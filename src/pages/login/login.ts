@@ -9,6 +9,6 @@ export class LoginPage  {
     constructor() { }
 
     login() {
-        
+        alert('Not yet implemented');        
     }
 }
