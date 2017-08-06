@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Register } from "../../models/register";
 
 @Component({
     selector: 'page-register',
@@ -6,10 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class RegisterPage {
-    name: string;
-    email: string;
-    password: string;
-    password_confirm: string;
+    data: Register = new Register();
 
     constructor() {
 
