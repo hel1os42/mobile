@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
+import { LoginPage } from "../pages/login/login";
+import { RegisterPage } from "../pages/register/register";
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { UserPage } from '../pages/user/user';
@@ -15,6 +17,8 @@ import { NotificationsPage } from '../pages/notifications/notifications';
   declarations: [
     MyApp,
     StartPage,
+    LoginPage,
+    RegisterPage,
     TabsPage,
     HomePage,
     UserPage,
@@ -29,6 +33,8 @@ import { NotificationsPage } from '../pages/notifications/notifications';
   entryComponents: [
     MyApp,
     StartPage,
+    LoginPage,
+    RegisterPage,
     TabsPage,
     HomePage,
     UserPage,
