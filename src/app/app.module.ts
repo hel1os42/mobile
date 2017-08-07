@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from "@angular/http";
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -12,6 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { UserPage } from '../pages/user/user';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
+import { AuthService } from "../providers/auth.service";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { NotificationsPage } from '../pages/notifications/notifications';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -44,7 +47,8 @@ import { NotificationsPage } from '../pages/notifications/notifications';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService
   ]
 })
 export class AppModule {}
