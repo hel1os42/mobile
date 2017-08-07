@@ -49,4 +49,4 @@ develop deploy:
   script:
     - release=`date +%Y%m%d%H%M%S`
     - scp -rp -P 665 www deploy@dev.toavalon.com:$WEB_PATH/releases/$release
-    - ssh deploy@dev.toavalon.com -p 665 'rm $WEB_PATH/public && ln -s $WEB_PATH/releases/$release $WEB_PATH/public'
+    - ssh deploy@dev.toavalon.com -p 665 "rm $WEB_PATH/public && ln -s $WEB_PATH/releases/$release $WEB_PATH/public"
