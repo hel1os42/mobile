@@ -1,0 +1,53 @@
+cache:
+  paths:
+  - vendor/
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  REPOSITORY: gitlab.toavalon.com:5000
+  IMAGE: codename-nau/mobile-hybrid/laravel
+  TEST_TAG: $CI_COMMIT_REF_NAME
+  RELEASE_TAG: latest
+
+stages:
+  - build
+  - test
+  - build_image
+  - release
+  - deploy
+
+build:
+  image: gitlab.toavalon.com:5000/agileek/ionic-framework:latest
+  stage: build
+  before_script:
+    - npm install
+  script:
+    - ionic build --prod
+  artifacts:
+    paths:
+      - ./*
+
+develop deploy:
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    - develop
+  tags:
+    - docker
+  variables:
+    WEB_PATH: /opt/nau/mobile
+  environment:
+    name: develop
+    url: https://m.nau.toavalon.com
+  before_script:
+    - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  after_script:
+    - ssh deploy@dev.toavalon.com -p 665 "docker logout"
+  script:
+    - release=`date +%Y%m%d%H%M%S`
+    - scp -rp www deploy@dev.toavalon.com/releases/$release -P 665
+    - ssh deploy@dev.toavalon.com -p 665 'rm $WEB_PATH/public && ln -s $WEB_PATH/releases/$release $WEB_PATH/public'
