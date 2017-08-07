@@ -17,7 +17,7 @@ stages:
   - deploy
 
 build:
-  image: beevelop/cordova:latest
+  image: beevelop/ionic:latest
   stage: build
   before_script:
     - npm install
