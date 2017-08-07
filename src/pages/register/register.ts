@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { ToastController, NavController } from "ionic-angular";
 import { Register } from "../../models/register";
 import { AuthService } from "../../providers/auth.service";
-import { ToastController } from "ionic-angular";
+import { TabsPage } from "../tabs/tabs";
 
 @Component({
     selector: 'page-register',
@@ -13,6 +14,7 @@ export class RegisterPage {
     data: Register = new Register();    
 
     constructor(
+        public nav: NavController,
         private authService: AuthService,
         private toast: ToastController) {
 
@@ -29,11 +31,12 @@ export class RegisterPage {
     }
 
     register() {
+       
         this.authService
             .register(this.data)
             .subscribe(
                 resp => {
-                    console.log('User has been successfully registered', resp.json());
+                    this.nav.setRoot(TabsPage);
                 },
                 errResp => {
                     let err = errResp.json();
