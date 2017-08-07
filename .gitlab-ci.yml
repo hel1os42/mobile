@@ -45,9 +45,7 @@ develop deploy:
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-  after_script:
-    - ssh deploy@dev.toavalon.com -p 665 "docker logout"
   script:
     - release=`date +%Y%m%d%H%M%S`
-    - scp -rp www deploy@dev.toavalon.com/releases/$release -P 665
+    - scp -rp -P 665 www deploy@dev.toavalon.com:$WEB_PATH/releases/$release
     - ssh deploy@dev.toavalon.com -p 665 'rm $WEB_PATH/public && ln -s $WEB_PATH/releases/$release $WEB_PATH/public'
