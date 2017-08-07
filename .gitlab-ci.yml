@@ -17,7 +17,7 @@ stages:
   - deploy
 
 build:
-  image: gitlab.toavalon.com:5000/agileek/ionic-framework:latest
+  image: agileek/ionic-framework:latest
   stage: build
   before_script:
     - npm install
