@@ -5,7 +5,6 @@ import { UserPage } from '../user/user';
 import { FavoritesPage } from '../favorites/favorites';
 import { NotificationsPage } from '../notifications/notifications';
 
-
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'
@@ -16,11 +15,9 @@ export class TabsPage {
   tab2Root = UserPage;
   tab3Root = FavoritesPage;
   tab4Root = NotificationsPage;
-    
 
-
-  constructor(public navCtrl: NavController) {
-
+  constructor(private navCtrl: NavController) {
+        
   }
 
 }

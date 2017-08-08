@@ -14,6 +14,8 @@ import { UserPage } from '../pages/user/user';
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { AuthService } from "../providers/auth.service";
+import { ApiService } from "../providers/api.service";
+import { StorageService } from "../providers/storage.service";
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { AuthService } from "../providers/auth.service";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService
+    ApiService,
+    AuthService,
+    StorageService
   ]
 })
 export class AppModule {}
