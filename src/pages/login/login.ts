@@ -30,9 +30,9 @@ export class LoginPage  {
                     this.nav.setRoot(TabsPage);
                 },
                 (errResp) => {
-                   
+                    let err = errResp.json();
                     let toast = this.toast.create({
-                        message: 'Invalid email or password',
+                        message: err.error || 'Unexpected error occured',
                         duration: 5000,
                         position: 'bottom',
                         dismissOnPageChange: true,
