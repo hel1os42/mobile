@@ -10,16 +10,36 @@ import { TabsPage } from "../tabs/tabs";
 })
 
 export class LoginPage  {
-    data: Login = new Login;
+    token: any; 
+    data: Login = new Login();
     
     constructor(
         public nav: NavController,
         private authService: AuthService,
         private toast: ToastController) { 
-
-        }
+        
+}
 
     login() {
-        alert('Not yet implemented');        
+        
+        this.authService
+            .login(this.data)
+            .subscribe(
+                resp => {
+                    this.token = resp.json();
+                    this.nav.setRoot(TabsPage);
+                },
+                (errResp) => {
+                   
+                    let toast = this.toast.create({
+                        message: 'Invalid email or password',
+                        duration: 5000,
+                        position: 'bottom',
+                        dismissOnPageChange: true,
+                        cssClass: 'toast'
+                    });
+                    toast.present();
+                }
+            );
     }
 }
