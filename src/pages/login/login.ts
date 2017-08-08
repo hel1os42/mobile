@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { AuthService } from "../../providers/auth.service";
 import { Login } from "../../models/login";
 import { TabsPage } from "../tabs/tabs";
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'page-login',
@@ -14,11 +15,11 @@ export class LoginPage  {
     data: Login = new Login();
     
     constructor(
-        public nav: NavController,
+        private nav: NavController,
         private authService: AuthService,
-        private toast: ToastController) { 
+        private storage: Storage) { 
         
-}
+    }
 
     login() {
         
@@ -27,6 +28,7 @@ export class LoginPage  {
             .subscribe(
                 resp => {
                     this.token = resp.json();
+                    this.storage.set('token', this.token);                    
                     this.nav.setRoot(TabsPage);
                 }
             );

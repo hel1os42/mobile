@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastController, NavController } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { Register } from "../../models/register";
 import { AuthService } from "../../providers/auth.service";
 import { TabsPage } from "../tabs/tabs";
@@ -14,9 +14,8 @@ export class RegisterPage {
     data: Register = new Register();    
 
     constructor(
-        public nav: NavController,
-        private authService: AuthService,
-        private toast: ToastController) {
+        private nav: NavController,
+        private authService: AuthService) {
         
     }
 
