@@ -17,15 +17,15 @@ export class RegisterPage {
         public nav: NavController,
         private authService: AuthService,
         private toast: ToastController) {
+        
+    }
 
+    ionViewDidEnter() {
         this.authService
             .getReferrerId(this.inviteCode)
             .subscribe(
                 resp => {
                     this.data = resp.json();
-                },
-                errResp => {
-                    debugger;
                 }
             );
     }
@@ -37,27 +37,6 @@ export class RegisterPage {
             .subscribe(
                 resp => {
                     this.nav.setRoot(TabsPage);
-                },
-                errResp => {
-                    let err = errResp.json();
-                    let messages = [];
-
-                    for (let key in err) {
-                        let el = err[key];
-                        for (let i = 0; i < el.length; i++) {
-                            let msg = el[i];
-                            messages.push(msg);
-                        }
-                    }
-
-                    let toast = this.toast.create({
-                        message: messages.join('\n'),
-                        duration: 5000,
-                        position: 'bottom',
-                        dismissOnPageChange: true,
-                        cssClass: 'toast'
-                    });
-                    toast.present();
                 }
             );
     }

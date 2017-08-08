@@ -28,17 +28,6 @@ export class LoginPage  {
                 resp => {
                     this.token = resp.json();
                     this.nav.setRoot(TabsPage);
-                },
-                (errResp) => {
-                    let err = errResp.json();
-                    let toast = this.toast.create({
-                        message: err.error || 'Unexpected error occured',
-                        duration: 5000,
-                        position: 'bottom',
-                        dismissOnPageChange: true,
-                        cssClass: 'toast'
-                    });
-                    toast.present();
                 }
             );
     }
