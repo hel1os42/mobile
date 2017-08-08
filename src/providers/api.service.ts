@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, URLSearchParams, Response } from '@angular/http';
 import { ToastController } from "ionic-angular";
 import { Observable } from "rxjs";
+import 'rxjs/add/operator/share';
 
 
 @Injectable()
@@ -14,7 +15,8 @@ export class ApiService {
   }
 
   private subscribeErrorHandler(obs: Observable<Response>): Observable<Response> {
-    obs.subscribe(
+    let sharableObs = obs.share();
+    sharableObs.subscribe(
       resp => { },
       errResp => {
         let err = errResp.json();
@@ -46,7 +48,7 @@ export class ApiService {
         toast.present();
       });
       
-    return obs;
+    return sharableObs;
   }
 
   get(endpoint: string, params?: any, options?: RequestOptions) {
@@ -65,8 +67,7 @@ export class ApiService {
       options.search = !options.search && p || options.search;
     }
 
-    return this.subscribeErrorHandler(
-      this.http.get(this.url + '/' + endpoint, options));    
+    return this.http.get(this.url + '/' + endpoint, options);
   }
 
   post(endpoint: string, body: any, options?: RequestOptions) {

@@ -30,12 +30,17 @@ export class RegisterPage {
     }
 
     register() {
-       
         this.authService
             .register(this.data)
-            .subscribe(
-                resp => {
-                    this.nav.setRoot(TabsPage);
+            .subscribe(resp => {
+                this.authService
+                    .login({
+                        email: this.data.email,
+                        password: this.data.password
+                    })
+                    .subscribe(resp => {
+                        this.nav.setRoot(TabsPage);
+                    })                    
                 }
             );
     }
