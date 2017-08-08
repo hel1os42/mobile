@@ -23,7 +23,7 @@ export class LoginPage  {
         this.authService
             .login(this.data)
             .subscribe(
-                resp => {                    
+                resp => {             
                     this.nav.setRoot(TabsPage);
                 }
             );

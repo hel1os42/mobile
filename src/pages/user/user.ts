@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { App } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { StartPage } from "../start/start";
 
@@ -10,13 +10,13 @@ import { StartPage } from "../start/start";
 export class UserPage {
 
   constructor(
-    private nav: NavController,
+    private app: App,
     private auth: AuthService) {
 
   }
 
   logout() {
     this.auth.logout();
-    this.nav.setRoot(StartPage);
+    this.app.getRootNav().setRoot(StartPage);
   }
 }
