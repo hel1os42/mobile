@@ -14,7 +14,7 @@ export class StartPage {
 
   constructor(
     private nav: NavController,
-    private authService: AuthService) {
+    private auth: AuthService) {
   }
 
   login() {
@@ -22,7 +22,7 @@ export class StartPage {
   }
  
   register() {
-    let inviteCode = this.authService.getInviteCode();
+    let inviteCode = this.auth.getInviteCode();
     if(inviteCode)
       this.nav.push(RegisterPage);
     else

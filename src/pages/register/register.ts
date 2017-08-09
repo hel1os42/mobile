@@ -16,13 +16,13 @@ export class RegisterPage {
     
     constructor(
         private nav: NavController,
-        private authService: AuthService,
+        private auth: AuthService,
         private storage: StorageService) {
         
     }
     
     ionViewDidEnter() {
-        this.authService
+        this.auth
            .getReferrerId(this.inviteCode)
            .subscribe(
                resp => {
@@ -32,10 +32,10 @@ export class RegisterPage {
     }
 
     register() {
-        this.authService
+        this.auth
             .register(this.data)
             .subscribe(resp => {
-                this.authService
+                this.auth
                     .login({
                         email: this.data.email,
                         password: this.data.password
