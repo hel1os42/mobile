@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Register } from "../models/register";
 import { Login } from "../models/login";
 import { ApiService } from "./api.service";
 import { TokenService } from "./token.service";
 import { Token } from "../models/token";
-import 'rxjs/add/operator/share';
 
 @Injectable()
 export class AuthService {
@@ -36,12 +34,12 @@ export class AuthService {
     }
 
     login(login: Login) {
-        let sharableObs = this.api.post('auth/login', login).share();
-        sharableObs.subscribe(resp => {
+        let obs = this.api.post('auth/login', login);
+        obs.subscribe(resp => {
             let token = resp.json();
             this.token.set(token);
-        });        
-        return sharableObs;
+        });
+        return obs;
     }
 
     logout() {
