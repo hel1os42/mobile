@@ -22,7 +22,7 @@ export class RegisterPage {
     }
     
     ionViewDidEnter() {
-            this.authService
+        this.authService
            .getReferrerId(this.inviteCode)
            .subscribe(
                resp => {

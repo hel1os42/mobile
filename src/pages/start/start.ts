@@ -11,7 +11,6 @@ import { InvitePage } from "../invite/invite";
   templateUrl: 'start.html'
 })
 export class StartPage {
-  
 
   constructor(
     private nav: NavController,
@@ -21,7 +20,6 @@ export class StartPage {
   login() {
     this.nav.push(LoginPage);
   }
-  
  
   register() {
     let inviteCode = this.authService.getInviteCode();

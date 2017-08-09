@@ -11,24 +11,21 @@ import { Register } from "../../models/register";
 })
 
 export class InvitePage {
-    inviteCode: string;
-    key = 'Register'
     data: Register = new Register();
 
     constructor(
-        public nav: NavController,
-        private authService: AuthService,
+        private nav: NavController,
+        private auth: AuthService,
         private storage: StorageService) {
         
     }
 
     apply() {
         this.authService
-            .getReferrerId(this.inviteCode)
+            .getReferrerId(this.auth.getInviteCode())
             .subscribe(
                 resp => {
                     this.data = resp.json();
-                    this.storage.set(this.key, this.data)
                     this.nav.push(RegisterPage);
                 }
             );
