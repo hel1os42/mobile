@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from "ionic-angular";
 import { AuthService } from "../../providers/auth.service";
 import { RegisterPage } from '../../pages/register/register';
-import { StorageService } from "../../providers/storage.service";
 import { Register } from "../../models/register";
 
 @Component({
@@ -11,21 +10,20 @@ import { Register } from "../../models/register";
 })
 
 export class InvitePage {
-    data: Register = new Register();
+    inviteCode: string;
 
     constructor(
         private nav: NavController,
-        private auth: AuthService,
-        private storage: StorageService) {
+        private auth: AuthService) {
         
     }
 
     apply() {
         this.auth
-            .getReferrerId(this.auth.getInviteCode())
+            .getReferrerId(this.inviteCode)
             .subscribe(
                 resp => {
-                    this.data = resp.json();
+                    this.auth.registerForm = resp.json();
                     this.nav.push(RegisterPage);
                 }
             );

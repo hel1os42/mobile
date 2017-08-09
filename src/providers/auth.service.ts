@@ -10,7 +10,7 @@ import 'rxjs/add/operator/share';
 @Injectable()
 export class AuthService {
     inviteCode: string = '';
-    INVITE = 'invite';
+    registerForm: Register = new Register();
     
     constructor(
         private api: ApiService,
@@ -47,4 +47,5 @@ export class AuthService {
     logout() {
         this.token.remove();
     }
+
 }

@@ -3,7 +3,6 @@ import { NavController } from "ionic-angular";
 import { Register } from "../../models/register";
 import { AuthService } from "../../providers/auth.service";
 import { TabsPage } from "../tabs/tabs";
-import { StorageService } from "../../providers/storage.service";
 
 @Component({
     selector: 'page-register',
@@ -11,24 +10,24 @@ import { StorageService } from "../../providers/storage.service";
 })
 
 export class RegisterPage {
-    inviteCode: string = '59713';
     data: Register = new Register();
     
     constructor(
         private nav: NavController,
-        private auth: AuthService,
-        private storage: StorageService) {
-        
+        private auth: AuthService) {
     }
     
     ionViewDidEnter() {
-        this.auth
-           .getReferrerId(this.inviteCode)
-           .subscribe(
-               resp => {
+        let inviteCode = this.auth.getInviteCode();
+        this.data = this.auth.registerForm;
+        if (this.data.referrer_id)
+            return;
+        else
+            this.auth
+                .getReferrerId(inviteCode)
+                .subscribe(resp => {
                     this.data = resp.json();
-                }
-            );
+                });
     }
 
     register() {

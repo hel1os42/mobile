@@ -5,7 +5,6 @@ import { LoginPage } from "../login/login";
 import { RegisterPage } from "../register/register";
 import { InvitePage } from "../invite/invite";
 
-
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html'
@@ -23,7 +22,7 @@ export class StartPage {
  
   register() {
     let inviteCode = this.auth.getInviteCode();
-    if(inviteCode)
+    if (inviteCode)
       this.nav.push(RegisterPage);
     else
       this.nav.push(InvitePage);
