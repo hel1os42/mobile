@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, URLSearchParams, Response } from '@angular/http';
+import { Http, RequestOptions, URLSearchParams, Headers, Response } from '@angular/http';
 import { ToastController } from "ionic-angular";
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/share';
-
+import { TokenService } from "./token.service";
 
 @Injectable()
 export class ApiService {
@@ -11,7 +11,25 @@ export class ApiService {
 
   constructor(
     private http: Http,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private token: TokenService) {
+  }
+
+  private getOptions(options: RequestOptions): RequestOptions {
+    let token = this.token.get();
+  
+    if (!token)
+      return options;
+
+    if (!options)
+      options = new RequestOptions();
+
+    if (!options.headers)
+      options.headers = new Headers();
+
+    options.headers.append('Authorization', `Bearer ${token.token}`);
+
+    return options;
   }
 
   private subscribeErrorHandler(obs: Observable<Response>): Observable<Response> {
@@ -68,26 +86,26 @@ export class ApiService {
     }
 
     return this.subscribeErrorHandler(
-      this.http.get(this.url + '/' + endpoint, options));
+      this.http.get(this.url + '/' + endpoint, this.getOptions(options)));
   }
 
   post(endpoint: string, body: any, options?: RequestOptions) {
     return this.subscribeErrorHandler(
-      this.http.post(this.url + '/' + endpoint, body, options));
+      this.http.post(this.url + '/' + endpoint, body, this.getOptions(options)));
   }
 
   put(endpoint: string, body: any, options?: RequestOptions) {
     return this.subscribeErrorHandler(
-      this.http.put(this.url + '/' + endpoint, body, options));
+      this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)));
   }
 
   delete(endpoint: string, options?: RequestOptions) {
     return this.subscribeErrorHandler(
-      this.http.delete(this.url + '/' + endpoint, options));
+      this.http.delete(this.url + '/' + endpoint, this.getOptions(options)));
   }
 
   patch(endpoint: string, body: any, options?: RequestOptions) {
     return this.subscribeErrorHandler(
-      this.http.put(this.url + '/' + endpoint, body, options));
+      this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)));
   }
 }

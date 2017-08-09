@@ -17,6 +17,7 @@ import { NotificationsPage } from '../pages/notifications/notifications';
 import { AuthService } from "../providers/auth.service";
 import { ApiService } from "../providers/api.service";
 import { StorageService } from "../providers/storage.service";
+import { TokenService } from "../providers/token.service";
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { StorageService } from "../providers/storage.service";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiService,
     AuthService,
-    StorageService
+    StorageService,
+    TokenService
   ]
 })
 export class AppModule {}

@@ -3,41 +3,27 @@ import { Http } from '@angular/http';
 import { Register } from "../models/register";
 import { Login } from "../models/login";
 import { ApiService } from "./api.service";
-import { StorageService } from "./storage.service";
+import { TokenService } from "./token.service";
 import { Token } from "../models/token";
 import 'rxjs/add/operator/share';
 
 @Injectable()
 export class AuthService {
-    TOKEN_KEY = 'token';
-    token: Token;
     inviteCode: string = '';
     INVITE = 'invite';
     
     constructor(
         private api: ApiService,
-        private storage: StorageService) {
+        private token: TokenService) {
 
     }
          
     getInviteCode() {
-
-        if(this.inviteCode === '') {
-            this.inviteCode = this.storage.get(this.INVITE);
-            return this.inviteCode;
-        }
-            
-    }
-
-    private getToken() {
-        if (this.token && this.token.token)
-            return this.token;
-        this.token = this.storage.get(this.TOKEN_KEY);
-        return this.token;
+        return this.inviteCode;            
     }
 
     isLoggedIn() {
-        let token = this.getToken();
+        let token = this.token.get();
         return !!token;
     }
 
@@ -53,13 +39,12 @@ export class AuthService {
         let sharableObs = this.api.post('auth/login', login).share();
         sharableObs.subscribe(resp => {
             let token = resp.json();
-            this.storage.set(this.TOKEN_KEY, token);
+            this.token.set(token);
         });        
         return sharableObs;
     }
 
     logout() {
-        this.storage.remove(this.TOKEN_KEY);
-        this.token = undefined;
+        this.token.remove();
     }
 }
