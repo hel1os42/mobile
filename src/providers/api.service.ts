@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, URLSearchParams, Headers, Response } from '@angular/http';
-import { ToastController } from "ionic-angular";
+import { ToastController, LoadingController } from "ionic-angular";
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/finally';
 import { TokenService } from "./token.service";
 
 @Injectable()
@@ -12,6 +13,7 @@ export class ApiService {
   constructor(
     private http: Http,
     private toast: ToastController,
+    private loading: LoadingController,
     private token: TokenService) {
   }
 
@@ -33,38 +35,47 @@ export class ApiService {
   }
 
   private subscribeErrorHandler(obs: Observable<Response>): Observable<Response> {
-    let sharableObs = obs.share();
-    sharableObs.subscribe(
-      resp => { },
-      errResp => {
-        let err = errResp.json();
-        let messages = [];
+    let loading = this.loading.create({
+      content: ''
+    });
 
-        if (err.error) {
-          messages.push(err.error)
-        }
-        else {
-          for (let key in err) {
-            let el = err[key];
-            for (let i = 0; i < el.length; i++) {
-                let msg = el[i];
-                messages.push(msg);
+    loading.present();
+
+    let sharableObs = obs.share();
+
+    sharableObs
+      .finally(() => loading.dismiss())
+      .subscribe(
+        resp => { },
+        errResp => {
+          let messages = [];
+          let err = errResp.json();        
+
+          if (err.error) {
+            messages.push(err.error)
+          }
+          else {
+            for (let key in err) {
+              let el = err[key];
+              for (let i = 0; i < el.length; i++) {
+                  let msg = el[i];
+                  messages.push(msg);
+              }
             }
           }
-        }
-        
-        if (messages.length == 0) {
-          messages.push('Unexpected error occured');
-        }
+          
+          if (messages.length == 0) {
+            messages.push('Unexpected error occured');
+          }
 
-        let toast = this.toast.create({
-            message: messages.join('\n'),
-            duration: 5000,
-            position: 'bottom',
-            dismissOnPageChange: true
+          let toast = this.toast.create({
+              message: messages.join('\n'),
+              duration: 5000,
+              position: 'bottom',
+              dismissOnPageChange: true
+          });
+          toast.present();
         });
-        toast.present();
-      });
       
     return sharableObs;
   }
