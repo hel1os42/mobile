@@ -11,6 +11,7 @@ import { RegisterPage } from "../pages/register/register";
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { UserPage } from '../pages/user/user';
+import { InvitePage } from "../pages/invite/invite";
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { AuthService } from "../providers/auth.service";
@@ -21,6 +22,7 @@ import { StorageService } from "../providers/storage.service";
   declarations: [
     MyApp,
     StartPage,
+    InvitePage,
     LoginPage,
     RegisterPage,
     TabsPage,
@@ -38,6 +40,7 @@ import { StorageService } from "../providers/storage.service";
   entryComponents: [
     MyApp,
     StartPage,
+    InvitePage,
     LoginPage,
     RegisterPage,
     TabsPage,

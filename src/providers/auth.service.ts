@@ -11,12 +11,22 @@ import 'rxjs/add/operator/share';
 export class AuthService {
     TOKEN_KEY = 'token';
     token: Token;
+    inviteCode: string = '';
+    INVITE = 'invite';
     
     constructor(
-        private http: Http,
         private api: ApiService,
         private storage: StorageService) {
 
+    }
+         
+    getInviteCode() {
+
+        if(this.inviteCode === '') {
+            this.inviteCode = this.storage.get(this.INVITE);
+            return this.inviteCode;
+        }
+            
     }
 
     private getToken() {
