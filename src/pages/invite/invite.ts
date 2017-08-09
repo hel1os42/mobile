@@ -21,7 +21,7 @@ export class InvitePage {
     }
 
     apply() {
-        this.authService
+        this.auth
             .getReferrerId(this.auth.getInviteCode())
             .subscribe(
                 resp => {
