@@ -8,7 +8,7 @@ import { Token } from "../models/token";
 @Injectable()
 export class AuthService {
     inviteCode: string = '';
-    registerForm: Register = new Register();
+    registerData: Register = new Register();
     
     constructor(
         private api: ApiService,
@@ -18,6 +18,14 @@ export class AuthService {
          
     getInviteCode() {
         return this.inviteCode;            
+    }
+
+    getRegisterData() {
+        return this.registerData;
+    }
+
+    setRegisterData(data) {
+        return this.registerData = data;
     }
 
     isLoggedIn() {

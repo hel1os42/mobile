@@ -19,7 +19,7 @@ export class RegisterPage {
     
     ionViewDidEnter() {
         let inviteCode = this.auth.getInviteCode();
-        this.data = this.auth.registerForm;
+        this.data = this.auth.getRegisterData();
         if (this.data.referrer_id)
             return;
         else
