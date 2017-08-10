@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, URLSearchParams, Response } from '@angular/http';
-import { ToastController } from "ionic-angular";
+import { Http, RequestOptions, URLSearchParams, Headers, Response } from '@angular/http';
+import { ToastController, LoadingController } from "ionic-angular";
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/share';
-
+import 'rxjs/add/operator/finally';
+import { TokenService } from "./token.service";
 
 @Injectable()
 export class ApiService {
@@ -11,42 +12,70 @@ export class ApiService {
 
   constructor(
     private http: Http,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private loading: LoadingController,
+    private token: TokenService) {
+  }
+
+  private getOptions(options: RequestOptions): RequestOptions {
+    let token = this.token.get();
+  
+    if (!token)
+      return options;
+
+    if (!options)
+      options = new RequestOptions();
+
+    if (!options.headers)
+      options.headers = new Headers();
+
+    options.headers.append('Authorization', `Bearer ${token.token}`);
+
+    return options;
   }
 
   private subscribeErrorHandler(obs: Observable<Response>): Observable<Response> {
-    let sharableObs = obs.share();
-    sharableObs.subscribe(
-      resp => { },
-      errResp => {
-        let err = errResp.json();
-        let messages = [];
+    let loading = this.loading.create({
+      content: ''
+    });
 
-        if (err.error) {
-          messages.push(err.error)
-        }
-        else {
-          for (let key in err) {
-            let el = err[key];
-            for (let i = 0; i < el.length; i++) {
-                let msg = el[i];
-                messages.push(msg);
+    loading.present();
+
+    let sharableObs = obs.share();
+
+    sharableObs
+      .finally(() => loading.dismiss())
+      .subscribe(
+        resp => { },
+        errResp => {
+          let messages = [];
+          let err = errResp.json();        
+
+          if (err.error) {
+            messages.push(err.error)
+          }
+          else {
+            for (let key in err) {
+              let el = err[key];
+              for (let i = 0; i < el.length; i++) {
+                  let msg = el[i];
+                  messages.push(msg);
+              }
             }
           }
-        }
-        
-        if (messages.length == 0) {
-          messages.push('Unexpected error occured');
-        }
+          
+          if (messages.length == 0) {
+            messages.push('Unexpected error occured');
+          }
 
-        let toast = this.toast.create({
-            message: messages.join('\n'),
-            duration: 5000,
-            position: 'bottom',
-            dismissOnPageChange: true
+          let toast = this.toast.create({
+              message: messages.join('\n'),
+              duration: 5000,
+              position: 'bottom',
+              dismissOnPageChange: true
+          });
+          toast.present();
         });
-        toast.present();
-      });
       
     return sharableObs;
   }
@@ -67,26 +96,27 @@ export class ApiService {
       options.search = !options.search && p || options.search;
     }
 
-    return this.http.get(this.url + '/' + endpoint, options);
+    return this.subscribeErrorHandler(
+      this.http.get(this.url + '/' + endpoint, this.getOptions(options)));
   }
 
   post(endpoint: string, body: any, options?: RequestOptions) {
     return this.subscribeErrorHandler(
-      this.http.post(this.url + '/' + endpoint, body, options));
+      this.http.post(this.url + '/' + endpoint, body, this.getOptions(options)));
   }
 
   put(endpoint: string, body: any, options?: RequestOptions) {
     return this.subscribeErrorHandler(
-      this.http.put(this.url + '/' + endpoint, body, options));
+      this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)));
   }
 
   delete(endpoint: string, options?: RequestOptions) {
     return this.subscribeErrorHandler(
-      this.http.delete(this.url + '/' + endpoint, options));
+      this.http.delete(this.url + '/' + endpoint, this.getOptions(options)));
   }
 
   patch(endpoint: string, body: any, options?: RequestOptions) {
     return this.subscribeErrorHandler(
-      this.http.put(this.url + '/' + endpoint, body, options));
+      this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)));
   }
 }

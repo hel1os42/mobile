@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Invite Code</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <form>
+    <ion-list>
+        
+        <ion-item>
+            <ion-label fixed>Invite Code</ion-label>
+            <ion-input [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
+        </ion-item>
+
+        <div padding>
+        <button ion-button large block (click)="apply()">APPLY</button>
+      </div>
+    </ion-list>
+  </form>
+</ion-content>

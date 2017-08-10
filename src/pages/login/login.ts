@@ -14,13 +14,12 @@ export class LoginPage  {
     
     constructor(
         private nav: NavController,
-        private authService: AuthService) { 
+        private auth: AuthService) { 
         
     }
 
     login() {
-        
-        this.authService
+        this.auth
             .login(this.data)
             .subscribe(
                 resp => {             

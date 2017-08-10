@@ -11,16 +11,19 @@ import { RegisterPage } from "../pages/register/register";
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { UserPage } from '../pages/user/user';
+import { InvitePage } from "../pages/invite/invite";
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { AuthService } from "../providers/auth.service";
 import { ApiService } from "../providers/api.service";
 import { StorageService } from "../providers/storage.service";
+import { TokenService } from "../providers/token.service";
 
 @NgModule({
   declarations: [
     MyApp,
     StartPage,
+    InvitePage,
     LoginPage,
     RegisterPage,
     TabsPage,
@@ -38,6 +41,7 @@ import { StorageService } from "../providers/storage.service";
   entryComponents: [
     MyApp,
     StartPage,
+    InvitePage,
     LoginPage,
     RegisterPage,
     TabsPage,
@@ -52,7 +56,8 @@ import { StorageService } from "../providers/storage.service";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiService,
     AuthService,
-    StorageService
+    StorageService,
+    TokenService
   ]
 })
 export class AppModule {}

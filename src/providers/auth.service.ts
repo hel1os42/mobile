@@ -1,33 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Register } from "../models/register";
 import { Login } from "../models/login";
 import { ApiService } from "./api.service";
-import { StorageService } from "./storage.service";
+import { TokenService } from "./token.service";
 import { Token } from "../models/token";
-import 'rxjs/add/operator/share';
 
 @Injectable()
 export class AuthService {
-    TOKEN_KEY = 'token';
-    token: Token;
+    inviteCode: string = '';
+    registerForm: Register = new Register();
     
     constructor(
-        private http: Http,
         private api: ApiService,
-        private storage: StorageService) {
+        private token: TokenService) {
 
     }
-
-    private getToken() {
-        if (this.token && this.token.token)
-            return this.token;
-        this.token = this.storage.get(this.TOKEN_KEY);
-        return this.token;
+         
+    getInviteCode() {
+        return this.inviteCode;            
     }
 
     isLoggedIn() {
-        let token = this.getToken();
+        let token = this.token.get();
         return !!token;
     }
 
@@ -40,16 +34,16 @@ export class AuthService {
     }
 
     login(login: Login) {
-        let sharableObs = this.api.post('auth/login', login).share();
-        sharableObs.subscribe(resp => {
+        let obs = this.api.post('auth/login', login);
+        obs.subscribe(resp => {
             let token = resp.json();
-            this.storage.set(this.TOKEN_KEY, token);
-        });        
-        return sharableObs;
+            this.token.set(token);
+        });
+        return obs;
     }
 
     logout() {
-        this.storage.remove(this.TOKEN_KEY);
-        this.token = undefined;
+        this.token.remove();
     }
+
 }

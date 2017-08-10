@@ -10,30 +10,31 @@ import { TabsPage } from "../tabs/tabs";
 })
 
 export class RegisterPage {
-    inviteCode: string = '59713'
-    data: Register = new Register();    
-
+    data: Register = new Register();
+    
     constructor(
         private nav: NavController,
-        private authService: AuthService) {
-        
+        private auth: AuthService) {
     }
-
+    
     ionViewDidEnter() {
-        this.authService
-            .getReferrerId(this.inviteCode)
-            .subscribe(
-                resp => {
+        let inviteCode = this.auth.getInviteCode();
+        this.data = this.auth.registerForm;
+        if (this.data.referrer_id)
+            return;
+        else
+            this.auth
+                .getReferrerId(inviteCode)
+                .subscribe(resp => {
                     this.data = resp.json();
-                }
-            );
+                });
     }
 
     register() {
-        this.authService
+        this.auth
             .register(this.data)
             .subscribe(resp => {
-                this.authService
+                this.auth
                     .login({
                         email: this.data.email,
                         password: this.data.password
