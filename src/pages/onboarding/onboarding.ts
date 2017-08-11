@@ -10,7 +10,7 @@ import { SignUpCodePage } from "../signup-code/signup-code";
   selector: 'page-onboarding',
   templateUrl: 'onboarding.html'
 })
-export class OnBoargingPage {
+export class OnBoardingPage {
   code: string;
 
   constructor(
