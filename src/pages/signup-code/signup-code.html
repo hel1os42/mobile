@@ -1,21 +1,16 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title></ion-title>
-  </ion-navbar>
-</ion-header>
 
 <ion-content scroll="false">
   <div class="logo">
   </div>
   <div text-center text-uppercase class="color-gray">
-    enter your phone
+    enter code
   </div>
   <ion-item>
     <ion-select [(ngModel)]="numcode">
       <ion-option value="380">+380</ion-option>
-      <ion-option value="101">+101</ion-option>
+      <ion-option value="101">+101</ion-option>s
     </ion-select>
-    <ion-input type="tel" placeholder="" [(ngModel)] ="phone"></ion-input>
+    <ion-input type="tel" placeholder="" [(ngModel)]="code"></ion-input>
   </ion-item>
 
   <div padding>

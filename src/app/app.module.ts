@@ -19,12 +19,14 @@ import { ApiService } from "../providers/api.service";
 import { StorageService } from "../providers/storage.service";
 import { TokenService } from "../providers/token.service";
 import { SignUpPage } from "../pages/sign-up/signup";
+import { SignUpCodePage } from "../pages/sign-up-code/sign-up-code";
 
 @NgModule({
   declarations: [
     MyApp,
     StartPage,
     SignUpPage,
+    SignUpCodePage,
     InvitePage,
     LoginPage,
     RegisterPage,
@@ -44,6 +46,7 @@ import { SignUpPage } from "../pages/sign-up/signup";
     MyApp,
     StartPage,
     SignUpPage,
+    SignUpCodePage,
     InvitePage,
     LoginPage,
     RegisterPage,
