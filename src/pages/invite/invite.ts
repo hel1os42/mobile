@@ -14,7 +14,7 @@ export class InvitePage {
     constructor(
         private nav: NavController,
         private auth: AuthService) {
-        
+
     }
 
     apply() {
