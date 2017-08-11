@@ -1,15 +1,9 @@
 export class User {
     name: string;
-    points: number;
-    level: number;
-    referralUsers: any;
-    offers: any;
-    myOffers: any
     email: string;
-    password: string;
+    level: number;
+    points: number;
     referrer_id: string;
-    icon;
-    logo;
-    nau;
-
+    created_at: string;
+    updtedt_at: string;
 }
