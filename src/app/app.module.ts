@@ -20,6 +20,7 @@ import { StorageService } from "../providers/storage.service";
 import { TokenService } from "../providers/token.service";
 import { SignUpPage } from "../pages/sign-up/signup";
 import { SignUpCodePage } from "../pages/signup-code/signup-code";
+import { OnBoargingPage } from "../pages/onboarding/onboarding";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SignUpCodePage } from "../pages/signup-code/signup-code";
     HomePage,
     UserPage,
     FavoritesPage,
-    NotificationsPage
+    NotificationsPage,
+    OnBoargingPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { SignUpCodePage } from "../pages/signup-code/signup-code";
     HomePage,
     UserPage,
     FavoritesPage,
-    NotificationsPage
+    NotificationsPage,
+    OnBoargingPage
   ],
   providers: [
     StatusBar,
