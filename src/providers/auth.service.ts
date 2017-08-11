@@ -20,11 +20,11 @@ export class AuthService {
         return this.inviteCode;            
     }
 
-    phone(phone: string) {
+    checkPhone(phone: string) {
         this.api.post('auth/phone', phone);
     }
 
-    code(messageCode: string){
+    applyCode(messageCode: string){
         let obs = this.api.post('auth/code', messageCode);
         obs.subscribe(resp => {
             let token = resp.json();
