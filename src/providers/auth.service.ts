@@ -15,9 +15,22 @@ export class AuthService {
         private token: TokenService) {
 
     }
-         
+    
     getInviteCode() {
         return this.inviteCode;            
+    }
+
+    phone(phone: string) {
+        this.api.post('auth/phone', phone);
+    }
+
+    code(messageCode: string){
+        let obs = this.api.post('auth/code', messageCode);
+        obs.subscribe(resp => {
+            let token = resp.json();
+            this.token.set(token);
+        });
+        return obs;
     }
 
     getRegisterData() {
