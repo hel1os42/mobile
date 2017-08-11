@@ -1,9 +1,22 @@
 <ion-content scroll="false">
-  <div class="logo">    
+  <div class="logo">
   </div>
-
+  <div text-center text-uppercase class="color-gray">
+    network affiliate universe
+  </div>
   <div padding>
-    <button ion-button block large color="secondary" margin-bottom (click)="login()">LOGIN</button>
-    <button ion-button block large (click)="register()">REGISTER</button>
+    <button ion-button block middle color="secondary" margin-bottom (click)="login()">sign up</button>
+  </div>
+  <div text-center text-uppercase class="color-gray font-75">
+    or login with
+  </div>
+  <ion-row class="row">
+    <ion-col text-right class="col"><ion-icon class="font-200" color="primary" name="logo-facebook"></ion-icon></ion-col>
+    <ion-col text-center class="col"><ion-icon class="font-200" color="primary" name="logo-google"></ion-icon></ion-col>
+    <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="add-circle"></ion-icon></ion-col>
+  </ion-row>
+
+    <div padding>
+  <button ion-button block middle (click)="register()">sign in</button>
   </div>
 </ion-content>

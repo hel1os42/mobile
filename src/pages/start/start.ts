@@ -19,7 +19,7 @@ export class StartPage {
   login() {
     this.nav.push(LoginPage);
   }
- 
+
   register() {
     let inviteCode = this.auth.getInviteCode();
     if (inviteCode)

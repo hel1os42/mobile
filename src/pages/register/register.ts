@@ -11,12 +11,12 @@ import { TabsPage } from "../tabs/tabs";
 
 export class RegisterPage {
     data: Register = new Register();
-    
+
     constructor(
         private nav: NavController,
         private auth: AuthService) {
     }
-    
+
     ionViewDidEnter() {
         let inviteCode = this.auth.getInviteCode();
         this.data = this.auth.getRegisterData();
@@ -41,7 +41,7 @@ export class RegisterPage {
                     })
                     .subscribe(resp => {
                         this.nav.setRoot(TabsPage);
-                    })                    
+                    })
                 }
             );
     }
