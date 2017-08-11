@@ -5,18 +5,15 @@
   <div text-center text-uppercase class="color-gray">
     enter code
   </div>
-  <ion-item>
-    <ion-select [(ngModel)]="numcode">
-      <ion-option value="380">+380</ion-option>
-      <ion-option value="101">+101</ion-option>s
-    </ion-select>
+
+  <ion-item padding>
     <ion-input type="tel" placeholder="" [(ngModel)]="code"></ion-input>
   </ion-item>
 
   <div padding>
-    <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">get code</button>
+    <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">apply</button>
   </div>
   <div text-center text-uppercase class="color-gray font-75">
-    we do not use your private data
+    please input code from sms. we sent code to you
   </div>
 </ion-content>
