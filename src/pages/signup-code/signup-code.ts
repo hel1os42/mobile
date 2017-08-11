@@ -6,8 +6,8 @@ import { RegisterPage } from "../register/register";
 import { InvitePage } from "../invite/invite";
 
 @Component({
-  selector: 'page-sign-up-code',
-  templateUrl: 'sign-up-code.html'
+  selector: 'page-signup-code',
+  templateUrl: 'signup-code.html'
 })
 export class SignUpCodePage {
   constructor(
