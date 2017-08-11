@@ -7,10 +7,10 @@ import { InvitePage } from "../invite/invite";
 import { SignUpCodePage } from "../signup-code/signup-code";
 
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html'
+  selector: 'page-onboarding',
+  templateUrl: 'onboarding.html'
 })
-export class SignUpPage {
+export class OnBoargingPage {
   code: string;
 
   constructor(
