@@ -11,7 +11,7 @@ import { SignUpCodePage } from "../signup-code/signup-code";
   templateUrl: 'signup.html'
 })
 export class SignUpPage {
-  phone: string;
+  code: string;
 
   constructor(
     private nav: NavController,
@@ -19,7 +19,7 @@ export class SignUpPage {
   }
 
 getCode() {
-  this.auth.checkPhone(this.phone);
+  this.auth.applyCode(this.code);
    this.nav.push(SignUpCodePage);
 }
 
