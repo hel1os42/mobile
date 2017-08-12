@@ -4,6 +4,7 @@ import { ToastController, LoadingController } from "ionic-angular";
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/map';
 import { TokenService } from "./token.service";
 
 @Injectable()
@@ -34,7 +35,7 @@ export class ApiService {
     return options;
   }
 
-  private subscribeErrorHandler(obs: Observable<Response>): Observable<Response> {
+  private subscribeErrorHandler(obs: Observable<Response>) {
     let loading = this.loading.create({
       content: ''
     });
@@ -77,7 +78,7 @@ export class ApiService {
           toast.present();
         });
       
-    return sharableObs;
+    return sharableObs.map(resp => resp.json());
   }
 
   get(endpoint: string, params?: any, options?: RequestOptions) {

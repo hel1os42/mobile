@@ -6,6 +6,7 @@ import { StartPage } from '../pages/start/start';
 import { TabsPage } from "../pages/tabs/tabs";
 import { AuthService } from "../providers/auth.service";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
+import { RegisterPage } from "../pages/register/register";
 
 @Component({
   templateUrl: 'app.html'
@@ -23,7 +24,8 @@ export class MyApp {
       splashScreen.hide();
 
       //this.rootPage = auth.isLoggedIn() ? TabsPage : StartPage;
-      this.rootPage = OnBoardingPage
+      //this.rootPage = OnBoardingPage
+      this.rootPage = RegisterPage;
     });
   }
 }

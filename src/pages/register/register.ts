@@ -25,9 +25,7 @@ export class RegisterPage {
         else
             this.auth
                 .getReferrerId(inviteCode)
-                .subscribe(resp => {
-                    this.data = resp.json();
-                });
+                .subscribe(register => { this.data = register; });
     }
 
     register() {

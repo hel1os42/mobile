@@ -21,8 +21,8 @@ export class InvitePage {
         this.auth
             .getReferrerId(this.inviteCode)
             .subscribe(
-                resp => {
-                    this.auth.setRegisterData(resp.json());
+                data => {
+                    this.auth.setRegisterData(data);
                     this.nav.push(RegisterPage);
                 }
             );
