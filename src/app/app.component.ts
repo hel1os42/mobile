@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StartPage } from '../pages/start/start';
 import { TabsPage } from "../pages/tabs/tabs";
 import { AuthService } from "../providers/auth.service";
+import { OnBoardingPage } from "../pages/onboarding/onboarding";
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +22,8 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      this.rootPage = auth.isLoggedIn() ? TabsPage : StartPage;
+      //this.rootPage = auth.isLoggedIn() ? TabsPage : StartPage;
+      this.rootPage = OnBoardingPage
     });
   }
 }
