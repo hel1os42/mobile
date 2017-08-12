@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
-import { LoginPage } from "../login/login";
-import { RegisterPage } from "../register/register";
-import { InvitePage } from "../invite/invite";
-import { SignUpCodePage } from "../signup-code/signup-code";
+import { StartPage } from "../start/start";
 
 @Component({
   selector: 'page-onboarding',
@@ -18,9 +15,8 @@ export class OnBoardingPage {
     private auth: AuthService) {
   }
 
-getCode() {
-  this.auth.applyCode(this.code);
-   this.nav.push(SignUpCodePage);
+skip() {
+   this.nav.push(StartPage);
 }
 
 }
