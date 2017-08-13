@@ -58,41 +58,41 @@ export class ApiService {
         sharableObs
             .finally(() => loading.dismiss())
             .subscribe(
-            resp => { },
-            errResp => {
-                if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
-                    this.renewToken();
-                    return;
-                }                
+                resp => { },
+                errResp => {
+                    if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
+                        this.renewToken();
+                        return;
+                    }
 
-                let messages = [];
-                let err = errResp.json();
+                    let messages = [];
+                    let err = errResp.json();
 
-                if (err.error) {
-                    messages.push(err.error)
-                }
-                else {
-                    for (let key in err) {
-                        let el = err[key];
-                        for (let i = 0; i < el.length; i++) {
-                            let msg = el[i];
-                            messages.push(msg);
+                    if (err.error) {
+                        messages.push(err.error)
+                    }
+                    else {
+                        for (let key in err) {
+                            let el = err[key];
+                            for (let i = 0; i < el.length; i++) {
+                                let msg = el[i];
+                                messages.push(msg);
+                            }
                         }
                     }
-                }
 
-                if (messages.length == 0) {
-                    messages.push('Unexpected error occured');
-                }
+                    if (messages.length == 0) {
+                        messages.push('Unexpected error occured');
+                    }
 
-                let toast = this.toast.create({
-                    message: messages.join('\n'),
-                    duration: 5000,
-                    position: 'bottom',
-                    dismissOnPageChange: true
+                    let toast = this.toast.create({
+                        message: messages.join('\n'),
+                        duration: 5000,
+                        position: 'bottom',
+                        dismissOnPageChange: true
+                    });
+                    toast.present();
                 });
-                toast.present();
-            });
 
         return sharableObs.map(resp => resp.json());
     }    
