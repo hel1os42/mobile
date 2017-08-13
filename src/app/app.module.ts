@@ -21,6 +21,7 @@ import { TokenService } from "../providers/token.service";
 import { SignUpPage } from "../pages/signup/signup";
 import { SignUpCodePage } from "../pages/signup-code/signup-code";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
+import { ProfileService } from "../providers/profile.service";
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { OnBoardingPage } from "../pages/onboarding/onboarding";
     ApiService,
     AuthService,
     StorageService,
-    TokenService
+    TokenService,
+    ProfileService
   ]
 })
 export class AppModule {}

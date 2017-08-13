@@ -8,6 +8,7 @@ import { AuthService } from "../providers/auth.service";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { RegisterPage } from "../pages/register/register";
 import { SignUpPage } from "../pages/signup/signup";
+import { LoginPage } from "../pages/login/login";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
 
       //this.rootPage = auth.isLoggedIn() ? TabsPage : StartPage;
       //this.rootPage = OnBoardingPage
-      this.rootPage = SignUpPage;
+      this.rootPage = LoginPage;
     });
   }
 }
