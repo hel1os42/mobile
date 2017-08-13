@@ -16,7 +16,7 @@ export class TabsPage {
   tab3Root = FavoritesPage;
   tab4Root = NotificationsPage;
 
-  constructor(private navCtrl: NavController) {
+  constructor(private nav: NavController) {
         
   }
 

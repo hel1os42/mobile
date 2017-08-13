@@ -7,7 +7,7 @@ import { NavController } from 'ionic-angular';
 })
 export class FavoritesPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(private nav: NavController) {
 
   }
 
