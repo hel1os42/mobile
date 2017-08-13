@@ -5,20 +5,20 @@ import { LoginPage } from "../login/login";
 import { SignUpCodePage } from "../signup-code/signup-code";
 
 @Component({
-  selector: 'page-signup',
-  templateUrl: 'signup.html'
+    selector: 'page-signup',
+    templateUrl: 'signup.html'
 })
 export class SignUpPage {
-  phone: string;
+    phone: string;
 
-  constructor(
-    private nav: NavController,
-    private auth: AuthService) {
-  }
+    constructor(
+        private nav: NavController,
+        private auth: AuthService) {
+    }
 
-getCode() {
-  this.auth.checkPhone(this.phone);
-   this.nav.push(SignUpCodePage);
-}
+    getCode() {
+        this.auth.checkPhone(this.phone);
+        this.nav.push(SignUpCodePage);
 
+    }
 }
