@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
-import { LoginPage } from "../login/login";
 import { SignUpCodePage } from "../signup-code/signup-code";
 
 @Component({
@@ -19,7 +18,7 @@ export class SignUpPage {
     getCode() {
         this.auth.checkPhone(this.phone)
             .subscribe(res => {
-                console.log(res);
+                this.nav.push(SignUpCodePage);
             });
     }
 }

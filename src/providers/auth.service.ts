@@ -22,21 +22,15 @@ export class AuthService {
     }
 
     checkPhone(phone: string) {
-        return Observable.create(observer => {
-            debugger;
-            observer.onNext({ success: true });
-            observer.onCompleted();
-        });
-
+        return Observable.of({ success: true });
         //return this.api.post('auth/phone', phone);
     }
 
     applyCode(messageCode: string){
-        let obs = this.api.post('auth/code', messageCode);
-        obs.subscribe(token => {
-            this.token.set(token);
-        });
-        return obs;
+        return Observable.of({ success: true });
+        // let obs = this.api.post('auth/code', messageCode);
+        // obs.subscribe(token => { this.token.set(token); });
+        // return obs;
     }
 
     getRegisterData() {
@@ -53,11 +47,7 @@ export class AuthService {
     }
 
     getReferrerId(inviteCode: string) {
-        return Observable.create(observer => {
-            observer.onNext({ name: '', email: '', referrer_id: '3243242432432442342',  });
-            observer.onCompleted();
-        })
-        //return this.api.get(`auth/register/${inviteCode}`);
+        return this.api.get(`auth/register/${inviteCode}`);
     }
 
     register(register: Register) {

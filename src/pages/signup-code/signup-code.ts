@@ -16,8 +16,10 @@ export class SignUpCodePage {
   }
 
   getCode() {
-    this.auth.applyCode(this.code);
-    this.nav.push(RegisterPage);
+    this.auth.applyCode(this.code)
+        .subscribe(res => {                                    
+            this.nav.push(RegisterPage);
+        });    
   }
 }
 
