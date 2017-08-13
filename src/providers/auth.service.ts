@@ -26,8 +26,7 @@ export class AuthService {
 
     applyCode(messageCode: string){
         let obs = this.api.post('auth/code', messageCode);
-        obs.subscribe(resp => {
-            let token = resp.json();
+        obs.subscribe(token => {
             this.token.set(token);
         });
         return obs;
