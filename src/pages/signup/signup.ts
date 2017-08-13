@@ -17,8 +17,9 @@ export class SignUpPage {
     }
 
     getCode() {
-        this.auth.checkPhone(this.phone);
-        this.nav.push(SignUpCodePage);
-
+        this.auth.checkPhone(this.phone)
+            .subscribe(res => {
+                console.log(res);
+            });
     }
 }

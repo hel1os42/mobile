@@ -4,7 +4,7 @@ import { AuthService } from "../../providers/auth.service";
 import { LoginPage } from "../login/login";
 import { RegisterPage } from "../register/register";
 import { InvitePage } from "../invite/invite";
-import { SignUpPage } from "../sign-up/signup";
+import { SignUpPage } from "../signup/signup";
 
 @Component({
   selector: 'page-start',

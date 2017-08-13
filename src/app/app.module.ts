@@ -18,7 +18,7 @@ import { AuthService } from "../providers/auth.service";
 import { ApiService } from "../providers/api.service";
 import { StorageService } from "../providers/storage.service";
 import { TokenService } from "../providers/token.service";
-import { SignUpPage } from "../pages/sign-up/signup";
+import { SignUpPage } from "../pages/signup/signup";
 import { SignUpCodePage } from "../pages/signup-code/signup-code";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
 

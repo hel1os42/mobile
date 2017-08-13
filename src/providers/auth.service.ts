@@ -4,6 +4,7 @@ import { Login } from "../models/login";
 import { ApiService } from "./api.service";
 import { TokenService } from "./token.service";
 import { Token } from "../models/token";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class AuthService {
@@ -21,7 +22,13 @@ export class AuthService {
     }
 
     checkPhone(phone: string) {
-        this.api.post('auth/phone', phone);
+        return Observable.create(observer => {
+            debugger;
+            observer.onNext({ success: true });
+            observer.onCompleted();
+        });
+
+        //return this.api.post('auth/phone', phone);
     }
 
     applyCode(messageCode: string){
@@ -46,7 +53,11 @@ export class AuthService {
     }
 
     getReferrerId(inviteCode: string) {
-        return this.api.get(`auth/register/${inviteCode}`);
+        return Observable.create(observer => {
+            observer.onNext({ name: '', email: '', referrer_id: '3243242432432442342',  });
+            observer.onCompleted();
+        })
+        //return this.api.get(`auth/register/${inviteCode}`);
     }
 
     register(register: Register) {
