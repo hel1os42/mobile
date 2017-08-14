@@ -59,7 +59,7 @@ export class AuthService {
 
     login(login: Login) {
         let obs = this.api.post('auth/login', login);
-        obs.subscribe(token => {this.token.set(token); });
+        obs.subscribe(token => this.token.set(token));
         return obs;
     }
 
