@@ -5,11 +5,11 @@ import { AuthService } from "../../providers/auth.service";
 import { TabsPage } from "../tabs/tabs";
 
 @Component({
-    selector: 'page-register',
-    templateUrl: 'register.html'
+    selector: 'page-create-user-profile',
+    templateUrl: 'create-user-profile.html'
 })
 
-export class RegisterPage {
+export class CreateUserProfile {
     data: Register = new Register();
 
     constructor(

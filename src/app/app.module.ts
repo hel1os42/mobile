@@ -7,10 +7,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
 import { LoginPage } from "../pages/login/login";
-import { RegisterPage } from "../pages/register/register";
+import { CreateUserProfile } from "../pages/create-user-profile/create-user-profile";
 import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
-import { UserPage } from '../pages/user/user';
+import { HomeUserPage } from '../pages/home-user-page/home-user-page';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { InvitePage } from "../pages/invite/invite";
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
@@ -31,10 +31,10 @@ import { ProfileService } from "../providers/profile.service";
     SignUpCodePage,
     InvitePage,
     LoginPage,
-    RegisterPage,
+    CreateUserProfile,
     TabsPage,
-    HomePage,
-    UserPage,
+    HomeUserPage,
+    UserProfilePage,
     FavoritesPage,
     NotificationsPage,
     OnBoardingPage
@@ -52,10 +52,10 @@ import { ProfileService } from "../providers/profile.service";
     SignUpCodePage,
     InvitePage,
     LoginPage,
-    RegisterPage,
+    CreateUserProfile,
     TabsPage,
-    HomePage,
-    UserPage,
+    HomeUserPage,
+    UserProfilePage,
     FavoritesPage,
     NotificationsPage,
     OnBoardingPage

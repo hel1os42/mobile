@@ -6,10 +6,10 @@ import { ProfileService } from "../../providers/profile.service";
 import { User } from "../../models/user";
 
 @Component({
-  selector: 'page-user',
-  templateUrl: 'user.html'
+  selector: 'page-user-profile',
+  templateUrl: 'user-profile.html'
 })
-export class UserPage {
+export class UserProfilePage {
     data: User = new User();
 
   constructor(

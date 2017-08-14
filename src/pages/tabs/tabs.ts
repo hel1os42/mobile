@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { UserPage } from '../user/user';
+import { HomeUserPage } from '../home-user-page/home-user-page';
+import { UserProfilePage } from '../user-profile/user-profile';
 import { FavoritesPage } from '../favorites/favorites';
 import { NotificationsPage } from '../notifications/notifications';
 
@@ -11,8 +11,8 @@ import { NotificationsPage } from '../notifications/notifications';
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = UserPage;
+  tab1Root = HomeUserPage;
+  tab2Root = UserProfilePage;
   tab3Root = FavoritesPage;
   tab4Root = NotificationsPage;
 
