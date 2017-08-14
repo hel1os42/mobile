@@ -8,29 +8,26 @@
 <ion-content>
   <form (submit)="register()">
     <ion-list padding-right>
-
       <ion-item>
         <ion-label><ion-icon class="font-200" color="primary" name="add-circle"></ion-icon></ion-label>
         <ion-input type="text" placeholder="Your name" [(ngModel)]="data.name" name="name"></ion-input>
       </ion-item>
 
-      <ion-item class="text-filed-radius">
+      <ion-item padding-bottom >
         <ion-input type="email" placeholder="Your e-mail" [(ngModel)]="data.email" name="email"></ion-input>
       </ion-item>
 
-      <ion-item>if your will additional information about yourself it helps us to recommend best offer for you. Also you can good
-      oportunity to earn points for this!
-      </ion-item>
+      <p padding>if your will additional information about yourself it helps us to recommend best offer for you. Also you can good
+        oportunity to earn points for this!
+      </p>
 
-      <ion-list>
         <ion-item>
           <ion-label>Your income</ion-label>
-          <ion-select class="text-filed-radius">
+          <ion-select>
             <ion-option value="nes">NES</ion-option>
             <ion-option value="n64">Nintendo64</ion-option>
           </ion-select>
         </ion-item>
-      </ion-list>
 
       <ion-grid>
         <ion-row>
@@ -38,7 +35,7 @@
             <ion-list>
               <ion-item>
                 <ion-label>Male</ion-label>
-                <ion-select class="text-filed-radius">
+                <ion-select>
                   <ion-option value="nes">NES</ion-option>
                   <ion-option value="n64">Nintendo64</ion-option>
                 </ion-select>
@@ -49,7 +46,7 @@
             <ion-list>
               <ion-item>
                 <ion-label>Age</ion-label>
-                <ion-select class="text-filed-radius">
+                <ion-select>
                   <ion-option value="nes">NES</ion-option>
                   <ion-option value="n64">Nintendo64</ion-option>
                 </ion-select>
@@ -58,6 +55,15 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+
+      <ion-row class="row">
+        <ion-label padding>Connect with social network</ion-label>
+        <ion-item>
+        <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-facebook"></ion-icon></ion-col>
+        <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-google"></ion-icon></ion-col>
+        <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-instagram"></ion-icon></ion-col>
+        </ion-item>
+      </ion-row>
 
       <ion-item>
         <ion-label fixed>Password</ion-label>
@@ -70,7 +76,7 @@
       </ion-item>
 
       <div padding>
-        <button ion-button large block>REGISTER</button>
+        <button ion-button large block>Create account</button>
       </div>
     </ion-list>
   </form>
