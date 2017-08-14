@@ -18,14 +18,15 @@ export class CreateUserProfile {
     }
 
     ionViewDidEnter() {
-        let inviteCode = this.auth.getInviteCode();
         this.data = this.auth.getRegisterData();
         if (this.data.referrer_id)
             return;
-        else
+        else {
+            let inviteCode = this.auth.getInviteCode();
             this.auth
                 .getReferrerId(inviteCode)
                 .subscribe(register => { this.data = register; });
+        }            
     }
 
     register() {
