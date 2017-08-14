@@ -6,29 +6,26 @@ import { ProfileService } from "../../providers/profile.service";
 import { User } from "../../models/user";
 
 @Component({
-  selector: 'page-user-profile',
-  templateUrl: 'user-profile.html'
+    selector: 'page-user-profile',
+    templateUrl: 'user-profile.html'
 })
 export class UserProfilePage {
-    data: User = new User();
+    user: User;    
 
-  constructor(
-    private app: App,
-    private profile: ProfileService,
-    private auth: AuthService,) {
+    constructor(
+        private app: App,
+        private profile: ProfileService,
+        private auth: AuthService) {
 
-  }
+    }
 
-  ionViewDidEnter() {
-      this.profile.get()
-        .subscribe(profile => {
-            this.data = profile;
-            console.log(this.data);
-        })
-  }
+    ionViewDidEnter() {
+        this.profile.get()
+            .subscribe(user => this.user = user);
+    }
 
-  logout() {
-    this.auth.logout();
-    this.app.getRootNav().setRoot(StartPage);
-  }
+    logout() {
+        this.auth.logout();
+        this.app.getRootNav().setRoot(StartPage);
+    }
 }
