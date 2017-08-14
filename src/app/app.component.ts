@@ -23,9 +23,13 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      //this.rootPage = auth.isLoggedIn() ? TabsPage : StartPage;
+      if (auth.isLoggedIn()) {
+          this.rootPage = TabsPage;
+      }
+      else
+         this.rootPage = auth.isOnboardingShown() ? StartPage : OnBoardingPage; 
       //this.rootPage = OnBoardingPage
-      this.rootPage = CreateUserProfile;
+      //this.rootPage = CreateUserProfile;
     });
   }
 }

@@ -5,15 +5,18 @@ import { ApiService } from "./api.service";
 import { TokenService } from "./token.service";
 import { Token } from "../models/token";
 import { Observable } from "rxjs";
+import { StorageService } from "./storage.service";
 
 @Injectable()
 export class AuthService {
+
     inviteCode: string = '59713';
     registerData: Register = new Register();
     
     constructor(
         private api: ApiService,
-        private token: TokenService) {
+        private token: TokenService,
+        private storage: StorageService) {
 
     }
     
@@ -62,6 +65,11 @@ export class AuthService {
 
     logout() {
         this.token.remove();
+    }
+
+    isOnboardingShown() {
+        let isSwown: boolean = this.storage.get('shown');
+        return isSwown;
     }
 
 }
