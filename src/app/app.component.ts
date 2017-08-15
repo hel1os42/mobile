@@ -28,9 +28,10 @@ export class MyApp {
                 this.rootPage = TabsPage;
             }
             else
+                this.rootPage = CreateAdvUserProfile;
+
                 //this.rootPage = auth.isOnboardingShown() ? StartPage : OnBoardingPage;
                 //this.rootPage = OnBoardingPage
-                this.rootPage = CreateAdvUserProfile;
         });
     }
 }
