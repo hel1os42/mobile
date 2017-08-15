@@ -12,7 +12,44 @@ page-home-user-page {
     background: #aaa2a2;
   }
 
-  .content{
+  .search-block{
+    background: #aaa2a2;
+    position: relative;
+  }
+
+  .scroll-content{
     padding: 0;
+  }
+
+  .searchbar-md .searchbar-input{
+    border-radius: 100px;
+    padding: 0 10px 0 30px;
+    background: #aaa2a2;
+    box-shadow: 0 0 3px rgba(255,255,255,0.5);
+    -webkit-box-shadow: 0 0 3px rgba(255,255,255,0.5);
+    color: #fff
+  }
+
+  .searchbar-md .searchbar-search-icon{
+    left: 6px;
+    top: 6px;
+  }
+
+  .btn-settings{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .type-food{
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 1%;
+  }
+
+  .item-md ion-avatar ion-img, .item-md ion-avatar img{
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
   }
 }
