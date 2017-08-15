@@ -72,3 +72,15 @@ button[ion-button] {
   color: #fff;
   border-radius: 100px;
 }
+
+ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content{
+  padding: 0;
+}
+
+.button[icon-only] {
+  box-shadow: none;
+}
+
+.button[icon-only]:active {
+  box-shadow: none;
+}
