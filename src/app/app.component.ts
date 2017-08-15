@@ -7,6 +7,7 @@ import { TabsPage } from "../pages/tabs/tabs";
 import { AuthService } from "../providers/auth.service";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { CreateUserProfile } from "../pages/create-user-profile/create-user-profile";
+import { CreateAdvUserProfile } from "../pages/create-advUser-profile/create-advUser-profile";
 
 @Component({
   templateUrl: 'app.html'
@@ -27,9 +28,9 @@ export class MyApp {
           this.rootPage = TabsPage;
       }
       else
-      this.rootPage = auth.isOnboardingShown() ? StartPage : OnBoardingPage;
+      //this.rootPage = auth.isOnboardingShown() ? StartPage : OnBoardingPage;
       //this.rootPage = OnBoardingPage
-      //this.rootPage = CreateUserProfile;
+      this.rootPage = CreateAdvUserProfile;
     });
   }
 }
