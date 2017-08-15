@@ -1,6 +1,45 @@
 <ion-header>
     <ion-navbar>
-      <ion-title>Create Offer</ion-title>
+      <ion-title>Create New Offer</ion-title>
     </ion-navbar>
   </ion-header>
   
+  <ion-content padding="">
+    <form (submit)="createOffer()">
+      <ion-list>
+  
+        <ion-item>
+          <ion-input padding-top border-top="0" type="text" placeholder="Input Offer Name"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-input padding-top type="text" placeholder="Add offer description here"></ion-input>
+        </ion-item>
+
+        <div padding>
+            <button margin-top ion-button round outline block>Browse Picture</button>
+        </div>
+
+        <ion-item padding>
+           <ion-label>Your income</ion-label>
+            <ion-select>
+              <ion-option value="nes">NES</ion-option>
+              <ion-option value="n64">Nintendo64</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item padding>
+            <ion-label>Your income</ion-label>
+            <ion-select>
+              <ion-option value="nes">NES</ion-option>
+              <ion-option value="n64">Nintendo64</ion-option>
+            </ion-select>
+        </ion-item>
+
+
+  
+        <div padding>
+          <button ion-button block>CREATE OFFER</button>
+        </div>
+      </ion-list>
+    </form>
+  </ion-content>

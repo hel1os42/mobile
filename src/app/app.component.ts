@@ -8,6 +8,7 @@ import { AuthService } from "../providers/auth.service";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { CreateUserProfile } from "../pages/create-user-profile/create-user-profile";
 import { CreateAdvUserProfile } from "../pages/create-advUser-profile/create-advUser-profile";
+import { CreateOffer } from "../pages/create-offer/create-offer";
 
 @Component({
     templateUrl: 'app.html'
@@ -28,7 +29,7 @@ export class MyApp {
                 this.rootPage = TabsPage;
             }
             else
-                this.rootPage = CreateAdvUserProfile;
+                this.rootPage = CreateOffer;
 
                 //this.rootPage = auth.isOnboardingShown() ? StartPage : OnBoardingPage;
                 //this.rootPage = OnBoardingPage
