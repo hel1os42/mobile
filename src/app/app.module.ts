@@ -24,6 +24,7 @@ import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { ProfileService } from "../providers/profile.service";
 import { CreateAdvUserProfile } from "../pages/create-advuser-profile/create-advuser-profile";
 import { OfferService } from "../providers/offer.servise";
+import { CreateOffer } from "../pages/create-offer/create-offer";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { OfferService } from "../providers/offer.servise";
     LoginPage,
     CreateUserProfile,
     CreateAdvUserProfile,
+    CreateOffer,
     TabsPage,
     HomeUserPage,
     UserProfilePage,
@@ -57,6 +59,7 @@ import { OfferService } from "../providers/offer.servise";
     LoginPage,
     CreateUserProfile,
     CreateAdvUserProfile,
+    CreateOffer,
     TabsPage,
     HomeUserPage,
     UserProfilePage,
