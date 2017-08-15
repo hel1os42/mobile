@@ -23,6 +23,7 @@ import { SignUpCodePage } from "../pages/signup-code/signup-code";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { ProfileService } from "../providers/profile.service";
 import { CreateAdvUserProfile } from "../pages/create-advuser-profile/create-advuser-profile";
+import { OfferService } from "../providers/offer.servise";
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { CreateAdvUserProfile } from "../pages/create-advuser-profile/create-adv
     AuthService,
     StorageService,
     TokenService,
-    ProfileService
+    ProfileService,
+    OfferService
   ]
 })
 export class AppModule {}
