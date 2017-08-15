@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from "ionic-angular";
 import { AuthService } from "../../providers/auth.service";
-import { RegisterPage } from '../../pages/register/register';
-import { Register } from "../../models/register";
+import { CreateUserProfile } from '../../pages/create-user-profile/create-user-profile';
 
 @Component({
     selector: 'page-invite',
@@ -15,16 +14,16 @@ export class InvitePage {
     constructor(
         private nav: NavController,
         private auth: AuthService) {
-        
+
     }
 
     apply() {
         this.auth
             .getReferrerId(this.inviteCode)
             .subscribe(
-                resp => {
-                    this.auth.registerForm = resp.json();
-                    this.nav.push(RegisterPage);
+                data => {
+                    this.auth.setRegisterData(data);
+                    this.nav.push(CreateUserProfile);
                 }
             );
     }

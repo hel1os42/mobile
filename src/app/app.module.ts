@@ -7,10 +7,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
 import { LoginPage } from "../pages/login/login";
-import { RegisterPage } from "../pages/register/register";
+import { CreateUserProfile } from "../pages/create-user-profile/create-user-profile";
 import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
-import { UserPage } from '../pages/user/user';
+import { HomeUserPage } from '../pages/home-user-page/home-user-page';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { InvitePage } from "../pages/invite/invite";
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
@@ -18,19 +18,26 @@ import { AuthService } from "../providers/auth.service";
 import { ApiService } from "../providers/api.service";
 import { StorageService } from "../providers/storage.service";
 import { TokenService } from "../providers/token.service";
+import { SignUpPage } from "../pages/signup/signup";
+import { SignUpCodePage } from "../pages/signup-code/signup-code";
+import { OnBoardingPage } from "../pages/onboarding/onboarding";
+import { ProfileService } from "../providers/profile.service";
 
 @NgModule({
   declarations: [
     MyApp,
     StartPage,
+    SignUpPage,
+    SignUpCodePage,
     InvitePage,
     LoginPage,
-    RegisterPage,
+    CreateUserProfile,
     TabsPage,
-    HomePage,
-    UserPage,
+    HomeUserPage,
+    UserProfilePage,
     FavoritesPage,
-    NotificationsPage
+    NotificationsPage,
+    OnBoardingPage
   ],
   imports: [
     BrowserModule,
@@ -41,14 +48,17 @@ import { TokenService } from "../providers/token.service";
   entryComponents: [
     MyApp,
     StartPage,
+    SignUpPage,
+    SignUpCodePage,
     InvitePage,
     LoginPage,
-    RegisterPage,
+    CreateUserProfile,
     TabsPage,
-    HomePage,
-    UserPage,
+    HomeUserPage,
+    UserProfilePage,
     FavoritesPage,
-    NotificationsPage
+    NotificationsPage,
+    OnBoardingPage
   ],
   providers: [
     StatusBar,
@@ -57,7 +67,8 @@ import { TokenService } from "../providers/token.service";
     ApiService,
     AuthService,
     StorageService,
-    TokenService
+    TokenService,
+    ProfileService
   ]
 })
 export class AppModule {}

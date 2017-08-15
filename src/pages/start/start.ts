@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { LoginPage } from "../login/login";
-import { RegisterPage } from "../register/register";
+import { CreateUserProfile } from "../create-user-profile/create-user-profile";
 import { InvitePage } from "../invite/invite";
+import { SignUpPage } from "../signup/signup";
 
 @Component({
   selector: 'page-start',
@@ -19,12 +20,14 @@ export class StartPage {
   login() {
     this.nav.push(LoginPage);
   }
- 
+
   register() {
-    let inviteCode = this.auth.getInviteCode();
-    if (inviteCode)
-      this.nav.push(RegisterPage);
-    else
-      this.nav.push(InvitePage);
+    this.nav.push(SignUpPage);
+
+    // let inviteCode = this.auth.getInviteCode();
+    // if (inviteCode)
+    //   this.nav.push(CreateUserProfile);
+    // else
+    //   this.nav.push(InvitePage);
   }
 }

@@ -1,0 +1,26 @@
+page-onboarding {
+  h1{
+    color: white;
+  }
+
+  .slide1{
+    background: url("../assets/img/slide1.jpg") no-repeat 50% 50%/cover;
+  }
+
+  .slide2{
+    background: url("../assets/img/slide2.jpg") no-repeat 50% 50%/cover;
+  }
+
+  .slide3{
+    background: url("../assets/img/slide3.jpg") no-repeat 50% 50%/cover;
+  }
+
+  .skip{
+    position: fixed;
+    color: #fff;
+    top: 3%;
+    right: 1%;
+    z-index: 1111;
+    background: transparent;
+  }
+}

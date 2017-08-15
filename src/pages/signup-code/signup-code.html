@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title></ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content scroll="false">
+    <div class="logo">
+    </div>
+    <div text-center text-uppercase class="color-gray">
+        enter code
+    </div>
+
+    <ion-item padding>
+        <ion-input type="tel" placeholder="" [(ngModel)]="code"></ion-input>
+    </ion-item>
+
+    <div padding>
+        <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">apply</button>
+    </div>
+    <div text-center text-uppercase class="color-gray font-75">
+        please input code from sms. we sent code to you
+    </div>
+</ion-content>

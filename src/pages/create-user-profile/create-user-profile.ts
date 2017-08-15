@@ -5,29 +5,28 @@ import { AuthService } from "../../providers/auth.service";
 import { TabsPage } from "../tabs/tabs";
 
 @Component({
-    selector: 'page-register',
-    templateUrl: 'register.html'
+    selector: 'page-create-user-profile',
+    templateUrl: 'create-user-profile.html'
 })
 
-export class RegisterPage {
+export class CreateUserProfile {
     data: Register = new Register();
-    
+
     constructor(
         private nav: NavController,
         private auth: AuthService) {
     }
-    
+
     ionViewDidEnter() {
-        let inviteCode = this.auth.getInviteCode();
-        this.data = this.auth.registerForm;
+        this.data = this.auth.getRegisterData();
         if (this.data.referrer_id)
             return;
-        else
+        else {
+            let inviteCode = this.auth.getInviteCode();
             this.auth
                 .getReferrerId(inviteCode)
-                .subscribe(resp => {
-                    this.data = resp.json();
-                });
+                .subscribe(register => { this.data = register; });
+        }            
     }
 
     register() {
@@ -41,7 +40,7 @@ export class RegisterPage {
                     })
                     .subscribe(resp => {
                         this.nav.setRoot(TabsPage);
-                    })                    
+                    })
                 }
             );
     }

@@ -22,3 +22,53 @@ button[ion-button] {
 .toast-message {
   white-space: pre;
 }
+
+.logo {
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  background: url("../assets/img/logo_start.png") no-repeat center center;
+  background-size: contain;
+}
+
+.font-50{
+  font-size: 50%;
+}
+
+.font-75{
+  font-size: 75%;
+}
+
+.font-125{
+  font-size: 125%;
+}
+
+.font-150{
+  font-size: 150%;
+}
+
+.font-175{
+  font-size: 175%;
+}
+
+.font-200{
+  font-size: 200%;
+}
+
+// text colors
+.text-white {
+  color: #fff;
+}
+
+.text-gray {
+  color: gray;
+}
+
+.text-filed-radius{
+  background: #dbd8d8;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  color: #fff;
+  border-radius: 100px;
+}
