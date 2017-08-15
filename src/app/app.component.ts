@@ -10,27 +10,27 @@ import { CreateUserProfile } from "../pages/create-user-profile/create-user-prof
 import { CreateAdvUserProfile } from "../pages/create-advUser-profile/create-advUser-profile";
 
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any;
+    rootPage: any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    auth: AuthService) {
+    constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+        auth: AuthService) {
 
-    platform.ready().then((resp) => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+        platform.ready().then((resp) => {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            statusBar.styleDefault();
+            splashScreen.hide();
 
-      if (auth.isLoggedIn()) {
-          this.rootPage = TabsPage;
-      }
-      else
-      //this.rootPage = auth.isOnboardingShown() ? StartPage : OnBoardingPage;
-      //this.rootPage = OnBoardingPage
-      this.rootPage = CreateAdvUserProfile;
-    });
-  }
+            if (auth.isLoggedIn()) {
+                this.rootPage = TabsPage;
+            }
+            else
+                //this.rootPage = auth.isOnboardingShown() ? StartPage : OnBoardingPage;
+                //this.rootPage = OnBoardingPage
+                this.rootPage = CreateAdvUserProfile;
+        });
+    }
 }
