@@ -16,8 +16,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-list margin>
-
+  <ion-list padding-left padding-right>
     <ion-item>
       <ion-input class="font-150" placeholder="Company name" type="text" value=""></ion-input>
     </ion-item>
@@ -26,16 +25,19 @@
       <ion-input placeholder="Add company description here" type="text"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-select class="bg-gray" full placeholder="Choose category">
+    <ion-item class="border-bottom-no" padding-top>
+      <ion-select interface="action-sheet" class="bg-gray width-100" full placeholder="Choose category">
         <ion-option value="cat1">Category 1</ion-option>
         <ion-option value="cat2">Category 2</ion-option>
       </ion-select>
     </ion-item>
 
-    <ion-label>Choose your location</ion-label>
-    <img src="assets/img/map.jpg"/>
+    <p class="font-75">Choose your location</p>
+
+    <ion-img [width]="imgWidth" [height]="imgHeight" src="assets/img/map.jpg"></ion-img>
 
     <button ion-button full margin-top>Create account</button>
+
   </ion-list>
+
 </ion-content>
