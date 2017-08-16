@@ -5,10 +5,37 @@
 </ion-header>
 
 <ion-content>
-  <div class="cover">
-    <button ion-button outline color="dark">Set Cover</button>
-    <button ion-button icon-only color="transparent">
-      <ion-icon class="text-white" name="md-pin"></ion-icon>
-    </button>
-  </div>
+  <ion-grid class="cover">
+    <ion-row>
+      <ion-col col-6 class="relative">
+        <button class="btn-add" ion-fab color="light"><ion-icon name="md-add" class="text-black"></ion-icon></button>
+      </ion-col>
+      <ion-col col-6>
+        <button class="btn-set" ion-button outline color="dark">Set Cover</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list margin>
+
+    <ion-item>
+      <ion-input class="font-150" placeholder="Company name" type="text" value=""></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input placeholder="Add company description here" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-select class="bg-gray" full placeholder="Choose category">
+        <ion-option value="cat1">Category 1</ion-option>
+        <ion-option value="cat2">Category 2</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-label>Choose your location</ion-label>
+    <img src="assets/img/map.jpg"/>
+
+    <button ion-button full margin-top>Create account</button>
+  </ion-list>
 </ion-content>
