@@ -1,16 +1,22 @@
 page-create-offer {
-   .name input::placeholder {
-        font-size: 200%;
-    }
-
   .browse {
       border-style: dashed;
-      border-width: 2px;
+      border-width: 1px;
   }
 
+<<<<<<< HEAD
+  #map img{
+        width: 100%;
+      }
+
+    .bcg {
+        background: url(../assets/img/arrow-down.png) no-repeat center right 8px;
+    }
+=======
   #map {
       border-radius: 30px;
-      }
-    
+  }
+>>>>>>> 2b4697425d55ce3ec2de2d27c085465259fb6e5d
+
 }
 

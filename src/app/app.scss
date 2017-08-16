@@ -91,7 +91,17 @@ ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content{
 
 .border-bottom-no .list-md .item-block .item-inner, .border-bottom-no.item-md.item-block .item-inner{
   border-bottom: none;
+  padding-right: 0;
 }
+
+.border-bottom-no .select-md .select-icon{
+  right: 17px;
+}
+
+.border-bottom-no .label-md{
+  margin: 0;
+}
+
 
 .button[icon-only] {
   box-shadow: none;
@@ -120,4 +130,8 @@ ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content{
 .bg-gray{
   border-radius: 100px;
   background: lightgray;
+}
+
+.item-md{
+  padding-left: 0;
 }

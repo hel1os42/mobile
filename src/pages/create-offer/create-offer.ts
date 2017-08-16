@@ -11,7 +11,4 @@ export class CreateOffer {
     constructor() {
 
     }
-
-
-
 }
