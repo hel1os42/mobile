@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content scroll="false">
+<ion-content padding scroll="false">
   <div class="logo">
   </div>
   <div text-center text-uppercase class="text-gray">
@@ -18,9 +18,8 @@
     <ion-input type="tel" placeholder="" [(ngModel)] ="phone"></ion-input>
   </ion-item>
 
-  <div padding>
-    <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">get code</button>
-  </div>
+  <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">get code</button>
+
   <div text-center text-uppercase class="color-gray font-75">
     we do not use your private data
   </div>
