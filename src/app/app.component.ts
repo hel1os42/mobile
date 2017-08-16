@@ -29,7 +29,7 @@ export class MyApp {
                 this.rootPage = TabsPage;
             }
             else
-                this.rootPage = CreateOffer;
+                this.rootPage = StartPage;
 
                 //this.rootPage = auth.isOnboardingShown() ? StartPage : OnBoardingPage;
                 //this.rootPage = OnBoardingPage

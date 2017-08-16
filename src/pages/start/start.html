@@ -1,22 +1,26 @@
-<ion-content scroll="false">
+<ion-content padding scroll="false">
   <div class="logo">
   </div>
-  <div text-center text-uppercase class="color-gray">
+  <div padding-bottom text-center text-uppercase class="color-gray" class="font-150">
     network affiliate universe
   </div>
   <div padding>
     <button ion-button block middle color="secondary" margin-bottom (click)="register()">sign up</button>
   </div>
-  <div text-center text-uppercase class="color-gray font-75">
+  <p padding text-center text-uppercase class="color-gray font-75">
     or login with
-  </div>
-  <ion-row class="row">
+  </p>
+  <ion-row padding class="row">
     <ion-col text-right class="col"><ion-icon class="font-200" color="primary" name="logo-facebook"></ion-icon></ion-col>
     <ion-col text-center class="col"><ion-icon class="font-200" color="primary" name="logo-google"></ion-icon></ion-col>
     <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="add-circle"></ion-icon></ion-col>
   </ion-row>
 
-    <div padding>
-  <button ion-button block middle (click)="login()">sign in</button>
-  </div>
+
+
 </ion-content>
+<ion-footer no-shadow no-border>
+  <p padding text-uppercase text-center>
+    <a (click)="login()">sign in</a>
+  </p>
+</ion-footer>

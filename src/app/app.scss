@@ -25,7 +25,7 @@ button[ion-button] {
 
 .logo {
   width: 50%;
-  height: 50%;
+  height: 40%;
   margin: 0 auto;
   background: url("../assets/img/logo_start.png") no-repeat center center;
   background-size: contain;
@@ -90,9 +90,9 @@ ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content{
 }
 
 .border-bottom-no .list-md .item-block .item-inner, .border-bottom-no.item-md.item-block .item-inner{
-  border-bottom: none;
-  padding-right: 0;
-}
+   border-bottom: none;
+   padding-right: 0;
+ }
 
 .border-bottom-no .select-md .select-icon{
   right: 17px;
@@ -101,7 +101,6 @@ ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content{
 .border-bottom-no .label-md{
   margin: 0;
 }
-
 
 .button[icon-only] {
   box-shadow: none;
