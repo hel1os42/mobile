@@ -89,11 +89,8 @@ ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content{
   padding: 0;
 }
 
-.border-bottom-no .list-md .item-block .item-inner, .border-bottom-no.item-md.item-block .item-inner{
-<<<<<<< HEAD
-  border-bottom: none;
-  padding-right: 0;
-=======
+.border-bottom-no .list-md .item-block .item-inner,
+.border-bottom-no.item-md.item-block .item-inner{
    border-bottom: none;
    padding-right: 0;
  }
@@ -102,9 +99,8 @@ ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content{
   right: 17px;
 }
 
-.border-bottom-no .label-md{
+.border-bottom-no .label-md {
   margin: 0;
->>>>>>> 3ddca8220deafc31ac6992383e474eb136bd7732
 }
 
 .border-bottom-no .select-md .select-icon{
@@ -114,7 +110,6 @@ ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content{
 .border-bottom-no .label-md{
   margin: 0;
 }
-
 
 .button[icon-only] {
   box-shadow: none;
