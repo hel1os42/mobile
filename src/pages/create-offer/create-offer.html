@@ -1,46 +1,89 @@
 <ion-header>
     <ion-navbar>
-      <ion-title>Create New Offer</ion-title>
+        <ion-title>Create New Offer</ion-title>
     </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding-right padding-left padding-bottom>
+</ion-header>
+
+<ion-content padding-right padding-left padding-bottom>
     <form (submit)="createOffer()">
-      <ion-list>
-  
-        <ion-item padding-top class="name">
-          <ion-input padding-top type="text" placeholder="Input Offer Name"></ion-input>
-        </ion-item>
-  
-        <ion-item>
-          <ion-input padding-top type="text" placeholder="Add offer description here"></ion-input>
-        </ion-item>
+        <ion-list>
 
-        <div padding>
-            <button class="browse" margin-top ion-button round outline block>Browse Picture</button>
-        </div>
-        <div padding>
-        <ion-item>
-           <ion-label>Your income</ion-label>
-            <ion-select>
-              <ion-option value="nes">NES</ion-option>
-              <ion-option value="n64">Nintendo64</ion-option>
-            </ion-select>
-        </ion-item>
-        </div>
-        <ion-item padding>
-            <ion-label>Your income</ion-label>
-            <ion-select>
-              <ion-option value="nes">NES</ion-option>
-              <ion-option value="n64">Nintendo64</ion-option>
-            </ion-select>
-        </ion-item>
+            <ion-item padding-top class="name">
+                <ion-input padding-top type="text" placeholder="Input Offer Name"></ion-input>
+            </ion-item>
 
+            <ion-item>
+                <ion-input padding-top type="text" placeholder="Add offer description here"></ion-input>
+            </ion-item>
 
-  
-        <div padding>
-          <button ion-button block>CREATE OFFER</button>
-        </div>
-      </ion-list>
+            <div padding>
+                <button class="browse" margin-top ion-button round outline block>Browse Picture</button>
+            </div>
+
+            <ion-item padding>
+                <ion-label>Choose category</ion-label>
+                <ion-select>
+                    <ion-option value="nes">NES</ion-option>
+                    <ion-option value="n64">Nintendo64</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item padding>
+                <ion-label>Set Working time</ion-label>
+                <ion-select>
+
+                </ion-select>
+            </ion-item>
+
+            <ion-item padding-left padding-right>
+                <ion-label>from</ion-label>
+                <ion-datetime displayFormat="DDD/D/MM/YYYY     h:mm a"></ion-datetime>
+            </ion-item>
+            <ion-item padding-left padding-right>
+                <ion-label>to</ion-label>
+                <ion-datetime displayFormat="DDD/D/MM/YYYY     h:mm a"></ion-datetime>
+            </ion-item>
+
+            <div padding class="check">
+                Additional options
+            </div>
+
+            <div>
+                <ion-item padding>
+                    <ion-label>Unlimited offer</ion-label>
+                    <ion-select>
+                        <ion-option value="Start">NES</ion-option>
+                        <ion-option value="n64">Nintendo64</ion-option>
+                    </ion-select>
+                </ion-item>
+                <ion-grid padding>
+                    <ion-row>
+                        <ion-col>
+                            <p>Working radius:</p>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                <ion-label>{{radius}}</ion-label>
+                                <ion-select [(ngModel)]="radius" name="radius">
+                                    <ion-option value="50">50 m</ion-option>
+                                    <ion-option value="100">100 m</ion-option>
+                                    <ion-option value="150">150 m</ion-option>
+                                    <ion-option value="200">200 m</ion-option>
+                                    <ion-option value="250">250 m</ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+
+            <div padding id="map">
+                <img src="assets/img/map.jpg" />
+            </div>
+
+            <div padding>
+                <button ion-button block>CREATE OFFER</button>
+            </div>
+        </ion-list>
     </form>
-  </ion-content>
+</ion-content>

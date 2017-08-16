@@ -1,4 +1,3 @@
-
 import { Component } from "@angular/core";
 
 @Component({
@@ -7,8 +6,12 @@ import { Component } from "@angular/core";
 })
 
 export class CreateOffer {
+    radius: number;
 
     constructor() {
 
     }
+
+
+
 }
