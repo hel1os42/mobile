@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
 import { LoginPage } from "../pages/login/login";
-import { CreateUserProfile } from "../pages/create-user-profile/create-user-profile";
+import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-profile";
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomeUserPage } from '../pages/home-user-page/home-user-page';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
@@ -22,9 +22,9 @@ import { SignUpPage } from "../pages/signup/signup";
 import { SignUpCodePage } from "../pages/signup-code/signup-code";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { ProfileService } from "../providers/profile.service";
-import { CreateAdvUserProfile } from "../pages/create-advUser-profile/create-advUser-profile";
+import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create-advUser-profile";
 import { OfferService } from "../providers/offer.servise";
-import { CreateOffer } from "../pages/create-offer/create-offer";
+import { CreateOfferPage } from "../pages/create-offer/create-offer";
 
 
 @NgModule({
@@ -35,9 +35,9 @@ import { CreateOffer } from "../pages/create-offer/create-offer";
     SignUpCodePage,
     InvitePage,
     LoginPage,
-    CreateUserProfile,
-    CreateAdvUserProfile,
-    CreateOffer,
+    CreateUserProfilePage,
+    CreateAdvUserProfilePage,
+    CreateOfferPage,
     TabsPage,
     HomeUserPage,
     UserProfilePage,
@@ -58,9 +58,9 @@ import { CreateOffer } from "../pages/create-offer/create-offer";
     SignUpCodePage,
     InvitePage,
     LoginPage,
-    CreateUserProfile,
-    CreateAdvUserProfile,
-    CreateOffer,
+    CreateUserProfilePage,
+    CreateAdvUserProfilePage,
+    CreateOfferPage,
     TabsPage,
     HomeUserPage,
     UserProfilePage,

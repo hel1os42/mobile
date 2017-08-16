@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
     templateUrl: 'create-offer.html'
 })
 
-export class CreateOffer {
+export class CreateOfferPage {
     radius: number;
 
     constructor() {

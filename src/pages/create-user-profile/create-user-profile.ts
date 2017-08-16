@@ -9,7 +9,7 @@ import { TabsPage } from "../tabs/tabs";
     templateUrl: 'create-user-profile.html'
 })
 
-export class CreateUserProfile {
+export class CreateUserProfilePage {
     data: Register = new Register();
 
     constructor(

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
-import { CreateUserProfile } from "../create-user-profile/create-user-profile";
+import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
 
 @Component({
   selector: 'page-signup-code',
@@ -18,7 +18,7 @@ export class SignUpCodePage {
   getCode() {
     this.auth.applyCode(this.code)
         .subscribe(res => {                                    
-            this.nav.push(CreateUserProfile);
+            this.nav.push(CreateUserProfilePage);
         });    
   }
 }

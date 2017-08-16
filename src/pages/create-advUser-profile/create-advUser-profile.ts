@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: 'create-advUser-profile.html'
 })
 
-export class CreateAdvUserProfile {
+export class CreateAdvUserProfilePage {
 
     constructor() {
 

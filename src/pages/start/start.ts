@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { LoginPage } from "../login/login";
-import { CreateUserProfile } from "../create-user-profile/create-user-profile";
+import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
 import { InvitePage } from "../invite/invite";
 import { SignUpPage } from "../signup/signup";
 
