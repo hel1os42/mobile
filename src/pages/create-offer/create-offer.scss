@@ -1,3 +1,11 @@
 page-create-offer {
-  
+   .name input::placeholder {
+        font-size: 200%;
+    }
+
+  .browse {
+      border-style: dashed;
+      border-width: 2px;
+  }
+
 }
