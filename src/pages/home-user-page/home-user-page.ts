@@ -12,10 +12,9 @@ export class HomeUserPage {
     constructor(
         private nav: NavController,
         private profile: ProfileService) {
-
     }
 
     ionViewDidEnter() {
-            
+
     }
 }

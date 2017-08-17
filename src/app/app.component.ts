@@ -29,9 +29,10 @@ export class MyApp {
                 ? TabsPage
                 : auth.isOnboardingShown()
                     ? StartPage
-                    : OnBoardingPage;                          
-            
-            this.rootPage = CreateOfferPage
+                    : OnBoardingPage;
+
+            this.rootPage = StartPage;
+          //CreateUserProfilePage
         });
     }
 }
