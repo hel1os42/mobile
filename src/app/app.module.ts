@@ -25,6 +25,7 @@ import { ProfileService } from "../providers/profile.service";
 import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create-advUser-profile";
 import { OfferService } from "../providers/offer.servise";
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
+import { SettingsPage } from "../pages/settings/settings";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { CreateOfferPage } from "../pages/create-offer/create-offer";
     UserProfilePage,
     FavoritesPage,
     NotificationsPage,
-    OnBoardingPage
+    OnBoardingPage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { CreateOfferPage } from "../pages/create-offer/create-offer";
     UserProfilePage,
     FavoritesPage,
     NotificationsPage,
-    OnBoardingPage
+    OnBoardingPage,
+    SettingsPage
   ],
   providers: [
     StatusBar,
