@@ -11,6 +11,7 @@ import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
 import { SettingsPage } from "../pages/settings/settings";
 import { UserProfilePage } from "../pages/user-profile/user-profile";
+import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
 @Component({
     templateUrl: 'app.html'
 })
@@ -31,7 +32,7 @@ export class MyApp {
                 : auth.isOnboardingShown()
                     ? StartPage
                     : OnBoardingPage;
-
+          this.rootPage = AdvUserProfilePage;
           //CreateUserProfilePage
           //SettingsPage
           // UserProfilePage
