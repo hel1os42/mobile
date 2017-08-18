@@ -53,9 +53,13 @@
         </ion-item>
       </ion-row>
 
-      <p padding>
-        <img src="assets/img/map.jpg"/>
-      </p>
+      <p padding class="font-75">Choose your location:</p>
+      <div padding-bottom>
+          <div *ngIf="!coords.lat" >Detecting your location...</div>
+          <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+              <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+          </agm-map>
+      </div>
 
       <ion-item>
         <ion-label fixed>Password</ion-label>
