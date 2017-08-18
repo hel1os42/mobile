@@ -32,7 +32,7 @@ export class MyApp {
                     ? StartPage
                     : OnBoardingPage;
 
-            this.rootPage = StartPage;
+         
           //CreateUserProfilePage
           //SettingsPage
           // UserProfilePage
