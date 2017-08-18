@@ -11,7 +11,7 @@ import { SettingsPage } from "../settings/settings";
     templateUrl: 'user-profile.html'
 })
 export class UserProfilePage {
-    user: User;    
+    user: User = new User();    
 
     constructor(
         private app: App,
