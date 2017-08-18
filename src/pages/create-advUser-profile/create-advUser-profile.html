@@ -32,9 +32,14 @@
       </ion-select>
     </ion-item>
 
-    <p class="font-75">Choose your location</p>
+    <p padding class="font-75">Choose your location:</p>
 
-    <ion-img [width]="imgWidth" [height]="imgHeight" src="assets/img/map.jpg"></ion-img>
+    <div padding-bottom>
+        <div *ngIf="!coords.lat" >Detecting your location...</div>
+        <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+            <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+        </agm-map>
+    </div>
 
     <button ion-button full margin-top>Create account</button>
 
