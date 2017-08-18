@@ -10,7 +10,7 @@ import { StorageService } from "../../providers/storage.service";
 })
 export class OnBoardingPage {
     code: string;
-    SHOWN_KEY = 'shown';
+    SHOWN_KEY = 'shownOnboarding';
 
     constructor(
         private nav: NavController,
