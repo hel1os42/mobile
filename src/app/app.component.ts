@@ -10,7 +10,7 @@ import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-
 import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create-advUser-profile";
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
 import { SettingsPage } from "../pages/settings/settings";
-
+import { UserProfilePage } from "../pages/user-profile/user-profile";
 @Component({
     templateUrl: 'app.html'
 })
@@ -32,8 +32,10 @@ export class MyApp {
                     ? StartPage
                     : OnBoardingPage;
 
-            this.rootPage = SettingsPage;
+            this.rootPage = StartPage;
           //CreateUserProfilePage
+          //SettingsPage
+          // UserProfilePage
         });
     }
 }
