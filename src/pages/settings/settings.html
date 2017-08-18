@@ -1,5 +1,50 @@
 <ion-header>
-    <ion-navbar>
-      <ion-title>Settings</ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+      <ion-item>
+        <ion-label class="font-200"><ion-icon color="dark" name="add-circle"></ion-icon></ion-label>
+        <ion-input type="text" placeholder="Your name" class="font-150" name="name"></ion-input>
+      </ion-item>
+
+      <ion-item padding-bottom>
+        <ion-input type="text" placeholder="About yourself" name="about"></ion-input>
+      </ion-item>
+
+      <ion-item padding-bottom class="border-bottom-no">
+        <ion-input type="email" class="bg-gray" placeholder="Your e-mail" name="email"></ion-input>
+      </ion-item>
+
+      <p padding>if your will additional information about yourself it helps us to recommend best offer for you. Also you can good
+        oportunity to earn points for this!
+      </p>
+
+      <ion-row class="row">
+        <ion-label padding>Connect with social network</ion-label>
+        <ion-item>
+          <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-facebook"></ion-icon></ion-col>
+          <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-google"></ion-icon></ion-col>
+          <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-instagram"></ion-icon></ion-col>
+        </ion-item>
+      </ion-row>
+
+      <p padding>
+        <img src="assets/img/map.jpg"/>
+      </p>
+
+      <ion-card color="light">
+        <ion-card-header text-center>
+          Create Account for Bussines
+        </ion-card-header>
+
+        <ion-card-content>
+          <button color="dark" ion-button block>Create account</button>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-list>
+</ion-content>
