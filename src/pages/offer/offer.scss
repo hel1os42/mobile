@@ -1,0 +1,34 @@
+page-offer{
+  h1{
+    color: white;
+  }
+
+  .slide1{
+    background: url("../assets/img/offer_page_background.jpg") no-repeat 50% 50%/cover;
+  }
+
+  .btn-circle{
+    width: 30px;
+    height: 30px;
+  }
+
+  .block-btn{
+    margin-top: 20%;
+  }
+
+  .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+    bottom: 43%;
+    padding-left: 16px;
+  }
+
+  .swiper-pagination{
+    text-align: left;
+  }
+
+  .toolbar-top{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1111;
+  }
+}
