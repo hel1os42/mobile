@@ -30,6 +30,7 @@ import { OfferService } from "../providers/offer.service";
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
 import { SettingsPage } from "../pages/settings/settings";
 import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
+import { MyOffersPage } from "../pages/my-offers/my-offers";
 
 
 
@@ -51,7 +52,8 @@ import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
     NotificationsPage,
     OnBoardingPage,
     SettingsPage,
-    AdvUserProfilePage
+    AdvUserProfilePage,
+    MyOffersPage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
     NotificationsPage,
     OnBoardingPage,
     SettingsPage,
-    AdvUserProfilePage
+    AdvUserProfilePage,
+    MyOffersPage
   ],
   providers: [
     StatusBar,
