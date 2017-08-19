@@ -44,9 +44,23 @@
       </ion-item>
     </ion-row>
 
-    <p padding>
-      <img src="assets/img/map.jpg" />
-    </p>
+    <div padding-top padding-bottom>
+      <a (click)="isShownMap()">
+        <ion-icon *ngIf="!isMap" name="arrow-down"></ion-icon>
+        <ion-icon *ngIf="isMap" name="arrow-up"></ion-icon>
+        <div class="select">
+          Change your location
+        </div>
+      </a>
+    </div>
+    
+
+    <div *ngIf="isMap" padding-bottom>
+      <div *ngIf="!coords.lat" >Detecting your location...</div>
+      <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+          <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+      </agm-map>
+    </div>
 
     <ion-card color="light">
       <ion-card-header text-center>

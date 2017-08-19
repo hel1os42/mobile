@@ -21,7 +21,21 @@ page-settings{
     -webkit-box-shadow: none;
   }
 
-  a {
+  ion-navbar a {
     float: right;
   }
+
+  .select {
+      float: left;
+      padding-right: 5px;
+  }
+    
+  .icon {
+      line-height: 1.2;
+    }
+
+  agm-map {
+    height: 200px;
+    }
+
 }

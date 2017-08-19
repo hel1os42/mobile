@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { User } from "../../models/user";
 import { ProfileService } from "../../providers/profile.service";
 import { CreateAdvUserProfilePage } from "../create-advUser-profile/create-advUser-profile";
+import { LocationService } from "../../providers/location.service";
+import { Coords } from "../../models/coords";
 
 @Component({
   selector: 'page-settings',
@@ -10,15 +12,31 @@ import { CreateAdvUserProfilePage } from "../create-advUser-profile/create-advUs
 })
 export class SettingsPage {
   user: User = new User;
+  message: string;
+  coords: Coords = new Coords();
+  isMap: boolean = false;
 
   constructor(private nav: NavController,
-    private profile: ProfileService) {
+              private profile: ProfileService,
+              private location: LocationService){
 
   }
 
   ionViewDidEnter() {
     this.profile.get()
       .subscribe(user => this.user = user);
+
+      this.location.get()
+      .then((resp) => {                
+          this.coords = {
+              lat: resp.coords.latitude,
+              lng: resp.coords.longitude
+          };
+      })
+      .catch((error) => {
+          this.message = error.message;
+          console.log(this.message);
+      });
   }
 
   saveProfile() {
@@ -29,5 +47,12 @@ export class SettingsPage {
 
   openCreateAdvUser() {
     this.nav.push(CreateAdvUserProfilePage);
+  }
+
+  isShownMap() {
+    if(!this.isMap)
+      this.isMap = true;
+    else
+      this.isMap = false;
   }
 }
