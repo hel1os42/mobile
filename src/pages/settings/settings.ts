@@ -14,7 +14,7 @@ export class SettingsPage {
   user: User = new User;
   message: string;
   coords: Coords = new Coords();
-  isMap: boolean = false;
+  isMapVisible: boolean = false;
 
   constructor(private nav: NavController,
               private profile: ProfileService,
@@ -49,10 +49,7 @@ export class SettingsPage {
     this.nav.push(CreateAdvUserProfilePage);
   }
 
-  isShownMap() {
-    if(!this.isMap)
-      this.isMap = true;
-    else
-      this.isMap = false;
+  toggleMapVisibility() {
+      this.isMapVisible = !this.isMapVisible;
   }
 }
