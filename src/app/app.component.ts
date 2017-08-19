@@ -13,6 +13,7 @@ import { SettingsPage } from "../pages/settings/settings";
 import { UserProfilePage } from "../pages/user-profile/user-profile";
 import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
 import { MyOffersPage } from "../pages/my-offers/my-offers";
+import { OfferPage } from "../pages/offer/offer";
 @Component({
     templateUrl: 'app.html'
 })
@@ -33,7 +34,7 @@ export class MyApp {
                 : auth.isOnboardingShown()
                     ? StartPage
                     : OnBoardingPage;
-            this.rootPage = MyOffersPage;
+            this.rootPage = OfferPage;
         });
     }
 }
