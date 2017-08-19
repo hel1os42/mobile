@@ -1,11 +1,10 @@
 <ion-header>
   <ion-navbar>
-    <a item-end (click)="saveProfile()">
+    <ion-title>Settings</ion-title>
+    <a (click)="saveProfile()">
       <ion-icon padding-right color="dark" class="font-300" name="checkmark"></ion-icon>
     </a>
-    <ion-title>Settings</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
@@ -14,7 +13,7 @@
       <ion-label class="font-200">
         <ion-icon color="dark" name="add-circle"></ion-icon>
       </ion-label>
-      <ion-input [(ngModel)]="user.name" type="text"class="font-150" name="name"></ion-input>
+      <ion-input [(ngModel)]="user.name" type="text" class="font-150" name="name"></ion-input>
     </ion-item>
 
     <ion-item padding-bottom>

@@ -33,7 +33,7 @@ export class MyApp {
                 : auth.isOnboardingShown()
                     ? StartPage
                     : OnBoardingPage;
-            //this.rootPage = MyOffersPage;
+            this.rootPage = MyOffersPage;
         });
     }
 }

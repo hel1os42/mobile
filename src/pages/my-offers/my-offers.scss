@@ -1,0 +1,17 @@
+page-my-offers{
+  .segment-ios .segment-button:first-of-type{
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+  }
+
+  .segment-ios .segment-button:last-of-type{
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+
+  .item-md ion-avatar ion-img, .item-md ion-avatar img, .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
+    border-radius: 0;
+    width: 100px;
+    height: auto;
+  }
+}
