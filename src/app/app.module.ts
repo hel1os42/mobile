@@ -2,12 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from "@angular/http";
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
+import { AgmCoreModule } from '@agm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
 import { LoginPage } from "../pages/login/login";
-import { CreateUserProfile } from "../pages/create-user-profile/create-user-profile";
+import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-profile";
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomeUserPage } from '../pages/home-user-page/home-user-page';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
@@ -15,6 +17,7 @@ import { InvitePage } from "../pages/invite/invite";
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { AuthService } from "../providers/auth.service";
+import { LocationService } from "../providers/location.service";
 import { ApiService } from "../providers/api.service";
 import { StorageService } from "../providers/storage.service";
 import { TokenService } from "../providers/token.service";
@@ -22,6 +25,15 @@ import { SignUpPage } from "../pages/signup/signup";
 import { SignUpCodePage } from "../pages/signup-code/signup-code";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { ProfileService } from "../providers/profile.service";
+import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create-advUser-profile";
+import { OfferService } from "../providers/offer.service";
+import { CreateOfferPage } from "../pages/create-offer/create-offer";
+import { SettingsPage } from "../pages/settings/settings";
+import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
+import { MyOffersPage } from "../pages/my-offers/my-offers";
+import { OfferPage } from "../pages/offer/offer";
+
+
 
 @NgModule({
   declarations: [
@@ -31,18 +43,26 @@ import { ProfileService } from "../providers/profile.service";
     SignUpCodePage,
     InvitePage,
     LoginPage,
-    CreateUserProfile,
+    CreateUserProfilePage,
+    CreateAdvUserProfilePage,
+    CreateOfferPage,
     TabsPage,
     HomeUserPage,
     UserProfilePage,
     FavoritesPage,
     NotificationsPage,
-    OnBoardingPage
+    OnBoardingPage,
+    SettingsPage,
+    AdvUserProfilePage,
+    MyOffersPage,
+    OfferPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBAgndAbV-v4aQWTAHrUljUfSCAthdK-RY'}),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,13 +72,19 @@ import { ProfileService } from "../providers/profile.service";
     SignUpCodePage,
     InvitePage,
     LoginPage,
-    CreateUserProfile,
+    CreateUserProfilePage,
+    CreateAdvUserProfilePage,
+    CreateOfferPage,
     TabsPage,
     HomeUserPage,
     UserProfilePage,
     FavoritesPage,
     NotificationsPage,
-    OnBoardingPage
+    OnBoardingPage,
+    SettingsPage,
+    AdvUserProfilePage,
+    MyOffersPage,
+    OfferPage
   ],
   providers: [
     StatusBar,
@@ -68,7 +94,10 @@ import { ProfileService } from "../providers/profile.service";
     AuthService,
     StorageService,
     TokenService,
-    ProfileService
+    ProfileService,
+    OfferService,
+    Geolocation,
+    LocationService
   ]
 })
 export class AppModule {}

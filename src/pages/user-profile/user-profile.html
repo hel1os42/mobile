@@ -1,11 +1,44 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      {{ user?.name }}
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  <button ion-button large block (click)="logout()">LOGOUT</button> 
+  <ion-item class="border-bottom-no">
+    <ion-avatar item-start>
+      <img src="assets/img/user_profile/ava.png">
+    </ion-avatar>
+    <h2>{{ user?.name }} Nastya Clark</h2>
+    <p>206789</p>
+    <a item-end (click)="openSettings()">
+      <ion-icon color="dark" class="font-200" name="cog"></ion-icon>
+    </a>
+  </ion-item>
+
+  <img width="100%" src="assets/img/user_profile/circle.png">
+
+  <ion-grid text-center>
+    <ion-row>
+      <ion-col align-self-start>
+        <div>
+          <ion-icon class="icon-medium" name="lock"></ion-icon>
+          <h3>0</h3>
+          <div>offers</div>
+        </div>
+      </ion-col>
+      <ion-col align-self-end>
+        <br>
+        <div>
+          <ion-icon class="icon-medium" name="cloud-circle"></ion-icon>
+          <h3>5</h3>
+          <div>nau</div>
+        </div>
+      </ion-col>
+      <ion-col align-self-start>
+        <div>
+          <ion-icon class="icon-medium" name="contact"></ion-icon>
+          <h3>5</h3>
+          <div>users</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button margin-top ion-button outline block color="dark">Get your first offer</button>
+  <button margin-top margin-bottom ion-button outline block color="dark" (click)="logout()">LOGOUT</button>
 </ion-content>

@@ -25,7 +25,7 @@ button[ion-button] {
 
 .logo {
   width: 50%;
-  height: 50%;
+  height: 40%;
   margin: 0 auto;
   background: url("../assets/img/logo_start.png") no-repeat center center;
   background-size: contain;
@@ -55,6 +55,14 @@ button[ion-button] {
   font-size: 200%;
 }
 
+.font-250{
+  font-size: 250%;
+}
+
+.font-300{
+  font-size: 300%;
+}
+
 // text colors
 .text-white {
   color: #fff;
@@ -64,6 +72,10 @@ button[ion-button] {
   color: gray;
 }
 
+.text-black {
+  color: black;
+}
+
 .text-filed-radius{
   background: #dbd8d8;
   padding: 0;
@@ -71,4 +83,97 @@ button[ion-button] {
   width: 100%;
   color: #fff;
   border-radius: 100px;
+}
+
+ion-app.md [padding], ion-app.md [padding] .padding-no .scroll-content,
+ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
+  padding: 0;
+}
+
+.border-bottom-no .list-md .item-block .item-inner,
+.border-bottom-no.item-md.item-block .item-inner,
+.border-bottom-no .list-ios .item-block .item-inner,
+.border-bottom-no.item-ios.item-block .item-inner{
+   border-bottom: none;
+   padding-right: 0;
+ }
+
+// .select-left .select-md .select-icon,
+//.select-left .select-ios .select-icon{
+//  right: 17px;
+//}
+
+.border-bottom-no .label-md,
+.border-bottom-no .label-ios {
+  margin: 0;
+}
+
+.border-bottom-no .label-md,
+.border-bottom-no .label-ios{
+  margin: 0;
+}
+
+.button[icon-only] {
+  box-shadow: none;
+}
+
+.button[icon-only]:active {
+  box-shadow: none;
+}
+
+.width-25{
+  min-width: 25%;
+}
+
+.width-50{
+  min-width: 50%;
+}
+
+.width-75{
+  min-width: 75%;
+}
+
+.width-100{
+  min-width: 100%;
+}
+
+.bg-gray{
+  border-radius: 100px;
+  background: lightgray;
+}
+
+.bg-gray-left{
+  border-radius: 100px 0 0 100px;
+  background: lightgray;
+}
+
+.bg-gray-right{
+  border-radius: 0 100px 100px 0;
+  background: lightgray;
+}
+
+.bg-graylight-right{
+  border-radius: 0 100px 100px 0;
+  background: #EAEAEA;
+}
+
+
+.item-md, .item-ios{
+  padding-left: 0;
+}
+
+.icon-large{
+  font-size: 50px;
+}
+
+.icon-medium{
+  font-size: 35px;
+}
+
+.icon-small{
+  font-size: 20px;
+}
+
+.icon-small-s{
+  font-size: 10px;
 }

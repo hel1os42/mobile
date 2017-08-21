@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from "ionic-angular";
 import { AuthService } from "../../providers/auth.service";
-import { CreateUserProfile } from '../../pages/create-user-profile/create-user-profile';
+import { CreateUserProfilePage } from '../../pages/create-user-profile/create-user-profile';
 
 @Component({
     selector: 'page-invite',
@@ -23,7 +23,7 @@ export class InvitePage {
             .subscribe(
                 data => {
                     this.auth.setRegisterData(data);
-                    this.nav.push(CreateUserProfile);
+                    this.nav.push(CreateUserProfilePage);
                 }
             );
     }

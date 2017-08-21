@@ -1,5 +1,21 @@
-.map{
-  width: 100%;
-  height: auto;
-  border-radius: 100px;
+page-create-user-profile{
+  .map{
+    width: 100%;
+    height: auto;
+    border-radius: 100px;
+  }
+
+  .label-md,.label-ios{
+    margin: 0;
+  }
+
+  img{
+    width: 100%;
+  }
+
+  agm-map {
+    height: 200px;
+    border-radius: 50px;
+  }
+  
 }

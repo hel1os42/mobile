@@ -1,26 +1,27 @@
 <ion-header>
   <ion-navbar>
-    <ion-title></ion-title>
+    <ion-title>Sign Up</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content scroll="false">
+<ion-content padding scroll="false">
   <div class="logo">
   </div>
   <div text-center text-uppercase class="text-gray">
     enter your phone
   </div>
-  <ion-item padding>
-    <ion-select placeholder="+380" [(ngModel)]="numcode">
+  <ion-item padding class="border-bottom-no">
+    <ion-select class="bg-gray-left" placeholder="+380" [(ngModel)]="numcode">
       <ion-option value="380">+380</ion-option>
-      <ion-option value="101">+101</ion-option>
+      <ion-option value="101">+102</ion-option>
     </ion-select>
-    <ion-input type="tel" placeholder="" [(ngModel)] ="phone"></ion-input>
+    <ion-input class="bg-graylight-right" type="tel" placeholder="" [(ngModel)] ="phone"></ion-input>
   </ion-item>
 
-  <div padding>
-    <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">get code</button>
-  </div>
+  <p padding>
+  <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">get code</button>
+  </p>
+
   <div text-center text-uppercase class="color-gray font-75">
     we do not use your private data
   </div>
