@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { LocationService } from "../../providers/location.service";
 import { AgmCoreModule} from '@agm/core';
 import { Coords } from "../../models/coords";
+import { NavController } from "ionic-angular";
+import { MyOffersPage } from "../my-offers/my-offers";
 
 @Component({
     selector: 'page-create-offer',
@@ -13,8 +15,8 @@ export class CreateOfferPage {
     message: string;
     coords: Coords = new Coords();
 
-    constructor(private location: LocationService) {
-        
+    constructor(private location: LocationService,
+                private nav: NavController) {
     }
 
     ionViewDidLoad() {
@@ -29,5 +31,11 @@ export class CreateOfferPage {
                 this.message = error.message;
                 console.log(this.message);
             });
+    }
+
+    createOffer() {
+        
+        this.nav.push(MyOffersPage);
+    
     }
 }

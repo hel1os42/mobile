@@ -68,7 +68,7 @@ export class AuthService {
     }
 
     isOnboardingShown() {
-        let isSwown: boolean = this.storage.get('shown');
+        let isSwown: boolean = this.storage.get('shownOnboarding');
         return isSwown;
     }
 
