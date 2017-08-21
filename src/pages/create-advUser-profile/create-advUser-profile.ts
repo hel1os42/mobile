@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
+import { AdvUserProfilePage } from "../adv-user-profile/adv-user-profile";
+import { NavController } from "ionic-angular";
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -11,7 +13,8 @@ export class CreateAdvUserProfilePage {
     coords: Coords = new Coords();
     message: string;
 
-    constructor(private location: LocationService) {
+    constructor(private location: LocationService,
+                private nav: NavController) {
 
     }
 
@@ -28,4 +31,8 @@ export class CreateAdvUserProfilePage {
             console.log(this.message);
         });
     }
+
+    openAdvUserProfile() {
+        this.nav.push(AdvUserProfilePage);
+      }
 }
