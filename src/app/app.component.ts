@@ -34,7 +34,7 @@ export class MyApp {
                 : auth.isOnboardingShown()
                     ? StartPage
                     : OnBoardingPage;
-            this.rootPage = OfferPage;
+           
         });
     }
 }
