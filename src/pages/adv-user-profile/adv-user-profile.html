@@ -37,5 +37,23 @@
 
     <button (click)="openCreateOffer()"ion-button full margin-top>Create offer</button>
   </ion-content>
-
 </ion-content>
+
+<p class="modal_create">
+  <ion-card color="light">
+    <p text-right>
+      <a class="close_btn icon-small" color="dark"><ion-icon name="close"></ion-icon></a>
+    </p>
+
+    <ion-card-header text-center>
+      <p text-center>
+        <img src="assets/img/proc.png"/>
+      </p>
+      <h2>Create Your First Offer</h2>
+    </ion-card-header>
+
+    <ion-card-content>
+      <button (click)="openCreateAdvUser()" color="dark" ion-button block>Create</button>
+    </ion-card-content>
+  </ion-card>
+</p>
