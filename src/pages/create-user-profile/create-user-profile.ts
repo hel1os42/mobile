@@ -15,6 +15,7 @@ export class CreateUserProfilePage {
     data: Register = new Register();
     coords: Coords = new Coords();
     message: string;
+    isSelectVisible: boolean = false;
 
     constructor(
         private nav: NavController,
@@ -60,5 +61,9 @@ export class CreateUserProfilePage {
                     })
                 }
             );
+    }
+
+    toggleSelect() {
+        this.isSelectVisible = !this.isSelectVisible;
     }
 }

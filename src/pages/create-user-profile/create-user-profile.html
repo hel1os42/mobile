@@ -8,7 +8,9 @@
   <form (submit)="register()">
     <ion-list>
       <ion-item>
-        <ion-label class="font-200"><ion-icon color="dark" name="add-circle"></ion-icon></ion-label>
+        <ion-label class="font-200">
+          <ion-icon color="dark" name="add-circle"></ion-icon>
+        </ion-label>
         <ion-input type="text" placeholder="Your name" class="font-150" [(ngModel)]="data.name" name="name"></ion-input>
       </ion-item>
 
@@ -20,45 +22,69 @@
         <ion-input type="email" class="bg-gray" placeholder="Your e-mail" [(ngModel)]="data.email" name="email"></ion-input>
       </ion-item>
 
-      <p padding>if your will additional information about yourself it helps us to recommend best offer for you. Also you can good
-        oportunity to earn points for this!
+    <p padding>if your will additional information about yourself it helps us to recommend best offer for you. Also you can good oportunity
+        to earn points for this!
       </p>
+      
+      <div padding-top padding-bottom>
+        <a (click)="toggleSelect()">
+          <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
+          <ion-icon *ngIf="isSelectVisible" name="arrow-up"></ion-icon>
+          <div *ngIf="!isSelectVisible" class="select">
+              Show additional information
+          </div>
+          <div *ngIf="isSelectVisible" class="select">
+          Hide additional information
+          </div>
+        </a>
+      </div>
 
+      <div padding  *ngIf="isSelectVisible">
+        
+      
+      <ion-item class="border-bottom-no select-left">
+        <ion-select class="bg-gray width-100" placeholder="Your income">
+          <ion-option value="nes">NES</ion-option>
+          <ion-option value="n64">Nintendo64</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-list padding-top>
         <ion-item class="border-bottom-no select-left">
-          <ion-select class="bg-gray width-100" placeholder="Your income">
+          <ion-select class="bg-gray width-50" placeholder="Age">
+            <ion-option value="nes">NES</ion-option>
+            <ion-option value="n64">Nintendo64</ion-option>
+          </ion-select>
+          <ion-select class="bg-gray width-50" placeholder="Male">
             <ion-option value="nes">NES</ion-option>
             <ion-option value="n64">Nintendo64</ion-option>
           </ion-select>
         </ion-item>
+      </ion-list>
+    </div>
 
-            <ion-list padding-top>
-              <ion-item class="border-bottom-no select-left">
-                <ion-select class="bg-gray width-50" placeholder="Age">
-                  <ion-option value="nes">NES</ion-option>
-                  <ion-option value="n64">Nintendo64</ion-option>
-                </ion-select>
-                <ion-select class="bg-gray width-50" placeholder="Male">
-                  <ion-option value="nes">NES</ion-option>
-                  <ion-option value="n64">Nintendo64</ion-option>
-                </ion-select>
-              </ion-item>
-            </ion-list>
 
       <ion-row class="row">
         <ion-label padding>Connect with social network</ion-label>
         <ion-item>
-        <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-facebook"></ion-icon></ion-col>
-        <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-google"></ion-icon></ion-col>
-        <ion-col text-left class="col"><ion-icon class="font-200" color="primary" name="logo-instagram"></ion-icon></ion-col>
+          <ion-col text-left class="col">
+            <ion-icon class="font-200" color="primary" name="logo-facebook"></ion-icon>
+          </ion-col>
+          <ion-col text-left class="col">
+            <ion-icon class="font-200" color="primary" name="logo-google"></ion-icon>
+          </ion-col>
+          <ion-col text-left class="col">
+            <ion-icon class="font-200" color="primary" name="logo-instagram"></ion-icon>
+          </ion-col>
         </ion-item>
       </ion-row>
 
       <p padding class="font-75">Choose your location:</p>
       <div padding-bottom>
-          <div *ngIf="!coords.lat" >Detecting your location...</div>
-          <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
-              <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
-          </agm-map>
+        <div *ngIf="!coords.lat">Detecting your location...</div>
+        <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+          <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+        </agm-map>
       </div>
 
       <ion-item>
