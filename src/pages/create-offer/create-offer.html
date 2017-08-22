@@ -69,11 +69,17 @@
                 </ion-grid>
     
                 
-                <div padding>
-                    Additional options
-                </div>
+                <div padding-top padding-bottom>
+                        <a (click)="toggleSelect()">
+                          <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
+                          <ion-icon *ngIf="isSelectVisible" name="arrow-up"></ion-icon>
+                          <div class="select">
+                              Additional options
+                          </div>
+                        </a>
+                      </div>
     
-                <div>
+                <div *ngIf="isSelectVisible">
                     <ion-item padding-top class="border-bottom-no">
                         <ion-select placeholder="Unlimited offer" class="bg-gray width-100" interface="action-sheet">
                             <ion-option value="">Limited</ion-option>
@@ -96,7 +102,7 @@
                             </ion-col>
                         </ion-row>
                     </ion-grid>
-                </div>
+                
     
                 <div>
                     <div *ngIf="!coords.lat" >Detecting your location...</div>
@@ -105,6 +111,7 @@
                         <agm-circle fillOpacity="0.2"  [radius]="radius" [latitude]="coords.lat" [longitude]="coords.lng"></agm-circle>
                     </agm-map>
                 </div>
+            </div>
     
                 <div padding>
                     <button ion-button block>CREATE OFFER</button>

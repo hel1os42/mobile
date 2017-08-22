@@ -17,6 +17,7 @@ export class CreateOfferPage {
     message: string;
     coords: Coords = new Coords();
     dataOffer: Offer = new Offer;
+    isSelectVisible: boolean = false;
 
     constructor(private location: LocationService,
         private nav: NavController,
@@ -44,8 +45,10 @@ export class CreateOfferPage {
     }
 
     createOffer() {
-
         this.nav.push(MyOffersPage);
+    }
 
+    toggleSelect() {
+        this.isSelectVisible = !this.isSelectVisible;
     }
 }
