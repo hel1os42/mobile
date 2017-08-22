@@ -31,7 +31,7 @@ export class CreateUserProfilePage {
             let inviteCode = this.auth.getInviteCode();
             this.auth
                 .getReferrerId(inviteCode)
-                .subscribe(register => { this.data = register; });
+                .subscribe(register => this.data = register);
         } 
         
         this.location.get()
