@@ -177,3 +177,19 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .icon-small-s{
   font-size: 10px;
 }
+
+.accord-visibility{
+  opacity: 1;
+  height: 100%;
+  overflow: hidden;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.accord-hidden{
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
