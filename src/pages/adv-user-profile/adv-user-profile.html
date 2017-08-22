@@ -38,10 +38,11 @@
   </ion-content>
 </ion-content>
 
-<p class="modal_create">
+
+<p *ngIf="!isModalVisible" class="modal_create">
   <ion-card color="light">
     <p text-right>
-      <a class="close_btn icon-small" color="dark"><ion-icon name="close"></ion-icon></a>
+      <a (click)="closeModal()" class="close_btn icon-small" color="dark"><ion-icon name="close"></ion-icon></a>
     </p>
 
     <ion-card-header text-center>
@@ -52,7 +53,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <button (click)="openCreateAdvUser()" color="dark" ion-button block>Create</button>
+      <button (click)="openCreateOffer()" color="dark" ion-button block>Create</button>
     </ion-card-content>
   </ion-card>
 </p>
