@@ -15,9 +15,9 @@ export class CreateOfferPage {
     radiuses = [50, 100, 150, 200, 250];
     radius: number = 200;
     message: string;
-    coords: Coords = new Coords();
-    dataOffer: Offer = new Offer;
-    isSelectVisible: boolean = false;
+    coords = new Coords();
+    offer = new Offer();
+    isSelectVisible = false;
 
     constructor(private location: LocationService,
         private nav: NavController,
@@ -26,7 +26,7 @@ export class CreateOfferPage {
 
     ionViewDidLoad() {
         this.offerService.getOffersData()
-            .subscribe(resp => this.dataOffer = resp);
+            .subscribe(resp => this.offer = resp);
         
         this.location.get()
             .then((resp) => {
@@ -39,12 +39,21 @@ export class CreateOfferPage {
                 this.message = error.message;
                 console.log(this.message);
             });
-        
-        
-
     }
 
     createOffer() {
+        
+        this.offer.reward = 1;
+        this.offer.max_count = 1;
+        this.offer.max_for_user = 1;
+        this.offer.max_per_day = 1;
+        this.offer.max_for_user_per_day = 1;
+        this.offer.user_level_min = 1;
+        this.offer.latitude = this.coords.lat.toString();
+        this.offer.longitude = this.coords.lng.toString();
+
+        this.offerService.setOffer(this.offer);
+   
         this.nav.push(MyOffersPage);
     }
 
