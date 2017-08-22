@@ -35,10 +35,7 @@ export class MyApp {
                     ? StartPage
                     : OnBoardingPage;
 
-<<<<<<< HEAD
-=======
           //this.rootPage = CreateOfferPage
->>>>>>> e854d86033c4f4a2a3386ce017335a30e7315ea2
         });
     }
 }
