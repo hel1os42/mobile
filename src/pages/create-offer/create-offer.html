@@ -104,7 +104,7 @@
                     </ion-grid>
 
 
-                <div>
+                <div padding-top padding-bottom>
                     <div *ngIf="!coords.lat" >Detecting your location...</div>
                     <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
                         <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
