@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AuthService } from "../../providers/auth.service";
 import { LoginPage } from "../login/login";
 import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
 import { SignUpInvitePage } from "../invite/invite";
@@ -13,8 +12,7 @@ import { SignUpPage } from "../signup/signup";
 export class StartPage {
 
   constructor(
-    private nav: NavController,
-    private auth: AuthService) {
+    private nav: NavController) {
   }
 
   login() {
@@ -24,10 +22,6 @@ export class StartPage {
   register() {
     this.nav.push(SignUpPage);
 
-    let inviteCode = this.auth.getInviteCode();
-    if (inviteCode)
-    this.nav.push(CreateUserProfilePage);
-    else
-    this.nav.push(SignUpInvitePage);
+
   }
 }

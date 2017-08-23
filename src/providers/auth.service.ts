@@ -10,7 +10,7 @@ import { StorageService } from "./storage.service";
 @Injectable()
 export class AuthService {
 
-    inviteCode: string = '59713';
+    inviteCode: string = '';
     registerData: Register = new Register();
     
     constructor(
