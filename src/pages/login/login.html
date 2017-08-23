@@ -4,7 +4,7 @@
 </ion-header>
 
 <ion-content padding>
-  <!--<form (submit)="login()">-->
+  <form (submit)="login()">
     <div class="logo">
     </div>
 
@@ -15,16 +15,16 @@
     <p text-center class="font-75">Please enter your phone number and<br>confirmation code from SMS</p>
 
     <ion-item padding class="border-bottom-no">
-      <ion-select class="bg-graydark-left" placeholder="+380" [(ngModel)]="numcode">
+      <ion-select class="bg-graydark-left" placeholder="+380">
         <ion-option value="380">+380</ion-option>
         <ion-option value="101">+102</ion-option>
       </ion-select>
-      <ion-input class="bg-gray-right" type="tel" placeholder="" [(ngModel)] ="phone"></ion-input>
+      <ion-input class="bg-gray-right" type="tel" placeholder="" ></ion-input>
     </ion-item>
 
     <ion-item padding class="border-bottom-no">
       <ion-label class="bg-graydark-left label-left">OTP</ion-label>
-      <ion-input class="bg-gray-right" type="tel" placeholder="" [(ngModel)]="code"></ion-input>
+      <ion-input class="bg-gray-right" type="tel" placeholder="" ></ion-input>
     </ion-item>
 
     <ion-item padding class="border-bottom-no">
@@ -38,6 +38,6 @@
     <p padding-top>
       <button ion-button block middle>Sign in</button>
     </p>
+    </form>
     <p text-center margin class="font-75 text-gray">Please do not disturb<br>Your private data will be safety</p>
-  <!--</form>-->
 </ion-content>
