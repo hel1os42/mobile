@@ -3,7 +3,7 @@ import { NavController } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { LoginPage } from "../login/login";
 import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
-import { InvitePage } from "../invite/invite";
+import { SignUpInvitePage } from "../invite/invite";
 import { SignUpPage } from "../signup/signup";
 
 @Component({
@@ -24,10 +24,10 @@ export class StartPage {
   register() {
     this.nav.push(SignUpPage);
 
-    // let inviteCode = this.auth.getInviteCode();
-    // if (inviteCode)
-    //   this.nav.push(CreateUserProfile);
-    // else
-    //   this.nav.push(InvitePage);
+    let inviteCode = this.auth.getInviteCode();
+    if (inviteCode)
+    this.nav.push(CreateUserProfilePage);
+    else
+    this.nav.push(SignUpInvitePage);
   }
 }

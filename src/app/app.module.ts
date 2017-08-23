@@ -13,7 +13,7 @@ import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomeUserPage } from '../pages/home-user-page/home-user-page';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
-import { InvitePage } from "../pages/invite/invite";
+import { SignUpInvitePage } from "../pages/invite/invite";
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { AuthService } from "../providers/auth.service";
@@ -41,7 +41,7 @@ import { OfferPage } from "../pages/offer/offer";
     StartPage,
     SignUpPage,
     SignUpCodePage,
-    InvitePage,
+    SignUpInvitePage,
     LoginPage,
     CreateUserProfilePage,
     CreateAdvUserProfilePage,
@@ -72,7 +72,7 @@ import { OfferPage } from "../pages/offer/offer";
     StartPage,
     SignUpPage,
     SignUpCodePage,
-    InvitePage,
+    SignUpInvitePage,
     LoginPage,
     CreateUserProfilePage,
     CreateAdvUserProfilePage,

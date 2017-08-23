@@ -8,7 +8,7 @@ import { CreateUserProfilePage } from '../../pages/create-user-profile/create-us
     templateUrl: 'invite.html'
 })
 
-export class InvitePage {
+export class SignUpInvitePage {
     inviteCode: string;
 
     constructor(
