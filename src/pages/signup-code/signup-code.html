@@ -1,24 +1,29 @@
 <ion-header>
     <ion-navbar>
-        <ion-title></ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding scroll="false">
     <div class="logo">
     </div>
-    <p padding text-center text-uppercase class="color-gray">
-        enter code
+    <p text-center text-uppercase>
+        enter confirmation code
     </p>
 
+    <ion-grid>
+      <ion-row>
+        <ion-col offset-1 col-10 text-center class="font-75">Please input confirmation code from SMS</ion-col>
+      </ion-row>
+    </ion-grid>
+
     <ion-item padding class="border-bottom-no">
-        <ion-input class="bg-gray" type="tel" placeholder="" [(ngModel)]="code"></ion-input>
+        <ion-label class="bg-graydark-left label-left">OTP</ion-label>
+        <ion-input class="bg-gray-right" type="tel" placeholder="" [(ngModel)]="code"></ion-input>
     </ion-item>
 
     <p padding>
-        <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">apply</button>
+        <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">Next</button>
     </p>
-    <div text-center text-uppercase class="color-gray font-75">
-        please input code from sms. we sent code to you
-    </div>
+
+    <p text-center class="font-75 text-gray">One-time password helps you<br>confirm phone number.</p>
 </ion-content>

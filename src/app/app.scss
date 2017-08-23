@@ -17,6 +17,14 @@
 
 button[ion-button] {
   border-radius: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.button-circle-small{
+  width: 30px;
+  height: 30px;
+  font-size: 11px;
 }
 
 .toast-message {
@@ -29,6 +37,14 @@ button[ion-button] {
   margin: 0 auto;
   background: url("../assets/img/logo_start.png") no-repeat center center;
   background-size: contain;
+}
+
+.header-ios .toolbar-ios:last-child .toolbar-background-ios{
+  border-width: 0;
+}
+
+ion-header ion-icon.back-button-icon.icon {
+  color: map-get($colors, dark);
 }
 
 .font-50{
@@ -139,17 +155,17 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .bg-gray{
   border-radius: 100px;
-  background: lightgray;
+  background: #EAEAEA;
 }
 
 .bg-gray-left{
   border-radius: 100px 0 0 100px;
-  background: lightgray;
+  background: #EAEAEA;
 }
 
 .bg-gray-right{
   border-radius: 0 100px 100px 0;
-  background: lightgray;
+  background: #EAEAEA;
 }
 
 .bg-graylight-right{
@@ -157,6 +173,20 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   background: #EAEAEA;
 }
 
+.bg-graydark-left{
+  border-radius: 100px 0 0 100px;
+  background: lightgray;
+}
+
+.bg-graydark-right{
+  border-radius: 0 100px 100px 0;
+  background: lightgray;
+}
+
+.label-left{
+  padding: 11px 21.5px;
+  color: map-get($colors, dark);
+}
 
 .item-md, .item-ios{
   padding-left: 0;
@@ -192,4 +222,15 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   opacity: 0;
   height: 0;
   overflow: hidden;
+}
+
+.text-input-ios {
+  margin: 0;
+  padding: 11px;
+  width: 100%;
+}
+
+.label-ios + ion-input .text-input, .label-ios + ion-textarea .text-input, .label-ios + .input + .cloned-input{
+  margin-left: 0;
+  width: 100%;
 }

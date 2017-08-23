@@ -61,7 +61,8 @@ import { OfferPage } from "../pages/offer/offer";
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
-      mode: "ios"
+      mode: "ios",
+      backButtonText: "",
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBAgndAbV-v4aQWTAHrUljUfSCAthdK-RY'}),

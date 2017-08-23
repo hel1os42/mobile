@@ -1,25 +1,25 @@
 <ion-header>
   <ion-navbar>
-    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
+<ion-content padding scroll="false">
+  <div class="logo">
+  </div>
+  <p text-center text-uppercase>
+    enter invite code
+  </p>
+  <p padding text-center class="font-75">
+    You should have received a code from the friend who recommended NAU to you. Please ask him again
+  </p>
 
-<ion-content>
-    <div padding text-center text-uppercase class="text-gray">
-        enter invite code
-      </div>
-  <form>
-    <ion-list>
-        
-        <ion-item>
-            <ion-label fixed>Invite Code</ion-label>
-            <ion-input [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
-        </ion-item>
+  <ion-item class="border-bottom-no">
+     <ion-input text-center placeholder="XX-XX-XX" class="bg-gray" [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
+  </ion-item>
 
-        <div padding>
-        <button ion-button large block (click)="apply()">SIGN UP</button>
-      </div>
-    </ion-list>
-  </form>
+  <p padding>
+     <button ion-button block middle color="secondary" (click)="apply()">Sign up</button>
+  </p>
+
+  <p text-center class="font-75 text-gray">Please do not disturb<br>Your private data will be safety</p>
 </ion-content>
