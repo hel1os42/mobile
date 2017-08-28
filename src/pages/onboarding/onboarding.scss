@@ -18,9 +18,22 @@ page-onboarding {
   .skip{
     position: fixed;
     color: #fff;
-    top: 3%;
+    bottom: 3%;
     right: 1%;
     z-index: 1111;
     background: transparent;
   }
+
+  .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+    bottom: 80px;
+  },
+
+  .swiper-pagination-bullet-active {
+    background: #fff;
+  }
+
+  .swiper-pagination-bullet{
+    background: #ffffff;
+  }
+
 }

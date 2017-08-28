@@ -5,27 +5,85 @@
 </ion-header>
 
 <ion-content padding>
+
   <form (submit)="register()">
-    <ion-list>
+    <ion-list class="bg-gray-block">
       <ion-item>
-        <ion-label class="font-200">
-          <ion-icon color="dark" name="add-circle"></ion-icon>
-        </ion-label>
-        <ion-input type="text" placeholder="Your name" class="font-150" [(ngModel)]="data.name" name="name"></ion-input>
+        <div item-start text-center>
+          <button class="btn-add-border-out button-circle-medium" ion-fab color="dark"><ion-icon name="md-add" class="text-lightgray"></ion-icon></button>
+        </div>
+        <div item-end>
+          <ion-input class="border-bottom-gray" type="text" placeholder="Your Name" [(ngModel)]="data.name" name="name1"></ion-input>
+          <ion-input type="email" placeholder="Your E-mail" [(ngModel)]="data.email" name="email"></ion-input>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="bg-gray-block" no-lines>
+      <ion-item>
+        <ion-avatar item-start>
+          <span text-center>
+            <img src="../assets/img/create_user_profile/1.png">
+          </span>
+        </ion-avatar>
+        <div item-end>
+          <p margin>if your will additional information about yourself it helps us to recommend best offer for you.
+            to earn points for this!
+          </p>
+        </div>
       </ion-item>
 
-      <ion-item padding-bottom>
-        <ion-input type="text" placeholder="About yourself" [(ngModel)]="data.aboutyourself" name="about"></ion-input>
+      <ion-item>
+        <ion-avatar item-start>
+          <span text-center>
+            <img src="../assets/img/create_user_profile/2.png">
+          </span>
+        </ion-avatar>
+        <div item-end>
+          <p margin>Of course you have good opportunity to earn extra points for this! More infromation - more points!
+          </p>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <p padding class="font-75">SOCIAL ACCOUNTS (Every item adds + 3 points) </p>
+
+    <ion-list class="bg-gray-block">
+      <ion-item>
+        <ion-icon padding-left item-start name="logo-facebook" class="text-gray"></ion-icon>
+        <ion-label padding-left class="label label-ios">Facebook</ion-label>
+        <div item-end>
+          <ion-label class="label label-ios points font-75">+ 3 points</ion-label>
+        </div>
+        <div item-end>
+          <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
+        </div>
       </ion-item>
 
-      <ion-item padding-bottom class="border-bottom-no">
-        <ion-input type="email" class="bg-gray" placeholder="Your e-mail" [(ngModel)]="data.email" name="email"></ion-input>
+      <ion-item>
+        <ion-icon padding-left item-start name="logo-twitter" class="text-gray"></ion-icon>
+        <ion-label padding-left class="label label-ios">Twitter</ion-label>
+        <div item-end>
+          <ion-label class="label label-ios points font-75">+ 3 points</ion-label>
+        </div>
+        <div item-end>
+          <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
+        </div>
       </ion-item>
 
-    <p padding>if your will additional information about yourself it helps us to recommend best offer for you. Also you can good oportunity
-        to earn points for this!
-      </p>
+      <ion-item>
+        <ion-icon padding-left item-start name="logo-instagram" class="text-gray"></ion-icon>
+        <ion-label padding-left class="label label-ios">Instagram</ion-label>
+        <div item-end>
+          <ion-label class="label label-ios points font-75">+ 3 points</ion-label>
+        </div>
+        <div item-end>
+          <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
+        </div>
+      </ion-item>
+    </ion-list>
 
+    <ion-list>
       <div padding-top padding-bottom>
         <a (click)="toggleSelect()">
           <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
