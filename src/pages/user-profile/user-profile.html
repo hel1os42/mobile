@@ -1,16 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Your Account</ion-title>
+  </ion-navbar>
+</ion-header>
 <ion-content padding>
   <ion-item class="border-bottom-no">
-    <ion-avatar item-start>
-      <img src="assets/img/user_profile/ava.png">
-    </ion-avatar>
-    <h2>{{ user?.name }} Nastya Clark</h2>
+    <h2>{{ user?.name }} Nastya Clark <span item-center class="font-75 text-gray">Level 4</span></h2>
     <p>206789</p>
+    <a item-end>
+      <ion-icon color="dark" class="font-200" name="ios-car"></ion-icon>
+    </a>
     <a item-end (click)="openSettings()">
       <ion-icon color="dark" class="font-200" name="cog"></ion-icon>
     </a>
   </ion-item>
 
   <img width="100%" src="assets/img/user_profile/circle.png">
+
+  <p text-uppercase text-center>Your tasks & jobs for today</p>
+
+  <ion-slides pager="true" spaceBetween="10">
+    <ion-slide>
+      <ion-list no-lines>
+        <ion-item class="text-white">
+          <ion-avatar item-start>
+            <img src="assets/img/user_profile/cup.png">
+          </ion-avatar>
+          <h2 text-uppercase>Get new points </h2>
+          <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list no-lines>
+        <ion-item class="text-white">
+          <ion-avatar item-start>
+            <img src="assets/img/user_profile/cup.png">
+          </ion-avatar>
+          <h2 text-uppercase>Get new points </h2>
+          <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list no-lines>
+        <ion-item class="text-white">
+          <ion-avatar item-start>
+            <img src="assets/img/user_profile/cup.png">
+          </ion-avatar>
+          <h2 text-uppercase>Get new points </h2>
+          <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
 
   <ion-grid text-center>
     <ion-row>
@@ -22,7 +65,6 @@
         </div>
       </ion-col>
       <ion-col align-self-end>
-        <br>
         <div>
           <ion-icon class="icon-medium" name="cloud-circle"></ion-icon>
           <h3>5</h3>
@@ -38,7 +80,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
+<!--
   <button margin-top ion-button outline block color="dark">Get your first offer</button>
   <button margin-top margin-bottom ion-button outline block color="dark" (click)="logout()">LOGOUT</button>
+-->
 </ion-content>
