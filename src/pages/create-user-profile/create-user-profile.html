@@ -27,7 +27,7 @@
           </span>
         </ion-avatar>
         <div item-end>
-          <p margin>if your will additional information about yourself it helps us to recommend best offer for you.
+          <p>if your will additional information about yourself it helps us to recommend best offer for you.
             to earn points for this!
           </p>
         </div>
@@ -40,7 +40,7 @@
           </span>
         </ion-avatar>
         <div item-end>
-          <p margin>Of course you have good opportunity to earn extra points for this! More infromation - more points!
+          <p>Of course you have good opportunity to earn extra points for this! More infromation - more points!
           </p>
         </div>
       </ion-item>
@@ -49,7 +49,7 @@
     <p padding class="font-75">SOCIAL ACCOUNTS (Every item adds + 3 points) </p>
 
     <ion-list class="bg-gray-block">
-      <ion-item>
+      <a><ion-item>
         <ion-icon padding-left item-start name="logo-facebook" class="text-gray"></ion-icon>
         <ion-label padding-left class="label label-ios">Facebook</ion-label>
         <div item-end>
@@ -58,9 +58,9 @@
         <div item-end>
           <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
         </div>
-      </ion-item>
+      </ion-item></a>
 
-      <ion-item>
+      <a><ion-item>
         <ion-icon padding-left item-start name="logo-twitter" class="text-gray"></ion-icon>
         <ion-label padding-left class="label label-ios">Twitter</ion-label>
         <div item-end>
@@ -69,9 +69,9 @@
         <div item-end>
           <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
         </div>
-      </ion-item>
+      </ion-item></a>
 
-      <ion-item>
+      <a><ion-item>
         <ion-icon padding-left item-start name="logo-instagram" class="text-gray"></ion-icon>
         <ion-label padding-left class="label label-ios">Instagram</ion-label>
         <div item-end>
@@ -80,7 +80,7 @@
         <div item-end>
           <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
         </div>
-      </ion-item>
+      </ion-item></a>
     </ion-list>
 
     <ion-list>
@@ -88,64 +88,60 @@
         <a (click)="toggleSelect()">
           <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
           <ion-icon *ngIf="isSelectVisible" name="arrow-up"></ion-icon>
-          <div *ngIf="!isSelectVisible" class="select">
-              Show additional information
+          <div  *ngIf="!isSelectVisible" class="select font-75">
+            Show additional options (more points)
           </div>
           <div *ngIf="isSelectVisible" class="select">
-          Hide additional information
+            Hide additional information
           </div>
         </a>
       </div>
 
-      <div padding  *ngIf="isSelectVisible">
+      <div padding *ngIf="isSelectVisible" class="font-75">
 
+        <ion-list class="bg-gray-block">
+          <a><ion-item>
+            <ion-label padding-left class="label label-ios">Gender</ion-label>
+            <div item-end>
+              <ion-label class="label label-ios points font-75">+ 5 points</ion-label>
+            </div>
+            <div item-end>
+              <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
+            </div>
+          </ion-item></a>
 
-      <ion-item class="border-bottom-no select-left">
-        <ion-select class="bg-gray width-100" placeholder="Your income">
-          <ion-option value="nes">NES</ion-option>
-          <ion-option value="n64">Nintendo64</ion-option>
-        </ion-select>
-      </ion-item>
+          <a><ion-item>
+            <ion-label padding-left class="label label-ios">Age</ion-label>
+            <div item-end>
+              <ion-label class="label label-ios points font-75">+ 9 points</ion-label>
+            </div>
+            <div item-end>
+              <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
+            </div>
+          </ion-item></a>
 
-      <ion-list padding-top>
-        <ion-item class="border-bottom-no select-left">
-          <ion-select class="bg-gray width-50" placeholder="Age">
-            <ion-option value="nes">NES</ion-option>
-            <ion-option value="n64">Nintendo64</ion-option>
-          </ion-select>
-          <ion-select class="bg-gray width-50" placeholder="Male">
-            <ion-option value="nes">NES</ion-option>
-            <ion-option value="n64">Nintendo64</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+          <a><ion-item>
+            <ion-label padding-left class="label label-ios">Income</ion-label>
+            <div item-end>
+              <ion-label class="label label-ios points font-75">+ 5 points</ion-label>
+            </div>
+            <div item-end>
+              <ion-icon item-start name="ios-arrow-forward-outline" class="text-black"></ion-icon>
+            </div>
+          </ion-item></a>
+        </ion-list>
+
+        <p padding text-uppercase class="font-75">Confirm your location:</p>
+        <div padding-bottom>
+          <div *ngIf="!coords.lat">Detecting your location...</div>
+          <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+            <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+          </agm-map>
+        </div>
+
     </div>
 
-
-      <ion-row class="row">
-        <ion-label padding>Connect with social network</ion-label>
-        <ion-item>
-          <ion-col text-left class="col">
-            <ion-icon class="font-200" color="primary" name="logo-facebook"></ion-icon>
-          </ion-col>
-          <ion-col text-left class="col">
-            <ion-icon class="font-200" color="primary" name="logo-google"></ion-icon>
-          </ion-col>
-          <ion-col text-left class="col">
-            <ion-icon class="font-200" color="primary" name="logo-instagram"></ion-icon>
-          </ion-col>
-        </ion-item>
-      </ion-row>
-
-      <p padding class="font-75">Choose your location:</p>
-      <div padding-bottom>
-        <div *ngIf="!coords.lat">Detecting your location...</div>
-        <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
-          <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
-        </agm-map>
-      </div>
-
-      <ion-item>
+      <!-- <ion-item>
         <ion-label fixed>Password</ion-label>
         <ion-input type="password" [(ngModel)]="data.password" name="password"></ion-input>
       </ion-item>
@@ -153,7 +149,7 @@
       <ion-item>
         <ion-label fixed>Confirm Password</ion-label>
         <ion-input type="password" [(ngModel)]="data.password_confirm" name="password_confirm"></ion-input>
-      </ion-item>
+      </ion-item> -->
 
       <p padding>
         <button ion-button block>Create account</button>

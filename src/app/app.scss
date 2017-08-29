@@ -211,12 +211,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   border: none;
 }
 
-.bg-gray-block .text-input-ios {
-  padding: 9px;
-}
-
-.bg-gray-block [item-start], .bg-gray-block [item-end], .bg-gray-block ion-avatar[item-start] {
+.bg-gray-block [item-left], .bg-gray-block [item-start], .bg-gray-block [item-right], .bg-gray-block [item-end], .bg-gray-block .item-ios ion-avatar[item-left], .bg-gray-block .item-ios ion-thumbnail[item-left], .bg-gray-block .item-ios ion-avatar[item-start], .bg-gray-block .item-ios ion-thumbnail[item-start]{
   margin: 4px;
+  padding: 4px;
 }
 
 .bg-gray-block [item-start] img{
@@ -292,4 +289,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   -moz-outline-radius: 100px;
   outline: 1px dashed #aea9a9;
   outline-offset: 2px;
+}
+
+.agm-map-container-inner[_ngcontent-c0]{
+  border-radius: 15px;
 }
