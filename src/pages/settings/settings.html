@@ -8,6 +8,51 @@
 </ion-header>
 
 <ion-content padding>
+<p text-uppercase padding-left class="font-75">Choose your account (hide)</p>
+  <ion-grid>
+    <ion-row text-center align-items-center class="block-user-adv">
+      <ion-col>
+        <img margin-top src="assets/img/user_profile/ava.png">
+        <p text-uppercase class="font-75">Client</p>
+      </ion-col>
+      <ion-col>
+         <ion-item no-lines>
+            <ion-toggle checked="true"></ion-toggle>
+         </ion-item>
+      </ion-col>
+      <ion-col>
+        <img margin-top src="assets/img/thumb_offers1.png">
+        <p text-uppercase class="font-75">Adventiser</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <p text-uppercase padding-left class="font-75">Change your phone number</p>
+
+  <ion-grid>
+    <ion-row align-items-center class="block-phone">
+      <ion-col col-8 text-left padding-left>
+        <div class="font-100">+380501234567</div>
+      </ion-col>
+      <ion-col col-4 text-right>
+        <ion-item no-lines>
+          <button ion-button round class="font-75">Change</button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <p text-uppercase padding-left class="font-75">Private data</p>
+
+  <ion-list class="block-user-adv" margin-top>
+    <ion-item><div margin-left item-start text-left>Show my private data</div> <ion-checkbox item-end></ion-checkbox></ion-item>
+    <ion-item><div margin-left item-start text-left>Show my phone number</div> <ion-checkbox item-end></ion-checkbox></ion-item>
+    <ion-item><div margin-left item-start text-left>Show my e-mail address</div> <ion-checkbox item-end></ion-checkbox></ion-item>
+  </ion-list>
+
+</ion-content>
+<!--
+<ion-content padding>
   <ion-list>
     <ion-item>
       <ion-label class="font-200">
@@ -52,7 +97,7 @@
         </div>
       </a>
     </div>
-    
+
 
     <div *ngIf="isMapVisible" padding-bottom>
       <div *ngIf="!coords.lat" >Detecting your location...</div>
@@ -73,3 +118,4 @@
 
   </ion-list>
 </ion-content>
+-->
