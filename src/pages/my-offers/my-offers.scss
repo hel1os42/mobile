@@ -1,12 +1,12 @@
 page-my-offers{
   .segment-ios .segment-button:first-of-type{
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 
   .segment-ios .segment-button:last-of-type{
-    border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .item-md ion-avatar ion-img, .item-md ion-avatar img, .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
@@ -15,8 +15,23 @@ page-my-offers{
     height: auto;
   }
 
-  .top-line{
-    background: darkgrey;
-    padding: 10px;
+  .block-btn .item-ios .item-button{
+    width: 30px;
+    height: 30px;
+  }
+
+  .happy .item-wrapper{
+    margin-bottom: 3px;
+    border-radius: 7px;
+  }
+
+  .happy .item {
+    color: #fff;
+    background: #7f7f7f;
+  }
+
+  .happy h2 {
+    font-weight: bold;
+    margin-bottom: 7px;
   }
 }

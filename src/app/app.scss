@@ -302,3 +302,16 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .list .item-block:last-child {
   border-bottom: none;
 }
+
+.grid-tabs{
+  padding: 0;
+  background: #b6b6b6;
+}
+
+.grid-tabs .col{
+  padding: 8px;
+}
+
+.grid-tabs .col.active, .grid-tabs .col:active, .grid-tabs .col:hover{
+  background: gray;
+}
