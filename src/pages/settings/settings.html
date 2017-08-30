@@ -8,8 +8,16 @@
 </ion-header>
 
 <ion-content padding>
-<p text-uppercase padding-left class="font-75">Choose your account (hide)</p>
-  <ion-grid>
+
+  <a (click)="toggleMapVisibility()">
+      <ion-icon *ngIf="isMapVisible" name="arrow-down"></ion-icon>
+      <ion-icon *ngIf="!isMapVisible" name="arrow-up"></ion-icon>
+      <div text-uppercase padding-left class="select font-75">
+        Choose your account (hide)
+      </div>
+  </a>
+
+  <ion-grid *ngIf="!isMapVisible">
     <ion-row text-center align-items-center class="block-user-adv">
       <ion-col>
         <img margin-top src="assets/img/user_profile/ava.png">
@@ -45,10 +53,17 @@
   <p text-uppercase padding-left class="font-75">Private data</p>
 
   <ion-list class="block-user-adv" margin-top>
-    <ion-item><div margin-left item-start text-left>Show my private data</div> <ion-checkbox item-end></ion-checkbox></ion-item>
-    <ion-item><div margin-left item-start text-left>Show my phone number</div> <ion-checkbox item-end></ion-checkbox></ion-item>
-    <ion-item><div margin-left item-start text-left>Show my e-mail address</div> <ion-checkbox item-end></ion-checkbox></ion-item>
+    <ion-item><ion-label margin-left item-end>Show my private data</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
+    <ion-item><ion-label margin-left item-end>Show my phone number</ion-label> <ion-checkbox item-end></ion-checkbox></ion-item>
+    <ion-item><ion-label margin-left item-end>Show my e-mail address</ion-label> <ion-checkbox item-end></ion-checkbox></ion-item>
   </ion-list>
+
+  <div padding-bottom>
+    <div *ngIf="!coords.lat" >Detecting your location...</div>
+    <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+      <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+    </agm-map>
+  </div>
 
 </ion-content>
 <!--
