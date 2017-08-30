@@ -32,6 +32,7 @@ import { SettingsPage } from "../pages/settings/settings";
 import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
 import { MyOffersPage } from "../pages/my-offers/my-offers";
 import { OfferPage } from "../pages/offer/offer";
+import { TestPage } from "../pages/test/test";
 
 
 
@@ -55,7 +56,8 @@ import { OfferPage } from "../pages/offer/offer";
     SettingsPage,
     AdvUserProfilePage,
     MyOffersPage,
-    OfferPage
+    OfferPage,
+    TestPage
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { OfferPage } from "../pages/offer/offer";
     SettingsPage,
     AdvUserProfilePage,
     MyOffersPage,
-    OfferPage
+    OfferPage,
+    TestPage
   ],
   providers: [
     StatusBar,
