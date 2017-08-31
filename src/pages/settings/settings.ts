@@ -39,11 +39,11 @@ export class SettingsPage {
       });
   }
 
-  /*saveProfile() {
+  saveProfile() {
     this.nav.pop();
     //this.profile.set(this.user);
     //.subscribe(res => )
-  }*/
+  }
 
   openCreateAdvUser() {
     this.nav.push(CreateAdvUserProfilePage);
