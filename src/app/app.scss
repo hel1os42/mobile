@@ -315,3 +315,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .grid-tabs .col.active, .grid-tabs .col:active, .grid-tabs .col:hover{
   background: gray;
 }
+
+.grid {
+  padding: 0;
+}
