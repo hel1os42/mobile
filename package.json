@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "2.1.4",
-    "ionic": "3.9.1",
+    "ionic": "3.9.2",
     "typescript": "2.3.4"
   },
   "description": "An Ionic project",
