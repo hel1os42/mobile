@@ -33,6 +33,7 @@ import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
 import { MyOffersPage } from "../pages/my-offers/my-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { TestPage } from "../pages/test/test";
+import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
 
 
 
@@ -57,7 +58,8 @@ import { TestPage } from "../pages/test/test";
     AdvUserProfilePage,
     MyOffersPage,
     OfferPage,
-    TestPage
+    TestPage,
+    SplashScreenPage
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ import { TestPage } from "../pages/test/test";
     AdvUserProfilePage,
     MyOffersPage,
     OfferPage,
-    TestPage
+    TestPage,
+    SplashScreenPage
   ],
   providers: [
     StatusBar,
