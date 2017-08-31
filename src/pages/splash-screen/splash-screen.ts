@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { SettingsPage } from "../settings/settings";
 
 @Component({
     selector: 'page-splash-screen',
@@ -7,6 +8,10 @@ import { NavController } from 'ionic-angular';
 })
 export class SplashScreenPage {
 
-    constructor() {
+    constructor(private nav: NavController) {
+    }
+
+    openSettings() {
+        this.nav.push(SettingsPage);
     }
 }
