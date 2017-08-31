@@ -44,8 +44,8 @@
       <ion-col col-8 text-left padding-left>
         <div class="font-100">+380501234567</div>
       </ion-col>
-      <ion-col col-4 text-right>
-        <ion-item no-lines>
+      <ion-col col-4>
+        <ion-item no-lines text-right>
           <button ion-button round class="font-75">Change</button>
         </ion-item>
       </ion-col>
@@ -66,6 +66,10 @@
       <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
     </agm-map>
   </div>
+
+  <p padding>
+    <button ion-button block>Save changes</button>
+  </p>
 
 </ion-content>
 <!--
