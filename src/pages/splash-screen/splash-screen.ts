@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Slides } from 'ionic-angular';
 import { SettingsPage } from "../settings/settings";
 
 @Component({
@@ -8,10 +8,30 @@ import { SettingsPage } from "../settings/settings";
 })
 export class SplashScreenPage {
 
+    @ViewChild('slides') slides: Slides;
+    @ViewChild('slidesNews') slidesNews: Slides;
     constructor(private nav: NavController) {
     }
 
     openSettings() {
         this.nav.push(SettingsPage);
     }
+
+    slideNext() {
+        this.slides.slideNext();
+    }
+
+    slidePrev() {
+        this.slides.slidePrev();
+    }
+
+    slideNewsNext() {
+        this.slidesNews.slideNext();
+    }
+
+    slideNewsPrev() {
+        this.slidesNews.slidePrev();
+    }
+
+
 }

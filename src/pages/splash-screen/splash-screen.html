@@ -17,10 +17,10 @@
   <ion-grid text-center margin-bottom>
     <ion-row>
       <ion-col col-1 align-self-center>
-        <a><ion-icon name="ios-arrow-back" class="font-200"></ion-icon></a>
+        <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
       </ion-col>
       <ion-col col-10 align-self-center>
-        <ion-slides spaceBetween="10" class="slider_top">
+        <ion-slides #slides spaceBetween="10" class="slider_top">
           <ion-slide padding text-center>
             <img margin-top src="assets/img/splash_screen/slide1.png">
             <h5 text-uppercase>How it works?</h5>
@@ -40,7 +40,7 @@
         </ion-slides>
       </ion-col>
       <ion-col col-1 align-self-center>
-        <a><ion-icon name="ios-arrow-forward" class="font-200"></ion-icon></a>
+        <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -75,10 +75,10 @@
   <ion-grid>
     <ion-row>
       <ion-col col-1 align-self-end>
-        <a><ion-icon name="ios-arrow-back" class="font-200"></ion-icon></a>
+        <a><ion-icon (click)="slideNewsPrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
       </ion-col>
       <ion-col col-10 align-self-center>
-        <ion-slides spaceBetween="10" class="slider_bottom">
+        <ion-slides #slidesNews spaceBetween="10" class="slider_bottom">
           <ion-slide padding>
             <p class="font-65">12/06/07</p>
             <div class="font-75">Double Up Food Bucks is a national model for healthy food incentives active in more...</div>
@@ -94,7 +94,7 @@
         </ion-slides>
       </ion-col>
       <ion-col col-1 align-self-end>
-        <a><ion-icon name="ios-arrow-forward" class="font-200"></ion-icon></a>
+        <a><ion-icon (click)="slideNewsNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
