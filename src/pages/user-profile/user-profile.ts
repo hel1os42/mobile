@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { App, NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { App, NavController, Slides } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { StartPage } from "../start/start";
 import { ProfileService } from "../../providers/profile.service";
@@ -11,7 +11,9 @@ import { SettingsPage } from "../settings/settings";
     templateUrl: 'user-profile.html'
 })
 export class UserProfilePage {
-    user: User = new User();    
+    user: User = new User();
+    
+    @ViewChild(Slides) slides: Slides;
 
     constructor(
         private app: App,
@@ -34,5 +36,13 @@ export class UserProfilePage {
     logout() {
         this.auth.logout();
         this.app.getRootNav().setRoot(StartPage);
+    }
+
+    slideNext() {
+        this.slides.slideNext();
+    }
+
+    slidePrev() {
+        this.slides.slidePrev();
     }
 }

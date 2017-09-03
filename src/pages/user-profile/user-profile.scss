@@ -29,4 +29,9 @@ page-user-profile{
   .swiper-container .list-ios{
     margin: 0;
   }
+
+  ion-item > .item-inner {
+    padding: 0 !important;
+  }
+
 }

@@ -19,12 +19,12 @@
 
   <p text-uppercase text-center>Your tasks & jobs for today</p>
 
-  <ion-grid text-center>
+  <ion-grid  text-center>
     <ion-row>
-      <ion-col col-1 align-self-center>
-        <a><ion-icon name="ios-arrow-back" class="font-200"></ion-icon></a>
+      <ion-col  col-1 align-self-center>
+        <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
       </ion-col>
-      <ion-col col-10 align-self-center>
+      <ion-col class="grid" col-10 align-self-center>
         <ion-slides spaceBetween="10">
           <ion-slide>
             <ion-list no-lines>
@@ -62,7 +62,7 @@
         </ion-slides>
       </ion-col>
       <ion-col col-1 align-self-center>
-        <a><ion-icon name="ios-arrow-forward" class="font-200"></ion-icon></a>
+        <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
