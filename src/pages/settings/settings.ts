@@ -14,7 +14,10 @@ export class SettingsPage {
   user: User = new User;
   message: string;
   coords: Coords = new Coords();
-  isMapVisible: boolean = false;
+  radiuses = [50, 100, 150, 200, 250];
+  radius: number = 5;
+  isAccountsChoiceVisible: boolean = false;
+  isSelectRadiusVisible: boolean = false;
 
   constructor(private nav: NavController,
               private profile: ProfileService,
@@ -49,7 +52,12 @@ export class SettingsPage {
     this.nav.push(CreateAdvUserProfilePage);
   }
 
-  toggleMapVisibility() {
-      this.isMapVisible = !this.isMapVisible;
+  toggleAccountsChoiceVisible() {
+      this.isAccountsChoiceVisible = !this.isAccountsChoiceVisible;
   }
+
+  toggleSelectRadiusVisible() {
+    this.isSelectRadiusVisible = !this.isSelectRadiusVisible;
+  }
+  
 }
