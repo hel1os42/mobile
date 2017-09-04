@@ -34,6 +34,7 @@ import { MyOffersPage } from "../pages/my-offers/my-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { TestPage } from "../pages/test/test";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
+import { UserRewardsPage } from "../pages/user-rewards-page/user-rewards-page";
 
 
 
@@ -59,7 +60,8 @@ import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
     MyOffersPage,
     OfferPage,
     TestPage,
-    SplashScreenPage
+    SplashScreenPage,
+    UserRewardsPage
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,8 @@ import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
     MyOffersPage,
     OfferPage,
     TestPage,
-    SplashScreenPage
+    SplashScreenPage,
+    UserRewardsPage
   ],
   providers: [
     StatusBar,
