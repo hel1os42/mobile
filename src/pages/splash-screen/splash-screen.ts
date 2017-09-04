@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
 import { SettingsPage } from "../settings/settings";
+import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
 
 @Component({
     selector: 'page-splash-screen',
@@ -16,7 +17,10 @@ export class SplashScreenPage {
     openSettings() {
         this.nav.push(SettingsPage);
     }
-
+    
+    openCreateUserProfile() {
+        this.nav.push(CreateUserProfilePage);
+    }
     slideNext() {
         this.slides.slideNext();
     }
