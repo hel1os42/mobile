@@ -7,11 +7,11 @@
   <ion-item class="border-bottom-no">
     <h2 margin-left>{{ user?.name }} Nastya Clark <span item-center class="font-75 text-gray">Level 4</span></h2>
     <p margin-left>206789</p>
-    <a item-end margin-right>
-      <ion-icon color="dark" class="font-200" name="ios-podium"></ion-icon>
+    <a item-end (click)="openRewards()" margin-right>
+      <ion-icon color="dark" class="font-200" name="trophy"></ion-icon>
     </a>
     <a item-end (click)="openSettings()" margin-right>
-      <ion-icon color="dark" class="font-200" name="cog"></ion-icon>
+      <ion-icon color="dark" class="font-200" name="settings"></ion-icon>
     </a>
   </ion-item>
 

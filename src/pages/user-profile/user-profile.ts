@@ -5,6 +5,7 @@ import { StartPage } from "../start/start";
 import { ProfileService } from "../../providers/profile.service";
 import { User } from "../../models/user";
 import { SettingsPage } from "../settings/settings";
+import { UserRewardsPage } from "../user-rewards-page/user-rewards-page";
 
 @Component({
     selector: 'page-user-profile',
@@ -31,6 +32,10 @@ export class UserProfilePage {
     openSettings() {
         //this.app.getRootNav().setRoot(SettingsPage);
         this.nav.push(SettingsPage);
+    }
+
+    openRewards() {
+        this.nav.push(UserRewardsPage);
     }
     
     logout() {
