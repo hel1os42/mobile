@@ -32,10 +32,10 @@ export class CreateUserProfilePage {
             this.auth
                 .getReferrerId(inviteCode)
                 .subscribe(register => this.data = register);
-        } 
-        
+        }
+
         this.location.get()
-        .then((resp) => {                
+        .then((resp) => {
             this.coords = {
                 lat: resp.coords.latitude,
                 lng: resp.coords.longitude

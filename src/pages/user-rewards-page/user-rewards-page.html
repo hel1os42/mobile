@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Your tasks & jobs</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+  <ion-list no-lines>
+    <ion-item>
+      <img src="../assets/img/user_profile/ava.png" item-start>
+      <div>Nastya Clark</div>
+      <div class="font-75 text-gray">Level 4 4200 points</div>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <ion-segment [(ngModel)]="seg" margin-bottom text-uppercase color="dark">
+      <ion-segment-button value="completed">
+        Completed
+      </ion-segment-button>
+      <ion-segment-button value="active">
+        Active
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div text-uppercase>Tasks for today</div>
+  <ion-list no-lines class="happy">
+      <ion-item>
+        <img src="assets/img/user_rewards/icon_1.png" item-start>
+        <h2 text-uppercase>Task №1</h2>
+        <h5 class="text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+        <ion-icon item-end name="ios-checkmark-circle-outline" class="icon-check"></ion-icon>
+      </ion-item>
+  </ion-list>
+
+  <div text-uppercase>Tasks for level 2</div>
+  <ion-list no-lines class="happy">
+    <ion-item>
+      <img src="assets/img/user_rewards/icon_2.png" item-start>
+      <h2 text-uppercase>Task №2</h2>
+      <h5 class="text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+      <ion-icon item-end name="ios-checkmark-circle-outline" class="text-black icon-check"></ion-icon>
+    </ion-item>
+
+    <ion-item>
+      <img src="assets/img/user_rewards/icon_3.png" item-start>
+      <h2 text-uppercase>Task №3</h2>
+      <h5 class="text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+      <ion-icon item-end name="ios-checkmark-circle-outline" class="text-black icon-check"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
