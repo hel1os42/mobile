@@ -75,20 +75,18 @@
     </ion-list>
 
     <ion-list>
-      <div padding-top padding-bottom>
         <a (click)="toggleSelect()">
           <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
           <ion-icon *ngIf="isSelectVisible" name="arrow-up"></ion-icon>
-          <div  *ngIf="!isSelectVisible" class="select font-75">
+          <div *ngIf="!isSelectVisible" class="select font-75">
             Show additional options (more points)
           </div>
-          <div *ngIf="isSelectVisible" class="select">
+          <div *ngIf="isSelectVisible" class="select font-75">
             Hide additional information
           </div>
         </a>
-      </div>
 
-      <div padding *ngIf="isSelectVisible" class="font-75">
+      <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }">
 
         <ion-list class="bg-gray-block">
           <a ion-item detail-push>
@@ -133,7 +131,7 @@
         <ion-input type="password" [(ngModel)]="data.password_confirm" name="password_confirm"></ion-input>
       </ion-item> -->
 
-      <p padding>
+      <p>
         <button ion-button block>Create account</button>
       </p>
     </ion-list>

@@ -36,7 +36,7 @@ export class MyApp {
                     ? StartPage
                     : OnBoardingPage;
 
-          this.rootPage = UserProfilePage;
+          this.rootPage = CreateUserProfilePage;
         });
     }
 }
