@@ -15,7 +15,7 @@ export class OfferService{
         this.api.post('advert/offers', date);
     }
 
-    getOffersCategories() {
+    getCategories() {
         return this.api.get('categories');
     }
 
