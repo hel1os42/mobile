@@ -3,14 +3,14 @@
     <ion-title>Your Account</ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
   <ion-item class="border-bottom-no">
-    <h2>{{ user?.name }} Nastya Clark <span item-center class="font-75 text-gray">Level 4</span></h2>
-    <p>206789</p>
-    <a item-end>
-      <ion-icon color="dark" class="font-200" name="ios-car"></ion-icon>
+    <h2 margin-left>{{ user?.name }} Nastya Clark <span item-center class="font-75 text-gray">Level 4</span></h2>
+    <p margin-left>206789</p>
+    <a item-end margin-right>
+      <ion-icon color="dark" class="font-200" name="ios-podium"></ion-icon>
     </a>
-    <a item-end (click)="openSettings()">
+    <a item-end (click)="openSettings()" margin-right>
       <ion-icon color="dark" class="font-200" name="cog"></ion-icon>
     </a>
   </ion-item>
@@ -19,9 +19,9 @@
 
   <p text-uppercase text-center>Your tasks & jobs for today</p>
 
-  <ion-grid  text-center>
+  <ion-grid text-center>
     <ion-row>
-      <ion-col  col-1 align-self-center>
+      <ion-col col-1 align-self-center>
         <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
       </ion-col>
       <ion-col class="grid" col-10 align-self-center>
@@ -66,10 +66,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
-
-
 
   <ion-grid text-center>
     <ion-row>
