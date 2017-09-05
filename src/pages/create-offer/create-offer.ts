@@ -3,7 +3,7 @@ import { LocationService } from "../../providers/location.service";
 import { AgmCoreModule } from '@agm/core';
 import { Coords } from "../../models/coords";
 import { NavController } from "ionic-angular";
-import { MyOffersPage } from "../my-offers/my-offers";
+import { UserOffersPage } from "../user-offers/user-offers";
 import { Offer } from "../../models/offer";
 import { OfferService } from "../../providers/offer.service";
 
@@ -54,7 +54,7 @@ export class CreateOfferPage {
 
         this.offerService.setOffer(this.offer);
    
-        this.nav.push(MyOffersPage);
+        this.nav.push(UserOffersPage);
     }
 
     toggleSelect() {

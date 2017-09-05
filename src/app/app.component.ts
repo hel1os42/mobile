@@ -12,7 +12,7 @@ import { CreateOfferPage } from "../pages/create-offer/create-offer";
 import { SettingsPage } from "../pages/settings/settings";
 import { UserProfilePage } from "../pages/user-profile/user-profile";
 import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
-import { MyOffersPage } from "../pages/my-offers/my-offers";
+import { UserOffersPage } from "../pages/user-offers/user-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
 import { UserRewardsPage } from "../pages/user-rewards/user-rewards";

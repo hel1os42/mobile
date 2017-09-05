@@ -30,7 +30,7 @@ import { OfferService } from "../providers/offer.service";
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
 import { SettingsPage } from "../pages/settings/settings";
 import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
-import { MyOffersPage } from "../pages/my-offers/my-offers";
+import { UserOffersPage } from "../pages/user-offers/user-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { TestPage } from "../pages/test/test";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
@@ -60,7 +60,7 @@ import { UserNauPage } from "../pages/user-nau/user-nau";
     OnBoardingPage,
     SettingsPage,
     AdvUserProfilePage,
-    MyOffersPage,
+    UserOffersPage,
     OfferPage,
     TestPage,
     SplashScreenPage,
@@ -98,7 +98,7 @@ import { UserNauPage } from "../pages/user-nau/user-nau";
     OnBoardingPage,
     SettingsPage,
     AdvUserProfilePage,
-    MyOffersPage,
+    UserOffersPage,
     OfferPage,
     TestPage,
     SplashScreenPage,
