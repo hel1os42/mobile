@@ -7,7 +7,7 @@
   <ion-item class="border-bottom-no">
     <h2 margin-left>{{ user?.name }} Nastya Clark <span item-center class="font-75 text-gray">Level 4</span></h2>
     <p margin-left>206789</p>
-    <a item-end (click)="openRewards()" margin-right>
+    <a item-end  margin-right>
       <ion-icon color="dark" class="font-200" name="trophy"></ion-icon>
     </a>
     <a item-end (click)="openSettings()" margin-right>
@@ -25,7 +25,7 @@
         <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
       </ion-col>
       <ion-col class="grid" col-10 align-self-center>
-        <ion-slides spaceBetween="10">
+        <ion-slides (click)="openRewards()" spaceBetween="10">
           <ion-slide>
             <ion-list no-lines>
               <ion-item class="text-white">
