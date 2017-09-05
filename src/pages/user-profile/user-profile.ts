@@ -5,7 +5,7 @@ import { StartPage } from "../start/start";
 import { ProfileService } from "../../providers/profile.service";
 import { User } from "../../models/user";
 import { SettingsPage } from "../settings/settings";
-import { UserRewardsPage } from "../user-rewards-page/user-rewards-page";
+import { UserRewardsPage } from "../user-rewards/user-rewards";
 
 @Component({
     selector: 'page-user-profile',
