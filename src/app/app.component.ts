@@ -38,7 +38,7 @@ export class MyApp {
                     ? StartPage
                     : OnBoardingPage;
 
-          this.rootPage = UserOffersPage;
+          //this.rootPage = CreateOfferPage;
         });
     }
 }
