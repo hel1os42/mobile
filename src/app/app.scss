@@ -283,6 +283,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .toolbar-title-ios{
   color: #000;
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 .toolbar-ios ion-title{
@@ -322,4 +323,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .grid {
   padding: 0;
+}
+
+.margin-no{
+  margin: 0;
 }

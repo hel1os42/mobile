@@ -8,7 +8,7 @@ export class Offer {
     max_for_user: number;
     max_per_day: number;
     max_for_user_per_day: number;
-    radius: string;
+    radius: number;
     description: string;
     start_date: string;
     finish_date: string;
@@ -16,6 +16,6 @@ export class Offer {
     finish_time: string;
     category_id: string;
     user_level_min: number;
-    latitude;
-    longitude;
+    latitude: number;
+    longitude: number;
 }

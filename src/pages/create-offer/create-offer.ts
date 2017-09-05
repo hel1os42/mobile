@@ -6,6 +6,8 @@ import { NavController } from "ionic-angular";
 import { UserOffersPage } from "../user-offers/user-offers";
 import { Offer } from "../../models/offer";
 import { OfferService } from "../../providers/offer.service";
+import { ProfileService } from "../../providers/profile.service";
+import { AdvUserOffersPage } from "../adv-user-offers/adv-user-offers";
 
 @Component({
     selector: 'page-create-offer',
@@ -20,8 +22,9 @@ export class CreateOfferPage {
     isSelectVisible = false;
 
     constructor(private location: LocationService,
-        private nav: NavController,
-        private offerService: OfferService) {
+                private nav: NavController,
+                private offerService: OfferService,
+                private profileService: ProfileService) {
     }
 
     ionViewDidLoad() {
@@ -42,19 +45,32 @@ export class CreateOfferPage {
     }
 
     createOffer() {
-        
+
+        this.offer.label = "name";
         this.offer.reward = 1;
+        this.offer.country = "country";
+        this.offer.city = "city";
         this.offer.max_count = 1;
         this.offer.max_for_user = 1;
         this.offer.max_per_day = 1;
         this.offer.max_for_user_per_day = 1;
+        this.offer.radius = 1;
+        this.offer.description = "description";
+        this.offer.start_date = "2017-09-01T10:00:00+0000";
+        this.offer.finish_date = "2017-09-01T11:00:00+0000";
+        this.offer.start_time = "10:00:00+0000";
+        this.offer.finish_time = "11:00:00+0000";
         this.offer.user_level_min = 1;
-        this.offer.latitude = this.coords.lat.toString();
-        this.offer.longitude = this.coords.lng.toString();
+        this.offer.latitude = this.coords.lat;
+        this.offer.longitude = this.coords.lng;
+        
+        this.profileService.get()
+            .subscribe(resp => this.offer.category_id = resp.data[1].id);
+            debugger;
 
         this.offerService.setOffer(this.offer);
-   
-        this.nav.push(UserOffersPage);
+
+        this.nav.push(AdvUserOffersPage);
     }
 
     toggleSelect() {
