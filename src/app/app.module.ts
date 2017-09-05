@@ -37,6 +37,7 @@ import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
 import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { UserUsersPage } from "../pages/user-users/user-users";
+import { UserNauPage } from "../pages/user-nau/user-nau";
 
 
 
@@ -65,7 +66,8 @@ import { UserUsersPage } from "../pages/user-users/user-users";
     SplashScreenPage,
     UserRewardsPage,
     UserAchievePage,
-    UserUsersPage
+    UserUsersPage,
+    UserNauPage
   ],
   imports: [
     BrowserModule,
@@ -102,7 +104,8 @@ import { UserUsersPage } from "../pages/user-users/user-users";
     SplashScreenPage,
     UserRewardsPage,
     UserAchievePage,
-    UserUsersPage
+    UserUsersPage,
+    UserNauPage
   ],
   providers: [
     StatusBar,
