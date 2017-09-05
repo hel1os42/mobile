@@ -24,27 +24,27 @@ export class CreateUserProfilePage {
     }
 
     ionViewDidEnter() {
-        this.data = this.auth.getRegisterData();
-        if (this.data.referrer_id)
-            return;
-        else {
-            let inviteCode = this.auth.getInviteCode();
-            this.auth
-                .getReferrerId(inviteCode)
-                .subscribe(register => this.data = register);
-        }
+        // this.data = this.auth.getRegisterData();
+        // if (this.data.referrer_id)
+        //     return;
+        // else {
+        //     let inviteCode = this.auth.getInviteCode();
+        //     this.auth
+        //         .getReferrerId(inviteCode)
+        //         .subscribe(register => this.data = register);
+        // }
 
         this.location.get()
-        .then((resp) => {
-            this.coords = {
-                lat: resp.coords.latitude,
-                lng: resp.coords.longitude
-            };
-        })
-        .catch((error) => {
-            this.message = error.message;
-            console.log(this.message);
-        });
+            .then((resp) => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+            })
+            .catch((error) => {
+                this.message = error.message;
+                console.log(this.message);
+            });
     }
 
     register() {
