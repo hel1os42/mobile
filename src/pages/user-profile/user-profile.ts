@@ -8,6 +8,8 @@ import { SettingsPage } from "../settings/settings";
 import { UserRewardsPage } from "../user-rewards/user-rewards";
 import { UserAchievePage } from "../user-achieve/user-achieve";
 import { UserOffersPage } from "../user-offers/user-offers";
+import { UserNauPage } from "../user-nau/user-nau";
+import { UserUsersPage } from "../user-users/user-users";
 
 @Component({
     selector: 'page-user-profile',
@@ -46,6 +48,14 @@ export class UserProfilePage {
 
     openUserOffers() {
         this.nav.push(UserOffersPage)
+    }
+
+    openUserNau() {
+        this.nav.push(UserNauPage)
+    }
+
+    openUserUsers() {
+        this.nav.push(UserUsersPage)
     }
     
     logout() {
