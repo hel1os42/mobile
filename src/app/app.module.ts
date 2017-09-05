@@ -36,6 +36,7 @@ import { TestPage } from "../pages/test/test";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
 import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
+import { UserUsersPage } from "../pages/user-users/user-users";
 
 
 
@@ -63,7 +64,8 @@ import { UserAchievePage } from "../pages/user-achieve/user-achieve";
     TestPage,
     SplashScreenPage,
     UserRewardsPage,
-    UserAchievePage
+    UserAchievePage,
+    UserUsersPage
   ],
   imports: [
     BrowserModule,
@@ -99,7 +101,8 @@ import { UserAchievePage } from "../pages/user-achieve/user-achieve";
     TestPage,
     SplashScreenPage,
     UserRewardsPage,
-    UserAchievePage
+    UserAchievePage,
+    UserUsersPage
   ],
   providers: [
     StatusBar,
