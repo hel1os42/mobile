@@ -8,7 +8,7 @@ export class OfferService{
     constructor(private api: ApiService) {}
 
     getOffersData() {
-        return this.api.get('/advert/offers/create');
+        return this.api.get('advert/offers/create');
     }
 
     setOffer(date: Offer) {

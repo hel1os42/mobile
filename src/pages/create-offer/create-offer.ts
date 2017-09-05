@@ -8,6 +8,7 @@ import { Offer } from "../../models/offer";
 import { OfferService } from "../../providers/offer.service";
 import { ProfileService } from "../../providers/profile.service";
 import { AdvUserOffersPage } from "../adv-user-offers/adv-user-offers";
+import { OfferCategory } from "../../models/offerCategory";
 
 @Component({
     selector: 'page-create-offer',
@@ -20,7 +21,9 @@ export class CreateOfferPage {
     coords = new Coords();
     offer = new Offer();
     isSelectVisible = false;
-
+    offerCategory = new OfferCategory();
+    offerCategories = Array(this.offerCategory);
+   
     constructor(private location: LocationService,
                 private nav: NavController,
                 private offerService: OfferService,
@@ -42,6 +45,10 @@ export class CreateOfferPage {
                 this.message = error.message;
                 console.log(this.message);
             });
+
+       
+        this.offerService.getCategories()
+            .subscribe(resp => this.offerCategories = resp.data);
     }
 
     createOffer() {
@@ -63,11 +70,8 @@ export class CreateOfferPage {
         this.offer.user_level_min = 1;
         this.offer.latitude = this.coords.lat;
         this.offer.longitude = this.coords.lng;
-        
-        this.profileService.get()
-            .subscribe(resp => this.offer.category_id = resp.data[1].id);
-            debugger;
-
+        this.offer.category_id = "this.offerCategories[1].id";
+  
         this.offerService.setOffer(this.offer);
 
         this.nav.push(AdvUserOffersPage);
