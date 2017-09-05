@@ -7,7 +7,7 @@
   <ion-item class="border-bottom-no">
     <h2 margin-left>{{ user?.name }} Nastya Clark <span item-center class="font-75 text-gray">Level 4</span></h2>
     <p margin-left>206789</p>
-    <a item-end  margin-right>
+    <a item-end (click)="openAchieve()"  margin-right>
       <ion-icon color="dark" class="font-200" name="trophy"></ion-icon>
     </a>
     <a item-end (click)="openSettings()" margin-right>

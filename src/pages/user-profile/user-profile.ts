@@ -6,6 +6,7 @@ import { ProfileService } from "../../providers/profile.service";
 import { User } from "../../models/user";
 import { SettingsPage } from "../settings/settings";
 import { UserRewardsPage } from "../user-rewards/user-rewards";
+import { UserAchievePage } from "../user-achieve/user-achieve";
 
 @Component({
     selector: 'page-user-profile',
@@ -36,6 +37,10 @@ export class UserProfilePage {
 
     openRewards() {
         this.nav.push(UserRewardsPage);
+    }
+
+    openAchieve() {
+        this.nav.push(UserAchievePage);
     }
     
     logout() {
