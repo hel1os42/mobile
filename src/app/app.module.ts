@@ -38,6 +38,7 @@ import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";
+import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 
 
 
@@ -67,7 +68,8 @@ import { UserNauPage } from "../pages/user-nau/user-nau";
     UserRewardsPage,
     UserAchievePage,
     UserUsersPage,
-    UserNauPage
+    UserNauPage,
+    AdvUserOffersPage
   ],
   imports: [
     BrowserModule,
@@ -105,7 +107,8 @@ import { UserNauPage } from "../pages/user-nau/user-nau";
     UserRewardsPage,
     UserAchievePage,
     UserUsersPage,
-    UserNauPage
+    UserNauPage,
+    AdvUserOffersPage
   ],
   providers: [
     StatusBar,
