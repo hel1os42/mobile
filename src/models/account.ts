@@ -7,5 +7,5 @@ export class Account {
     gender: string;
     age: number;
     income: number;
-    location: string;
+   address: string;
 }
