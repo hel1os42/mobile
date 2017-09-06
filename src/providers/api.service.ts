@@ -61,7 +61,7 @@ export class ApiService {
                 resp => { },
                 errResp => {
                     if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
-                        this.renewToken();
+                        this.token.remove();
                         return;
                     }
 

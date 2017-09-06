@@ -6,6 +6,8 @@ import { TokenService } from "./token.service";
 import { Token } from "../models/token";
 import { Observable } from "rxjs";
 import { StorageService } from "./storage.service";
+import { App } from "ionic-angular";
+import { LoginPage } from "../pages/login/login";
 
 @Injectable()
 export class AuthService {
@@ -14,10 +16,14 @@ export class AuthService {
     registerData: Register = new Register();
     
     constructor(
+        private app: App,
         private api: ApiService,
         private token: TokenService,
         private storage: StorageService) {
 
+        this.token.onRemove.subscribe(() => {
+            this.app.getRootNav().setRoot(LoginPage);      
+        });
     }
     
     getInviteCode() {
@@ -64,7 +70,7 @@ export class AuthService {
     }
 
     logout() {
-        this.token.remove();
+        this.token.remove();        
     }
 
     isOnboardingShown() {

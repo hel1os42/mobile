@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StartPage } from '../pages/start/start';
@@ -19,6 +19,8 @@ import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
 import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";
+import { TokenService } from "../providers/token.service";
+import { LoginPage } from "../pages/login/login";
 @Component({
     templateUrl: 'app.html'
 })
@@ -26,7 +28,9 @@ export class MyApp {
     rootPage: any;
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-        auth: AuthService) {
+        //private nav: NavController,
+        private auth: AuthService,
+        private token: TokenService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -34,12 +38,10 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
 
-            this.rootPage = auth.isLoggedIn()
+            this.rootPage = this.auth.isLoggedIn()
                 ? TabsPage : StartPage;
-                /*: auth.isOnboardingShown()
-                    ? StartPage
-                    : OnBoardingPage;*/
-          this.rootPage = CreateUserProfilePage;
-        });
+              
+            //this.rootPage = CreateUserProfilePage;
+        });        
     }
 }
