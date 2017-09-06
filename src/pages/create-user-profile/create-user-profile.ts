@@ -24,7 +24,6 @@ export class CreateUserProfilePage {
     account: UserAccount = new UserAccount();
     message: string;
     isSelectVisible: boolean = false;
-    points: number = 0;
     isFocusName: boolean = false;
     isFocusEmail: boolean = false;
 
@@ -35,7 +34,6 @@ export class CreateUserProfilePage {
         private changeDetectorRef: ChangeDetectorRef,
         private profileService: ProfileService) {
     }
-
 
     onMapCenterChange(center: LatLngLiteral) {
         this.coords.lat = center.lat;
@@ -58,17 +56,19 @@ export class CreateUserProfilePage {
         });
     }
 
+    point() {
+       let points = this.account.name ? 8 : 0;
+       return points;
+    }
+
     ionViewDidLoad() {
         this.account = this.profileService.userAccount;//to do
 
-        if (this.account.name)
+        if (this.account.name) {
             this.isFocusName = true;
-            this.points = 8;
+        }
         if (this.account.email)
             this.isFocusEmail = true;
-
-
-
 
         /* this.data = this.auth.getRegisterData();
          if (this.data.referrer_id)

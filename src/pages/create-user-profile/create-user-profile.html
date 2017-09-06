@@ -16,7 +16,7 @@
           <div (click)="focusName()" *ngIf="!isFocusName" class="popover_not popover1 text-gray font-65">
             <span padding-right>Your profile collected here</span>
             <img src="../assets/img/create_user_profile/icon_1.png">
-            <span padding-left>8</span>
+            <span padding-left>0</span>
           </div>
 
           <div (click)="focusEmail()" *ngIf="!isFocusEmail" class="popover_not popover2 text-gray font-65">
@@ -26,7 +26,7 @@
           </div>
           <div (click)="focusName()" class="input_relative">
             <ion-input  class="border-bottom-gray" type="text" placeholder="Your Name" [(ngModel)]="account.name" name="name1"></ion-input>
-            <span *ngIf="account.name" class="text-gray"><img src="../assets/img/create_user_profile/icon_1.png">8</span>
+            <span class="text-gray"><img src="../assets/img/create_user_profile/icon_1.png">{{ point() }}</span>
           </div>
           <div (click)="focusEmail()" class="input_relative">
             <ion-input type="email" placeholder="Your E-mail" [(ngModel)]="account.email" name="email"></ion-input>
@@ -112,7 +112,7 @@
           <a ion-item detail-push>
             <div padding-left item-start></div>
 
-            <ion-select placeholder="Gender" class="gender_select">
+            <ion-select [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender" class="gender_select" interface="action-sheet">
               <ion-option value="f">Female</ion-option>
               <ion-option value="m">Male</ion-option>
             </ion-select>
