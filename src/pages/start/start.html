@@ -1,30 +1,34 @@
 <ion-content padding scroll="false">
-  <div class="logo">
+  <div class="logo-margin">
   </div>
-  <div padding-bottom text-center text-uppercase class="color-gray" class="font-150">
-    network affiliate universe
-  </div>
-  <div padding>
+  <div text-center text-uppercase margin-top><b>sign up</b> <span class="text-gray">or</span> <b>login</b></div>
+
+  <p text-center class="font-75">Please choose your convenient way<br>to enter NAU</p>
+
+  <div>
     <button ion-button block middle color="secondary" margin-bottom (click)="register()">sign up</button>
   </div>
-  <p padding text-center text-uppercase class="color-gray font-75">
-    or login with
-  </p>
-  <ion-row padding class="row">
-    <ion-col text-right class="col">
-      <a><ion-icon class="font-200" name="logo-facebook"></ion-icon></a>
-    </ion-col>
-    <ion-col text-center class="col">
-      <a><ion-icon class="font-200" color="primary" name="logo-google"></ion-icon></a>
-    </ion-col>
-    <ion-col text-left class="col">
-      <a><ion-icon class="font-200" color="primary" name="add-circle"></ion-icon></a>
-    </ion-col>
-  </ion-row>
 
-</ion-content>
-<ion-footer no-shadow no-border>
-  <p padding text-uppercase text-center>
-    <a (click)="login()">sign in</a>
+  <p padding text-center class="text-gray font-75">
+    or Sign up with
   </p>
+
+  <div text-center>
+    <button margin ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </button>
+    <button margin ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-twitter"></ion-icon>
+    </button>
+    <button margin ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-google"></ion-icon>
+    </button>
+  </div>
+</ion-content>
+
+<ion-footer no-shadow no-border padding>
+  <div margin text-center>
+    <div class="font-75">You already have account</div>
+    <div><a (click)="login()">Sign In</a></div>
+  </div>
 </ion-footer>

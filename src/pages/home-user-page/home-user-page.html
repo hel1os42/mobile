@@ -1,19 +1,15 @@
-<ion-header>
-  <ion-navbar>
-    <ion-grid>
-      <ion-row text-center align-items-top>
-        <ion-col><a><img src="assets/img/tab-icon1.png"/><p class="font-75 text-white">Food & drink</p></a></ion-col>
-        <ion-col><img src="assets/img/tab-icon2.png"/><p class="font-75 text-white">Beauty & Fitness</p></ion-col>
-        <ion-col><img src="assets/img/tab-icon3.png"/><p class="font-75 text-white">Retail & Services</p></ion-col>
-        <ion-col><img src="assets/img/tab-icon4.png"/><p class="font-75 text-white">Attractions & Leisure</p></ion-col>
-        <ion-col><img src="assets/img/tab-icon5.png"/><p class="font-75 text-white">Others & Online</p></ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-navbar>
-</ion-header>
-
 <ion-content class="padding-no">
-  <ion-segment color="primary" padding-top>
+  <ion-grid>
+    <ion-row class="tb-background" text-center align-items-end>
+      <ion-col><a><img src="assets/img/tab-icon1.png"/><p class="font-75 text-white">Food & drink</p></a></ion-col>
+      <ion-col><a><img src="assets/img/tab-icon2.png"/><p class="font-75 text-white">Beauty & Fitness</p></a></ion-col>
+      <ion-col><a><img src="assets/img/tab-icon3.png"/><p class="font-75 text-white">Retail & Services</p></a></ion-col>
+      <ion-col><a><img src="assets/img/tab-icon4.png"/><p class="font-75 text-white">Attractions & Leisure</p></a></ion-col>
+      <ion-col><a><img src="assets/img/tab-icon5.png"/><p class="font-75 text-white">Others & Online</p></a></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-segment color="primary">
     <ion-segment-button value="alloffers">
       All offers
     </ion-segment-button>
@@ -39,7 +35,7 @@
           <ion-icon class="text-white" name="settings"></ion-icon>
         </button>
       </ion-col>
-      <ion-col col-2 text-wrap>
+      <ion-col col-2 text-center>
         <button ion-button icon-only color="transparent">
           <ion-icon class="text-white" name="md-pin"></ion-icon>
         </button>

@@ -1,0 +1,102 @@
+<ion-content class="padding-no">
+  <ion-grid padding-top>
+    <ion-row align-items-start>
+      <ion-col col-3 padding-left>
+        <h5><img src="assets/img/logo_start.png"></h5>
+      </ion-col>
+      <ion-col col-7 padding-left>
+        <h5 text-uppercase>Hello!!!</h5>
+        <p class="font-75">You can add information in your account. If helps us suggest you offers</p>
+      </ion-col>
+      <a ion-col col-2 text-right (click)="openSettings()">
+        <h5 padding-right><ion-icon color="dark" class="font-200" name="settings"></ion-icon></h5>
+      </a>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid text-center margin-bottom>
+    <ion-row>
+      <ion-col col-1 align-self-center>
+        <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
+      </ion-col>
+      <ion-col col-10 align-self-center>
+        <ion-slides #slides spaceBetween="10" class="slider_top">
+          <ion-slide padding text-center>
+            <img margin-top src="assets/img/logo_start.png">
+            <h5 text-uppercase>How it works?</h5>
+          </ion-slide>
+          <ion-slide (click)="openCreateUserProfile()" padding text-center>
+            <img margin-top src="assets/img/splash_screen/slide2.png">
+            <h5 text-uppercase>Fill more info</h5>
+          </ion-slide>
+          <ion-slide padding text-center>
+            <img margin-top src="assets/img/splash_screen/slide3.png">
+            <h5 text-uppercase>Search offers now</h5>
+          </ion-slide>
+          <ion-slide padding text-center>
+            <img margin-top src="assets/img/splash_screen/slide3.png">
+            <h5 text-uppercase>Get offer now</h5>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+      <ion-col col-1 align-self-center>
+        <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid text-center class="grid-tabs-splash">
+    <ion-row align-items-center>
+      <a ion-col>
+        <p><img src="assets/img/splash_screen/tab-icon1.png"></p>
+        <p class="font-65">Food & <br>drink</p>
+      </a>
+      <a ion-col>
+        <p><img src="assets/img/splash_screen/tab-icon2.png"></p>
+        <p class="font-65">Beauty & <br>Fitness</p>
+      </a>
+      <a ion-col>
+        <p><img src="assets/img/splash_screen/tab-icon3.png"></p>
+        <p class="font-65">Retail & <br>Services</p>
+      </a>
+      <a ion-col>
+        <p><img src="assets/img/splash_screen/tab-icon4.png"></p>
+        <p class="font-65">Attractions & <br>Leisure</p>
+      </a>
+      <a ion-col>
+        <p><img src="assets/img/splash_screen/tab-icon5.png"></p>
+        <p class="font-65">Others & <br>Online</p>
+      </a>
+    </ion-row>
+  </ion-grid>
+
+  <h5 class="font-weight-normal" text-center text-uppercase>news & events</h5>
+
+  <ion-grid padding-bottom>
+    <ion-row>
+      <ion-col col-1 align-self-end>
+        <a><ion-icon (click)="slideNewsPrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
+      </ion-col>
+      <ion-col col-10 align-self-center>
+        <ion-slides #slidesNews spaceBetween="10" class="slider_bottom">
+          <ion-slide padding>
+            <p class="font-65">12/06/07</p>
+            <div class="font-75">Double Up Food Bucks is a national model for healthy food incentives active in more...</div>
+          </ion-slide>
+          <ion-slide padding>
+            <p class="font-65">12/06/07</p>
+            <div class="font-75">Double Up Food Bucks is a national model for healthy food incentives active in more...</div>
+          </ion-slide>
+          <ion-slide padding>
+            <p class="font-65">12/06/07</p>
+            <div class="font-75">Double Up Food Bucks is a national model for healthy food incentives active in more...</div>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+      <ion-col col-1 align-self-end>
+        <a><ion-icon (click)="slideNewsNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -14,8 +14,95 @@ page-create-user-profile{
   }
 
   agm-map {
-    height: 200px;
+    height: 250px;
     border-radius: 50px;
   }
-  
+
+  .select {
+    float: left;
+    padding-right: 5px;
+  }
+
+  .icon {
+    line-height: 1.1;
+  }
+
+  .points{
+    background: gray;
+    color: #fff;
+    padding: 3px;
+    border-radius: 3px;
+  }
+
+  .ion-logo-twitter{
+    width: 41.8px;
+  }
+
+  .input_relative{
+    position: relative;
+  }
+
+  .input_relative span{
+    position: absolute;
+    right: 0;
+    height: 43px;
+    top: 0;
+    padding: 10px;
+  }
+
+  .input_relative span img, .popover_not img{
+    height: 100%;
+    width: auto;
+  }
+
+  .popover_not {
+    position: absolute;
+    right: 3px;
+    background: #fff;
+    padding: 7px;
+    border-radius: 100px;
+    z-index: 111;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-align: center;
+    display: table;
+  }
+
+  .popover1{
+    top: 3px;
+  }
+
+  .popover2{
+    bottom: 3px;
+    width: calc(100% - 6px);
+  }
+
+  .popover_not img{
+    height: 21px;
+    width: auto;
+  }
+
+  .popover_not span{
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .item-content{
+    width: 100%;
+  }
+
+  #marker {
+    color: darkorchid;
+    font-size: 50px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: -160px;
+    width: 32px;
+  }
+
+  .gender_select.select.select-ios{
+    padding: 11px 8px 11px 8px;
+    max-width: 100%;
+  }
+
 }

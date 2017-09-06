@@ -1,14 +1,14 @@
 export class Offer {
 
     label: string;
-    reward: string;
+    reward: number;
     country: string;
     city: string;
-    max_count: string;
+    max_count: number;
     max_for_user: number;
     max_per_day: number;
     max_for_user_per_day: number;
-    radius: string;
+    radius: number;
     description: string;
     start_date: string;
     finish_date: string;

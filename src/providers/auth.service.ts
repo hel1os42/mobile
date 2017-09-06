@@ -6,18 +6,35 @@ import { TokenService } from "./token.service";
 import { Token } from "../models/token";
 import { Observable } from "rxjs";
 import { StorageService } from "./storage.service";
+import { App } from "ionic-angular";
+import { LoginPage } from "../pages/login/login";
 
 @Injectable()
 export class AuthService {
 
-    inviteCode: string = '59713';
+    inviteCode: string = '';
     registerData: Register = new Register();
-    
+
     constructor(
+        private app: App,
         private api: ApiService,
         private token: TokenService,
         private storage: StorageService) {
 
+        this.token.onRemove.subscribe(() => {
+            this.app.getRootNav().setRoot(LoginPage);      
+        });
+
+        setInterval(() => {
+            if (this.isLoggedIn()) {
+                this.api.get('auth/token', false)
+                    .subscribe(
+                        token => this.token.set(token),
+                        errResp => {
+                            this.token.remove();
+                        });                
+            }            
+        }, 60 * 1000);  //every 5 min
     }
     
     getInviteCode() {
@@ -64,12 +81,11 @@ export class AuthService {
     }
 
     logout() {
-        this.token.remove();
+        this.token.remove();        
     }
 
     isOnboardingShown() {
         let isSwown: boolean = this.storage.get('shownOnboarding');
         return isSwown;
-    }
-
+    }    
 }

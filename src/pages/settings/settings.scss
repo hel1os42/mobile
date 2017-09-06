@@ -27,15 +27,35 @@ page-settings{
 
   .select {
       float: left;
-      padding-right: 5px;
   }
-    
+
   .icon {
-      line-height: 1.2;
+      line-height: 1.1;
     }
 
   agm-map {
     height: 200px;
     }
 
+  .block-user-adv {
+    border-radius: 15px;
+    background: #EAEAEA;
+  }
+
+  .item-block{
+    background: transparent;
+  }
+
+  .block-user-adv img{
+    height: 45px;
+    width: auto;
+  }
+
+  .block-phone{
+    border-radius: 100px;
+    background: #EAEAEA;
+  }
+   .radius {
+
+   }
 }

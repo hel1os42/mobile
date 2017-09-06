@@ -13,7 +13,7 @@ import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomeUserPage } from '../pages/home-user-page/home-user-page';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
-import { InvitePage } from "../pages/invite/invite";
+import { SignUpInvitePage } from "../pages/invite/invite";
 import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { AuthService } from "../providers/auth.service";
@@ -30,8 +30,15 @@ import { OfferService } from "../providers/offer.service";
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
 import { SettingsPage } from "../pages/settings/settings";
 import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
-import { MyOffersPage } from "../pages/my-offers/my-offers";
+import { UserOffersPage } from "../pages/user-offers/user-offers";
 import { OfferPage } from "../pages/offer/offer";
+import { TestPage } from "../pages/test/test";
+import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
+import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
+import { UserAchievePage } from "../pages/user-achieve/user-achieve";
+import { UserUsersPage } from "../pages/user-users/user-users";
+import { UserNauPage } from "../pages/user-nau/user-nau";
+import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 
 
 
@@ -41,7 +48,7 @@ import { OfferPage } from "../pages/offer/offer";
     StartPage,
     SignUpPage,
     SignUpCodePage,
-    InvitePage,
+    SignUpInvitePage,
     LoginPage,
     CreateUserProfilePage,
     CreateAdvUserProfilePage,
@@ -54,13 +61,23 @@ import { OfferPage } from "../pages/offer/offer";
     OnBoardingPage,
     SettingsPage,
     AdvUserProfilePage,
-    MyOffersPage,
-    OfferPage
+    UserOffersPage,
+    OfferPage,
+    TestPage,
+    SplashScreenPage,
+    UserRewardsPage,
+    UserAchievePage,
+    UserUsersPage,
+    UserNauPage,
+    AdvUserOffersPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      mode: "ios",
+      backButtonText: "",
+    }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBAgndAbV-v4aQWTAHrUljUfSCAthdK-RY'}),
   ],
@@ -70,7 +87,7 @@ import { OfferPage } from "../pages/offer/offer";
     StartPage,
     SignUpPage,
     SignUpCodePage,
-    InvitePage,
+    SignUpInvitePage,
     LoginPage,
     CreateUserProfilePage,
     CreateAdvUserProfilePage,
@@ -83,8 +100,15 @@ import { OfferPage } from "../pages/offer/offer";
     OnBoardingPage,
     SettingsPage,
     AdvUserProfilePage,
-    MyOffersPage,
-    OfferPage
+    UserOffersPage,
+    OfferPage,
+    TestPage,
+    SplashScreenPage,
+    UserRewardsPage,
+    UserAchievePage,
+    UserUsersPage,
+    UserNauPage,
+    AdvUserOffersPage
   ],
   providers: [
     StatusBar,

@@ -18,7 +18,7 @@ export class CreateAdvUserProfilePage {
 
     }
 
-    ionViewDidEnter() {
+    ionViewWillEnter() {
         this.location.get()
         .then((resp) => {                
             this.coords = {

@@ -1,22 +1,39 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Invite Code</ion-title>
   </ion-navbar>
 </ion-header>
 
+<ion-content padding scroll="false">
+  <div class="logo">
+  </div>
+  <p text-center text-uppercase>
+    enter invite code
+  </p>
+  <p padding text-center class="font-75">
+    You should have received a code from the friend who recommended NAU to you. Please ask him again
+  </p>
 
-<ion-content>
-  <form>
-    <ion-list>
-        
-        <ion-item>
-            <ion-label fixed>Invite Code</ion-label>
-            <ion-input [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
-        </ion-item>
+  <ion-item class="border-bottom-no">
+    <ion-input text-center placeholder="XX-XX-XX" class="bg-gray" [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
+  </ion-item>
 
-        <div padding>
-        <button ion-button large block (click)="apply()">APPLY</button>
-      </div>
-    </ion-list>
-  </form>
+  <div *ngIf="data.referrer_id" class="temporary">
+    <p>temporary stub - signup with email/password</p>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="email" placeholder="E-mail" [(ngModel)]="data.email" name="email"></ion-input>
+    </ion-item>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="password" placeholder="Password" [(ngModel)]="data.password" name="password"></ion-input>
+    </ion-item>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="password" placeholder="Confirm password" [(ngModel)]="data.password_confirm" name="password"></ion-input>
+    </ion-item>
+  </div>
+
+  <p padding>
+    <button *ngIf="!data.referrer_id" ion-button block middle color="secondary" (click)="apply()">Sign up</button>
+    <button *ngIf="data.referrer_id" ion-button block middle color="secondary" (click)="register()">Sign up</button>
+  </p>
+
+  <p text-center class="font-75 text-gray">Please do not disturb<br>Your private data will be safety</p>
 </ion-content>

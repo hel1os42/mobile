@@ -3,82 +3,90 @@
             <ion-title>Create New Offer</ion-title>
         </ion-navbar>
     </ion-header>
-    
+
     <ion-content padding>
         <form (submit)="createOffer()">
             <ion-list>
-    
+
                 <ion-item>
-                    <ion-input class="font-150" type="text" placeholder="Input Offer Name"></ion-input>
+                    <ion-input [(ngModel)]="offer.label" [ngModelOptions]="{standalone: true}" class="font-150" type="text" placeholder="Input Offer Name"></ion-input>
                 </ion-item>
-    
+
                 <ion-item padding-top>
-                    <ion-input type="text" placeholder="Add offer description here"></ion-input>
+                    <ion-input [(ngModel)]="offer.description" [ngModelOptions]="{standalone: true}" type="text" placeholder="Add offer description here"></ion-input>
                 </ion-item>
-    
+
                 <div padding>
                     <button class="browse" type="button" margin-top ion-button round outline block>Browse Picture</button>
                 </div>
-    
+
+                <ion-item padding-top class="border-bottom-no">
+                        <ion-select placeholder="Choose category" class="bg-gray width-100" interface="action-sheet">
+                            <ion-option value="">Food &amp; Drink</ion-option>
+                            <ion-option value="">Food Category</ion-option>
+                            <ion-option value="">Drink Category</ion-option>
+                            <ion-option value="">Healthy Food</ion-option>
+                        </ion-select>
+                    </ion-item>
+
+                    <ion-item padding-top class="border-bottom-no">
+                        <ion-select placeholder="Set Working time" class="bg-gray width-100" interface="action-sheet">
+                            <ion-option value="">All Day</ion-option>
+                            <ion-option value="">All Week</ion-option>
+                            <ion-option value="">All Month</ion-option>
+                            <ion-option value="">All Year</ion-option>
+                            <ion-option value="">Set Time</ion-option>
+                        </ion-select>
+                    </ion-item>
+
+
                 <ion-grid>
                     <ion-row>
                         <ion-col col-2>
-                                <ion-label>from</ion-label> 
+                                <ion-label>from</ion-label>
                         </ion-col>
                         <ion-col col-6 class="bcg">
-                                <ion-datetime displayFormat="DDD/D/MM/YYYY"></ion-datetime>
+                                <ion-datetime [(ngModel)]="offer.start_date" [ngModelOptions]="{standalone: true}" displayFormat="DDD/D/MM/YYYY" min="2017-09-01" max="2022" ></ion-datetime>
                         </ion-col>
                         <ion-col class="bcg">
-                                <ion-datetime displayFormat="h:mm a"></ion-datetime>
+                                <ion-datetime [(ngModel)]="offer.start_time" [ngModelOptions]="{standalone: true}" displayFormat="h:mm a"></ion-datetime>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
-    
+
                 <ion-grid>
                     <ion-row>
                         <ion-col col-2>
-                                <ion-label>to</ion-label> 
+                                <ion-label>to</ion-label>
                         </ion-col>
                         <ion-col col-6 class="bcg">
-                                <ion-datetime displayFormat="DDD/D/MM/YYYY"></ion-datetime>
+                                <ion-datetime [(ngModel)]="offer.finish_date" [ngModelOptions]="{standalone: true}" displayFormat="DDD/D/MM/YYYY" min="2017-09-01" max="2022"></ion-datetime>
                         </ion-col>
                         <ion-col class="bcg">
-                                <ion-datetime displayFormat="h:mm a"></ion-datetime>
+                                <ion-datetime [(ngModel)]="offer.finish_time" [ngModelOptions]="{standalone: true}" displayFormat="h:mm a"></ion-datetime>
                         </ion-col>
                     </ion-row>
                 </ion-grid>
-    
-                <ion-item padding-top class="border-bottom-no">
-                    <ion-select placeholder="Choose category" class="bg-gray width-100" interface="action-sheet">
-                        <ion-option value="">Food &amp; Drink</ion-option>
-                        <ion-option value="">Food Category</ion-option>
-                        <ion-option value="">Drink Category</ion-option>
-                        <ion-option value="">Healthy Food</ion-option>
-                    </ion-select>
-                </ion-item>
-    
-                <ion-item padding-top class="border-bottom-no">
-                    <ion-select placeholder="Set Working time" class="bg-gray width-100" interface="action-sheet">
-                        <ion-option value="">All Day</ion-option>
-                        <ion-option value="">All Week</ion-option>
-                        <ion-option value="">All Month</ion-option>
-                        <ion-option value="">All Year</ion-option>
-                        <ion-option value="">Set Time</ion-option>
-                    </ion-select>
-                </ion-item>
-    
-                <div padding>
-                    Additional options
-                </div>
-    
-                <div>
+
+
+                <div padding-top padding-bottom>
+                        <a (click)="toggleSelect()">
+                          <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
+                          <ion-icon *ngIf="isSelectVisible" name="arrow-up"></ion-icon>
+                          <div class="select">
+                              Additional options
+                          </div>
+                        </a>
+                      </div>
+
+              <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }">
                     <ion-item padding-top class="border-bottom-no">
                         <ion-select placeholder="Unlimited offer" class="bg-gray width-100" interface="action-sheet">
                             <ion-option value="">Limited</ion-option>
                             <ion-option value="">Unlimited</ion-option>
                         </ion-select>
                     </ion-item>
-                    
+
                     <ion-grid padding>
                         <ion-row>
                             <ion-col col-6>
@@ -87,27 +95,27 @@
                             <ion-col col-6>
                                 <ion-item class="border-bottom-no">
                                     <ion-label>Working radius</ion-label>
-                                    <ion-select [(ngModel)]="radius" placeholder="50 m" name="radius" class="bg-gray width-100" interface="action-sheet">
+                                    <ion-select [(ngModel)]="offer.radius" placeholder="50 m" name="radius" class="bg-gray width-100" interface="action-sheet">
                                         <ion-option *ngFor="let radius of radiuses" [value]="radius">{{ radius }} m</ion-option>
                                     </ion-select>
                                 </ion-item>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
-                </div>
-    
-                <div>
+
+
+                <div padding-top padding-bottom>
                     <div *ngIf="!coords.lat" >Detecting your location...</div>
                     <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
                         <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
                         <agm-circle fillOpacity="0.2"  [radius]="radius" [latitude]="coords.lat" [longitude]="coords.lng"></agm-circle>
                     </agm-map>
                 </div>
-    
+            </div>
+
                 <div padding>
                     <button ion-button block>CREATE OFFER</button>
                 </div>
             </ion-list>
         </form>
     </ion-content>
-    

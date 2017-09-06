@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { StorageService } from "./storage.service";
 import { Token } from "../models/token";
 
@@ -6,6 +6,7 @@ import { Token } from "../models/token";
 export class TokenService {
     TOKEN_KEY = 'token';
     token: Token;
+    onRemove = new EventEmitter();
     
     constructor(
         private storage: StorageService) {
@@ -20,12 +21,13 @@ export class TokenService {
     }
 
     set(token: Token) {
-        this.remove();
+        this.token = undefined;
         this.storage.set(this.TOKEN_KEY, token);
     }
 
     remove() {
         this.storage.remove(this.TOKEN_KEY);
         this.token = undefined;
+        this.onRemove.emit();
     }
 }
