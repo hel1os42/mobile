@@ -34,12 +34,12 @@ export class MyApp {
             splashScreen.hide();
 
             this.rootPage = auth.isLoggedIn()
-                ? TabsPage
-                : auth.isOnboardingShown()
+                ? TabsPage : StartPage;
+                /*: auth.isOnboardingShown()
                     ? StartPage
-                    : OnBoardingPage;
+                    : OnBoardingPage;*/
 
-          this.rootPage = UserUsersPage;
+          //this.rootPage = UserUsersPage;
         });
     }
 }

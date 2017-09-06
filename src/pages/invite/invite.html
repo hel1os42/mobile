@@ -14,12 +14,26 @@
   </p>
 
   <ion-item class="border-bottom-no">
-     <ion-input text-center placeholder="XX-XX-XX" class="bg-gray" [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
+    <ion-input text-center placeholder="XX-XX-XX" class="bg-gray" [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
 
+  <div *ngIf="data.referrer_id" class="temporary">
+    <p>temporary stub - signup with email/password</p>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="email" placeholder="E-mail" [(ngModel)]="data.email" name="email"></ion-input>
+    </ion-item>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="password" placeholder="Password" [(ngModel)]="data.password" name="password"></ion-input>
+    </ion-item>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="password" placeholder="Confirm password" [(ngModel)]="data.password_confirm" name="password"></ion-input>
+    </ion-item>
+  </div>
+
   <p padding>
-     <button ion-button block middle color="secondary" (click)="apply()">Sign up</button>
+    <button *ngIf="!data.referrer_id" ion-button block middle color="secondary" (click)="apply()">Sign up</button>
+    <button *ngIf="data.referrer_id" ion-button block middle color="secondary" (click)="register()">Sign up</button>
   </p>
 
-  <p text-center class="font-75 text-gray">Please do not disturb<br>Your private data will be safety</p> 
+  <p text-center class="font-75 text-gray">Please do not disturb<br>Your private data will be safety</p>
 </ion-content>

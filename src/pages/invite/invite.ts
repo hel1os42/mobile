@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from "ionic-angular";
 import { AuthService } from "../../providers/auth.service";
 import { CreateUserProfilePage } from '../../pages/create-user-profile/create-user-profile';
+import { OnBoardingPage } from "../onboarding/onboarding";
+import { Register } from "../../models/register";
 
 @Component({
     selector: 'page-invite',
@@ -10,6 +12,7 @@ import { CreateUserProfilePage } from '../../pages/create-user-profile/create-us
 
 export class SignUpInvitePage {
     inviteCode: string;
+    data: Register = new Register();
 
     constructor(
         private nav: NavController,
@@ -18,13 +21,34 @@ export class SignUpInvitePage {
     }
 
     apply() {
+
         this.auth
             .getReferrerId(this.inviteCode)
             .subscribe(
-                data => {
-                    this.auth.setRegisterData(data);
-                    this.nav.push(CreateUserProfilePage);
-                }
-            );
+            data => {
+                this.data = data;
+                //this.auth.setRegisterData(data);
+                //this.nav.push(CreateUserProfilePage);
+            });
     }
+
+    register() {
+        this.data.name = this.data.email;
+        this.auth
+            .register(this.data)
+            .subscribe(resp => {
+                this.auth
+                    .login({
+                        email: this.data.email,
+                        password: this.data.password
+                    })
+                    .subscribe(resp => {
+                        this.nav.setRoot(OnBoardingPage);
+                    })
+            }
+            );
+            this.auth.setRegisterData(this.data);
+    }
+
+
 }

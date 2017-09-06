@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { StartPage } from "../start/start";
 import { StorageService } from "../../providers/storage.service";
+import { SplashScreenPage } from "../splash-screen/splash-screen";
+import { TabsPage } from "../tabs/tabs";
 
 @Component({
     selector: 'page-onboarding',
@@ -20,7 +22,7 @@ export class OnBoardingPage {
     
 skip() {
     this.storage.set(this.SHOWN_KEY, true);
-    this.nav.push(StartPage);
+    this.nav.push(TabsPage);
 }
 
 }
