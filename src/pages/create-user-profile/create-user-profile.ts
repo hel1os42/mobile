@@ -59,10 +59,11 @@ export class CreateUserProfilePage {
     }
 
     ionViewDidLoad() {
-        this.account = this.profileService.userAccount;
+        this.account = this.profileService.userAccount;//to do
 
         if (this.account.name)
             this.isFocusName = true;
+            this.points = 8;
         if (this.account.email)
             this.isFocusEmail = true;
 

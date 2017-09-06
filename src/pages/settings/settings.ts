@@ -15,7 +15,7 @@ export class SettingsPage {
   user: User = new User;
   message: string;
   coords: Coords = new Coords();
-  radiuses = [50, 100, 150, 200, 250];
+  radiuses = [100, 150, 200, 250, 500, 1000];
   radius: number = 5;
   isAccountsChoiceVisible: boolean = false;
   isSelectRadiusVisible: boolean = false;
