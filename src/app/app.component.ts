@@ -18,6 +18,7 @@ import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
 import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
 import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 import { UserUsersPage } from "../pages/user-users/user-users";
+import { UserNauPage } from "../pages/user-nau/user-nau";
 @Component({
     templateUrl: 'app.html'
 })
@@ -39,7 +40,7 @@ export class MyApp {
                     ? StartPage
                     : OnBoardingPage;
 
-          this.rootPage = UserUsersPage;
+          this.rootPage = UserNauPage;
         });
     }
 }

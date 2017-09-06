@@ -1,47 +1,49 @@
-.happy .item {
-  margin-bottom: 3px;
-  border-radius: 7px;
-  color: #fff;
-  background: #7f7f7f;
-  padding: 15px;
-  position: relative;
-}
+page-user-rewards{
+  .happy .item {
+    margin-bottom: 3px;
+    border-radius: 7px;
+    color: #fff;
+    background: #7f7f7f;
+    padding: 15px;
+    position: relative;
+  }
 
-.happy h2 {
-  font-weight: bold;
-  margin-bottom: 7px;
-}
+  .happy h2 {
+    font-weight: bold;
+    margin-bottom: 7px;
+  }
 
-.happy h5 {
-  white-space: normal;
-  font-size: 70%;
-}
+  .happy h5 {
+    white-space: normal;
+    font-size: 70%;
+  }
 
-.segment-ios .segment-button:first-of-type {
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
-}
+  .segment-ios .segment-button:first-of-type {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+  }
 
-.icon-check{
-  position: absolute;
-  right: 1px;
-  top: 1px;
-  color: #000;
-}
+  .icon-check{
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    color: #000;
+  }
 
-.segment-ios .segment-button:last-of-type {
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-}
+  .segment-ios .segment-button:last-of-type {
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
 
-.segment-ios .segment-button{
-  height: 4.2rem;
-  line-height: 4rem;
-  color: #fff;
-  border: none;
-  background: #7f7f7f;
-}
+  .segment-ios .segment-button{
+    height: 4.2rem;
+    line-height: 4rem;
+    color: #fff;
+    border: none;
+    background: #7f7f7f;
+  }
 
-.segment-ios .segment-button.segment-activated{
-  background: #c6c6c6;
+  .segment-ios .segment-button.segment-activated{
+    background: #c6c6c6;
+  }
 }
