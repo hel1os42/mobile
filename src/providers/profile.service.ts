@@ -5,6 +5,7 @@ import { UserAccount } from "../models/userAccount";
 
 @Injectable()
 export class ProfileService {
+    userAccount: UserAccount = new UserAccount();
     
     constructor(private api: ApiService ) { }
 
@@ -13,6 +14,7 @@ export class ProfileService {
     }
 
     set(account: UserAccount) {
+        this.userAccount = account;
         return Observable.of({ success: true });
         //this.api.post('', account);
     }
