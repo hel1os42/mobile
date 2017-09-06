@@ -1,4 +1,8 @@
 page-user-profile{
+  ion-app.ios [padding], ion-app.ios [padding] .scroll-content{
+    padding: 0;
+  }
+
   h3{
     margin: 0;
   }
