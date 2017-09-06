@@ -14,7 +14,7 @@ page-create-user-profile{
   }
 
   agm-map {
-    height: 200px;
+    height: 250px;
     border-radius: 50px;
   }
 
@@ -89,4 +89,15 @@ page-create-user-profile{
   .item-content{
     width: 100%;
   }
+
+  #marker {
+    color: darkorchid;
+    font-size: 50px;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: -160px;
+    width: 32px;
+  }
+
 }

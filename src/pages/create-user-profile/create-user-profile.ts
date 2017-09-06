@@ -11,6 +11,7 @@ import { Coords } from "../../models/coords";
 import { UserAccount } from "../../models/userAccount";
 import { ProfileService } from "../../providers/profile.service";
 import { UserProfilePage } from "../user-profile/user-profile";
+import { SplashScreenPage } from "../splash-screen/splash-screen";
 
 @Component({
     selector: 'page-create-user-profile',
@@ -23,6 +24,9 @@ export class CreateUserProfilePage {
     account: UserAccount = new UserAccount();
     message: string;
     isSelectVisible: boolean = false;
+    points: number = 0;
+    isFocusName: boolean = false;
+    isFocusEmail: boolean = false;
 
     constructor(
         private nav: NavController,
@@ -55,6 +59,16 @@ export class CreateUserProfilePage {
     }
 
     ionViewDidLoad() {
+        this.account = this.profileService.userAccount;
+
+        if (this.account.name)
+            this.isFocusName = true;
+        if (this.account.email)
+            this.isFocusEmail = true;
+
+
+
+
         /* this.data = this.auth.getRegisterData();
          if (this.data.referrer_id)
              return;
@@ -94,10 +108,18 @@ export class CreateUserProfilePage {
             }
             );*/
             this.profileService.set(this.account)
-                .subscribe(resp => this.nav.setRoot(UserProfilePage));
+                .subscribe(resp => this.nav.setRoot(SplashScreenPage));
     }
 
     toggleSelect() {
         this.isSelectVisible = !this.isSelectVisible;
+    }
+
+    focusName() {
+        this.isFocusName = true;
+    }
+
+    focusEmail() {
+        this.isFocusEmail = true;
     }
 }
