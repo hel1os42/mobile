@@ -39,7 +39,7 @@ export class MyApp {
                 /*: auth.isOnboardingShown()
                     ? StartPage
                     : OnBoardingPage;*/
-          this.rootPage = UserNauPage;
+          //this.rootPage = UserNauPage;
         });
     }
 }
