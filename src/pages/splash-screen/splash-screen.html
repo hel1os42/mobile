@@ -1,15 +1,15 @@
-<ion-content>
-  <ion-grid>
+<ion-content class="padding-no">
+  <ion-grid padding-top>
     <ion-row align-items-start>
       <ion-col col-3 padding-left>
         <h5><img src="assets/img/logo_start.png"></h5>
       </ion-col>
       <ion-col col-7 padding-left>
-        <h5 text-uppercase>Hello</h5>
+        <h5 text-uppercase>Hello!!!</h5>
         <p class="font-75">You can add information in your account. If helps us suggest you offers</p>
       </ion-col>
       <a ion-col col-2 text-right (click)="openSettings()">
-        <h5><ion-icon color="dark" class="font-200" name="settings"></ion-icon></h5>
+        <h5 padding-right><ion-icon color="dark" class="font-200" name="settings"></ion-icon></h5>
       </a>
     </ion-row>
   </ion-grid>
@@ -72,7 +72,7 @@
 
   <h5 class="font-weight-normal" text-center text-uppercase>news & events</h5>
 
-  <ion-grid>
+  <ion-grid padding-bottom>
     <ion-row>
       <ion-col col-1 align-self-end>
         <a><ion-icon (click)="slideNewsPrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
