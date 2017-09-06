@@ -8,7 +8,9 @@ import { AuthService } from "../../providers/auth.service";
 import { TabsPage } from "../tabs/tabs";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
-import { Account } from "../../models/account";
+import { UserAccount } from "../../models/userAccount";
+import { ProfileService } from "../../providers/profile.service";
+import { UserProfilePage } from "../user-profile/user-profile";
 
 @Component({
     selector: 'page-create-user-profile',
@@ -18,7 +20,7 @@ import { Account } from "../../models/account";
 export class CreateUserProfilePage {
     data: Register = new Register();
     coords: Coords = new Coords();
-    account: Account = new Account();
+    account: UserAccount = new UserAccount();
     message: string;
     isSelectVisible: boolean = false;
 
@@ -26,7 +28,8 @@ export class CreateUserProfilePage {
         private nav: NavController,
         private auth: AuthService,
         private location: LocationService,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private profileService: ProfileService) {
     }
 
 
@@ -77,7 +80,7 @@ export class CreateUserProfilePage {
     }
 
     register() {
-        this.auth
+        /*this.auth
             .register(this.data)
             .subscribe(resp => {
                 this.auth
@@ -89,7 +92,9 @@ export class CreateUserProfilePage {
                         this.nav.setRoot(TabsPage);
                     })
             }
-            );
+            );*/
+            this.profileService.set(this.account)
+                .subscribe(resp => this.nav.setRoot(UserProfilePage));
     }
 
     toggleSelect() {

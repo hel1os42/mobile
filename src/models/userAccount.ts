@@ -1,4 +1,4 @@
-export class Account {
+export class UserAccount {
     name: string;
     email: string;
     facebookName: string;
@@ -7,5 +7,5 @@ export class Account {
     gender: string;
     age: number;
     income: number;
-   address: string;
+    address: string;
 }
