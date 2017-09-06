@@ -12,11 +12,24 @@
         <div item-start text-center>
           <button class="btn-add-border-out button-circle-medium" ion-fab color="dark"><ion-icon name="md-add" class="text-lightgray"></ion-icon></button>
         </div>
-        <div item-content>
-          <ion-item>
-            <ion-input class="border-bottom-gray" type="text" placeholder="Your Name" [(ngModel)]="account.name" name="name1"></ion-input>
-          </ion-item>
-          <ion-input type="email" placeholder="Your E-mail" [(ngModel)]="account.email" name="email"></ion-input>
+        <div item-content class="item-content">
+          <div class="popover_not popover1 text-gray font-65">
+            <span padding-right>Your profile collected here</span>
+            <img src="../assets/img/create_user_profile/icon_1.png">
+            <span padding-left>8</span>
+          </div>
+
+          <div class="popover_not popover2 text-gray font-65">
+            <img src="../assets/img/create_user_profile/icon_3.png">
+            <span>Your should confirm your email address</span>
+            <img src="../assets/img/create_user_profile/icon_2.png">
+          </div>
+          <div class="input_relative"><ion-input class="border-bottom-gray" type="text" placeholder="Your Name" [(ngModel)]="data.name" name="name1"></ion-input>
+            <span class="text-gray"><img src="../assets/img/create_user_profile/icon_1.png"> 0</span>
+          </div>
+          <div class="input_relative"><ion-input type="email" placeholder="Your E-mail" [(ngModel)]="data.email" name="email"></ion-input>
+            <span class="text-gray"><img src="../assets/img/create_user_profile/icon_2.png"></span>
+          </div>
         </div>
       </ion-item>
     </ion-list>
@@ -29,8 +42,8 @@
           </span>
         </ion-avatar>
         <div item-end text-left>
-          <p>if your will additional information about yourself it helps us to recommend best offer for you. to earn points
-            for this!
+          <p>if your will additional information about yourself it helps us to recommend best offer for you.
+            to earn points for this!
           </p>
         </div>
       </ion-item>
@@ -53,25 +66,28 @@
     <ion-list class="bg-gray-block">
       <a ion-item detail-push>
         <ion-icon padding-left item-start name="logo-facebook" class="text-gray"></ion-icon>
-        <ion-input [(ngModel)]="account.facebookName" [ngModelOptions]="{standalone: true}" placeholder="Facebook"></ion-input>
+        <ion-input placeholder="Facebook"></ion-input>
         <div item-end>
-          <ion-label *ngIf="!account.instagramName" class="label label-ios points font-75">+ 3 points</ion-label>
+          <ion-icon color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+          <ion-label class="label label-ios points font-75">+ 3 points</ion-label>
         </div>
       </a>
 
       <a ion-item detail-push>
         <ion-icon padding-left item-start name="logo-twitter" class="text-gray"></ion-icon>
-        <ion-input [(ngModel)]="account.twitterName" [ngModelOptions]="{standalone: true}" placeholder="Twitter"></ion-input>
+        <ion-input placeholder="Twitter"></ion-input>
         <div item-end>
-          <ion-label *ngIf="!account.twitterName" class="label label-ios points font-75">+ 3 points</ion-label>
+          <ion-icon color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+          <ion-label class="label label-ios points font-75">+ 3 points</ion-label>
         </div>
       </a>
 
       <a ion-item detail-push>
         <ion-icon padding-left item-start name="logo-instagram" class="text-gray"></ion-icon>
-        <ion-input [(ngModel)]="account.instagramName" [ngModelOptions]="{standalone: true}" placeholder="Instagram"></ion-input>
+        <ion-input placeholder="Instagram"></ion-input>
         <div item-end>
-          <ion-label *ngIf="!account.instagramName" class="label label-ios points font-75">+ 3 points</ion-label>
+          <ion-icon color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+          <ion-label class="label label-ios points font-75">+ 3 points</ion-label>
         </div>
       </a>
     </ion-list>
@@ -92,41 +108,40 @@
 
         <ion-list class="bg-gray-block">
           <a ion-item detail-push>
-            <ion-label padding-left class="label label-ios">Gender</ion-label>
+            <div padding-left item-start></div>
+            <ion-input placeholder="Gender"></ion-input>
             <div item-end>
+              <ion-icon color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
               <ion-label class="label label-ios points font-75">+ 5 points</ion-label>
             </div>
           </a>
 
           <a ion-item detail-push>
-            <ion-label padding-left class="label label-ios">Age</ion-label>
+            <div padding-left item-start></div>
+            <ion-input placeholder="Age"></ion-input>
             <div item-end>
+              <ion-icon color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
               <ion-label class="label label-ios points font-75">+ 9 points</ion-label>
             </div>
           </a>
 
           <a ion-item detail-push>
-            <ion-label padding-left class="label label-ios">Income</ion-label>
+            <div padding-left item-start></div>
+            <ion-input placeholder="Income"></ion-input>
             <div item-end>
+              <ion-icon color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
               <ion-label class="label label-ios points font-75">+ 5 points</ion-label>
             </div>
           </a>
         </ion-list>
 
         <p padding text-uppercase class="font-75">Confirm your location:</p>
-        <div>
+        <div padding-bottom>
           <div *ngIf="!coords.lat">Detecting your location...</div>
-          <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)">
-            <!--<agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>-->
+          <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+            <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
           </agm-map>
-          <ion-icon id="marker" name="pin"></ion-icon>
-
         </div>
-        <ion-card>
-          <ion-card-content>
-            {{ account.address }}
-          </ion-card-content>
-        </ion-card>
 
       </div>
 

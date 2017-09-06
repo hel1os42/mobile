@@ -45,6 +45,14 @@ button[ion-button] {
   background-size: contain;
 }
 
+.logo-margin {
+  width: 50%;
+  height: 40%;
+  margin: 15% auto 5% auto;
+  background: url("../assets/img/logo_start.png") no-repeat center center;
+  background-size: contain;
+}
+
 .header-ios .toolbar-ios:last-child .toolbar-background-ios{
   border-width: 0;
 }

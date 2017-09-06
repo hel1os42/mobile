@@ -14,7 +14,7 @@ page-create-user-profile{
   }
 
   agm-map {
-    height: 250px;
+    height: 200px;
     border-radius: 50px;
   }
 
@@ -38,13 +38,55 @@ page-create-user-profile{
     width: 41.8px;
   }
 
-  #marker {
-    color: darkorchid;
-    font-size: 50px;
-    display: block;
-    margin: 0 auto;
+  .input_relative{
     position: relative;
-    top: -160px;
-    width: 32px;
+  }
+
+  .input_relative span{
+    position: absolute;
+    right: 0;
+    height: 43px;
+    top: 0;
+    padding: 10px;
+  }
+
+  .input_relative span img, .popover_not img{
+    height: 100%;
+    width: auto;
+  }
+
+  .popover_not {
+    position: absolute;
+    right: 3px;
+    background: #fff;
+    padding: 7px;
+    border-radius: 100px;
+    z-index: 111;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-align: center;
+    display: table;
+  }
+
+  .popover1{
+    top: 3px;
+  }
+
+  .popover2{
+    bottom: 3px;
+    width: calc(100% - 6px);
+  }
+
+  .popover_not img{
+    height: 21px;
+    width: auto;
+  }
+
+  .popover_not span{
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .item-content{
+    width: 100%;
   }
 }

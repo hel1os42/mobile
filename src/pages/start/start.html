@@ -1,5 +1,5 @@
 <ion-content padding scroll="false">
-  <div class="logo">
+  <div class="logo-margin">
   </div>
   <div text-center text-uppercase margin-top><b>sign up</b> <span class="text-gray">or</span> <b>login</b></div>
 
@@ -8,41 +8,27 @@
   <div>
     <button ion-button block middle color="secondary" margin-bottom (click)="register()">sign up</button>
   </div>
-</ion-content>
 
-<ion-footer no-shadow no-border padding>
   <p padding text-center class="text-gray font-75">
     or Sign up with
   </p>
-  <ion-row margin class="row" text-center>
-    <ion-col class="col">
-      <button ion-button icon-only class="button-circle-small">
-        <ion-icon name="logo-facebook"></ion-icon>
-      </button>
-    </ion-col>
-    <ion-col class="col">
-      <button ion-button icon-only class="button-circle-small">
-        <ion-icon name="logo-twitter"></ion-icon>
-      </button>
-    </ion-col>
-    <ion-col class="col">
-      <button ion-button icon-only class="button-circle-small">
-        <ion-icon name="logo-google"></ion-icon>
-      </button>
-    </ion-col>
-    <ion-col class="col">
-      <button ion-button icon-only class="button-circle-small">
-        <ion-icon name=""></ion-icon>
-      </button>
-    </ion-col>
-    <ion-col class="col">
-      <button ion-button icon-only class="button-circle-small">
-        <ion-icon name=""></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
+
+  <div text-center>
+    <button margin ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </button>
+    <button margin ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-twitter"></ion-icon>
+    </button>
+    <button margin ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-google"></ion-icon>
+    </button>
+  </div>
+</ion-content>
+
+<ion-footer no-shadow no-border padding>
   <div margin text-center>
     <div class="font-75">You already have account</div>
-    <div><a (click)="login()">sign In</a></div>
+    <div><a (click)="login()">Sign In</a></div>
   </div>
 </ion-footer>
