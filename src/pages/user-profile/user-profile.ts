@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { App, NavController, Slides } from 'ionic-angular';
+import { NavController, Slides } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { StartPage } from "../start/start";
 import { ProfileService } from "../../providers/profile.service";
@@ -21,7 +21,6 @@ export class UserProfilePage {
     @ViewChild(Slides) slides: Slides;
 
     constructor(
-        private app: App,
         private profile: ProfileService,
         private auth: AuthService,
         private nav: NavController) {
@@ -60,7 +59,6 @@ export class UserProfilePage {
     
     logout() {
         this.auth.logout();
-        this.app.getRootNav().setRoot(StartPage);
     }
 
     slideNext() {
