@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, URLSearchParams, Headers, Response } from '@angular/http';
-import { ToastController, LoadingController } from "ionic-angular";
+import { ToastController, LoadingController, Loading } from "ionic-angular";
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/finally';
@@ -36,27 +36,21 @@ export class ApiService {
         return options;
     }
 
-    private renewToken() {
-        return this.get('auth/token')
-            .subscribe(
-                token => { this.token.set(token); },
-                errResp => {
-                    this.token.remove();
-                    // TODO: switch to login screen
-                })
-    }
-
-    private wrapObservable(obs: Observable<Response>) {
-        let loading = this.loading.create({
-            content: ''
-        });
-
-        loading.present();
+    private wrapObservable(obs: Observable<Response>, showLoading: boolean = true) {
+        let loading: Loading;
+        
+        if (showLoading) {
+            loading = this.loading.create({ content: '' });
+            loading.present();
+        }
 
         let sharableObs = obs.share();
 
         sharableObs
-            .finally(() => loading.dismiss())
+            .finally(() => {
+                if (loading)
+                    loading.dismiss();
+            })
             .subscribe(
                 resp => { },
                 errResp => {
@@ -97,7 +91,7 @@ export class ApiService {
         return sharableObs.map(resp => resp.json());
     }    
 
-    get(endpoint: string, params?: any, options?: RequestOptions) {
+    get(endpoint: string, showLoading: boolean = true, params?: any, options?: RequestOptions) {
         if (!options) {
             options = new RequestOptions();
         }
@@ -114,7 +108,9 @@ export class ApiService {
         }
 
         return this.wrapObservable(
-            this.http.get(this.url + '/' + endpoint, this.getOptions(options)));
+            this.http.get(this.url + '/' + endpoint, this.getOptions(options)),
+            showLoading
+        );
     }
 
     post(endpoint: string, body: any, options?: RequestOptions) {

@@ -14,7 +14,7 @@ export class AuthService {
 
     inviteCode: string = '';
     registerData: Register = new Register();
-    
+
     constructor(
         private app: App,
         private api: ApiService,
@@ -24,6 +24,17 @@ export class AuthService {
         this.token.onRemove.subscribe(() => {
             this.app.getRootNav().setRoot(LoginPage);      
         });
+
+        setInterval(() => {
+            if (this.isLoggedIn()) {
+                this.api.get('auth/token', false)
+                    .subscribe(
+                        token => this.token.set(token),
+                        errResp => {
+                            this.token.remove();
+                        });                
+            }            
+        }, 60 * 1000);  //every 5 min
     }
     
     getInviteCode() {
@@ -76,6 +87,5 @@ export class AuthService {
     isOnboardingShown() {
         let isSwown: boolean = this.storage.get('shownOnboarding');
         return isSwown;
-    }
-
+    }    
 }
