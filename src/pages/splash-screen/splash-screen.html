@@ -16,8 +16,8 @@
 
   <ion-grid text-center margin-bottom>
     <ion-row>
-      <ion-col col-1 align-self-center>
-        <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
+      <ion-col (click)="slidePrev()"  col-1 align-self-center>
+        <a><ion-icon name="ios-arrow-back" class="font-200"></ion-icon></a>
       </ion-col>
       <ion-col col-10 align-self-center>
         <ion-slides #slides spaceBetween="10" class="slider_top">
@@ -39,8 +39,8 @@
           </ion-slide>
         </ion-slides>
       </ion-col>
-      <ion-col col-1 align-self-center>
-        <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
+      <ion-col (click)="slideNext()" col-1 align-self-center>
+        <a><ion-icon  name="ios-arrow-forward" class="font-200"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -74,8 +74,8 @@
 
   <ion-grid padding-bottom>
     <ion-row>
-      <ion-col col-1 align-self-end>
-        <a><ion-icon (click)="slideNewsPrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
+      <ion-col (click)="slideNewsPrev()" col-1 align-self-end>
+        <a><ion-icon  name="ios-arrow-back" class="font-200"></ion-icon></a>
       </ion-col>
       <ion-col col-10 align-self-center>
         <ion-slides #slidesNews spaceBetween="10" class="slider_bottom">
@@ -93,8 +93,8 @@
           </ion-slide>
         </ion-slides>
       </ion-col>
-      <ion-col col-1 align-self-end>
-        <a><ion-icon (click)="slideNewsNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
+      <ion-col (click)="slideNewsNext()" col-1 align-self-end>
+        <a><ion-icon  name="ios-arrow-forward" class="font-200"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
