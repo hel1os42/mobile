@@ -21,11 +21,9 @@ import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";
 import { TokenService } from "../providers/token.service";
 import { LoginPage } from "../pages/login/login";
-<<<<<<< HEAD
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
-=======
 import { NotificationsPage } from "../pages/notifications/notifications";
->>>>>>> dad09042920c470fa67cd6fcdceef1706930997e
+
 @Component({
     templateUrl: 'app.html'
 })
@@ -46,11 +44,7 @@ export class MyApp {
             this.rootPage = this.auth.isLoggedIn()
                 ? TabsPage : StartPage;
 
-<<<<<<< HEAD
             this.rootPage = AdvTabsPage;
-=======
-            this.rootPage = NotificationsPage;
->>>>>>> dad09042920c470fa67cd6fcdceef1706930997e
         });
     }
 }
