@@ -21,6 +21,7 @@ import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";
 import { TokenService } from "../providers/token.service";
 import { LoginPage } from "../pages/login/login";
+import { NotificationsPage } from "../pages/notifications/notifications";
 @Component({
     templateUrl: 'app.html'
 })
@@ -41,7 +42,7 @@ export class MyApp {
             this.rootPage = this.auth.isLoggedIn()
                 ? TabsPage : StartPage;
 
-            //this.rootPage = SettingsPage;
+            this.rootPage = NotificationsPage;
         });
     }
 }

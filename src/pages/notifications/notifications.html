@@ -1,11 +1,57 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      notifications
-    </ion-title>
+    <ion-title>Notifications</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="dark" class="btn_search">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
- 
+<ion-content>
+
+  <div margin class = "block-search">
+    <ion-searchbar round placeholder="" showCancelButton="false">
+    </ion-searchbar>
+    <a class="btn_options text-black"><ion-icon name="options"></ion-icon></a>
+  </div>
+
+  <p text-uppercase margin-left>Today</p>
+  <ion-list margin-bottom margin-left margin-right no-lines class="happy">
+    <ion-item detail-push>
+      <ion-avatar item-start>
+        <img src="assets/img/user_users/ava1.png">
+      </ion-avatar>
+      <h2 text-uppercase class="happy_title">Emily Miller</h2>
+      <div class="text-gray font-75">Reddeemed offer of <b class="text-black">StarBucks</b></div>
+      <span text-uppercase class="points font-65">Reddeemed offer</span>
+      <ion-icon name="ios-navigate"></ion-icon> <span class="font-65">100 m</span>
+    </ion-item>
+  </ion-list>
+
+  <p text-uppercase margin-left>Yesterday</p>
+  <ion-list margin-bottom margin-left margin-right no-lines class="happy">
+    <ion-item detail-push>
+      <h2 text-uppercase class="happy_title">Pizza&pasta</h2>
+      <div class="text-gray font-75">Our restrant wants offer your interesting<br> proposition! <b class="text-black">Get your chance!</b></div>
+    </ion-item>
+
+    <ion-item detail-push>
+      <h2 text-uppercase class="happy_title">System notification</h2>
+      <div class="text-gray font-75">Our restrant wants offer your interesting<br> proposition! <b class="text-black">Read more!</b></div>
+    </ion-item>
+
+    <ion-item detail-push>
+      <ion-avatar item-start>
+        <img src="assets/img/notifications/icon_not2.png">
+      </ion-avatar>
+      <h2 text-uppercase class="happy_title">New cafe</h2>
+      <div class="text-gray font-75">Now availiable in your region</div>
+      <span text-uppercase class="points font-65">View all offers</span>
+      <ion-icon name="ios-navigate"></ion-icon> <span class="font-65">250 m</span>
+    </ion-item>
+  </ion-list>
+
+
 </ion-content>
