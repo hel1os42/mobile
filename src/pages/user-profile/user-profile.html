@@ -6,8 +6,8 @@
 
 <ion-content class="padding-no">
   <ion-item class="border-bottom-no">
-    <h2 margin-left>{{ user?.name }} Nastya Clark <span item-center class="font-75 text-gray">Level 4</span></h2>
-    <p margin-left>206789</p>
+    <h2 margin-left>{{ user?.name }}<span padding-left item-center class="font-75 text-gray">Level {{user.level}}</span></h2>
+    <p margin-left>{{user.points}}</p>
     <a item-end (click)="openAchieve()"  margin-right>
       <ion-icon color="dark" class="font-200" name="trophy"></ion-icon>
     </a>
