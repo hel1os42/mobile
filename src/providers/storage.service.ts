@@ -7,9 +7,9 @@ export class StorageService {
 
     set(key: string, value: any) {
         if (typeof value === 'undefined')
-            localStorage.setItem(key, JSON.stringify(value));
-        else
             localStorage.setItem(key, '');
+        else
+            localStorage.setItem(key, JSON.stringify(value));
     }
 
     get(key: string): any {
