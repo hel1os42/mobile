@@ -62,11 +62,11 @@ export class SettingsPage {
           this.message = error.message;
           console.log(this.message);
       });
-      this.isAdvMode = this.auth.getMode();
+      this.isAdvMode = this.profile.getMode();
   }
 
   toggleAdvMode() {
-    this.auth.setMode(this.isAdvMode);
+    this.profile.setMode(this.isAdvMode);
     this.isVisibleModal = this.isAdvMode;
   }
 

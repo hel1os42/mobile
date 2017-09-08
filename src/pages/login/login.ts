@@ -4,6 +4,7 @@ import { AuthService } from "../../providers/auth.service";
 import { Login } from "../../models/login";
 import { TabsPage } from "../tabs/tabs";
 import { OnBoardingPage } from "../onboarding/onboarding";
+import { ProfileService } from '../../providers/profile.service';
 
 @Component({
     selector: 'page-login',
@@ -15,7 +16,8 @@ export class LoginPage  {
     
     constructor(
         private nav: NavController,
-        private auth: AuthService) { 
+        private auth: AuthService,
+        private profile: ProfileService) { 
         
     }
 
@@ -24,7 +26,7 @@ export class LoginPage  {
             .login(this.data)
             .subscribe(
                 resp => {             
-                    this.nav.setRoot(/*this.auth.isOnboardingShown() ? TabsPage :*/ OnBoardingPage);
+                    this.nav.setRoot(/*this.profile.isOnboardingShown() ? TabsPage :*/ OnBoardingPage);
                 }
             );
     }

@@ -23,6 +23,7 @@ import { TokenService } from "../providers/token.service";
 import { LoginPage } from "../pages/login/login";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { NotificationsPage } from "../pages/notifications/notifications";
+import { ProfileService } from '../providers/profile.service';
 
 @Component({
     templateUrl: 'app.html'
@@ -33,7 +34,8 @@ export class MyApp {
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
         //private nav: NavController,
         private auth: AuthService,
-        private token: TokenService) {
+        private token: TokenService,
+        private profile: ProfileService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -42,7 +44,7 @@ export class MyApp {
             splashScreen.hide();
 
             this.rootPage = !this.auth.isLoggedIn() 
-                ? StartPage : this.auth.getMode() ? AdvTabsPage : TabsPage;
+                ? StartPage : this.profile.getMode() ? AdvTabsPage : TabsPage;
 
             //this.rootPage = AdvTabsPage;
         });
