@@ -1,25 +1,41 @@
 <ion-header>
         <ion-navbar>
             <ion-title>Create New Offer</ion-title>
+            <ion-buttons end>
+              <button ion-button icon-only color="dark" class="btn_search">
+                <span class="font-75">Next</span>
+                <ion-icon name="arrow-forward"></ion-icon>
+              </button>
+            </ion-buttons>
         </ion-navbar>
     </ion-header>
 
     <ion-content padding>
         <form (submit)="createOffer()">
-            <ion-list>
-
-                <ion-item>
-                    <ion-input [(ngModel)]="offer.label" [ngModelOptions]="{standalone: true}" class="font-150" type="text" placeholder="Input Offer Name"></ion-input>
+          <div class="progress-block">
+            <div class="progress-line"></div>
+            <div class="progress-line-fill"></div>
+            <span class="circle fill"></span>
+            <span class="circle no-fill"></span>
+            <span class="circle no-fill"></span>
+            <span class="circle no-fill"></span>
+            <span class="circle no-fill"></span>
+            <span class="circle no-fill"></span>
+          </div>
+          <p text-uppercase text-center padding-top>Name & desription</p>
+            <ion-list padding-top>
+                <ion-item no-lines>
+                    <ion-input [(ngModel)]="offer.label" [ngModelOptions]="{standalone: true}" class="bg-gray" type="text" placeholder="Offer Name"></ion-input>
                 </ion-item>
 
-                <ion-item padding-top>
-                    <ion-input [(ngModel)]="offer.description" [ngModelOptions]="{standalone: true}" type="text" placeholder="Add offer description here"></ion-input>
+                <ion-item padding-top no-lines>
+                  <ion-textarea [(ngModel)]="offer.description" [ngModelOptions]="{standalone: true}" class="bg-gray" placeholder="Description"></ion-textarea>
                 </ion-item>
 
                 <div padding>
-                    <button class="browse" type="button" margin-top ion-button round outline block>Browse Picture</button>
+                    <button class="browse font-75" color="dark" type="button" margin-top ion-button round outline block>Add photo</button>
                 </div>
-
+                <!--
                 <ion-item padding-top class="border-bottom-no">
                         <ion-select placeholder="Choose category" class="bg-gray width-100" interface="action-sheet">
                             <ion-option value="">Food &amp; Drink</ion-option>
@@ -112,10 +128,17 @@
                     </agm-map>
                 </div>
             </div>
+              -->
 
-                <div padding>
-                    <button ion-button block>CREATE OFFER</button>
-                </div>
+              <div margin-top>
+                <button ion-button block text-uppercase>Next step</button>
+              </div>
+
+              <!--
+              <div padding>
+                <button ion-button block text-uppercase>>Create offer</button>
+              </div>
+              -->
             </ion-list>
         </form>
     </ion-content>
