@@ -17,8 +17,8 @@ export class SplashScreenPage {
     }
 
     openSettings() {
-        this.nav.push(SettingsPage);
-        //this.app.getRootNav().setRoot(SettingsPage);
+        //this.nav.push(SettingsPage);
+        this.app.getRootNav().setRoot(SettingsPage);
     }
     
     openCreateUserProfile() {

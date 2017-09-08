@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Navbar } from 'ionic-angular';
+import { NavController, Navbar, App } from 'ionic-angular';
 import { User } from "../../models/user";
 import { ProfileService } from "../../providers/profile.service";
 import { CreateAdvUserProfilePage } from "../create-advUser-profile/create-advUser-profile";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
+import { StorageService } from "../../providers/storage.service";
+import { TabsPage } from "../tabs/tabs";
 
 
 @Component({
@@ -19,13 +21,18 @@ export class SettingsPage {
   radius: number = 5;
   isAccountsChoiceVisible: boolean = false;
   isSelectRadiusVisible: boolean = false;
+  isAdvMode: boolean;
+  isVisibleModal: boolean = false;
+  ADV_MOD_KEY = "isAdvMod";
 
   //@ViewChild(Navbar) navBar: Navbar;
   
 
   constructor(private nav: NavController,
               private profile: ProfileService,
-              private location: LocationService){
+              private location: LocationService,
+              private storage: StorageService,
+              private app: App){
 
   }
 
@@ -51,10 +58,16 @@ export class SettingsPage {
           this.message = error.message;
           console.log(this.message);
       });
+      this.isAdvMode = this.storage.get(this.ADV_MOD_KEY);
+  }
+
+  toggleAdvMode() {
+    this.storage.set(this.ADV_MOD_KEY, this.isAdvMode);
+    //this.isVisibleModal = this.isAdvMode;
   }
 
   saveProfile() {
-    this.nav.pop();
+    this.app.getRootNav().setRoot(TabsPage);
     //this.profile.set(this.user);
     //.subscribe(res => )
   }
@@ -69,6 +82,10 @@ export class SettingsPage {
 
   toggleSelectRadiusVisible() {
     this.isSelectRadiusVisible = !this.isSelectRadiusVisible;
+  }
+
+  closeModal() {
+    this.isVisibleModal = !this.isVisibleModal;
   }
   
 }

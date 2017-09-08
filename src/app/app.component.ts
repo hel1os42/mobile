@@ -44,7 +44,7 @@ export class MyApp {
             this.rootPage = this.auth.isLoggedIn()
                 ? TabsPage : StartPage;
 
-            this.rootPage = AdvTabsPage;
+            //this.rootPage = AdvTabsPage;
         });
     }
 }
