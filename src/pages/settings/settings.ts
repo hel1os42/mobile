@@ -7,6 +7,7 @@ import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
 import { StorageService } from "../../providers/storage.service";
 import { TabsPage } from "../tabs/tabs";
+import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 
 
 @Component({
@@ -64,10 +65,12 @@ export class SettingsPage {
 
   toggleAdvMode() {
     this.storage.set(this.ADV_MODE_KEY, this.isAdvMode);
+    this.isVisibleModal = this.isAdvMode;
   }
 
   saveProfile() {
-    this.app.getRootNav().setRoot(TabsPage);
+    let page = this.isAdvMode ? AdvTabsPage : TabsPage;
+    this.app.getRootNav().setRoot(page);
     //this.profile.set(this.user);
     //.subscribe(res => )
   }
