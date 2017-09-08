@@ -46,7 +46,7 @@ export class MyApp {
             this.rootPage = !this.auth.isLoggedIn() 
                 ? StartPage : this.profile.getMode() ? AdvTabsPage : TabsPage;
 
-            //this.rootPage = AdvTabsPage;
+            //this.rootPage = CreateOfferPage;
         });
     }
 }
