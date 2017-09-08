@@ -26,6 +26,10 @@ export class ProfileService {
         return this.api.get('profile/referrals');
     }
 
+    getOffers() {
+        return this.api.get('offers');
+    }
+
     getMode() {
         let advMode: boolean = this.storage.get(this.ADV_MODE_KEY)
         return advMode;
