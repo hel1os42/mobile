@@ -4,6 +4,7 @@ import { AdvUserProfilePage } from "../adv-user-profile/adv-user-profile";
 import { CreateOfferPage } from "../create-offer/create-offer";
 import { AdvUserOffersPage } from "../adv-user-offers/adv-user-offers";
 import { AdvNotificationsPage } from "../adv-notifications/adv-notifications";
+import { AdvHomePage } from '../adv-home/adv-home';
 
 @Component({
   selector: 'page-adv-tabs',
@@ -11,7 +12,7 @@ import { AdvNotificationsPage } from "../adv-notifications/adv-notifications";
 })
 export class AdvTabsPage {
 
-  tab1Root;
+  tab1Root = AdvHomePage;
   tab2Root = AdvUserProfilePage;
   tab3Root = CreateOfferPage;
   tab4Root = AdvNotificationsPage;

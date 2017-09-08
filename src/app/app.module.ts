@@ -41,6 +41,7 @@ import { UserNauPage } from "../pages/user-nau/user-nau";
 import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
+import { AdvHomePage } from '../pages/adv-home/adv-home';
 
 
 
@@ -73,7 +74,8 @@ import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notificatio
     UserNauPage,
     AdvUserOffersPage,
     AdvTabsPage,
-    AdvNotificationsPage
+    AdvNotificationsPage,
+    AdvHomePage
   ],
   imports: [
     BrowserModule,
@@ -114,7 +116,8 @@ import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notificatio
     UserNauPage,
     AdvUserOffersPage,
     AdvTabsPage,
-    AdvNotificationsPage
+    AdvNotificationsPage,
+    AdvHomePage
   ],
   providers: [
     StatusBar,
