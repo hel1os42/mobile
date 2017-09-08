@@ -8,6 +8,7 @@ import { Coords } from "../../models/coords";
 import { StorageService } from "../../providers/storage.service";
 import { TabsPage } from "../tabs/tabs";
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
+import { AuthService } from '../../providers/auth.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class SettingsPage {
   isSelectRadiusVisible: boolean = false;
   isAdvMode: boolean;
   isVisibleModal: boolean = false;
-  ADV_MODE_KEY = "isAdvMode";
+  
 
   //@ViewChild(Navbar) navBar: Navbar;
   
@@ -34,7 +35,8 @@ export class SettingsPage {
     private profile: ProfileService,
     private location: LocationService,
     private storage: StorageService,
-    private app: App){
+    private app: App,
+    private auth: AuthService){
 
   }
 
@@ -45,7 +47,7 @@ export class SettingsPage {
     }
   }*/
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     this.profile.get()
       .subscribe(user => this.user = user);
 
@@ -60,11 +62,11 @@ export class SettingsPage {
           this.message = error.message;
           console.log(this.message);
       });
-      this.isAdvMode = this.storage.get(this.ADV_MODE_KEY);
+      this.isAdvMode = this.auth.getMode();
   }
 
   toggleAdvMode() {
-    this.storage.set(this.ADV_MODE_KEY, this.isAdvMode);
+    this.auth.setMode(this.isAdvMode);
     this.isVisibleModal = this.isAdvMode;
   }
 

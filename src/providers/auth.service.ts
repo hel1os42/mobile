@@ -14,6 +14,7 @@ export class AuthService {
 
     inviteCode: string = '';
     registerData: Register = new Register();
+    ADV_MODE_KEY = "isAdvMode";
 
     constructor(
         private app: App,
@@ -87,5 +88,14 @@ export class AuthService {
     isOnboardingShown() {
         let isSwown: boolean = this.storage.get('shownOnboarding');
         return isSwown;
-    }    
+    } 
+    
+    getMode() {
+        let advMode: boolean = this.storage.get(this.ADV_MODE_KEY)
+        return advMode;
+    }
+
+    setMode(advMode) {
+        this.storage.set(this.ADV_MODE_KEY, advMode);
+    }
 }
