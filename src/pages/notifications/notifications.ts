@@ -6,9 +6,14 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'notifications.html'
 })
 export class NotificationsPage {
+  isVisibleSearch: boolean = false;
 
   constructor(private nav: NavController) {
 
+  }
+
+  toggleSearch() {
+    this.isVisibleSearch = true;
   }
 
 }

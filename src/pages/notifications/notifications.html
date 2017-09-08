@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Notifications</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="dark" class="btn_search">
+      <button (click)="toggleSearch()" ion-button icon-only color="dark" class="btn_search">
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
@@ -11,7 +11,7 @@
 
 <ion-content>
 
-  <div margin class = "block-search">
+  <div *ngIf="isVisibleSearch" margin class = "block-search">
     <ion-searchbar round placeholder="" showCancelButton="false">
     </ion-searchbar>
     <a class="btn_options text-black"><ion-icon name="options"></ion-icon></a>
