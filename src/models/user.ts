@@ -3,7 +3,7 @@ export class User {
     name: string;
     email: string;
     created_at: string;
-    updtedt_at: string;
+    updated_at: string;
     invite_code: string;
     level: number;
     points: number;    
