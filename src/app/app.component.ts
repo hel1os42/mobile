@@ -41,8 +41,8 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
 
-            this.rootPage = this.auth.isLoggedIn()
-                ? TabsPage : StartPage;
+            this.rootPage = !this.auth.isLoggedIn() 
+                ? StartPage : this.auth.getMode() ? AdvTabsPage : TabsPage;
 
             //this.rootPage = AdvTabsPage;
         });
