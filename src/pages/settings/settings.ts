@@ -23,16 +23,17 @@ export class SettingsPage {
   isSelectRadiusVisible: boolean = false;
   isAdvMode: boolean;
   isVisibleModal: boolean = false;
-  ADV_MOD_KEY = "isAdvMod";
+  ADV_MODE_KEY = "isAdvMode";
 
   //@ViewChild(Navbar) navBar: Navbar;
   
 
-  constructor(private nav: NavController,
-              private profile: ProfileService,
-              private location: LocationService,
-              private storage: StorageService,
-              private app: App){
+  constructor(
+    private nav: NavController,
+    private profile: ProfileService,
+    private location: LocationService,
+    private storage: StorageService,
+    private app: App){
 
   }
 
@@ -58,12 +59,11 @@ export class SettingsPage {
           this.message = error.message;
           console.log(this.message);
       });
-      this.isAdvMode = this.storage.get(this.ADV_MOD_KEY);
+      this.isAdvMode = this.storage.get(this.ADV_MODE_KEY);
   }
 
   toggleAdvMode() {
-    this.storage.set(this.ADV_MOD_KEY, this.isAdvMode);
-    //this.isVisibleModal = this.isAdvMode;
+    this.storage.set(this.ADV_MODE_KEY, this.isAdvMode);
   }
 
   saveProfile() {
