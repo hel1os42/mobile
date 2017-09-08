@@ -18,4 +18,8 @@ export class ProfileService {
         return Observable.of({ success: true });
         //this.api.post('', account);
     }
+
+    getReferrals() {
+        return this.api.get('profile/referrals');
+    }
 }
