@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Navbar, App } from 'ionic-angular';
+import { NavController, Navbar, App, PopoverController } from 'ionic-angular';
 import { User } from "../../models/user";
 import { ProfileService } from "../../providers/profile.service";
 import { CreateAdvUserProfilePage } from "../create-advUser-profile/create-advUser-profile";
@@ -9,6 +9,7 @@ import { StorageService } from "../../providers/storage.service";
 import { TabsPage } from "../tabs/tabs";
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { AuthService } from '../../providers/auth.service';
+import { PopoverComponent } from './popover.component';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class SettingsPage {
     private location: LocationService,
     private storage: StorageService,
     private app: App,
-    private auth: AuthService){
+    private auth: AuthService,
+    private popoverCtrl: PopoverController){
 
   }
 
@@ -68,6 +70,10 @@ export class SettingsPage {
   toggleAdvMode() {
     this.profile.setMode(this.isAdvMode);
     this.isVisibleModal = this.isAdvMode;
+    if (this.isAdvMode) {
+      let popover = this.popoverCtrl.create(PopoverComponent);
+      popover.present();
+    }
   }
 
   saveProfile() {

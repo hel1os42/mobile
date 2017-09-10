@@ -42,6 +42,7 @@ import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
 import { AdvHomePage } from '../pages/adv-home/adv-home';
+import { PopoverComponent } from '../pages/settings/popover.component';
 
 
 
@@ -75,7 +76,8 @@ import { AdvHomePage } from '../pages/adv-home/adv-home';
     AdvUserOffersPage,
     AdvTabsPage,
     AdvNotificationsPage,
-    AdvHomePage
+    AdvHomePage,
+    PopoverComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +119,8 @@ import { AdvHomePage } from '../pages/adv-home/adv-home';
     AdvUserOffersPage,
     AdvTabsPage,
     AdvNotificationsPage,
-    AdvHomePage
+    AdvHomePage,
+    PopoverComponent
   ],
   providers: [
     StatusBar,
