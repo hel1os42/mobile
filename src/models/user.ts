@@ -6,5 +6,9 @@ export class User {
     updated_at: string;
     invite_code: string;
     level: number;
-    points: number;    
+    points: number;
+    offers_count: number;
+    referrals_count: number;
+    accounts_count: number;
+    activation_codes_count: number
 }
