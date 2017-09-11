@@ -27,7 +27,6 @@ export class CreateAdvUserProfilePage {
     }
 
     ionViewDidLoad() {
-        debugger;
         this.location.get()
             .then((resp) => {                
                 this.coords = {
