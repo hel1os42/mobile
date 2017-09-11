@@ -26,6 +26,7 @@ export class CreateUserProfilePage {
     isSelectVisible: boolean = false;
     isFocusName: boolean = false;
     isFocusEmail: boolean = false;
+    address: string;
 
     constructor(
         private nav: NavController,
@@ -49,7 +50,7 @@ export class CreateUserProfilePage {
         let latlng = { lat: this.coords.lat, lng: this.coords.lng };
         geocoder.geocode({ 'location': latlng }, (results, status) => {
             if (status === 'OK') {
-                this.account.address = results[1].formatted_address;
+                this.address = results[1].formatted_address;
                 this.changeDetectorRef.detectChanges();
                 console.log(results);
             }
@@ -108,6 +109,8 @@ export class CreateUserProfilePage {
                     })
             }
             );*/
+            this.account.latitude = this.coords.lat;
+            this.account.longitude = this.coords.lng;
             this.profileService.set(this.account)
                 .subscribe(resp => this.nav.setRoot(SplashScreenPage));
     }
