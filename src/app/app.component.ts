@@ -24,6 +24,7 @@ import { LoginPage } from "../pages/login/login";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { NotificationsPage } from "../pages/notifications/notifications";
 import { ProfileService } from '../providers/profile.service';
+import { SignUpPage } from "../pages/signup/signup";
 
 @Component({
     templateUrl: 'app.html'
@@ -43,10 +44,10 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
 
-            this.rootPage = !this.auth.isLoggedIn() 
+            this.rootPage = !this.auth.isLoggedIn()
                 ? StartPage : this.profile.getMode() ? AdvTabsPage : TabsPage;
 
-            //this.rootPage = CreateOfferPage;
+            //this.rootPage = SettingsPage;
         });
     }
 }

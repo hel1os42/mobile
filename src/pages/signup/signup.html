@@ -6,23 +6,23 @@
 <ion-content padding scroll="false">
   <div class="logo">
   </div>
-  <div text-center text-uppercase>
-    enter your phone
-  </div>
-  <p text-center class="font-75">Please choose your country phone code<br>and fill your phone number</p>
+  <div text-center margin-top margin-bottom class="title-big-sign">Phone Number</div>
+  <p margin-bottom text-center class="font-75 text-4F4F4F">Please choose your country phone code<br>and fill your phone number</p>
   <ion-item padding class="border-bottom-no">
-    <ion-select class="bg-graydark-left" placeholder="+380" [(ngModel)]="numcode">
+    <ion-select class="bg-gray-left" placeholder="+380" [(ngModel)]="numcode">
       <ion-option value="380">+380</ion-option>
       <ion-option value="101">+102</ion-option>
     </ion-select>
-    <ion-input class="bg-gray-right" type="tel" placeholder="" [(ngModel)] ="phone"></ion-input>
+    <ion-input class="bg-gray-right" type="tel" placeholder="123-45-67" [(ngModel)] ="phone"></ion-input>
   </ion-item>
 
   <p padding>
-  <button ion-button block middle color="secondary" margin-bottom (click)="getCode()">Next</button>
+  <button ion-button block middle color="primary" margin-bottom (click)="getCode()">Next</button>
   </p>
-
-  <div text-center class="text-gray font-75">
-    We do not use your private data
-  </div>
 </ion-content>
+
+<ion-footer padding>
+  <div text-center margin class="font-75 text-828282">
+    Please do not disturb<br> your private data will be safety
+  </div>
+</ion-footer>
