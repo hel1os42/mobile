@@ -47,7 +47,7 @@ export class MyApp {
             this.rootPage = !this.auth.isLoggedIn()
                 ? StartPage : this.profile.getMode() ? AdvTabsPage : TabsPage;
 
-            //this.rootPage = SettingsPage;
+            //this.rootPage = OnBoardingPage;
         });
     }
 }

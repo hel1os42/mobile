@@ -110,7 +110,7 @@ ion-header ion-icon.back-button-icon.icon {
 }
 
 .font-75{
-  font-size: 75%;
+  font-size: 12px;
 }
 
 .font-125{
@@ -407,4 +407,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .footer.footer-ios {
   border-top: 1px solid #F2F2F2;
   min-height: 86px;
+}
+
+.no-border.footer.footer-ios {
+  border-top: none;
 }
