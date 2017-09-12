@@ -43,18 +43,19 @@ android:
     - echo "$ANDROID_PRIVATE_KEY" | base64 -d > android.key
     - cordova platform add android
     - ionic cordova build android --prod --release --no-build -- -- --keystore=android.key --alias=nau-release --storePassword="$ANDROID_KEY_PASSWORD" --password="$ANDROID_KEY_PASSWORD"
+    - mv ./platforms/android/build/outputs/apk/android-release.apk nau.apk
   only:
     - develop
   artifacts:
     paths:
-      - ./platforms/android/build/outputs/apk/android-release.apk
+      - nau.apk
 
 android2slack:
   image: gitlab.toavalon.com:5000/codename-nau/mobile-hybrid/android-build:latest
   stage: deploy
   script:
     - export DT=`date +%Y%m%d%H%M%S`
-    - mv ./platforms/android/build/outputs/apk/android-release.apk "nau-technical-preview-$CI_COMMIT_SHA-$DT.apk"
+    - mv nau.apk "nau-technical-preview-$CI_COMMIT_SHA-$DT.apk"
     - curl -F file="@nau-technical-preview-$CI_COMMIT_SHA-$DT.apk" -F channels="$SLACK_CHANNEL" -F token="$SLACK_TOKEN" https://slack.com/api/files.upload
   only:
     - develop
