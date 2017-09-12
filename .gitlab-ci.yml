@@ -37,8 +37,10 @@ build develop:
 android:
   image: gitlab.toavalon.com:5000/codename-nau/mobile-hybrid/android-build:latest
   stage: build_image
+  before_script:
+    - npm install
   script:
-    - echo "$ANDROID_PRIVATE_KEY" | base64 -D > android.key
+    - echo "$ANDROID_PRIVATE_KEY" | base64 -d > android.key
     - ionic cordova build android --prod --release --no-build -- -- --keystore=android.key --alias=nau-release --storePassword="$ANDROID_KEY_PASSWORD" --password="$ANDROID_KEY_PASSWORD"
     - curl -F file=@./platforms/android/build/outputs/apk/android-release.apk -F channels="$SLACK_CHANNEL" -F token="$SLACK_TOKEN" https://slack.com/api/files.upload
   only:
