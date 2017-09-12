@@ -27,6 +27,7 @@ page-settings{
 
   .select {
       float: left;
+      padding-right: 5px;
   }
 
   .icon {
@@ -55,7 +56,15 @@ page-settings{
     border-radius: 100px;
     background: #EAEAEA;
   }
-   .radius {
 
-   }
+  .modal_create img{
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .modal_create .why{
+    font-size: 80%;
+    font-weight: 400;
+    line-height: 170%;
+  }
 }

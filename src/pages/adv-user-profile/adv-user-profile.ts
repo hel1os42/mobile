@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CreateOfferPage } from "../create-offer/create-offer";
 import { StorageService } from "../../providers/storage.service";
+import { SettingsPage } from '../settings/settings';
 
 @Component({
   selector: 'page-adv-user-profile',
@@ -30,4 +31,9 @@ export class AdvUserProfilePage {
     this.isModalVisible = true;
     this.storage.set(this.MODAL_VISIBLE_KEY, true);
   }
+
+  openSettings() {
+    //this.app.getRootNav().setRoot(SettingsPage);
+    this.nav.push(SettingsPage);
+}
 }

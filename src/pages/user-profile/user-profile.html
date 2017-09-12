@@ -6,8 +6,8 @@
 
 <ion-content class="padding-no">
   <ion-item class="border-bottom-no">
-    <h2 margin-left>{{ user?.name }} Nastya Clark <span item-center class="font-75 text-gray">Level 4</span></h2>
-    <p margin-left>206789</p>
+    <h2 margin-left>{{ user?.name }}<span padding-left item-center class="font-75 text-gray">Level {{user.level}}</span></h2>
+    <p margin-left>{{user.points}}</p>
     <a item-end (click)="openAchieve()"  margin-right>
       <ion-icon color="dark" class="font-200" name="trophy"></ion-icon>
     </a>
@@ -75,21 +75,21 @@
       <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
         <div>
           <ion-icon class="icon-medium" name="lock"></ion-icon>
-          <h3>0</h3>
+          <h3>{{ user.offers_count }}</h3>
           <div>offers</div>
         </div>
       </a>
       <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
         <div>
           <ion-icon class="icon-medium" name="cloud-circle"></ion-icon>
-          <h3>5</h3>
+          <h3>{{ user.accounts_count }}</h3>
           <div>nau</div>
         </div>
       </a>
       <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
         <div>
           <ion-icon class="icon-medium" name="contact"></ion-icon>
-          <h3>5</h3>
+          <h3>{{ user.referrals_count }}</h3>
           <div>users</div>
         </div>
       </a>

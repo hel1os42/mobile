@@ -7,48 +7,23 @@
 <ion-content>
   <ion-list no-lines class="margin-no">
     <ion-item>
-      <div padding-left margin-left item-start><ion-icon class="icon-medium" name="md-person"></ion-icon></div>
-      <p>123</p>
+      <div padding-left margin-left item-start>
+        <ion-icon class="icon-medium" name="md-person"></ion-icon>
+      </div>
+      <p>{{ total }}</p>
       <div class="font-65">Users</div>
       <button item-end class="button-circle-medium" ion-fab color="transparent"><ion-icon name="funnel-outline" class="text-black"></ion-icon></button>
     </ion-item>
   </ion-list>
 
   <ion-list margin-bottom margin-left margin-right no-lines class="happy">
-    <ion-item>
+    <ion-item *ngFor="let referral of referrals">
       <ion-avatar item-start>
         <img src="assets/img/user_users/ava1.png">
       </ion-avatar>
-      <h2 text-uppercase class="happy_title">Alex Miller <img src="assets/img/user_users/icon_right.png"></h2>
-      <h5 text-uppercase class="text-lightgray">Level: <b>3</b><span margin-left>Offers: <b>15</b></span></h5>
-      <h5 class="text-lightgray">Registration date: 2017-08-07</h5>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/img/user_users/ava2.png">
-      </ion-avatar>
-      <h2 text-uppercase class="happy_title">John Doe <img src="assets/img/user_users/icon_right.png"></h2>
-      <h5 text-uppercase class="text-lightgray">Level: <b>3</b><span margin-left>Offers: <b>15</b></span></h5>
-      <h5 class="text-lightgray">Registration date: 2017-08-07</h5>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/img/user_users/ava3.png">
-      </ion-avatar>
-      <h2 text-uppercase class="happy_title">Scoth Dixon <img src="assets/img/user_users/icon_right.png"></h2>
-      <h5 text-uppercase class="text-lightgray">Level: <b>3</b><span margin-left>Offers: <b>15</b></span></h5>
-      <h5 class="text-lightgray">Registration date: 2017-08-07</h5>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/img/user_users/ava4.png">
-      </ion-avatar>
-      <h2 text-uppercase class="happy_title">Lora Smith <img src="assets/img/user_users/icon_right.png"></h2>
-      <h5 text-uppercase class="text-lightgray">Level: <b>3</b><span margin-left>Offers: <b>15</b></span></h5>
-      <h5 class="text-lightgray">Registration date: 2017-08-07</h5>
+      <h2 text-uppercase class="happy_title">{{ referral.name }}<img src="assets/img/user_users/icon_right.png"></h2>
+      <h5 text-uppercase class="text-lightgray">Level: <b>{{ referral.level }}</b><span margin-left>Offers: <b>15</b></span></h5>
+      <h5 class="text-lightgray">Registration date: {{ referral.created_at.substring(0,10)}}</h5>
     </ion-item>
   </ion-list>
 

@@ -21,6 +21,11 @@ import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";
 import { TokenService } from "../providers/token.service";
 import { LoginPage } from "../pages/login/login";
+import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
+import { NotificationsPage } from "../pages/notifications/notifications";
+import { ProfileService } from '../providers/profile.service';
+import { SignUpPage } from "../pages/signup/signup";
+
 @Component({
     templateUrl: 'app.html'
 })
@@ -30,7 +35,8 @@ export class MyApp {
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
         //private nav: NavController,
         private auth: AuthService,
-        private token: TokenService) {
+        private token: TokenService,
+        private profile: ProfileService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -38,10 +44,10 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
 
-            this.rootPage = this.auth.isLoggedIn()
-                ? TabsPage : StartPage;
+            this.rootPage = !this.auth.isLoggedIn()
+                ? StartPage : this.profile.getMode() ? AdvTabsPage : TabsPage;
 
-            //this.rootPage = CreateUserProfilePage;
+            //this.rootPage = OnBoardingPage;
         });
     }
 }

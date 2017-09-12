@@ -39,6 +39,10 @@ import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";
 import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
+import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
+import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
+import { AdvHomePage } from '../pages/adv-home/adv-home';
+import { PopoverComponent } from '../pages/settings/popover.component';
 
 
 
@@ -69,7 +73,11 @@ import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
     UserAchievePage,
     UserUsersPage,
     UserNauPage,
-    AdvUserOffersPage
+    AdvUserOffersPage,
+    AdvTabsPage,
+    AdvNotificationsPage,
+    AdvHomePage,
+    PopoverComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +116,11 @@ import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
     UserAchievePage,
     UserUsersPage,
     UserNauPage,
-    AdvUserOffersPage
+    AdvUserOffersPage,
+    AdvTabsPage,
+    AdvNotificationsPage,
+    AdvHomePage,
+    PopoverComponent
   ],
   providers: [
     StatusBar,

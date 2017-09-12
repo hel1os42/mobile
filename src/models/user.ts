@@ -3,8 +3,12 @@ export class User {
     name: string;
     email: string;
     created_at: string;
-    updtedt_at: string;
+    updated_at: string;
     invite_code: string;
     level: number;
-    points: number;    
+    points: number;
+    offers_count: number;
+    referrals_count: number;
+    accounts_count: number;
+    activation_codes_count: number
 }

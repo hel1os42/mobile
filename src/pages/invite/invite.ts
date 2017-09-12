@@ -11,7 +11,7 @@ import { Register } from "../../models/register";
 })
 
 export class SignUpInvitePage {
-    inviteCode: string;
+    inviteCode: string = "59713";
     data: Register = new Register();
 
     constructor(

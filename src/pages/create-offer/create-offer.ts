@@ -16,7 +16,6 @@ import { OfferCategory } from "../../models/offerCategory";
 })
 export class CreateOfferPage {
     radiuses = [50, 100, 150, 200, 250];
-    radius: number = 200;
     message: string;
     coords = new Coords();
     offer = new Offer();

@@ -7,5 +7,6 @@ export class UserAccount {
     gender: string;
     age: number;
     income: number;
-    address: string;
+    latitude: number;
+    longitude: number;
 }
