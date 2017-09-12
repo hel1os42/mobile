@@ -39,6 +39,14 @@
   font-family: 'OpenSansNauLight';
 }
 
+.bg-gray-nau{
+  background: #F2F2F2;
+}
+
+.bg-white-nau{
+  background: #fff;
+}
+
 button[ion-button] {
   border-radius: 25px;
   text-transform: uppercase;
@@ -99,6 +107,30 @@ button[ion-button] {
 
 ion-header ion-icon.back-button-icon.icon {
   color: map-get($colors, dark);
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.text-family-light{
+  font-family: 'OpenSansNauLight';
+}
+
+.font-12{
+  font-size: 12px;
+}
+
+.font-16{
+  font-size: 16px;
+}
+
+.font-18{
+  font-size: 18px;
+}
+
+.font-22{
+  font-size: 22px;
 }
 
 .font-50{
@@ -168,6 +200,14 @@ ion-header ion-icon.back-button-icon.icon {
 
 .text-828282{
   color: #828282;
+}
+
+.text-FF8B10{
+  color: #FF8B10;
+}
+
+.text-BDBDBD{
+  color: #BDBDBD;
 }
 
 .text-filed-radius{
