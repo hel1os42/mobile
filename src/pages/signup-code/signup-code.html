@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding scroll="false">
+    <div class="logo">
+    </div>
+
+    <div text-center margin-top margin-bottom class="title-big-sign">Confirm</div>
+    <p margin-bottom text-center class="font-75 text-4F4F4F">Please fill confirmation code<br>from message</p>
+
+    <ion-item padding class="border-bottom-no">
+        <ion-label class="bg-gray-left label-left">OTP</ion-label>
+        <ion-input class="bg-gray-right" type="tel" placeholder="XX-XX-XX-XX" [(ngModel)]="code"></ion-input>
+    </ion-item>
+
+    <p padding>
+        <button ion-button block middle color="primary" margin-bottom (click)="getCode()">Next</button>
+    </p>
+</ion-content>
+
+<ion-footer padding>
+  <div text-center margin class="font-75 text-828282">
+    One-time password helps to you<br>confirm phone number.
+  </div>
+</ion-footer>

@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Your Account</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="padding-no">
+  <ion-item class="border-bottom-no">
+    <h2 margin-left>{{ user?.name }}<span padding-left item-center class="font-75 text-gray">Level {{user.level}}</span></h2>
+    <p margin-left>{{user.points}}</p>
+    <a item-end (click)="openAchieve()"  margin-right>
+      <ion-icon color="dark" class="font-200" name="trophy"></ion-icon>
+    </a>
+    <a item-end (click)="openSettings()" margin-right>
+      <ion-icon color="dark" class="font-200" name="settings"></ion-icon>
+    </a>
+  </ion-item>
+
+  <div margin>
+    <img width="100%" src="assets/img/user_profile/circle.png">
+  </div>
+
+  <p text-uppercase text-center>Your tasks & jobs for today</p>
+
+  <ion-grid text-center>
+    <ion-row>
+      <ion-col col-1 align-self-center>
+        <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
+      </ion-col>
+      <ion-col class="grid" col-10 align-self-center>
+        <ion-slides (click)="openRewards()" spaceBetween="10">
+          <ion-slide>
+            <ion-list no-lines>
+              <ion-item class="text-white">
+                <ion-avatar item-start>
+                  <img src="assets/img/user_profile/cup.png">
+                </ion-avatar>
+                <h2 text-uppercase>Get new points </h2>
+                <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+              </ion-item>
+            </ion-list>
+          </ion-slide>
+          <ion-slide>
+            <ion-list no-lines>
+              <ion-item class="text-white">
+                <ion-avatar item-start>
+                  <img src="assets/img/user_profile/cup.png">
+                </ion-avatar>
+                <h2 text-uppercase>Get new points </h2>
+                <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+              </ion-item>
+            </ion-list>
+          </ion-slide>
+          <ion-slide>
+            <ion-list no-lines>
+              <ion-item class="text-white">
+                <ion-avatar item-start>
+                  <img src="assets/img/user_profile/cup.png">
+                </ion-avatar>
+                <h2 text-uppercase>Get new points </h2>
+                <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+              </ion-item>
+            </ion-list>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+      <ion-col col-1 align-self-center>
+        <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid text-center padding-top padding-bottom>
+    <ion-row>
+      <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
+        <div>
+          <ion-icon class="icon-medium" name="lock"></ion-icon>
+          <h3>{{ user.offers_count }}</h3>
+          <div>offers</div>
+        </div>
+      </a>
+      <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
+        <div>
+          <ion-icon class="icon-medium" name="cloud-circle"></ion-icon>
+          <h3>{{ user.accounts_count }}</h3>
+          <div>nau</div>
+        </div>
+      </a>
+      <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
+        <div>
+          <ion-icon class="icon-medium" name="contact"></ion-icon>
+          <h3>{{ user.referrals_count }}</h3>
+          <div>users</div>
+        </div>
+      </a>
+    </ion-row>
+  </ion-grid>
+<!--
+  <button margin-top ion-button outline block color="dark">Get your first offer</button>
+  <button margin-top margin-bottom ion-button outline block color="dark" (click)="logout()">LOGOUT</button>
+-->
+</ion-content>

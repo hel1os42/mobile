@@ -1,0 +1,84 @@
+page-create-offer {
+    .browse {
+        -moz-outline-radius: 15px;
+        outline: 1px dashed #aea9a9;
+        outline-offset: -12px;
+        border-radius: 15px;
+        border: none;
+        background: #EAEAEA;
+        height: 80px;
+    }
+
+    #map img{
+        width: 100%;
+    }
+
+    .bcg {
+        background: url(../assets/img/arrow-down.png) no-repeat center right 8px;
+    }
+
+    agm-map {
+        height: 200px;
+        border-radius: 50px;
+      }
+
+  .select {
+    float: left;
+    padding-right: 5px;
+  }
+
+  .icon {
+    line-height: 1.1;
+  }
+
+  .progress-block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    position: relative;
+  }
+
+  .circle{
+    width: 5vw;
+    height: 5vw;
+    border: 2px solid lightgray;
+    border-radius: 5vw;
+    z-index: 2;
+  }
+
+  .fill{
+    background: #fff;
+  }
+
+  .no-fill{
+    background: lightgray;
+  }
+
+  .progress-line{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 2vw;
+    height: 2vw;
+    background: lightgray;
+    z-index: 0;
+    border-radius: 2vw;
+  }
+
+  .progress-line-fill{
+    width: 20%;
+    position: absolute;
+    left: 0;
+    top: 2.5vw;
+    height: 1vw;
+    background: #fff;
+    z-index: 1;
+    border-radius: 2vw;
+  }
+
+  .item-ios.item-block .item-inner{
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,44 @@
+page-adv-user-offers{
+  .segment-ios .segment-button:first-of-type{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .segment-ios .segment-button:last-of-type{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .item-md ion-avatar ion-img, .item-md ion-avatar img, .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
+    border-radius: 0;
+    width: 100px;
+    height: 100px;
+  }
+
+  .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start]{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .block-btn .item-ios .item-button{
+    width: 30px;
+    height: 30px;
+  }
+
+  .happy .item-wrapper{
+    margin-bottom: 3px;
+    border-radius: 7px;
+  }
+
+  .happy .item {
+    color: #fff;
+    background: #7f7f7f;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .happy h2 {
+    font-weight: bold;
+    margin-bottom: 7px;
+  }
+}

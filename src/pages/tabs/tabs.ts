@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { UserPage } from '../user/user';
+import { UserProfilePage } from '../user-profile/user-profile';
 import { FavoritesPage } from '../favorites/favorites';
 import { NotificationsPage } from '../notifications/notifications';
-
+import { SplashScreenPage } from "../splash-screen/splash-screen";
 
 @Component({
   selector: 'page-tabs',
@@ -12,15 +11,13 @@ import { NotificationsPage } from '../notifications/notifications';
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = UserPage;
+  tab1Root = SplashScreenPage;
+  tab2Root = UserProfilePage;
   tab3Root = FavoritesPage;
   tab4Root = NotificationsPage;
-    
 
-
-  constructor(public navCtrl: NavController) {
-
+  constructor(private nav: NavController) {
+        
   }
 
 }

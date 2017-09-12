@@ -1,0 +1,59 @@
+page-adv-user-profile {
+  .cover{
+    background: url(../assets/img/adv_user_profile_banner.jpg);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 80px;
+    position: relative;
+    margin-bottom: 40px;
+  }
+
+  .ava_adv{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    top: 43px;
+    left: 15px;
+    border-radius: 100px;
+  }
+
+  p{
+    margin-bottom: 0;
+    margin-top: 5px;
+  }
+
+  .col{
+    box-shadow: 0 0 9px rgba(0,0,0,0.1);
+  }
+
+  .card {
+    margin: auto;
+    border-radius: 7px;
+    width: 100%;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  .modal_create{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 111;
+    background: rgba(0, 0, 0, 0.71);
+    padding: 5%;
+    display: flex;
+  }
+
+  .close_btn{
+    margin: 4px;
+  }
+
+  ion-card img{
+    width: 40%;
+    display: inline;
+  }
+}

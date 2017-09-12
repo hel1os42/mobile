@@ -28,9 +28,21 @@ $colors: (
   secondary:  #FF9A00,
   danger:     #f53d3d,
   light:      #EDF3F5,
-  dark:       #8E9BA1
+  dark:       #8E9BA1,
+  white:      #fff,
+  transparent: transparent
 );
 
+$balanced: #000066 !default;
+$toolbar-background: transparent;
+$popover-ios-width: 90%;
+
+@font-face {
+  font-family: 'OpenSansNau';
+  src: url('../assets/fonts/OpenSans-Regular.ttf');
+}
+
+$font-family-ios-base: OpenSansNau;
 
 // App iOS Variables
 // --------------------------------------------------

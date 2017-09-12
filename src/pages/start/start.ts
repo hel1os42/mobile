@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LoginPage } from "../login/login";
-import { RegisterPage } from "../register/register";
+import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
+import { SignUpInvitePage } from "../invite/invite";
+import { SignUpPage } from "../signup/signup";
 
 @Component({
   selector: 'page-start',
@@ -9,15 +11,17 @@ import { RegisterPage } from "../register/register";
 })
 export class StartPage {
 
-  constructor(public navCtrl: NavController) {
-    
+  constructor(
+    private nav: NavController) {
   }
 
   login() {
-    this.navCtrl.push(LoginPage);
+    this.nav.push(LoginPage);
   }
 
   register() {
-    this.navCtrl.push(RegisterPage);
+    this.nav.push(SignUpPage);
+
+
   }
 }

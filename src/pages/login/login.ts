@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { AuthService } from "../../providers/auth.service";
 import { Login } from "../../models/login";
 import { TabsPage } from "../tabs/tabs";
+import { OnBoardingPage } from "../onboarding/onboarding";
+import { ProfileService } from '../../providers/profile.service';
 
 @Component({
     selector: 'page-login',
@@ -10,16 +12,22 @@ import { TabsPage } from "../tabs/tabs";
 })
 
 export class LoginPage  {
-    data: Login = new Login;
+    data: Login = new Login();
     
     constructor(
-        public nav: NavController,
-        private authService: AuthService,
-        private toast: ToastController) { 
-
-        }
+        private nav: NavController,
+        private auth: AuthService,
+        private profile: ProfileService) { 
+        
+    }
 
     login() {
-        alert('Not yet implemented');        
+        this.auth
+            .login(this.data)
+            .subscribe(
+                resp => {             
+                    this.nav.setRoot(/*this.profile.isOnboardingShown() ? TabsPage :*/ OnBoardingPage);
+                }
+            );
     }
 }

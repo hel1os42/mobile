@@ -1,0 +1,176 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create Account</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form >
+    <ion-list class="bg-gray-block">
+      <ion-item>
+        <div item-start text-center>
+          <button class="btn-add-border-out button-circle-medium" ion-fab color="dark"><ion-icon name="md-add" class="text-lightgray"></ion-icon></button>
+        </div>
+        <div item-content class="item-content">
+          <div (click)="focusName()" *ngIf="!isFocusName" class="popover_not popover1 text-gray font-65">
+            <span padding-right>Your profile collected here</span>
+            <img src="../assets/img/create_user_profile/icon_1.png">
+            <span padding-left>8</span>
+          </div>
+
+          <div (click)="focusEmail()" *ngIf="!isFocusEmail" class="popover_not popover2 text-gray font-65">
+            <img src="../assets/img/create_user_profile/icon_3.png">
+            <span>Your should confirm your email address</span>
+            <img src="../assets/img/create_user_profile/icon_2.png">
+          </div>
+          <div (click)="focusName()" class="input_relative">
+            <ion-input  class="border-bottom-gray" type="text" placeholder="Your Name" [(ngModel)]="account.name" name="name1"></ion-input>
+            <span class="text-gray"><img src="../assets/img/create_user_profile/icon_1.png">{{ point() }}</span>
+          </div>
+          <div (click)="focusEmail()" class="input_relative">
+            <ion-input type="email" placeholder="Your E-mail" [(ngModel)]="account.email" name="email"></ion-input>
+            <span class="text-gray"><img src="../assets/img/create_user_profile/icon_2.png"></span>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <ion-list class="bg-gray-block" no-lines>
+      <ion-item>
+        <ion-avatar item-start>
+          <span text-center>
+            <img src="../assets/img/create_user_profile/1.png">
+          </span>
+        </ion-avatar>
+        <div item-end text-left>
+          <p>if your will additional information about yourself it helps us to recommend best offer for you. to earn points
+            for this!
+          </p>
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar item-start>
+          <span text-center>
+            <img src="../assets/img/create_user_profile/2.png">
+          </span>
+        </ion-avatar>
+        <div item-end text-left>
+          <p>Of course you have good opportunity to earn extra points for this! More infromation - more points!
+          </p>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <p padding class="font-75">SOCIAL ACCOUNTS (Every item adds + 3 points) </p>
+
+    <ion-list class="bg-gray-block">
+      <a ion-item detail-push>
+        <ion-icon padding-left item-start name="logo-facebook" class="text-gray"></ion-icon>
+        <ion-input [(ngModel)]="account.facebookName" [ngModelOptions]="{standalone: true}" placeholder="Facebook"></ion-input>
+        <div item-end>
+          <ion-icon *ngIf="account.facebookName" color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+          <ion-label *ngIf="!account.facebookName" class="label label-ios points font-75">+ 3 points</ion-label>
+        </div>
+      </a>
+
+      <a ion-item detail-push>
+        <ion-icon padding-left item-start name="logo-twitter" class="text-gray"></ion-icon>
+        <ion-input [(ngModel)]="account.twitterName" [ngModelOptions]="{standalone: true}" placeholder="Twitter"></ion-input>
+        <div item-end>
+          <ion-icon *ngIf="account.twitterName" color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+          <ion-label *ngIf="!account.twitterName" class="label label-ios points font-75">+ 3 points</ion-label>
+        </div>
+      </a>
+
+      <a ion-item detail-push>
+        <ion-icon padding-left item-start name="logo-instagram" class="text-gray"></ion-icon>
+        <ion-input [(ngModel)]="account.instagramName" [ngModelOptions]="{standalone: true}" placeholder="Instagram"></ion-input>
+        <div item-end>
+          <ion-icon *ngIf="account.instagramName" color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+          <ion-label *ngIf="!account.instagramName" class="label label-ios points font-75">+ 3 points</ion-label>
+        </div>
+      </a>
+    </ion-list>
+
+    <ion-list>
+      <a (click)="toggleSelect()">
+        <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
+        <ion-icon *ngIf="isSelectVisible" name="arrow-up"></ion-icon>
+        <div *ngIf="!isSelectVisible" class="select font-75">
+          Show additional options (more points)
+        </div>
+        <div *ngIf="isSelectVisible" class="select font-75">
+          Hide additional information
+        </div>
+      </a>
+
+      <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }">
+
+        <ion-list class="bg-gray-block">
+          <a ion-item detail-push>
+            <div padding-left item-start></div>
+
+            <ion-select [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender" class="gender_select" interface="action-sheet">
+              <ion-option value="f">Female</ion-option>
+              <ion-option value="m">Male</ion-option>
+            </ion-select>
+            <!-- <ion-input [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender"></ion-input>-->
+            <div item-end>
+              <ion-icon *ngIf="account.gender" color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+              <ion-label *ngIf="!account.gender" class="label label-ios points font-75">+ 5 points</ion-label>
+            </div>
+          </a>
+
+          <a ion-item detail-push>
+            <div padding-left item-start></div>
+            <ion-input [(ngModel)]="account.age" [ngModelOptions]="{standalone: true}" placeholder="Age"></ion-input>
+            <div item-end>
+              <ion-icon *ngIf="account.age" color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+              <ion-label *ngIf="!account.age" class="label label-ios points font-75">+ 9 points</ion-label>
+            </div>
+          </a>
+
+          <a ion-item detail-push>
+            <div padding-left item-start></div>
+            <ion-input [(ngModel)]="account.income" [ngModelOptions]="{standalone: true}" placeholder="Income"></ion-input>
+            <div item-end>
+              <ion-icon *ngIf="account.income" color="dark" class="font-200" name="ios-checkmark-circle"></ion-icon>
+              <ion-label *ngIf="!account.income" class="label label-ios points font-75">+ 5 points</ion-label>
+            </div>
+          </a>
+        </ion-list>
+
+        <p padding text-uppercase class="font-75">Confirm your location:</p>
+        <div>
+          <div *ngIf="!coords.lat">Detecting your location...</div>
+          <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)">
+            <!--<agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>-->
+          </agm-map>
+          <ion-icon id="marker" name="pin"></ion-icon>
+        </div>
+        <ion-card>
+          <ion-card-content>
+            {{ address }}
+          </ion-card-content>
+        </ion-card>
+
+      </div>
+
+      <!-- <ion-item>
+        <ion-label fixed>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="data.password" name="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Confirm Password</ion-label>
+        <ion-input type="password" [(ngModel)]="data.password_confirm" name="password_confirm"></ion-input>
+      </ion-item> -->
+
+      <p>
+        <button (click)="register()" ion-button block>Create account</button>
+      </p>
+    </ion-list>
+  </form>
+</ion-content>

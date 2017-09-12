@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+    <!--
+    <a (click)="saveProfile()">
+      <ion-icon padding-right color="dark" class="font-300" name="checkmark"></ion-icon>
+    </a>
+    -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <a (click)="toggleAccountsChoiceVisible()">
+      <ion-icon *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
+      <ion-icon *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
+      <div text-uppercase padding-left class="select font-75">
+        Choose your account (hide)
+      </div>
+  </a>
+
+  <ion-grid *ngIf="!isAccountsChoiceVisible">
+    <ion-row text-center align-items-center class="block-user-adv">
+      <ion-col>
+        <img margin-top src="assets/img/user_profile/ava.png">
+        <p text-uppercase class="font-75">Client</p>
+      </ion-col>
+      <ion-col>
+         <ion-item no-lines>
+            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
+         </ion-item>
+      </ion-col>
+      <ion-col>
+        <img margin-top src="assets/img/thumb_offers1.png">
+        <p text-uppercase class="font-75">Adventiser</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <p text-uppercase padding-left class="font-75">Change your phone number</p>
+
+  <ion-grid>
+    <ion-row align-items-center class="block-phone">
+      <ion-col col-8 text-left padding-left>
+        <div class="font-100">+380501234567</div>
+      </ion-col>
+      <ion-col col-4>
+        <ion-item no-lines text-right>
+          <button ion-button round class="font-75">Change</button>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <p text-uppercase padding-left class="font-75">Private data</p>
+
+  <ion-list class="block-user-adv" margin-top>
+    <ion-item><ion-label margin-left item-end>Show my private data</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
+    <ion-item><ion-label margin-left item-end>Show my phone number</ion-label> <ion-checkbox item-end></ion-checkbox></ion-item>
+    <ion-item><ion-label margin-left item-end>Show my e-mail address</ion-label> <ion-checkbox item-end></ion-checkbox></ion-item>
+  </ion-list>
+
+  <div text-uppercase class="radius" margin>
+    <a (click)="toggleSelectRadiusVisible()">Set radius for yours offers interest</a>
+  </div>
+  <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-bottom class="border-bottom-no">
+    <ion-label>Offers radius</ion-label>
+    <ion-select [(ngModel)]="radius" (ionChange)="toggleSelectRadiusVisible()" (ionCancel)="toggleSelectRadiusVisible()" placeholder="50 m" name="radius" class="bg-gray width-100" interface="action-sheet">
+        <ion-option *ngFor="let radius of radiuses" [value]="radius">{{ radius }} m</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <div padding-bottom>
+    <div *ngIf="!coords.lat" >Detecting your location...</div>
+    <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+      <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+      <agm-circle fillOpacity="0.2"  [radius]="radius" [latitude]="coords.lat" [longitude]="coords.lng"></agm-circle>
+    </agm-map>
+  </div>
+
+  <p padding>
+    <button (click)="saveProfile()" ion-button block>Save changes</button>
+  </p>
+</ion-content>
+
+<!--
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label class="font-200">
+        <ion-icon color="dark" name="add-circle"></ion-icon>
+      </ion-label>
+      <ion-input [(ngModel)]="user.name" type="text" class="font-150" name="name"></ion-input>
+    </ion-item>
+
+    <ion-item padding-bottom>
+      <ion-input type="text" placeholder="About yourself" name="about"></ion-input>
+    </ion-item>
+
+    <ion-item padding-bottom class="border-bottom-no">
+      <ion-input [(ngModel)]="user.email" type="email" class="bg-gray" name="email"></ion-input>
+    </ion-item>
+
+    <p padding>if your will additional information about yourself it helps us to recommend best offer for you. Also you can good oportunity
+      to earn points for this!
+    </p>
+
+    <ion-row class="row">
+      <ion-label padding>Connect with social network</ion-label>
+      <ion-item>
+        <ion-col text-left class="col">
+          <ion-icon class="font-200" color="primary" name="logo-facebook"></ion-icon>
+        </ion-col>
+        <ion-col text-left class="col">
+          <ion-icon class="font-200" color="primary" name="logo-google"></ion-icon>
+        </ion-col>
+        <ion-col text-left class="col">
+          <ion-icon class="font-200" color="primary" name="logo-instagram"></ion-icon>
+        </ion-col>
+      </ion-item>
+    </ion-row>
+
+    <div padding-top padding-bottom>
+      <a (click)="toggleMapVisibility()">
+        <ion-icon *ngIf="!isMapVisible" name="arrow-down"></ion-icon>
+        <ion-icon *ngIf="isMapVisible" name="arrow-up"></ion-icon>
+        <div class="select">
+          Change your location
+        </div>
+      </a>
+    </div>
+
+
+    <div *ngIf="isMapVisible" padding-bottom>
+      <div *ngIf="!coords.lat" >Detecting your location...</div>
+      <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+          <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+      </agm-map>
+    </div>
+
+    <ion-card color="light">
+      <ion-card-header text-center>
+        Create Account for Bussines
+      </ion-card-header>
+
+      <ion-card-content>
+        <button (click)="openCreateAdvUser()" color="dark" ion-button block>Create account</button>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+</ion-content>
+-->

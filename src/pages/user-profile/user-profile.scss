@@ -1,0 +1,41 @@
+page-user-profile{
+  ion-app.ios [padding], ion-app.ios [padding] .scroll-content{
+    padding: 0;
+  }
+
+  h3{
+    margin: 0;
+  }
+
+  ion-slides{
+    height: inherit;
+  }
+
+  ion-slide h5{
+    white-space: normal;
+  }
+
+  ion-list {
+    background: gray;
+    border-radius: 10px;
+    padding: 15px;
+  }
+
+  .item-block {
+    background: transparent;
+  }
+
+  .item-ios ion-avatar img{
+    width: 60px;
+    height: 60px;
+  }
+
+  .swiper-container .list-ios{
+    margin: 0;
+  }
+
+  ion-item > .item-inner {
+    padding: 0 !important;
+  }
+
+}

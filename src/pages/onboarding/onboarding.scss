@@ -1,0 +1,56 @@
+page-onboarding {
+  h1{
+    color: white;
+  }
+
+  .slide1{
+    background: url("../assets/img/onboarding/nau_bg1.svg") no-repeat 50% 50%/cover;
+  }
+
+  .slide2{
+    background: url("../assets/img/onboarding/nau_bg2.svg") no-repeat 50% 50%/cover;
+  }
+
+  .slide3{
+    background: url("../assets/img/onboarding/nau_bg3.svg") no-repeat 50% 50%/cover;
+  }
+
+  .title-big-sign{
+    color: #fff;
+  }
+
+  .skip{
+    position: fixed;
+    color: #fff;
+    bottom: 3%;
+    right: 1%;
+    z-index: 1111;
+    background: transparent;
+  }
+
+  .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+    bottom: 80px;
+  },
+
+  .swiper-pagination-bullet-active {
+    background: #fff;
+  }
+
+  .swiper-pagination-bullet{
+    background: #ffffff;
+  }
+
+  .slide-title-img{
+    height: 35px;
+    margin-bottom: 20%;
+  }
+
+  .slide-title-img img{
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+
+  .footer{
+    opacity: 0.5;
+  }
+}

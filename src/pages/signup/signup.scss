@@ -1,0 +1,19 @@
+page-signup {
+  .list-md .item-block .item-inner, .border-bottom-no.item-md.item-block .item-inner {
+    border-bottom: none;
+    padding-right: 0;
+  }
+
+  .select-ios .select-icon .select-icon-inner{
+    background: url("../assets/img/sign_up/arrow_down.svg") no-repeat center center;
+    color: transparent;
+    width: 14px;
+    height: 7px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: 0;
+    border: none;
+    left: 7px;
+    top: 6px;
+  }
+}

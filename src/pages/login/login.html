@@ -1,27 +1,48 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Login</ion-title>
   </ion-navbar>
 </ion-header>
 
-
-<ion-content>
+<ion-content padding>
+  <div class="logo">
+  </div>
   <form (submit)="login()">
-    <ion-list>
 
-      <ion-item>
-        <ion-label fixed>Email</ion-label>
-        <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
-      </ion-item>
+    <div text-center margin-top margin-bottom class="title-big-sign">Login</div>
+    <p text-center margin-bottom class="font-75 text-4F4F4F">Please enter your phone number and<br>confirmation code</p>
 
-      <ion-item>
-        <ion-label fixed>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
-      </ion-item>
+    <ion-item margin-top class="border-bottom-no">
+      <ion-select class="bg-gray-left" placeholder="+380">
+        <ion-option value="380">+380</ion-option>
+        <ion-option value="101">+102</ion-option>
+      </ion-select>
+      <ion-input class="bg-gray-right" type="tel" placeholder="" ></ion-input>
+    </ion-item>
 
-      <div padding>
-        <button ion-button large block>LOGIN</button>
-      </div>
-    </ion-list>
-  </form>
+    <ion-item margin-top class="border-bottom-no">
+      <ion-label class="bg-gray-left label-left">OTP</ion-label>
+      <ion-input class="bg-gray-right" type="tel" placeholder="XX-XX-XX-XX" ></ion-input>
+    </ion-item>
+
+    <div class="temporary">
+        <p>temporary stub - login with email/password</p>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="email" placeholder="E-mail" [(ngModel)]="data.email" name="email"></ion-input>
+    </ion-item>
+
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="password" placeholder="Password" [(ngModel)]="data.password" name="password"></ion-input>
+    </ion-item>
+    </div>
+
+    <p padding-top>
+      <button ion-button block middle color="primary">Sign in</button>
+    </p>
+    </form>
 </ion-content>
+
+<ion-footer padding>
+  <div margin-top margin-bottom text-center>
+    <div><a (click)="login()" class="link-nau">Sign Up</a></div>
+  </div>
+</ion-footer>

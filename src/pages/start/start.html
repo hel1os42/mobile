@@ -1,9 +1,36 @@
-<ion-content scroll="false">
-  <div class="logo">    
+<ion-content padding scroll="false">
+  <div class="logo-margin">
+  </div>
+  <div text-center margin-top class="title-big-sign">Sign Up</div>
+
+  <p text-center class="font-75 text-4F4F4F">Please choose your convenient way<br>to enter NAU</p>
+
+  <div>
+    <button ion-button block middle color="primary" margin-bottom (click)="register()">sign up</button>
   </div>
 
-  <div padding>
-    <button ion-button block large color="secondary" margin-bottom (click)="login()">LOGIN</button>
-    <button ion-button block large (click)="register()">REGISTER</button>
-  </div>
+  <p padding text-center class="font-75 text-828282">
+    or Sign up with
+  </p>
+
+  <p text-center margin-bottom>
+    <button ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </button>
+    <button ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-twitter"></ion-icon>
+    </button>
+    <button ion-button icon-only class="button-circle-small">
+      <ion-icon name="logo-google"></ion-icon>
+    </button>
+  </p>
 </ion-content>
+
+
+<!-- <ion-footer no-shadow no-border padding>-->
+<ion-footer no-shadow no-border padding>
+  <div margin text-center>
+    <div class="font-75 text-828282">Already have account</div>
+    <div><a (click)="login()" class="link-nau">Sign In</a></div>
+  </div>
+</ion-footer>

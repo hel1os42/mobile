@@ -1,0 +1,30 @@
+page-splash-screen{
+  .swiper-container .list-ios{
+    margin: 0;
+  }
+
+  .slider_top.slides.slides-ios{
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  }
+
+  .slides img{
+    width: 30%;
+  }
+
+  .grid-tabs-splash .col{
+    box-shadow: 0 0 9px rgba(0,0,0,0.1);
+    min-height: 115px;
+  }
+
+  .grid-tabs-splash .col img{
+    max-width: 70%;
+  }
+
+  .font-weight-normal{
+    font-weight: 400;
+  }
+
+  .slider_bottom .slide-zoom{
+    text-align: left;
+  }
+}

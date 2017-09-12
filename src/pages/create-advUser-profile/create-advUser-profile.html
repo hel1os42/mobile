@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create account Adv</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="padding-no">
+  <ion-grid class="cover">
+    <ion-row>
+      <ion-col col-6 class="relative">
+        <button class="btn-add-border-in" ion-fab color="light"><ion-icon name="md-add" class="text-black"></ion-icon></button>
+      </ion-col>
+      <ion-col col-6>
+        <button class="btn-set" ion-button outline color="dark">Set Cover</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list padding-left padding-right>
+    <ion-item>
+      <ion-input class="font-150" placeholder="Company name" type="text" value=""></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input placeholder="Add company description here" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item class="border-bottom-no" padding-top>
+      <ion-label>Choose category</ion-label>
+      <ion-select [(ngModel)]="selectedCategory" interface="action-sheet" class="bg-gray width-100" placeholder="Choose category">
+        <ion-option *ngFor="let category of categories" [value]="category">{{ category.name }}</ion-option>
+      </ion-select>
+    </ion-item>    
+
+    <p padding class="font-75">Choose your location:</p>
+
+    <div padding-bottom>
+        <div *ngIf="!coords.lat" >Detecting your location...</div>
+        <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+            <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+        </agm-map>
+    </div>
+
+    <button (click)="openAdvUserProfile()" ion-button full margin-top>Create account</button>
+
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding scroll="false">
+  <div class="logo">
+  </div>
+
+  <div text-center margin-top margin-bottom class="title-big-sign">Invitation</div>
+  <p margin-bottom text-center class="font-75 text-4F4F4F">You should have received a code from the friend who recommended NAU to you. Please ask him again</p>
+
+  <ion-item class="border-bottom-no">
+    <ion-input text-center placeholder="XX-XX-XX-XX" class="bg-gray" [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
+  </ion-item>
+
+  <div *ngIf="data.referrer_id" class="temporary">
+    <p>temporary stub - signup with email/password</p>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="email" placeholder="E-mail" [(ngModel)]="data.email" name="email"></ion-input>
+    </ion-item>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="password" placeholder="Password" [(ngModel)]="data.password" name="password"></ion-input>
+    </ion-item>
+    <ion-item padding class="border-bottom-no">
+      <ion-input class="bg-gray" type="password" placeholder="Confirm password" [(ngModel)]="data.password_confirm" name="password"></ion-input>
+    </ion-item>
+  </div>
+
+  <p padding>
+    <button *ngIf="!data.referrer_id" ion-button block middle color="primary" (click)="apply()">Sign up</button>
+    <button *ngIf="data.referrer_id" ion-button block middle color="primary" (click)="register()">Sign up</button>
+  </p>
+</ion-content>
+
+<ion-footer padding>
+  <div text-center margin class="font-75 text-828282">
+    Please ask your friend again
+  </div>
+</ion-footer>

@@ -1,0 +1,70 @@
+page-settings{
+  .map{
+    width: 100%;
+    height: auto;
+    border-radius: 100px;
+  }
+
+  .label-md,.label-ios{
+    margin: 0;
+  }
+
+  img{
+    width: 100%;
+  }
+
+  .card {
+    margin: 0;
+    border-radius: 20px;
+    width: 100%;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  ion-navbar a {
+    float: right;
+  }
+
+  .select {
+      float: left;
+      padding-right: 5px;
+  }
+
+  .icon {
+      line-height: 1.1;
+    }
+
+  agm-map {
+    height: 200px;
+    }
+
+  .block-user-adv {
+    border-radius: 15px;
+    background: #EAEAEA;
+  }
+
+  .item-block{
+    background: transparent;
+  }
+
+  .block-user-adv img{
+    height: 45px;
+    width: auto;
+  }
+
+  .block-phone{
+    border-radius: 100px;
+    background: #EAEAEA;
+  }
+
+  .modal_create img{
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .modal_create .why{
+    font-size: 80%;
+    font-weight: 400;
+    line-height: 170%;
+  }
+}
