@@ -2,13 +2,6 @@ cache:
   paths:
   - vendor/
 
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-  REPOSITORY: gitlab.toavalon.com:5000
-  IMAGE: codename-nau/mobile-hybrid/laravel
-  TEST_TAG: $CI_COMMIT_REF_NAME
-  RELEASE_TAG: latest
-
 stages:
   - build
   - test
@@ -25,8 +18,31 @@ build:
     - ionic --version
     - ionic build --prod
   artifacts:
+    only:
+      - develop
     paths:
-      - ./*
+      - ./www
+
+android:
+  image: gitlab.toavalon.com:5000/codename-nau/mobile-hybrid/android-build:latest
+  stage: build_image
+  script:
+    - echo "$ANDROID_PRIVATE_KEY" | base64 -D > android.key
+    - ionic cordova build android --prod --release --no-build -- -- --keystore=android.key --alias=nau-release --storePassword="$ANDROID_KEY_PASSWORD" --password="$ANDROID_KEY_PASSWORD"
+    - curl -F file=@./platforms/android/build/outputs/apk/android-release.apk -F channels="$SLACK_CHANNEL" -F token="$SLACK_TOKEN" https://slack.com/api/files.upload
+  only:
+    - develop
+  artifacts:
+    paths:
+      - ./platforms/android/build/outputs/apk/android-release.apk
+
+android2slack:
+  image: gitlab.toavalon.com:5000/codename-nau/mobile-hybrid/android-build:latest
+  stage: deploy
+  script:
+    - curl -F file=@./platforms/android/build/outputs/apk/android-release.apk -F channels="$SLACK_CHANNEL" -F token="$SLACK_TOKEN" https://slack.com/api/files.upload
+  only:
+    - develop
 
 develop deploy:
   stage: deploy
