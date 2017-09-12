@@ -23,7 +23,7 @@ build:
     paths:
       - ./www
 
-build:
+build develop:
   image: beevelop/ionic:latest
   stage: build
   before_script:
