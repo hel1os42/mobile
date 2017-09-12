@@ -17,11 +17,22 @@ build:
   script:
     - ionic --version
     - ionic build --prod
+  only:
+    - develop
   artifacts:
-    only:
-      - develop
     paths:
       - ./www
+
+build:
+  image: beevelop/ionic:latest
+  stage: build
+  before_script:
+    - npm install
+  script:
+    - ionic --version
+    - ionic build --prod
+  except:
+    - develop
 
 android:
   image: gitlab.toavalon.com:5000/codename-nau/mobile-hybrid/android-build:latest
