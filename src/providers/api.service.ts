@@ -62,8 +62,8 @@ export class ApiService {
                     let messages = [];
                     let err = errResp.json();
 
-                    if (err.error) {
-                        messages.push(err.error)
+                    if (err.error && err.message) {
+                        messages.push(err.message)
                     }
                     else {
                         for (let key in err) {
