@@ -1,0 +1,44 @@
+<svg width="24" height="28" viewBox="0 0 24 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Vector</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-360 -2163)">
+<rect x="360" y="2163" width="24" height="28" fill="#F2F2F2"/>
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M 247 1471L 661 1471L 661 2207L 247 2207L 247 1471Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="09-splash" clip-path="url(#clip-0)">
+<path d="M 247 1471L 661 1471L 661 2207L 247 2207L 247 1471Z" fill="#FFFFFF"/>
+<g id="Rectangle 12">
+<use xlink:href="#path0_fill" transform="translate(247 1893)" fill="#F2F2F2"/>
+</g>
+<g id="Group">
+<g id="Rectangle 2" filter="url(#filter0_d)">
+<use xlink:href="#path1_fill" transform="translate(247 2147)" fill="#FFFFFF"/>
+</g>
+<g id="account">
+<g id="Group">
+<g id="Group">
+<g id="Vector">
+<use xlink:href="#path2_fill" transform="translate(360 2163)" fill="#BDBDBD"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d" filterUnits="userSpaceOnUse" x="247" y="2123" width="414" height="84" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
+<feOffset dx="0" dy="-6"/>
+<feGaussianBlur stdDeviation="9"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<path id="path0_fill" d="M 0 0L 414 0L 414 314L 0 314L 0 0Z"/>
+<path id="path1_fill" d="M 0 0L 414 0L 414 60L 0 60L 0 0Z"/>
+<path id="path2_fill" d="M 7.10859 14.0147C 3.29892 10.6743 3.55848 5.25792 6.59784 2.24216C 9.56184 -0.696716 14.1921 -0.747975 17.2398 2.09692C 20.3126 4.96745 20.8401 10.5633 16.9049 13.9976C 17.3989 14.1002 17.8845 14.1771 18.3618 14.3137C 21.6523 15.245 23.913 18.2009 23.98 21.6951C 24.0135 23.4635 23.9967 25.2234 23.9883 26.9919C 23.9883 27.6924 23.6618 28 22.9334 28C 18.7637 28 14.594 28 10.4243 28C 7.32628 28 4.22831 28 1.13034 28C 0.276305 28 2.37972e-15 27.7095 2.37972e-15 26.8552C 2.37972e-15 25.232 2.37972e-15 23.6088 2.37972e-15 21.9856C 2.37972e-15 17.8165 2.88028 14.5359 6.9495 14.066C 6.98299 14.0574 7.02486 14.0404 7.10859 14.0147ZM 1.63271 26.1888C 8.59059 26.1888 15.4312 26.1888 22.2803 26.1888C 22.2803 24.5913 22.3472 23.0193 22.2635 21.4644C 22.163 19.5166 21.2588 17.9702 19.7014 16.8425C 18.7804 16.1762 17.7505 15.7746 16.6202 15.7661C 13.5138 15.749 10.3991 15.6892 7.29279 15.7832C 4.64696 15.8601 2.31092 17.8848 1.90065 20.5418C 1.6076 22.3871 1.70807 24.2837 1.63271 26.1888ZM 12.0067 1.74665C 8.70781 1.73811 6.00336 4.48048 5.98662 7.83797C 5.96987 11.1869 8.67432 13.972 11.9565 13.9806C 15.2638 13.9976 17.9933 11.2296 18.0017 7.8636C 18.0017 4.51466 15.3056 1.75519 12.0067 1.74665Z"/>
+</defs>
+</svg>
