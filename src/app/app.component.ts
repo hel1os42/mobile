@@ -24,7 +24,6 @@ import { LoginPage } from "../pages/login/login";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { NotificationsPage } from "../pages/notifications/notifications";
 import { ProfileService } from '../providers/profile.service';
-import { SignUpPage } from "../pages/signup/signup";
 
 @Component({
     templateUrl: 'app.html'
@@ -45,9 +44,14 @@ export class MyApp {
             splashScreen.hide();
 
             this.rootPage = !this.auth.isLoggedIn()
-                ? StartPage : this.profile.getMode() ? AdvTabsPage : TabsPage;
+                ? OnBoardingPage
+                : this.profile.getMode()
+                    ? AdvTabsPage
+                    : TabsPage;            
 
-            //this.rootPage = SplashScreenPage;
+            //this.rootPage = SignUpInvitePage;
         });
+
+        this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
     }
 }
