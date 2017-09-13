@@ -19,4 +19,9 @@ export class OfferService{
         return this.api.get('categories');
     }
 
+    getRedeemedOffers() {
+        return this.api.get('profile?with=offers');
+    }
+
+
 }
