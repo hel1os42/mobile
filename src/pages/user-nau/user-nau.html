@@ -25,26 +25,11 @@
   </ion-list>
 
   <p margin text-uppercase>Latest payments</p>
-  <ion-list margin-bottom margin-left margin-right no-lines class="happy">
-    <ion-item>
-      <h2 text-uppercase>Payment 543821</h2>
-      <span text-uppercase item-end>100 NAU</span>
-      <h5 class="font-75 text-lightgray">2017-08-07 13:32:25</h5>
-    </ion-item>
-    <ion-item>
-      <h2 text-uppercase>Payment 478230</h2>
-      <span text-uppercase item-end class="text-lightgray">-30 NAU</span>
-      <h5 class="font-75 text-lightgray">2017-08-07 13:32:25</h5>
-    </ion-item>
-    <ion-item>
-      <h2 text-uppercase>Payment 103947</h2>
-      <span text-uppercase item-end>50 NAU</span>
-      <h5 class="font-75 text-lightgray">2017-08-07 13:32:25</h5>
-    </ion-item>
-    <ion-item>
-      <h2 text-uppercase>Payment 478230</h2>
-      <span text-uppercase item-end class="text-lightgray">-27 NAU</span>
-      <h5 class="font-75 text-lightgray">2017-08-07 13:32:25</h5>
+  <ion-list  margin-bottom margin-left margin-right no-lines class="happy">
+      <ion-item *ngFor="let transaction of transactions">
+      <h2 text-uppercase>Payment {{ parse(transaction.id) }}</h2>
+      <span text-uppercase item-end class="text-lightgray">{{ transaction.amount}} NAU</span>
+      <h5 class="font-75 text-lightgray">{{ transaction.created_at.substring(0,19) }}</h5>
     </ion-item>
   </ion-list>
 
