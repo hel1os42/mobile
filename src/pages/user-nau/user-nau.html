@@ -27,8 +27,8 @@
   <p margin text-uppercase>Latest payments</p>
   <ion-list  margin-bottom margin-left margin-right no-lines class="happy">
       <ion-item *ngFor="let transaction of transactions">
-      <h2 text-uppercase>Payment {{ parse(transaction.id) }}</h2>
-      <span text-uppercase item-end class="text-lightgray">{{ transaction.amount}} NAU</span>
+      <h2 text-uppercase class="overflow">Payment {{ transaction.id }}</h2>
+      <span text-uppercase item-end class="text-lightgray">{{ transaction.amount }} NAU</span>
       <h5 class="font-75 text-lightgray">{{ transaction.created_at.substring(0,19) }}</h5>
     </ion-item>
   </ion-list>
