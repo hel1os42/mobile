@@ -23,7 +23,7 @@
         </ion-avatar>
           <h2 text-uppercase>{{ offer.label}}</h2>
           <h5 text-uppercase>{{ offer.city }}</h5>
-          <h5 class="font-75 text-lightgray">Date: {{ offer.start_date.substring(0,10) }}</h5>
+          <h5 class="font-75 text-lightgray">Date: {{ offer.pivot.created_at.substring(0,10) }}</h5>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button icon-only><ion-icon name="create"></ion-icon></button>
