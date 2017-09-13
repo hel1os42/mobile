@@ -30,7 +30,7 @@ page-onboarding {
 
   .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
     bottom: 80px;
-  },
+  }
 
   .swiper-pagination-bullet-active {
     background: #fff;
@@ -53,4 +53,8 @@ page-onboarding {
   .footer{
     opacity: 0.5;
   }
+
+  .scroll-content {
+    overflow-y: hidden !important;
+ }
 }
