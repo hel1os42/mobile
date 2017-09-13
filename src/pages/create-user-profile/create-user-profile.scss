@@ -18,9 +18,9 @@ page-create-user-profile{
     border-radius: 50px;
   }
 
-  .select {
-    float: left;
-    padding-right: 5px;
+  .select-block-desc {
+    margin-top: 7px;
+    margin-bottom: 0;
   }
 
   .icon {
@@ -28,10 +28,32 @@ page-create-user-profile{
   }
 
   .points{
-    background: gray;
+    background: #FF8B10;
     color: #fff;
     padding: 3px;
-    border-radius: 3px;
+  }
+
+  .added{
+    background: #3E4B5D;
+    color: #fff;
+    padding: 3px;
+  }
+
+  .block-name.item-ios [item-right], .item-ios [item-end], .block-people.item-ios [item-right], .item-ios [item-end]{
+    margin: 0;
+  }
+
+  .block-name.item-ios.item-block .item-inner, .block-people.item-ios.item-block .item-inner{
+    padding-right: 0;
+  }
+
+  .block-name .points{
+    margin-left: 5px;
+  }
+
+  .block-name img{
+    height: 24px;
+    margin-top: 8px;
   }
 
   .ion-logo-twitter{
@@ -105,4 +127,8 @@ page-create-user-profile{
     max-width: 100%;
   }
 
+  .people{
+    width: 60px;
+    padding-bottom: 40px;
+  }
 }

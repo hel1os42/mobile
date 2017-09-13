@@ -47,6 +47,10 @@
   background: #fff;
 }
 
+.bg-FF8B10{
+  background: #FF8B10;
+}
+
 button[ion-button] {
   border-radius: 25px;
   text-transform: uppercase;
@@ -228,9 +232,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .border-bottom-no.item-md.item-block .item-inner,
 .border-bottom-no .list-ios .item-block .item-inner,
 .border-bottom-no.item-ios.item-block .item-inner{
-   border-bottom: none;
-   padding-right: 0;
- }
+  border-bottom: none;
+  padding-right: 0;
+}
 
 // .select-left .select-md .select-icon,
 //.select-left .select-ios .select-icon{
@@ -274,6 +278,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .bg-gray{
   border-radius: 100px;
   border: 1px solid #E0E0E0;
+}
+
+.bg-gray.item-ios.item-block .item-inner{
+  border-bottom: 0;
 }
 
 .bg-gray-left{
@@ -451,4 +459,34 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .no-border.footer.footer-ios {
   border-top: none;
+}
+
+.header{
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.toolbar-title-ios{
+  color: #333333;
+  font-size: 16px;
+}
+
+.margin-bottom-small{
+  margin-bottom: 5px;
+}
+
+.block-lines{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-top: 1px solid #F2F2F2;
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.block-lines-bottom-left-right{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-bottom: 1px solid #F2F2F2;
 }
