@@ -1,0 +1,22 @@
+<svg width="30" height="30" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-2777 -2605)">
+<g id="Group">
+<g id="Ellipse 9">
+<use xlink:href="#path0_fill" transform="translate(2777 2605)" fill="url(#paint0_linear)"/>
+</g>
+<g id="!">
+<use xlink:href="#path1_fill" transform="translate(2785 2606)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(3.10188e-07 -30 20.7143 -3.49965e-08 6.42857 30)">
+<stop offset="0" stop-color="#FF5A00"/>
+<stop offset="1" stop-color="#FF8A23"/>
+</linearGradient>
+<path id="path0_fill" d="M 30 15C 30 23.2843 23.2843 30 15 30C 6.71573 30 0 23.2843 0 15C 0 6.71573 6.71573 0 15 0C 23.2843 0 30 6.71573 30 15Z"/>
+<path id="path1_fill" d="M 7.85938 16.6641L 6.16016 16.6641L 5.65234 6.72266L 8.35742 6.72266L 7.85938 16.6641ZM 5.53516 19.7793C 5.53516 19.2975 5.66211 18.9329 5.91602 18.6855C 6.16992 18.4316 6.53125 18.3047 7 18.3047C 7.46224 18.3047 7.81706 18.4349 8.06445 18.6953C 8.31185 18.9557 8.43555 19.3171 8.43555 19.7793C 8.43555 20.2415 8.30859 20.6094 8.05469 20.8828C 7.80729 21.1497 7.45573 21.2832 7 21.2832C 6.53776 21.2832 6.17643 21.153 5.91602 20.8926C 5.66211 20.6322 5.53516 20.2611 5.53516 19.7793Z"/>
+</defs>
+</svg>

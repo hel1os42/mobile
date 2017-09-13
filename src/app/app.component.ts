@@ -47,11 +47,12 @@ export class MyApp {
                 ? OnBoardingPage
                 : this.profile.getMode()
                     ? AdvTabsPage
-                    : TabsPage;            
+                    : TabsPage;
 
-            //this.rootPage = SignUpInvitePage;
-        });
+            //this.rootPage = CreateUserProfilePage;
 
+        })
+        
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
     }
 }
