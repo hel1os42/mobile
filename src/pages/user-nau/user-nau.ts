@@ -10,6 +10,7 @@ import { ProfileService } from '../../providers/profile.service';
 export class UserNauPage {
 
     transactions: Transaction[];
+    balance: number;
 
     constructor(
         private nav: NavController,
@@ -20,6 +21,13 @@ export class UserNauPage {
     ionViewDidLoad() {
         this.profile.getTransactions()
             .subscribe(resp => this.transactions = resp.data)
+
+        let accounts;
+        this.profile.getAccounts()
+            .subscribe(resp => {
+                accounts = resp.accounts;
+                this.balance = accounts.map(account => account.balance).reduce((sum, amount) => sum + amount);
+            })
     }
 
 }

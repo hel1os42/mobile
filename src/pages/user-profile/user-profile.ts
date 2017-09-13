@@ -17,6 +17,7 @@ import { UserUsersPage } from "../user-users/user-users";
 })
 export class UserProfilePage {
     user: User = new User();
+    balance: number;
     
     @ViewChild(Slides) slides: Slides;
 
@@ -30,6 +31,13 @@ export class UserProfilePage {
     ionViewDidEnter() {
         this.profile.get()
             .subscribe(user => this.user = user);
+
+        let accounts;
+        this.profile.getAccounts()
+            .subscribe(resp => 
+                { accounts = resp.accounts;
+                this.balance = accounts.map(account => account.balance).reduce((sum, amount) => sum + amount);
+            })
     }
 
     openSettings() {
