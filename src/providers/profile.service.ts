@@ -26,9 +26,6 @@ export class ProfileService {
         return this.api.get('profile/referrals');
     }
 
-    getOffers() {
-        return this.api.get('offers');
-    }
 
     getTransactions() {
         return this.api.get('transactions');
