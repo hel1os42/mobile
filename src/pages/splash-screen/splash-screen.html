@@ -1,102 +1,116 @@
-<ion-content class="padding-no">
-  <ion-grid padding-top>
+<ion-content class="padding-no bg-gray-nau">
+  <ion-grid padding-top margin-bottom class="bg-white-nau">
     <ion-row align-items-start>
       <ion-col col-3 padding-left>
-        <h5><img src="assets/img/logo_start.png"></h5>
+        <h5><img src="assets/img/splash_screen/icon_people.svg"></h5>
       </ion-col>
-      <ion-col col-7 padding-left>
-        <h5 text-uppercase>Hello!!!</h5>
-        <p class="font-75">You can add information in your account. If helps us suggest you offers</p>
+      <ion-col (click)="openCreateUserProfile()" col-7>
+        <h5 class="font-18 text-3E4B5D bold">Hello, Client!</h5>
+        <p class="font-75 text-828282">You can add information in your account. If helps us suggest you offers and tasks</p>
       </ion-col>
       <a ion-col col-2 text-right (click)="openSettings()">
-        <h5 padding-right><ion-icon color="dark" class="font-200" name="settings"></ion-icon></h5>
+        <h5 padding-right><img src="assets/img/settings.svg"></h5>
       </a>
     </ion-row>
   </ion-grid>
 
-  <ion-grid text-center margin-bottom>
+  <ion-grid class="bg-white-nau">
     <ion-row>
-      <ion-col (click)="slidePrev()"  col-1 align-self-center>
-        <a><ion-icon name="ios-arrow-back" class="font-200"></ion-icon></a>
+      <ion-col (click)="slidePrev()" col-1 align-self-center>
+        <a><ion-icon name="ios-arrow-back" class="font-200 text-BDBDBD"></ion-icon></a>
       </ion-col>
       <ion-col col-10 align-self-center>
         <ion-slides #slides spaceBetween="10" class="slider_top">
-          <ion-slide padding text-center>
-            <img margin-top src="assets/img/logo_start.png">
-            <h5 text-uppercase>How it works?</h5>
+
+          <ion-slide>
+            <ion-grid>
+              <ion-row align-items-center>
+                <ion-col col-4 padding-right>
+                  <img margin-top src="assets/img/splash_screen/slide1.svg">
+                </ion-col>
+                <ion-col col-8 text-left>
+                  <h5 class="font-22 text-3E4B5D bold">How It Works?</h5>
+                  <div class="font-75 text-828282">To provide proper credit, use the embedded credit already in the icon you downloaded</div>
+                  <a class="text-FF8B10 font-12">Read more</a>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-slide>
-          <ion-slide (click)="openCreateUserProfile()" padding text-center>
-            <img margin-top src="assets/img/splash_screen/slide2.png">
-            <h5 text-uppercase>Fill more info</h5>
+
+          <ion-slide>
+            <ion-grid>
+              <ion-row align-items-center>
+                <ion-col col-4 padding-right>
+                  <img margin-top src="assets/img/splash_screen/slide2.svg">
+                </ion-col>
+                <ion-col col-8 text-left>
+                  <h5 class="font-22 text-3E4B5D bold">Search Offers</h5>
+                  <div class="font-75 text-828282">To provide proper credit, use the embedded credit already in the icon you downloaded</div>
+                  <a class="text-FF8B10 font-12">Read more</a>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </ion-slide>
-          <ion-slide padding text-center>
-            <img margin-top src="assets/img/splash_screen/slide3.png">
-            <h5 text-uppercase>Search offers now</h5>
-          </ion-slide>
-          <ion-slide padding text-center>
-            <img margin-top src="assets/img/splash_screen/slide3.png">
-            <h5 text-uppercase>Get offer now</h5>
-          </ion-slide>
+
         </ion-slides>
       </ion-col>
       <ion-col (click)="slideNext()" col-1 align-self-center>
-        <a><ion-icon  name="ios-arrow-forward" class="font-200"></ion-icon></a>
+        <a><ion-icon  name="ios-arrow-forward" class="font-200 text-BDBDBD"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-grid text-center class="grid-tabs-splash">
-    <ion-row align-items-center>
+    <ion-row align-items-end>
       <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon1.png"></p>
-        <p class="font-65">Food & <br>drink</p>
+        <p><img src="assets/img/splash_screen/tab-icon1.svg"></p>
+        <p class="font-65 text-white">Food & <br>drink</p>
       </a>
       <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon2.png"></p>
-        <p class="font-65">Beauty & <br>Fitness</p>
+        <p><img src="assets/img/splash_screen/tab-icon2.svg"></p>
+        <p class="font-65 text-white">Beauty & <br>Fitness</p>
       </a>
       <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon3.png"></p>
-        <p class="font-65">Retail & <br>Services</p>
+        <p><img src="assets/img/splash_screen/tab-icon3.svg"></p>
+        <p class="font-65 text-white">Retail & <br>Services</p>
       </a>
       <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon4.png"></p>
-        <p class="font-65">Attractions & <br>Leisure</p>
+        <p><img src="assets/img/splash_screen/tab-icon4.svg"></p>
+        <p class="font-65 text-white">Attractions & <br>Leisure</p>
       </a>
       <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon5.png"></p>
-        <p class="font-65">Others & <br>Online</p>
+        <p><img src="assets/img/splash_screen/tab-icon5.svg"></p>
+        <p class="font-65 text-white">Others & <br>Online</p>
       </a>
     </ion-row>
   </ion-grid>
 
-  <h5 class="font-weight-normal" text-center text-uppercase>news & events</h5>
-
-  <ion-grid padding-bottom>
+  <h5 class="text-828282 font-16" text-center text-uppercase>news & events</h5>
+  <div margin>
+  <ion-grid margin-bottom class="bg-white-nau">
     <ion-row>
-      <ion-col (click)="slideNewsPrev()" col-1 align-self-end>
-        <a><ion-icon  name="ios-arrow-back" class="font-200"></ion-icon></a>
+      <ion-col (click)="slideNewsPrev()" col-1 align-self-center>
+        <a><ion-icon name="ios-arrow-back" class="font-200 text-BDBDBD"></ion-icon></a>
       </ion-col>
-      <ion-col col-10 align-self-center>
+      <ion-col col-10 align-self-center class="block-slider">
         <ion-slides #slidesNews spaceBetween="10" class="slider_bottom">
-          <ion-slide padding>
-            <p class="font-65">12/06/07</p>
-            <div class="font-75">Double Up Food Bucks is a national model for healthy food incentives active in more...</div>
+          <ion-slide>
+            <div class="font-12 text-family-light text-828282">07/08/2017</div>
+            <div class="font-16 bold text-3E4B5D">Good opportunity for client</div>
+            <div class="text-828282 font-12">Double Up Food Bucks is a national model for healthy</div>
           </ion-slide>
-          <ion-slide padding>
-            <p class="font-65">12/06/07</p>
-            <div class="font-75">Double Up Food Bucks is a national model for healthy food incentives active in more...</div>
-          </ion-slide>
-          <ion-slide padding>
-            <p class="font-65">12/06/07</p>
-            <div class="font-75">Double Up Food Bucks is a national model for healthy food incentives active in more...</div>
+          <ion-slide>
+              <img class="img-float-left" src="assets/img/splash_screen/slider_rest.png"/>
+              <div class="font-12 text-family-light text-828282">07/08/2017</div>
+              <div class="font-16 bold text-3E4B5D">New restaurant</div>
+              <div class="text-828282 font-12">Double Up Food Bucks is a national model for healthy</div>
           </ion-slide>
         </ion-slides>
       </ion-col>
-      <ion-col (click)="slideNewsNext()" col-1 align-self-end>
-        <a><ion-icon  name="ios-arrow-forward" class="font-200"></ion-icon></a>
+      <ion-col (click)="slideNewsNext()" col-1 align-self-center>
+        <a><ion-icon  name="ios-arrow-forward" class="font-200 text-BDBDBD"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
-
+</div>
 </ion-content>

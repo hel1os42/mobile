@@ -5,6 +5,7 @@ import { Login } from "../../models/login";
 import { TabsPage } from "../tabs/tabs";
 import { OnBoardingPage } from "../onboarding/onboarding";
 import { ProfileService } from '../../providers/profile.service';
+import { SignUpPage } from '../signup/signup';
 
 @Component({
     selector: 'page-login',
@@ -29,5 +30,9 @@ export class LoginPage  {
                     this.nav.setRoot(/*this.profile.isOnboardingShown() ? TabsPage :*/ OnBoardingPage);
                 }
             );
+    }
+
+    signup() {
+        this.nav.push(SignUpPage);
     }
 }

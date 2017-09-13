@@ -1,0 +1,53 @@
+page-tabs{
+  .tab-button{
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: auto 40%;
+  }
+
+  .tabs-ios .tabbar{
+    background: #fff;
+  }
+
+  #tab-t0-0.tab-button[aria-selected="true"]{
+    background-image: url(../assets/img/tabs/tab1_a.svg);
+  }
+
+  #tab-t0-0.tab-button[aria-selected="false"]{
+    color: blue;
+    background-image: url(../assets/img/tabs/tab1.svg);
+  }
+
+  #tab-t0-1.tab-button[aria-selected="true"]{
+    background-image: url(../assets/img/tabs/tab2_a.svg);
+  }
+
+  #tab-t0-1.tab-button[aria-selected="false"]{
+    background-image: url(../assets/img/tabs/tab2.svg);
+  }
+
+  #tab-t0-2.tab-button[aria-selected="true"]{
+    background-image: url(../assets/img/tabs/tab3_a.svg);
+  }
+
+  #tab-t0-2.tab-button[aria-selected="false"]{
+    background-image: url(../assets/img/tabs/tab3.svg);
+  }
+
+  #tab-t0-3.tab-button[aria-selected="true"]{
+    background-image: url(../assets/img/tabs/tab4_a.svg);
+  }
+
+  #tab-t0-3.tab-button[aria-selected="false"]{
+    background-image: url(../assets/img/tabs/tab4.svg);
+  }
+
+  #tab-t0-4.tab-button[aria-selected="true"]{
+    background-image: url(../assets/img/tabs/tab5_a.svg);
+  }
+
+  #tab-t0-4.tab-button[aria-selected="false"]{
+    color: blue;
+    background-image: url(../assets/img/tabs/tab5.svg);
+  }
+}

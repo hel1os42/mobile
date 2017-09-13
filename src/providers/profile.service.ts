@@ -30,6 +30,10 @@ export class ProfileService {
         return this.api.get('offers');
     }
 
+    getTransactions() {
+        return this.api.get('transactions');
+    }
+
     getMode() {
         let advMode: boolean = this.storage.get(this.ADV_MODE_KEY)
         return advMode;

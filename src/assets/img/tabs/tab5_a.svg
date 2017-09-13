@@ -1,0 +1,51 @@
+<svg width="27" height="24" viewBox="0 0 27 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-601 -2165)">
+<rect x="601" y="2165" width="27" height="24" fill="#F2F2F2"/>
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M 247 1471L 661 1471L 661 2207L 247 2207L 247 1471Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="09-splash" clip-path="url(#clip-0)">
+<path d="M 247 1471L 661 1471L 661 2207L 247 2207L 247 1471Z" fill="#FFFFFF"/>
+<g id="Rectangle 12">
+<use xlink:href="#path0_fill" transform="translate(247 1893)" fill="#F2F2F2"/>
+</g>
+<g id="Group">
+<g id="Rectangle 2" filter="url(#filter0_d)">
+<use xlink:href="#path1_fill" transform="translate(247 2147)" fill="#FFFFFF"/>
+</g>
+<g id="Group">
+<g id="Rectangle 5">
+<use xlink:href="#path2_fill" transform="translate(601 2165)" fill="#FF8B10"/>
+</g>
+<g id="Line 2">
+<use xlink:href="#path3_stroke" transform="translate(612 2172)" fill="#FF8B10"/>
+</g>
+<g id="Line 2">
+<use xlink:href="#path4_stroke" transform="matrix(1 -2.44929e-16 2.44929e-16 1 601 2181)" fill="#FF8B10"/>
+</g>
+<g id="Line 2">
+<use xlink:href="#path4_stroke" transform="matrix(1 -2.44929e-16 2.44929e-16 1 601 2189)" fill="#FF8B10"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d" filterUnits="userSpaceOnUse" x="247" y="2123" width="414" height="84" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
+<feOffset dx="0" dy="-6"/>
+<feGaussianBlur stdDeviation="9"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<path id="path0_fill" d="M 0 0L 414 0L 414 314L 0 314L 0 0Z"/>
+<path id="path1_fill" d="M 0 0L 414 0L 414 60L 0 60L 0 0Z"/>
+<path id="path2_fill" d="M 0 1C 0 0.447715 0.447715 0 1 0L 6 0C 6.55228 0 7 0.447715 7 1L 7 6C 7 6.55228 6.55228 7 6 7L 1 7C 0.447715 7 0 6.55228 0 6L 0 1Z"/>
+<path id="path3_stroke" d="M 0.75 -1.5C 0.335786 -1.5 0 -1.16421 0 -0.75C 0 -0.335786 0.335786 0 0.75 0L 0.75 -1.5ZM 15.25 0C 15.6642 0 16 -0.335786 16 -0.75C 16 -1.16421 15.6642 -1.5 15.25 -1.5L 15.25 0ZM 0.75 0L 15.25 0L 15.25 -1.5L 0.75 -1.5L 0.75 0Z"/>
+<path id="path4_stroke" d="M 0.75 -1.5C 0.335786 -1.5 0 -1.16421 0 -0.75C 0 -0.335786 0.335786 0 0.75 0L 0.75 -1.5ZM 26.25 0C 26.6642 0 27 -0.335786 27 -0.75C 27 -1.16421 26.6642 -1.5 26.25 -1.5L 26.25 0ZM 0.75 0L 26.25 0L 26.25 -1.5L 0.75 -1.5L 0.75 0Z"/>
+</defs>
+</svg>
