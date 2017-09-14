@@ -8,10 +8,10 @@ import { AuthService } from "../../providers/auth.service";
 import { TabsPage } from "../tabs/tabs";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
-import { UserAccount } from "../../models/userAccount";
 import { ProfileService } from "../../providers/profile.service";
 import { UserProfilePage } from "../user-profile/user-profile";
 import { SplashScreenPage } from "../splash-screen/splash-screen";
+import { User } from '../../models/user';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -21,7 +21,7 @@ import { SplashScreenPage } from "../splash-screen/splash-screen";
 export class CreateUserProfilePage {
     data: Register = new Register();
     coords: Coords = new Coords();
-    account: UserAccount = new UserAccount();
+    account: User = new User();
     message: string;
     isSelectVisible: boolean = false;
     isFocusName: boolean = false;
@@ -63,7 +63,7 @@ export class CreateUserProfilePage {
     }
 
     ionViewDidLoad() {
-        this.account = this.profileService.userAccount;//to do
+        this.account = this.profileService.user;//to do
 
         if (this.account.name) {
             this.isFocusName = true;
