@@ -156,12 +156,12 @@
           </a>
         </div>
         <p margin text-uppercase class="font-14 text-4F4F4F">Confirm your location:</p>
-        <div>
+        <div class="block-map">
           <div *ngIf="!coords.lat">Detecting your location...</div>
           <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)">
             <!--<agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>-->
           </agm-map>
-          <ion-icon id="marker" name="pin"></ion-icon>
+          <div id="marker"></div>
         </div>
         <!--<ion-card>
           <ion-card-content>

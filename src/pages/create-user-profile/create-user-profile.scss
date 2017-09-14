@@ -112,14 +112,23 @@ page-create-user-profile{
     width: 100%;
   }
 
-  #marker {
-    color: darkorchid;
-    font-size: 50px;
-    display: block;
-    margin: 0 auto;
+  .block-map{
     position: relative;
-    top: -160px;
-    width: 32px;
+  }
+
+  #marker {
+    position: absolute;
+    z-index: 111;
+    background-color: rgba(255, 139, 16, 0.2);
+    background-image: url(../assets/img/create_user_profile/pin.svg);
+    background-position: 50% 50%;
+    background-size: auto 31px;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+    left: calc(50% - 75px);
+    top: 50px;
+    border-radius: 150px;
   }
 
   .gender_select.select.select-ios{
