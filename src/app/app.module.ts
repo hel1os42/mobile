@@ -14,7 +14,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { HomeUserPage } from '../pages/home-user-page/home-user-page';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { SignUpInvitePage } from "../pages/invite/invite";
-import { FavoritesPage } from '../pages/favorites/favorites';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { AuthService } from "../providers/auth.service";
 import { LocationService } from "../providers/location.service";
@@ -42,7 +41,9 @@ import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
 import { AdvHomePage } from '../pages/adv-home/adv-home';
+import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { PopoverComponent } from '../pages/settings/popover.component';
+
 
 
 
@@ -60,7 +61,7 @@ import { PopoverComponent } from '../pages/settings/popover.component';
     TabsPage,
     HomeUserPage,
     UserProfilePage,
-    FavoritesPage,
+    BookmarksPage,
     NotificationsPage,
     OnBoardingPage,
     SettingsPage,
@@ -103,7 +104,7 @@ import { PopoverComponent } from '../pages/settings/popover.component';
     TabsPage,
     HomeUserPage,
     UserProfilePage,
-    FavoritesPage,
+    BookmarksPage,
     NotificationsPage,
     OnBoardingPage,
     SettingsPage,
