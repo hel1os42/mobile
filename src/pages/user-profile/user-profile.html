@@ -2,33 +2,36 @@
   <ion-navbar>
     <ion-title>Your Account</ion-title>
     <ion-buttons end>
-      <a><img src="../assets/img/cards.svg"></a>
+      <a><img src="../assets/img/settings.svg"></a>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="padding-no">
-  <ion-item class="border-bottom-no">
-    <h2 margin-left>{{ user?.name }}<span padding-left item-center class="font-75 text-gray">Level {{user.level}}</span></h2>
-    <p margin-left>{{user.points}}</p>
-    <a item-end (click)="openAchieve()"  margin-right>
-      <ion-icon color="dark" class="font-200" name="trophy"></ion-icon>
+  <ion-item margin-top class="border-bottom-no">
+    <ion-avatar item-start>
+      <div margin-left class="user_level font-22 text-white">L{{user.level}}</div>
+    </ion-avatar>
+    <div class="font-18 text-3E4B5D bold">{{ user?.name }}</div>
+    <div class="font-14 text-828282">{{user.points}}</div>
+    <a item-end (click)="openAchieve()" margin-right>
+      <a><img src="../assets/img/user_profile/btn_icon1.svg"></a>
     </a>
     <a item-end (click)="openSettings()" margin-right>
-      <ion-icon color="dark" class="font-200" name="settings"></ion-icon>
+      <a><img src="../assets/img/user_profile/btn_icon2.svg"></a>
     </a>
   </ion-item>
 
-  <div margin>
-    <img width="100%" src="assets/img/user_profile/circle.png">
+  <div margin-left margin-right>
+    <img width="100%" src="assets/img/user_profile/circle.svg">
   </div>
 
-  <p text-uppercase text-center>Your tasks & jobs for today</p>
+  <div class="font-14 text-4F4F4F" margin-bottom text-uppercase text-center>Your tasks & jobs for today</div>
 
-  <ion-grid text-center>
+  <ion-grid text-center class="block-slider">
     <ion-row>
       <ion-col col-1 align-self-center>
-        <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200"></ion-icon></a>
+        <a padding-left><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon></a>
       </ion-col>
       <ion-col class="grid" col-10 align-self-center>
         <ion-slides (click)="openRewards()" spaceBetween="10">
@@ -36,39 +39,17 @@
             <ion-list no-lines>
               <ion-item class="text-white">
                 <ion-avatar item-start>
-                  <img src="assets/img/user_profile/cup.png">
+                  <img src="assets/img/user_profile/slide1.svg">
                 </ion-avatar>
-                <h2 text-uppercase>Get new points </h2>
-                <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
-              </ion-item>
-            </ion-list>
-          </ion-slide>
-          <ion-slide>
-            <ion-list no-lines>
-              <ion-item class="text-white">
-                <ion-avatar item-start>
-                  <img src="assets/img/user_profile/cup.png">
-                </ion-avatar>
-                <h2 text-uppercase>Get new points </h2>
-                <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
-              </ion-item>
-            </ion-list>
-          </ion-slide>
-          <ion-slide>
-            <ion-list no-lines>
-              <ion-item class="text-white">
-                <ion-avatar item-start>
-                  <img src="assets/img/user_profile/cup.png">
-                </ion-avatar>
-                <h2 text-uppercase>Get new points </h2>
-                <h5 class="font-75 text-lightgray">Double Up Food Bucks is a national model for healthy food</h5>
+                <div class="bold font-22 text-white">Get New Points</div>
+                <div text-wrap class="font-12 text-white">Get new offers nearby for you place and improve your level</div>
               </ion-item>
             </ion-list>
           </ion-slide>
         </ion-slides>
       </ion-col>
       <ion-col col-1 align-self-center>
-        <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200"></ion-icon></a>
+        <a padding-right><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200 text-828282"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -77,23 +58,23 @@
     <ion-row>
       <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
         <div>
-          <ion-icon class="icon-medium" name="lock"></ion-icon>
-          <h3>{{ user.offers_count }}</h3>
-          <div>offers</div>
+          <img src="assets/img/user_profile/offers.svg">
+          <div class="bold font-22 text-3E4B5D">{{ user.offers_count }}</div>
+          <div text-uppercase class="text-3E4B5D font-12">offers</div>
         </div>
       </a>
       <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
         <div>
-          <ion-icon class="icon-medium" name="cloud-circle"></ion-icon>
-          <h3>{{ balance }}</h3>
-          <div>nau</div>
+          <img src="assets/img/user_profile/nau.svg">
+          <div class="bold font-22 text-3E4B5D">{{ balance }}</div>
+          <div text-uppercase class="text-3E4B5D font-12">nau</div>
         </div>
       </a>
       <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
         <div>
-          <ion-icon class="icon-medium" name="contact"></ion-icon>
-          <h3>{{ user.referrals_count }}</h3>
-          <div>users</div>
+          <img src="assets/img/user_profile/users.svg">
+          <div class="bold font-22 text-3E4B5D">{{ user.referrals_count }}</div>
+          <div text-uppercase class="text-3E4B5D font-12">users</div>
         </div>
       </a>
     </ion-row>
