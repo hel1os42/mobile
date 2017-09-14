@@ -15,3 +15,10 @@ export class User {
     accounts_count: number;
     activation_codes_count: number
 }
+/*missing:  
+    facebookName: string;
+    twitterName: string;
+    instagramName: string;
+    gender:string;
+    age: number;
+    income;*/
