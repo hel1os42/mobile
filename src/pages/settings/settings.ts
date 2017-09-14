@@ -83,9 +83,9 @@ export class SettingsPage {
     //.subscribe(res => )
   }
 
-  openCreateAdvUser() {
-    this.nav.push(CreateAdvUserProfilePage);
-  }
+  // openCreateAdvUser() {
+  //   this.nav.push(CreateAdvUserProfilePage);
+  // }
 
   toggleAccountsChoiceVisible() {
       this.isAccountsChoiceVisible = !this.isAccountsChoiceVisible;

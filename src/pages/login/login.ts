@@ -3,9 +3,9 @@ import { NavController } from "ionic-angular";
 import { AuthService } from "../../providers/auth.service";
 import { Login } from "../../models/login";
 import { TabsPage } from "../tabs/tabs";
-import { OnBoardingPage } from "../onboarding/onboarding";
 import { ProfileService } from '../../providers/profile.service';
 import { SignUpPage } from '../signup/signup';
+import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 
 @Component({
     selector: 'page-login',
@@ -27,7 +27,7 @@ export class LoginPage  {
             .login(this.data)
             .subscribe(
                 resp => {             
-                    this.nav.setRoot(/*this.profile.isOnboardingShown() ? TabsPage :*/ OnBoardingPage);
+                    this.nav.setRoot(this.profile.getMode() ? AdvTabsPage : TabsPage);
                 }
             );
     }

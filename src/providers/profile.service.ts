@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { Observable } from "rxjs";
-import { UserAccount } from "../models/userAccount";
 import { StorageService } from './storage.service';
+import { User } from '../models/user';
 
 @Injectable()
 export class ProfileService {
-    userAccount: UserAccount = new UserAccount();
+    user: User = new User();
     ADV_MODE_KEY = "isAdvMode";
 
     constructor(private api: ApiService,
@@ -16,8 +16,8 @@ export class ProfileService {
         return this.api.get('profile');
     }
 
-    set(account: UserAccount) {
-        this.userAccount = account;//to do
+    set(account: User) {
+        this.user = account;//to do
         return Observable.of({ success: true });
         //this.api.post('', account);
     }
@@ -26,12 +26,13 @@ export class ProfileService {
         return this.api.get('profile/referrals');
     }
 
-    getOffers() {
-        return this.api.get('offers');
-    }
 
     getTransactions() {
         return this.api.get('transactions');
+    }
+
+    getAccounts() {
+        return this.api.get('profile?with=accounts');
     }
 
     getMode() {

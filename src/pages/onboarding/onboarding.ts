@@ -12,17 +12,17 @@ import { TabsPage } from "../tabs/tabs";
 })
 export class OnBoardingPage {
     code: string;
-    SHOWN_KEY = 'shownOnboarding';
+    //SHOWN_KEY = 'shownOnboarding';
 
     constructor(
         private nav: NavController,
         private auth: AuthService,
         private storage: StorageService) {
     }
-    
-skip() {
-    this.storage.set(this.SHOWN_KEY, true);
-    this.nav.push(TabsPage);
-}
+
+    skip() {
+        //this.storage.set(this.SHOWN_KEY, true);
+        this.nav.push(StartPage);
+    }
 
 }

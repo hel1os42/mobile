@@ -25,4 +25,11 @@ page-user-nau{
     padding-left: 10px;
     padding-right: 10px;
   }
+
+  .overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  
+  }
 }

@@ -37,17 +37,20 @@ export class SignUpInvitePage {
         this.auth
             .register(this.data)
             .subscribe(resp => {
-                this.auth
-                    .login({
-                        email: this.data.email,
-                        password: this.data.password
-                    })
-                    .subscribe(resp => {
-                        this.nav.setRoot(OnBoardingPage);
-                    })
+                // this.auth
+                //     .login({
+                //         email: this.data.email,
+                //         password: this.data.password
+                //     })
+                //     .subscribe(resp => {
+                //         this.nav.setRoot(OnBoardingPage);
+                //     })
+                this.auth.setRegisterData(this.data);
+                this.nav.setRoot(CreateUserProfilePage);
+
             }
             );
-            this.auth.setRegisterData(this.data);
+           
     }
 
 

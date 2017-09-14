@@ -8,10 +8,10 @@ import { AuthService } from "../../providers/auth.service";
 import { TabsPage } from "../tabs/tabs";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
-import { UserAccount } from "../../models/userAccount";
 import { ProfileService } from "../../providers/profile.service";
 import { UserProfilePage } from "../user-profile/user-profile";
 import { SplashScreenPage } from "../splash-screen/splash-screen";
+import { User } from '../../models/user';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -21,12 +21,18 @@ import { SplashScreenPage } from "../splash-screen/splash-screen";
 export class CreateUserProfilePage {
     data: Register = new Register();
     coords: Coords = new Coords();
-    account: UserAccount = new UserAccount();
+    account: User = new User();
     message: string;
     isSelectVisible: boolean = false;
-    isFocusName: boolean = false;
-    isFocusEmail: boolean = false;
+    visibleInfo: boolean = false
     address: string;
+    facebookName: string;
+    twitterName: string;
+    instagramName: string;
+    gender:string;
+    age: number;
+    income;
+    
 
     constructor(
         private nav: NavController,
@@ -58,19 +64,14 @@ export class CreateUserProfilePage {
     }
 
     point() {
-       let points = this.account.name ? 8 : 0;
+       let points = (this.account.name ?  +8 : +0) + (this.facebookName ? +3 : +0) + 
+                    (this.twitterName ?  +3 : +0) + (this.instagramName ?  +3 : +0) +
+                    (this.gender ?  +5 : +0) + (this.age ?  +9 : +0) + (this.income ?  +9 : +0);
        return points;
     }
 
     ionViewDidLoad() {
-        this.account = this.profileService.userAccount;//to do
-
-        if (this.account.name) {
-            this.isFocusName = true;
-        }
-        if (this.account.email)
-            this.isFocusEmail = true;
-
+        this.account = this.profileService.user;//to do
         /* this.data = this.auth.getRegisterData();
          if (this.data.referrer_id)
              return;
@@ -91,8 +92,6 @@ export class CreateUserProfilePage {
                 this.message = error.message;
                 console.log(this.message);
             });
-
-
     }
 
     register() {
@@ -111,6 +110,7 @@ export class CreateUserProfilePage {
             );*/
             this.account.latitude = this.coords.lat;
             this.account.longitude = this.coords.lng;
+            //this.account.points = this.point(); to do
             this.profileService.set(this.account)
                 .subscribe(resp => this.nav.setRoot(SplashScreenPage));
     }
@@ -119,11 +119,8 @@ export class CreateUserProfilePage {
         this.isSelectVisible = !this.isSelectVisible;
     }
 
-    focusName() {
-        this.isFocusName = true;
+    toggleVisibleInfo() {
+        this.visibleInfo = true;
     }
 
-    focusEmail() {
-        this.isFocusEmail = true;
-    }
 }

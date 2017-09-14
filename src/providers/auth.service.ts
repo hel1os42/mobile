@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Register } from "../models/register";
 import { Login } from "../models/login";
 import { ApiService } from "./api.service";
@@ -7,7 +7,6 @@ import { Token } from "../models/token";
 import { Observable } from "rxjs";
 import { StorageService } from "./storage.service";
 import { App } from "ionic-angular";
-import { LoginPage } from "../pages/login/login";
 
 @Injectable()
 export class AuthService {
@@ -15,14 +14,14 @@ export class AuthService {
     inviteCode: string = '';
     registerData: Register = new Register();
 
+    onLogout = new EventEmitter();
+
     constructor(
         private app: App,
         private api: ApiService,
         private token: TokenService) {
 
-        this.token.onRemove.subscribe(() => {
-            this.app.getRootNav().setRoot(LoginPage);
-        });
+        this.token.onRemove.subscribe(() => this.onLogout.emit());
 
         setInterval(() => {
             if (this.isLoggedIn()) {
@@ -82,7 +81,4 @@ export class AuthService {
     logout() {
         this.token.remove();
     }
-
-  
-
 }

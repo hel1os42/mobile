@@ -47,6 +47,10 @@
   background: #fff;
 }
 
+.bg-FF8B10{
+  background: #FF8B10;
+}
+
 button[ion-button] {
   border-radius: 25px;
   text-transform: uppercase;
@@ -228,9 +232,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .border-bottom-no.item-md.item-block .item-inner,
 .border-bottom-no .list-ios .item-block .item-inner,
 .border-bottom-no.item-ios.item-block .item-inner{
-   border-bottom: none;
-   padding-right: 0;
- }
+  border-bottom: none;
+  padding-right: 0;
+}
 
 // .select-left .select-md .select-icon,
 //.select-left .select-ios .select-icon{
@@ -274,6 +278,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .bg-gray{
   border-radius: 100px;
   border: 1px solid #E0E0E0;
+}
+
+.bg-gray.item-ios.item-block .item-inner{
+  border-bottom: 0;
 }
 
 .bg-gray-left{
@@ -408,7 +416,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .agm-map-container-inner[_ngcontent-c0]{
-  border-radius: 15px;
+
 }
 
 .list .item-block:first-child {
@@ -451,4 +459,70 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .no-border.footer.footer-ios {
   border-top: none;
+}
+
+.header{
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.toolbar-title-ios{
+  color: #333333;
+  font-size: 16px;
+}
+
+.margin-bottom-small{
+  margin-bottom: 5px;
+}
+
+.block-lines{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-top: 1px solid #F2F2F2;
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.block-lines-bottom-left-right{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.top-block-nau ion-avatar {
+  border-radius: 0;
+  height: 40px;
+}
+
+.top-block-nau [item-end] {
+  margin: 0;
+}
+
+.top-block-nau .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau .item-ios ion-avatar img{
+  border-radius: 0;
+  width: inherit;
+  height: inherit;
+}
+
+.item-block-nau .item{
+  margin-bottom: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  padding: 15px;
+}
+
+.item-block-nau .input-wrapper .label-ios, .item-block-nau-slider .input-wrapper .label-ios{
+  margin: 0;
+}
+
+.item-block-nau .input-wrapper ion-label, .item-block-nau-slider .input-wrapper ion-label{
+  height: 100%;
+}
+.item-block-nau-slider .item {
+  padding: 15px;
+}
+.item-block-nau-slider .item-wrapper{
+  margin-bottom: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }

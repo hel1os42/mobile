@@ -8,7 +8,7 @@
   <ion-list no-lines class="margin-no">
     <ion-item>
       <div padding-left margin-left item-start><img class="icon_logo" src="assets/img/logo_start.png"></div>
-      <p>5 375</p>
+      <p>{{ balance }}</p>
       <div class="font-65">NAU</div>
       <button item-end ion-button color="dark" class="btn_transfer">Transfer</button>
       <button item-end class="button-circle-medium" ion-fab color="transparent"><ion-icon name="funnel-outline" class="text-black"></ion-icon></button>
@@ -20,16 +20,16 @@
     <ion-item>
       <h2 text-uppercase>Payment 543821</h2>
       <span text-uppercase item-end>130 NAU</span>
-      <h5 class="font-75 text-lightgray">2017-08-07 13:32:25</h5>
+      <h5 class="font-75 text-lightgray">{{ today | date: "dd/MM/y  H:mm:ss" }}</h5>
     </ion-item>
   </ion-list>
 
   <p margin text-uppercase>Latest payments</p>
   <ion-list  margin-bottom margin-left margin-right no-lines class="happy">
       <ion-item *ngFor="let transaction of transactions">
-      <h2 text-uppercase>Payment {{ parse(transaction.id) }}</h2>
-      <span text-uppercase item-end class="text-lightgray">{{ transaction.amount}} NAU</span>
-      <h5 class="font-75 text-lightgray">{{ transaction.created_at.substring(0,19) }}</h5>
+      <h2 text-uppercase class="overflow">Payment {{ transaction.id }}</h2>
+      <span text-uppercase item-end class="text-lightgray">{{ transaction.amount }} NAU</span>
+      <h5 class="font-75 text-lightgray">{{ transaction.created_at | date: "dd/MM/y  H:mm:ss" }}</h5>
     </ion-item>
   </ion-list>
 
