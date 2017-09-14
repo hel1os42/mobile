@@ -18,14 +18,14 @@
   </ion-item>
 
   <ion-list margin-top no-lines class="item-block-nau">
-      <ion-item *ngFor="let offer of offers" #item>
-        <ion-avatar item-start>
-          <img src="assets/img/user_offers/image.png">
-        </ion-avatar>
-          <div class="bold font-22 text-3E4B5D">{{ offer.label}}</div>
-          <div class="bold font-14 text-FF8B10" text-uppercase>{{ offer.city }}</div>
-          <div class="font-14 text-828282">Date: {{ offer.pivot.created_at.substring(0,10) }}</div>
-      </ion-item>
+    <ion-item *ngFor="let offer of offers" #item>
+      <ion-avatar item-start>
+        <img src="assets/img/user_offers/image.png">
+      </ion-avatar>
+      <div class="bold font-22 text-3E4B5D">{{ offer.label}}</div>
+      <div class="bold font-14 text-FF8B10" text-uppercase>{{ offer.city }}</div>
+      <div class="font-14 text-828282">Date: {{ offer.pivot.created_at.substring(0,10) }}</div>
+    </ion-item>
   </ion-list>
 
 </ion-content>
