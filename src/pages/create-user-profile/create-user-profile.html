@@ -151,7 +151,7 @@
             </div>
           </a>
         </div>
-        <p padding text-uppercase class="font-14 text-4F4F4F">Confirm your location:</p>
+        <p margin text-uppercase class="font-14 text-4F4F4F">Confirm your location:</p>
         <div>
           <div *ngIf="!coords.lat">Detecting your location...</div>
           <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)">

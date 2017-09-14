@@ -49,10 +49,10 @@ export class MyApp {
                     ? AdvTabsPage
                     : TabsPage;
 
-            //this.rootPage = CreateUserProfilePage;
-
+            //this.rootPage = UserProfilePage;
+          this.rootPage = CreateUserProfilePage;
         })
-        
+
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
     }
 }
