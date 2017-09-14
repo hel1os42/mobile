@@ -26,33 +26,32 @@ import { NotificationsPage } from "../pages/notifications/notifications";
 import { ProfileService } from '../providers/profile.service';
 
 @Component({
-    templateUrl: 'app.html'
+  templateUrl: 'app.html'
 })
 export class MyApp {
-    rootPage: any;
+  rootPage: any;
 
-    constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-        //private nav: NavController,
-        private auth: AuthService,
-        private token: TokenService,
-        private profile: ProfileService) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+              //private nav: NavController,
+              private auth: AuthService,
+              private token: TokenService,
+              private profile: ProfileService) {
 
-        platform.ready().then((resp) => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            statusBar.styleDefault();
-            splashScreen.hide();
+    platform.ready().then((resp) => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      statusBar.styleDefault();
+      splashScreen.hide();
 
-            this.rootPage = !this.auth.isLoggedIn()
-                ? OnBoardingPage
-                : this.profile.getMode()
-                    ? AdvTabsPage
-                    : TabsPage;
+      this.rootPage = !this.auth.isLoggedIn()
+        ? OnBoardingPage
+        : this.profile.getMode()
+        ? AdvTabsPage
+        : TabsPage;
 
-            //this.rootPage = UserProfilePage;
-          this.rootPage = CreateUserProfilePage;
-        })
+      this.rootPage = UserOffersPage;
+    })
 
-        this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
-    }
+    this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
+  }
 }
