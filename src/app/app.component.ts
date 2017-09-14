@@ -50,7 +50,6 @@ export class MyApp {
                     : TabsPage;
 
             //this.rootPage = UserProfilePage;
-          this.rootPage = CreateUserProfilePage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);

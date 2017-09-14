@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Your Account</ion-title>
     <ion-buttons end>
-      <a><img src="../assets/img/settings.svg"></a>
+      <a (click)="openSettings()"><img src="../assets/img/settings.svg"></a>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -14,10 +14,10 @@
     </ion-avatar>
     <div class="font-18 text-3E4B5D bold">{{ user?.name }}</div>
     <div class="font-14 text-828282">{{user.points}}</div>
-    <a item-end (click)="openAchieve()" margin-right>
+    <a (click)="openRewards()" item-end margin-right>
       <a><img src="../assets/img/user_profile/btn_icon1.svg"></a>
     </a>
-    <a item-end (click)="openSettings()" margin-right>
+    <a (click)="openAchieve()" item-end margin-right>
       <a><img src="../assets/img/user_profile/btn_icon2.svg"></a>
     </a>
   </ion-item>
@@ -34,7 +34,7 @@
         <a padding-left><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon></a>
       </ion-col>
       <ion-col class="grid" col-10 align-self-center>
-        <ion-slides (click)="openRewards()" spaceBetween="10">
+        <ion-slides spaceBetween="10">
           <ion-slide>
             <ion-list no-lines>
               <ion-item class="text-white">
