@@ -491,3 +491,40 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   border-bottom: 1px solid #F2F2F2;
 }
 
+.top-block-nau ion-avatar {
+  border-radius: 0;
+  height: 40px;
+}
+
+.top-block-nau [item-end] {
+  margin: 0;
+}
+
+.top-block-nau .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau .item-ios ion-avatar img{
+  border-radius: 0;
+  width: inherit;
+  height: inherit;
+}
+
+.item-block-nau .item{
+  margin-bottom: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  padding: 15px;
+}
+
+.item-block-nau .input-wrapper .label-ios, .item-block-nau-slider .input-wrapper .label-ios{
+  margin: 0;
+}
+
+.item-block-nau .input-wrapper ion-label, .item-block-nau-slider .input-wrapper ion-label{
+  height: 100%;
+}
+
+.item-block-nau-slider .item {
+  padding: 15px;
+}
+
+.item-block-nau-slider .item-wrapper{
+  margin-bottom: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
