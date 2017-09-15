@@ -39,10 +39,10 @@ export class ApiService {
     private wrapObservable(obs: Observable<Response>, showLoading: boolean = true) {
         let loading: Loading;
         
-        if (showLoading) {
+        /*if (showLoading) {
             loading = this.loading.create({ content: '' });
             loading.present();
-        }
+        }*/
 
         let sharableObs = obs.share();
 
