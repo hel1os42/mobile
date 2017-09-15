@@ -4,26 +4,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list no-lines class="margin-no">
-    <ion-item>
-      <div padding-left margin-left item-start>
-        <ion-icon class="icon-medium" name="md-person"></ion-icon>
-      </div>
-      <p>{{ total }}</p>
-      <div class="font-65">Users</div>
-      <button item-end class="button-circle-medium" ion-fab color="transparent"><ion-icon name="funnel-outline" class="text-black"></ion-icon></button>
-    </ion-item>
-  </ion-list>
+<ion-content padding>
+  <ion-item class="border-bottom-no top-block-nau">
+    <ion-avatar item-start>
+      <img src="../assets/img/user_users/icon_user.svg">
+    </ion-avatar>
+    <div class="font-18 text-3E4B5D bold">{{ total }}</div>
+    <div class="font-14 text-828282">Users</div>
+    <a item-end>
+      <a><img src="../assets/img/user_offers/icon_right.svg"></a>
+    </a>
+  </ion-item>
 
-  <ion-list margin-bottom margin-left margin-right no-lines class="happy">
+  <ion-list margin-top no-lines class="item-block-nau">
     <ion-item *ngFor="let referral of referrals">
       <ion-avatar item-start>
         <img src="assets/img/user_users/ava1.png">
       </ion-avatar>
-      <h2 text-uppercase class="happy_title">{{ referral.name }}<img src="assets/img/user_users/icon_right.png"></h2>
-      <h5 text-uppercase class="text-lightgray">Level: <b>{{ referral.level }}</b><span margin-left>Offers: <b>15</b></span></h5>
-      <h5 class="text-lightgray">Registration date: {{ referral.created_at.substring(0,10)}}</h5>
+      <div class="happy_title font-18 bold text-3E4B5D">{{ referral.name }}<img src="assets/img/user_users/icon_right.svg"></div>
+      <div text-uppercase class="font-14 text-4F4F4F">Level: <b>{{ referral.level }}</b><span margin-left>Offers: <b>15</b></span></div>
+      <div class="text-828282 font-14">Registration date: {{ referral.created_at.substring(0,10)}}</div>
     </ion-item>
   </ion-list>
 

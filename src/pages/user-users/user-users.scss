@@ -1,22 +1,4 @@
 page-user-users{
-  .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
-    width: 50px;
-    height: 50px;
-  }
-
-  h5 b{
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .happy .item {
-    color: #fff;
-    background: #7f7f7f;
-    margin-bottom: 3px;
-    border-radius: 7px;
-    padding: 15px;
-  }
-
   .happy_title{
     position: relative;
   }
@@ -24,10 +6,10 @@ page-user-users{
   .happy_title img{
     position: absolute;
     right: 0;
-    height: 17px;
+    height: 21px;
   }
 
-  .label-ios {
-    margin: 0;
+  .item-block-nau .item-ios ion-avatar img{
+    border-radius: 100px;
   }
 }

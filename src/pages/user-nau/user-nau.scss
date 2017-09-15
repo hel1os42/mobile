@@ -1,35 +1,16 @@
 page-user-nau{
-  .icon_logo{
-    height: 30px;
-  }
-
-  .happy .item {
-    color: #fff;
-    background: #7f7f7f;
-    margin-bottom: 3px;
-    border-radius: 7px;
-  }
-
-  .happy .item .label-ios{
-    margin: 0;
-  }
-
-  .happy .item .item-inner{
-    padding: 15px;
-  }
-
   .btn_transfer.item-button{
     margin: 0;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 17px;
+    padding-right: 17px;
+    background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
   }
 
   .overflow {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  
   }
 }
