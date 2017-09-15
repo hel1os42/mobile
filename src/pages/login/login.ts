@@ -6,6 +6,7 @@ import { TabsPage } from "../tabs/tabs";
 import { ProfileService } from '../../providers/profile.service';
 import { SignUpPage } from '../signup/signup';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-login',
@@ -18,7 +19,7 @@ export class LoginPage  {
     constructor(
         private nav: NavController,
         private auth: AuthService,
-        private profile: ProfileService) { 
+        private appMode: AppModeService) { 
         
     }
 
@@ -27,7 +28,7 @@ export class LoginPage  {
             .login(this.data)
             .subscribe(
                 resp => {             
-                    this.nav.setRoot(this.profile.getMode() ? AdvTabsPage : TabsPage);
+                    this.nav.setRoot(this.appMode.getAdvMode() ? AdvTabsPage : TabsPage);
                 }
             );
     }

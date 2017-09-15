@@ -7,7 +7,6 @@ import { User } from '../models/user';
 @Injectable()
 export class ProfileService {
     user: User = new User();
-    ADV_MODE_KEY = "isAdvMode";
 
     constructor(private api: ApiService,
         private storage: StorageService) { }
@@ -33,15 +32,6 @@ export class ProfileService {
 
     getAccounts() {
         return this.api.get('profile?with=accounts');
-    }
-
-    getMode() {
-        let advMode: boolean = this.storage.get(this.ADV_MODE_KEY)
-        return advMode;
-    }
-
-    setMode(advMode) {
-        this.storage.set(this.ADV_MODE_KEY, advMode);
     }
 
     isOnboardingShown() {

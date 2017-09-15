@@ -5,11 +5,11 @@ import { ProfileService } from "../../providers/profile.service";
 import { CreateAdvUserProfilePage } from "../create-advUser-profile/create-advUser-profile";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
-import { StorageService } from "../../providers/storage.service";
 import { TabsPage } from "../tabs/tabs";
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { AuthService } from '../../providers/auth.service';
 import { PopoverComponent } from './popover.component';
+import { AppModeService } from '../../providers/appMode.service';
 
 
 @Component({
@@ -35,7 +35,7 @@ export class SettingsPage {
     private nav: NavController,
     private profile: ProfileService,
     private location: LocationService,
-    private storage: StorageService,
+    private appMode: AppModeService,
     private app: App,
     private auth: AuthService,
     private popoverCtrl: PopoverController){
@@ -64,11 +64,11 @@ export class SettingsPage {
           this.message = error.message;
           console.log(this.message);
       });
-      this.isAdvMode = this.profile.getMode();
+      this.isAdvMode = this.appMode.getAdvMode();
   }
 
   toggleAdvMode() {
-    this.profile.setMode(this.isAdvMode);
+    this.appMode.setAdvMode(this.isAdvMode);
     this.isVisibleModal = this.isAdvMode;
     if (this.isAdvMode) {
       let popover = this.popoverCtrl.create(PopoverComponent);

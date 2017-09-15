@@ -43,6 +43,7 @@ import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notificatio
 import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { PopoverComponent } from '../pages/settings/popover.component';
+import { AppModeService } from '../providers/appMode.service';
 
 
 
@@ -133,6 +134,7 @@ import { PopoverComponent } from '../pages/settings/popover.component';
     TokenService,
     ProfileService,
     OfferService,
+    AppModeService,
     Geolocation,
     LocationService
   ]
