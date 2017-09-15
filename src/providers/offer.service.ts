@@ -7,7 +7,7 @@ export class OfferService{
 
     constructor(private api: ApiService) {}
 
-    getOffersData() {
+    getOfferData() {
         return this.api.get('advert/offers/create');
     }
 
