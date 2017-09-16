@@ -44,6 +44,7 @@ import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { PopoverComponent } from '../pages/settings/popover.component';
 import { AppModeService } from '../providers/appMode.service';
 import { PlacesPage } from '../pages/places/places.';
+import { HomePage } from '../pages/home/home';
 
 
 
@@ -79,6 +80,7 @@ import { PlacesPage } from '../pages/places/places.';
     AdvTabsPage,
     AdvNotificationsPage,
     AdvHomePage,
+    HomePage,
     PopoverComponent
   ],
   imports: [
@@ -122,6 +124,7 @@ import { PlacesPage } from '../pages/places/places.';
     AdvTabsPage,
     AdvNotificationsPage,
     AdvHomePage,
+    HomePage,
     PopoverComponent
   ],
   providers: [
