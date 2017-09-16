@@ -26,6 +26,7 @@ export class SettingsPage {
   isSelectRadiusVisible: boolean = false;
   isAdvMode: boolean;
   isVisibleModal: boolean = false;
+  isToggled: boolean = false;
   
 
   //@ViewChild(Navbar) navBar: Navbar;
@@ -68,6 +69,7 @@ export class SettingsPage {
   }
 
   toggleAdvMode() {
+    this.isToggled = true;
     this.appMode.setAdvMode(this.isAdvMode);
     this.isVisibleModal = this.isAdvMode;
     if (this.isAdvMode) {
@@ -77,8 +79,12 @@ export class SettingsPage {
   }
 
   saveProfile() {
-    let page = this.isAdvMode ? AdvTabsPage : TabsPage;
-    this.app.getRootNav().setRoot(page);
+    if(this.isToggled) {
+      let page = this.isAdvMode ? AdvTabsPage : TabsPage;
+      this.app.getRootNav().setRoot(page);
+    }
+    else
+      this.nav.pop();
     //this.profile.set(this.user);
     //.subscribe(res => )
   }

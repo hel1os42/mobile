@@ -27,7 +27,8 @@ export class LoginPage  {
         this.auth
             .login(this.data)
             .subscribe(
-                resp => {             
+                resp => {
+                    this.appMode.setHomeMode(true);   
                     this.nav.setRoot(this.appMode.getAdvMode() ? AdvTabsPage : TabsPage);
                 }
             );
