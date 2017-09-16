@@ -11,8 +11,7 @@ export class AppModeService {
     constructor(private storage: StorageService) { }
     
     getAdvMode() {
-        let advMode: boolean = this.storage.get(this.ADV_MODE_KEY)
-        return advMode;
+        return !!this.storage.get(this.ADV_MODE_KEY)
     }
 
     setAdvMode(advMode) {
@@ -20,16 +19,16 @@ export class AppModeService {
     }
 
     getHomeMode() {
-        return this.storage.get(this.HOME_MODE_KEY);
+        return !!this.storage.get(this.HOME_MODE_KEY);
     }
 
-    setHomeMode() {
-        this.storage.set(this.HOME_MODE_KEY, true);
+    setHomeMode(bool) {
+        this.storage.set(this.HOME_MODE_KEY, bool);
     }
 
     getOnboardingVisible() {
-        let isSwown: boolean = this.storage.get(this.ONBOARDING_KEY);
-        return isSwown;
+        return !!this.storage.get(this.ONBOARDING_KEY);
+       
     }
 
     setOnboardingVisible() {
