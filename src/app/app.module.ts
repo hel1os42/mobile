@@ -11,7 +11,6 @@ import { StartPage } from "../pages/start/start";
 import { LoginPage } from "../pages/login/login";
 import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-profile";
 import { TabsPage } from '../pages/tabs/tabs';
-import { HomeUserPage } from '../pages/home-user-page/home-user-page';
 import { UserProfilePage } from '../pages/user-profile/user-profile';
 import { SignUpInvitePage } from "../pages/invite/invite";
 import { NotificationsPage } from '../pages/notifications/notifications';
@@ -44,6 +43,7 @@ import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { PopoverComponent } from '../pages/settings/popover.component';
 import { AppModeService } from '../providers/appMode.service';
+import { PlacesPage } from '../pages/places/places.';
 
 
 
@@ -60,7 +60,7 @@ import { AppModeService } from '../providers/appMode.service';
     CreateAdvUserProfilePage,
     CreateOfferPage,
     TabsPage,
-    HomeUserPage,
+    PlacesPage,
     UserProfilePage,
     BookmarksPage,
     NotificationsPage,
@@ -103,7 +103,7 @@ import { AppModeService } from '../providers/appMode.service';
     CreateAdvUserProfilePage,
     CreateOfferPage,
     TabsPage,
-    HomeUserPage,
+    PlacesPage,
     UserProfilePage,
     BookmarksPage,
     NotificationsPage,
