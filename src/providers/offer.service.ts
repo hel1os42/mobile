@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
-import { Offer } from "../models/offer";
+import { OfferCreate } from "../models/offerCreate";
 
 @Injectable()
 export class OfferService{
@@ -11,7 +11,7 @@ export class OfferService{
         return this.api.get('advert/offers/create');
     }
 
-    set(offer: Offer) {
+    set(offer: OfferCreate) {
         this.api.post('advert/offers', offer);
     }
 

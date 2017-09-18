@@ -1,4 +1,4 @@
-export class Offer {
+export class OfferCreate {
 
     reward: number;
     status: string;
