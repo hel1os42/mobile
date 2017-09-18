@@ -30,7 +30,7 @@ export class CreateOfferPage {
     }
 
     ionViewDidLoad() {
-        this.offerService.getOfferData()
+        this.offerService.getOfferCreate()
             .subscribe(resp => this.offer = resp);
         
         this.location.get()
