@@ -633,3 +633,91 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .wrap{
   white-space: normal;
 }
+
+/* RADIO MD */
+.radio-nau .radio {
+  padding: 14px;
+}
+
+.item-radio.item-ios ion-label {
+  margin-left: 20px;
+}
+
+.radio-nau .item {
+  margin-bottom: 10px;
+}
+
+.radio-nau .radio-icon{
+  width: 17px;
+  height: 17px;
+  border: 1px solid #E0E0E0;
+}
+
+.radio-nau .radio-inner {
+  left: 2px;
+  top: 2px;
+  width: 10.5px;
+  height: 10.5px;
+  background: linear-gradient(89.37deg, #FF5A00 0.65%, #FF8B10 99.57%);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.radio-nau .item-radio-checked ion-label{
+  color: inherit;
+}
+
+.radio-nau.radio-nau-no-margin .label{
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+/* PROGRESS BLOCK PAGE CREATE OFFER */
+
+.progress-block {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  position: relative;
+}
+
+.progress-block .circle{
+  width: 5vw;
+  height: 5vw;
+  border: 2px solid #F2F2F2;
+  border-radius: 5vw;
+  z-index: 2;
+  background: #F2F2F2;
+}
+
+.progress-block .fill-first{
+  background: #FF5A00;
+}
+
+.progress-block .fill-last{
+  background: #FF8B10;
+}
+
+.progress-block .progress-line{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 2vw;
+  height: 2vw;
+  background: #F2F2F2;
+  z-index: 0;
+  border-radius: 2vw;
+}
+
+.progress-block .progress-line-fill{
+  position: absolute;
+  left: 2vw;
+  top: 2.5vw;
+  height: 1vw;
+  background: linear-gradient(89.93deg, #FF5A00 0.01%, #FF8B10 99.99%);
+  z-index: 3;
+  border-radius: 2vw;
+}

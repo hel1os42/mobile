@@ -9,6 +9,7 @@ import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-profile";
 import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create-advUser-profile";
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
+import { CreateOffer1Page } from "../pages/create-offer-1/create-offer-1";
 import { SettingsPage } from "../pages/settings/settings";
 import { UserProfilePage } from "../pages/user-profile/user-profile";
 import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
@@ -49,7 +50,7 @@ export class MyApp {
                     ? AdvTabsPage
                     : TabsPage;
 
-            //this.rootPage = UserProfilePage;
+            //this.rootPage = CreateOffer1Page;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
