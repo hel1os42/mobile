@@ -23,5 +23,9 @@ export class OfferService{
         return this.api.get('profile?with=offers');
     }
 
+    getOffersList() {
+        return this.api.get('offers');
+    }
+
 
 }
