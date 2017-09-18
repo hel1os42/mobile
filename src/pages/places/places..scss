@@ -1,0 +1,33 @@
+page-home-user-page {
+  .grid{
+    padding: 0;
+  }
+
+  .grid img{
+    max-width: 30px;
+  }
+
+  .list{
+    margin: 0 0 16px;
+  }
+
+  .tb-background{
+    background: #aaa2a2;
+  }
+
+  .tb-background img{
+    height: auto;
+    width: 50%;
+  }
+
+  .type-food{
+    border: 1px solid rgba(62, 75, 93, 0.5);
+    padding: 2px;
+  }
+
+  .item-md ion-avatar ion-img, .item-md ion-avatar img, .item-ios ion-avatar ion-img, .item-ios ion-avatar img{
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+}

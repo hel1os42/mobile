@@ -23,7 +23,7 @@ import { TokenService } from "../providers/token.service";
 import { LoginPage } from "../pages/login/login";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { NotificationsPage } from "../pages/notifications/notifications";
-import { ProfileService } from '../providers/profile.service';
+import { AppModeService } from '../providers/appMode.service';
 
 @Component({
     templateUrl: 'app.html'
@@ -35,7 +35,7 @@ export class MyApp {
         //private nav: NavController,
         private auth: AuthService,
         private token: TokenService,
-        private profile: ProfileService) {
+        private appMode: AppModeService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -45,7 +45,7 @@ export class MyApp {
 
             this.rootPage = !this.auth.isLoggedIn()
                 ? OnBoardingPage
-                : this.profile.getMode()
+                : this.appMode.getAdvMode()
                     ? AdvTabsPage
                     : TabsPage;
 

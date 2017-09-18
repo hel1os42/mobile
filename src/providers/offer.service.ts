@@ -7,12 +7,12 @@ export class OfferService{
 
     constructor(private api: ApiService) {}
 
-    getOffersData() {
+    getOfferData() {
         return this.api.get('advert/offers/create');
     }
 
-    setOffer(date: Offer) {
-        this.api.post('advert/offers', date);
+    set(data: Offer) {
+        this.api.post('advert/offers', data);
     }
 
     getCategories() {

@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-favorites',
-  templateUrl: 'favorites.html'
+  selector: 'page-bookmarks',
+  templateUrl: 'bookmarks.html'
 })
-export class FavoritesPage {
+export class BookmarksPage {
 
   constructor(private nav: NavController) {
 

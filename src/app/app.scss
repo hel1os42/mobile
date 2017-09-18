@@ -121,6 +121,10 @@ ion-header ion-icon.back-button-icon.icon {
   font-family: 'OpenSansNauLight';
 }
 
+.font-10{
+  font-size: 12px;
+}
+
 .font-12{
   font-size: 12px;
 }
@@ -135,6 +139,10 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-22{
   font-size: 22px;
+}
+
+.font-36{
+  font-size: 36px;
 }
 
 .font-50{
@@ -212,6 +220,14 @@ ion-header ion-icon.back-button-icon.icon {
 
 .text-BDBDBD{
   color: #BDBDBD;
+}
+
+.text-FEC282{
+  color: #FEC282;
+}
+
+.text-FF5A00{
+  color: #FF5A00;
 }
 
 .text-filed-radius{
@@ -491,6 +507,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   border-bottom: 1px solid #F2F2F2;
 }
 
+/* BLOCK TOP & ITEMS SHADOW */
 .top-block-nau ion-avatar {
   border-radius: 0;
   height: 40px;
@@ -525,4 +542,75 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .item-block-nau-slider .item-wrapper{
   margin-bottom: 10px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.top-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start],
+.item-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start]{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.item-block-nau .item-ios [item-right], .item-ios [item-end]{
+  margin: 0;
+}
+
+.item-block-nau .item-ios.item-block .item-inner{
+  padding-right: 0;
+}
+
+/* TABS */
+.grid-tabs-splash{
+  background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.grid-tabs-splash .col{
+  min-height: 115px;
+}
+
+.grid-tabs-splash .col img{
+  max-width: 70%;
+}
+
+/* SEARCH */
+.block-search{
+  position: relative;
+}
+
+.btn_search_settings{
+  position: absolute;
+  right: 52px;
+  top: 20px;
+}
+
+.searchbar-ios{
+  background: transparent;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  min-height: 42px;
+}
+
+.searchbar-ios .searchbar-search-icon{
+  background-image: url(../assets/img/search.svg);
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+  left: 3px;
+  top: 6px;
+}
+
+/* SEGMENT */
+.segment-ios .segment-button{
+  border: none;
+  color: #828282;
+}
+
+.segment-ios .segment-button.segment-activated{
+  background: transparent;
+  color: #FF5A00;
+
+}
+
+.wrap{
+  white-space: normal;
 }

@@ -2,19 +2,18 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ProfileService } from "../../providers/profile.service";
 import { User } from "../../models/user";
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
-    selector: 'page-home-user-page',
-    templateUrl: 'home-user-page.html'
+    selector: 'page-places',
+    templateUrl: 'places.html'
 })
-export class HomeUserPage {
+export class PlacesPage {
 
     constructor(
         private nav: NavController,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private appMode: AppModeService) {
     }
-
-    ionViewDidEnter() {
-
-    }
+   
 }

@@ -30,7 +30,7 @@ export class CreateOfferPage {
     }
 
     ionViewDidLoad() {
-        this.offerService.getOffersData()
+        this.offerService.getOfferData()
             .subscribe(resp => this.offer = resp);
         
         this.location.get()
@@ -71,7 +71,7 @@ export class CreateOfferPage {
         this.offer.longitude = this.coords.lng;
         this.offer.category_id = "this.offerCategories[1].id";
   
-        this.offerService.setOffer(this.offer);
+        this.offerService.set(this.offer);
 
         this.nav.push(AdvUserOffersPage);
     }
