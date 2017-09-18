@@ -585,6 +585,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
 
 .grid-tabs-splash .col img{
@@ -720,4 +721,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   background: linear-gradient(89.93deg, #FF5A00 0.01%, #FF8B10 99.99%);
   z-index: 3;
   border-radius: 2vw;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

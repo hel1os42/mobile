@@ -1,4 +1,4 @@
-<ion-content class="padding-no bg-gray-nau">
+<ion-content no-bounce class="padding-no bg-gray-nau">
   <ion-grid padding-top margin-bottom class="bg-white-nau">
     <ion-row align-items-start>
       <ion-col col-3 padding-left>
@@ -9,14 +9,14 @@
         <p class="font-75 text-828282">You can add information in your account. If helps us suggest you offers and tasks</p>
       </ion-col>
       <a ion-col col-2 text-right (click)="openSettings()">
-        <h5 padding-right><img src="assets/img/settings.svg"></h5>
+        <h5><img src="assets/img/settings.svg"></h5>
       </a>
     </ion-row>
   </ion-grid>
 
   <ion-grid class="bg-white-nau">
     <ion-row>
-      <ion-col (click)="slidePrev()" col-1 align-self-center>
+      <ion-col text-right (click)="slidePrev()" col-1 align-self-center>
         <a><ion-icon name="ios-arrow-back" class="font-200 text-BDBDBD"></ion-icon></a>
       </ion-col>
       <ion-col col-10 align-self-center>
@@ -54,8 +54,8 @@
 
         </ion-slides>
       </ion-col>
-      <ion-col (click)="slideNext()" col-1 align-self-center>
-        <a><ion-icon  name="ios-arrow-forward" class="font-200 text-BDBDBD"></ion-icon></a>
+      <ion-col text-left (click)="slideNext()" col-1 align-self-center>
+        <a><ion-icon name="ios-arrow-forward" class="font-200 text-BDBDBD"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -89,7 +89,7 @@
   <div margin>
   <ion-grid margin-bottom class="bg-white-nau">
     <ion-row>
-      <ion-col (click)="slideNewsPrev()" col-1 align-self-center>
+      <ion-col text-right (click)="slideNewsPrev()" col-1 align-self-center>
         <a><ion-icon name="ios-arrow-back" class="font-200 text-BDBDBD"></ion-icon></a>
       </ion-col>
       <ion-col col-10 align-self-center class="block-slider">
@@ -107,8 +107,8 @@
           </ion-slide>
         </ion-slides>
       </ion-col>
-      <ion-col (click)="slideNewsNext()" col-1 align-self-center>
-        <a><ion-icon  name="ios-arrow-forward" class="font-200 text-BDBDBD"></ion-icon></a>
+      <ion-col text-left (click)="slideNewsNext()" col-1 align-self-center>
+        <a><ion-icon name="ios-arrow-forward" class="font-200 text-BDBDBD"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>
