@@ -47,6 +47,7 @@ import { AppModeService } from '../providers/appMode.service';
 import { PlacesPage } from '../pages/places/places.';
 import { HomePage } from '../pages/home/home';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
+import { PlacesMapPage } from '../pages/places-map/places-map';
 
 
 
@@ -84,6 +85,7 @@ import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
     AdvHomePage,
     HomePage,
     CreateOffer1Page,
+    PlacesMapPage,
     SettingsPopover,
     CreateOfferPopover,
   ],
@@ -130,6 +132,7 @@ import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
     AdvHomePage,
     HomePage,
     CreateOffer1Page,
+    PlacesMapPage,
     SettingsPopover,
     CreateOfferPopover
   ],
