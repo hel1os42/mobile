@@ -1,40 +1,43 @@
 <ion-header>
         <ion-navbar>
-            <ion-title>Create New Offer</ion-title>
+            <ion-title>Create Offer</ion-title>
             <ion-buttons end>
               <button ion-button icon-only color="dark" class="btn_search">
-                <span class="font-75">Next</span>
-                <ion-icon name="arrow-forward"></ion-icon>
+                <span class="font-12 text-333333 no-bold">Next</span>
+                <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
               </button>
             </ion-buttons>
         </ion-navbar>
+        <p margin>
+           <span class="progress-block">
+               <span class="progress-line"></span>
+               <span class="progress-line-fill"></span>
+               <span class="circle fill-first"></span>
+               <span class="circle fill-last"></span>
+               <span class="circle no-fill"></span>
+               <span class="circle no-fill"></span>
+               <span class="circle no-fill"></span>
+               <span class="circle no-fill"></span>
+            </span>
+        </p>
     </ion-header>
 
-    <ion-content padding>
+    <ion-content>
         <form (submit)="createOffer()">
-          <div class="progress-block">
-            <div class="progress-line"></div>
-            <div class="progress-line-fill"></div>
-            <span class="circle fill"></span>
-            <span class="circle no-fill"></span>
-            <span class="circle no-fill"></span>
-            <span class="circle no-fill"></span>
-            <span class="circle no-fill"></span>
-            <span class="circle no-fill"></span>
-          </div>
-          <p text-uppercase text-center padding-top>Name & desription</p>
-            <ion-list padding-top>
+
+          <div class="text-4F4F4F font-14" text-uppercase margin>Name & description</div>
+          <div class="block-lines">
                 <ion-item no-lines>
                     <ion-input [(ngModel)]="offer.label" [ngModelOptions]="{standalone: true}" class="bg-gray" type="text" placeholder="Offer Name"></ion-input>
                 </ion-item>
 
-                <ion-item padding-top no-lines>
-                  <ion-textarea [(ngModel)]="offer.description" [ngModelOptions]="{standalone: true}" class="bg-gray" placeholder="Description"></ion-textarea>
+                <ion-item no-lines margin-top>
+                  <ion-textarea [(ngModel)]="offer.description" [ngModelOptions]="{standalone: true}" class="bg-gray-radius-small" placeholder="Offer description"></ion-textarea>
                 </ion-item>
-
-                <div padding>
-                    <button class="browse font-75" color="dark" type="button" margin-top ion-button round outline block>Add photo</button>
-                </div>
+            </div>
+            <div class="block-lines">
+                <button class="browse font-16 text-3E4B5D no-bold" type="button" ion-button round outline block text-uppercase>Add picture</button>
+            </div>
                 <!--
                 <ion-item padding-top class="border-bottom-no">
                         <ion-select placeholder="Choose category" class="bg-gray width-100" interface="action-sheet">
@@ -130,15 +133,15 @@
             </div>
               -->
 
-              <div margin-top>
-                <button ion-button block text-uppercase>Next step</button>
-              </div>
+              <p margin>
+                <button ion-button block text-uppercase color="primary">Next step</button>
+              </p>
 
               <!--
               <div padding>
                 <button ion-button block text-uppercase>>Create offer</button>
               </div>
               -->
-            </ion-list>
+
         </form>
     </ion-content>

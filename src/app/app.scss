@@ -117,6 +117,14 @@ ion-header ion-icon.back-button-icon.icon {
   font-weight: bold;
 }
 
+.no-bold{
+  font-weight: normal;
+}
+
+.no-bold.button{
+  font-weight: normal;
+}
+
 .text-family-light{
   font-family: 'OpenSansNauLight';
 }
@@ -230,6 +238,10 @@ ion-header ion-icon.back-button-icon.icon {
   color: #FF5A00;
 }
 
+.text-333333{
+  color: #333333;
+}
+
 .text-filed-radius{
   background: #dbd8d8;
   padding: 0;
@@ -293,6 +305,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .bg-gray{
   border-radius: 100px;
+  border: 1px solid #E0E0E0;
+}
+
+.bg-gray-radius-small{
+  border-radius: 20px;
   border: 1px solid #E0E0E0;
 }
 
@@ -565,7 +582,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .grid-tabs-splash .col{
-  min-height: 115px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .grid-tabs-splash .col img{

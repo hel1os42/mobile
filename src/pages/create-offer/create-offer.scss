@@ -1,12 +1,7 @@
 page-create-offer {
     .browse {
-        -moz-outline-radius: 15px;
-        outline: 1px dashed #aea9a9;
-        outline-offset: -12px;
-        border-radius: 15px;
-        border: none;
-        background: #EAEAEA;
-        height: 80px;
+        border: 1px dotted #828282;
+        border-radius: 25px;
     }
 
     #map img{
@@ -43,17 +38,18 @@ page-create-offer {
   .circle{
     width: 5vw;
     height: 5vw;
-    border: 2px solid lightgray;
+    border: 2px solid #F2F2F2;
     border-radius: 5vw;
     z-index: 2;
+    background: #F2F2F2;
   }
 
-  .fill{
-    background: #fff;
+  .fill-first{
+    background: #FF5A00;
   }
 
-  .no-fill{
-    background: lightgray;
+  .fill-last{
+    background: #FF8B10;
   }
 
   .progress-line{
@@ -62,7 +58,7 @@ page-create-offer {
     left: 0;
     top: 2vw;
     height: 2vw;
-    background: lightgray;
+    background: #F2F2F2;
     z-index: 0;
     border-radius: 2vw;
   }
@@ -70,11 +66,11 @@ page-create-offer {
   .progress-line-fill{
     width: 20%;
     position: absolute;
-    left: 0;
+    left: 2vw;
     top: 2.5vw;
     height: 1vw;
-    background: #fff;
-    z-index: 1;
+    background: linear-gradient(89.93deg, #FF5A00 0.01%, #FF8B10 99.99%);
+    z-index: 3;
     border-radius: 2vw;
   }
 
