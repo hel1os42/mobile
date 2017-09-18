@@ -15,7 +15,7 @@ import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
 import { UserOffersPage } from "../pages/user-offers/user-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
-import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
+import { UserTasksPage } from "../pages/user-tasks/user-tasks";
 import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";

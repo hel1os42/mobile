@@ -32,7 +32,7 @@ import { UserOffersPage } from "../pages/user-offers/user-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { TestPage } from "../pages/test/test";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
-import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
+import { UserTasksPage } from "../pages/user-tasks/user-tasks";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";
@@ -72,7 +72,7 @@ import { HomePage } from '../pages/home/home';
     OfferPage,
     TestPage,
     SplashScreenPage,
-    UserRewardsPage,
+    UserTasksPage,
     UserAchievePage,
     UserUsersPage,
     UserNauPage,
@@ -116,7 +116,7 @@ import { HomePage } from '../pages/home/home';
     OfferPage,
     TestPage,
     SplashScreenPage,
-    UserRewardsPage,
+    UserTasksPage,
     UserAchievePage,
     UserUsersPage,
     UserNauPage,

@@ -5,7 +5,7 @@ import { StartPage } from "../start/start";
 import { ProfileService } from "../../providers/profile.service";
 import { User } from "../../models/user";
 import { SettingsPage } from "../settings/settings";
-import { UserRewardsPage } from "../user-rewards/user-rewards";
+import { UserTasksPage } from "../user-tasks/user-tasks";
 import { UserAchievePage } from "../user-achieve/user-achieve";
 import { UserOffersPage } from "../user-offers/user-offers";
 import { UserNauPage } from "../user-nau/user-nau";
@@ -46,7 +46,7 @@ export class UserProfilePage {
     }
 
     openRewards() {
-        this.nav.push(UserRewardsPage);
+        this.nav.push(UserTasksPage);
     }
 
     openAchieve() {
