@@ -11,9 +11,9 @@ import { AppModeService } from '../../providers/appMode.service';
 export class PlacesPage {
 
     constructor(
-        private nav: NavController,
-        private profile: ProfileService,
-        private appMode: AppModeService) {
+        private nav: NavController) {
     }
+
+   
    
 }

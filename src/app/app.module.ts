@@ -48,6 +48,7 @@ import { PlacesPage } from '../pages/places/places.';
 import { HomePage } from '../pages/home/home';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { PlacesMapPage } from '../pages/places-map/places-map';
+import { PlacePage } from '../pages/place/place';
 
 
 
@@ -86,6 +87,7 @@ import { PlacesMapPage } from '../pages/places-map/places-map';
     HomePage,
     CreateOffer1Page,
     PlacesMapPage,
+    PlacePage,
     SettingsPopover,
     CreateOfferPopover,
   ],
@@ -133,6 +135,7 @@ import { PlacesMapPage } from '../pages/places-map/places-map';
     HomePage,
     CreateOffer1Page,
     PlacesMapPage,
+    PlacePage,
     SettingsPopover,
     CreateOfferPopover
   ],
