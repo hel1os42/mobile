@@ -41,7 +41,8 @@ import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
 import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
-import { PopoverComponent } from '../pages/settings/popover.component';
+import { SettingsPopover } from '../pages/settings/settings.popover.';
+import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
 import { AppModeService } from '../providers/appMode.service';
 import { PlacesPage } from '../pages/places/places.';
 import { HomePage } from '../pages/home/home';
@@ -81,7 +82,8 @@ import { HomePage } from '../pages/home/home';
     AdvNotificationsPage,
     AdvHomePage,
     HomePage,
-    PopoverComponent
+    SettingsPopover,
+    CreateOfferPopover
   ],
   imports: [
     BrowserModule,
@@ -125,7 +127,8 @@ import { HomePage } from '../pages/home/home';
     AdvNotificationsPage,
     AdvHomePage,
     HomePage,
-    PopoverComponent
+    SettingsPopover,
+    CreateOfferPopover
   ],
   providers: [
     StatusBar,

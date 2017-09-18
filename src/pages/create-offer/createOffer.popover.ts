@@ -3,11 +3,11 @@ import { ViewController, App } from 'ionic-angular';
 import { CreateOfferPage } from './create-offer';
 
 @Component({
-    selector: 'popover-component',
-    templateUrl: 'popover.component.html'
+    selector: 'createOffer-popover-component',
+    templateUrl: 'createOffer.popover.html'
 })
 
-export class PopoverComponent {
+export class CreateOfferPopover {
     constructor(
         private viewCtrl: ViewController,
         private app: App) { }

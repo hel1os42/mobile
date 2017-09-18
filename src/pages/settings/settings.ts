@@ -8,7 +8,7 @@ import { Coords } from "../../models/coords";
 import { TabsPage } from "../tabs/tabs";
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { AuthService } from '../../providers/auth.service';
-import { PopoverComponent } from './popover.component';
+import { SettingsPopover } from './settings.popover.';
 import { AppModeService } from '../../providers/appMode.service';
 
 
@@ -73,7 +73,7 @@ export class SettingsPage {
     this.appMode.setAdvMode(this.isAdvMode);
     this.isVisibleModal = this.isAdvMode;
     if (this.isAdvMode) {
-      let popover = this.popoverCtrl.create(PopoverComponent);
+      let popover = this.popoverCtrl.create(SettingsPopover);
       popover.present();
     }
   }

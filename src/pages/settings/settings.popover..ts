@@ -4,11 +4,11 @@ import { CreateUserProfilePage } from '../create-user-profile/create-user-profil
 import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 
 @Component({
-    selector: 'popover-component',
-    templateUrl: 'popover.component.html'
+    selector: 'settings-popover-component',
+    templateUrl: 'settings.popover.html'
 })
 
-export class PopoverComponent {
+export class SettingsPopover {
     constructor(
         private viewCtrl: ViewController,
         private app: App) { }
