@@ -14,6 +14,5 @@ export class CreateOfferPopover {
 
     close() {
         this.viewCtrl.dismiss();
-        this.app.getRootNav().setRoot(CreateOfferPage);
     }
 }

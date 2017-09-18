@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController, App } from 'ionic-angular';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
-import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
+import { CreateOfferPage } from '../create-offer/create-offer';
 
 @Component({
     selector: 'settings-popover-component',
@@ -15,6 +15,6 @@ export class SettingsPopover {
 
     close() {
         this.viewCtrl.dismiss();
-        this.app.getRootNav().setRoot(CreateAdvUserProfilePage);
+        this.app.getRootNav().setRoot(CreateOfferPage);
     }
 }
