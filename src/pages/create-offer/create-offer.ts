@@ -2,13 +2,14 @@ import { Component } from "@angular/core";
 import { LocationService } from "../../providers/location.service";
 import { AgmCoreModule } from '@agm/core';
 import { Coords } from "../../models/coords";
-import { NavController } from "ionic-angular";
+import { NavController, App, PopoverController } from "ionic-angular";
 import { UserOffersPage } from "../user-offers/user-offers";
 import { Offer } from "../../models/offer";
 import { OfferService } from "../../providers/offer.service";
 import { ProfileService } from "../../providers/profile.service";
 import { AdvUserOffersPage } from "../adv-user-offers/adv-user-offers";
 import { OfferCategory } from "../../models/offerCategory";
+import { CreateOfferPopover} from "../create-offer/createOffer.popover"
 
 @Component({
     selector: 'page-create-offer',
@@ -26,11 +27,17 @@ export class CreateOfferPage {
     constructor(private location: LocationService,
                 private nav: NavController,
                 private offerService: OfferService,
-                private profileService: ProfileService) {
+                private profileService: ProfileService,
+                private app: App,
+                private popoverCtrl: PopoverController) {
     }
 
     ionViewDidLoad() {
-        this.offerService.getOfferData()
+
+        let popover = this.popoverCtrl.create(CreateOfferPopover);
+        popover.present();
+        
+        this.offerService.getOfferCreate()
             .subscribe(resp => this.offer = resp);
         
         this.location.get()

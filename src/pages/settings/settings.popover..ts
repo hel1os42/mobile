@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { ViewController, App } from 'ionic-angular';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
-import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
+import { CreateOfferPage } from '../create-offer/create-offer';
 
 @Component({
-    selector: 'popover-component',
-    templateUrl: 'popover.component.html'
+    selector: 'settings-popover-component',
+    templateUrl: 'settings.popover.html'
 })
 
-export class PopoverComponent {
+export class SettingsPopover {
     constructor(
         private viewCtrl: ViewController,
         private app: App) { }
 
     close() {
         this.viewCtrl.dismiss();
-        this.app.getRootNav().setRoot(CreateAdvUserProfilePage);
+        this.app.getRootNav().setRoot(CreateOfferPage);
     }
 }

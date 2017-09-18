@@ -32,7 +32,7 @@ import { UserOffersPage } from "../pages/user-offers/user-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { TestPage } from "../pages/test/test";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
-import { UserRewardsPage } from "../pages/user-rewards/user-rewards";
+import { UserTasksPage } from "../pages/user-tasks/user-tasks";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { UserUsersPage } from "../pages/user-users/user-users";
 import { UserNauPage } from "../pages/user-nau/user-nau";
@@ -41,10 +41,12 @@ import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
 import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
-import { PopoverComponent } from '../pages/settings/popover.component';
+import { SettingsPopover } from '../pages/settings/settings.popover.';
+import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
 import { AppModeService } from '../providers/appMode.service';
 import { PlacesPage } from '../pages/places/places.';
 import { HomePage } from '../pages/home/home';
+import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 
 
 
@@ -72,7 +74,7 @@ import { HomePage } from '../pages/home/home';
     OfferPage,
     TestPage,
     SplashScreenPage,
-    UserRewardsPage,
+    UserTasksPage,
     UserAchievePage,
     UserUsersPage,
     UserNauPage,
@@ -81,7 +83,9 @@ import { HomePage } from '../pages/home/home';
     AdvNotificationsPage,
     AdvHomePage,
     HomePage,
-    PopoverComponent
+    CreateOffer1Page,
+    SettingsPopover,
+    CreateOfferPopover,
   ],
   imports: [
     BrowserModule,
@@ -116,7 +120,7 @@ import { HomePage } from '../pages/home/home';
     OfferPage,
     TestPage,
     SplashScreenPage,
-    UserRewardsPage,
+    UserTasksPage,
     UserAchievePage,
     UserUsersPage,
     UserNauPage,
@@ -125,7 +129,9 @@ import { HomePage } from '../pages/home/home';
     AdvNotificationsPage,
     AdvHomePage,
     HomePage,
-    PopoverComponent
+    CreateOffer1Page,
+    SettingsPopover,
+    CreateOfferPopover
   ],
   providers: [
     StatusBar,
