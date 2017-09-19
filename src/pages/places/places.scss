@@ -32,7 +32,9 @@ page-places {
   }
 
   agm-map {
-    height: 300px;
-    }
+    height: calc(100vh - 159px);
+    height: -webkit-calc(100vh - 159px);
+    height: -moz-calc(100vh - 159px);
+  }
 
 }

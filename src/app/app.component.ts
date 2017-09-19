@@ -25,6 +25,8 @@ import { LoginPage } from "../pages/login/login";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { NotificationsPage } from "../pages/notifications/notifications";
 import { AppModeService } from '../providers/appMode.service';
+import { PlacePage } from "../pages/place/place";
+import { PlacesPage } from "../pages/places/places";
 
 @Component({
     templateUrl: 'app.html'
@@ -50,7 +52,7 @@ export class MyApp {
                     ? AdvTabsPage
                     : TabsPage;
 
-            //this.rootPage = CreateOffer1Page;
+            //this.rootPage = PlacesPage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
