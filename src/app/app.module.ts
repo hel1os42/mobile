@@ -33,6 +33,7 @@ import { OfferPage } from "../pages/offer/offer";
 import { TestPage } from "../pages/test/test";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
 import { SplashInfoPage } from '../pages/splash-info/splash-info';
+import { SplashNewsPage } from '../pages/splash-news/splash-news';
 import { UserTasksPage } from "../pages/user-tasks/user-tasks";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { UserUsersPage } from "../pages/user-users/user-users";
@@ -87,9 +88,11 @@ import { CompanyService } from '../providers/company.service';
     CreateOffer1Page,
     PlaceFeedbackPage,
     PlacePage,
+    SplashInfoPage,
+    SplashNewsPage,
     SettingsPopover,
-    CreateOfferPopover,
-    SplashInfoPage
+    CreateOfferPopover
+   
   ],
   imports: [
     BrowserModule,
@@ -136,9 +139,11 @@ import { CompanyService } from '../providers/company.service';
     CreateOffer1Page,
     PlaceFeedbackPage,
     PlacePage,
+    SplashInfoPage,
+    SplashNewsPage,
     SettingsPopover,
-    CreateOfferPopover,
-    SplashInfoPage
+    CreateOfferPopover
+    
   ],
   providers: [
     StatusBar,
