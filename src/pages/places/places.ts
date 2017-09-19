@@ -6,6 +6,7 @@ import { User } from "../../models/user";
 import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
+import { PlacePage } from '../place/place';
 
 @Component({
     selector: 'page-places',
@@ -49,7 +50,8 @@ export class PlacesPage {
 
     constructor(
         private nav: NavController,
-        private location: LocationService) {
+        private location: LocationService,
+        private appMode: AppModeService) {
     }
 
     ionViewDidEnter() {
@@ -70,5 +72,8 @@ export class PlacesPage {
         this.isMapVisible = !this.isMapVisible;
     }
 
+    openPlace() {
+        this.nav.setRoot(PlacePage);
+    }
 
 }

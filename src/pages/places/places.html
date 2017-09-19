@@ -50,7 +50,7 @@
   </ion-item>
 
   <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
-    <ion-item >
+    <ion-item (click)="openPlace()">
       <ion-avatar item-start text-center>
         <img src="assets/img/user_home/image1.png">
         <span text-uppercase class="bold font-12 text-FF5A00">Featured</span>

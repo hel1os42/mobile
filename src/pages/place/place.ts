@@ -14,7 +14,7 @@ export class PlacePage {
     }
 
     ionViewDidLoad() {
-        this.offerService.getOffersList();
+        //this.offerService.getOffersList();to do
     }
 
 }
