@@ -32,6 +32,7 @@ import { UserOffersPage } from "../pages/user-offers/user-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { TestPage } from "../pages/test/test";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
+import { SplashInfoPage } from '../pages/splash-info/splash-info';
 import { UserTasksPage } from "../pages/user-tasks/user-tasks";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { UserUsersPage } from "../pages/user-users/user-users";
@@ -50,9 +51,6 @@ import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
 import { PlacePage } from '../pages/place/place';
 import { CompanyService } from '../providers/company.service';
-
-
-
 
 @NgModule({
   declarations: [
@@ -91,6 +89,7 @@ import { CompanyService } from '../providers/company.service';
     PlacePage,
     SettingsPopover,
     CreateOfferPopover,
+    SplashInfoPage
   ],
   imports: [
     BrowserModule,
@@ -138,7 +137,8 @@ import { CompanyService } from '../providers/company.service';
     PlaceFeedbackPage,
     PlacePage,
     SettingsPopover,
-    CreateOfferPopover
+    CreateOfferPopover,
+    SplashInfoPage
   ],
   providers: [
     StatusBar,
