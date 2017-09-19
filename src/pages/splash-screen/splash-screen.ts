@@ -3,6 +3,7 @@ import { NavController, Slides, App } from 'ionic-angular';
 import { SettingsPage } from "../settings/settings";
 import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
 import { PlacesPage } from '../places/places';
+import { SplashInfoPage } from '../splash-info/splash-info';
 
 @Component({
     selector: 'page-splash-screen',
@@ -44,6 +45,10 @@ export class SplashScreenPage {
     openPlaces() {
         //this.app.getRootNav().setRoot(PlacesPage);
         this.nav.setRoot(PlacesPage);
+    }
+
+    openSplashInfo() {
+        this.nav.setRoot(SplashInfoPage);
     }
 
 
