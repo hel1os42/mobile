@@ -44,7 +44,7 @@ import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { SettingsPopover } from '../pages/settings/settings.popover.';
 import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
 import { AppModeService } from '../providers/appMode.service';
-import { PlacesPage } from '../pages/places/places.';
+import { PlacesPage } from '../pages/places/places';
 import { HomePage } from '../pages/home/home';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { PlacesMapPage } from '../pages/places-map/places-map';
