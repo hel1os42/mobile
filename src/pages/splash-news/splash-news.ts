@@ -10,13 +10,15 @@ import { TabsPage } from '../tabs/tabs';
 export class SplashNewsPage {
 
     constructor(private app: App,
-                private appMode: AppModeService) {
+                private appMode: AppModeService,
+                private nav: NavController) {
 
     }
 
     openHome() {
         this.appMode.setHomeMode(true);
-        this.app.getRootNav().setRoot(TabsPage);
+        //this.app.getRootNav().setRoot(TabsPage);
+        this.nav.setRoot(TabsPage)
     }
     
 }
