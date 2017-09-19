@@ -42,26 +42,28 @@
 <ion-content padding no-bounce>
   <ion-item class="block-search" no-lines>
     <ion-searchbar round placeholder=""></ion-searchbar>
-    <a item-end><img src="assets/img/user_home/icon_pin.svg"></a>
-    <!--<a item-end><img src="assets/img/user_home/icon_pin_hide.svg"></a>-->
+    <a (click)="toggleMap()" item-end>
+      <img *ngIf="!isMapVisible" src="assets/img/user_home/icon_pin.svg">
+      <img *ngIf="isMapVisible" src="assets/img/user_home/icon_pin.svg">
+  </a>
     <a class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
   </ion-item>
 
-  <ion-list no-lines class="item-block-nau margin-top-10">
-    <ion-item>
+  <ion-list *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
+    <ion-item >
       <ion-avatar item-start text-center>
         <img src="assets/img/user_home/image1.png">
         <span text-uppercase class="bold font-12 text-FF5A00">Featured</span>
       </ion-avatar>
-        <div>
-          <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-          <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-          <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-          <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-          <ion-icon class="text-FEC282 font-12" name="star-outline"></ion-icon>
-          <img src="assets/img/user_home/icon_small_user.svg"><span class="font-75"> 128</span>
-          <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> 100 m</span>
-        </div>
+      <div>
+        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
+        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
+        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
+        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
+        <ion-icon class="text-FEC282 font-12" name="star-outline"></ion-icon>
+        <img src="assets/img/user_home/icon_small_user.svg"><span class="font-75"> 128</span>
+        <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> 100 m</span>
+      </div>
       <div class="bold font-22 text-3E4B5D">The fair food
         <ion-icon class="font-75" name="ios-arrow-forward"></ion-icon>
       </div>
@@ -83,4 +85,10 @@
 
   </ion-list>
 
+  <div *ngIf="isMapVisible">
+      <div *ngIf="!coords.lat">Detecting your location...</div>
+      <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+        <agm-marker *ngFor="let tempCoord of tempCoords" [latitude]="tempCoord.lat" [longitude]="tempCoord.lng"></agm-marker>
+      </agm-map>
+  </div>
 </ion-content>

@@ -1,4 +1,4 @@
-page-home-user-page {
+page-places {
   .grid{
     padding: 0;
   }
@@ -30,4 +30,9 @@ page-home-user-page {
     height: 60px;
     margin-bottom: 10px;
   }
+
+  agm-map {
+    height: 300px;
+    }
+
 }
