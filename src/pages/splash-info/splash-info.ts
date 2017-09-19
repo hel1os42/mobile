@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from "ionic-angular";
+import { NavController, App } from "ionic-angular";
+import { AppModeService } from '../../providers/appMode.service';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
     selector: 'page-splash-info',
@@ -7,7 +9,13 @@ import { NavController } from "ionic-angular";
 })
 export class SplashInfoPage {
 
-    constructor() {
+    constructor(private app: App,
+                private appMode: AppModeService) {
 
-    } 
+    }
+    
+    toHome() {
+        this.appMode.setHomeMode(true);
+        this.app.getRootNav().setRoot(TabsPage);
+    }
 }
