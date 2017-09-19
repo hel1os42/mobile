@@ -4,6 +4,7 @@ import { SettingsPage } from "../settings/settings";
 import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
 import { PlacesPage } from '../places/places';
 import { SplashInfoPage } from '../splash-info/splash-info';
+import { SplashNewsPage } from '../splash-news/splash-news';
 
 @Component({
     selector: 'page-splash-screen',
@@ -49,6 +50,10 @@ export class SplashScreenPage {
 
     openSplashInfo() {
         this.nav.setRoot(SplashInfoPage);
+    }
+
+    openSplashNews() {
+        this.nav.setRoot(SplashNewsPage);
     }
 
 
