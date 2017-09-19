@@ -8,7 +8,7 @@ import { Coords } from "../../models/coords";
 import { TabsPage } from "../tabs/tabs";
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { AuthService } from '../../providers/auth.service';
-import { SettingsPopover } from './settings.popover.';
+import { SettingsPopover } from './settings.popover';
 import { AppModeService } from '../../providers/appMode.service';
 
 

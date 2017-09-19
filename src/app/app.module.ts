@@ -41,7 +41,7 @@ import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
 import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
-import { SettingsPopover } from '../pages/settings/settings.popover.';
+import { SettingsPopover } from '../pages/settings/settings.popover';
 import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
 import { AppModeService } from '../providers/appMode.service';
 import { PlacesPage } from '../pages/places/places';
