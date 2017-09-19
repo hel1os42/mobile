@@ -52,7 +52,7 @@ export class PlacesPage {
         private location: LocationService) {
     }
 
-    ionViewDidLoad() {
+    ionViewDidEnter() {
         this.location.get()
             .then((resp) => {
                 this.coords = {
