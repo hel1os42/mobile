@@ -47,7 +47,7 @@ import { AppModeService } from '../providers/appMode.service';
 import { PlacesPage } from '../pages/places/places';
 import { HomePage } from '../pages/home/home';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
-import { PlacesMapPage } from '../pages/places-map/places-map';
+import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
 import { PlacePage } from '../pages/place/place';
 
 
@@ -86,7 +86,7 @@ import { PlacePage } from '../pages/place/place';
     AdvHomePage,
     HomePage,
     CreateOffer1Page,
-    PlacesMapPage,
+    PlaceFeedbackPage,
     PlacePage,
     SettingsPopover,
     CreateOfferPopover,
@@ -134,7 +134,7 @@ import { PlacePage } from '../pages/place/place';
     AdvHomePage,
     HomePage,
     CreateOffer1Page,
-    PlacesMapPage,
+    PlaceFeedbackPage,
     PlacePage,
     SettingsPopover,
     CreateOfferPopover

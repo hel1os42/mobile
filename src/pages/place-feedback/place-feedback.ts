@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-places-map',
-  templateUrl: 'places-map.html'
+  selector: 'page-place-feedback',
+  templateUrl: 'place-feedback.html'
 })
-export class PlacesMapPage {
+export class PlaceFeedbackPage {
 
   constructor(private nav: NavController) {
 
