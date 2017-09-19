@@ -1,16 +1,33 @@
 <ion-header>
-        <ion-navbar>
-          <ion-title>INFORMATION</ion-title>
-        </ion-navbar>
-      </ion-header>
+  <ion-navbar>
+    <ion-title>INFORMATION</ion-title>
+  </ion-navbar>
+</ion-header>
 
-      <ion-content padding>
-            <h5 class="font-22 text-3E4B5D bold">Search offers</h5>
-            <p>
-                <img margin-top src="assets/img/splash_screen/slide2.svg">
-                Some of our Services allow you to upload, add, store, 
-                send or receive content. At the same time, 
-                all rights to intellectual property in relation 
-                to these materials remain with their owner.
-            </p>
-      </ion-content>
+<ion-content padding>
+  <h5 margin-top class="font-22 text-3E4B5D bold">Search offers</h5>
+  <div class="flex">
+    <img margin-right src="assets/img/splash_screen/slide2.svg">
+    <div padding-top>
+      Some of our Services allow you to upload, add, store,
+       send or receive content. At the same time, all rights to intellectual
+      property in relation to these materials remain with their owner.
+    </div>
+  </div>
+  <p>
+    Our Services allow you to upload, add, store, send or receive content. 
+    At the same time, all rights to intellectual property
+    in relation to these materials remain with their owner. 
+    Simply put, everything that was yours will remain so.
+  </p>
+  <p padding-bottom>
+    Allow you to upload, add, store, send or receive content. 
+    At the same time, all rights to intellectual property in relation
+    to these materials remain with their owner. 
+    Simply put, everything that was yours will remain so.
+  </p>
+
+    <p margin-top>
+      <button margin-top color="primary" (click)="toHome()" ion-button block>search new offers</button>
+    </p>
+</ion-content>
