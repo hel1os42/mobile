@@ -49,11 +49,11 @@ export class SplashScreenPage {
     }
 
     openSplashInfo() {
-        this.nav.setRoot(SplashInfoPage);
+        this.nav.push(SplashInfoPage);
     }
 
     openSplashNews() {
-        this.nav.setRoot(SplashNewsPage);
+        this.nav.push(SplashNewsPage);
     }
 
 
