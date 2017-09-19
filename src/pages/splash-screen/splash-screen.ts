@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides, App } from 'ionic-angular';
 import { SettingsPage } from "../settings/settings";
 import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
+import { PlacesPage } from '../places/places';
 
 @Component({
     selector: 'page-splash-screen',
@@ -38,6 +39,11 @@ export class SplashScreenPage {
 
     slideNewsPrev() {
         this.slidesNews.slidePrev();
+    }
+
+    openPlaces() {
+        //this.app.getRootNav().setRoot(PlacesPage);
+        this.nav.setRoot(PlacesPage);
     }
 
 
