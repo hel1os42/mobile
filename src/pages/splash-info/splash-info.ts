@@ -14,7 +14,7 @@ export class SplashInfoPage {
 
     }
     
-    toHome() {
+    openHome() {
         this.appMode.setHomeMode(true);
         this.app.getRootNav().setRoot(TabsPage);
     }
