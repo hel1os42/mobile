@@ -1,0 +1,19 @@
+page-bookmarks{
+  .btn_transfer.item-button{
+    margin-top: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 17px;
+    padding-right: 17px;
+    background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+    border-radius: 12px;
+  }
+
+  .item-block-nau.block-places .item-ios [item-right], .item-ios [item-end]{
+    width: 33px;
+  }
+
+  .block-offers{
+    display: none;
+  }
+}
