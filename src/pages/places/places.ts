@@ -7,6 +7,8 @@ import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
 import { PlacePage } from '../place/place';
+import { CompanyService } from '../../providers/company.service';
+import { Company } from '../../models/company';
 
 @Component({
     selector: 'page-places',
@@ -17,41 +19,17 @@ export class PlacesPage {
     isMapVisible: boolean = false;
     coords = new Coords;
     message;
-    tempCoords: Coords[] = [
-        {
-            lat: 49.3,
-            lng: 28.4999998
-        },
-        {
-            lat: 49.1442104,
-            lng: 28.4459988
-        },
-        {
-            lat: 49.4442110,
-            lng: 28.445870499999955
-        },
-        {
-            lat: 49.2643,
-            lng: 28.44589922
-        },
-        {
-            lat: 49.284215,
-            lng: 28.7458
-        },
-        {
-            lat: 49.284415,
-            lng: 28.4658
-        },
-        {
-            lat: 49.294215,
-            lng: 28.4458
-        },
-    ];
+    companies: Company[];
 
     constructor(
         private nav: NavController,
         private location: LocationService,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private company: CompanyService) {
+    }
+
+    ionViewDidLoad() {
+        this.companies = this.company.getCompanies();
     }
 
     ionViewDidEnter() {
@@ -73,7 +51,7 @@ export class PlacesPage {
     }
 
     openPlace() {
-        this.nav.setRoot(PlacePage);
+        this.nav.push(PlacePage);
     }
 
 }
