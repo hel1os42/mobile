@@ -7,8 +7,8 @@ import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
 import { PlacePage } from '../place/place';
-import { CompanyService } from '../../providers/company.service';
 import { Company } from '../../models/company';
+import { OfferService } from '../../providers/offer.service';
 
 @Component({
     selector: 'page-places',
@@ -25,11 +25,12 @@ export class PlacesPage {
         private nav: NavController,
         private location: LocationService,
         private appMode: AppModeService,
-        private company: CompanyService) {
+        private offers: OfferService) {
     }
 
     ionViewDidLoad() {
-        this.companies = this.company.getCompanies();
+        this.offers.getCompanies()
+            .subscribe(companies => this.companies = companies);
     }
 
     ionViewDidEnter() {
@@ -50,8 +51,19 @@ export class PlacesPage {
         this.isMapVisible = !this.isMapVisible;
     }
 
-    openPlace() {
-        this.nav.push(PlacePage);
+    openPlace(id) {
+        this.nav.push(PlacePage, { companyId: id });
     }
 
+    getStars(star: number){
+        let showStars: boolean[] = [];
+        for (var i = 0; i < 5; i++) {
+            showStars.push(star > i);
+        }
+        return showStars;
+    }
+
+    getDistance(latitude: number, longitude: number) {
+        return 200;
+    }
 }
