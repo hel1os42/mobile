@@ -51,7 +51,6 @@ import { HomePage } from '../pages/home/home';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
 import { PlacePage } from '../pages/place/place';
-import { CompanyService } from '../providers/company.service';
 
 @NgModule({
   declarations: [
@@ -158,7 +157,6 @@ import { CompanyService } from '../providers/company.service';
     AppModeService,
     Geolocation,
     LocationService,
-    CompanyService
   ]
 })
 export class AppModule {}
