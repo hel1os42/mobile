@@ -5,10 +5,10 @@ export class MockCompanies {
         {
             id: "1",
             name: "The Fair Food",
-            description: "The modern concept of a sandwich using slices of bread",
+            description: "Double Up Food Bucks is a national model for healthy food incentives active in more than 20 states.",
             about: null,
             testimonials_count: 1,
-            testimonials: "Some of our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner.",
+            testimonials: null,
             categories_count: 2,
             categories: [
                 { id: '1', name: 'Bakery', children_count: 0 },
@@ -31,7 +31,7 @@ export class MockCompanies {
             description: "A sandwich is a food typically consisting of vegetables",
             about: null,
             testimonials_count: 1,
-            testimonials: "",
+            testimonials: null,
             categories_count: 2,
             categories: [
                 { id: '3', name: 'Sandwitch', children_count: 0 },
@@ -54,7 +54,7 @@ export class MockCompanies {
             description: "European food and coffee",
             about: null,
             testimonials_count: 1,
-            testimonials: "",
+            testimonials: null,
             categories_count: 2,
             categories: [
                 { id: '5', name: 'European Food', children_count: 0 },

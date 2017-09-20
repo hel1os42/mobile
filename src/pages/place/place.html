@@ -14,22 +14,20 @@
     </div>
   </div>
   <div text-right class="margin-10">
-    <span text-uppercase class="bold font-12 text-FF5A00 margin-right-10">Featured</span>
-    <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-    <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-    <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-    <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-    <ion-icon class="text-FEC282 font-12" name="star-outline"></ion-icon>
-    <img class="margin-left-10" src="assets/img/user_home/icon_small_user.svg"><span class="font-75"> 128</span>
-    <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> 100 m</span>
+    <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 margin-right-10">Featured</span>
+    <ng-container *ngFor="let showStar of getStars(company.stars)">
+        <ion-icon class="text-FEC282 font-12" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+      </ng-container>   
+    <img class="margin-left-10" src="assets/img/user_home/icon_small_user.svg"><span class="font-75"> {{ company.testimonials_count }}</span>
+    <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> {{ getDistance(company.latitude, company.longitude) }} m</span>
   </div>
-  <div margin-top margin-right margin-left class="text-3E4B5D font-36 bold">The Fair Food</div>
-  <div margin-left margin-right class="text-4F4F4F font-12 bold wrap">330S. Pineaple Ave., Suite 201 Sarasota, Florida 34236</div>
+  <div margin-top margin-right margin-left class="text-3E4B5D font-36 bold">{{ company.name }}</div>
+  <div margin-left margin-right class="text-4F4F4F font-12 bold wrap">{{ company.address }}</div>
   <ion-item no-lines>
-    <div margin-left class="font-12 text-828282 wrap">Double Up Food Bucks is a national model for healthy food incentives active in more than 20 states.</div>
+    <div margin-left class="font-12 text-828282 wrap">{{ company.description }}</div>
     <div item-end>
       <div class="font-36 text-FF5A00" text-center>
-        6
+        {{ company. offers_count }}
       </div>
       <div class="font-10 text-828282">
         offers
