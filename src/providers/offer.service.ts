@@ -24,7 +24,7 @@ export class OfferService {
             throw new Error('Invalid compamy ID');
         let company = companies[0];
         company.offers = MockOffers.items;
-        company.offers_count = MockOffers.length;
+        company.offers_count = MockOffers.items.length;
         return Observable.of(company);
     }
 

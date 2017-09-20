@@ -50,26 +50,25 @@
   </ion-item>
 
   <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
-    <ion-item *ngFor="let company of companies" (click)="openPlace()">
+    <ion-item *ngFor="let company of companies" (click)="openPlace(company.id)">
       <ion-avatar item-start text-center>
         <img src="assets/img/user_home/image1.png">
         <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00">Featured</span>
       </ion-avatar>
       <div>
-        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 font-12" name="star-outline"></ion-icon>
+        <ng-container *ngFor="let showStar of getStars(company.stars)">
+          <ion-icon class="text-FEC282 font-12" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+        </ng-container>        
         <img src="assets/img/user_home/icon_small_user.svg"><span class="font-75">{{ company.testimonials_count }}</span>
-        <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> 100 m</span>
+        <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg">
+        <span class="font-75"> {{ getDistance(company.latitude, company.longitude) }} m</span>
       </div>
       <div class="bold font-22 text-3E4B5D">{{ company.name }}
         <ion-icon class="font-75" name="ios-arrow-forward"></ion-icon>
       </div>
-      <span *ngFor="let category of company.categories">
+      <ng-container *ngFor="let category of company.categories">
           <span class="type-food font-75 text-3E4B5D" >{{ category.name }}</span>      
-      </span>
+      </ng-container>
       <div margin-top class="text-828282 font-12 wrap">{{ company. description }}</div>
       <div item-end>
         <div text-center>

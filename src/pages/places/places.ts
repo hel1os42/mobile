@@ -51,7 +51,19 @@ export class PlacesPage {
         this.isMapVisible = !this.isMapVisible;
     }
 
-    openPlace() {
-        this.nav.push(PlacePage);
+    openPlace(id) {
+        this.nav.push(PlacePage, { companyId: id });
+    }
+
+    getStars(star: number){
+        let showStars: boolean[] = [];
+        for (var i = 0; i < 5; i++) {
+            showStars.push(star > i);
+        }
+        return showStars;
+    }
+
+    getDistance(latitude: number, longitude: number) {
+        return 200;
     }
 }

@@ -15,7 +15,7 @@ export class Company {
     stars: number;
     is_featured: boolean;
     is_starred: boolean;
-    image_url;
+    image_url: string;
     address: string;
     latitude: number;
     longitude: number;

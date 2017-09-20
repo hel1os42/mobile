@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { OfferService } from '../../providers/offer.service';
 
 @Component({
@@ -8,13 +8,18 @@ import { OfferService } from '../../providers/offer.service';
 })
 export class PlacePage {
 
-    constructor(private nav: NavController,
-                private offerService: OfferService) {
+    constructor(
+        private nav: NavController,
+        private offers: OfferService,
+        private navParams: NavParams) {
 
     }
 
     ionViewDidLoad() {
-        //this.offerService.getOffersList();to do
+        let companyId = this.navParams.get('companyId');
+        this.offers.getCompany(companyId)
+            .subscribe(company => console.log(company));
+        
+        ;
     }
-
 }
