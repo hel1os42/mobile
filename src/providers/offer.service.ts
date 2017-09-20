@@ -13,7 +13,7 @@ export class OfferService {
         private api: ApiService) { }
 
     getCompanies() {
-        // return this.api.get('companies');
+        // return this.api.get('companies?with=categories');
         return Observable.of(MockCompanies.items);
     }
 

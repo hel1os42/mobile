@@ -67,8 +67,9 @@
       <div class="bold font-22 text-3E4B5D">{{ company.name }}
         <ion-icon class="font-75" name="ios-arrow-forward"></ion-icon>
       </div>
-      <span class="type-food font-75 text-3E4B5D">Bakery</span>
-      <span class="type-food font-75 text-3E4B5D">Burger</span>
+      <span *ngFor="let category of company.categories">
+          <span class="type-food font-75 text-3E4B5D" >{{ category.name }}</span>      
+      </span>
       <div margin-top class="text-828282 font-12 wrap">{{ company. description }}</div>
       <div item-end>
         <div text-center>

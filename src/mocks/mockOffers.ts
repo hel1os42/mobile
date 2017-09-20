@@ -23,7 +23,7 @@ export class MockOffers {
             latitude: 50.466430,
             longitude: 30.669317,
             radius: 50000,
-            categories_count: 1,
+            categories_count: 1
         },
         {
             image_url: "",

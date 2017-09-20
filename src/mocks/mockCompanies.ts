@@ -9,8 +9,11 @@ export class MockCompanies {
             about: null,
             testimonials_count: 1,
             testimonials: "Some of our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner.",
-            categories_count: 1,
-            categories: null,
+            categories_count: 2,
+            categories: [
+                { id: '1', name: 'Bakery', children_count: 0 },
+                { id: '2', name: 'Burger', children_count: 0 }
+            ],
             offers_count: 3,
             offers: null,
             stars: 1,
@@ -29,8 +32,11 @@ export class MockCompanies {
             about: null,
             testimonials_count: 1,
             testimonials: "",
-            categories_count: 1,
-            categories: null,
+            categories_count: 2,
+            categories: [
+                { id: '3', name: 'Sandwitch', children_count: 0 },
+                { id: '4', name: 'Coffee', children_count: 0 }
+            ],
             offers_count: 0,
             offers: null,
             stars: 1,
@@ -49,8 +55,11 @@ export class MockCompanies {
             about: null,
             testimonials_count: 1,
             testimonials: "",
-            categories_count: 1,
-            categories: null,
+            categories_count: 2,
+            categories: [
+                { id: '5', name: 'European Food', children_count: 0 },
+                { id: '4', name: 'Coffee', children_count: 0 }
+            ],
             offers_count: 0,
             offers: null,
             stars: 1,
