@@ -629,7 +629,31 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .segment-ios .segment-button.segment-activated{
   background: transparent;
   color: #FF5A00;
+}
 
+/* SEGMENT NAU */
+.nau-segment.segment-ios .segment-button{
+  border: 1px solid #FF8B10;
+  color: #FF8B10;
+}
+
+.nau-segment.segment-ios .segment-button.segment-activated{
+  background: #FF8B10;
+  color: #FFF;
+}
+
+.nau-segment.segment-ios .segment-button:first-of-type {
+  border-top-left-radius: 100px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 100px;
+}
+
+.nau-segment.segment-ios .segment-button:last-of-type {
+  border-top-left-radius: 0;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  border-bottom-left-radius: 0;
 }
 
 .wrap{
@@ -794,4 +818,31 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .display-table span, .display-table div{
   display: table-cell;
+}
+
+.star_right{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.num_right{
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
+.flex{
+  display: flex;
+}
+
+.plus{
+  padding-top: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.type-food{
+  border: 1px solid rgba(62, 75, 93, 0.5);
+  padding: 2px;
 }
