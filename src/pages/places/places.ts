@@ -29,7 +29,8 @@ export class PlacesPage {
     }
 
     ionViewDidLoad() {
-        this.companies = this.company.getCompanies();
+        this.company.getCompanies()
+            .subscribe(companies => this.companies = companies);
     }
 
     ionViewDidEnter() {
@@ -53,5 +54,4 @@ export class PlacesPage {
     openPlace() {
         this.nav.push(PlacePage);
     }
-
 }
