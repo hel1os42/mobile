@@ -1,0 +1,38 @@
+<svg width="24" height="22" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Star</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-1956 -74)">
+<rect x="1956" y="74" width="24" height="22" fill="#F2F2F2"/>
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M 1599 -361L 2013 -361L 2013 375L 1599 375L 1599 -361Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="04-place" clip-path="url(#clip-0)">
+<path d="M 1599 -361L 2013 -361L 2013 375L 1599 375L 1599 -361Z" fill="#FFFFFF"/>
+<g id="Group">
+<g id="Group">
+<g id="Group">
+<g id="Rectangle 2" filter="url(#filter0_d)">
+<use xlink:href="#path0_fill" transform="translate(1619 60)" fill="#FFFFFF"/>
+</g>
+<g id="Star">
+<use xlink:href="#path1_fill" transform="translate(1956 74)" fill="#FEC282"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d" filterUnits="userSpaceOnUse" x="1601" y="48" width="410" height="176" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
+<feOffset dx="0" dy="6"/>
+<feGaussianBlur stdDeviation="9"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<path id="path0_fill" d="M 0 0L 374 0L 374 140L 0 140L 0 0Z"/>
+<path id="path1_fill" d="M 12 0L 15.174 7.63131L 23.4127 8.2918L 17.1357 13.6687L 19.0534 21.7082L 12 17.4L 4.94658 21.7082L 6.8643 13.6687L 0.587322 8.2918L 8.82596 7.63131L 12 0Z"/>
+</defs>
+</svg>

@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Your Account</ion-title>
     <ion-buttons end>
-      <a (click)="openSettings()"><img src="../assets/img/settings.svg"></a>
+      <a (click)="openSettings()"><img src="assets/img/settings.svg"></a>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -15,10 +15,10 @@
     <div class="font-18 text-3E4B5D bold">{{ user?.name }}</div>
     <div class="font-14 text-828282">{{user.points}}</div>
     <a (click)="openRewards()" item-end margin-right>
-      <a><img src="../assets/img/user_profile/btn_icon1.svg"></a>
+      <a><img src="assets/img/user_profile/btn_icon1.svg"></a>
     </a>
     <a (click)="openAchieve()" item-end margin-right>
-      <a><img src="../assets/img/user_profile/btn_icon2.svg"></a>
+      <a><img src="assets/img/user_profile/btn_icon2.svg"></a>
     </a>
   </ion-item>
 
@@ -31,7 +31,7 @@
   <ion-grid text-center class="block-slider">
     <ion-row>
       <ion-col col-1 align-self-center>
-        <a padding-left><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon></a>
+        <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon></a>
       </ion-col>
       <ion-col class="grid" col-10 align-self-center>
         <ion-slides spaceBetween="10">
@@ -49,7 +49,7 @@
         </ion-slides>
       </ion-col>
       <ion-col col-1 align-self-center>
-        <a padding-right><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200 text-828282"></ion-icon></a>
+        <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200 text-828282"></ion-icon></a>
       </ion-col>
     </ion-row>
   </ion-grid>

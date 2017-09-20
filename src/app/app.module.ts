@@ -32,6 +32,8 @@ import { UserOffersPage } from "../pages/user-offers/user-offers";
 import { OfferPage } from "../pages/offer/offer";
 import { TestPage } from "../pages/test/test";
 import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
+import { SplashInfoPage } from '../pages/splash-info/splash-info';
+import { SplashNewsPage } from '../pages/splash-news/splash-news';
 import { UserTasksPage } from "../pages/user-tasks/user-tasks";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { UserUsersPage } from "../pages/user-users/user-users";
@@ -41,15 +43,14 @@ import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
 import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
-import { SettingsPopover } from '../pages/settings/settings.popover.';
+import { SettingsPopover } from '../pages/settings/settings.popover';
 import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
 import { AppModeService } from '../providers/appMode.service';
-import { PlacesPage } from '../pages/places/places.';
+import { PlacesPage } from '../pages/places/places';
 import { HomePage } from '../pages/home/home';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
-
-
-
+import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
+import { PlacePage } from '../pages/place/place';
 
 @NgModule({
   declarations: [
@@ -84,8 +85,13 @@ import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
     AdvHomePage,
     HomePage,
     CreateOffer1Page,
+    PlaceFeedbackPage,
+    PlacePage,
+    SplashInfoPage,
+    SplashNewsPage,
     SettingsPopover,
-    CreateOfferPopover,
+    CreateOfferPopover
+   
   ],
   imports: [
     BrowserModule,
@@ -130,8 +136,13 @@ import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
     AdvHomePage,
     HomePage,
     CreateOffer1Page,
+    PlaceFeedbackPage,
+    PlacePage,
+    SplashInfoPage,
+    SplashNewsPage,
     SettingsPopover,
     CreateOfferPopover
+    
   ],
   providers: [
     StatusBar,
@@ -145,7 +156,7 @@ import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
     OfferService,
     AppModeService,
     Geolocation,
-    LocationService
+    LocationService,
   ]
 })
 export class AppModule {}

@@ -9,6 +9,7 @@ import { OnBoardingPage } from "../pages/onboarding/onboarding";
 import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-profile";
 import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create-advUser-profile";
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
+import { CreateOffer1Page } from "../pages/create-offer-1/create-offer-1";
 import { SettingsPage } from "../pages/settings/settings";
 import { UserProfilePage } from "../pages/user-profile/user-profile";
 import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
@@ -24,6 +25,11 @@ import { LoginPage } from "../pages/login/login";
 import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
 import { NotificationsPage } from "../pages/notifications/notifications";
 import { AppModeService } from '../providers/appMode.service';
+import { PlacePage } from "../pages/place/place";
+import { PlacesPage } from "../pages/places/places";
+import { PlaceFeedbackPage } from "../pages/place-feedback/place-feedback";
+import { SplashNewsPage } from "../pages/splash-news/splash-news";
+import { BookmarksPage } from "../pages/bookmarks/bookmarks";
 
 @Component({
     templateUrl: 'app.html'
@@ -49,7 +55,7 @@ export class MyApp {
                     ? AdvTabsPage
                     : TabsPage;
 
-            //this.rootPage = UserProfilePage;
+            //this.rootPage = BookmarksPage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);

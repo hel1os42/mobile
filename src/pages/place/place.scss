@@ -1,0 +1,55 @@
+page-place {
+
+  .plus{
+    padding-top: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .btn_transfer.item-button{
+    margin-top: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 17px;
+    padding-right: 17px;
+    background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+    border-radius: 12px;
+  }
+
+  .cover{
+    background-image: url(../assets/img/place/header.png);
+  }
+
+  .segment{
+    border-top: 1px solid #F2F2F2;
+  }
+
+  .top-block-nau.testimonials .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau.testimonials .item-ios ion-avatar img{
+    border-radius: 100px;
+  }
+
+  .footer.footer-ios {
+    min-height: inherit;
+    box-shadow: 0px -6px 18px rgba(0, 0, 0, 0.12);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .footer.footer-ios .item-ios.item-block .item-inner{
+    padding-right: 0;
+  }
+
+  .footer.footer-ios .bg-gray{
+    border-radius: 8px;
+  }
+
+  .btn_check{
+    background: linear-gradient(0deg, #FF5A00 0%, #FF8A23 100%);
+    border-radius: 100px;
+    padding: 11px;
+    height: 42px;
+    width: 42px;
+  }
+}

@@ -4,7 +4,7 @@ import { AgmCoreModule } from '@agm/core';
 import { Coords } from "../../models/coords";
 import { NavController, App, PopoverController } from "ionic-angular";
 import { UserOffersPage } from "../user-offers/user-offers";
-import { Offer } from "../../models/offer";
+import { OfferCreate } from "../../models/offerCreate";
 import { OfferService } from "../../providers/offer.service";
 import { ProfileService } from "../../providers/profile.service";
 import { AdvUserOffersPage } from "../adv-user-offers/adv-user-offers";
@@ -19,7 +19,7 @@ export class CreateOfferPage {
     radiuses = [50, 100, 150, 200, 250];
     message: string;
     coords = new Coords();
-    offer = new Offer();
+    offer = new OfferCreate();
     isSelectVisible = false;
     offerCategory = new OfferCategory();
     offerCategories = Array(this.offerCategory);

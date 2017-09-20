@@ -1,4 +1,4 @@
-page-home-user-page {
+page-places {
   .grid{
     padding: 0;
   }
@@ -20,14 +20,20 @@ page-home-user-page {
     width: 50%;
   }
 
-  .type-food{
-    border: 1px solid rgba(62, 75, 93, 0.5);
-    padding: 2px;
-  }
-
   .item-md ion-avatar ion-img, .item-md ion-avatar img, .item-ios ion-avatar ion-img, .item-ios ion-avatar img{
     width: 60px;
     height: 60px;
     margin-bottom: 10px;
   }
+
+  agm-map {
+    height: calc(100vh - 159px);
+    height: -webkit-calc(100vh - 159px);
+    height: -moz-calc(100vh - 159px);
+  }
+
+  .item-block-nau .item-ios [item-right], .item-ios [item-end]{
+    width: 33px;
+  }
+
 }

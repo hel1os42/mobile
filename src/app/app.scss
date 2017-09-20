@@ -125,7 +125,7 @@ ion-header ion-icon.back-button-icon.icon {
   font-weight: normal;
 }
 
-.text-family-light{
+.text-family-light, .regular{
   font-family: 'OpenSansNauLight';
 }
 
@@ -448,10 +448,6 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   outline-offset: 2px;
 }
 
-.agm-map-container-inner[_ngcontent-c0]{
-
-}
-
 .list .item-block:first-child {
   border-top: none;
 }
@@ -578,17 +574,23 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 /* TABS */
 .grid-tabs-splash{
   background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .grid-tabs-splash .col{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
 
 .grid-tabs-splash .col img{
   max-width: 70%;
+}
+
+.grid-tabs-splash p{
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 /* SEARCH */
@@ -598,12 +600,12 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .btn_search_settings{
   position: absolute;
-  right: 52px;
+  right: 68px;
   top: 20px;
 }
 
 .searchbar-ios{
-  background: transparent;
+  background: #fff;
   border: 1px solid #E0E0E0;
   border-radius: 8px;
   min-height: 42px;
@@ -627,9 +629,220 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .segment-ios .segment-button.segment-activated{
   background: transparent;
   color: #FF5A00;
+}
 
+/* SEGMENT NAU */
+.nau-segment.segment-ios .segment-button{
+  border: 1px solid #FF8B10;
+  color: #FF8B10;
+}
+
+.nau-segment.segment-ios .segment-button.segment-activated{
+  background: #FF8B10;
+  color: #FFF;
+}
+
+.nau-segment.segment-ios .segment-button:first-of-type {
+  border-top-left-radius: 100px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 100px;
+}
+
+.nau-segment.segment-ios .segment-button:last-of-type {
+  border-top-left-radius: 0;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  border-bottom-left-radius: 0;
 }
 
 .wrap{
   white-space: normal;
+}
+
+.italic{
+  font-style: italic;
+}
+
+/* RADIO MD */
+.radio-nau .radio {
+  padding: 14px;
+}
+
+.item-radio.item-ios ion-label {
+  margin-left: 20px;
+}
+
+.radio-nau .item {
+  margin-bottom: 10px;
+}
+
+.radio-nau .radio-icon{
+  width: 17px;
+  height: 17px;
+  border: 1px solid #E0E0E0;
+}
+
+.radio-nau .radio-inner {
+  left: 2px;
+  top: 2px;
+  width: 10.5px;
+  height: 10.5px;
+  background: linear-gradient(89.37deg, #FF5A00 0.65%, #FF8B10 99.57%);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.radio-nau .item-radio-checked ion-label{
+  color: inherit;
+}
+
+.radio-nau.radio-nau-no-margin .label{
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+/* PROGRESS BLOCK PAGE CREATE OFFER */
+
+.progress-block {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  position: relative;
+}
+
+.progress-block .circle{
+  width: 5vw;
+  height: 5vw;
+  border: 2px solid #F2F2F2;
+  border-radius: 5vw;
+  z-index: 2;
+  background: #F2F2F2;
+}
+
+.progress-block .fill-first{
+  background: #FF5A00;
+}
+
+.progress-block .fill-last{
+  background: #FF8B10;
+}
+
+.progress-block .progress-line{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 2vw;
+  height: 2vw;
+  background: #F2F2F2;
+  z-index: 0;
+  border-radius: 2vw;
+}
+
+.progress-block .progress-line-fill{
+  position: absolute;
+  left: 2vw;
+  top: 2.5vw;
+  height: 1vw;
+  background: linear-gradient(89.93deg, #FF5A00 0.01%, #FF8B10 99.99%);
+  z-index: 3;
+  border-radius: 2vw;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.margin-10{
+  margin: 10px;
+}
+
+.margin-top-10{
+  margin-top: 10px;
+}
+
+.margin-bottom-10{
+  margin-bottom: 10px;
+}
+
+.margin-left-10{
+  margin-left: 10px;
+}
+
+.margin-right-10{
+  margin-right: 10px;
+}
+
+/* HEADER. Page places */
+.cover{
+  width: 100%;
+  height: 89px;
+  position: relative;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.cover .cover_logo{
+  position: absolute;
+  left: 3%;
+  bottom: -35px;
+  width: 70px;
+  height: 70px;
+  border-radius: 100px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.cover_block_btn{
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+.cover_block_btn .button{
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.relative{
+  position: relative;
+}
+
+.display-table{
+  display: table;
+  width: 100%;
+}
+
+.display-table span, .display-table div{
+  display: table-cell;
+}
+
+.star_right{
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.num_right{
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
+.flex{
+  display: flex;
+}
+
+.plus{
+  padding-top: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.type-food{
+  border: 1px solid rgba(62, 75, 93, 0.5);
+  padding: 2px;
 }

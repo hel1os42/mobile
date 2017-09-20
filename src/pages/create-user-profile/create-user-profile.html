@@ -4,27 +4,26 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="padding-no">
   <form >
     <div class="block-lines-bottom-left-right">
       <ion-item no-lines class="block-name">
         <div text-uppercase class="text-4F4F4F font-14">Name & email</div>
-        <div item-end><img src="../assets/img/cards.svg"></div>
+        <div item-end><img src="assets/img/cards.svg"></div>
         <div item-end><span class="label label-ios points font-75">You have {{ point() }} points</span></div>
       </ion-item>
     </div>
 
     <div class="block-lines">
     <ion-item no-lines class="block-people">
-      <img item-start class="people" src="../assets/img/create_user_profile/people.svg">
+      <img item-start class="people" src="assets/img/create_user_profile/people.svg">
       <div item-end class="item-content">
         <ion-input class="bg-gray margin-bottom-small" type="text" placeholder="Your Name" [(ngModel)]="account.name" name="name1"></ion-input>
         <div class="input_relative">
         <ion-input class="bg-gray margin-bottom-small" type="email" placeholder="Your E-mail" [(ngModel)]="account.email" name="email"></ion-input>
         <span *ngIf="account.email" class="text-gray">
           <a (click)="toggleVisibleInfo()">
-          <img src="../assets/img/create_user_profile/info.svg">
+          <img src="assets/img/create_user_profile/info.svg">
         </a>
         </span>
         </div>
@@ -65,7 +64,7 @@
     <div class="block-lines">
       <ion-item *ngIf="!visibleInfo" no-lines>
         <div item-start>
-            <img src="../assets/img/create_user_profile/img_1.svg">
+            <img src="assets/img/create_user_profile/img_1.svg">
         </div>
         <div item-end text-left class="item-content">
           <div class="bold font-16 text-3E4B5D">Earn Extra Points</div>
@@ -74,7 +73,7 @@
       </ion-item>
       <ion-item *ngIf="visibleInfo" no-lines>
         <div item-start>
-          <img src="../assets/img/create_user_profile/img_2.svg">
+          <img src="assets/img/create_user_profile/img_2.svg">
         </div>
         <div item-end text-left class="item-content">
           <div class="bold font-16 text-3E4B5D">Confirm Email Address</div>

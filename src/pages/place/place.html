@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>The fair food</ion-title>
+  </ion-navbar>
+  <div class="cover">
+    <img class="cover_logo" [src]="company.image_url">
+    <div class="cover_block_btn">
+      <button class="margin-right-10" ion-button icon-only color="white">
+        <img src="assets/img/place/btn_star.svg">
+      </button>
+      <button ion-button icon-only color="white">
+        <img src="assets/img/place/btn_share.svg">
+      </button>
+    </div>
+  </div>
+  <div text-right class="margin-10">
+    <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 margin-right-10">Featured</span>
+    <ng-container *ngFor="let showStar of getStars(company.stars)">
+        <ion-icon class="text-FEC282 font-12" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+      </ng-container>   
+    <img class="margin-left-10" src="assets/img/user_home/icon_small_user.svg"><span class="font-75"> {{ company.testimonials_count }}</span>
+    <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> {{ getDistance(company.latitude, company.longitude) }} m</span>
+  </div>
+  <div margin-top margin-right margin-left class="text-3E4B5D font-36 bold">{{ company.name }}</div>
+  <div margin-left margin-right class="text-4F4F4F font-12 bold wrap">{{ company.address }}</div>
+  <ion-item no-lines>
+    <div margin-left class="font-12 text-828282 wrap">{{ company.description }}</div>
+    <div margin-bottom item-end>
+      <div class="font-36 text-FF5A00" text-center>
+        {{ company. offers_count }}
+      </div>
+      <div class="font-10 text-828282">
+        offers
+      </div>
+    </div>
+  </ion-item>
+  
+  <ion-segment [(ngModel)]="segment" text-uppercase>
+    <ion-segment-button  (ionSelect)="toggleFooter(false)" value="alloffers">
+      All offers
+    </ion-segment-button>
+    <ion-segment-button (ionSelect)="toggleFooter(true)"  value="testimonials">
+      Testimonials
+    </ion-segment-button>
+    <ion-segment-button  (ionSelect)="toggleFooter(false)"value="about">
+      About
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content [ngSwitch]="segment" padding no-bounce>
+  <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
+    <ion-item *ngFor=" let offer of offersList" class="relative">
+      <ion-avatar item-start>
+        <img [src]="offer.image_url">
+      </ion-avatar>
+      <div class="bold font-22 text-3E4B5D">{{ offer.label }}</div>
+      <div text-regular class="margin-top-10 font-12 text-828282 wrap">{{ offer.description }}</div>
+      <img class="star_right" src="assets/img/place/icon_star.svg">
+      <div class="margin-top-10 flex">
+        <button ion-button class="btn_transfer font-14 text-white">Transfer</button>
+        <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
+        <img class="gift" src="assets/img/place/icon_gift.svg">
+      </div>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/img/place/ava_person.png">
+      </ion-avatar>
+      <div class="bold font-18 text-3E4B5D">Emily Miller <span class="font-12 text-828282 no-bold">07/09/2017</span></div>
+      <div class="margin-top-10 font-12 text-828282 wrap italic">Amazing restrant for all family!!! I am gona to visit this place again! Of course ...</div>
+    </ion-item>
+  </ion-list>
+
+  <div  *ngSwitchCase="'about'" margin-top class="item-block-nau">
+    <div class="text-3E4B5D bold font-18">About our beautiful place</div>
+    <div class="text-828282 font-12 regular margin-top-10 margin-bottom-10">To provide the proper credit, use the embedded credit already in the
+    icon you downloaded, or you can copy the attribution text and add it to your citations,
+    about page, or place in which you would credit work you did not create.</div>
+    <img width="100%" src="assets/img/place/about.png">
+  </div>
+
+</ion-content>
+
+<!-- <ion-footer no-shadow no-border padding>-->
+<ion-footer *ngIf="visibleFooter" no-shadow no-border>
+  <ion-item no-lines>
+    <ion-input class="bg-gray" placeholder="Add your feedback"></ion-input>
+    <!--<a item-end><img src="assets/img/user_home/icon_pin.svg"></a>-->
+    <a class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
+  </ion-item>
+</ion-footer>
