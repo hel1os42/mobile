@@ -1,66 +1,23 @@
 page-notifications{
-  .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
-    width: 50px;
-    height: 50px;
+  .btn_search_settings {
+    right: 20px;
   }
 
-  h5 b{
-    font-weight: 700;
+  .today.item.item-block.item-ios ion-avatar ion-img, .today.item.item-block.item-ios ion-avatar img, .today.item.item-block.item-ios ion-avatar img{
+    border-radius: 100px;
   }
 
-  .happy .item {
-    color: #000;
-    background: #e6e6e6;
-    margin-bottom: 3px;
-    border-radius: 7px;
-    padding-left: 15px;
+  .btn_next.item-button{
     padding-top: 15px;
     padding-bottom: 15px;
+    padding-left: 17px;
+    padding-right: 17px;
+    background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+    border-radius: 12px;
+  }
+
+  .item-ios.item-block .item-inner{
     padding-right: 0;
   }
 
-  .happy_title{
-    position: relative;
-  }
-
-  .label-ios {
-    margin: 0;
-  }
-
-  .points{
-    background: gray;
-    color: #fff;
-    padding: 3px;
-    border-radius: 7px;
-  }
-
-  .item-ios[detail-push] .item-inner, button.item-ios:not([detail-none]) .item-inner, a.item-ios:not([detail-none]) .item-inner{
-    padding-right: 0;
-  }
-
-  .ion-label{
-    overflow: inherit;
-    white-space: normal;
-  }
-
-  .block-search{
-    position: relative;
-  }
-
-  .block-search .searchbar-ios{
-    background: transparent;
-    border: 1px solid black;
-    border-radius: 100px;
-    min-height: 37px;
-  }
-
-  .btn_options{
-    position: absolute;
-    right: 19px;
-    top: 10px;
-  }
-
-  .btn_search{
-    font-size: 12px;
-  }
 }
