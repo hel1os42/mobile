@@ -1,0 +1,24 @@
+<svg width="18" height="19" viewBox="0 0 18 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-144 -5868)">
+<g id="Group">
+<g id="Ellipse">
+<mask id="mask0_outline_ins">
+<use xlink:href="#path0_fill" fill="white" transform="translate(144 5868)"/>
+</mask>
+<g mask="url(#mask0_outline_ins)">
+<use xlink:href="#path1_stroke_2x" transform="translate(144 5868)" fill="#FF5A00"/>
+</g>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(0.707107 0.707107 -0.707107 0.707107 156 5880.5)" fill="#FF5A00"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 15 7.5C 15 11.6421 11.6421 15 7.5 15C 3.35786 15 0 11.6421 0 7.5C 0 3.35786 3.35786 0 7.5 0C 11.6421 0 15 3.35786 15 7.5Z"/>
+<path id="path1_stroke_2x" d="M 13 7.5C 13 10.5376 10.5376 13 7.5 13L 7.5 17C 12.7467 17 17 12.7467 17 7.5L 13 7.5ZM 7.5 13C 4.46243 13 2 10.5376 2 7.5L -2 7.5C -2 12.7467 2.25329 17 7.5 17L 7.5 13ZM 2 7.5C 2 4.46243 4.46243 2 7.5 2L 7.5 -2C 2.25329 -2 -2 2.25329 -2 7.5L 2 7.5ZM 7.5 2C 10.5376 2 13 4.46243 13 7.5L 17 7.5C 17 2.25329 12.7467 -2 7.5 -2L 7.5 2Z"/>
+<path id="path2_stroke" d="M 0.00850537 -0.999964C -0.543759 -1.00466 -0.995266 -0.56077 -0.999964 -0.00850537C -1.00466 0.543759 -0.56077 0.995266 -0.00850537 0.999964L 0.00850537 -0.999964ZM 7.12322 1.06062C 7.67549 1.06532 8.12699 0.62143 8.13169 0.0691656C 8.13639 -0.483099 7.6925 -0.934606 7.14023 -0.939304L 7.12322 1.06062ZM -0.00850537 0.999964L 7.12322 1.06062L 7.14023 -0.939304L 0.00850537 -0.999964L -0.00850537 0.999964Z"/>
+</defs>
+</svg>
