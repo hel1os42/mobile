@@ -27,6 +27,8 @@ import { NotificationsPage } from "../pages/notifications/notifications";
 import { AppModeService } from '../providers/appMode.service';
 import { PlacePage } from "../pages/place/place";
 import { PlacesPage } from "../pages/places/places";
+import { PlaceFeedbackPage } from "../pages/place-feedback/place-feedback";
+
 
 @Component({
     templateUrl: 'app.html'
@@ -52,7 +54,7 @@ export class MyApp {
                     ? AdvTabsPage
                     : TabsPage;
 
-            //this.rootPage = PlacesPage;
+            //this.rootPage = PlaceFeedbackPage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);

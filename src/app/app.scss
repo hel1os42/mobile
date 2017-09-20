@@ -125,7 +125,7 @@ ion-header ion-icon.back-button-icon.icon {
   font-weight: normal;
 }
 
-.text-family-light{
+.text-family-light, .regular{
   font-family: 'OpenSansNauLight';
 }
 
@@ -785,4 +785,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .relative{
   position: relative;
+}
+
+.display-table{
+  display: table;
+  width: 100%;
+}
+
+.display-table span, .display-table div{
+  display: table-cell;
 }
