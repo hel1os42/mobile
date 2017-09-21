@@ -36,4 +36,33 @@ page-places {
     width: 33px;
   }
 
+  /* modal */
+
+
+}
+
+places-popover-component {
+  .modal_content{
+    position: relative;
+  }
+
+  .footer_btn {
+
+  }
+
+  .bg-gray {
+    border-radius: 100px;
+    border: none;
+    background: #E0E0E0;
+    padding-right: 16px;
+  }
+
+  .item-ios.item-block .item-inner {
+    padding-right: 0;
+  }
+
+  .checkbox-ios .checkbox-icon {
+    background-color: #fff;
+    background-image: none;
+  }
 }
