@@ -89,7 +89,7 @@
 
   <div *ngIf="isMapVisible">
     <div *ngIf="!coords.lat">Detecting your location...</div>
-    <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+    <agm-map class="card" *ngIf="mapCenter" [zoom]="15" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng" [fitBounds]="mapBounds">
       <agm-marker *ngFor="let company of companies" [latitude]="company.latitude" [longitude]="company.longitude" [iconUrl]="'assets/img/places_pin.png'">
         <agm-info-window [disableAutoPan]="false">
           <div class='agm-info-window-content'>{{company.name}}
