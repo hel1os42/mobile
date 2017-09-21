@@ -4,17 +4,16 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding no-bounce>
+<ion-content padding no-bounce *ngIf="testimonial">
   <div class="display-table" margin-top>
-    <span class="bold font-22 text-3E4B5D">Emily Miller</span>
-    <span text-right class="font-12 text-828282">07/09/2017</span>
+    <span class="bold font-22 text-3E4B5D">{{ testimonial.name }}</span>
+    <span text-right class="font-12 text-828282">{{ testimonial.date }}</span>
   </div>
   <div margin-top>
-    <img src="assets/img/place/ava_person.png" margin-right margin-bottom>
-    <span class="margin-top-10 font-14 text-828282 italic">Some of our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner.
-    <div class="margin-top-10">Our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.</div>
+    <img [src]="testimonial.avatar_url" margin-right margin-bottom>
+    <span class="margin-top-10 font-14 text-828282 italic">{{ testimonial.text }}
     </span>
   </div>
-  <button ion-button color="secondary">Back</button>
+  <button (click)="back()" ion-button color="secondary">Back</button>
 
 </ion-content>
