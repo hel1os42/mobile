@@ -27,13 +27,13 @@ export class PlacesPage {
         private location: LocationService,
         private appMode: AppModeService,
         private offers: OfferService,
-        private popoverCtrl: PopoverController,) {
+        private popoverCtrl: PopoverController) {
     }
 
     ionViewDidLoad() {
         this.offers.getCompanies()
             .subscribe(companies => this.companies = companies);
-  
+
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -55,7 +55,7 @@ export class PlacesPage {
         this.nav.push(PlacePage, { companyId: id });
     }
 
-    getStars(star: number){
+    getStars(star: number) {
         let showStars: boolean[] = [];
         for (var i = 0; i < 5; i++) {
             showStars.push(star > i);
@@ -71,4 +71,5 @@ export class PlacesPage {
         let popover = this.popoverCtrl.create(PlacesPopover);
         popover.present();
     }
+
 }
