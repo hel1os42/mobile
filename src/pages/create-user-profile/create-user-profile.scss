@@ -15,7 +15,6 @@ page-create-user-profile{
 
   agm-map {
     height: 250px;
-    border-radius: 50px;
   }
 
   .select-block-desc {
@@ -129,6 +128,7 @@ page-create-user-profile{
     left: calc(50% - 75px);
     top: 50px;
     border-radius: 150px;
+    pointer-events: none;
   }
 
   .gender_select.select.select-ios{
