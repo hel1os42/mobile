@@ -18,10 +18,10 @@
     <ion-item no-lines class="block-people">
       <img item-start class="people" src="assets/img/create_user_profile/people.svg">
       <div item-end class="item-content">
-        <ion-input class="bg-gray margin-bottom-small" type="text" placeholder="Your Name" [(ngModel)]="account.name" name="name1"></ion-input>
+        <ion-input class="bg-gray margin-bottom-small" type="text" placeholder="Your Name" [(ngModel)]="user.name" name="name1"></ion-input>
         <div class="input_relative">
-        <ion-input class="bg-gray margin-bottom-small" type="email" placeholder="Your E-mail" [(ngModel)]="account.email" name="email"></ion-input>
-        <span *ngIf="account.email" class="text-gray">
+        <ion-input class="bg-gray margin-bottom-small" type="email" placeholder="Your E-mail" [(ngModel)]="user.email" name="email"></ion-input>
+        <span *ngIf="user.email" class="text-gray">
           <a (click)="toggleVisibleInfo()">
           <img src="assets/img/create_user_profile/info.svg">
         </a>

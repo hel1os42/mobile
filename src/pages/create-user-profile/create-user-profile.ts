@@ -21,7 +21,7 @@ import { User } from '../../models/user';
 export class CreateUserProfilePage {
     data: Register = new Register();
     coords: Coords = new Coords();
-    account: User = new User();
+    user: User = new User();
     message: string;
     isSelectVisible: boolean = false;
     visibleInfo: boolean = false
@@ -29,10 +29,10 @@ export class CreateUserProfilePage {
     facebookName: string;
     twitterName: string;
     instagramName: string;
-    gender:string;
+    gender: string;
     age: number;
     income;
-    
+
 
     constructor(
         private nav: NavController,
@@ -64,14 +64,14 @@ export class CreateUserProfilePage {
     }
 
     point() {
-       let points = (this.account.name ?  +8 : +0) + (this.facebookName ? +3 : +0) + 
-                    (this.twitterName ?  +3 : +0) + (this.instagramName ?  +3 : +0) +
-                    (this.gender ?  +5 : +0) + (this.age ?  +9 : +0) + (this.income ?  +9 : +0);
-       return points;
+        let points = (this.user.name ? +8 : +0) + (this.facebookName ? +3 : +0) +
+            (this.twitterName ? +3 : +0) + (this.instagramName ? +3 : +0) +
+            (this.gender ? +5 : +0) + (this.age ? +9 : +0) + (this.income ? +9 : +0);
+        return points;
     }
 
     ionViewDidLoad() {
-        this.account = this.profileService.user;//to do
+        this.user = this.profileService.user;//to do
         /* this.data = this.auth.getRegisterData();
          if (this.data.referrer_id)
              return;
@@ -108,11 +108,11 @@ export class CreateUserProfilePage {
                     })
             }
             );*/
-            this.account.latitude = this.coords.lat;
-            this.account.longitude = this.coords.lng;
-            //this.account.points = this.point(); to do
-            this.profileService.set(this.account)
-                .subscribe(resp => this.nav.setRoot(SplashScreenPage));
+        this.user.latitude = this.coords.lat;
+        this.user.longitude = this.coords.lng;
+        //this.account.points = this.point(); to do
+        this.profileService.set(this.user)
+            .subscribe(resp => this.nav.setRoot(SplashScreenPage));
     }
 
     toggleSelect() {
