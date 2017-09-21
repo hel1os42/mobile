@@ -106,11 +106,11 @@ export class SettingsPage {
     this.user.longitude = this.coords.lng;
     this.profile.set(this.user)
       .subscribe(resp => {
-        if (this.isToggled) {
-          let page = this.isAdvMode ? AdvTabsPage : TabsPage;
-          this.app.getRootNav().setRoot(page);
-        }
-        else
+        // if (this.isToggled) {
+        //   let page = this.isAdvMode ? AdvTabsPage : TabsPage;
+        //   this.app.getRootNav().setRoot(page);
+        // }
+        // else
           this.nav.pop()
       });
 
