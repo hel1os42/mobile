@@ -11,25 +11,21 @@ import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 })
 export class PlacePage {
     company = new Company();
-    offersList: Offer[];
-    segment;
     visibleFooter: boolean = false;
+    segment;
 
     constructor(
         private nav: NavController,
         private offers: OfferService,
         private navParams: NavParams) {
         
-            this.segment = "alloffers"   
+        this.segment = "alloffers"   
     }
 
     ionViewDidLoad() {
         let companyId = this.navParams.get('companyId');
         this.offers.getCompany(companyId)
-            .subscribe(company => {
-                this.company = company;
-                this.offersList = company.offers;})
-
+            .subscribe(company => this.company = company);
     }
     
     getStars(star: number){
@@ -44,7 +40,12 @@ export class PlacePage {
         return 200;
     }
 
-    openFeedback() {
-        this.nav.push(PlaceFeedbackPage);
+    openFeedback(testimonial) {
+        this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
     }
+
+    openAbout(about) {
+        
+    }
+    
 }
