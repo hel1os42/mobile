@@ -4,6 +4,7 @@ import { OfferService } from '../../providers/offer.service';
 import { Company } from '../../models/company';
 import { Offer } from '../../models/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
+import { OfferPage } from '../offer/offer';
 
 @Component({
     selector: 'page-place',
@@ -44,8 +45,8 @@ export class PlacePage {
         this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
     }
 
-    openAbout(about) {
-        
+    openOffer(offer) {
+        this.nav.push(OfferPage, { offer: offer});
     }
     
 }

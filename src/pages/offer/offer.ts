@@ -11,4 +11,8 @@ export class OfferPage {
 
   }
 
+  back() {
+    this.nav.pop();
+  }
+
 }

@@ -50,7 +50,7 @@
 
 <ion-content [ngSwitch]="segment" padding no-bounce>
   <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-    <ion-item *ngFor=" let offer of company.offers" class="relative">
+    <ion-item *ngFor=" let offer of company.offers" (click)="openOffer(offer)" class="relative">
       <ion-avatar item-start>
         <img [src]="offer.image_url">
       </ion-avatar>
@@ -58,7 +58,7 @@
       <div text-regular class="margin-top-10 font-12 text-828282 wrap">{{ offer.description }}</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-10 flex">
-        <button ion-button class="btn_transfer font-14 text-white">Transfer</button>
+        <button ion-button class="btn_transfer font-14 text-white">redeem now</button>
         <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
         <img class="gift" src="assets/img/place/icon_gift.svg">
       </div>
