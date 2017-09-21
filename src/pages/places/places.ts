@@ -31,9 +31,7 @@ export class PlacesPage {
     ionViewDidLoad() {
         this.offers.getCompanies()
             .subscribe(companies => this.companies = companies);
-    }
-
-    ionViewDidEnter() {
+  
         this.location.get()
             .then((resp) => {
                 this.coords = {

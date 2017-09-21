@@ -158,7 +158,6 @@
         <div class="block-map">
           <div *ngIf="!coords.lat">Detecting your location...</div>
           <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)">
-            <!--<agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>-->
           </agm-map>
           <div id="marker"></div>
         </div>
