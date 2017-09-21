@@ -43,7 +43,4 @@ export class PlacePage {
         return 200;
     }
 
-    toggleFooter(bool) {
-        this.visibleFooter = bool;
-    }
 }

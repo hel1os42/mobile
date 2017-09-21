@@ -36,13 +36,13 @@
   </ion-item>
   
   <ion-segment [(ngModel)]="segment" text-uppercase>
-    <ion-segment-button  (ionSelect)="toggleFooter(false)" value="alloffers">
+    <ion-segment-button value="alloffers">
       All offers
     </ion-segment-button>
-    <ion-segment-button (ionSelect)="toggleFooter(true)"  value="testimonials">
+    <ion-segment-button value="testimonials">
       Testimonials
     </ion-segment-button>
-    <ion-segment-button  (ionSelect)="toggleFooter(false)"value="about">
+    <ion-segment-button value="about">
       About
     </ion-segment-button>
   </ion-segment>
@@ -87,7 +87,7 @@
 </ion-content>
 
 <!-- <ion-footer no-shadow no-border padding>-->
-<ion-footer *ngIf="visibleFooter" no-shadow no-border>
+<ion-footer *ngIf="segment == 'testimonials'" no-shadow no-border>
   <ion-item no-lines>
     <ion-input class="bg-gray" placeholder="Add your feedback"></ion-input>
     <!--<a item-end><img src="assets/img/user_home/icon_pin.svg"></a>-->
