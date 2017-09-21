@@ -1,49 +1,31 @@
-page-user-rewards{
-  .happy .item {
-    margin-bottom: 3px;
-    border-radius: 7px;
-    color: #fff;
-    background: #7f7f7f;
-    padding: 15px;
-    position: relative;
+page-user-tasks{
+  .flex span{
+    margin: auto;
   }
 
-  .happy h2 {
-    font-weight: bold;
-    margin-bottom: 7px;
+  .top-block-nau {
+    overflow: visible;
   }
 
-  .happy h5 {
-    white-space: normal;
-    font-size: 70%;
+  .top-block-nau ion-avatar{
+    height: inherit;
   }
 
-  .segment-ios .segment-button:first-of-type {
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
+  .top-block-nau ion-avatar img{
+    border-radius: 100px;
   }
 
-  .icon-check{
+  .user_level{
     position: absolute;
-    right: 1px;
-    top: 1px;
-    color: #000;
+    bottom: -10px;
+    right: -10px;
+    background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
+    border-radius: 100px;
+    padding: 8px;
   }
 
-  .segment-ios .segment-button:last-of-type {
-    border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
-  }
-
-  .segment-ios .segment-button{
-    height: 4.2rem;
-    line-height: 4rem;
-    color: #fff;
-    border: none;
-    background: #7f7f7f;
-  }
-
-  .segment-ios .segment-button.segment-activated{
-    background: #c6c6c6;
+  .grayscale{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
   }
 }
