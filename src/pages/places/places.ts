@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { AgmCoreModule } from '@agm/core';
 import { ProfileService } from '../../providers/profile.service';
 import { User } from '../../models/user';
@@ -26,7 +26,8 @@ export class PlacesPage {
         private nav: NavController,
         private location: LocationService,
         private appMode: AppModeService,
-        private offers: OfferService) {
+        private offers: OfferService,
+        private popoverCtrl: PopoverController,) {
     }
 
     ionViewDidLoad() {
@@ -64,5 +65,10 @@ export class PlacesPage {
 
     getDistance(latitude: number, longitude: number) {
         return 200;
+    }
+
+    openPopover() {
+        let popover = this.popoverCtrl.create(PlacesPopover);
+        popover.present();
     }
 }

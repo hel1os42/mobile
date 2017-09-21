@@ -46,7 +46,7 @@
       <img *ngIf="!isMapVisible" src="assets/img/user_home/icon_pin.svg">
       <img *ngIf="isMapVisible" src="assets/img/user_home/icon_pin_hide.svg">
   </a>
-    <a class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
+    <a (click)="openPopover()" class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
   </ion-item>
 
   <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
@@ -89,7 +89,7 @@
   <div *ngIf="isMapVisible">
       <div *ngIf="!coords.lat">Detecting your location...</div>
       <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
-        <agm-marker *ngFor="let company of companies" [latitude]="company.latitude" [longitude]="company.longitude"></agm-marker>
+        <agm-marker *ngFor="let company of companies" [latitude]="company.latitude" [longitude]="company.longitude" [iconUrl]="'assets/img/places_pin.png'" [title]="company.name"></agm-marker>
       </agm-map>
   </div>
 </ion-content>
