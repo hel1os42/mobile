@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AgmCoreModule } from '@agm/core';
-import { ProfileService } from "../../providers/profile.service";
-import { User } from "../../models/user";
+import { ProfileService } from '../../providers/profile.service';
+import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
 import { PlacePage } from '../place/place';
 import { Company } from '../../models/company';
 import { OfferService } from '../../providers/offer.service';
+import { PlacesPopover } from './places.popover';
 
 @Component({
     selector: 'page-places',

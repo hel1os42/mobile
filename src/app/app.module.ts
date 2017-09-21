@@ -45,12 +45,14 @@ import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { SettingsPopover } from '../pages/settings/settings.popover';
 import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
+import { PlacesPopover } from '../pages/places/places.popover';
 import { AppModeService } from '../providers/appMode.service';
 import { PlacesPage } from '../pages/places/places';
 import { HomePage } from '../pages/home/home';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
 import { PlacePage } from '../pages/place/place';
+
 
 @NgModule({
   declarations: [
@@ -90,7 +92,8 @@ import { PlacePage } from '../pages/place/place';
     SplashInfoPage,
     SplashNewsPage,
     SettingsPopover,
-    CreateOfferPopover
+    CreateOfferPopover,
+    PlacesPopover
    
   ],
   imports: [
@@ -141,7 +144,8 @@ import { PlacePage } from '../pages/place/place';
     SplashInfoPage,
     SplashNewsPage,
     SettingsPopover,
-    CreateOfferPopover
+    CreateOfferPopover,
+    PlacesPopover
     
   ],
   providers: [
