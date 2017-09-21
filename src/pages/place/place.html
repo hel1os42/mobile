@@ -67,7 +67,7 @@
   </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
-    <ion-item>
+    <ion-item  (click)="openFeedback()">
       <ion-avatar item-start>
         <img src="assets/img/place/ava_person.png">
       </ion-avatar>
