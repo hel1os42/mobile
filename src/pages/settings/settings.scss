@@ -9,18 +9,6 @@ page-settings{
     margin: 0;
   }
 
-  img{
-    width: 100%;
-  }
-
-  .card {
-    margin: 0;
-    border-radius: 20px;
-    width: 100%;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-  }
-
   ion-navbar a {
     float: right;
   }
@@ -30,32 +18,9 @@ page-settings{
       padding-right: 5px;
   }
 
-  .icon {
-      line-height: 1.1;
-    }
-
   agm-map {
-    height: 200px;
+    height: 250px;
     }
-
-  .block-user-adv {
-    border-radius: 15px;
-    background: #EAEAEA;
-  }
-
-  .item-block{
-    background: transparent;
-  }
-
-  .block-user-adv img{
-    height: 45px;
-    width: auto;
-  }
-
-  .block-phone{
-    border-radius: 100px;
-    background: #EAEAEA;
-  }
 
   .modal_create img{
     width: 50%;
@@ -66,5 +31,76 @@ page-settings{
     font-size: 80%;
     font-weight: 400;
     line-height: 170%;
+  }
+
+  /* NEW STYLES */
+  .toggle-ios .toggle-icon{
+    background-color: #fff;
+  }
+
+  .toggle-ios .toggle-inner{
+    background: linear-gradient(90.57deg, #FF5A00 0.54%, #FF8B10 99.56%);
+    box-shadow: none;
+    left: 4px;
+    top: 4px;
+  }
+
+  .toggle-ios {
+    width: 77px;
+    height: 35px;
+    border: 1px solid #E0E0E0;
+    border-radius: 25px;
+  }
+
+  .item-ios .toggle-ios {
+    margin: 0;
+    padding: 0;
+  }
+
+  .toggle-ios.toggle-checked .toggle-icon{
+    background-color: #FFF;
+  }
+
+  .toggle-ios.toggle-checked .toggle-inner {
+    -webkit-transform: translate3d(41px, 0, 0);
+    transform: translate3d(41px, 0, 0);
+  }
+
+  .ava_user_adv img{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+  }
+
+  .ava_user_adv .input-wrapper{
+    display: none;
+  }
+
+  .ava_user_adv .item-ios .toggle-ios{
+    margin: 0 auto;
+  }
+
+  .block-phone .item-block{
+    min-height: inherit;
+  }
+
+  .block-map{
+    position: relative;
+  }
+
+  #marker {
+    position: absolute;
+    z-index: 111;
+    background-color: rgba(255, 139, 16, 0.2);
+    background-image: url(../assets/img/create_user_profile/pin.svg);
+    background-position: 50% 50%;
+    background-size: auto 31px;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+    left: calc(50% - 75px);
+    top: 50px;
+    border-radius: 150px;
+    pointer-events: none;
   }
 }
