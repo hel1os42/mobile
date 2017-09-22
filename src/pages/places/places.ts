@@ -83,13 +83,13 @@ export class PlacesPage {
 
                 this.mapsAPILoader.load()
                     .then(() => {
-                        if (companies && companies.length == 1) {
+                        if (this.companies && this.companies.length == 1) {
                             this.mapCenter = {
-                                lat: companies[0].latitude,
-                                lng: companies[0].longitude,
+                                lat: this.companies[0].latitude,
+                                lng: this.companies[0].longitude,
                             };
                         }
-                        this.mapBounds = this.generateBounds(companies);
+                        this.mapBounds = this.generateBounds(this.companies);
                     })
             });
     }
