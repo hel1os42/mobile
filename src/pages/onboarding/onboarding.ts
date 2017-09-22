@@ -26,7 +26,7 @@ export class OnBoardingPage {
         //this.appMode.setOnboardingVisible();
         this.auth.getInviteCode();
         let page = this.invite ? StartPage : SignUpInvitePage;
-        this.nav.push(page);
+        this.nav.setRoot(page);
     }
 
 }
