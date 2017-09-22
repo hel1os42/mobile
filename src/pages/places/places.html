@@ -26,10 +26,10 @@
 <ion-content no-bounce class="padding-no">
   <ion-item class="block-search" no-lines padding-left padding-right>
     <ion-searchbar round placeholder=""></ion-searchbar>
-    <a (click)="toggleMap()" item-end>
+    <a (click)="toggleMap()" item-end text-center>
       <img *ngIf="!isMapVisible" src="assets/img/user_home/icon_pin.svg">
       <img *ngIf="isMapVisible" src="assets/img/user_home/icon_pin_hide.svg">
-  </a>
+    </a>
     <a (click)="openPopover()" class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
   </ion-item>
 

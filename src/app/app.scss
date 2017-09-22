@@ -595,8 +595,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .grid-tabs-splash .col{
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   height: 100%;
 }
 
@@ -724,7 +726,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .progress-block {
   width: 100%;
   display: flex;
+  display: -webkit-flex;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   padding-top: 2px;
   padding-bottom: 2px;
   position: relative;
@@ -850,6 +854,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .flex{
   display: flex;
+  display: -webkit-flex;
 }
 
 .plus{
