@@ -145,12 +145,24 @@ ion-header ion-icon.back-button-icon.icon {
   font-size: 18px;
 }
 
+.font-20{
+  font-size: 20px;
+}
+
 .font-22{
   font-size: 22px;
 }
 
+.font-30{
+  font-size: 30px;
+}
+
 .font-36{
   font-size: 36px;
+}
+
+.font-40{
+  font-size: 40px;
 }
 
 .font-50{
@@ -240,6 +252,10 @@ ion-header ion-icon.back-button-icon.icon {
 
 .text-333333{
   color: #333333;
+}
+
+.text-E0E0E0{
+  color: #E0E0E0;
 }
 
 .text-filed-radius{
@@ -879,3 +895,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   overflow: hidden;
 }
 
+.popover-ios .popover-content{
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.overflow-visible{
+  overflow: visible;
+}
+
+.active_cat{
+  opacity: 0.5;
+}
