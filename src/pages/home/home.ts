@@ -21,10 +21,6 @@ export class HomePage {
 
     ionSelected() {
         this.appMode.setHomeMode(false);
-    }
-
-    ionViewDidLeave() {
-        this.appMode.setHomeMode(false);
-    }
+    }    
 
 }

@@ -33,8 +33,7 @@ export class LoginPage  {
             })
             .subscribe(
                 resp => {
-                    // this.appMode.setHomeMode(true);   
-                    // this.nav.setRoot(this.appMode.getAdvMode() ? AdvTabsPage : TabsPage);
+                    this.appMode.setHomeMode(true);  
                     this.nav.setRoot(TabsPage);
                 }
             );
