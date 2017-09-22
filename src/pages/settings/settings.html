@@ -9,77 +9,96 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
-  <a (click)="toggleAccountsChoiceVisible()">
-      <ion-icon *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
-      <ion-icon *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
-      <div text-uppercase padding-left class="select font-75">
-        Choose your account (hide)
+<ion-content padding-top>
+  <div class="margin-bottom-10">
+    <a (click)="toggleAccountsChoiceVisible()">
+      <ion-icon class="text-828282" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
+      <ion-icon class="text-828282" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
+      <div text-uppercase padding-left class="select font-14 text-4F4F4F">
+        Choose your account <span text-lowercase>(hide)</span>
       </div>
-  </a>
+    </a>
+  </div>
 
-  <ion-grid *ngIf="!isAccountsChoiceVisible">
-    <ion-row text-center align-items-center class="block-user-adv">
-      <ion-col>
-        <img margin-top src="assets/img/user_profile/ava.png">
-        <p text-uppercase class="font-75">Client</p>
-      </ion-col>
-      <ion-col>
-         <ion-item no-lines>
-            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
-         </ion-item>
-      </ion-col>
-      <ion-col>
-        <img margin-top src="assets/img/thumb_offers1.png">
-        <p text-uppercase class="font-75">Adventiser</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div *ngIf="!isAccountsChoiceVisible" class="block-lines">
+    <ion-grid class="ava_user_adv">
+      <ion-row text-center align-items-center>
+        <ion-col>
+          <img margin-top src="assets/img/settings/user.svg">
+          <p class="font-15 text-3E4B5D bold">Client</p>
+        </ion-col>
+        <ion-col>
+          <ion-item no-lines>
+            <!-- <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle> -->
+            <ion-toggle></ion-toggle>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <img margin-top src="assets/img/settings/adv.svg">
+          <p class="font-16 text-BDBDBD bold">Advertiser</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
-  <p text-uppercase padding-left class="font-75">Change your phone number</p>
+  <div class="block-lines">
+    <div text-uppercase class="font-14 text-4F4F4F">Change your phone number</div>
+  </div>
 
-  <ion-grid>
-    <ion-row align-items-center class="block-phone">
-      <ion-col col-8 text-left padding-left>
-        <div class="font-100">+380501234567</div>
-      </ion-col>
-      <ion-col col-4>
-        <ion-item no-lines text-right>
-          <button ion-button round class="font-75">Change</button>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="block-lines block-phone">
+    <ion-grid class="bg-gray">
+      <ion-row align-items-center>
+        <ion-col col-8 text-left padding-left>
+          <div class="text-3E4B5D font-16">+380501234567</div>
+        </ion-col>
+        <ion-col col-4>
+          <ion-item no-lines text-right>
+            <button color="primary" ion-button round class="font-12 regular">Change</button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
-  <p text-uppercase padding-left class="font-75">Private data</p>
+  <div class="block-lines">
+    <div text-uppercase class="font-14 text-4F4F4F">Private data</div>
+  </div>
 
-  <ion-list class="block-user-adv" margin-top>
-    <ion-item><ion-label margin-left item-end>Show my private data</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-    <ion-item><ion-label margin-left item-end>Show my phone number</ion-label> <ion-checkbox item-end></ion-checkbox></ion-item>
-    <ion-item><ion-label margin-left item-end>Show my e-mail address</ion-label> <ion-checkbox item-end></ion-checkbox></ion-item>
-  </ion-list>
+  <div class="block-lines" mode="md">
+    <ion-item class="bg-gray margin-bottom-small">
+      <ion-label margin-left item-end class="text-3E4B5D font-16">Show my private data</ion-label>
+      <ion-checkbox [(ngModel)]="showData" item-end></ion-checkbox>
+    </ion-item>
+    <ion-item class="bg-gray margin-bottom-small">
+      <ion-label margin-left item-end class="text-3E4B5D font-16">Show my phone number</ion-label>
+      <ion-checkbox [(ngModel)]="showPhone" item-end></ion-checkbox>
+    </ion-item>
+    <ion-item class="bg-gray">
+      <ion-label margin-left item-end class="text-3E4B5D font-16">Show my e-mail address</ion-label>
+      <ion-checkbox [(ngModel)]="showEmail" item-end></ion-checkbox>
+    </ion-item>
+  </div>
 
-  <div text-uppercase class="radius" margin>
-    <a (click)="toggleSelectRadiusVisible()">Set radius for yours offers interest</a>
+  <div text-uppercase margin>
+    <a class="text-4F4F4F font-14" (click)="toggleSelectRadiusVisible()">Set radius for yours offers interest</a>
   </div>
   <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-bottom class="border-bottom-no">
     <ion-label>Offers radius</ion-label>
-    <ion-select [(ngModel)]="radius" (ionChange)="toggleSelectRadiusVisible()" (ionCancel)="toggleSelectRadiusVisible()" placeholder="50 m" name="radius" class="bg-gray width-100" interface="action-sheet">
-        <ion-option *ngFor="let radius of radiuses" [value]="radius">{{ radius }} m</ion-option>
+    <ion-select [(ngModel)]="radius" (ionChange)="toggleSelectRadiusVisible()" (ionCancel)="toggleSelectRadiusVisible()" placeholder="50 m"
+      name="radius" class="bg-gray width-100" interface="action-sheet">
+      <ion-option *ngFor="let radius of radiuses" [value]="radius">{{ radius }} m</ion-option>
     </ion-select>
   </ion-item>
 
-  <div padding-bottom>
-    <div *ngIf="!coords.lat" >Detecting your location...</div>
+  <div class="block-map">
+    <div padding-left *ngIf="!coords.lat">Detecting your location...</div>
     <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
-      <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
-      <agm-circle fillOpacity="0.2"  [radius]="radius" [latitude]="coords.lat" [longitude]="coords.lng"></agm-circle>
     </agm-map>
+    <div id="marker"></div>
   </div>
 
-  <p padding>
-    <button (click)="saveProfile()" ion-button block>Save changes</button>
+  <p margin>
+    <button (click)="saveProfile()" color="primary" ion-button block>Save changes</button>
   </p>
 </ion-content>
 

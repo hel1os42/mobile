@@ -846,3 +846,36 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   border: 1px solid rgba(62, 75, 93, 0.5);
   padding: 2px;
 }
+
+.radius{
+  border-radius: 100px;
+}
+
+.checkbox-ios .checkbox-icon {
+  border: none;
+  background-color: #fff;
+  background-image: url(../assets/img/checkbox_not_active.svg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+}
+
+.checkbox-ios .checkbox-icon.checkbox-checked {
+  border: none;
+  background-color: #fff;
+  background-image: url(../assets/img/checkbox_active.svg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+}
+
+.text-overflow-35{
+  height: 35px;
+  overflow: hidden;
+}
+
+.text-overflow-54{
+  height: 54px;
+  overflow: hidden;
+}
+

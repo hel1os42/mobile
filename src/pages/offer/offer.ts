@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
+import { RedeemedPopover } from './redeemed.popover';
 
 @Component({
   selector: 'page-offer',
@@ -7,8 +8,15 @@ import { NavController } from 'ionic-angular';
 })
 export class OfferPage {
 
-  constructor(private nav: NavController) {
+  constructor(private nav: NavController,
+    private popoverCtrl: PopoverController,) {
 
+  }
+
+  back() {
+    //this.nav.pop();
+    let popover = this.popoverCtrl.create(RedeemedPopover);
+    popover.present();
   }
 
 }

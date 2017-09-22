@@ -28,6 +28,10 @@ page-place {
     border-radius: 100px;
   }
 
+  .testimonials.list .item-block:last-child {
+    margin-bottom: 90px;
+  }
+
   .footer.footer-ios {
     min-height: inherit;
     box-shadow: 0px -6px 18px rgba(0, 0, 0, 0.12);
@@ -35,6 +39,7 @@ page-place {
     padding-bottom: 10px;
     padding-left: 16px;
     padding-right: 16px;
+    background: #fff;
   }
 
   .footer.footer-ios .item-ios.item-block .item-inner{

@@ -1,25 +1,9 @@
 <ion-header>
   <ion-grid text-center class="grid-tabs-splash">
     <ion-row align-items-end>
-      <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon1.svg"></p>
-        <p class="font-65 text-white">Food & <br>drink</p>
-      </a>
-      <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon2.svg"></p>
-        <p class="font-65 text-white">Beauty & <br>Fitness</p>
-      </a>
-      <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon3.svg"></p>
-        <p class="font-65 text-white">Retail & <br>Services</p>
-      </a>
-      <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon4.svg"></p>
-        <p class="font-65 text-white">Attractions & <br>Leisure</p>
-      </a>
-      <a ion-col>
-        <p><img src="assets/img/splash_screen/tab-icon5.svg"></p>
-        <p class="font-65 text-white">Others & <br>Online</p>
+      <a ion-col *ngFor="let category of categories" [ngClass]="{ 'active': isSelectedCategory(category) }" (click)="selectCategory(category)">
+        <p><img [src]="category.image_url"></p>
+        <p class="font-65 text-white">{{ category.name }}</p>
       </a>
     </ion-row>
   </ion-grid>
@@ -46,7 +30,7 @@
       <img *ngIf="!isMapVisible" src="assets/img/user_home/icon_pin.svg">
       <img *ngIf="isMapVisible" src="assets/img/user_home/icon_pin_hide.svg">
   </a>
-    <a class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
+    <a (click)="openPopover()" class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
   </ion-item>
 
   <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
@@ -67,9 +51,10 @@
         <ion-icon class="font-75" name="ios-arrow-forward"></ion-icon>
       </div>
       <ng-container *ngFor="let category of company.categories">
-          <span class="type-food font-75 text-3E4B5D" >{{ category.name }}</span>
+        <span class="type-food font-75 text-3E4B5D">{{ category.name }}</span>
       </ng-container>
-      <div margin-top class="text-828282 font-12 wrap">{{ company. description }}</div>
+      <div margin-top class="text-828282 font-12 wrap text-overflow-35">{{ company. description }}</div>
+
       <img class="star_right" src="assets/img/place/icon_star.svg">
 
       <div item-end>
@@ -87,9 +72,14 @@
   </ion-list>
 
   <div *ngIf="isMapVisible">
-      <div *ngIf="!coords.lat">Detecting your location...</div>
-      <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
-        <agm-marker *ngFor="let company of companies" [latitude]="company.latitude" [longitude]="company.longitude"></agm-marker>
-      </agm-map>
+    <div *ngIf="!coords.lat">Detecting your location...</div>
+    <agm-map class="card" *ngIf="mapCenter" [zoom]="15" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng" [fitBounds]="mapBounds">
+      <agm-marker *ngFor="let company of companies" [latitude]="company.latitude" [longitude]="company.longitude" [iconUrl]="'assets/img/places_pin.png'">
+        <agm-info-window [disableAutoPan]="false">
+          <div class='agm-info-window-content'>{{company.name}}
+          </div>
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>
   </div>
 </ion-content>

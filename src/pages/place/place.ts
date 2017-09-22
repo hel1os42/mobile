@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { OfferService } from '../../providers/offer.service';
 import { Company } from '../../models/company';
 import { Offer } from '../../models/offer';
+import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
+import { OfferPage } from '../offer/offer';
 
 @Component({
     selector: 'page-place',
@@ -10,25 +12,21 @@ import { Offer } from '../../models/offer';
 })
 export class PlacePage {
     company = new Company();
-    offersList: Offer[];
-    segment;
     visibleFooter: boolean = false;
+    segment;
 
     constructor(
         private nav: NavController,
         private offers: OfferService,
         private navParams: NavParams) {
         
-            this.segment = "alloffers"   
+        this.segment = "alloffers"   
     }
 
     ionViewDidLoad() {
         let companyId = this.navParams.get('companyId');
         this.offers.getCompany(companyId)
-            .subscribe(company => {
-                this.company = company;
-                this.offersList = company.offers;})
-
+            .subscribe(company => this.company = company);
     }
     
     getStars(star: number){
@@ -43,7 +41,12 @@ export class PlacePage {
         return 200;
     }
 
-    toggleFooter(bool) {
-        this.visibleFooter = bool;
+    openFeedback(testimonial) {
+        this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
     }
+
+    openOffer(offer) {
+        this.nav.push(OfferPage, { offer: offer});
+    }
+    
 }

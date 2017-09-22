@@ -1,7 +1,7 @@
 page-user-achieve{
   .progress-bar-content{
     width: 100%;
-    background: gray;
+    background: #F2F2F2;
     height: 10px;
     position: relative;
     border-radius: 10px;
@@ -9,20 +9,49 @@ page-user-achieve{
 
   .progress-bar-level{
     width: 40%;
-    background: lightgray;
+    background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
     height: 100%;
     position: absolute;
     left: 0;
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px;
   }
 
-  .block_name{
-    position: relative;
-    width: 100%;
-  }
-
-  .block_name span{
-    position: absolute;
+  .star_right{
     right: 0;
+    top: 0;
+  }
+
+  .flex span{
+    margin: auto;
+  }
+
+  .top-block-nau {
+    overflow: visible;
+  }
+
+  .top-block-nau ion-avatar{
+    height: inherit;
+  }
+
+  .top-block-nau ion-avatar img{
+    border-radius: 100px;
+  }
+
+  .user_level{
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
+    border-radius: 100px;
+    padding: 8px;
+  }
+
+  .item-ios ion-avatar {
+    min-width: 50px;
+    min-height: 50px;
+  }
+
+  .item-ios ion-avatar img {
+    margin: auto;
   }
 }
