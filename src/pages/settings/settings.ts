@@ -29,6 +29,9 @@ export class SettingsPage {
   isAdvMode: boolean;
   isVisibleModal: boolean = false;
   isToggled: boolean = false;
+  showData: boolean = false;
+  showPhone: boolean = false;
+  showEmail: boolean = false; 
 
 
   //@ViewChild(Navbar) navBar: Navbar;
