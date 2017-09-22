@@ -1,7 +1,6 @@
 export class Register {
-    name: string;
-    email: string;
-    password: string;
-    password_confirm: string;
+
+    phone: string;
+    code: string
     referrer_id: string;
 }
