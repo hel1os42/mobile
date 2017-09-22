@@ -25,12 +25,12 @@ export class AuthService {
 
         setInterval(() => {
             if (this.isLoggedIn()) {
-                this.api.get('auth/token', false)
-                    .subscribe(
-                    token => this.token.set(token),
-                    errResp => {
-                        this.token.remove();
-                    });
+                // this.api.get('auth/token', false)
+                //     .subscribe(
+                //         token => this.token.set(token),
+                //         errResp => {
+                //             this.token.remove();
+                //         });
             }
         }, 60 * 1000);  //every 5 min
     }
