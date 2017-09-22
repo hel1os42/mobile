@@ -52,6 +52,8 @@ import { HomePage } from '../pages/home/home';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
 import { PlacePage } from '../pages/place/place';
+import { RedeemedPopover } from '../pages/offer/redeemed.popover';
+import { CongratulationPopover } from '../pages/offer/congratulation.popover';
 
 
 @NgModule({
@@ -92,8 +94,10 @@ import { PlacePage } from '../pages/place/place';
     SplashInfoPage,
     SplashNewsPage,
     SettingsPopover,
+    RedeemedPopover,
     CreateOfferPopover,
-    PlacesPopover
+    PlacesPopover,
+    CongratulationPopover
    
   ],
   imports: [
@@ -144,8 +148,10 @@ import { PlacePage } from '../pages/place/place';
     SplashInfoPage,
     SplashNewsPage,
     SettingsPopover,
+    RedeemedPopover,
     CreateOfferPopover,
-    PlacesPopover
+    PlacesPopover,
+    CongratulationPopover
     
   ],
   providers: [
