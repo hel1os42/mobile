@@ -5,6 +5,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { StartPage } from "../start/start";
 import { SplashScreenPage } from "../splash-screen/splash-screen";
 import { TabsPage } from "../tabs/tabs";
+import { SignUpInvitePage } from '../invite/invite';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { TabsPage } from "../tabs/tabs";
 })
 export class OnBoardingPage {
     code: string;
+    invite: string = "";
 
     constructor(
         private nav: NavController,
@@ -22,7 +24,9 @@ export class OnBoardingPage {
 
     skip() {
         //this.appMode.setOnboardingVisible();
-        this.nav.push(StartPage);
+        this.auth.getInviteCode();
+        let page = this.invite ? StartPage : SignUpInvitePage;
+        this.nav.push(page);
     }
 
 }
