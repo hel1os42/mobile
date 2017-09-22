@@ -15,6 +15,7 @@ import { AppModeService } from '../../providers/appMode.service';
 
 export class LoginPage  {
     data: Login = new Login();
+    numCode: string = "+380";
     
     constructor(
         private nav: NavController,
@@ -25,7 +26,10 @@ export class LoginPage  {
 
     login() {
         this.auth
-            .login(this.data)
+            .login({
+                phone: this.numCode + this.data.phone,
+                code: this.data.code
+            })
             .subscribe(
                 resp => {
                     this.appMode.setHomeMode(true);   

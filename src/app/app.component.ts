@@ -56,7 +56,7 @@ export class MyApp {
                     ? AdvTabsPage
                     : TabsPage;
 
-          //this.rootPage = UserTasksPage;
+          //this.rootPage = OfferPage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);

@@ -44,33 +44,13 @@ export class AuthService {
         this.inviteCode = invite;
     }
 
-    checkPhone(phone: string) {
-        return Observable.of({ success: true });
-        //return this.api.post('auth/phone', phone);
-    }
-
-    applyCode(messageCode: string) {
-        return Observable.of({ success: true });
-        // let obs = this.api.post('auth/code', messageCode);
-        // obs.subscribe(token => { this.token.set(token); });
-        // return obs;
-    }
-
-    getRegisterData() {
-        return this.registerData;
-    }
-
-    setRegisterData(data) {
-        return this.registerData = data;
-    }
-
     isLoggedIn() {
         let token = this.token.get();
         return !!token;
     }
 
-    getReferrerId(inviteCode: string) {
-        return this.api.get(`auth/register/${inviteCode}`);
+    getReferrerId(inviteCode: string, phone: string) {
+        return this.api.get(`auth/register/${inviteCode}/${phone}/code`);
     }
 
     register(register: Register) {
