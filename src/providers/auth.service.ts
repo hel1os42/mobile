@@ -1,12 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Register } from "../models/register";
-import { Login } from "../models/login";
-import { ApiService } from "./api.service";
-import { TokenService } from "./token.service";
-import { Token } from "../models/token";
-import { Observable } from "rxjs";
-import { StorageService } from "./storage.service";
-import { App } from "ionic-angular";
+import { Register } from '../models/register';
+import { Login } from '../models/login';
+import { ApiService } from './api.service';
+import { TokenService } from './token.service';
+import { Token } from '../models/token';
+import { Observable } from 'rxjs';
+import { StorageService } from './storage.service';
+import { App } from 'ionic-angular';
 
 @Injectable()
 export class AuthService {
@@ -37,6 +37,10 @@ export class AuthService {
 
     getInviteCode() {
         return this.inviteCode;
+    }
+
+    setInviteCode(invite) {
+        this.inviteCode = invite;
     }
 
     checkPhone(phone: string) {
