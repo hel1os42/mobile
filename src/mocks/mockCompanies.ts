@@ -33,7 +33,7 @@ export class MockCompanies {
             ],
             categories_count: 2,
             categories: [
-                { id: '1', name: 'Bakery', children_count: 0 },
+                { id: 'Beauty&Fitness', name: 'Bakery', children_count: 0 },
                 { id: '2', name: 'Burger', children_count: 0 }
             ],
             offers_count: 3,
@@ -78,7 +78,7 @@ export class MockCompanies {
             ],
             categories_count: 2,
             categories: [
-                { id: '3', name: 'Sandwitch', children_count: 0 },
+                { id: 'Food&Drinks', name: 'Sandwitch', children_count: 0 },
                 { id: '4', name: 'Coffee', children_count: 0 }
             ],
             offers_count: 3,

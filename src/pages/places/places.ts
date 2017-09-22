@@ -11,12 +11,16 @@ import { Company } from '../../models/company';
 import { OfferService } from '../../providers/offer.service';
 import { PlacesPopover } from './places.popover';
 import { google } from '@agm/core/services/google-maps-types';
+import { OfferCategory } from '../../models/offerCategory';
 
 @Component({
     selector: 'page-places',
     templateUrl: 'places.html'
 })
 export class PlacesPage {
+
+    categories: OfferCategory[] = OfferCategory.StaticList;
+    selectedCategory: OfferCategory;
 
     isMapVisible: boolean = false;
     coords = new Coords;
@@ -32,7 +36,17 @@ export class PlacesPage {
         private offers: OfferService,
         private popoverCtrl: PopoverController,
         private mapsAPILoader: MapsAPILoader) {
-                    
+        
+        this.selectedCategory = this.categories[0];
+    }
+
+    isSelectedCategory(category: OfferCategory) {
+        return this.selectedCategory && this.selectedCategory.id == category.id;
+    }
+
+    selectCategory(category: OfferCategory) {
+        this.selectedCategory = category;
+        this.loadCompanies();
     }
 
     generateBounds(markers): any {
@@ -56,10 +70,17 @@ export class PlacesPage {
         return undefined;
     }
 
-    ionViewDidLoad() {
-        this.offers.getCompanies()
+    filterCompaniesBySelectedCategory(companies: Company[]): Company[] {
+        return companies.filter(p => {
+            return p.categories.find(p => p.id == this.selectedCategory.id);
+        })
+    }
+
+    loadCompanies() {
+        this.offers.getCompanies(this.selectedCategory.id)
             .subscribe(companies => {
-                this.companies = companies;
+                this.companies = this.filterCompaniesBySelectedCategory(companies);
+
                 this.mapsAPILoader.load()
                     .then(() => {
                         if (companies && companies.length == 1) {
@@ -71,6 +92,10 @@ export class PlacesPage {
                         this.mapBounds = this.generateBounds(companies);
                     })
             });
+    }
+
+    ionViewDidLoad() {
+        this.loadCompanies();
 
         this.location.get()
             .then((resp) => {

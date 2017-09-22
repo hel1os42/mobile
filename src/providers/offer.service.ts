@@ -12,8 +12,11 @@ export class OfferService {
     constructor(
         private api: ApiService) { }
 
-    getCompanies() {
-        // return this.api.get('companies?with=categories');
+    getCompanies(categoryId?) {
+        // return this.api.get('companies', false, {
+        //     with: 'categories',
+        //     category_id: categoryId
+        // });
         return Observable.of(MockCompanies.items);
     }
 
