@@ -36,6 +36,7 @@ export class AuthService {
     }
 
     getInviteCode() {
+        //this.inviteCode = to do
         return this.inviteCode;
     }
 

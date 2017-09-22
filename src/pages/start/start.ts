@@ -1,18 +1,21 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { LoginPage } from "../login/login";
-import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
-import { SignUpInvitePage } from "../invite/invite";
-import { SignUpPage } from "../signup/signup";
+import { AuthService } from '../../providers/auth.service';
+import { LoginPage } from '../login/login';
+import { SignUpPage } from '../signup/signup';
+
+import { SignUpInvitePage } from '../invite/invite';
 
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html'
 })
 export class StartPage {
+  invite: string = "";
 
   constructor(
-    private nav: NavController) {
+    private nav: NavController,
+    private auth: AuthService) {
   }
 
   login() {
@@ -20,7 +23,9 @@ export class StartPage {
   }
 
   register() {
-    this.nav.push(SignUpPage);
+    this.auth.getInviteCode();
+    let page = this.invite ? SignUpPage : SignUpInvitePage;
+    this.nav.push(page);
 
 
   }
