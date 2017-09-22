@@ -7,6 +7,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { SignUpPage } from '../signup/signup';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { AppModeService } from '../../providers/appMode.service';
+import { SignUpInvitePage } from '../invite/invite';
 
 @Component({
     selector: 'page-login',
@@ -28,17 +29,18 @@ export class LoginPage  {
         this.auth
             .login({
                 phone: this.numCode + this.data.phone,
-                code: this.data.code
+                code: this.data.phone.slice(-6)
             })
             .subscribe(
                 resp => {
-                    this.appMode.setHomeMode(true);   
-                    this.nav.setRoot(this.appMode.getAdvMode() ? AdvTabsPage : TabsPage);
+                    // this.appMode.setHomeMode(true);   
+                    // this.nav.setRoot(this.appMode.getAdvMode() ? AdvTabsPage : TabsPage);
+                    this.nav.setRoot(TabsPage);
                 }
             );
     }
 
     signup() {
-        this.nav.push(SignUpPage);
+        this.nav.push(SignUpInvitePage);
     }
 }
