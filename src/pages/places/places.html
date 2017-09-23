@@ -3,7 +3,7 @@
     <ion-row align-items-end>
       <a ion-col *ngFor="let category of categories" [ngClass]="{ 'active_cat': isSelectedCategory(category) }" (click)="selectCategory(category)">
         <p><img [src]="category.image_url"></p>
-        <p class="font-65 text-white">{{ category.name }}</p>
+        <p class="font-75 text-white">{{ category.name }}</p>
       </a>
     </ion-row>
   </ion-grid>
