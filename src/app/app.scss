@@ -130,11 +130,15 @@ ion-header ion-icon.back-button-icon.icon {
 }
 
 .font-10{
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .font-12{
   font-size: 12px;
+}
+
+.font-14{
+  font-size: 14px;
 }
 
 .font-16{
@@ -600,6 +604,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   justify-content: space-between;
   -webkit-justify-content: space-between;
   height: 100%;
+  min-height: 100%;
 }
 
 .grid-tabs-splash .col img{
