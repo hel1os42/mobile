@@ -104,6 +104,9 @@ import { CongratulationPopover } from '../pages/offer/congratulation.popover';
     IonicModule.forRoot(MyApp, {
       mode: "ios",
       backButtonText: "",
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBAgndAbV-v4aQWTAHrUljUfSCAthdK-RY'}),

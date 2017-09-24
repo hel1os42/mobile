@@ -916,3 +916,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .active_cat{
   opacity: 0.5;
 }
+
+/* FIX KEYBOARD SCROLL
+.input-cover {
+  position: static;
+}*/
+
+.item-multiple-inputs ion-select{
+  z-index: 1;
+}
+
