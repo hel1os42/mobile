@@ -23,7 +23,8 @@
   </ion-item>
 
   <p padding-top>
-    <button ion-button block middle color="primary" (click)="login()">Sign in</button>
+    <button ion-button block middle color="primary"
+      (click)="login()" [disabled]="!(data.phone && data.code)">Sign in</button>
   </p>
 
 </ion-content>
