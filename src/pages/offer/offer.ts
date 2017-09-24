@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
 import { RedeemedPopover } from './redeemed.popover';
 import { CongratulationPopover } from './congratulation.popover';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
   selector: 'page-offer',
@@ -9,7 +10,8 @@ import { CongratulationPopover } from './congratulation.popover';
 })
 export class OfferPage {
 
-  constructor(private nav: NavController,
+  constructor(
+    private nav: NavController,
     private popoverCtrl: PopoverController) {
 
   }
