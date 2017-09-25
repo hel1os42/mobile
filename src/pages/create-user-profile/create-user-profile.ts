@@ -43,7 +43,6 @@ export class CreateUserProfilePage {
 
         this.profile.get()
             .subscribe(resp => this.user = resp);
-        debugger;
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -90,13 +89,11 @@ export class CreateUserProfilePage {
     }
 
     createAccount() {
-        debugger;
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
         //this.account.points = this.point(); to do
         this.profile.set(this.user)
             .subscribe();
-        debugger;
         this.profile.put(this.user)
             .subscribe(resp => this.nav.setRoot(UserProfilePage));
     }
