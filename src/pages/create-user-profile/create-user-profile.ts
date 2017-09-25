@@ -39,7 +39,11 @@ export class CreateUserProfilePage {
         private auth: AuthService,
         private location: LocationService,
         private changeDetectorRef: ChangeDetectorRef,
-        private profileService: ProfileService) {
+        private profile: ProfileService) {
+
+        this.profile.get()
+            .subscribe(resp => this.user = resp);
+        debugger;
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -71,16 +75,7 @@ export class CreateUserProfilePage {
     }
 
     ionViewDidLoad() {
-        this.user = this.profileService.user;//to do
-        /* this.data = this.auth.getRegisterData();
-         if (this.data.referrer_id)
-             return;
-         else {
-            let inviteCode = this.auth.getInviteCode();
-            this.auth
-                .getReferrerId(inviteCode)
-                .subscribe(register => this.data = register);
-         }*/
+
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -94,25 +89,16 @@ export class CreateUserProfilePage {
             });
     }
 
-    register() {
-        /*this.auth
-            .register(this.data)
-            .subscribe(resp => {
-                this.auth
-                    .login({
-                        email: this.data.email,
-                        password: this.data.password
-                    })
-                    .subscribe(resp => {
-                        this.nav.setRoot(TabsPage);
-                    })
-            }
-            );*/
+    createAccount() {
+        debugger;
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
         //this.account.points = this.point(); to do
-        this.profileService.set(this.user)
-            .subscribe(resp => this.nav.setRoot(SplashScreenPage));
+        this.profile.set(this.user)
+            .subscribe();
+        debugger;
+        this.profile.put(this.user)
+            .subscribe(resp => this.nav.setRoot(UserProfilePage));
     }
 
     toggleSelect() {
