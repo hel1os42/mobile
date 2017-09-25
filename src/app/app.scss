@@ -801,6 +801,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   margin-right: 10px;
 }
 
+.margin-left-5{
+    margin-left: 5px;
+}
+
+.margin-right-5{
+    margin-right: 5px;
+}
+
 /* HEADER. Page places */
 .cover{
   width: 100%;
@@ -924,5 +932,27 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .item-multiple-inputs ion-select{
   z-index: 1;
+}
+
+.tabs-ios .tabbar{
+    background: #fff;
+    box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.12);
+    border-top: none;
+}
+
+.letter-spacing-1{
+    letter-spacing: 1px;
+}
+
+.item-ios[detail-push] .item-inner{
+    background-position: right 3px center;
+}
+
+.item-ios[detail-push]{
+    padding-right: 0;
+}
+
+.item-ios[detail-push] .item-inner .input-wrapper{
+    padding-right: 15px;
 }
 
