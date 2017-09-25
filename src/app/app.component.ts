@@ -31,6 +31,7 @@ import { PlaceFeedbackPage } from "../pages/place-feedback/place-feedback";
 import { SplashNewsPage } from "../pages/splash-news/splash-news";
 import { BookmarksPage } from "../pages/bookmarks/bookmarks";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
+import { OfferTermsPage } from "../pages/offer-terms/offer-terms";
 
 @Component({
     templateUrl: 'app.html'
@@ -52,7 +53,7 @@ export class MyApp {
 
             this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : TabsPage;
 
-          //this.rootPage = OfferPage;
+          //this.rootPage = OfferTermsPage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);

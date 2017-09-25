@@ -789,6 +789,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   margin-top: 10px;
 }
 
+.margin-top-30{
+    margin-top: 30px;
+}
+
 .margin-bottom-10{
   margin-bottom: 10px;
 }
@@ -956,3 +960,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     padding-right: 15px;
 }
 
+a:active{
+    opacity: 0.5;
+}
+
+.item-ios.activated {
+    background-color: inherit;
+    opacity: 0.5;
+}
