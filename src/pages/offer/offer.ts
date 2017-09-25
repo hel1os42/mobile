@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, PopoverController, App, NavParams } from 'ionic-angular';
-import { RedeemedPopover } from './redeemed.popover';
+import { OfferRedeemPopover } from './offerRedeem.popover';
 import { CongratulationPopover } from './congratulation.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { Offer } from '../../models/offer';
@@ -58,7 +58,7 @@ export class OfferPage {
         
         this.offers.getActivationCode('15f4f73e-f9c5-4ecb-9a02-f515e03147d7' /*this.offer.id*/)
             .subscribe((offerActivationCode: OfferActivationCode) => {
-                let offerRedeemPopover = this.popoverCtrl.create(RedeemedPopover, { redeemingResponse: offerActivationCode });
+                let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { redeemingResponse: offerActivationCode });
                 offerRedeemPopover.present();
 
                 this.timer = setInterval(() => {

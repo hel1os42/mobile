@@ -51,7 +51,7 @@ import { PlacesPage } from '../pages/places/places';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
 import { PlacePage } from '../pages/place/place';
-import { RedeemedPopover } from '../pages/offer/redeemed.popover';
+import { OfferRedeemPopover } from '../pages/offer/offerRedeem.popover';
 import { CongratulationPopover } from '../pages/offer/congratulation.popover';
 
 
@@ -92,7 +92,7 @@ import { CongratulationPopover } from '../pages/offer/congratulation.popover';
     SplashInfoPage,
     SplashNewsPage,
     SettingsPopover,
-    RedeemedPopover,
+    OfferRedeemPopover,
     CreateOfferPopover,
     PlacesPopover,
     CongratulationPopover
@@ -148,7 +148,7 @@ import { CongratulationPopover } from '../pages/offer/congratulation.popover';
     SplashInfoPage,
     SplashNewsPage,
     SettingsPopover,
-    RedeemedPopover,
+    OfferRedeemPopover,
     CreateOfferPopover,
     PlacesPopover,
     CongratulationPopover

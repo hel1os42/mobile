@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { ViewController, App, NavParams } from 'ionic-angular';
 
 @Component({
-    selector: 'redeemed-popover-component',
-    templateUrl: 'redeemed.popover.html'
+    selector: 'offerRedeem-popover-component',
+    templateUrl: 'offerRedeem.popover.html'
 })
 
-export class RedeemedPopover {
+export class OfferRedeemPopover {
 
     redeemingResponse;
 
