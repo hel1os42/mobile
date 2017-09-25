@@ -56,7 +56,7 @@
   <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
     <ion-item *ngFor=" let offer of offersList" (click)="openOffer(offer)" class="relative">
       <ion-avatar item-start>
-        <img [src]="offer.image_url">
+        <img [src]="offer.picture_url">
       </ion-avatar>
       <div class="bold font-22 text-3E4B5D">{{ offer.label }}</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap">{{ offer.description }}</div>

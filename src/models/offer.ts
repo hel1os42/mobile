@@ -3,8 +3,8 @@ import { OfferCategory } from "./offerCategory";
 
 export class Offer {
     id: string;
+    picture_url: string;
     company?: Company;
-    image_url: string;
     label: string;
     description: string;
     reward: number;

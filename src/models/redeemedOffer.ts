@@ -1,6 +1,7 @@
 export class RedeemedOffer {
     id: string;
     reward: number;
+    picture_url: string;
     status: string;
     country: string;
     city: string;
