@@ -122,8 +122,8 @@ export class PlacesPage {
         this.isMapVisible = !this.isMapVisible;
     }
 
-    openPlace(id) {
-        this.nav.push(PlacePage, { companyId: id });
+    openPlace(id, categoryId) {
+        this.nav.push(PlacePage, { companyId: id, categoryId: this.selectedCategory.id });
     }
 
     getStars(star: number) {
