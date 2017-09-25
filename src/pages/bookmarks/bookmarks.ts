@@ -7,8 +7,10 @@ import { NavController } from 'ionic-angular';
 })
 export class BookmarksPage {
 
-  constructor(private nav: NavController) {
+    segment;
 
+  constructor(private nav: NavController) {
+    this.segment = "places";
   }
 
 }

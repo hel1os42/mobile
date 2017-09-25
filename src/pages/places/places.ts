@@ -21,7 +21,7 @@ export class PlacesPage {
 
     categories: OfferCategory[] = OfferCategory.StaticList;
     selectedCategory: OfferCategory;
-
+    segment;
     isMapVisible: boolean = false;
     coords = new Coords;
     mapBounds;
@@ -38,6 +38,7 @@ export class PlacesPage {
         private mapsAPILoader: MapsAPILoader) {
 
         this.selectedCategory = this.categories[0];
+        this.segment = "alloffers";
     }
 
     ionSelected() {
