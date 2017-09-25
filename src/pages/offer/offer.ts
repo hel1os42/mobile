@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, PopoverController, App, NavParams } from 'ionic-angular';
-import { RedeemedPopover } from './redeemed.popover';
+import { OfferRedeemPopover } from './offerRedeem.popover';
 import { CongratulationPopover } from './congratulation.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { Offer } from '../../models/offer';
@@ -49,28 +49,41 @@ export class OfferPage {
         return showStars;
     }
 
-    ionViewDidLeave() {
-        if (this.timer)
+    stopTimer() {
+        if (this.timer) {
             clearInterval(this.timer);
+            this.timer = undefined;
+        }
+    }
+
+    ionViewDidLeave() {
+        this.stopTimer();
     }
 
     openRedeemPopover() {
+        if (this.timer)
+            return;
         
         this.offers.getActivationCode('15f4f73e-f9c5-4ecb-9a02-f515e03147d7' /*this.offer.id*/)
             .subscribe((offerActivationCode: OfferActivationCode) => {
-                let offerRedeemPopover = this.popoverCtrl.create(RedeemedPopover, { redeemingResponse: offerActivationCode });
+                if (this.timer)
+                    return;
+
+                let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
                 offerRedeemPopover.present();
+                offerRedeemPopover.onDidDismiss(() => this.stopTimer());
 
                 this.timer = setInterval(() => {
                     this.offers.getRedemtionStatus(offerActivationCode.code)
                         .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
                             if (offerRedemtionStatus.redemption_id) {
-                                clearInterval(this.timer);
+                                this.stopTimer();
 
                                 offerRedeemPopover.dismiss();
 
                                 let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover);
                                 offerRedeemedPopover.present();
+                                offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
                             }
                         });
                 }, 3000)

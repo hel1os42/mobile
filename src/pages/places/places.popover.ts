@@ -11,4 +11,7 @@ export class PlacesPopover {
         private viewCtrl: ViewController,
         private app: App) { }
 
+    close() {
+        this.viewCtrl.dismiss();        
+    }
 }
