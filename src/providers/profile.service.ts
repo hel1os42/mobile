@@ -32,4 +32,8 @@ export class ProfileService {
         return this.api.get('profile?with=accounts');
     }
 
+    put(user: User) {
+        return this.api.put('profile', user);
+    }
+
 }

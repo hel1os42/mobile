@@ -33,9 +33,9 @@ export class OfferService {
         return Observable.of(company);
     }
 
-    getOffers() {
-        //return this.api.get('offers');
-        return Observable.of(MockOffers.items);
+    getOffers(category_ids: string[]) {
+        return this.api.get(`offers?category_ids[0]=${category_ids[0]}`);
+        //return Observable.of(MockOffers.items);
     }
 
     getOfferCreate() {

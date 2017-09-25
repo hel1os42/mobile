@@ -8,6 +8,7 @@ export class User {
     phone: string;
     latitude: number;
     longitude: number;
+    picture_url: string;
     level: number;
     points: number;
     offers_count: number;
