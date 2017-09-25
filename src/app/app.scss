@@ -594,7 +594,6 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 /* TABS */
 .grid-tabs-splash{
   background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .grid-tabs-splash .col{
@@ -608,12 +607,16 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .grid-tabs-splash .col img{
-  max-width: 70%;
+  max-width: 65%;
 }
 
 .grid-tabs-splash p{
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+}
+
+.grid-tabs-splash span{
+    margin-bottom: 9px;
 }
 
 /* SEARCH */
@@ -915,6 +918,12 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .text-overflow-54{
   height: 54px;
   overflow: hidden;
+}
+
+.text-ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .popover-ios .popover-content{

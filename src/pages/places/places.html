@@ -3,7 +3,7 @@
     <ion-row align-items-end>
       <a ion-col *ngFor="let category of categories" [ngClass]="{ 'active_cat': isSelectedCategory(category) }" (click)="selectCategory(category)">
         <p><img [src]="category.image_url"></p>
-        <p class="font-75 text-white">{{ category.name }}</p>
+        <span class="font-75 text-white">{{ category.name }}</span>
       </a>
     </ion-row>
   </ion-grid>
@@ -47,7 +47,7 @@
         <img class="margin-left-5" src="assets/img/user_home/icon_small_arrow.svg">
         <span class="font-75"> {{ getDistance(company.latitude, company.longitude) }} m</span>
       </div>
-      <div class="bold font-22 text-3E4B5D">{{ company.name }}</div>
+      <div class="bold font-20 text-3E4B5D text-ellipsis">{{ company.name }}</div>
       <ng-container *ngFor="let category of company.categories">
         <span class="type-food font-75 text-3E4B5D">{{ category.name }}</span>
       </ng-container>
