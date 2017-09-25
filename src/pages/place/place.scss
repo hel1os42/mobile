@@ -40,7 +40,8 @@ page-place {
     padding-left: 16px;
     padding-right: 16px;
     background: #fff;
-    margin-bottom: 50px;
+    margin-bottom: 49px;
+    border-bottom: 1px solid #BDBDBD
   }
 
   .footer.footer-ios .item-ios.item-block .item-inner{
@@ -60,7 +61,6 @@ page-place {
   }
 
   .tabbar_testimonials{
-    box-shadow: none;
-    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
   }
 }
