@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, App } from 'ionic-angular';
+import { ViewController, App, NavParams } from 'ionic-angular';
 
 @Component({
     selector: 'redeemed-popover-component',
@@ -7,9 +7,16 @@ import { ViewController, App } from 'ionic-angular';
 })
 
 export class RedeemedPopover {
+
+    redeemingResponse;
+
     constructor(
         private viewCtrl: ViewController,
-        private app: App) { }
+        private app: App,
+        private navParams: NavParams,) { 
+        
+        this.redeemingResponse = this.navParams.get('redeemingResponse');
+        }
 
     close() {
         this.viewCtrl.dismiss();
