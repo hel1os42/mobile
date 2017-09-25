@@ -53,7 +53,7 @@ import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
 import { PlacePage } from '../pages/place/place';
 import { RedeemedPopover } from '../pages/offer/redeemed.popover';
 import { CongratulationPopover } from '../pages/offer/congratulation.popover';
-
+import { OfferTermsPage } from '../pages/offer-terms/offer-terms';
 
 @NgModule({
   declarations: [
@@ -95,8 +95,8 @@ import { CongratulationPopover } from '../pages/offer/congratulation.popover';
     RedeemedPopover,
     CreateOfferPopover,
     PlacesPopover,
-    CongratulationPopover
-
+    CongratulationPopover,
+    OfferTermsPage
   ],
   imports: [
     BrowserModule,
@@ -151,8 +151,8 @@ import { CongratulationPopover } from '../pages/offer/congratulation.popover';
     RedeemedPopover,
     CreateOfferPopover,
     PlacesPopover,
-    CongratulationPopover
-
+    CongratulationPopover,
+    OfferTermsPage
   ],
   providers: [
     StatusBar,
