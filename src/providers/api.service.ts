@@ -10,6 +10,7 @@ import { TokenService } from "./token.service";
 @Injectable()
 export class ApiService {
     HTTP_STATUS_CODE_UNATHORIZED = 401;
+    HTTP_STATUS_CODE_TOO_MANY_REQ = 429;
     url: string = 'https://nau.toavalon.com';
 
     constructor(
@@ -57,20 +58,27 @@ export class ApiService {
                     if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
                         this.token.remove();
                         return;
-                    }
+                    }                
 
                     let messages = [];
-                    let err = errResp.json();
 
-                    if (err.error && err.message) {
-                        messages.push(err.message)
+                    if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
+                        messages.push('Too Many Attempts.')
                     }
-                    else {
-                        for (let key in err) {
-                            let el = err[key];
-                            for (let i = 0; i < el.length; i++) {
-                                let msg = el[i];
-                                messages.push(msg);
+                    else
+                    {
+                        let err = errResp.json();
+
+                        if (err.error && err.message) {
+                            messages.push(err.message)
+                        }
+                        else {
+                            for (let key in err) {
+                                let el = err[key];
+                                for (let i = 0; i < el.length; i++) {
+                                    let msg = el[i];
+                                    messages.push(msg);
+                                }
                             }
                         }
                     }

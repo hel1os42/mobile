@@ -5,6 +5,7 @@ import { CreateUserProfilePage } from "../create-user-profile/create-user-profil
 import { PlacesPage } from '../places/places';
 import { SplashInfoPage } from '../splash-info/splash-info';
 import { SplashNewsPage } from '../splash-news/splash-news';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-splash-screen',
@@ -14,16 +15,18 @@ export class SplashScreenPage {
 
     @ViewChild('slides') slides: Slides;
     @ViewChild('slidesNews') slidesNews: Slides;
-    
-    constructor(private nav: NavController,
-                private app: App) {
+
+    constructor(
+        private appMode: AppModeService,
+        private nav: NavController,
+        private app: App) {
     }
 
     openSettings() {
         this.nav.push(SettingsPage);
         //this.app.getRootNav().setRoot(SettingsPage);
     }
-    
+
     openCreateUserProfile() {
         this.nav.push(CreateUserProfilePage);
     }
@@ -44,8 +47,7 @@ export class SplashScreenPage {
     }
 
     openPlaces() {
-        //this.app.getRootNav().setRoot(PlacesPage);
-        this.nav.setRoot(PlacesPage);
+        this.appMode.setHomeMode(true);
     }
 
     openSplashInfo() {

@@ -1,68 +1,52 @@
-<ion-content scroll="false">
-  <p class="toolbar-top">
-    <a (click)="back()" margin text-left><ion-icon class="icon-medium text-white" name="ios-arrow-back"></ion-icon></a>
-  </p>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Offer</ion-title>
+  </ion-navbar>
+</ion-header>
 
-  <ion-slides pager="true">
-    <ion-slide class="slide1">
-      <p margin text-left class="text-white">
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="ios-star-outline"></ion-icon>
-      </p>
-      <h1>Italian cuisine days</h1>
-      <h5 margin class="font-75 text-white">We offer tasty italian cuisine for you on the weekend!</h5>
-      <div margin-left class="block-btn" text-left>
-      <button ion-button icon-only text-left margin-right class="btn-circle icon-small-s">
-        <ion-icon name="md-create"></ion-icon>
-      </button>
-      <button ion-button icon-only text-left class="btn-circle icon-small-s">
-        <ion-icon name="ios-close"></ion-icon>
-      </button>
-      </div>
-    </ion-slide>
-
-    <ion-slide class="slide1">
-      <p margin text-left class="text-white">
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="ios-star-outline"></ion-icon>
-      </p>
-      <h1>Italian cuisine days</h1>
-      <h5 margin class="font-75 text-white">We offer tasty italian cuisine for you on the weekend!</h5>
-      <div margin-left class="block-btn" text-left>
-        <button ion-button icon-only text-left margin-right class="btn-circle icon-small-s">
-          <ion-icon name="md-create"></ion-icon>
+<ion-content padding scroll="false">
+  <ion-item no-lines color="transparent" class="overflow-visible padding-left-offer">
+    <div item-start class="relative">
+      <div class="user_level font-30 text-white">10</div>
+      <div class="icon-plus">+</div>
+    </div>
+    <span class="font-16 text-E0E0E0">points</span>
+    <div item-end class="btn_social">
+      <div>
+        <button ion-button icon-only color="white">
+          <img src="assets/img/user_offers/icon1.svg">
         </button>
-        <button ion-button icon-only text-left class="btn-circle icon-small-s">
-          <ion-icon name="ios-close"></ion-icon>
+        <button ion-button icon-only color="white">
+          <img src="assets/img/user_offers/icon2.svg">
+        </button>
+        <button ion-button icon-only color="white">
+          <img src="assets/img/user_offers/icon3.svg">
         </button>
       </div>
-    </ion-slide>
+    </div>
+  </ion-item>
 
-    <ion-slide class="slide1">
-      <p margin text-left class="text-white">
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="star"></ion-icon>
-        <ion-icon class="icon-small-s" name="ios-star-outline"></ion-icon>
-      </p>
-      <h1>Italian cuisine days</h1>
-      <h5 margin class="font-75 text-white">We offer tasty italian cuisine for you on the weekend!</h5>
-      <div margin-left class="block-btn" text-left>
-        <button ion-button icon-only text-left margin-right class="btn-circle icon-small-s">
-          <ion-icon name="md-create"></ion-icon>
-        </button>
-        <button ion-button icon-only text-left class="btn-circle icon-small-s">
-          <ion-icon name="ios-close"></ion-icon>
-        </button>
-      </div>
-    </ion-slide>
-  </ion-slides>
+  <div class="padding-left-offer padding-top-35">
+    <img src="assets/img/user_offers/icon_star.svg">
+    <img src="assets/img/user_offers/icon_star.svg">
+    <img src="assets/img/user_offers/icon_star.svg">
+    <img src="assets/img/user_offers/icon_star.svg">
+    <img src="assets/img/user_offers/icon_star.svg">
+    <img class="margin-left-10" src="assets/img/user_offers/icon_user.svg"><span class="font-16 text-E0E0E0">128</span>
+    <img class="margin-left-10" src="assets/img/user_offers/icon_arrow.svg"><span class="font-16 text-E0E0E0">100 m</span>
+  </div>
 
+  <div class="bold font-40 text-white padding-left-offer padding-right-offer padding-top-25">Italian cuisine days</div>
+
+  <div margin-top class="text-E0E0E0 font-16 padding-left-offer padding-right-offer padding-right-offer">We offer tasty italian cuisine for you on the weekend! Waiting for you!</div>
+
+  <div class="btn_footer">
+    <a (click)="openRedeemPopover()"text-center class="circles">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+      <div class="circle3"><span>Redeem OFFER</span></div>
+    </a>
+  </div>
 </ion-content>
+
+

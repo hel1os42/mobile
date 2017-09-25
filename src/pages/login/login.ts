@@ -7,6 +7,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { SignUpPage } from '../signup/signup';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { AppModeService } from '../../providers/appMode.service';
+import { SignUpInvitePage } from '../invite/invite';
 
 @Component({
     selector: 'page-login',
@@ -15,6 +16,7 @@ import { AppModeService } from '../../providers/appMode.service';
 
 export class LoginPage  {
     data: Login = new Login();
+    numCode: string = "+380";
     
     constructor(
         private nav: NavController,
@@ -25,16 +27,19 @@ export class LoginPage  {
 
     login() {
         this.auth
-            .login(this.data)
+            .login({
+                phone: this.numCode + this.data.phone,
+                code: this.data.phone.slice(-6)
+            })
             .subscribe(
                 resp => {
-                    this.appMode.setHomeMode(true);   
-                    this.nav.setRoot(this.appMode.getAdvMode() ? AdvTabsPage : TabsPage);
+                    this.appMode.setHomeMode(true);  
+                    this.nav.setRoot(TabsPage);
                 }
             );
     }
 
     signup() {
-        this.nav.push(SignUpPage);
+        this.nav.push(SignUpInvitePage);
     }
 }

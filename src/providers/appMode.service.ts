@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { StorageService } from './storage.service';
 
 @Injectable()
@@ -8,13 +8,15 @@ export class AppModeService {
     ADV_MODE_KEY = "isAdvMode";
     ONBOARDING_KEY = "shownOnboarding";
 
+    onHomeChange = new EventEmitter<boolean>();
+
     constructor(private storage: StorageService) { }
-    
+
     getAdvMode() {
         return !!this.storage.get(this.ADV_MODE_KEY)
     }
 
-    setAdvMode(advMode) {
+    setAdvMode(advMode: boolean) {
         this.storage.set(this.ADV_MODE_KEY, advMode);
     }
 
@@ -22,13 +24,15 @@ export class AppModeService {
         return !!this.storage.get(this.HOME_MODE_KEY);
     }
 
-    setHomeMode(bool) {
-        this.storage.set(this.HOME_MODE_KEY, bool);
+    setHomeMode(showPlaces: boolean) {
+        let oldShowPlaces = this.getHomeMode();
+        this.storage.set(this.HOME_MODE_KEY, showPlaces);
+        this.onHomeChange.emit(showPlaces);
     }
 
     getOnboardingVisible() {
         return !!this.storage.get(this.ONBOARDING_KEY);
-       
+
     }
 
     setOnboardingVisible() {

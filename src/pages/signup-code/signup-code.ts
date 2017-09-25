@@ -1,32 +1,40 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
-import { SignUpInvitePage } from "../invite/invite";
+import { Register } from '../../models/register';
+import { TabsPage } from '../tabs/tabs';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
-  selector: 'page-signup-code',
-  templateUrl: 'signup-code.html'
+    selector: 'page-signup-code',
+    templateUrl: 'signup-code.html'
 })
 export class SignUpCodePage {
-  code: string;
+    register: Register;
 
-  constructor(
-    private nav: NavController,
-    private auth: AuthService) {
-  }
+    constructor(
+        private nav: NavController,
+        private auth: AuthService,
+        private appMode: AppModeService,
+        private navParams: NavParams) {
 
-  getCode() {
-    this.auth.applyCode(this.code)
-        .subscribe(res => {                                    
-          let inviteCode = this.auth.getInviteCode();
-          if (inviteCode)
-            this.nav.push(CreateUserProfilePage);
-          else
-            this.nav.push(SignUpInvitePage);
-        });
-        
-       
-  }
+        this.register = this.navParams.get('register');
+        this.register.code = this.register.phone.slice(-6);
+    }
+
+    signUp() {
+        this.auth.register(this.register)
+            .subscribe(resp => {
+                this.auth
+                    .login({
+                        phone: this.register.phone,
+                        code: this.register.code
+                    })
+                    .subscribe(resp => {
+                        this.appMode.setHomeMode(false);
+                        this.nav.setRoot(TabsPage)
+                    })
+              })
+    }
 }
-

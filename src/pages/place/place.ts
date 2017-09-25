@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { OfferService } from '../../providers/offer.service';
 import { Company } from '../../models/company';
 import { Offer } from '../../models/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { OfferPage } from '../offer/offer';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-place',
@@ -18,9 +19,15 @@ export class PlacePage {
     constructor(
         private nav: NavController,
         private offers: OfferService,
-        private navParams: NavParams) {
-        
-        this.segment = "alloffers"   
+        private appMode: AppModeService,
+        private navParams: NavParams,
+        private app: App) {
+
+        this.segment = "alloffers"
+    }
+
+    ionSelected() {
+        this.appMode.setHomeMode(false);
     }
 
     ionViewDidLoad() {
@@ -28,7 +35,7 @@ export class PlacePage {
         this.offers.getCompany(companyId)
             .subscribe(company => this.company = company);
     }
-    
+
     getStars(star: number){
         let showStars: boolean[] = [];
         for (var i = 0; i < 5; i++) {
@@ -46,7 +53,8 @@ export class PlacePage {
     }
 
     openOffer(offer) {
-        this.nav.push(OfferPage, { offer: offer});
+        //this.nav.setRoot(OfferPage, { offer: offer});
+        this.app.getRootNav().push(OfferPage);
     }
-    
+
 }

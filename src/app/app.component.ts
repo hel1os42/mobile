@@ -50,13 +50,9 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
 
-            this.rootPage = !this.auth.isLoggedIn()
-                ? OnBoardingPage
-                : this.appMode.getAdvMode()
-                    ? AdvTabsPage
-                    : TabsPage;
+            this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : TabsPage;
 
-          //this.rootPage = UserTasksPage;
+          //this.rootPage = OfferPage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);

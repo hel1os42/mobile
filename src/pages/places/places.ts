@@ -27,7 +27,7 @@ export class PlacesPage {
     mapBounds;
     mapCenter;
     message;
-    companies: Company[];    
+    companies: Company[];
 
     constructor(
         private nav: NavController,
@@ -36,8 +36,12 @@ export class PlacesPage {
         private offers: OfferService,
         private popoverCtrl: PopoverController,
         private mapsAPILoader: MapsAPILoader) {
-        
+
         this.selectedCategory = this.categories[0];
+    }
+
+    ionSelected() {
+        this.appMode.setHomeMode(false);
     }
 
     isSelectedCategory(category: OfferCategory) {
@@ -52,7 +56,7 @@ export class PlacesPage {
     generateBounds(markers): any {
         if (markers && markers.length > 0) {
             let google = window['google'];
-            
+
             let bounds = new google.maps.LatLngBounds();
 
             markers.forEach((marker: any) => {
@@ -66,7 +70,7 @@ export class PlacesPage {
 
             return bounds;
         }
-        
+
         return undefined;
     }
 

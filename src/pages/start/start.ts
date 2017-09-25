@@ -5,17 +5,15 @@ import { LoginPage } from '../login/login';
 import { SignUpPage } from '../signup/signup';
 
 import { SignUpInvitePage } from '../invite/invite';
+import { ApiService } from '../../providers/api.service';
 
 @Component({
   selector: 'page-start',
   templateUrl: 'start.html'
 })
 export class StartPage {
-  invite: string = "";
-
   constructor(
-    private nav: NavController,
-    private auth: AuthService) {
+    private nav: NavController) {
   }
 
   login() {
@@ -23,10 +21,6 @@ export class StartPage {
   }
 
   register() {
-    this.auth.getInviteCode();
-    let page = this.invite ? SignUpPage : SignUpInvitePage;
-    this.nav.push(page);
-
-
+    this.nav.push(SignUpInvitePage);
   }
 }

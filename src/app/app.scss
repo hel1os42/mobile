@@ -130,11 +130,15 @@ ion-header ion-icon.back-button-icon.icon {
 }
 
 .font-10{
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .font-12{
   font-size: 12px;
+}
+
+.font-14{
+  font-size: 14px;
 }
 
 .font-16{
@@ -145,12 +149,24 @@ ion-header ion-icon.back-button-icon.icon {
   font-size: 18px;
 }
 
+.font-20{
+  font-size: 20px;
+}
+
 .font-22{
   font-size: 22px;
 }
 
+.font-30{
+  font-size: 30px;
+}
+
 .font-36{
   font-size: 36px;
+}
+
+.font-40{
+  font-size: 40px;
 }
 
 .font-50{
@@ -158,7 +174,7 @@ ion-header ion-icon.back-button-icon.icon {
 }
 
 .font-65{
-  font-size: 65%;
+  font-size: 11px;
 }
 
 .font-75{
@@ -240,6 +256,10 @@ ion-header ion-icon.back-button-icon.icon {
 
 .text-333333{
   color: #333333;
+}
+
+.text-E0E0E0{
+  color: #E0E0E0;
 }
 
 .text-filed-radius{
@@ -579,9 +599,12 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .grid-tabs-splash .col{
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   height: 100%;
+  min-height: 100%;
 }
 
 .grid-tabs-splash .col img{
@@ -708,7 +731,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .progress-block {
   width: 100%;
   display: flex;
+  display: -webkit-flex;
   justify-content: space-between;
+  -webkit-justify-content: space-between;
   padding-top: 2px;
   padding-bottom: 2px;
   position: relative;
@@ -834,6 +859,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .flex{
   display: flex;
+  display: -webkit-flex;
 }
 
 .plus{
@@ -877,5 +903,26 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .text-overflow-54{
   height: 54px;
   overflow: hidden;
+}
+
+.popover-ios .popover-content{
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.overflow-visible{
+  overflow: visible;
+}
+
+.active_cat{
+  opacity: 0.5;
+}
+
+/* FIX KEYBOARD SCROLL
+.input-cover {
+  position: static;
+}*/
+
+.item-multiple-inputs ion-select{
+  z-index: 1;
 }
 

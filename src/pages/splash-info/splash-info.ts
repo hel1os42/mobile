@@ -9,13 +9,13 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class SplashInfoPage {
 
-    constructor(private app: App,
-                private appMode: AppModeService) {
+    constructor(
+        private app: App,
+        private appMode: AppModeService) {
 
     }
-    
+
     openHome() {
         this.appMode.setHomeMode(true);
-        this.app.getRootNav().setRoot(TabsPage);
     }
 }

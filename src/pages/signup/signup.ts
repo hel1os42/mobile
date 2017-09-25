@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { AuthService } from "../../providers/auth.service";
-import { SignUpCodePage } from "../signup-code/signup-code";
+import { NavController, NavParams } from 'ionic-angular';
+import { AuthService } from '../../providers/auth.service';
+import { SignUpCodePage } from '../signup-code/signup-code';
 
 @Component({
     selector: 'page-signup',
@@ -9,16 +9,21 @@ import { SignUpCodePage } from "../signup-code/signup-code";
 })
 export class SignUpPage {
     phone: string;
+    numCode: string = "+380"
+    phoneNumber: string;
 
     constructor(
         private nav: NavController,
         private auth: AuthService) {
     }
 
-    getCode() {
-        this.auth.checkPhone(this.phone)
-            .subscribe(res => {
-                this.nav.push(SignUpCodePage);
-            });
+    getCode(phone) {
+        this.phoneNumber = this.numCode + this.phone;                
+        let inviteCode = this.auth.getInviteCode();
+
+        this.auth.getReferrerId(inviteCode, this.phoneNumber)
+            .subscribe(register => {
+                this.nav.push(SignUpCodePage, { register: register });
+            })
     }
 }

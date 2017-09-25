@@ -1,9 +1,9 @@
 <ion-header>
   <ion-grid text-center class="grid-tabs-splash">
     <ion-row align-items-end>
-      <a ion-col *ngFor="let category of categories" [ngClass]="{ 'active': isSelectedCategory(category) }" (click)="selectCategory(category)">
+      <a ion-col *ngFor="let category of categories" [ngClass]="{ 'active_cat': isSelectedCategory(category) }" (click)="selectCategory(category)">
         <p><img [src]="category.image_url"></p>
-        <p class="font-65 text-white">{{ category.name }}</p>
+        <p class="font-75 text-white">{{ category.name }}</p>
       </a>
     </ion-row>
   </ion-grid>
@@ -26,10 +26,10 @@
 <ion-content no-bounce class="padding-no">
   <ion-item class="block-search" no-lines padding-left padding-right>
     <ion-searchbar round placeholder=""></ion-searchbar>
-    <a (click)="toggleMap()" item-end>
+    <a (click)="toggleMap()" item-end text-center>
       <img *ngIf="!isMapVisible" src="assets/img/user_home/icon_pin.svg">
       <img *ngIf="isMapVisible" src="assets/img/user_home/icon_pin_hide.svg">
-  </a>
+    </a>
     <a (click)="openPopover()" class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
   </ion-item>
 
@@ -72,11 +72,10 @@
   </ion-list>
 
   <div *ngIf="isMapVisible">
-    <div *ngIf="!coords.lat">Detecting your location...</div>
     <agm-map class="card" *ngIf="mapCenter" [zoom]="15" [latitude]="mapCenter.lat" [longitude]="mapCenter.lng" [fitBounds]="mapBounds">
       <agm-marker *ngFor="let company of companies" [latitude]="company.latitude" [longitude]="company.longitude" [iconUrl]="'assets/img/places_pin.png'">
         <agm-info-window [disableAutoPan]="false">
-          <div class='agm-info-window-content'>{{company.name}}
+          <div (click)="openPlace(company.id)" class='agm-info-window-content'>{{company.name}}
           </div>
         </agm-info-window>
       </agm-marker>

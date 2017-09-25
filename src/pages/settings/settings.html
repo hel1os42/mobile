@@ -9,8 +9,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding-top>
-  <div class="margin-bottom-10">
+<ion-content class="padding-no">
+  <div margin-top class="margin-bottom-10">
     <a (click)="toggleAccountsChoiceVisible()">
       <ion-icon class="text-828282" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
       <ion-icon class="text-828282" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
@@ -94,7 +94,7 @@
     <div padding-left *ngIf="!coords.lat">Detecting your location...</div>
     <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
     </agm-map>
-    <div id="marker"></div>
+    <div id="marker" *ngIf="coords.lat"></div>
   </div>
 
   <p margin>

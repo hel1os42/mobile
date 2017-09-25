@@ -9,15 +9,15 @@
   <div text-center margin-top margin-bottom class="title-big-sign">Phone Number</div>
   <p margin-bottom text-center class="font-75 text-4F4F4F">Please choose your country phone code<br>and fill your phone number</p>
   <ion-item padding class="border-bottom-no">
-    <ion-select class="bg-gray-left" placeholder="+380" [(ngModel)]="numcode">
-      <ion-option value="380">+380</ion-option>
-      <ion-option value="101">+102</ion-option>
+    <ion-select class="bg-gray-left" placeholder="+380" [(ngModel)]="numCode" interface="popover">
+      <ion-option selected value="+380">+380</ion-option>
+      <ion-option value="+1">+1</ion-option>
     </ion-select>
     <ion-input class="bg-gray-right" type="tel" placeholder="123-45-67" [(ngModel)] ="phone"></ion-input>
   </ion-item>
 
   <p padding>
-  <button ion-button block middle color="primary" margin-bottom (click)="getCode()">Next</button>
+  <button (click)="getCode()" [disabled]="!(phone)" ion-button block middle color="primary" margin-bottom>Next</button>
   </p>
 </ion-content>
 
