@@ -54,9 +54,7 @@ export class PlacePage {
 
     openOffer(offer) {
         //this.nav.setRoot(OfferPage, { offer: offer});
-        this.app.getRootNav().setRoot(OfferPage);
+        this.app.getRootNav().push(OfferPage);
     }
-
-
 
 }
