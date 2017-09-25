@@ -43,25 +43,25 @@
         <ng-container *ngFor="let showStar of getStars(company.stars)">
           <ion-icon class="text-FEC282 font-12" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
         </ng-container>
-        <img class="margin-left-5" src="assets/img/user_home/icon_small_user.svg"><span class="font-75">{{ company.testimonials_count }}</span>
+        <img class="margin-left-5" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">{{ company.testimonials_count }}</span>
         <img class="margin-left-5" src="assets/img/user_home/icon_small_arrow.svg">
-        <span class="font-75"> {{ getDistance(company.latitude, company.longitude) }} m</span>
+        <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} m</span>
       </div>
-      <div class="bold font-20 text-3E4B5D text-ellipsis">{{ company.name }}</div>
+      <div class="bold font-20 text-3E4B5D text-ellipsis margin-bottom-5">{{ company.name }}</div>
       <ng-container *ngFor="let category of company.categories">
-        <span class="type-food font-75 text-3E4B5D">{{ category.name }}</span>
+        <span class="type-food font-10 text-3E4B5D">{{ category.name }}</span>
       </ng-container>
-      <div margin-top class="text-828282 font-12 wrap text-overflow-35">{{ company. description }}</div>
+      <div margin-top class="text-828282 font-12 wrap text-overflow-35 margin-top-5">{{ company. description }}</div>
 
       <img class="star_right" src="assets/img/place/icon_star.svg">
 
       <div item-end>
         <div class="num_right">
-          <div class="font-36 text-FF5A00" text-center>
+          <div class="font-36 bold text-FF5A00" text-center>
             {{ company. offers_count }}
           </div>
           <div class="font-10 text-828282">
-            offers
+            Offers
           </div>
         </div>
       </div>

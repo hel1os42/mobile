@@ -554,12 +554,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   border-radius: 0;
   width: inherit;
   height: inherit;
+  max-width: 23vw;
+  max-height: 23vw;
 }
 
 .item-block-nau .item{
   margin-bottom: 10px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  padding: 15px;
+  padding: 10px;
 }
 
 .item-block-nau .input-wrapper .label-ios, .item-block-nau-slider .input-wrapper .label-ios{
@@ -650,6 +652,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .segment-ios .segment-button{
   border: none;
   color: #828282;
+  height: 3.9rem;
+  line-height: 3.7rem;
 }
 
 .segment-ios .segment-button.segment-activated{
@@ -816,6 +820,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-right: 5px;
 }
 
+.margin-top-5{
+    margin-top: 5px;
+}
+
+.margin-bottom-5{
+    margin-bottom: 5px;
+}
+
 /* HEADER. Page places */
 .cover{
   width: 100%;
@@ -862,14 +874,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .star_right{
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 10px;
+  top: 10px;
 }
 
 .num_right{
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  right: 10px;
+  bottom: 10px;
 }
 
 .flex{
