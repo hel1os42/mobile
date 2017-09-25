@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
 import { OfferService } from '../../providers/offer.service';
 import { Company } from '../../models/company';
 import { Offer } from '../../models/offer';
@@ -20,7 +20,8 @@ export class PlacePage {
         private nav: NavController,
         private offers: OfferService,
         private appMode: AppModeService,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private app: App) {
 
         this.segment = "alloffers"
     }
@@ -52,7 +53,10 @@ export class PlacePage {
     }
 
     openOffer(offer) {
-        this.nav.push(OfferPage, { offer: offer});
+        //this.nav.setRoot(OfferPage, { offer: offer});
+        this.app.getRootNav().setRoot(OfferPage);
     }
+
+
 
 }
