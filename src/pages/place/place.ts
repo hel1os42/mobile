@@ -52,9 +52,9 @@ export class PlacePage {
         this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
     }
 
-    openOffer(offer) {
+    openOffer(offer, company) {
         //this.nav.setRoot(OfferPage, { offer: offer});
-        this.app.getRootNav().push(OfferPage);
+        this.app.getRootNav().push(OfferPage, { offer: offer, company: this.company});
     }
 
 }

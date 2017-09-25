@@ -5,6 +5,7 @@ export class MockOffers {
 
     public static items: Offer[] = [
         {
+            id: "1",
             image_url: "assets/img/place/offers_image1.png",
             label: "Chance for you",
             description: "A hamburger or burger is a sandwich consisting of one",
@@ -26,6 +27,7 @@ export class MockOffers {
             categories_count: 1
         },
         {
+            id: "2",
             image_url: "assets/img/place/offers_image2.png",
             label: "Happy Friday",
             description: "The patty may be pan fried, barbecued, or flame broiled",
@@ -47,6 +49,7 @@ export class MockOffers {
             categories_count: 1,
         },
         {
+            id: "3",
             image_url: "../assets/img/place/offers_image1.png",
             label: "Happy Burger",
             description: "A hamburger or burger is a sandwich consisting of one",

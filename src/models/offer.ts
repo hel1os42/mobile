@@ -2,7 +2,8 @@ import { Company } from "./company";
 import { OfferCategory } from "./offerCategory";
 
 export class Offer {
-    company?: Company
+    id: string;
+    company?: Company;
     image_url: string;
     label: string;
     description: string;
