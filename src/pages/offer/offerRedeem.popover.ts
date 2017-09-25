@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams, NavController } from 'ionic-angular';
+import { OfferTermsPage } from '../offer-terms/offer-terms';
 
 @Component({
     selector: 'offerRedeem-popover-component',
@@ -12,7 +13,8 @@ export class OfferRedeemPopover {
 
     constructor(
         private viewCtrl: ViewController,
-        private navParams: NavParams,) { 
+        private navParams: NavParams,
+        private nav: NavController) { 
         
         this.redeemingResponse = this.navParams.get('offerActivationCode');       
     
@@ -20,5 +22,9 @@ export class OfferRedeemPopover {
 
     close() {
         this.viewCtrl.dismiss();
+    }
+
+    openOfferTerms() {
+        this.nav.push(OfferTermsPage)
     }
 }

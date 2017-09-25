@@ -3,7 +3,7 @@
   <div margin-top text-uppercase class="text-3E4B5D font-36 bold">{{ redeemingResponse.code }}</div>
   <div class="text-BDBDBD font-14 margin-bottom-10">or use QR-code</div>
   <img class="margin-bottom-10" src="assets/img/user_offers/qr-code.svg">
-  <div class="margin-bottom-10"><a href="#" class="text-4F4F4F font-16">Agree with Terms & Conditions</a></div>
+  <div class="margin-bottom-10"><a (click)="openOfferTerms()" href="#" class="text-4F4F4F font-16">Agree with Terms & Conditions</a></div>
   <div margin>
     <div class="block-btn">
       <button (click)="close()" ion-button block color="secondary">Cancel</button>
