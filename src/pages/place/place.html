@@ -54,7 +54,7 @@
 
 <ion-content [ngSwitch]="segment" padding no-bounce>
   <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-    <ion-item *ngFor=" let offer of company.offers" (click)="openOffer(offer)" class="relative">
+    <ion-item *ngFor=" let offer of offersList" (click)="openOffer(offer)" class="relative">
       <ion-avatar item-start>
         <img [src]="offer.image_url">
       </ion-avatar>

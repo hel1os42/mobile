@@ -13,6 +13,5 @@ export class CongratulationPopover {
 
     close() {
         this.viewCtrl.dismiss();
-        this.app.getRootNav().setRoot();
     }
 }
