@@ -32,6 +32,7 @@ import { SplashNewsPage } from "../pages/splash-news/splash-news";
 import { BookmarksPage } from "../pages/bookmarks/bookmarks";
 import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { OfferTermsPage } from "../pages/offer-terms/offer-terms";
+import { SettingsPageChangePhone } from "../pages/settings-change-phone/settings-change-phone";
 
 @Component({
     templateUrl: 'app.html'
@@ -53,7 +54,7 @@ export class MyApp {
 
             this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : TabsPage;
 
-          //this.rootPage = OfferTermsPage;
+          //this.rootPage = SettingsPageChangePhone;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
