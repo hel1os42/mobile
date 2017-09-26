@@ -2,8 +2,8 @@
   <ion-navbar>
     <ion-title>The fair food</ion-title>
   </ion-navbar>
-  <div class="cover">
-    <img class="cover_logo" [src]="company.image_url">
+  <div class="cover" [style.background-image]="'company.cover_url'"  >
+    <img class="cover_logo" [src]="company.picture_url">
     <div class="cover_block_btn">
       <button class="margin-right-10" ion-button icon-only color="white">
         <img src="assets/img/place/btn_star.svg">
