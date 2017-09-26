@@ -12,6 +12,7 @@ import { OfferService } from '../../providers/offer.service';
 import { PlacesPopover } from './places.popover';
 import { google } from '@agm/core/services/google-maps-types';
 import { OfferCategory } from '../../models/offerCategory';
+import { DistanceUtils } from '../../utils/distanse';
 
 @Component({
     selector: 'page-places',
@@ -136,9 +137,12 @@ export class PlacesPage {
     }
 
     getDistance(latitude: number, longitude: number) {
-        return 200;
+        if (this.coords) {
+            return DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+        };
+        return undefined;
     }
-
+    
     openPopover() {
         let popover = this.popoverCtrl.create(PlacesPopover);
         popover.present();
