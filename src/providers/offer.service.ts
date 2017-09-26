@@ -38,6 +38,14 @@ export class OfferService {
         //return Observable.of(MockOffers.items);
     }
 
+    getPlaces(category_ids: string[]) {
+        return this.api.get(`places?category_ids[0]=${category_ids[0]}`);
+    }
+
+    getPlacesOffers(place_id) {
+        return this.api.get(`places/${place_id}/offers`);
+    }
+
     getOfferCreate() {
         return this.api.get('advert/offers/create');
     }
