@@ -34,8 +34,25 @@ export class OfferService {
     }
 
     getOffers(category_ids: string[]) {
-        return this.api.get(`offers?category_ids[0]=${category_ids[0]}`);
-        //return Observable.of(MockOffers.items);
+        //return this.api.get(`offers?category_ids[0]=${category_ids[0]}`);
+        return Observable.of(MockOffers.items);
+    }
+
+    getPlaces(category_ids: string[], lat: number, lng: number, radius: number) {
+        return this.api.get('places', true, {
+            'category_ids[0]': category_ids[0],
+            latitude: lat,
+            longitude: lng,
+            radius: radius
+        });
+    }
+
+    getPlace(place_id: string) {
+        return this.api.get(`places/${place_id}?with=offers`);
+    }
+
+    getPlaceOffers(place_id) {
+        return this.api.get(`places/${place_id}/offers`);
     }
 
     getOfferCreate() {
@@ -66,6 +83,6 @@ export class OfferService {
                 return Observable.of({ redemption_id: "redemption_id" });
             }
         else
-            return this.api.get(`activation_codes/${code}`);
+            return this.api.get(`activation_codes/${code}`, false);
     }
 }

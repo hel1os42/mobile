@@ -3,7 +3,8 @@
     <ion-title>The fair food</ion-title>
   </ion-navbar>
   <div class="cover">
-    <img class="cover_logo" [src]="company.image_url">
+    <!-- <img class="cover_logo" [src]="company.picture_url"> -->
+    <img class="cover_logo" src="assets/img/user_home/image1.png">    
     <div class="cover_block_btn">
       <button class="margin-right-10" ion-button icon-only color="white">
         <img src="assets/img/place/btn_star.svg">
@@ -56,7 +57,8 @@
   <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
     <ion-item *ngFor=" let offer of offersList" (click)="openOffer(offer)" class="relative">
       <ion-avatar item-start>
-        <img src="https://nau.toavalon.com/offers/b8b3fb1d-7105-4916-8269-98685d3a4c83/picture.jpg">
+        <!-- <img [src]="offer.picture_url"> -->
+        <img src="assets/img/place/offers_image1.png">
       </ion-avatar>
       <div class="bold font-22 text-3E4B5D">{{ offer.label }}</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap">{{ offer.description }}</div>

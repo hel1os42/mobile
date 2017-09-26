@@ -14,7 +14,7 @@ import { AppModeService } from '../../providers/appMode.service';
 export class PlacePage {
     company = new Company();
     visibleFooter: boolean = false;
-    segment;
+    segment: string;
     offersList: Offer[];
 
     constructor(
@@ -26,14 +26,14 @@ export class PlacePage {
 
         this.segment = "alloffers";
 
-        let companyId = this.navParams.get('companyId');
-        let categoryId = this.navParams.get('categoryId');
+        this.company = this.navParams.get('company');
+        let companyId = this.company.id;
 
-        this.offers.getCompany(companyId)
-            .subscribe(company => this.company = company);
-
-        this.offers.getOffers([categoryId])
-            .subscribe(resp => this.offersList = resp.data);
+        this.offers.getPlace(companyId)
+            .subscribe(companyWithOffers => {
+                this.company = companyWithOffers;
+                this.offersList = companyWithOffers.offers;
+            })         
     }
 
     ionSelected() {
