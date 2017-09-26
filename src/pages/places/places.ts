@@ -19,15 +19,19 @@ import { OfferCategory } from '../../models/offerCategory';
 })
 export class PlacesPage {
 
+    companies: Company[];
     categories: OfferCategory[] = OfferCategory.StaticList;
     selectedCategory: OfferCategory;
-    segment;
     isMapVisible: boolean = false;
-    coords = new Coords;
+    coords: Coords = {
+        lat: 50,
+        lng: 30
+    };
     mapBounds;
-    mapCenter;
-    message;
-    companies: Company[];
+    mapCenter: Coords;
+    message: string;
+    radius = 50000000;
+    segment: string;
 
     constructor(
         private nav: NavController,
@@ -39,6 +43,25 @@ export class PlacesPage {
 
         this.selectedCategory = this.categories[0];
         this.segment = "alloffers";
+        
+        this.location.get()
+            .then((resp) => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                if (!this.mapCenter) {
+                    this.mapCenter = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                }
+            })
+            .catch((error) => {
+                this.message = error.message;
+            });
+
+        this.loadCompanies();
     }
 
     ionSelected() {
@@ -75,56 +98,33 @@ export class PlacesPage {
         return undefined;
     }
 
-    filterCompaniesBySelectedCategory(companies: Company[]): Company[] {
-        return companies.filter(p => {
-            return p.categories.find(p => p.id == this.selectedCategory.id);
-        })
-    }
-
     loadCompanies() {
-        this.offers.getCompanies(this.selectedCategory.id)
+        this.offers.getPlaces([this.selectedCategory.id], this.coords.lat, this.coords.lng, this.radius)
             .subscribe(companies => {
-                this.companies = this.filterCompaniesBySelectedCategory(companies);
+                this.companies = companies.data;
 
                 this.mapsAPILoader.load()
                     .then(() => {
-                        if (this.companies && this.companies.length == 1) {
+                        if (this.companies.length == 0 && this.coords) {
+                            this.mapCenter = this.coords;
+                        }
+                        else if (this.companies.length == 1) {
                             this.mapCenter = {
                                 lat: this.companies[0].latitude,
                                 lng: this.companies[0].longitude,
                             };
-                        }
+                        };
                         this.mapBounds = this.generateBounds(this.companies);
                     })
             });
     }
-
-    ionViewDidLoad() {
-        this.loadCompanies();
-
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.mapCenter = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-            })
-            .catch((error) => {
-                this.message = error.message;
-                console.log(this.message);
-            });
-    }
-
+    
     toggleMap() {
         this.isMapVisible = !this.isMapVisible;
     }
 
-    openPlace(id, categoryId) {
-        this.nav.push(PlacePage, { companyId: id, categoryId: this.selectedCategory.id });
+    openPlace(company) {
+        this.nav.push(PlacePage, { company: company });
     }
 
     getStars(star: number) {
