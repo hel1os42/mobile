@@ -40,9 +40,196 @@ page-user-profile{
   ion-item > .item-inner {
     padding: 0 !important;
   }
+
   .user_level{
     background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
     border-radius: 100px;
     padding: 8px;
   }
+
+  /* CIRCLE */
+
+    .block-user-level{
+        width: 100vw;
+        height: 100vw;
+        background: url(../assets/img/user_profile/star.svg);
+        display: flex;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+    }
+
+    .block-circle{
+        width: 50%;
+        height: 50%;
+        display: block;
+        font-size: 0;
+        position: relative;
+        margin: auto;
+    }
+
+    .label-point{
+        font-size: 4vw;
+        position: absolute;
+        color: #828282;
+    }
+
+    .circle-label-left{
+        top: -2.5vw;
+        left: -12vw;
+    }
+
+    .circle-label-right{
+        top: -2.5vw;
+        right: -12vw;
+    }
+
+    .circle-label-bottom{
+        bottom: -7vw;
+        left: -50%;
+        text-align: center;
+        width: 100%;
+    }
+
+    .circle-label-top{
+        top: -11vw;
+        left: -50%;
+        width: 100%;
+        text-align: center;
+    }
+
+    .circle-center{
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        left: 10%;
+        top: 10%;
+        background-color: #fff;
+        background-image: url(../assets/img/user_profile/star.svg);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 100vw 100vw;
+        border-radius: 100vw;
+        z-index: 1;
+        display: flex;
+        text-align: center;
+    }
+
+    .circle-center .block-get{
+        margin: auto;
+    }
+
+    .circle-center .block-get div{
+        font-size: 5vw;
+        margin-top: 2vw;
+        margin-bottom: 1vw;
+        line-height: 5vw;
+    }
+
+    .circle-center .block-get img{
+        height: 12vw;
+        width: auto;
+    }
+
+    .circle-center .block-get span{
+        font-size: 3vw;
+        line-height: 4.5vw;
+    }
+
+    .color-fill{
+        background: #FF5A00;
+    }
+
+    .color-no-fill{
+        background: #FFC08B;
+    }
+
+    .box1.color-grad, .box2.color-grad{
+        background: linear-gradient(180deg, #FF5A00, #FFC08B);
+    }
+
+    .box3.color-grad, .box4.color-grad{
+        background: linear-gradient(0deg, #FF5A00, #FFC08B);
+    }
+
+    .box{
+        width: 49%;
+        height: 49%;
+        display: inline-block;
+        margin: 0.5%;
+        position: relative;
+    }
+
+    .box1{
+        border-radius: 0 100vw 0 0;
+    }
+
+    .box2{
+        border-radius: 0 0 100vw 0;
+    }
+
+    .box3{
+        border-radius: 0 0 0 100vw;
+    }
+
+    .box4{
+        border-radius: 100vw 0 0 0;
+    }
+
+    .next-level{
+        top: -5vw;
+        left: -6.5vw;
+        position: absolute;
+        border-radius: 100vw;
+        background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
+        border: 2px solid #FFFFFF;
+        width: 12vw;
+        height: 12vw;
+        z-index: 111;
+        color: #fff;
+        font-size: 2.2vw;
+        display: flex;
+    }
+
+    .next-level span{
+        margin: auto;
+        text-align: center;
+    }
+
+    .user-ava-name{
+        position: absolute;
+        height: 25%;
+        z-index: 11;
+    }
+
+    .user-level-1{
+        left: 75%;
+        top: 12.5%;
+    }
+
+    .user-level-2{
+        left: 68%;
+        top: 68%; /* 50-14 = 36/ 36/2 = 18 + 50 */
+    }
+
+    .user-ava-name .circle-ava{
+        background-image: url(../assets/img/user_achi/ava.png);
+        background-position: 50% 50%;
+        background-size: cover;
+        width: 14vw;
+        height: 14vw;
+        border-radius: 100vw;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        margin: 0 2vw 0 0;
+    }
+
+    .user-ava-name .lbl1{
+        font-size: 4vw;
+    }
+
+    .user-ava-name .lbl2{
+        font-size: 3vw;
+    }
 }
+
