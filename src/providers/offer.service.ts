@@ -43,7 +43,8 @@ export class OfferService {
             'category_ids[0]': category_ids[0],
             latitude: lat,
             longitude: lng,
-            radius: radius
+            radius: radius,
+            with: 'categories'
         });
     }
 

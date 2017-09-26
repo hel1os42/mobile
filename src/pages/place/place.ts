@@ -6,12 +6,16 @@ import { Offer } from '../../models/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { OfferPage } from '../offer/offer';
 import { AppModeService } from '../../providers/appMode.service';
+import { Coords } from '../../models/coords';
+import { LocationService } from '../../providers/location.service';
+import { DistanceUtils } from '../../utils/distanse';
 
 @Component({
     selector: 'page-place',
     templateUrl: 'place.html'
 })
 export class PlacePage {
+    coords: Coords;
     company = new Company();
     visibleFooter: boolean = false;
     segment: string;
@@ -19,6 +23,7 @@ export class PlacePage {
 
     constructor(
         private nav: NavController,
+        private location: LocationService,
         private offers: OfferService,
         private appMode: AppModeService,
         private navParams: NavParams,
@@ -33,7 +38,15 @@ export class PlacePage {
             .subscribe(companyWithOffers => {
                 this.company = companyWithOffers;
                 this.offersList = companyWithOffers.offers;
-            })         
+            });
+            
+        this.location.get()
+            .then((resp) => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+            });
     }
 
     ionSelected() {
@@ -49,7 +62,10 @@ export class PlacePage {
     }
 
     getDistance(latitude: number, longitude: number) {
-        return 200;
+        if (this.coords) {
+            return DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+        };
+        return undefined;
     }
 
     openFeedback(testimonial) {
