@@ -38,8 +38,12 @@ export class OfferService {
         //return Observable.of(MockOffers.items);
     }
 
-    getPlaces(category_ids: string[]) {
-        return this.api.get(`places?category_ids[0]=${category_ids[0]}`);
+    getPlaces(category_ids: string, lat: number, lng: number, radius: number) {
+        return this.api.get(`places?category_ids[0]=${category_ids}&latitude=${lat}&longitude=${lng}&radius=${radius}`);
+    }
+
+    getPlace(place_id) {
+        return this.api.get(`places/${place_id}`);
     }
 
     getPlacesOffers(place_id) {
