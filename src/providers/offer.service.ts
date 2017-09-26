@@ -9,6 +9,8 @@ import { MockCompanies } from '../mocks/mockCompanies';
 @Injectable()
 export class OfferService {
 
+    counter = 0;
+
     constructor(
         private api: ApiService) { }
 
@@ -31,9 +33,9 @@ export class OfferService {
         return Observable.of(company);
     }
 
-    getOffers() {
-        //return this.api.get('offers');
-        return Observable.of(MockOffers.items);
+    getOffers(category_ids: string[]) {
+        return this.api.get(`offers?category_ids[0]=${category_ids[0]}`);
+        //return Observable.of(MockOffers.items);
     }
 
     getOfferCreate() {
@@ -50,5 +52,20 @@ export class OfferService {
 
     getRedeemedOffers() {
         return this.api.get('profile?with=offers');
-    }   
+    }
+    
+    getActivationCode(offerId: string) {
+        return this.api.get(`offers/${offerId}/activation_code`);
+    }
+
+    getRedemtionStatus(code: string) {
+        this.counter++;
+        if (this.counter > 3 )
+            {
+                this.counter = 0;
+                return Observable.of({ redemption_id: "redemption_id" });
+            }
+        else
+            return this.api.get(`activation_codes/${code}`);
+    }
 }

@@ -15,6 +15,7 @@ export class PlacePage {
     company = new Company();
     visibleFooter: boolean = false;
     segment;
+    offersList: Offer[];
 
     constructor(
         private nav: NavController,
@@ -23,17 +24,20 @@ export class PlacePage {
         private navParams: NavParams,
         private app: App) {
 
-        this.segment = "alloffers"
+        this.segment = "alloffers";
+
+        let companyId = this.navParams.get('companyId');
+        let categoryId = this.navParams.get('categoryId');
+
+        this.offers.getCompany(companyId)
+            .subscribe(company => this.company = company);
+
+        this.offers.getOffers([categoryId])
+            .subscribe(resp => this.offersList = resp.data);
     }
 
     ionSelected() {
         this.appMode.setHomeMode(false);
-    }
-
-    ionViewDidLoad() {
-        let companyId = this.navParams.get('companyId');
-        this.offers.getCompany(companyId)
-            .subscribe(company => this.company = company);
     }
 
     getStars(star: number){
@@ -52,9 +56,9 @@ export class PlacePage {
         this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
     }
 
-    openOffer(offer) {
+    openOffer(offer, company) {
         //this.nav.setRoot(OfferPage, { offer: offer});
-        this.app.getRootNav().push(OfferPage);
+        this.app.getRootNav().push(OfferPage, { offer: offer, company: this.company});
     }
 
 }

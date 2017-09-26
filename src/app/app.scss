@@ -554,12 +554,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   border-radius: 0;
   width: inherit;
   height: inherit;
+  max-width: 23vw;
+  max-height: 23vw;
 }
 
 .item-block-nau .item{
   margin-bottom: 10px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  padding: 15px;
+  padding: 10px;
 }
 
 .item-block-nau .input-wrapper .label-ios, .item-block-nau-slider .input-wrapper .label-ios{
@@ -594,7 +596,6 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 /* TABS */
 .grid-tabs-splash{
   background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .grid-tabs-splash .col{
@@ -608,12 +609,16 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .grid-tabs-splash .col img{
-  max-width: 70%;
+  max-width: 65%;
 }
 
 .grid-tabs-splash p{
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+}
+
+.grid-tabs-splash span{
+    margin-bottom: 9px;
 }
 
 /* SEARCH */
@@ -647,6 +652,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .segment-ios .segment-button{
   border: none;
   color: #828282;
+  height: 3.9rem;
+  line-height: 3.7rem;
 }
 
 .segment-ios .segment-button.segment-activated{
@@ -789,6 +796,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   margin-top: 10px;
 }
 
+.margin-top-30{
+    margin-top: 30px;
+}
+
 .margin-bottom-10{
   margin-bottom: 10px;
 }
@@ -799,6 +810,22 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .margin-right-10{
   margin-right: 10px;
+}
+
+.margin-left-5{
+    margin-left: 5px;
+}
+
+.margin-right-5{
+    margin-right: 5px;
+}
+
+.margin-top-5{
+    margin-top: 5px;
+}
+
+.margin-bottom-5{
+    margin-bottom: 5px;
 }
 
 /* HEADER. Page places */
@@ -847,14 +874,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .star_right{
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 10px;
+  top: 10px;
 }
 
 .num_right{
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  right: 10px;
+  bottom: 10px;
 }
 
 .flex{
@@ -905,6 +932,12 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   overflow: hidden;
 }
 
+.text-ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .popover-ios .popover-content{
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
@@ -926,3 +959,33 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   z-index: 1;
 }
 
+.tabs-ios .tabbar{
+    background: #fff;
+    box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.12);
+    border-top: none;
+}
+
+.letter-spacing-1{
+    letter-spacing: 1px;
+}
+
+.item-ios[detail-push] .item-inner{
+    background-position: right 3px center;
+}
+
+.item-ios[detail-push]{
+    padding-right: 0;
+}
+
+.item-ios[detail-push] .item-inner .input-wrapper{
+    padding-right: 15px;
+}
+
+a:active{
+    opacity: 0.5;
+}
+
+.item-ios.activated {
+    background-color: inherit;
+    opacity: 0.5;
+}

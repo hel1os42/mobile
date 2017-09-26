@@ -2,15 +2,16 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-bookmarks',
-  templateUrl: 'bookmarks.html'
+  selector: 'page-offer-terms',
+  templateUrl: 'offer-terms.html'
 })
-export class BookmarksPage {
-
-    segment;
+export class OfferTermsPage {
 
   constructor(private nav: NavController) {
-    this.segment = "places";
+
   }
 
+  back() {
+      this.nav.pop();
+  }
 }

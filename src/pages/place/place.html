@@ -29,11 +29,11 @@
     <ion-item no-lines>
       <div margin-left class="font-12 text-828282 wrap">{{ company.description }}</div>
       <div item-end>
-        <div class="font-36 text-FF5A00" text-center>
+        <div class="font-36 offers_count text-FF5A00" text-center>
           {{ company. offers_count }}
         </div>
         <div class="font-10 text-828282">
-          offers
+          Offers
         </div>
       </div>
     </ion-item>
@@ -54,9 +54,9 @@
 
 <ion-content [ngSwitch]="segment" padding no-bounce>
   <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-    <ion-item *ngFor=" let offer of company.offers" (click)="openOffer(offer)" class="relative">
+    <ion-item *ngFor=" let offer of offersList" (click)="openOffer(offer)" class="relative">
       <ion-avatar item-start>
-        <img [src]="offer.image_url">
+        <img src="https://nau.toavalon.com/offers/b8b3fb1d-7105-4916-8269-98685d3a4c83/picture.jpg">
       </ion-avatar>
       <div class="bold font-22 text-3E4B5D">{{ offer.label }}</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap">{{ offer.description }}</div>

@@ -2,8 +2,9 @@ import { Company } from "./company";
 import { OfferCategory } from "./offerCategory";
 
 export class Offer {
-    company?: Company
-    image_url: string;
+    id: string;
+    picture_url: string;
+    company?: Company;
     label: string;
     description: string;
     reward: number;

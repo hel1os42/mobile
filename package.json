@@ -1,6 +1,6 @@
 {
     "name": "nau",
-    "version": "0.0.1",    
+    "version": "0.0.1",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
@@ -43,7 +43,7 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "2.1.4",
-        "ionic": "3.9.2",
+        "ionic": "3.9.1",
         "typescript": "2.3.4"
     },
     "description": "nau",

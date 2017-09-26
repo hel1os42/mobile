@@ -40,7 +40,8 @@ page-place {
     padding-left: 16px;
     padding-right: 16px;
     background: #fff;
-    margin-bottom: 50px;
+    margin-bottom: 49px;
+    border-bottom: 1px solid #BDBDBD
   }
 
   .footer.footer-ios .item-ios.item-block .item-inner{
@@ -57,5 +58,13 @@ page-place {
     padding: 11px;
     height: 42px;
     width: 42px;
+  }
+
+  .tabbar_testimonials{
+    border-bottom: 1px solid gray;
+  }
+
+  .offers_count{
+    line-height: 34px;
   }
 }

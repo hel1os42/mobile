@@ -14,7 +14,7 @@
     <div class="font-18 text-3E4B5D bold">123</div>
     <div class="font-14 text-828282">Bookmarks</div>
   </ion-item>
-  <ion-segment text-uppercase margin-top class="nau-segment">
+  <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="nau-segment">
     <ion-segment-button value="places">
       Places
     </ion-segment-button>
@@ -28,7 +28,7 @@
     <ion-item class="relative">
       <ion-avatar item-start text-center>
         <img src="assets/img/user_home/image1.png">
-        <span text-uppercase class="bold font-12 text-FF5A00">Featured</span>
+        <span text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">Featured</span>
       </ion-avatar>
       <div>
         <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
@@ -36,24 +36,22 @@
         <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
         <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
         <ion-icon class="text-FEC282 font-12" name="star-outline"></ion-icon>
-        <img src="assets/img/user_home/icon_small_user.svg"><span class="font-75">128</span>
-        <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> 100 m</span>
+        <img class="margin-left-5" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">128</span>
+        <img class="margin-left-5" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75 text-828282"> 100 m</span>
       </div>
-      <div class="bold font-22 text-3E4B5D">The Fair food
-        <ion-icon class="font-75" name="ios-arrow-forward"></ion-icon>
-      </div>
-      <span class="type-food font-75 text-3E4B5D">Bakery</span>
-      <span class="type-food font-75 text-3E4B5D">Burger</span>
-      <div margin-top class="text-828282 font-12 wrap text-overflow-35">The modern</div>
+      <div class="bold font-20 text-3E4B5D text-ellipsis margin-bottom-5">The Fair food</div>
+      <span class="type-food font-10 text-3E4B5D">Bakery</span>
+      <span class="type-food font-10 text-3E4B5D">Burger</span>
+      <div margin-top class="text-828282 font-12 wrap text-overflow-35 margin-top-5">The modern</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
 
       <div item-end>
         <div class="num_right">
-          <div class="font-36 text-FF5A00" text-center>
+          <div class="font-36 bold text-FF5A00" text-center>
             3
           </div>
           <div class="font-10 text-828282">
-            offers
+            Offers
           </div>
         </div>
       </div>
@@ -80,7 +78,7 @@
       <ion-avatar item-start>
         <img src="assets/img/place/offers_image2.png">
       </ion-avatar>
-      <div class="bold font-22 text-3E4B5D">Happy Friday</div>
+      <div class="bold font-20 text-3E4B5D text-ellipsis">Happy Friday</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap">The patty may be pan fried, barbecued, or flame broiled</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-10 flex">
