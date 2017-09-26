@@ -7,8 +7,10 @@ import { NavController } from "ionic-angular";
 })
 export class UserTasksPage {
 
+    seg;
+
     constructor(
         private nav: NavController) {
-
+        this.seg = "active";
     }
 }
