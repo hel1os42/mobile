@@ -1,6 +1,7 @@
 page-user-nau{
   .btn_transfer.item-button{
     margin: 0;
+    margin-right: 10%;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 17px;
@@ -12,5 +13,14 @@ page-user-nau{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .item-block-nau .item{
+    padding: 16px;
+  }
+
+  .star_right{
+    top: 16px;
+    right: 16px;
   }
 }
