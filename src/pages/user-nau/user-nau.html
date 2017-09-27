@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Nau payments</ion-title>
+    <ion-title>NAU transactions</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -19,19 +19,19 @@
   </ion-item>
 <!-- 
   <div margin-top class="font-14 text-4F4F4F" text-uppercase>Today</div>
-  <ion-list margin-top no-lines class="item-block-nau">
-    <ion-item>
-      <div class="text-3E4B5D font-22">Payment 543821</div>
-      <div class="text-3E4B5D font-22" text-uppercase item-end>130 NAU</div>
+  <ion-list no-lines class="item-block-nau margin-top-5">
+    <ion-item class="relative">
+      <div class="text-3E4B5D font-22 margin-bottom-5 bold">Payment 543821</div>
+      <div class="text-3E4B5D font-22 star_right" text-uppercase><span class="bold">130</span><span class="regular"> NAU</span></div>
       <div class="font-14 text-828282">{{ today | date: "dd/MM/y  H:mm:ss" }}</div>
     </ion-item>
   </ion-list> -->
 
   <div margin-top class="font-14 text-4F4F4F" text-uppercase>Latest payments</div>
-  <ion-list margin-top no-lines class="item-block-nau">
-      <ion-item *ngFor="let transaction of transactions">
-      <div class="overflow text-3E4B5D font-22">Pay {{ transaction.id }}</div>
-      <div text-uppercase item-end class="text-3E4B5D font-22">{{ transaction.amount }} NAU</div>
+  <ion-list no-lines class="item-block-nau margin-top-5">
+      <ion-item class="relative" *ngFor="let transaction of transactions">
+      <div class="text-3E4B5D font-22 margin-bottom-5 bold">Pay {{ transaction.id }}</div>
+      <div class="text-3E4B5D font-22 star_right" text-uppercase><span class="bold">{{ transaction.amount }}</span><span class="regular"> NAU</span></div>
       <div class="font-14 text-828282">{{ transaction.created_at | date: "dd/MM/y  H:mm:ss" }}</div>
     </ion-item>
   </ion-list>
