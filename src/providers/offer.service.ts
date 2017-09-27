@@ -68,12 +68,16 @@ export class OfferService {
         return this.api.get('categories');
     }
 
+    getSubCategories(category_id) {
+        return this.api.get(`categories/${category_id}?with=children`);
+    }
+
     getRedeemedOffers() {
         return this.api.get('profile?with=offers');
     }
     
-    getActivationCode(offerId: string) {
-        return this.api.get(`offers/${offerId}/activation_code`);
+    getActivationCode(offer_id: string) {
+        return this.api.get(`offers/${offer_id}/activation_code`);
     }
 
     getRedemtionStatus(code: string) {
