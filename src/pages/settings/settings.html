@@ -82,7 +82,7 @@
   <div text-uppercase margin>
     <a class="text-4F4F4F font-14" (click)="toggleSelectRadiusVisible()">Set radius for yours offers interest</a>
   </div>
-  <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-bottom class="border-bottom-no">
+  <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-bottom padding-left padding-right class="border-bottom-no">
     <ion-label>Offers radius</ion-label>
     <ion-select [(ngModel)]="radius" (ionChange)="toggleSelectRadiusVisible()" (ionCancel)="toggleSelectRadiusVisible()" placeholder="50 m"
       name="radius" class="bg-gray width-100" interface="action-sheet">

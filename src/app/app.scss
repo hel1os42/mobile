@@ -595,26 +595,29 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 /* TABS */
 .grid-tabs-splash{
-  background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
+    background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
 }
 
-.grid-tabs-splash .col{
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: column;
-  justify-content: space-between;
-  -webkit-justify-content: space-between;
-  height: 100%;
-  min-height: 100%;
+.grid-tabs-splash .col img {
+    max-width: 100%;
+    height: 100%;
 }
 
-.grid-tabs-splash .col img{
-  max-width: 65%;
+.grid-tabs-splash .row {
+    display: table;
+    width: 100%;
+    padding: 2%;
+}
+
+.grid-tabs-splash .col {
+    display: table-cell;
+    width: auto;
+    width: 25vw;
 }
 
 .grid-tabs-splash p{
-  margin-top: 9px;
-  margin-bottom: 9px;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .grid-tabs-splash span{
@@ -988,4 +991,9 @@ a:active{
 .item-ios.activated {
     background-color: inherit;
     opacity: 0.5;
+}
+
+.select-ios .select-icon .select-icon-inner{
+    left: -10px;
+    margin-top: 0;
 }
