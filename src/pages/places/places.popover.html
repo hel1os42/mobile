@@ -14,15 +14,10 @@
     </a>
 
     <div class="block-checks">
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Appetizers</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Condiments</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Confectionery </ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Convenience</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">foods </ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Desserts </ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Dips, pastes and spreads</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Dried foods</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Dumplings</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
+      <ion-item *ngFor="let category of categories" no-lines>
+          <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
+          <ion-checkbox item-end></ion-checkbox>
+        </ion-item>
     </div>
 
     <div class="footer_btn" padding>
