@@ -61,7 +61,7 @@ page-places {
 
 places-popover-component {
   .modal_content{
-    position: relative;
+    padding-bottom: 60px;
   }
 
   .block-checks {
@@ -80,8 +80,33 @@ places-popover-component {
     padding-right: 0;
   }
 
+  .item-block{
+    min-height: 3.4rem;
+  }
+
   .checkbox-ios .checkbox-icon {
     background-color: #fff;
     background-image: none;
+  }
+
+  .footer_btn {
+    position: absolute;
+    width: 90%;
+    bottom: 0;
+    left: 5%;
+    background: #fff;
+    border-radius: 10px;
+  }
+
+  .footer_btn .grid{
+    padding-bottom: 16px;
+  }
+
+  .margin-left-2proc{
+    margin-left: 2%;
+  }
+
+  .margin-right-2proc{
+    margin-right: 2%;
   }
 }
