@@ -66,4 +66,8 @@ export class AuthService {
     logout() {
         this.token.remove();
     }
+
+    getOtp(phone) {
+        return phone.slice(-6);//to do
+    }
 }
