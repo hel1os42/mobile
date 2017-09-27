@@ -13,6 +13,7 @@ import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { AuthService } from '../../providers/auth.service';
 import { SettingsPopover } from './settings.popover';
 import { AppModeService } from '../../providers/appMode.service';
+import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 
 
 @Component({
@@ -110,6 +111,10 @@ export class SettingsPage {
 
     closeModal() {
         this.isVisibleModal = !this.isVisibleModal;
+    }
+
+    openChangePhone(user: User) {
+        this.nav.push(SettingsChangePhonePage, { user: this.user});
     }
 
 }
