@@ -13,6 +13,7 @@ import { PlacesPopover } from './places.popover';
 import { google } from '@agm/core/services/google-maps-types';
 import { OfferCategory } from '../../models/offerCategory';
 import { DistanceUtils } from '../../utils/distanse';
+import { SubCategory } from '../../models/offerSubCategory';
 
 @Component({
     selector: 'page-places',
@@ -22,6 +23,7 @@ export class PlacesPage {
 
     companies: Company[];
     categories: OfferCategory[] = OfferCategory.StaticList;
+    subCategories: SubCategory[];
     selectedCategory: OfferCategory;
     isMapVisible: boolean = false;
     coords: Coords = {
@@ -44,7 +46,7 @@ export class PlacesPage {
 
         this.selectedCategory = this.categories[0];
         this.segment = "alloffers";
-        
+
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -119,13 +121,13 @@ export class PlacesPage {
                     })
             });
     }
-    
+
     toggleMap() {
         this.isMapVisible = !this.isMapVisible;
     }
 
-    openPlace(company) {
-        this.nav.push(PlacePage, { company: company });
+    openPlace(company, distance) {
+        this.nav.push(PlacePage, { company: company, distance: this.getDistance(company.latitude, company.longitude) });
     }
 
     getStars(star: number) {
@@ -142,10 +144,15 @@ export class PlacesPage {
         };
         return undefined;
     }
-    
+
     openPopover() {
-        let popover = this.popoverCtrl.create(PlacesPopover);
-        popover.present();
+        this.offers.getSubCategories(this.selectedCategory.id)
+            .subscribe(category => {
+                this.subCategories = category.children;
+                let popover = this.popoverCtrl.create(PlacesPopover, { subCat: this.subCategories });
+                popover.present();
+            });
+
     }
 
 }

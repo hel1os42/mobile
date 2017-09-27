@@ -19,9 +19,7 @@ export class PlacesPopover {
         private offer: OfferService,
         private navParams: NavParams) { 
         
-        this.categoryId = this.navParams.get('categoryId');
-        this.offer.getSubCategories(this.categoryId)
-            .subscribe(categories => this.categories = categories.children);
+       
         }
 
     close() {
