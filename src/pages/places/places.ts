@@ -35,6 +35,7 @@ export class PlacesPage {
     message: string;
     radius = 50000000;
     segment: string;
+    distanceString: string;
 
     constructor(
         private nav: NavController,
@@ -139,8 +140,11 @@ export class PlacesPage {
     }
 
     getDistance(latitude: number, longitude: number) {
+        let distance: number;
         if (this.coords) {
-            return DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
+            return this.distanceString;
         };
         return undefined;
     }
@@ -149,7 +153,7 @@ export class PlacesPage {
         this.offers.getSubCategories(this.selectedCategory.id)
             .subscribe(category => {
                 this.subCategories = category.children;
-                let popover = this.popoverCtrl.create(PlacesPopover, { subCat: this.subCategories });
+                let popover = this.popoverCtrl.create(PlacesPopover, {subCat: this.subCategories});
                 popover.present();
             });
 

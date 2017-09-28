@@ -19,6 +19,7 @@ export class OfferPage {
     company = new Company;
     offerActivationCode: OfferActivationCode;
     timer;
+    distanceString: string
 
     constructor(
         private nav: NavController,
@@ -28,7 +29,7 @@ export class OfferPage {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
-
+        this.distanceString = this.navParams.get('distance');
     }
 
     //ionViewDidLoad() {
@@ -36,10 +37,6 @@ export class OfferPage {
     //  let popover = this.popoverCtrl.create(CongratulationPopover);
     //  popover.present();
     //}
-
-    getDistance(latitude: number, longitude: number) {
-        return 200;
-    }
 
     getStars(star: number) {
         let showStars: boolean[] = [];

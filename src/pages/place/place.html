@@ -20,7 +20,7 @@
         <ion-icon class="text-FEC282 font-12" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
       </ng-container>
     <img class="margin-left-10" src="assets/img/user_home/icon_small_user.svg"><span class="font-75"> {{ company.testimonials_count }}</span>
-    <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> {{ getDistance(company.latitude, company.longitude) }} m</span>
+    <img class="margin-left-10" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75"> {{ distanceString }}</span>
   </div>
   <ion-list class="margin-no">
   <div margin-top margin-right margin-left class="text-3E4B5D font-36 bold">{{ company.name }}</div>
