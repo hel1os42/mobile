@@ -6,35 +6,43 @@ import { BookmarksPage } from '../bookmarks/bookmarks';
 import { AppModeService } from '../../providers/appMode.service';
 import { PlacesPage } from '../places/places';
 import { SplashScreenPage } from '../splash-screen/splash-screen';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'page-tabs',
-  templateUrl: 'tabs.html'
+    selector: 'page-tabs',
+    templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root;
-  tab2Root = UserProfilePage;
-  tab3Root = BookmarksPage;
-  tab4Root = NotificationsPage;
+    private _onHomeChangeSubscription: Subscription;
 
-  @ViewChild('tabs') tabs: Tabs;
+    tab1Root;
+    tab2Root = UserProfilePage;
+    tab3Root = BookmarksPage;
+    tab4Root = NotificationsPage;
 
-  constructor(private nav: NavController,
-    private appMode: AppModeService) {
+    @ViewChild('tabs') tabs: Tabs;
 
-    this.tab1Root = this.appMode.getHomeMode()
-      ? PlacesPage
-      : SplashScreenPage;
+    constructor(private nav: NavController,
+        private appMode: AppModeService) {
 
-    this.appMode.onHomeChange.subscribe(showPlaces => {
-      this.tabs.getByIndex(0)
-        .setRoot(showPlaces ? PlacesPage : SplashScreenPage);
-    });
-  }
+        this.tab1Root = this.appMode.getHomeMode()
+            ? PlacesPage
+            : SplashScreenPage;
 
-  tabChange() {
-    if (this.tabs.getSelected().index > 0)
-        this.appMode.setHomeMode(false);
-  }
+        this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
+            this.tabs.getByIndex(0)
+                .setRoot(showPlaces ? PlacesPage : SplashScreenPage);
+        });
+    }
+
+    tabChange() {
+        if (this.tabs.getSelected().index > 0)
+            this.appMode.setHomeMode(false);
+    }
+
+    ionViewWillUnload() {
+        debugger;
+        this._onHomeChangeSubscription.unsubscribe();
+    }
 }
