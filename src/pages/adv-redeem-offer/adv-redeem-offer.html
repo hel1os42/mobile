@@ -10,10 +10,10 @@
         </div>
         <div class="block-lines">
             <ion-item no-lines>
-                <ion-input class="bg-gray" type="text" placeholder="Offer"></ion-input>
+                <ion-input [(ngModel)]="reddemCode" class="bg-gray" type="text" placeholder="Code"></ion-input>
             </ion-item>
         </div>
         <p margin>
-            <button (click)="toggleChangePhone()" color="primary" ion-button block>Redeem</button>
+            <button (click)="sendCode()" color="primary" ion-button block>Redeem</button>
         </p>
 </ion-content>

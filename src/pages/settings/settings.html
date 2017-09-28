@@ -25,12 +25,12 @@
       <ion-row text-center align-items-center>
         <ion-col>
           <img margin-top src="assets/img/settings/user.svg">
+          <!-- <img margin-top [src]="user.picture_url"> -->
           <p class="font-15 text-3E4B5D bold">Client</p>
         </ion-col>
         <ion-col>
           <ion-item no-lines>
-            <!-- <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle> -->
-            <ion-toggle></ion-toggle>
+            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isVisibleRedeemButton"></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -41,8 +41,8 @@
     </ion-grid>
   </div>
 
-    <p margin>
-        <button (click)="" color="primary" ion-button block>Redeem offer</button>
+    <p *ngIf="toggleAdvMode()" margin>
+        <button (click)="openAdvRedeem()" color="primary" ion-button block>Redeem offer</button>
     </p>
 
     <div class="block-lines">
@@ -53,11 +53,11 @@
         <ion-grid class="bg-gray">
             <ion-row align-items-center>
                 <ion-col col-8 text-left padding-left>
-                    <div text-uppecase class="text-3E4B5D font-16">1acd7</div>
+                    <div text-uppecase class="text-3E4B5D font-16">{{ user.invite_code }}</div>
                 </ion-col>
                 <ion-col col-4>
                     <ion-item no-lines text-right>
-                        <button (click)="" color="primary" ion-button round class="font-12 regular">Copy</button>
+                        <button color="primary" ion-button round class="font-12 regular">Copy</button>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -115,7 +115,9 @@
 
   <div class="block-map">
     <div padding-left *ngIf="!coords.lat">Detecting your location...</div>
-    <agm-map class="card" *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
+    <agm-map class="card" *ngIf="coords.lat" [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng">
+        <!-- <agm-marker *ngIf="coords.lat" [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
+        <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="235"></agm-circle> -->
     </agm-map>
     <div id="marker" *ngIf="coords.lat"></div>
   </div>

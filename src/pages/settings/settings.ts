@@ -14,6 +14,7 @@ import { AuthService } from '../../providers/auth.service';
 import { SettingsPopover } from './settings.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
+import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class SettingsPage {
     isSelectRadiusVisible: boolean = false;
     isAdvMode: boolean;
     isVisibleModal: boolean = false;
+    isVisibleRedeemButton: boolean = false;
     isToggled: boolean = false;
     showData: boolean = false;
     showPhone: boolean = false;
@@ -83,13 +85,14 @@ export class SettingsPage {
     }
 
     toggleAdvMode() {
-        this.isToggled = true;
-        this.appMode.setAdvMode(this.isAdvMode);
-        this.isVisibleModal = this.isAdvMode;
-        if (this.isAdvMode) {
-            let popover = this.popoverCtrl.create(SettingsPopover);
-            popover.present();
-        }
+        // this.isToggled = true;
+        // this.appMode.setAdvMode(this.isAdvMode);
+        // this.isVisibleModal = this.isAdvMode;
+        // if (this.isAdvMode) {
+        //     let popover = this.popoverCtrl.create(SettingsPopover);
+        //     popover.present();
+        //}
+        return this.isVisibleRedeemButton;
     }
 
     saveProfile() {
@@ -115,6 +118,10 @@ export class SettingsPage {
 
     openChangePhone(user: User) {
         this.nav.push(SettingsChangePhonePage, { user: this.user});
+    }
+
+    openAdvRedeem() {
+        this.nav.push(AdvRedeemOfferPage);
     }
 
 }

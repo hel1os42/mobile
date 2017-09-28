@@ -90,4 +90,8 @@ export class OfferService {
         else
             return this.api.get(`activation_codes/${code}`, false);
     }
+
+    setRedeemCode(redeemCode: string) {
+        this.api.post('redemptions', redeemCode);
+    }
 }

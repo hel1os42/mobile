@@ -29,19 +29,14 @@ export class UserProfilePage {
     }
 
     ionViewDidEnter() {
-        this.profile.get()
-            .subscribe(user => this.user = user);
-
-        let accounts;
-        this.profile.getAccounts()
-            .subscribe(resp => 
-                { accounts = resp.accounts;
-                this.balance = accounts.map(account => account.balance).reduce((sum, amount) => sum + amount);
+        this.profile.getWithAccounts()
+            .subscribe(resp => {
+                this.user = resp;
+                this.balance = this.user.accounts.NAU.balance;
             })
     }
 
     openSettings() {
-        //this.app.getRootNav().setRoot(SettingsPage);
         this.nav.push(SettingsPage);
     }
 
@@ -58,7 +53,7 @@ export class UserProfilePage {
     }
 
     openUserNau() {
-        this.nav.push(UserNauPage)
+        this.nav.push(UserNauPage, { balance: this.balance })
     }
 
     openUserUsers() {
@@ -66,7 +61,7 @@ export class UserProfilePage {
     }
     
     logout() {
-        this.auth.logout();
+        //this.auth.logout();
     }
 
     slideNext() {
