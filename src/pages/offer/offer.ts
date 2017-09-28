@@ -61,7 +61,7 @@ export class OfferPage {
         if (this.timer)
             return;
         
-        this.offers.getActivationCode('15f4f73e-f9c5-4ecb-9a02-f515e03147d7' /*this.offer.id*/)
+        this.offers.getActivationCode(this.offer.id)
             .subscribe((offerActivationCode: OfferActivationCode) => {
                 if (this.timer)
                     return;
