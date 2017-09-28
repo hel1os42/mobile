@@ -31,7 +31,7 @@
       <ion-icon class="text-FEC282 font-22" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
     </ng-container>
     <img class="margin-left-10" src="assets/img/user_offers/icon_user.svg"><span class="font-16 text-E0E0E0">{{ company.testimonials_count }}</span>
-    <img class="margin-left-10" src="assets/img/user_offers/icon_arrow.svg"><span class="font-16 text-E0E0E0">{{ getDistance(company.latitude, company.longitude) }} m</span>
+    <img class="margin-left-10" src="assets/img/user_offers/icon_arrow.svg"><span class="font-16 text-E0E0E0"> {{ distanceString }}</span>
   </div>
 
   <div class="bold font-40 text-white padding-left-offer padding-right-offer padding-top-25">{{ offer.label }}</div>

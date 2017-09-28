@@ -1,8 +1,8 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Your Account</ion-title>
-    <ion-buttons end>
-      <a class="margin-right-10" (click)="openSettings()"><img src="assets/img/settings.svg"></a>
+    <ion-buttons margin-right end>
+      <a (click)="openSettings()"><img src="assets/img/settings.svg"></a>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -10,7 +10,7 @@
 <ion-content class="padding-no">
   <ion-item margin-top class="border-bottom-no top-block-nau" >
     <ion-avatar item-start>
-      <div margin-left class="user_level font-22 text-white">L{{user.level}}</div>
+      <div margin-left class="user_level font-22 text-white" (click)="logout()">L{{user.level}}</div>
     </ion-avatar>
     <div class="font-18 text-3E4B5D bold">{{ user?.name }}</div>
     <div class="font-14 text-828282">{{user.points}}</div>

@@ -15,6 +15,7 @@ export class User {
     referrals_count: number;
     accounts_count: number;
     activation_codes_count: number
+    accounts?: any;
 }
 /*missing:  
     facebookName: string;

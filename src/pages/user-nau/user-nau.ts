@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from "ionic-angular";
+import { NavController, NavParams } from "ionic-angular";
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
 import { DatePipe } from '@angular/common';
@@ -16,20 +16,14 @@ export class UserNauPage {
 
     constructor(
         private nav: NavController,
-        private profile: ProfileService) {
-
+        private profile: ProfileService,
+        private navParams: NavParams) {
+        
+        this.balance = this.navParams.get('balance');
     }
 
     ionViewDidLoad() {
         this.profile.getTransactions()
-            .subscribe(resp => this.transactions = resp.data)
-
-        let accounts;
-        this.profile.getAccounts()
-            .subscribe(resp => {
-                accounts = resp.accounts;
-                this.balance = accounts.map(account => account.balance).reduce((sum, amount) => sum + amount);
-            })
+            .subscribe(resp => this.transactions = resp.data);
     }
-
 }

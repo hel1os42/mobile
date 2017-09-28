@@ -9,8 +9,6 @@ import { MockCompanies } from '../mocks/mockCompanies';
 @Injectable()
 export class OfferService {
 
-    counter = 0;
-
     constructor(
         private api: ApiService) { }
 
@@ -68,22 +66,23 @@ export class OfferService {
         return this.api.get('categories');
     }
 
+    getSubCategories(category_id) {
+        return this.api.get(`categories/${category_id}?with=children`);
+    }
+
     getRedeemedOffers() {
         return this.api.get('profile?with=offers');
     }
     
-    getActivationCode(offerId: string) {
-        return this.api.get(`offers/${offerId}/activation_code`);
+    getActivationCode(offer_id: string) {
+        return this.api.get(`offers/${offer_id}/activation_code`);
     }
 
     getRedemtionStatus(code: string) {
-        this.counter++;
-        if (this.counter > 3 )
-            {
-                this.counter = 0;
-                return Observable.of({ redemption_id: "redemption_id" });
-            }
-        else
-            return this.api.get(`activation_codes/${code}`, false);
+        return this.api.get(`activation_codes/${code}`, false);
+    }
+
+    setRedeemCode(code: string) {
+        return this.api.post('redemptions', { code: code });
     }
 }

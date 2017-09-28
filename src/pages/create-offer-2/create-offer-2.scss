@@ -1,0 +1,77 @@
+page-create-offer-2 {
+  .bcg {
+    background: url(../assets/img/arrow-down.png) no-repeat center right 8px;
+  }
+
+  .icon {
+    line-height: 1.1;
+  }
+
+  .item-ios.item-block .item-inner{
+    padding-right: 0;
+  }
+
+  .progress-block .progress-line-fill{
+    width: 40%;
+  }
+
+  .block-lines .item {
+    margin-bottom: 10px;
+  }
+
+  .block-lines .label {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 20px;
+  }
+
+  .datetime-ios {
+    padding: 11px 16px 11px 16px;
+  }
+
+  .item-ios[detail-push]{
+    padding-right: 10px;
+  }
+
+  .datetime-text{
+    font-size: 16px;
+    color: #3E4B5D;
+  }
+
+  .select-block-desc {
+    margin-top: 7px;
+    margin-bottom: 0;
+  }
+
+  .select-block-desc .icon{
+    float: right;
+  }
+
+  .detailed .label{
+    margin-left: 0;
+  }
+
+  .detailed .item-ios[detail-push]{
+    padding-right: 0;
+  }
+
+  .detailed .datetime-ios{
+    padding: 0;
+  }
+
+  .detailed .item{
+    background: transparent;
+  }
+
+  .detailed .item.item-ios .checkbox-ios{
+    display: flex;
+    margin: 8px 10px 8px 2px;
+    width: 100%;
+    justify-content: end;
+  }
+
+  .detailed .col, .detailed-header .col{
+    padding: 0;
+  }
+}

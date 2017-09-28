@@ -20,6 +20,7 @@ export class PlacePage {
     visibleFooter: boolean = false;
     segment: string;
     offersList: Offer[];
+    distanceString: string;
 
     constructor(
         private nav: NavController,
@@ -30,9 +31,9 @@ export class PlacePage {
         private app: App) {
 
         this.segment = "alloffers";
-
         this.company = this.navParams.get('company');
         let companyId = this.company.id;
+        this.distanceString = this.navParams.get('distance');
 
         this.offers.getPlace(companyId)
             .subscribe(companyWithOffers => {
@@ -61,20 +62,13 @@ export class PlacePage {
         return showStars;
     }
 
-    getDistance(latitude: number, longitude: number) {
-        if (this.coords) {
-            return DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
-        };
-        return undefined;
-    }
-
     openFeedback(testimonial) {
         this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
     }
 
-    openOffer(offer, company) {
+    openOffer(offer, company, distance) {
         //this.nav.setRoot(OfferPage, { offer: offer});
-        this.app.getRootNav().push(OfferPage, { offer: offer, company: this.company});
+        this.app.getRootNav().push(OfferPage, { offer: offer, company: this.company, distance: this.distanceString});
     }
 
 }

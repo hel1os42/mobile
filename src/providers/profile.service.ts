@@ -28,7 +28,7 @@ export class ProfileService {
         return this.api.get('transactions');
     }
 
-    getAccounts() {
+    getWithAccounts() {
         return this.api.get('profile?with=accounts');
     }
 

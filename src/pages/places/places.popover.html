@@ -1,11 +1,12 @@
 <div margin class="modal_content">
+    <!--
     <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">Select Type</ion-label>
       <div item-end>
         <img src="assets/img/user_home/arrow_down.svg">
       </div>
     </a>
-
+    -->
     <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">Select Cuisine</ion-label>
       <div item-end>
@@ -14,27 +15,21 @@
     </a>
 
     <div class="block-checks">
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Appetizers</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Condiments</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Confectionery </ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Convenience</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">foods </ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Desserts </ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Dips, pastes and spreads</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Dried foods</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
-      <ion-item no-lines><ion-label margin-left item-end class="text-828282 font-16">Dumplings</ion-label><ion-checkbox item-end></ion-checkbox></ion-item>
+      <ion-item *ngFor="let category of categories" no-lines>
+          <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
+          <ion-checkbox (ionChange)="selectCategory(category.name)" item-end></ion-checkbox>
+        </ion-item>
     </div>
-
-    <div class="footer_btn" padding>
-      <ion-grid>
+</div>
+<div class="footer_btn" padding>
+    <ion-grid>
         <ion-row>
-          <ion-col text-center>
-            <button (click)="close()" ion-button block color="secondary">Clear</button>
-          </ion-col>
-          <ion-col text-center>
-            <button (click)="close()" ion-button block color="primary">Done</button>
-          </ion-col>
+            <ion-col text-center class="margin-right-2proc">
+                <button (click)="back()" ion-button block color="secondary">Clear</button>
+            </ion-col>
+            <ion-col text-center class="margin-left-2proc">
+                <button (click)="close()" ion-button block color="primary">Done</button>
+            </ion-col>
         </ion-row>
-      </ion-grid>
-    </div>
+    </ion-grid>
 </div>

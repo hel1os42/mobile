@@ -1,21 +1,35 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Change phone number</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Change phone number</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content class="padding-no">
-    <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
-        Enter New phone number
+    <div *ngIf="visibleChangePhone">
+        <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
+            Enter New phone number
+        </div>
+        <div class="block-lines">
+            <ion-item no-lines>
+                <ion-input [(ngModel)]="user.phone" class="bg-gray" type="text" placeholder=""></ion-input>
+            </ion-item>
+        </div>
+        <p margin>
+            <button (click)="toggleChangePhone()" color="primary" ion-button block>Get confirm code</button>
+        </p>
     </div>
 
-    <div class="block-lines">
-        <ion-item no-lines>
-            <ion-input class="bg-gray" type="text" placeholder=""></ion-input>
-        </ion-item>
+    <div *ngIf="!visibleChangePhone">
+        <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
+            Enter Confirmation code
+        </div>
+        <div class="block-lines">
+            <ion-item no-lines>
+                <ion-input [(ngModel)]="otp" class="bg-gray" type="text" placeholder=""></ion-input>
+            </ion-item>
+        </div>
+        <p margin>
+            <button (click)="changePhone()" color="primary" ion-button block>Change number</button>
+        </p>
     </div>
-
-    <p margin>
-        <button color="primary" ion-button block>Get confirm code</button>
-    </p>
 </ion-content>

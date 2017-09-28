@@ -54,7 +54,9 @@ import { PlacePage } from '../pages/place/place';
 import { OfferRedeemPopover } from '../pages/offer/offerRedeem.popover';
 import { CongratulationPopover } from '../pages/offer/congratulation.popover';
 import { OfferTermsPage } from '../pages/offer-terms/offer-terms';
-import { SettingsPageChangePhone } from '../pages/settings-change-phone/settings-change-phone';
+import { SettingsChangePhonePage } from '../pages/settings-change-phone/settings-change-phone';
+import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
+import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,9 @@ import { SettingsPageChangePhone } from '../pages/settings-change-phone/settings
     PlacesPopover,
     CongratulationPopover,
     OfferTermsPage,
-    SettingsPageChangePhone
+    SettingsChangePhonePage,
+    AdvRedeemOfferPage,
+    CreateOffer2Page
   ],
   imports: [
     BrowserModule,
@@ -155,7 +159,9 @@ import { SettingsPageChangePhone } from '../pages/settings-change-phone/settings
     PlacesPopover,
     CongratulationPopover,
     OfferTermsPage,
-    SettingsPageChangePhone
+    SettingsChangePhonePage,
+    AdvRedeemOfferPage,
+    CreateOffer2Page
   ],
   providers: [
     StatusBar,

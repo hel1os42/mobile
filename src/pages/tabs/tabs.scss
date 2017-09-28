@@ -5,45 +5,43 @@ page-tabs{
     background-size: auto 40%;
   }
 
-  #tab-t0-0.tab-button[aria-selected="true"]{
+  .tab-button[aria-selected="true"]:nth-child(1) {
     background-image: url(../assets/img/tabs/tab1_a.svg);
   }
 
-  #tab-t0-0.tab-button[aria-selected="false"]{
-    color: blue;
+  .tab-button[aria-selected="false"]:nth-child(1){
     background-image: url(../assets/img/tabs/tab1.svg);
   }
 
-  #tab-t0-1.tab-button[aria-selected="true"]{
+  .tab-button[aria-selected="true"]:nth-child(2){
     background-image: url(../assets/img/tabs/tab2_a.svg);
   }
 
-  #tab-t0-1.tab-button[aria-selected="false"]{
+  .tab-button[aria-selected="false"]:nth-child(2){
     background-image: url(../assets/img/tabs/tab2.svg);
   }
 
-  #tab-t0-2.tab-button[aria-selected="true"]{
+  .tab-button[aria-selected="true"]:nth-child(3){
     background-image: url(../assets/img/tabs/tab3_a.svg);
   }
 
-  #tab-t0-2.tab-button[aria-selected="false"]{
+  .tab-button[aria-selected="false"]:nth-child(3){
     background-image: url(../assets/img/tabs/tab3.svg);
   }
 
-  #tab-t0-3.tab-button[aria-selected="true"]{
+  .tab-button[aria-selected="true"]:nth-child(4){
     background-image: url(../assets/img/tabs/tab4_a.svg);
   }
 
-  #tab-t0-3.tab-button[aria-selected="false"]{
+  .tab-button[aria-selected="false"]:nth-child(4){
     background-image: url(../assets/img/tabs/tab4.svg);
   }
 
-  #tab-t0-4.tab-button[aria-selected="true"]{
+  .tab-button[aria-selected="true"]:nth-child(5){
     background-image: url(../assets/img/tabs/tab5_a.svg);
   }
 
-  #tab-t0-4.tab-button[aria-selected="false"]{
-    color: blue;
+  .tab-button[aria-selected="false"]:nth-child(5){
     background-image: url(../assets/img/tabs/tab5.svg);
   }
 }

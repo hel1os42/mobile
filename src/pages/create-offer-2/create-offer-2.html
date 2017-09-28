@@ -1,0 +1,284 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Create Offer</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="dark" class="btn_search">
+        <span class="font-12 text-333333 no-bold">Next</span>
+        <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <p margin>
+           <span class="progress-block">
+               <span class="progress-line"></span>
+               <span class="progress-line-fill"></span>
+               <span class="circle fill-first"></span>
+               <span class="circle fill-last"></span>
+               <span class="circle fill-last"></span>
+               <span class="circle no-fill"></span>
+               <span class="circle no-fill"></span>
+               <span class="circle no-fill"></span>
+            </span>
+  </p>
+</ion-header>
+
+<ion-content>
+  <form (submit)="createOffer()">
+
+      <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Working dates</div>
+      <div class="block-lines">
+          <div no-lines>
+              <ion-item class="bg-gray" detail-push>
+                  <ion-label class="text-BDBDBD font-16">from</ion-label>
+                  <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+              </ion-item>
+
+              <ion-item class="bg-gray" detail-push>
+                  <ion-label class="text-BDBDBD font-16">to</ion-label>
+                  <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+              </ion-item>
+          </div>
+      </div>
+      <div class="block-lines">
+          <div class="text-4F4F4F font-14" text-uppercase>Working Days</div>
+      </div>
+      <div class="block-lines radio-nau">
+          <div radio-group no-lines>
+              <ion-item class="bg-gray">
+                  <ion-label>Working Days</ion-label>
+                  <ion-radio mode="md" value="workingdays"></ion-radio>
+              </ion-item>
+              <ion-item class="bg-gray">
+                  <ion-label>Weekend</ion-label>
+                  <ion-radio mode="md" value="weekend"></ion-radio>
+              </ion-item>
+          </div>
+      </div>
+      <div class="block-lines">
+          <div class="text-4F4F4F font-14" text-uppercase>Working time</div>
+      </div>
+      <div class="block-lines">
+          <div no-lines>
+              <ion-item class="bg-gray" detail-push>
+                  <ion-label class="text-BDBDBD font-16">from</ion-label>
+                  <ion-datetime displayFormat="HH:mm"></ion-datetime>
+              </ion-item>
+
+              <ion-item class="bg-gray" detail-push>
+                  <ion-label class="text-BDBDBD font-16">to</ion-label>
+                  <ion-datetime displayFormat="HH:mm"></ion-datetime>
+              </ion-item>
+          </div>
+      </div>
+
+      <div class="block-lines">
+          <a (click)="toggleSelect()">
+              <div text-uppercase padding-right class="select-block-desc text-828282 font-14">
+                  Detailed settings
+                  <ion-icon name="arrow-up"></ion-icon>
+                 <!-- <ion-icon name="arrow-down"></ion-icon> -->
+              </div>
+          </a>
+
+          <p class="select-block-desc text-828282 font-12">You can set working time more flexibility</p>
+
+          <ion-grid padding-left text-uppercase class="text-BDBDBD font-14 padding-right-5 margin-top-5 margin-bottom-5 detailed-header">
+              <ion-row>
+                  <ion-col col-3>
+                      Day
+                  </ion-col>
+                  <ion-col col-3>
+                      From
+                  </ion-col>
+                  <ion-col col-3>
+                      To
+                  </ion-col>
+                  <ion-col col-3 text-right>
+                      Work
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+
+          <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" mode="md">
+              <ion-row>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          MON
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          <ion-checkbox></ion-checkbox>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+
+          <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" mode="md">
+              <ion-row>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          TUE
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          <ion-checkbox></ion-checkbox>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+
+          <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" mode="md">
+              <ion-row>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          WED
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          <ion-checkbox></ion-checkbox>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+
+          <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" mode="md">
+              <ion-row>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          THU
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          <ion-checkbox></ion-checkbox>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+
+          <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" mode="md">
+              <ion-row>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          FRI
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          <ion-checkbox></ion-checkbox>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+
+          <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" mode="md">
+              <ion-row>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          SAT
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          <ion-checkbox></ion-checkbox>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+
+          <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" mode="md">
+              <ion-row>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          SUN
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item detail-push no-lines>
+                          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+                      </ion-item>
+                  </ion-col>
+                  <ion-col col-3>
+                      <ion-item no-lines>
+                          <ion-checkbox></ion-checkbox>
+                      </ion-item>
+                  </ion-col>
+              </ion-row>
+          </ion-grid>
+
+      </div>
+
+    <p margin>
+      <button ion-button block text-uppercase color="primary">Next step</button>
+    </p>
+
+  </form>
+</ion-content>
