@@ -34,6 +34,7 @@ import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { OfferTermsPage } from "../pages/offer-terms/offer-terms";
 import { SettingsChangePhonePage } from "../pages/settings-change-phone/settings-change-phone";
 import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
+import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 
 @Component({
     templateUrl: 'app.html'
@@ -55,7 +56,7 @@ export class MyApp {
 
             this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : TabsPage;
 
-          //this.rootPage = AdvRedeemOfferPage;
+          //this.rootPage = CreateOffer2Page;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
