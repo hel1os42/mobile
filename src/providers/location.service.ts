@@ -12,7 +12,9 @@ export class LocationService {
         if (this.geoposition)
             return Promise.resolve(this.geoposition);
         else
-            return this.geolocation.getCurrentPosition()
-                .then(geo => this.geoposition = geo);
+            return this.geolocation.getCurrentPosition({
+                enableHighAccuracy: true,
+                timeout: 10000
+            }).then(geo => this.geoposition = geo);
     }
 }

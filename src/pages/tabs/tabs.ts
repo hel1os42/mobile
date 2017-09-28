@@ -42,7 +42,6 @@ export class TabsPage {
     }
 
     ionViewWillUnload() {
-        debugger;
         this._onHomeChangeSubscription.unsubscribe();
     }
 }

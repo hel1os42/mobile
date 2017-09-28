@@ -32,7 +32,7 @@
       <ion-item class="relative" *ngFor="let transaction of transactions">
       <div class="text-3E4B5D font-22 margin-bottom-5 bold overflow"><span class="bold">Pay {{ transaction.id }}</span></div>
       <div class="text-3E4B5D font-22 star_right" text-uppercase><span class="bold">{{ transaction.amount }}</span><span class="regular"> NAU</span></div>
-      <!-- <div class="font-14 text-828282">{{ transaction.created_at | date: "dd/MM/y  H:mm:ss" }}</div> -->
+      <div class="font-14 text-828282">{{ transaction.created_at | date: 'dd/MM/y H:mm:ss' }}</div>
     </ion-item>
   </ion-list>
 

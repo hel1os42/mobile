@@ -8,16 +8,17 @@ import { OfferService } from '../../providers/offer.service';
 })
 export class AdvRedeemOfferPage {
 
-    redeemCode: string;
+    code: string;
 
-    constructor(private nav: NavController,
-                private offers: OfferService) {
+    constructor(
+        private nav: NavController,
+        private offers: OfferService) {
 
     }
 
     sendCode() {
-        this.offers.setRedeemCode(this.redeemCode);
-        this.nav.pop();
+        this.offers.setRedeemCode(this.code)
+            .subscribe(() => this.nav.pop());
     }
 
 }
