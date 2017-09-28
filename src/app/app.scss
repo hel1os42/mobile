@@ -1005,3 +1005,7 @@ a:active{
 .popover-viewport{
     overflow: scroll;
 }
+
+.block-lines .item:last-child{
+    margin-bottom: 0;
+}
