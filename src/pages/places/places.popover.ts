@@ -12,6 +12,8 @@ export class PlacesPopover {
 
     categories: SubCategory[];
     categoryId: string;
+    selectedCategories: string[] = [];
+    selected: boolean;
 
     constructor(
         private viewCtrl: ViewController,
@@ -19,10 +21,21 @@ export class PlacesPopover {
         private offer: OfferService,
         private navParams: NavParams) { 
         
-       
+       this.categories = this.navParams.get('subCat');
         }
 
+    selectCategory(name) {
+      
+        this.selectedCategories = this.selectedCategories + name;
+   
+    }
+
     close() {
+        this.selectedCategories;
         this.viewCtrl.dismiss();        
+    }
+
+    back() {
+        this.viewCtrl.dismiss(); 
     }
 }
