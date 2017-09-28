@@ -10,7 +10,7 @@
     <ion-avatar item-start>
       <img src="assets/img/user_nau/icon_nau.svg">
     </ion-avatar>
-    <div class="font-18 text-3E4B5D bold">{{ total }}</div>
+    <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
     <div class="font-14 text-828282">NAU</div>
     <button item-end ion-button class="btn_transfer font-14 text-white">Transfer</button>
     <a item-end margin-left>
@@ -30,7 +30,7 @@
   <div margin-top class="font-14 text-4F4F4F" text-uppercase>Latest payments</div>
   <ion-list no-lines class="item-block-nau margin-top-5">
       <ion-item class="relative" *ngFor="let transaction of transactions">
-      <div class="text-3E4B5D font-22 margin-bottom-5 bold">Pay {{ transaction.id }}</div>
+      <div class="text-3E4B5D font-22 margin-bottom-5 bold overflow"><span class="bold">Pay {{ transaction.id }}</span></div>
       <div class="text-3E4B5D font-22 star_right" text-uppercase><span class="bold">{{ transaction.amount }}</span><span class="regular"> NAU</span></div>
       <div class="font-14 text-828282">{{ transaction.created_at | date: "dd/MM/y  H:mm:ss" }}</div>
     </ion-item>

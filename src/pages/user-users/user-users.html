@@ -22,7 +22,7 @@
         <img src="assets/img/user_users/ava1.png">
       </ion-avatar>
       <div class="happy_title font-18 bold text-3E4B5D">{{ referral.name }}<img src="assets/img/user_users/icon_right.svg"></div>
-      <div text-uppercase class="font-14 text-4F4F4F">Level: <b>{{ referral.level }}</b><span margin-left>Offers: <b>15</b></span></div>
+      <div text-uppercase class="font-14 text-4F4F4F">Level: <b>{{ referral.level }}</b><span margin-left>Offers: <b>{{ referral.offers_count }}</b></span></div>
       <div class="text-828282 font-14">Registration date: {{ referral.created_at.substring(0,10)}}</div>
     </ion-item>
   </ion-list>
