@@ -18,6 +18,7 @@ import { UserUsersPage } from "../user-users/user-users";
 export class UserProfilePage {
     user: User = new User();
     balance: number;
+    NAU_Id: string;
     
     @ViewChild(Slides) slides: Slides;
 
@@ -33,6 +34,7 @@ export class UserProfilePage {
             .subscribe(resp => {
                 this.user = resp;
                 this.balance = this.user.accounts.NAU.balance;
+                this.NAU_Id = this.user.accounts.NAU.id;
             })
     }
 
@@ -40,12 +42,12 @@ export class UserProfilePage {
         this.nav.push(SettingsPage);
     }
 
-    openRewards() {
-        this.nav.push(UserTasksPage);
+    openRewards(user: User) {
+        this.nav.push(UserTasksPage, {user: this.user});
     }
 
-    openAchieve() {
-        this.nav.push(UserAchievePage);
+    openAchieve(user: User) {
+        this.nav.push(UserAchievePage, {user: this.user});
     }
 
     openUserOffers() {
@@ -53,7 +55,7 @@ export class UserProfilePage {
     }
 
     openUserNau() {
-        this.nav.push(UserNauPage, { balance: this.balance })
+        this.nav.push(UserNauPage, { balance: this.balance, NAU_Id: this.NAU_Id })
     }
 
     openUserUsers() {

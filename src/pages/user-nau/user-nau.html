@@ -1,23 +1,23 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>NAU transactions</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>NAU transactions</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-item class="border-bottom-no top-block-nau">
-    <ion-avatar item-start>
-      <img src="assets/img/user_nau/icon_nau.svg">
-    </ion-avatar>
-    <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
-    <div class="font-14 text-828282">NAU</div>
-    <button item-end ion-button class="btn_transfer font-14 text-white">Transfer</button>
-    <a item-end margin-left>
+    <ion-item class="border-bottom-no top-block-nau">
+        <ion-avatar item-start>
+            <img src="assets/img/user_nau/icon_nau.svg">
+        </ion-avatar>
+        <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
+        <div class="font-14 text-828282">NAU</div>
+        <button item-end ion-button class="btn_transfer font-14 text-white">Transfer</button>
+        <a item-end margin-left>
       <a><img src="assets/img/user_offers/icon_right.svg"></a>
-    </a>
-  </ion-item>
-<!-- 
+        </a>
+    </ion-item>
+    <!-- 
   <div margin-top class="font-14 text-4F4F4F" text-uppercase>Today</div>
   <ion-list no-lines class="item-block-nau margin-top-5">
     <ion-item class="relative">
@@ -27,13 +27,18 @@
     </ion-item>
   </ion-list> -->
 
-  <div margin-top class="font-14 text-4F4F4F" text-uppercase>Latest payments</div>
-  <ion-list no-lines class="item-block-nau margin-top-5">
-      <ion-item class="relative" *ngFor="let transaction of transactions">
-      <div class="text-3E4B5D font-22 margin-bottom-5 bold overflow"><span class="bold">Pay {{ transaction.id }}</span></div>
-      <div class="text-3E4B5D font-22 star_right" text-uppercase><span class="bold">{{ transaction.amount }}</span><span class="regular"> NAU</span></div>
-      <div class="font-14 text-828282">{{ transaction.created_at | date: 'dd/MM/y H:mm:ss' }}</div>
-    </ion-item>
-  </ion-list>
+    <div margin-top class="font-14 text-4F4F4F" text-uppercase>Latest payments</div>
+    <ion-list no-lines class="item-block-nau margin-top-5">
+        <ion-item class="relative" *ngFor="let transaction of transactions">
+            <div [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0), 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}" class="font-22 margin-bottom-5 bold overflow">
+                <span class="bold">Pay {{ transaction.id }}</span>
+            </div>
+            <div [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0), 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}" class="font-22 star_right" text-uppercase>
+                <span class="bold">{{ transactionSource( transaction.source_account_id, transaction.amount) }}</span>
+                <span class="regular"> NAU</span>
+            </div>
+            <div class="font-14 text-828282">{{ transaction.created_at | date: 'dd/MM/y H:mm:ss' }}</div>
+        </ion-item>
+    </ion-list>
 
 </ion-content>
