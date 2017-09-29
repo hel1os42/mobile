@@ -42,12 +42,12 @@ export class UserProfilePage {
         this.nav.push(SettingsPage);
     }
 
-    openRewards() {
-        this.nav.push(UserTasksPage);
+    openRewards(user: User) {
+        this.nav.push(UserTasksPage, {user: this.user});
     }
 
-    openAchieve() {
-        this.nav.push(UserAchievePage);
+    openAchieve(user: User) {
+        this.nav.push(UserAchievePage, {user: this.user});
     }
 
     openUserOffers() {
