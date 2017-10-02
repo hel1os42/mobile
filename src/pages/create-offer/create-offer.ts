@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LocationService } from '../../providers/location.service';
 import { AgmCoreModule } from '@agm/core';
 import { Coords } from '../../models/coords';
-import { NavController, App, PopoverController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
