@@ -20,6 +20,11 @@
   src: url('../assets/fonts/OpenSans-Light.ttf');
 }
 
+@font-face {
+    font-family: 'OpenSansNauSemibold';
+    src: url('../assets/fonts/OpenSans-Semibold.ttf');
+}
+
 .link-nau{
   font-style: normal;
   font-weight: bold;
@@ -129,6 +134,10 @@ ion-header ion-icon.back-button-icon.icon {
   font-family: 'OpenSansNauLight';
 }
 
+.semibold{
+    font-family: 'OpenSansNauSemibold';
+}
+
 .font-10{
   font-size: 10px;
 }
@@ -179,6 +188,7 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-75{
   font-size: 12px;
+  font-size: 3vw;
 }
 
 .font-125{
@@ -552,16 +562,16 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .top-block-nau .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau .item-ios ion-avatar img{
   border-radius: 0;
-  width: inherit;
   height: inherit;
   max-width: 23vw;
   max-height: 23vw;
+  width: 23vw;
 }
 
 .item-block-nau .item{
-  margin-bottom: 10px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  padding: 10px;
+  margin-bottom: 3%;
+  padding: 2vw;
 }
 
 .item-block-nau .input-wrapper .label-ios, .item-block-nau-slider .input-wrapper .label-ios{
@@ -596,6 +606,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 /* TABS */
 .grid-tabs-splash{
     background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
+    font-size: 2.8vw;
+    line-height: 4vw;
 }
 
 .grid-tabs-splash .col img {
@@ -629,10 +641,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   position: relative;
 }
 
-.btn_search_settings{
+.btn_search_settings img{
   position: absolute;
-  right: 68px;
-  top: 20px;
+  right: 21vw;
+  top: 32%;
+  width: 7.5vw;
 }
 
 .searchbar-ios{
@@ -640,23 +653,35 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   border: 1px solid #E0E0E0;
   border-radius: 8px;
   min-height: 42px;
+  width: 77vw;
+  height: 10vw;
+}
+
+.searchbar-ios .searchbar-input{
+    height: 7vw;
 }
 
 .searchbar-ios .searchbar-search-icon{
   background-image: url(../assets/img/search.svg);
   background-size: contain;
-  width: 20px;
-  height: 20px;
+  width: 4.3vw;
+  height: 4.3vw;
   left: 3px;
-  top: 6px;
+  top: 1.5vw;
 }
 
 /* SEGMENT */
+.segment-ios{
+    width: 94%;
+    margin-left: 4%;
+}
+
 .segment-ios .segment-button{
   border: none;
   color: #828282;
-  height: 3.9rem;
-  line-height: 3.7rem;
+  font-size: 3.5vw;
+  line-height: 10.5vw;
+  height: 10.5vw;
 }
 
 .segment-ios .segment-button.segment-activated{
@@ -1033,3 +1058,58 @@ a:active{
 .block-lines .item:last-child{
     margin-bottom: 0;
 }
+
+.searchbar-right-block{
+
+}
+
+.btn_map1{
+    position: absolute;
+    top: 20%;
+    width: 5.6vw;
+    right: 8.5vw;
+}
+
+.btn_map2{
+    position: absolute;
+    top: 27%;
+    width: 7.5vw;
+    right: 6.3vw;
+}
+
+.icon-star{
+    font-size: 3.3vw;
+}
+
+ion-app.ios [padding-right], ion-app.ios [padding-right] .scroll-content{
+    padding-right: 5%;
+}
+
+ion-app.ios [padding-left], ion-app.ios [padding-left] .scroll-content{
+    padding-left: 5%;
+}
+
+ion-app.ios [padding-top], ion-app.ios [padding-top] .scroll-content{
+    padding-top: 5%;
+}
+
+ion-app.ios [padding-bottom], ion-app.ios [padding-bottom] .scroll-content{
+    padding-bottom: 5%;
+}
+
+ion-app.ios [margin-top], ion-app.ios [margin-top] .scroll-content{
+    margin-top: 5%;
+}
+
+ion-app.ios [margin-bottom], ion-app.ios [margin-bottom] .scroll-content{
+    margin-bottom: 5%;
+}
+
+ion-app.ios [margin-left], ion-app.ios [margin-left] .scroll-content{
+    margin-left: 5%;
+}
+
+ion-app.ios [margin-right], ion-app.ios [margin-right] .scroll-content{
+    margin-right: 5%;
+}
+
