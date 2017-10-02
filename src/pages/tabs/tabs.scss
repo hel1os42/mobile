@@ -45,11 +45,4 @@ page-tabs{
     background-image: url(../assets/img/tabs/tab5.svg);
   }
 
-  .tab-button[aria-selected="true"]:nth-child(6) {
-    background-image: url(../assets/img/tabs/tab1_a.svg);
-  }
-
-  .tab-button[aria-selected="false"]:nth-child(6){
-    background-image: url(../assets/img/tabs/tab1.svg);
-  }
 }

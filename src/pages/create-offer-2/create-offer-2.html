@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Create Offer</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="dark" class="btn_search">
+      <button (click)="openCreateOffer3Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -23,19 +23,19 @@
 </ion-header>
 
 <ion-content>
-  <form (submit)="createOffer()">
+  
 
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Working dates</div>
       <div class="block-lines">
           <div no-lines>
               <ion-item class="bg-gray" detail-push>
                   <ion-label class="text-BDBDBD font-16">from</ion-label>
-                  <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+                  <ion-datetime [(ngModel)]="offer.start_date" [ngModelOptions]="{standalone: true}" displayFormat="DDD D/MM/YYYY" min="2017-09-01" max="2022" ></ion-datetime>
               </ion-item>
 
               <ion-item class="bg-gray" detail-push>
                   <ion-label class="text-BDBDBD font-16">to</ion-label>
-                  <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+                  <ion-datetime [(ngModel)]="offer.finish_date" [ngModelOptions]="{standalone: true}" displayFormat="DDD D/MM/YYYY" min="2017-09-01" max="2022"></ion-datetime>
               </ion-item>
           </div>
       </div>
@@ -75,16 +75,17 @@
       </div>
 
       <div class="block-lines">
-          <a (click)="toggleSelect()">
+          <a (click)="toggleVisible()">
               <div text-uppercase padding-right class="select-block-desc text-828282 font-14">
                   Detailed settings
-                  <ion-icon name="arrow-up"></ion-icon>
-                 <!-- <ion-icon name="arrow-down"></ion-icon> -->
+                  <ion-icon *ngIf="isDetailedSettingsVisible" name="arrow-up"></ion-icon>
+                 <ion-icon *ngIf="!isDetailedSettingsVisible" name="arrow-down"></ion-icon>
               </div>
           </a>
 
           <p class="select-block-desc text-828282 font-12">You can set working time more flexibility</p>
 
+          <div *ngIf="isDetailedSettingsVisible">
           <ion-grid padding-left text-uppercase class="text-BDBDBD font-14 padding-right-5 margin-top-5 margin-bottom-5 detailed-header">
               <ion-row>
                   <ion-col col-3>
@@ -276,12 +277,12 @@
                   </ion-col>
               </ion-row>
           </ion-grid>
-
+          </div>
       </div>
 
     <p margin>
-      <button ion-button block text-uppercase color="primary">Next step</button>
+      <button (click)="openCreateOffer3Page()" ion-button block text-uppercase color="primary">Next step</button>
     </p>
 
-  </form>
+ 
 </ion-content>
