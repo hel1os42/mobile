@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Create Offer</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="dark" class="btn_search">
+      <button (click)=" openCreateOffer2Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -23,7 +23,7 @@
 </ion-header>
 
 <ion-content>
-  <form (submit)="createOffer()">
+  <form>
     <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Category & type</div>
     <div class="block-lines radio-nau">
       <div radio-group no-lines>
@@ -80,7 +80,7 @@
     </div>
 
     <p margin>
-      <button ion-button block text-uppercase color="primary">Next step</button>
+      <button (click)=" openCreateOffer2Page()" ion-button block text-uppercase color="primary">Next step</button>
     </p>
 
   </form>
