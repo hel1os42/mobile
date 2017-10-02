@@ -60,6 +60,8 @@ import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
 import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
+import { PlacesAlternativePage } from '../pages/places-alternative/places-alternative';
+import { PlacesAlternativePopover } from '../pages/places-alternative/places.alternative.popover';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,7 @@ import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
     OfferRedeemPopover,
     CreateOfferPopover,
     PlacesPopover,
+    PlacesAlternativePopover,
     CongratulationPopover,
     OfferTermsPage,
     SettingsChangePhonePage,
@@ -108,7 +111,8 @@ import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
     CreateOffer2Page,
     CreateOffer3Page,
     CreateOffer4Page,
-    CreateOffer5Page
+    CreateOffer5Page,
+    PlacesAlternativePage
   ],
   imports: [
     BrowserModule,
@@ -163,6 +167,7 @@ import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
     OfferRedeemPopover,
     CreateOfferPopover,
     PlacesPopover,
+    PlacesAlternativePopover,
     CongratulationPopover,
     OfferTermsPage,
     SettingsChangePhonePage,
@@ -170,7 +175,8 @@ import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
     CreateOffer2Page,
     CreateOffer3Page,
     CreateOffer4Page,
-    CreateOffer5Page
+    CreateOffer5Page,
+    PlacesAlternativePage
   ],
   providers: [
     StatusBar,
