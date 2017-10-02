@@ -26,16 +26,13 @@ export class UserProfilePage {
         private profile: ProfileService,
         private auth: AuthService,
         private nav: NavController) {
-
-    }
-
-    ionViewDidEnter() {
+        
         this.profile.getWithAccounts()
-            .subscribe(resp => {
-                this.user = resp;
-                this.balance = this.user.accounts.NAU.balance;
-                this.NAU_Id = this.user.accounts.NAU.id;
-            })
+        .subscribe(resp => {
+            this.user = resp;
+            this.balance = this.user.accounts.NAU.balance;
+            this.NAU_Id = this.user.accounts.NAU.id;
+        })
     }
 
     openSettings() {

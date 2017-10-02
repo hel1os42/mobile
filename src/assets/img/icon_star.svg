@@ -1,0 +1,12 @@
+<svg width="12" height="11" viewBox="0 0 12 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Star</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-395 305)">
+<g id="Star">
+<use xlink:href="#path0_fill" transform="translate(395 -305)" fill="#FEC282"/>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 6 0L 7.58702 3.81565L 11.7063 4.1459L 8.56785 6.83435L 9.52671 10.8541L 6 8.7L 2.47329 10.8541L 3.43215 6.83435L 0.293661 4.1459L 4.41298 3.81565L 6 0Z"/>
+</defs>
+</svg>

@@ -7,6 +7,8 @@ import { AppModeService } from '../../providers/appMode.service';
 import { PlacesPage } from '../places/places';
 import { SplashScreenPage } from '../splash-screen/splash-screen';
 import { Subscription } from 'rxjs';
+import { PlacesAlternativePage } from '../places-alternative/places-alternative';
+
 
 @Component({
     selector: 'page-tabs',
@@ -20,20 +22,28 @@ export class TabsPage {
     tab2Root = UserProfilePage;
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
+    tab5Root = NotificationsPage;
+    tab6Root = PlacesAlternativePage;
 
     @ViewChild('tabs') tabs: Tabs;
 
     constructor(private nav: NavController,
         private appMode: AppModeService) {
 
-        this.tab1Root = this.appMode.getHomeMode()
-            ? PlacesPage
-            : SplashScreenPage;
+        // this.tab1Root = this.appMode.getHomeMode()
+        //     ? PlacesPage
+        //     : SplashScreenPage;to do
+        this.tab1Root = PlacesPage;//remove
+
+        // this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
+        //     this.tabs.getByIndex(0)
+        //         .setRoot(showPlaces ? PlacesPage : SplashScreenPage);
+        // });
 
         this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
-            this.tabs.getByIndex(0)
-                .setRoot(showPlaces ? PlacesPage : SplashScreenPage);
-        });
+                 this.tabs.getByIndex(0)
+                 .setRoot(PlacesPage);//remove
+             });
     }
 
     tabChange() {

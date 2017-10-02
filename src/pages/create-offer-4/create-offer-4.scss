@@ -1,0 +1,26 @@
+page-create-offer-4 {
+    .bcg {
+        background: url(../assets/img/arrow-down.png) no-repeat center right 8px;
+    }
+
+    .select {
+        float: left;
+        padding-right: 5px;
+    }
+
+    .icon {
+        line-height: 1.1;
+    }
+
+    .item-ios.item-block .item-inner{
+        padding-right: 0;
+    }
+
+    .progress-block .progress-line-fill{
+        width: 78%;
+    }
+
+    .note.note-ios{
+        margin-right: 40px;
+    }
+}
