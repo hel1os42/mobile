@@ -23,7 +23,6 @@ export class CreateOfferPage {
                 private nav: NavController,
                 private offerService: OfferService,
                 private profileService: ProfileService,
-                private app: App,
                 private popoverCtrl: PopoverController) {
 
         this.offerService.getOfferCreate()
