@@ -2,7 +2,7 @@
         <ion-navbar>
             <ion-title>Create Offer</ion-title>
             <ion-buttons end>
-              <button ion-button icon-only color="dark" class="btn_search">
+              <button (click)="openCreateOffer1Page()" ion-button icon-only color="dark" class="btn_search">
                 <span class="font-12 text-333333 no-bold">Next</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
               </button>
@@ -23,7 +23,7 @@
     </ion-header>
 
     <ion-content>
-        <form (submit)="createOffer()">
+        <form>
           <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Name & description</div>
           <div class="block-lines">
                 <ion-item no-lines>
@@ -38,26 +38,6 @@
                 <button class="browse font-16 text-3E4B5D no-bold" type="button" ion-button round outline block text-uppercase>Add picture</button>
             </div>
                 <!--
-                <ion-item padding-top class="border-bottom-no">
-                        <ion-select placeholder="Choose category" class="bg-gray width-100" interface="action-sheet">
-                            <ion-option value="">Food &amp; Drink</ion-option>
-                            <ion-option value="">Food Category</ion-option>
-                            <ion-option value="">Drink Category</ion-option>
-                            <ion-option value="">Healthy Food</ion-option>
-                        </ion-select>
-                    </ion-item>
-
-                    <ion-item padding-top class="border-bottom-no">
-                        <ion-select placeholder="Set Working time" class="bg-gray width-100" interface="action-sheet">
-                            <ion-option value="">All Day</ion-option>
-                            <ion-option value="">All Week</ion-option>
-                            <ion-option value="">All Month</ion-option>
-                            <ion-option value="">All Year</ion-option>
-                            <ion-option value="">Set Time</ion-option>
-                        </ion-select>
-                    </ion-item>
-
-
                 <ion-grid>
                     <ion-row>
                         <ion-col col-2>
@@ -132,12 +112,7 @@
             </div>
               -->
               <p margin>
-                <button ion-button block text-uppercase color="primary">Next step</button>
+                <button (click)="openCreateOffer1Page()" ion-button block text-uppercase color="primary">Next step</button>
               </p>
-              <!--
-              <div padding>
-                <button ion-button block text-uppercase>>Create offer</button>
-              </div>
-              -->
         </form>
     </ion-content>
