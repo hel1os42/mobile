@@ -58,6 +58,8 @@ import { SettingsChangePhonePage } from '../pages/settings-change-phone/settings
 import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
 import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
+import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
+import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
 
 @NgModule({
   declarations: [
@@ -104,7 +106,9 @@ import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
     SettingsChangePhonePage,
     AdvRedeemOfferPage,
     CreateOffer2Page,
-    CreateOffer3Page
+    CreateOffer3Page,
+    CreateOffer4Page,
+    CreateOffer5Page
   ],
   imports: [
     BrowserModule,
@@ -164,7 +168,9 @@ import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
     SettingsChangePhonePage,
     AdvRedeemOfferPage,
     CreateOffer2Page,
-    CreateOffer3Page
+    CreateOffer3Page,
+    CreateOffer4Page,
+    CreateOffer5Page
   ],
   providers: [
     StatusBar,
