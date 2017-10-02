@@ -39,6 +39,11 @@ export class TabsPage {
         //     this.tabs.getByIndex(0)
         //         .setRoot(showPlaces ? PlacesPage : SplashScreenPage);
         // });
+
+        this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
+                 this.tabs.getByIndex(0)
+                 .setRoot(PlacesPage);//remove
+             });
     }
 
     tabChange() {
