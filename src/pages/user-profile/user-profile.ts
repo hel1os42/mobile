@@ -26,28 +26,25 @@ export class UserProfilePage {
         private profile: ProfileService,
         private auth: AuthService,
         private nav: NavController) {
-
-    }
-
-    ionViewDidEnter() {
+        
         this.profile.getWithAccounts()
-            .subscribe(resp => {
-                this.user = resp;
-                this.balance = this.user.accounts.NAU.balance;
-                this.NAU_Id = this.user.accounts.NAU.id;
-            })
+        .subscribe(resp => {
+            this.user = resp;
+            this.balance = this.user.accounts.NAU.balance;
+            this.NAU_Id = this.user.accounts.NAU.id;
+        })
     }
 
     openSettings() {
         this.nav.push(SettingsPage);
     }
 
-    openRewards() {
-        this.nav.push(UserTasksPage);
+    openRewards(user: User) {
+        this.nav.push(UserTasksPage, {user: this.user});
     }
 
-    openAchieve() {
-        this.nav.push(UserAchievePage);
+    openAchieve(user: User) {
+        this.nav.push(UserAchievePage, {user: this.user});
     }
 
     openUserOffers() {
