@@ -104,6 +104,25 @@ page-places {
     .margin-top-1vw{
         margin-top: 1vw;
     }
+
+    .segment-ios{
+        width: 90%;
+        margin-left: 5%;
+        display: block;
+    }
+
+    .segment-ios .segment-button {
+        margin-left: 5.4%;
+        display: inline;
+    }
+
+    .segment-ios .segment-button:first-of-type{
+        margin-left: 0;
+    }
+
+    .segment-ios .segment-button:last-of-type {
+        margin-left: 5.4%;
+    }
 }
 
 places-popover-component {
