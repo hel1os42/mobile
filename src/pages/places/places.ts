@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, PopoverController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, PopoverController, Content } from 'ionic-angular';
 import { AgmCoreModule, LatLngBounds, MapsAPILoader } from '@agm/core';
 import { ProfileService } from '../../providers/profile.service';
 import { User } from '../../models/user';
@@ -14,6 +14,7 @@ import { google } from '@agm/core/services/google-maps-types';
 import { OfferCategory } from '../../models/offerCategory';
 import { DistanceUtils } from '../../utils/distanse';
 import { SubCategory } from '../../models/offerSubCategory';
+
 
 @Component({
     selector: 'page-places',
@@ -36,6 +37,9 @@ export class PlacesPage {
     radius = 50000000;
     segment: string;
     distanceString: string;
+
+    @ViewChild(Content)
+    content:Content;
 
     constructor(
         private nav: NavController,
@@ -66,6 +70,12 @@ export class PlacesPage {
             });
 
         this.loadCompanies();
+    }
+
+    ngAfterViewInit() {
+        this.content.ionScroll.subscribe(event => {
+            console.log('scrolling ', event);
+        });
     }
 
     ionSelected() {
