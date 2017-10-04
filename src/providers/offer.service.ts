@@ -59,7 +59,7 @@ export class OfferService {
     }
 
     set(offer: OfferCreate) {
-        this.api.post('advert/offers', offer);
+        return this.api.post('advert/offers', offer);
     }
 
     getCategories() {

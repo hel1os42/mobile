@@ -3,7 +3,7 @@
     <ion-title>Create Offer</ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="dark" class="btn_search">
-        <span class="font-12 text-333333 no-bold">Next</span>
+        <span class="font-12 text-333333 no-bold">Finish</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
     </ion-buttons>
@@ -23,7 +23,6 @@
 </ion-header>
 
 <ion-content>
-  <form (submit)="createOffer()">
 
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Rewards options</div>
       <div class="block-lines">
@@ -48,7 +47,7 @@
       </div>
 
     <p margin>
-      <button ion-button block text-uppercase color="primary">Create offer</button>
+      <button (click)="createOffer()" ion-button block text-uppercase color="primary">Create offer</button>
     </p>
 
   </form>

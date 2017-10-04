@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Create Offer</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="dark" class="btn_search">
+      <button (click)="openCreateOffer5Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -57,7 +57,7 @@
       </div>
 
     <p margin>
-      <button ion-button block text-uppercase color="primary">Next step</button>
+      <button (click)="openCreateOffer5Page()" ion-button block text-uppercase color="primary">Next step</button>
     </p>
 
   </form>
