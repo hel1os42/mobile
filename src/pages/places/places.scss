@@ -36,7 +36,6 @@ page-places {
     width: 33px;
   }
 
-
   .block-search.item-ios.item-block .item-inner {
     padding-right: 0;
   }
@@ -70,13 +69,14 @@ page-places {
 
   .icon_people{
     width: 1.9vw;
-    margin-left: 5%;
+    margin-left: 7%;
     margin-right: 1vw;
   }
 
   .icon_arrow{
     width: 1.9vw;
-    margin-left: 5%;
+    margin-left: 7%;
+    margin-right: 1vw;
   }
 
     .font-20 {
@@ -93,12 +93,35 @@ page-places {
     }
 
     .font-12 {
-        font-size: 2.5vw;
+        font-size: 3vw;
     }
 
     .text-overflow-35{
         width: 93%;
         height: 5vw;
+    }
+
+    .margin-top-1vw{
+        margin-top: 1vw;
+    }
+
+    .segment-ios{
+        width: 90%;
+        margin-left: 5%;
+        display: block;
+    }
+
+    .segment-ios .segment-button {
+        margin-left: 5.4%;
+        display: inline;
+    }
+
+    .segment-ios .segment-button:first-of-type{
+        margin-left: 0;
+    }
+
+    .segment-ios .segment-button:last-of-type {
+        margin-left: 5.4%;
     }
 }
 

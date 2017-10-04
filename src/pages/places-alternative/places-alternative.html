@@ -46,7 +46,7 @@
             <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">{{ company.testimonials_count }}</span>
             <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
             <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} </span>
-            <div class="bold font-20 text-3E4B5D text-ellipsis margin-bottom-5">{{ company.name }}</div>
+            <div class="bold font-20 text-3E4B5D text-ellipsis">{{ company.name }}</div>
             <ng-container *ngFor="let category of company.categories">
                 <span class="type-food font-10 text-3E4B5D">{{ category.name }}</span>
             </ng-container>
