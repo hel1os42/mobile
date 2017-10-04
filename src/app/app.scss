@@ -607,29 +607,15 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   padding-right: 0;
 }
 
+.item-block-nau.list.list-ios {
+    margin: 5vw 0 5vw;
+}
+
 /* TABS */
 .grid-tabs-splash{
   background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
   font-size: 2.8vw;
   line-height: 4vw;
-}
-
-.grid-tabs-splash.show{
-    transition: 0.5s;
-    transform: translateY(0);
-    -moz-transform: translateY(0);
-    -ms-transform: translateY(0);
-    -webkit-transform: translateY(0);
-    -o-transform: translateY(0);
-}
-
-.grid-tabs-splash.hide{
-    transition: 0.5s;
-    transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    -webkit-transform: translateY(-100%);
-    -o-transform: translateY(-100%);
 }
 
 .grid-tabs-splash .col img {
@@ -666,8 +652,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .btn_search_settings img{
   position: absolute;
   right: 21vw;
-  top: 0;
-  height: 100%;
+  bottom: 2vw;
+  height: 92%;
   width: 7.5vw;
 }
 
@@ -680,8 +666,17 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   height: 10vw;
 }
 
+.searchbar-ios.searchbar-left-aligned .searchbar-input {
+    padding-left: 6vw;
+}
+
+.block-search .label-ios{
+    margin: 0 0 3vw 0;
+}
+
 .searchbar-ios .searchbar-input{
     height: 7vw;
+    padding: 0 10vw;
 }
 
 .searchbar-ios .searchbar-search-icon{
@@ -694,10 +689,17 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .searchbar-ios .searchbar-clear-icon{
-    right: 12%;
-    width: 5vw;
+    right: 0;
+    width: 10vw;
     height: 100%;
-    background-size: 100%;
+    background-size: 8vw;
+    background-color: #fff;
+    z-index: 111;
+    border-radius: 0;
+}
+
+.searchbar-ios .button-clear-ios:hover:not(.disable-hover){
+    opacity: 1;
 }
 
 /* SEGMENT */
@@ -979,12 +981,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .type-food{
-    border: 1px solid rgba(62, 75, 93, 0.5);
-    padding: 0.7vw;
+    border: 0.3vw solid rgba(62, 75, 93, 0.5);
+    padding: 0.8vw;
     font-size: 2.3vw;
     color: #3E4B5D;
-    border-radius: 0.4vw;
+    border-radius: 1vw;
     margin-right: 1.5vw;
+    margin-top: 2vw;
+    display: inline-block;
 }
 
 .radius{
@@ -1100,16 +1104,16 @@ a:active{
 
 .btn_map1{
     position: absolute;
-    top: 0;
-    height: 100%;
+    bottom: 2vw;
+    height: 92%;
     width: 5.6vw;
     right: 5.6vw;
 }
 
 .btn_map2{
     position: absolute;
-    top: 0;
-    height: 100%;
+    bottom: 2vw;
+    height: 92%;
     width: 7.5vw;
     right: 5vw;
 }
