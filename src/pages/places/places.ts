@@ -38,7 +38,7 @@ export class PlacesPage {
     segment: string;
     distanceString: string;
     search: string;
-    categoryFilter: string;
+    categoryFilter: string[];
 
     // @ViewChild(Content)
     // content: Content;
@@ -72,7 +72,7 @@ export class PlacesPage {
             });
 
         this.loadCompanies([this.selectedCategory.id], this.search);
-        this.categoryFilter = this.selectedCategory.id;
+        this.categoryFilter = [this.selectedCategory.id];
     }
 
     // ngAfterViewInit() {
@@ -93,7 +93,7 @@ export class PlacesPage {
         this.search = ""
         this.selectedCategory = category;
         this.loadCompanies([this.selectedCategory.id], this.search);
-        this.categoryFilter = this.selectedCategory.id;
+        this.categoryFilter = [this.selectedCategory.id];
     }
 
     generateBounds(markers): any {
@@ -172,15 +172,15 @@ export class PlacesPage {
                         this.categoryFilter = categoriesIds;
                     }
                     else {
-                        this.categoryFilter = this.selectedCategory.id
+                        this.categoryFilter = [this.selectedCategory.id]
                     }
-                    this.loadCompanies([this.categoryFilter], this.search);
+                    this.loadCompanies(this.categoryFilter, this.search);
                 })
             });
     }
 
     searchCompanies($event) {
-        this.loadCompanies([this.categoryFilter], this.search);
+        this.loadCompanies(this.categoryFilter, this.search);
     }
 
 }
