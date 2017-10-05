@@ -93,7 +93,6 @@ export class CreateUserProfilePage {
         this.user.longitude = this.coords.lng;
         //this.account.points = this.point(); to do
         this.profile.set(this.user)
-            .subscribe();
         this.profile.put(this.user)
             .subscribe(resp => this.nav.setRoot(UserProfilePage));
     }

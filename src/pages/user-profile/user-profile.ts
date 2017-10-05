@@ -33,6 +33,7 @@ export class UserProfilePage {
             this.balance = this.user.accounts.NAU.balance;
             this.NAU_Id = this.user.accounts.NAU.id;
         })
+        this.profile.set(this.user);
     }
 
     openSettings() {
