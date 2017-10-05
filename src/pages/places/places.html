@@ -29,7 +29,7 @@
         </ion-segment>
 
         <ion-item class="block-search relative" no-lines padding-left padding-right>
-            <ion-searchbar round placeholder=""></ion-searchbar>
+            <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2500 round placeholder=""></ion-searchbar>
             <a (click)="openPopover()" class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
                 <img class="btn_map1" *ngIf="!isMapVisible" src="assets/img/user_home/icon_pin.svg">

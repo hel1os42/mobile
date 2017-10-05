@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, PopoverController, Content } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { AgmCoreModule, LatLngBounds, MapsAPILoader } from '@agm/core';
 import { ProfileService } from '../../providers/profile.service';
 import { User } from '../../models/user';
