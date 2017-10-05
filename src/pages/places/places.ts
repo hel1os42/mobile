@@ -39,8 +39,8 @@ export class PlacesPage {
     distanceString: string;
     search: string;
 
-    @ViewChild(Content)
-    content: Content;
+    // @ViewChild(Content)
+    // content: Content;
 
     constructor(
         private nav: NavController,

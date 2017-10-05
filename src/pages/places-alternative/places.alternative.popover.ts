@@ -11,31 +11,36 @@ import { OfferService } from '../../providers/offer.service';
 export class PlacesAlternativePopover {
 
     categories: SubCategory[];
-    categoryId: string;
-    selectedCategories: string[] = [];
-    selected: boolean;
+    selectCategories: any[];
+    categoriesIds: string[];
 
     constructor(
         private viewCtrl: ViewController,
-        private app: App,
         private offer: OfferService,
-        private navParams: NavParams) { 
-        
-       this.categories = this.navParams.get('subCat');
+        private navParams: NavParams) {
+
+        this.categories = this.navParams.get('subCat');
+        this.selectCategories = this.categories.map(p => p.id);
+
+        for (let i = 0; i < this.selectCategories.length; i++) {
+            this.selectCategories[i] = ({
+                categoryId: this.categories[i].id,
+                isSelected: false,
+                name: this.categories[i].name
+            });
         }
 
-    selectCategory(name) {
-      
-        this.selectedCategories = this.selectedCategories + name;
-   
     }
 
     close() {
-        this.selectedCategories;
-        this.viewCtrl.dismiss();        
+        let filtered = this.selectCategories.filter(p => p.isSelected);
+        this.categoriesIds = filtered.map(p => p.categoryId);
+        this.viewCtrl.dismiss(this.categoriesIds);
     }
 
-    back() {
-        this.viewCtrl.dismiss(); 
+    clear() {
+        for (let i = 0; i < this.selectCategories.length; i++) {
+            this.selectCategories[i].isSelected = false;
+        }
     }
 }
