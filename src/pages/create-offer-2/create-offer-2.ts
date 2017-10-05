@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer3Page } from '../create-offer-3/create-offer-3';
 import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
+//import * as moment from 'moment';
 
 
 @Component({
@@ -36,9 +36,9 @@ export class CreateOffer2Page {
         // this.offer.start_date = (new Date(this.offer.start_date)).toISOString();
         // let start = moment(this.offer.start_date).add(2, 's').add(100000, 'ms');
 
-        // // this.offer.start_date = moment().format("YYYY-MM-DD "); 
+        // // this.offer.start_date = moment().format("YYYY-MM-DD ");
         // // debugger
-        // this.offer.finish_date = this.finishDate + " " + this.offer.finish_time; 
+        // this.offer.finish_date = this.finishDate + " " + this.offer.finish_time;
         this.offer.start_date = "2017-09-15 16:38:17.000000+0200";//to do
         this.offer.finish_date = "2017-11-15 16:38:17.000000+0200";
         this.offer.start_time = "16:38:17.000000+0200";

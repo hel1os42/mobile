@@ -26,10 +26,14 @@
 
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Working Area</div>
       <div class="block-lines">
-          <button padding-left ion-item class="bg-gray">
-              Your place
-              <ion-note item-end class="text-3E4B5D font-16 bold">Los-Angeles</ion-note>
-          </button>
+          <ion-item padding-left class="bg-gray">
+              <ion-label>Your place</ion-label>
+              <ion-select class="text-3E4B5D font-16 bold">
+                  <ion-option value="los" [selected]="true">Los-Angeles</ion-option>
+                  <ion-option value="tex">Texas</ion-option>
+                  <ion-option value="chi">Chicago</ion-option>
+              </ion-select>
+          </ion-item>
       </div>
 
       <div class="block-lines">
