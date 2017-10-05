@@ -29,7 +29,11 @@ page-create-offer-1 {
     margin-right: 40px;
   }
 
-  .select-text{
-    padding-right: 5vw;
+  .item-ios[detail-push]{
+    padding-right: 10px;
+  }
+
+  .select-ios .select-icon {
+    display: none;
   }
 }

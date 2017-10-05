@@ -44,7 +44,7 @@ page-place {
     border-bottom: 1px solid #BDBDBD
   }
 
-  .footer.footer-ios .item-ios.item-block .item-inner{
+  .item-ios.item-block .item-inner{
     padding-right: 0;
   }
 
@@ -67,4 +67,41 @@ page-place {
   .offers_count{
     line-height: 34px;
   }
+
+    .text-overflow-35{
+        display: block;
+        width: 93%;
+        max-height: 9vw;
+        height: inherit;
+    }
+
+    .num_right {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    .segment-ios{
+        width: 100%;
+        display: block;
+    }
+
+    .segment-ios .segment-button {
+        margin-left: 12%;
+        display: inline;
+        font-size: 4vw;
+        line-height: 12vw;
+    }
+
+    .segment-ios .segment-button:first-of-type{
+        margin-left: 5%;
+    }
+
+    .label-ios{
+        margin: 0;
+    }
+
+    .segment-ios .segment-button:last-of-type {
+        margin-left: 13%;
+    }
 }
