@@ -21,6 +21,10 @@ export class CreateOffer3Page {
 
     openCreateOffer4Page() {
         this.offer.city = this.city;
+        this.offer.country = "country";//to do
+        this.offer.radius = 1000000;//todo
+        this.offer.longitude = 50.1;//to do
+        this.offer.latitude = 30.1;//to do
         this.nav.push(CreateOffer4Page, { offer: this.offer });
     }
 

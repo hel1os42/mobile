@@ -22,6 +22,7 @@ export class CreateOffer1Page {
     }
 
     openCreateOffer2Page() {
+        this.offer.category_id = "b97a54a2-daa7-4846-bfe1-8c26c93ffe11";//to do
         this.nav.push(CreateOffer2Page, { offer: this.offer });//add bindings (category & type, type)
     }
 

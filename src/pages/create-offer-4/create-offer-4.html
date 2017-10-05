@@ -23,7 +23,6 @@
 </ion-header>
 
 <ion-content>
-  <form (submit)="createOffer()">
 
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Max redemption per user</div>
       <div class="block-lines">
@@ -71,10 +70,8 @@
       <div class="block-lines">
           <ion-item padding-left class="bg-gray">
               <ion-label>Minimal user level</ion-label>
-              <ion-select class="text-3E4B5D font-16 bold">
-                  <ion-option value="num1" [selected]="true">1</ion-option>
-                  <ion-option value="num2">2</ion-option>
-                  <ion-option value="num3">3</ion-option>
+              <ion-select [(ngModel)]="level" class="text-3E4B5D font-16 bold">
+                  <ion-option *ngFor=" let level of levels " [value]="level">{{ level }}</ion-option>
               </ion-select>
           </ion-item>
       </div>
@@ -83,5 +80,4 @@
       <button (click)="openCreateOffer5Page()" ion-button block text-uppercase color="primary">Next step</button>
     </p>
 
-  </form>
 </ion-content>
