@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-title>Create Offer</ion-title>
         <ion-buttons end>
-            <button (click)=" openCreateOffer2Page()" ion-button icon-only color="dark" class="btn_search">
+            <button (click)="openCreateOffer2Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -52,21 +52,21 @@
                     Discount
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
-                <ion-radio mode="md" value="delivery"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, false)" mode="md" value="discount"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
                 <ion-label>
                     Second Fee
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
-                <ion-radio mode="md" value="another1"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="another1"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
                 <ion-label>
                     Bonus or Gift
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
-                <ion-radio mode="md" value="another2"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="another2"></ion-radio>
             </ion-item>
         </div>
     </div>
@@ -74,9 +74,8 @@
     <div class="block-lines">
         <ion-item padding-left class="bg-gray" detail-push>
             <ion-label>Set discount (%)</ion-label>
-            <ion-select class="text-3E4B5D font-16 bold">
-                <ion-option value="m10" [selected]="true">10</ion-option>
-                <ion-option value="m20">20</ion-option>
+            <ion-select [disabled]="isDiscountSelectDisable" [(ngModel)]="discount" interface="action-sheet" class="text-3E4B5D font-16 bold">
+                <ion-option *ngFor=" let discount of discounts " [value]="discount">{{ discount }}</ion-option>
             </ion-select>
         </ion-item>
     </div>

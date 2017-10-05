@@ -32,7 +32,7 @@ export class CreateOffer2Page {
     }
 
     openCreateOffer3Page() {
-        this.offer.start_date = this.startDate + " " + this.offer.start_time;
+        // this.offer.start_date = this.startDate + " " + this.offer.start_time;
         // this.offer.start_date = (new Date(this.offer.start_date)).toISOString();
         // let start = moment(this.offer.start_date).add(2, 's').add(100000, 'ms');
 

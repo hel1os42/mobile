@@ -14,9 +14,7 @@ export class ProfileService {
     }
 
     set(account: User) {
-        this.user = account;//to do
-        return Observable.of({ success: true });
-        //this.api.post('', account);
+        this.user = account;
     }
 
     getReferrals() {

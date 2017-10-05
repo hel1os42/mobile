@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Create Offer</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="dark" class="btn_search">
+      <button (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Finish</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -28,10 +28,8 @@
       <div class="block-lines">
           <ion-item padding-left class="bg-gray margin-bottom-5">
               <ion-label>Reward for redemption</ion-label>
-              <ion-select class="text-3E4B5D font-16 bold">
-                  <ion-option value="num10" [selected]="true">10</ion-option>
-                  <ion-option value="num20">20</ion-option>
-                  <ion-option value="num30">33</ion-option>
+              <ion-select [(ngModel)]="reward" interface="action-sheet" class="text-3E4B5D font-16 bold">
+                  <ion-option *ngFor=" let reward of rewards " [value]="reward">{{ reward }}</ion-option>
               </ion-select>
           </ion-item>
 
@@ -50,7 +48,7 @@
               <ion-avatar item-start>
                   <img src="assets/img/user_nau/icon_nau.svg">
               </ion-avatar>
-              <div class="font-18 text-3E4B5D bold">256</div>
+              <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
               <div class="font-12 text-828282">You have tokens on your account</div>
           </ion-item>
       </div>
