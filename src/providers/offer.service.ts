@@ -36,13 +36,18 @@ export class OfferService {
         return Observable.of(MockOffers.items);
     }
 
-    getPlaces(category_ids: string[], lat: number, lng: number, radius: number) {
-        return this.api.get('places', true, {
-            'category_ids[0]': category_ids[0],
+    getPlaces(category_ids: string[], lat: number, lng: number, radius: number, search: string) {
+            let str = '';     
+            for (let i = 0; i < category_ids.length; i++) {
+                let id = category_ids[i];
+                str += `${'category_ids[]'}=${id}&`;
+            };
+        return this.api.get(`places?${str}`, true, {
             latitude: lat,
             longitude: lng,
             radius: radius,
-            with: 'categories'
+            with: 'categories',
+            search: search,
         });
     }
 
@@ -59,7 +64,7 @@ export class OfferService {
     }
 
     set(offer: OfferCreate) {
-        this.api.post('advert/offers', offer);
+        return this.api.post('advert/offers', offer);
     }
 
     getCategories() {

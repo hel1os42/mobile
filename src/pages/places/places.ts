@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, PopoverController, Content } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { AgmCoreModule, LatLngBounds, MapsAPILoader } from '@agm/core';
 import { ProfileService } from '../../providers/profile.service';
 import { User } from '../../models/user';
@@ -37,9 +37,11 @@ export class PlacesPage {
     radius = 50000000;
     segment: string;
     distanceString: string;
+    search: string;
+    categoryFilter: string;
 
-    @ViewChild(Content)
-    content:Content;
+    // @ViewChild(Content)
+    // content: Content;
 
     constructor(
         private nav: NavController,
@@ -69,14 +71,15 @@ export class PlacesPage {
                 this.message = error.message;
             });
 
-        this.loadCompanies();
+        this.loadCompanies([this.selectedCategory.id], this.search);
+        this.categoryFilter = this.selectedCategory.id;
     }
 
-    ngAfterViewInit() {
-        this.content.ionScroll.subscribe(event => {
-            console.log('scrolling ', event);
-        });
-    }
+    // ngAfterViewInit() {
+    //     this.content.ionScroll.subscribe(event => {
+    //         console.log('scrolling', event);
+    //     });
+    // }
 
     ionSelected() {
         this.appMode.setHomeMode(false);
@@ -87,8 +90,10 @@ export class PlacesPage {
     }
 
     selectCategory(category: OfferCategory) {
+        this.search = ""
         this.selectedCategory = category;
-        this.loadCompanies();
+        this.loadCompanies([this.selectedCategory.id], this.search);
+        this.categoryFilter = this.selectedCategory.id;
     }
 
     generateBounds(markers): any {
@@ -105,18 +110,15 @@ export class PlacesPage {
             if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
                 return undefined;
             }
-
             return bounds;
         }
-
         return undefined;
     }
 
-    loadCompanies() {
-        this.offers.getPlaces([this.selectedCategory.id], this.coords.lat, this.coords.lng, this.radius)
+    loadCompanies(categoryId, search) {
+        this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search)
             .subscribe(companies => {
                 this.companies = companies.data;
-
                 this.mapsAPILoader.load()
                     .then(() => {
                         if (this.companies.length == 0 && this.coords) {
@@ -150,9 +152,8 @@ export class PlacesPage {
     }
 
     getDistance(latitude: number, longitude: number) {
-        let distance: number;
         if (this.coords) {
-            distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
             this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
             return this.distanceString;
         };
@@ -162,11 +163,24 @@ export class PlacesPage {
     openPopover() {
         this.offers.getSubCategories(this.selectedCategory.id)
             .subscribe(category => {
+                this.search = "";
                 this.subCategories = category.children;
-                let popover = this.popoverCtrl.create(PlacesPopover, {subCat: this.subCategories});
+                let popover = this.popoverCtrl.create(PlacesPopover, { subCat: this.subCategories });
                 popover.present();
+                popover.onDidDismiss((categoriesIds) => {
+                    if (categoriesIds.length !== 0) {
+                        this.categoryFilter = categoriesIds;
+                    }
+                    else {
+                        this.categoryFilter = this.selectedCategory.id
+                    }
+                    this.loadCompanies([this.categoryFilter], this.search);
+                })
             });
+    }
 
+    searchCompanies($event) {
+        this.loadCompanies([this.categoryFilter], this.search);
     }
 
 }

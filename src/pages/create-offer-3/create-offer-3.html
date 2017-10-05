@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>Create Offer</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only color="dark" class="btn_search">
+      <button (click)="openCreateOffer4Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -23,14 +23,15 @@
 </ion-header>
 
 <ion-content>
-  <form (submit)="createOffer()">
 
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Working Area</div>
       <div class="block-lines">
-          <button padding-left ion-item class="bg-gray">
-              Your place
-              <ion-note item-end class="text-3E4B5D font-16 bold">Los-Angeles</ion-note>
-          </button>
+          <ion-item padding-left class="bg-gray" detail-push>
+              <ion-label>Your place</ion-label>
+              <ion-select [(ngModel)]="city" interface="popover" class="text-3E4B5D font-16 bold">
+                  <ion-option *ngFor=" let city of cities " [value]="city">{{ city }}</ion-option>
+              </ion-select>
+          </ion-item>
       </div>
 
       <div class="block-lines">
@@ -38,8 +39,7 @@
       </div>
 
     <p margin>
-      <button ion-button block text-uppercase color="primary">Next step</button>
+      <button (click)="openCreateOffer4Page()" ion-button block text-uppercase color="primary">Next step</button>
     </p>
 
-  </form>
 </ion-content>

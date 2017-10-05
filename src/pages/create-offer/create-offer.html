@@ -23,15 +23,15 @@
     </ion-header>
 
     <ion-content>
-        <form>
+      
           <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Name & description</div>
           <div class="block-lines">
                 <ion-item no-lines>
-                    <ion-input [(ngModel)]="offer.label" [ngModelOptions]="{standalone: true}" class="bg-gray" type="text" placeholder="Offer Name"></ion-input>
+                    <ion-input [(ngModel)]="offer.label" class="bg-gray" type="text" placeholder="Offer Name"></ion-input>
                 </ion-item>
 
                 <ion-item no-lines margin-top>
-                  <ion-textarea [(ngModel)]="offer.description" [ngModelOptions]="{standalone: true}" class="bg-gray-radius-small" placeholder="Offer description"></ion-textarea>
+                  <ion-textarea [(ngModel)]="offer.description" class="bg-gray-radius-small" placeholder="Offer description"></ion-textarea>
                 </ion-item>
             </div>
             <div class="block-lines">
@@ -114,5 +114,5 @@
               <p margin>
                 <button (click)="openCreateOffer1Page()" ion-button block text-uppercase color="primary">Next step</button>
               </p>
-        </form>
+       
     </ion-content>

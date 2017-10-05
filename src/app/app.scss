@@ -144,10 +144,12 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-10{
   font-size: 10px;
+    font-size: 2.5vw;
 }
 
 .font-12{
   font-size: 12px;
+  font-size: 3vw;
 }
 
 .font-14{
@@ -164,6 +166,7 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-20{
   font-size: 20px;
+    font-size: 5vw;
 }
 
 .font-22{
@@ -176,6 +179,8 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-36{
   font-size: 36px;
+    font-size: 9vw;
+    line-height: 9vw;
 }
 
 .font-40{
@@ -337,6 +342,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   min-width: 100%;
 }
 
+.width-88{
+    width: 88%;
+}
+
 .bg-gray{
   border-radius: 100px;
   border: 1px solid #E0E0E0;
@@ -466,10 +475,12 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .toolbar-title-ios{
-  color: #000;
-  font-weight: 400;
+  font-family: 'OpenSansNauSemibold';
   text-transform: uppercase;
-  font-size: 1.5rem;
+  color: #333333;
+  font-size: 16px;
+  font-size: 4vw;
+  font-weight: normal;
 }
 
 .toolbar-ios ion-title{
@@ -526,11 +537,6 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .header{
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-.toolbar-title-ios{
-  color: #333333;
-  font-size: 16px;
 }
 
 .margin-bottom-small{
@@ -607,29 +613,15 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   padding-right: 0;
 }
 
+.item-block-nau.list.list-ios {
+    margin: 5vw 0 5vw;
+}
+
 /* TABS */
 .grid-tabs-splash{
   background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
   font-size: 2.8vw;
   line-height: 4vw;
-}
-
-.grid-tabs-splash.show{
-    transition: 0.5s;
-    transform: translateY(0);
-    -moz-transform: translateY(0);
-    -ms-transform: translateY(0);
-    -webkit-transform: translateY(0);
-    -o-transform: translateY(0);
-}
-
-.grid-tabs-splash.hide{
-    transition: 0.5s;
-    transform: translateY(-100%);
-    -moz-transform: translateY(-100%);
-    -ms-transform: translateY(-100%);
-    -webkit-transform: translateY(-100%);
-    -o-transform: translateY(-100%);
 }
 
 .grid-tabs-splash .col img {
@@ -666,8 +658,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .btn_search_settings img{
   position: absolute;
   right: 21vw;
-  top: 0;
-  height: 100%;
+  bottom: 2vw;
+  height: 92%;
   width: 7.5vw;
 }
 
@@ -680,8 +672,18 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   height: 10vw;
 }
 
+.searchbar-ios.searchbar-left-aligned .searchbar-input {
+    padding-left: 6vw;
+}
+
+.block-search .label-ios{
+    margin: 0 0 3vw 0;
+}
+
 .searchbar-ios .searchbar-input{
     height: 7vw;
+    padding: 0 10vw;
+    font-size: 3.7vw;
 }
 
 .searchbar-ios .searchbar-search-icon{
@@ -694,16 +696,22 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .searchbar-ios .searchbar-clear-icon{
-    right: 12%;
-    width: 5vw;
+    right: 0;
+    width: 10vw;
     height: 100%;
-    background-size: 100%;
+    background-size: 8vw;
+    background-color: #fff;
+    z-index: 111;
+    border-radius: 0;
+}
+
+.searchbar-ios .button-clear-ios:hover:not(.disable-hover){
+    opacity: 1;
 }
 
 /* SEGMENT */
 .segment-ios{
-    width: 94%;
-    margin-left: 4%;
+    width: 100%;
 }
 
 .segment-ios .segment-button{
@@ -887,6 +895,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-bottom: 2.4%;
 }
 
+.margin-top-2proc{
+    margin-top: 2%;
+}
+
 .padding-10{
     padding: 10px;
 }
@@ -918,16 +930,17 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   position: relative;
   background-size: cover;
   background-position: 50% 50%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .cover .cover_logo{
   position: absolute;
-  left: 3%;
-  bottom: -35px;
-  width: 70px;
-  height: 70px;
+  left: 4.8%;
+  bottom: -11vw;
+  width: 22vw;
+  height: 22vw;
   border-radius: 100px;
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .cover_block_btn{
@@ -937,9 +950,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .cover_block_btn .button{
-  width: 30px;
-  height: 30px;
+  width: 8vw;
+  height: 8vw;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.cover_block_btn .button img{
+    width: 55%;
+    height: auto;
 }
 
 .relative{
@@ -961,10 +979,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   top: 10px;
 }
 
-.num_right{
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+.num_right {
+    position: absolute;
+    right: 3%;
+    bottom: 7%;
 }
 
 .flex{
@@ -979,12 +997,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .type-food{
-    border: 1px solid rgba(62, 75, 93, 0.5);
-    padding: 0.7vw;
+    border: 0.3vw solid rgba(62, 75, 93, 0.5);
+    padding: 0.8vw;
     font-size: 2.3vw;
     color: #3E4B5D;
-    border-radius: 0.4vw;
+    border-radius: 1vw;
     margin-right: 1.5vw;
+    margin-top: 2vw;
+    display: inline-block;
 }
 
 .radius{
@@ -1100,16 +1120,16 @@ a:active{
 
 .btn_map1{
     position: absolute;
-    top: 0;
-    height: 100%;
+    bottom: 2vw;
+    height: 92%;
     width: 5.6vw;
     right: 5.6vw;
 }
 
 .btn_map2{
     position: absolute;
-    top: 0;
-    height: 100%;
+    bottom: 2vw;
+    height: 92%;
     width: 7.5vw;
     right: 5vw;
 }
@@ -1135,6 +1155,10 @@ ion-app.ios [padding-bottom], ion-app.ios [padding-bottom] .scroll-content{
     padding-bottom: 5%;
 }
 
+ion-app.ios [padding], ion-app.ios [padding] .scroll-content{
+    padding: 5%;
+}
+
 ion-app.ios [margin-top], ion-app.ios [margin-top] .scroll-content{
     margin-top: 5%;
 }
@@ -1151,3 +1175,30 @@ ion-app.ios [margin-right], ion-app.ios [margin-right] .scroll-content{
     margin-right: 5%;
 }
 
+ion-app.ios [margin], ion-app.ios [margin] .scroll-content{
+    margin: 5%;
+}
+
+.bg-gray .select-text{
+    padding-right: 2vw;
+}
+
+.icon_people{
+    width: 1.9vw;
+    margin-left: 7%;
+    margin-right: 1vw;
+}
+
+.icon_arrow{
+    width: 1.9vw;
+    margin-left: 7%;
+    margin-right: 1vw;
+}
+
+.margin-0{
+    margin: 0;
+}
+
+.item-block{
+    min-height: inherit;
+}

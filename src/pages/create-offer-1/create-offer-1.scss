@@ -28,4 +28,12 @@ page-create-offer-1 {
   .note.note-ios{
     margin-right: 40px;
   }
+
+  .item-ios[detail-push]{
+    padding-right: 10px;
+  }
+
+  .select-ios .select-icon {
+    display: none;
+  }
 }

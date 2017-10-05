@@ -40,16 +40,6 @@ page-places {
     padding-right: 0;
   }
 
-  .font-36{
-    line-height: 34px;
-  }
-
-  .num_right {
-    position: absolute;
-    right: 3%;
-    bottom: 7%;
-  }
-
   .star_right {
     position: absolute;
     right: 3%;
@@ -58,51 +48,18 @@ page-places {
   }
 
   .text-overflow-35{
-    display: table;
-    width: 100%;
+    display: block;
+    width: 93%;
+    max-height: 9vw;
+    height: inherit;
   }
-
-  .text-overflow-35 span{
-    display: table-cell;
-    vertical-align: bottom;
-  }
-
-  .icon_people{
-    width: 1.9vw;
-    margin-left: 7%;
-    margin-right: 1vw;
-  }
-
-  .icon_arrow{
-    width: 1.9vw;
-    margin-left: 7%;
-    margin-right: 1vw;
-  }
-
-    .font-20 {
-        font-size: 5vw;
-    }
-
-    .font-10 {
-        font-size: 2.5vw;
-    }
-
-    .font-36 {
-        font-size: 9vw;
-        line-height: 9vw;
-    }
-
-    .font-12 {
-        font-size: 3vw;
-    }
-
-    .text-overflow-35{
-        width: 93%;
-        height: 5vw;
-    }
 
     .margin-top-1vw{
         margin-top: 1vw;
+    }
+
+    .margin-bottom-3vw{
+        margin-bottom: 3vw;
     }
 
     .segment-ios{
@@ -122,6 +79,10 @@ page-places {
 
     .segment-ios .segment-button:last-of-type {
         margin-left: 5.4%;
+    }
+
+    .sticky{
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     }
 }
 

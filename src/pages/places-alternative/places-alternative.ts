@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
 import { AgmCoreModule, LatLngBounds, MapsAPILoader } from '@agm/core';
 import { ProfileService } from '../../providers/profile.service';
@@ -36,6 +36,10 @@ export class PlacesAlternativePage {
     radius = 50000000;
     segment: string;
     distanceString: string;
+    search: string;
+
+    // @ViewChild(Content)
+    // content: Content;
 
     constructor(
         private nav: NavController,
@@ -65,8 +69,14 @@ export class PlacesAlternativePage {
                 this.message = error.message;
             });
 
-        this.loadCompanies();
+        this.loadCompanies([this.selectedCategory.id]);
     }
+
+    // ngAfterViewInit() {
+    //     this.content.ionScroll.subscribe(event => {
+    //         console.log('scrolling', event);
+    //     });
+    // }
 
     ionSelected() {
         this.appMode.setHomeMode(false);
@@ -78,7 +88,7 @@ export class PlacesAlternativePage {
 
     selectCategory(category: OfferCategory) {
         this.selectedCategory = category;
-        this.loadCompanies();
+        this.loadCompanies([this.selectedCategory.id]);
     }
 
     generateBounds(markers): any {
@@ -102,8 +112,8 @@ export class PlacesAlternativePage {
         return undefined;
     }
 
-    loadCompanies() {
-        this.offers.getPlaces([this.selectedCategory.id], this.coords.lat, this.coords.lng, this.radius)
+    loadCompanies(categoryId) {
+        this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, this.search)
             .subscribe(companies => {
                 this.companies = companies.data;
 
@@ -140,9 +150,8 @@ export class PlacesAlternativePage {
     }
 
     getDistance(latitude: number, longitude: number) {
-        let distance: number;
         if (this.coords) {
-            distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
             this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
             return this.distanceString;
         };
@@ -153,8 +162,13 @@ export class PlacesAlternativePage {
         this.offers.getSubCategories(this.selectedCategory.id)
             .subscribe(category => {
                 this.subCategories = category.children;
-                let popover = this.popoverCtrl.create(PlacesAlternativePopover, {subCat: this.subCategories});
+                let popover = this.popoverCtrl.create(PlacesAlternativePopover, { subCat: this.subCategories });
                 popover.present();
+                popover.onDidDismiss((categoriesIds) => {
+                    if (categoriesIds.length !== 0) {
+                        this.loadCompanies(categoriesIds);
+                    }
+                })
             });
 
     }

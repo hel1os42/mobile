@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-title>Create Offer</ion-title>
         <ion-buttons end>
-            <button (click)=" openCreateOffer2Page()" ion-button icon-only color="dark" class="btn_search">
+            <button (click)="openCreateOffer2Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -23,65 +23,65 @@
 </ion-header>
 
 <ion-content>
-    <form>
-        <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Category & type</div>
-        <div class="block-lines radio-nau">
-            <div radio-group no-lines>
-                <ion-item class="bg-gray">
-                    <ion-label>Delivery</ion-label>
-                    <ion-radio mode="md" value="delivery"></ion-radio>
-                </ion-item>
-                <ion-item class="bg-gray">
-                    <ion-label>Another</ion-label>
-                    <ion-radio mode="md" value="another1"></ion-radio>
-                </ion-item>
-                <ion-item class="bg-gray">
-                    <ion-label>Another</ion-label>
-                    <ion-radio mode="md" value="another2"></ion-radio>
-                </ion-item>
-            </div>
+
+    <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Category & type</div>
+    <div class="block-lines radio-nau">
+        <div radio-group no-lines>
+            <ion-item class="bg-gray">
+                <ion-label>Delivery</ion-label>
+                <ion-radio mode="md" value="delivery"></ion-radio>
+            </ion-item>
+            <ion-item class="bg-gray">
+                <ion-label>Another</ion-label>
+                <ion-radio mode="md" value="another1"></ion-radio>
+            </ion-item>
+            <ion-item class="bg-gray">
+                <ion-label>Another</ion-label>
+                <ion-radio mode="md" value="another2"></ion-radio>
+            </ion-item>
         </div>
+    </div>
 
-        <div class="block-lines">
-            <div class="text-4F4F4F font-14" text-uppercase>Offer type</div>
+    <div class="block-lines">
+        <div class="text-4F4F4F font-14" text-uppercase>Offer type</div>
+    </div>
+    <div class="block-lines radio-nau radio-nau-no-margin">
+        <div radio-group no-lines>
+            <ion-item class="bg-gray">
+                <ion-label>
+                    Discount
+                    <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
+                </ion-label>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, false)" mode="md" value="discount"></ion-radio>
+            </ion-item>
+            <ion-item class="bg-gray">
+                <ion-label>
+                    Second Fee
+                    <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
+                </ion-label>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="another1"></ion-radio>
+            </ion-item>
+            <ion-item class="bg-gray">
+                <ion-label>
+                    Bonus or Gift
+                    <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
+                </ion-label>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="another2"></ion-radio>
+            </ion-item>
         </div>
-        <div class="block-lines radio-nau radio-nau-no-margin">
-            <div radio-group no-lines>
-                <ion-item class="bg-gray">
-                    <ion-label>
-                        Discount
-                        <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
-                    </ion-label>
-                    <ion-radio mode="md" value="delivery"></ion-radio>
-                </ion-item>
-                <ion-item class="bg-gray">
-                    <ion-label>
-                        Second Fee
-                        <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
-                    </ion-label>
-                    <ion-radio mode="md" value="another1"></ion-radio>
-                </ion-item>
-                <ion-item class="bg-gray">
-                    <ion-label>
-                        Bonus or Gift
-                        <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
-                    </ion-label>
-                    <ion-radio mode="md" value="another2"></ion-radio>
-                </ion-item>
-            </div>
-        </div>
+    </div>
 
-        <div class="block-lines">
-            <button padding-left ion-item class="bg-gray">
-        Set discount (%)
-        <ion-note item-end class="text-3E4B5D font-16 bold">10</ion-note>
-      </button>
+    <div class="block-lines">
+        <ion-item padding-left class="bg-gray" detail-push>
+            <ion-label>Set discount (%)</ion-label>
+            <ion-select [disabled]="isDiscountSelectDisable" [(ngModel)]="discount" interface="action-sheet" class="text-3E4B5D font-16 bold">
+                <ion-option *ngFor=" let discount of discounts " [value]="discount">{{ discount }}</ion-option>
+            </ion-select>
+        </ion-item>
+    </div>
 
-        </div>
+    <p margin>
+        <button (click)="openCreateOffer2Page()" ion-button block text-uppercase color="primary">Next step</button>
+    </p>
 
-        <p margin>
-            <button (click)="openCreateOffer2Page()" ion-button block text-uppercase color="primary">Next step</button>
-        </p>
-
-    </form>
 </ion-content>
