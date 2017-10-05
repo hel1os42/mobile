@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Platform, NavController } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { StartPage } from '../pages/start/start';
 import { TabsPage } from "../pages/tabs/tabs";
 import { AuthService } from "../providers/auth.service";
 import { OnBoardingPage } from "../pages/onboarding/onboarding";
@@ -46,9 +45,7 @@ export class MyApp {
     rootPage: any;
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-        //private nav: NavController,
         private auth: AuthService,
-        private token: TokenService,
         private appMode: AppModeService) {
 
         platform.ready().then((resp) => {
