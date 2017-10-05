@@ -12,7 +12,7 @@ import * as moment from 'moment';
 })
 export class CreateOffer2Page {
 
-    offer = new OfferCreate;
+    offer: OfferCreate;
     isDetailedSettingsVisible: boolean = false;
     startDate: string;
     finishDate: string;
@@ -20,7 +20,7 @@ export class CreateOffer2Page {
     finishTime: string;
 
     constructor(private nav: NavController,
-        private navParams: NavParams) {
+                private navParams: NavParams) {
 
         this.offer = this.navParams.get('offer');
 

@@ -9,7 +9,7 @@ import { CreateOffer5Page } from '../create-offer-5/create-offer-5';
 })
 export class CreateOffer4Page {
 
-    offer = new OfferCreate;
+    offer: OfferCreate;
 
     constructor(private nav: NavController,
                 private navParams: NavParams) {
