@@ -10,15 +10,17 @@ import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
 export class CreateOffer3Page {
 
     offer: OfferCreate;
-
+    cities: string[] = ["Los-Angeles", "Texas", "Chicago", "Kyiv", "Berlin"];
+    city: string = "Los-Angeles";
+;
     constructor(private nav: NavController,
                 private navParams: NavParams) {
 
         this.offer = this.navParams.get('offer');
-
     }
 
     openCreateOffer4Page() {
+        this.offer.city = this.city;
         this.nav.push(CreateOffer4Page, { offer: this.offer });
     }
 
