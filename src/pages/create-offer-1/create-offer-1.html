@@ -72,11 +72,13 @@
     </div>
 
     <div class="block-lines">
-        <button padding-left ion-item class="bg-gray">
-        Set discount (%)
-        <ion-note item-end class="text-3E4B5D font-16 bold">10</ion-note>
-      </button>
-
+        <ion-item padding-left class="bg-gray">
+            <ion-label>Set discount (%)</ion-label>
+            <ion-select class="text-3E4B5D font-16 bold">
+                <ion-option value="m10" [selected]="true">10</ion-option>
+                <ion-option value="m20">20</ion-option>
+            </ion-select>
+        </ion-item>
     </div>
 
     <p margin>

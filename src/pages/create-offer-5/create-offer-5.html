@@ -26,14 +26,23 @@
 
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Rewards options</div>
       <div class="block-lines">
-          <button padding-left ion-item class="bg-gray margin-bottom-5">
-              Reward for redemption
-              <ion-note item-end class="text-3E4B5D font-16 bold">10</ion-note>
-          </button>
-          <button padding-left ion-item class="bg-gray margin-bottom-5">
-              Token reservation
-              <ion-note item-end class="text-3E4B5D font-16 bold">55</ion-note>
-          </button>
+          <ion-item padding-left class="bg-gray margin-bottom-5">
+              <ion-label>Reward for redemption</ion-label>
+              <ion-select class="text-3E4B5D font-16 bold">
+                  <ion-option value="num10" [selected]="true">10</ion-option>
+                  <ion-option value="num20">20</ion-option>
+                  <ion-option value="num30">33</ion-option>
+              </ion-select>
+          </ion-item>
+
+          <ion-item padding-left class="bg-gray">
+              <ion-label>Token reservation</ion-label>
+              <ion-select class="text-3E4B5D font-16 bold">
+                  <ion-option value="num55" [selected]="true">55</ion-option>
+                  <ion-option value="num65">65</ion-option>
+                  <ion-option value="num75">75</ion-option>
+              </ion-select>
+          </ion-item>
       </div>
 
       <div class="block-lines">
@@ -49,5 +58,5 @@
     <p margin>
       <button (click)="createOffer()" ion-button block text-uppercase color="primary">Create offer</button>
     </p>
-    
+
 </ion-content>

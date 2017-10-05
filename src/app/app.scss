@@ -148,6 +148,7 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-12{
   font-size: 12px;
+  font-size: 3vw;
 }
 
 .font-14{
@@ -1155,3 +1156,6 @@ ion-app.ios [margin-right], ion-app.ios [margin-right] .scroll-content{
     margin-right: 5%;
 }
 
+.bg-gray .select-text{
+    padding-right: 5vw;
+}
