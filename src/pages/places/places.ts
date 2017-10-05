@@ -37,9 +37,10 @@ export class PlacesPage {
     radius = 50000000;
     segment: string;
     distanceString: string;
+    search: string;
 
     @ViewChild(Content)
-    content:Content;
+    content: Content;
 
     constructor(
         private nav: NavController,
@@ -69,14 +70,14 @@ export class PlacesPage {
                 this.message = error.message;
             });
 
-        this.loadCompanies();
+        this.loadCompanies([this.selectedCategory.id]);
     }
 
-    ngAfterViewInit() {
-        this.content.ionScroll.subscribe(event => {
-            console.log('scrolling ', event);
-        });
-    }
+    // ngAfterViewInit() {
+    //     this.content.ionScroll.subscribe(event => {
+    //         console.log('scrolling', event);
+    //     });
+    // }
 
     ionSelected() {
         this.appMode.setHomeMode(false);
@@ -88,7 +89,7 @@ export class PlacesPage {
 
     selectCategory(category: OfferCategory) {
         this.selectedCategory = category;
-        this.loadCompanies();
+        this.loadCompanies([this.selectedCategory.id]);
     }
 
     generateBounds(markers): any {
@@ -112,8 +113,8 @@ export class PlacesPage {
         return undefined;
     }
 
-    loadCompanies() {
-        this.offers.getPlaces([this.selectedCategory.id], this.coords.lat, this.coords.lng, this.radius)
+    loadCompanies(categoryId) {
+        this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, this.search)
             .subscribe(companies => {
                 this.companies = companies.data;
 
@@ -150,9 +151,8 @@ export class PlacesPage {
     }
 
     getDistance(latitude: number, longitude: number) {
-        let distance: number;
         if (this.coords) {
-            distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
             this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
             return this.distanceString;
         };
@@ -163,8 +163,13 @@ export class PlacesPage {
         this.offers.getSubCategories(this.selectedCategory.id)
             .subscribe(category => {
                 this.subCategories = category.children;
-                let popover = this.popoverCtrl.create(PlacesPopover, {subCat: this.subCategories});
+                let popover = this.popoverCtrl.create(PlacesPopover, { subCat: this.subCategories });
                 popover.present();
+                popover.onDidDismiss((categoriesIds) => {
+                    if (categoriesIds.length !== 0) {
+                        this.loadCompanies(categoriesIds);
+                    }
+                })
             });
 
     }

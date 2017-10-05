@@ -15,9 +15,9 @@
     </a>
 
     <div class="block-checks">
-      <ion-item *ngFor="let category of categories" no-lines>
-          <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
-          <ion-checkbox (ionChange)="selectCategory(category.name)" item-end></ion-checkbox>
+      <ion-item *ngFor="let selectCategory of selectCategories" no-lines>
+          <ion-label margin-left item-end class="text-828282 font-16">{{ selectCategory.name }}</ion-label>
+          <ion-checkbox [(ngModel)]="selectCategory.isSelected" item-end></ion-checkbox>
         </ion-item>
     </div>
 </div>
@@ -25,7 +25,7 @@
     <ion-grid>
         <ion-row>
             <ion-col text-center class="margin-right-2proc">
-                <button (click)="back()" ion-button block color="secondary">Clear</button>
+                <button (click)="clear()" ion-button block color="secondary">Clear</button>
             </ion-col>
             <ion-col text-center class="margin-left-2proc">
                 <button (click)="close()" ion-button block color="primary">Done</button>

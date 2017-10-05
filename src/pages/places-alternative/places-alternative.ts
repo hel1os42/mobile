@@ -36,6 +36,7 @@ export class PlacesAlternativePage {
     radius = 50000000;
     segment: string;
     distanceString: string;
+    search: string;
 
     constructor(
         private nav: NavController,
@@ -103,7 +104,7 @@ export class PlacesAlternativePage {
     }
 
     loadCompanies() {
-        this.offers.getPlaces([this.selectedCategory.id], this.coords.lat, this.coords.lng, this.radius)
+        this.offers.getPlaces([this.selectedCategory.id], this.coords.lat, this.coords.lng, this.radius, this.search)
             .subscribe(companies => {
                 this.companies = companies.data;
 

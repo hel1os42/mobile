@@ -8,12 +8,11 @@ import { NavController, Slides } from "ionic-angular";
 export class TestPage {
 
     @ViewChild(Slides) slides: Slides;
-    
+
     constructor(
         private nav: NavController) {
 
-    }    
-
+    }
     slideNext() {
         this.slides.slideNext();
     }
