@@ -342,6 +342,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   min-width: 100%;
 }
 
+.width-88{
+    width: 88%;
+}
+
 .bg-gray{
   border-radius: 100px;
   border: 1px solid #E0E0E0;
@@ -679,6 +683,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .searchbar-ios .searchbar-input{
     height: 7vw;
     padding: 0 10vw;
+    font-size: 3.7vw;
 }
 
 .searchbar-ios .searchbar-search-icon{
@@ -945,9 +950,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .cover_block_btn .button{
-  width: 30px;
-  height: 30px;
+  width: 8vw;
+  height: 8vw;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.cover_block_btn .button img{
+    width: 55%;
+    height: auto;
 }
 
 .relative{
