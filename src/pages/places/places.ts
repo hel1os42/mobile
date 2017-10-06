@@ -118,7 +118,7 @@ export class PlacesPage {
     loadCompanies(categoryId, search) {
         this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search)
             .subscribe(companies => {
-                this.companies = companies.data;
+                this.companies = companies.data.filter(p => p. offers_count > 0);
                 this.mapsAPILoader.load()
                     .then(() => {
                         if (this.companies.length == 0 && this.coords) {
