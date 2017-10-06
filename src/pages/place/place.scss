@@ -25,7 +25,7 @@ page-place {
   }
 
   .top-block-nau.testimonials .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau.testimonials .item-ios ion-avatar img{
-    border-radius: 100px;
+    border-radius: 100vw;
   }
 
   .testimonials.list .item-block:last-child {
@@ -68,12 +68,6 @@ page-place {
     line-height: 34px;
   }
 
-    .text-overflow-35{
-        display: block;
-        max-height: 9vw;
-        height: inherit;
-    }
-
     .num_right {
         position: absolute;
         right: 0;
@@ -102,5 +96,9 @@ page-place {
 
     .segment-ios .segment-button:last-of-type {
         margin-left: 13%;
+    }
+
+    .item-block-nau.list.list-ios{
+        margin: 0;
     }
 }

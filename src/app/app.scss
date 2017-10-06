@@ -25,6 +25,11 @@
     src: url('../assets/fonts/OpenSans-Semibold.ttf');
 }
 
+@font-face {
+    font-family: 'OpenSansNauExtrabold';
+    src: url('../assets/fonts/OpenSans-ExtraBold.ttf');
+}
+
 .link-nau{
   font-style: normal;
   font-weight: bold;
@@ -122,6 +127,10 @@ ion-header ion-icon.back-button-icon.icon {
   font-weight: bold;
 }
 
+.extrabold{
+  font-family: 'OpenSansNauExtrabold';
+}
+
 .no-bold{
   font-weight: normal;
 }
@@ -154,10 +163,12 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-14{
   font-size: 14px;
+  font-size: 3.7vw;
 }
 
 .font-16{
   font-size: 16px;
+  font-size: 4.2vw;
 }
 
 .font-18{
@@ -171,6 +182,7 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-22{
   font-size: 22px;
+  font-size: 5.7vw;
 }
 
 .font-30{
@@ -185,6 +197,8 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-40{
   font-size: 40px;
+  font-size: 10vw;
+  line-height: 10vw;
 }
 
 .font-50{
@@ -756,6 +770,12 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   white-space: normal;
 }
 
+.wrap-no{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .italic{
   font-style: italic;
 }
@@ -1030,7 +1050,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .text-overflow-35{
-  height: 35px;
+  max-height: 8vw;
+  height: auto;
+  display: block;
   overflow: hidden;
 }
 
@@ -1200,5 +1222,10 @@ ion-app.ios [margin], ion-app.ios [margin] .scroll-content{
 }
 
 .item-block{
+    min-height: inherit;
+}
+
+.item-ios ion-avatar{
+    min-width: inherit;
     min-height: inherit;
 }
