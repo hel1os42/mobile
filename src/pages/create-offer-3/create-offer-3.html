@@ -29,7 +29,7 @@
           <ion-item padding-left class="bg-gray" detail-push>
               <ion-label>Your place</ion-label>
               <ion-select [(ngModel)]="city" interface="popover" class="text-3E4B5D font-16 bold">
-                  <ion-option *ngFor=" let city of cities " [value]="city">{{ city }}</ion-option>
+                  <ion-option (ionSelect)="toCity($event)" *ngFor=" let city of cities " [value]="city">{{ city }}</ion-option>
               </ion-select>
           </ion-item>
       </div>
@@ -37,6 +37,12 @@
       <div class="block-lines">
           <div class="text-4F4F4F font-14" text-uppercase>Setting map radius</div>
       </div>
+      <div class="block-map">
+            <div *ngIf="!coords.lat">Detecting your location...</div>
+            <agm-map *ngIf="coords.lat" [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+            </agm-map>
+            <div id="marker"></div>
+        </div>
 
     <p margin>
       <button (click)="openCreateOffer4Page()" ion-button block text-uppercase color="primary">Next step</button>
