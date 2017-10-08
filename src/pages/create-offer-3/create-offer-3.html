@@ -28,7 +28,7 @@
       <div class="block-lines">
           <ion-item padding-left class="bg-gray" detail-push>
               <ion-label>Your place</ion-label>
-              <ion-select [(ngModel)]="city" interface="popover" class="text-3E4B5D font-16 bold">
+              <ion-select [(ngModel)]="city" (ngModelChange)="toCity($event)" interface="popover" class="text-3E4B5D font-16 bold">
                   <ion-option (ionSelect)="toCity($event)" *ngFor=" let city of cities " [value]="city">{{ city }}</ion-option>
               </ion-select>
           </ion-item>

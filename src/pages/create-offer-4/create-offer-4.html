@@ -28,37 +28,29 @@
       <div class="block-lines">
           <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
               <ion-label>Overall</ion-label>
-              <ion-select class="text-3E4B5D font-16 bold">
-                  <ion-option value="un" [selected]="true">Unlimited</ion-option>
-                  <ion-option value="num1">1</ion-option>
-                  <ion-option value="num2">2</ion-option>
+              <ion-select  [(ngModel)]="maxForUs" class="text-3E4B5D font-16 bold">
+                  <ion-option *ngFor=" let maxForUs of maxForUser " [value]="maxForUs">{{ (maxForUs == 10000000) ? 'Unlimited' : maxForUs }}</ion-option>
               </ion-select>
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
               <ion-label>Daily</ion-label>
-              <ion-select class="text-3E4B5D font-16 bold">
-                  <ion-option value="un" [selected]="true">Unlimited</ion-option>
-                  <ion-option value="num1">1</ion-option>
-                  <ion-option value="num2">2</ion-option>
-              </ion-select>
+              <ion-select  [(ngModel)]="maxForUsPerDay" class="text-3E4B5D font-16 bold">
+                    <ion-option *ngFor=" let maxForUsPerDay of maxForUserPerDay " [value]="maxForUsPerDay">{{ (maxForUsPerDay == 10000000) ? 'Unlimited' : maxForUsPerDay }}</ion-option>
+                </ion-select>
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
               <ion-label>Weekly</ion-label>
               <ion-select class="text-3E4B5D font-16 bold">
                   <ion-option value="un" [selected]="true">Unlimited</ion-option>
-                  <ion-option value="num1">1</ion-option>
-                  <ion-option value="num2">2</ion-option>
               </ion-select>
           </ion-item>
 
-          <ion-item padding-left class="bg-gray">
+          <ion-item padding-left class="bg-gray" detail-push>
               <ion-label>Monthly</ion-label>
-              <ion-select class="text-3E4B5D font-16 bold" detail-push>
+              <ion-select class="text-3E4B5D font-16 bold">
                   <ion-option value="un" [selected]="true">Unlimited</ion-option>
-                  <ion-option value="num1">1</ion-option>
-                  <ion-option value="num2">2</ion-option>
               </ion-select>
           </ion-item>
       </div>

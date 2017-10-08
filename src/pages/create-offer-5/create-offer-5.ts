@@ -16,6 +16,8 @@ export class CreateOffer5Page {
     balance: number = 0;
     rewards: number[] = [10, 20, 30, 40, 50, 60, 70];
     reward: number = 10;
+    tokens: number[] = [15, 20 , 25, 30, 35, 40 , 45, 55];
+    token = 55;
 
     constructor(private nav: NavController,
         private navParams: NavParams,

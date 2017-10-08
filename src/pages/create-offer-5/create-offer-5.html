@@ -26,20 +26,18 @@
 
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Rewards options</div>
       <div class="block-lines">
-          <ion-item padding-left class="bg-gray margin-bottom-5">
+          <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
               <ion-label>Reward for redemption</ion-label>
               <ion-select [(ngModel)]="reward" interface="action-sheet" class="text-3E4B5D font-16 bold">
                   <ion-option *ngFor=" let reward of rewards " [value]="reward">{{ reward }}</ion-option>
               </ion-select>
           </ion-item>
 
-          <ion-item padding-left class="bg-gray">
+          <ion-item padding-left class="bg-gray" detail-push>
               <ion-label>Token reservation</ion-label>
-              <ion-select class="text-3E4B5D font-16 bold">
-                  <ion-option value="num55" [selected]="true">55</ion-option>
-                  <ion-option value="num65">65</ion-option>
-                  <ion-option value="num75">75</ion-option>
-              </ion-select>
+              <ion-select [(ngModel)]="token" interface="action-sheet" class="text-3E4B5D font-16 bold">
+                    <ion-option *ngFor=" let token of tokens " [value]="token">{{ token }}</ion-option>
+                </ion-select>
           </ion-item>
       </div>
 

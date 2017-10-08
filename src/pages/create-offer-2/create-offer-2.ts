@@ -30,12 +30,12 @@ export class CreateOffer2Page {
 
     openCreateOffer3Page() {
         this.offer.start_date = this.offer.start_date + " " + this.offer.start_time;
-        this.offer.start_date = moment(this.offer.start_date).format();
-        this.offer.start_time = moment(this.offer.start_date).format('HH:mm:ssZZ');
+        this.offer.start_date = moment(this.offer.start_date).format('YYYY-MM-DD HH:mm:ss.SSSSSSZZ');// to do (timezone from place)
+        this.offer.start_time = moment(this.offer.start_date).format('HH:mm:ss.SSSSSSZZ');
         this.offer.finish_date = this.offer.finish_date + " " + this.offer.finish_time;
-        this.offer.finish_date = moment(this.offer.finish_date).format();
-        this.offer.finish_time = moment(this.offer.finish_date).format('HH:mm:ssZZ');
-        
+        this.offer.finish_date = moment(this.offer.finish_date).format('YYYY-MM-DD HH:mm:ss.SSSSSSZZ');// to do (timezone from place)
+        this.offer.finish_time = moment(this.offer.finish_date).format('HH:mm:ss.SSSSSSZZ');
+       
         this.nav.push(CreateOffer3Page, { offer: this.offer });
 
     }

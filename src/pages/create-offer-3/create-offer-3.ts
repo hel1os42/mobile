@@ -18,11 +18,12 @@ export class CreateOffer3Page {
     coords: Coords = new Coords();
     message: string;
     cities: string[] = ['Moscow', 'Berlin', 'Manila', 'Bogotá', 'Kyiv'];
-    city: string = 'Manila';
-    country: string;
+    city: string;
+    country: string
     bounds;
-    address: string;
-    
+    // country: string;
+    // address: string;
+
     constructor(
         private nav: NavController,
         private navParams: NavParams,
@@ -61,19 +62,29 @@ export class CreateOffer3Page {
         let latlng = { lat: this.coords.lat, lng: this.coords.lng };
         geocoder.geocode({ 'location': latlng }, (results, status) => {
             if (status === 'OK') {
-                // this.city = results[1].address_components[0].long_name;
-                // this.country = results[3].formatted_address;
-                // this.address = results[0].formatted_address;
+                let timezone = results.timeZoneId;
+                results = results[0].address_components;
+                debugger
+                this.city = this.findResult(results, "locality");
+                this.country = this.findResult(results, "country");
                 this.changeDetectorRef.detectChanges();
                 console.log(results);
+                debugger
             }
         });
     }
 
+    findResult(results, name) {
+        let result = _.find(results, function (obj: any) {
+            return obj.types[0] == name && obj.types[1] == "political";
+        });
+        return result ? result.long_name : null;
+    };
+
     toCity($event) {
         let google = window['google'];
         let geocoder = new google.maps.Geocoder();
-        geocoder.geocode({'address': this.city}, (results, status) => {
+        geocoder.geocode({ 'address': this.city }, (results, status) => {
             if (status === 'OK') {
                 let result = results[0].geometry.bounds;
                 // this.coords.lng = (result.b.b + result.b.f) / 2;
@@ -81,40 +92,18 @@ export class CreateOffer3Page {
                 let bounds = new google.maps.LatLngBounds();
                 bounds.extend(new google.maps.LatLng(result.f.b, result.b.b));
                 bounds.extend(new google.maps.LatLng(result.f.f, result.b.f));
-                this.bounds = bounds; 
+                this.bounds = bounds;
             }
         });
 
     }
 
-    generateBounds(coords) {
-    
-    }
-
     openCreateOffer4Page() {
         this.offer.city = this.city;
-        this.offer.country;//to do
-
-        switch (this.city) {
-            case 'Moscow':
-                this.offer.country = 'Russia';
-                break;
-            case 'Berlin':
-                this.offer.country = 'Germany';
-                break;
-            case 'Manila':
-                this.offer.country = 'Philippines';
-                break;
-            case 'Bogotá':
-                this.offer.country = 'Colombia';
-                break;
-            case 'Kyiv':
-                this.offer.country = 'Ukraine';
-                break;
-        }
+        this.offer.country = this.country//to do
         this.offer.radius = 30000;//todo
-        this.offer.longitude = 50.1;//to do
-        this.offer.latitude = 30.1;//to do
+        this.offer.longitude = this.coords.lng;//to do(from place)
+        this.offer.latitude = this.coords.lat;//to do(from place)
         debugger
         this.nav.push(CreateOffer4Page, { offer: this.offer });
     }
