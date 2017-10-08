@@ -1,26 +1,38 @@
 page-create-advUser-profile {
   .cover{
-    background: lightgray;
-    width: 100%;
-    height: 55px;
-    position: relative;
-    margin-bottom: 40px;
+    background: linear-gradient(89.86deg, #FF5A00 0.03%, #FF8B10 99.98%);
   }
 
-  .btn-add-border-in{
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    -moz-outline-radius: 100px;
-    outline: 1px dashed #aea9a9;
-    outline-offset: -4px;
+  .cover_logo{
+      background-color: #fff;
+      background-image: url(../assets/img/create_advuser_profile/dotted.svg);
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: 80% 80%;
+      display: table;
   }
 
-  .btn-set{
-    border: 1px dashed black;
-    border-radius: 7px;
-    margin: auto;
+  .cover_logo span{
+      margin: 0 auto;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 4.5vw;
   }
+
+  .btn_right{
+      position: absolute;
+      right: 4.3vw;
+      bottom: 4.1vw;
+      background: #fff;
+      border-radius: 100vw;
+      height: 6vw;
+      color: #3E4B5D;
+  }
+
+    .padding-top-9vw{
+        padding-top: 9vw;
+    }
 
   .relative{
     position: relative;
@@ -30,5 +42,9 @@ page-create-advUser-profile {
     height: 200px;
     border-radius: 50px;
   }
+
+    .select-ios .select-icon{
+        display: none;
+    }
 
 }

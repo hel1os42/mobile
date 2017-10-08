@@ -35,7 +35,7 @@ export class CreateOffer2Page {
         this.offer.finish_date = this.offer.finish_date + " " + this.offer.finish_time;
         this.offer.finish_date = moment(this.offer.finish_date).format();
         this.offer.finish_time = moment(this.offer.finish_date).format('HH:mm:ssZZ');
-        
+
         this.nav.push(CreateOffer3Page, { offer: this.offer });
 
     }
