@@ -7,8 +7,6 @@ import { AppModeService } from '../../providers/appMode.service';
 import { PlacesPage } from '../places/places';
 import { SplashScreenPage } from '../splash-screen/splash-screen';
 import { Subscription } from 'rxjs';
-import { PlacesAlternativePage } from '../places-alternative/places-alternative';
-
 
 @Component({
     selector: 'page-tabs',
@@ -23,7 +21,6 @@ export class TabsPage {
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
     tab5Root = NotificationsPage;
-    tab6Root = PlacesAlternativePage;
 
     @ViewChild('tabs') tabs: Tabs;
 
