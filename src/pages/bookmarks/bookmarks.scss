@@ -21,15 +21,18 @@ page-bookmarks{
     line-height: 34px;
   }
 
-  .num_right {
-    position: absolute;
-    right: 10px;
-    bottom: 12px;
-  }
+    .item-block-nau .item-ios [item-right], .item-ios [item-end]{
+        width: 33px;
+    }
 
-  .star_right {
-    position: absolute;
-    right: 14px;
-    top: 17px;
-  }
+    .star_right {
+        position: absolute;
+        right: 3%;
+        top: 7%;
+        width: 5.3vw;
+    }
+
+    .text-overflow-35{
+        width: 93%;
+    }
 }

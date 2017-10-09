@@ -1,24 +1,24 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Your Account</ion-title>
-    <ion-buttons margin-right end>
+    <ion-buttons class="btn_header" margin-right end>
       <a (click)="openSettings()"><img src="assets/img/settings.svg"></a>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="padding-no">
-  <ion-item margin-top class="border-bottom-no top-block-nau" >
+  <ion-item class="border-bottom-no top-block-nau padding-top-5vw padding-left-5vw padding-right-5vw">
     <ion-avatar item-start>
-      <div margin-left class="user_level font-22 text-white" (click)="logout()">L{{user.level}}</div>
+      <div class="user_level font-22 text-white" (click)="logout()">L{{user.level}}</div>
     </ion-avatar>
     <div class="font-18 text-3E4B5D bold">{{ user?.name }}</div>
     <div class="font-14 text-828282">{{user.points}}</div>
-    <a (click)="openRewards()" item-end margin-right>
+    <a (click)="openRewards()" item-end>
       <a><img src="assets/img/user_profile/btn_icon1.svg"></a>
     </a>
-    <a (click)="openAchieve()" item-end margin-right>
-      <a><img src="assets/img/user_profile/btn_icon2.svg"></a>
+    <a (click)="openAchieve()" item-end>
+      <a class="margin-left-6vw"><img src="assets/img/user_profile/btn_icon2.svg"></a>
     </a>
   </ion-item>
 
@@ -76,7 +76,7 @@
                   <img src="assets/img/user_profile/slide1.svg">
                 </ion-avatar>
                 <div class="bold font-22 text-white">Get New Points</div>
-                <div text-wrap class="font-12 text-white">Get new offers nearby for you place and improve your level</div>
+                <div text-wrap class="font-12 text-white padding-top-3vw">Get new offers nearby for you place and improve your level</div>
               </ion-item>
             </ion-list>
           </ion-slide>
@@ -88,26 +88,26 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid text-center padding-top padding-bottom>
+  <ion-grid text-center padding-top padding-bottom class="block-icon-bottom">
     <ion-row>
       <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
         <div>
           <img src="assets/img/user_profile/offers.svg">
-          <div class="bold font-22 text-3E4B5D">{{ user.offers_count }}</div>
+          <div class="bold font-22 text-3E4B5D margin-bottom-2vw">{{ user.offers_count }}</div>
           <div text-uppercase class="text-3E4B5D font-12">offers</div>
         </div>
       </a>
       <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
         <div>
           <img src="assets/img/user_profile/nau.svg">
-          <div class="bold font-22 text-3E4B5D">{{ balance }}</div>
+          <div class="bold font-22 text-3E4B5D margin-bottom-2vw">{{ balance }}</div>
           <div text-uppercase class="text-3E4B5D font-12">nau</div>
         </div>
       </a>
       <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
         <div>
           <img src="assets/img/user_profile/users.svg">
-          <div class="bold font-22 text-3E4B5D">{{ user.referrals_count }}</div>
+          <div class="bold font-22 text-3E4B5D margin-bottom-2vw">{{ user.referrals_count }}</div>
           <div text-uppercase class="text-3E4B5D font-12">users</div>
         </div>
       </a>

@@ -173,6 +173,7 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-18{
   font-size: 18px;
+  font-size: 4.7vw;
 }
 
 .font-20{
@@ -382,7 +383,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   font-style: normal;
   font-weight: bold;
   line-height: normal;
-  font-size: 16px;
+  font-size: 4.3vw;
   text-transform: uppercase;
   color: #828282;
 }
@@ -437,7 +438,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .label-left{
-  padding: 3vw 5vw;
+  padding: 3vw 4vw 3vw 6vw;
   color: map-get($colors, dark);
 }
 
@@ -495,6 +496,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   font-size: 16px;
   font-size: 4vw;
   font-weight: normal;
+}
+
+.toolbar-ios {
+  padding: 0;
+  min-height: 14vw;
 }
 
 .toolbar-ios ion-title{
@@ -578,19 +584,36 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 /* BLOCK TOP & ITEMS SHADOW */
 .top-block-nau ion-avatar {
   border-radius: 0;
-  height: 40px;
+  height: 10vw;
 }
 
 .top-block-nau [item-end] {
   margin: 0;
 }
 
-.top-block-nau .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau .item-ios ion-avatar img{
+.item-block-nau .item-ios ion-avatar img{
   border-radius: 0;
   height: inherit;
   max-width: 23vw;
   max-height: 23vw;
   width: 23vw;
+}
+
+.top-block-nau.item-ios ion-avatar img{
+    border-radius: 0;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
+    width: inherit;
+}
+
+.top-block-nau.item-ios ion-avatar{
+    margin: 0 2.9vw 0 0;
+}
+
+.top-block-nau [item-end] a img{
+    height: 7.7vw;
+    width: auto;
 }
 
 .item-block-nau .item{
@@ -916,6 +939,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-bottom: 2.4%;
 }
 
+.margin-bottom-2vw{
+    margin-bottom: 2vw;
+}
+
 .margin-top-2proc{
     margin-top: 2%;
 }
@@ -924,8 +951,20 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-top: 6vw;
 }
 
+.margin-left-6vw{
+    margin-left: 6vw;
+}
+
 .margin-top-5vw{
     margin-top: 5vw;
+}
+
+.margin-top-1vw{
+    margin-top: 1vw;
+}
+
+.margin-bottom-3vw{
+    margin-bottom: 3vw;
 }
 
 .padding-10{
@@ -955,6 +994,26 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .padding-sign .fixed-content, .padding-sign .scroll-content{
     padding-left: 13.5vw;
     padding-right: 13.5vw;
+}
+
+.padding-top-5vw{
+    padding-top: 5vw;
+}
+
+.padding-top-3vw{
+    padding-top: 3vw;
+}
+
+.padding-bottom-5vw{
+    padding-bottom: 5vw;
+}
+
+.padding-left-5vw{
+    padding-left: 5vw;
+}
+
+.padding-right-5vw{
+    padding-right: 5vw;
 }
 
 /* HEADER. Page places */
@@ -1257,4 +1316,17 @@ ion-app.ios [margin], ion-app.ios [margin] .scroll-content{
 .text-input-ios{
     padding: 3vw 6.3vw 3vw 6.3vw;
     font-size: 4.2vw;
+}
+
+.item-ios, .button-ios{
+    font-size: 4.2vw;
+}
+
+.item-ios .item-button {
+    font-size: 2.6vw;
+}
+
+.btn_header img{
+    width: 7.2vw;
+    height: 7.2vw;
 }
