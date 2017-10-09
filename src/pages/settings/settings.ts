@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, Navbar, App, PopoverController } from 'ionic-angular';
+import { NavController, Navbar, App, PopoverController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 import { AgmCoreModule } from '@agm/core';
 import { LatLngLiteral } from "@agm/core";
@@ -36,7 +36,6 @@ export class SettingsPage {
     showEmail: boolean = false;
     nextPage: any;
 
-
     constructor(
         private nav: NavController,
         private profile: ProfileService,
@@ -45,9 +44,10 @@ export class SettingsPage {
         private app: App,
         private auth: AuthService,
         private popoverCtrl: PopoverController,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private navParams: NavParams) {
 
-        // this.isAdvMode = this.appMode.getAdvMode();
+        this.isAdvMode = this.navParams.get('isAdvMode');
 
         this.profile.get()
             .subscribe(resp => this.user = resp);
@@ -115,17 +115,14 @@ export class SettingsPage {
         this.profile.put(this.user)
             .subscribe(resp => {
                 if (!this.isChangeMode) {
-                    debugger
                     this.nav.pop();
                 }
                 else {
                     if (this.isAdvMode) {
-                        debugger
-                        this.nav.setRoot(OnBoardingPage, {isAdvMode: true});
+                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: this.nextPage});
                     }
                     else {
-                        this.nav.setRoot(TabsPage);
-                        debugger
+                        this.app.getRootNav().push(TabsPage);
                     }
                     
                 }
