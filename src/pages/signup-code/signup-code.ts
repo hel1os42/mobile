@@ -33,7 +33,7 @@ export class SignUpCodePage {
                     })
                     .subscribe(resp => {
                         this.appMode.setHomeMode(false);
-                        this.nav.setRoot(TabsPage)
+                        this.nav.setRoot(CreateUserProfilePage);
                     })
               })
     }

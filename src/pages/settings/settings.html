@@ -30,7 +30,7 @@
         </ion-col>
         <ion-col>
           <ion-item no-lines>
-            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isVisibleRedeemButton"></ion-toggle>
+            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -41,7 +41,7 @@
     </ion-grid>
   </div>
 
-    <p *ngIf="toggleAdvMode()" margin>
+    <p *ngIf="isAdvMode" margin>
         <button (click)="openAdvRedeem()" color="primary" ion-button block>Redeem offer</button>
     </p>
 

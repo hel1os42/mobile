@@ -34,7 +34,7 @@ export class LoginPage  {
             .subscribe(
                 resp => {
                     this.appMode.setHomeMode(true);  
-                    this.nav.setRoot(TabsPage);
+                    this.nav.setRoot(TabsPage, {index: 0});
                 }
             );
     }

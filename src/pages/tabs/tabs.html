@@ -1,4 +1,4 @@
-<ion-tabs #tabs (ionChange)="tabChange()">
+<ion-tabs [selectedIndex]="selectedTabIndex" #tabs (ionChange)="tabChange()">
     <ion-tab [root]="tab1Root"></ion-tab>
     <ion-tab [root]="tab2Root"></ion-tab>
     <ion-tab [root]="tab3Root"></ion-tab>

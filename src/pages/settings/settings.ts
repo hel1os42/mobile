@@ -5,7 +5,6 @@ import { AgmCoreModule } from '@agm/core';
 import { LatLngLiteral } from "@agm/core";
 import { User } from "../../models/user";
 import { ProfileService } from "../../providers/profile.service";
-import { CreateAdvUserProfilePage } from "../create-advUser-profile/create-advUser-profile";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
 import { TabsPage } from "../tabs/tabs";
@@ -15,6 +14,7 @@ import { SettingsPopover } from './settings.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
+import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 
 
 @Component({
@@ -28,10 +28,7 @@ export class SettingsPage {
     radiuses = [100, 150, 200, 250, 500, 1000];
     isAccountsChoiceVisible: boolean = false;
     isSelectRadiusVisible: boolean = false;
-    isAdvMode: boolean;
-    isVisibleModal: boolean = false;
-    isVisibleRedeemButton: boolean = false;
-    isToggled: boolean = false;
+    isAdvMode = false;
     showData: boolean = false;
     showPhone: boolean = false;
     showEmail: boolean = false;
@@ -47,7 +44,7 @@ export class SettingsPage {
         private popoverCtrl: PopoverController,
         private changeDetectorRef: ChangeDetectorRef) {
 
-        this.isAdvMode = this.appMode.getAdvMode();
+        // this.isAdvMode = this.appMode.getAdvMode();
 
         this.profile.get()
             .subscribe(resp => this.user = resp);
@@ -85,14 +82,26 @@ export class SettingsPage {
     }
 
     toggleAdvMode() {
-        // this.isToggled = true;
-        // this.appMode.setAdvMode(this.isAdvMode);
-        // this.isVisibleModal = this.isAdvMode;
-        // if (this.isAdvMode) {
-        //     let popover = this.popoverCtrl.create(SettingsPopover);
-        //     popover.present();
-        //}
-        return this.isVisibleRedeemButton;
+        this.appMode.setAdvMode(this.isAdvMode);
+        let page: any;
+        this.profile.getAdvert()
+            .subscribe(
+            resp => {
+                page = AdvTabsPage;
+                this.popoverShow(page);
+            },
+            errResp => {
+                page = CreateAdvUserProfilePage;
+                this.popoverShow(page);
+            })
+        return this.isAdvMode;
+    }
+
+    popoverShow(page) {
+        if (this.isAdvMode) {
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: page });
+            popover.present();
+        }
     }
 
     saveProfile() {
@@ -112,12 +121,8 @@ export class SettingsPage {
         this.isSelectRadiusVisible = !this.isSelectRadiusVisible;
     }
 
-    closeModal() {
-        this.isVisibleModal = !this.isVisibleModal;
-    }
-
     openChangePhone(user: User) {
-        this.nav.push(SettingsChangePhonePage, { user: this.user});
+        this.nav.push(SettingsChangePhonePage, { user: this.user });
     }
 
     openAdvRedeem() {
