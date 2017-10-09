@@ -28,10 +28,7 @@ export class SettingsPage {
     radiuses = [100, 150, 200, 250, 500, 1000];
     isAccountsChoiceVisible: boolean = false;
     isSelectRadiusVisible: boolean = false;
-    isAdvMode: boolean;
-    isVisibleModal: boolean = false;
-    isVisibleRedeemButton: boolean = false;
-    isToggled: boolean = false;
+    isAdvMode = false;
     showData: boolean = false;
     showPhone: boolean = false;
     showEmail: boolean = false;
@@ -47,7 +44,7 @@ export class SettingsPage {
         private popoverCtrl: PopoverController,
         private changeDetectorRef: ChangeDetectorRef) {
 
-        this.isAdvMode = this.appMode.getAdvMode();
+        // this.isAdvMode = this.appMode.getAdvMode();
 
         this.profile.get()
             .subscribe(resp => this.user = resp);
@@ -85,14 +82,12 @@ export class SettingsPage {
     }
 
     toggleAdvMode() {
-        // this.isToggled = true;
-        // this.appMode.setAdvMode(this.isAdvMode);
-        // this.isVisibleModal = this.isAdvMode;
-        // if (this.isAdvMode) {
-        //     let popover = this.popoverCtrl.create(SettingsPopover);
-        //     popover.present();
-        //}
-        return this.isVisibleRedeemButton;
+        this.appMode.setAdvMode(this.isAdvMode);
+        if (this.isAdvMode) {
+            let popover = this.popoverCtrl.create(SettingsPopover);
+            popover.present();
+        }
+        return this.isAdvMode;
     }
 
     saveProfile() {
@@ -112,12 +107,8 @@ export class SettingsPage {
         this.isSelectRadiusVisible = !this.isSelectRadiusVisible;
     }
 
-    closeModal() {
-        this.isVisibleModal = !this.isVisibleModal;
-    }
-
     openChangePhone(user: User) {
-        this.nav.push(SettingsChangePhonePage, { user: this.user});
+        this.nav.push(SettingsChangePhonePage, { user: this.user });
     }
 
     openAdvRedeem() {
