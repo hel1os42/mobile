@@ -13,22 +13,32 @@ export class SettingsChangePhonePage {
     user = new User;
     visibleChangePhone: boolean = true;
     otp: string;
+    phone: string
 
     constructor(private nav: NavController,
-                private navParams: NavParams,
-                private auth: AuthService,
-                private profile: ProfileService) {
-                
-                this.user = this.navParams.get('user');
+        private navParams: NavParams,
+        private auth: AuthService,
+        private profile: ProfileService) {
+
+        this.user = this.navParams.get('user');
     }
 
     toggleChangePhone() {
         this.visibleChangePhone = false;
-        this.otp = this.auth.getOtp(this.user.phone);
+        this.otp = this.auth.getOtp(this.phone);
     }
 
     changePhone() {
-        this.profile.put(this.user);
-        this.nav.pop();
+        if (this.user.phone == this.phone) {
+            this.nav.pop();
+        }
+        else {
+            this.user.phone = this.phone;
+            this.profile.put(this.user)
+                .subscribe(
+                    resp => this.nav.pop(),
+                    errResp => this.visibleChangePhone = true);
+        }
+ 
     }
 }
