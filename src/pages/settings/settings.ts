@@ -15,6 +15,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
 import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
+import { OnBoardingPage } from '../onboarding/onboarding';
 
 
 @Component({
@@ -29,9 +30,11 @@ export class SettingsPage {
     isAccountsChoiceVisible: boolean = false;
     isSelectRadiusVisible: boolean = false;
     isAdvMode = false;
+    isChangeMode = false;
     showData: boolean = false;
     showPhone: boolean = false;
     showEmail: boolean = false;
+    nextPage: any;
 
 
     constructor(
@@ -59,6 +62,11 @@ export class SettingsPage {
             .catch((error) => {
                 this.message = error.message;
             });
+
+        this.profile.getAdvert()
+            .subscribe(
+            resp => this.nextPage = AdvTabsPage,
+            errResp => this.nextPage = CreateAdvUserProfilePage)
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -82,18 +90,13 @@ export class SettingsPage {
     }
 
     toggleAdvMode() {
-        this.appMode.setAdvMode(this.isAdvMode);
-        let page: any;
-        this.profile.getAdvert()
-            .subscribe(
-            resp => {
-                page = AdvTabsPage;
-                this.popoverShow(page);
-            },
-            errResp => {
-                page = CreateAdvUserProfilePage;
-                this.popoverShow(page);
-            })
+        this.isChangeMode = !this.isChangeMode;
+        if (this.nextPage == CreateAdvUserProfilePage) {
+            this.popoverShow(this.nextPage);
+        }
+        else {
+            this.popoverShow(this.nextPage);
+        }
         return this.isAdvMode;
     }
 
@@ -105,12 +108,28 @@ export class SettingsPage {
     }
 
     saveProfile() {
+        this.appMode.setAdvMode(this.isAdvMode);
+
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
-
         this.profile.put(this.user)
-            .subscribe(resp => this.nav.pop());
-
+            .subscribe(resp => {
+                if (!this.isChangeMode) {
+                    debugger
+                    this.nav.pop();
+                }
+                else {
+                    if (this.isAdvMode) {
+                        debugger
+                        this.nav.setRoot(OnBoardingPage, {isAdvMode: true});
+                    }
+                    else {
+                        this.nav.setRoot(TabsPage);
+                        debugger
+                    }
+                    
+                }
+            });
     }
 
     toggleAccountsChoiceVisible() {
