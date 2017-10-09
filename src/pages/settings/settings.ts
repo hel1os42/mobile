@@ -5,7 +5,6 @@ import { AgmCoreModule } from '@agm/core';
 import { LatLngLiteral } from "@agm/core";
 import { User } from "../../models/user";
 import { ProfileService } from "../../providers/profile.service";
-import { CreateAdvUserProfilePage } from "../create-advUser-profile/create-advUser-profile";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
 import { TabsPage } from "../tabs/tabs";
@@ -15,6 +14,7 @@ import { SettingsPopover } from './settings.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
+import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 
 
 @Component({
@@ -83,11 +83,25 @@ export class SettingsPage {
 
     toggleAdvMode() {
         this.appMode.setAdvMode(this.isAdvMode);
+        let page: any;
+        this.profile.getAdvert()
+            .subscribe(
+            resp => {
+                page = AdvTabsPage;
+                this.popoverShow(page);
+            },
+            errResp => {
+                page = CreateAdvUserProfilePage;
+                this.popoverShow(page);
+            })
+        return this.isAdvMode;
+    }
+
+    popoverShow(page) {
         if (this.isAdvMode) {
-            let popover = this.popoverCtrl.create(SettingsPopover);
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: page });
             popover.present();
         }
-        return this.isAdvMode;
     }
 
     saveProfile() {
