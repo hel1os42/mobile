@@ -22,6 +22,29 @@ page-user-profile{
   .block-slider{
     background: #3E4B5D;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    height: 31.4vw;
+  }
+
+  .block-slider .row{
+    height: 100%;
+  }
+
+  .block-slider .item-ios ion-avatar img{
+    height: 14.5vw;
+    width: auto;
+    padding-right: 10vw;
+    padding-left: 7vw;
+    border-radius: 0;
+  }
+
+  .block-slider ion-list {
+    padding: 2vw;
+  }
+
+  .block-icon-bottom  img {
+    height: 9.4vw;
+    width: auto;
+    margin-bottom: 3vw;
   }
 
   .item-block {
@@ -42,9 +65,11 @@ page-user-profile{
   }
 
   .user_level{
-    background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
-    border-radius: 100px;
-    padding: 8px;
+      background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
+      border-radius: 100vw;
+      padding: 1.8vw;
+      height: 10vw;
+      width: 10vw;
   }
 
   /* CIRCLE */
