@@ -1,38 +1,45 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Create account Adv</ion-title>
+    <ion-title>Create account</ion-title>
   </ion-navbar>
+    <ion-list class="margin-0">
+        <div class="cover">
+            <!-- <img class="cover_logo" [src]="company.picture_url"> -->
+            <div class="cover_logo">
+                <span text-uppercase class="font-12 semibold">Add<br>logo</span>
+            </div>
+            <button class="btn_right font-12" text-uppercase ion-button>Set image</button>
+        </div>
+    </ion-list>
 </ion-header>
 
 <ion-content class="padding-no">
-  <ion-grid class="cover">
-    <ion-row>
-      <ion-col col-6 class="relative">
-        <button class="btn-add-border-in" ion-fab color="light"><ion-icon name="md-add" class="text-black"></ion-icon></button>
-      </ion-col>
-      <ion-col col-6>
-        <button class="btn-set" ion-button outline color="dark">Set Cover</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <div class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw" text-uppercase margin-top margin-left margin-right>Add company name & descriptions</div>
+    <div class="block-lines">
+        <ion-item no-lines>
+            <ion-input class="bg-gray" type="text" placeholder="Company name"></ion-input>
+        </ion-item>
 
-  <ion-list padding-left padding-right>
-    <ion-item>
-      <ion-input class="font-150" placeholder="Company name" type="text" value=""></ion-input>
-    </ion-item>
+        <ion-item no-lines margin-top>
+            <ion-textarea class="bg-gray-radius-small" placeholder="Company description"></ion-textarea>
+        </ion-item>
+    </div>
 
-    <ion-item>
-      <ion-input placeholder="Add company description here" type="text"></ion-input>
-    </ion-item>
+    <div class="block-lines">
+        <div class="text-4F4F4F font-14" text-uppercase>Category & type your place</div>
+    </div>
 
-    <ion-item class="border-bottom-no" padding-top>
-      <ion-label>Choose category</ion-label>
-      <ion-select [(ngModel)]="selectedCategory" interface="action-sheet" class="bg-gray width-100" placeholder="Choose category">
-        <ion-option *ngFor="let category of categories" [value]="category">{{ category.name }}</ion-option>
-      </ion-select>
-    </ion-item>    
+    <div class="block-lines">
+        <a ion-item detail-push class="bg-gray">
+            <ion-select [(ngModel)]="selectedCategory" placeholder="Choose category" interface="action-sheet">
+                <ion-option *ngFor="let category of categories" [value]="category">{{ category.name }}</ion-option>
+            </ion-select>
+        </a>
+    </div>
 
-    <p padding class="font-75">Choose your location:</p>
+    <div class="block-lines">
+        <div class="text-4F4F4F font-14" text-uppercase>Choose your office location</div>
+    </div>
 
     <div padding-bottom>
         <div *ngIf="!coords.lat" >Detecting your location...</div>
@@ -41,8 +48,6 @@
         </agm-map>
     </div>
 
-    <button (click)="openAdvUserProfile()" ion-button full margin-top>Create account</button>
-
-  </ion-list>
+    <button (click)="openAdvUserProfile()" ion-button full margin-top color="primary">Create account</button>
 
 </ion-content>
