@@ -1,0 +1,23 @@
+<div margin class="modal_content">
+
+    <div text-uppercase text-center class="font-16 text-#4F4F4F semibold">Category</div>
+
+    <div class="block-checks">
+      <ion-item *ngFor="let selectCategory of selectCategories" no-lines>
+          <ion-label margin-left item-end class="text-828282 font-16">Food & Drinks</ion-label>
+          <ion-checkbox item-end></ion-checkbox>
+        </ion-item>
+    </div>
+</div>
+<div class="footer_btn" padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center class="margin-right-2proc">
+                <button (click)="clear()" ion-button block color="secondary">Cancel</button>
+            </ion-col>
+            <ion-col text-center class="margin-left-2proc">
+                <button (click)="close()" ion-button block color="primary">Done</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</div>

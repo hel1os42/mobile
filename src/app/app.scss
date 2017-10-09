@@ -179,6 +179,7 @@ ion-header ion-icon.back-button-icon.icon {
 .font-20{
   font-size: 20px;
     font-size: 5vw;
+    line-height: 5vw;
 }
 
 .font-22{
@@ -619,7 +620,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .item-block-nau .item{
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   margin-bottom: 3%;
-  padding: 2vw;
+  padding: 4vw;
 }
 
 .item-block-nau .input-wrapper .label-ios, .item-block-nau-slider .input-wrapper .label-ios{
@@ -959,6 +960,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-top: 5vw;
 }
 
+.margin-top-3vw{
+    margin-top: 3vw;
+}
+
 .margin-top-1vw{
     margin-top: 1vw;
 }
@@ -1172,7 +1177,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .item-ios[detail-push] .item-inner{
-    background-position: right 3px center;
+    background-position: right 3vw center;
 }
 
 .item-ios[detail-push]{
@@ -1180,7 +1185,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .item-ios[detail-push] .item-inner .input-wrapper{
-    padding-right: 15px;
+    padding-right: 5vw;
 }
 
 a:active{
