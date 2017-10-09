@@ -9,10 +9,9 @@
   <div text-center class="title-big-sign">Phone Number</div>
   <div text-center class="margin-top-6vw font-75 text-4F4F4F">Please choose your country phone code<br>and fill your phone number</div>
   <ion-item class="border-bottom-no margin-top-6vw">
-    <ion-select class="bg-gray-left" placeholder="+380" [(ngModel)]="numCode" interface="popover">
-      <ion-option selected value="+380">+380</ion-option>
-      <ion-option value="+1">+1</ion-option>
-    </ion-select>
+    <ion-select class="bg-gray-left" [(ngModel)]="numCode" interface="popover">
+        <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
+      </ion-select>
     <ion-input class="bg-gray-right" type="tel" placeholder="123-45-67" [(ngModel)] ="phone"></ion-input>
   </ion-item>
 
