@@ -33,15 +33,15 @@ page-place {
   }
 
   .footer.footer-ios {
-    min-height: inherit;
     box-shadow: 0px -6px 18px rgba(0, 0, 0, 0.12);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 16px;
-    padding-right: 16px;
     background: #fff;
-    margin-bottom: 49px;
-    border-bottom: 1px solid #BDBDBD
+    border-bottom: 1px solid #BDBDBD;
+    padding-top: 3%;
+    padding-bottom: 17%;
+    height: 17vw;
+    margin-bottom: 13%;
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
 
   .item-ios.item-block .item-inner{
@@ -54,10 +54,10 @@ page-place {
 
   .btn_check{
     background: linear-gradient(0deg, #FF5A00 0%, #FF8A23 100%);
-    border-radius: 100px;
-    padding: 11px;
-    height: 42px;
-    width: 42px;
+    border-radius: 100vw;
+    padding: 2.7vw;
+    height: 10.4vw;
+    width: 10.4vw;
   }
 
   .tabbar_testimonials{
