@@ -17,6 +17,7 @@ page-onboarding {
 
   .title-big-sign{
     color: #fff;
+    margin-bottom: 9vw;
   }
 
   .skip{
@@ -41,13 +42,12 @@ page-onboarding {
   }
 
   .slide-title-img{
-    height: 35px;
-    margin-bottom: 20%;
+    height: 10.2vw;
+    margin-bottom: 23vw;
   }
 
   .slide-title-img img{
-    margin-left: 7px;
-    margin-right: 7px;
+      margin-left: 5vw;
   }
 
   .footer{
@@ -57,4 +57,10 @@ page-onboarding {
   .scroll-content {
     overflow-y: hidden !important;
  }
+
+    .footer.footer-ios {
+        padding-left: 13.5vw;
+        padding-right: 13.5vw;
+        padding-bottom: 7vw;
+    }
 }
