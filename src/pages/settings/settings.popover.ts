@@ -21,6 +21,6 @@ export class SettingsPopover {
 
     close() {
         this.viewCtrl.dismiss();
-            this.app.getRootNav().setRoot(OnBoardingPage, {page: this.page, isAdvMode: true});
+            this.app.getRootNav().setRoot(OnBoardingPage, {page: this.page, isAdvMode: true, isAdvOnBoarding: true});
     }
 }

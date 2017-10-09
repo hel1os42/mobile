@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { AppModeService } from '../../providers/appMode.service';
+import { NavController, NavParams } from 'ionic-angular';
 import { StartPage } from '../start/start';
 
 @Component({
@@ -8,17 +7,23 @@ import { StartPage } from '../start/start';
     templateUrl: 'onboarding.html'
 })
 export class OnBoardingPage {
-    code: string;
     
+    isAdvMode: boolean;
+    isAdvOnBoarding: boolean;
 
     constructor(
         private nav: NavController,
-        private appMode: AppModeService) {
+        private navParams: NavParams) {
+
+        this.isAdvMode = this.navParams.get('isAdvMode');
+        this.isAdvOnBoarding = this.navParams.get('isAdvOnBoarding');
+        
     }
 
     skip() {
         //this.appMode.setOnboardingVisible();
-        this.nav.setRoot(StartPage);
+        this.nav.setRoot(this.isAdvMode ?  this.navParams.get('page') : StartPage);
+        debugger
     }
 
 }

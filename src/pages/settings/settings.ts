@@ -119,7 +119,7 @@ export class SettingsPage {
                 }
                 else {
                     if (this.isAdvMode) {
-                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: this.nextPage});
+                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true});
                     }
                     else {
                         this.app.getRootNav().push(TabsPage);
