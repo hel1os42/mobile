@@ -8,12 +8,11 @@ page-notifications{
   }
 
   .btn_next.item-button{
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 17px;
-    padding-right: 17px;
+    padding-left: 7vw;
+    padding-right: 7vw;
     background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
-    border-radius: 12px;
+    border-radius: 2.5vw;
+    height: 7.2vw;
   }
 
   .item-ios.item-block .item-inner{
@@ -27,5 +26,13 @@ page-notifications{
 
     .item-block-nau.list.list-ios {
         margin: 0;
+    }
+
+    .searchbar-ios{
+        width: 100%;
+    }
+
+    .btn_search_settings img{
+        right: 3vw;
     }
 }

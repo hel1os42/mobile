@@ -1,20 +1,25 @@
 page-place {
 
   .plus{
-    padding-top: 10px;
-    padding-left: 7px;
-    padding-right: 7px;
+      padding-top: 2vw;
+      padding-left: 2vw;
+      padding-right: 2vw;
   }
 
-  .btn_transfer.item-button{
-    margin-top: 5px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 17px;
-    padding-right: 17px;
-    background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
-    border-radius: 12px;
-  }
+    .gift{
+        height: 8.4vw;
+        width: auto;
+        margin-top: 0.5vw;
+    }
+
+    .btn_transfer.item-button{
+        height: 7.2vw;
+        margin: 0;
+        padding-left: 4.3vw;
+        padding-right: 4.3vw;
+        margin-top: 2vw;
+        background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+    }
 
   .cover{
     background-image: url(../assets/img/place/header.png);
