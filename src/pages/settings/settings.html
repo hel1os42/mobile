@@ -10,13 +10,13 @@
 </ion-header>
 
 <ion-content class="padding-no">
-  <div margin-top class="margin-bottom-10">
-    <a (click)="toggleAccountsChoiceVisible()">
-      <ion-icon class="text-828282" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
-      <ion-icon class="text-828282" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
-      <div text-uppercase padding-left class="select font-14 text-4F4F4F">
-        Choose your account <span text-lowercase>(hide)</span>
-      </div>
+  <div padding-top class="block-lines-bottom-left-right">
+    <a class="select" (click)="toggleAccountsChoiceVisible()">
+        <span text-uppercase class="font-14 text-4F4F4F">
+            Choose your account <span text-lowercase>(hide)</span>
+        </span>
+      <ion-icon class="text-828282 icon" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
+      <ion-icon class="text-828282 icon" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
     </a>
   </div>
 
@@ -26,7 +26,7 @@
         <ion-col>
           <img margin-top src="assets/img/settings/user.svg">
           <!-- <img margin-top [src]="user.picture_url"> -->
-          <p class="font-15 text-3E4B5D bold">Client</p>
+          <div class="font-16 text-3E4B5D bold">Client</div>
         </ion-col>
         <ion-col>
           <ion-item no-lines>
@@ -35,7 +35,7 @@
         </ion-col>
         <ion-col>
           <img margin-top src="assets/img/settings/adv.svg">
-          <p class="font-16 text-BDBDBD bold">Advertiser</p>
+          <div class="font-16 text-BDBDBD bold">Advertaiser</div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -102,7 +102,7 @@
     </ion-item>
   </div>
 
-  <div text-uppercase margin>
+  <div class="block-lines">
     <a class="text-4F4F4F font-14" (click)="toggleSelectRadiusVisible()">Set radius for yours offers interest</a>
   </div>
   <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-bottom padding-left padding-right class="border-bottom-no">

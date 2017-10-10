@@ -151,38 +151,38 @@ ion-header ion-icon.back-button-icon.icon {
     font-size: 0;
 }
 
-.font-10{
+.font-10, button.font-10{
   font-size: 10px;
-    font-size: 2.5vw;
+  font-size: 2.5vw;
 }
 
-.font-12{
+.font-12, button.font-12{
   font-size: 12px;
   font-size: 3vw;
 }
 
-.font-14{
+.font-14, button.font-14{
   font-size: 14px;
   font-size: 3.7vw;
 }
 
-.font-16{
+.font-16, button.font-16{
   font-size: 16px;
   font-size: 4.2vw;
 }
 
-.font-18{
+.font-18, button.font-18{
   font-size: 18px;
   font-size: 4.7vw;
 }
 
-.font-20{
+.font-20, button.font-20{
   font-size: 20px;
     font-size: 5vw;
     line-height: 5vw;
 }
 
-.font-22{
+.font-22, button.font-22{
   font-size: 22px;
   font-size: 5.7vw;
 }
@@ -209,6 +209,7 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-65{
   font-size: 11px;
+  font-size: 2.7vw;
 }
 
 .font-75{
@@ -363,8 +364,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .bg-gray{
-  border-radius: 100px;
+  border-radius: 100vw;
   border: 1px solid #E0E0E0;
+  min-height: 11.8vw;
+}
+
+.bg-gray.item-block{
+    min-height: 11.8vw;
 }
 
 .bg-gray-radius-small{
@@ -562,7 +568,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .margin-bottom-small{
-  margin-bottom: 5px;
+  margin-bottom: 2.2vw;
 }
 
 .block-lines{
@@ -575,10 +581,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .block-lines-bottom-left-right{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-top: 4vw;
+  padding-bottom: 4vw;
+  padding-left: 4.3vw;
+  padding-right: 4.3vw;
   border-bottom: 1px solid #F2F2F2;
 }
 
@@ -676,7 +682,6 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .grid-tabs-splash .col {
     display: table-cell;
-    width: auto;
     width: 25vw;
 }
 
@@ -705,10 +710,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .searchbar-ios{
   background: #fff;
   border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  min-height: 42px;
+  border-radius: 2vw;
   width: 77vw;
   height: 10vw;
+  min-height: inherit;
 }
 
 .searchbar-ios.searchbar-left-aligned .searchbar-input {
@@ -940,6 +945,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-bottom: 2.4%;
 }
 
+.margin-bottom-1vw{
+    margin-bottom: 1vw;
+}
+
 .margin-bottom-2vw{
     margin-bottom: 2vw;
 }
@@ -968,6 +977,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-top: 1vw;
 }
 
+.margin-top-14vw{
+    margin-top: 14vw;
+}
+
 .margin-bottom-3vw{
     margin-bottom: 3vw;
 }
@@ -982,6 +995,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .padding-bottom-10{
     padding-bottom: 10px;
+}
+
+.padding-bottom-5vw{
+    padding-bottom: 5vw;
 }
 
 .padding-left-10{
@@ -1007,6 +1024,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .padding-top-3vw{
     padding-top: 3vw;
+}
+
+.padding-top-1vw{
+    padding-top: 1vw;
+}
+
+.padding-top-8vw{
+    padding-top: 8vw;
 }
 
 .padding-bottom-5vw{
@@ -1037,7 +1062,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   bottom: -11vw;
   width: 22vw;
   height: 22vw;
-  border-radius: 100px;
+  border-radius: 100vw;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
@@ -1116,6 +1141,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
+  width: 5.1vw;
+  height: 3.9vw;
 }
 
 .checkbox-ios .checkbox-icon.checkbox-checked {
@@ -1125,6 +1152,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
+  width: 5.1vw;
+  height: 3.9vw;
 }
 
 .text-overflow-35{
@@ -1210,12 +1239,9 @@ a:active{
     overflow: scroll;
 }
 
-.block-lines .item:last-child{
+.block-lines .item:last-child, .block-lines-bottom-left-right .item:last-child{
     margin-bottom: 0;
-}
-
-.searchbar-right-block{
-
+    font-size: 0;
 }
 
 .btn_map1{
@@ -1329,9 +1355,27 @@ ion-app.ios [margin], ion-app.ios [margin] .scroll-content{
 
 .item-ios .item-button {
     font-size: 2.6vw;
+    line-height: 2.6vw;
 }
 
 .btn_header img{
     width: 7.2vw;
     height: 7.2vw;
+}
+
+.back-button-ios {
+    margin-left: 3vw;
+}
+
+textarea.text-input {
+    height: 23.7vw;
+}
+
+.table{
+    display: table;
+}
+
+.table-cell{
+    display: table-cell;
+    vertical-align: middle;
 }
