@@ -8,11 +8,17 @@ import { ViewController, App, NavParams } from 'ionic-angular';
 
 export class CreateAdvUserProfilePopover {
 
-    page: any;
+    rootCategories: any[];
 
     constructor(private viewCtrl: ViewController,
                 private app: App,
                 private navParams: NavParams) { 
       
+    // this.rootCategories = this.navParams.get('root.Categories');
+    
     }
+
+    close() {
+        this.viewCtrl.dismiss();
+    } 
 }
