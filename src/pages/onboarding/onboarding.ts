@@ -23,7 +23,6 @@ export class OnBoardingPage {
     skip() {
         //this.appMode.setOnboardingVisible();
         this.nav.setRoot(this.isAdvMode ?  this.navParams.get('page') : StartPage);
-        debugger
     }
 
 }
