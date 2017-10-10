@@ -5,6 +5,7 @@ import { AdvUserProfilePage } from "../adv-user-profile/adv-user-profile";
 import { NavController } from "ionic-angular";
 import { OfferCategory } from '../../models/offerCategory';
 import { ApiService } from '../../providers/api.service';
+import {  CreateAdvUserProfilePopover } from './create-advUser-profile.popover';
 import * as _ from 'lodash';
 
 @Component({
@@ -16,7 +17,7 @@ export class CreateAdvUserProfilePage {
     coords: Coords = new Coords();
     message: string;
     selectedCategory: OfferCategory;
-    categories: OfferCategory[];
+    rootCategories: OfferCategory[];
     names: string[];
 
     constructor(
@@ -40,10 +41,15 @@ export class CreateAdvUserProfilePage {
                 });
 
         this.api.get('categories')
-            .subscribe(resp => this.categories = resp.data);
+            .subscribe(resp => this.rootCategories = resp.data);
     }
 
-    openAdvUserProfile() {
+    chooseCategory() {
+
+    }
+
+    createAccount() {
+
         this.nav.push(AdvUserProfilePage);
     }
 }
