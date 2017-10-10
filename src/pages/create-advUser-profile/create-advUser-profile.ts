@@ -17,11 +17,9 @@ import { OfferService } from '../../providers/offer.service';
 export class CreateAdvUserProfilePage {
     coords: Coords = new Coords();
     message: string;
-    rootCategories: OfferCategory[] = OfferCategory.StaticList;
-    selectRootCategories: any[];
-    selectedRootCategories: any[];
-    selectedRootcategory = [{name: ''}];
-    categoryName = 'Choose category';
+    categories: OfferCategory[] = OfferCategory.StaticList;    
+    selectedCategory: any;
+    selectedChildCategoryIds: string[];
 
     constructor(
         private location: LocationService,
@@ -39,36 +37,35 @@ export class CreateAdvUserProfilePage {
             })
             .catch((error) => {
                 this.message = error.message;
-                console.log(this.message);
             });
-
-        this.selectRootCategories = this.rootCategories.map(p => p.id);
-        for (let i = 0; i < this.rootCategories.length; i++) {
-            this.selectRootCategories[i] = ({
-                categoryId: this.rootCategories[i].id,
-                name: this.rootCategories[i].name,
-                img: this.rootCategories[i].imageAdvCreate_url,
-                isSelected: false
-            });
-        }
     }
     
-    chooseCategory() {
-
+    showCategoriesPopover() {
         let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover, {
-            rootCategories: this.selectedRootCategories ? this.selectedRootCategories : this.selectRootCategories
+            categories: this.categories.map(p => {
+                return {
+                    id: p.id,
+                    name: p.name,
+                    imageAdvCreate_url: p.imageAdvCreate_url,
+                    isSelected: this.selectedCategory && p.id == this.selectedCategory.id
+                }
+            })
         });
+        
         popover.present();
-        popover.onDidDismiss(selectRootCategories => {
-            this.selectedRootCategories = selectRootCategories;
-            this.selectedRootcategory = selectRootCategories.filter(p => p.isSelected);
-            this.categoryName = this.selectedRootcategory.length > 0 ? this.selectedRootcategory[0].name : "Choose category";
-            debugger
+
+        popover.onDidDismiss(categories => {
+            if (!categories)
+                return;
+            
+            let selectedCategories = categories.filter(p => p.isSelected);
+            if (selectedCategories.length > 0) {
+                this.selectedCategory = selectedCategories[0];
+            }
         })
     }
 
     createAccount() {
-
         this.nav.push(AdvUserProfilePage);
     }
 }

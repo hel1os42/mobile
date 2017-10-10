@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController, App, NavParams } from 'ionic-angular';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'create-advUser-profile-popover-component',
@@ -8,23 +9,26 @@ import { ViewController, App, NavParams } from 'ionic-angular';
 
 export class CreateAdvUserProfilePopover {
 
-    rootCategories: any[];
+    categories: any[];
 
     constructor(private viewCtrl: ViewController,
-                private app: App,
-                private navParams: NavParams) { 
-      
-    // this.rootCategories = this.navParams.get('root.Categories');
-            this.rootCategories = this.navParams.get('rootCategories');
+        private app: App,
+        private navParams: NavParams) {
+
+        this.categories = this.navParams.get('categories');
     }
 
-    close() {
-        this.viewCtrl.dismiss(this.rootCategories);
+    done() {
+        this.viewCtrl.dismiss(this.categories);
     }
-    
-    clear() {
-        for (let i = 0; i < this.rootCategories.length; i++) {
-            this.rootCategories[i].isSelected = false;
+
+    selectCategory(category) {
+        for (let i = 0; i < this.categories.length; i++) {
+            this.categories[i].isSelected = category.id == this.categories[i].id;
         }
+    }
+
+    cancel() {
+        this.viewCtrl.dismiss();
     }
 }

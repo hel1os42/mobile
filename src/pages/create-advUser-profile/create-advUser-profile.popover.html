@@ -3,12 +3,12 @@
     <div text-uppercase text-center class="font-16 text-#4F4F4F semibold">Category</div>
 
     <div class="block-checks">
-        <ion-item *ngFor="let rootCategory of rootCategories" no-lines>
+        <ion-item *ngFor="let category of categories" no-lines>
             <ion-label margin-left item-end class="text-828282 font-16">
-                <img [src]="rootCategory.img">
-                {{ rootCategory.name }}
+                <img [src]="category.imageAdvCreate_url">
+                {{ category.name }}
             </ion-label>
-            <ion-checkbox [(ngModel)]="rootCategory.isSelected" item-end></ion-checkbox>
+            <ion-checkbox [(ngModel)]="category.isSelected" (ngModelChange)="selectCategory(category)" item-end></ion-checkbox>
         </ion-item>
     </div>
 </div>
@@ -16,10 +16,10 @@
     <ion-grid>
         <ion-row>
             <ion-col text-center class="margin-right-2proc">
-                <button (click)="clear()" ion-button block color="secondary">Cancel</button>
+                <button (click)="cancel()" ion-button block color="secondary">Cancel</button>
             </ion-col>
             <ion-col text-center class="margin-left-2proc">
-                <button (click)="close()" ion-button block color="primary">Done</button>
+                <button (click)="done()" ion-button block color="primary">Done</button>
             </ion-col>
         </ion-row>
     </ion-grid>

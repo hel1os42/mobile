@@ -30,9 +30,15 @@
     </div>
 
     <div class="block-lines">
-        <a (click)="chooseCategory()" ion-item detail-push padding-left class="bg-gray">
-            <img *ngIf="selectedRootcategory[0]" [src]="selectedRootcategory[0].img">
-            {{ categoryName }}
+        <a (click)="showCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
+            <ng-container *ngIf="selectedCategory">
+                <img [src]="selectedCategory.imageAdvCreate_url">
+                {{ selectedCategory.name }}
+            </ng-container>
+            
+            <ng-container *ngIf="!selectedCategory">
+                Choose category
+            </ng-container>            
         </a>
     </div>
 
