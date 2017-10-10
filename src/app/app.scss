@@ -775,6 +775,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .nau-segment.segment-ios .segment-button{
   border: 1px solid #FF8B10;
   color: #FF8B10;
+  font-family: 'OpenSansNauSemibold';
+  font-size: 3.7vw;
 }
 
 .nau-segment.segment-ios .segment-button.segment-activated{
@@ -981,6 +983,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-top: 14vw;
 }
 
+.margin-top-7vw{
+    margin-top: 7vw;
+}
+
 .margin-bottom-3vw{
     margin-bottom: 3vw;
 }
@@ -1097,9 +1103,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .star_right{
-  position: absolute;
-  right: 10px;
-  top: 10px;
+    position: absolute;
+    right: 4vw;
+    top: 4vw;
+    height: 4vw;
+    width: auto;
 }
 
 .num_right {
@@ -1164,8 +1172,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .text-overflow-54{
-  height: 54px;
-  overflow: hidden;
+    max-height: 12vw;
+    height: auto;
+    overflow: hidden;
+    display: block;
 }
 
 .text-ellipsis{

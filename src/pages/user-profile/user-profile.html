@@ -10,7 +10,7 @@
 <ion-content class="padding-no">
   <ion-item class="border-bottom-no top-block-nau padding-top-5vw padding-left-5vw padding-right-5vw">
     <ion-avatar item-start>
-      <div class="user_level font-22 text-white" (click)="logout()">L{{user.level}}</div>
+      <div text-center class="user_level font-22 text-white table" (click)="logout()"><span class="table-cell">L{{user.level}}</span></div>
     </ion-avatar>
     <div class="font-18 text-3E4B5D bold">{{ user?.name }}</div>
     <div class="font-14 text-828282">{{user.points}}</div>
