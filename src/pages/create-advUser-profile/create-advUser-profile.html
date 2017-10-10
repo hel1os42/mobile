@@ -30,10 +30,9 @@
     </div>
 
     <div class="block-lines">
-        <a ion-item detail-push class="bg-gray">
-            <ion-select [(ngModel)]="selectedCategory" placeholder="Choose category" interface="action-sheet">
-                <ion-option *ngFor="let category of categories" [value]="category">{{ category.name }}</ion-option>
-            </ion-select>
+        <a (click)="chooseCategory()" ion-item detail-push padding-left class="bg-gray">
+            <img *ngIf="selectedRootcategory[0]" [src]="selectedRootcategory[0].img">
+            {{ categoryName }}
         </a>
     </div>
 
@@ -48,6 +47,6 @@
         </agm-map>
     </div>
 
-    <button (click)="openAdvUserProfile()" ion-button full margin-top color="primary">Create account</button>
+    <button (click)="createAccount()" ion-button full margin-top color="primary">Create account</button>
 
 </ion-content>

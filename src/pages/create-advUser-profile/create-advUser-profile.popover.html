@@ -4,7 +4,10 @@
 
     <div class="block-checks">
         <ion-item *ngFor="let rootCategory of rootCategories" no-lines>
-            <ion-label margin-left item-end class="text-828282 font-16">{{ rootCategory.name }}</ion-label>
+            <ion-label margin-left item-end class="text-828282 font-16">
+                <img [src]="rootCategory.img">
+                {{ rootCategory.name }}
+            </ion-label>
             <ion-checkbox [(ngModel)]="rootCategory.isSelected" item-end></ion-checkbox>
         </ion-item>
     </div>
@@ -13,7 +16,7 @@
     <ion-grid>
         <ion-row>
             <ion-col text-center class="margin-right-2proc">
-                <button ion-button block color="secondary">Cancel</button>
+                <button (click)="clear()" ion-button block color="secondary">Cancel</button>
             </ion-col>
             <ion-col text-center class="margin-left-2proc">
                 <button (click)="close()" ion-button block color="primary">Done</button>
