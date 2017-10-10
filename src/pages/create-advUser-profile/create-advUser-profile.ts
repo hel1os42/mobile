@@ -19,7 +19,7 @@ export class CreateAdvUserProfilePage {
     message: string;
     categories: OfferCategory[] = OfferCategory.StaticList;    
     selectedCategory: any;
-    selectedChildCategoryIds: string[];
+    selectedChildCategories: any[];
 
     constructor(
         private location: LocationService,

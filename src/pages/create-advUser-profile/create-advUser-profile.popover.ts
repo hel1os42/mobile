@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 export class CreateAdvUserProfilePopover {
 
     categories: any[];
+    selectedCategory: any;
 
     constructor(private viewCtrl: ViewController,
         private app: App,
@@ -18,15 +19,20 @@ export class CreateAdvUserProfilePopover {
         this.categories = this.navParams.get('categories');
     }
 
-    done() {
-        this.viewCtrl.dismiss(this.categories);
-    }
-
     selectCategory(category) {
+        this.selectedCategory = category.isSelected ? category : undefined;
         for (let i = 0; i < this.categories.length; i++) {
             this.categories[i].isSelected = category.id == this.categories[i].id;
         }
     }
+
+    canSave() {
+        return this.selectedCategory;        
+    }
+
+    save() {
+        this.viewCtrl.dismiss(this.categories);
+    }    
 
     cancel() {
         this.viewCtrl.dismiss();

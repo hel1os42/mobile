@@ -3,17 +3,12 @@
     <div text-uppercase text-center class="font-16 text-#4F4F4F semibold padding-bottom-5vw">Category</div>
 
     <div class="block-checks">
-<<<<<<< HEAD
         <ion-item *ngFor="let category of categories" no-lines>
-            <ion-label margin-left item-end class="text-828282 font-16">
-                <img [src]="category.imageAdvCreate_url">
-                {{ category.name }}
-=======
-        <ion-item *ngFor="let rootCategory of rootCategories" no-lines>
             <ion-label item-end class="text-828282 font-16 semibold table">
-                <div class="block-img-category"><img [src]="rootCategory.img"></div>
-                <span class="table-cell">{{ rootCategory.name }}</span>
->>>>>>> 9d71aa3b95f97fa921fd403b6d7d48a6a097dcf5
+                <div class="block-img-category">
+                    <img [src]="category.imageAdvCreate_url">
+                </div>
+                <span class="table-cell">{{ category.name }}</span>
             </ion-label>
             <ion-checkbox [(ngModel)]="category.isSelected" (ngModelChange)="selectCategory(category)" item-end></ion-checkbox>
         </ion-item>
@@ -26,7 +21,7 @@
                 <button (click)="cancel()" ion-button block color="secondary">Cancel</button>
             </ion-col>
             <ion-col text-center class="margin-left-2proc">
-                <button (click)="done()" ion-button block color="primary">Done</button>
+                <button (click)="save()" [disabled]="!canSave()" ion-button block color="primary">Done</button>
             </ion-col>
         </ion-row>
     </ion-grid>

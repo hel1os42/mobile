@@ -29,7 +29,6 @@
         <div class="text-4F4F4F font-14" text-uppercase>Category & type your place</div>
     </div>
 
-<<<<<<< HEAD
     <div class="block-lines">
         <a (click)="showCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
             <ng-container *ngIf="selectedCategory">
@@ -40,12 +39,6 @@
             <ng-container *ngIf="!selectedCategory">
                 Choose category
             </ng-container>            
-=======
-    <div class="block-lines category">
-        <a (click)="chooseCategory()" ion-item detail-push padding-left class="bg-gray">
-            <img *ngIf="selectedRootcategory[0]" [src]="selectedRootcategory[0].img">
-            {{ categoryName }}
->>>>>>> 9d71aa3b95f97fa921fd403b6d7d48a6a097dcf5
         </a>
     </div>
 
