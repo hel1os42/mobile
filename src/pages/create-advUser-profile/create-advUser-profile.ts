@@ -8,6 +8,7 @@ import { ApiService } from '../../providers/api.service';
 import { CreateAdvUserProfilePopover } from './create-advUser-profile.popover';
 import * as _ from 'lodash';
 import { OfferService } from '../../providers/offer.service';
+import { SelectedCategory } from '../../models/selectCategory';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -18,8 +19,8 @@ export class CreateAdvUserProfilePage {
     coords: Coords = new Coords();
     message: string;
     categories: OfferCategory[] = OfferCategory.StaticList;    
-    selectedCategory: any;
-    selectedChildCategories: any[];
+    selectedCategory: SelectedCategory;
+    selectedChildCategories: SelectedCategory[];
 
     constructor(
         private location: LocationService,
@@ -46,7 +47,7 @@ export class CreateAdvUserProfilePage {
                 return {
                     id: p.id,
                     name: p.name,
-                    imageAdvCreate_url: p.imageAdvCreate_url,
+                    image_url: p.imageAdvCreate_url,
                     isSelected: this.selectedCategory && p.id == this.selectedCategory.id
                 }
             })
@@ -58,7 +59,7 @@ export class CreateAdvUserProfilePage {
             if (!categories)
                 return;
             
-            let selectedCategories = categories.filter(p => p.isSelected);
+            let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
             if (selectedCategories.length > 0) {
                 this.selectedCategory = selectedCategories[0];
             }
