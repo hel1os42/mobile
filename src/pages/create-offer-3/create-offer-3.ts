@@ -64,12 +64,10 @@ export class CreateOffer3Page {
             if (status === 'OK') {
                 let timezone = results.timeZoneId;
                 results = results[0].address_components;
-                debugger
                 this.city = this.findResult(results, "locality");
                 this.country = this.findResult(results, "country");
                 this.changeDetectorRef.detectChanges();
                 console.log(results);
-                debugger
             }
         });
     }

@@ -38,10 +38,29 @@ page-create-advUser-profile {
         margin: 0;
     }
 
-  agm-map {
-    height: 200px;
-    border-radius: 50px;
-  }
+    agm-map {
+        height: 250px;
+    }
+
+    .block-map{
+        position: relative;
+      }
+
+    #marker {
+        position: absolute;
+        z-index: 111;
+        background-color: rgba(255, 139, 16, 0.2);
+        background-image: url(../assets/img/create_user_profile/pin.svg);
+        background-position: 50% 50%;
+        background-size: auto 31px;
+        background-repeat: no-repeat;
+        width: 150px;
+        height: 150px;
+        left: calc(50% - 75px);
+        top: 50px;
+        border-radius: 150px;
+        pointer-events: none;
+      }
 
     .select-ios .select-icon{
         display: none;
