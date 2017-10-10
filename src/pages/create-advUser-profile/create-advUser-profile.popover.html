@@ -1,18 +1,18 @@
-<div margin class="modal_content">
+<div class="modal_content">
 
-    <div text-uppercase text-center class="font-16 text-#4F4F4F semibold">Category</div>
+    <div text-uppercase text-center class="font-16 text-#4F4F4F semibold padding-bottom-5vw">Category</div>
 
     <div class="block-checks">
         <ion-item *ngFor="let rootCategory of rootCategories" no-lines>
-            <ion-label margin-left item-end class="text-828282 font-16">
-                <img [src]="rootCategory.img">
-                {{ rootCategory.name }}
+            <ion-label item-end class="text-828282 font-16 semibold table">
+                <div class="block-img-category"><img [src]="rootCategory.img"></div>
+                <span class="table-cell">{{ rootCategory.name }}</span>
             </ion-label>
             <ion-checkbox [(ngModel)]="rootCategory.isSelected" item-end></ion-checkbox>
         </ion-item>
     </div>
 </div>
-<div class="footer_btn" padding>
+<div class="footer_btn" padding-left padding-right padding-bottom>
     <ion-grid>
         <ion-row>
             <ion-col text-center class="margin-right-2proc">

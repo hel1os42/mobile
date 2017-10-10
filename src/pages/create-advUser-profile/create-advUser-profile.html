@@ -29,7 +29,7 @@
         <div class="text-4F4F4F font-14" text-uppercase>Category & type your place</div>
     </div>
 
-    <div class="block-lines">
+    <div class="block-lines category">
         <a (click)="chooseCategory()" ion-item detail-push padding-left class="bg-gray">
             <img *ngIf="selectedRootcategory[0]" [src]="selectedRootcategory[0].img">
             {{ categoryName }}
@@ -40,13 +40,15 @@
         <div class="text-4F4F4F font-14" text-uppercase>Choose your office location</div>
     </div>
 
-    <div padding-bottom>
+    <div>
         <div *ngIf="!coords.lat" >Detecting your location...</div>
         <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
             <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
         </agm-map>
     </div>
 
-    <button (click)="createAccount()" ion-button full margin-top color="primary">Create account</button>
+    <p margin>
+        <button (click)="createAccount()" ion-button block color="primary">Create account</button>
+    </p>
 
 </ion-content>
