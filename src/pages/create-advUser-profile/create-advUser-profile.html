@@ -40,6 +40,17 @@
             </ng-container>
         </a>
     </div>
+    <div *ngIf="selectedCategory" class="block-lines">
+        <a (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
+            <ng-container *ngIf="selectedChildCategories">
+                {{ selectedCategory.name }}
+            </ng-container>
+
+            <ng-container *ngIf="!selectedChildCategories">
+                {{ selectedCategory.name + 'categories' }}
+            </ng-container>
+        </a>
+    </div>
 
     <div class="block-lines">
         <div class="text-4F4F4F font-14" text-uppercase>Choose your office location</div>
