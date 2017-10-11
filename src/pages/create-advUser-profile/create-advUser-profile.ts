@@ -8,9 +8,10 @@ import { ApiService } from '../../providers/api.service';
 import { CreateAdvUserProfilePopover1 } from './create-advUser-profile.popover1';
 import * as _ from 'lodash';
 import { OfferService } from '../../providers/offer.service';
-import { SelectedCategory } from '../../models/selectCategory';
+import { SelectedCategory } from '../../models/selectedCategory';
 import { LatLngLiteral } from '@agm/core';
 import { AgmCoreModule } from '@agm/core';
+import { ChildCategory } from '../../models/childCategory';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -21,8 +22,10 @@ export class CreateAdvUserProfilePage {
     coords: Coords = new Coords();
     message: string;
     categories: OfferCategory[] = OfferCategory.StaticList;
+    childCategories: ChildCategory[];
     selectedCategory: SelectedCategory;
     selectedChildCategories: SelectedCategory[];
+
     address: string;
 
     constructor(
@@ -86,7 +89,6 @@ export class CreateAdvUserProfilePage {
         });
 
         popover.present();
-
         popover.onDidDismiss(categories => {
             if (!categories)
                 return;
