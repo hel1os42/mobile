@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ViewController, App, NavParams } from 'ionic-angular';
-import * as _ from 'lodash';
-import { SelectedCategory } from '../../models/selectCategory';
+import { ViewController, NavParams } from 'ionic-angular';
+import { SelectedCategory } from '../../models/selectedCategory';
 
 @Component({
     selector: 'create-advUser-profile-popover-component1',
@@ -14,8 +13,7 @@ export class CreateAdvUserProfilePopover1 {
     selectedCategory: any;
 
     constructor(private viewCtrl: ViewController,
-        private app: App,
-        private navParams: NavParams) {
+                private navParams: NavParams) {
 
         this.categories = this.navParams.get('categories');
     }
