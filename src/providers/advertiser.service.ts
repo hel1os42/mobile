@@ -28,12 +28,12 @@ export class AdvertiserService {
         return this.api.post('places', {place: place});
     }
 
-    setPicture(picture_url: string) {
-        return this.api.post('profile/place/picture', {picture_url: picture_url});
+    setPicture(picture) {
+        return this.api.post('profile/place/picture', {picture: picture});
     }
 
-    setCover(cover_url: string) {
-        return this.api.post('profile/place/cover', {cover_url: cover_url});
+    setCover(cover) {
+        return this.api.post('profile/place/cover', {cover: cover});
     }
 
 
