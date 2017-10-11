@@ -64,6 +64,7 @@ import { PlacesAlternativePage } from '../pages/places-alternative/places-altern
 import { PlacesAlternativePopover } from '../pages/places-alternative/places.alternative.popover';
 import { CreateAdvUserProfilePopover1 } from '../pages/create-advUser-profile/create-advUser-profile.popover1';
 import { CreateAdvUserProfilePopover2 } from '../pages/create-advUser-profile/create-advUser-profile.popover2';
+import { AdvertiserService } from '../providers/advertiser.service';
 
 @NgModule({
   declarations: [
@@ -197,6 +198,7 @@ import { CreateAdvUserProfilePopover2 } from '../pages/create-advUser-profile/cr
     AppModeService,
     Geolocation,
     LocationService,
+    AdvertiserService
   ]
 })
 export class AppModule {}
