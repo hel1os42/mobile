@@ -17,11 +17,11 @@
     <div class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw" text-uppercase margin-top margin-left margin-right>Add company name & descriptions</div>
     <div class="block-lines">
         <ion-item no-lines>
-            <ion-input class="bg-gray" type="text" placeholder="Company name"></ion-input>
+            <ion-input [(ngModel)]="place.name" class="bg-gray" type="text" placeholder="Company name"></ion-input>
         </ion-item>
 
         <ion-item no-lines margin-top>
-            <ion-textarea class="bg-gray-radius-small" placeholder="Company description"></ion-textarea>
+            <ion-textarea [(ngModel)]="place.description" class="bg-gray-radius-small" placeholder="Company description"></ion-textarea>
         </ion-item>
     </div>
 
