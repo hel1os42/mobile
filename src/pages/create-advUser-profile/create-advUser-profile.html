@@ -45,19 +45,20 @@
             </ng-container>
         </a>
 
-        <a *ngIf="selectedCategory" (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
+        <a *ngIf="selectedCategory" (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray ">
             <ng-container *ngIf="selectedChildCategories">
-                {{ childCategoriesNames }}
+                <div class="text-3E4B5D font-16 semibold">
+                    {{ childCategoriesNames }}
+                </div>
             </ng-container>
 
             <ng-container *ngIf="!selectedChildCategories">
-                {{ selectedCategory.name + ' categories' }}
+                <div class="text-3E4B5D font-16 semibold">
+                    {{ selectedCategory.name + ' categories' }}
+                </div>
             </ng-container>
         </a>
     </div>
-
-
-
 
     <div class="block-lines">
         <div class="text-4F4F4F font-14" text-uppercase>Choose your office location</div>
@@ -66,7 +67,8 @@
 
     <div class="block-map">
         <div *ngIf="!coords.lat">Detecting your location...</div>
-        <agm-map *ngIf="coords.lat" [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+        <agm-map *ngIf="coords.lat" [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)"
+            [fitBounds]="bounds">
         </agm-map>
         <div id="marker"></div>
     </div>

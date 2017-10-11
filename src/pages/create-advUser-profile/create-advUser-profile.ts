@@ -1,8 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { LocationService } from "../../providers/location.service";
-import { Coords } from "../../models/coords";
-import { AdvUserProfilePage } from "../adv-user-profile/adv-user-profile";
-import { NavController, PopoverController } from "ionic-angular";
+import { LocationService } from '../../providers/location.service';
+import { Coords } from '../../models/coords';
+import { NavController, PopoverController } from 'ionic-angular';
 import { OfferCategory } from '../../models/offerCategory';
 import { ApiService } from '../../providers/api.service';
 import { CreateAdvUserProfilePopover1 } from './create-advUser-profile.popover1';
@@ -13,6 +12,9 @@ import { LatLngLiteral } from '@agm/core';
 import { AgmCoreModule } from '@agm/core';
 import { ChildCategory } from '../../models/childCategory';
 import { CreateAdvUserProfilePopover2 } from './create-advUser-profile.popover2';
+import { PlaceCreate } from '../../models/placeCreate';
+import { AdvTabsPage } from '../adv-tabs/adv-tabs';
+import { AdvertiserService } from '../../providers/advertiser.service';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -27,7 +29,9 @@ export class CreateAdvUserProfilePage {
     selectedCategory: SelectedCategory;
     selectedChildCategories: SelectedCategory[];
     childCategoriesNames: string[];
-
+    place = new PlaceCreate;
+    pictureurl;
+    coverurl;
     address: string;
 
     constructor(
@@ -36,6 +40,7 @@ export class CreateAdvUserProfilePage {
         private popoverCtrl: PopoverController,
         private api: ApiService,
         private offer: OfferService,
+        private advert: AdvertiserService,
         private changeDetectorRef: ChangeDetectorRef) {
 
     }
@@ -116,28 +121,39 @@ export class CreateAdvUserProfilePage {
                             isSelected: this.selectedChildCategories ? !!this.selectedChildCategories.find(k => k.id == p.id) : false
                         }
                     })
-                    
+
                 })
                 popover.present();
                 popover.onDidDismiss(categories => {
                     if (!categories) {
                         return;
                     }
-                    
+
                     let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
                     if (selectedCategories.length > 0) {
                         this.selectedChildCategories = selectedCategories;
-                        this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name );
+                        this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name);
                     }
                     else {
                         this.selectedChildCategories = undefined;
                     }
                 })
             })
-           
+
     }
 
     createAccount() {
-        this.nav.push(AdvUserProfilePage);
+        this.place.latitude = this.coords.lat;
+        this.place.longitude = this.coords.lng;
+        this.place.address = this.address;
+        this.place.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
+        debugger
+        this.place.radius = 30000;
+
+        debugger
+        this.advert.set(this.place)
+            .subscribe(resp =>
+                this.nav.push(AdvTabsPage))
+
     }
 }

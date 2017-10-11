@@ -56,7 +56,7 @@ export class MyApp {
 
             this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : TabsPage;
 
-            //this.rootPage = CreateOfferPage;
+            this.rootPage = CreateAdvUserProfilePage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
