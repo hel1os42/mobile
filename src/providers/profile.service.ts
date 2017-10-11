@@ -33,8 +33,4 @@ export class ProfileService {
         return this.api.put('profile', user);
     }
 
-    getAdvert() {
-        return this.api.get('profile/place');
-    }
-
 }
