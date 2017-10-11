@@ -4,11 +4,11 @@ import { AgmCoreModule } from '@agm/core';
 import { Coords } from '../../models/coords';
 import { NavController, PopoverController } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
-import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { OfferCategory } from '../../models/offerCategory';
 import { CreateOfferPopover } from '../create-offer/createOffer.popover'
 import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
+import { AdvertiserService } from '../../providers/advertiser.service';
 
 @Component({
     selector: 'page-create-offer',
@@ -21,11 +21,11 @@ export class CreateOfferPage {
 
     constructor(private location: LocationService,
                 private nav: NavController,
-                private offerService: OfferService,
+                private advert: AdvertiserService,
                 private profileService: ProfileService,
                 private popoverCtrl: PopoverController) {
 
-        this.offerService.getOfferCreate()
+        this.advert.getOfferCreate()
             .subscribe(resp => this.offer = resp);
 
         this.location.get()

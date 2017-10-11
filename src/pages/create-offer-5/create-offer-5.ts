@@ -4,6 +4,7 @@ import { OfferCreate } from '../../models/offerCreate';
 import { OfferService } from '../../providers/offer.service';
 import { User } from '../../models/user';
 import { ProfileService } from '../../providers/profile.service';
+import { AdvertiserService } from '../../providers/advertiser.service';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -21,7 +22,7 @@ export class CreateOffer5Page {
 
     constructor(private nav: NavController,
         private navParams: NavParams,
-        private offerService: OfferService,
+        private advert: AdvertiserService,
         private profile: ProfileService) {
 
         this.offer = this.navParams.get('offer');
@@ -36,7 +37,7 @@ export class CreateOffer5Page {
         this.offer.reward = this.reward;
         this.offer;
         debugger;
-        this.offerService.set(this.offer)
+        this.advert.setOffer(this.offer)
             .subscribe()//to do;
     }
 

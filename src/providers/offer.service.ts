@@ -59,14 +59,6 @@ export class OfferService {
         return this.api.get(`places/${place_id}/offers`);
     }
 
-    getOfferCreate() {
-        return this.api.get('advert/offers/create');
-    }
-
-    set(offer: OfferCreate) {
-        return this.api.post('advert/offers', offer);
-    }
-
     getCategories() {
         return this.api.get('categories');
     }
@@ -85,9 +77,5 @@ export class OfferService {
 
     getRedemtionStatus(code: string) {
         return this.api.get(`activation_codes/${code}`, false);
-    }
-
-    setRedeemCode(code: string) {
-        return this.api.post('redemptions', { code: code });
     }
 }
