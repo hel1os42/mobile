@@ -62,7 +62,7 @@ import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
 import { PlacesAlternativePage } from '../pages/places-alternative/places-alternative';
 import { PlacesAlternativePopover } from '../pages/places-alternative/places.alternative.popover';
-import { CreateAdvUserProfilePopover } from '../pages/create-advUser-profile/create-advUser-profile.popover';
+import { CreateAdvUserProfilePopover1 } from '../pages/create-advUser-profile/create-advUser-profile.popover1';
 
 @NgModule({
   declarations: [
@@ -107,7 +107,7 @@ import { CreateAdvUserProfilePopover } from '../pages/create-advUser-profile/cre
     PlacesPopover,
     PlacesAlternativePopover,
     CongratulationPopover,
-    CreateAdvUserProfilePopover,
+    CreateAdvUserProfilePopover1,
     OfferTermsPage,
     SettingsChangePhonePage,
     AdvRedeemOfferPage,
@@ -172,7 +172,7 @@ import { CreateAdvUserProfilePopover } from '../pages/create-advUser-profile/cre
     PlacesPopover,
     PlacesAlternativePopover,
     CongratulationPopover,
-    CreateAdvUserProfilePopover,
+    CreateAdvUserProfilePopover1,
     OfferTermsPage,
     SettingsChangePhonePage,
     AdvRedeemOfferPage,

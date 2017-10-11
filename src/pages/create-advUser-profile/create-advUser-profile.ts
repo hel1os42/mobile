@@ -5,7 +5,7 @@ import { AdvUserProfilePage } from "../adv-user-profile/adv-user-profile";
 import { NavController, PopoverController } from "ionic-angular";
 import { OfferCategory } from '../../models/offerCategory';
 import { ApiService } from '../../providers/api.service';
-import { CreateAdvUserProfilePopover } from './create-advUser-profile.popover';
+import { CreateAdvUserProfilePopover1 } from './create-advUser-profile.popover1';
 import * as _ from 'lodash';
 import { OfferService } from '../../providers/offer.service';
 import { SelectedCategory } from '../../models/selectCategory';
@@ -74,7 +74,7 @@ export class CreateAdvUserProfilePage {
     }
 
     showCategoriesPopover() {
-        let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover, {
+        let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover1, {
             categories: this.categories.map(p => {
                 return {
                     id: p.id,

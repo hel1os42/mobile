@@ -4,11 +4,11 @@ import * as _ from 'lodash';
 import { SelectedCategory } from '../../models/selectCategory';
 
 @Component({
-    selector: 'create-advUser-profile-popover-component',
-    templateUrl: 'create-advUser-profile.popover.html'
+    selector: 'create-advUser-profile-popover-component1',
+    templateUrl: 'create-advUser-profile.popover1.html'
 })
 
-export class CreateAdvUserProfilePopover {
+export class CreateAdvUserProfilePopover1 {
 
     categories: SelectedCategory[];
     selectedCategory: any;
