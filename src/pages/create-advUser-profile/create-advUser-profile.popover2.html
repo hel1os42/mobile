@@ -5,12 +5,9 @@
         <div class="block-checks">
             <ion-item *ngFor="let category of categories" no-lines>
                 <ion-label item-end class="text-828282 font-16 semibold table">
-                    <div class="block-img-category">
-                        <img [src]="category.image_url">
-                    </div>
                     <span class="table-cell">{{ category.name }}</span>
                 </ion-label>
-                <ion-checkbox [(ngModel)]="category.isSelected" (ngModelChange)="selectCategory(category)" item-end></ion-checkbox>
+                <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
             </ion-item>
         </div>
     </div>
@@ -21,7 +18,7 @@
                     <button (click)="cancel()" ion-button block color="secondary">Cancel</button>
                 </ion-col>
                 <ion-col text-center class="margin-left-2proc">
-                    <button (click)="save()" [disabled]="!canSave()" ion-button block color="primary">Done</button>
+                    <button (click)="save()" ion-button block color="primary">Done</button>
                 </ion-col>
             </ion-row>
         </ion-grid>

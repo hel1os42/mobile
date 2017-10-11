@@ -12,6 +12,7 @@ import { SelectedCategory } from '../../models/selectedCategory';
 import { LatLngLiteral } from '@agm/core';
 import { AgmCoreModule } from '@agm/core';
 import { ChildCategory } from '../../models/childCategory';
+import { CreateAdvUserProfilePopover2 } from './create-advUser-profile.popover2';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -25,6 +26,7 @@ export class CreateAdvUserProfilePage {
     childCategories: ChildCategory[];
     selectedCategory: SelectedCategory;
     selectedChildCategories: SelectedCategory[];
+    childCategoriesNames: string[];
 
     address: string;
 
@@ -98,6 +100,41 @@ export class CreateAdvUserProfilePage {
                 this.selectedCategory = selectedCategories[0];
             }
         })
+    }
+
+    showChildCategoriesPopover() {
+        this.offer.getSubCategories(this.selectedCategory.id)
+            .subscribe(resp => {
+                this.childCategories = resp.children;
+                let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover2, {
+                    categoryName: this.selectedCategory.name,
+                    categories: this.childCategories.map(p => {
+                        return {
+                            id: p.id,
+                            name: p.name,
+                            image_url: '',
+                            isSelected: this.selectedChildCategories ? !!this.selectedChildCategories.find(k => k.id == p.id) : false
+                        }
+                    })
+                    
+                })
+                popover.present();
+                popover.onDidDismiss(categories => {
+                    if (!categories) {
+                        return;
+                    }
+                    
+                    let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
+                    if (selectedCategories.length > 0) {
+                        this.selectedChildCategories = selectedCategories;
+                        this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name );
+                    }
+                    else {
+                        this.selectedChildCategories = undefined;
+                    }
+                })
+            })
+           
     }
 
     createAccount() {

@@ -32,7 +32,12 @@
     <div class="block-lines">
         <a (click)="showCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
             <ng-container *ngIf="selectedCategory">
-                <div class="text-3E4B5D font-16 semibold table"> <span class="table-cell font-0"><img class="choose-img" [src]="selectedCategory.image_url"></span><span class="table-cell padding-left-2vw"> {{ selectedCategory.name }}</span></div>
+                <div class="text-3E4B5D font-16 semibold table"> 
+                    <span class="table-cell font-0">
+                        <img class="choose-img" [src]="selectedCategory.image_url">
+                    </span>
+                    <span class="table-cell padding-left-2vw"> {{ selectedCategory.name }}</span>
+                </div>
             </ng-container>
 
             <ng-container *ngIf="!selectedCategory">
@@ -40,14 +45,15 @@
             </ng-container>
         </a>
     </div>
-    <div *ngIf="selectedCategory" class="block-lines">
+    
+    <div *ngIf="selectedCategory" class="">
         <a (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
             <ng-container *ngIf="selectedChildCategories">
-                {{ selectedCategory.name }}
+                {{ childCategoriesNames }}
             </ng-container>
 
             <ng-container *ngIf="!selectedChildCategories">
-                {{ selectedCategory.name + 'categories' }}
+                {{ selectedCategory.name + ' categories' }}
             </ng-container>
         </a>
     </div>

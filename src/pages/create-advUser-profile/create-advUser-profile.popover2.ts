@@ -10,9 +10,23 @@ import { SelectedCategory } from '../../models/selectedCategory';
 export class CreateAdvUserProfilePopover2 {
 
     categories: SelectedCategory[];
-    selectedCategory: any;
+    categoryName: string;
 
     constructor(private viewCtrl: ViewController,
-        private navParams: NavParams) {
+                private navParams: NavParams) {
+
+        this.categories = this.navParams.get('categories');
+        this.categoryName = this.navParams.get('categoryName');
+       
     }
+
+    save() {
+        this.viewCtrl.dismiss(this.categories);
+    } 
+    
+    cancel() {
+        this.viewCtrl.dismiss();
+    }
+
+
 }
