@@ -10,7 +10,7 @@
     <span text-right class="font-12 text-828282">{{ testimonial.date }}</span>
   </div>
   <div margin-top>
-    <img [src]="testimonial.avatar_url" margin-right margin-bottom>
+    <div margin-right margin-bottom class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + ')'"></div>
     <span class="margin-top-10 font-14 text-828282 italic">{{ testimonial.text }}
     </span>
   </div>

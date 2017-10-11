@@ -28,7 +28,7 @@
         <a ion-item detail-none (click)="openPlace(company)">
             <ion-avatar item-start text-center>
                 <!-- <img [src]="company.picture_url"> -->
-                <img src="assets/img/user_home/image1.png">
+                <div class="thumb_image" [style.background-image]="'url(assets/img/user_home/image1.png)'"></div>
                 <span text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">Featured</span>
             </ion-avatar>
             <div class="font-0">
@@ -66,7 +66,7 @@
   <ion-list margin-top no-lines class="block-offers item-block-nau">
     <ion-item class="relative">
       <ion-avatar item-start>
-        <img src="assets/img/place/offers_image1.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
       <div class="bold font-22 text-3E4B5D">Chance for you</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap text-overflow-35">A hamburger or burger is a sandwich consisting of one</div>
@@ -80,7 +80,7 @@
 
     <ion-item class="relative">
       <ion-avatar item-start>
-        <img src="assets/img/place/offers_image2.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image2.png)'"></div>
       </ion-avatar>
       <div class="bold font-20 text-3E4B5D text-ellipsis">Happy Friday</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap">The patty may be pan fried, barbecued, or flame broiled</div>
