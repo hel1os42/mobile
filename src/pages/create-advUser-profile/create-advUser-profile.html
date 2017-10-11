@@ -30,9 +30,9 @@
     </div>
 
     <div class="block-lines">
-        <a (click)="showCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
+        <a (click)="showCategoriesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
             <ng-container *ngIf="selectedCategory">
-                <div class="text-3E4B5D font-16 semibold table"> 
+                <div class="text-3E4B5D font-16 semibold table">
                     <span class="table-cell font-0">
                         <img class="choose-img" [src]="selectedCategory.image_url">
                     </span>
@@ -44,10 +44,8 @@
                 <div class="text-3E4B5D font-16 semibold">Choose category</div>
             </ng-container>
         </a>
-    </div>
-    
-    <div *ngIf="selectedCategory" class="">
-        <a (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
+
+        <a *ngIf="selectedCategory" (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
             <ng-container *ngIf="selectedChildCategories">
                 {{ childCategoriesNames }}
             </ng-container>
@@ -57,6 +55,9 @@
             </ng-container>
         </a>
     </div>
+
+
+
 
     <div class="block-lines">
         <div class="text-4F4F4F font-14" text-uppercase>Choose your office location</div>

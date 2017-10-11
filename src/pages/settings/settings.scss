@@ -89,10 +89,6 @@ page-settings{
     margin: 0 auto;
   }
 
-  .block-phone .item-block{
-    min-height: inherit;
-  }
-
   .block-map{
     position: relative;
   }
@@ -118,4 +114,37 @@ page-settings{
       width: 17.1vw;
       border-radius: 100vw;
   }
+}
+
+settings-popover-component{
+    .modal_content{
+        padding-left: 12vw;
+        padding-right: 12vw;
+        padding-bottom: 6.3vw;
+        padding-top: 8.7vw;
+    }
+
+    .adv_modal{
+        width: 14.5vw;
+        height: 14.5vw;
+        margin-top: 8vw;
+        margin-bottom: 6vw;
+    }
+
+    .button-ios{
+        margin: 9.2vw auto 0;
+        width: 50vw;
+    }
+
+    .line-height-7vw{
+        line-height: 7vw;
+    }
+
+    .close{
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        width: 5vw;
+        height: 5vw;
+    }
 }

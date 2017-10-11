@@ -112,24 +112,15 @@ places-popover-component {
     background-image: none;
   }
 
-  .footer_btn {
-    position: absolute;
-    width: 90%;
-    bottom: 0;
-    left: 5%;
-    background: #fff;
-    border-radius: 10px;
-  }
-
-  .footer_btn .grid{
-    padding-bottom: 16px;
-  }
-
   .margin-left-2proc{
     margin-left: 2%;
   }
 
   .margin-right-2proc{
     margin-right: 2%;
+  }
+
+  .footer_btn .grid {
+    padding-bottom: 16px;
   }
 }

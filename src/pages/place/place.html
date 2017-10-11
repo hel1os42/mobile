@@ -56,7 +56,7 @@
     <ion-item *ngFor=" let offer of offersList" (click)="openOffer(offer)" class="relative">
       <ion-avatar item-start>
         <!-- <img [src]="offer.picture_url"> -->
-        <img src="assets/img/place/offers_image1.png">
+          <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
       <div class="bold font-22 text-3E4B5D width-88 wrap-no">{{ offer.label }}</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap text-overflow-35">{{ offer.description }}</div>
@@ -72,7 +72,7 @@
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
     <ion-item *ngFor=" let testimonial of company.testimonials" (click)="openFeedback(testimonial)">
       <ion-avatar item-start>
-        <img [src]="testimonial.avatar_url">
+        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + ')'"></div>
       </ion-avatar>
       <div class="bold font-18 text-3E4B5D">{{ testimonial.name }} <span class="font-12 text-828282 no-bold">{{ testimonial.date }}</span></div>
       <div class="margin-top-10 font-12 text-828282 wrap italic text-overflow-35">{{ testimonial.text }}</div>

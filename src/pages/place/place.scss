@@ -29,10 +29,6 @@ page-place {
     border-top: 1px solid #F2F2F2;
   }
 
-  .top-block-nau.testimonials .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau.testimonials .item-ios ion-avatar img{
-    border-radius: 100vw;
-  }
-
   .testimonials.list .item-block:last-child {
     margin-bottom: 90px;
   }
@@ -105,5 +101,9 @@ page-place {
 
     .item-block-nau.list.list-ios{
         margin: 0;
+    }
+
+    .thumb_image{
+        border-radius: 100vw;
     }
 }

@@ -606,6 +606,15 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   width: 23vw;
 }
 
+.item-block-nau .item-ios ion-avatar .thumb_image{
+    border-radius: 0;
+    height: 23vw;
+    width: 23vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
 .top-block-nau.item-ios ion-avatar img{
     border-radius: 0;
     height: inherit;
@@ -773,10 +782,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 /* SEGMENT NAU */
 .nau-segment.segment-ios .segment-button{
-  border: 1px solid #FF8B10;
-  color: #FF8B10;
-  font-family: 'OpenSansNauSemibold';
-  font-size: 3.7vw;
+    color: #FF8B10;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #FF8B10;
+    border-bottom: 1px solid #FF8B10;
+    font-family: 'OpenSansNauSemibold';
+    font-size: 3.7vw;
 }
 
 .nau-segment.segment-ios .segment-button.segment-activated{
@@ -785,17 +797,23 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .nau-segment.segment-ios .segment-button:first-of-type {
-  border-top-left-radius: 100px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 100px;
+    border-top-left-radius: 100vw;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 100vw;
+    border-left: 1px solid #FF8B10;
+    border-top: 1px solid #FF8B10;
+    border-bottom: 1px solid #FF8B10;
 }
 
 .nau-segment.segment-ios .segment-button:last-of-type {
-  border-top-left-radius: 0;
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-  border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 100vw;
+    border-bottom-right-radius: 100vw;
+    border-bottom-left-radius: 0;
+    border-right: 1px solid #FF8B10;
+    border-top: 1px solid #FF8B10;
+    border-bottom: 1px solid #FF8B10;
 }
 
 .wrap{
@@ -1013,6 +1031,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .padding-left-2vw{
     padding-left: 2vw;
+}
+
+.padding-left-1vw{
+    padding-left: 1vw;
+}
+
+.padding-left-4vw{
+    padding-left: 4vw;
 }
 
 .padding-right-10{
@@ -1392,4 +1418,17 @@ textarea.text-input {
 .table-cell{
     display: table-cell;
     vertical-align: middle;
+}
+
+.footer_btn {
+    position: absolute;
+    width: 90%;
+    bottom: 0;
+    left: 5%;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.footer_btn .grid{
+    padding-bottom: 0;
 }
