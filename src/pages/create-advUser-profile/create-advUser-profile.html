@@ -32,11 +32,11 @@
     <div class="block-lines">
         <a (click)="showCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
             <ng-container *ngIf="selectedCategory">
-                <img [src]="selectedCategory.image_url"> {{ selectedCategory.name }}
+                <div class="text-3E4B5D font-16 semibold table"> <span class="table-cell font-0"><img class="choose-img" [src]="selectedCategory.image_url"></span><span class="table-cell padding-left-2vw"> {{ selectedCategory.name }}</span></div>
             </ng-container>
 
             <ng-container *ngIf="!selectedCategory">
-                Choose category
+                <div class="text-3E4B5D font-16 semibold">Choose category</div>
             </ng-container>
         </a>
     </div>
