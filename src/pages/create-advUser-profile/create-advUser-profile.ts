@@ -40,7 +40,7 @@ export class CreateAdvUserProfilePage {
         private popoverCtrl: PopoverController,
         private api: ApiService,
         private offer: OfferService,
-        private advert: AdvertiserService,
+        private advertCreate: AdvertiserService,
         private changeDetectorRef: ChangeDetectorRef) {
 
     }
@@ -151,7 +151,7 @@ export class CreateAdvUserProfilePage {
         this.place.radius = 30000;
 
         debugger
-        this.advert.set(this.place)
+        this.advertCreate.set(this.place)
             .subscribe(resp =>
                 this.nav.push(AdvTabsPage))
 

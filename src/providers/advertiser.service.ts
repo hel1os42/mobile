@@ -25,15 +25,15 @@ export class AdvertiserService {
     }
 
     set(place: PlaceCreate) {
-        return this.api.post('places', {place: place});
+        return this.api.post('places', place);
     }
 
     setPicture(picture) {
-        return this.api.post('profile/place/picture', {picture: picture});
+        return this.api.post('profile/place/picture', null);
     }
 
     setCover(cover) {
-        return this.api.post('profile/place/cover', {cover: cover});
+        return this.api.post('profile/place/cover', null);
     }
 
 
