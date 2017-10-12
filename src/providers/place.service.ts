@@ -9,7 +9,7 @@ export class PlaceService {
     constructor(private api: ApiService) { }
 
     get() {
-        return this.api.get('profile/place');
+        return this.api.get('profile/place?with=offers');
     }
 
     getOfferCreate() {
