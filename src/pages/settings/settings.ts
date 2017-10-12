@@ -50,10 +50,10 @@ export class SettingsPage {
         private advert: AdvertiserService ) {
 
         this.isAdvMode = this.navParams.get('isAdvMode');
+        this.user = this.navParams.get('user');
 
-        this.profile.get()
-            .subscribe(resp => this.user = resp);
-
+        // this.profile.getWithAccounts()
+        //     .subscribe(resp => this.user = resp);
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -93,25 +93,15 @@ export class SettingsPage {
 
     toggleAdvMode() {
         this.isChangeMode = !this.isChangeMode;
-        if (this.nextPage == CreateAdvUserProfilePage) {
-            this.popoverShow(this.nextPage);
-        }
-        else {
-            this.popoverShow(this.nextPage);
+        if (this.isAdvMode && this.nextPage == CreateAdvUserProfilePage) {
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: this.nextPage});
+            popover.present();
         }
         return this.isAdvMode;
     }
 
-    popoverShow(page) {
-        if (this.isAdvMode) {
-            let popover = this.popoverCtrl.create(SettingsPopover, { page: page });
-            popover.present();
-        }
-    }
-
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
-
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
         this.profile.put(this.user)
