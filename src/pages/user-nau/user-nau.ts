@@ -22,8 +22,7 @@ export class UserNauPage {
 
         this.balance = this.navParams.get('balance');
         this.NAU_Id = this.navParams.get('NAU_Id');
-        // this.profile.getTransactions()
-        // .subscribe(resp => this.transactions = resp.data);
+      
         this.profile.getTransactions()
             .subscribe(resp => this.transactions = resp.data);
     }
