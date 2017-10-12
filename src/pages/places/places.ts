@@ -14,6 +14,7 @@ import { google } from '@agm/core/services/google-maps-types';
 import { OfferCategory } from '../../models/offerCategory';
 import { DistanceUtils } from '../../utils/distanse';
 import { ChildCategory } from '../../models/childCategory';
+import { SelectedCategory } from '../../models/selectedCategory';
 
 
 @Component({
@@ -24,8 +25,9 @@ export class PlacesPage {
 
     companies: Company[];
     categories: OfferCategory[] = OfferCategory.StaticList;
-    subCategories: ChildCategory[];
-    selectedCategory: OfferCategory;
+    childCategories: ChildCategory[];
+    selectedChildCategories: SelectedCategory[];
+    selectedCategory = new OfferCategory;
     isMapVisible: boolean = false;
     coords: Coords = {
         lat: 50,
@@ -118,7 +120,8 @@ export class PlacesPage {
     loadCompanies(categoryId, search) {
         this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search)
             .subscribe(companies => {
-                this.companies = companies.data.filter(p => p. offers_count > 0);
+                this.companies = companies.data.filter(p => p.offers_count > 0);
+                // this.companies = companies.data;
                 this.mapsAPILoader.load()
                     .then(() => {
                         if (this.companies.length == 0 && this.coords) {
@@ -164,15 +167,31 @@ export class PlacesPage {
         this.offers.getSubCategories(this.selectedCategory.id)
             .subscribe(category => {
                 this.search = "";
-                this.subCategories = category.children;
-                let popover = this.popoverCtrl.create(PlacesPopover, { subCat: this.subCategories });
+                this.childCategories = category.children;
+                let popover = this.popoverCtrl.create(PlacesPopover, {
+                    childCategories: this.childCategories.map(p => {
+                        return {
+                            id: p.id,
+                            name: p.name,
+                            isSelected: this.selectedChildCategories ? !!this.selectedChildCategories.find(k => k.id == p.id) : false
+                        }
+                    })
+                });
                 popover.present();
-                popover.onDidDismiss((categoriesIds) => {
-                    if (categoriesIds.length !== 0) {
-                        this.categoryFilter = categoriesIds;
+                popover.onDidDismiss((categories) => {
+                    if (!categories) {
+                        return;
+                    }
+
+                    let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
+                    if (selectedCategories.length > 0) {
+                        this.selectedChildCategories = selectedCategories;
+                        this.categoryFilter = this.selectedChildCategories.map(p => p.id);
                     }
                     else {
-                        this.categoryFilter = [this.selectedCategory.id]
+                        this.selectedChildCategories = undefined;
+                        // this.categoryFilter = this.childCategories.map(p => p.id);to do
+                        this.categoryFilter = [this.selectedCategory.id];
                     }
                     this.loadCompanies(this.categoryFilter, this.search);
                 })
