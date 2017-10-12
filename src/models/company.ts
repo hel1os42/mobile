@@ -3,6 +3,7 @@ import { Offer } from "./offer";
 
 export class Company {
     id: string;
+    user_id: string;
     name: string;
     description: string;
     about: String;
@@ -15,9 +16,12 @@ export class Company {
     stars: number;
     is_featured: boolean;
     is_starred: boolean;
-    picture_url: string;
     address: string;
     latitude: number;
     longitude: number;
-    radius: number;
+    radius: number;    
+    picture_url: string;
+    cover_url: string;
 }
+
+
