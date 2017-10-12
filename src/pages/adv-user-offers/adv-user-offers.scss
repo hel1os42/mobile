@@ -1,0 +1,71 @@
+page-adv-user-offers {
+    .btn_transfer.item-button {
+        margin: 0;
+        margin-right: 5vw;
+        padding-left: 2.2vw;
+        padding-right: 2.2vw;
+        height: 7.7vw;
+        background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+    }
+
+    .top-block-nau .input-wrapper {
+        overflow: visible;
+    }
+
+    .item-block-nau .item-ios [item-end] {
+        width: 12.5vw;
+    }
+
+    .toggle-ios .toggle-icon {
+        background-color: #fff;
+        border-radius: 100vw;
+    }
+
+    .toggle-ios .toggle-inner {
+        background: #828282;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        left: 0.5vw;
+        top: 0.5vw;
+        width: 4.7vw;
+        height: 4.7vw;
+        border-radius: 100vw;
+    }
+
+    .toggle-ios {
+        width: 11.8vw;
+        height: 5.8vw;
+        border: 1px solid #E0E0E0;
+        border-radius: 100vw;
+    }
+
+    .item-ios .toggle-ios {
+        margin: 0;
+        padding: 0;
+    }
+
+    .toggle-ios.toggle-checked .toggle-icon {
+        background-color: #FFF;
+    }
+
+    .toggle-ios.toggle-checked .toggle-inner {
+        -webkit-transform: translate3d(10.5vw, 0, 0);
+        transform: translate3d(6.1vw, 0, 0);
+        background: linear-gradient(90.57deg, #FF5A00 0.54%, #FF8B10 99.56%);
+    }
+
+    .item-block-nau .item{
+        margin-bottom: 0;
+    }
+
+    .list-ios ion-item-options .button{
+        width: 24.1vw;
+    }
+
+    .list-ios ion-item-options .button img{
+        width: auto;
+        height: 5vw;
+        margin-bottom: 3.6vw;
+    }
+
+}

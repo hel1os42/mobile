@@ -1,0 +1,73 @@
+page-onboarding {
+    h1{
+        color: white;
+    }
+
+    .slide1{
+        background: url("../assets/img/onboarding/nau_bg1.svg") no-repeat 50% 50%/cover;
+    }
+
+    .slide2{
+        background: url("../assets/img/onboarding/nau_bg2.svg") no-repeat 50% 50%/cover;
+    }
+
+    .slide3{
+        background: url("../assets/img/onboarding/nau_bg3.svg") no-repeat 50% 50%/cover;
+    }
+
+    .title-big-sign{
+        color: #fff;
+        margin-bottom: 9vw;
+    }
+
+    .skip{
+        position: fixed;
+        color: #fff;
+        bottom: 3%;
+        right: 1%;
+        z-index: 1111;
+        background: transparent;
+    }
+
+    .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
+        bottom: 80px;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #fff;
+    }
+
+    .swiper-pagination-bullet{
+        background: #ffffff;
+    }
+
+    .slide-title-img{
+        height: 10.2vw;
+        margin-bottom: 23vw;
+    }
+
+    .slide-title-img img{
+        margin-left: 5vw;
+    }
+
+    .footer{
+        opacity: 0.5;
+    }
+
+    .scroll-content {
+        overflow-y: hidden !important;
+    }
+
+    .footer.footer-ios {
+        padding-left: 13.5vw;
+        padding-right: 13.5vw;
+        padding-bottom: 7vw;
+    }
+
+    .business {
+        margin-top: 2.3vw;
+        letter-spacing: 1.2vw;
+        text-align: center;
+        padding-left: 6%;
+    }
+}
