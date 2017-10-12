@@ -1,7 +1,7 @@
 import { Company } from "../models/company";
 
 export class MockCompanies {
-    public static items: Company[] = [
+    public static items: [
         {
             id: '1',
             name: 'The Fair Food',
@@ -29,7 +29,7 @@ export class MockCompanies {
                     avatar_url: 'assets/img/user_users/ava2.png',
                     date: '20/09/2017',
                     text: 'Our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.'
-                },
+                }
             ],
             categories_count: 2,
             categories: [
@@ -74,7 +74,7 @@ export class MockCompanies {
                     avatar_url: 'assets/img/user_users/ava2.png',
                     date: '20/09/2017',
                     text: 'Our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.'
-                },
+                }
             ],
             categories_count: 2,
             categories: [
@@ -119,7 +119,7 @@ export class MockCompanies {
                     avatar_url: 'assets/img/user_users/ava2.png',
                     date: '20/09/2017',
                     text: 'Our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.'
-                },
+                }
             ],
             categories_count: 2,
             categories: [
