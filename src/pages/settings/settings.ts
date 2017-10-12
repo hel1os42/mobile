@@ -51,6 +51,10 @@ export class SettingsPage {
 
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
+        if(!this.user.id) {
+            this.profile.get()
+                .subscribe(user => this.user = user);
+        }
 
         // this.profile.getWithAccounts()
         //     .subscribe(resp => this.user = resp);
