@@ -29,9 +29,7 @@ export class CreateAdvUserProfilePage {
     selectedCategory: SelectedCategory;
     selectedChildCategories: SelectedCategory[];
     childCategoriesNames: string[];
-    place = new PlaceCreate;
-    pictureurl;
-    coverurl;
+    company = new PlaceCreate();
     address: string;
 
     constructor(
@@ -143,17 +141,15 @@ export class CreateAdvUserProfilePage {
     }
 
     createAccount() {
-        this.place.latitude = this.coords.lat;
-        this.place.longitude = this.coords.lng;
-        this.place.address = this.address;
-        this.place.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
+        this.company.latitude = this.coords.lat;
+        this.company.longitude = this.coords.lng;
+        this.company.address = this.address;
+        this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
       
-        this.place.radius = 30000;
+        this.company.radius = 30000;
 
-        this.placeService.set(this.place)
+        this.placeService.set(this.company)
             .subscribe(resp =>
                 this.nav.push(AdvTabsPage, {company: resp}))
-                debugger
-
     }
 }
