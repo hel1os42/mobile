@@ -1,20 +1,25 @@
 page-place {
 
   .plus{
-    padding-top: 10px;
-    padding-left: 7px;
-    padding-right: 7px;
+      padding-top: 2vw;
+      padding-left: 2vw;
+      padding-right: 2vw;
   }
 
-  .btn_transfer.item-button{
-    margin-top: 5px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 17px;
-    padding-right: 17px;
-    background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
-    border-radius: 12px;
-  }
+    .gift{
+        height: 8.4vw;
+        width: auto;
+        margin-top: 0.5vw;
+    }
+
+    .btn_transfer.item-button{
+        height: 7.2vw;
+        margin: 0;
+        padding-left: 4.3vw;
+        padding-right: 4.3vw;
+        margin-top: 2vw;
+        background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+    }
 
   .cover{
     background-image: url(../assets/img/place/header.png);
@@ -24,24 +29,20 @@ page-place {
     border-top: 1px solid #F2F2F2;
   }
 
-  .top-block-nau.testimonials .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau.testimonials .item-ios ion-avatar img{
-    border-radius: 100px;
-  }
-
   .testimonials.list .item-block:last-child {
     margin-bottom: 90px;
   }
 
   .footer.footer-ios {
-    min-height: inherit;
     box-shadow: 0px -6px 18px rgba(0, 0, 0, 0.12);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 16px;
-    padding-right: 16px;
     background: #fff;
-    margin-bottom: 49px;
-    border-bottom: 1px solid #BDBDBD
+    border-bottom: 1px solid #BDBDBD;
+    padding-top: 3%;
+    padding-bottom: 17%;
+    height: 17vw;
+    margin-bottom: 13%;
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
 
   .item-ios.item-block .item-inner{
@@ -54,10 +55,10 @@ page-place {
 
   .btn_check{
     background: linear-gradient(0deg, #FF5A00 0%, #FF8A23 100%);
-    border-radius: 100px;
-    padding: 11px;
-    height: 42px;
-    width: 42px;
+    border-radius: 100vw;
+    padding: 2.7vw;
+    height: 10.4vw;
+    width: 10.4vw;
   }
 
   .tabbar_testimonials{
@@ -67,12 +68,6 @@ page-place {
   .offers_count{
     line-height: 34px;
   }
-
-    .text-overflow-35{
-        display: block;
-        max-height: 9vw;
-        height: inherit;
-    }
 
     .num_right {
         position: absolute;
@@ -102,5 +97,13 @@ page-place {
 
     .segment-ios .segment-button:last-of-type {
         margin-left: 13%;
+    }
+
+    .item-block-nau.list.list-ios{
+        margin: 0;
+    }
+
+    .thumb_image{
+        border-radius: 100vw;
     }
 }

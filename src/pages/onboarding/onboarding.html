@@ -5,8 +5,10 @@
         <img src="assets/img/onboarding/n.svg"/>
         <img src="assets/img/onboarding/a.svg"/>
         <img src="assets/img/onboarding/u.svg"/>
+        <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">For business</div>
       </div>
-      <div text-center margin-top margin-bottom class="title-big-sign">Hello!</div>
+      <div *ngIf="!isAdvMode" text-center class="title-big-sign">Hello!</div>
+      <div *ngIf="isAdvMode" text-center class="title-big-sign">Enjoy!</div>
       <p text-center class="font-75 text-white">Are your ready to create amazing offers and <br>visiting best restrant in the world?</p>
     </ion-slide>
     <ion-slide class="slide2">
@@ -14,8 +16,10 @@
         <img src="assets/img/onboarding/n.svg"/>
         <img src="assets/img/onboarding/a.svg"/>
         <img src="assets/img/onboarding/u.svg"/>
+        <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">For business</div>
       </div>
-      <div text-center margin-top margin-bottom class="title-big-sign">Make Money</div>
+      <div *ngIf="!isAdvMode" text-center class="title-big-sign">Make Money</div>
+      <div *ngIf="isAdvMode" text-center class="title-big-sign">Enjoy!</div>
       <p text-center class="font-75 text-white">Are your ready to create amazing offers and <br>visiting best restrant in the world?</p>
     </ion-slide>
     <ion-slide class="slide3">
@@ -23,14 +27,13 @@
         <img src="assets/img/onboarding/n.svg"/>
         <img src="assets/img/onboarding/a.svg"/>
         <img src="assets/img/onboarding/u.svg"/>
+        <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">For business</div>
       </div>
-      <div text-center margin-top margin-bottom class="title-big-sign">Enjoy!</div>
+      <div text-center class="title-big-sign">Enjoy!</div>
       <p text-center class="font-75 text-white">Are your ready to create amazing offers and <br>visiting best restrant in the world?</p>
     </ion-slide>
   </ion-slides>
-  <ion-footer no-shadow no-border padding class="no-border">
-    <p margin>
+  <ion-footer no-shadow no-border class="no-border padding-sign">
       <button color="white" ion-button block outline (click)="skip()">SKIP</button>
-    </p>
   </ion-footer>
 </ion-content>

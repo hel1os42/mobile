@@ -8,21 +8,21 @@
   <ion-item padding-bottom class="border-bottom-no top-block-nau relative overflow-visible">
     <ion-avatar item-start class="relative">
       <img src="assets/img/user_achi/ava.png">
-      <div class="user_level font-20 text-white">L{{ user.level }}</div>
+      <div text-center class="user_level font-20 text-white table"><span class="table-cell">L{{ user.level }}</span></div>
     </ion-avatar>
     <div class="font-18 text-3E4B5D bold">{{ user.name }}</div>
-    <img class="margin-top-10" src="assets/img/user_achi/icon_card.svg">
+    <img class="margin-top-3vw card" src="assets/img/user_achi/icon_card.svg">
     <span text-uppercase class="font-14 text-828282">{{ user.points }} points</span>
     <span text-uppercase class="font-14 text-828282 regular"> / 10 000</span>
     <a class="star_right">
       <div class="flex"><img class="margin-right-10" src="assets/img/user_tasks/icon_note.svg"><span class="text-18 text-BDBDBD">21</span></div>
     </a>
-    <div class="progress-bar-content margin-top-10">
+    <div class="progress-bar-content margin-top-3vw">
       <span class="progress-bar-level"></span>
     </div>
   </ion-item>
 
-  <ion-segment [(ngModel)]="seg" text-uppercase class="nau-segment margin-top-10">
+  <ion-segment [(ngModel)]="seg" text-uppercase class="nau-segment margin-top-7vw">
     <ion-segment-button value="active">
       Active
     </ion-segment-button>
@@ -35,10 +35,10 @@
   <ion-list no-lines class="item-block-nau">
     <ion-item detail-push class="yesterday relative">
       <ion-avatar item-start>
-        <img class="grayscale" src="assets/img/place/offers_image1.png">
+        <div class="thumb_image grayscale" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
-      <div class="bold font-20 text-3E4B5D">Find new places</div>
-      <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54">To provide proper credit, use the embedded credit already in the icon you downloaded
+      <div class="bold font-20 text-3E4B5D width-88">Find new places</div>
+      <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">To provide proper credit, use the embedded credit already in the icon you downloaded
         To provide proper credit, use the embedded credit already in the icon you downloaded
       </div>
       <img class="star_right" src="assets/img/user_tasks/icon_ch.svg">
@@ -49,18 +49,18 @@
   <ion-list no-lines class="item-block-nau">
     <ion-item detail-push class="yesterday">
       <ion-avatar item-start>
-        <img src="assets/img/place/offers_image1.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
-      <div class="bold font-20 text-3E4B5D">Redeem new offers</div>
-      <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54">Proper credit, use the embedded credit already in the icon you downloaded</div>
+      <div class="bold font-20 text-3E4B5D width-88">Redeem new offers</div>
+      <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">Proper credit, use the embedded credit already in the icon you downloaded</div>
     </ion-item>
 
     <ion-item detail-push class="yesterday">
       <ion-avatar item-start>
-        <img src="assets/img/place/offers_image1.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
-      <div class="bold font-20 text-3E4B5D">Redeem new offers</div>
-      <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54">Proper credit, use the embedded credit already in the icon you downloaded</div>
+      <div class="bold font-20 text-3E4B5D width-88">Redeem new offers</div>
+      <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">Proper credit, use the embedded credit already in the icon you downloaded</div>
     </ion-item>
   </ion-list>
 

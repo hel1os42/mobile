@@ -34,6 +34,6 @@ export class AdvUserProfilePage {
 
   openSettings() {
     //this.app.getRootNav().setRoot(SettingsPage);
-    this.nav.push(SettingsPage);
+    this.nav.push(SettingsPage, {isAdvMode: true});
 }
 }

@@ -94,7 +94,7 @@ export class CreateUserProfilePage {
         //this.account.points = this.point(); to do
         this.profile.set(this.user)
         this.profile.put(this.user)
-            .subscribe(resp => this.nav.setRoot(UserProfilePage));
+            .subscribe(resp => this.nav.setRoot(TabsPage, {selectedTabIndex: 1}));
     }
 
     toggleSelect() {

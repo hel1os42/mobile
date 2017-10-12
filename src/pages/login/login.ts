@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from "ionic-angular";
-import { AuthService } from "../../providers/auth.service";
-import { Login } from "../../models/login";
-import { TabsPage } from "../tabs/tabs";
+import { NavController } from 'ionic-angular';
+import { AuthService } from '../../providers/auth.service';
+import { Login } from '../../models/login';
+import { TabsPage } from '../tabs/tabs';
 import { ProfileService } from '../../providers/profile.service';
 import { SignUpPage } from '../signup/signup';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
@@ -16,7 +16,8 @@ import { SignUpInvitePage } from '../invite/invite';
 
 export class LoginPage  {
     data: Login = new Login();
-    numCode: string = "+380";
+    numCodes = ['+7', '+49', '+63', '+57', '+380'];
+    numCode: string = '+380';
     
     constructor(
         private nav: NavController,
@@ -34,7 +35,7 @@ export class LoginPage  {
             .subscribe(
                 resp => {
                     this.appMode.setHomeMode(true);  
-                    this.nav.setRoot(TabsPage);
+                    this.nav.setRoot(TabsPage, {index: 0});
                 }
             );
     }

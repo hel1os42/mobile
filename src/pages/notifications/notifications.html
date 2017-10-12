@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Notifications</ion-title>
-    <ion-buttons end margin-right>
+    <ion-buttons class="btn_header" end margin-right>
         <a *ngIf="!isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_active.svg"></a>
         <a *ngIf="isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_not_active.svg"></a>
     </ion-buttons>
@@ -15,37 +15,36 @@
     <a class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
   </ion-item>
 
-  <div margin-top class="font-14 text-4F4F4F" text-uppercase>Today</div>
-  <ion-list no-lines class="item-block-nau">
+  <div class="font-14 text-4F4F4F" text-uppercase>Today</div>
+  <ion-list no-lines class="item-block-nau font-0">
     <ion-item detail-push class="today">
       <ion-avatar item-start>
-        <img src="assets/img/user_users/ava1.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/user_users/ava1.png)'"></div>
       </ion-avatar>
       <div class="bold font-20 text-3E4B5D">Alex Miller</div>
-      <div text-regular class="margin-top-10 font-12 text-828282">Sent new message for you</div>
-      <button ion-button margin-top class="btn_next font-14 text-white">Read</button>
+      <div text-regular class="font-12 text-828282 margin-top-3vw width-88">Sent new message for you</div>
+      <button ion-button class="btn_next font-14 text-white margin-top-3vw extrabold font-14">Read</button>
     </ion-item>
   </ion-list>
 
-  <div margin-top class="font-14 text-4F4F4F" text-uppercase>Yesterday</div>
-  <ion-list no-lines class="item-block-nau">
+  <div class="font-14 text-4F4F4F padding-top-5vw" text-uppercase>Yesterday</div>
+  <ion-list no-lines class="item-block-nau font-0">
     <ion-item detail-push class="yesterday">
       <ion-avatar item-start>
-        <img src="assets/img/place/offers_image1.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
       <div class="bold font-20 text-3E4B5D">Happy Friday</div>
-      <div class="margin-top-10 font-12 text-828282 wrap text-overflow-35">Our restaurant wants offer your interesting proposition!</div>
-      <div text-uppercase class="margin-top-10 bold font-14 text-FF8B10">Get your chance!</div>
+      <div class="font-12 text-828282 wrap text-overflow-35 margin-top-3vw width-88">Our restaurant wants offer your interesting proposition!</div>
+      <div text-uppercase class="bold font-14 text-FF8B10 margin-top-3vw">Get your chance!</div>
     </ion-item>
 
     <ion-item detail-push class="yesterday">
       <ion-avatar item-start>
-        <img src="assets/img/place/offers_image2.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image2.png)'"></div>
       </ion-avatar>
       <div class="bold font-20 text-3E4B5D">System Notification</div>
-      <div class="margin-top-10 font-12 text-828282 wrap text-overflow-35">Proper credit, use the embedded credit already in the icon you downloaded</div>
+      <div class="font-12 text-828282 wrap text-overflow-35 margin-top-3vw width-88">Proper credit, use the embedded credit already in the icon you downloaded</div>
     </ion-item>
   </ion-list>
-
 
 </ion-content>

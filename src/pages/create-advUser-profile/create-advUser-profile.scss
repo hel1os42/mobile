@@ -1,34 +1,126 @@
 page-create-advUser-profile {
   .cover{
-    background: lightgray;
-    width: 100%;
-    height: 55px;
-    position: relative;
-    margin-bottom: 40px;
+    background: linear-gradient(89.86deg, #FF5A00 0.03%, #FF8B10 99.98%);
   }
 
-  .btn-add-border-in{
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    -moz-outline-radius: 100px;
-    outline: 1px dashed #aea9a9;
-    outline-offset: -4px;
+  .cover_logo{
+      background-color: #fff;
+      background-image: url(../assets/img/create_advuser_profile/dotted.svg);
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      background-size: 80% 80%;
+      display: table;
   }
 
-  .btn-set{
-    border: 1px dashed black;
-    border-radius: 7px;
-    margin: auto;
+  .cover_logo span{
+      margin: 0 auto;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      line-height: 4.5vw;
   }
 
-  .relative{
-    position: relative;
+  .btn_right{
+      position: absolute;
+      right: 4.3vw;
+      bottom: 4.1vw;
+      background: #fff;
+      border-radius: 100vw;
+      height: 6vw;
+      color: #3E4B5D;
   }
 
-  agm-map {
-    height: 200px;
-    border-radius: 50px;
-  }
+    .padding-top-9vw{
+        padding-top: 9vw;
+    }
 
+    .label-ios{
+        margin: 0;
+    }
+
+    agm-map {
+        height: 250px;
+    }
+
+    .block-map{
+        position: relative;
+      }
+
+    #marker {
+        position: absolute;
+        z-index: 111;
+        background-color: rgba(255, 139, 16, 0.2);
+        background-image: url(../assets/img/create_user_profile/pin.svg);
+        background-position: 50% 50%;
+        background-size: auto 31px;
+        background-repeat: no-repeat;
+        width: 150px;
+        height: 150px;
+        left: calc(50% - 75px);
+        top: 50px;
+        border-radius: 150px;
+        pointer-events: none;
+      }
+
+    .select-ios .select-icon{
+        display: none;
+    }
+
+    .category img{
+        width: 6.5vw;
+        margin-left: 2vw;
+        height: auto;
+    }
+
+    .choose-img{
+        height: 7vw;
+        width: auto;
+    }
+
+}
+
+create-advUser-profile-popover-component1{
+    .item-ios {
+        padding-left: 0;
+        margin-bottom: 7vw;
+    }
+
+    .block-checks img{
+        height: 7.8vw;
+        width: auto;
+    }
+
+    .block-img-category{
+        width: 23vw;
+        text-align: center;
+    }
+
+    .modal_content{
+        padding-top: 8vw;
+        padding-right: 6vw;
+        padding-left: 3vw;
+    }
+}
+
+create-advUser-profile-popover-component2{
+    .item-ios {
+        padding-left: 0;
+        margin-bottom: 1vw;
+    }
+
+    .block-checks img{
+        height: 7.8vw;
+        width: auto;
+    }
+
+    .block-img-category{
+        width: 23vw;
+        text-align: center;
+    }
+
+    .modal_content{
+        padding-top: 8vw;
+        padding-right: 7vw;
+        padding-left: 10vw;
+    }
 }

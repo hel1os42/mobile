@@ -48,19 +48,8 @@ page-places {
   }
 
   .text-overflow-35{
-    display: block;
     width: 93%;
-    max-height: 9vw;
-    height: inherit;
   }
-
-    .margin-top-1vw{
-        margin-top: 1vw;
-    }
-
-    .margin-bottom-3vw{
-        margin-bottom: 3vw;
-    }
 
     .segment-ios{
         width: 90%;
@@ -86,6 +75,10 @@ page-places {
         top: -1px;
         background-color: white;
         z-index: 100;
+    }
+
+    .item-block-nau .item{
+        padding: 2vw;
     }
 }
 
@@ -119,24 +112,15 @@ places-popover-component {
     background-image: none;
   }
 
-  .footer_btn {
-    position: absolute;
-    width: 90%;
-    bottom: 0;
-    left: 5%;
-    background: #fff;
-    border-radius: 10px;
-  }
-
-  .footer_btn .grid{
-    padding-bottom: 16px;
-  }
-
   .margin-left-2proc{
     margin-left: 2%;
   }
 
   .margin-right-2proc{
     margin-right: 2%;
+  }
+
+  .footer_btn .grid {
+    padding-bottom: 16px;
   }
 }

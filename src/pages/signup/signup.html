@@ -3,26 +3,24 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding scroll="false">
+<ion-content class="padding-sign" scroll="false">
   <div class="logo">
   </div>
-  <div text-center margin-top margin-bottom class="title-big-sign">Phone Number</div>
-  <p margin-bottom text-center class="font-75 text-4F4F4F">Please choose your country phone code<br>and fill your phone number</p>
-  <ion-item padding class="border-bottom-no">
-    <ion-select class="bg-gray-left" placeholder="+380" [(ngModel)]="numCode" interface="popover">
-      <ion-option selected value="+380">+380</ion-option>
-      <ion-option value="+1">+1</ion-option>
-    </ion-select>
+  <div text-center class="title-big-sign">Phone Number</div>
+  <div text-center class="margin-top-6vw font-75 text-4F4F4F">Please choose your country phone code<br>and fill your phone number</div>
+  <ion-item class="border-bottom-no margin-top-6vw">
+    <ion-select class="bg-gray-left" [(ngModel)]="numCode" interface="popover">
+        <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
+      </ion-select>
     <ion-input class="bg-gray-right" type="tel" placeholder="123-45-67" [(ngModel)] ="phone"></ion-input>
   </ion-item>
 
-  <p padding>
-  <button (click)="getCode()" [disabled]="!(phone)" ion-button block middle color="primary" margin-bottom>Next</button>
-  </p>
+  <button text-uppercase class="margin-top-5vw" (click)="getCode()" [disabled]="!(phone)" ion-button block middle color="primary">Next</button>
+
 </ion-content>
 
-<ion-footer padding>
-  <div text-center margin class="font-75 text-828282">
+<ion-footer no-shadow no-border>
+  <div text-center class="font-75 text-828282">
     Please do not disturb<br> your private data will be safety
   </div>
 </ion-footer>

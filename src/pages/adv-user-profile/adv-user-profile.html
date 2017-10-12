@@ -1,63 +1,76 @@
 <ion-header>
-  <ion-navbar text-right class="font-125">
-    <p padding-right>
-      <ion-icon name="contact" class="text-black"></ion-icon>
-      0
-    </p>
-  </ion-navbar>
-  <a item-end (click)="openSettings()" margin-right>
-      <ion-icon color="dark" class="font-200" name="settings"></ion-icon>
-  </a>
+    <ion-navbar>
+        <ion-title>Advertiser</ion-title>
+        <ion-buttons class="btn_header" margin-right end>
+            <a (click)="openSettings()"><img src="assets/img/settings.svg"></a>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-list class="margin-0">
+        <div class="cover">
+            <img class="cover_logo" src="assets/img/user_home/image1.png">
+            <button text-uppercase item-end ion-button class="btn_transfer font-16 extrabold text-white">Create offer</button>
+        </div>
+
+        <div margin-left margin-right margin-bottom class="font-0 relative margin-top-14vw">
+            <div margin-top  class="text-3E4B5D font-36 bold">The Fair Food</div>
+            <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc">330 S. Pineapple Ave., Suite 201 Sarasota, Florida 34236</div>
+            <div class="font-12 text-828282 wrap text-overflow-35 margin-top-2proc width-88">Double Up Food Bucks is a national model for healthy food incentives active in more than 20 states</div>
+        </div>
+    </ion-list>
 </ion-header>
 
-<ion-content>
-
-  <div class="cover">
-    <img src="assets/img/thumb_offers1.png" class="ava_adv">
-  </div>
-  
-
-  <ion-content padding>
-    <ion-grid text-center margin-bottom>
-      <ion-row>
-        <ion-col>
-          <ion-icon class="icon-medium" name="lock"></ion-icon>
-          <p text-uppercase class="font-100">offers</p>
-          <p>0</p>
-        </ion-col>
-        <ion-col>
-          <ion-icon class="icon-medium" name="sync"></ion-icon>
-          <p text-uppercase class="font-100">nau</p>
-          <p>0</p>
-        </ion-col>
-        <ion-col>
-          <ion-icon class="icon-medium" name="card"></ion-icon>
-          <p text-uppercase class="font-100">points</p>
-          <p>0</p>
-        </ion-col>
-      </ion-row>
+<ion-content padding>
+    <ion-grid text-center class="block-icon-bottom padding-top-3vw padding-bottom-5vw">
+        <ion-row>
+            <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
+                <div>
+                    <img src="assets/img/user_profile/offers.svg">
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">0</div>
+                    <div text-uppercase class="text-3E4B5D font-12">offers</div>
+                </div>
+            </a>
+            <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
+                <div>
+                    <img src="assets/img/user_profile/nau.svg">
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">0</div>
+                    <div text-uppercase class="text-3E4B5D font-12">nau</div>
+                </div>
+            </a>
+            <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
+                <div>
+                    <img src="assets/img/adv-user-profile/static.svg">
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">0</div>
+                    <div text-uppercase class="text-3E4B5D font-12">users</div>
+                </div>
+            </a>
+        </ion-row>
     </ion-grid>
 
-    <button (click)="openCreateOffer()"ion-button full margin-top>Create offer</button>
-  </ion-content>
+    <ion-grid text-center class="block-slider">
+        <ion-row>
+            <ion-col col-1 align-self-center>
+                <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon></a>
+            </ion-col>
+            <ion-col class="grid" col-10 align-self-center>
+                <ion-slides spaceBetween="10">
+                    <ion-slide (click)="openRewards()">
+                        <ion-list no-lines>
+                            <ion-item class="text-white">
+                                <ion-avatar item-start>
+                                    <img src="assets/img/adv-user-profile/img.png">
+                                </ion-avatar>
+                                <div class="font-12 text-828282 light">07/08/2017</div>
+                                <div class="font-16 padding-top-1vw bold text-3E4B5D">New restaurant</div>
+                                <div class="font-12 padding-top-1vw text-828282 text-overflow-35 wrap">Double Up Food Bucks is a national model for health</div>
+                            </ion-item>
+                        </ion-list>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+            <ion-col col-1 align-self-center>
+                <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200 text-828282"></ion-icon></a>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
 </ion-content>
-
-
-<p *ngIf="!isModalVisible" class="modal_create">
-  <ion-card color="light">
-    <p text-right>
-      <a (click)="closeModal()" class="close_btn icon-small" color="dark"><ion-icon name="close"></ion-icon></a>
-    </p>
-
-    <ion-card-header text-center>
-      <p text-center>
-        <img src="assets/img/proc.png"/>
-      </p>
-      <h2>Create Your First Offer</h2>
-    </ion-card-header>
-
-    <ion-card-content>
-      <button (click)="openCreateOffer()" color="dark" ion-button block>Create</button>
-    </ion-card-content>
-  </ion-card>
-</p>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController, App, NavParams } from 'ionic-angular';
-import { SubCategory } from '../../models/offerSubCategory';
 import { OfferService } from '../../providers/offer.service';
+import { ChildCategory } from '../../models/childCategory';
 
 @Component({
     selector: 'places-alternative-popover-component',
@@ -10,7 +10,7 @@ import { OfferService } from '../../providers/offer.service';
 
 export class PlacesAlternativePopover {
 
-    categories: SubCategory[];
+    categories: ChildCategory[];
     selectCategories: any[];
     categoriesIds: string[];
 

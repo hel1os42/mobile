@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
-import { LocationService } from "../../providers/location.service";
-import { Coords } from "../../models/coords";
-import { AdvUserProfilePage } from "../adv-user-profile/adv-user-profile";
-import { NavController } from "ionic-angular";
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { LocationService } from '../../providers/location.service';
+import { Coords } from '../../models/coords';
+import { NavController, PopoverController } from 'ionic-angular';
 import { OfferCategory } from '../../models/offerCategory';
 import { ApiService } from '../../providers/api.service';
+import { CreateAdvUserProfilePopover1 } from './create-advUser-profile.popover1';
 import * as _ from 'lodash';
+import { OfferService } from '../../providers/offer.service';
+import { SelectedCategory } from '../../models/selectedCategory';
+import { LatLngLiteral } from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
+import { ChildCategory } from '../../models/childCategory';
+import { CreateAdvUserProfilePopover2 } from './create-advUser-profile.popover2';
+import { PlaceCreate } from '../../models/placeCreate';
+import { AdvTabsPage } from '../adv-tabs/adv-tabs';
+import { AdvertiserService } from '../../providers/advertiser.service';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -15,35 +24,136 @@ import * as _ from 'lodash';
 export class CreateAdvUserProfilePage {
     coords: Coords = new Coords();
     message: string;
-    selectedCategory: OfferCategory;
-    categories: OfferCategory[];
-    names: string[];
+    categories: OfferCategory[] = OfferCategory.StaticList;
+    childCategories: ChildCategory[];
+    selectedCategory: SelectedCategory;
+    selectedChildCategories: SelectedCategory[];
+    childCategoriesNames: string[];
+    place = new PlaceCreate;
+    pictureurl;
+    coverurl;
+    address: string;
 
     constructor(
         private location: LocationService,
         private nav: NavController,
-        private api: ApiService) {
+        private popoverCtrl: PopoverController,
+        private api: ApiService,
+        private offer: OfferService,
+        private advertCreate: AdvertiserService,
+        private changeDetectorRef: ChangeDetectorRef) {
 
     }
 
     ionViewDidLoad() {
+
         this.location.get()
-            .then((resp) => {                
+            .then((resp) => {
                 this.coords = {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
-                    };
-                })
-                .catch((error) => {
-                    this.message = error.message;
-                    console.log(this.message);
-                });
-
-        this.api.get('categories')
-            .subscribe(resp => this.categories = resp.data);
+                };
+            })
+            .catch((error) => {
+                this.message = error.message;
+                console.log(this.message);
+            });
     }
 
-    openAdvUserProfile() {
-        this.nav.push(AdvUserProfilePage);
+    onMapCenterChange(center: LatLngLiteral) {
+        this.coords.lat = center.lat;
+        this.coords.lng = center.lng;
+        this.geocodeDebounced();
+    }
+
+    geocodeDebounced = _.debounce(this.geocode, 1000);
+
+    geocode() {
+        let google = window['google'];
+        let geocoder = new google.maps.Geocoder();
+        let latlng = { lat: this.coords.lat, lng: this.coords.lng };
+        geocoder.geocode({ 'location': latlng }, (results, status) => {
+            if (status === 'OK') {
+                this.address = results[0].formatted_address;
+                // this.city = this.findResult(results, "locality");
+                // this.country = this.findResult(results, "country");
+                this.changeDetectorRef.detectChanges();
+                console.log(results);
+            }
+        });
+    }
+
+    showCategoriesPopover() {
+        let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover1, {
+            categories: this.categories.map(p => {
+                return {
+                    id: p.id,
+                    name: p.name,
+                    image_url: p.imageAdvCreate_url,
+                    isSelected: this.selectedCategory && p.id == this.selectedCategory.id
+                }
+            })
+        });
+
+        popover.present();
+        popover.onDidDismiss(categories => {
+            if (!categories)
+                return;
+
+            let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
+            if (selectedCategories.length > 0) {
+                this.selectedCategory = selectedCategories[0];
+            }
+        })
+    }
+
+    showChildCategoriesPopover() {
+        this.offer.getSubCategories(this.selectedCategory.id)
+            .subscribe(resp => {
+                this.childCategories = resp.children;
+                let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover2, {
+                    categoryName: this.selectedCategory.name,
+                    categories: this.childCategories.map(p => {
+                        return {
+                            id: p.id,
+                            name: p.name,
+                            image_url: '',
+                            isSelected: this.selectedChildCategories ? !!this.selectedChildCategories.find(k => k.id == p.id) : false
+                        }
+                    })
+
+                })
+                popover.present();
+                popover.onDidDismiss(categories => {
+                    if (!categories) {
+                        return;
+                    }
+
+                    let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
+                    if (selectedCategories.length > 0) {
+                        this.selectedChildCategories = selectedCategories;
+                        this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name);
+                    }
+                    else {
+                        this.selectedChildCategories = undefined;
+                    }
+                })
+            })
+
+    }
+
+    createAccount() {
+        this.place.latitude = this.coords.lat;
+        this.place.longitude = this.coords.lng;
+        this.place.address = this.address;
+        this.place.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
+        debugger
+        this.place.radius = 30000;
+
+        debugger
+        this.advertCreate.set(this.place)
+            .subscribe(resp =>
+                this.nav.push(AdvTabsPage))
+
     }
 }

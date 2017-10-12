@@ -1,59 +1,47 @@
 page-adv-user-profile {
-  .cover{
-    background: url(../assets/img/adv_user_profile_banner.jpg);
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 80px;
-    position: relative;
-    margin-bottom: 40px;
-  }
+    .cover{
+        background-image: url(../assets/img/place/header.png);
+    }
 
-  .ava_adv{
-    position: absolute;
-    height: 70px;
-    width: 70px;
-    top: 43px;
-    left: 15px;
-    border-radius: 100px;
-  }
+    .block-icon-bottom img {
+        height: 9.4vw;
+        width: auto;
+        margin-bottom: 3vw;
+    }
 
-  p{
-    margin-bottom: 0;
-    margin-top: 5px;
-  }
+    .block-slider{
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        height: 31.4vw;
+    }
 
-  .col{
-    box-shadow: 0 0 9px rgba(0,0,0,0.1);
-  }
+    .block-slider .row{
+        height: 100%;
+    }
 
-  .card {
-    margin: auto;
-    border-radius: 7px;
-    width: 100%;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-  }
+    .block-slider .item-ios ion-avatar img{
+        height: 17vw;
+        width: 17vw;
+        border-radius: 0;
+        margin-left: 4vw;
+    }
 
-  .modal_create{
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 111;
-    background: rgba(0, 0, 0, 0.71);
-    padding: 5%;
-    display: flex;
-  }
+    .block-slider ion-list {
+        padding: 2vw;
+    }
 
-  .close_btn{
-    margin: 4px;
-  }
+    .list-ios{
+        margin: 0;
+    }
 
-  ion-card img{
-    width: 40%;
-    display: inline;
-  }
+    .text-overflow-35 {
+        max-height: 11vw;
+    }
+
+    .btn_transfer{
+        position: absolute;
+        bottom: -6.3vw;
+        right: 4.8vw;
+        background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+        border-radius: 100vw;
+    }
 }

@@ -1,11 +1,10 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, Navbar, App, PopoverController } from 'ionic-angular';
+import { NavController, Navbar, App, PopoverController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 import { AgmCoreModule } from '@agm/core';
 import { LatLngLiteral } from "@agm/core";
 import { User } from "../../models/user";
 import { ProfileService } from "../../providers/profile.service";
-import { CreateAdvUserProfilePage } from "../create-advUser-profile/create-advUser-profile";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
 import { TabsPage } from "../tabs/tabs";
@@ -15,6 +14,9 @@ import { SettingsPopover } from './settings.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
+import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
+import { OnBoardingPage } from '../onboarding/onboarding';
+import { AdvertiserService } from '../../providers/advertiser.service';
 
 
 @Component({
@@ -28,14 +30,12 @@ export class SettingsPage {
     radiuses = [100, 150, 200, 250, 500, 1000];
     isAccountsChoiceVisible: boolean = false;
     isSelectRadiusVisible: boolean = false;
-    isAdvMode: boolean;
-    isVisibleModal: boolean = false;
-    isVisibleRedeemButton: boolean = false;
-    isToggled: boolean = false;
+    isAdvMode = false;
+    isChangeMode = false;
     showData: boolean = false;
     showPhone: boolean = false;
     showEmail: boolean = false;
-
+    nextPage: any;
 
     constructor(
         private nav: NavController,
@@ -45,9 +45,11 @@ export class SettingsPage {
         private app: App,
         private auth: AuthService,
         private popoverCtrl: PopoverController,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private navParams: NavParams,
+        private advert: AdvertiserService ) {
 
-        this.isAdvMode = this.appMode.getAdvMode();
+        this.isAdvMode = this.navParams.get('isAdvMode');
 
         this.profile.get()
             .subscribe(resp => this.user = resp);
@@ -62,6 +64,11 @@ export class SettingsPage {
             .catch((error) => {
                 this.message = error.message;
             });
+
+        this.advert.get()
+            .subscribe(
+            resp => this.nextPage = AdvTabsPage,
+            errResp => this.nextPage = CreateAdvUserProfilePage);
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -85,23 +92,43 @@ export class SettingsPage {
     }
 
     toggleAdvMode() {
-        // this.isToggled = true;
-        // this.appMode.setAdvMode(this.isAdvMode);
-        // this.isVisibleModal = this.isAdvMode;
-        // if (this.isAdvMode) {
-        //     let popover = this.popoverCtrl.create(SettingsPopover);
-        //     popover.present();
-        //}
-        return this.isVisibleRedeemButton;
+        this.isChangeMode = !this.isChangeMode;
+        if (this.nextPage == CreateAdvUserProfilePage) {
+            this.popoverShow(this.nextPage);
+        }
+        else {
+            this.popoverShow(this.nextPage);
+        }
+        return this.isAdvMode;
+    }
+
+    popoverShow(page) {
+        if (this.isAdvMode) {
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: page });
+            popover.present();
+        }
     }
 
     saveProfile() {
+        this.appMode.setAdvMode(this.isAdvMode);
+
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
-
         this.profile.put(this.user)
-            .subscribe(resp => this.nav.pop());
-
+            .subscribe(resp => {
+                if (!this.isChangeMode) {
+                    this.nav.pop();
+                }
+                else {
+                    if (this.isAdvMode) {
+                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true});
+                    }
+                    else {
+                        this.app.getRootNav().push(TabsPage);
+                    }
+                    
+                }
+            });
     }
 
     toggleAccountsChoiceVisible() {
@@ -112,12 +139,8 @@ export class SettingsPage {
         this.isSelectRadiusVisible = !this.isSelectRadiusVisible;
     }
 
-    closeModal() {
-        this.isVisibleModal = !this.isVisibleModal;
-    }
-
     openChangePhone(user: User) {
-        this.nav.push(SettingsChangePhonePage, { user: this.user});
+        this.nav.push(SettingsChangePhonePage, { user: this.user });
     }
 
     openAdvRedeem() {

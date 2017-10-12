@@ -3,21 +3,36 @@ page-notifications{
     right: 20px;
   }
 
-  .today.item.item-block.item-ios ion-avatar ion-img, .today.item.item-block.item-ios ion-avatar img, .today.item.item-block.item-ios ion-avatar img{
-    border-radius: 100px;
+  .today .thumb_image{
+    border-radius: 100vw;
   }
 
   .btn_next.item-button{
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 17px;
-    padding-right: 17px;
+    padding-left: 7vw;
+    padding-right: 7vw;
     background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
-    border-radius: 12px;
+    border-radius: 2.5vw;
+    height: 7.2vw;
   }
 
   .item-ios.item-block .item-inner{
     padding-right: 0;
   }
 
+    .btn_header img {
+        width: 4.8vw;
+        height: 4.8vw;
+    }
+
+    .item-block-nau.list.list-ios {
+        margin: 0;
+    }
+
+    .searchbar-ios{
+        width: 100%;
+    }
+
+    .btn_search_settings img{
+        right: 3vw;
+    }
 }

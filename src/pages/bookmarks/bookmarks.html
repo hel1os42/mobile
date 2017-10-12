@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item no-lines>
+  <ion-item no-lines class="border-bottom-no top-block-nau">
     <ion-avatar item-start>
       <img src="assets/img/bookmarks/star.svg">
     </ion-avatar>
@@ -24,45 +24,49 @@
   </ion-segment>
 
   <!-- PLACES -->
-  <ion-list margin-top no-lines class="item-block-nau block-places margin-top-10">
-    <ion-item class="relative">
-      <ion-avatar item-start text-center>
-        <img src="assets/img/user_home/image1.png">
-        <span text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">Featured</span>
-      </ion-avatar>
-      <div>
-        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 font-12" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 font-12" name="star-outline"></ion-icon>
-        <img class="margin-left-5 margin-right-5" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">128</span>
-        <img class="margin-left-5" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75 text-828282"> 100 m</span>
-      </div>
-      <div class="bold font-20 text-3E4B5D text-ellipsis margin-bottom-5">The Fair food</div>
-      <span class="type-food font-10 text-3E4B5D">Bakery</span>
-      <span class="type-food font-10 text-3E4B5D">Burger</span>
-      <div margin-top class="text-828282 font-12 wrap text-overflow-35 margin-top-5">The modern</div>
-      <img class="star_right" src="assets/img/place/icon_star.svg">
+    <ion-list no-lines class="item-block-nau margin-top-10 block-places">
+        <a ion-item detail-none (click)="openPlace(company)">
+            <ion-avatar item-start text-center>
+                <!-- <img [src]="company.picture_url"> -->
+                <div class="thumb_image" [style.background-image]="'url(assets/img/user_home/image1.png)'"></div>
+                <span text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">Featured</span>
+            </ion-avatar>
+            <div class="font-0">
+                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
+                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
+                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
+                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
+                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
+                <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">128</span>
+                <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+                <span class="font-75 text-828282">100 m</span>
+                <div class="bold font-20 text-3E4B5D text-ellipsis margin-top-1vw">The Fair food</div>
+                <div class="wrap">
+                <span class="type-food">Bakkery</span>
+                </div>
+                <div margin-top class="text-828282 font-12 wrap text-overflow-35 margin-top-5">Description</div>
+            </div>
+            <img class="star_right" src="assets/img/place/icon_star.svg">
 
-      <div item-end>
-        <div class="num_right">
-          <div class="font-36 bold text-FF5A00" text-center>
-            3
-          </div>
-          <div text-center class="font-10 text-828282">
-            Offers
-          </div>
-        </div>
-      </div>
-    </ion-item>
-  </ion-list>
+            <div item-end>
+                <div class="num_right">
+                    <div class="font-36 bold text-FF5A00" text-center>
+                        24
+                    </div>
+                    <div text-center class="font-10 text-828282">
+                        Offers
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    </ion-list>
 
   <!-- OFFERS -->
   <ion-list margin-top no-lines class="block-offers item-block-nau">
     <ion-item class="relative">
       <ion-avatar item-start>
-        <img src="assets/img/place/offers_image1.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
       <div class="bold font-22 text-3E4B5D">Chance for you</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap text-overflow-35">A hamburger or burger is a sandwich consisting of one</div>
@@ -76,7 +80,7 @@
 
     <ion-item class="relative">
       <ion-avatar item-start>
-        <img src="assets/img/place/offers_image2.png">
+        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image2.png)'"></div>
       </ion-avatar>
       <div class="bold font-20 text-3E4B5D text-ellipsis">Happy Friday</div>
       <div text-regular class="margin-top-10 font-12 text-828282 wrap">The patty may be pan fried, barbecued, or flame broiled</div>

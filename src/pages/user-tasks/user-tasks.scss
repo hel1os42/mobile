@@ -11,17 +11,14 @@ page-user-tasks{
     height: inherit;
   }
 
-  .top-block-nau ion-avatar img{
-    border-radius: 100px;
-  }
-
   .user_level{
     position: absolute;
-    bottom: -10px;
-    right: -10px;
+    right: -4vw;
+    bottom: -4vw;
+    border-radius: 100vw;
+    height: 10vw;
+    width: 10vw;
     background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
-    border-radius: 100px;
-    padding: 8px;
   }
 
   .grayscale{
@@ -33,4 +30,28 @@ page-user-tasks{
     top: 0;
     right: 0;
   }
+
+    .top-block-nau.item-ios ion-avatar img{
+        border-radius: 100vw;
+        width: 15vw;
+        height: 15vw;
+    }
+
+    .top-block-nau.item-ios ion-avatar {
+        margin: 0 5vw 0 0;
+    }
+
+    .top-block-nau .star_right img{
+        height: 7.7vw;
+        width: auto;
+    }
+
+    .card{
+        height: 5vw;
+        width: auto;
+    }
+
+    .item-block-nau.list.list-ios{
+        margin: 0;
+    }
 }

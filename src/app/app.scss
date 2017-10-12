@@ -25,11 +25,16 @@
     src: url('../assets/fonts/OpenSans-Semibold.ttf');
 }
 
+@font-face {
+    font-family: 'OpenSansNauExtrabold';
+    src: url('../assets/fonts/OpenSans-ExtraBold.ttf');
+}
+
 .link-nau{
   font-style: normal;
   font-weight: bold;
   line-height: normal;
-  font-size: 16px;
+  font-size: 4.2vw;
   text-align: center;
   text-transform: uppercase;
   color: #FF5A00;
@@ -39,7 +44,7 @@
   font-style: normal;
   font-weight: 300;
   line-height: normal;
-  font-size: 36px;
+  font-size: 8vw;
   color: #3E4B5D;
   font-family: 'OpenSansNauLight';
 }
@@ -95,19 +100,19 @@ button[ion-button] {
 }
 
 .logo {
-  width: 90%;
-  height: 40%;
-  margin: 0 auto;
-  background: url("../assets/img/logo.svg") no-repeat center center;
-  background-size: contain;
+    width: auto;
+    height: 22vw;
+    margin: 12vw auto 17vw auto;
+    background: url(../assets/img/logo.svg) no-repeat center center;
+    background-size: contain;
 }
 
 .logo-margin {
-  width: 90%;
-  height: 40%;
-  margin: 15% auto 5% auto;
-  background: url("../assets/img/logo.svg") no-repeat center center;
-  background-size: contain;
+    width: auto;
+    height: 22vw;
+    margin: 27vw auto 17vw auto;
+    background: url(../assets/img/logo.svg) no-repeat center center;
+    background-size: contain;
 }
 
 .header-ios .toolbar-ios:last-child .toolbar-background-ios{
@@ -120,6 +125,10 @@ ion-header ion-icon.back-button-icon.icon {
 
 .bold{
   font-weight: bold;
+}
+
+.extrabold{
+  font-family: 'OpenSansNauExtrabold';
 }
 
 .no-bold{
@@ -142,35 +151,40 @@ ion-header ion-icon.back-button-icon.icon {
     font-size: 0;
 }
 
-.font-10{
+.font-10, button.font-10{
   font-size: 10px;
-    font-size: 2.5vw;
+  font-size: 2.5vw;
 }
 
-.font-12{
+.font-12, button.font-12{
   font-size: 12px;
   font-size: 3vw;
 }
 
-.font-14{
+.font-14, button.font-14{
   font-size: 14px;
+  font-size: 3.7vw;
 }
 
-.font-16{
+.font-16, button.font-16{
   font-size: 16px;
+  font-size: 4.2vw;
 }
 
-.font-18{
+.font-18, button.font-18{
   font-size: 18px;
+  font-size: 4.7vw;
 }
 
-.font-20{
+.font-20, button.font-20{
   font-size: 20px;
     font-size: 5vw;
+    line-height: 5vw;
 }
 
-.font-22{
+.font-22, button.font-22{
   font-size: 22px;
+  font-size: 5.7vw;
 }
 
 .font-30{
@@ -185,6 +199,8 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-40{
   font-size: 40px;
+  font-size: 10vw;
+  line-height: 10vw;
 }
 
 .font-50{
@@ -193,6 +209,7 @@ ion-header ion-icon.back-button-icon.icon {
 
 .font-65{
   font-size: 11px;
+  font-size: 2.7vw;
 }
 
 .font-75{
@@ -347,8 +364,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .bg-gray{
-  border-radius: 100px;
+  border-radius: 100vw;
   border: 1px solid #E0E0E0;
+  min-height: 11.8vw;
+}
+
+.bg-gray.item-block{
+    min-height: 11.8vw;
 }
 
 .bg-gray-radius-small{
@@ -368,7 +390,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   font-style: normal;
   font-weight: bold;
   line-height: normal;
-  font-size: 16px;
+  font-size: 4.3vw;
   text-transform: uppercase;
   color: #828282;
 }
@@ -423,7 +445,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .label-left{
-  padding: 11px 21.5px;
+  padding: 3vw 4vw 3vw 6vw;
   color: map-get($colors, dark);
 }
 
@@ -483,6 +505,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   font-weight: normal;
 }
 
+.toolbar-ios {
+  padding: 0;
+  min-height: 14vw;
+}
+
 .toolbar-ios ion-title{
   padding: 0 10px 1px;
 }
@@ -528,7 +555,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .footer.footer-ios {
   border-top: 1px solid #F2F2F2;
-  min-height: 86px;
+  height: 25vw;
+  padding: 7vw;
 }
 
 .no-border.footer.footer-ios {
@@ -540,37 +568,37 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .margin-bottom-small{
-  margin-bottom: 5px;
+  margin-bottom: 2.2vw;
 }
 
 .block-lines{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-top: 4vw;
+  padding-bottom: 4vw;
+  padding-left: 4.3vw;
+  padding-right: 4.3vw;
   border-top: 1px solid #F2F2F2;
   border-bottom: 1px solid #F2F2F2;
 }
 
 .block-lines-bottom-left-right{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-top: 4vw;
+  padding-bottom: 4vw;
+  padding-left: 4.3vw;
+  padding-right: 4.3vw;
   border-bottom: 1px solid #F2F2F2;
 }
 
 /* BLOCK TOP & ITEMS SHADOW */
 .top-block-nau ion-avatar {
   border-radius: 0;
-  height: 40px;
+  height: 10vw;
 }
 
 .top-block-nau [item-end] {
   margin: 0;
 }
 
-.top-block-nau .item-ios ion-avatar ion-img, .item-ios ion-avatar img, .item-block-nau .item-ios ion-avatar img{
+.item-block-nau .item-ios ion-avatar img{
   border-radius: 0;
   height: inherit;
   max-width: 23vw;
@@ -578,10 +606,36 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   width: 23vw;
 }
 
+.item-block-nau .item-ios ion-avatar .thumb_image{
+    border-radius: 0;
+    height: 23vw;
+    width: 23vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.top-block-nau.item-ios ion-avatar img{
+    border-radius: 0;
+    height: inherit;
+    max-width: inherit;
+    max-height: inherit;
+    width: inherit;
+}
+
+.top-block-nau.item-ios ion-avatar{
+    margin: 0 2.9vw 0 0;
+}
+
+.top-block-nau [item-end] a img{
+    height: 7.7vw;
+    width: auto;
+}
+
 .item-block-nau .item{
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   margin-bottom: 3%;
-  padding: 2vw;
+  padding: 4vw;
 }
 
 .item-block-nau .input-wrapper .label-ios, .item-block-nau-slider .input-wrapper .label-ios{
@@ -637,7 +691,6 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .grid-tabs-splash .col {
     display: table-cell;
-    width: auto;
     width: 25vw;
 }
 
@@ -666,10 +719,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .searchbar-ios{
   background: #fff;
   border: 1px solid #E0E0E0;
-  border-radius: 8px;
-  min-height: 42px;
+  border-radius: 2vw;
   width: 77vw;
   height: 10vw;
+  min-height: inherit;
 }
 
 .searchbar-ios.searchbar-left-aligned .searchbar-input {
@@ -729,8 +782,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 /* SEGMENT NAU */
 .nau-segment.segment-ios .segment-button{
-  border: 1px solid #FF8B10;
-  color: #FF8B10;
+    color: #FF8B10;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #FF8B10;
+    border-bottom: 1px solid #FF8B10;
+    font-family: 'OpenSansNauSemibold';
+    font-size: 3.7vw;
 }
 
 .nau-segment.segment-ios .segment-button.segment-activated{
@@ -739,21 +797,33 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .nau-segment.segment-ios .segment-button:first-of-type {
-  border-top-left-radius: 100px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 100px;
+    border-top-left-radius: 100vw;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 100vw;
+    border-left: 1px solid #FF8B10;
+    border-top: 1px solid #FF8B10;
+    border-bottom: 1px solid #FF8B10;
 }
 
 .nau-segment.segment-ios .segment-button:last-of-type {
-  border-top-left-radius: 0;
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
-  border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 100vw;
+    border-bottom-right-radius: 100vw;
+    border-bottom-left-radius: 0;
+    border-right: 1px solid #FF8B10;
+    border-top: 1px solid #FF8B10;
+    border-bottom: 1px solid #FF8B10;
 }
 
 .wrap{
   white-space: normal;
+}
+
+.wrap-no{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .italic{
@@ -895,8 +965,48 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-bottom: 2.4%;
 }
 
+.margin-bottom-1vw{
+    margin-bottom: 1vw;
+}
+
+.margin-bottom-2vw{
+    margin-bottom: 2vw;
+}
+
 .margin-top-2proc{
     margin-top: 2%;
+}
+
+.margin-top-6vw{
+    margin-top: 6vw;
+}
+
+.margin-left-6vw{
+    margin-left: 6vw;
+}
+
+.margin-top-5vw{
+    margin-top: 5vw;
+}
+
+.margin-top-3vw{
+    margin-top: 3vw;
+}
+
+.margin-top-1vw{
+    margin-top: 1vw;
+}
+
+.margin-top-14vw{
+    margin-top: 14vw;
+}
+
+.margin-top-7vw{
+    margin-top: 7vw;
+}
+
+.margin-bottom-3vw{
+    margin-bottom: 3vw;
 }
 
 .padding-10{
@@ -911,8 +1021,24 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     padding-bottom: 10px;
 }
 
+.padding-bottom-5vw{
+    padding-bottom: 5vw;
+}
+
 .padding-left-10{
     padding-left: 10px;
+}
+
+.padding-left-2vw{
+    padding-left: 2vw;
+}
+
+.padding-left-1vw{
+    padding-left: 1vw;
+}
+
+.padding-left-4vw{
+    padding-left: 4vw;
 }
 
 .padding-right-10{
@@ -923,10 +1049,43 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     padding-right: 5px;
 }
 
+.padding-sign .fixed-content, .padding-sign .scroll-content{
+    padding-left: 13.5vw;
+    padding-right: 13.5vw;
+}
+
+.padding-top-5vw{
+    padding-top: 5vw;
+}
+
+.padding-top-3vw{
+    padding-top: 3vw;
+}
+
+.padding-top-1vw{
+    padding-top: 1vw;
+}
+
+.padding-top-8vw{
+    padding-top: 8vw;
+}
+
+.padding-bottom-5vw{
+    padding-bottom: 5vw;
+}
+
+.padding-left-5vw{
+    padding-left: 5vw;
+}
+
+.padding-right-5vw{
+    padding-right: 5vw;
+}
+
 /* HEADER. Page places */
 .cover{
   width: 100%;
-  height: 89px;
+  height: 20vw;
   position: relative;
   background-size: cover;
   background-position: 50% 50%;
@@ -939,7 +1098,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   bottom: -11vw;
   width: 22vw;
   height: 22vw;
-  border-radius: 100px;
+  border-radius: 100vw;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
@@ -974,9 +1133,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .star_right{
-  position: absolute;
-  right: 10px;
-  top: 10px;
+    position: absolute;
+    right: 4vw;
+    top: 4vw;
+    height: 4vw;
+    width: auto;
 }
 
 .num_right {
@@ -1018,6 +1179,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
+  width: 5.1vw;
+  height: 3.9vw;
 }
 
 .checkbox-ios .checkbox-icon.checkbox-checked {
@@ -1027,16 +1190,22 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: contain;
+  width: 5.1vw;
+  height: 3.9vw;
 }
 
 .text-overflow-35{
-  height: 35px;
+  max-height: 8vw;
+  height: auto;
+  display: block;
   overflow: hidden;
 }
 
 .text-overflow-54{
-  height: 54px;
-  overflow: hidden;
+    max-height: 12vw;
+    height: auto;
+    overflow: hidden;
+    display: block;
 }
 
 .text-ellipsis{
@@ -1077,7 +1246,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .item-ios[detail-push] .item-inner{
-    background-position: right 3px center;
+    background-position: right 3vw center;
 }
 
 .item-ios[detail-push]{
@@ -1085,7 +1254,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .item-ios[detail-push] .item-inner .input-wrapper{
-    padding-right: 15px;
+    padding-right: 5vw;
 }
 
 a:active{
@@ -1110,12 +1279,9 @@ a:active{
     overflow: scroll;
 }
 
-.block-lines .item:last-child{
+.block-lines .item:last-child, .block-lines-bottom-left-right .item:last-child{
     margin-bottom: 0;
-}
-
-.searchbar-right-block{
-
+    font-size: 0;
 }
 
 .btn_map1{
@@ -1201,4 +1367,68 @@ ion-app.ios [margin], ion-app.ios [margin] .scroll-content{
 
 .item-block{
     min-height: inherit;
+}
+
+.item-ios ion-avatar{
+    min-width: inherit;
+    min-height: inherit;
+}
+
+.item-ios.item-block .item-inner{
+    padding-right: 0;
+}
+
+.select.select-ios{
+    padding: 3vw 6.3vw 3vw 6.3vw;
+    max-width: 100%;
+    font-size: 4.2vw;
+}
+
+.text-input-ios{
+    padding: 3vw 6.3vw 3vw 6.3vw;
+    font-size: 4.2vw;
+}
+
+.item-ios, .button-ios{
+    font-size: 4.2vw;
+}
+
+.item-ios .item-button {
+    font-size: 2.6vw;
+    line-height: 2.6vw;
+}
+
+.btn_header img{
+    width: 7.2vw;
+    height: 7.2vw;
+}
+
+.back-button-ios {
+    margin-left: 3vw;
+}
+
+textarea.text-input {
+    height: 23.7vw;
+}
+
+.table{
+    display: table;
+}
+
+.table-cell{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.footer_btn {
+    position: absolute;
+    width: 90%;
+    bottom: 0;
+    left: 5%;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.footer_btn .grid{
+    padding-bottom: 0;
 }

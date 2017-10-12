@@ -17,19 +17,22 @@ page-bookmarks{
     display: none;
   }
 
-  .font-36{
-    line-height: 34px;
-  }
+    .item-block-nau .item-ios [item-right], .item-ios [item-end]{
+        width: 33px;
+    }
 
-  .num_right {
-    position: absolute;
-    right: 10px;
-    bottom: 12px;
-  }
+    .star_right {
+        position: absolute;
+        right: 3%;
+        top: 7%;
+        width: 5.3vw;
+    }
 
-  .star_right {
-    position: absolute;
-    right: 14px;
-    top: 17px;
-  }
+    .text-overflow-35{
+        width: 93%;
+    }
+
+    .block-places.item-block-nau .item{
+        padding: 2vw;
+    }
 }

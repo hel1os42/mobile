@@ -3,24 +3,23 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="padding-sign">
   <div class="logo">
   </div>
 
-  <div text-center margin-top margin-bottom class="title-big-sign">Invitation</div>
-  <p margin-bottom text-center class="font-75 text-4F4F4F">You should have received a code from the friend who recommended NAU to you. Please ask him again</p>
+  <div text-center class="title-big-sign">Invitation</div>
+  <div text-center class="font-75 text-4F4F4F margin-top-6vw">You should have received a code from the friend who recommended NAU to you</div>
 
-  <ion-item class="border-bottom-no">
+  <ion-item class="border-bottom-no margin-top-6vw">
     <ion-input text-center placeholder="XX-XX-XX-XX" class="bg-gray" [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
 
-  <p padding>
-    <button ion-button block middle color="primary" (click)="next()">NEXT</button>
-  </p>
+  <button text-uppercase class="margin-top-5vw" ion-button block middle color="primary" (click)="next()">sign up</button>
+
 </ion-content>
 
 <ion-footer padding>
-  <div text-center margin class="font-75 text-828282">
+  <div text-center class="font-75 text-828282">
     Please ask your friend again
   </div>
 </ion-footer>

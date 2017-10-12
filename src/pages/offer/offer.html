@@ -4,10 +4,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding scroll="false">
-  <ion-item no-lines color="transparent" class="overflow-visible padding-left-offer">
+<ion-content scroll="false" class="padding-no font-0">
+  <ion-item no-lines color="transparent" class="overflow-visible padding-left-offer padding-top-10vw padding-right-5vw">
     <div item-start class="relative">
-      <div class="user_level font-30 text-white">10</div>
+      <div class="user_level font-30 text-white extrabold">10</div>
       <div class="icon-plus">+</div>
     </div>
     <span class="font-16 text-E0E0E0">points</span>
@@ -26,15 +26,15 @@
     </div>
   </ion-item>
 
-  <div class="padding-left-offer padding-top-35">
+  <div class="padding-left-offer padding-top-10vw">
     <ng-container *ngFor="let showStar of getStars(company.stars)">
-      <ion-icon class="text-FEC282 font-22" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+      <ion-icon class="text-FEC282 font-22 stars" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
     </ng-container>
-    <img class="margin-left-10" src="assets/img/user_offers/icon_user.svg"><span class="font-16 text-E0E0E0">{{ company.testimonials_count }}</span>
-    <img class="margin-left-10" src="assets/img/user_offers/icon_arrow.svg"><span class="font-16 text-E0E0E0"> {{ distanceString }}</span>
+    <img class="icon_user" src="assets/img/user_offers/icon_user.svg"><span class="font-16 text-E0E0E0">{{ company.testimonials_count }}</span>
+    <img class="icon_arrow" src="assets/img/user_offers/icon_arrow.svg"><span class="font-16 text-E0E0E0">{{ distanceString }}</span>
   </div>
 
-  <div class="bold font-40 text-white padding-left-offer padding-right-offer padding-top-25">{{ offer.label }}</div>
+  <div class="bold font-40 extrabold text-white padding-left-offer padding-right-offer padding-top-7vw">{{ offer.label }}</div>
 
   <div margin-top class="text-E0E0E0 font-16 padding-left-offer padding-right-offer padding-right-offer">{{ offer.description }}</div>
 
@@ -42,7 +42,7 @@
     <a (click)="openRedeemPopover()"text-center class="circles">
       <div class="circle1"></div>
       <div class="circle2"></div>
-      <div class="circle3"><span>Redeem OFFER</span></div>
+      <div class="circle3"><span>Redeem<div class="extrabold">OFFER</div></span></div>
     </a>
   </div>
 </ion-content>

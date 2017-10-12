@@ -10,13 +10,13 @@
 </ion-header>
 
 <ion-content class="padding-no">
-  <div margin-top class="margin-bottom-10">
-    <a (click)="toggleAccountsChoiceVisible()">
-      <ion-icon class="text-828282" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
-      <ion-icon class="text-828282" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
-      <div text-uppercase padding-left class="select font-14 text-4F4F4F">
-        Choose your account <span text-lowercase>(hide)</span>
-      </div>
+  <div padding-top class="block-lines-bottom-left-right">
+    <a class="select" (click)="toggleAccountsChoiceVisible()">
+        <span text-uppercase class="font-14 text-4F4F4F">
+            Choose your account <span text-lowercase>(hide)</span>
+        </span>
+      <ion-icon class="text-828282 icon" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
+      <ion-icon class="text-828282 icon" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
     </a>
   </div>
 
@@ -26,22 +26,22 @@
         <ion-col>
           <img margin-top src="assets/img/settings/user.svg">
           <!-- <img margin-top [src]="user.picture_url"> -->
-          <p class="font-15 text-3E4B5D bold">Client</p>
+          <div class="font-16 text-3E4B5D bold">Client</div>
         </ion-col>
         <ion-col>
           <ion-item no-lines>
-            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isVisibleRedeemButton"></ion-toggle>
+            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col>
           <img margin-top src="assets/img/settings/adv.svg">
-          <p class="font-16 text-BDBDBD bold">Advertiser</p>
+          <div class="font-16 text-BDBDBD bold">Advertaiser</div>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 
-    <p *ngIf="toggleAdvMode()" margin>
+    <p *ngIf="isAdvMode" margin>
         <button (click)="openAdvRedeem()" color="primary" ion-button block>Redeem offer</button>
     </p>
 
@@ -49,19 +49,10 @@
         <div text-uppercase class="font-14 text-4F4F4F">Your invite code</div>
     </div>
 
-    <div class="block-lines block-phone">
-        <ion-grid class="bg-gray">
-            <ion-row align-items-center>
-                <ion-col col-8 text-left padding-left>
-                    <div text-uppecase class="text-3E4B5D font-16">{{ user.invite_code }}</div>
-                </ion-col>
-                <ion-col col-4>
-                    <ion-item no-lines text-right>
-                        <!-- <button color="primary" ion-button round class="font-12 regular">Copy</button> -->
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+    <div class="block-lines">
+        <ion-item class="bg-gray">
+            <ion-label margin-left class="text-3E4B5D font-16">{{ user.invite_code }}</ion-label>
+        </ion-item>
     </div>
 
   <div class="block-lines">
@@ -102,7 +93,7 @@
     </ion-item>
   </div>
 
-  <div text-uppercase margin>
+  <div class="block-lines">
     <a class="text-4F4F4F font-14" (click)="toggleSelectRadiusVisible()">Set radius for yours offers interest</a>
   </div>
   <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-bottom padding-left padding-right class="border-bottom-no">

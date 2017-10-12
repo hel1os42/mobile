@@ -3,34 +3,30 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="padding-sign">
   <div class="logo">
   </div>
-  <div text-center margin-top margin-bottom class="title-big-sign">Login</div>
-  <p text-center margin-bottom class="font-75 text-4F4F4F">Please enter your phone number and<br>confirmation code</p>
+  <div text-center class="title-big-sign">Login</div>
+  <div text-center class="margin-top-6vw font-75 text-4F4F4F">Please enter your phone number and<br>confirmation code</div>
 
-  <ion-item margin-top class="border-bottom-no">
-    <ion-select class="bg-gray-left" placeholder="+380" [(ngModel)]="numCode">
-      <ion-option value="+380">+380</ion-option>
-      <ion-option value="+1">+1</ion-option>
+  <ion-item class="border-bottom-no margin-top-6vw">
+    <ion-select class="bg-gray-left" [(ngModel)]="numCode" interface="popover">
+      <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
     </ion-select>
-    <ion-input class="bg-gray-right" type="tel" placeholder="" [(ngModel)]="data.phone"></ion-input>
+    <ion-input class="bg-gray-right tel" type="tel" placeholder="123-45-67" [(ngModel)]="data.phone"></ion-input>
   </ion-item>
 
   <ion-item margin-top class="border-bottom-no">
     <ion-label class="bg-gray-left label-left">OTP</ion-label>
-    <ion-input class="bg-gray-right" type="tel" placeholder="XX-XX-XX" [(ngModel)]="data.code"></ion-input>
+    <ion-input class="bg-gray-right otp" type="tel" placeholder="XX-XX-XX" [(ngModel)]="data.code"></ion-input>
   </ion-item>
 
-  <p padding-top>
-    <button ion-button block middle color="primary"
-      (click)="login()" [disabled]="!(data.phone && data.code)">Sign in</button>
-  </p>
+  <button text-uppercase class="margin-top-5vw" ion-button block middle color="primary" (click)="login()" [disabled]="!(data.phone && data.code)">Sign in</button>
 
 </ion-content>
 
-<ion-footer padding>
-  <div margin-top margin-bottom text-center>
+<ion-footer no-shadow no-border>
+  <div text-center>
     <div><a (click)="signup()" class="link-nau">Sign Up</a></div>
   </div>
 </ion-footer>

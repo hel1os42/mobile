@@ -14,9 +14,14 @@ page-settings{
   }
 
   .select {
-      float: left;
-      padding-right: 5px;
+      display: block;
+      width: 100%;
   }
+
+    .select .icon{
+        float: right;
+        display: inline;
+    }
 
   agm-map {
     height: 250px;
@@ -36,20 +41,24 @@ page-settings{
   /* NEW STYLES */
   .toggle-ios .toggle-icon{
     background-color: #fff;
+    border-radius: 100vw;
   }
 
   .toggle-ios .toggle-inner{
     background: linear-gradient(90.57deg, #FF5A00 0.54%, #FF8B10 99.56%);
     box-shadow: none;
-    left: 4px;
-    top: 4px;
+    left: 1vw;
+    top: 1vw;
+    width: 6.5vw;
+    height: 6.5vw;
+    border-radius: 100vw;
   }
 
   .toggle-ios {
-    width: 77px;
-    height: 35px;
+    width: 18.8vw;
+    height: 8.4vw;
     border: 1px solid #E0E0E0;
-    border-radius: 25px;
+    border-radius: 100vw;
   }
 
   .item-ios .toggle-ios {
@@ -62,14 +71,14 @@ page-settings{
   }
 
   .toggle-ios.toggle-checked .toggle-inner {
-    -webkit-transform: translate3d(41px, 0, 0);
-    transform: translate3d(41px, 0, 0);
+    -webkit-transform: translate3d(10.5vw, 0, 0);
+    transform: translate3d(10.5vw, 0, 0);
   }
 
   .ava_user_adv img{
-    width: 60px;
-    height: 60px;
-    border-radius: 100px;
+    width: 15.5vw;
+    height: 15.5vw;
+    border-radius: 100vw;
   }
 
   .ava_user_adv .input-wrapper{
@@ -78,10 +87,6 @@ page-settings{
 
   .ava_user_adv .item-ios .toggle-ios{
     margin: 0 auto;
-  }
-
-  .block-phone .item-block{
-    min-height: inherit;
   }
 
   .block-map{
@@ -105,6 +110,41 @@ page-settings{
   }
 
   .block-lines .item-ios .item-button {
-    width: 73px;
+      height: 6.3vw;
+      width: 17.1vw;
+      border-radius: 100vw;
   }
+}
+
+settings-popover-component{
+    .modal_content{
+        padding-left: 12vw;
+        padding-right: 12vw;
+        padding-bottom: 6.3vw;
+        padding-top: 8.7vw;
+    }
+
+    .adv_modal{
+        width: 14.5vw;
+        height: 14.5vw;
+        margin-top: 8vw;
+        margin-bottom: 6vw;
+    }
+
+    .button-ios{
+        margin: 9.2vw auto 0;
+        width: 50vw;
+    }
+
+    .line-height-7vw{
+        line-height: 7vw;
+    }
+
+    .close{
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        width: 5vw;
+        height: 5vw;
+    }
 }

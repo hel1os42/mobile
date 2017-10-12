@@ -37,7 +37,7 @@ export class UserProfilePage {
     }
 
     openSettings() {
-        this.nav.push(SettingsPage);
+        this.nav.push(SettingsPage, {isAdvMode: false});
     }
 
     openRewards(user: User) {

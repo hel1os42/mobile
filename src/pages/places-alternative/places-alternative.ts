@@ -13,7 +13,7 @@ import { PlacesAlternativePopover } from './places.alternative.popover';
 import { google } from '@agm/core/services/google-maps-types';
 import { OfferCategory } from '../../models/offerCategory';
 import { DistanceUtils } from '../../utils/distanse';
-import { SubCategory } from '../../models/offerSubCategory';
+import { ChildCategory } from '../../models/childCategory';
 
 @Component({
     selector: 'page-places-alternative',
@@ -23,7 +23,7 @@ export class PlacesAlternativePage {
 
     companies: Company[];
     categories: OfferCategory[] = OfferCategory.StaticList;
-    subCategories: SubCategory[];
+    subCategories: ChildCategory[];
     selectedCategory: OfferCategory;
     isMapVisible: boolean = false;
     coords: Coords = {

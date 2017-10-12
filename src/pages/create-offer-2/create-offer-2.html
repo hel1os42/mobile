@@ -29,13 +29,13 @@
         <div no-lines>
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">from</ion-label>
-                <ion-datetime [(ngModel)]="startDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" min="2017-09-01" max="2021-12" class="bold">
+                <ion-datetime [(ngModel)]="offer.start_date" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="todayDate | date: 'yyyy-MM-dd'" max="2021-12-31" class="bold">
                 </ion-datetime>
             </ion-item>
 
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">to</ion-label>
-                <ion-datetime [(ngModel)]="finishDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" min="2017-09-02" max="2022" class="bold">
+                <ion-datetime [(ngModel)]="offer.finish_date" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="todayDate | date: 'yyyy-MM-dd'" max="2022" class="bold">
                 </ion-datetime>
             </ion-item>
         </div>
@@ -77,7 +77,8 @@
     </div>
 
     <div class="block-lines">
-        <a (click)="toggleVisible()">
+        <!-- <a (click)="toggleVisible()">to do -->
+            <a>
             <div text-uppercase padding-right class="select-block-desc text-828282 font-14">
                 Detailed settings
                 <ion-icon *ngIf="isDetailedSettingsVisible" name="arrow-up"></ion-icon>

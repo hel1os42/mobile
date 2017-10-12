@@ -62,6 +62,9 @@ import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
 import { PlacesAlternativePage } from '../pages/places-alternative/places-alternative';
 import { PlacesAlternativePopover } from '../pages/places-alternative/places.alternative.popover';
+import { CreateAdvUserProfilePopover1 } from '../pages/create-advUser-profile/create-advUser-profile.popover1';
+import { CreateAdvUserProfilePopover2 } from '../pages/create-advUser-profile/create-advUser-profile.popover2';
+import { AdvertiserService } from '../providers/advertiser.service';
 
 @NgModule({
   declarations: [
@@ -106,6 +109,8 @@ import { PlacesAlternativePopover } from '../pages/places-alternative/places.alt
     PlacesPopover,
     PlacesAlternativePopover,
     CongratulationPopover,
+    CreateAdvUserProfilePopover1,
+    CreateAdvUserProfilePopover2,
     OfferTermsPage,
     SettingsChangePhonePage,
     AdvRedeemOfferPage,
@@ -170,6 +175,8 @@ import { PlacesAlternativePopover } from '../pages/places-alternative/places.alt
     PlacesPopover,
     PlacesAlternativePopover,
     CongratulationPopover,
+    CreateAdvUserProfilePopover1,
+    CreateAdvUserProfilePopover2,
     OfferTermsPage,
     SettingsChangePhonePage,
     AdvRedeemOfferPage,
@@ -191,6 +198,7 @@ import { PlacesAlternativePopover } from '../pages/places-alternative/places.alt
     AppModeService,
     Geolocation,
     LocationService,
+    AdvertiserService
   ]
 })
 export class AppModule {}

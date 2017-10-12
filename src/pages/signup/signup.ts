@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth.service';
 import { SignUpCodePage } from '../signup-code/signup-code';
 
@@ -9,7 +9,8 @@ import { SignUpCodePage } from '../signup-code/signup-code';
 })
 export class SignUpPage {
     phone: string;
-    numCode: string = "+380"
+    numCodes = ['+7', '+49', '+63', '+57', '+380'];
+    numCode: string = '+380';
     phoneNumber: string;
 
     constructor(

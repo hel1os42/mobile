@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ViewController, App } from 'ionic-angular';
-import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
-import { CreateOfferPage } from '../create-offer/create-offer';
+import { ViewController, App, NavParams } from 'ionic-angular';
+import { OnBoardingPage } from '../onboarding/onboarding';
 
 @Component({
     selector: 'settings-popover-component',
@@ -9,12 +8,19 @@ import { CreateOfferPage } from '../create-offer/create-offer';
 })
 
 export class SettingsPopover {
-    constructor(
-        private viewCtrl: ViewController,
-        private app: App) { }
+
+    page: any;
+
+    constructor(private viewCtrl: ViewController,
+                private app: App,
+                private navParams: NavParams) { 
+        
+        this.page = this.navParams.get('page');
+
+        }
 
     close() {
         this.viewCtrl.dismiss();
-        this.app.getRootNav().setRoot(CreateOfferPage);
+            this.app.getRootNav().setRoot(OnBoardingPage, {page: this.page, isAdvMode: true, isAdvOnBoarding: true});
     }
 }
