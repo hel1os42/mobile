@@ -8,13 +8,13 @@
     <ion-list class="margin-0">
         <div class="cover">
             <img class="cover_logo" src="assets/img/user_home/image1.png">
-            <button text-uppercase item-end ion-button class="btn_transfer font-16 extrabold text-white">Create offer</button>
+            <button (click)="openCreateOffer()" text-uppercase item-end ion-button class="btn_transfer font-16 extrabold text-white">Create offer</button>
         </div>
 
         <div margin-left margin-right margin-bottom class="font-0 relative margin-top-14vw">
-            <div margin-top  class="text-3E4B5D font-36 bold">The Fair Food</div>
-            <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc">330 S. Pineapple Ave., Suite 201 Sarasota, Florida 34236</div>
-            <div class="font-12 text-828282 wrap text-overflow-35 margin-top-2proc width-88">Double Up Food Bucks is a national model for healthy food incentives active in more than 20 states</div>
+            <div margin-top  class="text-3E4B5D font-36 bold">{{ company.name }}</div>
+            <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc">{{ company.address }}</div>
+            <div class="font-12 text-828282 wrap text-overflow-35 margin-top-2proc width-88">{{company.description }}</div>
         </div>
     </ion-list>
 </ion-header>
@@ -22,25 +22,25 @@
 <ion-content padding>
     <ion-grid text-center class="block-icon-bottom padding-top-3vw padding-bottom-5vw">
         <ion-row>
-            <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
+            <a (click)="openUserOffers()" ion-col class="text-gray" align-self-start>
                 <div>
                     <img src="assets/img/user_profile/offers.svg">
-                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">0</div>
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ company.offers_count }}</div>
                     <div text-uppercase class="text-3E4B5D font-12">offers</div>
                 </div>
             </a>
-            <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
+            <a (click)="openUserNau()" ion-col class="text-gray" align-self-end>
                 <div>
                     <img src="assets/img/user_profile/nau.svg">
-                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">0</div>
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ balance }}</div>
                     <div text-uppercase class="text-3E4B5D font-12">nau</div>
                 </div>
             </a>
-            <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
+            <a ion-col class="text-gray" align-self-start>
                 <div>
                     <img src="assets/img/adv-user-profile/static.svg">
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">0</div>
-                    <div text-uppercase class="text-3E4B5D font-12">users</div>
+                    <div text-uppercase class="text-3E4B5D font-12">Statistic</div>
                 </div>
             </a>
         </ion-row>
@@ -49,11 +49,11 @@
     <ion-grid text-center class="block-slider">
         <ion-row>
             <ion-col col-1 align-self-center>
-                <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon></a>
+                <a><ion-icon name="ios-arrow-back" class="font-200 text-828282"></ion-icon></a>
             </ion-col>
             <ion-col class="grid" col-10 align-self-center>
                 <ion-slides spaceBetween="10">
-                    <ion-slide (click)="openRewards()">
+                    <ion-slide>
                         <ion-list no-lines>
                             <ion-item class="text-white">
                                 <ion-avatar item-start>
@@ -68,7 +68,7 @@
                 </ion-slides>
             </ion-col>
             <ion-col col-1 align-self-center>
-                <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200 text-828282"></ion-icon></a>
+                <a><ion-icon name="ios-arrow-forward" class="font-200 text-828282"></ion-icon></a>
             </ion-col>
         </ion-row>
     </ion-grid>

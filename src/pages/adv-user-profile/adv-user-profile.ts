@@ -5,6 +5,10 @@ import { StorageService } from "../../providers/storage.service";
 import { SettingsPage } from '../settings/settings';
 import { Company } from '../../models/company';
 import { PlaceService } from '../../providers/place.service';
+import { ProfileService } from '../../providers/profile.service';
+import { UserNauPage } from '../user-nau/user-nau';
+import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
+import { User } from '../../models/user';
 
 @Component({
     selector: 'page-adv-user-profile',
@@ -13,14 +17,29 @@ import { PlaceService } from '../../providers/place.service';
 export class AdvUserProfilePage {
     isModalVisible: boolean;
     MODAL_VISIBLE_KEY = "modalVisible";
-    company = new Company;
+    company = new Company();
+    balance: number;
+    NAU_Id: string;
+    user = new User;
 
     constructor(private nav: NavController,
         private storage: StorageService,
         private navParams: NavParams,
-        private place: PlaceService) {
+        private place: PlaceService,
+        private profile: ProfileService) {
 
-        this.company = this.navParams.get('place')
+        this.navParams.get('company');
+           
+        if(!this.company.id) {
+            this.place.get()
+                .subscribe(company => this.company = company);
+        }
+        this.profile.getWithAccounts()
+        .subscribe(resp => {
+            this.user = resp;
+            this.balance = resp.accounts.NAU.balance;
+            this.NAU_Id = resp.accounts.NAU.id;
+        })
     }
 
     ionViewWillEnter() {
@@ -40,6 +59,14 @@ export class AdvUserProfilePage {
 
     openSettings() {
         //this.app.getRootNav().setRoot(SettingsPage);
-        this.nav.push(SettingsPage, { isAdvMode: true });
+        this.nav.push(SettingsPage, { isAdvMode: true, user: this.user });
+    }
+
+    openUserNau() {
+        this.nav.push(UserNauPage, { balance: this.balance, NAU_Id: this.NAU_Id });
+    }
+
+    openUserOffers() {
+        this.nav.push( AdvUserOffersPage);
     }
 }
