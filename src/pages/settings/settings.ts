@@ -16,7 +16,7 @@ import { SettingsChangePhonePage } from '../settings-change-phone/settings-chang
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
 import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 import { OnBoardingPage } from '../onboarding/onboarding';
-import { AdvertiserService } from '../../providers/advertiser.service';
+import { PlaceService } from '../../providers/place.service';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class SettingsPage {
         private popoverCtrl: PopoverController,
         private changeDetectorRef: ChangeDetectorRef,
         private navParams: NavParams,
-        private advert: AdvertiserService ) {
+        private place: PlaceService ) {
 
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
@@ -65,7 +65,7 @@ export class SettingsPage {
                 this.message = error.message;
             });
 
-        this.advert.get()
+        this.place.get()
             .subscribe(
             resp => this.nextPage = AdvTabsPage,
             errResp => this.nextPage = CreateAdvUserProfilePage);

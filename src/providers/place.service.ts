@@ -4,7 +4,7 @@ import { OfferCreate } from "../models/offerCreate";
 import { PlaceCreate } from "../models/placeCreate";
 
 @Injectable()
-export class AdvertiserService {
+export class PlaceService {
 
     constructor(private api: ApiService) { }
 

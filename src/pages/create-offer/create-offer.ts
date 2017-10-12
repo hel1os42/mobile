@@ -8,7 +8,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { OfferCategory } from '../../models/offerCategory';
 import { CreateOfferPopover } from '../create-offer/createOffer.popover'
 import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
-import { AdvertiserService } from '../../providers/advertiser.service';
+import { PlaceService } from '../../providers/place.service';
 
 @Component({
     selector: 'page-create-offer',
@@ -21,11 +21,11 @@ export class CreateOfferPage {
 
     constructor(private location: LocationService,
                 private nav: NavController,
-                private advert: AdvertiserService,
+                private place: PlaceService,
                 private profileService: ProfileService,
                 private popoverCtrl: PopoverController) {
 
-        this.advert.getOfferCreate()
+        this.place.getOfferCreate()
             .subscribe(resp => this.offer = resp);
 
         this.location.get()

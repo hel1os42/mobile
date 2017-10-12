@@ -14,7 +14,7 @@ import { ChildCategory } from '../../models/childCategory';
 import { CreateAdvUserProfilePopover2 } from './create-advUser-profile.popover2';
 import { PlaceCreate } from '../../models/placeCreate';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
-import { AdvertiserService } from '../../providers/advertiser.service';
+import { PlaceService } from '../../providers/place.service';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -40,7 +40,7 @@ export class CreateAdvUserProfilePage {
         private popoverCtrl: PopoverController,
         private api: ApiService,
         private offer: OfferService,
-        private advertCreate: AdvertiserService,
+        private placeService: PlaceService,
         private changeDetectorRef: ChangeDetectorRef) {
 
     }
@@ -147,13 +147,13 @@ export class CreateAdvUserProfilePage {
         this.place.longitude = this.coords.lng;
         this.place.address = this.address;
         this.place.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
-        debugger
+      
         this.place.radius = 30000;
 
-        debugger
-        this.advertCreate.set(this.place)
+        this.placeService.set(this.place)
             .subscribe(resp =>
-                this.nav.push(AdvTabsPage))
+                this.nav.push(AdvTabsPage, {company: resp}))
+                debugger
 
     }
 }
