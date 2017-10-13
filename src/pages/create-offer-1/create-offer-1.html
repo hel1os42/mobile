@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title>Create Offer</ion-title>
-        <ion-buttons end>
+        <ion-buttons end class="padding-right-3vw">
             <button (click)="openCreateOffer2Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
@@ -28,15 +28,15 @@
     <div class="block-lines radio-nau">
         <div radio-group no-lines>
             <ion-item class="bg-gray">
-                <ion-label>Delivery</ion-label>
+                <ion-label class="text-3E4B5D font-16 semibold">Delivery</ion-label>
                 <ion-radio mode="md" value="delivery"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
-                <ion-label>Another</ion-label>
+                <ion-label class="text-3E4B5D font-16 semibold">Another</ion-label>
                 <ion-radio mode="md" value="another1"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
-                <ion-label>Another</ion-label>
+                <ion-label class="text-3E4B5D font-16 semibold">Another 2</ion-label>
                 <ion-radio mode="md" value="another2"></ion-radio>
             </ion-item>
         </div>
@@ -48,21 +48,21 @@
     <div class="block-lines radio-nau radio-nau-no-margin">
         <div radio-group no-lines>
             <ion-item class="bg-gray">
-                <ion-label>
+                <ion-label class="text-3E4B5D font-16 semibold">
                     Discount
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
                 <ion-radio (ionSelect)="toggleDiscountDisabled($event, false)" mode="md" value="discount"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
-                <ion-label>
+                <ion-label class="text-3E4B5D font-16 semibold">
                     Second Fee
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
                 <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="another1"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
-                <ion-label>
+                <ion-label class="text-3E4B5D font-16 semibold">
                     Bonus or Gift
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
@@ -73,9 +73,9 @@
 
     <div class="block-lines">
         <ion-item padding-left class="bg-gray" detail-push>
-            <ion-label>Set discount (%)</ion-label>
+            <ion-label class="text-3E4B5D font-16 semibold">Set discount (%)</ion-label>
             <ion-select [disabled]="isDiscountSelectDisable" [(ngModel)]="discount" interface="action-sheet" class="text-3E4B5D font-16 bold">
-                <ion-option *ngFor=" let discount of discounts " [value]="discount">{{ discount }}</ion-option>
+                <ion-option class="text-3E4B5D font-16 bold" *ngFor=" let discount of discounts " [value]="discount">{{ discount }}</ion-option>
             </ion-select>
         </ion-item>
     </div>

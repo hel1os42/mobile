@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Create Offer</ion-title>
-    <ion-buttons end>
+      <ion-buttons end class="padding-right-3vw">
       <button (click)="openCreateOffer5Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
@@ -27,28 +27,28 @@
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Max redemption per user</div>
       <div class="block-lines">
           <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
-              <ion-label>Overall</ion-label>
+              <ion-label class="text-3E4B5D font-16 semibold">Overall</ion-label>
               <ion-select  [(ngModel)]="maxForUs" class="text-3E4B5D font-16 bold">
                   <ion-option *ngFor=" let maxForUs of maxForUser " [value]="maxForUs">{{ (maxForUs == 10000000) ? 'Unlimited' : maxForUs }}</ion-option>
               </ion-select>
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
-              <ion-label>Daily</ion-label>
+              <ion-label class="text-3E4B5D font-16 semibold">Daily</ion-label>
               <ion-select  [(ngModel)]="maxForUsPerDay" class="text-3E4B5D font-16 bold">
                     <ion-option *ngFor=" let maxForUsPerDay of maxForUserPerDay " [value]="maxForUsPerDay">{{ (maxForUsPerDay == 10000000) ? 'Unlimited' : maxForUsPerDay }}</ion-option>
                 </ion-select>
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
-              <ion-label>Weekly</ion-label>
+              <ion-label class="text-3E4B5D font-16 semibold">Weekly</ion-label>
               <ion-select class="text-3E4B5D font-16 bold">
                   <ion-option value="un" [selected]="true">Unlimited</ion-option>
               </ion-select>
           </ion-item>
 
           <ion-item padding-left class="bg-gray" detail-push>
-              <ion-label>Monthly</ion-label>
+              <ion-label class="text-3E4B5D font-16 semibold">Monthly</ion-label>
               <ion-select class="text-3E4B5D font-16 bold">
                   <ion-option value="un" [selected]="true">Unlimited</ion-option>
               </ion-select>
@@ -61,7 +61,7 @@
 
       <div class="block-lines">
           <ion-item padding-left class="bg-gray" detail-push>
-              <ion-label>Minimal user level</ion-label>
+              <ion-label class="text-3E4B5D font-16 semibold">Minimal user level</ion-label>
               <ion-select [(ngModel)]="level" class="text-3E4B5D font-16 bold">
                   <ion-option *ngFor=" let level of levels " [value]="level">{{ level }}</ion-option>
               </ion-select>

@@ -35,4 +35,8 @@ page-bookmarks{
     .block-places.item-block-nau .item{
         padding: 2vw;
     }
+
+    .item-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start] {
+        margin: 0 2vw 0 0;
+    }
 }
