@@ -65,6 +65,7 @@ import { PlacesAlternativePopover } from '../pages/places-alternative/places.alt
 import { CreateAdvUserProfilePopover1 } from '../pages/create-advUser-profile/create-advUser-profile.popover1';
 import { CreateAdvUserProfilePopover2 } from '../pages/create-advUser-profile/create-advUser-profile.popover2';
 import { PlaceService } from '../providers/place.service';
+import { FeedPage } from "../pages/feed/feed";
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { PlaceService } from '../providers/place.service';
     CreateOffer2Page,
     CreateOffer3Page,
     CreateOffer4Page,
-    CreateOffer5Page
+    CreateOffer5Page,
+    FeedPage
   ],
   imports: [
     BrowserModule,
@@ -183,7 +185,8 @@ import { PlaceService } from '../providers/place.service';
     CreateOffer2Page,
     CreateOffer3Page,
     CreateOffer4Page,
-    CreateOffer5Page
+    CreateOffer5Page,
+    FeedPage
   ],
   providers: [
     StatusBar,

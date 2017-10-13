@@ -1,0 +1,37 @@
+page-adv-notifications{
+    .btn_search_settings {
+        right: 20px;
+    }
+
+    .item-block-nau .today.item-ios ion-avatar .thumb_image{
+        border-radius: 100vw;
+    }
+
+    .btn_view.item-button{
+        padding-left: 5vw;
+        padding-right: 5vw;
+        background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+        border-radius: 2.5vw;
+    }
+
+    .item-ios.item-block .item-inner{
+        padding-right: 0;
+    }
+
+    .btn_header img {
+        width: 4.8vw;
+        height: 4.8vw;
+    }
+
+    .item-block-nau.list.list-ios {
+        margin: 0;
+    }
+
+    .searchbar-ios{
+        width: 100%;
+    }
+
+    .btn_search_settings img{
+        right: 3vw;
+    }
+}

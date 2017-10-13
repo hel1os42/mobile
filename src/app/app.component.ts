@@ -38,6 +38,7 @@ import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
 import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
+import { FeedPage } from "../pages/feed/feed";
 
 @Component({
     templateUrl: 'app.html'
