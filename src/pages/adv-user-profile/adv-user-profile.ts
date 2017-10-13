@@ -32,24 +32,22 @@ export class AdvUserProfilePage {
         private profile: ProfileService) {
 
         this.company = this.navParams.get('company');
-
-        if (!this.company) {
-            this.place.get()
-                .subscribe(company => {
-                    this.company = company;
-                    this.content.resize();
-                });
+        if(!this.company) {
+            this.company = this.place.company;
         }
+
+        this.place.get()
+            .subscribe(company => {
+                this.company = company;
+                this.content.resize();
+            });
+
         this.profile.getWithAccounts()
             .subscribe(resp => {
                 this.user = resp;
                 this.balance = resp.accounts.NAU.balance;
                 this.NAU_Id = resp.accounts.NAU.id;
             })
-    }
-
-    ngAfterViewInit() {
-        this.content.resize();
     }
 
     ionViewWillEnter() {

@@ -16,6 +16,7 @@ export class CreateAdvUserProfilePopover1 {
                 private navParams: NavParams) {
 
         this.categories = this.navParams.get('categories');
+        this.selectedCategory = this.categories.find(p => p.isSelected);
     }
 
     selectCategory(category) {
