@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, App } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -8,8 +8,7 @@ import { ViewController, App } from 'ionic-angular';
 
 export class CongratulationPopover {
     constructor(
-        private viewCtrl: ViewController,
-        private app: App) { }
+        private viewCtrl: ViewController) { }
 
     close() {
         this.viewCtrl.dismiss();

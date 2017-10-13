@@ -3,7 +3,6 @@ import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
 import { NavController, PopoverController } from 'ionic-angular';
 import { OfferCategory } from '../../models/offerCategory';
-import { ApiService } from '../../providers/api.service';
 import { CreateAdvUserProfilePopover1 } from './create-advUser-profile.popover1';
 import * as _ from 'lodash';
 import { OfferService } from '../../providers/offer.service';
@@ -36,7 +35,6 @@ export class CreateAdvUserProfilePage {
         private location: LocationService,
         private nav: NavController,
         private popoverCtrl: PopoverController,
-        private api: ApiService,
         private offer: OfferService,
         private placeService: PlaceService,
         private changeDetectorRef: ChangeDetectorRef) {

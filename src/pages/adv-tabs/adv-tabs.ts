@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, Tabs, NavParams } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { AdvUserProfilePage } from "../adv-user-profile/adv-user-profile";
 import { CreateOfferPage } from "../create-offer/create-offer";
 import { AdvUserOffersPage } from "../adv-user-offers/adv-user-offers";

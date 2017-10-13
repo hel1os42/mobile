@@ -1,5 +1,5 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, Navbar, App, PopoverController, NavParams } from 'ionic-angular';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { NavController, App, PopoverController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 import { AgmCoreModule } from '@agm/core';
 import { LatLngLiteral } from "@agm/core";
@@ -9,7 +9,6 @@ import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
 import { TabsPage } from "../tabs/tabs";
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
-import { AuthService } from '../../providers/auth.service';
 import { SettingsPopover } from './settings.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
@@ -43,7 +42,6 @@ export class SettingsPage {
         private location: LocationService,
         private appMode: AppModeService,
         private app: App,
-        private auth: AuthService,
         private popoverCtrl: PopoverController,
         private changeDetectorRef: ChangeDetectorRef,
         private navParams: NavParams,
