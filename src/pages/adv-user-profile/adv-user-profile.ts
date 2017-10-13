@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
 import { CreateOfferPage } from "../create-offer/create-offer";
 import { StorageService } from "../../providers/storage.service";
 import { SettingsPage } from '../settings/settings';
@@ -15,6 +15,9 @@ import { User } from '../../models/user';
     templateUrl: 'adv-user-profile.html'
 })
 export class AdvUserProfilePage {
+
+    @ViewChild(Content) content: Content;
+
     isModalVisible: boolean;
     MODAL_VISIBLE_KEY = "modalVisible";
     company = new Company();
@@ -28,18 +31,25 @@ export class AdvUserProfilePage {
         private place: PlaceService,
         private profile: ProfileService) {
 
-        this.navParams.get('company');
-           
-        if(!this.company.id) {
+        this.company = this.navParams.get('company');
+
+        if (!this.company) {
             this.place.get()
-                .subscribe(company => this.company = company);
+                .subscribe(company => {
+                    this.company = company;
+                    this.content.resize();
+                });
         }
         this.profile.getWithAccounts()
-        .subscribe(resp => {
-            this.user = resp;
-            this.balance = resp.accounts.NAU.balance;
-            this.NAU_Id = resp.accounts.NAU.id;
-        })
+            .subscribe(resp => {
+                this.user = resp;
+                this.balance = resp.accounts.NAU.balance;
+                this.NAU_Id = resp.accounts.NAU.id;
+            })
+    }
+
+    ngAfterViewInit() {
+        this.content.resize();
     }
 
     ionViewWillEnter() {
@@ -67,6 +77,6 @@ export class AdvUserProfilePage {
     }
 
     openUserOffers() {
-        this.nav.push( AdvUserOffersPage);
+        this.nav.push(AdvUserOffersPage);
     }
 }

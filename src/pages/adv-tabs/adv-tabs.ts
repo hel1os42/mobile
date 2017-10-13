@@ -12,7 +12,7 @@ import { AdvNotificationsPage } from "../adv-notifications/adv-notifications";
 export class AdvTabsPage {
 
 
-    tab1Root = AdvUserProfilePage;
+    // tab1Root = AdvUserProfilePage;
     tab2Root = AdvUserProfilePage;
     tab3Root = CreateOfferPage;
     tab4Root = AdvNotificationsPage;

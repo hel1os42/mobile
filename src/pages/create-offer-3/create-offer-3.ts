@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
 import { Coords } from '../../models/coords';
-import { LocationService } from '../../providers/location.service';
 import { LatLngLiteral } from '@agm/core';
 import { AgmCoreModule } from '@agm/core';
 import * as _ from 'lodash';
@@ -26,7 +25,6 @@ export class CreateOffer3Page {
     constructor(
         private nav: NavController,
         private navParams: NavParams,
-        private location: LocationService,
         private changeDetectorRef: ChangeDetectorRef) {
 
         this.offer = this.navParams.get('offer');
