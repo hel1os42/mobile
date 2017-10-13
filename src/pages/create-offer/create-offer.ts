@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LocationService } from '../../providers/location.service';
 import { AgmCoreModule } from '@agm/core';
 import { Coords } from '../../models/coords';
-import { NavController, PopoverController } from 'ionic-angular';
+import { NavController, PopoverController, NavParams } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
 import { ProfileService } from '../../providers/profile.service';
 import { OfferCategory } from '../../models/offerCategory';
@@ -27,26 +27,11 @@ export class CreateOfferPage {
 
         this.place.getOfferCreate()
             .subscribe(resp => this.offer = resp);
-
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-            })
-            .catch((error) => {
-                this.message = error.message;
-            });
-    }
-
-    // ionViewDidLoad() {
-    //     // let popover = this.popoverCtrl.create(CreateOfferPopover);
-    //     // popover.present();
-    // }
+        
+            }
 
     openCreateOffer1Page() {
-        this.nav.push(CreateOffer1Page, { offer: this.offer });
+        this.nav.push(CreateOffer1Page, { offer: this.offer});
     }
 
 }
