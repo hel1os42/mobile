@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
-import { OfferService } from '../../providers/offer.service';
 import { User } from '../../models/user';
 import { ProfileService } from '../../providers/profile.service';
 import { PlaceService } from '../../providers/place.service';

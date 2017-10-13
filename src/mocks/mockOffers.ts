@@ -1,5 +1,4 @@
 import { Offer } from '../models/offer';
-import { OfferCategory } from '../models/offerCategory';
 
 export class MockOffers {
 

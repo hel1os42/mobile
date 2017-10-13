@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { OfferCreate } from "../models/offerCreate";
 import { Offer } from '../models/offer';
-import { MockOffers } from '../mocks/mockOffers';
 import { Observable } from 'rxjs';
 // import { MockCompanies } from '../mocks/mockCompanies';
 
