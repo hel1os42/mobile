@@ -662,10 +662,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
-.top-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start],
-.item-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start]{
+.top-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start] {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.item-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start] {
+    margin: 0 4vw 0 0;
 }
 
 .item-block-nau .item-ios [item-right], .item-ios [item-end]{
@@ -944,22 +947,27 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .margin-10{
     margin: 10px;
+    margin: 2.4vw;
 }
 
 .margin-top-10{
     margin-top: 10px;
+    margin-top: 2.4vw;
 }
 
 .margin-bottom-10{
     margin-bottom: 10px;
+    margin-bottom: 2.4vw;
 }
 
 .margin-left-10{
     margin-left: 10px;
+    margin-left: 2.4vw;
 }
 
 .margin-right-10{
     margin-right: 10px;
+    margin-right: 2.4vw;
 }
 
 .margin-left-5{
@@ -1084,6 +1092,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     padding-top: 1vw;
 }
 
+.padding-top-2vw{
+    padding-top: 2vw;
+}
+
 .padding-top-8vw{
     padding-top: 8vw;
 }
@@ -1099,6 +1111,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .padding-right-5vw{
     padding-right: 5vw;
 }
+
+.padding-right-3vw{
+    padding-right: 3vw;
+}
+
 
 /* HEADER. Page places */
 .cover{
@@ -1212,6 +1229,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     height: 3.9vw;
 }
 
+.checkbox-ios .checkbox-checked .checkbox-inner{
+    display: none;
+}
+
 .text-overflow-35{
     max-height: 8vw;
     height: auto;
@@ -1234,6 +1255,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .popover-ios .popover-content{
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    min-height: 50vw;
 }
 
 .overflow-visible{
@@ -1414,6 +1436,8 @@ ion-app.ios [margin], ion-app.ios [margin] .scroll-content{
 .item-ios .item-button {
     font-size: 2.6vw;
     line-height: 2.6vw;
+    padding: 2vw;
+    height: inherit;
 }
 
 .btn_header img{
@@ -1531,4 +1555,9 @@ textarea.text-input {
 .picker-toolbar-button:last-child .button{
     background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
     margin-right: 5vw;
+}
+
+.grayscale{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 }

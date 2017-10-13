@@ -37,6 +37,7 @@ import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
 import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
+import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
 
 @Component({
     templateUrl: 'app.html'
@@ -56,7 +57,7 @@ export class MyApp {
 
             this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : TabsPage;
 
-            //this.rootPage = CreateAdvUserProfilePage;
+            //this.rootPage = CreateOfferPage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
