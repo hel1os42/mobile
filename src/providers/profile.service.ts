@@ -5,16 +5,10 @@ import { User } from '../models/user';
 
 @Injectable()
 export class ProfileService {
-    user: User = new User();
-
     constructor(private api: ApiService) { }
 
     get() {
         return this.api.get('profile');
-    }
-
-    set(account: User) {
-        this.user = account;
     }
 
     getReferrals() {

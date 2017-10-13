@@ -69,8 +69,8 @@ export class SettingsPage {
 
         this.place.get()
             .subscribe(
-            resp => this.nextPage = AdvTabsPage,
-            errResp => this.nextPage = CreateAdvUserProfilePage);
+                resp => this.nextPage = AdvTabsPage,
+                errResp => this.nextPage = CreateAdvUserProfilePage);
     }
 
     onMapCenterChange(center: LatLngLiteral) {

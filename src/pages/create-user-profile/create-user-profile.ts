@@ -92,7 +92,6 @@ export class CreateUserProfilePage {
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
         //this.account.points = this.point(); to do
-        this.profile.set(this.user)
         this.profile.put(this.user)
             .subscribe(resp => this.nav.setRoot(TabsPage, {selectedTabIndex: 1}));
     }

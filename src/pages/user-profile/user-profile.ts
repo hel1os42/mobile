@@ -28,12 +28,11 @@ export class UserProfilePage {
         private nav: NavController) {
         
         this.profile.getWithAccounts()
-        .subscribe(resp => {
-            this.user = resp;
-            this.balance = this.user.accounts.NAU.balance;
-            this.NAU_Id = this.user.accounts.NAU.id;
-        })
-        this.profile.set(this.user);
+            .subscribe(resp => {
+                this.user = resp;
+                this.balance = this.user.accounts.NAU.balance;
+                this.NAU_Id = this.user.accounts.NAU.id;
+            });
     }
 
     openSettings() {
