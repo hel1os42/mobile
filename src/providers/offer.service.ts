@@ -63,6 +63,10 @@ export class OfferService {
         return this.api.get('categories');
     }
 
+    getCategory(category_id) {
+        return this.api.get(`categories/${category_id}`);
+    }
+
     getSubCategories(category_id) {
         return this.api.get(`categories/${category_id}?with=children`);
     }

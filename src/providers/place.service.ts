@@ -12,6 +12,10 @@ export class PlaceService {
         return this.api.get('profile/place?with=offers');
     }
 
+    getWithCategory() {
+        return this.api.get('profile/place?with=categories');
+    }
+
     getOfferCreate() {
         return this.api.get('advert/offers/create');
     }
