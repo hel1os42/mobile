@@ -11,7 +11,7 @@ import * as moment from 'moment';
 })
 export class CreateOffer2Page {
 
-    offer: OfferCreate;
+    offer = new OfferCreate;
     isDetailedSettingsVisible: boolean = false;
     todayDate: Date;
 

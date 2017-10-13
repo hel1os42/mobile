@@ -36,7 +36,7 @@ export class CreateOffer1Page {
         this.offer.longitude = this.company.longitude;
         this.offer.latitude = this.company.latitude;
      
-        this.nav.push(CreateOffer2Page, { offer: this.offer, company: this.company });//add bindings (category & type, type)
+        this.nav.push(CreateOffer2Page, { offer: this.offer});//add bindings (category & type, type)
     }
 
     toggleDiscountDisabled($event, isDiscountSelectDisable) {
