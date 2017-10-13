@@ -12,9 +12,9 @@
         </div>
 
         <div margin-left margin-right margin-bottom class="font-0 relative margin-top-14vw">
-            <div margin-top  class="text-3E4B5D font-36 bold">{{ company.name }}</div>
-            <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc">{{ company.address }}</div>
-            <div class="font-12 text-828282 wrap text-overflow-35 margin-top-2proc width-88">{{company.description }}</div>
+            <div margin-top  class="text-3E4B5D font-36 bold">{{ company?.name }}</div>
+            <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc">{{ company?.address }}</div>
+            <div class="font-12 text-828282 wrap text-overflow-35 margin-top-2proc width-88">{{company?.description }}</div>
         </div>
     </ion-list>
 </ion-header>
@@ -25,7 +25,7 @@
             <a (click)="openUserOffers()" ion-col class="text-gray" align-self-start>
                 <div>
                     <img src="assets/img/user_profile/offers.svg">
-                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ company.offers_count }}</div>
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ company?.offers_count }}</div>
                     <div text-uppercase class="text-3E4B5D font-12">offers</div>
                 </div>
             </a>
