@@ -11,7 +11,6 @@ import { AdvNotificationsPage } from "../adv-notifications/adv-notifications";
 })
 export class AdvTabsPage {
 
-    @ViewChild('tabs') tabs: Tabs;
 
     tab1Root = AdvUserProfilePage;
     tab2Root = AdvUserProfilePage;
@@ -19,8 +18,7 @@ export class AdvTabsPage {
     tab4Root = AdvNotificationsPage;
     tab5Root = AdvUserOffersPage;
 
-    constructor(private nav: NavController,
-                private navParams: NavParams) {
+    constructor(private nav: NavController) {
 
     }
 
