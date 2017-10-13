@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
-import { OfferService } from '../../providers/offer.service';
 import { User } from '../../models/user';
 import { ProfileService } from '../../providers/profile.service';
-import { AdvertiserService } from '../../providers/advertiser.service';
+import { PlaceService } from '../../providers/place.service';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -22,7 +21,7 @@ export class CreateOffer5Page {
 
     constructor(private nav: NavController,
         private navParams: NavParams,
-        private advert: AdvertiserService,
+        private place: PlaceService,
         private profile: ProfileService) {
 
         this.offer = this.navParams.get('offer');
@@ -37,7 +36,7 @@ export class CreateOffer5Page {
         this.offer.reward = this.reward;
         this.offer;
         debugger;
-        this.advert.setOffer(this.offer)
+        this.place.setOffer(this.offer)
             .subscribe()//to do;
     }
 

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Create Offer</ion-title>
-    <ion-buttons end>
+      <ion-buttons end class="padding-right-3vw">
       <button (click)="openCreateOffer4Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
@@ -27,10 +27,10 @@
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Working Area</div>
       <div class="block-lines">
           <ion-item padding-left class="bg-gray" detail-push>
-              <ion-label>Your place</ion-label>
-              <ion-select [(ngModel)]="city" (ngModelChange)="toCity($event)" interface="popover" class="text-3E4B5D font-16 bold">
+              <ion-label class="text-3E4B5D font-16 bold">{{ city }}</ion-label>
+              <!-- <ion-select [(ngModel)]="city" (ngModelChange)="toCity($event)" interface="popover" class="text-3E4B5D font-16 bold">
                   <ion-option (ionSelect)="toCity($event)" *ngFor=" let city of cities " [value]="city">{{ city }}</ion-option>
-              </ion-select>
+              </ion-select> -->
           </ion-item>
       </div>
 
@@ -39,7 +39,7 @@
       </div>
       <div class="block-map">
             <div *ngIf="!coords.lat">Detecting your location...</div>
-            <agm-map *ngIf="coords.lat" [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+            <agm-map *ngIf="coords.lat" [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
             </agm-map>
             <div id="marker"></div>
         </div>

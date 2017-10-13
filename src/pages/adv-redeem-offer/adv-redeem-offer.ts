@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { AdvertiserService } from '../../providers/advertiser.service';
+import { PlaceService } from '../../providers/place.service';
 
 @Component({
     selector: 'page-adv-redeem-offer',
@@ -12,12 +12,12 @@ export class AdvRedeemOfferPage {
 
     constructor(
         private nav: NavController,
-        private advert: AdvertiserService) {
+        private place: PlaceService) {
 
     }
 
     sendCode() {
-        this.advert.setRedeemCode(this.code)
+        this.place.setRedeemCode(this.code)
             .subscribe(() => this.nav.pop());
     }
 

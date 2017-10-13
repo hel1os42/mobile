@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Create Offer</ion-title>
-    <ion-buttons end>
+      <ion-buttons end class="padding-right-3vw">
       <button (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Finish</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
@@ -27,14 +27,14 @@
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Rewards options</div>
       <div class="block-lines">
           <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
-              <ion-label>Reward for redemption</ion-label>
+              <ion-label class="text-3E4B5D font-16 semibold">Reward for redemption</ion-label>
               <ion-select [(ngModel)]="reward" interface="action-sheet" class="text-3E4B5D font-16 bold">
                   <ion-option *ngFor=" let reward of rewards " [value]="reward">{{ reward }}</ion-option>
               </ion-select>
           </ion-item>
 
           <ion-item padding-left class="bg-gray" detail-push>
-              <ion-label>Token reservation</ion-label>
+              <ion-label class="text-3E4B5D font-16 semibold">Token reservation</ion-label>
               <ion-select [(ngModel)]="token" interface="action-sheet" class="text-3E4B5D font-16 bold">
                     <ion-option *ngFor=" let token of tokens " [value]="token">{{ token }}</ion-option>
                 </ion-select>

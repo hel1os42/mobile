@@ -12,6 +12,8 @@ export class OfferCreate {
     max_for_user: number;
     max_per_day: number;
     max_for_user_per_day: number;
+    max_for_user_per_week: number;
+    max_for_user_per_month: number;
     user_level_min: number;
     latitude: number;
     longitude: number;

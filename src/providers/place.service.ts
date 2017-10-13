@@ -4,12 +4,16 @@ import { OfferCreate } from "../models/offerCreate";
 import { PlaceCreate } from "../models/placeCreate";
 
 @Injectable()
-export class AdvertiserService {
+export class PlaceService {
 
     constructor(private api: ApiService) { }
 
     get() {
-        return this.api.get('profile/place');
+        return this.api.get('profile/place?with=offers');
+    }
+
+    getWithCategory() {
+        return this.api.get('profile/place?with=categories');
     }
 
     getOfferCreate() {

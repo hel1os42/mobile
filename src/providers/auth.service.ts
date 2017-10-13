@@ -6,7 +6,6 @@ import { TokenService } from './token.service';
 import { Token } from '../models/token';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
-import { App } from 'ionic-angular';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +16,6 @@ export class AuthService {
     onLogout = new EventEmitter();
 
     constructor(
-        private app: App,
         private api: ApiService,
         private token: TokenService) {
 

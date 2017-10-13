@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from "ionic-angular";
+import { NavParams } from "ionic-angular";
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'page-user-nau',
@@ -16,14 +15,12 @@ export class UserNauPage {
     NAU_Id: string;
 
     constructor(
-        private nav: NavController,
         private profile: ProfileService,
         private navParams: NavParams) {
 
         this.balance = this.navParams.get('balance');
         this.NAU_Id = this.navParams.get('NAU_Id');
-        // this.profile.getTransactions()
-        // .subscribe(resp => this.transactions = resp.data);
+      
         this.profile.getTransactions()
             .subscribe(resp => this.transactions = resp.data);
     }

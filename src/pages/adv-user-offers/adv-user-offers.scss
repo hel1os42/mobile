@@ -1,5 +1,5 @@
-page-adv-user-offers{
-    .btn_transfer.item-button{
+page-adv-user-offers {
+    .btn_transfer.item-button {
         margin: 0;
         margin-right: 5vw;
         padding-left: 2.2vw;
@@ -8,20 +8,20 @@ page-adv-user-offers{
         background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
     }
 
-    .top-block-nau .input-wrapper{
+    .top-block-nau .input-wrapper {
         overflow: visible;
     }
 
-    .item-block-nau .item-ios [item-end]{
+    .item-block-nau .item-ios [item-end] {
         width: 12.5vw;
     }
 
-    .toggle-ios .toggle-icon{
+    .toggle-ios .toggle-icon {
         background-color: #fff;
         border-radius: 100vw;
     }
 
-    .toggle-ios .toggle-inner{
+    .toggle-ios .toggle-inner {
         background: #828282;
         -webkit-box-shadow: none;
         box-shadow: none;
@@ -44,7 +44,7 @@ page-adv-user-offers{
         padding: 0;
     }
 
-    .toggle-ios.toggle-checked .toggle-icon{
+    .toggle-ios.toggle-checked .toggle-icon {
         background-color: #FFF;
     }
 
@@ -52,6 +52,20 @@ page-adv-user-offers{
         -webkit-transform: translate3d(10.5vw, 0, 0);
         transform: translate3d(6.1vw, 0, 0);
         background: linear-gradient(90.57deg, #FF5A00 0.54%, #FF8B10 99.56%);
+    }
+
+    .item-block-nau .item{
+        margin-bottom: 0;
+    }
+
+    .list-ios ion-item-options .button{
+        width: 24.1vw;
+    }
+
+    .list-ios ion-item-options .button img{
+        width: auto;
+        height: 5vw;
+        margin-bottom: 3.6vw;
     }
 
 }

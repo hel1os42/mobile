@@ -21,20 +21,18 @@ page-user-tasks{
     background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
   }
 
-  .grayscale{
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-  }
-
   .top-block-nau .star_right {
     top: 0;
     right: 0;
   }
 
-    .top-block-nau.item-ios ion-avatar img{
+    .top-block-nau.item-ios ion-avatar .thumb_image{
         border-radius: 100vw;
         width: 15vw;
         height: 15vw;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
     }
 
     .top-block-nau.item-ios ion-avatar {
@@ -53,5 +51,22 @@ page-user-tasks{
 
     .item-block-nau.list.list-ios{
         margin: 0;
+    }
+
+    .progress-bar-content{
+        width: 100%;
+        background: #F2F2F2;
+        position: relative;
+        height: 2.3vw;
+        border-radius: 100vw;
+    }
+
+    .progress-bar-level{
+        width: 40%;
+        background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
+        height: 100%;
+        position: absolute;
+        left: 0;
+        border-radius: 100vw;
     }
 }

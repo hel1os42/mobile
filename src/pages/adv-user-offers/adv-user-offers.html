@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Offers</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Offers</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
@@ -20,10 +20,10 @@
         <ion-segment-button value="all">
             All
         </ion-segment-button>
-        <ion-segment-button class="padding-left-1vw" value="featured">
+        <ion-segment-button value="featured">
             Featured
         </ion-segment-button>
-        <ion-segment-button class="padding-left-4vw" value="active">
+        <ion-segment-button value="active">
             Active
         </ion-segment-button>
         <ion-segment-button value="off">
@@ -32,16 +32,28 @@
     </ion-segment>
 
     <ion-list margin-top no-lines class="item-block-nau">
-        <ion-item>
-            <ion-avatar item-start>
-                <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
-            </ion-avatar>
-            <div item-content>
-            <div class="bold font-22 text-3E4B5D">Discount Gift</div>
-            <div class="bold font-14 text-FF8B10 padding-top-1vw" text-uppercase><span class="text-828282 no-bold">Redeemed</span> 53 times</div>
-            <div class="font-14 text-828282 regular padding-top-1vw">Was created:<br>05/09/2017</div>
-            </div>
-            <div item-end><ion-toggle></ion-toggle></div>
-        </ion-item>
+        <ion-item-sliding>
+            <ion-item>
+                <ion-avatar item-start>
+                    <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
+                </ion-avatar>
+                <div item-content>
+                    <div class="bold font-22 text-3E4B5D">Discount Gift</div>
+                    <div class="bold font-14 text-FF8B10 padding-top-1vw" text-uppercase><span class="text-828282 no-bold">Redeemed</span> 53 times</div>
+                    <div class="font-14 text-828282 regular padding-top-1vw">Was created:<br>05/09/2017</div>
+                </div>
+                <div item-end><ion-toggle></ion-toggle></div>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button class="bg-3E4B5D">
+                    <img src="assets/img/adv-user-offers/edit.svg">
+                    <div text-uppercase class="font-12 regular text-white">Edit</div>
+                </button>
+                <button ion-button class="bg-FF5A00">
+                    <img src="assets/img/adv-user-offers/delete.svg">
+                    <div text-uppercase class="font-12 regular text-white">Delete</div>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
     </ion-list>
 </ion-content>

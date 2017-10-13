@@ -3,7 +3,6 @@ import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
 import { NavController, PopoverController } from 'ionic-angular';
 import { OfferCategory } from '../../models/offerCategory';
-import { ApiService } from '../../providers/api.service';
 import { CreateAdvUserProfilePopover1 } from './create-advUser-profile.popover1';
 import * as _ from 'lodash';
 import { OfferService } from '../../providers/offer.service';
@@ -14,7 +13,7 @@ import { ChildCategory } from '../../models/childCategory';
 import { CreateAdvUserProfilePopover2 } from './create-advUser-profile.popover2';
 import { PlaceCreate } from '../../models/placeCreate';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
-import { AdvertiserService } from '../../providers/advertiser.service';
+import { PlaceService } from '../../providers/place.service';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -29,18 +28,15 @@ export class CreateAdvUserProfilePage {
     selectedCategory: SelectedCategory;
     selectedChildCategories: SelectedCategory[];
     childCategoriesNames: string[];
-    place = new PlaceCreate;
-    pictureurl;
-    coverurl;
+    company = new PlaceCreate();
     address: string;
 
     constructor(
         private location: LocationService,
         private nav: NavController,
         private popoverCtrl: PopoverController,
-        private api: ApiService,
         private offer: OfferService,
-        private advertCreate: AdvertiserService,
+        private placeService: PlaceService,
         private changeDetectorRef: ChangeDetectorRef) {
 
     }
@@ -143,17 +139,15 @@ export class CreateAdvUserProfilePage {
     }
 
     createAccount() {
-        this.place.latitude = this.coords.lat;
-        this.place.longitude = this.coords.lng;
-        this.place.address = this.address;
-        this.place.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
-        debugger
-        this.place.radius = 30000;
+        this.company.latitude = this.coords.lat;
+        this.company.longitude = this.coords.lng;
+        this.company.address = this.address;
+        this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
+      
+        this.company.radius = 30000;
 
-        debugger
-        this.advertCreate.set(this.place)
+        this.placeService.set(this.company)
             .subscribe(resp =>
-                this.nav.push(AdvTabsPage))
-
+                this.nav.push(AdvTabsPage, {company: resp}))
     }
 }

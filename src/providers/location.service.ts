@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import { Coords } from "../models/coords";
+
 
 @Injectable()
 export class LocationService {

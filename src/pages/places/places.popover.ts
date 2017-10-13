@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController, App, NavParams } from 'ionic-angular';
 import { OfferService } from '../../providers/offer.service';
 import { ChildCategory } from '../../models/childCategory';
+import { SelectedCategory } from '../../models/selectedCategory';
 
 @Component({
     selector: 'places-popover-component',
@@ -10,37 +11,23 @@ import { ChildCategory } from '../../models/childCategory';
 
 export class PlacesPopover {
 
-    categories: ChildCategory[];
-    selectCategories: any[];
-    categoriesIds: string[];
+    categories: SelectedCategory[];
 
     constructor(
         private viewCtrl: ViewController,
         private offer: OfferService,
         private navParams: NavParams) {
 
-        this.categories = this.navParams.get('subCat');
-        this.selectCategories = this.categories.map(p => p.id);
-
-        for (let i = 0; i < this.selectCategories.length; i++) {
-            this.selectCategories[i] = ({
-                categoryId: this.categories[i].id,
-                isSelected: false,
-                name: this.categories[i].name
-            });
+        this.categories = this.navParams.get('childCategories');
         }
 
-    }
-
     close() {
-        let filtered = this.selectCategories.filter(p => p.isSelected);
-        this.categoriesIds = filtered.map(p => p.categoryId);
-        this.viewCtrl.dismiss(this.categoriesIds);
+        this.viewCtrl.dismiss(this.categories);
     }
 
     clear() {
-        for (let i = 0; i < this.selectCategories.length; i++) {
-            this.selectCategories[i].isSelected = false;
+        for (let i = 0; i < this.categories.length; i++) {
+            this.categories[i].isSelected = false;
         }
     }
 }

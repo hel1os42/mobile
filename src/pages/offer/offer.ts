@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController, App, NavParams } from 'ionic-angular';
+import { NavController, PopoverController, NavParams } from 'ionic-angular';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { CongratulationPopover } from './congratulation.popover';
-import { AppModeService } from '../../providers/appMode.service';
 import { Offer } from '../../models/offer';
 import { Company } from '../../models/company';
 import { OfferService } from '../../providers/offer.service';

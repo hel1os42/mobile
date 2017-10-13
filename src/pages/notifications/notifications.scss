@@ -1,23 +1,23 @@
 page-notifications{
-  .btn_search_settings {
-    right: 20px;
-  }
+    .btn_search_settings {
+        right: 20px;
+    }
 
-  .today .thumb_image{
-    border-radius: 100vw;
-  }
+    .item-block-nau .today.item-ios ion-avatar .thumb_image{
+        border-radius: 100vw;
+    }
 
-  .btn_next.item-button{
-    padding-left: 7vw;
-    padding-right: 7vw;
-    background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
-    border-radius: 2.5vw;
-    height: 7.2vw;
-  }
+    .btn_next.item-button{
+        padding-left: 7vw;
+        padding-right: 7vw;
+        background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
+        border-radius: 2.5vw;
+        height: 7.2vw;
+    }
 
-  .item-ios.item-block .item-inner{
-    padding-right: 0;
-  }
+    .item-ios.item-block .item-inner{
+        padding-right: 0;
+    }
 
     .btn_header img {
         width: 4.8vw;

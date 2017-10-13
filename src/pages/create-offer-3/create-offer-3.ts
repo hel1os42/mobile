@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
 import { Coords } from '../../models/coords';
-import { LocationService } from '../../providers/location.service';
 import { LatLngLiteral } from '@agm/core';
 import { AgmCoreModule } from '@agm/core';
 import * as _ from 'lodash';
@@ -14,39 +13,42 @@ import * as _ from 'lodash';
 })
 export class CreateOffer3Page {
 
-    offer: OfferCreate;
+    offer = new OfferCreate();
     coords: Coords = new Coords();
     message: string;
-    cities: string[] = ['Moscow', 'Berlin', 'Manila', 'Bogotá', 'Kyiv'];
-    city: string;
-    country: string
     bounds;
+    city: string;
+    // cities: string[] = ['Moscow', 'Berlin', 'Manila', 'Bogotá', 'Kyiv'];
     // country: string;
     // address: string;
 
     constructor(
         private nav: NavController,
         private navParams: NavParams,
-        private location: LocationService,
         private changeDetectorRef: ChangeDetectorRef) {
 
         this.offer = this.navParams.get('offer');
+        this.coords.lat = this.offer.latitude;
+        this.coords.lng = this.offer.longitude;
+
+        this.geocodeDebounced();
+
     }
 
-    ionViewDidLoad() {
+    // ionViewDidLoad() {
+    // //     // this.location.get()
+    // //     //     .then((resp) => {
+    // //     //         this.coords = {
+    // //     //             lat: resp.coords.latitude,
+    // //     //             lng: resp.coords.longitude
+    // //     //         };
+    // //     //     })
+    // //     //     .catch((error) => {
+    // //     //         this.message = error.message;
+    // //     //         console.log(this.message);
+    // //     //     });
 
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-            })
-            .catch((error) => {
-                this.message = error.message;
-                console.log(this.message);
-            });
-    }
+    //  }
 
     onMapCenterChange(center: LatLngLiteral) {
         this.coords.lat = center.lat;
@@ -65,7 +67,7 @@ export class CreateOffer3Page {
                 let timezone = results.timeZoneId;
                 results = results[0].address_components;
                 this.city = this.findResult(results, "locality");
-                this.country = this.findResult(results, "country");
+                this.offer.country = this.findResult(results, "country");
                 this.changeDetectorRef.detectChanges();
                 console.log(results);
             }
@@ -79,29 +81,24 @@ export class CreateOffer3Page {
         return result ? result.long_name : null;
     };
 
-    toCity($event) {
-        let google = window['google'];
-        let geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'address': this.city }, (results, status) => {
-            if (status === 'OK') {
-                let result = results[0].geometry.bounds;
-                // this.coords.lng = (result.b.b + result.b.f) / 2;
-                // this.coords.lat = (result.f.b + result.f.f) / 2;
-                let bounds = new google.maps.LatLngBounds();
-                bounds.extend(new google.maps.LatLng(result.f.b, result.b.b));
-                bounds.extend(new google.maps.LatLng(result.f.f, result.b.f));
-                this.bounds = bounds;
-            }
-        });
+    // toCity($event) {
+    //     let google = window['google'];
+    //     let geocoder = new google.maps.Geocoder();
+    //     geocoder.geocode({ 'address': this.city }, (results, status) => {
+    //         if (status === 'OK') {
+    //             let result = results[0].geometry.bounds;
+    //             let bounds = new google.maps.LatLngBounds();
+    //             bounds.extend(new google.maps.LatLng(result.f.b, result.b.b));
+    //             bounds.extend(new google.maps.LatLng(result.f.f, result.b.f));
+    //             this.bounds = bounds;
+    //         }
+    //     });
 
-    }
+    // }
 
     openCreateOffer4Page() {
-        this.offer.city = this.city;
-        this.offer.country = this.country//to do
         this.offer.radius = 30000;//todo
-        this.offer.longitude = this.coords.lng;//to do(from place)
-        this.offer.latitude = this.coords.lat;//to do(from place)
+        this.offer.city = this.city;
         debugger
         this.nav.push(CreateOffer4Page, { offer: this.offer });
     }

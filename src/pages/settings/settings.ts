@@ -1,5 +1,5 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { NavController, Navbar, App, PopoverController, NavParams } from 'ionic-angular';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { NavController, App, PopoverController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 import { AgmCoreModule } from '@agm/core';
 import { LatLngLiteral } from "@agm/core";
@@ -9,14 +9,13 @@ import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
 import { TabsPage } from "../tabs/tabs";
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
-import { AuthService } from '../../providers/auth.service';
 import { SettingsPopover } from './settings.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
 import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 import { OnBoardingPage } from '../onboarding/onboarding';
-import { AdvertiserService } from '../../providers/advertiser.service';
+import { PlaceService } from '../../providers/place.service';
 
 
 @Component({
@@ -43,17 +42,20 @@ export class SettingsPage {
         private location: LocationService,
         private appMode: AppModeService,
         private app: App,
-        private auth: AuthService,
         private popoverCtrl: PopoverController,
         private changeDetectorRef: ChangeDetectorRef,
         private navParams: NavParams,
-        private advert: AdvertiserService ) {
+        private place: PlaceService ) {
 
         this.isAdvMode = this.navParams.get('isAdvMode');
+        this.user = this.navParams.get('user');
+        if(!this.user.id) {
+            this.profile.get()
+                .subscribe(user => this.user = user);
+        }
 
-        this.profile.get()
-            .subscribe(resp => this.user = resp);
-
+        // this.profile.getWithAccounts()
+        //     .subscribe(resp => this.user = resp);
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -65,7 +67,7 @@ export class SettingsPage {
                 this.message = error.message;
             });
 
-        this.advert.get()
+        this.place.get()
             .subscribe(
             resp => this.nextPage = AdvTabsPage,
             errResp => this.nextPage = CreateAdvUserProfilePage);
@@ -93,25 +95,15 @@ export class SettingsPage {
 
     toggleAdvMode() {
         this.isChangeMode = !this.isChangeMode;
-        if (this.nextPage == CreateAdvUserProfilePage) {
-            this.popoverShow(this.nextPage);
-        }
-        else {
-            this.popoverShow(this.nextPage);
+        if (this.isAdvMode && this.nextPage == CreateAdvUserProfilePage) {
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: this.nextPage});
+            popover.present();
         }
         return this.isAdvMode;
     }
 
-    popoverShow(page) {
-        if (this.isAdvMode) {
-            let popover = this.popoverCtrl.create(SettingsPopover, { page: page });
-            popover.present();
-        }
-    }
-
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
-
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
         this.profile.put(this.user)

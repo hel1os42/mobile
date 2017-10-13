@@ -15,9 +15,9 @@
     </a>
 
     <div class="block-checks">
-      <ion-item *ngFor="let selectCategory of selectCategories" no-lines>
-          <ion-label margin-left item-end class="text-828282 font-16">{{ selectCategory.name }}</ion-label>
-          <ion-checkbox [(ngModel)]="selectCategory.isSelected" item-end></ion-checkbox>
+      <ion-item *ngFor="let category of categories" no-lines>
+          <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
+          <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
         </ion-item>
     </div>
 </div>

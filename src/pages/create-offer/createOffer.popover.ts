@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, App } from 'ionic-angular';
-import { CreateOfferPage } from './create-offer';
+import { ViewController } from 'ionic-angular';
 
 @Component({
     selector: 'createOffer-popover-component',
@@ -9,8 +8,7 @@ import { CreateOfferPage } from './create-offer';
 
 export class CreateOfferPopover {
     constructor(
-        private viewCtrl: ViewController,
-        private app: App) { }
+        private viewCtrl: ViewController) { }
 
     close() {
         this.viewCtrl.dismiss();
