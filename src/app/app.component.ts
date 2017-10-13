@@ -25,6 +25,7 @@ import { UserAchievePage } from "../pages/user-achieve/user-achieve";
 import { OfferTermsPage } from "../pages/offer-terms/offer-terms";
 import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
 import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
+import { FeedPage } from "../pages/feed/feed";
 
 @Component({
     templateUrl: 'app.html'

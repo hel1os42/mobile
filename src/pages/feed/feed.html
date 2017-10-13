@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>what happend</ion-title>
+        <ion-buttons class="btn_header" end margin-right>
+            <a *ngIf="!isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_active.svg"></a>
+            <a *ngIf="isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_not_active.svg"></a>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item *ngIf="isVisibleSearch" class="block-search" no-lines>
+        <ion-searchbar round placeholder=""></ion-searchbar>
+        <a class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
+    </ion-item>
+
+    <div class="font-14 text-4F4F4F" text-uppercase>Today</div>
+    <ion-list no-lines class="item-block-nau font-0">
+        <ion-item detail-push class="today">
+            <ion-avatar item-start>
+                <div class="thumb_image" [style.background-image]="'url(assets/img/user_users/ava1.png)'"></div>
+            </ion-avatar>
+            <div class="bold font-20 text-3E4B5D">Erick Brick</div>
+            <div class="font-12 text-4F4F4F margin-top-3vw width-88">Redeemed your offer at</div>
+            <div text-uppercase class="bold font-14 text-FF8B10">Pizza&pasta restaurant</div>
+        </ion-item>
+    </ion-list>
+
+    <div class="font-14 text-4F4F4F padding-top-5vw" text-uppercase>Yesterday</div>
+    <ion-list no-lines class="item-block-nau font-0">
+        <ion-item detail-push class="yesterday">
+            <ion-avatar item-start>
+                <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
+            </ion-avatar>
+            <div class="bold font-20 text-3E4B5D">System Notification</div>
+            <div class="font-12 text-828282 wrap text-overflow-54 margin-top-3vw width-88">Proper credit, use the embedded credit already in the icon you downloaded</div>
+        </ion-item>
+
+        <ion-item detail-push class="yesterday">
+            <ion-avatar item-start>
+                <div class="thumb_image" [style.background-image]="'url(assets/img/thumb_cafe.png)'"></div>
+            </ion-avatar>
+            <div class="bold font-20 text-3E4B5D">Black Cafe</div>
+            <div class="font-12 text-828282 wrap text-overflow-35 margin-top-3vw width-88">Now available in your region</div>
+            <div class="table font-0">
+            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw extrabold font-14">View Place</button>
+            <span class="table-cell padding-top-2vw">
+            <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+            <span class="font-75 text-828282">210</span>
+            </span>
+            </div>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
