@@ -4,7 +4,7 @@ import { SelectedCategory } from '../../models/selectedCategory';
 
 @Component({
     selector: 'create-advUser-profile-category-popover',
-    templateUrl: 'create-advUser-profile.categorypopover.html'
+    templateUrl: 'create-advUser-profile.category.popover.html'
 })
 
 export class CreateAdvUserProfileCategoryPopover {
