@@ -62,8 +62,8 @@ import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
 import { PlacesAlternativePage } from '../pages/places-alternative/places-alternative';
 import { PlacesAlternativePopover } from '../pages/places-alternative/places.alternative.popover';
-import { CreateAdvUserProfilePopover1 } from '../pages/create-advUser-profile/create-advUser-profile.popover1';
-import { CreateAdvUserProfilePopover2 } from '../pages/create-advUser-profile/create-advUser-profile.popover2';
+import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
+import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
 import { PlaceService } from '../providers/place.service';
 import { FeedPage } from "../pages/feed/feed";
 
@@ -110,8 +110,8 @@ import { FeedPage } from "../pages/feed/feed";
     PlacesPopover,
     PlacesAlternativePopover,
     CongratulationPopover,
-    CreateAdvUserProfilePopover1,
-    CreateAdvUserProfilePopover2,
+    CreateAdvUserProfileCategoryPopover,
+    CreateAdvUserProfileChildCategoryPopover,
     OfferTermsPage,
     SettingsChangePhonePage,
     AdvRedeemOfferPage,
@@ -177,8 +177,8 @@ import { FeedPage } from "../pages/feed/feed";
     PlacesPopover,
     PlacesAlternativePopover,
     CongratulationPopover,
-    CreateAdvUserProfilePopover1,
-    CreateAdvUserProfilePopover2,
+    CreateAdvUserProfileCategoryPopover,
+    CreateAdvUserProfileChildCategoryPopover,
     OfferTermsPage,
     SettingsChangePhonePage,
     AdvRedeemOfferPage,

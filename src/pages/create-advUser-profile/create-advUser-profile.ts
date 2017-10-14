@@ -3,14 +3,14 @@ import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
 import { NavController, PopoverController } from 'ionic-angular';
 import { OfferCategory } from '../../models/offerCategory';
-import { CreateAdvUserProfilePopover1 } from './create-advUser-profile.popover1';
+import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
 import * as _ from 'lodash';
 import { OfferService } from '../../providers/offer.service';
 import { SelectedCategory } from '../../models/selectedCategory';
 import { LatLngLiteral } from '@agm/core';
 import { AgmCoreModule } from '@agm/core';
 import { ChildCategory } from '../../models/childCategory';
-import { CreateAdvUserProfilePopover2 } from './create-advUser-profile.popover2';
+import {CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
 import { PlaceCreate } from '../../models/placeCreate';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { PlaceService } from '../../providers/place.service';
@@ -80,7 +80,7 @@ export class CreateAdvUserProfilePage {
     }
 
     showCategoriesPopover() {
-        let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover1, {
+        let popover = this.popoverCtrl.create(CreateAdvUserProfileCategoryPopover, {
             categories: this.categories.map(p => {
                 return {
                     id: p.id,
@@ -107,7 +107,7 @@ export class CreateAdvUserProfilePage {
         this.offer.getSubCategories(this.selectedCategory.id)
             .subscribe(resp => {
                 this.childCategories = resp.children;
-                let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover2, {
+                let popover = this.popoverCtrl.create(CreateAdvUserProfileChildCategoryPopover, {
                     categoryName: this.selectedCategory.name,
                     categories: this.childCategories.map(p => {
                         return {
