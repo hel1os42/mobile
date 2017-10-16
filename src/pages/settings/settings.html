@@ -105,13 +105,11 @@
     </ion-select>
   </ion-item>
 
-  <div class="block-map">
+  <div *ngIf="coords.lat" class="block-map">
     <div padding-left *ngIf="!coords.lat">Detecting your location...</div>
-    <agm-map class="card" *ngIf="coords.lat" [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng">
-        <!-- <agm-marker *ngIf="coords.lat" [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
-        <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="235"></agm-circle> -->
+    <agm-map class="card"  [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng">
     </agm-map>
-    <div id="marker" *ngIf="coords.lat"></div>
+    <div id="marker"></div>
   </div>
 
   <p margin>

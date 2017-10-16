@@ -49,6 +49,8 @@ export class SettingsPage {
 
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
+        this.coords.lat = this.user.latitude;
+        this.coords.lng = this.user.longitude;
         if(!this.user.id) {
             this.profile.get()
                 .subscribe(user => this.user = user);
