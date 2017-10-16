@@ -27,7 +27,6 @@
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
         "@types/lodash": "4.14.74",
-        "com.synconset.imagepicker": "2.1.8",
         "cordova-android": "6.2.3",
         "cordova-plugin-compat": "1.1.0",
         "cordova-plugin-console": "1.0.5",
@@ -63,7 +62,7 @@
             "cordova-plugin-whitelist": {},
             "ionic-plugin-keyboard": {},
             "cordova-plugin-geolocation": {},
-            "com.synconset.imagepicker": {
+            "cordova-plugin-telerik-imagepicker": {
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
             },
             "cordova-plugin-file-transfer": {}
