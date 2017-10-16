@@ -66,6 +66,7 @@ import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-pro
 import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
 import { PlaceService } from '../providers/place.service';
 import { FeedPage } from "../pages/feed/feed";
+import { ToastService } from '../providers/toast.service';
 
 @NgModule({
   declarations: [
@@ -194,6 +195,7 @@ import { FeedPage } from "../pages/feed/feed";
     AuthService,
     StorageService,
     TokenService,
+    ToastService,
     ProfileService,
     OfferService,
     AppModeService,

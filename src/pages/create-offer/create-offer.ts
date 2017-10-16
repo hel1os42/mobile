@@ -8,6 +8,7 @@ import { CreateOfferPopover } from '../create-offer/createOffer.popover'
 import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
 import { PlaceService } from '../../providers/place.service';
 import { ImagePicker } from '@ionic-native/image-picker'
+import { ToastService } from '../../providers/toast.service';
 
 @Component({
     selector: 'page-create-offer',
@@ -21,6 +22,7 @@ export class CreateOfferPage {
     constructor(
         private nav: NavController,
         private place: PlaceService,
+        private toast: ToastService,
         private imagePicker: ImagePicker) {
 
         this.place.getOfferCreate()
@@ -33,13 +35,13 @@ export class CreateOfferPage {
     }
 
     addPicture() {
-        this.imagePicker.getPictures({
-            maximumImagesCount: 1
-        }).then((results) => {
-            debugger;
-            for (var i = 0; i < results.length; i++) {
-                console.log('Image URI: ' + results[i]);
-            }
-        }, (err) => { console.error(err) });
+        let options = { maximumImagesCount: 1 };
+        this.imagePicker.getPictures(options)
+            .then(results => {
+                this.offer.picture_url = results[0];
+            })
+            .catch(err => {
+                this.toast.show(JSON.stringify(err));
+            });
     }
 }
