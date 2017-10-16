@@ -55,6 +55,7 @@ export class OfferPage {
 
     ionViewDidLeave() {
         this.stopTimer();
+        this.app.navPop();
     }
 
     openRedeemPopover() {
@@ -85,9 +86,5 @@ export class OfferPage {
                         });
                 }, 3000)
             })       
-    }
-
-    ionViewWillUnload() {
-        this.app.navPop();
     }
 }
