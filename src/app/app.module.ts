@@ -6,7 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from '@agm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { ImagePicker } from '@ionic-native/image-picker'
+import { ImagePicker } from '@ionic-native/image-picker';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";

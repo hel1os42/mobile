@@ -7,7 +7,7 @@ import { OfferCategory } from '../../models/offerCategory';
 import { CreateOfferPopover } from '../create-offer/createOffer.popover'
 import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
 import { PlaceService } from '../../providers/place.service';
-import { ImagePicker } from '@ionic-native/image-picker'
+import { ImagePicker } from '@ionic-native/image-picker';
 import { ToastService } from '../../providers/toast.service';
 
 @Component({
