@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
 import { AgmCoreModule, LatLngBounds, MapsAPILoader } from '@agm/core';
 import { AppModeService } from '../../providers/appMode.service';
@@ -39,9 +39,6 @@ export class PlacesPage {
     distanceString: string;
     search: string;
     categoryFilter: string[];
-
-    // @ViewChild(Content)
-    // content: Content;
 
     constructor(
         private nav: NavController,

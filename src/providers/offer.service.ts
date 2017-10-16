@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
-import { Offer } from '../models/offer';
-import { Observable } from 'rxjs';
 // import { MockCompanies } from '../mocks/mockCompanies';
 
 @Injectable()

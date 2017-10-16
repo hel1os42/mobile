@@ -5,7 +5,6 @@ import { NotificationsPage } from '../notifications/notifications';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { AppModeService } from '../../providers/appMode.service';
 import { PlacesPage } from '../places/places';
-import { SplashScreenPage } from '../splash-screen/splash-screen';
 import { Subscription } from 'rxjs';
 import { FeedPage } from '../feed/feed';
 
