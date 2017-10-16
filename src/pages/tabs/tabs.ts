@@ -7,6 +7,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { PlacesPage } from '../places/places';
 import { SplashScreenPage } from '../splash-screen/splash-screen';
 import { Subscription } from 'rxjs';
+import { FeedPage } from '../feed/feed';
 
 @Component({
     selector: 'page-tabs',
@@ -20,7 +21,7 @@ export class TabsPage {
     tab2Root = UserProfilePage;
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
-    tab5Root = NotificationsPage;
+    tab5Root = FeedPage;
     selectedTabIndex = 0;
 
     @ViewChild('tabs') tabs: Tabs;
