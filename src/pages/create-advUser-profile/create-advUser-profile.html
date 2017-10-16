@@ -5,10 +5,10 @@
     <ion-list class="margin-0">
         <div class="cover">
             <!-- <img class="cover_logo" [src]="company.picture_url"> -->
-            <div class="cover_logo">
+            <div (click)="addLogo()" class="cover_logo">
                 <span text-uppercase class="font-12 semibold">Add<br>logo</span>
             </div>
-            <button class="btn_right font-12" text-uppercase ion-button>Set image</button>
+            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
         </div>
     </ion-list>
     <div class="header-shadow"></div>
@@ -66,9 +66,9 @@
         <div>{{ address }}</div>
     </div>
 
-    <div class="block-map">
+    <div *ngIf="coords.lat" class="block-map">
         <div *ngIf="!coords.lat">Detecting your location...</div>
-        <agm-map *ngIf="coords.lat" [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)"
+        <agm-map [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)"
             [fitBounds]="bounds">
         </agm-map>
         <div id="marker"></div>

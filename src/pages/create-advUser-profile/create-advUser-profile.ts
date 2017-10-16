@@ -14,6 +14,9 @@ import {CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profil
 import { PlaceCreate } from '../../models/placeCreate';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { PlaceService } from '../../providers/place.service';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { ToastService } from '../../providers/toast.service';
+import { ApiService } from '../../providers/api.service';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -30,6 +33,8 @@ export class CreateAdvUserProfilePage {
     childCategoriesNames: string[];
     company = new PlaceCreate();
     address: string;
+    picture_url: string;
+    cover_url: string;
 
     constructor(
         private location: LocationService,
@@ -37,7 +42,10 @@ export class CreateAdvUserProfilePage {
         private popoverCtrl: PopoverController,
         private offer: OfferService,
         private placeService: PlaceService,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private toast: ToastService,
+        private imagePicker: ImagePicker,
+        private api: ApiService) {
 
     }
 
@@ -138,6 +146,28 @@ export class CreateAdvUserProfilePage {
 
     }
 
+    addLogo() {
+        let options = { maximumImagesCount: 1 };
+        this.imagePicker.getPictures(options)
+            .then(results => {
+                this.picture_url = results[0];
+            })
+            .catch(err => {
+                this.toast.show(JSON.stringify(err));
+            });
+    }
+
+    addCover() {
+        let options = { maximumImagesCount: 1 };
+        this.imagePicker.getPictures(options)
+            .then(results => {
+                this.cover_url = results[0];
+            })
+            .catch(err => {
+                this.toast.show(JSON.stringify(err));
+            });
+    }
+
     createAccount() {
         this.company.latitude = this.coords.lat;
         this.company.longitude = this.coords.lng;
@@ -147,7 +177,10 @@ export class CreateAdvUserProfilePage {
         this.company.radius = 30000;
 
         this.placeService.set(this.company)
-            .subscribe(resp =>
-                this.nav.push(AdvTabsPage, {company: resp}))
+            .subscribe(resp => {
+                this.api.uploadImage(this.picture_url, 'profile/place/picture');
+                this.api.uploadImage(this.cover_url, 'profile/place/cover');
+                this.nav.push(AdvTabsPage, {company: resp});
+            })
     }
 }
