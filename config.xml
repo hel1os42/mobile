@@ -92,4 +92,5 @@
     <plugin name="com.synconset.imagepicker" spec="~2.1.8">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign offer images" />
     </plugin>
+    <plugin name="cordova-plugin-file-transfer" spec="1.6.3" />
 </widget>
