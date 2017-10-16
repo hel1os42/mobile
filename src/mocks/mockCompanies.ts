@@ -1,4 +1,3 @@
-import { Company } from "../models/company";
 
 export class MockCompanies {
     public static items: [

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { AdvUserProfilePage } from "../adv-user-profile/adv-user-profile";
 import { CreateOfferPage } from "../create-offer/create-offer";
 import { AdvUserOffersPage } from "../adv-user-offers/adv-user-offers";
@@ -18,7 +17,7 @@ export class AdvTabsPage {
     tab4Root = AdvNotificationsPage;
     tab5Root = AdvUserOffersPage;
 
-    constructor(private nav: NavController) {
+    constructor() {
 
     }
 

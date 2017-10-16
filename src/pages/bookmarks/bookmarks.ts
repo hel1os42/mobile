@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'page-bookmarks',
@@ -9,7 +8,8 @@ export class BookmarksPage {
 
     segment;
 
-  constructor(private nav: NavController) {
+  constructor() {
+
     this.segment = "places";
   }
 

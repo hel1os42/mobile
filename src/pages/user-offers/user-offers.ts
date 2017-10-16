@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { RedeemedOffer } from '../../models/redeemedOffer';
-import { ProfileService } from '../../providers/profile.service';
 import { OfferService } from '../../providers/offer.service';
 
 @Component({
@@ -12,9 +10,7 @@ export class UserOffersPage {
   offers: RedeemedOffer[];
   total: number;
 
-  constructor(private nav: NavController,
-              private profile: ProfileService,
-              private offer: OfferService) {
+  constructor(private offer: OfferService) {
 
   }
 

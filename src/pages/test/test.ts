@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Slides } from "ionic-angular";
+import { Slides } from 'ionic-angular';
 
 @Component({
     selector: 'page-test',
@@ -9,8 +9,7 @@ export class TestPage {
 
     @ViewChild(Slides) slides: Slides;
 
-    constructor(
-        private nav: NavController) {
+    constructor() {
 
     }
     slideNext() {

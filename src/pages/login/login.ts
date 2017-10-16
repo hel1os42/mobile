@@ -3,9 +3,6 @@ import { NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth.service';
 import { Login } from '../../models/login';
 import { TabsPage } from '../tabs/tabs';
-import { ProfileService } from '../../providers/profile.service';
-import { SignUpPage } from '../signup/signup';
-import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { AppModeService } from '../../providers/appMode.service';
 import { SignUpInvitePage } from '../invite/invite';
 
