@@ -138,7 +138,7 @@ export class ApiService {
             this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)), true);
     }
 
-    uploadImage(path, filePath) {
+    uploadImage(filePath, path) {
         let token = this.token.get();
 
         let options: FileUploadOptions = {
