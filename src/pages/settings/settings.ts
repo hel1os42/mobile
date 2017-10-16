@@ -68,7 +68,7 @@ export class SettingsPage {
         this.place.get()
             .subscribe(
                 resp => this.nextPage = AdvTabsPage,
-                errResp => this.nextPage = CreateAdvUserProfilePage);
+                errResp => this.nextPage = undefined);
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -93,8 +93,8 @@ export class SettingsPage {
 
     toggleAdvMode() {
         this.isChangeMode = !this.isChangeMode;
-        if (this.isAdvMode && this.nextPage == CreateAdvUserProfilePage) {
-            let popover = this.popoverCtrl.create(SettingsPopover, { page: this.nextPage});
+        if (this.isAdvMode && !this.nextPage) {
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: CreateAdvUserProfilePage});
             popover.present();
         }
         return this.isAdvMode;
