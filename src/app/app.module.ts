@@ -60,8 +60,6 @@ import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
 import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
-import { PlacesAlternativePage } from '../pages/places-alternative/places-alternative';
-import { PlacesAlternativePopover } from '../pages/places-alternative/places.alternative.popover';
 import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
 import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
 import { PlaceService } from '../providers/place.service';
@@ -80,7 +78,6 @@ import { FeedPage } from "../pages/feed/feed";
     CreateOfferPage,
     TabsPage,
     PlacesPage,
-    PlacesAlternativePage,
     UserProfilePage,
     BookmarksPage,
     NotificationsPage,
@@ -108,7 +105,6 @@ import { FeedPage } from "../pages/feed/feed";
     OfferRedeemPopover,
     CreateOfferPopover,
     PlacesPopover,
-    PlacesAlternativePopover,
     CongratulationPopover,
     CreateAdvUserProfileCategoryPopover,
     CreateAdvUserProfileChildCategoryPopover,
@@ -147,7 +143,6 @@ import { FeedPage } from "../pages/feed/feed";
     CreateOfferPage,
     TabsPage,
     PlacesPage,
-    PlacesAlternativePage,
     UserProfilePage,
     BookmarksPage,
     NotificationsPage,
@@ -175,7 +170,6 @@ import { FeedPage } from "../pages/feed/feed";
     OfferRedeemPopover,
     CreateOfferPopover,
     PlacesPopover,
-    PlacesAlternativePopover,
     CongratulationPopover,
     CreateAdvUserProfileCategoryPopover,
     CreateAdvUserProfileChildCategoryPopover,
