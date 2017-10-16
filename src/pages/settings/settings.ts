@@ -53,9 +53,7 @@ export class SettingsPage {
             this.profile.get()
                 .subscribe(user => this.user = user);
         }
-
-        // this.profile.getWithAccounts()
-        //     .subscribe(resp => this.user = resp);
+        
         this.location.get()
             .then((resp) => {
                 this.coords = {
