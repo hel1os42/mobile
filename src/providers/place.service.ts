@@ -41,13 +41,4 @@ export class PlaceService {
         return this.api.post('places', place);
     }
 
-    setPicture(picture) {
-        return this.api.post('profile/place/picture', null);
-    }
-
-    setCover(cover) {
-        return this.api.post('profile/place/cover', null);
-    }
-
-
 }
