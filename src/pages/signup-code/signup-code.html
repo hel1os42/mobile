@@ -10,10 +10,12 @@
     <div text-center class="title-big-sign">Confirm</div>
     <div text-center class="margin-top-6vw font-75 text-4F4F4F">Please fill confirmation code<br>from message</div>
 
-    <ion-item class="margin-top-6vw border-bottom-no">
-        <ion-label class="bg-gray-left label-left">OTP</ion-label>
-        <ion-input class="bg-gray-right" type="tel" placeholder="XX-XX-XX" [(ngModel)]="register.code"></ion-input>
-    </ion-item>
+    <div margin-top class="bg-gray margin-top-6vw">
+        <ion-item class="border-bottom-no">
+            <ion-label class="label-left">OTP</ion-label>
+            <ion-input type="tel" placeholder="XX-XX-XX" [(ngModel)]="register.code"></ion-input>
+        </ion-item>
+    </div>
 
     <button text-uppercase class="margin-top-6vw" (click)="signUp()" ion-button block middle color="primary">Next</button>
 

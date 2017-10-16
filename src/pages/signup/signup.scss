@@ -20,13 +20,13 @@ page-signup {
       top: 1.5vw;
   }
 
-    .text-input-ios {
-        padding: 3vw 6.3vw 3vw 0;
-    }
-
     .select-ios .select-icon {
         position: relative;
         width: inherit;
         height: inherit;
+    }
+
+    .text-input-ios {
+        padding: 0 6vw 0 3vw;
     }
 }

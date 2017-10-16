@@ -376,6 +376,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-radius: 100vw;
     border: 1px solid #E0E0E0;
     min-height: 11.8vw;
+    overflow: hidden;
 }
 
 .bg-gray.item-block{
@@ -454,7 +455,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .label-left{
-    padding: 3vw 4vw 3vw 6vw;
+    padding: 3vw 4vw 3vw 6.3vw;
     color: map-get($colors, dark);
 }
 
@@ -1065,6 +1066,14 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .padding-left-4vw{
     padding-left: 4vw;
+}
+
+.padding-left-7vw{
+    padding-left: 7vw;
+}
+
+.padding-left-6a3vw{
+    padding-left: 6vw;
 }
 
 .padding-right-10{
