@@ -85,4 +85,8 @@ export class OfferPage {
                 }, 3000)
             })       
     }
+
+    ionViewWillUnload() {
+        this.nav.pop();
+    }
 }
