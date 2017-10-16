@@ -88,6 +88,6 @@ export class OfferPage {
     }
 
     ionViewWillUnload() {
-        this.app.goBack();
+        this.app.navPop();
     }
 }
