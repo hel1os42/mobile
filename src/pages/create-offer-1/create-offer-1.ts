@@ -12,7 +12,7 @@ import { PlaceService } from '../../providers/place.service';
 })
 export class CreateOffer1Page {
 
-    offer = new OfferCreate;
+    offer: OfferCreate;
     discounts: number[] = [5, 10, 15, 20, 25, 30, 35, 40];//to do
     discount: number = 10;
     isDiscountSelectDisable: boolean = true;

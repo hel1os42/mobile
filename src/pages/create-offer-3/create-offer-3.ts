@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 })
 export class CreateOffer3Page {
 
-    offer = new OfferCreate();
+    offer: OfferCreate;
     coords: Coords = new Coords();
     message: string;
     bounds;
@@ -35,21 +35,6 @@ export class CreateOffer3Page {
 
     }
 
-    // ionViewDidLoad() {
-    // //     // this.location.get()
-    // //     //     .then((resp) => {
-    // //     //         this.coords = {
-    // //     //             lat: resp.coords.latitude,
-    // //     //             lng: resp.coords.longitude
-    // //     //         };
-    // //     //     })
-    // //     //     .catch((error) => {
-    // //     //         this.message = error.message;
-    // //     //         console.log(this.message);
-    // //     //     });
-
-    //  }
-
     onMapCenterChange(center: LatLngLiteral) {
         this.coords.lat = center.lat;
         this.coords.lng = center.lng;
@@ -64,7 +49,7 @@ export class CreateOffer3Page {
         let latlng = { lat: this.coords.lat, lng: this.coords.lng };
         geocoder.geocode({ 'location': latlng }, (results, status) => {
             if (status === 'OK') {
-                let timezone = results.timeZoneId;
+                // let timezone = results.timeZoneId;
                 results = results[0].address_components;
                 this.city = this.findResult(results, "locality");
                 this.offer.country = this.findResult(results, "country");
@@ -99,7 +84,7 @@ export class CreateOffer3Page {
     openCreateOffer4Page() {
         this.offer.radius = 30000;//todo
         this.offer.city = this.city;
-        debugger
+        
         this.nav.push(CreateOffer4Page, { offer: this.offer });
     }
 

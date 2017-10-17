@@ -24,9 +24,6 @@ export class CreateOfferPage {
         private toast: ToastService,
         private imagePicker: ImagePicker) {
 
-        this.place.getOfferCreate()
-            .subscribe(resp => this.offer = resp);
-
             }
 
     openCreateOffer1Page() {
