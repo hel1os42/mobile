@@ -3,7 +3,6 @@ import { AgmCoreModule } from '@agm/core';
 import { Coords } from '../../models/coords';
 import { NavController } from 'ionic-angular';
 import { OfferCreate } from '../../models/offerCreate';
-import { OfferCategory } from '../../models/offerCategory';
 import { CreateOfferPopover } from '../create-offer/createOffer.popover'
 import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
 import { PlaceService } from '../../providers/place.service';

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
 @Component({
     selector: 'page-notifications',
@@ -9,7 +8,7 @@ export class NotificationsPage {
 
     isVisibleSearch: boolean = false;
 
-    constructor(private nav: NavController) {
+    constructor() {
 
     }
 

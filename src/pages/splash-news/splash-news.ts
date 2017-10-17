@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, App } from "ionic-angular";
+import { NavController } from "ionic-angular";
 import { AppModeService } from '../../providers/appMode.service';
 import { TabsPage } from '../tabs/tabs';
 
@@ -9,8 +9,7 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class SplashNewsPage {
 
-    constructor(private app: App,
-                private appMode: AppModeService,
+    constructor(private appMode: AppModeService,
                 private nav: NavController) {
 
     }

@@ -1,7 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
-import { AuthService } from "../../providers/auth.service";
-import { StartPage } from "../start/start";
 import { ProfileService } from "../../providers/profile.service";
 import { User } from "../../models/user";
 import { SettingsPage } from "../settings/settings";
@@ -24,7 +22,6 @@ export class UserProfilePage {
 
     constructor(
         private profile: ProfileService,
-        private auth: AuthService,
         private nav: NavController) {
         
         this.profile.getWithAccounts()

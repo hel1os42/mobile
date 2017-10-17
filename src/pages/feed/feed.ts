@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
 @Component({
     selector: 'page-feed',
@@ -9,7 +8,7 @@ export class FeedPage {
 
     isVisibleSearch = false;
 
-    constructor(private nav: NavController) {
+    constructor() {
 
     }
 

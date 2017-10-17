@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, App, NavParams } from 'ionic-angular';
-import { OfferService } from '../../providers/offer.service';
-import { ChildCategory } from '../../models/childCategory';
+import { ViewController, NavParams } from 'ionic-angular';
 import { SelectedCategory } from '../../models/selectedCategory';
 
 @Component({
@@ -15,7 +13,6 @@ export class PlacesPopover {
 
     constructor(
         private viewCtrl: ViewController,
-        private offer: OfferService,
         private navParams: NavParams) {
 
         this.categories = this.navParams.get('childCategories');
