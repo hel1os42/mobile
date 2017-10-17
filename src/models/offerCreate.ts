@@ -7,7 +7,7 @@ export class OfferCreate {
     reward: number;
     start_date: string;
     finish_date: string;
-    timeFrames: TimeFrames[];
+    timeframes: TimeFrames[];
     category_id: string;
     max_count: number;
     max_for_user: number;
