@@ -3,7 +3,15 @@ page-create-advUser-profile {
     background: linear-gradient(89.86deg, #FF5A00 0.03%, #FF8B10 99.98%);
   }
 
-  .cover_logo{
+  .cover_logo_adv{
+      position: absolute;
+      left: 4.8%;
+      bottom: -11vw;
+      width: 22vw;
+      height: 22vw;
+      border-radius: 100vw;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      z-index: 11111111;
       background-color: #fff;
       background-image: url(../assets/img/create_advuser_profile/dotted.svg);
       background-position: 50% 50%;
@@ -12,7 +20,7 @@ page-create-advUser-profile {
       display: table;
   }
 
-  .cover_logo span{
+  .cover_logo_adv span{
       margin: 0 auto;
       display: table-cell;
       vertical-align: middle;

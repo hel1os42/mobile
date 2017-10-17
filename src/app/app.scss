@@ -1152,6 +1152,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     height: 22vw;
     border-radius: 100vw;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    z-index: 11111111;
 }
 
 .cover_block_btn{
