@@ -3,9 +3,8 @@
     <ion-title>The fair food</ion-title>
   </ion-navbar>
   <ion-list class="margin-0">
-  <div class="cover" [style.background-image]="'url(assets/img/place/header.png)'">
-    <!-- <img class="cover_logo" [src]="company.picture_url"> -->
-    <div class="cover_logo" [style.background-image]="'url(assets/img/user_home/image1.png)'"></div>
+  <div class="cover" [style.background-image]="'url(' + company.cover_url + ')'">
+    <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + ')'"></div>
     <div class="cover_block_btn">
       <button ion-button icon-only color="white">
         <img src="assets/img/place/btn_star.svg">
