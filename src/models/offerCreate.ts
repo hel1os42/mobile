@@ -21,7 +21,5 @@ export class OfferCreate {
     radius: number;
     country: string;
     city: string;
-    start_time: string;//to remove
-    finish_time: string;//to remove
     picture_url: string;
 }
