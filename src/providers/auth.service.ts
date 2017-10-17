@@ -3,9 +3,6 @@ import { Register } from '../models/register';
 import { Login } from '../models/login';
 import { ApiService } from './api.service';
 import { TokenService } from './token.service';
-import { Token } from '../models/token';
-import { Observable } from 'rxjs';
-import { StorageService } from './storage.service';
 
 @Injectable()
 export class AuthService {

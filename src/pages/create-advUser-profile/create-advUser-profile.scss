@@ -79,7 +79,7 @@ page-create-advUser-profile {
 
 }
 
-create-advUser-profile-popover-component1{
+create-advUser-profile-category-popover{
     .item-ios {
         padding-left: 0;
         margin-bottom: 7vw;
@@ -99,10 +99,11 @@ create-advUser-profile-popover-component1{
         padding-top: 8vw;
         padding-right: 6vw;
         padding-left: 3vw;
+        padding-bottom: 17vw;
     }
 }
 
-create-advUser-profile-popover-component2{
+create-advUser-profile-popover-childCategory{
     .item-ios {
         padding-left: 0;
         margin-bottom: 1vw;
@@ -122,5 +123,6 @@ create-advUser-profile-popover-component2{
         padding-top: 8vw;
         padding-right: 7vw;
         padding-left: 10vw;
+        padding-bottom: 21vw;
     }
 }

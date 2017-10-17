@@ -49,13 +49,13 @@ export class SettingsPage {
 
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
+        this.coords.lat = this.user.latitude;
+        this.coords.lng = this.user.longitude;
         if(!this.user.id) {
             this.profile.get()
                 .subscribe(user => this.user = user);
         }
-
-        // this.profile.getWithAccounts()
-        //     .subscribe(resp => this.user = resp);
+        
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -69,8 +69,8 @@ export class SettingsPage {
 
         this.place.get()
             .subscribe(
-            resp => this.nextPage = AdvTabsPage,
-            errResp => this.nextPage = CreateAdvUserProfilePage);
+                resp => this.nextPage = AdvTabsPage,
+                errResp => this.nextPage = undefined);
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -95,8 +95,8 @@ export class SettingsPage {
 
     toggleAdvMode() {
         this.isChangeMode = !this.isChangeMode;
-        if (this.isAdvMode && this.nextPage == CreateAdvUserProfilePage) {
-            let popover = this.popoverCtrl.create(SettingsPopover, { page: this.nextPage});
+        if (this.isAdvMode && !this.nextPage) {
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: CreateAdvUserProfilePage});
             popover.present();
         }
         return this.isAdvMode;

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, App } from "ionic-angular";
 import { AppModeService } from '../../providers/appMode.service';
-import { TabsPage } from '../tabs/tabs';
 
 @Component({
     selector: 'page-splash-info',
@@ -9,9 +7,7 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class SplashInfoPage {
 
-    constructor(
-        private app: App,
-        private appMode: AppModeService) {
+    constructor(private appMode: AppModeService) {
 
     }
 

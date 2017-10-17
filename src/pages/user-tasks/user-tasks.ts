@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from "ionic-angular";
+import { NavParams } from "ionic-angular";
 import { User } from '../../models/user';
 
 @Component({
@@ -11,9 +11,7 @@ export class UserTasksPage {
     user: User = new User();
     seg;
 
-    constructor(
-        private nav: NavController,
-        private navParams: NavParams) {
+    constructor(private navParams: NavParams) {
 
         this.seg = "active";
         this.user = this.navParams.get('user');

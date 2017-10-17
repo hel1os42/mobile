@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-notifications',
-  templateUrl: 'notifications.html'
+    selector: 'page-notifications',
+    templateUrl: 'notifications.html'
 })
 export class NotificationsPage {
-  isVisibleSearch: boolean = false;
 
-  constructor(private nav: NavController) {
+    isVisibleSearch: boolean = false;
 
-  }
+    constructor() {
 
-  toggleSearch() {
-    this.isVisibleSearch = true;
-  }
+    }
+
+    toggleSearch() {
+        this.isVisibleSearch = !this.isVisibleSearch;
+    }
 
 }

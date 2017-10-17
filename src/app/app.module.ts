@@ -6,6 +6,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from '@agm/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { FileTransfer } from '@ionic-native/file-transfer';
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
 import { LoginPage } from "../pages/login/login";
@@ -60,12 +62,11 @@ import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
 import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
-import { PlacesAlternativePage } from '../pages/places-alternative/places-alternative';
-import { PlacesAlternativePopover } from '../pages/places-alternative/places.alternative.popover';
-import { CreateAdvUserProfilePopover1 } from '../pages/create-advUser-profile/create-advUser-profile.popover1';
-import { CreateAdvUserProfilePopover2 } from '../pages/create-advUser-profile/create-advUser-profile.popover2';
+import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
+import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
 import { PlaceService } from '../providers/place.service';
 import { FeedPage } from "../pages/feed/feed";
+import { ToastService } from '../providers/toast.service';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,6 @@ import { FeedPage } from "../pages/feed/feed";
     CreateOfferPage,
     TabsPage,
     PlacesPage,
-    PlacesAlternativePage,
     UserProfilePage,
     BookmarksPage,
     NotificationsPage,
@@ -108,10 +108,9 @@ import { FeedPage } from "../pages/feed/feed";
     OfferRedeemPopover,
     CreateOfferPopover,
     PlacesPopover,
-    PlacesAlternativePopover,
     CongratulationPopover,
-    CreateAdvUserProfilePopover1,
-    CreateAdvUserProfilePopover2,
+    CreateAdvUserProfileCategoryPopover,
+    CreateAdvUserProfileChildCategoryPopover,
     OfferTermsPage,
     SettingsChangePhonePage,
     AdvRedeemOfferPage,
@@ -147,7 +146,6 @@ import { FeedPage } from "../pages/feed/feed";
     CreateOfferPage,
     TabsPage,
     PlacesPage,
-    PlacesAlternativePage,
     UserProfilePage,
     BookmarksPage,
     NotificationsPage,
@@ -175,10 +173,9 @@ import { FeedPage } from "../pages/feed/feed";
     OfferRedeemPopover,
     CreateOfferPopover,
     PlacesPopover,
-    PlacesAlternativePopover,
     CongratulationPopover,
-    CreateAdvUserProfilePopover1,
-    CreateAdvUserProfilePopover2,
+    CreateAdvUserProfileCategoryPopover,
+    CreateAdvUserProfileChildCategoryPopover,
     OfferTermsPage,
     SettingsChangePhonePage,
     AdvRedeemOfferPage,
@@ -191,11 +188,14 @@ import { FeedPage } from "../pages/feed/feed";
   providers: [
     StatusBar,
     SplashScreen,
+    ImagePicker,
+    FileTransfer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiService,
     AuthService,
     StorageService,
     TokenService,
+    ToastService,
     ProfileService,
     OfferService,
     AppModeService,

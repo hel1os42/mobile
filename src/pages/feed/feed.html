@@ -6,6 +6,7 @@
             <a *ngIf="isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_not_active.svg"></a>
         </ion-buttons>
     </ion-navbar>
+    <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content padding>
@@ -21,9 +22,16 @@
             <ion-avatar item-start>
                 <div class="thumb_image" [style.background-image]="'url(assets/img/user_users/ava1.png)'"></div>
             </ion-avatar>
-            <div class="bold font-20 text-3E4B5D">Erick Brick</div>
-            <div class="font-12 text-4F4F4F margin-top-3vw width-88">Redeemed your offer at</div>
-            <div text-uppercase class="bold font-14 text-FF8B10">Pizza&pasta restaurant</div>
+            <div class="bold font-20 text-3E4B5D">Alex Miller</div>
+            <div class="font-12 text-4F4F4F margin-top-3vw width-88 text-overflow-35">Redeemed your offer at</div>
+            <div text-uppercase class="bold font-14 text-FF8B10">The Fair food</div>
+            <div class="table">
+            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw extrabold font-14">redeem offer</button>
+            <span class="table-cell padding-top-2vw">
+            <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+            <span class="font-75 text-828282">210 m</span>
+            </span>
+            </div>
         </ion-item>
     </ion-list>
 
@@ -33,8 +41,15 @@
             <ion-avatar item-start>
                 <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
             </ion-avatar>
-            <div class="bold font-20 text-3E4B5D">System Notification</div>
-            <div class="font-12 text-828282 wrap text-overflow-54 margin-top-3vw width-88">Proper credit, use the embedded credit already in the icon you downloaded</div>
+            <div class="bold font-20 text-3E4B5D">Happy Friday</div>
+            <div class="font-12 text-828282 wrap text-overflow-54 margin-top-3vw width-88">Our restaurant wants offer your ineresting proposition!</div>
+            <div class="table">
+                <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw extrabold font-14">Redeem offer</button>
+            <span class="table-cell padding-top-2vw">
+            <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+            <span class="font-75 text-828282">100 m</span>
+            </span>
+            </div>
         </ion-item>
 
         <ion-item detail-push class="yesterday">
@@ -42,12 +57,12 @@
                 <div class="thumb_image" [style.background-image]="'url(assets/img/thumb_cafe.png)'"></div>
             </ion-avatar>
             <div class="bold font-20 text-3E4B5D">Black Cafe</div>
-            <div class="font-12 text-828282 wrap text-overflow-35 margin-top-3vw width-88">Now available in your region</div>
-            <div class="table font-0">
-            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw extrabold font-14">View Place</button>
+            <div class="font-12 text-828282 wrap text-overflow-54 margin-top-3vw width-88">Now available in your region</div>
+            <div class="table">
+            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw font-14">View offers</button>
             <span class="table-cell padding-top-2vw">
             <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
-            <span class="font-75 text-828282">210</span>
+            <span class="font-75 text-828282">300 m</span>
             </span>
             </div>
         </ion-item>

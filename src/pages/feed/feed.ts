@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-feed',
-  templateUrl: 'feed.html'
+    selector: 'page-feed',
+    templateUrl: 'feed.html'
 })
 export class FeedPage {
 
-  constructor(private nav: NavController) {
+    isVisibleSearch = false;
 
-  }
+    constructor() {
+
+    }
+
+    toggleSearch() {
+        this.isVisibleSearch = !this.isVisibleSearch;
+    }
 
 }

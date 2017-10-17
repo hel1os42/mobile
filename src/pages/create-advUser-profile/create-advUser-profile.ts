@@ -3,17 +3,20 @@ import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
 import { NavController, PopoverController } from 'ionic-angular';
 import { OfferCategory } from '../../models/offerCategory';
-import { CreateAdvUserProfilePopover1 } from './create-advUser-profile.popover1';
+import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
 import * as _ from 'lodash';
 import { OfferService } from '../../providers/offer.service';
 import { SelectedCategory } from '../../models/selectedCategory';
 import { LatLngLiteral } from '@agm/core';
 import { AgmCoreModule } from '@agm/core';
 import { ChildCategory } from '../../models/childCategory';
-import { CreateAdvUserProfilePopover2 } from './create-advUser-profile.popover2';
+import {CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
 import { PlaceCreate } from '../../models/placeCreate';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { PlaceService } from '../../providers/place.service';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { ToastService } from '../../providers/toast.service';
+import { ApiService } from '../../providers/api.service';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -30,6 +33,8 @@ export class CreateAdvUserProfilePage {
     childCategoriesNames: string[];
     company = new PlaceCreate();
     address: string;
+    picture_url: string;
+    cover_url: string;
 
     constructor(
         private location: LocationService,
@@ -37,7 +42,10 @@ export class CreateAdvUserProfilePage {
         private popoverCtrl: PopoverController,
         private offer: OfferService,
         private placeService: PlaceService,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private toast: ToastService,
+        private imagePicker: ImagePicker,
+        private api: ApiService) {
 
     }
 
@@ -80,7 +88,7 @@ export class CreateAdvUserProfilePage {
     }
 
     showCategoriesPopover() {
-        let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover1, {
+        let popover = this.popoverCtrl.create(CreateAdvUserProfileCategoryPopover, {
             categories: this.categories.map(p => {
                 return {
                     id: p.id,
@@ -107,7 +115,7 @@ export class CreateAdvUserProfilePage {
         this.offer.getSubCategories(this.selectedCategory.id)
             .subscribe(resp => {
                 this.childCategories = resp.children;
-                let popover = this.popoverCtrl.create(CreateAdvUserProfilePopover2, {
+                let popover = this.popoverCtrl.create(CreateAdvUserProfileChildCategoryPopover, {
                     categoryName: this.selectedCategory.name,
                     categories: this.childCategories.map(p => {
                         return {
@@ -138,6 +146,28 @@ export class CreateAdvUserProfilePage {
 
     }
 
+    addLogo() {
+        let options = { maximumImagesCount: 1 };
+        this.imagePicker.getPictures(options)
+            .then(results => {
+                this.picture_url = results[0];
+            })
+            .catch(err => {
+                this.toast.show(JSON.stringify(err));
+            });
+    }
+
+    addCover() {
+        let options = { maximumImagesCount: 1 };
+        this.imagePicker.getPictures(options)
+            .then(results => {
+                this.cover_url = results[0];
+            })
+            .catch(err => {
+                this.toast.show(JSON.stringify(err));
+            });
+    }
+
     createAccount() {
         this.company.latitude = this.coords.lat;
         this.company.longitude = this.coords.lng;
@@ -147,7 +177,10 @@ export class CreateAdvUserProfilePage {
         this.company.radius = 30000;
 
         this.placeService.set(this.company)
-            .subscribe(resp =>
-                this.nav.push(AdvTabsPage, {company: resp}))
+            .subscribe(resp => {
+                this.api.uploadImage(this.picture_url, 'profile/place/picture');
+                this.api.uploadImage(this.cover_url, 'profile/place/cover');
+                this.nav.push(AdvTabsPage, {company: resp});
+            })
     }
 }

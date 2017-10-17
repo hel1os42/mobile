@@ -2,13 +2,22 @@ import { Injectable } from "@angular/core";
 import { ApiService } from "./api.service";
 import { OfferCreate } from "../models/offerCreate";
 import { PlaceCreate } from "../models/placeCreate";
+import { Company } from "../models/company";
 
 @Injectable()
 export class PlaceService {
 
+    company: Company;
+
     constructor(private api: ApiService) { }
 
     get() {
+        let obs = this.api.get('profile/place');
+        obs.subscribe(company => this.company = company);
+        return obs;
+    }
+
+    getWithOffers() {
         return this.api.get('profile/place?with=offers');
     }
 
@@ -31,14 +40,5 @@ export class PlaceService {
     set(place: PlaceCreate) {
         return this.api.post('places', place);
     }
-
-    setPicture(picture) {
-        return this.api.post('profile/place/picture', null);
-    }
-
-    setCover(cover) {
-        return this.api.post('profile/place/cover', null);
-    }
-
 
 }

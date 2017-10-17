@@ -1,4 +1,4 @@
-page-adv-notifications{
+page-feed{
     .btn_search_settings {
         right: 20px;
     }
@@ -8,10 +8,12 @@ page-adv-notifications{
     }
 
     .btn_view.item-button{
-        padding-left: 5vw;
-        padding-right: 5vw;
+        padding-top: 2.7vw;
+        padding-bottom: 2.7vw;
+        width: 32.2vw;
+        border-radius: 3vw;
+        font-size: 3.7vw;
         background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
-        border-radius: 2.5vw;
     }
 
     .item-ios.item-block .item-inner{

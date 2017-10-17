@@ -4,13 +4,10 @@ import { Register } from "../../models/register";
 import { AgmCoreModule } from '@agm/core';
 import { LatLngLiteral } from "@agm/core";
 import * as _ from 'lodash';
-import { AuthService } from "../../providers/auth.service";
 import { TabsPage } from "../tabs/tabs";
 import { LocationService } from "../../providers/location.service";
 import { Coords } from "../../models/coords";
 import { ProfileService } from "../../providers/profile.service";
-import { UserProfilePage } from "../user-profile/user-profile";
-import { SplashScreenPage } from "../splash-screen/splash-screen";
 import { User } from '../../models/user';
 
 @Component({
@@ -36,7 +33,6 @@ export class CreateUserProfilePage {
 
     constructor(
         private nav: NavController,
-        private auth: AuthService,
         private location: LocationService,
         private changeDetectorRef: ChangeDetectorRef,
         private profile: ProfileService) {
@@ -92,7 +88,6 @@ export class CreateUserProfilePage {
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
         //this.account.points = this.point(); to do
-        this.profile.set(this.user)
         this.profile.put(this.user)
             .subscribe(resp => this.nav.setRoot(TabsPage, {selectedTabIndex: 1}));
     }

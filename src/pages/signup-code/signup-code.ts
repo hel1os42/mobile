@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
 import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
 import { Register } from '../../models/register';
-import { TabsPage } from '../tabs/tabs';
 import { AppModeService } from '../../providers/appMode.service';
 
 @Component({

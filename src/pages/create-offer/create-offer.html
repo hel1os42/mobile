@@ -1,118 +1,54 @@
 <ion-header>
-        <ion-navbar>
-            <ion-title>Create Offer</ion-title>
-            <ion-buttons end class="padding-right-3vw">
-              <button (click)="openCreateOffer1Page()" ion-button icon-only color="dark" class="btn_search">
+    <ion-navbar>
+        <ion-title>Create Offer</ion-title>
+        <ion-buttons end class="padding-right-3vw">
+            <button (click)="openCreateOffer1Page()" ion-button icon-only color="dark" class="btn_search">
                 <span class="font-12 text-333333 no-bold">Next</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
-              </button>
-            </ion-buttons>
-        </ion-navbar>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-list no-lines>
         <p margin>
-           <span class="progress-block">
-               <span class="progress-line"></span>
-               <span class="progress-line-fill"></span>
-               <span class="circle fill-first"></span>
-               <span class="circle no-fill"></span>
-               <span class="circle no-fill"></span>
-               <span class="circle no-fill"></span>
-               <span class="circle no-fill"></span>
-               <span class="circle no-fill"></span>
+            <span class="progress-block">
+                <span class="progress-line"></span>
+                <span class="progress-line-fill"></span>
+                <span class="circle fill-first"></span>
+                <span class="circle no-fill"></span>
+                <span class="circle no-fill"></span>
+                <span class="circle no-fill"></span>
+                <span class="circle no-fill"></span>
+                <span class="circle no-fill"></span>
             </span>
         </p>
-    </ion-header>
+    </ion-list>
+    <div class="header-shadow"></div>
+</ion-header>
 
-    <ion-content>
+<ion-content>
 
-          <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Name & description</div>
-          <div class="block-lines">
-                <ion-item no-lines>
-                    <ion-input [(ngModel)]="offer.label" class="bg-gray" type="text" placeholder="Offer Name"></ion-input>
-                </ion-item>
+    <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Name & description</div>
+    <div class="block-lines">
+        <ion-item no-lines>
+            <ion-input [(ngModel)]="offer.label" class="bg-gray" type="text" placeholder="Offer Name"></ion-input>
+        </ion-item>
 
-                <ion-item no-lines margin-top>
-                  <ion-textarea [(ngModel)]="offer.description" class="bg-gray-radius-small" placeholder="Offer description"></ion-textarea>
-                </ion-item>
-            </div>
-            <div class="block-lines">
-                <button class="browse font-16 text-3E4B5D no-bold" type="button" ion-button round outline block text-uppercase>Add picture</button>
-            </div>
-                <!--
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-2>
-                                <ion-label>from</ion-label>
-                        </ion-col>
-                        <ion-col col-6 class="bcg">
-                                <ion-datetime [(ngModel)]="offer.start_date" [ngModelOptions]="{standalone: true}" displayFormat="DDD/D/MM/YYYY" min="2017-09-01" max="2022" ></ion-datetime>
-                        </ion-col>
-                        <ion-col class="bcg">
-                                <ion-datetime [(ngModel)]="offer.start_time" [ngModelOptions]="{standalone: true}" displayFormat="h:mm a"></ion-datetime>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+        <ion-item no-lines margin-top>
+            <ion-textarea [(ngModel)]="offer.description" class="bg-gray-radius-small" placeholder="Offer description"></ion-textarea>
+        </ion-item>
+    </div>
+    <div class="block-lines">
+        <button (click)="addPicture()" class="browse font-16 text-3E4B5D no-bold" type="button" ion-button round outline block text-uppercase>
+            Add picture
+        </button>
+    </div>
 
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-2>
-                                <ion-label>to</ion-label>
-                        </ion-col>
-                        <ion-col col-6 class="bcg">
-                                <ion-datetime [(ngModel)]="offer.finish_date" [ngModelOptions]="{standalone: true}" displayFormat="DDD/D/MM/YYYY" min="2017-09-01" max="2022"></ion-datetime>
-                        </ion-col>
-                        <ion-col class="bcg">
-                                <ion-datetime [(ngModel)]="offer.finish_time" [ngModelOptions]="{standalone: true}" displayFormat="h:mm a"></ion-datetime>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+    <!-- <input type="file" accept="image/*" (change)="fileChange($event)"> -->
+
+    <p margin>
+        <button (click)="openCreateOffer1Page()" ion-button block text-uppercase color="primary">Next step</button>
+    </p>
 
 
-                <div padding-top padding-bottom>
-                        <a (click)="toggleSelect()">
-                          <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
-                          <ion-icon *ngIf="isSelectVisible" name="arrow-up"></ion-icon>
-                          <div class="select">
-                              Additional options
-                          </div>
-                        </a>
-                      </div>
 
-              <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }">
-                    <ion-item padding-top class="border-bottom-no">
-                        <ion-select placeholder="Unlimited offer" class="bg-gray width-100" interface="action-sheet">
-                            <ion-option value="">Limited</ion-option>
-                            <ion-option value="">Unlimited</ion-option>
-                        </ion-select>
-                    </ion-item>
-
-                    <ion-grid padding>
-                        <ion-row>
-                            <ion-col col-6>
-                                <p>Working radius:</p>
-                            </ion-col>
-                            <ion-col col-6>
-                                <ion-item class="border-bottom-no">
-                                    <ion-label>Working radius</ion-label>
-                                    <ion-select [(ngModel)]="offer.radius" placeholder="50 m" name="radius" class="bg-gray width-100" interface="action-sheet">
-                                        <ion-option *ngFor="let radius of radiuses" [value]="radius">{{ radius }} m</ion-option>
-                                    </ion-select>
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-
-
-                <div padding-top padding-bottom>
-                    <div *ngIf="!coords.lat" >Detecting your location...</div>
-                    <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng">
-                        <agm-marker [latitude]="coords.lat" [longitude]="coords.lng"></agm-marker>
-                        <agm-circle fillOpacity="0.2"  [radius]="radius" [latitude]="coords.lat" [longitude]="coords.lng"></agm-circle>
-                    </agm-map>
-                </div>
-            </div>
-              -->
-              <p margin>
-                <button (click)="openCreateOffer1Page()" ion-button block text-uppercase color="primary">Next step</button>
-              </p>
-
-    </ion-content>
+</ion-content>

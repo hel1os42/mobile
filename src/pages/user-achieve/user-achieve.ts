@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
 
 @Component({
@@ -10,8 +10,7 @@ export class UserAchievePage {
 
     user: User = new User();
 
-    constructor(private nav: NavController,
-                private navParams: NavParams) {
+    constructor(private navParams: NavParams) {
 
         this.user = this.navParams.get('user')
     }

@@ -1,3 +1,5 @@
+import { TimeFrames } from "./timeFrames";
+
 export class OfferCreate {
 
     label: string;
@@ -5,8 +7,7 @@ export class OfferCreate {
     reward: number;
     start_date: string;
     finish_date: string;
-    start_time: string;
-    finish_time: string;
+    timeFrames: TimeFrames[];
     category_id: string;
     max_count: number;
     max_for_user: number;
@@ -20,4 +21,7 @@ export class OfferCreate {
     radius: number;
     country: string;
     city: string;
+    start_time: string;//to remove
+    finish_time: string;//to remove
+    picture_url: string;
 }

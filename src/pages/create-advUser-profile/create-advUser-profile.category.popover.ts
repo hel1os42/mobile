@@ -3,11 +3,11 @@ import { ViewController, NavParams } from 'ionic-angular';
 import { SelectedCategory } from '../../models/selectedCategory';
 
 @Component({
-    selector: 'create-advUser-profile-popover-component1',
-    templateUrl: 'create-advUser-profile.popover1.html'
+    selector: 'create-advUser-profile-category-popover',
+    templateUrl: 'create-advUser-profile.category.popover.html'
 })
 
-export class CreateAdvUserProfilePopover1 {
+export class CreateAdvUserProfileCategoryPopover {
 
     categories: SelectedCategory[];
     selectedCategory: any;
@@ -16,6 +16,7 @@ export class CreateAdvUserProfilePopover1 {
                 private navParams: NavParams) {
 
         this.categories = this.navParams.get('categories');
+        this.selectedCategory = this.categories.find(p => p.isSelected);
     }
 
     selectCategory(category) {

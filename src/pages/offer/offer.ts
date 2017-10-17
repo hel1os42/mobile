@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController, NavParams } from 'ionic-angular';
+import { NavController, PopoverController, NavParams, App } from 'ionic-angular';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { CongratulationPopover } from './congratulation.popover';
 import { Offer } from '../../models/offer';
@@ -24,7 +24,8 @@ export class OfferPage {
         private nav: NavController,
         private popoverCtrl: PopoverController,
         private navParams: NavParams,
-        private offers: OfferService) {
+        private offers: OfferService,
+        private app: App) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
@@ -54,6 +55,7 @@ export class OfferPage {
 
     ionViewDidLeave() {
         this.stopTimer();
+        this.app.navPop();
     }
 
     openRedeemPopover() {

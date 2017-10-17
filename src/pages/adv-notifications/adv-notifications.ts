@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
 @Component({
   selector: 'page-adv-notifications',
@@ -7,7 +6,7 @@ import { NavController } from 'ionic-angular';
 })
 export class AdvNotificationsPage {
 
-  constructor(private nav: NavController) {
+  constructor() {
 
   }
 

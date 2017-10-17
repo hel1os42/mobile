@@ -6,6 +6,8 @@ import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/map';
 import { TokenService } from "./token.service";
+import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
+import { ToastService } from './toast.service';
 
 @Injectable()
 export class ApiService {
@@ -15,9 +17,10 @@ export class ApiService {
 
     constructor(
         private http: Http,
-        private toast: ToastController,
+        private toast: ToastService,
         private loading: LoadingController,
-        private token: TokenService) {
+        private token: TokenService,
+        private fileTransfer: FileTransfer) {
     }
 
     private getOptions(options: RequestOptions): RequestOptions {
@@ -39,7 +42,7 @@ export class ApiService {
 
     private wrapObservable(obs: Observable<Response>, showLoading: boolean = true) {
         let loading: Loading;
-        
+
         if (showLoading) {
             loading = this.loading.create({ content: '' });
             loading.present();
@@ -58,7 +61,7 @@ export class ApiService {
                     if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
                         this.token.remove();
                         return;
-                    }                
+                    }
 
                     let messages = [];
 
@@ -87,17 +90,11 @@ export class ApiService {
                         messages.push('Unexpected error occured');
                     }
 
-                    let toast = this.toast.create({
-                        message: messages.join('\n'),
-                        duration: 5000,
-                        position: 'bottom',
-                        dismissOnPageChange: true
-                    });
-                    toast.present();
+                    this.toast.show(messages.join('\n'));
                 });
 
         return sharableObs.map(resp => resp.json());
-    }    
+    }
 
     get(endpoint: string, showLoading: boolean = true, params?: any, options?: RequestOptions) {
         if (!options) {
@@ -139,5 +136,30 @@ export class ApiService {
     patch(endpoint: string, body: any, options?: RequestOptions) {
         return this.wrapObservable(
             this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)), true);
+    }
+
+    uploadImage(filePath, path) {
+        let token = this.token.get();
+
+        let options: FileUploadOptions = {
+            fileKey: 'picture',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token.token}`
+            }
+        };
+
+        let loading = this.loading.create({ content: 'Uploading image...' });
+        loading.present();
+
+        let transfer = this.fileTransfer.create();
+        return transfer.upload(filePath, this.url + '/' + path, options)
+            .then(resp => {
+                loading.dismiss();
+            })
+            .catch(err => {
+                loading.dismiss();
+                this.toast.show(JSON.stringify(err));
+            });
     }
 }
