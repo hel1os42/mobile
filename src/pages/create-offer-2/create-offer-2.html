@@ -9,18 +9,18 @@
         </ion-buttons>
     </ion-navbar>
     <ion-list no-lines>
-    <p margin>
-        <span class="progress-block">
-               <span class="progress-line"></span>
-        <span class="progress-line-fill"></span>
-        <span class="circle fill-first"></span>
-        <span class="circle fill-last"></span>
-        <span class="circle fill-last"></span>
-        <span class="circle no-fill"></span>
-        <span class="circle no-fill"></span>
-        <span class="circle no-fill"></span>
-        </span>
-    </p>
+        <p margin>
+            <span class="progress-block">
+                <span class="progress-line"></span>
+                <span class="progress-line-fill"></span>
+                <span class="circle fill-first"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle no-fill"></span>
+                <span class="circle no-fill"></span>
+                <span class="circle no-fill"></span>
+            </span>
+        </p>
     </ion-list>
     <div class="header-shadow"></div>
 </ion-header>
@@ -32,50 +32,53 @@
         <div no-lines>
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">from</ion-label>
-                <ion-datetime doneText="Ok" [(ngModel)]="offer.start_date" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="todayDate | date: 'yyyy-MM-dd'" max="2021-12-31" class="text-3E4B5D font-16 semibold">
+                <ion-datetime doneText="Ok" [(ngModel)]="startDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="todayDate | date: 'yyyy-MM-dd'"
+                    max="2021-12-31" class="text-3E4B5D font-16 semibold">
                 </ion-datetime>
             </ion-item>
 
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">to</ion-label>
-                <ion-datetime doneText="Ok" [(ngModel)]="offer.finish_date" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="todayDate | date: 'yyyy-MM-dd'" max="2022" class="text-3E4B5D font-16 semibold">
+                <ion-datetime doneText="Ok" [(ngModel)]="finishDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="startDate ? startDate : todayDate | date: 'yyyy-MM-dd'"
+                    max="2022" class="text-3E4B5D font-16 semibold">
                 </ion-datetime>
             </ion-item>
         </div>
     </div>
-    <div class="block-lines">
-        <div class="text-4F4F4F font-14" text-uppercase>Working Days</div>
-    </div>
-    <div class="block-lines radio-nau">
-        <div radio-group no-lines>
-            <ion-item class="bg-gray">
-                <ion-label class="text-3E4B5D font-16 semibold">Working Days</ion-label>
-                <ion-radio mode="md" value="workingdays"></ion-radio>
-            </ion-item>
-            <ion-item class="bg-gray">
-                <ion-label class="text-3E4B5D font-16 semibold">Weekend</ion-label>
-                <button padding-left ion-item class="bg-gray">
-                    Overall
-                    <ion-note item-end class="text-3E4B5D font-16 bold">Unlimited</ion-note>
-                </button>
-                <ion-radio mode="md" value="weekend"></ion-radio>
-            </ion-item>
-        </div>
-    </div>
-    <div class="block-lines">
-        <div class="text-4F4F4F font-14" text-uppercase>Working time</div>
-    </div>
-    <div class="block-lines">
-        <div no-lines>
-            <ion-item class="bg-gray" detail-push>
-                <ion-label class="text-BDBDBD font-16">from</ion-label>
-                <ion-datetime doneText="Ok"  [(ngModel)]="offer.start_time" displayFormat="HH:mm" pickerFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-            </ion-item>
 
-            <ion-item class="bg-gray" detail-push>
-                <ion-label class="text-BDBDBD font-16">to</ion-label>
-                <ion-datetime doneText="Ok" [(ngModel)]="offer.finish_time" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-            </ion-item>
+    <div *ngIf="!isDetailedSettingsVisible">
+        <div class="block-lines">
+            <div class="text-4F4F4F font-14" text-uppercase>Working Days</div>
+        </div>
+        <div class="block-lines radio-nau">
+            <div radio-group no-lines>
+                <ion-item class="bg-gray">
+                    <ion-label class="text-3E4B5D font-16 semibold">Working Days</ion-label>
+                    <ion-radio (ionSelect)="selectWorkingDays($event)" mode="md" value="workingdays"></ion-radio>
+                </ion-item>
+                <ion-item class="bg-gray">
+                    <ion-label class="text-3E4B5D font-16 semibold">Weekend</ion-label>
+                    <ion-radio (ionSelect)="selectWeekend($event)" mode="md" value="weekend"></ion-radio>
+                </ion-item>
+            </div>
+        </div>
+        <div class="block-lines">
+            <div class="text-4F4F4F font-14" text-uppercase>Working time</div>
+        </div>
+        <div class="block-lines">
+            <div no-lines>
+                <ion-item class="bg-gray" detail-push>
+                    <ion-label class="text-BDBDBD font-16">from</ion-label>
+                    <ion-datetime (ionChange)="selectStartTime($event)" [(ngModel)]="startTime" doneText="Ok" displayFormat="HH:mm" pickerFormat="HH:mm"
+                        class="text-3E4B5D font-16 semibold"></ion-datetime>
+                </ion-item>
+
+                <ion-item class="bg-gray" detail-push>
+                    <ion-label class="text-BDBDBD font-16">to</ion-label>
+                    <ion-datetime (ionChange)="selectFinishTime($event)" [(ngModel)]="finishTime" doneText="Ok" displayFormat="HH:mm" pickerFormat="HH:mm"
+                        [min]="startTime" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                </ion-item>
+            </div>
         </div>
     </div>
 
@@ -91,200 +94,52 @@
         <p class="select-block-desc text-828282 font-12">You can set working time more flexibility</p>
 
         <div class="time-range">
-        <div *ngIf="isDetailedSettingsVisible">
-            <ion-grid padding-left text-uppercase class="text-BDBDBD font-14 padding-right-5 margin-top-3vw margin-bottom-5 detailed-header">
-                <ion-row>
-                    <ion-col col-3>
-                        Day
-                    </ion-col>
-                    <ion-col col-3>
-                        From
-                    </ion-col>
-                    <ion-col col-3>
-                        <span class="padding-left-5vw">To</span>
-                    </ion-col>
-                    <ion-col col-3 text-right>
-                        <span class="padding-right-3vw">Work</span>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+            <div *ngIf="isDetailedSettingsVisible">
+                <ion-grid padding-left text-uppercase class="text-BDBDBD font-14 padding-right-5 margin-top-3vw margin-bottom-5 detailed-header">
+                    <ion-row>
+                        <ion-col col-3>
+                            Day
+                        </ion-col>
+                        <ion-col col-3>
+                            From
+                        </ion-col>
+                        <ion-col col-3>
+                            <span class="padding-left-5vw">To</span>
+                        </ion-col>
+                        <ion-col col-3 text-right>
+                            <span class="padding-right-3vw">Work</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
 
-            <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10 padding-top-3vw" mode="md">
-                <ion-row>
-                    <ion-col col-3>
-                        <ion-item no-lines class="text-3E4B5D font-16 semibold">
-                            MON
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime placeholder="00:00" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item class="padding-left-5vw" detail-push no-lines>
-                            <ion-datetime placeholder="23:59" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <ion-checkbox></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+                <ion-grid *ngFor=" let frame of timeFrames" padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10 padding-top-3vw"
+                    mode="md">
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-item no-lines class="text-3E4B5D font-16 semibold">
+                                {{ frame.days.slice(0,3) }}
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item detail-push no-lines>
+                                <ion-datetime [(ngModel)]="frame.from" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item class="padding-left-5vw" detail-push no-lines>
+                                <ion-datetime [(ngModel)]="frame.to" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item no-lines>
+                                <ion-checkbox [(ngModel)]="frame.isSelected"></ion-checkbox>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
 
-            <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10 padding-top-3vw" mode="md">
-                <ion-row>
-                    <ion-col col-3>
-                        <ion-item no-lines class="text-3E4B5D font-16 semibold">
-                            TUE
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime placeholder="00:00" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item class="padding-left-5vw" detail-push no-lines>
-                            <ion-datetime placeholder="23:59" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <ion-checkbox></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-            <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10 padding-top-3vw" mode="md">
-                <ion-row>
-                    <ion-col col-3>
-                        <ion-item no-lines class="text-3E4B5D font-16 semibold">
-                            WED
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime placeholder="00:00" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item class="padding-left-5vw" detail-push no-lines>
-                            <ion-datetime placeholder="23:59" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <ion-checkbox></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-            <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10 padding-top-3vw" mode="md">
-                <ion-row>
-                    <ion-col col-3>
-                        <ion-item no-lines class="text-3E4B5D font-16 semibold">
-                            THU
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime placeholder="00:00" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item class="padding-left-5vw" detail-push no-lines>
-                            <ion-datetime placeholder="23:59" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <ion-checkbox></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-            <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10 padding-top-3vw" mode="md">
-                <ion-row>
-                    <ion-col col-3>
-                        <ion-item no-lines class="text-3E4B5D font-16 semibold">
-                            FRI
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime placeholder="00:00" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item class="padding-left-5vw" detail-push no-lines>
-                            <ion-datetime placeholder="23:59" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <ion-checkbox></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-            <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10 padding-top-3vw" mode="md">
-                <ion-row>
-                    <ion-col col-3 class="text-3E4B5D font-16 semibold">
-                        <ion-item no-lines>
-                            SAT
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime placeholder="00:00" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item class="padding-left-5vw" detail-push no-lines>
-                            <ion-datetime placeholder="23:59" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <ion-checkbox></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-            <ion-grid padding-left text-uppercase class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10 padding-top-3vw" mode="md">
-                <ion-row>
-                    <ion-col col-3 class="text-3E4B5D font-16 semibold">
-                        <ion-item no-lines>
-                            SUN
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime placeholder="00:00" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item class="padding-left-5vw" detail-push no-lines>
-                            <ion-datetime placeholder="23:59" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <ion-checkbox></ion-checkbox>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+            </div>
         </div>
-      </div>
     </div>
 
     <p margin>
