@@ -44,18 +44,18 @@
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
-              <ion-label class="text-3E4B5D font-16 semibold">Weekly</ion-label>
-              <ion-select class="text-3E4B5D font-16 bold">
-                  <ion-option value="un" [selected]="true">Unlimited</ion-option>
+            <ion-label class="text-3E4B5D font-16 semibold">Weekly</ion-label>
+            <ion-select  [(ngModel)]="maxForUsPerWeek" class="text-3E4B5D font-16 bold">
+                  <ion-option *ngFor=" let maxForUsPerWeek of maxForUserPerWeek " [value]="maxForUsPerWeek">{{ (maxForUsPerWeek == 10000000) ? 'Unlimited' : maxForUsPerWeek }}</ion-option>
               </ion-select>
-          </ion-item>
+        </ion-item>
 
-          <ion-item padding-left class="bg-gray" detail-push>
-              <ion-label class="text-3E4B5D font-16 semibold">Monthly</ion-label>
-              <ion-select class="text-3E4B5D font-16 bold">
-                  <ion-option value="un" [selected]="true">Unlimited</ion-option>
+        <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
+            <ion-label class="text-3E4B5D font-16 semibold">Monthly</ion-label>
+            <ion-select  [(ngModel)]="maxForUsPerMonth" class="text-3E4B5D font-16 bold">
+                  <ion-option *ngFor=" let maxForUsPerMonth of maxForUserPerMonth " [value]="maxForUsPerMonth">{{ (maxForUsPerMonth == 10000000) ? 'Unlimited' : maxForUsPerMonth }}</ion-option>
               </ion-select>
-          </ion-item>
+        </ion-item>
       </div>
 
       <div class="block-lines">
@@ -65,7 +65,7 @@
       <div class="block-lines">
           <ion-item padding-left class="bg-gray" detail-push>
               <ion-label class="text-3E4B5D font-16 semibold">Minimal user level</ion-label>
-              <ion-select [(ngModel)]="level" class="text-3E4B5D font-16 bold">
+              <ion-select [(ngModel)]="level" [disabled]="true" class="text-3E4B5D font-16 bold">
                   <ion-option *ngFor=" let level of levels " [value]="level">{{ level }}</ion-option>
               </ion-select>
           </ion-item>
