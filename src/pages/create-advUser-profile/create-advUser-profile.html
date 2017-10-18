@@ -3,9 +3,9 @@
         <ion-title>Create account</ion-title>
     </ion-navbar>
     <ion-list class="margin-0">
-        <div class="cover" [style.background-image]="'url(assets/img/place/header.png)'">
+        <div class="cover" [style.background-image]="'url(' + cover_url + ')'">
             <!-- <img class="cover_logo" [src]="company.picture_url"> -->
-            <div class="cover_logo" [style.background-image]="'url(assets/img/user_home/image1.png)'"></div>
+            <div class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
             <div (click)="addLogo()" class="cover_logo_adv">
                 <span text-uppercase class="font-12 semibold">Add<br>logo</span>
             </div>
