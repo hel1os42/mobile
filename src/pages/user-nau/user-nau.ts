@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavParams } from "ionic-angular";
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
-import { DatePicker } from '@ionic-native/date-picker';
 
 @Component({
     selector: 'page-user-nau',
@@ -17,7 +16,6 @@ export class UserNauPage {
 
     constructor(
         private profile: ProfileService,
-        private datePicker: DatePicker,
         private navParams: NavParams) {
 
         this.balance = this.navParams.get('balance');
@@ -33,13 +31,13 @@ export class UserNauPage {
     }
 
     showCalendar() {
-        this.datePicker.show({
-            date: new Date(),
-            mode: 'date',
-            androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-            }).then(
-            date => console.log('Got date: ', date),
-            err => console.log('Error occurred while getting date: ', err)
-        );
+        // this.datePicker.show({
+        //     date: new Date(),
+        //     mode: 'date',
+        //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+        //     }).then(
+        //     date => console.log('Got date: ', date),
+        //     err => console.log('Error occurred while getting date: ', err)
+        // );
    }
 }
