@@ -41,4 +41,8 @@ export class PlaceService {
         return this.api.post('places', place);
     }
 
+    getOffers() {
+        return this.api.get('advert/offers');
+    }
+
 }
