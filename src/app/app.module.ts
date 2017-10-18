@@ -67,6 +67,7 @@ import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUse
 import { PlaceService } from '../providers/place.service';
 import { FeedPage } from "../pages/feed/feed";
 import { ToastService } from '../providers/toast.service';
+import { DatePicker } from '@ionic-native/date-picker';
 
 @NgModule({
   declarations: [
@@ -201,7 +202,8 @@ import { ToastService } from '../providers/toast.service';
     AppModeService,
     Geolocation,
     LocationService,
-    PlaceService
+    PlaceService,
+    DatePicker
   ]
 })
 export class AppModule {}
