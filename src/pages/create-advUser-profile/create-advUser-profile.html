@@ -5,8 +5,8 @@
     <ion-list class="margin-0">
         <div class="cover" [style.background-image]="'url(' + cover_url + ')'">
             <!-- <img class="cover_logo" [src]="company.picture_url"> -->
-            <div class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
-            <div (click)="addLogo()" class="cover_logo_adv">
+            <div *ngIf="picture_url" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
+            <div *ngIf="!picture_url"(click)="addLogo()" class="cover_logo_adv">
                 <span text-uppercase class="font-12 semibold">Add<br>logo</span>
             </div>
             <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
