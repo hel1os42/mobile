@@ -2,7 +2,7 @@ import { Offer } from '../models/offer';
 
 export class MockOffers {
 
-    public static items: Offer[] = [
+    public static items = [
         {
             id: "1",
             picture_url: "assets/img/place/offers_image1.png",
