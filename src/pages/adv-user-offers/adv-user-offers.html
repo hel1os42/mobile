@@ -10,9 +10,9 @@
         <ion-avatar item-start>
             <img src="assets/img/user_offers/icon_lock.svg">
         </ion-avatar>
-        <div class="font-18 text-3E4B5D bold">312</div>
+        <div class="font-18 text-3E4B5D bold">{{ total }}</div>
         <div class="font-14 text-828282">Created Offers</div>
-        <button item-end ion-button class="btn_transfer font-14 text-white extrabold">Create new</button>
+        <button (click)="openCreateOffer()" item-end ion-button class="btn_transfer font-14 text-white extrabold">Create new</button>
         <a item-end margin-left class="font-0">
             <a><img src="assets/img/user_offers/icon_right.svg"></a>
         </a>
@@ -33,17 +33,21 @@
     </ion-segment>
 
     <ion-list margin-top no-lines class="item-block-nau">
-        <ion-item-sliding>
+        <ion-item-sliding *ngFor="let offer of offers">
             <ion-item>
                 <ion-avatar item-start>
-                    <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
+                    <div class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div>
                 </ion-avatar>
                 <div item-content>
-                    <div class="bold font-22 text-3E4B5D">Discount Gift</div>
-                    <div class="bold font-14 text-FF8B10 padding-top-1vw" text-uppercase><span class="text-828282 no-bold">Redeemed</span> 53 times</div>
-                    <div class="font-14 text-828282 regular padding-top-1vw">Was created:<br>05/09/2017</div>
+                    <div class="bold font-22 text-3E4B5D">{{ offer.label }}</div>
+                    <div class="bold font-14 text-FF8B10 padding-top-1vw" text-uppercase>
+                        <span class="text-828282 no-bold">Redeemed</span> 53 times
+                    </div>
+                    <div class="font-14 text-828282 regular padding-top-1vw">Was created:<br>{{ offer.created_at }}</div>
                 </div>
-                <div item-end><ion-toggle></ion-toggle></div>
+                <div item-end>
+                    <ion-toggle></ion-toggle>
+                </div>
             </ion-item>
             <ion-item-options side="right">
                 <button ion-button class="bg-3E4B5D">
