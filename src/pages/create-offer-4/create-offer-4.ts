@@ -20,11 +20,13 @@ export class CreateOffer4Page {
     maxForUsPerWeek = 10000000;
     maxForUserPerMonth = [1, 5, 10, 20, 100, 10000000];
     maxForUsPerMonth = 10000000;
+    picture_url: string;
 
     constructor(private nav: NavController,
                 private navParams: NavParams) {
 
         this.offer = this.navParams.get('offer');
+        this.picture_url = this.navParams.get('picture');
 
     }
 
@@ -36,6 +38,6 @@ export class CreateOffer4Page {
         this.offer.max_per_day = 20;//to do
         this.offer.max_for_user_per_week = this.maxForUsPerWeek;
         this.offer.max_for_user_per_month = this.maxForUsPerMonth;
-        this.nav.push(CreateOffer5Page, { offer: this.offer });
+        this.nav.push(CreateOffer5Page, { offer: this.offer, picture: this.picture_url });
     }
 }

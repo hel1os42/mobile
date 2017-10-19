@@ -18,6 +18,7 @@ export class CreateOffer3Page {
     message: string;
     bounds;
     city: string;
+    picture_url: string;
     // cities: string[] = ['Moscow', 'Berlin', 'Manila', 'Bogotá', 'Kyiv'];
     // country: string;
     // address: string;
@@ -28,6 +29,7 @@ export class CreateOffer3Page {
         private changeDetectorRef: ChangeDetectorRef) {
 
         this.offer = this.navParams.get('offer');
+        this.picture_url = this.navParams.get('picture');
         this.coords.lat = this.offer.latitude;
         this.coords.lng = this.offer.longitude;
 
@@ -85,7 +87,7 @@ export class CreateOffer3Page {
         this.offer.radius = 30000;//todo
         this.offer.city = this.city;
         
-        this.nav.push(CreateOffer4Page, { offer: this.offer });
+        this.nav.push(CreateOffer4Page, { offer: this.offer, picture: this.picture_url });
     }
 
 }

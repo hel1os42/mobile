@@ -21,12 +21,14 @@ export class CreateOffer2Page {
     startTime: string;
     startDate: string;
     finishDate: string;
+    picture_url: string;
   
 
     constructor(private nav: NavController,
         private navParams: NavParams) {
 
         this.offer = this.navParams.get('offer');
+        this.picture_url = this.navParams.get('picture');
         this.todayDate = new Date();
         let days = DateTimeUtils.ALL_DAYS;
             
@@ -88,7 +90,7 @@ export class CreateOffer2Page {
             }
         })
         debugger
-        this.nav.push(CreateOffer3Page, { offer: this.offer });
+        this.nav.push(CreateOffer3Page, { offer: this.offer, picture: this.picture_url });
 
     }
 }
