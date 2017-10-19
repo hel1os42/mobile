@@ -38,7 +38,9 @@ export class PlaceService {
     }
 
     set(place: PlaceCreate) {
-        return this.api.post('places', place);
+        let obs = this.api.post('places', place);
+        obs.subscribe(company => this.company = company);
+        return obs;
     }
 
     getOffers() {
