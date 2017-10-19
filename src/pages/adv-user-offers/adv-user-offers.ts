@@ -17,14 +17,14 @@ export class AdvUserOffersPage {
     constructor(private nav: NavController,
                 private place: PlaceService) {
 
-            this.place.getOffers()
-                .subscribe(resp => {
-                    this.offers = resp.data;
-                    this.total = resp.total;
-                    debugger
-                });        
+        this.place.getOffers()
+            .subscribe(resp => {
+                this.offers = resp.data;
+                this.total = resp.total;
+            });
 
-            this.segment = "all";
+        this.segment = "all";
+
     }
 
     openCreateOffer() {

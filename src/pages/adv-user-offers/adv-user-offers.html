@@ -36,17 +36,17 @@
         <ion-item-sliding *ngFor="let offer of offers">
             <ion-item>
                 <ion-avatar item-start>
-                    <div class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div>
+                    <div [ngClass]="{ 'grayscale' : (!offer.status == 'active') }" class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div>
                 </ion-avatar>
                 <div item-content>
                     <div class="bold font-22 text-3E4B5D">{{ offer.label }}</div>
                     <div class="bold font-14 text-FF8B10 padding-top-1vw" text-uppercase>
                         <span class="text-828282 no-bold">Redeemed</span> 53 times
                     </div>
-                    <div class="font-14 text-828282 regular padding-top-1vw">Was created:<br>{{ offer.created_at }}</div>
+                    <div class="font-14 text-828282 regular padding-top-1vw">Was created:<br>{{ offer.created_at.slice(0, 10) }}</div>
                 </div>
                 <div item-end>
-                    <ion-toggle></ion-toggle>
+                    <ion-toggle [checked]="offer.status == 'active'"></ion-toggle>
                 </div>
             </ion-item>
             <ion-item-options side="right">
