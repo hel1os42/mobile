@@ -1,17 +1,14 @@
 <div class="modal_content">
-    
         <div text-uppercase text-center class="font-16 text-#4F4F4F semibold padding-bottom-5vw">Category</div>
-    
+
         <div class="block-checks">
             <ion-item *ngFor="let category of categories" no-lines>
-                <ion-label item-end class="text-828282 font-16 semibold table">
-                    <span class="table-cell">{{ category.name }}</span>
-                </ion-label>
+                <ion-label item-end class="text-828282 font-16 semibold">{{ category.name }}</ion-label>
                 <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
             </ion-item>
         </div>
-    </div>
-    <div class="footer_btn" padding-left padding-right padding-bottom>
+</div>
+<div class="footer_btn" padding-left padding-right padding-bottom>
         <ion-grid>
             <ion-row>
                 <ion-col text-center class="margin-right-2proc">
@@ -22,5 +19,4 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-    </div>
-    
+</div>

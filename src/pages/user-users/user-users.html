@@ -12,9 +12,12 @@
     </ion-avatar>
     <div class="font-18 text-3E4B5D bold">{{ total }}</div>
     <div class="font-14 text-828282">Users</div>
-    <a item-end>
-      <a><img src="assets/img/user_offers/icon_right.svg"></a>
-    </a>
+      <a item-end margin-left>
+          <a (click)="showCalendar()"><img src="assets/img/user_offers/icon_right.svg">
+              <ion-datetime doneText="Ok" [(ngModel)]="startDate" [min]="todayDate | date: 'yyyy-MM-dd'" max="2021-12-31">
+              </ion-datetime>
+          </a>
+      </a>
   </ion-item>
 
   <ion-list margin-top no-lines class="item-block-nau">

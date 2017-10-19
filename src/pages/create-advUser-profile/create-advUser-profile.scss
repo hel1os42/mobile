@@ -112,25 +112,32 @@ create-advUser-profile-category-popover{
 }
 
 create-advUser-profile-popover-childCategory{
-    .item-ios {
-        padding-left: 0;
-        margin-bottom: 1vw;
-    }
-
-    .block-checks img{
-        height: 7.8vw;
-        width: auto;
-    }
-
-    .block-img-category{
-        width: 23vw;
-        text-align: center;
-    }
-
     .modal_content{
         padding-top: 8vw;
         padding-right: 7vw;
         padding-left: 10vw;
         padding-bottom: 21vw;
+    }
+
+    .block-checks {
+        margin-right: 5px;
+        margin-left: 8px;
+    }
+
+    .item-ios.item-block .item-inner {
+        padding-right: 0;
+    }
+
+    .item-block{
+        min-height: 3.4rem;
+    }
+
+    .checkbox-ios .checkbox-icon {
+        background-color: #fff;
+        background-image: none;
+    }
+
+    .footer_btn .grid {
+        padding-bottom: 0;
     }
 }
