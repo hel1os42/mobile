@@ -41,8 +41,8 @@ export class TabsPage {
         this.tab1Root = PlacesPage;
 
         this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
-            this.tabs.getByIndex(0)
-               .setRoot(PlacesPage);
+            // this.tabs.getByIndex(0)
+            //    .setRoot(PlacesPage);
         });
 
         this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;
