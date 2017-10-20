@@ -7,16 +7,16 @@
                 <div *ngIf="picture_url" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
                 <div *ngIf="!picture_url"(click)="addLogo()" class="cover_logo_adv">
                     <span text-uppercase class="font-12 semibold">Add<br>logo</span>
+                </div>
             <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
-        </div>
         </div>
         <div *ngIf="cover_url" class="cover" [style.background-image]="'url(' + cover_url + ')'">
             <div *ngIf="picture_url" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
             <div *ngIf="!picture_url"(click)="addLogo()" class="cover_logo_adv">
                 <span text-uppercase class="font-12 semibold">Add<br>logo</span>
-        <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
-    </div>
-    </div>
+            </div>
+            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
+        </div>
     </ion-list>
     <div class="header-shadow"></div>
 </ion-header>
