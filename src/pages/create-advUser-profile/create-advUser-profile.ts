@@ -181,15 +181,15 @@ export class CreateAdvUserProfilePage {
                 let pictureUpload = this.picture_url
                     ? this.api.uploadImage(this.picture_url, 'profile/place/picture')
                     : Promise.resolve();
-debugger
+
                 pictureUpload.then(() => {
                     let coverUpload = this.cover_url
                         ? this.api.uploadImage(this.cover_url, 'profile/place/cover')
                         : Promise.resolve();
-debugger
+
                     coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
                 });
             })
-            debugger
+        
     }
 }
