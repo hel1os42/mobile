@@ -196,10 +196,8 @@ export class CreateAdvUserProfilePage {
                         this.api.uploadImage(this.cover_url, 'profile/place/cover')
                             .then(res => this.nav.push(AdvTabsPage, {company: resp})); 
                     }
-                  
-                    this.nav.push(AdvTabsPage, {company: resp});
                 }
-               
+                this.nav.push(AdvTabsPage, {company: resp});
             })
     }
 }
