@@ -3,7 +3,6 @@
         <ion-title>Create account</ion-title>
     </ion-navbar>
     <ion-list class="margin-0">
-<<<<<<< HEAD
         <div *ngIf="!cover_url || cover_url == 0" class="cover">
             <div *ngIf="picture_url && picture_url != 0" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
             <div *ngIf="!picture_url || picture_url == 0" (click)="addLogo()" class="cover_logo_adv">
@@ -20,21 +19,6 @@
             </div>
             <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
 
-=======
-        <div *ngIf="!cover_url" class="cover" >
-                <div *ngIf="picture_url" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
-                <div *ngIf="!picture_url"(click)="addLogo()" class="cover_logo_adv">
-                    <span text-uppercase class="font-12 semibold">Add<br>logo</span>
-                </div>
-            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
-        </div>
-        <div *ngIf="cover_url" class="cover" [style.background-image]="'url(' + cover_url + ')'">
-            <div *ngIf="picture_url" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
-            <div *ngIf="!picture_url"(click)="addLogo()" class="cover_logo_adv">
-                <span text-uppercase class="font-12 semibold">Add<br>logo</span>
-            </div>
-            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
->>>>>>> 13cc886293267a80fa9656b95f0839aa8bb428a2
         </div>
     </ion-list>
     <div class="header-shadow"></div>
