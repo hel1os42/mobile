@@ -17,6 +17,7 @@ export class CreateOfferPage {
     message: string;
     coords = new Coords();
     offer = new OfferCreate();
+    picture_url: string;
 
     constructor(
         private nav: NavController,
@@ -24,20 +25,17 @@ export class CreateOfferPage {
         private toast: ToastService,
         private imagePicker: ImagePicker) {
 
-        this.place.getOfferCreate()
-            .subscribe(resp => this.offer = resp);
-
             }
 
     openCreateOffer1Page() {
-        this.nav.push(CreateOffer1Page, { offer: this.offer});
+        this.nav.push(CreateOffer1Page, { offer: this.offer, picture: this.picture_url});
     }
 
     addPicture() {
         let options = { maximumImagesCount: 1 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                this.offer.picture_url = results[0];
+                this.picture_url = results[0];
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));

@@ -33,11 +33,12 @@ export class OfferService {
     // }
 
     getPlaces(category_ids: string[], lat: number, lng: number, radius: number, search: string) {
-            let str = '';     
-            for (let i = 0; i < category_ids.length; i++) {
-                let id = category_ids[i];
-                str += `${'category_ids[]'}=${id}&`;
-            };
+        let str = '';     
+        for (let i = 0; i < category_ids.length; i++) {
+            let id = category_ids[i];
+            str += `${'category_ids[]'}=${id}&`;
+        };
+        
         return this.api.get(`places?${str}`, true, {
             latitude: lat,
             longitude: lng,

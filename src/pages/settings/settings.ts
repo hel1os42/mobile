@@ -109,6 +109,7 @@ export class SettingsPage {
         this.profile.put(this.user)
             .subscribe(resp => {
                 if (!this.isChangeMode) {
+                    this.isAdvMode = !this.isAdvMode;
                     this.nav.pop();
                 }
                 else {

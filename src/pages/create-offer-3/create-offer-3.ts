@@ -13,11 +13,12 @@ import * as _ from 'lodash';
 })
 export class CreateOffer3Page {
 
-    offer = new OfferCreate();
+    offer: OfferCreate;
     coords: Coords = new Coords();
     message: string;
     bounds;
     city: string;
+    picture_url: string;
     // cities: string[] = ['Moscow', 'Berlin', 'Manila', 'Bogotá', 'Kyiv'];
     // country: string;
     // address: string;
@@ -28,27 +29,13 @@ export class CreateOffer3Page {
         private changeDetectorRef: ChangeDetectorRef) {
 
         this.offer = this.navParams.get('offer');
+        this.picture_url = this.navParams.get('picture');
         this.coords.lat = this.offer.latitude;
         this.coords.lng = this.offer.longitude;
 
         this.geocodeDebounced();
 
     }
-
-    // ionViewDidLoad() {
-    // //     // this.location.get()
-    // //     //     .then((resp) => {
-    // //     //         this.coords = {
-    // //     //             lat: resp.coords.latitude,
-    // //     //             lng: resp.coords.longitude
-    // //     //         };
-    // //     //     })
-    // //     //     .catch((error) => {
-    // //     //         this.message = error.message;
-    // //     //         console.log(this.message);
-    // //     //     });
-
-    //  }
 
     onMapCenterChange(center: LatLngLiteral) {
         this.coords.lat = center.lat;
@@ -64,7 +51,7 @@ export class CreateOffer3Page {
         let latlng = { lat: this.coords.lat, lng: this.coords.lng };
         geocoder.geocode({ 'location': latlng }, (results, status) => {
             if (status === 'OK') {
-                let timezone = results.timeZoneId;
+                // let timezone = results.timeZoneId;
                 results = results[0].address_components;
                 this.city = this.findResult(results, "locality");
                 this.offer.country = this.findResult(results, "country");
@@ -99,8 +86,8 @@ export class CreateOffer3Page {
     openCreateOffer4Page() {
         this.offer.radius = 30000;//todo
         this.offer.city = this.city;
-        debugger
-        this.nav.push(CreateOffer4Page, { offer: this.offer });
+        
+        this.nav.push(CreateOffer4Page, { offer: this.offer, picture: this.picture_url });
     }
 
 }

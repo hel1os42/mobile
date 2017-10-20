@@ -12,11 +12,12 @@ import { PlaceService } from '../../providers/place.service';
 })
 export class CreateOffer1Page {
 
-    offer = new OfferCreate;
+    offer: OfferCreate;
     discounts: number[] = [5, 10, 15, 20, 25, 30, 35, 40];//to do
     discount: number = 10;
     isDiscountSelectDisable: boolean = true;
     company = new Company();
+    picture_url: string;
 
     constructor(private nav: NavController,
                 private navParams: NavParams,
@@ -24,6 +25,7 @@ export class CreateOffer1Page {
                 private place: PlaceService) {
 
         this.offer = this.navParams.get('offer');
+        this.picture_url = this.navParams.get('picture');
         this.place.getWithCategory()
             .subscribe(company => {
                 this.company = company;
@@ -36,7 +38,7 @@ export class CreateOffer1Page {
         this.offer.longitude = this.company.longitude;
         this.offer.latitude = this.company.latitude;
      
-        this.nav.push(CreateOffer2Page, { offer: this.offer});//add bindings (category & type, type)
+        this.nav.push(CreateOffer2Page, { offer: this.offer, picture: this.picture_url});//add bindings (category & type, type)
     }
 
     toggleDiscountDisabled($event, isDiscountSelectDisable) {

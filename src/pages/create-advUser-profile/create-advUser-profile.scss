@@ -3,7 +3,15 @@ page-create-advUser-profile {
     background: linear-gradient(89.86deg, #FF5A00 0.03%, #FF8B10 99.98%);
   }
 
-  .cover_logo{
+  .cover_logo_adv{
+      position: absolute;
+      left: 4.8%;
+      bottom: -11vw;
+      width: 22vw;
+      height: 22vw;
+      border-radius: 100vw;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      z-index: 11111111;
       background-color: #fff;
       background-image: url(../assets/img/create_advuser_profile/dotted.svg);
       background-position: 50% 50%;
@@ -12,7 +20,7 @@ page-create-advUser-profile {
       display: table;
   }
 
-  .cover_logo span{
+  .cover_logo_adv span{
       margin: 0 auto;
       display: table-cell;
       vertical-align: middle;
@@ -104,25 +112,32 @@ create-advUser-profile-category-popover{
 }
 
 create-advUser-profile-popover-childCategory{
-    .item-ios {
-        padding-left: 0;
-        margin-bottom: 1vw;
-    }
-
-    .block-checks img{
-        height: 7.8vw;
-        width: auto;
-    }
-
-    .block-img-category{
-        width: 23vw;
-        text-align: center;
-    }
-
     .modal_content{
         padding-top: 8vw;
         padding-right: 7vw;
         padding-left: 10vw;
         padding-bottom: 21vw;
+    }
+
+    .block-checks {
+        margin-right: 5px;
+        margin-left: 8px;
+    }
+
+    .item-ios.item-block .item-inner {
+        padding-right: 0;
+    }
+
+    .item-block{
+        min-height: 3.4rem;
+    }
+
+    .checkbox-ios .checkbox-icon {
+        background-color: #fff;
+        background-image: none;
+    }
+
+    .footer_btn .grid {
+        padding-bottom: 0;
     }
 }

@@ -35,7 +35,7 @@ page-adv-user-offers {
     .toggle-ios {
         width: 11.8vw;
         height: 5.8vw;
-        border: 1px solid #E0E0E0;
+        border: 0.3vw solid #E0E0E0;
         border-radius: 100vw;
     }
 
@@ -50,7 +50,7 @@ page-adv-user-offers {
 
     .toggle-ios.toggle-checked .toggle-inner {
         -webkit-transform: translate3d(10.5vw, 0, 0);
-        transform: translate3d(6.1vw, 0, 0);
+        transform: translate3d(5.9vw, 0, 0);
         background: linear-gradient(90.57deg, #FF5A00 0.54%, #FF8B10 99.56%);
     }
 
