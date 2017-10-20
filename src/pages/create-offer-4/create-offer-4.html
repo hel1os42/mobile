@@ -29,32 +29,24 @@
 
       <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Max redemption per user</div>
       <div class="block-lines">
-          <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
+          <ion-item padding-left class="bg-gray margin-bottom-5">
               <ion-label class="text-3E4B5D font-16 semibold">Overall</ion-label>
-              <ion-select  [(ngModel)]="maxForUs" class="text-3E4B5D font-16 bold">
-                  <ion-option *ngFor=" let maxForUs of maxForUser " [value]="maxForUs">{{ (maxForUs == 10000000) ? 'Unlimited' : maxForUs }}</ion-option>
-              </ion-select>
+              <ion-input class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
           </ion-item>
 
-          <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
+          <ion-item padding-left class="bg-gray margin-bottom-5">
               <ion-label class="text-3E4B5D font-16 semibold">Daily</ion-label>
-              <ion-select  [(ngModel)]="maxForUsPerDay" class="text-3E4B5D font-16 bold">
-                    <ion-option *ngFor=" let maxForUsPerDay of maxForUserPerDay " [value]="maxForUsPerDay">{{ (maxForUsPerDay == 10000000) ? 'Unlimited' : maxForUsPerDay }}</ion-option>
-                </ion-select>
+              <ion-input class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
           </ion-item>
 
-          <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
+          <ion-item padding-left class="bg-gray margin-bottom-5">
             <ion-label class="text-3E4B5D font-16 semibold">Weekly</ion-label>
-            <ion-select  [(ngModel)]="maxForUsPerWeek" class="text-3E4B5D font-16 bold">
-                  <ion-option *ngFor=" let maxForUsPerWeek of maxForUserPerWeek " [value]="maxForUsPerWeek">{{ (maxForUsPerWeek == 10000000) ? 'Unlimited' : maxForUsPerWeek }}</ion-option>
-              </ion-select>
+            <ion-input class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
         </ion-item>
 
-        <ion-item padding-left class="bg-gray margin-bottom-5" detail-push>
+        <ion-item padding-left class="bg-gray margin-bottom-5">
             <ion-label class="text-3E4B5D font-16 semibold">Monthly</ion-label>
-            <ion-select  [(ngModel)]="maxForUsPerMonth" class="text-3E4B5D font-16 bold">
-                  <ion-option *ngFor=" let maxForUsPerMonth of maxForUserPerMonth " [value]="maxForUsPerMonth">{{ (maxForUsPerMonth == 10000000) ? 'Unlimited' : maxForUsPerMonth }}</ion-option>
-              </ion-select>
+            <ion-input class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
         </ion-item>
       </div>
 
