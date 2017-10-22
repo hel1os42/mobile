@@ -31,22 +31,22 @@
       <div class="block-lines">
           <ion-item padding-left class="bg-gray margin-bottom-5">
               <ion-label class="text-3E4B5D font-16 semibold">Overall</ion-label>
-              <ion-input class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
+              <ion-input [(ngModel)]="maxForUser" class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5">
               <ion-label class="text-3E4B5D font-16 semibold">Daily</ion-label>
-              <ion-input class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
+              <ion-input [(ngModel)]="maxForUserPerDay" class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5">
             <ion-label class="text-3E4B5D font-16 semibold">Weekly</ion-label>
-            <ion-input class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
+            <ion-input [(ngModel)]=" maxForUserPerWeek" class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
         </ion-item>
 
         <ion-item padding-left class="bg-gray margin-bottom-5">
             <ion-label class="text-3E4B5D font-16 semibold">Monthly</ion-label>
-            <ion-input class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
+            <ion-input [(ngModel)]="maxForUserPerMonth" class="text-3E4B5D font-16 bold" text-right type="number" placeholder="Unlimited"></ion-input>
         </ion-item>
       </div>
 

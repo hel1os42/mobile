@@ -12,14 +12,10 @@ export class CreateOffer4Page {
     offer: OfferCreate;
     levels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     level = 1;
-    maxForUser = [1, 5, 10, 20, 100, 10000000];
-    maxForUs = 10000000;
-    maxForUserPerDay = [1, 5, 10, 20, 100, 10000000];
-    maxForUsPerDay =  10000000;
-    maxForUserPerWeek = [1, 5, 10, 20, 100, 10000000];
-    maxForUsPerWeek = 10000000;
-    maxForUserPerMonth = [1, 5, 10, 20, 100, 10000000];
-    maxForUsPerMonth = 10000000;
+    maxForUser;
+    maxForUserPerDay;
+    maxForUserPerWeek;
+    maxForUserPerMonth;
     picture_url: string;
 
     constructor(private nav: NavController,
@@ -33,11 +29,19 @@ export class CreateOffer4Page {
     openCreateOffer5Page() {
         this.offer.user_level_min = this.level;
         this.offer.max_count = 100;//to do
-        this.offer.max_for_user = this.maxForUs;
-        this.offer.max_for_user_per_day = this.maxForUsPerDay;
         this.offer.max_per_day = 20;//to do
-        this.offer.max_for_user_per_week = this.maxForUsPerWeek;
-        this.offer.max_for_user_per_month = this.maxForUsPerMonth;
+        if(this.maxForUser) {
+            this.offer.max_for_user = parseInt(this.maxForUser);
+        }
+        if(this.maxForUserPerDay) {
+            this.offer.max_for_user_per_day = parseInt(this.maxForUserPerDay);
+        }
+        if(this.maxForUserPerWeek) {
+            this.offer.max_for_user_per_week = parseInt(this.maxForUserPerWeek);
+        }
+        if(this.maxForUserPerMonth) {
+            this.offer.max_for_user_per_month = parseInt(this.maxForUserPerMonth);
+        }
         this.nav.push(CreateOffer5Page, { offer: this.offer, picture: this.picture_url });
     }
 }
