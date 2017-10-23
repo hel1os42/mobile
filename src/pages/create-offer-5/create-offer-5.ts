@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { OfferCreate } from '../../models/offerCreate';
-import { User } from '../../models/user';
 import { ProfileService } from '../../providers/profile.service';
 import { PlaceService } from '../../providers/place.service';
 import { ApiService } from '../../providers/api.service';
+import { Offer } from '../../models/offer';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -12,8 +11,7 @@ import { ApiService } from '../../providers/api.service';
 })
 export class CreateOffer5Page {
 
-    offer: OfferCreate;
-    user = new User();
+    offer: Offer;
     balance: 0;
     reward;
     token;
@@ -28,10 +26,9 @@ export class CreateOffer5Page {
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
         this.reward = this.offer.reward;
-        this.profile.getWithAccounts()//to do from service
+        this.profile.getWithAccounts()
             .subscribe(user => {
-                this.user = user;
-                this.balance = this.user.accounts.NAU.balance;
+                this.balance = user.accounts.NAU.balance;
             });
         }
 
@@ -39,13 +36,14 @@ export class CreateOffer5Page {
         this.offer.reward = parseInt(this.reward);
         this.place.setOffer(this.offer)
             .subscribe(resp => {
-                if(this.picture_url) {
-                    this.api.uploadImage(this.picture_url, `offers/${resp.id}/picture`)
-                        .then(resut => this.nav.popToRoot());
-                }
-                else {
-                    this.nav.popToRoot();
-                }
+                // if(this.picture_url) {
+                //     this.api.uploadImage(this.picture_url, `offers/${resp.id}/picture`)
+                //         .then(resut => this.nav.popToRoot());
+                // }
+                // else {
+                //     this.nav.popToRoot();
+                // }to do
+                this.nav.popToRoot;//to remove
             })
     }
 
