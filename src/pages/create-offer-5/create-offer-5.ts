@@ -14,11 +14,9 @@ export class CreateOffer5Page {
 
     offer: OfferCreate;
     user = new User();
-    balance: number = 0;
-    rewards: number[] = [10, 20, 30, 40, 50, 60, 70];
-    reward: number = 10;
-    tokens: number[] = [15, 20 , 25, 30, 35, 40 , 45, 55];
-    token = 55;
+    balance: 0;
+    reward;
+    token;
     picture_url: string;
 
     constructor(private nav: NavController,
@@ -29,6 +27,7 @@ export class CreateOffer5Page {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
+        this.reward = this.offer.reward;
         this.profile.getWithAccounts()//to do from service
             .subscribe(user => {
                 this.user = user;
@@ -37,18 +36,17 @@ export class CreateOffer5Page {
         }
 
     createOffer() {
-        this.offer.reward = this.reward;
+        this.offer.reward = parseInt(this.reward);
         this.place.setOffer(this.offer)
             .subscribe(resp => {
                 if(this.picture_url) {
                     this.api.uploadImage(this.picture_url, `offers/${resp.id}/picture`)
-                        .then(resut => this.nav.popToRoot())
+                        .then(resut => this.nav.popToRoot());
                 }
                 else {
-                    this.nav.popToRoot()
+                    this.nav.popToRoot();
                 }
             })
-            debugger
     }
 
 }
