@@ -63,6 +63,10 @@ page-create-user-profile{
     display: block;
   }
 
+  .block-people .item-ios [item-left], .item-ios [item-start]{
+      z-index: 111;
+  }
+
   .ion-logo-twitter{
     width: 41.8px;
   }

@@ -6,7 +6,6 @@
 </ion-header>
 
 <ion-content class="padding-no">
-  <form >
     <div class="block-lines-bottom-left-right">
       <ion-item no-lines class="block-name">
         <div text-uppercase class="text-4F4F4F font-14">Name & email</div>
@@ -37,36 +36,6 @@
     </ion-item>
     </div>
 
-    <!--
-    <ion-list class="bg-gray-block">
-      <ion-item>
-        <div item-start text-center>
-          <button class="btn-add-border-out button-circle-medium" ion-fab color="dark"><ion-icon name="md-add" class="text-lightgray"></ion-icon></button>
-        </div>
-        <div item-content class="item-content">
-          <div (click)="focusName()" *ngIf="!isFocusName" class="popover_not popover1 text-gray font-65">
-            <span padding-right>Your profile collected here</span>
-            <img src="../assets/img/create_user_profile/icon_1.png">
-            <span padding-left>8</span>
-          </div>
-
-          <div (click)="focusEmail()" *ngIf="!isFocusEmail" class="popover_not popover2 text-gray font-65">
-            <img src="../assets/img/create_user_profile/icon_3.png">
-            <span>Your should confirm your email address</span>
-            <img src="../assets/img/create_user_profile/icon_2.png">
-          </div>
-          <div (click)="focusName()" class="input_relative">
-            <ion-input  class="border-bottom-gray" type="text" placeholder="Your Name" [(ngModel)]="account.name" name="name1"></ion-input>
-            <span class="text-gray"><img src="../assets/img/create_user_profile/icon_1.png">{{ point() }}</span>
-          </div>
-          <div (click)="focusEmail()" class="input_relative">
-            <ion-input type="email" placeholder="Your E-mail" [(ngModel)]="account.email" name="email"></ion-input>
-            <span class="text-gray"><img src="../assets/img/create_user_profile/icon_2.png"></span>
-          </div>
-        </div>
-      </ion-item>
-    </ion-list>
-    -->
     <div class="block-lines">
       <ion-item *ngIf="!visibleInfo" no-lines>
         <div item-start>
@@ -176,5 +145,4 @@
       <p margin>
         <button color="primary" (click)="createAccount()" ion-button block>Create account</button>
       </p>
-  </form>
 </ion-content>
