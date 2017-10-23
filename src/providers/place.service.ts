@@ -44,7 +44,7 @@ export class PlaceService {
     }
 
     getOffers() {
-        return this.api.get('advert/offers');
+        return this.api.get('advert/offers?with=timeframes');
     }
 
 }
