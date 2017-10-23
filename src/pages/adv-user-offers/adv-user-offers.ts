@@ -27,7 +27,7 @@ export class AdvUserOffersPage {
 
     }
 
-    openCreateOffer() {
-        this.nav.push(CreateOfferPage);
+    openCreateOffer(offer) {
+        this.nav.push(CreateOfferPage, {offer: offer});
     }
 }
