@@ -25,7 +25,7 @@
     <ion-grid class="ava_user_adv">
       <ion-row text-center align-items-center>
         <ion-col>
-          <div margin-top class="thumb_image" [style.background-image]="'url(assets/img/settings/user.svg)'"></div>
+          <div margin-top class="thumb_image" [style.background-image]="'url(' + user.picture_url + ')'"></div>
           <!-- <img margin-top [src]="user.picture_url"> -->
           <div class="font-16 text-3E4B5D bold">Client</div>
         </ion-col>
@@ -35,7 +35,7 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <div margin-top class="thumb_image" [style.background-image]="'url(assets/img/settings/adv.svg)'"></div>
+          <div margin-top class="thumb_image" [style.background-image]="'url(' + advPicture_url + ')'"></div>
           <div class="font-16 text-BDBDBD bold">Advertaiser</div>
         </ion-col>
       </ion-row>

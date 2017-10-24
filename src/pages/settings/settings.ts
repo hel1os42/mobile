@@ -35,6 +35,7 @@ export class SettingsPage {
     showPhone: boolean = false;
     showEmail: boolean = false;
     nextPage: any;
+    advPicture_url: string;
 
     constructor(
         private nav: NavController,
@@ -69,7 +70,10 @@ export class SettingsPage {
 
         this.place.get()
             .subscribe(
-                resp => this.nextPage = AdvTabsPage,
+                resp => {
+                    this.nextPage = AdvTabsPage;
+                    this.advPicture_url = resp.picture_url;
+                },
                 errResp => this.nextPage = undefined);
     }
 
