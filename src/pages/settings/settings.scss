@@ -75,11 +75,12 @@ page-settings{
     transform: translate3d(10.5vw, 0, 0);
   }
 
-  .ava_user_adv img{
-    width: 15.5vw;
-    height: 15.5vw;
-    border-radius: 100vw;
-  }
+   .thumb_image{
+       width: 15.5vw;
+       height: 15.5vw;
+       border-radius: 100vw;
+       margin: auto;
+   }
 
   .ava_user_adv .input-wrapper{
     display: none;

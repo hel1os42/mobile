@@ -633,6 +633,15 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     background-position: 50% 50%;
 }
 
+.thumb_image{
+    border-radius: 0;
+    height: 23vw;
+    width: 23vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
 .top-block-nau.item-ios ion-avatar img{
     border-radius: 0;
     height: inherit;
