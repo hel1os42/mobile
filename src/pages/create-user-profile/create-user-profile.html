@@ -18,8 +18,8 @@
     <ion-item no-lines class="block-people">
         <div item-start>
             <a (click)="addLogo()">
-                <div *ngIf="picture_url && picture_url != 0" class="people" [style.background-image]="'url(' + picture_url + ')'"></div>
-                <div *ngIf="!picture_url || picture_url == 0" class="people"></div>
+                <div *ngIf="picture_url && picture_url != 'O'" class="people" [style.background-image]="'url(' + picture_url + ')'"></div>
+                <div *ngIf="!picture_url || picture_url == 'O'" class="people"></div>
             </a>
         </div>
       <div item-end class="item-content">
