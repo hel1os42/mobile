@@ -68,6 +68,7 @@ import { PlaceService } from '../providers/place.service';
 import { FeedPage } from "../pages/feed/feed";
 import { ToastService } from '../providers/toast.service';
 import { TimezoneService } from '../providers/timezone.service';
+import { StatisticPage } from "../pages/statistic/statistic";
 
 @NgModule({
   declarations: [
@@ -119,7 +120,8 @@ import { TimezoneService } from '../providers/timezone.service';
     CreateOffer3Page,
     CreateOffer4Page,
     CreateOffer5Page,
-    FeedPage
+    FeedPage,
+    StatisticPage
   ],
   imports: [
     BrowserModule,
@@ -184,7 +186,8 @@ import { TimezoneService } from '../providers/timezone.service';
     CreateOffer3Page,
     CreateOffer4Page,
     CreateOffer5Page,
-    FeedPage
+    FeedPage,
+    StatisticPage
   ],
   providers: [
     StatusBar,
