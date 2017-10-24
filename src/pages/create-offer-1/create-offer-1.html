@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Create Offer</ion-title>
+        <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
         <ion-buttons end class="padding-right-3vw">
             <button (click)="openCreateOffer2Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
