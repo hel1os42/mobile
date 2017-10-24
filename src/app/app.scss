@@ -574,7 +574,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .header-shadow{
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 18px -2px rgba(0, 0, 0, 0.12);
     width: 100%;
     height: 20px;
     background: transparent;
@@ -849,6 +849,42 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-right: 1px solid #FF8B10;
     border-top: 1px solid #FF8B10;
     border-bottom: 1px solid #FF8B10;
+}
+
+/* SEGMENT STATISTIC */
+.statistic-segment.segment-ios .segment-button{
+    color: #828282;
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid #828282;
+    border-bottom: 1px solid #828282;
+    font-family: 'OpenSansNauSemibold';
+    font-size: 3.7vw;
+}
+
+.statistic-segment.segment-ios .segment-button.segment-activated{
+    background: #828282;
+    color: #FFF;
+}
+
+.statistic-segment.segment-ios .segment-button:first-of-type {
+    border-top-left-radius: 100vw;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 100vw;
+    border-left: 1px solid #828282;
+    border-top: 1px solid #828282;
+    border-bottom: 1px solid #828282;
+}
+
+.statistic-segment.segment-ios .segment-button:last-of-type {
+    border-top-left-radius: 0;
+    border-top-right-radius: 100vw;
+    border-bottom-right-radius: 100vw;
+    border-bottom-left-radius: 0;
+    border-right: 1px solid #828282;
+    border-top: 1px solid #828282;
+    border-bottom: 1px solid #828282;
 }
 
 .wrap{
@@ -1595,4 +1631,8 @@ textarea.text-input {
 .grayscale{
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
+}
+
+.back-button-icon-ios {
+    font-size: 7vw;
 }
