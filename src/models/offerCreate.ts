@@ -5,8 +5,8 @@ export class OfferCreate {
     label: string;
     description: string;
     reward: number;
-    start_date: string;
-    finish_date: string;
+    start_date: any;
+    finish_date: any;
     timeframes: TimeFrames[];
     category_id: string;
     max_count: number;

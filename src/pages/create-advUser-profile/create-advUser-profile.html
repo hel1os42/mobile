@@ -3,14 +3,21 @@
         <ion-title>Create account</ion-title>
     </ion-navbar>
     <ion-list class="margin-0">
-        <div *ngIf="!cover_url" class="cover" [style.background-image]="'url(' + cover_url + ')'">
-            <div *ngIf="cover_url" class="cover">
-                <div *ngIf="picture_url" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
-                <div *ngIf="!picture_url"(click)="addLogo()" class="cover_logo_adv">
-                    <span text-uppercase class="font-12 semibold">Add<br>logo</span>
+        <div *ngIf="!cover_url || cover_url == 'O'" class="cover">
+            <div *ngIf="picture_url && picture_url != 'O'" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
+            <div *ngIf="!picture_url || picture_url == 'O'" (click)="addLogo()" class="cover_logo_adv">
+                <span text-uppercase class="font-12 semibold">Add
+                    <br>logo</span>
             </div>
             <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
         </div>
+        <div *ngIf="cover_url && cover_url != 'O'" class="cover" [style.background-image]="'url(' + cover_url + ')'">
+            <div *ngIf="picture_url && picture_url != 'O'" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
+            <div *ngIf="!picture_url || picture_url == 'O'" (click)="addLogo()" class="cover_logo_adv">
+                <span text-uppercase class="font-12 semibold">Add
+                    <br>logo</span>
+            </div>
+            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
         </div>
     </ion-list>
     <div class="header-shadow"></div>
@@ -70,8 +77,7 @@
 
     <div *ngIf="coords.lat" class="block-map">
         <div *ngIf="!coords.lat">Detecting your location...</div>
-        <agm-map [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)"
-            [fitBounds]="bounds">
+        <agm-map [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
         </agm-map>
         <div id="marker"></div>
     </div>

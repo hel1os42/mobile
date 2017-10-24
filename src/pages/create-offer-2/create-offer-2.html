@@ -32,7 +32,7 @@
         <div no-lines>
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">from</ion-label>
-                <ion-datetime doneText="Ok" [(ngModel)]="startDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="todayDate | date: 'yyyy-MM-dd'"
+                <ion-datetime doneText="Ok" [(ngModel)]="startDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="startDate ? startDate : todayDate | date: 'yyyy-MM-dd'"
                     max="2021-12-31" class="text-3E4B5D font-16 semibold">
                 </ion-datetime>
             </ion-item>
@@ -122,12 +122,12 @@
                         </ion-col>
                         <ion-col col-3>
                             <ion-item detail-push no-lines>
-                                <ion-datetime [(ngModel)]="frame.from" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                                <ion-datetime [(ngModel)]="frame.from" [placeholder]="frame.from" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
                             </ion-item>
                         </ion-col>
                         <ion-col col-3>
                             <ion-item class="padding-left-5vw" detail-push no-lines>
-                                <ion-datetime [(ngModel)]="frame.to" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                                <ion-datetime [(ngModel)]="frame.to" [placeholder]="frame.to"  doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
                             </ion-item>
                         </ion-col>
                         <ion-col col-3>

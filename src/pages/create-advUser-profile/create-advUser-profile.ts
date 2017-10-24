@@ -177,29 +177,19 @@ export class CreateAdvUserProfilePage {
         this.company.radius = 30000;
 
         this.placeService.set(this.company)
-            .subscribe(resp => {
-                if(this.picture_url) {
-                    this.api.uploadImage(this.picture_url, 'profile/place/picture')
-                        .then(result => {
-                            if(this.cover_url) {
-                                this.api.uploadImage(this.cover_url, 'profile/place/cover')
-                                    .then(res => this.nav.push(AdvTabsPage, {company: resp}));
-                            }
-                            else {
-                                 this.nav.push(AdvTabsPage, {company: resp});
-                            }
-                           
-                        })
-                }
-                else {
-                    if(this.cover_url) {
-                        this.api.uploadImage(this.cover_url, 'profile/place/cover')
-                            .then(res => this.nav.push(AdvTabsPage, {company: resp})); 
-                    }
-                  
-                    this.nav.push(AdvTabsPage, {company: resp});
-                }
-               
+            .subscribe(company => {
+                let pictureUpload = this.picture_url
+                    ? this.api.uploadImage(this.picture_url, 'profile/place/picture')
+                    : Promise.resolve();
+
+                pictureUpload.then(() => {
+                    let coverUpload = this.cover_url
+                        ? this.api.uploadImage(this.cover_url, 'profile/place/cover')
+                        : Promise.resolve();
+
+                    coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
+                });
             })
+        
     }
 }

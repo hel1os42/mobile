@@ -27,7 +27,10 @@ export class AdvUserOffersPage {
 
     }
 
-    openCreateOffer() {
-        this.nav.push(CreateOfferPage);
+    openCreateOffer(offer) {
+        this.place.getOffer(offer.id)
+            .subscribe(resp => {
+                this.nav.push(CreateOfferPage, {offer: resp});
+            })
     }
 }

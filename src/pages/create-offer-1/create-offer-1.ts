@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer2Page } from '../create-offer-2/create-offer-2';
 import { Company } from '../../models/company';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
+import { Offer } from '../../models/offer';
 
 @Component({
     selector: 'page-create-offer-1',
@@ -12,7 +12,7 @@ import { PlaceService } from '../../providers/place.service';
 })
 export class CreateOffer1Page {
 
-    offer: OfferCreate;
+    offer: Offer;
     discounts: number[] = [5, 10, 15, 20, 25, 30, 35, 40];//to do
     discount: number = 10;
     isDiscountSelectDisable: boolean = true;

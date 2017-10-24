@@ -35,6 +35,7 @@ export class SettingsPage {
     showPhone: boolean = false;
     showEmail: boolean = false;
     nextPage: any;
+    advPicture_url: string;
 
     constructor(
         private nav: NavController,
@@ -69,7 +70,10 @@ export class SettingsPage {
 
         this.place.get()
             .subscribe(
-                resp => this.nextPage = AdvTabsPage,
+                resp => {
+                    this.nextPage = AdvTabsPage;
+                    this.advPicture_url = resp.picture_url;
+                },
                 errResp => this.nextPage = undefined);
     }
 
@@ -104,10 +108,10 @@ export class SettingsPage {
 
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
-        this.user.latitude = this.coords.lat;
-        this.user.longitude = this.coords.lng;
-        this.profile.put(this.user)
-            .subscribe(resp => {
+        // this.user.latitude = this.coords.lat;
+        // this.user.longitude = this.coords.lng;
+        // this.profile.put(this.user)
+            // .subscribe(resp => {to do
                 if (!this.isChangeMode) {
                     this.isAdvMode = !this.isAdvMode;
                     this.nav.pop();
@@ -121,7 +125,7 @@ export class SettingsPage {
                     }
                     
                 }
-            });
+            // });
     }
 
     toggleAccountsChoiceVisible() {

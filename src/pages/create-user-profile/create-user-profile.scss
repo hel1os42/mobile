@@ -29,7 +29,10 @@ page-create-user-profile{
   .points{
     background: #FF8B10;
     color: #fff;
-    padding: 3px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
   }
 
   .added{
@@ -47,12 +50,21 @@ page-create-user-profile{
   }
 
   .block-name .points{
-    margin-left: 5px;
+    margin-left: 2.7vw;
+    padding-left: 3vw;
+    padding-right: 3vw;
   }
 
   .block-name img{
-    height: 24px;
-    margin-top: 8px;
+    width: 7.5vw;
+  }
+
+  .block-people a{
+    display: block;
+  }
+
+  .block-people .item-ios [item-left], .item-ios [item-start]{
+      z-index: 111;
   }
 
   .ion-logo-twitter{
@@ -131,8 +143,27 @@ page-create-user-profile{
     pointer-events: none;
   }
 
+    .item-ios [item-left], .item-ios [item-start]{
+        margin: 0;
+    }
+
   .people{
-    width: 60px;
-    padding-bottom: 40px;
+      width: 14.5vw;
+      height: 14.5vw;
+      margin-right: 4vw;
+      margin-top: -13.5vw;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-color: #fff;
+      background-image: url(../assets/img/create_user_profile/people.svg);
+      border-radius: 100vw;
   }
+
+    .img_lock{
+        width: 10.4vw;
+        height: auto;
+        margin-right: 7vw;
+        margin-left: 2.3vw;
+    }
 }

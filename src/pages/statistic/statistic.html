@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Statistic</ion-title>
+    </ion-navbar>
+    <div class="header-shadow"></div>
+</ion-header>
+
+<ion-content padding>
+    <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="nau-segment">
+        <ion-segment-button value="all">
+            All Offers
+        </ion-segment-button>
+        <ion-segment-button value="active">
+            Active offers
+        </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="statistic-segment">
+        <ion-segment-button value="today">
+            Today
+        </ion-segment-button>
+        <ion-segment-button value="yesterday">
+            Yesterday
+        </ion-segment-button>
+        <ion-segment-button value="week">
+            Week
+        </ion-segment-button>
+        <ion-segment-button value="month">
+            Month
+        </ion-segment-button>
+        <ion-segment-button value="calendar">
+            icon
+        </ion-segment-button>
+    </ion-segment>
+</ion-content>
