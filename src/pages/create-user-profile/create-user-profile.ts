@@ -11,6 +11,7 @@ import { ProfileService } from "../../providers/profile.service";
 import { User } from '../../models/user';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { ToastService } from '../../providers/toast.service';
+import { ApiService } from '../../providers/api.service';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -34,13 +35,13 @@ export class CreateUserProfilePage {
     picture_url: string;
 
 
-    constructor(
-        private nav: NavController,
+    constructor(private nav: NavController,
         private location: LocationService,
         private changeDetectorRef: ChangeDetectorRef,
         private profile: ProfileService,
         private toast: ToastService,
-        private imagePicker: ImagePicker) {
+        private imagePicker: ImagePicker,
+        private api: ApiService) {
 
         this.profile.get()
             .subscribe(resp => this.user = resp);
@@ -75,7 +76,6 @@ export class CreateUserProfilePage {
     }
 
     ionViewDidLoad() {
-
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -87,14 +87,6 @@ export class CreateUserProfilePage {
                 this.message = error.message;
                 console.log(this.message);
             });
-    }
-
-    createAccount() {
-        this.user.latitude = this.coords.lat;
-        this.user.longitude = this.coords.lng;
-        //this.account.points = this.point(); to do
-        this.profile.put(this.user)
-            .subscribe(resp => this.nav.setRoot(TabsPage, {selectedTabIndex: 1}));
     }
 
     toggleSelect() {
@@ -113,6 +105,22 @@ export class CreateUserProfilePage {
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
+            });
+    }
+
+    createAccount() {
+        this.user.latitude = this.coords.lat;
+        this.user.longitude = this.coords.lng;
+        //this.account.points = this.point(); to do
+        this.profile.put(this.user)
+            .subscribe(resp => {
+                if (this.picture_url) {
+                    this.api.uploadImage(this.picture_url, 'profile/picture')
+                        .then(resut => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
+                }
+                else {
+                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                }
             });
     }
 }
