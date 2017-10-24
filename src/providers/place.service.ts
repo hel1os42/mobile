@@ -34,9 +34,9 @@ export class PlaceService {
         return this.api.post('advert/offers', offer);
     }
 
-    putOffer(offer: Offer, id: string) {
-        return this.api.put(`offers/${id}`, offer);
-    }
+    // putOffer(offer: Offer, offer_id: string) {
+    //     return this.api.put(`offers/${offer_id}`, offer);
+    // }to do
 
     setRedeemCode(code: string) {
         return this.api.post('redemptions', { code: code });
@@ -49,7 +49,15 @@ export class PlaceService {
     }
 
     getOffers() {
+        return this.api.get('advert/offers');
+    }
+
+    getOffersWithTimeframes() {
         return this.api.get('advert/offers?with=timeframes');
+    }
+
+    getOffer(offer_id: string) {
+        return this.api.get(`advert/offers/${offer_id}?with=timeframes`)
     }
 
 }
