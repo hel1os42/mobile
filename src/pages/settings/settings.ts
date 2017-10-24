@@ -104,10 +104,10 @@ export class SettingsPage {
 
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
-        this.user.latitude = this.coords.lat;
-        this.user.longitude = this.coords.lng;
-        this.profile.put(this.user)
-            .subscribe(resp => {
+        // this.user.latitude = this.coords.lat;
+        // this.user.longitude = this.coords.lng;
+        // this.profile.put(this.user)
+            // .subscribe(resp => {to do
                 if (!this.isChangeMode) {
                     this.isAdvMode = !this.isAdvMode;
                     this.nav.pop();
@@ -121,7 +121,7 @@ export class SettingsPage {
                     }
                     
                 }
-            });
+            // });
     }
 
     toggleAccountsChoiceVisible() {
