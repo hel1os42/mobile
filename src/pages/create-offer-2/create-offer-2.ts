@@ -4,8 +4,11 @@ import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer3Page } from '../create-offer-3/create-offer-3';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimezoneService } from '../../providers/timezone.service';
+import { Offer } from '../../models/offer';
+import { OfferDate } from '../../models/OfferDate';
 
 
 @Component({
@@ -14,8 +17,8 @@ import { TimezoneService } from '../../providers/timezone.service';
 })
 export class CreateOffer2Page {
 
-    offer: OfferCreate;
-    isDetailedSettingsVisible = false;
+    offer: Offer;
+    isDetailedSettingsVisible: boolean;
     todayDate: Date;
     timeFrames = [];
     finishTime: string;
@@ -31,6 +34,7 @@ export class CreateOffer2Page {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
+        this.isDetailedSettingsVisible = this.offer.id ? true : false;
         this.todayDate = new Date();
         let days = DateTimeUtils.ALL_DAYS;
 
@@ -41,6 +45,37 @@ export class CreateOffer2Page {
                 days: days[i],
                 isSelected: false
             };
+        }
+        if (this.offer.id) {
+            this.startDate = this.offer.start_date.date.slice(0, 10);
+            this.finishDate = this.offer.finish_date.date.slice(0, 10);
+            // let timeframesData = [
+            //     {from: "10:00:00.000000+0300", to: "23:00:00.000000+0300", days: ["mo"]},
+            //     ];
+            if (this.offer.timeframes.length) {
+                let timeFrames = _.flatMap(this.offer.timeframes, function (obj) {
+                    return _.map(obj.days, function (day) {
+                        return {
+                            from: obj.from,
+                            to: obj.to,
+                            days: day
+                        };
+                    });
+                });
+
+                for (let i = 0; i < this.timeFrames.length; i ++) {
+                    for (let j = 0; j < timeFrames.length; j ++) {
+                        let tTF = this.timeFrames[i];
+                        let tF = timeFrames[j];
+                        tTF.isSelected = tTF.days.slice(0, 2) == tF.days;
+                        tTF.from = (tTF.days.slice(0, 2) == tF.days) ? tF.from.slice(0, 5) : '';
+                        tTF.to = (tTF.days.slice(0, 2) == tF.days) ? tF.to.slice(0, 5) : '';
+                        if (tTF.isSelected) {
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -84,8 +119,15 @@ export class CreateOffer2Page {
                 timezoneStr = DateTimeUtils.getTimezone(timezone);
                 let dateMask = DateTimeUtils.ZERO_DATETIME_SUFFIX;
                 let timeMask = DateTimeUtils.ZERO_TIME_SUFFIX;
-                this.offer.start_date = this.startDate + dateMask + timezoneStr;
-                this.offer.finish_date = this.finishDate + dateMask + timezoneStr;
+                if (this.offer.id) {
+                    this.offer.start_date.date = this.startDate + dateMask + timezoneStr;
+                    this.offer.finish_date.date = this.finishDate + dateMask + timezoneStr;
+                }
+                else {
+                    this.offer.start_date = this.startDate + dateMask + timezoneStr;
+                    this.offer.finish_date = this.finishDate + dateMask + timezoneStr;
+                }
+                
                 let selected = this.timeFrames.filter(p => p.isSelected);
                 this.offer.timeframes = selected.map(p => {
                     return {

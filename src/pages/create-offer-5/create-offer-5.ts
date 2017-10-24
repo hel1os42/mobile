@@ -30,21 +30,27 @@ export class CreateOffer5Page {
             .subscribe(user => {
                 this.balance = user.accounts.NAU.balance;
             });
-        }
+    }
 
     createOffer() {
         this.offer.reward = parseInt(this.reward);
-        this.place.setOffer(this.offer)
-            .subscribe(resp => {
-                // if(this.picture_url) {
-                //     this.api.uploadImage(this.picture_url, `offers/${resp.id}/picture`)
-                //         .then(resut => this.nav.popToRoot());
-                // }
-                // else {
-                //     this.nav.popToRoot();
-                // }to do
-                this.nav.popToRoot;//to remove
-            })
+        // if (this.offer.id) {
+        //     this.place.putOffer(this.offer, this.offer.id)
+        //         .subscribe(resp => this.nav.popToRoot())
+        // }to do
+        // else {
+            this.place.setOffer(this.offer)
+                .subscribe(resp => {
+                    // if(this.picture_url) {
+                    //     this.api.uploadImage(this.picture_url, `offers/${resp.id}/picture`)
+                    //         .then(resut => this.nav.popToRoot());
+                    // }
+                    // else {
+                    //     this.nav.popToRoot();
+                    // }to do
+                    this.nav.popToRoot();//to remove
+                })
+        }
     }
 
-}
+// }
