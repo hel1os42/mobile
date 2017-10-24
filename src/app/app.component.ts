@@ -9,6 +9,8 @@ import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create
 import { CreateOfferPage } from "../pages/create-offer/create-offer";
 import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
 import { LoginPage } from "../pages/login/login";
+import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
+import { AdvUserProfilePage } from '../pages/adv-user-profile/adv-user-profile';
 
 @Component({
     templateUrl: 'app.html'
@@ -27,7 +29,7 @@ export class MyApp {
 
             this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : TabsPage;
 
-            //this.rootPage = CreateAdvUserProfilePage;
+            //this.rootPage = AdvUserProfilePage;
         })
 
         this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
