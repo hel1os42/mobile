@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { CreateOfferPage } from '../create-offer/create-offer';
 import { PlaceService } from '../../providers/place.service';
 import { Offer } from '../../models/offer';
+import { TimezoneService } from '../../providers/timezone.service';
+import { DateTimeUtils } from '../../utils/date-time.utils';
 
 @Component({
     selector: 'page-adv-user-offers',
@@ -16,7 +18,8 @@ export class AdvUserOffersPage {
     date: string;
 
     constructor(private nav: NavController,
-        private place: PlaceService) {
+        private place: PlaceService,
+        private timezone: TimezoneService) {
 
         this.place.getOffers()
             .subscribe(resp => {
@@ -29,7 +32,7 @@ export class AdvUserOffersPage {
     }
 
     segmentChanged($event) {
-    
+
         switch ($event.value) {
             case 'all':
                 this.place.getOffers()
@@ -57,7 +60,18 @@ export class AdvUserOffersPage {
                     });
                 break;
         }
-        
+
+    }
+
+    filterByDate() {
+        let dates = DateTimeUtils.getFilterDates(this.date);
+        this.place.getFilteredOffersByDate(dates.startDate, dates.finishDate)
+            .subscribe(resp => {
+                this.offers = resp.data;
+                this.total = resp.total;
+                debugger
+            })
+        debugger
     }
 
     openCreateOffer() {
