@@ -115,8 +115,7 @@ export class CreateOffer2Page {
         let timezoneStr: string;
         this.timezone.get(this.offer.latitude, this.offer.longitude, Math.round(this.todayDate.valueOf() / 1000))
             .subscribe(resp => {
-                timezone = (resp.dstOffset + resp.rawOffset) / 3600;
-                timezoneStr = DateTimeUtils.getTimezone(timezone);
+                timezoneStr = DateTimeUtils.getTimezone(resp);
                 let dateMask = DateTimeUtils.ZERO_DATETIME_SUFFIX;
                 let timeMask = DateTimeUtils.ZERO_TIME_SUFFIX;
                 if (this.offer.id) {
