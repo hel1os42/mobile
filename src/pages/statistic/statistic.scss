@@ -2,4 +2,30 @@ page-statistic{
     .item-block-nau.list.list-ios {
         margin: 0;
     }
+
+    .block1{
+        display: none;
+    }
+
+    .btn_save{
+        position: absolute;
+        right: 4vw;
+        top: 4vw;
+    }
+
+    .item-label{
+        background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
+        border-radius: 100vw;
+        width: 15vw;
+        height: 15vw;
+    }
+
+    .block2 .block-labels .label-ios{
+       display: none;
+    }
+
+    .block2 .block-labels .item-ios [item-left], .item-ios [item-start] {
+        margin: 8px 16px 8px 0;
+        margin: 2vw 4vw 2vw 0vw;
+    }
 }
