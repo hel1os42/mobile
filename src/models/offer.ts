@@ -10,7 +10,6 @@ export class Offer extends OfferCreate {
     company?: Company;
     status: string;
     category?: OfferCategory
-    reserved: boolean;
     deleted_at: string;
     account_id: string;
     categories?: OfferCategory[];

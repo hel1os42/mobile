@@ -23,7 +23,22 @@ export class DateTimeUtils {
     public static ZERO_DATETIME_SUFFIX = ' 00:00:00.000000';
     public static ZERO_TIME_SUFFIX = ':00.000000';
 
-    static getTimezone(timezone) {
+    static getTimezone(timezoneData) {
+        let timezone = (timezoneData.dstOffset + timezoneData.rawOffset) / 3600;
+        return DateTimeUtils.timezoneToStr(timezone);
+    }
+
+    static getFilterDates(date: string) {
+        let timezone = -1 * (new Date().getTimezoneOffset() / 60);
+        let timezoneStr = DateTimeUtils.timezoneToStr(timezone);
+        let start = new Date(date).getTime() - (24 * 60 * 60 * 1000);
+        let startDate = encodeURIComponent(new Date(start).toISOString().slice(0, 10) + ' 23:59:59.999999' + timezoneStr);
+        let finish = new Date(date).getTime() + (24 * 60 * 60 * 1000);
+        let finishDate = encodeURIComponent(new Date(finish).toISOString().slice(0, 10) + ' 00:00:00.000000' + timezoneStr);
+       return {startDate, finishDate};
+    }
+
+    static timezoneToStr(timezone) {
         let timezoneStr = (timezone < 0)
         ? ('-0' + Math.abs(timezone) + '00') 
         : ('+0' + Math.abs(timezone) + '00');

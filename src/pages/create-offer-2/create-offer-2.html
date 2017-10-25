@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Create Offer</ion-title>
+        <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
         <ion-buttons end class="padding-right-3vw">
             <button (click)="openCreateOffer3Page()" ion-button icon-only color="transparent">
                 <span class="font-12 text-333333 no-bold">Next</span>
@@ -127,7 +127,7 @@
                         </ion-col>
                         <ion-col col-3>
                             <ion-item class="padding-left-5vw" detail-push no-lines>
-                                <ion-datetime [(ngModel)]="frame.to" [placeholder]="frame.to"  doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                                <ion-datetime [(ngModel)]="frame.to" [placeholder]="frame.to" [min]="frame.from ? frame.from : '00:00'"  doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
                             </ion-item>
                         </ion-col>
                         <ion-col col-3>

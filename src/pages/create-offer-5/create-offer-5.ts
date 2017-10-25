@@ -12,9 +12,9 @@ import { Offer } from '../../models/offer';
 export class CreateOffer5Page {
 
     offer: Offer;
-    balance: 0;
-    reward;
-    token;
+    balance = 0;
+    reward = '1';
+    reserved = '10';
     picture_url: string;
 
     constructor(private nav: NavController,
@@ -25,7 +25,11 @@ export class CreateOffer5Page {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
-        this.reward = this.offer.reward;
+        if (this.offer.id) {
+            this.reward = this.offer.reward.toString();
+            this.reserved = this.offer.reserved.toString();
+        }
+      
         this.profile.getWithAccounts()
             .subscribe(user => {
                 this.balance = user.accounts.NAU.balance;
@@ -34,6 +38,7 @@ export class CreateOffer5Page {
 
     createOffer() {
         this.offer.reward = parseInt(this.reward);
+        this.offer.reserved = parseInt(this.reserved);
         // if (this.offer.id) {
         //     this.place.putOffer(this.offer, this.offer.id)
         //         .subscribe(resp => this.nav.popToRoot())

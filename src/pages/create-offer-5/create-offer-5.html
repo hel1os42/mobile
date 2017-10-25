@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Create Offer</ion-title>
+    <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
       <ion-buttons end class="padding-right-3vw">
       <button (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Finish</span>
@@ -31,12 +31,12 @@
       <div class="block-lines">
           <ion-item padding-left class="bg-gray margin-bottom-5">
               <ion-label class="text-3E4B5D font-16 semibold">Reward for redemption</ion-label>
-              <ion-input [(ngModel)]="reward" class="text-3E4B5D font-16 bold" text-right type="number" value="1"></ion-input>
+              <ion-input [(ngModel)]="reward" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
           </ion-item>
 
           <ion-item padding-left class="bg-gray">
               <ion-label class="text-3E4B5D font-16 semibold">Token reservation</ion-label>
-              <ion-input [(ngModel)]="token" class="text-3E4B5D font-16 bold" text-right type="number" value="10"></ion-input>
+              <ion-input [(ngModel)]="reserved" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
           </ion-item>
       </div>
 

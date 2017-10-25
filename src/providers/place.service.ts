@@ -52,12 +52,24 @@ export class PlaceService {
         return this.api.get('advert/offers');
     }
 
+    getFilteredOffersByDate(startDate, finishDate) {
+        return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and`);
+    }
+
     getOffersWithTimeframes() {
         return this.api.get('advert/offers?with=timeframes');
     }
+    
+    getActiveOffers() {
+        return this.api.get('advert/offers?search=status:active');
+    }
+
+    getDeActiveOffers() {
+        return this.api.get('advert/offers?search=status:deactive');
+    }
 
     getOffer(offer_id: string) {
-        return this.api.get(`advert/offers/${offer_id}?with=timeframes`)
+        return this.api.get(`advert/offers/${offer_id}?with=timeframes`);
     }
 
 }
