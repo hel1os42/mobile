@@ -102,6 +102,7 @@ export class CreateUserProfilePage {
         this.imagePicker.getPictures(options)
             .then(results => {
                 this.picture_url = results[0];
+                console.log(results[0]);
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
