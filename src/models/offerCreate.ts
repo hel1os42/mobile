@@ -5,6 +5,7 @@ export class OfferCreate {
     label: string;
     description: string;
     reward: number;
+    reserved: number;
     start_date: any;
     finish_date: any;
     timeframes: TimeFrames[];
