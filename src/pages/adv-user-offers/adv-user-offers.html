@@ -17,7 +17,7 @@
             <a><img src="assets/img/user_offers/icon_right.svg"></a>
         </a>
     </ion-item>
-    <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="nau-segment">
+    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)" text-uppercase margin-top class="nau-segment">
         <ion-segment-button value="all">
             All
         </ion-segment-button>
@@ -27,7 +27,7 @@
         <ion-segment-button value="active">
             Active
         </ion-segment-button>
-        <ion-segment-button value="off">
+        <ion-segment-button value="deactive">
             Off
         </ion-segment-button>
     </ion-segment>

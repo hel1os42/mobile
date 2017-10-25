@@ -15,7 +15,7 @@ export class AdvUserOffersPage {
     total: number;
 
     constructor(private nav: NavController,
-                private place: PlaceService) {
+        private place: PlaceService) {
 
         this.place.getOffers()
             .subscribe(resp => {
@@ -23,14 +23,46 @@ export class AdvUserOffersPage {
                 this.total = resp.total;
             });
 
-        this.segment = "all";
+        this.segment = 'all';
 
+    }
+
+    segmentChanged($event) {
+    
+        switch ($event.value) {
+            case 'all':
+                this.place.getOffers()
+                    .subscribe(resp => {
+                        this.offers = resp.data;
+                        this.total = resp.total;
+                    });
+                break;
+            case 'featured':
+                this.offers = [];//to do
+                this.total = 0;//to do
+                break;
+            case 'active':
+                this.place.getActiveOffers()
+                    .subscribe(resp => {
+                        this.offers = resp.data;
+                        this.total = resp.total;
+                    });
+                break;
+            case 'deactive':
+                this.place.getDeActiveOffers()
+                    .subscribe(resp => {
+                        this.offers = resp.data;
+                        this.total = resp.total;
+                    });
+                break;
+        }
+        
     }
 
     openCreateOffer(offer) {
         this.place.getOffer(offer.id)
             .subscribe(resp => {
-                this.nav.push(CreateOfferPage, {offer: resp});
+                this.nav.push(CreateOfferPage, { offer: resp });
             })
     }
 }
