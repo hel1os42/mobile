@@ -52,6 +52,10 @@ export class PlaceService {
         return this.api.get('advert/offers');
     }
 
+    getFilteredOffersByDate(startDate, finishDate) {
+        return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and`);
+    }
+
     getOffersWithTimeframes() {
         return this.api.get('advert/offers?with=timeframes');
     }
