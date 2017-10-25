@@ -127,7 +127,7 @@
                         </ion-col>
                         <ion-col col-3>
                             <ion-item class="padding-left-5vw" detail-push no-lines>
-                                <ion-datetime [(ngModel)]="frame.to" [placeholder]="frame.to"  doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                                <ion-datetime [(ngModel)]="frame.to" [placeholder]="frame.to" [min]="frame.from ? frame.from : '00:00'"  doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
                             </ion-item>
                         </ion-col>
                         <ion-col col-3>
