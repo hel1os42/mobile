@@ -39,7 +39,6 @@ export class CreateOffer5Page {
     createOffer() {
         this.offer.reward = parseInt(this.reward);
         this.offer.reserved = parseInt(this.reserved);
-        debugger
         // if (this.offer.id) {
         //     this.place.putOffer(this.offer, this.offer.id)
         //         .subscribe(resp => this.nav.popToRoot())

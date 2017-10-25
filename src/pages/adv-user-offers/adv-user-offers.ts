@@ -69,9 +69,7 @@ export class AdvUserOffersPage {
             .subscribe(resp => {
                 this.offers = resp.data;
                 this.total = resp.total;
-                debugger
             })
-        debugger
     }
 
     openCreateOffer() {

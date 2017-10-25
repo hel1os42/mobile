@@ -27,7 +27,6 @@ export class CreateOfferPage {
 
         if (this.navParams.get('offer')) {
                 this.offer = this.navParams.get('offer');
-            debugger
         }
 
     }
