@@ -55,9 +55,17 @@ export class PlaceService {
     getOffersWithTimeframes() {
         return this.api.get('advert/offers?with=timeframes');
     }
+    
+    getActiveOffers() {
+        return this.api.get('advert/offers?search=status:active');
+    }
+
+    getDeActiveOffers() {
+        return this.api.get('advert/offers?search=status:deactive');
+    }
 
     getOffer(offer_id: string) {
-        return this.api.get(`advert/offers/${offer_id}?with=timeframes`)
+        return this.api.get(`advert/offers/${offer_id}?with=timeframes`);
     }
 
 }
