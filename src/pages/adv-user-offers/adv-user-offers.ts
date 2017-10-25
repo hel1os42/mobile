@@ -13,6 +13,7 @@ export class AdvUserOffersPage {
     segment: string;
     offers: Offer[];
     total: number;
+    date: string;
 
     constructor(private nav: NavController,
         private place: PlaceService) {
@@ -59,7 +60,11 @@ export class AdvUserOffersPage {
         
     }
 
-    openCreateOffer(offer) {
+    openCreateOffer() {
+        this.nav.push(CreateOfferPage);
+    }
+
+    openEditOffer(offer) {
         this.place.getOffer(offer.id)
             .subscribe(resp => {
                 this.nav.push(CreateOfferPage, { offer: resp });
