@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams } from "ionic-angular";
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
+import { DateTimeUtils } from '../../utils/date-time.utils';
 
 @Component({
     selector: 'page-user-nau',
@@ -13,6 +14,7 @@ export class UserNauPage {
     balance: number;
     today: number = Date.now();
     NAU_Id: string;
+    date: string;
 
     constructor(
         private profile: ProfileService,
@@ -30,14 +32,8 @@ export class UserNauPage {
         return amount;
     }
 
-    showCalendar() {
-        // this.datePicker.show({
-        //     date: new Date(),
-        //     mode: 'date',
-        //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-        //     }).then(
-        //     date => console.log('Got date: ', date),
-        //     err => console.log('Error occurred while getting date: ', err)
-        // );
-   }
+    filterByDate() {
+        let dates = DateTimeUtils.getFilterDates(this.date);
+        //to do
+    }
 }

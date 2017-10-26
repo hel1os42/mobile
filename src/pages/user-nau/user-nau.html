@@ -18,7 +18,7 @@
         <button item-end ion-button class="btn_transfer font-14 text-white">Transfer</button>
         <a item-end margin-left>
             <a (click)="showCalendar()"><img src="assets/img/user_offers/icon_right.svg">
-                <ion-datetime doneText="Ok" [(ngModel)]="startDate" [min]="todayDate | date: 'yyyy-MM-dd'" max="2021-12-31">
+                <ion-datetime doneText="Ok" [(ngModel)]="date" (ngModelChange)="filterByDate()" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" min="2017-10-01" max="2021-12-31">
                 </ion-datetime>
             </a>
         </a>
