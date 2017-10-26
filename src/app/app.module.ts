@@ -69,6 +69,7 @@ import { FeedPage } from "../pages/feed/feed";
 import { ToastService } from '../providers/toast.service';
 import { TimezoneService } from '../providers/timezone.service';
 import { StatisticPage } from "../pages/statistic/statistic";
+import { Statistic1Page } from "../pages/statistic1/statistic1";
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { StatisticPage } from "../pages/statistic/statistic";
     CreateOffer4Page,
     CreateOffer5Page,
     FeedPage,
-    StatisticPage
+    StatisticPage,
+    Statistic1Page
   ],
   imports: [
     BrowserModule,
@@ -187,7 +189,8 @@ import { StatisticPage } from "../pages/statistic/statistic";
     CreateOffer4Page,
     CreateOffer5Page,
     FeedPage,
-    StatisticPage
+    StatisticPage,
+    Statistic1Page
   ],
   providers: [
     StatusBar,
