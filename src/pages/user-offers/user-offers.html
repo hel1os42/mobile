@@ -27,7 +27,8 @@
   <ion-list margin-top no-lines class="item-block-nau">
     <ion-item *ngFor="let offer of offers" #item>
       <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div>
+       <!-- <div class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div> -->
+       <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
       <div class="bold font-22 text-3E4B5D">{{ offer.label}}</div>
       <div class="bold font-14 text-FF8B10" text-uppercase>{{ offer.city }}</div>
