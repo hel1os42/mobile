@@ -48,24 +48,24 @@ export class PlaceService {
         return obs;
     }
 
-    getOffers() {
-        return this.api.get('advert/offers');
+    getOffers(page) {
+        return this.api.get(`advert/offers?page=${page}`, page == 1);
     }
 
-    getFilteredOffersByDate(startDate, finishDate) {
-        return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and`);
+    getFilteredOffersByDate(startDate, finishDate, page) {
+        return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and&page=${page}`, page == 1);
     }
 
     getOffersWithTimeframes() {
         return this.api.get('advert/offers?with=timeframes');
     }
     
-    getActiveOffers() {
-        return this.api.get('advert/offers?search=status:active');
+    getActiveOffers(page) {
+        return this.api.get(`advert/offers?search=status:active&page=${page}`, page == 1);
     }
 
-    getDeActiveOffers() {
-        return this.api.get('advert/offers?search=status:deactive');
+    getDeActiveOffers(page) {
+        return this.api.get(`advert/offers?search=status:deactive&page=${page}`, page == 1);
     }
 
     getOffer(offer_id: string) {

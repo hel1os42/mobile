@@ -16,15 +16,20 @@ export class AdvUserOffersPage {
     offers: Offer[];
     total: number;
     date: string;
+    page = 1;
+    lastPage: number;
+    isFilterByDate = false;
+    dates;
 
     constructor(private nav: NavController,
         private place: PlaceService,
         private timezone: TimezoneService) {
 
-        this.place.getOffers()
+        this.place.getOffers(this.page)
             .subscribe(resp => {
                 this.offers = resp.data;
                 this.total = resp.total;
+                this.lastPage = resp.last_page;
             });
 
         this.segment = 'all';
@@ -32,43 +37,49 @@ export class AdvUserOffersPage {
     }
 
     segmentChanged($event) {
-
+        this.page = 1;
+        this.isFilterByDate = false;
         switch ($event.value) {
             case 'all':
-                this.place.getOffers()
+                this.place.getOffers(this.page)
                     .subscribe(resp => {
                         this.offers = resp.data;
                         this.total = resp.total;
+                        this.lastPage = resp.last_page;
+                    });
+                break;
+            case 'active':
+                this.place.getActiveOffers(this.page)
+                    .subscribe(resp => {
+                        this.offers = resp.data;
+                        this.total = resp.total;
+                        this.lastPage = resp.last_page;
+                    });
+                break;
+            case 'deactive':
+                this.place.getDeActiveOffers(this.page)
+                    .subscribe(resp => {
+                        this.offers = resp.data;
+                        this.total = resp.total;
+                        this.lastPage = resp.last_page;
                     });
                 break;
             case 'featured':
                 this.offers = [];//to do
                 this.total = 0;//to do
                 break;
-            case 'active':
-                this.place.getActiveOffers()
-                    .subscribe(resp => {
-                        this.offers = resp.data;
-                        this.total = resp.total;
-                    });
-                break;
-            case 'deactive':
-                this.place.getDeActiveOffers()
-                    .subscribe(resp => {
-                        this.offers = resp.data;
-                        this.total = resp.total;
-                    });
-                break;
         }
-
     }
 
     filterByDate() {
-        let dates = DateTimeUtils.getFilterDates(this.date);
-        this.place.getFilteredOffersByDate(dates.startDate, dates.finishDate)
+        this.page = 1;
+        this.isFilterByDate = true;
+        this.dates = DateTimeUtils.getFilterDates(this.date);
+        this.place.getFilteredOffersByDate(this.dates.startDate, this.dates.finishDate, this.page)
             .subscribe(resp => {
                 this.offers = resp.data;
                 this.total = resp.total;
+                this.lastPage = resp.last_page;
             })
     }
 
@@ -81,5 +92,40 @@ export class AdvUserOffersPage {
             .subscribe(resp => {
                 this.nav.push(CreateOfferPage, { offer: resp });
             })
+    }
+
+    doInfinite(infiniteScroll) {
+        this.page = this.page + 1;
+        if (this.page <= this.lastPage) {
+            setTimeout(() => {
+                let obs;
+                if (this.isFilterByDate) {
+                    obs = this.place.getFilteredOffersByDate(
+                        this.dates.startDate, this.dates.finishDate, this.page);
+                }
+                else {
+                    switch (this.segment) {
+                        case 'all':
+                            obs = this.place.getOffers(this.page);
+                            break;
+                        case 'active':
+                            obs = this.place.getActiveOffers(this.page);
+                            break;
+                        case 'deactive':
+                            obs = this.place.getDeActiveOffers(this.page);
+                            break;
+                    }
+                }
+                obs.subscribe(resp => {
+                    for (let i = 0; i < resp.data.length; i++) {
+                        this.offers.push(resp.data[i]);
+                    }
+                    infiniteScroll.complete();
+                });
+            });
+        }
+        else {
+            infiniteScroll.complete();
+        }
     }
 }
