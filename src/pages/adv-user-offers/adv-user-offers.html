@@ -7,16 +7,18 @@
 
 <ion-content padding>
     <ion-item class="border-bottom-no top-block-nau">
-        <ion-avatar item-start>
+        <div item-start>
             <img src="assets/img/user_offers/icon_lock.svg">
-        </ion-avatar>
-        <div class="font-18 text-3E4B5D bold">{{ total }}</div>
-        <div class="font-14 text-828282">Created Offers</div>
+        </div>
+        <div item-content>
+            <div class="font-18 text-3E4B5D bold">{{ total }}</div>
+            <div class="font-14 text-828282">Created Offers</div>
+        </div>
         <button (click)="openCreateOffer()" item-end ion-button class="btn_transfer font-14 text-white extrabold">Create new</button>
         <a item-end margin-left class="font-0 btn_calendar_user">
             <a><img src="assets/img/user_offers/icon_right.svg"></a>
             <ion-datetime doneText="Ok" [(ngModel)]="date" (ngModelChange)="filterByDate()" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" min="2017-10-01" max="2021-12-31">
-                </ion-datetime>
+            </ion-datetime>
         </a>
     </ion-item>
     <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)" text-uppercase margin-top class="nau-segment">
