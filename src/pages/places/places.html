@@ -3,7 +3,9 @@
     <ion-grid text-center class="grid-tabs-splash">
         <ion-row align-items-end>
             <a ion-col *ngFor="let category of categories" [ngClass]="{ 'active_cat': isSelectedCategory(category) }" (click)="selectCategory(category)">
-                <p><img [src]="category.image_url"></p>
+                <p>
+                    <img [src]="category.image_url">
+                </p>
                 <span class="semibold" [innerHTML]="category.name_html"></span>
             </a>
         </ion-row>
@@ -30,7 +32,9 @@
 
         <ion-item class="block-search relative" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
-            <a (click)="openPopover()" class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
+            <a (click)="openPopover()" class="btn_search_settings">
+                <img src="assets/img/user_home/icon_settings.svg">
+            </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
                 <img class="btn_map1" *ngIf="!isMapVisible" src="assets/img/user_home/icon_pin.svg">
                 <img class="btn_map2" *ngIf="isMapVisible" src="assets/img/user_home/icon_pin_hide.svg">
@@ -48,16 +52,17 @@
                 <ng-container *ngFor="let showStar of getStars(company.stars)">
                     <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
                 </ng-container>
-                <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">{{ company.testimonials_count }}</span>
+                <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
+                <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} </span>
-            <div class="bold font-20 text-3E4B5D text-ellipsis margin-top-1vw">{{ company.name }}</div>
-            <div class="wrap">
-            <ng-container *ngFor="let category of company.categories" >
-                    <span class="type-food">{{ category.name }}</span>
-            </ng-container>
-            </div>
-            <div margin-top class="text-828282 font-12 wrap text-overflow-35 margin-top-5">{{ company. description }}</div>
+                <div class="bold font-20 text-3E4B5D text-ellipsis margin-top-1vw">{{ company.name }}</div>
+                <div class="wrap">
+                    <ng-container *ngFor="let category of company.categories">
+                        <span class="type-food">{{ category.name }}</span>
+                    </ng-container>
+                </div>
+                <div margin-top class="text-828282 font-12 wrap text-overflow-35 margin-top-5">{{ company. description }}</div>
             </div>
             <img class="star_right" src="assets/img/place/icon_star.svg">
 
@@ -86,4 +91,9 @@
             <agm-marker [latitude]="coords?.lat" [longitude]="coords?.lng" [iconUrl]="'assets/img/tabs/tab2_a.svg'"></agm-marker>
         </agm-map>
     </div>
+
+    <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="infiniteScroll($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading companies..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    
 </ion-content>

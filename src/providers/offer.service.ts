@@ -32,19 +32,20 @@ export class OfferService {
     //     return Observable.of(MockOffers.items);
     // }
 
-    getPlaces(category_ids: string[], lat: number, lng: number, radius: number, search: string) {
+    getPlaces(category_ids: string[], lat: number, lng: number, radius: number, search: string, page: number) {
         let str = '';     
         for (let i = 0; i < category_ids.length; i++) {
             let id = category_ids[i];
             str += `${'category_ids[]'}=${id}&`;
         };
         
-        return this.api.get(`places?${str}`, true, {
+        return this.api.get(`places?${str}`, page == 1, {
             latitude: lat,
             longitude: lng,
             radius: radius,
             with: 'categories',
             search: search,
+            page: page
         });
     }
 
