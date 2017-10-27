@@ -40,7 +40,7 @@ export class PlacesPage {
     search: string;
     categoryFilter: string[];
     page = 1;
-    lastPage = 1;//temporary, to do 0
+    lastPage: number;
 
     constructor(
         private nav: NavController,
@@ -85,7 +85,6 @@ export class PlacesPage {
     selectCategory(category: OfferCategory) {
         this.search = ""
         this.selectedCategory = category;
-        this.companies = undefined;//temporary(filter by offers count)
         this.loadCompanies([this.selectedCategory.id], this.search, this.page = 1);
         this.categoryFilter = [this.selectedCategory.id];
     }
@@ -110,20 +109,10 @@ export class PlacesPage {
     }
 
     loadCompanies(categoryId, search, page) {
-        //temporary(filter by offers count), to do
         this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search, page)
             .subscribe(companies => {
-                if (!this.companies) {
-                    this.companies = companies.data.filter(p => p.offers_count > 0);
-                    this.lastPage = companies.last_page;
-                }
-                else {
-                    let companiesWithOffers = companies.data.filter(p => p.offers_count > 0);
-                    for (let i = 0; i < companiesWithOffers.length; i++) {
-                        this.companies.push(companiesWithOffers[i])
-                    }
-                }
-                //
+                this.companies = companies.data.filter(p => p.offers_count > 0);
+                // this.companies = companies.data;
                 this.mapsAPILoader.load()
                     .then(() => {
                         if (this.companies.length == 0 && this.coords) {
@@ -137,12 +126,6 @@ export class PlacesPage {
                         };
                         this.mapBounds = this.generateBounds(this.companies);
                     })
-                    //
-                this.page = page = page + 1;
-                if (this.page <= this.lastPage && this.lastPage > 1) {
-                    this.loadCompanies(categoryId, search, page);
-                }
-                //
             });
     }
 
@@ -201,14 +184,12 @@ export class PlacesPage {
                         // this.categoryFilter = this.childCategories.map(p => p.id);to do
                         this.categoryFilter = [this.selectedCategory.id];
                     }
-                    this.companies = undefined;//temporary(filter by offers count)
                     this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
                 })
             });
     }
 
     searchCompanies($event) {
-        this.companies = undefined;//temporary(filter by offers count)
         this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
     }
 
