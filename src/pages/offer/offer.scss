@@ -100,6 +100,11 @@ page-offer{
       margin-left: 2.2vw;
   }
 
+    .btn_social .button img {
+        width: 4vw;
+        height: auto;
+    }
+
   .user_level{
       background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
       border-radius: 100vw;
@@ -175,6 +180,10 @@ offerRedeem-popover-component {
     width: 60%;
     margin-left: 20%;
   }
+
+ .qr-code{
+     width: 50%;
+ }
 }
 
 congratulation-popover-component {
