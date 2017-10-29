@@ -20,7 +20,7 @@
     "@angular/platform-browser": "4.1.3",
     "@angular/platform-browser-dynamic": "4.1.3",
     "@ionic-native/calendar": "4.3.1",
-    "@ionic-native/core": "3.12.1",    
+    "@ionic-native/core": "3.12.1",
     "@ionic-native/file-transfer": "4.3.1",
     "@ionic-native/geolocation": "4.1.0",
     "@ionic-native/image-picker": "4.3.1",
@@ -28,6 +28,7 @@
     "@ionic-native/status-bar": "3.12.1",
     "@ionic/storage": "2.0.1",
     "@types/lodash": "4.14.74",
+    "chart.js": "2.7.1",
     "cordova-android": "6.2.3",
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-console": "1.0.5",
@@ -67,8 +68,8 @@
       "cordova-plugin-telerik-imagepicker": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
       },
-      "cordova-plugin-file-transfer": {}      
-    },    
+      "cordova-plugin-file-transfer": {}
+    },
     "platforms": [
       "android"
     ]
