@@ -54,11 +54,11 @@
             <div radio-group no-lines>
                 <ion-item class="bg-gray">
                     <ion-label class="text-3E4B5D font-16 semibold">Working Days</ion-label>
-                    <ion-radio (ionSelect)="selectWorkingDays($event)" mode="md" value="workingdays"></ion-radio>
+                    <ion-radio (ionSelect)="selectWorkingDays($event)" [checked]="isWorkingDays" mode="md"></ion-radio>
                 </ion-item>
                 <ion-item class="bg-gray">
                     <ion-label class="text-3E4B5D font-16 semibold">Weekend</ion-label>
-                    <ion-radio (ionSelect)="selectWeekend($event)" mode="md" value="weekend"></ion-radio>
+                    <ion-radio (ionSelect)="selectWeekend($event)" [checked]="isWeekend" mode="md"></ion-radio>
                 </ion-item>
             </div>
         </div>
@@ -76,7 +76,7 @@
                 <ion-item class="bg-gray" detail-push>
                     <ion-label class="text-BDBDBD font-16">to</ion-label>
                     <ion-datetime (ionChange)="selectFinishTime($event)" [(ngModel)]="finishTime" doneText="Ok" displayFormat="HH:mm" pickerFormat="HH:mm"
-                        [min]="startTime" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                        [min]="startTime ? startTime : '00:00'" class="text-3E4B5D font-16 semibold"></ion-datetime>
                 </ion-item>
             </div>
         </div>
@@ -122,17 +122,17 @@
                         </ion-col>
                         <ion-col col-3>
                             <ion-item detail-push no-lines>
-                                <ion-datetime [(ngModel)]="frame.from" [placeholder]="frame.from" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                                <ion-datetime [(ngModel)]="frame.from" (ngModelChange)="removeTime('start', frame.isSelected)" [placeholder]="frame.from"  doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
                             </ion-item>
                         </ion-col>
                         <ion-col col-3>
                             <ion-item class="padding-left-5vw" detail-push no-lines>
-                                <ion-datetime [(ngModel)]="frame.to" [placeholder]="frame.to" [min]="frame.from ? frame.from : '00:00'"  doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                                <ion-datetime [(ngModel)]="frame.to" (ngModelChange)="removeTime('finish', frame.isSelected)" [placeholder]="frame.to"  [min]="frame.from ? frame.from : '00:00'"  doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
                             </ion-item>
                         </ion-col>
                         <ion-col col-3>
                             <ion-item no-lines>
-                                <ion-checkbox [(ngModel)]="frame.isSelected"></ion-checkbox>
+                                <ion-checkbox [(ngModel)]="frame.isSelected" (ngModelChange)="checkDays(frame.isSelected)"[disabled]="!frame.from || !frame.to"></ion-checkbox>
                             </ion-item>
                         </ion-col>
                     </ion-row>
