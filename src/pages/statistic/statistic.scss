@@ -3,7 +3,7 @@ page-statistic{
         margin: 0;
     }
 
-    .block1, .block2{
+    .block1, .block3{
         display: none;
     }
 
@@ -42,5 +42,10 @@ page-statistic{
 
     .item-date.item-ios[detail-push] .item-inner {
         background-position: right 5vw center;
+    }
+
+    .chartjs-render-monitor{
+        background: #3E4B5D;
+        padding: 5vw 3vw 3vw 3vw;
     }
 }
