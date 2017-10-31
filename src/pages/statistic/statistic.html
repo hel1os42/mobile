@@ -1,12 +1,13 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Statistic</ion-title>
+        <ion-title *ngIf="!isDateFilterVisible">Statistic</ion-title>
+        <ion-title *ngIf="isDateFilterVisible">Date filte</ion-title>
     </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
 
-<ion-content padding>
-    <ion-segment text-uppercase class="nau-segment margin-top-1vw">
+<ion-content>
+    <ion-segment [(ngModel)]="activeSegment" padding-left padding-right padding-top text-uppercase class="nau-segment margin-top-1vw">
         <ion-segment-button value="all">
             All Offers
         </ion-segment-button>
@@ -15,7 +16,8 @@
         </ion-segment-button>
     </ion-segment>
 
-    <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="statistic-segment">
+    <ion-segment padding-left padding-right [(ngModel)]="segment" (ionChange)="segmentChanged($event)" text-uppercase margin-top
+        class="statistic-segment">
         <ion-segment-button value="today">
             Today
         </ion-segment-button>
@@ -32,99 +34,215 @@
         </ion-segment-button>
     </ion-segment>
 
-<div class="block1">
-    <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Main positions</div>
+    <div *ngIf="!isDateFilterVisible && !isGraphicVisible" class="block1" padding-left padding-right>
+        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Main positions</div>
 
-    <ion-grid text-center>
-        <ion-row class="grid-statistic">
-            <ion-col>
-                <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">180</div>
-                <div text-uppercase class="bold font-14 text-828282 regular">Viewed<br>my place</div>
-                <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
-            </ion-col>
-            <ion-col>
-                <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">1 350</div>
-                <div text-uppercase class="bold font-14 text-828282 regular">Viewed<br>offers</div>
-                <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
-            </ion-col>
-            <ion-col>
-                <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">53</div>
-                <div text-uppercase class="bold font-14 text-828282 regular">redeemed<br>offers</div>
-                <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+        <ion-grid text-center>
+            <ion-row class="grid-statistic">
+                <ion-col>
+                    <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">180</div>
+                    <div text-uppercase class="bold font-14 text-828282 regular">Viewed
+                        <br>my place</div>
+                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
+                </ion-col>
+                <ion-col>
+                    <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">1 350</div>
+                    <div text-uppercase class="bold font-14 text-828282 regular">Viewed
+                        <br>offers</div>
+                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
+                </ion-col>
+                <ion-col>
+                    <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">53</div>
+                    <div text-uppercase class="bold font-14 text-828282 regular">redeemed
+                        <br>offers</div>
+                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
 
-    <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Additional statiStics</div>
+        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Additional statiStics</div>
 
-    <ion-list no-lines class="item-block-nau font-0">
-        <a ion-item detail-push>
-            <div class="bold font-22 text-3E4B5D">1 325</div>
-            <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">Rating & Feedback</div>
-        </a>
+        <ion-list no-lines class="item-block-nau font-0">
+            <a ion-item detail-push>
+                <div class="bold font-22 text-3E4B5D">1 325</div>
+                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">Rating & Feedback</div>
+            </a>
 
-        <a ion-item detail-push>
-            <div class="bold font-22 text-3E4B5D">543</div>
-            <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">Requests for offers redeemed</div>
-        </a>
+            <a ion-item detail-push>
+                <div class="bold font-22 text-3E4B5D">543</div>
+                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">Requests for offers redeemed</div>
+            </a>
 
-        <a ion-item detail-push>
-            <div class="bold font-22 text-3E4B5D">2 374</div>
-            <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">money wasted for redeems</div>
-        </a>
-    </ion-list>
-</div>
+            <a ion-item detail-push>
+                <div class="bold font-22 text-3E4B5D">2 374</div>
+                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">money wasted for redeems</div>
+            </a>
+        </ion-list>
+    </div>
 
-<div class="block2">
-    <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Weekly detailed graphic information</div>
-    <ion-list no-lines class="item-block-nau font-0">
-        <ion-item>
-            <span class="bold font-22 text-3E4B5D">653</span> <span class="font-14 regular text-828282 padding-left-1vw">Users</span>
-            <div text-uppercase class="font-14 regular text-828282 margin-top-1vw margin-bottom-3vw">Viewed my place</div>
-            <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white btn_save">save pdf</button>
-            <img src="assets/img/statistic/graph.png">
-        </ion-item>
-    </ion-list>
+    <div [hidden]="!isGraphicVisible" class="block2" padding-left padding-right>
+        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Weekly detailed graphic information</div>
+        <ion-list no-lines class="item-block-nau font-0">
+            <ion-item>
+                <span class="bold font-22 text-3E4B5D">653</span>
+                <span class="font-14 regular text-828282 padding-left-1vw">Users</span>
+                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw margin-bottom-3vw">Viewed my place</div>
+                <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white btn_save">save pdf</button>
+                <canvas #barCanvas height="300"></canvas>
+                <!--<img src="assets/img/statistic/graph.png">-->
+            </ion-item>
+        </ion-list>
 
-    <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">week viewers</div>
+        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">week viewers</div>
 
-    <ion-list no-lines class="item-block-nau font-0 block-labels">
-        <ion-item>
-            <div item-start>
-                <div class="table item-label">
-                    <span text-center class="table-cell font-22 semibold text-white">L4</span>
+        <ion-list no-lines class="item-block-nau font-0 block-labels">
+            <ion-item>
+                <div item-start>
+                    <div class="table item-label">
+                        <span text-center class="table-cell font-22 semibold text-white">L4</span>
+                    </div>
                 </div>
-            </div>
-            <div item-content>
-            <div text-uppercase class="font-14 text-4F4F4F">Used Offers: <span class="bold">34</span></div>
-            <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
-            </div>
-        </ion-item>
-
-        <ion-item>
-            <div item-start>
-                <div class="table item-label">
-                    <span text-center class="table-cell font-22 semibold text-white">L3</span>
+                <div item-content>
+                    <div text-uppercase class="font-14 text-4F4F4F">Used Offers:
+                        <span class="bold">34</span>
+                    </div>
+                    <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
                 </div>
-            </div>
-            <div item-content>
-                <div text-uppercase class="font-14 text-4F4F4F">Used Offers: <span class="bold">21</span></div>
-                <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
-            </div>
-        </ion-item>
+            </ion-item>
 
-        <ion-item>
-            <div item-start>
-                <div class="table item-label">
-                    <span text-center class="table-cell font-22 semibold text-white">L2</span>
+            <ion-item>
+                <div item-start>
+                    <div class="table item-label">
+                        <span text-center class="table-cell font-22 semibold text-white">L3</span>
+                    </div>
                 </div>
-            </div>
-            <div item-content>
-                <div text-uppercase class="font-14 text-4F4F4F">Used Offers: <span class="bold">92</span></div>
-                <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
-            </div>
-        </ion-item>
-    </ion-list>
+                <div item-content>
+                    <div text-uppercase class="font-14 text-4F4F4F">Used Offers:
+                        <span class="bold">21</span>
+                    </div>
+                    <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
+                </div>
+            </ion-item>
 
-</div>
+            <ion-item>
+                <div item-start>
+                    <div class="table item-label">
+                        <span text-center class="table-cell font-22 semibold text-white">L2</span>
+                    </div>
+                </div>
+                <div item-content>
+                    <div text-uppercase class="font-14 text-4F4F4F">Used Offers:
+                        <span class="bold">92</span>
+                    </div>
+                    <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </div>
+
+    <div *ngIf="isDateFilterVisible" class="block3">
+        <div padding-left padding-right text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Choose period of time</div>
+
+        <div class="time-range block-lines">
+            <div *ngFor="let period of periods">
+                <ion-grid class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" padding-left>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-item no-lines>
+                                <div class="text-BDBDBD font-16 regular">from</div>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6>
+                            <ion-item class="item-date" detail-push no-lines>
+                                <ion-datetime [(ngModel)]="period.from.day" class="text-3E4B5D font-16 semibold" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY"  min="2017-10-31" max="2021-12-31"doneText="Ok">
+                                </ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item detail-push no-lines>
+                                <ion-datetime [(ngModel)]="period.from.time" [placeholder]="to" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+                <ion-grid class="text-3E4B5D font-16 bg-gray detailed" padding-left>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-item no-lines>
+                                <div class="text-BDBDBD font-16 regular">to</div>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6>
+                            <ion-item class="item-date" detail-push no-lines>
+                                <ion-datetime [(ngModel)]="period.to.day" class="text-3E4B5D font-16 semibold" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY"  min="2017-10-31" max="2022" doneText="Ok">
+                                </ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item detail-push no-lines>
+                                <ion-datetime [(ngModel)]="period.to.time" [placeholder]="to" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+
+                <div *ngIf="periods.length > 1" text-center text-uppercase class="font-14 text-BDBDBD regular margin-top-3vw margin-bottom-3vw">Compare with</div>
+            </div>
+            <!-- <ion-grid class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" padding-left>
+                <ion-row>
+                    <ion-col col-3>
+                        <ion-item no-lines>
+                            <div class="text-BDBDBD font-16 regular">from</div>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-item class="item-date" detail-push no-lines>
+                            <ion-datetime class="text-3E4B5D font-16 semibold" displayFormat="DDD/MM/DD/YYYY" doneText="Ok">
+                            </ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-item detail-push no-lines>
+                            <ion-datetime [placeholder]="to" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <ion-grid class="text-3E4B5D font-16 bg-gray detailed" padding-left>
+                <ion-row>
+                    <ion-col col-3>
+                        <ion-item no-lines>
+                            <div class="text-BDBDBD font-16 regular">to</div>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-item class="item-date" detail-push no-lines>
+                            <ion-datetime class="text-3E4B5D font-16 semibold" displayFormat="DDD/MM/DD/YYYY" doneText="Ok">
+                            </ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-3>
+                        <ion-item detail-push no-lines>
+                            <ion-datetime [placeholder]="to" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid> -->
+
+            <button (click)="showPeriodResult()" class="margin-top-3vw extrabold" color="primary" ion-button block>Show results</button>
+        </div>
+
+        <div class="block-lines">
+            <div padding-right text-uppercase class="text-4F4F4F font-14 regular">Compare several periods of time</div>
+        </div>
+
+        <p margin>
+            <button (click)="addDatePeriod()" class="extrabold" color="darkblue" ion-button block>add period</button>
+        </p>
+
+        <div padding-left padding-right padding-bottom text-center class="text-828282 font-12 regular">Compare your date. Chose several period of time for
+            <br>results comparing.</div>
+    </div>
 </ion-content>

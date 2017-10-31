@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams } from "ionic-angular";
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
+import { DateTimeUtils } from '../../utils/date-time.utils';
 
 @Component({
     selector: 'page-user-nau',
@@ -13,6 +14,10 @@ export class UserNauPage {
     balance: number;
     today: number = Date.now();
     NAU_Id: string;
+    date: string;
+    page = 1;
+    lastPage: number;
+
 
     constructor(
         private profile: ProfileService,
@@ -21,8 +26,11 @@ export class UserNauPage {
         this.balance = this.navParams.get('balance');
         this.NAU_Id = this.navParams.get('NAU_Id');
 
-        this.profile.getTransactions()
-            .subscribe(resp => this.transactions = resp.data);
+        this.profile.getTransactions(this.page)
+            .subscribe(resp => {
+                this.transactions = resp.data;
+                this.lastPage = resp.last_page;
+            });
     }
 
     transactionSource(sourceId, transactionAmount) {
@@ -30,14 +38,26 @@ export class UserNauPage {
         return amount;
     }
 
-    showCalendar() {
-        // this.datePicker.show({
-        //     date: new Date(),
-        //     mode: 'date',
-        //     androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-        //     }).then(
-        //     date => console.log('Got date: ', date),
-        //     err => console.log('Error occurred while getting date: ', err)
-        // );
-   }
+    filterByDate() {
+        let dates = DateTimeUtils.getFilterDates(this.date);
+        //to do
+    }
+
+    doInfinite(infiniteScroll) {
+        this.page = this.page + 1;
+        if (this.page <= this.lastPage) {
+            setTimeout(() => {
+                this.profile.getTransactions(this.page)
+                    .subscribe(resp => {
+                        for (let i = 0; i < resp.data.length; i++) {
+                            this.transactions.push(resp.data[i]);
+                        }
+                        infiniteScroll.complete();
+                    });
+            });
+        }
+        else {
+            infiniteScroll.complete();
+        }
+    }
 }

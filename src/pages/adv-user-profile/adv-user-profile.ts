@@ -9,6 +9,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { UserNauPage } from '../user-nau/user-nau';
 import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { User } from '../../models/user';
+import { StatisticPage } from '../statistic/statistic';
 
 @Component({
     selector: 'page-adv-user-profile',
@@ -76,5 +77,9 @@ export class AdvUserProfilePage {
 
     openUserOffers() {
         this.nav.push(AdvUserOffersPage);
+    }
+
+    openStatistic() {
+        this.nav.push(StatisticPage);
     }
 }

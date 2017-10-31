@@ -11,12 +11,16 @@
         <ion-avatar item-start>
             <img src="assets/img/user_nau/icon_nau.svg">
         </ion-avatar>
-        <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
-        <div class="font-14 text-828282">NAU</div>
+        <div item-content>
+            <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
+            <div class="font-14 text-828282">NAU</div>
+        </div>
         <button item-end ion-button class="btn_transfer font-14 text-white">Transfer</button>
         <a item-end margin-left class="btn_calendar_user">
-            <a><img src="assets/img/user_offers/icon_right.svg">
-                <ion-datetime doneText="Ok" [(ngModel)]="startDate" [min]="todayDate | date: 'yyyy-MM-dd'" max="2021-12-31">
+            <a (click)="showCalendar()">
+                <img src="assets/img/user_offers/icon_right.svg">
+                <ion-datetime doneText="Ok" [(ngModel)]="date" (ngModelChange)="filterByDate()" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY"
+                    min="2017-10-01" max="2021-12-31">
                 </ion-datetime>
             </a>
         </a>
@@ -25,15 +29,19 @@
     <div margin-top class="font-14 text-4F4F4F" text-uppercase>Latest payments</div>
     <ion-list no-lines class="item-block-nau margin-top-5">
         <ion-item class="relative" *ngFor="let transaction of transactions">
-            <div [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0), 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}" class="font-22 margin-bottom-5 bold overflow">
+            <div [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0), 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}"
+                class="font-22 margin-bottom-5 bold overflow">
                 <span class="bold">Pay {{ transaction.id }}</span>
             </div>
-            <div [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0), 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}" class="font-22 star_right" text-uppercase>
+            <div [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0), 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}"
+                class="font-22 star_right" text-uppercase>
                 <span class="bold">{{ transactionSource( transaction.source_account_id, transaction.amount) }}</span>
                 <span class="regular"> NAU</span>
             </div>
             <div class="font-14 text-828282">{{ transaction.created_at | date: 'dd/MM/y H:mm:ss' }}</div>
         </ion-item>
     </ion-list>
-
+    <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="doInfinite($event)" >
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading transactions..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

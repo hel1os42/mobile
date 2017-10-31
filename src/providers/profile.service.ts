@@ -14,8 +14,8 @@ export class ProfileService {
         return this.api.get('profile/referrals');
     }
 
-    getTransactions() {
-        return this.api.get('transactions?orderBy=created_at&sortedBy=desc');
+    getTransactions(page) {
+        return this.api.get(`transactions?orderBy=created_at&sortedBy=desc&page=${page}`, page == 1);
     }
 
     getWithAccounts() {

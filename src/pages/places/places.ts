@@ -39,6 +39,8 @@ export class PlacesPage {
     distanceString: string;
     search: string;
     categoryFilter: string[];
+    page = 1;
+    lastPage: number;
 
     constructor(
         private nav: NavController,
@@ -68,15 +70,9 @@ export class PlacesPage {
                 this.message = error.message;
             });
 
-        this.loadCompanies([this.selectedCategory.id], this.search);
+        this.loadCompanies([this.selectedCategory.id], this.search, this.page);
         this.categoryFilter = [this.selectedCategory.id];
     }
-
-    // ngAfterViewInit() {
-    //     this.content.ionScroll.subscribe(event => {
-    //         console.log('scrolling', event);
-    //     });
-    // }
 
     ionSelected() {
         this.appMode.setHomeMode(false);
@@ -89,7 +85,7 @@ export class PlacesPage {
     selectCategory(category: OfferCategory) {
         this.search = ""
         this.selectedCategory = category;
-        this.loadCompanies([this.selectedCategory.id], this.search);
+        this.loadCompanies([this.selectedCategory.id], this.search, this.page = 1);
         this.categoryFilter = [this.selectedCategory.id];
     }
 
@@ -112,8 +108,8 @@ export class PlacesPage {
         return undefined;
     }
 
-    loadCompanies(categoryId, search) {
-        this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search)
+    loadCompanies(categoryId, search, page) {
+        this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search, page)
             .subscribe(companies => {
                 this.companies = companies.data.filter(p => p.offers_count > 0);
                 // this.companies = companies.data;
@@ -188,13 +184,46 @@ export class PlacesPage {
                         // this.categoryFilter = this.childCategories.map(p => p.id);to do
                         this.categoryFilter = [this.selectedCategory.id];
                     }
-                    this.loadCompanies(this.categoryFilter, this.search);
+                    this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
                 })
             });
     }
 
     searchCompanies($event) {
-        this.loadCompanies(this.categoryFilter, this.search);
+        this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
+    }
+
+    infiniteScroll(infiniteScroll) {
+        this.page = this.page + 1;
+        if (this.page <= this.lastPage) {
+            setTimeout(() => {
+                this.offers.getPlaces(this.categoryFilter, this.coords.lat, this.coords.lng, this.radius, this.search, this.page)
+                    .subscribe(companies => {
+                        let companiesWithOffers = companies.data.filter(p => p.offers_count > 0);
+                        for (let i = 0; i < companiesWithOffers.length; i++) {
+                            this.companies.push(companiesWithOffers[i])
+                        }
+                        this.lastPage = companies.last_page;
+                        this.mapsAPILoader.load()
+                            .then(() => {
+                                if (this.companies.length == 0 && this.coords) {
+                                    this.mapCenter = this.coords;
+                                }
+                                else if (this.companies.length == 1) {
+                                    this.mapCenter = {
+                                        lat: this.companies[0].latitude,
+                                        lng: this.companies[0].longitude,
+                                    };
+                                };
+                                this.mapBounds = this.generateBounds(this.companies);
+                            })
+                        infiniteScroll.complete();
+                    });
+            });
+        }
+        else {
+            infiniteScroll.complete();
+        }
     }
 
 }
