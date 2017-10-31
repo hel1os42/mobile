@@ -49,13 +49,13 @@
                     <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">1 350</div>
                     <div text-uppercase class="bold font-14 text-828282 regular">Viewed
                         <br>offers</div>
-                    <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
+                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
                 </ion-col>
                 <ion-col>
                     <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">53</div>
                     <div text-uppercase class="bold font-14 text-828282 regular">redeemed
                         <br>offers</div>
-                    <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
+                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -80,7 +80,7 @@
         </ion-list>
     </div>
 
-    <div *ngIf="isGraphicVisible" class="block2" padding-left padding-right>
+    <div [hidden]="!isGraphicVisible" class="block2" padding-left padding-right>
         <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Weekly detailed graphic information</div>
         <ion-list no-lines class="item-block-nau font-0">
             <ion-item>
