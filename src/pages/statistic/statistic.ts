@@ -1,22 +1,42 @@
 import { Chart } from 'chart.js';
 import { Component, ViewChild } from '@angular/core';
+import { DatePeriod } from '../../models/datePeriod';
+import { NavController } from 'ionic-angular';
+import { Statistic1Page } from '../statistic1/statistic1';
 var array_gradient = [];
 
 @Component({
-  selector: 'page-statistic',
-  templateUrl: 'statistic.html'
+    selector: 'page-statistic',
+    templateUrl: 'statistic.html'
 })
 export class StatisticPage {
 
     @ViewChild('barCanvas') barCanvas;
 
     barChart: any;
+    segment = 'week';
+    activeSegment = 'all';
+    isGraphicVisible = false;
+    isDateFilterVisible = false;
+    periods: DatePeriod[] = [];
+    period = new DatePeriod;
 
-  constructor() {
-  }
+    constructor(private nav: NavController) {
+        this.period = {
+            from: {
+                day: '',
+                time: '',
+            },
+            to: {
+                day: '',
+                time: '',
+            }
+        };
+        this.periods.push(this.period);
+    }
 
-    ionViewDidLoad() {
-
+    showGraphic() {
+        this.isGraphicVisible = true;
         /**
          * GradientArray • Steps gradient.
          * @author Siamak Mokhtari <hi@siamak.work>
@@ -30,12 +50,12 @@ export class StatisticPage {
                 // Remove the hash if given
                 hex = hex.replace('#', '');
                 // If invalid code given return white
-                if(hex.length !== 3 && hex.length !== 6){
-                    return [255,255,255];
+                if (hex.length !== 3 && hex.length !== 6) {
+                    return [255, 255, 255];
                 }
                 // Double up charaters if only three suplied
-                if(hex.length == 3){
-                    hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+                if (hex.length == 3) {
+                    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
                 }
                 // Convert to [r,g,b] array
                 r = parseInt(hex.substr(0, 2), 16);
@@ -58,7 +78,7 @@ export class StatisticPage {
             // Pads a number with specified number of leading zeroes
             zeroFill(number, width) {
                 width -= number.toString().length;
-                if (width > 0){
+                if (width > 0) {
                     return [width + (/\./.test(number) ? 2 : 1)].join('0') + number;
                 }
                 return number;
@@ -86,7 +106,7 @@ export class StatisticPage {
                 let rVal = colorA[0], gVal = colorA[1], bVal = colorA[2];
 
                 // Loop over the steps-1 because we're includeing the last value manually to ensure it's accurate
-                for (let i = 0; i < (steps-1); i++) {
+                for (let i = 0; i < (steps - 1); i++) {
                     // If the first value is lower than the last - increment up otherwise increment down
                     rVal = (colorA[0] < colorB[0]) ? rVal + Math.round(rStep) : rVal - Math.round(rStep);
                     gVal = (colorA[1] < colorB[1]) ? gVal + Math.round(gStep) : gVal - Math.round(gStep);
@@ -100,7 +120,7 @@ export class StatisticPage {
 
             gradientList(colorA, colorB, steps) {
                 const colorArray = this.generateGradient(colorA, colorB, steps);
-                for(let i in colorArray) {
+                for (let i in colorArray) {
                     console.log(colorArray[i]);
                     array_gradient[array_gradient.length] = colorArray[i];
                 }
@@ -118,16 +138,16 @@ export class StatisticPage {
          * @param  {String} "#000"
          * @param  {Integer} 10
          */
-        colors.gradientList("#FFCD9C", "#FF640C", 6);
+        colors.gradientList('#FFCD9C', '#FF640C', 7);
 
         Chart.defaults.global.defaultFontColor = '#fff';
         this.barChart = new Chart(this.barCanvas.nativeElement, {
 
             type: 'line',
             data: {
-                labels: ["MON", "TUE", "WED", "THU", "FRI", "SAT"],
+                labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
                 datasets: [{
-                    data: [0, 10, 17, 34, 29, 20],
+                    data: [0, 10, 17, 34, 29, 20, 21],
                     fill: false,
                     borderColor: '#FF640C',
                     backgroundColor: '#FF640C',
@@ -143,7 +163,7 @@ export class StatisticPage {
                     yAxes: [{ // titles axes
                         ticks: {
                             stepSize: 10,
-                            beginAtZero:true,
+                            beginAtZero: true,
                             padding: 20
                         },
                         gridLines: {
@@ -161,24 +181,24 @@ export class StatisticPage {
                         }
                     }],
                 },
-                multiTooltipTemplate: function(chartData) {return chartData.datasetLabel + " : " + chartData.value;},
-                legend:{
-                    display:false,
+                multiTooltipTemplate: function (chartData) { return chartData.datasetLabel + " : " + chartData.value; },
+                legend: {
+                    display: false,
                 },
                 responsive: true,
                 animation: {
                     onComplete: function () {
                         var ctx = this.chart.ctx;
-                        ctx.textAlign = "center";
-                        ctx.textBaseline = "bottom";
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
                         var chart = this;
                         var datasets = this.config.data.datasets;
 
                         datasets.forEach(function (dataset: Array<any>, i: number) {
-                            ctx.font = "5vw OpenSansNauSemibold";
-                            ctx.fillStyle = "White";
+                            ctx.font = '5vw OpenSansNauSemibold';
+                            ctx.fillStyle = 'White';
                             chart.getDatasetMeta(i).data.forEach(function (p: any, j: any) {
-                                ctx.fillText(datasets[i].data[j], p._model.x, p._model.y - 12 );
+                                ctx.fillText(datasets[i].data[j], p._model.x, p._model.y - 12);
                             });
                         });
                     }
@@ -187,6 +207,48 @@ export class StatisticPage {
 
         });
 
+    }
+
+    segmentChanged($event) {
+        switch ($event.value) {
+            case 'today':
+                this.isDateFilterVisible = false;
+                this.isGraphicVisible = false;
+                break;
+            case 'yesterday':
+                this.isDateFilterVisible = false;
+                this.isGraphicVisible = false;
+                break;
+            case 'week':
+                this.isDateFilterVisible = false;
+                this.isGraphicVisible = false;
+                break;
+            case 'month':
+                this.isDateFilterVisible = false;
+                this.isGraphicVisible = false;
+                break;
+            case 'calendar':
+                this.isDateFilterVisible = true;
+                this.isGraphicVisible = false;
+                break;
+        }
+    }
+
+    addDatePeriod() {
+        this.periods.push({
+            from: {
+                day: '',
+                time: '',
+            },
+            to: {
+                day: '',
+                time: '',
+            }
+        });
+    }
+
+    showPeriodResult() {
+        this.nav.push(Statistic1Page);
     }
 
 }

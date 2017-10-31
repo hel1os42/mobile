@@ -154,7 +154,7 @@
                         </ion-col>
                         <ion-col col-6>
                             <ion-item class="item-date" detail-push no-lines>
-                                <ion-datetime [(ngModel)]="period.from.day" class="text-3E4B5D font-16 semibold" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" doneText="Ok">
+                                <ion-datetime [(ngModel)]="period.from.day" class="text-3E4B5D font-16 semibold" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY"  min="2017-10-31" max="2021-12-31"doneText="Ok">
                                 </ion-datetime>
                             </ion-item>
                         </ion-col>
@@ -175,7 +175,7 @@
                         </ion-col>
                         <ion-col col-6>
                             <ion-item class="item-date" detail-push no-lines>
-                                <ion-datetime [(ngModel)]="period.to.day" class="text-3E4B5D font-16 semibold" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" doneText="Ok">
+                                <ion-datetime [(ngModel)]="period.to.day" class="text-3E4B5D font-16 semibold" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY"  min="2017-10-31" max="2022" doneText="Ok">
                                 </ion-datetime>
                             </ion-item>
                         </ion-col>
