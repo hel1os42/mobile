@@ -149,7 +149,7 @@ export class StatisticPage {
                         gridLines: {
                             color: '#606A78',
                             lineWidth: 1,
-                            drawBorder: false
+                            drawBorder: false,
                         }
                     }],
                     xAxes: [{ // titles axes
@@ -161,8 +161,27 @@ export class StatisticPage {
                         }
                     }],
                 },
+                multiTooltipTemplate: function(chartData) {return chartData.datasetLabel + " : " + chartData.value;},
                 legend:{
                     display:false,
+                },
+                responsive: true,
+                animation: {
+                    onComplete: function () {
+                        var ctx = this.chart.ctx;
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "bottom";
+                        var chart = this;
+                        var datasets = this.config.data.datasets;
+
+                        datasets.forEach(function (dataset: Array<any>, i: number) {
+                            ctx.font = "5vw OpenSansNauSemibold";
+                            ctx.fillStyle = "White";
+                            chart.getDatasetMeta(i).data.forEach(function (p: any, j: any) {
+                                ctx.fillText(datasets[i].data[j], p._model.x, p._model.y - 12 );
+                            });
+                        });
+                    }
                 }
             }
 

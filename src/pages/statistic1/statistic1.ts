@@ -45,7 +45,7 @@ export class Statistic1Page {
                     }],
                     xAxes: [{ // titles axes
                         ticks: {
-                            padding: 20
+                            padding: 10
                         },
                         gridLines: {
                             display: false
@@ -55,27 +55,23 @@ export class Statistic1Page {
                 legend:{
                     display:false,
                 },
-                tooltips: {
-                    callbacks: {
-                        title: function(tooltipItem, data) {
-                            return data['labels'][tooltipItem[0]['index']];
-                        },
-                        label: function(tooltipItem, data) {
-                            return data['datasets'][0]['data'][tooltipItem['index']];
-                        },
-                        afterLabel: function(tooltipItem, data) {
-                            var dataset = data['datasets'][0];
-                            var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
-                            return '(' + percent + '%)';
-                        }
-                    },
-                    mode: 'point',
-                    backgroundColor: '#FFF',
-                    titleFontSize: 16,
-                    titleFontColor: '#0066ff',
-                    bodyFontColor: '#000',
-                    bodyFontSize: 14,
-                    displayColors: false
+                responsive: true,
+                animation: {
+                    onComplete: function () {
+                        var ctx = this.chart.ctx;
+                        ctx.textAlign = "center";
+                        ctx.textBaseline = "bottom";
+                        var chart = this;
+                        var datasets = this.config.data.datasets;
+
+                        datasets.forEach(function (dataset: Array<any>, i: number) {
+                            ctx.font = "8vw OpenSansNauSemibold";
+                            ctx.fillStyle = "White";
+                            chart.getDatasetMeta(i).data.forEach(function (p: any, j: any) {
+                                ctx.fillText(datasets[i].data[j], p._model.x, p._model.y );
+                            });
+                        });
+                    }
                 }
             }
 
