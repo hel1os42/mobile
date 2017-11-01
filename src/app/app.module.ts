@@ -71,6 +71,7 @@ import { TimezoneService } from '../providers/timezone.service';
 import { StatisticPage } from "../pages/statistic/statistic";
 import { Statistic1Page } from "../pages/statistic1/statistic1";
 import { LineChartComponent } from '../components/line-chart';
+import { BarChartComponent } from '../components/bar-chart';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { LineChartComponent } from '../components/line-chart';
     FeedPage,
     StatisticPage,
     Statistic1Page,
-    LineChartComponent
+    LineChartComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -193,7 +195,8 @@ import { LineChartComponent } from '../components/line-chart';
     FeedPage,
     StatisticPage,
     Statistic1Page,
-    LineChartComponent
+    LineChartComponent,
+    BarChartComponent
   ],
   providers: [
     StatusBar,
