@@ -1,19 +1,21 @@
-import { Component, ViewChild, Input, OnInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, Input, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
-var array_gradient = [];
+// var array_gradient = [];
 
 @Component({
     selector: 'line-chart',
-    template: `<canvas #barCanvas height="300"></canvas>`,
-    styles: [ 'height: 300' ]
+    template: '<canvas #barCanvas height="300"></canvas>',
 })
 
 export class LineChartComponent {
 
     @ViewChild('barCanvas') barCanvas: ElementRef;
     @Input() labels: string[];
-    @Input() data: string[]; 
+    @Input() data: string[];
     barChart: any;
+
+    constructor() {
+    }
 
     ngAfterViewInit() {
         // /**
@@ -110,7 +112,7 @@ export class LineChartComponent {
          * Colors extends from GradientArray
          */
         // let colors = new GradientArray();
-            let colors = '#FF5C02';
+        let colors = '#FF5C02';
         /**
          * Step by Step
          * @param  {String} "#FFF"
@@ -124,7 +126,7 @@ export class LineChartComponent {
 
             type: 'line',
             data: {
-                labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+                labels: this.labels,
                 datasets: [{
                     data: this.data,
                     fill: false,
@@ -186,4 +188,4 @@ export class LineChartComponent {
         });
 
     }
-    }
+}
