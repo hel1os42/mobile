@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
         <ion-buttons end class="padding-right-3vw">
-            <button (click)="openCreateOffer3Page()" ion-button icon-only color="transparent">
+            <button (click)="openCreateOffer3Page()" [disabled]="!(startTime && finishTime && timeFrames)" ion-button icon-only color="transparent">
                 <span class="font-12 text-333333 no-bold">Next</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
             </button>
@@ -132,7 +132,7 @@
                         </ion-col>
                         <ion-col col-3>
                             <ion-item no-lines>
-                                <ion-checkbox [(ngModel)]="frame.isSelected" (ngModelChange)="checkDays(frame.isSelected)"[disabled]="!frame.from || !frame.to"></ion-checkbox>
+                                <ion-checkbox [(ngModel)]="frame.isSelected" (ngModelChange)="checkDays()"[disabled]="!frame.from || !frame.to"></ion-checkbox>
                             </ion-item>
                         </ion-col>
                     </ion-row>
@@ -143,7 +143,7 @@
     </div>
 
     <p margin>
-        <button (click)="openCreateOffer3Page()" ion-button block text-uppercase color="primary">Next step</button>
+        <button (click)="openCreateOffer3Page()" [disabled]="!(startTime && finishTime && timeFrames)" ion-button block text-uppercase color="primary">Next step</button>
     </p>
 
 </ion-content>
