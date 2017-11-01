@@ -80,7 +80,7 @@
         </ion-list>
     </div>
 
-    <div [hidden]="!isGraphicVisible" class="block2" padding-left padding-right>
+    <div *ngIf="isGraphicVisible" class="block2" padding-left padding-right>
         <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Weekly detailed graphic information</div>
         <ion-list no-lines class="item-block-nau font-0">
             <ion-item>
@@ -88,8 +88,7 @@
                 <span class="font-14 regular text-828282 padding-left-1vw">Users</span>
                 <div text-uppercase class="font-14 regular text-828282 margin-top-2vw margin-bottom-3vw">Viewed my place</div>
                 <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white btn_save">save pdf</button>
-                <canvas #barCanvas height="300"></canvas>
-                <!--<img src="assets/img/statistic/graph.png">-->
+                <line-chart [labels]="labels" [data]="data"></line-chart>
             </ion-item>
         </ion-list>
 
