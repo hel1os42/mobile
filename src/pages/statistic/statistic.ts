@@ -1,9 +1,7 @@
-import { Chart } from 'chart.js';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatePeriod } from '../../models/datePeriod';
 import { NavController } from 'ionic-angular';
 import { Statistic1Page } from '../statistic1/statistic1';
-var array_gradient = [];
 
 @Component({
     selector: 'page-statistic',
@@ -11,9 +9,6 @@ var array_gradient = [];
 })
 export class StatisticPage {
 
-    // @ViewChild('barCanvas') barCanvas;
-
-    barChart: any;
     segment = 'week';
     activeSegment = 'all';
     isGraphicVisible = false;
