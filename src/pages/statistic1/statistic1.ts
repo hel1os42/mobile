@@ -10,6 +10,7 @@ export class Statistic1Page {
 
     labels = [['PERIOD 1', '01/07/2017'], ['PERIOD 2', '01/07/2017']];
     data = [435, 335];
+    segment = "realdata";
 
     constructor() {
     }
