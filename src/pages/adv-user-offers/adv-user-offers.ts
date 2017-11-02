@@ -36,10 +36,10 @@ export class AdvUserOffersPage {
 
     }
 
-    segmentChanged($event) {
+    filterOffers() {
         this.page = 1;
         this.isFilterByDate = false;
-        switch ($event.value) {
+        switch (this.segment) {
             case 'all':
                 this.place.getOffers(this.page)
                     .subscribe(resp => {
@@ -71,7 +71,8 @@ export class AdvUserOffersPage {
         }
     }
 
-    filterByDate() {
+    filterOffersByDate() {
+        this.segment = 'active';
         this.page = 1;
         this.isFilterByDate = true;
         this.dates = DateTimeUtils.getFilterDates(this.date);

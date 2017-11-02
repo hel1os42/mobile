@@ -19,13 +19,13 @@
             <a>
                 <img src="assets/img/user_offers/icon_right.svg">
             </a>
-            <ion-datetime doneText="Ok" [(ngModel)]="date" (ngModelChange)="filterByDate()" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY"
+            <ion-datetime doneText="Ok" [(ngModel)]="date" (ngModelChange)="filterOffersByDate()" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY"
                 min="2017-10-01" max="2021-12-31">
             </ion-datetime>
         </a>
     </ion-item>
-    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)" text-uppercase margin-top class="nau-segment">
-        <ion-segment-button value="all">
+    <ion-segment [(ngModel)]="segment" (click)="filterOffers()" text-uppercase margin-top class="nau-segment">
+        <ion-segment-button  value="all">
             All
         </ion-segment-button>
         <ion-segment-button value="featured">
@@ -59,7 +59,7 @@
                 </div>
             </ion-item>
             <ion-item-options side="right">
-                <button (click)="openEditOffer(offer)" ion-button class="bg-3E4B5D">
+                <button (click)="openEditOffer(offer)" [disabled]="offer.status == 'deactive'" ion-button class="bg-3E4B5D">
                     <img src="assets/img/adv-user-offers/edit.svg">
                     <div text-uppercase class="font-12 regular text-white">Edit</div>
                 </button>
