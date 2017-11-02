@@ -37,6 +37,8 @@ export class CreateOffer2Page {
         this.picture_url = this.navParams.get('picture');
         this.todayDate = new Date();
         let days = DateTimeUtils.ALL_DAYS;
+        this.startDate = this.offer.id ? this.offer.start_date.date.slice(0, 10) : undefined;
+        this.finishDate = this.offer.id ? this.offer.finish_date.date.slice(0, 10) : undefined;
 
         for (let i = 0; i < 7; i++) {
             this.timeFrames[i] = {
@@ -47,8 +49,6 @@ export class CreateOffer2Page {
             };
         }
         if (this.offer.id) {
-            this.startDate = this.offer.start_date.date.slice(0, 10);
-            this.finishDate = this.offer.finish_date.date.slice(0, 10);
             // let timeframesData = [
                 //{ from: "10:00:00.000000+0300", to: "23:00:00.000000+0300", days: ["tu", 'we', 'th', 'fr', "sa", "su"] },
             // ];
@@ -111,6 +111,7 @@ export class CreateOffer2Page {
 
     toggleVisible() {
         this.isDetailedSettingsVisible = !this.isDetailedSettingsVisible;
+        this.checkDays();
     }
 
     removeTime(event, isSelected) {
@@ -126,7 +127,7 @@ export class CreateOffer2Page {
         }
     }
 
-    checkDays(isSelected) {
+    checkDays() {
         let day = DateTimeUtils;
         let daysFrame = this.timeFrames.filter(i => i.isSelected).map(j => j.days.slice(0, 2));
         if (daysFrame.length == 2 || daysFrame.length == 5) {
