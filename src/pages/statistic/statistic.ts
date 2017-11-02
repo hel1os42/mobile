@@ -15,6 +15,7 @@ export class StatisticPage {
     isDateFilterVisible = false;
     periods: DatePeriod[] = [];
     period = new DatePeriod;
+    lastPeriod: DatePeriod;
     labels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     data = [0, 10, 17, 34, 29, 20, 11];
 
@@ -30,6 +31,7 @@ export class StatisticPage {
             }
         };
         this.periods.push(this.period);
+        this.lastPeriod = this.periods[this.periods.length - 1];
     }
 
     showGraphic() {
@@ -72,6 +74,7 @@ export class StatisticPage {
                 time: '',
             }
         });
+        this.lastPeriod = this.periods[this.periods.length - 1];
     }
 
     showPeriodResult() {
