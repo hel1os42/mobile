@@ -36,8 +36,8 @@ export class StatisticPage {
         this.isGraphicVisible = true;
     }
 
-    segmentChanged($event) {
-        switch ($event.value) {
+    filterOffers() {
+        switch (this.segment) {
             case 'today':
                 this.isDateFilterVisible = false;
                 this.isGraphicVisible = false;
