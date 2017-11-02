@@ -30,8 +30,8 @@
     "@types/lodash": "4.14.74",
     "chart.js": "2.7.1",
     "cordova-android": "6.2.3",
+    "cordova-ios": "4.5.3",
     "cordova-plugin-compat": "1.0.0",
-    "cordova-plugin-console": "1.0.5",
     "cordova-plugin-device": "1.1.6",
     "cordova-plugin-file": "4.0.0",
     "cordova-plugin-file-transfer": "1.6.3",
@@ -58,7 +58,6 @@
   "description": "nau",
   "cordova": {
     "plugins": {
-      "cordova-plugin-console": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-statusbar": {},
@@ -68,10 +67,14 @@
       "cordova-plugin-telerik-imagepicker": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
       },
-      "cordova-plugin-file-transfer": {}
+      "cordova-plugin-file-transfer": {},
+      "com.synconset.imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
+      }
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
