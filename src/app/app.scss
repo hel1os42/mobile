@@ -859,7 +859,12 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 /* SEGMENT STATISTIC */
+.statistic-segment.segment-ios{
+    display: table;
+}
+
 .statistic-segment.segment-ios .segment-button{
+    display: table-cell;
     color: #828282;
     border-left: none;
     border-right: none;
@@ -867,6 +872,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-bottom: 1px solid #828282;
     font-family: 'OpenSansNauSemibold';
     font-size: 3.2vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
 }
 
 .statistic-segment.segment-ios .segment-button.segment-activated{
@@ -882,9 +889,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-left: 1px solid #828282;
     border-top: 1px solid #828282;
     border-bottom: 1px solid #828282;
+    width: 21.8vw;
+    padding-left: 2vw;
+    padding-right: 0;
 }
 
 .statistic-segment.segment-ios .segment-button:last-of-type {
+    width: 12.4vw;
     border-top-left-radius: 0;
     border-top-right-radius: 100vw;
     border-bottom-right-radius: 100vw;

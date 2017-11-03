@@ -9,7 +9,7 @@ import { Statistic1Page } from '../statistic1/statistic1';
 })
 export class StatisticPage {
 
-    segment = 'week';
+    segment = 'today';
     activeSegment = 'all';
     isGraphicVisible = false;
     isDateFilterVisible = false;

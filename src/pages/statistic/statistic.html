@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title *ngIf="!isDateFilterVisible">Statistic</ion-title>
-        <ion-title *ngIf="isDateFilterVisible">Date filte</ion-title>
+        <ion-title *ngIf="isDateFilterVisible">Date filter</ion-title>
     </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
@@ -16,8 +16,7 @@
         </ion-segment-button>
     </ion-segment>
 
-    <ion-segment padding-left padding-right [(ngModel)]="segment" (click)="filterOffers()" text-uppercase margin-top
-        class="statistic-segment">
+    <ion-segment padding-left padding-right [(ngModel)]="segment" (click)="filterOffers()" text-uppercase margin-top class="statistic-segment">
         <ion-segment-button value="today">
             Today
         </ion-segment-button>
