@@ -186,7 +186,7 @@
                     </ion-row>
                 </ion-grid>
 
-                <div *ngIf="periods.length > 1" text-center text-uppercase class="font-14 text-BDBDBD regular margin-top-3vw margin-bottom-3vw">Compare with</div>
+                <div *ngIf="period != lastPeriod" text-center text-uppercase class="font-14 text-BDBDBD regular margin-top-3vw margin-bottom-3vw">Compare with</div>
             </div>
 
             <button (click)="showPeriodResult()" class="margin-top-3vw extrabold" color="primary" ion-button block>Show results</button>
