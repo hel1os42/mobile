@@ -34,9 +34,9 @@ export class PlaceService {
         return this.api.post('advert/offers', offer);
     }
 
-    // putOffer(offer: Offer, offer_id: string) {
-    //     return this.api.put(`offers/${offer_id}`, offer);
-    // }to do
+    putOffer(offer: Offer, offer_id: string) {
+        return this.api.put(`advert/offers/${offer_id}`, offer);
+    }
 
     setRedeemCode(code: string) {
         return this.api.post('redemptions', { code: code });
