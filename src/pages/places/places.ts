@@ -111,8 +111,13 @@ export class PlacesPage {
     loadCompanies(categoryId, search, page) {
         this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search, page)
             .subscribe(companies => {
-                this.companies = companies.data.filter(p => p.offers_count > 0);
+                // this.companies = companies.data.filter(p => p.offers_count > 0);//temporaty companies filter
                 // this.companies = companies.data;
+                //temporary offers list filter
+                let companiesList = companies.data.filter(p => p.offers_count > 0);
+                let i = 0;
+                this.nextPlace(i, companiesList);//
+
                 this.mapsAPILoader.load()
                     .then(() => {
                         if (this.companies.length == 0 && this.coords) {
@@ -224,6 +229,24 @@ export class PlacesPage {
         else {
             infiniteScroll.complete();
         }
+    }
+
+    countPlaceActiveOffers(offersList) {//temporary offers list filter
+        let activeOffersList = offersList.filter(p => p.status == 'active');
+        let activeOffersCount = activeOffersList.length;
+        return activeOffersCount;
+    }
+
+    nextPlace(i, companiesList) {//temporary offers list filter
+        if (i < companiesList.length) {
+            this.offers.getPlaceOffers(companiesList[i].id)
+                .subscribe(resp => {
+                    companiesList[i].offers_count = this.countPlaceActiveOffers(resp.data);
+                    i++;
+                    this.nextPlace(i, companiesList);
+                })
+        }
+        this.companies = companiesList.filter(p => p.offers_count > 0);
     }
 
 }
