@@ -113,11 +113,13 @@ export class PlacesPage {
             .subscribe(companies => {
                 // this.companies = companies.data.filter(p => p.offers_count > 0);//temporaty companies filter
                 // this.companies = companies.data;
+                
                 //temporary offers list filter
                 let companiesList = companies.data.filter(p => p.offers_count > 0);
                 let i = 0;
-                this.nextPlace(i, companiesList);//
-
+                this.companies = [];
+                this.nextPlace(i, companiesList);
+                //
                 this.mapsAPILoader.load()
                     .then(() => {
                         if (this.companies.length == 0 && this.coords) {
@@ -242,11 +244,13 @@ export class PlacesPage {
             this.offers.getPlaceOffers(companiesList[i].id)
                 .subscribe(resp => {
                     companiesList[i].offers_count = this.countPlaceActiveOffers(resp.data);
+                    if (companiesList[i].offers_count > 0) {
+                        this.companies.push(companiesList[i]);
+                    }
                     i++;
                     this.nextPlace(i, companiesList);
                 })
         }
-        this.companies = companiesList.filter(p => p.offers_count > 0);
     }
 
 }
