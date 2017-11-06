@@ -38,6 +38,10 @@ export class PlaceService {
         return this.api.put(`advert/offers/${offer_id}`, offer);
     }
 
+    putOfferStatus(status: {}, offer_id: string) {
+        return this.api.put(`advert/offers/${offer_id}/status`, status);
+    }
+
     setRedeemCode(code: string) {
         return this.api.post('redemptions', { code: code });
     }
