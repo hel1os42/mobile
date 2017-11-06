@@ -55,7 +55,7 @@
                         <br>{{ offer.created_at.slice(0, 10) }}</div>
                 </div>
                 <div item-end>
-                    <ion-toggle [checked]="offer.status == 'active'"></ion-toggle>
+                    <ion-toggle (ionChange)="editStatus(offer)" [checked]="offer.status == 'active'"></ion-toggle>
                 </div>
             </ion-item>
             <ion-item-options side="right">
