@@ -8,8 +8,6 @@ import * as _ from 'lodash';
 import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimezoneService } from '../../providers/timezone.service';
 import { Offer } from '../../models/offer';
-import { OfferDate } from '../../models/OfferDate';
-
 
 @Component({
     selector: 'page-create-offer-2',
@@ -157,14 +155,8 @@ export class CreateOffer2Page {
                 timezoneStr = DateTimeUtils.getTimezone(resp);
                 let dateMask = DateTimeUtils.ZERO_DATETIME_SUFFIX;
                 let timeMask = DateTimeUtils.ZERO_TIME_SUFFIX;
-                if (this.offer.id) {
-                    this.offer.start_date.date = this.startDate + dateMask + timezoneStr;
-                    this.offer.finish_date.date = this.finishDate + dateMask + timezoneStr;
-                }
-                else {
                     this.offer.start_date = this.startDate + dateMask + timezoneStr;
                     this.offer.finish_date = this.finishDate + dateMask + timezoneStr;
-                }
 
                 let selected = this.timeFrames.filter(p => p.isSelected);
                 this.offer.timeframes = selected.map(p => {

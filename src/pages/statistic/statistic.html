@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title *ngIf="!isDateFilterVisible">Statistic</ion-title>
-        <ion-title *ngIf="isDateFilterVisible">Date filte</ion-title>
+        <ion-title *ngIf="isDateFilterVisible">Date filter</ion-title>
     </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
@@ -16,8 +16,7 @@
         </ion-segment-button>
     </ion-segment>
 
-    <ion-segment padding-left padding-right [(ngModel)]="segment" (ionChange)="segmentChanged($event)" text-uppercase margin-top
-        class="statistic-segment">
+    <ion-segment padding-left padding-right [(ngModel)]="segment" (click)="filterOffers()" text-uppercase margin-top class="statistic-segment">
         <ion-segment-button value="today">
             Today
         </ion-segment-button>
@@ -186,49 +185,8 @@
                     </ion-row>
                 </ion-grid>
 
-                <div *ngIf="periods.length > 1" text-center text-uppercase class="font-14 text-BDBDBD regular margin-top-3vw margin-bottom-3vw">Compare with</div>
+                <div *ngIf="period != lastPeriod" text-center text-uppercase class="font-14 text-BDBDBD regular margin-top-3vw margin-bottom-3vw">Compare with</div>
             </div>
-            <!-- <ion-grid class="text-3E4B5D font-16 bg-gray detailed margin-bottom-10" padding-left>
-                <ion-row>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <div class="text-BDBDBD font-16 regular">from</div>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6>
-                        <ion-item class="item-date" detail-push no-lines>
-                            <ion-datetime class="text-3E4B5D font-16 semibold" displayFormat="DDD/MM/DD/YYYY" doneText="Ok">
-                            </ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime [placeholder]="to" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-            <ion-grid class="text-3E4B5D font-16 bg-gray detailed" padding-left>
-                <ion-row>
-                    <ion-col col-3>
-                        <ion-item no-lines>
-                            <div class="text-BDBDBD font-16 regular">to</div>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-6>
-                        <ion-item class="item-date" detail-push no-lines>
-                            <ion-datetime class="text-3E4B5D font-16 semibold" displayFormat="DDD/MM/DD/YYYY" doneText="Ok">
-                            </ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-3>
-                        <ion-item detail-push no-lines>
-                            <ion-datetime [placeholder]="to" doneText="Ok" displayFormat="HH:mm" class="text-3E4B5D font-16 semibold"></ion-datetime>
-                        </ion-item>
-                    </ion-col>
-                </ion-row>
-            </ion-grid> -->
 
             <button (click)="showPeriodResult()" class="margin-top-3vw extrabold" color="primary" ion-button block>Show results</button>
         </div>

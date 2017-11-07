@@ -36,10 +36,10 @@ export class AdvUserOffersPage {
 
     }
 
-    segmentChanged($event) {
+    filterOffers() {
         this.page = 1;
         this.isFilterByDate = false;
-        switch ($event.value) {
+        switch (this.segment) {
             case 'all':
                 this.place.getOffers(this.page)
                     .subscribe(resp => {
@@ -71,7 +71,8 @@ export class AdvUserOffersPage {
         }
     }
 
-    filterByDate() {
+    filterOffersByDate() {
+        this.segment = 'active';
         this.page = 1;
         this.isFilterByDate = true;
         this.dates = DateTimeUtils.getFilterDates(this.date);
@@ -92,6 +93,21 @@ export class AdvUserOffersPage {
             .subscribe(resp => {
                 this.nav.push(CreateOfferPage, { offer: resp });
             })
+    }
+
+    editStatus(offer) {
+        let status = { 
+            status: (offer.status == 'active') ? 'deactive' : 'active'};
+        this.place.putOfferStatus(status, offer.id)
+            .subscribe(resp => {
+                if(this.isFilterByDate) {
+                    this.filterOffersByDate();
+                }
+                else {
+                    this.filterOffers();
+                }
+            })
+        debugger
     }
 
     doInfinite(infiniteScroll) {

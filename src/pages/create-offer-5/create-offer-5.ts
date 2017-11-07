@@ -4,6 +4,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { PlaceService } from '../../providers/place.service';
 import { ApiService } from '../../providers/api.service';
 import { Offer } from '../../models/offer';
+import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -39,11 +40,11 @@ export class CreateOffer5Page {
     createOffer() {
         this.offer.reward = parseInt(this.reward);
         this.offer.reserved = parseInt(this.reserved);
-        // if (this.offer.id) {
-        //     this.place.putOffer(this.offer, this.offer.id)
-        //         .subscribe(resp => this.nav.popToRoot())
-        // }to do
-        // else {
+        if (this.offer.id) {
+            this.place.putOffer(this.offer, this.offer.id)
+                .subscribe(resp => this.nav.setRoot(AdvTabsPage));
+        }
+        else {
             this.place.setOffer(this.offer)
                 .subscribe(resp => {
                     // if(this.picture_url) {
@@ -58,4 +59,4 @@ export class CreateOffer5Page {
         }
     }
 
-// }
+}

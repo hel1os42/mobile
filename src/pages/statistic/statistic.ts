@@ -9,12 +9,13 @@ import { Statistic1Page } from '../statistic1/statistic1';
 })
 export class StatisticPage {
 
-    segment = 'week';
+    segment = 'today';
     activeSegment = 'all';
     isGraphicVisible = false;
     isDateFilterVisible = false;
     periods: DatePeriod[] = [];
     period = new DatePeriod;
+    lastPeriod: DatePeriod;
     labels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     data = [0, 10, 17, 34, 29, 20, 11];
 
@@ -30,14 +31,15 @@ export class StatisticPage {
             }
         };
         this.periods.push(this.period);
+        this.lastPeriod = this.periods[this.periods.length - 1];
     }
 
     showGraphic() {
         this.isGraphicVisible = true;
     }
 
-    segmentChanged($event) {
-        switch ($event.value) {
+    filterOffers() {
+        switch (this.segment) {
             case 'today':
                 this.isDateFilterVisible = false;
                 this.isGraphicVisible = false;
@@ -72,6 +74,7 @@ export class StatisticPage {
                 time: '',
             }
         });
+        this.lastPeriod = this.periods[this.periods.length - 1];
     }
 
     showPeriodResult() {
