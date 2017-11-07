@@ -95,6 +95,21 @@ export class AdvUserOffersPage {
             })
     }
 
+    editStatus(offer) {
+        let status = { 
+            status: (offer.status == 'active') ? 'deactive' : 'active'};
+        this.place.putOfferStatus(status, offer.id)
+            .subscribe(resp => {
+                if(this.isFilterByDate) {
+                    this.filterOffersByDate();
+                }
+                else {
+                    this.filterOffers();
+                }
+            })
+        debugger
+    }
+
     doInfinite(infiniteScroll) {
         this.page = this.page + 1;
         if (this.page <= this.lastPage) {
