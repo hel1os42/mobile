@@ -30,7 +30,7 @@
         <ion-input class="bg-gray margin-bottom-small" type="text" placeholder="Your Name" [(ngModel)]="user.name" name="name1"></ion-input>
         <div class="input_relative">
           <ion-input class="bg-gray margin-bottom-small" type="email" placeholder="Your E-mail" [(ngModel)]="user.email" name="email"></ion-input>
-          <span *ngIf="user.email" class="text-gray">
+          <span *ngIf="user.email" class="text-gray icon_info">
             <a (click)="toggleVisibleInfo()">
               <img src="assets/img/create_user_profile/info.svg">
             </a>
@@ -52,7 +52,7 @@
     </ion-item>
     <ion-item *ngIf="visibleInfo" no-lines>
       <div item-start>
-        <img src="assets/img/create_user_profile/img_2.svg">
+        <img class="img_msg" src="assets/img/create_user_profile/img_2.svg">
       </div>
       <div item-end text-left class="item-content">
         <div class="bold font-16 text-3E4B5D">Confirm Email Address</div>
@@ -66,33 +66,33 @@
   </div>
 
   <div class="block-lines">
-    
-    <a class="bg-gray margin-bottom-small" ion-item detail-push>
+
+    <ion-item class="bg-gray margin-bottom-small" ion-item detail-push>
       <ion-input class="text-3E4B5D" [(ngModel)]="facebookName" placeholder="Facebook"></ion-input>
       <div item-end>
         <ion-label *ngIf="facebookName" class="label label-ios added font-75">
           <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
         <ion-label *ngIf="!facebookName" class="label label-ios points font-75">+ 3 points</ion-label>
       </div>
-    </a>
+    </ion-item>
 
-    <a class="bg-gray margin-bottom-small" ion-item detail-push>
+    <ion-item class="bg-gray margin-bottom-small" ion-item detail-push>
       <ion-input class="text-3E4B5D" [(ngModel)]="instagramName" placeholder="Instagram"></ion-input>
       <div item-end>
         <ion-label *ngIf="instagramName" class="label label-ios added font-75">
           <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
         <ion-label *ngIf="!instagramName" class="label label-ios points font-75">+ 3 points</ion-label>
       </div>
-    </a>
+    </ion-item>
 
-    <a class="bg-gray" ion-item detail-push>
+    <ion-item class="bg-gray" ion-item detail-push>
       <ion-input class="text-3E4B5D" [(ngModel)]="twitterName" placeholder="Twitter"></ion-input>
       <div item-end>
         <ion-label *ngIf="twitterName" class="label label-ios added font-75">
           <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
         <ion-label *ngIf="!twitterName" class="label label-ios points font-75">+ 3 points</ion-label>
       </div>
-    </a>
+    </ion-item>
 
   </div>
 
@@ -110,7 +110,7 @@
 
   <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }">
     <div class="block-lines">
-      <a ion-item detail-push class="bg-gray margin-bottom-small">
+      <ion-item detail-push class="bg-gray margin-bottom-small">
         <ion-select [(ngModel)]="gender" placeholder="Gender" class="gender_select" interface="action-sheet">
           <ion-option value="f">Female</ion-option>
           <ion-option value="m">Male</ion-option>
@@ -121,25 +121,25 @@
             <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
           <ion-label *ngIf="!gender" class="label label-ios points font-75">+ 5 points</ion-label>
         </div>
-      </a>
+      </ion-item>
 
-      <a ion-item detail-push class="bg-gray margin-bottom-small">
+      <ion-item detail-push class="bg-gray margin-bottom-small">
         <ion-input [(ngModel)]="age" placeholder="Age"></ion-input>
         <div item-end>
           <ion-label *ngIf="age" class="label label-ios added font-75">
             <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
           <ion-label *ngIf="!age" class="label label-ios points font-75">+ 9 points</ion-label>
         </div>
-      </a>
+      </ion-item>
 
-      <a ion-item detail-push class="bg-gray margin-bottom-small">
+      <ion-item detail-push class="bg-gray margin-bottom-small">
         <ion-input [(ngModel)]="income" placeholder="Income"></ion-input>
         <div item-end>
           <ion-label *ngIf="income" class="label label-ios added font-75">
             <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
           <ion-label *ngIf="!income" class="label label-ios points font-75">+ 9 points</ion-label>
         </div>
-      </a>
+      </ion-item>
     </div>
     <p margin text-uppercase class="font-14 text-4F4F4F">Confirm your location:</p>
     <div class="block-map">
