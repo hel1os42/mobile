@@ -7,9 +7,10 @@ import { Component } from '@angular/core';
 export class FeedPage {
 
     isVisibleSearch = false;
+    segment: string;
 
     constructor() {
-
+        this.segment = 'all';
     }
 
     toggleSearch() {
