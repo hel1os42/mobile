@@ -100,15 +100,16 @@
     <a (click)="toggleSelect()">
       <div class="select-block-desc text-828282 font-14">
         SHOW ADDITIONAL OPTIONS (More points)
-        <ion-icon *ngIf="isSelectVisible" name="arrow-up"></ion-icon>
-        <ion-icon *ngIf="!isSelectVisible" name="arrow-down"></ion-icon>
+        <ion-icon *ngIf="isSelectVisible" name="arrow-up" class="icon"></ion-icon>
+        <ion-icon *ngIf="!isSelectVisible" name="arrow-down" class="icon"></ion-icon>
       </div>
     </a>
 
     <p class="select-block-desc text-828282 font-12">If you will fill additional information about yourself it helps us to recommend best offers for you.</p>
   </div>
 
-  <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }">
+  <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
+  <div *ngIf="isSelectVisible">
     <div class="block-lines">
       <ion-item detail-push class="bg-gray margin-bottom-small">
         <ion-select [(ngModel)]="gender" placeholder="Gender" class="gender_select" interface="action-sheet">
