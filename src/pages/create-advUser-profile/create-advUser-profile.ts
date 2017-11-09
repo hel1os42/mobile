@@ -35,7 +35,6 @@ export class CreateAdvUserProfilePage {
     address: string;
     picture_url: string;
     cover_url: string;
-    noChildren: boolean;
 
     constructor(
         private location: LocationService,
@@ -119,7 +118,6 @@ export class CreateAdvUserProfilePage {
         this.offer.getSubCategories(this.selectedCategory.id)
             .subscribe(resp => {
                 this.childCategories = resp.children;
-                this.noChildren = this.childCategories == [] ? true : false;
                 let popover = this.popoverCtrl.create(CreateAdvUserProfileChildCategoryPopover, {
                     categoryName: this.selectedCategory.name,
                     categories: this.childCategories.map(p => {
