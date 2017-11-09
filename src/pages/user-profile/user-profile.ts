@@ -8,6 +8,7 @@ import { UserAchievePage } from "../user-achieve/user-achieve";
 import { UserOffersPage } from "../user-offers/user-offers";
 import { UserNauPage } from "../user-nau/user-nau";
 import { UserUsersPage } from "../user-users/user-users";
+import { AuthService } from '../../providers/auth.service';
 
 @Component({
     selector: 'page-user-profile',
@@ -22,7 +23,8 @@ export class UserProfilePage {
 
     constructor(
         private profile: ProfileService,
-        private nav: NavController) {
+        private nav: NavController,
+        private auth: AuthService) {
         
         this.profile.getWithAccounts()
             .subscribe(resp => {
@@ -57,7 +59,8 @@ export class UserProfilePage {
     }
     
     logout() {
-        //this.auth.logout();
+        if (confirm('Are you sure?'))
+            this.auth.logout();
     }
 
     slideNext() {
@@ -67,4 +70,5 @@ export class UserProfilePage {
     slidePrev() {
         this.slides.slidePrev();
     }
+    
 }
