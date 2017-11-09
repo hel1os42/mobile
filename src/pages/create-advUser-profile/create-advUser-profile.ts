@@ -10,7 +10,7 @@ import { SelectedCategory } from '../../models/selectedCategory';
 import { LatLngLiteral } from '@agm/core';
 import { AgmCoreModule } from '@agm/core';
 import { ChildCategory } from '../../models/childCategory';
-import {CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
+import { CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
 import { PlaceCreate } from '../../models/placeCreate';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { PlaceService } from '../../providers/place.service';
@@ -47,10 +47,6 @@ export class CreateAdvUserProfilePage {
         private imagePicker: ImagePicker,
         private api: ApiService) {
 
-    }
-
-    ionViewDidLoad() {
-
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -62,6 +58,7 @@ export class CreateAdvUserProfilePage {
                 this.message = error.message;
                 console.log(this.message);
             });
+
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -176,7 +173,7 @@ export class CreateAdvUserProfilePage {
         this.company.longitude = this.coords.lng;
         this.company.address = this.address;
         this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
-      
+
         this.company.radius = 30000;
 
         this.placeService.set(this.company)
@@ -193,6 +190,6 @@ export class CreateAdvUserProfilePage {
                     coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
                 });
             })
-        
+
     }
 }
