@@ -75,11 +75,11 @@
         <div>{{ address }}</div>
     </div>
 
-    <div class="block-map">
-        <div *ngIf="!coords.lat">Detecting your location...</div>
-        <agm-map *ngIf="coords.lat" [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+    <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">Detecting your location...</div>
+    <div *ngIf="coords.lat" class="block-map">
+        <agm-map [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
         </agm-map>
-        <div *ngIf="coords.lat" id="marker"></div>
+        <div id="marker"></div>
     </div>
 
     <p margin>
