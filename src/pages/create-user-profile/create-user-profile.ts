@@ -44,6 +44,14 @@ export class CreateUserProfilePage {
 
         this.profile.get()
             .subscribe(resp => this.user = resp);
+        
+        this.location.getByIp()
+            .subscribe(resp => {
+                this.coords = {
+                    lat: resp.latitude,
+                    lng: resp.longitude
+                };
+            })
 
         this.location.get()
             .then((resp) => {

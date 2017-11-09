@@ -100,7 +100,7 @@ export class SettingsPage {
     toggleAdvMode() {
         this.isChangeMode = !this.isChangeMode;
         if (this.isAdvMode && !this.nextPage) {
-            let popover = this.popoverCtrl.create(SettingsPopover, { page: CreateAdvUserProfilePage});
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: CreateAdvUserProfilePage, latitude: this.coords.lat, longitude: this.coords.lng});
             popover.present();
         }
         return this.isAdvMode;
@@ -117,7 +117,7 @@ export class SettingsPage {
                 }
                 else {
                     if (this.isAdvMode && !this.nextPage) {
-                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true});
+                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true, latitude: this.coords.lat, longitude: this.coords.lng});
                     }
                     else 
                     if (this.isAdvMode) {
