@@ -75,15 +75,15 @@
         <div>{{ address }}</div>
     </div>
 
-    <div *ngIf="coords.lat" class="block-map">
+    <div class="block-map">
         <div *ngIf="!coords.lat">Detecting your location...</div>
-        <agm-map [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+        <agm-map *ngIf="coords.lat" [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
         </agm-map>
-        <div id="marker"></div>
+        <div *ngIf="coords.lat" id="marker"></div>
     </div>
 
     <p margin>
-        <button (click)="createAccount()" ion-button block color="primary">Create account</button>
+        <button (click)="createAccount()" [disabled]="!company.name || !company.description || !selectedChildCategories || !coords" ion-button block color="primary">Create account</button>
     </p>
 
 </ion-content>

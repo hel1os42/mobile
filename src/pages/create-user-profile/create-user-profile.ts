@@ -34,7 +34,6 @@ export class CreateUserProfilePage {
     income;
     picture_url: string;
 
-
     constructor(private nav: NavController,
         private location: LocationService,
         private changeDetectorRef: ChangeDetectorRef,
@@ -45,6 +44,18 @@ export class CreateUserProfilePage {
 
         this.profile.get()
             .subscribe(resp => this.user = resp);
+
+        this.location.get()
+            .then((resp) => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+            })
+            .catch((error) => {
+                this.message = error.message;
+                console.log(this.message);
+            });
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -73,20 +84,6 @@ export class CreateUserProfilePage {
             (this.twitterName ? +3 : +0) + (this.instagramName ? +3 : +0) +
             (this.gender ? +5 : +0) + (this.age ? +9 : +0) + (this.income ? +9 : +0);
         return points;
-    }
-
-    ionViewDidLoad() {
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-            })
-            .catch((error) => {
-                this.message = error.message;
-                console.log(this.message);
-            });
     }
 
     toggleSelect() {

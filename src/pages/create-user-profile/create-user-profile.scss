@@ -22,8 +22,13 @@ page-create-user-profile{
     margin-bottom: 0;
   }
 
-  .icon {
-    line-height: 1.1;
+  .icon-arrow {
+      line-height: 0.7;
+      float: right;
+      padding-right: 2.3vw;
+      color: #c8c7cc;
+      font-weight: 500;
+      font-size: 8vw;
   }
 
   .points{
@@ -33,12 +38,17 @@ page-create-user-profile{
     padding-right: 2vw;
     padding-top: 1vw;
     padding-bottom: 1vw;
+    border-radius: 0.7vw;
   }
 
   .added{
     background: #3E4B5D;
     color: #fff;
-    padding: 3px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    border-radius: 0.7vw;
   }
 
   .block-name.item-ios [item-right], .item-ios [item-end], .block-people.item-ios [item-right], .item-ios [item-end]{
@@ -75,12 +85,16 @@ page-create-user-profile{
     position: relative;
   }
 
-  .input_relative span{
-    position: absolute;
-    right: 0;
-    height: 43px;
-    top: 0;
-    padding: 10px;
+  .icon_info{
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 2.7vw 4vw;
+  }
+
+  .icon_info a{
+      width: 7vw;
+      height: 7vw;
   }
 
   .input_relative span img, .popover_not img{
@@ -165,5 +179,21 @@ page-create-user-profile{
         height: auto;
         margin-right: 7vw;
         margin-left: 2.3vw;
+    }
+
+    .img_msg{
+        width: 10.4vw;
+        height: auto;
+        margin-right: 7vw;
+        margin-left: 2.3vw;
+        margin-top: -3.5vw;
+    }
+
+    .item-ios[detail-push] .item-inner{
+        padding-right: 14vw;
+    }
+
+    .select-ios .select-icon{
+        display: none;
     }
 }

@@ -113,10 +113,13 @@ export class SettingsPage {
         // this.profile.put(this.user)
             // .subscribe(resp => {to do
                 if (!this.isChangeMode) {
-                    this.isAdvMode = !this.isAdvMode;
                     this.nav.pop();
                 }
                 else {
+                    if (this.isAdvMode && !this.nextPage) {
+                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true});
+                    }
+                    else 
                     if (this.isAdvMode) {
                         this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true});
                     }
