@@ -98,7 +98,7 @@ export class AdvUserOffersPage {
     editStatus(offer) {
         let status = { 
             status: (offer.status == 'active') ? 'deactive' : 'active'};
-        this.place.putOfferStatus(status, offer.id)
+        this.place.changeOfferStatus(status, offer.id)
             .subscribe(resp => {
                 if(this.isFilterByDate) {
                     this.filterOffersByDate();
