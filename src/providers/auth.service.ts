@@ -4,6 +4,8 @@ import { Login } from '../models/login';
 import { ApiService } from './api.service';
 import { TokenService } from './token.service';
 
+declare var cookieMaster;
+
 @Injectable()
 export class AuthService {
 
@@ -19,6 +21,7 @@ export class AuthService {
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
         setInterval(() => {
+            this.clearCookies();
             if (this.isLoggedIn()) {
                 this.api.get('auth/token', false)
                     .subscribe(
@@ -53,13 +56,14 @@ export class AuthService {
     }
 
     login(login: Login) {
-        this.deleteAllCookies();
+        this.clearCookies();
         let obs = this.api.post('auth/login', login);
         obs.subscribe(token => this.token.set(token));
         return obs;
     }
 
     logout() {
+        this.clearCookies();
         this.token.remove();
     }
 
@@ -67,14 +71,8 @@ export class AuthService {
         return phone.slice(-6);//to do
     }
 
-    deleteAllCookies() {
-        let cookies = document.cookie.split(";");
-    
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i];
-            let eqPos = cookie.indexOf("=");
-            let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        }
+    clearCookies() {
+        if (typeof cookieMaster !== 'undefined')
+            cookieMaster.clearCookies();
     }
 }
