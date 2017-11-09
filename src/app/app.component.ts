@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from "../pages/tabs/tabs";
@@ -20,7 +20,8 @@ export class MyApp {
     rootPage: any;
 
     constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-        private auth: AuthService) {
+        private auth: AuthService,
+        private app: App) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -33,6 +34,8 @@ export class MyApp {
             //this.rootPage = StatisticPage;
         });
 
-        this.auth.onLogout.subscribe(() => this.rootPage = LoginPage);
+        this.auth.onLogout.subscribe(() => {
+            this.app.getRootNav().setRoot(LoginPage);
+        });
     }
 }
