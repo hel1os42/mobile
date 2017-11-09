@@ -64,4 +64,5 @@
     <plugin name="com.synconset.imagepicker">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign offer images" />
     </plugin>
+    <plugin name="com.cordova.plugins.cookiemaster" spec="1.0.0" />
 </widget>
