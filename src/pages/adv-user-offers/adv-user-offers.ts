@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CreateOfferPage } from '../create-offer/create-offer';
@@ -25,49 +26,35 @@ export class AdvUserOffersPage {
         private place: PlaceService,
         private timezone: TimezoneService) {
 
-        this.place.getOffers(this.page)
-            .subscribe(resp => {
-                this.offers = resp.data;
-                this.total = resp.total;
-                this.lastPage = resp.last_page;
-            });
+        this.processOffers(this.place.getOffers(this.page));
 
         this.segment = 'all';
 
     }
 
+    processOffers(obs: Observable<any>) {
+        obs.subscribe(resp => {
+            this.offers = resp.data;
+            this.total = resp.total;
+            this.lastPage = resp.last_page;
+        })
+    }
+
     filterOffers() {
         this.page = 1;
         this.isFilterByDate = false;
-        switch (this.segment) {
-            case 'all':
-                this.place.getOffers(this.page)
-                    .subscribe(resp => {
-                        this.offers = resp.data;
-                        this.total = resp.total;
-                        this.lastPage = resp.last_page;
-                    });
-                break;
-            case 'active':
-                this.place.getActiveOffers(this.page)
-                    .subscribe(resp => {
-                        this.offers = resp.data;
-                        this.total = resp.total;
-                        this.lastPage = resp.last_page;
-                    });
-                break;
-            case 'deactive':
-                this.place.getDeActiveOffers(this.page)
-                    .subscribe(resp => {
-                        this.offers = resp.data;
-                        this.total = resp.total;
-                        this.lastPage = resp.last_page;
-                    });
-                break;
-            case 'featured':
-                this.offers = [];//to do
-                this.total = 0;//to do
-                break;
+
+        if (this.segment == 'featured') {
+            this.offers = [];//to do
+            this.total = 0;//to do
+        }
+        else {
+            let obs = this.segment == 'all'
+                ? this.place.getOffers(this.page)
+                : this.segment == 'active'
+                    ? this.place.getActiveOffers(this.page)
+                    : this.place.getDeActiveOffers(this.page);
+            this.processOffers(obs);
         }
     }
 
@@ -76,12 +63,7 @@ export class AdvUserOffersPage {
         this.page = 1;
         this.isFilterByDate = true;
         this.dates = DateTimeUtils.getFilterDates(this.date);
-        this.place.getFilteredOffersByDate(this.dates.startDate, this.dates.finishDate, this.page)
-            .subscribe(resp => {
-                this.offers = resp.data;
-                this.total = resp.total;
-                this.lastPage = resp.last_page;
-            })
+        this.processOffers(this.place.getFilteredOffersByDate(this.dates.startDate, this.dates.finishDate, this.page));
     }
 
     openCreateOffer() {
@@ -96,19 +78,19 @@ export class AdvUserOffersPage {
     }
 
     editStatus(offer) {
-        let status = {
+        let statusInfo = {
             status: (offer.status == 'active')
                 ? 'deactive'
                 : 'active'
         };
-        this.place.changeOfferStatus(status, offer.id)
+        this.place.changeOfferStatus(statusInfo, offer.id)
             .subscribe(resp => {
-                if(this.isFilterByDate) {
-                    this.filterOffersByDate();
-                }
-                else {
-                    this.filterOffers();
-                }
+                // if(this.isFilterByDate) {
+                //     this.filterOffersByDate();
+                // }
+                // else {
+                //     this.filterOffers();
+                // }
             })
     }
 
