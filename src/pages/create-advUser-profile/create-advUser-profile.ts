@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { LocationService } from '../../providers/location.service';
 import { Coords } from '../../models/coords';
-import { NavController, PopoverController } from 'ionic-angular';
+import { NavController, PopoverController, NavParams } from 'ionic-angular';
 import { OfferCategory } from '../../models/offerCategory';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
 import * as _ from 'lodash';
@@ -45,7 +45,21 @@ export class CreateAdvUserProfilePage {
         private changeDetectorRef: ChangeDetectorRef,
         private toast: ToastService,
         private imagePicker: ImagePicker,
-        private api: ApiService) {
+        private api: ApiService,
+        private navParams: NavParams) {
+
+        this.coords.lat = this.navParams.get('latitude');
+        this.coords.lng = this.navParams.get('longitude');
+
+        if (!this.coords.lat || !this.coords.lng) {
+            this.location.getByIp()
+                .subscribe(resp => {
+                    this.coords = {
+                        lat: resp.latitude,
+                        lng: resp.longitude
+                    };
+                })
+        }
 
         this.location.get()
             .then((resp) => {
