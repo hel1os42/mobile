@@ -38,8 +38,8 @@ export class PlaceService {
         return this.api.put(`advert/offers/${offer_id}`, offer);
     }
 
-    changeOfferStatus(status: {}, offer_id: string) {
-        return this.api.patch(`advert/offers/${offer_id}/status`, status);
+    changeOfferStatus(statusInfo, offer_id: string) {
+        return this.api.put(`advert/offers/${offer_id}/status`, statusInfo);
     }
 
     setRedeemCode(code: string) {
