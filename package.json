@@ -69,10 +69,7 @@
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
             },
             "cordova-plugin-file-transfer": {},
-            "com.synconset.imagepicker": {
-                "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
-            },
-            "com.cordova.plugins.cookiemaster": {}
+            "cordova-plugin-cookiemaster": {}
         },
         "platforms": [
             "android",

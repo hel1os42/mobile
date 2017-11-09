@@ -60,9 +60,6 @@
     <plugin name="cordova-plugin-telerik-imagepicker" spec="2.1.8">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign offer images" />
     </plugin>
-    <plugin name="cordova-plugin-file-transfer" spec="1.6.3" />
-    <plugin name="com.synconset.imagepicker">
-        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign offer images" />
-    </plugin>
-    <plugin name="com.cordova.plugins.cookiemaster" spec="1.0.0" />
+    <plugin name="cordova-plugin-file-transfer" spec="1.6.3" />    
+    <plugin name="cordova-plugin-cookiemaster" spec="1.0.0" />
 </widget>
