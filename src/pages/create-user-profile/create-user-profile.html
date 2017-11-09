@@ -147,7 +147,7 @@
       <div *ngIf="!coords.lat">Detecting your location...</div>
       <agm-map *ngIf="coords.lat" [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)">
       </agm-map>
-      <div id="marker"></div>
+      <div *ngIf="coords.lat" id="marker"></div>
     </div>
     <!--<ion-card>
           <ion-card-content>
