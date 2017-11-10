@@ -135,7 +135,7 @@ export class ApiService {
 
     patch(endpoint: string, body: any, options?: RequestOptions) {
         return this.wrapObservable(
-            this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)), true);
+            this.http.patch(this.url + '/' + endpoint, body, this.getOptions(options)), true);
     }
 
     uploadImage(filePath, path) {

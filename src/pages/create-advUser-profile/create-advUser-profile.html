@@ -57,13 +57,13 @@
 
         <a *ngIf="selectedCategory" (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray ">
             <ng-container *ngIf="selectedChildCategories">
-                <div class="text-3E4B5D font-16 semibold">
+                <div class="text-3E4B5D font-16 semibold wrap-no">
                     {{ childCategoriesNames }}
                 </div>
             </ng-container>
 
             <ng-container *ngIf="!selectedChildCategories">
-                <div class="text-3E4B5D font-16 semibold">
+                <div class="text-3E4B5D font-16 semibold wrap-no">
                     {{ selectedCategory.name + ' categories' }}
                 </div>
             </ng-container>
@@ -75,15 +75,15 @@
         <div>{{ address }}</div>
     </div>
 
-    <div class="block-map">
-        <div *ngIf="!coords.lat">Detecting your location...</div>
-        <agm-map *ngIf="coords.lat" [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+    <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">Detecting your location...</div>
+    <div *ngIf="coords.lat" class="block-map">
+        <agm-map [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
         </agm-map>
-        <div *ngIf="coords.lat" id="marker"></div>
+        <div id="marker"></div>
     </div>
 
     <p margin>
-        <button (click)="createAccount()" [disabled]="!company.name || !company.description || !selectedChildCategories || !coords" ion-button block color="primary">Create account</button>
+        <button (click)="createAccount()" [disabled]="!company.name || !company.description || (!selectedChildCategories && !noChild) || !coords" ion-button block color="primary">Create account</button>
     </p>
 
 </ion-content>

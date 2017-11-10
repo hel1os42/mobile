@@ -35,6 +35,7 @@ export class CreateAdvUserProfilePage {
     address: string;
     picture_url: string;
     cover_url: string;
+    noChild: boolean;//temporary
 
     constructor(
         private location: LocationService,
@@ -123,12 +124,16 @@ export class CreateAdvUserProfilePage {
                 this.selectedCategory = selectedCategories[0];
             }
         })
+        this.noChild = false;//temporary
     }
 
     showChildCategoriesPopover() {
         this.offer.getSubCategories(this.selectedCategory.id)
             .subscribe(resp => {
                 this.childCategories = resp.children;
+
+                this.noChild = resp.children.length == 0 ? true : false;//temporary
+
                 let popover = this.popoverCtrl.create(CreateAdvUserProfileChildCategoryPopover, {
                     categoryName: this.selectedCategory.name,
                     categories: this.childCategories.map(p => {
@@ -186,7 +191,7 @@ export class CreateAdvUserProfilePage {
         this.company.latitude = this.coords.lat;
         this.company.longitude = this.coords.lng;
         this.company.address = this.address;
-        this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
+        this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
 
         this.company.radius = 30000;
 

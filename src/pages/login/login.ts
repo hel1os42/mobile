@@ -5,22 +5,26 @@ import { Login } from '../../models/login';
 import { TabsPage } from '../tabs/tabs';
 import { AppModeService } from '../../providers/appMode.service';
 import { SignUpInvitePage } from '../invite/invite';
+import { ProfileService } from "../../providers/profile.service";
+import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 
 @Component({
     selector: 'page-login',
     templateUrl: 'login.html'
 })
 
-export class LoginPage  {
+export class LoginPage {
     data: Login = new Login();
     numCodes = ['+7', '+49', '+63', '+57', '+380'];
     numCode: string = '+380';
-    
+    page;
+
     constructor(
         private nav: NavController,
         private auth: AuthService,
-        private appMode: AppModeService) { 
-        
+        private appMode: AppModeService,
+        private profile: ProfileService, ) {
+
     }
 
     login() {
@@ -30,11 +34,18 @@ export class LoginPage  {
                 code: this.data.phone.slice(-6)
             })
             .subscribe(
-                resp => {
-                    this.appMode.setHomeMode(true);  
-                    this.nav.setRoot(TabsPage, {index: 0});
-                }
-            );
+            resp => {
+                this.appMode.setHomeMode(true);
+                this.profile.get()
+                    .subscribe(resp => {
+                        if (resp.name == '' && !resp.email) {
+                            this.nav.setRoot(CreateUserProfilePage)
+                        }
+                        else {
+                            this.nav.setRoot(TabsPage, { index: 0 });
+                        }
+                    });
+            });
     }
 
     signup() {
