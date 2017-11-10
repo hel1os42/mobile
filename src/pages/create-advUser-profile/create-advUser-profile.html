@@ -57,13 +57,13 @@
 
         <a *ngIf="selectedCategory" (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray ">
             <ng-container *ngIf="selectedChildCategories">
-                <div class="text-3E4B5D font-16 semibold">
+                <div class="text-3E4B5D font-16 semibold wrap-no">
                     {{ childCategoriesNames }}
                 </div>
             </ng-container>
 
             <ng-container *ngIf="!selectedChildCategories">
-                <div class="text-3E4B5D font-16 semibold">
+                <div class="text-3E4B5D font-16 semibold wrap-no">
                     {{ selectedCategory.name + ' categories' }}
                 </div>
             </ng-container>
