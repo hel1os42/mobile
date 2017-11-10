@@ -191,7 +191,7 @@ export class CreateAdvUserProfilePage {
         this.company.latitude = this.coords.lat;
         this.company.longitude = this.coords.lng;
         this.company.address = this.address;
-        this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [];
+        this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
 
         this.company.radius = 30000;
 
