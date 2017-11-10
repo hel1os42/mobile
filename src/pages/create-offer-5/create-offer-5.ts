@@ -30,7 +30,7 @@ export class CreateOffer5Page {
             this.reward = this.offer.reward.toString();
             this.reserved = this.offer.reserved.toString();
         }
-      
+
         this.profile.getWithAccounts()
             .subscribe(user => {
                 this.balance = user.accounts.NAU.balance;
@@ -47,14 +47,22 @@ export class CreateOffer5Page {
         else {
             this.place.setOffer(this.offer)
                 .subscribe(resp => {
-                    // if(this.picture_url) {
-                    //     this.api.uploadImage(this.picture_url, `offers/${resp.id}/picture`)
-                    //         .then(resut => this.nav.popToRoot());
-                    // }
-                    // else {
-                    //     this.nav.popToRoot();
-                    // }to do
-                    this.nav.popToRoot();//to remove
+
+                    if (typeof resp.http_headers.get('location') !== 'undefined') {
+                        let location = resp.http_headers.get('location');
+                        let offer_id = location.slice(- location.lastIndexOf('/') + 2);
+
+                        if (this.picture_url) {
+                            this.api.uploadImage(this.picture_url, `offers/${resp.id}/picture`)
+                                .then(resut => this.nav.popToRoot());
+                        }
+                        else {
+                            this.nav.popToRoot();
+                        }
+                    }
+                    else {
+                        this.nav.popToRoot();
+                    }
                 })
         }
     }
