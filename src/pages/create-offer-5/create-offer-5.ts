@@ -47,13 +47,15 @@ export class CreateOffer5Page {
         else {
             this.place.setOffer(this.offer)
                 .subscribe(resp => {
-
-                    if (typeof resp.http_headers.get('location') !== 'undefined') {
+                    console.log(resp.http_headers.get('location'));
+                    if (resp.http_headers.get('location') !== null) {
                         let location = resp.http_headers.get('location');
                         let offer_id = location.slice(- location.lastIndexOf('/') + 2);
+                        console.log("locaction: " + location);
+                        console.log("parsing: " + offer_id);
 
                         if (this.picture_url) {
-                            this.api.uploadImage(this.picture_url, `offers/${resp.id}/picture`)
+                            this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`)
                                 .then(resut => this.nav.popToRoot());
                         }
                         else {
