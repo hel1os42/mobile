@@ -166,7 +166,7 @@ export class CreateAdvUserProfilePage {
     }
 
     addLogo() {
-        let options = { maximumImagesCount: 1 };
+        let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
                 this.picture_url = results[0];
@@ -177,7 +177,7 @@ export class CreateAdvUserProfilePage {
     }
 
     addCover() {
-        let options = { maximumImagesCount: 1 };
+        let options = { maximumImagesCount: 1, width: 2560, height: 1440, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
                 this.cover_url = results[0];
