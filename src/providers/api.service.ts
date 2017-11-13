@@ -164,6 +164,7 @@ export class ApiService {
             .catch(err => {
                 loading.dismiss();
                 this.toast.show(JSON.stringify(err));
+                console.log(JSON.stringify(err));
             });
     }
 }
