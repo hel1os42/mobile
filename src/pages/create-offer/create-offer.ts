@@ -36,7 +36,7 @@ export class CreateOfferPage {
     }
 
     addPicture() {
-        let options = { maximumImagesCount: 1 };
+        let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
                 this.picture_url = results[0];

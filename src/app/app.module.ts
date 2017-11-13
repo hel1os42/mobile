@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { FileTransfer } from '@ionic-native/file-transfer';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { MyApp } from './app.component';
 import { StartPage } from "../pages/start/start";
 import { LoginPage } from "../pages/login/login";
@@ -204,6 +205,7 @@ import { BarChartComponent } from '../components/bar-chart';
     ImagePicker,
     FileTransfer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    BarcodeScanner,
     ApiService,
     AuthService,
     StorageService,

@@ -56,44 +56,48 @@ export class ApiService {
                     loading.dismiss();
             })
             .subscribe(
-                resp => { },
-                errResp => {
-                    if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
-                        this.token.remove();
-                        return;
+            resp => { },
+            errResp => {
+                if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
+                    this.token.remove();
+                    return;
+                }
+
+                let messages = [];
+
+                if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
+                    messages.push('Too Many Attempts.')
+                }
+                else {
+                    let err = errResp.json();
+
+                    if (err.error && err.message) {
+                        messages.push(err.message)
                     }
-
-                    let messages = [];
-
-                    if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
-                        messages.push('Too Many Attempts.')
-                    }
-                    else
-                    {
-                        let err = errResp.json();
-
-                        if (err.error && err.message) {
-                            messages.push(err.message)
-                        }
-                        else {
-                            for (let key in err) {
-                                let el = err[key];
-                                for (let i = 0; i < el.length; i++) {
-                                    let msg = el[i];
-                                    messages.push(msg);
-                                }
+                    else {
+                        for (let key in err) {
+                            let el = err[key];
+                            for (let i = 0; i < el.length; i++) {
+                                let msg = el[i];
+                                messages.push(msg);
                             }
                         }
                     }
+                }
 
-                    if (messages.length == 0) {
-                        messages.push('Unexpected error occured');
-                    }
+                if (messages.length == 0) {
+                    messages.push('Unexpected error occured');
+                }
 
-                    this.toast.show(messages.join('\n'));
-                });
+                this.toast.show(messages.join('\n'));
+            });
 
-        return sharableObs.map(resp => resp.json());
+        // return sharableObs.map(resp => resp.json());
+        return sharableObs.map(resp => {
+            let obj = resp.json();
+            obj.http_headers = resp.headers;
+            return obj;
+        })
     }
 
     get(endpoint: string, showLoading: boolean = true, params?: any, options?: RequestOptions) {

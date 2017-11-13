@@ -222,7 +222,7 @@ export class PlacesPage {
                                         lng: this.companies[0].longitude,
                                     };
                                 };
-                                this.mapBounds = this.generateBounds(this.companies);
+                                //this.mapBounds = this.generateBounds(this.companies);to do
                             })
                         infiniteScroll.complete();
                     });
@@ -251,6 +251,7 @@ export class PlacesPage {
                     this.nextPlace(i, companiesList);
                 })
         }
+        this.mapBounds = this.generateBounds(this.companies);//temporary
     }
 
 }
