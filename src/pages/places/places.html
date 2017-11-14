@@ -62,7 +62,7 @@
                         <span class="type-food">{{ category.name }}</span>
                     </ng-container>
                 </div>
-                <div margin-top class="text-828282 font-12 wrap text-overflow-35 margin-top-5">{{ company. description }}</div>
+                <div margin-top class="text-828282 font-12 wrap text-overflow-2-font-12 margin-top-5">{{ company. description }}</div>
             </div>
             <img class="star_right" src="assets/img/place/icon_star.svg">
 
@@ -95,5 +95,5 @@
     <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="infiniteScroll($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading companies..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
-    
+
 </ion-content>
