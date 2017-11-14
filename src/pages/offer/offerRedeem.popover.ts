@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController, NavParams, NavController } from 'ionic-angular';
 import { OfferTermsPage } from '../offer-terms/offer-terms';
-import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-
 
 @Component({
     selector: 'offerRedeem-popover-component',
@@ -12,14 +10,16 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
 export class OfferRedeemPopover {
 
     redeemingResponse;
+    qrWith: number;
 
     constructor(private viewCtrl: ViewController,
                 private navParams: NavParams,
-                private nav: NavController,
-                private barcode: BarcodeScanner) { 
+                private nav: NavController) { 
         
         this.redeemingResponse = this.navParams.get('offerActivationCode');
-    
+        this.qrWith = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        this.qrWith = this.qrWith / 2;
+
     }
 
     close() {
@@ -29,11 +29,5 @@ export class OfferRedeemPopover {
     openOfferTerms() {
         this.nav.push(OfferTermsPage)
     }
-
-    encodeRedeemingResponse () {
-        this.barcode.encode(this.barcode.Encode.TEXT_TYPE, this.redeemingResponse.code)
-            .then(res => console.log(res));
-    }
-
 
 }
