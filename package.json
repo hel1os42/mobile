@@ -73,7 +73,7 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-cookiemaster": {},
       "phonegap-plugin-barcodescanner": {
-        "CAMERA_USAGE_DESCRIPTION": " "
+        "CAMERA_USAGE_DESCRIPTION": "To scan barcodes"
       }
     },
     "platforms": [
