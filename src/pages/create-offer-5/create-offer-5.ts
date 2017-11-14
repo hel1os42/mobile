@@ -57,7 +57,7 @@ export class CreateOffer5Page {
                         if (this.picture_url) {
                             console.log(this.picture_url);
                             this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`)
-                                .then(resut => this.nav.popToRoot());
+                                .then(resut => this.nav.setRoot(AdvTabsPage));
                         }
                         else {
                             this.nav.popToRoot();
