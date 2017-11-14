@@ -8,6 +8,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth.service';
 import { ProfileService } from "../providers/profile.service";
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
+import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
+
 
 @Component({
     templateUrl: 'app.html'
@@ -33,9 +35,8 @@ export class MyApp {
                 .subscribe(resp => {
                     page = (resp.name == '' && !resp.email) ? CreateUserProfilePage : TabsPage;
                     this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : page;
+                    //this.rootPage = AdvRedeemOfferPage;
                 });
-
-            //this.rootPage = StatisticPage;
         });
 
         this.auth.onLogout.subscribe(() => {

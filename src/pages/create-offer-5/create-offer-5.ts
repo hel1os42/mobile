@@ -49,7 +49,7 @@ export class CreateOffer5Page {
         else {
             this.place.setOffer(this.offer)
                 .subscribe(resp => {
-                    console.log(resp.http_headers.get('location'));
+                    //console.log(resp.http_headers.get('location'));
                     if (resp.http_headers.get('location') !== null) {
                         let location = resp.http_headers.get('location');
                         let offer_id = location.slice(- location.lastIndexOf('/') + 2);
@@ -74,6 +74,7 @@ export class CreateOffer5Page {
                         else {
                             this.nav.popToRoot();
                         }
+
                     }
                     else {
                         this.nav.popToRoot();
