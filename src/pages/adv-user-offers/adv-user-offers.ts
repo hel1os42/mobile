@@ -71,7 +71,7 @@ export class AdvUserOffersPage {
     }
 
     openEditOffer(offer) {
-        this.place.getOffer(offer.id)
+        this.place.getOfferWithTimeframes(offer.id)
             .subscribe(resp => {
                 this.nav.push(CreateOfferPage, { offer: resp });
             })

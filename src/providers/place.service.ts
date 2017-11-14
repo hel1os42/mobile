@@ -72,7 +72,11 @@ export class PlaceService {
         return this.api.get(`advert/offers?search=status:deactive&page=${page}`, page == 1);
     }
 
-    getOffer(offer_id: string) {
+    getOffer(offer_id: string, loading: boolean) {
+        return this.api.get(`advert/offers/${offer_id}`, loading);
+    }
+
+    getOfferWithTimeframes(offer_id: string) {
         return this.api.get(`advert/offers/${offer_id}?with=timeframes`);
     }
 
