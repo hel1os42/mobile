@@ -29,6 +29,7 @@
     "@ionic-native/status-bar": "3.12.1",
     "@ionic/storage": "2.0.1",
     "@types/lodash": "4.14.74",
+    "angular2-qrcode": "2.0.1",
     "chart.js": "2.7.1",
     "cordova-android": "6.2.3",
     "cordova-ios": "4.5.3",

@@ -1,3 +1,4 @@
+import { QRCodeModule } from 'angular2-qrcode';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from "@angular/http";
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -133,6 +134,7 @@ import { BarChartComponent } from '../components/bar-chart';
   imports: [
     BrowserModule,
     HttpModule,
+    QRCodeModule,
     IonicModule.forRoot(MyApp, {
       mode: "ios",
       backButtonText: "",
