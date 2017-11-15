@@ -933,11 +933,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 /* RADIO MD */
 .radio-nau .radio {
-    padding: 14px;
+    padding: 0 4vw;
 }
 
 .item-radio.item-ios ion-label {
-    margin-left: 20px;
+    margin-left: 5vw;
 }
 
 .radio-nau .item {
@@ -945,16 +945,17 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .radio-nau .radio-icon{
-    width: 17px;
-    height: 17px;
+    width: 6vw;
+    height: 6vw;
     border: 1px solid #E0E0E0;
+    border-radius: 100vw;
+    display: table;
+    padding: 1vw;
 }
 
 .radio-nau .radio-inner {
-    left: 2px;
-    top: 2px;
-    width: 10.5px;
-    height: 10.5px;
+    position: static;
+    display: table-cell;
     background: linear-gradient(89.37deg, #FF5A00 0.65%, #FF8B10 99.57%);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
@@ -967,7 +968,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-top: 0;
     margin-bottom: 0;
     margin-right: 0;
-    margin-left: 20px;
+    margin-left: 5vw;
 }
 
 /* PROGRESS BLOCK PAGE CREATE OFFER */
@@ -1342,10 +1343,24 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .text-overflow-54{
-    max-height: 12vw;
+    max-height: 12.5vw;
     height: auto;
     overflow: hidden;
     display: block;
+}
+
+.text-overflow-2-font-12{
+    max-height: 8.5vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
+}
+
+.text-overflow-3-font-12{
+    max-height: 12.5vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
 }
 
 .text-ellipsis{
@@ -1703,4 +1718,12 @@ textarea.text-input {
 .item-ios[detail-push] .item-inner, button.item-ios:not([detail-none]) .item-inner, a.item-ios:not([detail-none]) .item-inner {
     background-position: right 4.5vw center;
     background-size: 5vw 5vw;
+}
+
+.item.item-ios .checkbox-ios[item-right], .item.item-ios .checkbox-ios[item-end] {
+    margin: 0 5vw;
+}
+
+.item-ios p {
+    font-size: 3vw;
 }

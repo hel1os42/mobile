@@ -1,12 +1,16 @@
 <div margin text-center>
   <div margin-top text-uppercase class="text-4F4F4F font-16 bold">Offer redeeming</div>
   <div margin-top class="text-3E4B5D font-36 bold">{{ redeemingResponse.code }}</div>
-  <div class="text-BDBDBD font-14 margin-bottom-10">or use QR-code</div>
-  <img class="margin-bottom-10 qr-code" src="assets/img/user_offers/qr-code.svg">
-  <div class="margin-bottom-10"><a (click)="openOfferTerms()" href="#" class="text-4F4F4F font-16">Agree with Terms & Conditions</a></div>
+  <div class="text-BDBDBD font-14 margin-top-10">or use QR-code</div>
   <div margin>
-    <div class="block-btn">
-      <button (click)="close()" ion-button block color="secondary">Cancel</button>
+      <qr-code [value]="redeemingResponse.code" [size]="qrWith"></qr-code>
+    <div class="margin-bottom-10">
+      <a (click)="openOfferTerms()" href="#" class="text-4F4F4F font-16">Agree with Terms & Conditions</a>
+    </div>
+    <div margin>
+      <div class="block-btn">
+        <button (click)="close()" ion-button block color="secondary">Cancel</button>
+      </div>
     </div>
   </div>
 </div>

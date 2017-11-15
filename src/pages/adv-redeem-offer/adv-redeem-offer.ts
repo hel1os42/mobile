@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PlaceService } from '../../providers/place.service';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 
 @Component({
     selector: 'page-adv-redeem-offer',
@@ -9,11 +10,20 @@ import { PlaceService } from '../../providers/place.service';
 export class AdvRedeemOfferPage {
 
     code: string;
+    options: BarcodeScannerOptions = {
+        preferFrontCamera: true,
+        orientation: 'portrait'
+    };
 
-    constructor(
-        private nav: NavController,
-        private place: PlaceService) {
+    constructor(private nav: NavController,
+                private place: PlaceService,
+                private barcode: BarcodeScanner) {
 
+    }
+
+    scanBarcode() {
+        this.barcode.scan()
+            .then(res => this.code = res.text);
     }
 
     sendCode() {

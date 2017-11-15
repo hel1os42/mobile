@@ -10,14 +10,16 @@ import { OfferTermsPage } from '../offer-terms/offer-terms';
 export class OfferRedeemPopover {
 
     redeemingResponse;
+    qrWith: number;
 
-    constructor(
-        private viewCtrl: ViewController,
-        private navParams: NavParams,
-        private nav: NavController) { 
+    constructor(private viewCtrl: ViewController,
+                private navParams: NavParams,
+                private nav: NavController) { 
         
-        this.redeemingResponse = this.navParams.get('offerActivationCode');       
-    
+        this.redeemingResponse = this.navParams.get('offerActivationCode');
+        this.qrWith = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        this.qrWith = this.qrWith / 2;
+
     }
 
     close() {
@@ -27,4 +29,5 @@ export class OfferRedeemPopover {
     openOfferTerms() {
         this.nav.push(OfferTermsPage)
     }
+
 }
