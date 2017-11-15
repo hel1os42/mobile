@@ -1,18 +1,18 @@
+import { MapsAPILoader } from '@agm/core';
+import { google } from '@agm/core/services/google-maps-types';
 import { Component } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
-import { AgmCoreModule, LatLngBounds, MapsAPILoader } from '@agm/core';
+import { ChildCategory } from '../../models/childCategory';
+import { Company } from '../../models/company';
+import { Coords } from '../../models/coords';
+import { OfferCategory } from '../../models/offerCategory';
+import { SelectedCategory } from '../../models/selectedCategory';
 import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
-import { Coords } from '../../models/coords';
-import { PlacePage } from '../place/place';
-import { Company } from '../../models/company';
 import { OfferService } from '../../providers/offer.service';
-import { PlacesPopover } from './places.popover';
-import { google } from '@agm/core/services/google-maps-types';
-import { OfferCategory } from '../../models/offerCategory';
 import { DistanceUtils } from '../../utils/distanse';
-import { ChildCategory } from '../../models/childCategory';
-import { SelectedCategory } from '../../models/selectedCategory';
+import { PlacePage } from '../place/place';
+import { PlacesPopover } from './places.popover';
 
 
 @Component({

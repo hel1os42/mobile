@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { OfferCreate } from '../../models/offerCreate';
-import { CreateOffer3Page } from '../create-offer-3/create-offer-3';
-import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
-import * as _ from 'lodash';
-import { DateTimeUtils } from '../../utils/date-time.utils';
-import { TimezoneService } from '../../providers/timezone.service';
 import { Offer } from '../../models/offer';
+import { TimezoneService } from '../../providers/timezone.service';
+import { DateTimeUtils } from '../../utils/date-time.utils';
+import { CreateOffer3Page } from '../create-offer-3/create-offer-3';
 
 @Component({
     selector: 'page-create-offer-2',

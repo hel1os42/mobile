@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
-import { Coords } from '../../models/coords';
-import { NavController, NavParams } from 'ionic-angular';
-import { OfferCreate } from '../../models/offerCreate';
-import { CreateOfferPopover } from '../create-offer/createOffer.popover'
-import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
-import { PlaceService } from '../../providers/place.service';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { ToastService } from '../../providers/toast.service';
+import { NavController, NavParams } from 'ionic-angular';
 import { Offer } from '../../models/offer';
+import { PlaceService } from '../../providers/place.service';
+import { ToastService } from '../../providers/toast.service';
+import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
 
 @Component({
     selector: 'page-create-offer',

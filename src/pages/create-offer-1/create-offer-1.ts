@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { CreateOffer2Page } from '../create-offer-2/create-offer-2';
 import { Company } from '../../models/company';
+import { Offer } from '../../models/offer';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
-import { Offer } from '../../models/offer';
+import { CreateOffer2Page } from '../create-offer-2/create-offer-2';
 
 @Component({
     selector: 'page-create-offer-1',

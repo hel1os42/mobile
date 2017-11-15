@@ -1,22 +1,21 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { LocationService } from '../../providers/location.service';
-import { Coords } from '../../models/coords';
-import { NavController, PopoverController, NavParams } from 'ionic-angular';
-import { OfferCategory } from '../../models/offerCategory';
-import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
-import * as _ from 'lodash';
-import { OfferService } from '../../providers/offer.service';
-import { SelectedCategory } from '../../models/selectedCategory';
 import { LatLngLiteral } from '@agm/core';
-import { AgmCoreModule } from '@agm/core';
-import { ChildCategory } from '../../models/childCategory';
-import { CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
-import { PlaceCreate } from '../../models/placeCreate';
-import { AdvTabsPage } from '../adv-tabs/adv-tabs';
-import { PlaceService } from '../../providers/place.service';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { ToastService } from '../../providers/toast.service';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import * as _ from 'lodash';
+import { ChildCategory } from '../../models/childCategory';
+import { Coords } from '../../models/coords';
+import { OfferCategory } from '../../models/offerCategory';
+import { PlaceCreate } from '../../models/placeCreate';
+import { SelectedCategory } from '../../models/selectedCategory';
 import { ApiService } from '../../providers/api.service';
+import { LocationService } from '../../providers/location.service';
+import { OfferService } from '../../providers/offer.service';
+import { PlaceService } from '../../providers/place.service';
+import { ToastService } from '../../providers/toast.service';
+import { AdvTabsPage } from '../adv-tabs/adv-tabs';
+import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
+import { CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
 
 @Component({
     selector: 'page-create-advUser-profile',

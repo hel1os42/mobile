@@ -1,11 +1,10 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { LatLngLiteral } from '@agm/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import * as _ from 'lodash';
+import { Coords } from '../../models/coords';
 import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
-import { Coords } from '../../models/coords';
-import { LatLngLiteral } from '@agm/core';
-import { AgmCoreModule } from '@agm/core';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'page-create-offer-3',

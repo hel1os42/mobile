@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
-import { ProfileService } from "../../providers/profile.service";
-import { User } from "../../models/user";
-import { SettingsPage } from "../settings/settings";
-import { UserTasksPage } from "../user-tasks/user-tasks";
-import { UserAchievePage } from "../user-achieve/user-achieve";
-import { UserOffersPage } from "../user-offers/user-offers";
-import { UserNauPage } from "../user-nau/user-nau";
-import { UserUsersPage } from "../user-users/user-users";
+import { User } from '../../models/user';
 import { AuthService } from '../../providers/auth.service';
+import { ProfileService } from '../../providers/profile.service';
+import { SettingsPage } from '../settings/settings';
+import { UserAchievePage } from '../user-achieve/user-achieve';
+import { UserNauPage } from '../user-nau/user-nau';
+import { UserOffersPage } from '../user-offers/user-offers';
+import { UserTasksPage } from '../user-tasks/user-tasks';
+import { UserUsersPage } from '../user-users/user-users';
 
 @Component({
     selector: 'page-user-profile',

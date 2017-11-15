@@ -1,15 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Content } from 'ionic-angular';
-import { CreateOfferPage } from "../create-offer/create-offer";
-import { StorageService } from "../../providers/storage.service";
-import { SettingsPage } from '../settings/settings';
+import { Content, NavController, NavParams } from 'ionic-angular';
 import { Company } from '../../models/company';
+import { User } from '../../models/user';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
-import { UserNauPage } from '../user-nau/user-nau';
+import { StorageService } from '../../providers/storage.service';
 import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
-import { User } from '../../models/user';
+import { CreateOfferPage } from '../create-offer/create-offer';
+import { SettingsPage } from '../settings/settings';
 import { StatisticPage } from '../statistic/statistic';
+import { UserNauPage } from '../user-nau/user-nau';
 
 @Component({
     selector: 'page-adv-user-profile',

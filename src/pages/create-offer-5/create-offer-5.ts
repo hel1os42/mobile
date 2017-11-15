@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { App, LoadingController, NavController, NavParams } from 'ionic-angular';
-import { ProfileService } from '../../providers/profile.service';
-import { PlaceService } from '../../providers/place.service';
-import { ApiService } from '../../providers/api.service';
 import { Offer } from '../../models/offer';
+import { ApiService } from '../../providers/api.service';
+import { PlaceService } from '../../providers/place.service';
+import { ProfileService } from '../../providers/profile.service';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 
 @Component({
@@ -25,7 +25,7 @@ export class CreateOffer5Page {
         private profile: ProfileService,
         private api: ApiService,
         private loading: LoadingController,
-        private app: App,) {
+        private app: App) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');

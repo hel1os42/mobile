@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController, NavParams, App } from 'ionic-angular';
-import { OfferRedeemPopover } from './offerRedeem.popover';
-import { CongratulationPopover } from './congratulation.popover';
-import { Offer } from '../../models/offer';
+import { App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Company } from '../../models/company';
-import { OfferService } from '../../providers/offer.service';
-import { OfferActivationCode } from '../../models/offerActivationCode'
+import { Offer } from '../../models/offer';
+import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
+import { OfferService } from '../../providers/offer.service';
+import { CongratulationPopover } from './congratulation.popover';
+import { OfferRedeemPopover } from './offerRedeem.popover';
 
 @Component({
     selector: 'page-offer',
