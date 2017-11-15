@@ -83,7 +83,7 @@
     </div>
 
     <p margin>
-        <button (click)="createAccount()" [disabled]="!company.name || !company.description || (!selectedChildCategories && !noChild) || !coords" ion-button block color="primary">Create account</button>
+        <button (click)="createAccount()" [disabled]="!company.name || !company.description || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">Create account</button>
     </p>
 
 </ion-content>
