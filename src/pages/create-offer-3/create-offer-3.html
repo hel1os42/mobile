@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
       <ion-buttons end class="padding-right-3vw">
-      <button (click)="openCreateOffer4Page()" [disabled]="!city" ion-button icon-only color="dark" class="btn_search">
+      <button (click)="openCreateOffer4Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -44,7 +44,7 @@
       <div *ngIf="coords.lat" class="block-map">
             <agm-map  [zoom]="14" [latitude]="coords.lat" [longitude]="coords.lng" [fitBounds]="bounds">
                 <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="400" [fillColor]="'#ff8b10'" [fillOpacity]="0.2"></agm-circle>
-                <agm-marker [latitude]="coords.lat" [longitude]="coords.lng" [iconUrl]="'../assets/img/create_user_profile/pin.svg'"></agm-marker>
+                <agm-marker [latitude]="coords.lat" [longitude]="coords.lng" [iconUrl]="'assets/img/create_user_profile/pin.svg'"></agm-marker>
             </agm-map>
             <!-- <div id="marker"></div> -->
         </div>
