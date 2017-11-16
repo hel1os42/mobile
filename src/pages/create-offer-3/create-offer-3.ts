@@ -85,7 +85,7 @@ export class CreateOffer3Page {
     openCreateOffer4Page() {
         this.offer.radius = 30000;//todo
         this.offer.city = this.city;
-        
+
         this.nav.push(CreateOffer4Page, { offer: this.offer, picture: this.picture_url });
     }
 

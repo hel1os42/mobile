@@ -40,12 +40,12 @@
       <div class="block-lines">
           <div class="text-4F4F4F font-14" text-uppercase>Setting map radius</div>
       </div>
-      <div class="block-map">
-            <div *ngIf="!coords.lat">Detecting your location...</div>
-            <agm-map *ngIf="coords.lat" [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+      <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">Detecting your location...</div>
+      <div *ngIf="coords.lat" class="block-map">
+            <agm-map [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
             </agm-map>
             <div id="marker"></div>
-        </div>
+      </div>
 
     <p margin>
       <button (click)="openCreateOffer4Page()" [disabled]="!city" ion-button block text-uppercase color="primary">Next step</button>

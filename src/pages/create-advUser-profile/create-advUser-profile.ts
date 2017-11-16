@@ -72,7 +72,7 @@ export class CreateAdvUserProfilePage {
                 this.message = error.message;
                 console.log(this.message);
             });
-
+        this.geocodeDebounced();
     }
 
     onMapCenterChange(center: LatLngLiteral) {
