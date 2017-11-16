@@ -40,7 +40,7 @@
       <div class="block-lines">
           <div class="text-4F4F4F font-14" text-uppercase>Setting map radius</div>
       </div>
-      <div *ngIf="!coords.lat">Detecting your location...</div>
+      <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">Detecting your location...</div>
       <div *ngIf="coords.lat" class="block-map">
             <agm-map  [zoom]="14" [latitude]="coords.lat" [longitude]="coords.lng" [fitBounds]="bounds">
                 <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="400" [fillColor]="'#ff8b10'" [fillOpacity]="0.2"></agm-circle>

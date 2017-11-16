@@ -77,7 +77,7 @@
 
     <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">Detecting your location...</div>
     <div *ngIf="coords.lat" class="block-map">
-        <agm-map [zoom]="12" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+        <agm-map [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
         </agm-map>
         <div id="marker"></div>
     </div>
