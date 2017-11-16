@@ -3,7 +3,7 @@
         <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
         <ion-buttons end class="padding-right-3vw">
             <button *ngIf="!offer.id" (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
-            <button *ngIf="offer.id" (click)="editOffer()" ion-button icon-only color="dark" class="btn_search">
+            <button *ngIf="offer.id" (click)="updateOffer()" ion-button icon-only color="dark" class="btn_search">
                 <span class="font-12 text-333333 no-bold">Finish</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
             </button>
@@ -54,7 +54,7 @@
 
     <p margin>
         <button *ngIf="!offer.id" (click)="createOffer()" ion-button block text-uppercase color="primary">Create offer</button>
-        <button *ngIf="offer.id" (click)="editOffer()" ion-button block text-uppercase color="primary">Edit offer</button>
+        <button *ngIf="offer.id" (click)="updateOffer()" ion-button block text-uppercase color="primary">Edit offer</button>
     </p>
 
 </ion-content>

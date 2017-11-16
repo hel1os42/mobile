@@ -1,3 +1,4 @@
+import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { Component } from '@angular/core';
 import { App, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { Offer } from '../../models/offer';
@@ -5,6 +6,7 @@ import { ApiService } from '../../providers/api.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -25,7 +27,7 @@ export class CreateOffer5Page {
         private profile: ProfileService,
         private api: ApiService,
         private loading: LoadingController,
-        private app: App) {
+        private alert: AlertController) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
@@ -76,21 +78,24 @@ export class CreateOffer5Page {
                 else {
                     this.nav.popToRoot();
                 }
-            })
+            },
+            err => this.presentConfirm('created'))
     }
 
-    editOffer() {
+    updateOffer() {
         this.offer.reward = parseInt(this.reward);
         this.offer.reserved = parseInt(this.reserved);
         this.place.putOffer(this.offer, this.offer.id)
             .subscribe(resp => {
                 if (this.picture_url) {
                     this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`)
-                        .then(resut => this.nav.setRoot(this.nav.getByIndex(this.nav.length() - 7)));
+                        .then(resut => this.nav.push(AdvUserOffersPage));
                 }
-                this.nav.setRoot(this.nav.getByIndex(this.nav.length() - 7));
+                this.nav.push(AdvUserOffersPage);
                 // this.app.getRootNav().setRoot(this.nav.getByIndex(this.nav.length() - 7));
-            });
+            },
+            err => this.presentConfirm('updated')
+            );
     }
 
     stopTimer() {
@@ -100,4 +105,29 @@ export class CreateOffer5Page {
         }
     }
 
+    presentConfirm(action: string) {
+        let isUpdate = action == 'updated' ? true : false;
+        let alert = this.alert.create({
+            title: 'Oops...ERROR',
+            subTitle: `Offer wasn't ${action}. Please try again`,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                       isUpdate ?  this.nav.push(AdvUserOffersPage) : this.nav.setRoot(AdvTabsPage);
+                        
+                    }
+                },
+                {
+                    text: 'Retry',
+                    handler: () => {
+                        isUpdate ? this.updateOffer() : this.createOffer();
+                    }
+                }
+            ]
+
+        });
+        alert.present();
+    }
 }
