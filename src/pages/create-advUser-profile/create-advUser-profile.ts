@@ -81,7 +81,7 @@ export class CreateAdvUserProfilePage {
         this.geocodeDebounced();
     }
 
-    geocodeDebounced = _.debounce(this.geocode, 1000);
+    geocodeDebounced = _.debounce(this.geocode, 500);
 
     geocode() {
         let google = window['google'];
