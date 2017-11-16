@@ -6,6 +6,7 @@ import { Coords } from '../../models/coords';
 import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
 
+
 @Component({
     selector: 'page-create-offer-3',
     templateUrl: 'create-offer-3.html'
@@ -36,18 +37,18 @@ export class CreateOffer3Page {
 
     }
 
-    onMapCenterChange(center: LatLngLiteral) {
-        this.coords.lat = center.lat;
-        this.coords.lng = center.lng;
-        this.geocodeDebounced();
-    }
+    // onMapCenterChange(center: LatLngLiteral) {
+    //     this.coords.lat = center.lat;
+    //     this.coords.lng = center.lng;
+    //     this.geocodeDebounced();
+    // }
 
     geocodeDebounced = _.debounce(this.geocode, 1000);
 
     geocode() {
         let google = window['google'];
         let geocoder = new google.maps.Geocoder();
-        let latlng = { lat: this.coords.lat, lng: this.coords.lng };
+        let latlng = { lat: this.offer.latitude, lng: this.offer.longitude };
         geocoder.geocode({ 'location': latlng }, (results, status) => {
             if (status === 'OK') {
                 // let timezone = results.timeZoneId;
