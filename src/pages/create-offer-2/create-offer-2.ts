@@ -66,7 +66,9 @@ export class CreateOffer2Page {
             }
             else {
                 timeFrame.from = this.startTime;
-                timeFrame.isSelected = true;
+                if (timeFrame.to != '') {
+                    timeFrame.isSelected = true;
+                }
             }
         });
     }
@@ -78,7 +80,9 @@ export class CreateOffer2Page {
             }
             else {
                 timeFrame.to = this.finishTime;
-                timeFrame.isSelected = true;
+                if (timeFrame.from != '') {
+                    timeFrame.isSelected = true;
+                }
             }
         });
     }
@@ -105,7 +109,7 @@ export class CreateOffer2Page {
 
     toggleVisible() {
         this.isDetailedSettingsVisible = !this.isDetailedSettingsVisible;
-        this.checkDays();
+        // this.checkDays();
     }
 
     removeTime(event, isSelected) {
@@ -141,6 +145,20 @@ export class CreateOffer2Page {
 
         this.startTime = DateTimeUtils.getTime(this.timeFrames).startTime;
         this.finishTime = DateTimeUtils.getTime(this.timeFrames).finishTime;
+
+        // this.timeFrames.forEach((timeFrame) => {
+        //     if (!timeFrame.isSelected) {
+        //         timeFrame.from = '';
+        //         timeFrame.to = '';
+        //     }
+        // });
+    }
+
+    isDisabled () {
+        let disabled;
+        let selected = this.timeFrames.filter(p => p.from != '' && p.from && p.to && p.to != '' && p.isSelected);
+        disabled = (selected.length == 0 || !this.startDate || !this.finishDate) ? true : false;
+        return disabled;
     }
 
     openCreateOffer3Page() {
