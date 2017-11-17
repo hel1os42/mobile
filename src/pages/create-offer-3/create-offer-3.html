@@ -41,7 +41,7 @@
           <div class="text-4F4F4F font-14" text-uppercase>Setting map radius (in km)</div>
       </div>
         <ion-item>
-            <ion-range min="1" max="100" [(ngModel)]="saturation" color="secondary">
+            <ion-range min="1" max="100" pin="true" [(ngModel)]="saturation" color="secondary">
                 <ion-label range-left>1</ion-label>
                 <ion-label range-right>100</ion-label>
             </ion-range>
