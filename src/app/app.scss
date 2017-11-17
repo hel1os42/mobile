@@ -1727,3 +1727,7 @@ textarea.text-input {
 .item-ios p {
     font-size: 3vw;
 }
+
+.content-ios:not([no-bounce]) > .scroll-content::before {
+    bottom: 0;
+}
