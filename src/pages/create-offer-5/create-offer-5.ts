@@ -47,10 +47,11 @@ export class CreateOffer5Page {
             .subscribe(resp => {
                 let location = resp.http_headers.get('location');
                 let offer_id = location.slice(- location.lastIndexOf('/') + 2);
-
+                let loading = this.loading.create({ content: 'Creating your offer...' });
+                
+                loading.present();
                 this.timer = setInterval(() => {
-                    let loading = this.loading.create({ content: 'Creating your offer...' });
-                    loading.present();
+
                     this.place.getOffer(offer_id, false)
                         .subscribe(offer => {
                             if (offer) {
@@ -69,7 +70,7 @@ export class CreateOffer5Page {
                                 }
                             }
                         });
-                }, 1000)
+                }, 1500)
             }, err => this.presentConfirm('created'))
     }
 
@@ -79,8 +80,13 @@ export class CreateOffer5Page {
         this.place.putOffer(this.offer, this.offer.id)
             .subscribe(resp => {
                 if (this.picture_url) {
+                    let loading = this.loading.create({ content: 'Updeting offer...' });
+                    loading.present();
                     this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`)
-                        .then(resut => this.navTo());
+                        .then(resut => {
+                            loading.dismiss();
+                            this.navTo();
+                        });
                 }
                 else {
                     this.navTo();
@@ -107,7 +113,7 @@ export class CreateOffer5Page {
                     text: 'Cancel',
                     role: 'cancel',
                     handler: () => {
-                            this.navTo()
+                        this.nav.setRoot(this.nav.first().component);
                     }
                 },
                 {
@@ -124,8 +130,8 @@ export class CreateOffer5Page {
 
     navTo() {
         this.nav.setRoot(this.nav.first().component).then(() => {
-        this.nav.parent.select(4);
-        this.nav.first();
+            this.nav.parent.select(4);
+            this.nav.first();
         })
     }
 }
