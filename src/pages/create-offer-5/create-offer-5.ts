@@ -1,12 +1,10 @@
-import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { Component } from '@angular/core';
-import { App, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, ViewController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ApiService } from '../../providers/api.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
-import { AdvTabsPage } from '../adv-tabs/adv-tabs';
-import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -27,7 +25,8 @@ export class CreateOffer5Page {
         private profile: ProfileService,
         private api: ApiService,
         private loading: LoadingController,
-        private alert: AlertController) {
+        private alert: AlertController,
+        private viewCtrl: ViewController) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
@@ -37,9 +36,7 @@ export class CreateOffer5Page {
         }
 
         this.profile.getWithAccounts()
-            .subscribe(user => {
-                this.balance = user.accounts.NAU.balance;
-            });
+            .subscribe(user => this.balance = user.accounts.NAU.balance);
     }
 
     createOffer() {
@@ -48,38 +45,32 @@ export class CreateOffer5Page {
 
         this.place.setOffer(this.offer)
             .subscribe(resp => {
-                //console.log(resp.http_headers.get('location'));
-                if (resp.http_headers.get('location') !== null) {
-                    let location = resp.http_headers.get('location');
-                    let offer_id = location.slice(- location.lastIndexOf('/') + 2);
-                    console.log("locaction: " + location);
-                    console.log("parsing: " + offer_id);
+                let location = resp.http_headers.get('location');
+                let offer_id = location.slice(- location.lastIndexOf('/') + 2);
 
-                    if (this.picture_url) {
-                        this.timer = setInterval(() => {
-                            let loading = this.loading.create({ content: 'Creating your offer...' });
-                            loading.present();
-                            this.place.getOffer(offer_id, false)
-                                .subscribe(offer => {
-                                    if (offer) {
-                                        this.stopTimer();
-                                        loading.dismiss();
-                                        this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`)
-                                            .then(resut => this.nav.setRoot(AdvTabsPage));
-                                    }
-                                });
-                        }, 2000)
-                    }
-                    else {
-                        this.nav.setRoot(AdvTabsPage);
-                    }
-
-                }
-                else {
-                    this.nav.popToRoot();
-                }
-            },
-            err => this.presentConfirm('created'))
+                this.timer = setInterval(() => {
+                    let loading = this.loading.create({ content: 'Creating your offer...' });
+                    loading.present();
+                    this.place.getOffer(offer_id, false)
+                        .subscribe(offer => {
+                            if (offer) {
+                                if (this.picture_url) {
+                                    this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`)
+                                        .then(res => {
+                                            this.stopTimer();
+                                            loading.dismiss()
+                                            this.navTo();
+                                        });
+                                }
+                                else { 
+                                    this.stopTimer();
+                                    loading.dismiss();
+                                    this.navTo();
+                                }
+                            }
+                        });
+                }, 1000)
+            }, err => this.presentConfirm('created'))
     }
 
     updateOffer() {
@@ -89,10 +80,11 @@ export class CreateOffer5Page {
             .subscribe(resp => {
                 if (this.picture_url) {
                     this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`)
-                        .then(resut => this.nav.push(AdvUserOffersPage));
+                        .then(resut => this.navTo());
                 }
-                this.nav.push(AdvUserOffersPage);
-                // this.app.getRootNav().setRoot(this.nav.getByIndex(this.nav.length() - 7));
+                else {
+                    this.navTo();
+                }
             },
             err => this.presentConfirm('updated')
             );
@@ -115,8 +107,7 @@ export class CreateOffer5Page {
                     text: 'Cancel',
                     role: 'cancel',
                     handler: () => {
-                       isUpdate ?  this.nav.push(AdvUserOffersPage) : this.nav.setRoot(AdvTabsPage);
-                        
+                            this.navTo()
                     }
                 },
                 {
@@ -129,5 +120,12 @@ export class CreateOffer5Page {
 
         });
         alert.present();
+    }
+
+    navTo() {
+        this.nav.setRoot(this.nav.first().component).then(() => {
+        this.nav.parent.select(4);
+        this.nav.first();
+        })
     }
 }
