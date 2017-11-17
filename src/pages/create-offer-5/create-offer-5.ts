@@ -56,7 +56,7 @@ export class CreateOffer5Page {
                         .subscribe(offer => {
                             if (offer) {
                                 if (this.picture_url) {
-                                    this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`)
+                                    this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`, false)
                                         .then(res => {
                                             this.stopTimer();
                                             loading.dismiss()
@@ -82,7 +82,7 @@ export class CreateOffer5Page {
                 if (this.picture_url) {
                     let loading = this.loading.create({ content: 'Updeting offer...' });
                     loading.present();
-                    this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`)
+                    this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`, false)
                         .then(resut => {
                             loading.dismiss();
                             this.navTo();

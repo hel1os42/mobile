@@ -197,12 +197,12 @@ export class CreateAdvUserProfilePage {
         this.placeService.set(this.company)
             .subscribe(company => {
                 let pictureUpload = this.picture_url
-                    ? this.api.uploadImage(this.picture_url, 'profile/place/picture')
+                    ? this.api.uploadImage(this.picture_url, 'profile/place/picture', true)
                     : Promise.resolve();
 
                 pictureUpload.then(() => {
                     let coverUpload = this.cover_url
-                        ? this.api.uploadImage(this.cover_url, 'profile/place/cover')
+                        ? this.api.uploadImage(this.cover_url, 'profile/place/cover', true)
                         : Promise.resolve();
 
                     coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));

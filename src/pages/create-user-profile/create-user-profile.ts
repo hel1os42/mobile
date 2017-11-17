@@ -120,7 +120,7 @@ export class CreateUserProfilePage {
         this.profile.put(this.user)
             .subscribe(resp => {
                 if (this.picture_url) {
-                    this.api.uploadImage(this.picture_url, 'profile/picture')
+                    this.api.uploadImage(this.picture_url, 'profile/picture', true)
                         .then(resut => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
                 }
                 else {
