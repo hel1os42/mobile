@@ -44,7 +44,7 @@
             <ion-item>
                 <ion-avatar item-start>
                     <!-- <div [ngClass]="{ 'grayscale' : (!offer.status == 'active') }" class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div> -->
-                    <div [ngClass]="{ 'grayscale' : (offer.status == 'deactive') }" class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div>
+                    <div [ngClass]="{ 'grayscale' : (offer.status == 'deactive') }" class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '), url(assets/img/imagenotfound.svg)'}"></div>
                 </ion-avatar>
                 <div item-content>
                     <div class="bold font-22 text-3E4B5D wrap-no width-86">{{ offer.label }}</div>
