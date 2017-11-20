@@ -32,11 +32,10 @@
         <div no-lines>
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">from</ion-label>
-                <ion-datetime doneText="Ok" [(ngModel)]="startDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="startDate ? startDate : todayDate | date: 'yyyy-MM-dd'"
+                <ion-datetime doneText="Ok" [(ngModel)]="startDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="todayDate | date: 'yyyy-MM-dd'"
                     max="2021-12-31" class="text-3E4B5D font-16 semibold">
                 </ion-datetime>
             </ion-item>
-
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">to</ion-label>
                 <ion-datetime doneText="Ok" [(ngModel)]="finishDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="startDate ? startDate : todayDate | date: 'yyyy-MM-dd'"
