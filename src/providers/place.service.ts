@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { OfferCreate } from "../models/offerCreate";
 import { PlaceCreate } from "../models/placeCreate";
@@ -9,6 +9,7 @@ import { Offer } from "../models/offer";
 export class PlaceService {
 
     company: Company;
+    onRefreshCompany: EventEmitter<Company> = new EventEmitter<Company>();
 
     constructor(private api: ApiService) { }
 
@@ -78,6 +79,10 @@ export class PlaceService {
 
     getOfferWithTimeframes(offer_id: string) {
         return this.api.get(`advert/offers/${offer_id}?with=timeframes`);
+    }
+
+    refreshPlace() {
+        this.get().subscribe(company => this.onRefreshCompany.emit(company));
     }
 
 }

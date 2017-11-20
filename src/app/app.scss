@@ -379,6 +379,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     width: 88%;
 }
 
+.width-86{
+    width: 86%;
+}
+
 .bg-gray{
     border-radius: 100vw;
     border: 1px solid #E0E0E0;
@@ -1726,4 +1730,12 @@ textarea.text-input {
 
 .item-ios p {
     font-size: 3vw;
+}
+
+.content-ios:not([no-bounce]) > .scroll-content::before {
+    bottom: 0;
+}
+
+.agm-info-window-content{
+    font-size: 4vw;
 }

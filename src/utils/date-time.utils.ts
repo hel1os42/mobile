@@ -92,8 +92,8 @@ export class DateTimeUtils {
             }
         }
         return {
-            startTime: startTime ? startTime.slice(0, 8) : undefined,
-            finishTime: finishTime ? finishTime.slice(0, 8) : undefined,
+            startTime: startTime ? startTime.slice(0, 5) : undefined,
+            finishTime: finishTime ? finishTime.slice(0, 5) : undefined,
             isWeekend: isWeekend,
             isWorkingDays: isWorkingDays,
             simpleTimeFrames: simpleTimeFrames,

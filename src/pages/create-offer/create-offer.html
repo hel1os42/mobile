@@ -46,7 +46,7 @@
     <!-- <input type="file" accept="image/*" (change)="fileChange($event)"> -->
 
     <p margin>
-        <button (click)="openCreateOffer1Page()" [disabled]="!(offer.label && offer.description)" ion-button block text-uppercase color="primary">Next step</button>
+        <button (click)="openCreateOffer1Page()" [disabled]="(offer.label?.length < 3 || offer.description?.length < 3)" ion-button block text-uppercase color="primary">Next step</button>
     </p>
 
 

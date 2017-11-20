@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>The fair food</ion-title>
+    <ion-title>{{ company.name }}</ion-title>
   </ion-navbar>
   <ion-list class="margin-0">
   <div class="cover" [style.background-image]="'url(' + company.cover_url + ')'">
@@ -59,7 +59,7 @@
           <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
       </ion-avatar>
       <div class="bold font-22 text-3E4B5D width-88 wrap-no">{{ offer.label }}</div>
-      <div text-regular class="margin-top-10 font-12 text-828282 wrap text-overflow-35">{{ offer.description }}</div>
+      <div text-regular class="margin-top-10 width-88 font-12 text-828282 wrap text-overflow-35">{{ offer.description }}</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-10 flex">
         <button ion-button class="btn_transfer font-14 text-white">redeem now</button>

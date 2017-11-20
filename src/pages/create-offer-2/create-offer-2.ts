@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { OfferCreate } from '../../models/offerCreate';
-import { CreateOffer3Page } from '../create-offer-3/create-offer-3';
-import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
-import * as _ from 'lodash';
-import { DateTimeUtils } from '../../utils/date-time.utils';
-import { TimezoneService } from '../../providers/timezone.service';
 import { Offer } from '../../models/offer';
+import { TimezoneService } from '../../providers/timezone.service';
+import { DateTimeUtils } from '../../utils/date-time.utils';
+import { CreateOffer3Page } from '../create-offer-3/create-offer-3';
 
 @Component({
     selector: 'page-create-offer-2',
@@ -70,7 +66,9 @@ export class CreateOffer2Page {
             }
             else {
                 timeFrame.from = this.startTime;
-                timeFrame.isSelected = true;
+                if (timeFrame.to != '') {
+                    timeFrame.isSelected = true;
+                }
             }
         });
     }
@@ -82,12 +80,14 @@ export class CreateOffer2Page {
             }
             else {
                 timeFrame.to = this.finishTime;
-                timeFrame.isSelected = true;
+                if (timeFrame.from != '') {
+                    timeFrame.isSelected = true;
+                }
             }
         });
     }
 
-    selectWorkingDays($event) {
+    selectWorkingDays() {
         this.timeFrames.forEach((timeFrame) => {
             timeFrame.isSelected = (timeFrame.days != DateTimeUtils.SATURDAY) && (timeFrame.days != DateTimeUtils.SUNDAY);
             timeFrame.from = timeFrame.isSelected ? this.startTime : '';
@@ -97,7 +97,7 @@ export class CreateOffer2Page {
         });
     }
 
-    selectWeekend($event) {
+    selectWeekend() {
         this.timeFrames.forEach((timeFrame) => {
             timeFrame.isSelected = (timeFrame.days == DateTimeUtils.SATURDAY) || (timeFrame.days == DateTimeUtils.SUNDAY);
             timeFrame.from = timeFrame.isSelected ? this.startTime : '';
@@ -109,7 +109,7 @@ export class CreateOffer2Page {
 
     toggleVisible() {
         this.isDetailedSettingsVisible = !this.isDetailedSettingsVisible;
-        this.checkDays();
+        // this.checkDays();
     }
 
     removeTime(event, isSelected) {
@@ -145,6 +145,20 @@ export class CreateOffer2Page {
 
         this.startTime = DateTimeUtils.getTime(this.timeFrames).startTime;
         this.finishTime = DateTimeUtils.getTime(this.timeFrames).finishTime;
+
+        // this.timeFrames.forEach((timeFrame) => {
+        //     if (!timeFrame.isSelected) {
+        //         timeFrame.from = '';
+        //         timeFrame.to = '';
+        //     }
+        // });
+    }
+
+    isDisabled () {
+        let disabled;
+        let selected = this.timeFrames.filter(p => p.from != '' && p.from && p.to && p.to != '' && p.isSelected);
+        disabled = (selected.length == 0 || !this.startDate || !this.finishDate) ? true : false;
+        return disabled;
     }
 
     openCreateOffer3Page() {
@@ -157,7 +171,6 @@ export class CreateOffer2Page {
                 let timeMask = DateTimeUtils.ZERO_TIME_SUFFIX;
                     this.offer.start_date = this.startDate + dateMask + timezoneStr;
                     this.offer.finish_date = this.finishDate + dateMask + timezoneStr;
-
                 let selected = this.timeFrames.filter(p => p.isSelected);
                 this.offer.timeframes = selected.map(p => {
                     return {

@@ -1,17 +1,16 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { NavController } from "ionic-angular";
-import { Register } from "../../models/register";
-import { AgmCoreModule } from '@agm/core';
-import { LatLngLiteral } from "@agm/core";
-import * as _ from 'lodash';
-import { TabsPage } from "../tabs/tabs";
-import { LocationService } from "../../providers/location.service";
-import { Coords } from "../../models/coords";
-import { ProfileService } from "../../providers/profile.service";
-import { User } from '../../models/user';
+import { LatLngLiteral } from '@agm/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { ToastService } from '../../providers/toast.service';
+import { NavController } from 'ionic-angular';
+import * as _ from 'lodash';
+import { Coords } from '../../models/coords';
+import { Register } from '../../models/register';
+import { User } from '../../models/user';
 import { ApiService } from '../../providers/api.service';
+import { LocationService } from '../../providers/location.service';
+import { ProfileService } from '../../providers/profile.service';
+import { ToastService } from '../../providers/toast.service';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -121,7 +120,7 @@ export class CreateUserProfilePage {
         this.profile.put(this.user)
             .subscribe(resp => {
                 if (this.picture_url) {
-                    this.api.uploadImage(this.picture_url, 'profile/picture')
+                    this.api.uploadImage(this.picture_url, 'profile/picture', true)
                         .then(resut => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
                 }
                 else {

@@ -1,10 +1,11 @@
+import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { ProfileService } from '../../providers/profile.service';
-import { PlaceService } from '../../providers/place.service';
-import { ApiService } from '../../providers/api.service';
+import { LoadingController, NavController, NavParams, ViewController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
-import { AdvTabsPage } from '../adv-tabs/adv-tabs';
+import { ApiService } from '../../providers/api.service';
+import { PlaceService } from '../../providers/place.service';
+import { ProfileService } from '../../providers/profile.service';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -24,7 +25,9 @@ export class CreateOffer5Page {
         private place: PlaceService,
         private profile: ProfileService,
         private api: ApiService,
-        private loading: LoadingController) {
+        private loading: LoadingController,
+        private alert: AlertController,
+        private viewCtrl: ViewController) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
@@ -34,53 +37,57 @@ export class CreateOffer5Page {
         }
 
         this.profile.getWithAccounts()
-            .subscribe(user => {
-                this.balance = user.accounts.NAU.balance;
-            });
+            .subscribe(user => this.balance = user.accounts.NAU.balance);
     }
 
     createOffer() {
         this.offer.reward = parseInt(this.reward);
         this.offer.reserved = parseInt(this.reserved);
-        if (this.offer.id) {
-            this.place.putOffer(this.offer, this.offer.id)
-                .subscribe(resp => this.nav.setRoot(AdvTabsPage));
-        }
-        else {
-            this.place.setOffer(this.offer)
-                .subscribe(resp => {
-                    //console.log(resp.http_headers.get('location'));
-                    if (resp.http_headers.get('location') !== null) {
-                        let location = resp.http_headers.get('location');
-                        let offer_id = location.slice(- location.lastIndexOf('/') + 2);
-                        console.log("locaction: " + location);
-                        console.log("parsing: " + offer_id);
-                        if (this.picture_url) {
+        this.place.setOffer(this.offer)
+            .subscribe(resp => {
+                let location = resp.http_headers.get('location');
+                let offer_id = location.slice(- location.lastIndexOf('/') + 2);
 
-                            this.timer = setInterval(() => {
-                                let loading = this.loading.create({ content: 'Creating your offer...' });
-                                loading.present();
-                                this.place.getOffer(offer_id, false)
-                                    .subscribe(offer => {
-                                        if (offer) {
-                                            this.stopTimer();
-                                            loading.dismiss();
-                                            this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`)
-                                                .then(resut => this.nav.setRoot(AdvTabsPage));
-                                        }
-                                    });
-                            }, 2000)
-                        }
-                        else {
-                            this.nav.popToRoot();
-                        }
+                let loading = this.loading.create({ content: 'Creating your offer...' });
+                loading.present();
+                this.timer = setInterval(() => {
 
-                    }
-                    else {
-                        this.nav.popToRoot();
-                    }
+                    this.place.getOffer(offer_id, false)
+                        .subscribe(offer => {
+                            this.place.refreshPlace();
+
+                            let promise = this.picture_url
+                                ? this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`, false)
+                                : Promise.resolve();
+
+                            promise.then(() => {
+                                this.stopTimer();
+                                loading.dismiss()
+                                this.navTo();
+                            });
+                        });
+                }, 1500)
+            }, err => this.presentConfirm('created'))
+    }
+
+    updateOffer() {
+        this.offer.reward = parseInt(this.reward);
+        this.offer.reserved = parseInt(this.reserved);
+        this.place.putOffer(this.offer, this.offer.id)
+            .subscribe(() => {
+                let loading = this.loading.create({ content: 'Updeting offer...' });
+                loading.present();
+                let promise = this.picture_url
+                    ? this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`, false)
+                    : Promise.resolve();
+
+                promise.then(() => {
+                    loading.dismiss();
+                    this.navTo();
                 })
-        }
+            },
+            err => this.presentConfirm('updated')
+            );
     }
 
     stopTimer() {
@@ -90,4 +97,35 @@ export class CreateOffer5Page {
         }
     }
 
+    presentConfirm(action: string) {
+        let isUpdate = action == 'updated' ? true : false;
+        let alert = this.alert.create({
+            title: 'Oops...ERROR',
+            subTitle: `Offer wasn't ${action}. Please try again`,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        this.nav.setRoot(this.nav.first().component);
+                    }
+                },
+                {
+                    text: 'Retry',
+                    handler: () => {
+                        isUpdate ? this.updateOffer() : this.createOffer();
+                    }
+                }
+            ]
+
+        });
+        alert.present();
+    }
+
+    navTo() {
+        this.nav.setRoot(this.nav.first().component).then(() => {
+            this.nav.parent.select(4);
+            // this.nav.first();
+        })
+    }
 }

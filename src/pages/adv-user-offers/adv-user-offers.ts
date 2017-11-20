@@ -1,11 +1,11 @@
-import { Observable } from 'rxjs/Rx';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { CreateOfferPage } from '../create-offer/create-offer';
-import { PlaceService } from '../../providers/place.service';
+import { Observable } from 'rxjs/Rx';
 import { Offer } from '../../models/offer';
+import { PlaceService } from '../../providers/place.service';
 import { TimezoneService } from '../../providers/timezone.service';
 import { DateTimeUtils } from '../../utils/date-time.utils';
+import { CreateOfferPage } from '../create-offer/create-offer';
 
 @Component({
     selector: 'page-adv-user-offers',
@@ -23,8 +23,7 @@ export class AdvUserOffersPage {
     dates;
 
     constructor(private nav: NavController,
-        private place: PlaceService,
-        private timezone: TimezoneService) {
+                private place: PlaceService) {
 
         this.processOffers(this.place.getOffers(this.page));
 

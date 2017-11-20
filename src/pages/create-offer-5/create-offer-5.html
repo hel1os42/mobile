@@ -1,57 +1,62 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
-      <ion-buttons end class="padding-right-3vw">
-      <button (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
-        <span class="font-12 text-333333 no-bold">Finish</span>
-        <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-  <ion-list no-lines>
-  <p margin>
-           <span class="progress-block">
-               <span class="progress-line"></span>
-               <span class="progress-line-fill"></span>
-               <span class="circle fill-first"></span>
-               <span class="circle fill-last"></span>
-               <span class="circle fill-last"></span>
-               <span class="circle fill-last"></span>
-               <span class="circle fill-last"></span>
-               <span class="circle fill-last"></span>
+    <ion-navbar>
+        <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
+        <ion-buttons end class="padding-right-3vw">
+            <button *ngIf="!offer.id" (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
+                <span class="font-12 text-333333 no-bold">Finish</span>
+                <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
+            </button>
+            <button *ngIf="offer.id" (click)="updateOffer()" ion-button icon-only color="dark" class="btn_search">
+                <span class="font-12 text-333333 no-bold">Finish</span>
+                <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-list no-lines>
+        <p margin>
+            <span class="progress-block">
+                <span class="progress-line"></span>
+                <span class="progress-line-fill"></span>
+                <span class="circle fill-first"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle fill-last"></span>
             </span>
-  </p>
-  </ion-list>
-<div class="header-shadow"></div>
+        </p>
+    </ion-list>
+    <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content>
 
-      <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Rewards options</div>
-      <div class="block-lines">
-          <ion-item padding-left class="bg-gray margin-bottom-5">
-              <ion-label class="text-3E4B5D font-16 semibold">Reward for redemption</ion-label>
-              <ion-input [(ngModel)]="reward" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
-          </ion-item>
+    <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Rewards options</div>
+    <div class="block-lines">
+        <ion-item padding-left class="bg-gray margin-bottom-5">
+            <ion-label class="text-3E4B5D font-16 semibold">Reward for redemption</ion-label>
+            <ion-input [(ngModel)]="reward" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
+        </ion-item>
 
-          <ion-item padding-left class="bg-gray">
-              <ion-label class="text-3E4B5D font-16 semibold">Token reservation</ion-label>
-              <ion-input [(ngModel)]="reserved" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
-          </ion-item>
-      </div>
+        <ion-item padding-left class="bg-gray">
+            <ion-label class="text-3E4B5D font-16 semibold">Token reservation</ion-label>
+            <ion-input [(ngModel)]="reserved" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
+        </ion-item>
+    </div>
 
-      <div class="block-lines">
-          <ion-item padding-left class="border-bottom-no top-block-nau">
-              <ion-avatar item-start>
-                  <img src="assets/img/user_nau/icon_nau.svg">
-              </ion-avatar>
-              <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
-              <div class="font-12 text-828282">You have tokens on your account</div>
-          </ion-item>
-      </div>
+    <div class="block-lines">
+        <ion-item padding-left class="border-bottom-no top-block-nau">
+            <ion-avatar item-start>
+                <img src="assets/img/user_nau/icon_nau.svg">
+            </ion-avatar>
+            <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
+            <div class="font-12 text-828282">You have tokens on your account</div>
+        </ion-item>
+    </div>
 
     <p margin>
-      <button (click)="createOffer()" ion-button block text-uppercase color="primary">Create offer</button>
+        <button *ngIf="!offer.id" (click)="createOffer()" ion-button block text-uppercase color="primary">Create offer</button>
+        <button *ngIf="offer.id" (click)="updateOffer()" ion-button block text-uppercase color="primary">Edit offer</button>
     </p>
 
 </ion-content>

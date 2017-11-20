@@ -1,11 +1,11 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { LatLngLiteral } from '@agm/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import * as _ from 'lodash';
+import { Coords } from '../../models/coords';
 import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
-import { Coords } from '../../models/coords';
-import { LatLngLiteral } from '@agm/core';
-import { AgmCoreModule } from '@agm/core';
-import * as _ from 'lodash';
+
 
 @Component({
     selector: 'page-create-offer-3',
@@ -37,18 +37,18 @@ export class CreateOffer3Page {
 
     }
 
-    onMapCenterChange(center: LatLngLiteral) {
-        this.coords.lat = center.lat;
-        this.coords.lng = center.lng;
-        this.geocodeDebounced();
-    }
+    // onMapCenterChange(center: LatLngLiteral) {
+    //     this.coords.lat = center.lat;
+    //     this.coords.lng = center.lng;
+    //     this.geocodeDebounced();
+    // }
 
     geocodeDebounced = _.debounce(this.geocode, 1000);
 
     geocode() {
         let google = window['google'];
         let geocoder = new google.maps.Geocoder();
-        let latlng = { lat: this.coords.lat, lng: this.coords.lng };
+        let latlng = { lat: this.offer.latitude, lng: this.offer.longitude };
         geocoder.geocode({ 'location': latlng }, (results, status) => {
             if (status === 'OK') {
                 // let timezone = results.timeZoneId;
@@ -86,7 +86,7 @@ export class CreateOffer3Page {
     openCreateOffer4Page() {
         this.offer.radius = 30000;//todo
         this.offer.city = this.city;
-        
+
         this.nav.push(CreateOffer4Page, { offer: this.offer, picture: this.picture_url });
     }
 

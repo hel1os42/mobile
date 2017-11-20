@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Tabs, NavParams } from 'ionic-angular';
-import { UserProfilePage } from '../user-profile/user-profile';
-import { NotificationsPage } from '../notifications/notifications';
-import { BookmarksPage } from '../bookmarks/bookmarks';
-import { AppModeService } from '../../providers/appMode.service';
-import { PlacesPage } from '../places/places';
+import { NavParams, Tabs } from 'ionic-angular';
 import { Subscription } from 'rxjs';
+import { AppModeService } from '../../providers/appMode.service';
+import { BookmarksPage } from '../bookmarks/bookmarks';
 import { FeedPage } from '../feed/feed';
+import { NotificationsPage } from '../notifications/notifications';
+import { PlacesPage } from '../places/places';
+import { UserProfilePage } from '../user-profile/user-profile';
 
 @Component({
     selector: 'page-tabs',

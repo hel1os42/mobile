@@ -142,7 +142,7 @@ export class ApiService {
             this.http.patch(this.url + '/' + endpoint, body, this.getOptions(options)), true);
     }
 
-    uploadImage(filePath, path) {
+    uploadImage(filePath, path, isShowLoading: boolean) {
         let token = this.token.get();
 
         let options: FileUploadOptions = {
@@ -154,15 +154,15 @@ export class ApiService {
         };
 
         let loading = this.loading.create({ content: 'Uploading image...' });
-        loading.present();
+        if (isShowLoading) loading.present();
 
         let transfer = this.fileTransfer.create();
         return transfer.upload(filePath, this.url + '/' + path, options)
             .then(resp => {
-                loading.dismiss();
+                if (isShowLoading) loading.dismiss();
             })
             .catch(err => {
-                loading.dismiss();
+                if (isShowLoading) loading.dismiss();
                 this.toast.show(JSON.stringify(err));
             });
     }

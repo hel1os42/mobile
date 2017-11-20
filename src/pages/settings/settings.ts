@@ -1,22 +1,20 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { NavController, App, PopoverController, NavParams } from 'ionic-angular';
+import { LatLngLiteral } from '@agm/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import * as _ from 'lodash';
-import { AgmCoreModule } from '@agm/core';
-import { LatLngLiteral } from "@agm/core";
-import { User } from "../../models/user";
-import { ProfileService } from "../../providers/profile.service";
-import { LocationService } from "../../providers/location.service";
-import { Coords } from "../../models/coords";
-import { TabsPage } from "../tabs/tabs";
-import { AdvTabsPage } from '../adv-tabs/adv-tabs';
-import { SettingsPopover } from './settings.popover';
+import { Coords } from '../../models/coords';
+import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
-import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
+import { LocationService } from '../../providers/location.service';
+import { PlaceService } from '../../providers/place.service';
+import { ProfileService } from '../../providers/profile.service';
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
+import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 import { OnBoardingPage } from '../onboarding/onboarding';
-import { PlaceService } from '../../providers/place.service';
-
+import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
+import { TabsPage } from '../tabs/tabs';
+import { SettingsPopover } from './settings.popover';
 
 @Component({
     selector: 'page-settings',

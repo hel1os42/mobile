@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
-import { OfferService } from '../../providers/offer.service';
+import { App, NavController, NavParams } from 'ionic-angular';
 import { Company } from '../../models/company';
-import { Offer } from '../../models/offer';
-import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
-import { OfferPage } from '../offer/offer';
-import { AppModeService } from '../../providers/appMode.service';
 import { Coords } from '../../models/coords';
+import { Offer } from '../../models/offer';
+import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
-import { DistanceUtils } from '../../utils/distanse';
+import { OfferService } from '../../providers/offer.service';
+import { OfferPage } from '../offer/offer';
+import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 
 @Component({
     selector: 'page-place',

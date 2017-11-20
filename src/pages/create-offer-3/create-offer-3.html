@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
       <ion-buttons end class="padding-right-3vw">
-      <button (click)="openCreateOffer4Page()" [disabled]="!city" ion-button icon-only color="dark" class="btn_search">
+      <button (click)="openCreateOffer4Page()" ion-button icon-only color="dark" class="btn_search">
         <span class="font-12 text-333333 no-bold">Next</span>
         <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
       </button>
@@ -38,17 +38,29 @@
       </div>
 
       <div class="block-lines">
-          <div class="text-4F4F4F font-14" text-uppercase>Setting map radius</div>
+          <div class="text-4F4F4F font-14" text-uppercase>Setting map radius (in km)</div>
       </div>
-      <div class="block-map">
-            <div *ngIf="!coords.lat">Detecting your location...</div>
-            <agm-map *ngIf="coords.lat" [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
+        <ion-item>
+            <ion-range min="1" max="100" pin="true" [(ngModel)]="saturation" color="secondary">
+                <ion-label range-left>1</ion-label>
+                <ion-label range-right>100</ion-label>
+            </ion-range>
+        </ion-item>
+      <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">Detecting your location...</div>
+      <div *ngIf="coords.lat" class="block-map">
+            <agm-map  [zoom]="14" [latitude]="coords.lat" [longitude]="coords.lng" [fitBounds]="bounds">
+                <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="400" [fillColor]="'#ff8b10'" [fillOpacity]="0.2"></agm-circle>
+                <agm-marker [latitude]="coords.lat" [longitude]="coords.lng" [iconUrl]="'assets/img/create_user_profile/pin.svg'">
+                    <agm-info-window [disableAutoPan]="true">
+                        <div>title</div>
+                    </agm-info-window>
+                </agm-marker>
             </agm-map>
-            <div id="marker"></div>
+            <!-- <div id="marker"></div> -->
         </div>
 
     <p margin>
-      <button (click)="openCreateOffer4Page()" [disabled]="!city" ion-button block text-uppercase color="primary">Next step</button>
+      <button (click)="openCreateOffer4Page()" ion-button block text-uppercase color="primary">Next step</button>
     </p>
 
 </ion-content>
