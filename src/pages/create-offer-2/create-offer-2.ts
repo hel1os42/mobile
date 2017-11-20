@@ -87,7 +87,7 @@ export class CreateOffer2Page {
         });
     }
 
-    selectWorkingDays($event) {
+    selectWorkingDays() {
         this.timeFrames.forEach((timeFrame) => {
             timeFrame.isSelected = (timeFrame.days != DateTimeUtils.SATURDAY) && (timeFrame.days != DateTimeUtils.SUNDAY);
             timeFrame.from = timeFrame.isSelected ? this.startTime : '';
@@ -97,7 +97,7 @@ export class CreateOffer2Page {
         });
     }
 
-    selectWeekend($event) {
+    selectWeekend() {
         this.timeFrames.forEach((timeFrame) => {
             timeFrame.isSelected = (timeFrame.days == DateTimeUtils.SATURDAY) || (timeFrame.days == DateTimeUtils.SUNDAY);
             timeFrame.from = timeFrame.isSelected ? this.startTime : '';
@@ -171,7 +171,6 @@ export class CreateOffer2Page {
                 let timeMask = DateTimeUtils.ZERO_TIME_SUFFIX;
                     this.offer.start_date = this.startDate + dateMask + timezoneStr;
                     this.offer.finish_date = this.finishDate + dateMask + timezoneStr;
-
                 let selected = this.timeFrames.filter(p => p.isSelected);
                 this.offer.timeframes = selected.map(p => {
                     return {

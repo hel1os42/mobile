@@ -68,13 +68,13 @@
             <div no-lines>
                 <ion-item class="bg-gray" detail-push>
                     <ion-label class="text-BDBDBD font-16">from</ion-label>
-                    <ion-datetime (ionChange)="selectStartTime($event)" [(ngModel)]="startTime" doneText="Ok" displayFormat="HH:mm" pickerFormat="HH:mm"
+                    <ion-datetime (ionChange)="selectStartTime()" [(ngModel)]="startTime" doneText="Ok" displayFormat="HH:mm" pickerFormat="HH:mm"
                         class="text-3E4B5D font-16 semibold"></ion-datetime>
                 </ion-item>
 
                 <ion-item class="bg-gray" detail-push>
                     <ion-label class="text-BDBDBD font-16">to</ion-label>
-                    <ion-datetime (ionChange)="selectFinishTime($event)" [(ngModel)]="finishTime" doneText="Ok" displayFormat="HH:mm" pickerFormat="HH:mm"
+                    <ion-datetime (ionChange)="selectFinishTime()" [(ngModel)]="finishTime" doneText="Ok" displayFormat="HH:mm" pickerFormat="HH:mm"
                         [min]="startTime ? startTime : '00:00'" class="text-3E4B5D font-16 semibold"></ion-datetime>
                 </ion-item>
             </div>
