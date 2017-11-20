@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Rx';
 import { Component, ViewChild } from '@angular/core';
 import { Content, NavController, NavParams } from 'ionic-angular';
 import { Company } from '../../models/company';
@@ -25,23 +26,31 @@ export class AdvUserProfilePage {
     balance: number;
     NAU_Id: string;
     user = new User;
+    onRefreshSubscription: Subscription;
 
     constructor(private nav: NavController,
         private storage: StorageService,
         private navParams: NavParams,
         private place: PlaceService,
         private profile: ProfileService) {
-
+        
         this.company = this.navParams.get('company');
-        if(!this.company) {
+        if (!this.company) {
             this.company = this.place.company;
         }
 
-        this.place.get()
+        this.onRefreshSubscription = this.place.onRefreshCompany
             .subscribe(company => {
                 this.company = company;
-                this.content.resize();
             });
+
+        if (!this.company) {
+            this.place.get()
+                .subscribe(company => {
+                    this.company = company;
+                    this.content.resize();
+                });
+        }
 
         this.profile.getWithAccounts()
             .subscribe(resp => {
@@ -81,5 +90,9 @@ export class AdvUserProfilePage {
 
     openStatistic() {
         this.nav.push(StatisticPage);
+    }
+
+    ionViewWillUnload() {
+        this.onRefreshSubscription.unsubscribe();
     }
 }
