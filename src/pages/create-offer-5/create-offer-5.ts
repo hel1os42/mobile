@@ -1,3 +1,4 @@
+import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams, ViewController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
@@ -42,33 +43,28 @@ export class CreateOffer5Page {
     createOffer() {
         this.offer.reward = parseInt(this.reward);
         this.offer.reserved = parseInt(this.reserved);
-
         this.place.setOffer(this.offer)
             .subscribe(resp => {
                 let location = resp.http_headers.get('location');
                 let offer_id = location.slice(- location.lastIndexOf('/') + 2);
+
                 let loading = this.loading.create({ content: 'Creating your offer...' });
-                
                 loading.present();
                 this.timer = setInterval(() => {
 
                     this.place.getOffer(offer_id, false)
                         .subscribe(offer => {
-                            if (offer) {
-                                if (this.picture_url) {
-                                    this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`, false)
-                                        .then(res => {
-                                            this.stopTimer();
-                                            loading.dismiss()
-                                            this.navTo();
-                                        });
-                                }
-                                else { 
-                                    this.stopTimer();
-                                    loading.dismiss();
-                                    this.navTo();
-                                }
-                            }
+                            this.place.refreshPlace();
+
+                            let promise = this.picture_url
+                                ? this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`, false)
+                                : Promise.resolve();
+
+                            promise.then(() => {
+                                this.stopTimer();
+                                loading.dismiss()
+                                this.navTo();
+                            });
                         });
                 }, 1500)
             }, err => this.presentConfirm('created'))
@@ -78,19 +74,17 @@ export class CreateOffer5Page {
         this.offer.reward = parseInt(this.reward);
         this.offer.reserved = parseInt(this.reserved);
         this.place.putOffer(this.offer, this.offer.id)
-            .subscribe(resp => {
-                if (this.picture_url) {
-                    let loading = this.loading.create({ content: 'Updeting offer...' });
-                    loading.present();
-                    this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`, false)
-                        .then(resut => {
-                            loading.dismiss();
-                            this.navTo();
-                        });
-                }
-                else {
+            .subscribe(() => {
+                let loading = this.loading.create({ content: 'Updeting offer...' });
+                loading.present();
+                let promise = this.picture_url
+                    ? this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`, false)
+                    : Promise.resolve();
+
+                promise.then(() => {
+                    loading.dismiss();
                     this.navTo();
-                }
+                })
             },
             err => this.presentConfirm('updated')
             );
@@ -131,7 +125,7 @@ export class CreateOffer5Page {
     navTo() {
         this.nav.setRoot(this.nav.first().component).then(() => {
             this.nav.parent.select(4);
-            this.nav.first();
+            // this.nav.first();
         })
     }
 }
