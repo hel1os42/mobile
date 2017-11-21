@@ -1,0 +1,16 @@
+<svg width="21" height="26" viewBox="0 0 21 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Ellipse 2</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-605 379)">
+<g id="Ellipse 2">
+<use xlink:href="#path0_fill" transform="translate(605 -379)" fill="url(#paint0_linear)"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(19.5 0.5 -0.559524 21.8214 0.279762 0.589285)">
+<stop offset="0.00552486" stop-color="#FF5A00"/>
+<stop offset="1" stop-color="#FF8A0F"/>
+</linearGradient>
+<path id="path0_fill" d="M 21 10.5C 21 16.299 10.5 26 10.5 26C 10.5 26 0 16.299 0 10.5C 0 4.70101 4.70101 0 10.5 0C 16.299 0 21 4.70101 21 10.5Z"/>
+</defs>
+</svg>
