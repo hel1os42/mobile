@@ -48,8 +48,8 @@
         </ion-item> -->
       <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">Detecting your location...</div>
       <div *ngIf="coords.lat" class="block-map">
-            <agm-map  [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng" [fitBounds]="bounds">
-                <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="400" [fillColor]="'#ff8b10'" [fillOpacity]="0.2"></agm-circle>
+            <agm-map  [zoom]="14" [latitude]="coords.lat" [longitude]="coords.lng" [fitBounds]="bounds">
+                <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="500" [fillColor]="'#ff8b10'" [fillOpacity]="0.2"></agm-circle>
                 <agm-marker [latitude]="coords.lat" [longitude]="coords.lng" [iconUrl]="'assets/img/create_user_profile/pin.svg'">
                     <agm-info-window [disableAutoPan]="true">
                         <div>title</div>

@@ -128,4 +128,8 @@ export class CreateOffer5Page {
             // this.nav.first();
         })
     }
+
+    disable() {
+        return parseInt(this.reserved) < parseInt(this.reward) * 10 || this.reserved == '' || this.reward == '';
+    }
 }

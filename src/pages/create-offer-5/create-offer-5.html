@@ -55,8 +55,8 @@
     </div>
 
     <p margin>
-        <button *ngIf="!offer.id" (click)="createOffer()" ion-button block text-uppercase color="primary">Create offer</button>
-        <button *ngIf="offer.id" (click)="updateOffer()" ion-button block text-uppercase color="primary">Edit offer</button>
+        <button *ngIf="!offer.id" (click)="createOffer()" [disabled]="disable()" ion-button block text-uppercase color="primary">Create offer</button>
+        <button *ngIf="offer.id" (click)="updateOffer()" [disabled]="disable()" ion-button block text-uppercase color="primary">Edit offer</button>
     </p>
 
 </ion-content>
