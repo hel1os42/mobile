@@ -38,17 +38,17 @@
       </div>
 
       <div class="block-lines">
-          <div class="text-4F4F4F font-14" text-uppercase>Setting map radius (in km)</div>
+          <div class="text-4F4F4F font-14" text-uppercase>Setting map radius (km)</div>
       </div>
-        <ion-item>
-            <ion-range min="1" max="100" pin="true" [(ngModel)]="saturation" color="secondary">
+        <!-- <ion-item>
+            <ion-range [(ngModel)]="radius" debounce="1500" min="1" max="50" pin="true"  color="secondary">
                 <ion-label range-left>1</ion-label>
                 <ion-label range-right>100</ion-label>
             </ion-range>
-        </ion-item>
+        </ion-item> -->
       <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">Detecting your location...</div>
       <div *ngIf="coords.lat" class="block-map">
-            <agm-map  [zoom]="14" [latitude]="coords.lat" [longitude]="coords.lng" [fitBounds]="bounds">
+            <agm-map  [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng" [fitBounds]="bounds">
                 <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="400" [fillColor]="'#ff8b10'" [fillOpacity]="0.2"></agm-circle>
                 <agm-marker [latitude]="coords.lat" [longitude]="coords.lng" [iconUrl]="'assets/img/create_user_profile/pin.svg'">
                     <agm-info-window [disableAutoPan]="true">
