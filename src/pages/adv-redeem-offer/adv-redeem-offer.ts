@@ -26,7 +26,7 @@ export class AdvRedeemOfferPage {
             .then(res => this.code = res.text);
     }
 
-    sendCode() {
+    confirm() {
         this.place.setRedeemCode(this.code)
             .subscribe(() => this.nav.pop());
     }
