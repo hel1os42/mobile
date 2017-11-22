@@ -1446,10 +1446,14 @@ a:active, .button:active{
 
 .btn_map1{
     position: absolute;
-    bottom: 2vw;
-    height: 92%;
+    top: 0;
+    height: 100%;
     width: 5.6vw;
     right: 5.6vw;
+}
+
+.btn_map1 img{
+    height: 6vw;
 }
 
 .btn_map2{

@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Notification</ion-title>
+        <ion-title>{{ 'PAGE_ADV-NOTIFICATIONS.NOTIFICATION' | translate }}</ion-title>
         <ion-buttons class="btn_header" end margin-right>
             <a *ngIf="!isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_active.svg"></a>
             <a *ngIf="isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_not_active.svg"></a>
@@ -16,19 +16,19 @@
         <a class="btn_search_settings"><img src="assets/img/user_home/icon_settings.svg"></a>
     </ion-item>
 
-    <div class="font-14 text-4F4F4F" text-uppercase>Today</div>
+    <div class="font-14 text-4F4F4F" text-uppercase>{{ 'PAGE_ADV-NOTIFICATIONS.TODAY' | translate }}</div>
     <ion-list no-lines class="item-block-nau font-0">
         <ion-item detail-push class="today">
             <ion-avatar item-start>
                 <div class="thumb_image" [style.background-image]="'url(assets/img/user_users/ava1.png)'"></div>
             </ion-avatar>
             <div class="bold font-20 text-3E4B5D">Erick Brick</div>
-            <div class="font-12 text-4F4F4F margin-top-3vw width-88 wrap-no">Redeemed your offer at</div>
+            <div class="font-12 text-4F4F4F margin-top-3vw width-88 wrap-no">{{ 'PAGE_ADV-NOTIFICATIONS.REDEEMED_YOUR_OFFER_AT' | translate }}</div>
             <div text-uppercase class="bold font-14 text-FF8B10 width-88 wrap-no">Pizza&pasta restaurant</div>
         </ion-item>
     </ion-list>
 
-    <div class="font-14 text-4F4F4F padding-top-5vw" text-uppercase>Yesterday</div>
+    <div class="font-14 text-4F4F4F padding-top-5vw" text-uppercase>{{ 'PAGE_ADV-NOTIFICATIONS.YESTERDAY' | translate }}</div>
     <ion-list no-lines class="item-block-nau font-0">
         <ion-item detail-push class="yesterday">
             <ion-avatar item-start>
@@ -43,9 +43,9 @@
                 <div class="thumb_image" [style.background-image]="'url(assets/img/thumb_cafe.png)'"></div>
             </ion-avatar>
             <div class="bold font-20 text-3E4B5D">Black Cafe</div>
-            <div class="font-12 text-828282 wrap-no margin-top-3vw width-88">Now available in your region</div>
+            <div class="font-12 text-828282 wrap-no margin-top-3vw width-88">{{ 'PAGE_ADV-NOTIFICATIONS.NOW_AVAILABLE_IN_YOUR_REGION' | translate }}</div>
             <div class="table">
-            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw font-14">View Place</button>
+            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw font-14">{{ 'PAGE_ADV-NOTIFICATIONS.VIEW_PLACE' | translate }}</button>
             <span class="table-cell padding-top-2vw">
             <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
             <span class="font-75 text-828282">210</span>

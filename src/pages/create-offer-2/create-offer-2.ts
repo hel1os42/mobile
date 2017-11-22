@@ -19,7 +19,7 @@ export class CreateOffer2Page {
     startTime: string;
     startDate: string;
     finishDate: string;
-    picture_url: string
+    picture_url: string;
     isWorkingDays = false;
     isWeekend = false;
 
@@ -181,6 +181,7 @@ export class CreateOffer2Page {
                 })
                 this.nav.push(CreateOffer3Page, { offer: this.offer, picture: this.picture_url });
             });
+        console.log(JSON.stringify(this.offer.timeframes));
     }
 
 }

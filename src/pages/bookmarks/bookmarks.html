@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Bookmarks
+      {{ 'PAGE_BOOKMARKS.BOOKMARKS' | translate }}
     </ion-title>
   </ion-navbar>
     <div class="header-shadow"></div>
@@ -13,14 +13,14 @@
       <img src="assets/img/bookmarks/star.svg">
     </ion-avatar>
     <div class="font-18 text-3E4B5D bold">123</div>
-    <div class="font-14 text-828282">Bookmarks</div>
+    <div class="font-14 text-828282">{{ 'PAGE_BOOKMARKS.BOOKMARKS' | translate }}</div>
   </ion-item>
   <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="nau-segment">
     <ion-segment-button value="places">
-      Places
+      {{ 'PAGE_BOOKMARKS.PLACES' | translate }}
     </ion-segment-button>
     <ion-segment-button value="offers">
-      Offers
+      {{ 'PAGE_BOOKMARKS.OFFERS' | translate }}
     </ion-segment-button>
   </ion-segment>
 
@@ -30,7 +30,7 @@
             <ion-avatar item-start text-center>
                 <!-- <img [src]="company.picture_url"> -->
                 <div class="thumb_image" [style.background-image]="'url(assets/img/user_home/image1.png)'"></div>
-                <span text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">Featured</span>
+                <span text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">{{ 'PAGE_BOOKMARKS.FEATURED' | translate }}</span>
             </ion-avatar>
             <div class="font-0">
                 <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
@@ -40,7 +40,7 @@
                 <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
                 <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">128</span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
-                <span class="font-75 text-828282">100 m</span>
+                <span class="font-75 text-828282">100 {{ 'UNIT.M' | translate }}</span>
                 <div class="bold font-20 text-3E4B5D text-ellipsis margin-top-1vw">The Fair food</div>
                 <div class="wrap">
                 <span class="type-food">Bakkery</span>
@@ -55,7 +55,7 @@
                         24
                     </div>
                     <div text-center class="font-10 text-828282">
-                        Offers
+                        {{ 'PAGE_BOOKMARKS.OFFERS' | translate }}
                     </div>
                 </div>
             </div>
@@ -73,21 +73,7 @@
       <div text-regular class="margin-top-10 font-12 text-828282 wrap text-overflow-35">A hamburger or burger is a sandwich consisting of one</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-10 flex">
-        <button ion-button class="btn_transfer font-14 text-white">Transfer</button>
-        <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-        <img class="gift" src="assets/img/place/icon_gift.svg">
-      </div>
-    </ion-item>
-
-    <ion-item class="relative">
-      <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image2.png)'"></div>
-      </ion-avatar>
-      <div class="bold font-20 text-3E4B5D text-ellipsis">Happy Friday</div>
-      <div text-regular class="margin-top-10 font-12 text-828282 wrap">The patty may be pan fried, barbecued, or flame broiled</div>
-      <img class="star_right" src="assets/img/place/icon_star.svg">
-      <div class="margin-top-10 flex">
-        <button ion-button class="btn_transfer font-14 text-white">Transfer</button>
+        <button ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_BOOKMARKS.REDEEM_NOW' | translate }}</button>
         <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
         <img class="gift" src="assets/img/place/icon_gift.svg">
       </div>
