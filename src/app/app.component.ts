@@ -1,4 +1,4 @@
-import { DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
+import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -65,10 +65,13 @@ export class MyApp {
         //     });
         // } else {
 
-
-        let langCode = this.translate.getBrowserLang() || DEFAULT_LANG_CODE;
+        let browserLang = this.translate.getBrowserLang();
+        let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === browserLang);
+        let langCode = isLang ? browserLang : DEFAULT_LANG_CODE;
+        debugger
         this.translate.use(langCode);
 
         SYS_OPTIONS.LANG_CODE = langCode;
     }
+  
 }

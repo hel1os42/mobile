@@ -16,11 +16,9 @@ export class ProfileService {
         if (forceReload || !this.user) {
             let obs = this.api.get('profile');
             obs.subscribe(user => this.user = user);
-            debugger
             return obs;
         }
         else {
-            debugger
             return Observable.of(this.user);
         }        
     }
