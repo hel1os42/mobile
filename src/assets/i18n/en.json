@@ -1,9 +1,118 @@
 {
+    "UNIT" : {
+        "KM" : "km",
+        "M" : "m",
+        "DETECTING_YOUR_LOCATION" : "Detecting your location...",
+        "SETTING_MAP_RADIUS" : "Setting map radius (km)",
+        "DONE" : "Done",
+        "CANCEL" : "Cancel"
+    },
+
     "PAGE_PLACES" : {
-        "all_offers" : "All offers",
-        "delivery" : "Delivery",
-        "new" : "New",
-        "monthly" : "Monthly",
-        "featured" : "Featured"
+        "ALL_OFFERS" : "All offers",
+        "DELIVERY" : "Delivery",
+        "NEW" : "New",
+        "MONTHLY" : "Monthly",
+        "FEATURED" : "Featured",
+        "OFFERS" : "Offers",
+        "LOADING_COMPANIES" : "Loading companies..."
+    },
+
+    "PAGE_ADV-NOTIFICATIONS" : {
+        "NOTIFICATION" : "Notification",
+        "TODAY" : "Today",
+        "YESTERDAY" : "Yesterday",
+        "VIEW_PLACE" : "View place",
+        "REDEEMED_YOUR_OFFER_AT" : "Redeemed your offer at",
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Now available in your region"
+    },
+
+    "PAGE_ADV-REDEEM-OFFER" : {
+        "CONFIRM_REDEMPTION" : "Confirm redemption",
+        "CODE" : "code",
+        "SCAN_QR_CODE" : "Scan QR Code",
+        "CONFIRM" : "Confirm"
+    },
+
+    "PAGE_ADV-USER-OFFERS" : {
+        "OFFERS" : "Offers",
+        "CREATED_OFFERS" : "Created Offers",
+        "CREATE_NEW" : "Create new",
+        "ALL" : "All",
+        "FEATURED" : "Featured",
+        "ACTIVE" : "Active",
+        "OFF" : "Off",
+        "REDEEMED" : "Redeemed",
+        "TIMES" : "times",
+        "WAS_CREATED" : "Was created:"
+    },
+
+    "PAGE_ADV-USER-PROFILE" : {
+        "ADVERTISER" : "Advertiser",
+        "CREATE_OFFER" : "Create offer",
+        "OFFERS" : "Offers",
+        "NAU" : "Nau",
+        "STATISTIC" : "Statistic"
+    },
+
+    "PAGE_BOOKMARKS" : {
+        "BOOKMARKS" : "Bookmarks",
+        "PLACES" : "Places",
+        "OFFERS" : "Offers",
+        "FEATURED" : "Featured",
+        "REDEEM_NOW" : "Redeem now"
+    },
+
+    "PAGE_CREATE-ADVUSER-PROFILE" : {
+        "CREATE_ACCOUNT" : "Create account",
+        "ADD" : "Add",
+        "LOGO" : "logo",
+        "SET_IMAGE" : "Set image",
+        "ADD_COMPANY_NAME" : "Add company name & descriptions",
+        "COMPANY_NAME" : "Company name",
+        "COMPANY_DESCRIPTION" : "Company description",
+        "CATEGORY_TYPE" : "Category & type your place",
+        "CHOOSE_CATEGORY" : "Choose category",
+        "CHOOSE_YOUR_OFFICE_LOCATION" : "Choose your office location",
+        "CATEGORY" : "Category"
+    },
+
+    "PAGE_CREATE-OFFER" : {
+        "CREATE_OFFER" : "Create Offer",
+        "EDIT_OFFER" : "Edit Offer",
+        "NEXT" : "Next",
+        "NAME_DESCRIPTION" : "Name & description",
+        "OFFER_NAME" : "Offer Name",
+        "OFFER_DESCRIPTION" : "Offer description",
+        "ADD_PICTURE" : "Add picture",
+        "NEXT_STEP" : "Next step",
+        "CATEGORY_TYPE" : "Category & type",
+        "OFFER_TYPE" : "Offer type",
+        "SET_DISCOUNT" : "Set discount",
+        "WORKING_DATES" : "Working dates",
+        "FROM" : "from",
+        "TO" : "to",
+        "WORKING_DAYS" : "Working days",
+        "WEEKEND" : "Weekend",
+        "WORKING_TIME" : "Working time",
+        "DETAILED_SETTINGS" : "Detailed settings",
+        "YOU_CAN_SET_WORKING_TIME" : "You can set working time more flexibility",
+        "DAY" : "Day",
+        "WORK" : "Work",
+        "WORKING_AREA" : "Working Area",
+        "MAX_REDEMPTION_PER_USER" : "Max redemption per user",
+        "OVERALL" : "Overall",
+        "DAILY" : "Daily",
+        "WEEKLY" : "Weekly",
+        "MONTHLY" : "Monthly",
+        "OTHER_LIMITS" : "Other limits",
+        "MINIMAL_USER_LEVEL" : "Minimal user level",
+        "UNLIMITED" : "Unlimited",
+        "FINISH" : "Finish",
+        "REWARDS_OPTIONS" : "Rewards options",
+        "REWARD_FOR_REDEMPTION" : "Reward for redemption",
+        "TOKEN_RESERVATION" : "Token reservation",
+        "YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT" : "You have tokens on your account",
+        "CREATE_OFFER" : "Create offer"
     }
 }

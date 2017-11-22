@@ -70,7 +70,7 @@ export class DateTimeUtils {
             finishTime = arr[0].to;
             isDetailedSettingsVisible = false;
             let days = arr.map(i => i.days);
-         
+
             if (arr.length == 2 && DateTimeUtils.find(days, [this.SATURDAY, this.SUNDAY])) {
                 isWeekend = true;
             }
