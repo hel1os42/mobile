@@ -34,12 +34,17 @@ export class MyApp {
 
             this.initTranslate();
     
-            this.profile.get()
-                .subscribe(resp => {
-                    let page = (resp.name == '' && !resp.email) ? CreateUserProfilePage : TabsPage;
-                    this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : page;
-                    //this.rootPage = CreateOffer3Page;
-                });
+            if (!this.auth.isLoggedIn()) {
+                this.rootPage = OnBoardingPage;
+            }
+            else {
+                this.profile.get()
+                    .subscribe(resp => {
+                        this.rootPage = (resp.name == '' && !resp.email)
+                            ? CreateUserProfilePage
+                            : TabsPage;
+                    });
+            }
         });
       
         this.auth.onLogout.subscribe(() => {
