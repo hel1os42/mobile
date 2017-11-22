@@ -51,7 +51,7 @@ export class PlacesPage {
         this.selectedCategory = this.categories[0];
         this.segment = "alloffers";
 
-        this.profile.get().subscribe(user => {
+        this.profile.get(false).subscribe(user => {
             this.coords = {
                 lat: user.latitude,
                 lng: user.longitude

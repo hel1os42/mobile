@@ -38,7 +38,7 @@ export class MyApp {
                 this.rootPage = OnBoardingPage;
             }
             else {
-                this.profile.get()
+                this.profile.get(true)
                     .subscribe(resp => {
                         this.rootPage = (resp.name == '' && !resp.email)
                             ? CreateUserProfilePage
