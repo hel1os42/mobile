@@ -41,7 +41,7 @@ export class CreateUserProfilePage {
         private imagePicker: ImagePicker,
         private api: ApiService) {
 
-        this.profile.get()
+        this.profile.get(true)
             .subscribe(resp => this.user = resp);
         
         this.location.getByIp()

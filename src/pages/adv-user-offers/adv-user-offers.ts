@@ -82,6 +82,7 @@ export class AdvUserOffersPage {
                 ? 'deactive'
                 : 'active'
         };
+        console.log(offer.status);
         this.place.changeOfferStatus(statusInfo, offer.id)
             .subscribe(resp => {
                 // if(this.isFilterByDate) {

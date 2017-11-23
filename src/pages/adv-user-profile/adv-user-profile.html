@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Advertiser</ion-title>
+        <ion-title>{{ 'PAGE_ADV-USER-PROFILE.ADVERTISER' | translate }}</ion-title>
         <ion-buttons class="btn_header" margin-right end>
             <a (click)="openSettings()"><img src="assets/img/settings.svg"></a>
         </ion-buttons>
@@ -8,7 +8,7 @@
     <ion-list class="margin-0">
         <div class="cover" [style.background-image]="'url(' + company?.cover_url + ')'">
             <div class="cover_logo" [style.background-image]="'url(' + company?.picture_url + ')'"></div>
-            <button (click)="openCreateOffer()" text-uppercase item-end ion-button class="btn_transfer font-16 extrabold text-white">Create offer</button>
+            <button (click)="openCreateOffer()" text-uppercase item-end ion-button class="btn_transfer font-16 extrabold text-white">{{ 'PAGE_ADV-USER-PROFILE.CREATE_OFFER' | translate }}</button>
         </div>
 
         <div margin-left margin-right margin-bottom class="font-0 relative margin-top-14vw">
@@ -27,21 +27,21 @@
                 <div>
                     <img src="assets/img/user_profile/offers.svg">
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ company?.offers_count }}</div>
-                    <div text-uppercase class="text-3E4B5D font-12">offers</div>
+                    <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_ADV-USER-PROFILE.OFFERS' | translate }}</div>
                 </div>
             </a>
             <a (click)="openUserNau()" ion-col class="text-gray" align-self-end>
                 <div>
                     <img src="assets/img/user_profile/nau.svg">
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ balance }}</div>
-                    <div text-uppercase class="text-3E4B5D font-12">nau</div>
+                    <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_ADV-USER-PROFILE.NAU' | translate }}</div>
                 </div>
             </a>
             <a (click)="openStatistic()" ion-col class="text-gray" align-self-start>
                 <div>
                     <img src="assets/img/adv-user-profile/static.svg">
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">0</div>
-                    <div text-uppercase class="text-3E4B5D font-12">Statistic</div>
+                    <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_ADV-USER-PROFILE.STATISTIC' | translate }}</div>
                 </div>
             </a>
         </ion-row>

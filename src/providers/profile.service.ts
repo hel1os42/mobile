@@ -1,13 +1,26 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from "./api.service";
+import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
+import { ApiService } from './api.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ProfileService {
-    constructor(private api: ApiService) { }
+    user: User;
 
-    get() {
-        return this.api.get('profile');
+    constructor(private api: ApiService, private auth: AuthService) {
+        auth.onLogout.subscribe(() => this.user = undefined);
+    }
+
+    get(forceReload: boolean) {
+        if (forceReload || !this.user) {
+            let obs = this.api.get('profile');
+            obs.subscribe(user => this.user = user);
+            return obs;
+        }
+        else {
+            return Observable.of(this.user);
+        }        
     }
 
     getReferrals() {
@@ -23,7 +36,8 @@ export class ProfileService {
     }
 
     put(user: User) {
-        return this.api.put('profile', user);
+        let obs = this.api.put('profile', user);
+        obs.subscribe(user => this.user = user);
+        return obs;
     }
-
 }

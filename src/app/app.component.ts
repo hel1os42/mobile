@@ -1,3 +1,5 @@
+import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
+import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,11 +19,12 @@ export class MyApp {
     rootPage: any;
 
     constructor(platform: Platform,
-        statusBar: StatusBar,
-        splashScreen: SplashScreen,
-        private auth: AuthService,
-        private app: App,
-        private profile: ProfileService) {
+                statusBar: StatusBar,
+                splashScreen: SplashScreen,
+                private auth: AuthService,
+                private app: App,
+                private profile: ProfileService,
+                private translate: TranslateService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -29,17 +32,45 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
 
-            let page;
-            this.profile.get()
-                .subscribe(resp => {
-                    page = (resp.name == '' && !resp.email) ? CreateUserProfilePage : TabsPage;
-                    this.rootPage = !this.auth.isLoggedIn() ? OnBoardingPage : page;
-                    //this.rootPage = CreateOffer3Page;
-                });
+            this.initTranslate();
+    
+            if (!this.auth.isLoggedIn()) {
+                this.rootPage = OnBoardingPage;
+            }
+            else {
+                this.profile.get(true)
+                    .subscribe(resp => {
+                        this.rootPage = (resp.name == '' && !resp.email)
+                            ? CreateUserProfilePage
+                            : TabsPage;
+                    });
+            }
         });
-
+      
         this.auth.onLogout.subscribe(() => {
             this.app.getRootNav().setRoot(LoginPage);
         });
     }
+
+    
+    initTranslate() {
+        // this language will be used as a fallback when a translation isn't found in the current language
+        this.translate.setDefaultLang(DEFAULT_LANG_CODE);
+                
+        // if ((<any>window).cordova) {
+        //     Globalization.getPreferredLanguage().then(result => {
+        //         var language = this.getSuitableLanguage(result.value);
+        //         translate.use(language);
+        //         sysOptions.systemLanguage = language;
+        //     });
+        // } else {
+
+        let browserLang = this.translate.getBrowserLang();
+        let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === browserLang);
+        let langCode = isLang ? browserLang : DEFAULT_LANG_CODE;
+        this.translate.use(langCode);
+
+        SYS_OPTIONS.LANG_CODE = langCode;
+    }
+  
 }

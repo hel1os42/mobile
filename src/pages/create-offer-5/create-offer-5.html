@@ -1,13 +1,13 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>{{ offer.id ? "Edit Offer" : "Create Offer" }}</ion-title>
+        <ion-title>{{( offer.id ? 'PAGE_CREATE-OFFER.EDIT_OFFER' : 'PAGE_CREATE-OFFER.CREATE_OFFER' ) | translate }}</ion-title>
         <ion-buttons end class="padding-right-3vw">
             <button *ngIf="!offer.id" (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
-                <span class="font-12 text-333333 no-bold">Finish</span>
+                <span class="font-12 text-333333 no-bold">{{ 'PAGE_CREATE-OFFER.FINISH' | translate }}</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
             </button>
             <button *ngIf="offer.id" (click)="updateOffer()" ion-button icon-only color="dark" class="btn_search">
-                <span class="font-12 text-333333 no-bold">Finish</span>
+                <span class="font-12 text-333333 no-bold">{{ 'PAGE_CREATE-OFFER.FINISH' | translate }}</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
             </button>
         </ion-buttons>
@@ -31,15 +31,15 @@
 
 <ion-content>
 
-    <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>Rewards options</div>
+    <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-OFFER.REWARDS_OPTIONS' | translate }}</div>
     <div class="block-lines">
         <ion-item padding-left class="bg-gray margin-bottom-5">
-            <ion-label class="text-3E4B5D font-16 semibold">Reward for redemption</ion-label>
+            <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.REWARD_FOR_REDEMPTION' | translate }}</ion-label>
             <ion-input [(ngModel)]="reward" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
         </ion-item>
 
         <ion-item padding-left class="bg-gray">
-            <ion-label class="text-3E4B5D font-16 semibold">Token reservation</ion-label>
+            <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.TOKEN_RESERVATION' | translate }}</ion-label>
             <ion-input [(ngModel)]="reserved" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
         </ion-item>
     </div>
@@ -50,13 +50,13 @@
                 <img src="assets/img/user_nau/icon_nau.svg">
             </ion-avatar>
             <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
-            <div class="font-12 text-828282">You have tokens on your account</div>
+            <div class="font-12 text-828282">{{ 'PAGE_CREATE-OFFER.YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT' | translate }}</div>
         </ion-item>
     </div>
 
     <p margin>
-        <button *ngIf="!offer.id" (click)="createOffer()" ion-button block text-uppercase color="primary">Create offer</button>
-        <button *ngIf="offer.id" (click)="updateOffer()" ion-button block text-uppercase color="primary">Edit offer</button>
+        <button *ngIf="!offer.id" (click)="createOffer()" [disabled]="disable()" ion-button block text-uppercase color="primary">{{ 'PAGE_CREATE-OFFER.CREATE_OFFER' | translate }}</button>
+        <button *ngIf="offer.id" (click)="updateOffer()" [disabled]="disable()" ion-button block text-uppercase color="primary">{{ 'PAGE_CREATE-OFFER.EDIT_OFFER' | translate }}</button>
     </p>
 
 </ion-content>

@@ -51,7 +51,7 @@ export class SettingsPage {
         this.coords.lat = this.user.latitude;
         this.coords.lng = this.user.longitude;
         if(!this.user.id) {
-            this.profile.get()
+            this.profile.get(true)
                 .subscribe(user => this.user = user);
         }
         

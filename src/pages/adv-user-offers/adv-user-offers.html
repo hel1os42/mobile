@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Offers</ion-title>
+        <ion-title>{{ 'PAGE_ADV-USER-OFFERS.OFFERS' | translate }}</ion-title>
     </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
@@ -12,9 +12,9 @@
         </ion-avatar>
         <div item-content>
             <div class="font-18 text-3E4B5D bold">{{ total }}</div>
-            <div class="font-14 text-828282">Created Offers</div>
+            <div class="font-14 text-828282">{{ 'PAGE_ADV-USER-OFFERS.CREATED_OFFERS' | translate }}</div>
         </div>
-        <button (click)="openCreateOffer()" item-end ion-button class="btn_transfer font-14 text-white extrabold">Create new</button>
+        <button (click)="openCreateOffer()" item-end ion-button class="btn_transfer font-14 text-white extrabold">{{ 'PAGE_ADV-USER-OFFERS.CREATE_NEW' | translate }}</button>
         <a item-end margin-left class="font-0 btn_calendar_user">
             <a>
                 <img src="assets/img/user_offers/icon_right.svg">
@@ -26,16 +26,16 @@
     </ion-item>
     <ion-segment [(ngModel)]="segment" (click)="filterOffers()" text-uppercase margin-top class="nau-segment">
         <ion-segment-button  value="all">
-            All
+            {{ 'PAGE_ADV-USER-OFFERS.ALL' | translate }}
         </ion-segment-button>
         <ion-segment-button value="featured">
-            Featured
+            {{ 'PAGE_ADV-USER-OFFERS.FEATURED' | translate }}
         </ion-segment-button>
         <ion-segment-button value="active">
-            Active
+            {{ 'PAGE_ADV-USER-OFFERS.ACTIVE' | translate }}
         </ion-segment-button>
         <ion-segment-button value="deactive">
-            Off
+            {{ 'PAGE_ADV-USER-OFFERS.OFF' | translate }}
         </ion-segment-button>
     </ion-segment>
 
@@ -47,11 +47,11 @@
                     <div [ngClass]="{ 'grayscale' : (offer.status == 'deactive') }" class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '), url(assets/img/imagenotfound.svg)'}"></div>
                 </ion-avatar>
                 <div item-content>
-                    <div class="bold font-22 text-3E4B5D wrap-no width-86">{{ offer.label }}</div>
+                    <div class="bold font-22 text-3E4B5D wrap-no width-44vw">{{ offer.label }}</div>
                     <div class="bold font-14 text-FF8B10 padding-top-1vw" text-uppercase>
-                        <span class="text-828282 no-bold">Redeemed</span> 53 times
+                        <span class="text-828282 no-bold">{{ 'PAGE_ADV-USER-OFFERS.REDEEMED' | translate }}</span> 53 {{ 'PAGE_ADV-USER-OFFERS.TIMES' | translate }}
                     </div>
-                    <div class="font-14 text-828282 regular padding-top-1vw">Was created:
+                    <div class="font-14 text-828282 regular padding-top-1vw">{{ 'PAGE_ADV-USER-OFFERS.WAS_CREATED' | translate }}
                         <br>{{ offer.created_at.slice(0, 10) }}</div>
                 </div>
                 <div item-end>

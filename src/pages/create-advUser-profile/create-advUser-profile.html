@@ -1,42 +1,46 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Create account</ion-title>
+        <ion-title>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</ion-title>
     </ion-navbar>
     <ion-list class="margin-0">
         <div *ngIf="!cover_url || cover_url == 'O'" class="cover">
             <div *ngIf="picture_url && picture_url != 'O'" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
             <div *ngIf="!picture_url || picture_url == 'O'" (click)="addLogo()" class="cover_logo_adv">
-                <span text-uppercase class="font-12 semibold">Add
-                    <br>logo</span>
+                <span text-uppercase class="font-12 semibold">
+                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD' | translate }}<br>
+                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.LOGO' | translate }}
+                </span>
             </div>
-            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
+            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>{{ 'PAGE_CREATE-ADVUSER-PROFILE.SET_IMAGE' | translate }}</button>
         </div>
         <div *ngIf="cover_url && cover_url != 'O'" class="cover" [style.background-image]="'url(' + cover_url + ')'">
             <div *ngIf="picture_url && picture_url != 'O'" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
             <div *ngIf="!picture_url || picture_url == 'O'" (click)="addLogo()" class="cover_logo_adv">
-                <span text-uppercase class="font-12 semibold">Add
-                    <br>logo</span>
+                <span text-uppercase class="font-12 semibold">
+                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD' | translate }}<br>
+                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.LOGO' | translate }}
+                </span>
             </div>
-            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>Set image</button>
+            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>{{ 'PAGE_CREATE-ADVUSER-PROFILE.SET_IMAGE' | translate }}</button>
         </div>
     </ion-list>
     <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content class="padding-no">
-    <div class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw" text-uppercase margin-top margin-left margin-right>Add company name & descriptions</div>
+    <div class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD_COMPANY_NAME' | translate }}</div>
     <div class="block-lines">
         <ion-item no-lines>
-            <ion-input [(ngModel)]="company.name" class="bg-gray" type="text" placeholder="Company name"></ion-input>
+            <ion-input [(ngModel)]="company.name" class="bg-gray" type="text" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }}"></ion-input>
         </ion-item>
 
         <ion-item no-lines margin-top>
-            <ion-textarea [(ngModel)]="company.description" class="bg-gray-radius-small" placeholder="Company description"></ion-textarea>
+            <ion-textarea [(ngModel)]="company.description" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }}"></ion-textarea>
         </ion-item>
     </div>
 
     <div class="block-lines">
-        <div class="text-4F4F4F font-14" text-uppercase>Category & type your place</div>
+        <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CATEGORY_TYPE' | translate }}</div>
     </div>
 
     <div class="block-lines">
@@ -51,7 +55,7 @@
             </ng-container>
 
             <ng-container *ngIf="!selectedCategory">
-                <div class="text-3E4B5D font-16 semibold">Choose category</div>
+                <div class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_CATEGORY' | translate }}</div>
             </ng-container>
         </a>
 
@@ -71,11 +75,11 @@
     </div>
 
     <div class="block-lines">
-        <div class="text-4F4F4F font-14" text-uppercase>Choose your office location</div>
+        <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_YOUR_OFFICE_LOCATION' | translate }}</div>
         <div>{{ address }}</div>
     </div>
 
-    <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">Detecting your location...</div>
+    <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
         <agm-map [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)" [fitBounds]="bounds">
         </agm-map>
@@ -83,7 +87,7 @@
     </div>
 
     <p margin>
-        <button (click)="createAccount()" [disabled]="!company.name || !company.description || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">Create account</button>
+        <button (click)="createAccount()" [disabled]="!company.name || !company.description || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
     </p>
 
 </ion-content>

@@ -1,3 +1,4 @@
+import { ProfileService } from '../../providers/profile.service';
 import { MapsAPILoader } from '@agm/core';
 import { google } from '@agm/core/services/google-maps-types';
 import { Component } from '@angular/core';
@@ -14,7 +15,6 @@ import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 
-
 @Component({
     selector: 'page-places',
     templateUrl: 'places.html'
@@ -27,10 +27,7 @@ export class PlacesPage {
     selectedChildCategories: SelectedCategory[];
     selectedCategory = new OfferCategory;
     isMapVisible: boolean = false;
-    coords: Coords = {
-        lat: 50,
-        lng: 30
-    };
+    coords: Coords;
     mapBounds;
     mapCenter: Coords;
     message: string;
@@ -48,30 +45,39 @@ export class PlacesPage {
         private appMode: AppModeService,
         private offers: OfferService,
         private popoverCtrl: PopoverController,
-        private mapsAPILoader: MapsAPILoader) {
+        private mapsAPILoader: MapsAPILoader,
+        private profile: ProfileService) {
 
         this.selectedCategory = this.categories[0];
         this.segment = "alloffers";
 
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                if (!this.mapCenter) {
-                    this.mapCenter = {
+        this.profile.get(false).subscribe(user => {
+            this.coords = {
+                lat: user.latitude,
+                lng: user.longitude
+            };
+            
+            this.location.get()
+                .then((resp) => {
+                    this.coords = {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
-                }
-            })
-            .catch((error) => {
-                this.message = error.message;
-            });
 
-        this.loadCompanies([this.selectedCategory.id], this.search, this.page);
-        this.categoryFilter = [this.selectedCategory.id];
+                    if (!this.mapCenter) {
+                        this.mapCenter = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                    }
+                })
+                .catch((error) => {
+                    this.message = error.message;
+                });
+
+            this.loadCompanies([this.selectedCategory.id], this.search, this.page);
+            this.categoryFilter = [this.selectedCategory.id];
+        })
     }
 
     ionSelected() {
@@ -90,20 +96,23 @@ export class PlacesPage {
     }
 
     generateBounds(markers): any {
+        let marker = {
+            latitude: this.coords.lat,
+            longitude: this.coords.lng
+        };
+
         if (markers && markers.length > 0) {
             let google = window['google'];
-
             let bounds = new google.maps.LatLngBounds();
-
-            markers.forEach((marker: any) => {
-                bounds.extend(new google.maps.LatLng({ lat: marker.latitude, lng: marker.longitude }));
-            });
-
-            //check if there is only one marker
-            if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                return undefined;
-            }
-            return bounds;
+                markers.forEach((marker: any) => {
+                    bounds.extend(new google.maps.LatLng({ lat: marker.latitude, lng: marker.longitude }));
+                });
+                //check if there is only one marker
+                if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+                    bounds.extend(new google.maps.LatLng({ lat: this.coords.lat, lng: this.coords.lng }));
+                    return bounds;
+                }
+                return bounds;
         }
         return undefined;
     }
@@ -113,7 +122,7 @@ export class PlacesPage {
             .subscribe(companies => {
                 // this.companies = companies.data.filter(p => p.offers_count > 0);//temporaty companies filter
                 // this.companies = companies.data;
-                
+
                 //temporary offers list filter
                 let companiesList = companies.data.filter(p => p.offers_count > 0);
                 let i = 0;

@@ -26,7 +26,8 @@ export class AdvUserProfilePage {
     balance: number;
     NAU_Id: string;
     user = new User;
-    onRefreshSubscription: Subscription;
+    onRefreshPlace: Subscription;
+    onRefreshAccounts: Subscription;
 
     constructor(private nav: NavController,
         private storage: StorageService,
@@ -39,7 +40,7 @@ export class AdvUserProfilePage {
             this.company = this.place.company;
         }
 
-        this.onRefreshSubscription = this.place.onRefreshCompany
+        this.onRefreshPlace = this.place.onRefreshCompany
             .subscribe(company => {
                 this.company = company;
             });
@@ -52,6 +53,17 @@ export class AdvUserProfilePage {
                 });
         }
 
+        this.onRefreshAccounts = this.place.onRefreshAccounts
+            .subscribe(() => {
+                this.profile.getWithAccounts()
+                    .subscribe(resp => {
+                this.user = resp;
+                this.balance = resp.accounts.NAU.balance;
+                this.NAU_Id = resp.accounts.NAU.id;
+                    })
+            })
+        
+            if (!this.balance) {
         this.profile.getWithAccounts()
             .subscribe(resp => {
                 this.user = resp;
@@ -59,6 +71,7 @@ export class AdvUserProfilePage {
                 this.NAU_Id = resp.accounts.NAU.id;
             })
     }
+}
 
     ionViewWillEnter() {
         this.isModalVisible = this.storage.get(this.MODAL_VISIBLE_KEY);
@@ -93,6 +106,7 @@ export class AdvUserProfilePage {
     }
 
     ionViewWillUnload() {
-        this.onRefreshSubscription.unsubscribe();
+        this.onRefreshPlace.unsubscribe();
+        this.onRefreshAccounts.unsubscribe();
     }
 }

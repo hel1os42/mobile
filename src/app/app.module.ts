@@ -1,225 +1,247 @@
-import { QRCodeModule } from 'angular2-qrcode';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from "@angular/http";
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
+import 'rxjs/add/operator/map';
+
 import { AgmCoreModule } from '@agm/core';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { Http, HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { Geolocation } from '@ionic-native/geolocation';
+import { ImagePicker } from '@ionic-native/image-picker';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { ImagePicker } from '@ionic-native/image-picker';
-import { FileTransfer } from '@ionic-native/file-transfer';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { MyApp } from './app.component';
-import { StartPage } from "../pages/start/start";
-import { LoginPage } from "../pages/login/login";
-import { CreateUserProfilePage } from "../pages/create-user-profile/create-user-profile";
-import { TabsPage } from '../pages/tabs/tabs';
-import { UserProfilePage } from '../pages/user-profile/user-profile';
-import { SignUpInvitePage } from "../pages/invite/invite";
-import { NotificationsPage } from '../pages/notifications/notifications';
-import { AuthService } from "../providers/auth.service";
-import { LocationService } from "../providers/location.service";
-import { ApiService } from "../providers/api.service";
-import { StorageService } from "../providers/storage.service";
-import { TokenService } from "../providers/token.service";
-import { SignUpPage } from "../pages/signup/signup";
-import { SignUpCodePage } from "../pages/signup-code/signup-code";
-import { OnBoardingPage } from "../pages/onboarding/onboarding";
-import { ProfileService } from "../providers/profile.service";
-import { CreateAdvUserProfilePage } from "../pages/create-advUser-profile/create-advUser-profile";
-import { OfferService } from "../providers/offer.service";
-import { CreateOfferPage } from "../pages/create-offer/create-offer";
-import { SettingsPage } from "../pages/settings/settings";
-import { AdvUserProfilePage } from "../pages/adv-user-profile/adv-user-profile";
-import { UserOffersPage } from "../pages/user-offers/user-offers";
-import { OfferPage } from "../pages/offer/offer";
-import { TestPage } from "../pages/test/test";
-import { SplashScreenPage } from "../pages/splash-screen/splash-screen";
-import { SplashInfoPage } from '../pages/splash-info/splash-info';
-import { SplashNewsPage } from '../pages/splash-news/splash-news';
-import { UserTasksPage } from "../pages/user-tasks/user-tasks";
-import { UserAchievePage } from "../pages/user-achieve/user-achieve";
-import { UserUsersPage } from "../pages/user-users/user-users";
-import { UserNauPage } from "../pages/user-nau/user-nau";
-import { AdvUserOffersPage } from "../pages/adv-user-offers/adv-user-offers";
-import { AdvTabsPage } from "../pages/adv-tabs/adv-tabs";
-import { AdvNotificationsPage } from "../pages/adv-notifications/adv-notifications";
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { QRCodeModule } from 'angular2-qrcode';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+
+import { BarChartComponent } from '../components/bar-chart';
+import { LineChartComponent } from '../components/line-chart';
 import { AdvHomePage } from '../pages/adv-home/adv-home';
-import { BookmarksPage } from '../pages/bookmarks/bookmarks';
-import { SettingsPopover } from '../pages/settings/settings.popover';
-import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
-import { PlacesPopover } from '../pages/places/places.popover';
-import { AppModeService } from '../providers/appMode.service';
-import { PlacesPage } from '../pages/places/places';
-import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
-import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
-import { PlacePage } from '../pages/place/place';
-import { OfferRedeemPopover } from '../pages/offer/offerRedeem.popover';
-import { CongratulationPopover } from '../pages/offer/congratulation.popover';
-import { OfferTermsPage } from '../pages/offer-terms/offer-terms';
-import { SettingsChangePhonePage } from '../pages/settings-change-phone/settings-change-phone';
+import { AdvNotificationsPage } from '../pages/adv-notifications/adv-notifications';
 import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
+import { AdvTabsPage } from '../pages/adv-tabs/adv-tabs';
+import { AdvUserOffersPage } from '../pages/adv-user-offers/adv-user-offers';
+import { AdvUserProfilePage } from '../pages/adv-user-profile/adv-user-profile';
+import { BookmarksPage } from '../pages/bookmarks/bookmarks';
+import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
+import {
+    CreateAdvUserProfileCategoryPopover,
+} from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
+import {
+    CreateAdvUserProfileChildCategoryPopover,
+} from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
+import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
 import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
-import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
-import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
+import { CreateOfferPage } from '../pages/create-offer/create-offer';
+import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
+import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
+import { FeedPage } from '../pages/feed/feed';
+import { SignUpInvitePage } from '../pages/invite/invite';
+import { LoginPage } from '../pages/login/login';
+import { NotificationsPage } from '../pages/notifications/notifications';
+import { OfferTermsPage } from '../pages/offer-terms/offer-terms';
+import { CongratulationPopover } from '../pages/offer/congratulation.popover';
+import { OfferPage } from '../pages/offer/offer';
+import { OfferRedeemPopover } from '../pages/offer/offerRedeem.popover';
+import { OnBoardingPage } from '../pages/onboarding/onboarding';
+import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
+import { PlacePage } from '../pages/place/place';
+import { PlacesPage } from '../pages/places/places';
+import { PlacesPopover } from '../pages/places/places.popover';
+import { SettingsChangePhonePage } from '../pages/settings-change-phone/settings-change-phone';
+import { SettingsPage } from '../pages/settings/settings';
+import { SettingsPopover } from '../pages/settings/settings.popover';
+import { SignUpCodePage } from '../pages/signup-code/signup-code';
+import { SignUpPage } from '../pages/signup/signup';
+import { SplashInfoPage } from '../pages/splash-info/splash-info';
+import { SplashNewsPage } from '../pages/splash-news/splash-news';
+import { SplashScreenPage } from '../pages/splash-screen/splash-screen';
+import { StartPage } from '../pages/start/start';
+import { StatisticPage } from '../pages/statistic/statistic';
+import { Statistic1Page } from '../pages/statistic1/statistic1';
+import { TabsPage } from '../pages/tabs/tabs';
+import { TestPage } from '../pages/test/test';
+import { UserAchievePage } from '../pages/user-achieve/user-achieve';
+import { UserNauPage } from '../pages/user-nau/user-nau';
+import { UserOffersPage } from '../pages/user-offers/user-offers';
+import { UserProfilePage } from '../pages/user-profile/user-profile';
+import { UserTasksPage } from '../pages/user-tasks/user-tasks';
+import { UserUsersPage } from '../pages/user-users/user-users';
+import { ApiService } from '../providers/api.service';
+import { AppModeService } from '../providers/appMode.service';
+import { AuthService } from '../providers/auth.service';
+import { LocationService } from '../providers/location.service';
+import { OfferService } from '../providers/offer.service';
 import { PlaceService } from '../providers/place.service';
-import { FeedPage } from "../pages/feed/feed";
-import { ToastService } from '../providers/toast.service';
+import { ProfileService } from '../providers/profile.service';
+import { StorageService } from '../providers/storage.service';
 import { TimezoneService } from '../providers/timezone.service';
-import { StatisticPage } from "../pages/statistic/statistic";
-import { Statistic1Page } from "../pages/statistic1/statistic1";
-import { LineChartComponent } from '../components/line-chart';
-import { BarChartComponent } from '../components/bar-chart';
+import { ToastService } from '../providers/toast.service';
+import { TokenService } from '../providers/token.service';
+import { MyApp } from './app.component';
+
+// The translate loader needs to know where to load i18n files
+// in Ionic's static asset pipeline.
+export function createTranslateLoader(http: Http) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
-    MyApp,
-    StartPage,
-    SignUpPage,
-    SignUpCodePage,
-    SignUpInvitePage,
-    LoginPage,
-    CreateUserProfilePage,
-    CreateAdvUserProfilePage,
-    CreateOfferPage,
-    TabsPage,
-    PlacesPage,
-    UserProfilePage,
-    BookmarksPage,
-    NotificationsPage,
-    OnBoardingPage,
-    SettingsPage,
-    AdvUserProfilePage,
-    UserOffersPage,
-    OfferPage,
-    TestPage,
-    SplashScreenPage,
-    UserTasksPage,
-    UserAchievePage,
-    UserUsersPage,
-    UserNauPage,
-    AdvUserOffersPage,
-    AdvTabsPage,
-    AdvNotificationsPage,
-    AdvHomePage,
-    CreateOffer1Page,
-    PlaceFeedbackPage,
-    PlacePage,
-    SplashInfoPage,
-    SplashNewsPage,
-    SettingsPopover,
-    OfferRedeemPopover,
-    CreateOfferPopover,
-    PlacesPopover,
-    CongratulationPopover,
-    CreateAdvUserProfileCategoryPopover,
-    CreateAdvUserProfileChildCategoryPopover,
-    OfferTermsPage,
-    SettingsChangePhonePage,
-    AdvRedeemOfferPage,
-    CreateOffer2Page,
-    CreateOffer3Page,
-    CreateOffer4Page,
-    CreateOffer5Page,
-    FeedPage,
-    StatisticPage,
-    Statistic1Page,
-    LineChartComponent,
-    BarChartComponent
+      MyApp,
+      StartPage,
+      SignUpPage,
+      SignUpCodePage,
+      SignUpInvitePage,
+      LoginPage,
+      CreateUserProfilePage,
+      CreateAdvUserProfilePage,
+      CreateOfferPage,
+      TabsPage,
+      PlacesPage,
+      UserProfilePage,
+      BookmarksPage,
+      NotificationsPage,
+      OnBoardingPage,
+      SettingsPage,
+      AdvUserProfilePage,
+      UserOffersPage,
+      OfferPage,
+      TestPage,
+      SplashScreenPage,
+      UserTasksPage,
+      UserAchievePage,
+      UserUsersPage,
+      UserNauPage,
+      AdvUserOffersPage,
+      AdvTabsPage,
+      AdvNotificationsPage,
+      AdvHomePage,
+      CreateOffer1Page,
+      PlaceFeedbackPage,
+      PlacePage,
+      SplashInfoPage,
+      SplashNewsPage,
+      SettingsPopover,
+      OfferRedeemPopover,
+      CreateOfferPopover,
+      PlacesPopover,
+      CongratulationPopover,
+      CreateAdvUserProfileCategoryPopover,
+      CreateAdvUserProfileChildCategoryPopover,
+      OfferTermsPage,
+      SettingsChangePhonePage,
+      AdvRedeemOfferPage,
+      CreateOffer2Page,
+      CreateOffer3Page,
+      CreateOffer4Page,
+      CreateOffer5Page,
+      FeedPage,
+      StatisticPage,
+      Statistic1Page,
+      LineChartComponent,
+      BarChartComponent
   ],
   imports: [
-    BrowserModule,
-    HttpModule,
-    QRCodeModule,
-    IonicModule.forRoot(MyApp, {
-      mode: "ios",
-      backButtonText: "",
-      scrollPadding: false,
-      scrollAssist: true,
-      autoFocusAssist: false
-    }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBAgndAbV-v4aQWTAHrUljUfSCAthdK-RY'}),
+      BrowserModule,
+      HttpModule,
+      QRCodeModule,
+      IonicModule.forRoot(MyApp, {
+        mode: "ios",
+        backButtonText: "",
+        scrollPadding: false,
+        scrollAssist: true,
+        autoFocusAssist: false
+      }),
+      AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyBAgndAbV-v4aQWTAHrUljUfSCAthdK-RY'
+      }),
+      TranslateModule.forRoot({
+        loader: { 
+          provide: TranslateLoader, 
+          useFactory: (createTranslateLoader), 
+          deps: [Http] },
+      })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    StartPage,
-    SignUpPage,
-    SignUpCodePage,
-    SignUpInvitePage,
-    LoginPage,
-    CreateUserProfilePage,
-    CreateAdvUserProfilePage,
-    CreateOfferPage,
-    TabsPage,
-    PlacesPage,
-    UserProfilePage,
-    BookmarksPage,
-    NotificationsPage,
-    OnBoardingPage,
-    SettingsPage,
-    AdvUserProfilePage,
-    UserOffersPage,
-    OfferPage,
-    TestPage,
-    SplashScreenPage,
-    UserTasksPage,
-    UserAchievePage,
-    UserUsersPage,
-    UserNauPage,
-    AdvUserOffersPage,
-    AdvTabsPage,
-    AdvNotificationsPage,
-    AdvHomePage,
-    CreateOffer1Page,
-    PlaceFeedbackPage,
-    PlacePage,
-    SplashInfoPage,
-    SplashNewsPage,
-    SettingsPopover,
-    OfferRedeemPopover,
-    CreateOfferPopover,
-    PlacesPopover,
-    CongratulationPopover,
-    CreateAdvUserProfileCategoryPopover,
-    CreateAdvUserProfileChildCategoryPopover,
-    OfferTermsPage,
-    SettingsChangePhonePage,
-    AdvRedeemOfferPage,
-    CreateOffer2Page,
-    CreateOffer3Page,
-    CreateOffer4Page,
-    CreateOffer5Page,
-    FeedPage,
-    StatisticPage,
-    Statistic1Page,
-    LineChartComponent,
-    BarChartComponent
+      MyApp,
+      StartPage,
+      SignUpPage,
+      SignUpCodePage,
+      SignUpInvitePage,
+      LoginPage,
+      CreateUserProfilePage,
+      CreateAdvUserProfilePage,
+      CreateOfferPage,
+      TabsPage,
+      PlacesPage,
+      UserProfilePage,
+      BookmarksPage,
+      NotificationsPage,
+      OnBoardingPage,
+      SettingsPage,
+      AdvUserProfilePage,
+      UserOffersPage,
+      OfferPage,
+      TestPage,
+      SplashScreenPage,
+      UserTasksPage,
+      UserAchievePage,
+      UserUsersPage,
+      UserNauPage,
+      AdvUserOffersPage,
+      AdvTabsPage,
+      AdvNotificationsPage,
+      AdvHomePage,
+      CreateOffer1Page,
+      PlaceFeedbackPage,
+      PlacePage,
+      SplashInfoPage,
+      SplashNewsPage,
+      SettingsPopover,
+      OfferRedeemPopover,
+      CreateOfferPopover,
+      PlacesPopover,
+      CongratulationPopover,
+      CreateAdvUserProfileCategoryPopover,
+      CreateAdvUserProfileChildCategoryPopover,
+      OfferTermsPage,
+      SettingsChangePhonePage,
+      AdvRedeemOfferPage,
+      CreateOffer2Page,
+      CreateOffer3Page,
+      CreateOffer4Page,
+      CreateOffer5Page,
+      FeedPage,
+      StatisticPage,
+      Statistic1Page,
+      LineChartComponent,
+      BarChartComponent
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    ImagePicker,
-    FileTransfer,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    BarcodeScanner,
-    ApiService,
-    AuthService,
-    StorageService,
-    TokenService,
-    ToastService,
-    ProfileService,
-    OfferService,
-    AppModeService,
-    Geolocation,
-    LocationService,
-    PlaceService,
-    TimezoneService
+      StatusBar,
+      SplashScreen,
+      ImagePicker,
+      FileTransfer,
+      { provide: ErrorHandler, useClass: IonicErrorHandler },
+      BarcodeScanner,
+      ApiService,
+      AuthService,
+      StorageService,
+      TokenService,
+      ToastService,
+      ProfileService,
+      OfferService,
+      AppModeService,
+      Geolocation,
+      LocationService,
+      PlaceService,
+      TimezoneService
   ]
 })
-export class AppModule {}
+export class AppModule { }
