@@ -112,7 +112,6 @@
         "REWARDS_OPTIONS" : "Rewards options",
         "REWARD_FOR_REDEMPTION" : "Reward for redemption",
         "TOKEN_RESERVATION" : "Token reservation",
-        "YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT" : "You have tokens on your account",
-        "CREATE_OFFER" : "Create offer"
+        "YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT" : "You have tokens on your account"
     }
 }
