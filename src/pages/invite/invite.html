@@ -7,19 +7,19 @@
   <div class="logo">
   </div>
 
-  <div text-center class="title-big-sign">Invitation</div>
-  <div text-center class="font-75 text-4F4F4F margin-top-6vw">You should have received a code from the friend who recommended NAU to you</div>
+  <div text-center class="title-big-sign">{{ 'PAGE_INVITE.INVITATION' | translate }}</div>
+  <div text-center class="font-75 text-4F4F4F margin-top-6vw">{{ 'PAGE_INVITE.YOU_SHOULD_HAVE_RECEIVED' | translate }}</div>
 
   <ion-item class="border-bottom-no margin-top-6vw">
     <ion-input text-center placeholder="XX-XX-XX-XX" class="bg-gray" [(ngModel)]="inviteCode" [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
 
-  <button text-uppercase class="margin-top-5vw" ion-button block middle color="primary" (click)="next()">sign up</button>
+  <button text-uppercase class="margin-top-5vw" ion-button block middle color="primary" (click)="next()">{{ 'UNIT.SIGN_UP' | translate }}</button>
 
 </ion-content>
 
 <ion-footer padding>
   <div text-center class="font-75 text-828282">
-    Please ask your friend again
+      {{ 'PAGE_INVITE.PLEASE_ASK' | translate }}
   </div>
 </ion-footer>

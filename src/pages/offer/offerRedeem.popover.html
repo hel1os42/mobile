@@ -1,15 +1,15 @@
 <div margin text-center>
-  <div margin-top text-uppercase class="text-4F4F4F font-16 bold">Offer redeeming</div>
+  <div margin-top text-uppercase class="text-4F4F4F font-16 bold">{{ 'PAGE_OFFER.OFFER_REDEEMING' | translate }}</div>
   <div margin-top class="text-3E4B5D font-36 bold">{{ redeemingResponse.code }}</div>
-  <div class="text-BDBDBD font-14 margin-top-10">or use QR-code</div>
+  <div class="text-BDBDBD font-14 margin-top-10">{{ 'PAGE_OFFER.OR_USE_QR_CODE' | translate }}</div>
   <div margin>
       <qr-code [value]="redeemingResponse.code" [size]="qrWith"></qr-code>
     <div margin>
-      <a (click)="openOfferTerms()" href="#" class="text-4F4F4F font-16">Agree with Terms & Conditions</a>
+      <a (click)="openOfferTerms()" href="#" class="text-4F4F4F font-16">{{ 'PAGE_OFFER.AGREE_WITH_TERMS' | translate }}</a>
     </div>
     <div margin>
       <div class="block-btn">
-        <button (click)="close()" ion-button block color="secondary">Cancel</button>
+        <button (click)="close()" ion-button block color="secondary">{{ 'UNIT.CANCEL' | translate }}</button>
       </div>
     </div>
   </div>

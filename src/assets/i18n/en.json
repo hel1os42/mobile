@@ -5,7 +5,9 @@
         "DETECTING_YOUR_LOCATION" : "Detecting your location...",
         "SETTING_MAP_RADIUS" : "Setting map radius (km)",
         "DONE" : "Done",
-        "CANCEL" : "Cancel"
+        "CANCEL" : "Cancel",
+        "SIGN_UP" : "sign up",
+        "SIGN_IN" : "sign in"
     },
 
     "PAGE_PLACES" : {
@@ -52,7 +54,8 @@
         "CREATE_OFFER" : "Create offer",
         "OFFERS" : "Offers",
         "NAU" : "Nau",
-        "STATISTIC" : "Statistic"
+        "STATISTIC" : "Statistic",
+        "CATEGORY" : "Category",
     },
 
     "PAGE_BOOKMARKS" : {
@@ -112,6 +115,96 @@
         "REWARDS_OPTIONS" : "Rewards options",
         "REWARD_FOR_REDEMPTION" : "Reward for redemption",
         "TOKEN_RESERVATION" : "Token reservation",
-        "YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT" : "You have tokens on your account"
-    }
+        "YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT" : "You have tokens on your account",
+        "CREATING_YOUR_OFFER" : "Creating your offer...",
+        "ERROR" : "Oops...ERROR",
+        "OFFER_WASNT" : "Offer wasn't",
+        "PLEASE_TRY_AGAIN" : "Please try again",
+        "RETRY" : "Retry",
+    },
+
+    "PAGE_CREATE-USER-PROFILE" : {
+        "CREATE_ACCOUNT" : "Create account",
+        "NAME_EMAIL" : "Name & email",
+        "YOU_HAVE" : "You have",
+        "POINTS" : "points",
+        "YOUR_NAME" : "Your Name",
+        "YOUR_EMAIL" : "Your E-mail",
+        "EARN_EXTRA_POINTS" : "Earn Extra Points",
+        "OF_COURSE" : "Of course you have good opportunity to earn extra points for this!",
+        "CONFIRM_EMAIL_ADDRESS" : "Confirm Email Address",
+        "WE_EMAILED" : "We emailed a confirmation link to your email address. Click the link to finish registration.",
+        "SOCIAL_ACCOUNTS" : "SOCIAL ACCOUNTS (Every item adds + 3 points)",
+        "ADDED" : "Added",
+        "SHOW_ADDITIONAL_OPTIONS" : "SHOW ADDITIONAL OPTIONS (More points)",
+        "IF_YOU_WILL" : "If you will fill additional information about yourself it helps us to recommend best offers for you.",
+        "GENDER" : "Gender",
+        "FEMALE" : "Female",
+        "MALE" : "Male",
+        "CONFIRM_YOUR_LOCATION" : "Confirm your location:",
+        "AGE" : "Age",
+        "INCOME" : "Income"
+    },
+
+    "PAGE_FEED" : {
+        "WHAT_HAPPEND" : "what happend",
+        "OFFERS" : "Offers",
+        "ALL" : "All",
+        "PLACES" : "Places",
+        "PEOPLE" : "People",
+        "REDEEMED_YOUR" : "Redeemed your offer at",
+        "REDEEM_OFFER" : "redeem offer",
+        "YESTERDAY" : "Yesterday",
+        "OUR_RESTAURANT_WANTS" : "Our restaurant wants offer your ineresting proposition!",
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Now available in your region"
+        "VIEW_OFFERS" : "View offers"
+    },
+
+    "PAGE_INVITE" : {
+        "INVITATION" : "Invitation",
+        "YOU_SHOULD_HAVE_RECEIVED" : "You should have received a code from the friend who recommended NAU to you",
+        "PLEASE_ASK" : "Please ask your friend again"
+    },
+
+    "PAGE_LOGIN" : {
+        "LOGIN" : "Login",
+        "PLEASE_ENTER" : "Please enter your phone number and",
+        "CONFIRMATION_CODE" : "confirmation code",
+        "OTP" : "OTP"
+    },
+
+    "PAGE_NOTIFICATIONS" : {
+        "NOTIFICATION" : "Notification",
+        "TODAY" : "Today",
+        "YESTERDAY" : "Yesterday",
+        "SENT_NEW_MESSAGE_FOR_YOU" : "Sent new message for you",
+        "OUR_RESTAURANT_WANTS" : "Our restaurant wants offer your ineresting proposition!",
+        "Get_your_chance" : "Get your chance!",
+        "SYSTEM_NOTIFICATION" : "System Notification",
+        "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
+        "READ" : "Read"
+    },
+
+    "PAGE_OFFER" : {
+        "CONGRATULATION" : "Congratulation!",
+        "OFFER_REDEMPTION_COMPLETED_AT" : "Offer redemption completed at",
+        "WE_ARE" : "We are appreciate your choice",
+        "YOU_EARNED" : "You earned",
+        "POINTS" : "points",
+        "OFFER" : "Offer",
+        "REDEEM" : "Redeem",
+        "OFFER_REDEEMING" : "Offer redeeming",
+        "OR_USE_QR_CODE" : "or use QR-code",
+        "AGREE_WITH_TERMS" : "Agree with Terms & Conditions"
+    },
+
+    "PAGE_OFFER-TERMS" : {
+        "TERMS_CONDITIONS" : "Terms & Conditions!",
+        "AVAILABLE_TOKENS" : "Available tokens are 50",
+        "SOME_OF_OUR_SERVICES" : "Some of our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.",
+        "PRIVACY" : "Privacy and copyright protection",
+        "WHILE_WORKING_WITH" : "While working with our Services, you authorize us to use your personal information in accordance with Google's privacy policy. The latter describes why we use this data and how we ensure the confidentiality of users when working with the Services.",
+        "WE_CHECK_ALL" : "We check all reports of alleged copyright infringement and, being guided by the Digital Millennium Copyright Act, we terminate accounts whose owners systematically violate copyrights",
+        "BACK" : "Back"
+    },
 }
