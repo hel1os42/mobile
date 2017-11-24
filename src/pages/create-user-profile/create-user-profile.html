@@ -27,9 +27,11 @@
         </a>
       </div>
       <div item-end class="item-content">
-        <ion-input class="bg-gray margin-bottom-small" type="text" placeholder="Your Name" [(ngModel)]="user.name" name="name1"></ion-input>
+        <ion-input (ionBlur)="validateName(user.name)" [(ngModel)]="user.name" class="bg-gray margin-bottom-small" type="text" placeholder="Your Name"
+          maxlength="30" name="name1"></ion-input>
         <div class="input_relative">
-          <ion-input class="bg-gray margin-bottom-small" type="email" placeholder="Your E-mail" [(ngModel)]="user.email" name="email"></ion-input>
+          <ion-input (ionBlur)="validateEmail(user.email)" [(ngModel)]="user.email" class="bg-gray margin-bottom-small" type="email"
+            placeholder="Your E-mail" maxlength="30" name="email"></ion-input>
           <span *ngIf="user.email" class="text-gray icon_info">
             <a (click)="toggleVisibleInfo()">
               <img src="assets/img/create_user_profile/info.svg">
@@ -156,6 +158,6 @@
         </ion-card>-->
   </div>
   <p margin>
-    <button color="primary" (click)="createAccount()" [disabled]="!user.name || !user.email" ion-button block>Create account</button>
+    <button color="primary" (click)="createAccount()" [disabled]="!isValidEmail || !isValidName" ion-button block>Create account</button>
   </p>
 </ion-content>
