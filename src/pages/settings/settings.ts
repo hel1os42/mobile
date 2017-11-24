@@ -122,11 +122,9 @@ export class SettingsPage {
                     if (this.isAdvMode) {
                         if  (!isShownOnboard) {
                             this.app.getRootNav().setRoot(OnBoardingPage, {isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true});
-                            debugger
                         }
                         else {
                             this.app.getRootNav().setRoot(AdvTabsPage, {isAdvMode: true, isAdvOnBoarding: true});
-                            debugger
                         }
                     }
                     else {
