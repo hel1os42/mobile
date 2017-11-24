@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { ApiService } from './api.service';
@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class ProfileService {
     user: User;
+    onRefreshAccounts: EventEmitter<User> = new EventEmitter<User>();
 
     constructor(private api: ApiService, private auth: AuthService) {
         auth.onLogout.subscribe(() => this.user = undefined);
@@ -39,5 +40,9 @@ export class ProfileService {
         let obs = this.api.put('profile', user);
         obs.subscribe(user => this.user = user);
         return obs;
+    }
+
+    refreshAccounts() {
+        this.getWithAccounts().subscribe(user => this.onRefreshAccounts.emit(user));
     }
 }

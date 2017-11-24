@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Rx';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
 import { User } from '../../models/user';
@@ -18,14 +19,22 @@ export class UserProfilePage {
     user: User = new User();
     balance: number;
     NAU_Id: string;
-    
+    onRefreshAccounts: Subscription;
+
     @ViewChild(Slides) slides: Slides;
 
     constructor(
         private profile: ProfileService,
         private nav: NavController,
         private auth: AuthService) {
-        
+
+        this.onRefreshAccounts = this.profile.onRefreshAccounts
+            .subscribe((resp) => {
+                this.user = resp;
+                this.balance = resp.accounts.NAU.balance;
+                this.NAU_Id = resp.accounts.NAU.id;
+            })
+
         this.profile.getWithAccounts()
             .subscribe(resp => {
                 this.user = resp;
@@ -35,15 +44,15 @@ export class UserProfilePage {
     }
 
     openSettings() {
-        this.nav.push(SettingsPage, {isAdvMode: false, user: this.user});
+        this.nav.push(SettingsPage, { isAdvMode: false, user: this.user });
     }
 
     openRewards(user: User) {
-        this.nav.push(UserTasksPage, {user: this.user});
+        this.nav.push(UserTasksPage, { user: this.user });
     }
 
     openAchieve(user: User) {
-        this.nav.push(UserAchievePage, {user: this.user});
+        this.nav.push(UserAchievePage, { user: this.user });
     }
 
     openUserOffers() {
@@ -57,7 +66,7 @@ export class UserProfilePage {
     openUserUsers() {
         this.nav.push(UserUsersPage)
     }
-    
+
     logout() {
         if (confirm('Are you sure?'))
             this.auth.logout();
@@ -70,5 +79,5 @@ export class UserProfilePage {
     slidePrev() {
         this.slides.slidePrev();
     }
-    
+
 }

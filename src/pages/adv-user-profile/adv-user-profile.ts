@@ -57,14 +57,11 @@ export class AdvUserProfilePage {
                 });
         }
 
-        this.onRefreshAccounts = this.place.onRefreshAccounts
-            .subscribe(() => {
-                this.profile.getWithAccounts()
-                    .subscribe(resp => {
+        this.onRefreshAccounts = this.profile.onRefreshAccounts
+            .subscribe((resp) => {
                 this.user = resp;
                 this.balance = resp.accounts.NAU.balance;
                 this.NAU_Id = resp.accounts.NAU.id;
-                    })
             })
         
             if (!this.balance) {
