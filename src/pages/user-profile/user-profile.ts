@@ -80,4 +80,8 @@ export class UserProfilePage {
         this.slides.slidePrev();
     }
 
+    ionViewWillUnload() {
+        this.onRefreshAccounts.unsubscribe();
+    }
+
 }
