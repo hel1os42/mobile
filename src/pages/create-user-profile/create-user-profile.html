@@ -156,10 +156,6 @@
         </ion-card>-->
   </div>
   <p margin>
-<<<<<<< HEAD
-    <button color="primary" (click)="createAccount()" [disabled]="!isValidEmail || !isValidName" ion-button block>Create account</button>
-=======
     <button color="primary" (click)="createAccount()" [disabled]="!user.name || !user.email" ion-button block>{{ 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
->>>>>>> 9a57cbb65165d9680ae0a58785aa2772e283d948
   </p>
 </ion-content>
