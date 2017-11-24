@@ -31,22 +31,22 @@
       <div class="block-lines">
           <ion-item padding-left class="bg-gray margin-bottom-5">
               <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.OVERALL' | translate }}</ion-label>
-              <ion-input [(ngModel)]="maxForUser" class="text-3E4B5D font-16 bold" text-right type="number" placeholder="{{ 'PAGE_CREATE-OFFER.UNLIMITED' | translate }}"></ion-input>
+              <ion-input [(ngModel)]="maxForUser" class="text-3E4B5D font-16 bold" text-right type="number" maxlength="18" placeholder="{{ 'PAGE_CREATE-OFFER.UNLIMITED' | translate }}"></ion-input>
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5">
               <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.DAILY' | translate }}</ion-label>
-              <ion-input [(ngModel)]="maxForUserPerDay" class="text-3E4B5D font-16 bold" text-right type="number" placeholder="{{ 'PAGE_CREATE-OFFER.UNLIMITED' | translate }}"></ion-input>
+              <ion-input [(ngModel)]="maxForUserPerDay" class="text-3E4B5D font-16 bold" text-right type="number" maxlength="18" placeholder="{{ 'PAGE_CREATE-OFFER.UNLIMITED' | translate }}"></ion-input>
           </ion-item>
 
           <ion-item padding-left class="bg-gray margin-bottom-5">
             <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.WEEKLY' | translate }}</ion-label>
-            <ion-input [(ngModel)]=" maxForUserPerWeek" class="text-3E4B5D font-16 bold" text-right type="number" placeholder="{{ 'PAGE_CREATE-OFFER.UNLIMITED' | translate }}"></ion-input>
+            <ion-input [(ngModel)]=" maxForUserPerWeek" class="text-3E4B5D font-16 bold" text-right type="number" maxlength="18" placeholder="{{ 'PAGE_CREATE-OFFER.UNLIMITED' | translate }}"></ion-input>
         </ion-item>
 
         <ion-item padding-left class="bg-gray margin-bottom-5">
             <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.MONTHLY' | translate }}</ion-label>
-            <ion-input [(ngModel)]="maxForUserPerMonth" class="text-3E4B5D font-16 bold" text-right type="number" placeholder="{{ 'PAGE_CREATE-OFFER.UNLIMITED' | translate }}"></ion-input>
+            <ion-input [(ngModel)]="maxForUserPerMonth" class="text-3E4B5D font-16 bold" text-right type="number" maxlength="18" placeholder="{{ 'PAGE_CREATE-OFFER.UNLIMITED' | translate }}"></ion-input>
         </ion-item>
       </div>
 
@@ -64,7 +64,7 @@
       </div>
 
     <p margin>
-      <button (click)="openCreateOffer5Page()" ion-button block text-uppercase color="primary">{{ 'PAGE_CREATE-OFFER.NEXT' | translate }}</button>
+      <button (click)="openCreateOffer5Page()" [disabled]="!disable()" ion-button block text-uppercase color="primary">{{ 'PAGE_CREATE-OFFER.NEXT' | translate }}</button>
     </p>
 
 </ion-content>

@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { LatLngLiteral } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -32,6 +33,9 @@ export class CreateUserProfilePage {
     age: number;
     income;
     picture_url: string;
+    isValidName = false;
+    isValidEmail = false;
+    
 
     constructor(private nav: NavController,
         private location: LocationService,
@@ -43,7 +47,7 @@ export class CreateUserProfilePage {
 
         this.profile.get(true)
             .subscribe(resp => this.user = resp);
-        
+
         this.location.getByIp()
             .subscribe(resp => {
                 this.coords = {
@@ -121,11 +125,33 @@ export class CreateUserProfilePage {
             .subscribe(resp => {
                 if (this.picture_url) {
                     this.api.uploadImage(this.picture_url, 'profile/picture', true)
-                        .then(resut => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
+                        .then(() => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
                 }
                 else {
                     this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
                 }
             });
     }
+
+    validateName(name) {
+        if (name.length < 3 || name.replace(/\s/g,"") == "") {
+            this.toast.show('User name must be atleast 3 charactrs long');
+            this.isValidName = false;
+        }
+        else {
+            this.isValidName = true;
+        }
+        
+    }
+
+    validateEmail(email) {
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let isValid = re.test(email);
+        if (!isValid) {
+            this.toast.show('Incorrect email, please, correct it');
+        }
+        this.isValidEmail = re.test(email);
+    }
+
+
 }

@@ -1,3 +1,4 @@
+import { AppModeService } from '../../providers/appMode.service';
 import { Subscription } from 'rxjs/Rx';
 import { Component, ViewChild } from '@angular/core';
 import { Content, NavController, NavParams } from 'ionic-angular';
@@ -33,7 +34,10 @@ export class AdvUserProfilePage {
         private storage: StorageService,
         private navParams: NavParams,
         private place: PlaceService,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private appMode: AppModeService) {
+
+        this.appMode.setOnboardingVisible()
         
         this.company = this.navParams.get('company');
         if (!this.company) {

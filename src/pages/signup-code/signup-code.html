@@ -7,8 +7,8 @@
     <div class="logo">
     </div>
 
-    <div text-center class="title-big-sign">Confirm</div>
-    <div text-center class="margin-top-6vw font-75 text-4F4F4F">Please fill confirmation code<br>from message</div>
+    <div text-center class="title-big-sign">{{ 'PAGE_SIGNUP-CODE.CONFIRM' | translate }}</div>
+    <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_SIGNUP-CODE.PLEASE_FILL_CONFIRMATION_CODE' | translate }}<br>{{ 'PAGE_SIGNUP-CODE.FROM_MESSAGE' | translate }}</div>
 
     <div margin-top class="bg-gray margin-top-6vw">
         <ion-item class="border-bottom-no">
@@ -17,12 +17,12 @@
         </ion-item>
     </div>
 
-    <button text-uppercase class="margin-top-6vw" (click)="signUp()" ion-button block middle color="primary">Next</button>
+    <button text-uppercase class="margin-top-6vw" (click)="signUp()" ion-button block middle color="primary">{{ 'PAGE_SIGNUP-CODE.NEXT' | translate }}</button>
 
 </ion-content>
 
 <ion-footer no-shadow no-border>
   <div text-center class="font-75 text-828282">
-    One-time password helps to you<br>confirm phone number.
+      {{ 'PAGE_SIGNUP-CODE.ONE_TIME' | translate }}<br>{{ 'PAGE_SIGNUP-CODE.CONFIRM_PHONE_NUMBER' | translate }}.
   </div>
 </ion-footer>

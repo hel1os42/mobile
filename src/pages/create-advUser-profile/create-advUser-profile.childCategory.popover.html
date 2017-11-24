@@ -1,5 +1,5 @@
 <div class="modal_content">
-        <div text-uppercase text-center class="font-16 text-#4F4F4F semibold padding-bottom-5vw">Category</div>
+        <div text-uppercase text-center class="font-16 text-#4F4F4F semibold padding-bottom-5vw">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CATEGORY' | translate }}</div>
 
         <div class="block-checks">
             <ion-item *ngFor="let category of categories" no-lines>
@@ -12,10 +12,10 @@
         <ion-grid>
             <ion-row>
                 <ion-col text-center class="margin-right-2proc">
-                    <button (click)="cancel()" ion-button block color="secondary">Cancel</button>
+                    <button (click)="cancel()" ion-button block color="secondary">{{ 'UNIT.CANCEL' | translate }}</button>
                 </ion-col>
                 <ion-col text-center class="margin-left-2proc">
-                    <button (click)="save()" ion-button block color="primary">Done</button>
+                    <button (click)="save()" ion-button block color="primary">{{ 'UNIT.DONE' | translate }}</button>
                 </ion-col>
             </ion-row>
         </ion-grid>

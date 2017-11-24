@@ -1,31 +1,25 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>News & events</ion-title>
+        <ion-title>{{ 'PAGE_SPLASH-NEWS.NEWS_EVENTS' | translate }}</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <div margin-top class="display-table">
-      <span text-left class="font-22 text-3E4B5D bold">New Restaurant</span>
+      <span text-left class="font-22 text-3E4B5D bold">{{ 'PAGE_SPLASH-NEWS.NEW_RESTAURANT' | translate }}</span>
       <span text-right class="font-12 text-828282">07/08/2017</span>
     </div>
 
     <img margin-top src="assets/img/splash_screen/splash_news_bcg.png">
     <p>
-        Our Services allow you to upload, add, store, send or receive content.
-        At the same time, all rights to intellectual property
-        in relation to these materials remain with their owner.
-        Simply put, everything that was yours will remain so.
+        {{ 'PAGE_SPLASH-NEWS.OUR_SERVICES_ALLOW_YOU' | translate }}
     </p>
     <p padding-bottom>
-        Allow you to upload, add, store, send or receive content.
-        At the same time, all rights to intellectual property in relation
-        to these materials remain with their owner. Simply put,
-        everything that was yours will remain so.
+        {{ 'PAGE_SPLASH-NEWS.ALLOW_YOU_TO_UPLOAD' | translate }}
     </p>
 
     <p margin-top>
-        <button margin-top color="primary" (click)="openHome()" ion-button block>Go To Restaurant</button>
+        <button margin-top color="primary" (click)="openHome()" ion-button block>{{ 'PAGE_SPLASH-NEWS.GO_TO_RESTAURANT' | translate }}</button>
     </p>
 
 </ion-content>
