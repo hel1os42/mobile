@@ -7,7 +7,8 @@
         "DONE" : "Done",
         "CANCEL" : "Cancel",
         "SIGN_UP" : "sign up",
-        "SIGN_IN" : "sign in"
+        "SIGN_IN" : "sign in",
+        "OFFERS" : "Offers"
     },
 
     "PAGE_PLACES" : {
@@ -17,7 +18,9 @@
         "MONTHLY" : "Monthly",
         "FEATURED" : "Featured",
         "OFFERS" : "Offers",
-        "LOADING_COMPANIES" : "Loading companies..."
+        "LOADING_COMPANIES" : "Loading companies...",
+        "SELECT_CUISINE" : "Select Cuisine",
+        "CLEAR" : "Clear"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -55,7 +58,7 @@
         "OFFERS" : "Offers",
         "NAU" : "Nau",
         "STATISTIC" : "Statistic",
-        "CATEGORY" : "Category",
+        "CATEGORY" : "Category"
     },
 
     "PAGE_BOOKMARKS" : {
@@ -120,7 +123,7 @@
         "ERROR" : "Oops...ERROR",
         "OFFER_WASNT" : "Offer wasn't",
         "PLEASE_TRY_AGAIN" : "Please try again",
-        "RETRY" : "Retry",
+        "RETRY" : "Retry"
     },
 
     "PAGE_CREATE-USER-PROFILE" : {
@@ -207,4 +210,88 @@
         "WE_CHECK_ALL" : "We check all reports of alleged copyright infringement and, being guided by the Digital Millennium Copyright Act, we terminate accounts whose owners systematically violate copyrights",
         "BACK" : "Back"
     },
+
+    "PAGE_ONBOARDING" : {
+        "FOR_BUSINESS" : "For business",
+        "HELLO" : "Hello!",
+        "ENJOY" : "Enjoy!",
+        "ARE_YOUR_READY" : "Are your ready to create amazing offers and",
+        "VISITING_BEST" : "visiting best restrant in the world?",
+        "MAKE_MONEY" : "Make Money",
+        "SKIP" : "Skip"
+    },
+
+    "PAGE_PLACE" : {
+        "FEATURED" : "Featured",
+        "ALL_OFFERS" : "All offers",
+        "TESTIMONIALS" : "Testimonials",
+        "ABOUT" : "About",
+        "REDEEM_NOW" : "redeem now",
+        "ADD_YOUR_FEEDBACK" : "Add your feedback"
+    },
+
+    "PAGE_PLACE-FEEDBACK" : {
+        "TESTIMONIAL" : "Testimonial",
+        "BACK" : "Back"
+    },
+
+    "PAGE_SETTINGS" : {
+        "SETTINGS" : "Settings",
+        "CHOOSE_YOUR_ACCOUNT" : "Choose your account",
+        "CLIENT" : "Client",
+        "ADVERTISER" : "Advertiser",
+        "CONFIRM_REDEMPTION" : "Confirm redemption",
+        "YOUR_INVITE_CODE" : "Your invite code",
+        "CHANGE_YOUR_PHONE_NUMBER" : "Change your phone number",
+        "PRIVATE_DATA" : "Private data",
+        "SHOW_MY_PRIVATE_DATA" : "Show my private data",
+        "SHOW_MY_PHONE_NUMBER" : "Show my phone number",
+        "SHOW_MY_EMAIL_ADDRESS" : "Show my e-mail address",
+        "SET_RADIUS" : "Set radius for yours offers interest",
+        "OFFERS_RADIUS" : "Offers radius",
+        "SAVE_CHANGES" : "Save changes",
+        "CHANGE" : "Change",
+        "GET_ACCOUNT_FOR_BUSINESS" : "Get account for business",
+        "WHY_I_NEED_ACCOUNT_FOR_BUSINESS?" : "Why I need Account for business?",
+        "HIDE" : "hide",
+        "IT_HELPS_ME" : "It helps me advertise my business",
+        "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
+        "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
+        "TRY_IT_FOR_FREE" : "Try it for free"
+    },
+
+    "PAGE_SETTINGS-CHANGE-PHONE" : {
+        "CHANGE_PHONE_NUMBER" : "Change phone number",
+        "ENTER_NEW_PHONE_NUMBER" : "Enter New phone number",
+        "GET_CONFIRM_CODE" : "Get confirm code",
+        "ENTER_CONFIRMATION_CODE" : "Enter Confirmation code",
+        "CHANGE_NUMBER" : "Change number"
+    },
+
+    "PAGE_SIGNUP" : {
+        "PHONE_NUMBER" : "Phone Number",
+        "PLEASE_CHOOSE" : "Please choose your country phone code",
+        "AND_FILL" : "and fill your phone number",
+        "NEXT" : "Next",
+        "PLEASE_DO_NOT_DISTURB" : "Please do not disturb",
+        "YOUR_PRIVATE" : "your private data will be safety"
+    },
+
+    "PAGE_SIGNUP-CODE" : {
+        "CONFIRM" : "Confirm",
+        "PLEASE_FILL_CONFIRMATION_CODE" : "Please fill confirmation code",
+        "FROM_MESSAGE" : "from message",
+        "NEXT" : "Next",
+        "ONE_TIME" : "One-time password helps to you",
+        "CONFIRM_PHONE_NUMBER" : "confirm phone number"
+    },
+
+    "PAGE_SPLASH-INFO" : {
+        "INFORMATION" : "Information",
+        "SEARCH_OFFERS" : "Search offers",
+        "SOME_OF_OUR_SERVICES" : "Some of our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner.",
+        "OUR_SERVICES_ALLOW_YOU" : "Our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.",
+        "ALLOW_YOU_TO_UPLOAD" : "Allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.",
+        "SEARCH_NEW_OFFERS" : "search new offers"
+    }
 }
