@@ -107,7 +107,7 @@ export class CreateOffer5Page {
                     text: 'Cancel',
                     role: 'cancel',
                     handler: () => {
-                        this.nav.setRoot(this.nav.first().component);
+                        // this.nav.setRoot(this.nav.first().component);
                     }
                 },
                 {
