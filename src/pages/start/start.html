@@ -1,16 +1,16 @@
 <ion-content class="padding-sign" scroll="false">
   <div class="logo-margin">
   </div>
-  <div text-center class="title-big-sign">Sign Up</div>
+  <div text-center class="title-big-sign">{{ 'PAGE_START.SIGN_UP' | translate }}</div>
 
-  <div text-center class="margin-top-6vw font-75 text-4F4F4F">Please choose your convenient way<br>to enter NAU</div>
+  <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_START.PLEASE_CHOOSE_YOUR_CONVENIENT_WAY' | translate }}<br>{{ 'PAGE_START.TO_ENTER_NAU' | translate }}</div>
 
   <div class="margin-top-6vw">
-    <button ion-button block middle color="primary" margin-bottom (click)="register()">sign up</button>
+    <button ion-button block middle color="primary" margin-bottom (click)="register()">{{ 'UNIT.SIGN_UP' | translate }}</button>
   </div>
 
   <div text-center class="font-75 text-828282 margin-top-5vw">
-    or Sign up with
+    {{ 'PAGE_START.OR_SIGN_UP_WITH' | translate }}
   </div>
 
   <div text-center class="btn_social margin-top-5vw">
@@ -29,7 +29,7 @@
 <!-- <ion-footer no-shadow no-border padding>-->
 <ion-footer no-shadow no-border>
   <div text-center>
-    <div class="font-75 text-828282">Already have account</div>
-    <div class="margin-top-2proc"><a (click)="login()" class="link-nau">Sign In</a></div>
+    <div class="font-75 text-828282">{{ 'PAGE_START.ALREADY_HAVE_ACCOUNT' | translate }}</div>
+    <div class="margin-top-2proc"><a (click)="login()" class="link-nau">{{ 'UNIT.SIGN_IN' | translate }}</a></div>
   </div>
 </ion-footer>

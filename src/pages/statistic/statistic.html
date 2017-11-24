@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
-        <ion-title *ngIf="!isDateFilterVisible">Statistic</ion-title>
-        <ion-title *ngIf="isDateFilterVisible">Date filter</ion-title>
+        <ion-title *ngIf="!isDateFilterVisible">{{ 'PAGE_STATISTIC.STATISTIC' | translate }}</ion-title>
+        <ion-title *ngIf="isDateFilterVisible">{{ 'PAGE_STATISTIC.DATE_FILTER' | translate }}</ion-title>
     </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
@@ -9,89 +9,89 @@
 <ion-content>
     <ion-segment [(ngModel)]="activeSegment" padding-left padding-right padding-top text-uppercase class="nau-segment margin-top-1vw">
         <ion-segment-button value="all">
-            All Offers
+            {{ 'PAGE_STATISTIC.ALL_OFFERS' | translate }}
         </ion-segment-button>
         <ion-segment-button value="active">
-            Active offers
+            {{ 'PAGE_STATISTIC.ACTIVE_OFFERS' | translate }}
         </ion-segment-button>
     </ion-segment>
 
     <ion-segment padding-left padding-right [(ngModel)]="segment" (click)="filterOffers()" text-uppercase margin-top class="statistic-segment">
         <ion-segment-button value="today">
-            Today
+            {{ 'PAGE_STATISTIC.TODAY' | translate }}
         </ion-segment-button>
         <ion-segment-button value="yesterday">
-            Yesterday
+            {{ 'PAGE_STATISTIC.YESTERDAY' | translate }}
         </ion-segment-button>
         <ion-segment-button value="week">
-            Week
+            {{ 'PAGE_STATISTIC.WEEK' | translate }}
         </ion-segment-button>
         <ion-segment-button value="month">
-            Month
+            {{ 'PAGE_STATISTIC.MONTH' | translate }}
         </ion-segment-button>
         <ion-segment-button value="calendar">
         </ion-segment-button>
     </ion-segment>
 
     <div *ngIf="!isDateFilterVisible && !isGraphicVisible" class="block1" padding-left padding-right>
-        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Main positions</div>
+        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">{{ 'PAGE_STATISTIC.MAIN_POSITIONS' | translate }}</div>
 
         <ion-grid text-center>
             <ion-row class="grid-statistic">
                 <ion-col>
                     <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">180</div>
-                    <div text-uppercase class="bold font-14 text-828282 regular">Viewed
-                        <br>my place</div>
-                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
+                    <div text-uppercase class="bold font-14 text-828282 regular">{{ 'PAGE_STATISTIC.VIEWED' | translate }}
+                        <br>{{ 'PAGE_STATISTIC.MY_PLACE' | translate }}</div>
+                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">{{ 'PAGE_STATISTIC.DETAILED' | translate }}</button>
                 </ion-col>
                 <ion-col>
                     <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">1 350</div>
-                    <div text-uppercase class="bold font-14 text-828282 regular">Viewed
-                        <br>offers</div>
-                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
+                    <div text-uppercase class="bold font-14 text-828282 regular">{{ 'PAGE_STATISTIC.VIEWED' | translate }}
+                        <br>{{ 'UNIT.OFFERS' | translate }}</div>
+                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">{{ 'PAGE_STATISTIC.DETAILED' | translate }}</button>
                 </ion-col>
                 <ion-col>
                     <div class="bold font-26 text-3E4B5D margin-top-3vw margin-bottom-1vw">53</div>
-                    <div text-uppercase class="bold font-14 text-828282 regular">redeemed
-                        <br>offers</div>
-                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">Detailed</button>
+                    <div text-uppercase class="bold font-14 text-828282 regular">{{ 'PAGE_STATISTIC.REDEEMED' | translate }}
+                        <br>{{ 'UNIT.OFFERS' | translate }}</div>
+                    <button (click)="showGraphic()" color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white margin-bottom-2vw margin-top-4vw">{{ 'PAGE_STATISTIC.DETAILED' | translate }}</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
 
-        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Additional statiStics</div>
+        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">{{ 'PAGE_STATISTIC.ADDITIONAL_STATISTICS' | translate }}</div>
 
         <ion-list no-lines class="item-block-nau font-0">
             <a ion-item detail-push>
                 <div class="bold font-22 text-3E4B5D">1 325</div>
-                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">Rating & Feedback</div>
+                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">{{ 'PAGE_STATISTIC.RATING_FEEDBACK' | translate }}</div>
             </a>
 
             <a ion-item detail-push>
                 <div class="bold font-22 text-3E4B5D">543</div>
-                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">Requests for offers redeemed</div>
+                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">{{ 'PAGE_STATISTIC.REQUESTS_FOR_OFFERS_REDEEMED' | translate }}</div>
             </a>
 
             <a ion-item detail-push>
                 <div class="bold font-22 text-3E4B5D">2 374</div>
-                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">money wasted for redeems</div>
+                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw">{{ 'PAGE_STATISTIC.MONEY_WASTED_FOR_REDEEMS' | translate }}</div>
             </a>
         </ion-list>
     </div>
 
     <div *ngIf="isGraphicVisible" class="block2" padding-left padding-right>
-        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Weekly detailed graphic information</div>
+        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">{{ 'PAGE_STATISTIC.WEEKLY_DETAILED_GRAPHIC_INFORMATION' | translate }}</div>
         <ion-list no-lines class="item-block-nau font-0">
             <ion-item>
                 <span class="bold font-22 text-3E4B5D">653</span>
-                <span class="font-14 regular text-828282 padding-left-1vw">Users</span>
-                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw margin-bottom-3vw">Viewed my place</div>
-                <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white btn_save">save pdf</button>
+                <span class="font-14 regular text-828282 padding-left-1vw">{{ 'PAGE_STATISTIC.USERS' | translate }}</span>
+                <div text-uppercase class="font-14 regular text-828282 margin-top-2vw margin-bottom-3vw">{{ 'PAGE_STATISTIC.VIEWED_MY_PLACE' | translate }}</div>
+                <button color="primary" text-uppercase ion-button class="btn-statistic font-12 semibold text-white btn_save">{{ 'PAGE_STATISTIC.SAVE_PDF' | translate }}</button>
                 <line-chart [labels]="labels" [data]="data"></line-chart>
             </ion-item>
         </ion-list>
 
-        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">week viewers</div>
+        <div text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">{{ 'PAGE_STATISTIC.WEEK_VIEWERS' | translate }}</div>
 
         <ion-list no-lines class="item-block-nau font-0 block-labels">
             <ion-item>
@@ -101,10 +101,10 @@
                     </div>
                 </div>
                 <div item-content>
-                    <div text-uppercase class="font-14 text-4F4F4F">Used Offers:
+                    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_STATISTIC.USED_OFFERS' | translate }}:
                         <span class="bold">34</span>
                     </div>
-                    <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
+                    <div text-uppercase class="font-14 regular text-828282">{{ 'PAGE_STATISTIC.VIEWED_DATE' | translate }}: 03/09/2017</div>
                 </div>
             </ion-item>
 
@@ -115,10 +115,10 @@
                     </div>
                 </div>
                 <div item-content>
-                    <div text-uppercase class="font-14 text-4F4F4F">Used Offers:
+                    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_STATISTIC.USED_OFFERS' | translate }}:
                         <span class="bold">21</span>
                     </div>
-                    <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
+                    <div text-uppercase class="font-14 regular text-828282">{{ 'PAGE_STATISTIC.VIEWED_DATE' | translate }}: 03/09/2017</div>
                 </div>
             </ion-item>
 
@@ -129,17 +129,17 @@
                     </div>
                 </div>
                 <div item-content>
-                    <div text-uppercase class="font-14 text-4F4F4F">Used Offers:
+                    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_STATISTIC.USED_OFFERS' | translate }}:
                         <span class="bold">92</span>
                     </div>
-                    <div text-uppercase class="font-14 regular text-828282">Viewed date: 03/09/2017</div>
+                    <div text-uppercase class="font-14 regular text-828282">{{ 'PAGE_STATISTIC.VIEWED_DATE' | translate }}: 03/09/2017</div>
                 </div>
             </ion-item>
         </ion-list>
     </div>
 
     <div *ngIf="isDateFilterVisible" class="block3">
-        <div padding-left padding-right text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">Choose period of time</div>
+        <div padding-left padding-right text-uppercase class="text-4F4F4F font-14 regular margin-top-5vw margin-bottom-1vw">{{ 'PAGE_STATISTIC.CHOOSE_PERIOD_OF_TIME' | translate }}</div>
 
         <div class="time-range block-lines">
             <div *ngFor="let period of periods">
@@ -147,7 +147,7 @@
                     <ion-row>
                         <ion-col col-3>
                             <ion-item no-lines>
-                                <div class="text-BDBDBD font-16 regular">from</div>
+                                <div class="text-BDBDBD font-16 regular">{{ 'PAGE_STATISTIC.FROM' | translate }}</div>
                             </ion-item>
                         </ion-col>
                         <ion-col col-6>
@@ -168,7 +168,7 @@
                     <ion-row>
                         <ion-col col-3>
                             <ion-item no-lines>
-                                <div class="text-BDBDBD font-16 regular">to</div>
+                                <div class="text-BDBDBD font-16 regular">{{ 'PAGE_STATISTIC.TO' | translate }}</div>
                             </ion-item>
                         </ion-col>
                         <ion-col col-6>
@@ -185,21 +185,21 @@
                     </ion-row>
                 </ion-grid>
 
-                <div *ngIf="period != lastPeriod" text-center text-uppercase class="font-14 text-BDBDBD regular margin-top-3vw margin-bottom-3vw">Compare with</div>
+                <div *ngIf="period != lastPeriod" text-center text-uppercase class="font-14 text-BDBDBD regular margin-top-3vw margin-bottom-3vw">{{ 'PAGE_STATISTIC.COMPARE_WITH' | translate }}</div>
             </div>
 
-            <button (click)="showPeriodResult()" class="margin-top-3vw extrabold" color="primary" ion-button block>Show results</button>
+            <button (click)="showPeriodResult()" class="margin-top-3vw extrabold" color="primary" ion-button block>{{ 'PAGE_STATISTIC.SHOW_RESULTS' | translate }}</button>
         </div>
 
         <div class="block-lines">
-            <div padding-right text-uppercase class="text-4F4F4F font-14 regular">Compare several periods of time</div>
+            <div padding-right text-uppercase class="text-4F4F4F font-14 regular">{{ 'PAGE_STATISTIC.COMPARE_SEVERAL' | translate }}</div>
         </div>
 
         <p margin>
-            <button (click)="addDatePeriod()" class="extrabold" color="darkblue" ion-button block>add period</button>
+            <button (click)="addDatePeriod()" class="extrabold" color="darkblue" ion-button block>{{ 'PAGE_STATISTIC.ADD_PERIOD' | translate }}</button>
         </p>
 
-        <div padding-left padding-right padding-bottom text-center class="text-828282 font-12 regular">Compare your date. Chose several period of time for
-            <br>results comparing.</div>
+        <div padding-left padding-right padding-bottom text-center class="text-828282 font-12 regular">{{ 'PAGE_STATISTIC.COMPARE_YOUR_DATE' | translate }}
+            <br>{{ 'PAGE_STATISTIC.RESULTS_COMPARING' | translate }}.</div>
     </div>
 </ion-content>

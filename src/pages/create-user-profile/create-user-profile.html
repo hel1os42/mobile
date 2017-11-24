@@ -29,7 +29,7 @@
       <div item-end class="item-content">
         <ion-input (ionBlur)="validateName(user.name)" [(ngModel)]="user.name" class="bg-gray margin-bottom-small" type="text" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }}" name="name1"></ion-input>
         <div class="input_relative">
-          <ion-input (ionBlur)="validateEmail(user.email)" [(ngModel)]="user.email" class="bg-gray margin-bottom-small" type="email" maxlength="30"  placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}" name="email"></ion-input>
+          <ion-input (ionBlur)="validateEmail(user.email)" [(ngModel)]="user.email" class="bg-gray margin-bottom-small" type="email" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}" name="email"></ion-input>
           <span *ngIf="user.email" class="text-gray icon_info">
             <a (click)="toggleVisibleInfo()">
               <img src="assets/img/create_user_profile/info.svg">
