@@ -106,6 +106,7 @@ export class SettingsPage {
 
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
+        let isShownOnboard = this.appMode.getOnboardingVisible()
         // this.user.latitude = this.coords.lat;
         // this.user.longitude = this.coords.lng;
         // this.profile.put(this.user)
@@ -115,14 +116,21 @@ export class SettingsPage {
                 }
                 else {
                     if (this.isAdvMode && !this.nextPage) {
-                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true, latitude: this.coords.lat, longitude: this.coords.lng});
+                        this.app.getRootNav().setRoot(OnBoardingPage, {isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true, latitude: this.coords.lat, longitude: this.coords.lng});
                     }
                     else 
                     if (this.isAdvMode) {
-                        this.app.getRootNav().push(OnBoardingPage, {isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true});
+                        if  (!isShownOnboard) {
+                            this.app.getRootNav().setRoot(OnBoardingPage, {isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true});
+                            debugger
+                        }
+                        else {
+                            this.app.getRootNav().setRoot(AdvTabsPage, {isAdvMode: true, isAdvOnBoarding: true});
+                            debugger
+                        }
                     }
                     else {
-                        this.app.getRootNav().push(TabsPage);
+                        this.app.getRootNav().setRoot(TabsPage);
                     }
                     
                 }
