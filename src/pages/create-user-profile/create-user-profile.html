@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Create Account</ion-title>
+    <ion-title>{{ 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</ion-title>
   </ion-navbar>
   <div class="header-shadow"></div>
 </ion-header>
@@ -8,12 +8,12 @@
 <ion-content class="padding-no">
   <div class="block-lines-bottom-left-right">
     <ion-item no-lines class="block-name">
-      <div text-uppercase class="text-4F4F4F font-14">Name & email</div>
+      <div text-uppercase class="text-4F4F4F font-14">{{ 'PAGE_CREATE-USER-PROFILE.NAME_EMAIL' | translate }}</div>
       <div item-end>
         <img src="assets/img/cards.svg">
       </div>
       <div item-end>
-        <span class="label label-ios points font-75">You have {{ point() }} points</span>
+        <span class="label label-ios points font-75">{{ 'PAGE_CREATE-USER-PROFILE.YOU_HAVE' | translate }} {{ point() }} {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</span>
       </div>
     </ion-item>
   </div>
@@ -27,11 +27,9 @@
         </a>
       </div>
       <div item-end class="item-content">
-        <ion-input (ionBlur)="validateName(user.name)" [(ngModel)]="user.name" class="bg-gray margin-bottom-small" type="text" placeholder="Your Name"
-          maxlength="30" name="name1"></ion-input>
+        <ion-input (ionBlur)="validateName(user.name)" [(ngModel)]="user.name" class="bg-gray margin-bottom-small" type="text" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }}" name="name1"></ion-input>
         <div class="input_relative">
-          <ion-input (ionBlur)="validateEmail(user.email)" [(ngModel)]="user.email" class="bg-gray margin-bottom-small" type="email"
-            placeholder="Your E-mail" maxlength="30" name="email"></ion-input>
+          <ion-input (ionBlur)="validateEmail(user.email)" [(ngModel)]="user.email" class="bg-gray margin-bottom-small" type="email" maxlength="30"  placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}" name="email"></ion-input>
           <span *ngIf="user.email" class="text-gray icon_info">
             <a (click)="toggleVisibleInfo()">
               <img src="assets/img/create_user_profile/info.svg">
@@ -48,8 +46,8 @@
         <img class="img_lock" src="assets/img/create_user_profile/img_1.svg">
       </div>
       <div item-end text-left class="item-content">
-        <div class="bold font-16 text-3E4B5D">Earn Extra Points</div>
-        <div class="text-4F4F4F font-12 margin-top-2vw">Of course you have good opportunity to earn extra points for this!</div>
+        <div class="bold font-16 text-3E4B5D">{{ 'PAGE_CREATE-USER-PROFILE.EARN_EXTRA_POINTS' | translate }}</div>
+        <div class="text-4F4F4F font-12 margin-top-2vw">{{ 'PAGE_CREATE-USER-PROFILE.OF_COURSE' | translate }}</div>
       </div>
     </ion-item>
     <ion-item *ngIf="visibleInfo" no-lines>
@@ -57,14 +55,14 @@
         <img class="img_msg" src="assets/img/create_user_profile/img_2.svg">
       </div>
       <div item-end text-left class="item-content">
-        <div class="bold font-16 text-3E4B5D">Confirm Email Address</div>
-        <div class="text-4F4F4F font-12">We emailed a confirmation link to your email address. Click the link to finish registration.</div>
+        <div class="bold font-16 text-3E4B5D">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_EMAIL_ADDRESS' | translate }}</div>
+        <div class="text-4F4F4F font-12">{{ 'PAGE_CREATE-USER-PROFILE.WE_EMAILED' | translate }}</div>
       </div>
     </ion-item>
   </div>
 
   <div class="block-lines">
-    <div class="font-75">SOCIAL ACCOUNTS (Every item adds + 3 points) </div>
+    <div class="font-75">{{ 'PAGE_CREATE-USER-PROFILE.SOCIAL_ACCOUNTS' | translate }}</div>
   </div>
 
   <div class="block-lines">
@@ -73,8 +71,8 @@
       <ion-input class="text-3E4B5D" [(ngModel)]="facebookName" placeholder="Facebook"></ion-input>
       <div item-end>
         <ion-label *ngIf="facebookName" class="label label-ios added font-75">
-          <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
-        <ion-label *ngIf="!facebookName" class="label label-ios points font-75">+ 3 points</ion-label>
+          <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+        <ion-label *ngIf="!facebookName" class="label label-ios points font-75">+ 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
       </div>
     </ion-item>
 
@@ -82,8 +80,8 @@
       <ion-input class="text-3E4B5D" [(ngModel)]="instagramName" placeholder="Instagram"></ion-input>
       <div item-end>
         <ion-label *ngIf="instagramName" class="label label-ios added font-75">
-          <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
-        <ion-label *ngIf="!instagramName" class="label label-ios points font-75">+ 3 points</ion-label>
+          <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+        <ion-label *ngIf="!instagramName" class="label label-ios points font-75">+ 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
       </div>
     </ion-item>
 
@@ -91,8 +89,8 @@
       <ion-input class="text-3E4B5D" [(ngModel)]="twitterName" placeholder="Twitter"></ion-input>
       <div item-end>
         <ion-label *ngIf="twitterName" class="label label-ios added font-75">
-          <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
-        <ion-label *ngIf="!twitterName" class="label label-ios points font-75">+ 3 points</ion-label>
+          <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+        <ion-label *ngIf="!twitterName" class="label label-ios points font-75">+ 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
       </div>
     </ion-item>
 
@@ -101,51 +99,51 @@
   <div class="block-lines">
     <a (click)="toggleSelect()">
       <div class="select-block-desc text-828282 font-14">
-        SHOW ADDITIONAL OPTIONS (More points)
+          {{ 'PAGE_CREATE-USER-PROFILE.SHOW_ADDITIONAL_OPTIONS' | translate }}
         <ion-icon *ngIf="isSelectVisible" name="arrow-up" class="icon-arrow"></ion-icon>
         <ion-icon *ngIf="!isSelectVisible" name="arrow-down" class="icon-arrow"></ion-icon>
       </div>
     </a>
 
-    <p class="select-block-desc text-828282 font-12">If you will fill additional information about yourself it helps us to recommend best offers for you.</p>
+    <p class="select-block-desc text-828282 font-12">{{ 'PAGE_CREATE-USER-PROFILE.IF_YOU_WILL' | translate }}</p>
   </div>
 
   <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
   <div *ngIf="isSelectVisible">
     <div class="block-lines">
       <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-select [(ngModel)]="gender" placeholder="Gender" class="gender_select" interface="action-sheet">
-          <ion-option value="f">Female</ion-option>
-          <ion-option value="m">Male</ion-option>
+        <ion-select [(ngModel)]="gender" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.GENDER' | translate }}" class="gender_select" interface="action-sheet">
+          <ion-option value="f">{{ 'PAGE_CREATE-USER-PROFILE.FEMALE' | translate }}</ion-option>
+          <ion-option value="m">{{ 'PAGE_CREATE-USER-PROFILE.MALE' | translate }}</ion-option>
         </ion-select>
         <!-- <ion-input [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender"></ion-input>-->
         <div item-end>
           <ion-label *ngIf="gender" class="label label-ios added font-75">
-            <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
-          <ion-label *ngIf="!gender" class="label label-ios points font-75">+ 5 points</ion-label>
+            <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+          <ion-label *ngIf="!gender" class="label label-ios points font-75">+ 5 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
         </div>
       </ion-item>
 
       <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-input [(ngModel)]="age" placeholder="Age"></ion-input>
+        <ion-input [(ngModel)]="age" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.AGE' | translate }}"></ion-input>
         <div item-end>
           <ion-label *ngIf="age" class="label label-ios added font-75">
-            <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
-          <ion-label *ngIf="!age" class="label label-ios points font-75">+ 9 points</ion-label>
+            <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+          <ion-label *ngIf="!age" class="label label-ios points font-75">+ 9 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
         </div>
       </ion-item>
 
       <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-input [(ngModel)]="income" placeholder="Income"></ion-input>
+        <ion-input [(ngModel)]="income" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.INCOME' | translate }}"></ion-input>
         <div item-end>
           <ion-label *ngIf="income" class="label label-ios added font-75">
-            <ion-icon name="md-checkmark"></ion-icon> Added</ion-label>
-          <ion-label *ngIf="!income" class="label label-ios points font-75">+ 9 points</ion-label>
+            <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+          <ion-label *ngIf="!income" class="label label-ios points font-75">+ 9 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
         </div>
       </ion-item>
     </div>
-    <p margin text-uppercase class="font-14 text-4F4F4F">Confirm your location:</p>
-    <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">Detecting your location...</div>
+    <p margin text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}</p>
+    <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
       <agm-map [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)">
       </agm-map>
@@ -158,6 +156,10 @@
         </ion-card>-->
   </div>
   <p margin>
+<<<<<<< HEAD
     <button color="primary" (click)="createAccount()" [disabled]="!isValidEmail || !isValidName" ion-button block>Create account</button>
+=======
+    <button color="primary" (click)="createAccount()" [disabled]="!user.name || !user.email" ion-button block>{{ 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
+>>>>>>> 9a57cbb65165d9680ae0a58785aa2772e283d948
   </p>
 </ion-content>

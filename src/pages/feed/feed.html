@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>what happend</ion-title>
+        <ion-title>{{ 'PAGE_FEED.WHAT_HAPPEND' | translate }}</ion-title>
         <ion-buttons class="btn_header" end margin-right>
             <a *ngIf="!isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_active.svg"></a>
             <a *ngIf="isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_not_active.svg"></a>
@@ -18,51 +18,51 @@
 
     <ion-segment [(ngModel)]="segment" text-uppercase margin-bottom class="nau-segment margin-top-2vw">
         <ion-segment-button  value="all">
-            All
+            {{ 'PAGE_FEED.ALL' | translate }}
         </ion-segment-button>
         <ion-segment-button value="places">
-            Places
+            {{ 'PAGE_FEED.PLACES' | translate }}
         </ion-segment-button>
         <ion-segment-button value="offers">
-            Offers
+            {{ 'PAGE_FEED.OFFERS' | translate }}
         </ion-segment-button>
         <ion-segment-button value="People">
-            People
+            {{ 'PAGE_FEED.PEOPLE' | translate }}
         </ion-segment-button>
     </ion-segment>
 
-    <div class="font-14 text-4F4F4F" text-uppercase>Today</div>
+    <div class="font-14 text-4F4F4F" text-uppercase>{{ 'PAGE_FEED.TODAY' | translate }}</div>
     <ion-list no-lines class="item-block-nau font-0">
         <ion-item detail-push class="today">
             <ion-avatar item-start>
                 <div class="thumb_image" [style.background-image]="'url(assets/img/user_users/ava1.png)'"></div>
             </ion-avatar>
             <div class="bold font-20 text-3E4B5D">Alex Miller</div>
-            <div class="font-12 text-4F4F4F margin-top-3vw width-88 text-overflow-35">Redeemed your offer at</div>
+            <div class="font-12 text-4F4F4F margin-top-3vw width-88 text-overflow-35">{{ 'PAGE_FEED.REDEEMED_YOUR' | translate }}</div>
             <div text-uppercase class="bold font-14 text-FF8B10">The Fair food</div>
             <div class="table">
-            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw extrabold font-14">redeem offer</button>
+            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw extrabold font-14">{{ 'PAGE_FEED.REDEEM_OFFER' | translate }}</button>
             <span class="table-cell padding-top-2vw">
             <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
-            <span class="font-75 text-828282">210 m</span>
+            <span class="font-75 text-828282">210 {{ 'UNIT.M' | translate }}</span>
             </span>
             </div>
         </ion-item>
     </ion-list>
 
-    <div class="font-14 text-4F4F4F padding-top-5vw" text-uppercase>Yesterday</div>
+    <div class="font-14 text-4F4F4F padding-top-5vw" text-uppercase>{{ 'PAGE_FEED.YESTERDAY' | translate }}</div>
     <ion-list no-lines class="item-block-nau font-0">
         <ion-item detail-push class="yesterday">
             <ion-avatar item-start>
                 <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
             </ion-avatar>
             <div class="bold font-20 text-3E4B5D">Happy Friday</div>
-            <div class="font-12 text-828282 wrap text-overflow-54 margin-top-3vw width-88">Our restaurant wants offer your ineresting proposition!</div>
+            <div class="font-12 text-828282 wrap text-overflow-54 margin-top-3vw width-88">{{ 'PAGE_FEED.OUR_RESTAURANT_WANTS' | translate }}</div>
             <div class="table">
-                <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw extrabold font-14">Redeem offer</button>
+                <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw extrabold font-14">{{ 'PAGE_FEED.REDEEM_OFFER' | translate }}</button>
             <span class="table-cell padding-top-2vw">
             <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
-            <span class="font-75 text-828282">100 m</span>
+            <span class="font-75 text-828282">100 {{ 'UNIT.M' | translate }}</span>
             </span>
             </div>
         </ion-item>
@@ -72,12 +72,12 @@
                 <div class="thumb_image" [style.background-image]="'url(assets/img/thumb_cafe.png)'"></div>
             </ion-avatar>
             <div class="bold font-20 text-3E4B5D">Black Cafe</div>
-            <div class="font-12 text-828282 wrap text-overflow-54 margin-top-3vw width-88">Now available in your region</div>
+            <div class="font-12 text-828282 wrap text-overflow-54 margin-top-3vw width-88">{{ 'PAGE_FEED.NOW_AVAILABLE_IN_YOUR_REGION' | translate }}</div>
             <div class="table">
-            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw font-14">View offers</button>
+            <button ion-button text-uppercase class="btn_view font-14 text-white margin-top-3vw font-14">{{ 'PAGE_FEED.VIEW_OFFERS' | translate }}</button>
             <span class="table-cell padding-top-2vw">
             <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
-            <span class="font-75 text-828282">300 m</span>
+            <span class="font-75 text-828282">300 {{ 'UNIT.M' | translate }}</span>
             </span>
             </div>
         </ion-item>

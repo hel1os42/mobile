@@ -75,7 +75,7 @@ export class CreateOffer5Page {
         this.offer.reserved = parseInt(this.reserved);
         this.place.putOffer(this.offer, this.offer.id)
             .subscribe(() => {
-                let loading = this.loading.create({ content: 'Updeting offer...' });
+                let loading = this.loading.create({ content: 'Updating offer...' });
                 loading.present();
                 let promise = this.picture_url
                     ? this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`, false)

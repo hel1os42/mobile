@@ -6,8 +6,8 @@
 <ion-content class="padding-sign">
   <div class="logo">
   </div>
-  <div text-center class="title-big-sign">Login</div>
-  <div text-center class="margin-top-6vw font-75 text-4F4F4F">Please enter your phone number and<br>confirmation code</div>
+  <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
+  <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}</div>
 
   <div class="bg-gray margin-top-6vw">
   <ion-item class="border-bottom-no">
@@ -20,18 +20,18 @@
 
   <div margin-top class="bg-gray padding-left-6a3vw">
       <ion-item class="border-bottom-no">
-        <ion-label>OTP</ion-label>
+        <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
         <ion-input class="otp" type="tel" placeholder="XX-XX-XX" [(ngModel)]="data.code"></ion-input>
       </ion-item>
   </div>
 
 
-  <button text-uppercase class="margin-top-5vw" ion-button block middle color="primary" (click)="login()" [disabled]="!(data.phone && data.code)">Sign in</button>
+  <button text-uppercase class="margin-top-5vw" ion-button block middle color="primary" (click)="login()" [disabled]="!(data.phone && data.code)">{{ 'UNIT.SIGN_IN' | translate }}</button>
 
 </ion-content>
 
 <ion-footer no-shadow no-border>
   <div text-center>
-    <div><a (click)="signup()" class="link-nau">Sign Up</a></div>
+    <div><a (click)="signup()" class="link-nau">{{ 'UNIT.SIGN_UP' | translate }}</a></div>
   </div>
 </ion-footer>

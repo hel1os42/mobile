@@ -8,7 +8,7 @@
     </a>
     -->
     <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
-      <ion-label text-uppercase class="text-4F4F4F font-16">Select Cuisine</ion-label>
+      <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_CUISINE' | translate }}</ion-label>
       <div item-end>
         <img src="assets/img/user_home/arrow_up.svg">
       </div>
@@ -25,10 +25,10 @@
     <ion-grid>
         <ion-row>
             <ion-col text-center class="margin-right-2proc">
-                <button (click)="clear()" ion-button block color="secondary">Clear</button>
+                <button (click)="clear()" ion-button block color="secondary">{{ 'PAGE_PLACES.CLEAR' | translate }}</button>
             </ion-col>
             <ion-col text-center class="margin-left-2proc">
-                <button (click)="close()" ion-button block color="primary">Done</button>
+                <button (click)="close()" ion-button block color="primary">{{ 'UNIT.DONE' | translate }}</button>
             </ion-col>
         </ion-row>
     </ion-grid>
