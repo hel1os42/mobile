@@ -1,3 +1,4 @@
+import { ProfileService } from '../../providers/profile.service';
 import { Component } from '@angular/core';
 import { App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Company } from '../../models/company';
@@ -25,7 +26,8 @@ export class OfferPage {
         private popoverCtrl: PopoverController,
         private navParams: NavParams,
         private offers: OfferService,
-        private app: App) {
+        private app: App,
+        private profile: ProfileService) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
@@ -76,7 +78,7 @@ export class OfferPage {
                         .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
                             if (offerRedemtionStatus.redemption_id) {
                                 this.stopTimer();
-
+                                this.profile.refreshAccounts();
                                 offerRedeemPopover.dismiss();
 
                                 let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover);
