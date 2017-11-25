@@ -120,7 +120,7 @@ export class PlacesPage {
     loadCompanies(categoryId, search, page) {
         this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search, page)
             .subscribe(companies => {
-                this.companies = companies.data.filter(p => p.offers_count > 0);//temporaty companies filter
+                this.companies = companies.data.filter(p => p.active_offers_count > 0);//temporaty companies filter
                 // this.companies = companies.data;
 
                 //temporary offers list filter

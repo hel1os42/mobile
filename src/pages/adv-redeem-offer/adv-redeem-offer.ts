@@ -1,3 +1,4 @@
+import { ProfileService } from '../../providers/profile.service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PlaceService } from '../../providers/place.service';
@@ -17,7 +18,8 @@ export class AdvRedeemOfferPage {
 
     constructor(private nav: NavController,
                 private place: PlaceService,
-                private barcode: BarcodeScanner) {
+                private barcode: BarcodeScanner,
+                private profile: ProfileService) {
 
     }
 
@@ -28,7 +30,10 @@ export class AdvRedeemOfferPage {
 
     confirm() {
         this.place.setRedeemCode(this.code)
-            .subscribe(() => this.nav.pop());
+            .subscribe((resp) => {
+                this.profile.refreshAccounts();
+                this.nav.pop()
+            });
     }
 
 }

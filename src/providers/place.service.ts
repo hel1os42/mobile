@@ -10,7 +10,6 @@ export class PlaceService {
 
     company: Company;
     onRefreshCompany: EventEmitter<Company> = new EventEmitter<Company>();
-    onRefreshAccounts: EventEmitter<any> = new EventEmitter();
 
     constructor(private api: ApiService) { }
 
@@ -45,9 +44,8 @@ export class PlaceService {
     }
 
     setRedeemCode(code: string) {
-        let obs = this.api.post('redemptions', { code: code });
-        obs.subscribe(() => this.onRefreshAccounts.emit());
-        return obs;
+        return this.api.post('redemptions', { code: code });
+
     }
 
     set(place: PlaceCreate) {
@@ -67,7 +65,7 @@ export class PlaceService {
     getOffersWithTimeframes() {
         return this.api.get('advert/offers?with=timeframes');
     }
-    
+
     getActiveOffers(page) {
         return this.api.get(`advert/offers?search=status:active&page=${page}`, page == 1);
     }
