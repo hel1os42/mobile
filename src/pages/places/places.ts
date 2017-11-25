@@ -120,8 +120,8 @@ export class PlacesPage {
     loadCompanies(categoryId, search, page) {
         this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search, page)
             .subscribe(companies => {
-                this.companies = companies.data.filter(p => p.active_offers_count > 0);//temporaty companies filter
-                // this.companies = companies.data;
+                // this.companies = companies.data.filter(p => p.active_offers_count > 0);//temporaty companies filter
+                this.companies = companies.data;
 
                 //temporary offers list filter
                 // let companiesList = companies.data.filter(p => p.offers_count > 0);
@@ -242,25 +242,25 @@ export class PlacesPage {
         }
     }
 
-    countPlaceActiveOffers(offersList) {//temporary offers list filter
-        let activeOffersList = offersList.filter(p => p.status == 'active');
-        let activeOffersCount = activeOffersList.length;
-        return activeOffersCount;
-    }
+    // countPlaceActiveOffers(offersList) {//temporary offers list filter
+    //     let activeOffersList = offersList.filter(p => p.status == 'active');
+    //     let activeOffersCount = activeOffersList.length;
+    //     return activeOffersCount;
+    // }
 
-    nextPlace(i, companiesList) {//temporary offers list filter
-        if (i < companiesList.length) {
-            this.offers.getPlaceOffers(companiesList[i].id)
-                .subscribe(resp => {
-                    companiesList[i].offers_count = this.countPlaceActiveOffers(resp.data);
-                    if (companiesList[i].offers_count > 0) {
-                        this.companies.push(companiesList[i]);
-                    }
-                    i++;
-                    this.nextPlace(i, companiesList);
-                })
-        }
-        this.mapBounds = this.generateBounds(this.companies);//temporary
-    }
+    // nextPlace(i, companiesList) {//temporary offers list filter
+    //     if (i < companiesList.length) {
+    //         this.offers.getPlaceOffers(companiesList[i].id)
+    //             .subscribe(resp => {
+    //                 companiesList[i].offers_count = this.countPlaceActiveOffers(resp.data);
+    //                 if (companiesList[i].offers_count > 0) {
+    //                     this.companies.push(companiesList[i]);
+    //                 }
+    //                 i++;
+    //                 this.nextPlace(i, companiesList);
+    //             })
+    //     }
+    //     this.mapBounds = this.generateBounds(this.companies);//temporary
+    // }
 
 }
