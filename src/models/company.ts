@@ -12,6 +12,7 @@ export class Company {
     categories_count: number;
     categories?: OfferCategory[];
     offers_count: number;
+    active_offers_count?: number;
     offers?: Offer[];
     stars: number;
     is_featured: boolean;
