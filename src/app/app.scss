@@ -1760,16 +1760,14 @@ textarea.text-input {
     font-size: 4vw;
 }
 
-<<<<<<< HEAD
-  .ng-valid[required], .ng-valid.required, .ng-valid  {
-    color: #3E4B5D; /* green */
-  }
-  
-  .ng-invalid:not(form)  {
-    color: #a94442; /* red */
-  }
-=======
+.ng-valid[required], .ng-valid.required, .ng-valid  {
+    color: inherit; /* green */
+}
+
+.ng-invalid:not(form)  {
+    color: inherit; /* red */
+}
+
 .button-inner{
     overflow: hidden;
 }
->>>>>>> 62f7b3e5fb2df4685038d56afe703bd75247d305
