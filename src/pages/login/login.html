@@ -9,24 +9,25 @@
   <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
   <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}</div>
 
+  <form [formGroup]="formData" (ngSubmit)="login()">
   <div class="bg-gray margin-top-6vw">
   <ion-item class="border-bottom-no">
-    <ion-select [(ngModel)]="numCode" interface="popover">
+    <ion-select formControlName="code" interface="popover">
       <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
     </ion-select>
-    <ion-input class="tel" type="tel" placeholder="1234567" [(ngModel)]="data.phone"></ion-input>
+    <ion-input formControlName="phone" class="tel" type="number" placeholder="1234567"></ion-input>
   </ion-item>
   </div>
 
   <div margin-top class="bg-gray padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
-        <ion-input class="otp" type="tel" placeholder="XXXXXX" [(ngModel)]="data.code"></ion-input>
+        <ion-input formControlName="otp" class="otp" type="number" placeholder="XXXXXX"></ion-input>
       </ion-item>
   </div>
+</form>
 
-
-  <button text-uppercase class="margin-top-5vw" ion-button block middle color="primary" (click)="login()" [disabled]="!(data.phone && data.code)">{{ 'UNIT.SIGN_IN' | translate }}</button>
+  <button (click)="login()" [disabled]="!formData.valid" type="submit" text-uppercase class="margin-top-5vw" ion-button block middle color="primary" >{{ 'UNIT.SIGN_IN' | translate }}</button>
 
 </ion-content>
 

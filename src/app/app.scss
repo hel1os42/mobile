@@ -1747,3 +1747,11 @@ textarea.text-input {
 .agm-info-window-content{
     font-size: 4vw;
 }
+
+  .ng-valid[required], .ng-valid.required, .ng-valid  {
+    color: #3E4B5D; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    color: #a94442; /* red */
+  }
