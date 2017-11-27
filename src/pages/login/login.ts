@@ -60,8 +60,10 @@ export class LoginPage {
 
     sliceStr(str: string, length: number) {
         if (str && str.length > length) {
-            if (length == 12) this.authData.phone = str.slice(0, length - 1);  
-            else this.authData.code = str.slice(0, length - 1);
+            if (length == 12) {
+                this.authData.phone = str.slice(0, str.length - 1); 
+            } 
+            else this.authData.code = str.slice(0, str.length - 1);
         }
     }
 

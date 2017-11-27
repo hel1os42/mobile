@@ -36,4 +36,10 @@ export class SignUpCodePage {
                     })
               })
     }
+
+    sliceStr(str: string) {
+        if (str.length > 6) {
+            this.register.code = str.slice(0, 5);  
+        }
+    }
 }

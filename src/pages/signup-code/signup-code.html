@@ -8,21 +8,26 @@
     </div>
 
     <div text-center class="title-big-sign">{{ 'PAGE_SIGNUP-CODE.CONFIRM' | translate }}</div>
-    <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_SIGNUP-CODE.PLEASE_FILL_CONFIRMATION_CODE' | translate }}<br>{{ 'PAGE_SIGNUP-CODE.FROM_MESSAGE' | translate }}</div>
+    <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_SIGNUP-CODE.PLEASE_FILL_CONFIRMATION_CODE' | translate }}
+        <br>{{ 'PAGE_SIGNUP-CODE.FROM_MESSAGE' | translate }}</div>
 
-    <div margin-top class="bg-gray margin-top-6vw">
-        <ion-item class="border-bottom-no">
-            <ion-label class="label-left">OTP</ion-label>
-            <ion-input type="tel" placeholder="XXXXXX" [(ngModel)]="register.code"></ion-input>
-        </ion-item>
-    </div>
+    <form #form="ngForm">
+        <div margin-top class="bg-gray margin-top-6vw">
+            <ion-item class="border-bottom-no">
+                <ion-label class="label-left">OTP</ion-label>
+                <ion-input (ionChange)="sliceStr(register.code)" [(ngModel)]="register.code" [minlength]="6" [maxlength]="6" ngControl="code" name="code"
+                    pattern="^[ 0-9]+$" required type="number" placeholder="XXXXXX"></ion-input>
+            </ion-item>
+        </div>
 
-    <button text-uppercase class="margin-top-6vw" (click)="signUp()" ion-button block middle color="primary">{{ 'PAGE_SIGNUP-CODE.NEXT' | translate }}</button>
-
+        <button text-uppercase class="margin-top-6vw" (click)="signUp()" [disabled]="!form.valid" ion-button block middle type="submit"
+            color="primary">{{ 'PAGE_SIGNUP-CODE.NEXT' | translate }}</button>
+    </form>
 </ion-content>
 
 <ion-footer no-shadow no-border>
-  <div text-center class="font-75 text-828282">
-      {{ 'PAGE_SIGNUP-CODE.ONE_TIME' | translate }}<br>{{ 'PAGE_SIGNUP-CODE.CONFIRM_PHONE_NUMBER' | translate }}.
-  </div>
+    <div text-center class="font-75 text-828282">
+        {{ 'PAGE_SIGNUP-CODE.ONE_TIME' | translate }}
+        <br>{{ 'PAGE_SIGNUP-CODE.CONFIRM_PHONE_NUMBER' | translate }}.
+    </div>
 </ion-footer>
