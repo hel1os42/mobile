@@ -1,10 +1,10 @@
-import { StringValidator } from '../../app/validators/string.validator';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AuthService } from "../../providers/auth.service";
-import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
+import { StringValidator } from '../../app/validators/string.validator';
 import { Register } from '../../models/register';
 import { AppModeService } from '../../providers/appMode.service';
+import { AuthService } from '../../providers/auth.service';
+import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 
 @Component({
     selector: 'page-signup-code',

@@ -1,14 +1,14 @@
-import { StringValidator } from '../../app/validators/string.validator';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { NavController } from 'ionic-angular';
-import { AuthService } from '../../providers/auth.service';
+import { StringValidator } from '../../app/validators/string.validator';
 import { Login } from '../../models/login';
-import { TabsPage } from '../tabs/tabs';
 import { AppModeService } from '../../providers/appMode.service';
-import { SignUpInvitePage } from '../invite/invite';
-import { ProfileService } from "../../providers/profile.service";
+import { AuthService } from '../../providers/auth.service';
+import { ProfileService } from '../../providers/profile.service';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
+import { SignUpInvitePage } from '../invite/invite';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
     selector: 'page-login',
