@@ -14,14 +14,14 @@
     <ion-select [(ngModel)]="numCode" interface="popover">
       <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
     </ion-select>
-    <ion-input class="tel" type="tel" placeholder="123-45-67" [(ngModel)]="data.phone"></ion-input>
+    <ion-input class="tel" type="tel" placeholder="1234567" [(ngModel)]="data.phone"></ion-input>
   </ion-item>
   </div>
 
   <div margin-top class="bg-gray padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
-        <ion-input class="otp" type="tel" placeholder="XX-XX-XX" [(ngModel)]="data.code"></ion-input>
+        <ion-input class="otp" type="tel" placeholder="XXXXXX" [(ngModel)]="data.code"></ion-input>
       </ion-item>
   </div>
 
