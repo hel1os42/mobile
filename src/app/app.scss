@@ -215,7 +215,7 @@ ion-header ion-icon.back-button-icon.icon {
 .font-40{
     font-size: 40px;
     font-size: 10vw;
-    line-height: 10vw;
+    line-height: 12vw;
 }
 
 .font-50{
@@ -377,6 +377,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .width-88{
     width: 88%;
+}
+
+.width-78{
+    width: 78%;
 }
 
 .width-44vw{
@@ -1371,6 +1375,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     overflow: hidden;
 }
 
+.text-overflow-3-font-40{
+    max-height: 44.5vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
+}
+
 .text-ellipsis{
     white-space: nowrap;
     overflow: hidden;
@@ -1710,6 +1721,7 @@ textarea.text-input {
     height: 7vw;
     padding-right: 4vw;
     padding-left: 4vw;
+    width: 24vw;
 }
 
 .btn_calendar_user .item-cover{
@@ -1746,4 +1758,8 @@ textarea.text-input {
 
 .agm-info-window-content{
     font-size: 4vw;
+}
+
+.button-inner{
+    overflow: hidden;
 }
