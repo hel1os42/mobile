@@ -1,4 +1,3 @@
-import { MaxValueValidator } from '../../app/validators/max-value.validator';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';

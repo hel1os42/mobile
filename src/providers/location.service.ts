@@ -40,4 +40,8 @@ export class LocationService {
             })
         return sharableObs.map(resp => resp.json());
     }
+
+    reset() {
+        this.geoposition = undefined;
+    }
 }
