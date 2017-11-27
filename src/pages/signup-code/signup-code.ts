@@ -1,3 +1,4 @@
+import { StringValidator } from '../../app/validators/string.validator';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AuthService } from "../../providers/auth.service";
@@ -34,12 +35,10 @@ export class SignUpCodePage {
                         this.appMode.setHomeMode(false);
                         this.nav.setRoot(CreateUserProfilePage);
                     })
-              })
+            })
     }
 
     sliceStr(str: string) {
-        if (str.length > 6) {
-            this.register.code = str.slice(0, 5);  
-        }
+        this.register.code = StringValidator.stringLimitMax(str, 6);
     }
 }

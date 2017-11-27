@@ -1,3 +1,4 @@
+import { StringValidator } from '../../app/validators/string.validator';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -42,6 +43,7 @@ export class LoginPage {
             .subscribe(
             resp => {
                 this.appMode.setHomeMode(true);
+                debugger
                 this.profile.get(true)
                     .subscribe(resp => {
                         if (resp.name == '' && !resp.email) {
@@ -59,12 +61,9 @@ export class LoginPage {
     }
 
     sliceStr(str: string, length: number) {
-        if (str && str.length > length) {
-            if (length == 12) {
-                this.authData.phone = str.slice(0, str.length - 1); 
-            } 
-            else this.authData.code = str.slice(0, str.length - 1);
+            this.authData.phone = StringValidator.stringLimitMax(str, 12);
+            this.authData.code = StringValidator.stringLimitMax(str, 6);
         }
-    }
+    
 
 }
