@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Your redeemed offers</ion-title>
+    <ion-title>{{ 'PAGE_USER-OFFERS.YOUR_REDEEMED_OFFERS' | translate }}</ion-title>
   </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
@@ -13,7 +13,7 @@
     </ion-avatar>
     <div item-content>
        <div class="font-18 text-3E4B5D bold">{{ total }}</div>
-       <div class="font-14 text-828282">Redeemed Offers</div>
+       <div class="font-14 text-828282">{{ 'PAGE_USER-OFFERS.REDEEMED_OFFERS' | translate }}</div>
     </div>
       <a item-end margin-left>
           <a class="btn_calendar_user">
@@ -30,9 +30,9 @@
        <!-- <div class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div> -->
        <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '), url(assets/img/imagenotfound.svg)'}" ></div>
       </ion-avatar>
-      <div class="bold font-22 text-3E4B5D">{{ offer.label}}</div>
+      <div class="bold font-22 text-3E4B5D wrap-no">{{ offer.label}}</div>
       <div class="bold font-14 text-FF8B10" text-uppercase>{{ offer.city }}</div>
-      <div class="font-14 text-828282">Date: {{ offer.pivot.created_at.substring(0,10) }}</div>
+      <div class="font-14 text-828282">{{ 'PAGE_USER-OFFERS.DATE' | translate }}: {{ offer.pivot.created_at.substring(0,10) }}</div>
     </ion-item>
   </ion-list>
 

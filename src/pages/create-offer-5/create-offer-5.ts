@@ -54,17 +54,20 @@ export class CreateOffer5Page {
 
                     this.place.getOffer(offer_id, false)
                         .subscribe(offer => {
-                            this.place.refreshPlace();
+                            if (offer.id) {
+                                this.place.refreshPlace();
 
-                            let promise = this.picture_url
-                                ? this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`, false)
-                                : Promise.resolve();
+                                let promise = this.picture_url
+                                    ? this.api.uploadImage(this.picture_url, `offers/${offer_id}/picture`, false)
+                                    : Promise.resolve();
 
-                            promise.then(() => {
-                                this.stopTimer();
-                                loading.dismiss()
-                                this.navTo();
-                            });
+                                promise.then((res) => {
+                                    console.log(res);
+                                    this.stopTimer();
+                                    loading.dismiss();
+                                    this.navTo();
+                                }).catch(t => console.log(t.error()));
+                            }
                         });
                 }, 1500)
             }, err => this.presentConfirm('created'))
