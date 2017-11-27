@@ -15,13 +15,13 @@ import { CreateUserProfilePage } from '../create-user-profile/create-user-profil
 })
 
 export class LoginPage {
-    authData: Login = new Login();
+    authData: Login = {
+        phone: '',
+        code: ''
+    };
     numCodes = ['+7', '+49', '+63', '+57', '+380'];
     numCode: string = '+380';
     page;
-    formData: FormGroup;
-    regexStr='^[ 0-9]+$';
-
 
     constructor(
         private nav: NavController,
@@ -30,20 +30,13 @@ export class LoginPage {
         private profile: ProfileService,
         private builder: FormBuilder) {
 
-            this.formData = this.builder.group({  
-                code: ['+380', Validators.required],
-                phone: ['',  Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(12), Validators.pattern(this.regexStr)])],
-                otp: ['',  Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(6)])]
-            });
     }
 
     login() {
-        this.authData.phone = this.formData.value.phone;
-        this.numCode = this.formData.value.code;
         this.auth
             .login({
                 phone: this.numCode + this.authData.phone,
-                code: this.formData.value.otp
+                code: this.authData.code
                 // code: this.authData.phone.slice(-6)
             })
             .subscribe(
@@ -63,6 +56,13 @@ export class LoginPage {
 
     signup() {
         this.nav.push(SignUpInvitePage);
+    }
+
+    sliceStr(str: string, length: number) {
+        if (str && str.length > length) {
+            if (length == 12) this.authData.phone = str.slice(0, length - 1);  
+            else this.authData.code = str.slice(0, length - 1);
+        }
     }
 
 }
