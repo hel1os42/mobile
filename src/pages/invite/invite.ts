@@ -9,7 +9,7 @@ import { SignUpPage } from '../signup/signup';
 })
 
 export class SignUpInvitePage {
-    inviteCode: string = '59c2af2';//to do
+    code = { inviteCode: '59c2af2' };//to do
     //data: Register = new Register();
 
     constructor(
@@ -19,7 +19,7 @@ export class SignUpInvitePage {
     }
 
     next() {
-        this.auth.setInviteCode(this.inviteCode);
+        this.auth.setInviteCode(this.code.inviteCode);
         this.nav.push(SignUpPage);
 
     }
