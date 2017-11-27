@@ -38,7 +38,7 @@ export class SignUpCodePage {
             })
     }
 
-    sliceStr(str: string) {
+    limitStr(str: string) {
         this.register.code = StringValidator.stringLimitMax(str, 6);
     }
 }

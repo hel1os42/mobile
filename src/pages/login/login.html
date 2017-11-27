@@ -15,14 +15,14 @@
     <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover">
       <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
     </ion-select>
-    <ion-input (keyup)="sliceStr(authData.phone, 12)" [(ngModel)]="authData.phone" ngControl="phone" name="phone" pattern="^[ 0-9]+$" [minlength]="7" required class="tel" type="number" placeholder="1234567"></ion-input>
+    <ion-input (ionChange)="limitStr(authData.phone, 12)" [(ngModel)]="authData.phone" ngControl="phone" name="phone" pattern="^[ 0-9]+$" [minlength]="7" required class="tel" type="number" placeholder="1234567"></ion-input>
   </ion-item>
   </div>
 
   <div margin-top class="bg-gray padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
-        <ion-input (keyup)="sliceStr(authData.code, 6)" [(ngModel)]="authData.code" ngControl="code" name="code" pattern="^[ 0-9]+$" [minlength]="6" [maxlength]="6" required class="otp" type="number" placeholder="XXXXXX"></ion-input>
+        <ion-input (ionChange)="limitStr(authData.code, 6)" [(ngModel)]="authData.code" ngControl="code" name="code" pattern="^[ 0-9]+$" [minlength]="6" [maxlength]="6" required class="otp" type="number" placeholder="XXXXXX"></ion-input>
       </ion-item>
   </div>
 </form>

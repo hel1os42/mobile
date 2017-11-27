@@ -60,9 +60,9 @@ export class LoginPage {
         this.nav.push(SignUpInvitePage);
     }
 
-    sliceStr(str: string, length: number) {
-            this.authData.phone = StringValidator.stringLimitMax(str, 12);
-            this.authData.code = StringValidator.stringLimitMax(str, 6);
+    limitStr(str: string, length: number) {
+        if (length == 12) this.authData.phone = StringValidator.stringLimitMax(str, length);
+        else this.authData.code = StringValidator.stringLimitMax(str, length);
         }
     
 
