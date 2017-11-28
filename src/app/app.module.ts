@@ -161,9 +161,9 @@ export function createTranslateLoader(http: Http) {
         apiKey: 'AIzaSyBAgndAbV-v4aQWTAHrUljUfSCAthdK-RY'
       }),
       TranslateModule.forRoot({
-        loader: { 
-          provide: TranslateLoader, 
-          useFactory: (createTranslateLoader), 
+        loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
           deps: [Http] },
       })
   ],

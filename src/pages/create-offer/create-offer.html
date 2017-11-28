@@ -29,13 +29,15 @@
 
     <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-OFFER.NAME_DESCRIPTION' | translate }}</div>
     <div class="block-lines">
+        <form [formGroup]="formData" (ngSubmit)="openCreateOffer1Page()">
         <ion-item no-lines>
-            <ion-input [(ngModel)]="offer.label" class="bg-gray" type="text" placeholder="{{ 'PAGE_CREATE-OFFER.OFFER_NAME' | translate }}"></ion-input>
+            <ion-input class="bg-gray" maxlength="30" formControlName="offer_name" type="text" placeholder="{{ 'PAGE_CREATE-OFFER.OFFER_NAME' | translate }}"></ion-input>
         </ion-item>
 
         <ion-item no-lines margin-top>
-            <ion-textarea [(ngModel)]="offer.description" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-OFFER.OFFER_DESCRIPTION' | translate }}"></ion-textarea>
+            <ion-textarea maxlength="250" class="bg-gray-radius-small" formControlName="offer_description" placeholder="{{ 'PAGE_CREATE-OFFER.OFFER_DESCRIPTION' | translate }}"></ion-textarea>
         </ion-item>
+        </form>
     </div>
     <div class="block-lines">
         <button (click)="addPicture()" class="browse font-16 text-3E4B5D no-bold" type="button" ion-button round outline block text-uppercase>
@@ -46,7 +48,7 @@
     <!-- <input type="file" accept="image/*" (change)="fileChange($event)"> -->
 
     <p margin>
-        <button (click)="openCreateOffer1Page()" [disabled]="(offer.label?.length < 3 || offer.description?.length < 3)" ion-button block text-uppercase color="primary">{{ 'PAGE_CREATE-OFFER.NEXT_STEP' | translate }}</button>
+        <button (click)="openCreateOffer1Page()" [disabled]="!formData.valid" ion-button block text-uppercase color="primary">{{ 'PAGE_CREATE-OFFER.NEXT_STEP' | translate }}</button>
     </p>
 
 </ion-content>

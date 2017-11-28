@@ -35,7 +35,7 @@ export class MyApp {
             splashScreen.hide();
 
             this.initTranslate();
-    
+
             if (!this.auth.isLoggedIn()) {
                 this.rootPage = OnBoardingPage;
             }
@@ -49,17 +49,17 @@ export class MyApp {
                     });
             }
         });
-      
+
         this.auth.onLogout.subscribe(() => {
             this.app.getRootNav().setRoot(LoginPage);
         });
     }
 
-    
+
     initTranslate() {
         // this language will be used as a fallback when a translation isn't found in the current language
         this.translate.setDefaultLang(DEFAULT_LANG_CODE);
-                
+
         // if ((<any>window).cordova) {
         //     Globalization.getPreferredLanguage().then(result => {
         //         var language = this.getSuitableLanguage(result.value);
@@ -75,5 +75,5 @@ export class MyApp {
 
         SYS_OPTIONS.LANG_CODE = langCode;
     }
-  
+
 }
