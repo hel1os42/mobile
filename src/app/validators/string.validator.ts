@@ -11,9 +11,6 @@ export class StringValidator {
             return str;
         }
     }
-}
-
-export class spaceValidator {
 
     static validString(fc: FormControl){
         if(fc.value.replace(/\s+/g,'').length > 3){
