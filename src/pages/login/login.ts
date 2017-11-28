@@ -33,7 +33,8 @@ export class LoginPage {
 
     }
 
-    login() {
+    login() { 
+        this.authData
         this.auth
             .login({
                 phone: this.numCode + this.authData.phone,
@@ -43,7 +44,6 @@ export class LoginPage {
             .subscribe(
             resp => {
                 this.appMode.setHomeMode(true);
-                debugger
                 this.profile.get(true)
                     .subscribe(resp => {
                         if (resp.name == '' && !resp.email) {
