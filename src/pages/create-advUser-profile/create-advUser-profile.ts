@@ -16,6 +16,8 @@ import { ToastService } from '../../providers/toast.service';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
 import { CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { StringValidator } from '../../app/validators/string.validator';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -35,6 +37,7 @@ export class CreateAdvUserProfilePage {
     picture_url: string;
     cover_url: string;
     noChild: boolean;//temporary
+    formData: FormGroup;
 
     constructor(
         private location: LocationService,
@@ -46,7 +49,8 @@ export class CreateAdvUserProfilePage {
         private toast: ToastService,
         private imagePicker: ImagePicker,
         private api: ApiService,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private builder: FormBuilder) {
 
         this.coords.lat = this.navParams.get('latitude');
         this.coords.lng = this.navParams.get('longitude');
@@ -73,6 +77,23 @@ export class CreateAdvUserProfilePage {
                 console.log(this.message);
             });
         this.geocodeDebounced();
+
+        this.formData = this.builder.group({
+            companyName: new FormControl("", Validators.compose([
+                StringValidator.validString,
+                Validators.maxLength(30),
+                Validators.minLength(3),
+                //Validators.pattern(/a-zA-Z0-9/),
+                Validators.required
+            ])),
+            companyDescription: new FormControl("", Validators.compose([
+                StringValidator.validString,
+                Validators.maxLength(250),
+                Validators.minLength(3),
+                //Validators.pattern(/a-zA-Z0-9/),
+                Validators.required
+            ])),
+        });
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -187,6 +208,8 @@ export class CreateAdvUserProfilePage {
     }
 
     createAccount() {
+        this.company.name = this.formData.value.companyName;
+        this.company.description = this.formData.value.companyDescription;
         this.company.latitude = this.coords.lat;
         this.company.longitude = this.coords.lng;
         this.company.address = this.address;

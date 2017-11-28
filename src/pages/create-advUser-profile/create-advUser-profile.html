@@ -30,13 +30,15 @@
 <ion-content class="padding-no">
     <div class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD_COMPANY_NAME' | translate }}</div>
     <div class="block-lines">
-        <ion-item no-lines>
-            <ion-input [(ngModel)]="company.name" class="bg-gray" type="text" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }}"></ion-input>
-        </ion-item>
+        <form [formGroup]="formData" (ngSubmit)="createAccount()">
+            <ion-item no-lines>
+                <ion-input formControlName="companyName" maxlength="30" class="bg-gray" type="text" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }}"></ion-input>
+            </ion-item>
 
-        <ion-item no-lines margin-top>
-            <ion-textarea [(ngModel)]="company.description" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }}"></ion-textarea>
-        </ion-item>
+            <ion-item no-lines margin-top>
+                <ion-textarea formControlName="companyDescription" maxlength="250" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }}"></ion-textarea>
+            </ion-item>
+        </form>
     </div>
 
     <div class="block-lines">
@@ -87,7 +89,7 @@
     </div>
 
     <p margin>
-        <button (click)="createAccount()" [disabled]="!company.name || !company.description || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
+        <button (click)="createAccount()" [disabled]="!formData.valid || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
     </p>
 
 </ion-content>
