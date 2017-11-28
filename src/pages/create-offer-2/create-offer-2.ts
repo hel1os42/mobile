@@ -183,7 +183,6 @@ export class CreateOffer2Page {
                 })
                 this.nav.push(CreateOffer3Page, { offer: this.offer, picture: this.picture_url });
             });
-        console.log(JSON.stringify(this.offer.timeframes));
     }
 
 }

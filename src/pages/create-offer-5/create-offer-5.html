@@ -2,11 +2,11 @@
     <ion-navbar>
         <ion-title>{{( offer.id ? 'PAGE_CREATE-OFFER.EDIT_OFFER' : 'PAGE_CREATE-OFFER.CREATE_OFFER' ) | translate }}</ion-title>
         <ion-buttons end class="padding-right-3vw">
-            <button *ngIf="!offer.id" (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
+            <button *ngIf="!offer.id" (click)="createOffer()" [disabled]="disable()" ion-button icon-only color="dark" class="btn_search">
                 <span class="font-12 text-333333 no-bold">{{ 'PAGE_CREATE-OFFER.FINISH' | translate }}</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
             </button>
-            <button *ngIf="offer.id" (click)="updateOffer()" ion-button icon-only color="dark" class="btn_search">
+            <button *ngIf="offer.id" (click)="updateOffer()" [disabled]="disable()" ion-button icon-only color="dark" class="btn_search">
                 <span class="font-12 text-333333 no-bold">{{ 'PAGE_CREATE-OFFER.FINISH' | translate }}</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
             </button>
