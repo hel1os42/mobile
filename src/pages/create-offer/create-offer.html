@@ -31,11 +31,11 @@
     <div class="block-lines">
         <form [formGroup]="formData" (ngSubmit)="openCreateOffer1Page()">
         <ion-item no-lines>
-            <ion-input class="bg-gray" maxlength="30" formControlName="offer_name" type="text" placeholder="{{ 'PAGE_CREATE-OFFER.OFFER_NAME' | translate }}"></ion-input>
+            <ion-input class="bg-gray" maxlength="30" formControlName="offerLabel" type="text" placeholder="{{ 'PAGE_CREATE-OFFER.OFFER_NAME' | translate }}"></ion-input>
         </ion-item>
 
         <ion-item no-lines margin-top>
-            <ion-textarea maxlength="250" class="bg-gray-radius-small" formControlName="offer_description" placeholder="{{ 'PAGE_CREATE-OFFER.OFFER_DESCRIPTION' | translate }}"></ion-textarea>
+            <ion-textarea maxlength="250" class="bg-gray-radius-small" formControlName="offerDescription" placeholder="{{ 'PAGE_CREATE-OFFER.OFFER_DESCRIPTION' | translate }}"></ion-textarea>
         </ion-item>
         </form>
     </div>

@@ -29,17 +29,21 @@ export class CreateOfferPage {
         if (this.navParams.get('offer')) {
             this.offer = this.navParams.get('offer');
         }
+        else {
+            this.offer.label = '';
+            this.offer.description = '';
+        }
 
 
         this.formData = this.builder.group({
-            offer_name: new FormControl('', Validators.compose([
+            offerLabel: new FormControl(this.offer.label, Validators.compose([
                 StringValidator.validString,
                 Validators.maxLength(30),
                 Validators.minLength(3),
                 //Validators.pattern(/a-zA-Z0-9/),
                 Validators.required
             ])),
-            offer_description: new FormControl('', Validators.compose([
+            offerDescription: new FormControl(this.offer.description, Validators.compose([
                 StringValidator.validString,
                 Validators.maxLength(250),
                 Validators.minLength(3),
@@ -50,6 +54,8 @@ export class CreateOfferPage {
     }
 
     openCreateOffer1Page() {
+        this.offer.label = this.formData.value.offerLabel;
+        this.offer.description = this.formData.value.offerDescription;
         this.nav.push(CreateOffer1Page, { offer: this.offer, picture: this.picture_url });
     }
 
