@@ -1,3 +1,4 @@
+import { StringValidator } from '../../app/validators/string.validator';
 import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { Component } from '@angular/core';
 import { LoadingController, NavController, NavParams, ViewController } from 'ionic-angular';
@@ -6,6 +7,7 @@ import { Offer } from '../../models/offer';
 import { ApiService } from '../../providers/api.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
+import { ToastService } from '../../providers/toast.service';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -27,7 +29,8 @@ export class CreateOffer5Page {
         private api: ApiService,
         private loading: LoadingController,
         private alert: AlertController,
-        private viewCtrl: ViewController) {
+        private viewCtrl: ViewController,
+        private toast: ToastService) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
@@ -41,6 +44,7 @@ export class CreateOffer5Page {
     }
 
     createOffer() {
+        if (this.validate()) {
         this.offer.reward = parseInt(this.reward);
         this.offer.reserved = parseInt(this.reserved);
         this.place.setOffer(this.offer)
@@ -71,9 +75,11 @@ export class CreateOffer5Page {
                         });
                 }, 1500)
             }, err => this.presentConfirm('created'))
+        }
     }
 
     updateOffer() {
+        if (this.validate()) {
         this.offer.reward = parseInt(this.reward);
         this.offer.reserved = parseInt(this.reserved);
         this.place.putOffer(this.offer, this.offer.id)
@@ -91,6 +97,7 @@ export class CreateOffer5Page {
             },
             err => this.presentConfirm('updated')
             );
+        }
     }
 
     stopTimer() {
@@ -132,7 +139,32 @@ export class CreateOffer5Page {
         })
     }
 
+    limitStr(str, length) {
+        if (length == 10) this.reward = StringValidator.stringLimitMax(str, length);
+        else this.reserved = StringValidator.stringLimitMax(str, length);
+    }
+
+    updateList(ev) {
+        StringValidator.updateList(ev);
+    }
+
+    validate() {
+        let reserved = parseInt(this.reserved);
+        let reward = parseInt(this.reward);
+        if (reserved > 0 && reward > 0 && reserved < reward * 10) {
+            this.toast.show('Reserved tokens should be \nat least 10 times larger than a reward');
+            return false;
+        }
+        if (reserved > 0 && reward > 0 && reserved % reward > 0) {
+            this.toast.show('Reserved tokens and reward should be multiple');
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     disable() {
-        return parseInt(this.reserved) < parseInt(this.reward) * 10 || this.reserved == '' || this.reward == '';
+        return  parseInt(this.reserved) <= 0 || parseInt(this.reward) <= 0 || this.reserved == '' || this.reward == '';
     }
 }
