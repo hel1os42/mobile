@@ -13,6 +13,7 @@ import { ToastService } from './toast.service';
 export class ApiService {
     HTTP_STATUS_CODE_UNATHORIZED = 401;
     HTTP_STATUS_CODE_TOO_MANY_REQ = 429;
+    HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
     url: string = 'https://nau.toavalon.com';
 
     constructor(
@@ -40,7 +41,7 @@ export class ApiService {
         return options;
     }
 
-    private wrapObservable(obs: Observable<Response>, showLoading: boolean = true) {
+    private wrapObservable(obs: Observable<Response>, showLoading: boolean = true, showToast?:boolean) {
         let loading: Loading;
 
         if (showLoading) {
@@ -67,6 +68,9 @@ export class ApiService {
 
                 if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
                     messages.push('Too Many Attempts.')
+                }
+                if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && !showToast) {
+                    return;
                 }
                 else {
                     let err = errResp.json();
