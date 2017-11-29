@@ -45,7 +45,7 @@ export class CreateOffer4Page {
         if (maxForUser >= 0 && (maxForUserPerDay > 0 && maxForUserPerDay > maxForUser) ||
             (maxForUserPerWeek > 0 && maxForUserPerWeek > maxForUser) ||
             (maxForUserPerMonth > 0 && maxForUserPerMonth > maxForUser)) {
-            this.toast.show('Max for user valid should be less than max for user overall');
+            this.toast.show('Maximum amount of redemptions by user \nfor definite period should be less than overall');
             return false;
         };
         return true;
@@ -56,7 +56,7 @@ export class CreateOffer4Page {
         let dayMaxCount = parseInt(this.formData.value.dayMaxCount);
 
         if (maxCount >= 0 && dayMaxCount > 0 && dayMaxCount > maxCount) {
-            this.toast.show('Day max valid should be less than max overall');
+            this.toast.show('Daily redemptions amount \nshould be less than overall');
             return false;
         };
         return true;
@@ -70,7 +70,7 @@ export class CreateOffer4Page {
 
         if ((maxCount >= 0 && maxForUser > 0 && maxForUser > maxCount) ||
             (dayMaxCount >= 0 && maxForUserPerDay > 0 && maxForUserPerDay > dayMaxCount)) {
-            this.toast.show('Max for user valid should be less than max overall');
+            this.toast.show('Maximum amount of redemptions by user \nshould be less than overall');
             return false;
         };
         return true;
