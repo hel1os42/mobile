@@ -33,7 +33,11 @@ export class LoginPage {
 
     }
 
-    login() { 
+    updateList(ev) {
+        StringValidator.updateList(ev);
+    }
+
+    login() {
         this.authData
         this.auth
             .login({
@@ -64,6 +68,6 @@ export class LoginPage {
         if (length == 12) this.authData.phone = StringValidator.stringLimitMax(str, length);
         else this.authData.code = StringValidator.stringLimitMax(str, length);
         }
-    
+
 
 }

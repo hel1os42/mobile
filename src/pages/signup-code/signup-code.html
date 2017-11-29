@@ -15,7 +15,7 @@
         <div margin-top class="bg-gray margin-top-6vw">
             <ion-item class="border-bottom-no">
                 <ion-label class="label-left">OTP</ion-label>
-                <ion-input (ionChange)="limitStr(register.code)" [(ngModel)]="register.code" [minlength]="6" [maxlength]="6" ngControl="code"
+                <ion-input (keyup)="updateList($event)" (ionChange)="limitStr(register.code)" [(ngModel)]="register.code" [minlength]="6" [maxlength]="6" ngControl="code"
                     name="code" pattern="^[0-9]+$" required type="number" placeholder="XXXXXX"></ion-input>
             </ion-item>
         </div>

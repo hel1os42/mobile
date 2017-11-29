@@ -19,6 +19,10 @@ export class SignUpPage {
         private auth: AuthService) {
     }
 
+    updateList(ev) {
+        StringValidator.updateList(ev);
+    }
+
     getCode(phone) {
         this.phoneNumber = this.numCode + this.formData.phone;
         let inviteCode = this.auth.getInviteCode();
