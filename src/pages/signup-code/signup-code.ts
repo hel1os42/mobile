@@ -23,6 +23,10 @@ export class SignUpCodePage {
         this.register.code = this.register.phone.slice(-6);
     }
 
+    updateList(ev) {
+        StringValidator.updateList(ev);
+    }
+
     signUp() {
         this.auth.register(this.register)
             .subscribe(resp => {
