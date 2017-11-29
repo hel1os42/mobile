@@ -1,12 +1,17 @@
 page-user-users{
+    .item-block-nau .item{
+        position: relative;
+    }
+
   .happy_title{
-    position: relative;
+    width: 85%;
   }
 
-  .happy_title img{
+  .right-icon-ref{
     position: absolute;
-    right: 0;
-    height: 21px;
+    right: 4vw;
+    top: 5vw;
+    height: 7vw;
   }
 
   .thumb_image{
