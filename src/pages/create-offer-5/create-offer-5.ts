@@ -109,9 +109,12 @@ export class CreateOffer5Page {
 
     presentConfirm(action: string) {
         let isUpdate = action == 'updated' ? true : false;
+        let subTitle = isUpdate ? 
+        `Offer wasn't update. Please try again` : 
+        `Offer wasn't create. Please try again`;
         let alert = this.alert.create({
             title: 'Oops...ERROR',
-            subTitle: `Offer wasn't ${action}. Please try again`,
+            subTitle: subTitle,
             buttons: [
                 {
                     text: 'Cancel',
