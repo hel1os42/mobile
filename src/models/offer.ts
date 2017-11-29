@@ -16,4 +16,5 @@ export class Offer extends OfferCreate {
     created_at: string;
     updated_at: string;
     timeframes: TimeFrames[];
+    redemptions_count?: number;
 }
