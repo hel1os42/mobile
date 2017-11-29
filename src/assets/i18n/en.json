@@ -146,8 +146,19 @@
         "CREATING_YOUR_OFFER" : "Creating your offer...",
         "ERROR" : "Oops...ERROR",
         "OFFER_WASNT" : "Offer wasn't",
+        "OFFER_WASNT_UPDATE_PLEASE_TRY_AGAIN" : "Offer wasn't update. Please try again",
+        "OFFER_WASNT_CREATED_PLEASE_TRY_AGAIN" : "Offer wasn't create. Please try again",
         "PLEASE_TRY_AGAIN" : "Please try again",
-        "RETRY" : "Retry"
+        "RETRY" : "Retry",
+        "UPDATING_OFFER" : "Updating your offer...",
+        "CREATING_OFFER" : "Creating your offer...",
+        "UPDATED" : "updated",
+        "CREATED" : "created",
+        "RESERVED_TOKENS_SHOULD" : "Reserved tokens should be at least 10 times larger than a reward",
+        "RESERVED_TOKENS_AND_REWARD" : "Reserved tokens and reward should be multiple",
+        "MAX_FOR_USER_VALID_OVERALL" : "Max for user valid should be less than max for user overall",
+        "DAY_MAX_VALID" : "Day max valid should be less than max overall",
+        "MAX_FOR_USER_VALID" : "Max for user valid should be less than max overall"
     },
 
     "PAGE_CREATE-USER-PROFILE" : {
