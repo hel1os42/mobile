@@ -19,4 +19,8 @@ export class StringValidator {
             return ({validString: true});
         }
     }
+
+    static updateList(ev) {
+        ev.target.value = ev.target.value.replace(/D/g, '');
+    }
 }

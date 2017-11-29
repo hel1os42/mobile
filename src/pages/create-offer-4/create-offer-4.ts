@@ -1,3 +1,4 @@
+import { StringValidator } from '../../app/validators/string.validator';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
@@ -76,7 +77,7 @@ export class CreateOffer4Page {
     }
 
     updateList(ev) {
-        ev.target.value = ev.target.value.replace(/D/g, '');
+        StringValidator.updateList(ev);
     }
 
     limitStr(key) {
