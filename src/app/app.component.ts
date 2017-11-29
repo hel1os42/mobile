@@ -1,3 +1,8 @@
+import { LocationService } from '../providers/location.service';
+import { Subscription } from 'rxjs/Rx';
+import { AdvTabsPage } from '../pages/adv-tabs/adv-tabs';
+import { CreateOfferPage } from '../pages/create-offer/create-offer';
+import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
 import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
@@ -17,14 +22,16 @@ import { ProfileService } from '../providers/profile.service';
 })
 export class MyApp {
     rootPage: any;
+    private onResumeSubscription: Subscription;
 
     constructor(platform: Platform,
-                statusBar: StatusBar,
-                splashScreen: SplashScreen,
-                private auth: AuthService,
-                private app: App,
-                private profile: ProfileService,
-                private translate: TranslateService) {
+        statusBar: StatusBar,
+        splashScreen: SplashScreen,
+        private auth: AuthService,
+        private app: App,
+        private profile: ProfileService,
+        private translate: TranslateService,
+        private location: LocationService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -33,7 +40,7 @@ export class MyApp {
             splashScreen.hide();
 
             this.initTranslate();
-    
+
             if (!this.auth.isLoggedIn()) {
                 this.rootPage = OnBoardingPage;
             }
@@ -43,20 +50,27 @@ export class MyApp {
                         this.rootPage = (resp.name == '' && !resp.email)
                             ? CreateUserProfilePage
                             : TabsPage;
+                        //this.rootPage = AdvTabsPage;
                     });
             }
+            this.onResumeSubscription = platform.resume.subscribe(() => {
+                this.location.reset();
+            });
         });
-      
+
         this.auth.onLogout.subscribe(() => {
             this.app.getRootNav().setRoot(LoginPage);
         });
+
+
+
     }
 
-    
+
     initTranslate() {
         // this language will be used as a fallback when a translation isn't found in the current language
         this.translate.setDefaultLang(DEFAULT_LANG_CODE);
-                
+
         // if ((<any>window).cordova) {
         //     Globalization.getPreferredLanguage().then(result => {
         //         var language = this.getSuitableLanguage(result.value);
@@ -72,5 +86,9 @@ export class MyApp {
 
         SYS_OPTIONS.LANG_CODE = langCode;
     }
-  
+
+    ngOnDestroy() {
+        this.onResumeSubscription.unsubscribe();
+    }
+
 }

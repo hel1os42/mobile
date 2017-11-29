@@ -1,6 +1,9 @@
+import { StringValidator } from '../../app/validators/string.validator';
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
-import { OfferCreate } from '../../models/offerCreate';
+import { Offer } from '../../models/offer';
+import { ToastService } from '../../providers/toast.service';
 import { CreateOffer5Page } from '../create-offer-5/create-offer-5';
 
 @Component({
@@ -9,39 +12,104 @@ import { CreateOffer5Page } from '../create-offer-5/create-offer-5';
 })
 export class CreateOffer4Page {
 
-    offer: OfferCreate;
+    offer: Offer;
     levels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     level = 1;
-    maxForUser;
-    maxForUserPerDay;
-    maxForUserPerWeek;
-    maxForUserPerMonth;
     picture_url: string;
+    formData: FormGroup;
 
     constructor(private nav: NavController,
-                private navParams: NavParams) {
+        private navParams: NavParams,
+        private toast: ToastService,
+        private builder: FormBuilder) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
 
+        this.formData = this.builder.group({
+            maxCount: [this.offer.max_count],
+            dayMaxCount: [this.offer.max_per_day],
+            maxForUser: [this.offer.max_for_user],
+            maxForUserPerDay: [this.offer.max_for_user_per_day],
+            maxForUserPerWeek: [this.offer.max_for_user_per_week],
+            maxForUserPerMonth: [this.offer.max_for_user_per_month],
+        })
+    }
+
+    validateMaxForUser() {
+        let maxForUser = parseInt(this.formData.value.maxForUser);
+        let maxForUserPerDay = parseInt(this.formData.value.maxForUserPerDay);
+        let maxForUserPerWeek = parseInt(this.formData.value.maxForUserPerWeek);
+        let maxForUserPerMonth = parseInt(this.formData.value.maxForUserPerMonth);
+
+        if (maxForUser >= 0 && (maxForUserPerDay > 0 && maxForUserPerDay > maxForUser) ||
+            (maxForUserPerWeek > 0 && maxForUserPerWeek > maxForUser) ||
+            (maxForUserPerMonth > 0 && maxForUserPerMonth > maxForUser)) {
+            this.toast.show('Max for user valid should be less than max for user overall');
+            return false;
+        };
+        return true;
+    }
+
+    validateMax() {
+        let maxCount = parseInt(this.formData.value.maxCount);
+        let dayMaxCount = parseInt(this.formData.value.dayMaxCount);
+
+        if (maxCount >= 0 && dayMaxCount > 0 && dayMaxCount > maxCount) {
+            this.toast.show('Day max valid should be less than max overall');
+            return false;
+        };
+        return true;
+    }
+
+    validateBetween() {
+        let maxCount = parseInt(this.formData.value.maxCount);
+        let dayMaxCount = parseInt(this.formData.value.dayMaxCount);
+        let maxForUser = parseInt(this.formData.value.maxForUser);
+        let maxForUserPerDay = parseInt(this.formData.value.maxForUserPerDay);
+
+        if ((maxCount >= 0 && maxForUser > 0 && maxForUser > maxCount) ||
+            (dayMaxCount >= 0 && maxForUserPerDay > 0 && maxForUserPerDay > dayMaxCount)) {
+            this.toast.show('Max for user valid should be less than max overall');
+            return false;
+        };
+        return true;
+    }
+
+    updateList(ev) {
+        StringValidator.updateList(ev);
+    }
+
+    limitStr(key) {
+        this.formData.valueChanges.subscribe(data => {
+            if (data[key].length > 18) {
+                this.formData.controls[key].setValue(data[key].slice(0, 18));
+            }
+        })
     }
 
     openCreateOffer5Page() {
-        this.offer.user_level_min = this.level;
-        this.offer.max_count = 100;//to do
-        this.offer.max_per_day = 20;//to do
-        if(this.maxForUser) {
-            this.offer.max_for_user = parseInt(this.maxForUser);
+        if (this.validateMaxForUser() && this.validateMax() && this.validateBetween()) {
+            this.offer.user_level_min = this.level;
+            if (this.formData.value.maxCount) {
+                this.offer.max_count = parseInt(this.formData.value.maxCount);
+            }
+            if (this.formData.value.dayMaxCount) {
+                this.offer.max_per_day = parseInt(this.formData.value.dayMaxCount);
+            }
+            if (this.formData.value.maxForUser) {
+                this.offer.max_for_user = parseInt(this.formData.value.maxForUser);
+            }
+            if (this.formData.value.maxForUserPerDay) {
+                this.offer.max_for_user_per_day = parseInt(this.formData.value.maxForUserPerDay);
+            }
+            if (this.formData.value.maxForUserPerWeek) {
+                this.offer.max_for_user_per_week = parseInt(this.formData.value.maxForUserPerWeek);
+            }
+            if (this.formData.value.maxForUserPerMonth) {
+                this.offer.max_for_user_per_month = parseInt(this.formData.value.maxForUserPerMonth);
+            }
+            this.nav.push(CreateOffer5Page, { offer: this.offer, picture: this.picture_url });
         }
-        if(this.maxForUserPerDay) {
-            this.offer.max_for_user_per_day = parseInt(this.maxForUserPerDay);
-        }
-        if(this.maxForUserPerWeek) {
-            this.offer.max_for_user_per_week = parseInt(this.maxForUserPerWeek);
-        }
-        if(this.maxForUserPerMonth) {
-            this.offer.max_for_user_per_month = parseInt(this.maxForUserPerMonth);
-        }
-        this.nav.push(CreateOffer5Page, { offer: this.offer, picture: this.picture_url });
     }
 }

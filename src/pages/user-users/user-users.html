@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Your referrals</ion-title>
+    <ion-title>{{ 'PAGE_USER-USERS.YOUR_REFERRALS' | translate }}</ion-title>
   </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
@@ -12,7 +12,7 @@
     </ion-avatar>
     <div item-content>
         <div class="font-18 text-3E4B5D bold">{{ total }}</div>
-        <div class="font-14 text-828282">Users</div>
+        <div class="font-14 text-828282">{{ 'PAGE_USER-USERS.USERS' | translate }}</div>
     </div>
       <a item-end margin-left class="btn_calendar_user">
           <a><img src="assets/img/user_offers/icon_right.svg">
@@ -27,9 +27,10 @@
       <ion-avatar item-start>
         <div class="thumb_image" [style.background-image]="'url(assets/img/user_users/ava1.png)'"></div>
       </ion-avatar>
-      <div class="happy_title font-18 bold text-3E4B5D">{{ referral.name }}<img src="assets/img/user_users/icon_right.svg"></div>
-      <div text-uppercase class="font-14 text-4F4F4F">Level: <b>{{ referral.level }}</b><span margin-left>Offers: <b>{{ referral.offers_count }}</b></span></div>
-      <div class="text-828282 font-14">Registration date: {{ referral.created_at.substring(0,10)}}</div>
+      <div class="happy_title font-18 bold text-3E4B5D padding-bottom-3vw">{{ referral.name }}</div>
+      <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_USER-USERS.LEVEL' | translate }}: <b>{{ referral.level }}</b><span margin-left>{{ 'PAGE_USER-USERS.OFFERS' | translate }}: <b>{{ referral.offers_count }}</b></span></div>
+      <div class="text-828282 font-14">{{ 'PAGE_USER-USERS.REGISTRATION_DATE' | translate }}: {{ referral.created_at.substring(0,10)}}</div>
+      <img class="right-icon-ref" src="assets/img/user_users/icon_right.svg">
     </ion-item>
   </ion-list>
 

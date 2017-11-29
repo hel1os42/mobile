@@ -31,8 +31,10 @@ export class CreateOffer2Page {
         this.picture_url = this.navParams.get('picture');
         this.todayDate = new Date();
         let days = DateTimeUtils.ALL_DAYS;
-        this.startDate = (this.offer.id && this.offer.start_date.date) ? this.offer.start_date.date.slice(0, 10) : undefined;
-        this.finishDate = (this.offer.id && this.offer.finish_date.date) ? this.offer.finish_date.date.slice(0, 10) : undefined;
+        // this.startDate = (this.offer.id && this.offer.start_date.date) ? this.offer.start_date.date.slice(0, 10) : undefined;
+        // this.finishDate = (this.offer.id && this.offer.finish_date.date) ? this.offer.finish_date.date.slice(0, 10) : undefined;
+        this.startDate = this.todayDate.toISOString().slice(0, 10);
+        this.finishDate = this.todayDate.toISOString().slice(0, 10);
 
         for (let i = 0; i < 7; i++) {
             this.timeFrames[i] = {
@@ -181,7 +183,6 @@ export class CreateOffer2Page {
                 })
                 this.nav.push(CreateOffer3Page, { offer: this.offer, picture: this.picture_url });
             });
-        console.log(JSON.stringify(this.offer.timeframes));
     }
 
 }

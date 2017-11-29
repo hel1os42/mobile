@@ -29,7 +29,7 @@
       <div item-end class="item-content">
         <ion-input (ionBlur)="validateName(user.name)" [(ngModel)]="user.name" class="bg-gray margin-bottom-small" type="text" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }}" name="name1"></ion-input>
         <div class="input_relative">
-          <ion-input (ionBlur)="validateEmail(user.email)" [(ngModel)]="user.email" class="bg-gray margin-bottom-small" type="email" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}" name="email"></ion-input>
+          <ion-input (ionBlur)="validateEmail(user.email)" [(ngModel)]="user.email" class="bg-gray margin-bottom-small field-email" type="email" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}" name="email"></ion-input>
           <span *ngIf="user.email" class="text-gray icon_info">
             <a (click)="toggleVisibleInfo()">
               <img src="assets/img/create_user_profile/info.svg">
@@ -68,7 +68,7 @@
   <div class="block-lines">
 
     <ion-item class="bg-gray margin-bottom-small" ion-item detail-push>
-      <ion-input class="text-3E4B5D" [(ngModel)]="facebookName" placeholder="Facebook"></ion-input>
+      <ion-input disabled class="text-3E4B5D" [(ngModel)]="facebookName" placeholder="Facebook"></ion-input>
       <div item-end>
         <ion-label *ngIf="facebookName" class="label label-ios added font-75">
           <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
@@ -77,7 +77,7 @@
     </ion-item>
 
     <ion-item class="bg-gray margin-bottom-small" ion-item detail-push>
-      <ion-input class="text-3E4B5D" [(ngModel)]="instagramName" placeholder="Instagram"></ion-input>
+      <ion-input disabled class="text-3E4B5D" [(ngModel)]="instagramName" placeholder="Instagram"></ion-input>
       <div item-end>
         <ion-label *ngIf="instagramName" class="label label-ios added font-75">
           <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
@@ -86,7 +86,7 @@
     </ion-item>
 
     <ion-item class="bg-gray" ion-item detail-push>
-      <ion-input class="text-3E4B5D" [(ngModel)]="twitterName" placeholder="Twitter"></ion-input>
+      <ion-input disabled class="text-3E4B5D" [(ngModel)]="twitterName" placeholder="Twitter"></ion-input>
       <div item-end>
         <ion-label *ngIf="twitterName" class="label label-ios added font-75">
           <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
@@ -125,7 +125,7 @@
       </ion-item>
 
       <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-input [(ngModel)]="age" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.AGE' | translate }}"></ion-input>
+        <ion-input disabled [(ngModel)]="age" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.AGE' | translate }}"></ion-input>
         <div item-end>
           <ion-label *ngIf="age" class="label label-ios added font-75">
             <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
@@ -134,7 +134,7 @@
       </ion-item>
 
       <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-input [(ngModel)]="income" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.INCOME' | translate }}"></ion-input>
+        <ion-input disabled [(ngModel)]="income" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.INCOME' | translate }}"></ion-input>
         <div item-end>
           <ion-label *ngIf="income" class="label label-ios added font-75">
             <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>

@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { NavController } from 'ionic-angular';
-import { AuthService } from '../../providers/auth.service';
+import { StringValidator } from '../../app/validators/string.validator';
 import { Login } from '../../models/login';
-import { TabsPage } from '../tabs/tabs';
 import { AppModeService } from '../../providers/appMode.service';
-import { SignUpInvitePage } from '../invite/invite';
-import { ProfileService } from "../../providers/profile.service";
+import { AuthService } from '../../providers/auth.service';
+import { ProfileService } from '../../providers/profile.service';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
+import { SignUpInvitePage } from '../invite/invite';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
     selector: 'page-login',
@@ -14,7 +16,10 @@ import { CreateUserProfilePage } from '../create-user-profile/create-user-profil
 })
 
 export class LoginPage {
-    data: Login = new Login();
+    authData: Login = {
+        phone: '',
+        code: ''
+    };
     numCodes = ['+7', '+49', '+63', '+57', '+380'];
     numCode: string = '+380';
     page;
@@ -23,15 +28,22 @@ export class LoginPage {
         private nav: NavController,
         private auth: AuthService,
         private appMode: AppModeService,
-        private profile: ProfileService, ) {
+        private profile: ProfileService,
+        private builder: FormBuilder) {
 
     }
 
+    updateList(ev) {
+        StringValidator.updateList(ev);
+    }
+
     login() {
+        this.authData
         this.auth
             .login({
-                phone: this.numCode + this.data.phone,
-                code: this.data.phone.slice(-6)
+                phone: this.numCode + this.authData.phone,
+                code: this.authData.code
+                // code: this.authData.phone.slice(-6)
             })
             .subscribe(
             resp => {
@@ -51,4 +63,11 @@ export class LoginPage {
     signup() {
         this.nav.push(SignUpInvitePage);
     }
+
+    limitStr(str: string, length: number) {
+        if (length == 12) this.authData.phone = StringValidator.stringLimitMax(str, length);
+        else this.authData.code = StringValidator.stringLimitMax(str, length);
+        }
+
+
 }

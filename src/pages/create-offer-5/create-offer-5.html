@@ -2,11 +2,11 @@
     <ion-navbar>
         <ion-title>{{( offer.id ? 'PAGE_CREATE-OFFER.EDIT_OFFER' : 'PAGE_CREATE-OFFER.CREATE_OFFER' ) | translate }}</ion-title>
         <ion-buttons end class="padding-right-3vw">
-            <button *ngIf="!offer.id" (click)="createOffer()" ion-button icon-only color="dark" class="btn_search">
+            <button *ngIf="!offer.id" (click)="createOffer()" [disabled]="disable()" ion-button icon-only color="dark" class="btn_search">
                 <span class="font-12 text-333333 no-bold">{{ 'PAGE_CREATE-OFFER.FINISH' | translate }}</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
             </button>
-            <button *ngIf="offer.id" (click)="updateOffer()" ion-button icon-only color="dark" class="btn_search">
+            <button *ngIf="offer.id" (click)="updateOffer()" [disabled]="disable()" ion-button icon-only color="dark" class="btn_search">
                 <span class="font-12 text-333333 no-bold">{{ 'PAGE_CREATE-OFFER.FINISH' | translate }}</span>
                 <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
             </button>
@@ -35,12 +35,12 @@
     <div class="block-lines">
         <ion-item padding-left class="bg-gray margin-bottom-5">
             <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.REWARD_FOR_REDEMPTION' | translate }}</ion-label>
-            <ion-input [(ngModel)]="reward" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
+            <ion-input (ionChange)="limitStr(reward, 10)" (keyup)="updateList($event)" [(ngModel)]="reward" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
         </ion-item>
 
         <ion-item padding-left class="bg-gray">
             <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.TOKEN_RESERVATION' | translate }}</ion-label>
-            <ion-input [(ngModel)]="reserved" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
+            <ion-input (ionChange)="limitStr(reserved, 12)" (keyup)="updateList($event)" [(ngModel)]="reserved" class="text-3E4B5D font-16 bold" text-right type="number"></ion-input>
         </ion-item>
     </div>
 

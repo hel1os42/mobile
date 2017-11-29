@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Your tasks & jobs</ion-title>
+        <ion-title>{{ 'PAGE_USER-TASKS.YOUR_TASKS_JOBS' | translate }}</ion-title>
     </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
@@ -11,9 +11,9 @@
             <div class="thumb_image" [style.background-image]="'url(assets/img/user_achi/ava.png)'"></div>
             <div text-center class="user_level font-20 text-white table"><span class="table-cell">L{{ user.level }}</span></div>
         </ion-avatar>
-        <div class="font-18 text-3E4B5D bold">{{ user.name }}</div>
+        <div class="font-18 text-3E4B5D bold wrap-no width-78">{{ user.name }}</div>
         <img class="margin-top-3vw card" src="assets/img/user_achi/icon_card.svg">
-        <span text-uppercase class="font-14 text-828282">{{ user.points }} points</span>
+        <span text-uppercase class="font-14 text-828282">{{ user.points }} {{ 'PAGE_USER-TASKS.POINTS' | translate }}</span>
         <span text-uppercase class="font-14 text-828282 regular"> / 10 000</span>
         <a class="star_right">
             <div class="flex"><img class="margin-right-10" src="assets/img/user_tasks/icon_note.svg"><span class="text-18 text-BDBDBD">21</span></div>
@@ -25,43 +25,41 @@
 
     <ion-segment [(ngModel)]="seg" text-uppercase class="nau-segment margin-top-4vw">
         <ion-segment-button value="active">
-            Active
+            {{ 'PAGE_USER-TASKS.ACTIVE' | translate }}
         </ion-segment-button>
         <ion-segment-button value="completed">
-            Completed
+            {{ 'PAGE_USER-TASKS.COMPLETED' | translate }}
         </ion-segment-button>
     </ion-segment>
 
-    <div margin-top class="font-14 text-4F4F4F" text-uppercase>Tasks for today</div>
+    <div margin-top class="font-14 text-4F4F4F" text-uppercase>{{ 'PAGE_USER-TASKS.TASKS_FOR_TODAY' | translate }}</div>
     <ion-list no-lines class="item-block-nau">
         <ion-item detail-push class="yesterday relative">
             <ion-avatar item-start>
                 <div class="thumb_image grayscale" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
             </ion-avatar>
-            <div class="bold font-20 text-3E4B5D width-88 wrap-no">Find new places</div>
-            <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">To provide proper credit, use the embedded credit already in the icon you downloaded
-                To provide proper credit, use the embedded credit already in the icon you downloaded
-            </div>
+            <div class="bold font-20 text-3E4B5D width-88 wrap-no">{{ 'PAGE_USER-TASKS.FIND_NEW_PLACES' | translate }}</div>
+            <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">{{ 'PAGE_USER-TASKS.TO_PROVIDE_PROPER_CREDIT' | translate }}</div>
             <img class="star_right" src="assets/img/user_tasks/icon_ch.svg">
         </ion-item>
     </ion-list>
 
-    <div margin-top class="font-14 text-4F4F4F" text-uppercase>Tasks for level 5</div>
+    <div margin-top class="font-14 text-4F4F4F" text-uppercase>{{ 'PAGE_USER-TASKS.TASKS_FOR_LEVEL' | translate }} 5</div>
     <ion-list no-lines class="item-block-nau">
         <ion-item detail-push class="yesterday">
             <ion-avatar item-start>
                 <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
             </ion-avatar>
-            <div class="bold font-20 text-3E4B5D width-88 wrap-no">Redeem new offers</div>
-            <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">Proper credit, use the embedded credit already in the icon you downloaded</div>
+            <div class="bold font-20 text-3E4B5D width-88 wrap-no">{{ 'PAGE_USER-TASKS.REDEEM_NEW_OFFERS' | translate }}</div>
+            <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">{{ 'PAGE_USER-TASKS.PROPER_CREDIT' | translate }}</div>
         </ion-item>
 
         <ion-item detail-push class="yesterday">
             <ion-avatar item-start>
                 <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
             </ion-avatar>
-            <div class="bold font-20 text-3E4B5D width-88 wrap-no">Redeem new offers</div>
-            <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">Proper credit, use the embedded credit already in the icon you downloaded</div>
+            <div class="bold font-20 text-3E4B5D width-88 wrap-no">{{ 'PAGE_USER-TASKS.REDEEM_NEW_OFFERS' | translate }}</div>
+            <div class="margin-top-10 font-12 text-828282 wrap text-overflow-54 width-88">{{ 'PAGE_USER-TASKS.PROPER_CREDIT' | translate }}</div>
         </ion-item>
     </ion-list>
 

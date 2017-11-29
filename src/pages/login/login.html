@@ -9,24 +9,25 @@
   <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
   <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}</div>
 
+  <form #form="ngForm" (ngSubmit)="login()">
   <div class="bg-gray margin-top-6vw">
   <ion-item class="border-bottom-no">
-    <ion-select [(ngModel)]="numCode" interface="popover">
+    <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover">
       <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
     </ion-select>
-    <ion-input class="tel" type="tel" placeholder="123-45-67" [(ngModel)]="data.phone"></ion-input>
+    <ion-input (ionChange)="limitStr(authData.phone, 12)" (keyup)="updateList($event)" [(ngModel)]="authData.phone" ngControl="phone" name="phone" pattern="^[0-9]+$" [minlength]="7" required class="tel" type="number" placeholder="1234567"></ion-input>
   </ion-item>
   </div>
 
   <div margin-top class="bg-gray padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
-        <ion-input class="otp" type="tel" placeholder="XX-XX-XX" [(ngModel)]="data.code"></ion-input>
+        <ion-input (ionChange)="limitStr(authData.code, 6)" (keyup)="updateList($event)" [(ngModel)]="authData.code" ngControl="code" name="code" pattern="^[0-9]+$" [minlength]="6" [maxlength]="6" required class="otp" type="number" placeholder="XXXXXX"></ion-input>
       </ion-item>
   </div>
+</form>
 
-
-  <button text-uppercase class="margin-top-5vw" ion-button block middle color="primary" (click)="login()" [disabled]="!(data.phone && data.code)">{{ 'UNIT.SIGN_IN' | translate }}</button>
+  <button (click)="login()" [disabled]="!form.valid" type="submit" text-uppercase class="margin-top-5vw" ion-button block middle color="primary" >{{ 'UNIT.SIGN_IN' | translate }}</button>
 
 </ion-content>
 

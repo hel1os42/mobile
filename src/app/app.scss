@@ -215,7 +215,7 @@ ion-header ion-icon.back-button-icon.icon {
 .font-40{
     font-size: 40px;
     font-size: 10vw;
-    line-height: 10vw;
+    line-height: 12vw;
 }
 
 .font-50{
@@ -377,6 +377,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .width-88{
     width: 88%;
+}
+
+.width-78{
+    width: 78%;
 }
 
 .width-44vw{
@@ -1148,6 +1152,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     padding-bottom: 2vw;
 }
 
+.padding-bottom-3vw{
+    padding-bottom: 3vw;
+}
+
 .padding-left-10{
     padding-left: 10px;
 }
@@ -1366,6 +1374,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .text-overflow-3-font-12{
     max-height: 12.5vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
+}
+
+.text-overflow-3-font-40{
+    max-height: 44.5vw;
     height: auto;
     display: block;
     overflow: hidden;
@@ -1710,6 +1725,7 @@ textarea.text-input {
     height: 7vw;
     padding-right: 4vw;
     padding-left: 4vw;
+    width: 24vw;
 }
 
 .btn_calendar_user .item-cover{
@@ -1747,3 +1763,21 @@ textarea.text-input {
 .agm-info-window-content{
     font-size: 4vw;
 }
+
+.ng-valid[required], .ng-valid.required, .ng-valid  {
+    color: inherit; /* green */
+}
+
+.ng-invalid:not(form)  {
+    color: inherit; /* red */
+}
+
+.button-inner{
+    overflow: hidden;
+}
+
+a:active, a:hover, input:active, input.text-input.text-input-ios {
+    outline: none;
+}
+
+

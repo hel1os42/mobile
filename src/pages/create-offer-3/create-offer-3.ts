@@ -1,9 +1,9 @@
+import { Offer } from '../../models/offer';
 import { LatLngLiteral } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Coords } from '../../models/coords';
-import { OfferCreate } from '../../models/offerCreate';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
 
 
@@ -13,7 +13,7 @@ import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
 })
 export class CreateOffer3Page {
 
-    offer: OfferCreate;
+    offer: Offer;
     coords: Coords = new Coords();
     message: string;
     bounds;

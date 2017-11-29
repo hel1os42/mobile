@@ -11,6 +11,30 @@
         "OFFERS" : "Offers"
     },
 
+    "MONTHS" : {
+        "JAN" : "JAN",
+        "FEB" : "FEB",
+        "MAR" : "MAR",
+        "APR" : "APR",
+        "JUN" : "JUN",
+        "JUL" : "JUL",
+        "AUG" : "AUG",
+        "SEP" : "SEP",
+        "OCT" : "OCT",
+        "NOV" : "NOV",
+        "DEC" : "DEC"
+    },
+
+    "DAYS" : {
+        "MON" : "MON",
+        "TUE" : "TUE",
+        "WED" : "WED",
+        "THU" : "THU",
+        "FRI" : "FRI",
+        "SAT" : "SAT",
+        "SUN" : "SUN"
+    },
+
     "PAGE_PLACES" : {
         "ALL_OFFERS" : "All offers",
         "DELIVERY" : "Delivery",
@@ -122,8 +146,19 @@
         "CREATING_YOUR_OFFER" : "Creating your offer...",
         "ERROR" : "Oops...ERROR",
         "OFFER_WASNT" : "Offer wasn't",
+        "OFFER_WASNT_UPDATE_PLEASE_TRY_AGAIN" : "Offer wasn't update. Please try again",
+        "OFFER_WASNT_CREATED_PLEASE_TRY_AGAIN" : "Offer wasn't create. Please try again",
         "PLEASE_TRY_AGAIN" : "Please try again",
-        "RETRY" : "Retry"
+        "RETRY" : "Retry",
+        "UPDATING_OFFER" : "Updating your offer...",
+        "CREATING_OFFER" : "Creating your offer...",
+        "UPDATED" : "updated",
+        "CREATED" : "created",
+        "RESERVED_TOKENS_SHOULD" : "Reserved tokens should be at least 10 times larger than a reward",
+        "RESERVED_TOKENS_AND_REWARD" : "Reserved tokens and reward should be multiple",
+        "MAX_FOR_USER_VALID_OVERALL" : "Max for user valid should be less than max for user overall",
+        "DAY_MAX_VALID" : "Day max valid should be less than max overall",
+        "MAX_FOR_USER_VALID" : "Max for user valid should be less than max overall"
     },
 
     "PAGE_CREATE-USER-PROFILE" : {
@@ -216,8 +251,7 @@
         "FOR_BUSINESS" : "For business",
         "HELLO" : "Hello!",
         "ENJOY" : "Enjoy!",
-        "ARE_YOUR_READY" : "Are your ready to create amazing offers and",
-        "VISITING_BEST" : "visiting best restrant in the world?",
+        "ARE_YOUR_READY" : "Enjoy the most attractive offers, gifts and discounts from various retailers in your location",
         "MAKE_MONEY" : "Make Money",
         "SKIP" : "Skip"
     },
@@ -346,6 +380,79 @@
         "ADD_PERIOD" : "add period",
         "COMPARE_YOUR_DATE" : "Compare your date. Chose several period of time for",
         "RESULTS_COMPARING" : "results comparing"
+    },
+
+    "PAGE_STATISTIC1" : {
+        "COMPARE_DIFFERENT_DATES" : "compare different dates",
+        "REAL_DATA" : "Real data",
+        "PERCENTAGE" : "Percentage %",
+        "COMPARISON_PERIODS" : "Comparison periods of time in diagram",
+        "USERS" : "Users",
+        "VIEWED_MY_PLACE" : "Viewed my place for 2 periods of time",
+        "SAVE_PDF" : "save pdf"
+    },
+
+    "PAGE_USER-ACHIEVE" : {
+        "YOUR_ACHIEVEMENT" : "Your achievement",
+        "POINTS" : "points",
+        "ACHIEVEMENT_LEVEL" : "Achievement Level",
+        "AWARD_FOR_FIRST_5_OFFERS" : "Award for first 5 offers",
+        "RECEIVED" : "Received",
+        "MEDAL_FOR_FIRST_10_OFFERS" : "Medal for first 10 offers",
+        "AWARD_FOR_REDEEMED_OFFER" : "Award for redeemed offer",
+        "GIFT_FOR_YOU_ACTIVITY" : "Gift for you activity"
+    },
+
+    "PAGE_USER-NAU" : {
+        "NAU_TRANSACTIONS" : "NAU transactions",
+        "TRANSFER" : "Transfer",
+        "LATEST_PAYMENTS" : "Latest payments",
+        "PAY" : "Pay",
+        "LOADING_TRANSACTIONS" : "Loading transactions...",
+        "NAU" : "NAU"
+    },
+
+    "PAGE_USER-OFFERS" : {
+        "YOUR_REDEEMED_OFFERS" : "Your redeemed offers",
+        "REDEEMED_OFFERS" : "Redeemed Offers",
+        "DATE" : "Date"
+    },
+
+    "PAGE_USER-PROFILE" : {
+        "YOUR_ACCOUNT" : "Your Account",
+        "GET" : "Get",
+        "ADDITIONAL" : "Additional",
+        "POINTS" : "points",
+        "NEXT" : "NEXT",
+        "LVL" : "LVL",
+        "YOUR_TASKS_JOBS_FOR_TODAY" : "Your tasks & jobs for today",
+        "GET_NEW_POINTS" : "Get New Points",
+        "GET_NEW_OFFERS_NEARBY" : "Get new offers nearby for you place and improve your level",
+        "OFFERS" : "offers",
+        "NAU" : "nau",
+        "USERS" : "users",
+        "LOGOUT" : "logout"
+    },
+
+    "PAGE_USER-TASKS" : {
+        "YOUR_TASKS_JOBS" : "Your tasks & jobs",
+        "ACTIVE" : "Active",
+        "COMPLETED" : "Completed",
+        "TASKS_FOR_TODAY" : "Tasks for today",
+        "FIND_NEW_PLACES" : "Find new places",
+        "TO_PROVIDE_PROPER_CREDIT" : "To provide proper credit, use the embedded credit already in the icon you downloaded to provide proper credit, use the embedded credit already in the icon you downloaded",
+        "TASKS_FOR_LEVEL" : "Tasks for level",
+        "REDEEM_NEW_OFFERS" : "Redeem new offers",
+        "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
+        "POINTS" : "Redeem new offers"
+    },
+
+    "PAGE_USER-USERS" : {
+        "YOUR_REFERRALS" : "Your referrals",
+        "USERS" : "Users",
+        "LEVEL" : "Level",
+        "OFFERS" : "Offers",
+        "REGISTRATION_DATE" : "Registration date"
     }
 }
 

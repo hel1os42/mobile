@@ -39,7 +39,7 @@ export class AuthService {
     }
 
     setInviteCode(invite) {
-        this.inviteCode = invite;
+        this.inviteCode = invite;//to do
     }
 
     isLoggedIn() {

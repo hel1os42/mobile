@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AuthService } from "../../providers/auth.service";
-import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
+import { StringValidator } from '../../app/validators/string.validator';
 import { Register } from '../../models/register';
 import { AppModeService } from '../../providers/appMode.service';
+import { AuthService } from '../../providers/auth.service';
+import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 
 @Component({
     selector: 'page-signup-code',
@@ -22,6 +23,10 @@ export class SignUpCodePage {
         this.register.code = this.register.phone.slice(-6);
     }
 
+    updateList(ev) {
+        StringValidator.updateList(ev);
+    }
+
     signUp() {
         this.auth.register(this.register)
             .subscribe(resp => {
@@ -34,6 +39,10 @@ export class SignUpCodePage {
                         this.appMode.setHomeMode(false);
                         this.nav.setRoot(CreateUserProfilePage);
                     })
-              })
+            })
+    }
+
+    limitStr(str: string) {
+        this.register.code = StringValidator.stringLimitMax(str, 6);
     }
 }
