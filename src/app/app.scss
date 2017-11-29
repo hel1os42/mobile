@@ -1771,3 +1771,9 @@ textarea.text-input {
 .button-inner{
     overflow: hidden;
 }
+
+a:active, a:hover, input:active, input.text-input.text-input-ios {
+    outline: none;
+}
+
+
