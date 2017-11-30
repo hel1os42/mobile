@@ -23,8 +23,12 @@ export class SettingsPopover {
 
         }
 
-    close() {
+    openOnboarding() {
         this.viewCtrl.dismiss();
             this.app.getRootNav().setRoot(OnBoardingPage, {page: this.page, isAdvMode: true, isAdvOnBoarding: true, latitude: this.latitude, longitude: this.longitude});
+    }
+
+    close() {
+        this.viewCtrl.dismiss();
     }
 }
