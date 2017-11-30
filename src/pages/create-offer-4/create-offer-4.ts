@@ -83,8 +83,8 @@ export class CreateOffer4Page {
 
     limitStr(key) {
         this.formData.valueChanges.subscribe(data => {
-            if (data[key].length > 18) {
-                this.formData.controls[key].setValue(data[key].slice(0, 18));
+            if (data[key].length > 10) {
+                this.formData.controls[key].setValue(data[key].slice(0, 10));
             }
         })
     }
