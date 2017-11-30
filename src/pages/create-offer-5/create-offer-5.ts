@@ -143,7 +143,7 @@ export class CreateOffer5Page {
     }
 
     limitStr(str, length) {
-        if (length == 10) this.reward = StringValidator.stringLimitMax(str, length);
+        if (length == 9) this.reward = StringValidator.stringLimitMax(str, length);
         else this.reserved = StringValidator.stringLimitMax(str, length);
     }
 

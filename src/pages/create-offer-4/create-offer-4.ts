@@ -1,6 +1,7 @@
+import { NamberValidator } from '../../app/validators/number.validator';
 import { StringValidator } from '../../app/validators/string.validator';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ToastService } from '../../providers/toast.service';
@@ -27,12 +28,12 @@ export class CreateOffer4Page {
         this.picture_url = this.navParams.get('picture');
 
         this.formData = this.builder.group({
-            maxCount: [this.offer.max_count],
-            dayMaxCount: [this.offer.max_per_day],
-            maxForUser: [this.offer.max_for_user],
-            maxForUserPerDay: [this.offer.max_for_user_per_day],
-            maxForUserPerWeek: [this.offer.max_for_user_per_week],
-            maxForUserPerMonth: [this.offer.max_for_user_per_month],
+            maxCount: new FormControl(this.offer.max_count, NamberValidator.min(1)),
+            dayMaxCount: new FormControl(this.offer.max_per_day, NamberValidator.min(1)),
+            maxForUser: new FormControl(this.offer.max_for_user, NamberValidator.min(1)),
+            maxForUserPerDay: new FormControl(this.offer.max_for_user_per_day, NamberValidator.min(1)),
+            maxForUserPerWeek: new FormControl(this.offer.max_for_user_per_week, NamberValidator.min(1)),
+            maxForUserPerMonth: new FormControl(this.offer.max_for_user_per_month, NamberValidator.min(1))
         })
     }
 
@@ -45,7 +46,7 @@ export class CreateOffer4Page {
         if (maxForUser >= 0 && (maxForUserPerDay > 0 && maxForUserPerDay > maxForUser) ||
             (maxForUserPerWeek > 0 && maxForUserPerWeek > maxForUser) ||
             (maxForUserPerMonth > 0 && maxForUserPerMonth > maxForUser)) {
-            this.toast.show('Max for user valid should be less than max for user overall');
+            this.toast.show('Maximum amount of redemptions by user \nfor definite period should be less than overall');
             return false;
         };
         return true;
@@ -56,7 +57,7 @@ export class CreateOffer4Page {
         let dayMaxCount = parseInt(this.formData.value.dayMaxCount);
 
         if (maxCount >= 0 && dayMaxCount > 0 && dayMaxCount > maxCount) {
-            this.toast.show('Day max valid should be less than max overall');
+            this.toast.show('Daily redemptions amount \nshould be less than overall');
             return false;
         };
         return true;
@@ -70,7 +71,7 @@ export class CreateOffer4Page {
 
         if ((maxCount >= 0 && maxForUser > 0 && maxForUser > maxCount) ||
             (dayMaxCount >= 0 && maxForUserPerDay > 0 && maxForUserPerDay > dayMaxCount)) {
-            this.toast.show('Max for user valid should be less than max overall');
+            this.toast.show('Maximum amount of redemptions by user \nshould be less than overall');
             return false;
         };
         return true;
@@ -82,8 +83,8 @@ export class CreateOffer4Page {
 
     limitStr(key) {
         this.formData.valueChanges.subscribe(data => {
-            if (data[key].length > 18) {
-                this.formData.controls[key].setValue(data[key].slice(0, 18));
+            if (data[key].length > 10) {
+                this.formData.controls[key].setValue(data[key].slice(0, 10));
             }
         })
     }

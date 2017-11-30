@@ -33,9 +33,6 @@ export class CreateUserProfilePage {
     age: number;
     income;
     picture_url: string;
-    isValidName = false;
-    isValidEmail = false;
-    
 
     constructor(private nav: NavController,
         private location: LocationService,
@@ -118,6 +115,7 @@ export class CreateUserProfilePage {
     }
 
     createAccount() {
+        if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {
         this.user.latitude = this.coords.lat;
         this.user.longitude = this.coords.lng;
         //this.account.points = this.point(); to do
@@ -131,17 +129,18 @@ export class CreateUserProfilePage {
                     this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
                 }
             });
+        }
     }
 
     validateName(name) {
-        if (name.length < 3 || name.replace(/\s/g,"") == "") {
+        if (name.length < 3 || name.replace(/\s/g, "") == "") {
             this.toast.show('User name must be atleast 3 charactrs long');
-            this.isValidName = false;
+            return false;
         }
         else {
-            this.isValidName = true;
+            return true;
         }
-        
+
     }
 
     validateEmail(email) {
@@ -149,9 +148,11 @@ export class CreateUserProfilePage {
         let isValid = re.test(email);
         if (!isValid) {
             this.toast.show('Incorrect email, please, correct it');
+            return false;
         }
-        this.isValidEmail = re.test(email);
+        else {
+            return true;
+        }
     }
-
 
 }

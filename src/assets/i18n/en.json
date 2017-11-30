@@ -156,9 +156,9 @@
         "CREATED" : "created",
         "RESERVED_TOKENS_SHOULD" : "Reserved tokens should be at least 10 times larger than a reward",
         "RESERVED_TOKENS_AND_REWARD" : "Reserved tokens and reward should be multiple",
-        "MAX_FOR_USER_VALID_OVERALL" : "Max for user valid should be less than max for user overall",
-        "DAY_MAX_VALID" : "Day max valid should be less than max overall",
-        "MAX_FOR_USER_VALID" : "Max for user valid should be less than max overall"
+        "MAX_FOR_USER_VALID_OVERALL" : "Maximum amount of redemptions by user for definite period should be less than overall",
+        "DAY_MAX_VALID" : "Daily redemptions amount should be less than overall",
+        "MAX_FOR_USER_VALID" : "Maximum amount of redemptions by user should be less than overall"
     },
 
     "PAGE_CREATE-USER-PROFILE" : {

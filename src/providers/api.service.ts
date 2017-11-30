@@ -69,7 +69,7 @@ export class ApiService {
                 if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
                     messages.push('Too Many Attempts.')
                 }
-                if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && !showToast) {
+                if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND) {
                     return;
                 }
                 else {

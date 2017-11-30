@@ -25,9 +25,9 @@
     <ion-grid class="ava_user_adv">
       <ion-row text-center align-items-center>
         <ion-col>
-          <div margin-top class="thumb_image" [style.background-image]="'url(' + user.picture_url + ')'"></div>
+          <div margin-top class="thumb_image" [ngStyle]="{'background-image': 'url(' + user.picture_url + '), url(assets/img/create_user_profile/people.svg)'}"></div>
           <!-- <img margin-top [src]="user.picture_url"> -->
-          <div class="font-16 text-3E4B5D bold">{{ 'PAGE_SETTINGS.CLIENT' | translate }}</div>
+          <div class="font-16 text-3E4B5D bold padding-top-3vw">{{ 'PAGE_SETTINGS.CLIENT' | translate }}</div>
         </ion-col>
         <ion-col>
           <ion-item no-lines>
@@ -35,8 +35,8 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <div margin-top class="thumb_image" [style.background-image]="'url(' + advPicture_url + ')'"></div>
-          <div class="font-16 text-BDBDBD bold">{{ 'PAGE_SETTINGS.ADVERTISER' | translate }}</div>
+          <div margin-top class="thumb_image" [ngStyle]="{'background-image': 'url(' + advPicture_url + '), url(assets/img/create_user_profile/people.svg)'}"></div>
+          <div class="font-16 text-BDBDBD bold padding-top-3vw">{{ 'PAGE_SETTINGS.ADVERTISER' | translate }}</div>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -82,15 +82,15 @@
   <div class="block-lines" mode="md">
     <ion-item class="bg-gray margin-bottom-small">
       <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_PRIVATE_DATA' | translate }}</ion-label>
-      <ion-checkbox [(ngModel)]="showData" item-end></ion-checkbox>
+      <ion-checkbox disabled [(ngModel)]="showData" item-end></ion-checkbox>
     </ion-item>
     <ion-item class="bg-gray margin-bottom-small">
       <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_PHONE_NUMBER' | translate }}</ion-label>
-      <ion-checkbox [(ngModel)]="showPhone" item-end></ion-checkbox>
+      <ion-checkbox disabled [(ngModel)]="showPhone" item-end></ion-checkbox>
     </ion-item>
     <ion-item class="bg-gray">
       <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_EMAIL_ADDRESS' | translate }}</ion-label>
-      <ion-checkbox [(ngModel)]="showEmail" item-end></ion-checkbox>
+      <ion-checkbox disabled [(ngModel)]="showEmail" item-end></ion-checkbox>
     </ion-item>
   </div>
 

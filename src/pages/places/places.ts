@@ -56,27 +56,30 @@ export class PlacesPage {
                 lat: user.latitude,
                 lng: user.longitude
             };
-            
+             if (!this.mapCenter) {
+                        this.mapCenter = {
+                            lat: this.coords.lat,
+                            lng: this.coords.lng
+                        };
+                    }
             this.location.get()
                 .then((resp) => {
                     this.coords = {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
-
-                    if (!this.mapCenter) {
                         this.mapCenter = {
                             lat: resp.coords.latitude,
                             lng: resp.coords.longitude
-                        };
-                    }
+                        }; 
+                        this.loadCompanies([this.selectedCategory.id], this.search, this.page);
+                        this.categoryFilter = [this.selectedCategory.id];
                 })
                 .catch((error) => {
                     this.message = error.message;
                 });
 
-            this.loadCompanies([this.selectedCategory.id], this.search, this.page);
-            this.categoryFilter = [this.selectedCategory.id];
+           
         })
     }
 
@@ -106,6 +109,7 @@ export class PlacesPage {
             let bounds = new google.maps.LatLngBounds();
                 markers.forEach((marker: any) => {
                     bounds.extend(new google.maps.LatLng({ lat: marker.latitude, lng: marker.longitude }));
+                    bounds.extend(new google.maps.LatLng({ lat: this.coords.lat, lng: this.coords.lng }));
                 });
                 //check if there is only one marker
                 if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
@@ -231,7 +235,7 @@ export class PlacesPage {
                                         lng: this.companies[0].longitude,
                                     };
                                 };
-                                //this.mapBounds = this.generateBounds(this.companies);to do
+                                this.mapBounds = this.generateBounds(this.companies);
                             })
                         infiniteScroll.complete();
                     });
