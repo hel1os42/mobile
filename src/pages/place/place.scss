@@ -30,23 +30,27 @@ page-place {
     margin-bottom: 90px;
   }
 
-  .footer.footer-ios {
+  .footer_testimonials {
     box-shadow: 0px -6px 18px rgba(0, 0, 0, 0.12);
     background: #fff;
     border-bottom: 1px solid #BDBDBD;
     padding-top: 3%;
     padding-bottom: 17%;
     height: 17vw;
+    width: 100%;
     margin-bottom: 13%;
     padding-left: 5vw;
     padding-right: 5vw;
+    position: fixed;
+    left: 0;
+    bottom: 0;
   }
 
   .item-ios.item-block .item-inner{
     padding-right: 0;
   }
 
-  .footer.footer-ios .bg-gray{
+  .footer_testimonials .bg-gray{
     border-radius: 8px;
   }
 
