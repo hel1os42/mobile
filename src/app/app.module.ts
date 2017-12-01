@@ -77,7 +77,7 @@ import { TimezoneService } from '../providers/timezone.service';
 import { ToastService } from '../providers/toast.service';
 import { TokenService } from '../providers/token.service';
 import { MyApp } from './app.component';
-import { CreateOfferInformationPopover } from '../pages/create-offer-5/information.popover';
+import { CreateOfferInformationPopover } from '../pages/adv-user-offers/information.popover';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
