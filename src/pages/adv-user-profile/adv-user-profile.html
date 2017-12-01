@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-title>{{ 'PAGE_ADV-USER-PROFILE.ADVERTISER' | translate }}</ion-title>
         <ion-buttons class="btn_header" margin-right end>
-            <a><img src="assets/img/edit.svg"></a>
+            <a (click)="editProfile()"><img src="assets/img/edit.svg"></a>
         </ion-buttons>
         <ion-buttons class="btn_header" margin-right end>
             <a (click)="openSettings()"><img src="assets/img/settings.svg"></a>
