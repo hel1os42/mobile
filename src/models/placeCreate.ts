@@ -3,7 +3,7 @@ export class PlaceCreate {
     description: string;
     about: string;
     address: string;
-    category_ids: string[];
+    category_ids?: string[];
     latitude: number;
     longitude: number;
     radius: number;
