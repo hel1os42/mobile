@@ -1,3 +1,4 @@
+import { Company } from '../../models/company';
 import { LatLngLiteral } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -6,7 +7,6 @@ import * as _ from 'lodash';
 import { ChildCategory } from '../../models/childCategory';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
-import { PlaceCreate } from '../../models/placeCreate';
 import { SelectedCategory } from '../../models/selectedCategory';
 import { ApiService } from '../../providers/api.service';
 import { LocationService } from '../../providers/location.service';
@@ -32,12 +32,14 @@ export class CreateAdvUserProfilePage {
     selectedCategory: SelectedCategory;
     selectedChildCategories: SelectedCategory[];
     childCategoriesNames: string[];
-    company = new PlaceCreate();
+    company: Company = new Company();
     address: string;
     picture_url: string;
     cover_url: string;
     noChild: boolean;//temporary
     formData: FormGroup;
+    changedLogo = false;
+    changedCover = false;
 
     constructor(
         private location: LocationService,
@@ -52,41 +54,56 @@ export class CreateAdvUserProfilePage {
         private navParams: NavParams,
         private builder: FormBuilder) {
 
-        this.coords.lat = this.navParams.get('latitude');
-        this.coords.lng = this.navParams.get('longitude');
+        // this.company = this.navParams.get('company');
+        this.coords.lat = this.navParams.get('latitude') ? this.navParams.get('latitude') : this.company.latitude;
+        this.coords.lng = this.navParams.get('longitude') ? this.navParams.get('longitude') : this.company.longitude;
 
-        if (!this.coords.lat || !this.coords.lng) {
-            this.location.getByIp()
-                .subscribe(resp => {
+        if (this.navParams.get('company')) {
+            this.company = this.navParams.get('company');
+            this.placeService.getWithCategory()
+                .subscribe(company => {
+                    this.company = company;
+                    this.picture_url = this.company.picture_url;
+                    this.cover_url = this.company.cover_url;
                     this.coords = {
-                        lat: resp.latitude,
-                        lng: resp.longitude
+                        lat: company.latitude,
+                        lng: company.longitude
                     };
+                    this.selectCategory(company.categories);
                 })
         }
-
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-            })
-            .catch((error) => {
-                this.message = error.message;
-                console.log(this.message);
-            });
+        else {
+            if (!this.coords.lat || !this.coords.lng) {
+                this.location.getByIp()
+                    .subscribe(resp => {
+                        this.coords = {
+                            lat: resp.latitude,
+                            lng: resp.longitude
+                        };
+                    })
+            }
+            this.location.get()
+                .then((resp) => {
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                })
+                .catch((error) => {
+                    this.message = error.message;
+                });
+        };
         this.geocodeDebounced();
 
         this.formData = this.builder.group({
-            companyName: new FormControl("", Validators.compose([
+            companyName: new FormControl(this.company.name ? this.company.name : '', Validators.compose([
                 StringValidator.validString,
                 Validators.maxLength(30),
                 Validators.minLength(3),
                 //Validators.pattern(/a-zA-Z0-9/),
                 Validators.required
             ])),
-            companyDescription: new FormControl("", Validators.compose([
+            companyDescription: new FormControl(this.company.description ? this.company.description : '', Validators.compose([
                 StringValidator.validString,
                 Validators.maxLength(250),
                 Validators.minLength(3),
@@ -94,6 +111,37 @@ export class CreateAdvUserProfilePage {
                 Validators.required
             ])),
         });
+    }
+
+    selectCategory(categories) {
+        let parentCategoryId = categories[0].parent_id === null ? categories[0].id : categories[0].parent_id;
+        let rootCategories = this.categories.filter(p => p.id == parentCategoryId).map(p => {
+            return {
+                id: p.id,
+                name: p.name,
+                image_url: p.imageAdvCreate_url,
+                isSelected: p.id == parentCategoryId
+            }
+        })
+        this.selectedCategory = rootCategories[0];
+        this.offer.getSubCategories(this.selectedCategory.id)
+            .subscribe(resp => {
+                // this.childCategories = resp.children;
+                let childCategoriesIds = categories[0].parent_id !== null ? categories.map(p => p.id) : undefined;
+                if (childCategoriesIds) {
+                    let selectedChildCategories: any = _(resp.children).keyBy('id').at(childCategoriesIds).value();
+                    this.selectedChildCategories = selectedChildCategories.map(p => {
+                        return {
+                            id: p.id,
+                            name: p.name,
+                            image_url: '',
+                            isSelected: true
+                        }
+                    })
+                    this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name);
+                }
+            })
+
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -190,6 +238,7 @@ export class CreateAdvUserProfilePage {
         this.imagePicker.getPictures(options)
             .then(results => {
                 this.picture_url = results[0];
+                this.changedLogo = true;
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
@@ -201,6 +250,7 @@ export class CreateAdvUserProfilePage {
         this.imagePicker.getPictures(options)
             .then(results => {
                 this.cover_url = results[0];
+                this.changedCover;
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
@@ -214,23 +264,42 @@ export class CreateAdvUserProfilePage {
         this.company.longitude = this.coords.lng;
         this.company.address = this.address;
         this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
-
         this.company.radius = 30000;
 
-        this.placeService.set(this.company)
-            .subscribe(company => {
-                let pictureUpload = this.picture_url
-                    ? this.api.uploadImage(this.picture_url, 'profile/place/picture', true)
-                    : Promise.resolve();
-
-                pictureUpload.then(() => {
-                    let coverUpload = this.cover_url
-                        ? this.api.uploadImage(this.cover_url, 'profile/place/cover', true)
+        if (!this.company.id) {
+            this.placeService.set(this.company)
+                .subscribe(company => {
+                    let pictureUpload = this.picture_url
+                        ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
                         : Promise.resolve();
 
-                    coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
-                });
-            })
+                    pictureUpload.then(() => {
+                        let coverUpload = this.cover_url
+                            ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
+                            : Promise.resolve();
+
+                        coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
+                    });
+                })
+        }
+        else {
+            if (this.company.id) {
+                this.placeService.putPlace(this.company)
+                    .subscribe((company) => {
+                        let pictureUpload = (this.picture_url && this.changedLogo)
+                            ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
+                            : Promise.resolve();
+
+                        pictureUpload.then(() => {
+                            let coverUpload = (this.cover_url && this.changedCover)
+                                ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
+                                : Promise.resolve();
+
+                            coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
+                        });
+                    })
+            }
+        }
 
     }
 }
