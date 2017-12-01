@@ -8,6 +8,8 @@ import { ApiService } from '../../providers/api.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
+import { CreateOfferInformationPopover } from './information.popover';
+import { PopoverController } from 'ionic-angular';
 
 @Component({
     selector: 'page-create-offer-5',
@@ -30,7 +32,11 @@ export class CreateOffer5Page {
         private loading: LoadingController,
         private alert: AlertController,
         private viewCtrl: ViewController,
+        private popoverCtrl: PopoverController,
         private toast: ToastService) {
+
+        let popover = this.popoverCtrl.create(CreateOfferInformationPopover);
+        popover.present();
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
@@ -109,8 +115,8 @@ export class CreateOffer5Page {
 
     presentConfirm(action: string) {
         let isUpdate = action == 'updated' ? true : false;
-        let subTitle = isUpdate ? 
-        `Offer wasn't update. Please try again` : 
+        let subTitle = isUpdate ?
+        `Offer wasn't update. Please try again` :
         `Offer wasn't create. Please try again`;
         let alert = this.alert.create({
             title: 'Oops...ERROR',
@@ -169,5 +175,9 @@ export class CreateOffer5Page {
 
     disable() {
         return  parseInt(this.reserved) <= 0 || parseInt(this.reward) <= 0 || this.reserved == '' || this.reward == '';
+    }
+
+    close() {
+
     }
 }
