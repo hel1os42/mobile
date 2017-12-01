@@ -54,6 +54,10 @@ export class PlaceService {
         return obs;
     }
 
+    putPlace(place: Company) {
+        return this.api.put('profile/place', place);
+    }
+
     getOffers(page) {
         return this.api.get(`advert/offers?page=${page}`, page == 1);
     }
