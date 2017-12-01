@@ -231,6 +231,5 @@ export class CreateAdvUserProfilePage {
                     coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
                 });
             })
-
     }
 }

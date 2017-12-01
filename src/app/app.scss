@@ -76,6 +76,10 @@ button[ion-button] {
     font-weight: bold;
 }
 
+.popover-ios button[ion-button]{
+    font-family: 'OpenSansNauExtrabold';
+}
+
 .button-ios-primary {
     background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
     font-style: normal;
@@ -1396,6 +1400,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .popover-ios .popover-content{
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     min-height: 50vw;
+    border-radius: 7vw;
 }
 
 .overflow-visible{
