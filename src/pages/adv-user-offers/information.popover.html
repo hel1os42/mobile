@@ -1,11 +1,14 @@
 <div class="modal_content" text-center>
-  <div text-uppercase class="text-4F4F4F font-16 bold">Information</div>
-  <img class="margin-top-7vw" src="assets/img/create_offer/information.svg">
-  <div margin-top class="font-20 text-3E4B5D bold">Now is available 50 tokens</div>
-  <div margin-top class="font-16 text-828282">You need have 55 tokens for reservation. Minimum is 1 token.</div>
-  <div margin-top class="font-14 text-BDBDBD">Please payment your account</div>
+    <a (click)="close()" class="close">
+        <img src="assets/img/settings/close.svg">
+    </a>
+    <div text-uppercase class="text-4F4F4F font-16 bold">Information</div>
+    <img class="margin-top-7vw" src="assets/img/create_offer/information.svg">
+    <div margin-top class="font-20 text-3E4B5D bold">Now {{ balance }} tokens are available</div>
+    <div margin-top class="font-16 text-828282">You need to have {{ reserved }} tokens for activation</div>
+    <div margin-top class="font-14 text-BDBDBD">Please make a payment to your account</div>
     <div class="margin-top-7vw">
-        <ion-grid>
+        <!-- <ion-grid>
             <ion-row>
                 <ion-col text-center class="margin-right-2proc">
                     <button (click)="close()" ion-button block color="secondary">Ok</button>
@@ -14,6 +17,6 @@
                     <button ion-button block color="primary">My NAU</button>
                 </ion-col>
             </ion-row>
-        </ion-grid>
+        </ion-grid> -->
     </div>
 </div>

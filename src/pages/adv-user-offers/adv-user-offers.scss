@@ -70,3 +70,20 @@ page-adv-user-offers {
     }
 
 }
+information-popover-component {
+    .modal_content{
+        padding-right: 5vw;
+        padding-left: 5vw;
+        padding-bottom: 6vw;
+        padding-top: 6vw;
+    }
+
+    
+    .close{
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        width: 5vw;
+        height: 5vw;
+    }
+}

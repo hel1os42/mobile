@@ -7,8 +7,19 @@ import { NavParams, ViewController } from 'ionic-angular';
 })
 
 export class CreateOfferInformationPopover {
+
+    balance: number;
+    reserved: number;
+
     constructor(
         private viewCtrl: ViewController,
         private navParams: NavParams) {
+
+        this.balance = this.navParams.get('balance');
+        this.reserved = this.navParams.get('reserved');
+    }
+
+    close() {
+        this.viewCtrl.dismiss();
     }
 }
