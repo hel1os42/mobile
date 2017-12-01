@@ -1,5 +1,4 @@
 import 'rxjs/add/operator/map';
-
 import { AgmCoreModule } from '@agm/core';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
@@ -14,7 +13,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angular2-qrcode';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BarChartComponent } from '../components/bar-chart';
 import { LineChartComponent } from '../components/line-chart';
 import { AdvHomePage } from '../pages/adv-home/adv-home';
@@ -25,19 +24,14 @@ import { AdvUserOffersPage } from '../pages/adv-user-offers/adv-user-offers';
 import { AdvUserProfilePage } from '../pages/adv-user-profile/adv-user-profile';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
-import {
-    CreateAdvUserProfileCategoryPopover,
-} from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
-import {
-    CreateAdvUserProfileChildCategoryPopover,
-} from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
+import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
+import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
 import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
 import { CreateOfferPage } from '../pages/create-offer/create-offer';
-import { CreateOfferPopover } from '../pages/create-offer/createOffer.popover';
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { FeedPage } from '../pages/feed/feed';
 import { SignUpInvitePage } from '../pages/invite/invite';
@@ -128,7 +122,6 @@ export function createTranslateLoader(http: Http) {
       SplashNewsPage,
       SettingsPopover,
       OfferRedeemPopover,
-      CreateOfferPopover,
       PlacesPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
@@ -149,6 +142,8 @@ export function createTranslateLoader(http: Http) {
   imports: [
       BrowserModule,
       HttpModule,
+      FormsModule,
+      ReactiveFormsModule,
       QRCodeModule,
       IonicModule.forRoot(MyApp, {
         mode: "ios",
@@ -205,7 +200,6 @@ export function createTranslateLoader(http: Http) {
       SplashNewsPage,
       SettingsPopover,
       OfferRedeemPopover,
-      CreateOfferPopover,
       PlacesPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
