@@ -1,7 +1,7 @@
+import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NavController } from 'ionic-angular';
-import { StringValidator } from '../../app/validators/string.validator';
 import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';

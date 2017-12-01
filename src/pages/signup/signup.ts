@@ -1,4 +1,4 @@
-import { StringValidator } from '../../app/validators/string.validator';
+import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth.service';

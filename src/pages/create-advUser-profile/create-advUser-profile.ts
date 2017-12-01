@@ -1,10 +1,11 @@
-import { Company } from '../../models/company';
 import { LatLngLiteral } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { ChildCategory } from '../../models/childCategory';
+import { Company } from '../../models/company';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
 import { SelectedCategory } from '../../models/selectedCategory';
@@ -13,11 +14,10 @@ import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
 import { ToastService } from '../../providers/toast.service';
+import { StringValidator } from '../../validators/string.validator';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
 import { CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { StringValidator } from '../../app/validators/string.validator';
 
 @Component({
     selector: 'page-create-advUser-profile',

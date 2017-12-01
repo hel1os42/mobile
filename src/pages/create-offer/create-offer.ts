@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController, NavParams } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { PlaceService } from '../../providers/place.service';
 import { ToastService } from '../../providers/toast.service';
+import { StringValidator } from '../../validators/string.validator';
 import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { StringValidator } from '../../app/validators/string.validator';
 
 @Component({
     selector: 'page-create-offer',

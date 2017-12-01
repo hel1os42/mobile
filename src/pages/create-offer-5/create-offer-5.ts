@@ -1,15 +1,13 @@
-import { StringValidator } from '../../app/validators/string.validator';
-import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
+import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
-import { LoadingController, NavController, NavParams, ViewController } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, PopoverController, ViewController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ApiService } from '../../providers/api.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
-import { CreateOfferInformationPopover } from './information.popover';
-import { PopoverController } from 'ionic-angular';
+
 
 @Component({
     selector: 'page-create-offer-5',
@@ -34,9 +32,6 @@ export class CreateOffer5Page {
         private viewCtrl: ViewController,
         private popoverCtrl: PopoverController,
         private toast: ToastService) {
-
-        let popover = this.popoverCtrl.create(CreateOfferInformationPopover);
-        popover.present();
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
