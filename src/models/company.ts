@@ -1,12 +1,10 @@
+import { PlaceCreate } from './placeCreate';
 import { OfferCategory } from "./offerCategory";
 import { Offer } from "./offer";
 
-export class Company {
+export class Company extends PlaceCreate  {
     id: string;
     user_id: string;
-    name: string;
-    description: string;
-    about: String;
     testimonials_count: number;
     testimonials;
     categories_count: number;
@@ -17,10 +15,6 @@ export class Company {
     stars: number;
     is_featured: boolean;
     is_starred: boolean;
-    address: string;
-    latitude: number;
-    longitude: number;
-    radius: number;    
     picture_url: string;
     cover_url: string;
 }
