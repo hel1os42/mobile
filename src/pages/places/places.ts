@@ -71,7 +71,7 @@ export class PlacesPage {
                         this.mapCenter = {
                             lat: resp.coords.latitude,
                             lng: resp.coords.longitude
-                        }; 
+                        };
                         this.loadCompanies([this.selectedCategory.id], this.search, this.page);
                         this.categoryFilter = [this.selectedCategory.id];
                 })
@@ -79,7 +79,7 @@ export class PlacesPage {
                     this.message = error.message;
                 });
 
-           
+
         })
     }
 
