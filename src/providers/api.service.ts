@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, URLSearchParams, Headers, Response } from '@angular/http';
+import { Headers, Http, QueryEncoder, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { ToastController, LoadingController, Loading } from "ionic-angular";
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/share';
@@ -8,6 +8,22 @@ import 'rxjs/add/operator/map';
 import { TokenService } from "./token.service";
 import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
 import { ToastService } from './toast.service';
+
+interface ApiRequestOptions {
+    showLoading?: boolean;
+    params?: any;
+    options?: RequestOptions;
+}
+
+class UriQueryEncoder extends QueryEncoder {
+    encodeKey(k: string): string {
+      return k;
+    }
+   
+    encodeValue(v: string): string {
+      return encodeURIComponent(v);
+    }
+}
 
 @Injectable()
 export class ApiService {
@@ -104,14 +120,20 @@ export class ApiService {
         })
     }
 
-    get(endpoint: string, showLoading: boolean = true, params?: any, options?: RequestOptions) {
+    get(endpoint: string, requestOptions?: ApiRequestOptions) {
+        if (!requestOptions)
+            requestOptions = { };
+        let { params, options } = requestOptions;
+        let showLoading = requestOptions.showLoading
+            || typeof(requestOptions.showLoading) == 'undefined';
+
         if (!options) {
             options = new RequestOptions();
         }
 
         // support easy query params for GET requests
         if (params) {
-            let p = new URLSearchParams();
+            let p = new URLSearchParams(undefined, new UriQueryEncoder());
             for (let k in params) {
                 p.set(k, params[k]);
             }

@@ -23,7 +23,7 @@ export class AuthService {
         setInterval(() => {
             this.clearCookies();
             if (this.isLoggedIn()) {
-                this.api.get('auth/token', false)
+                this.api.get('auth/token', { showLoading: false })
                     .subscribe(
                         token => this.token.set(token),
                         errResp => {

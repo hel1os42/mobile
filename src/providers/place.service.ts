@@ -59,11 +59,26 @@ export class PlaceService {
     }
 
     getOffers(page) {
-        return this.api.get(`advert/offers?page=${page}`, page == 1);
+        return this.api.get(`advert/offers?page=${page}`, {
+            showLoading: page == 1
+        });
     }
 
+    // getFilteredOffersByDate(startDate, finishDate, page) {
+    //     return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and&page=${page}`, {
+    //         showLoading: page == 1
+    //     });
+    // }
+
     getFilteredOffersByDate(startDate, finishDate, page) {
-        return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and&page=${page}`, page == 1);
+        return this.api.get('advert/offers', {
+            showLoading: page == 1,
+            params: {
+                search: `status:active;start_date:${startDate};finish_date:${finishDate}`,
+                searchJoin: 'and',
+                page: page
+            }
+        });
     }
 
     getOffersWithTimeframes() {
@@ -71,15 +86,19 @@ export class PlaceService {
     }
 
     getActiveOffers(page) {
-        return this.api.get(`advert/offers?search=status:active&page=${page}`, page == 1);
+        return this.api.get(`advert/offers?search=status:active&page=${page}`, {
+            showLoading: page == 1
+        });
     }
 
     getDeActiveOffers(page) {
-        return this.api.get(`advert/offers?search=status:deactive&page=${page}`, page == 1);
+        return this.api.get(`advert/offers?search=status:deactive&page=${page}`, {
+            showLoading: page == 1
+        });
     }
 
     getOffer(offer_id: string, loading: boolean) {
-        return this.api.get(`advert/offers/${offer_id}`, loading);
+        return this.api.get(`advert/offers/${offer_id}`, { showLoading: loading });
     }
 
     getOfferWithTimeframes(offer_id: string) {
