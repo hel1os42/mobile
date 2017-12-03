@@ -57,8 +57,14 @@ export class ApiService {
         return options;
     }
 
-    private wrapObservable(obs: Observable<Response>, showLoading: boolean = true, showToast?:boolean) {
+    private wrapObservable(obs: Observable<Response>, requestOptions?: ApiRequestOptions) {
         let loading: Loading;
+        
+        if (!requestOptions)
+            requestOptions = { };
+
+        let showLoading = requestOptions.showLoading
+            || typeof(requestOptions.showLoading) == 'undefined';
 
         if (showLoading) {
             loading = this.loading.create({ content: '' });
@@ -123,9 +129,7 @@ export class ApiService {
     get(endpoint: string, requestOptions?: ApiRequestOptions) {
         if (!requestOptions)
             requestOptions = { };
-        let { params, options } = requestOptions;
-        let showLoading = requestOptions.showLoading
-            || typeof(requestOptions.showLoading) == 'undefined';
+        let { params, options } = requestOptions;        
 
         if (!options) {
             options = new RequestOptions();
@@ -144,28 +148,32 @@ export class ApiService {
 
         return this.wrapObservable(
             this.http.get(this.url + '/' + endpoint, this.getOptions(options)),
-            showLoading
+            requestOptions
         );
     }
 
-    post(endpoint: string, body: any, options?: RequestOptions) {
+    post(endpoint: string, body: any, requestOptions?: ApiRequestOptions) {
+        let options = requestOptions ? requestOptions.options : undefined;
         return this.wrapObservable(
-            this.http.post(this.url + '/' + endpoint, body, this.getOptions(options)), true);
+            this.http.post(this.url + '/' + endpoint, body, this.getOptions(options)), requestOptions);
     }
 
-    put(endpoint: string, body: any, options?: RequestOptions) {
+    put(endpoint: string, body: any, requestOptions?: ApiRequestOptions) {
+        let options = requestOptions ? requestOptions.options : undefined;
         return this.wrapObservable(
-            this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)), true);
+            this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)), requestOptions);
     }
 
-    delete(endpoint: string, options?: RequestOptions) {
+    delete(endpoint: string, requestOptions?: ApiRequestOptions) {
+        let options = requestOptions ? requestOptions.options : undefined;
         return this.wrapObservable(
-            this.http.delete(this.url + '/' + endpoint, this.getOptions(options)), true);
+            this.http.delete(this.url + '/' + endpoint, this.getOptions(options)), requestOptions);
     }
 
-    patch(endpoint: string, body: any, options?: RequestOptions) {
+    patch(endpoint: string, body: any, requestOptions?: ApiRequestOptions) {
+        let options = requestOptions ? requestOptions.options : undefined;
         return this.wrapObservable(
-            this.http.patch(this.url + '/' + endpoint, body, this.getOptions(options)), true);
+            this.http.patch(this.url + '/' + endpoint, body, this.getOptions(options)), requestOptions);
     }
 
     uploadImage(filePath, path, isShowLoading: boolean) {
