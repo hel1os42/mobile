@@ -13,8 +13,8 @@ export class PlaceService {
 
     constructor(private api: ApiService) { }
 
-    get() {
-        let obs = this.api.get('profile/place');
+    get(ignoreNotFound?: boolean) {
+        let obs = this.api.get('profile/place', { ignoreHttpNotFound: ignoreNotFound });
         obs.subscribe(company => this.company = company);
         return obs;
     }
