@@ -13,6 +13,7 @@ interface ApiRequestOptions {
     showLoading?: boolean;
     params?: any;
     options?: RequestOptions;
+    ignoreHttpNotFound?: boolean;
 }
 
 class UriQueryEncoder extends QueryEncoder {
@@ -91,7 +92,7 @@ export class ApiService {
                 if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
                     messages.push('Too Many Attempts.')
                 }
-                if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND) {
+                else if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound) {
                     return;
                 }
                 else {

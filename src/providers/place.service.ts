@@ -97,8 +97,11 @@ export class PlaceService {
         });
     }
 
-    getOffer(offer_id: string, loading: boolean) {
-        return this.api.get(`advert/offers/${offer_id}`, { showLoading: loading });
+    getOffer(offer_id: string) {
+        return this.api.get(`advert/offers/${offer_id}`, {
+            showLoading: false,
+            ignoreHttpNotFound: true
+        });
     }
 
     getOfferWithTimeframes(offer_id: string) {

@@ -57,7 +57,7 @@ export class CreateOffer5Page {
                 loading.present();
                 this.timer = setInterval(() => {
 
-                    this.place.getOffer(offer_id, false)
+                    this.place.getOffer(offer_id)
                         .subscribe(offer => {
                             if (offer.id) {
                                 this.place.refreshPlace();
