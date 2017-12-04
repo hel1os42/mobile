@@ -55,6 +55,7 @@
                         <br>{{ offer.created_at.slice(0, 10) }}</div>
                 </div>
                 <div item-end>
+                    <div (click)="modalInfromation(offer)" *ngIf="offer.status == 'deactive'" class="toggle-disabled"></div>
                     <ion-toggle (ionChange)="editStatus(offer)" [checked]="offer.status == 'active'"></ion-toggle>
                 </div>
             </ion-item>

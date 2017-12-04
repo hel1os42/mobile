@@ -69,6 +69,15 @@ page-adv-user-offers {
         margin-bottom: 3.6vw;
     }
 
+    .toggle-disabled{
+        width: 20%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 111;
+    }
+
 }
 information-popover-component {
     .modal_content{
@@ -78,7 +87,7 @@ information-popover-component {
         padding-top: 6vw;
     }
 
-    
+
     .close{
         position: absolute;
         right: 5%;

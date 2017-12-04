@@ -101,7 +101,7 @@ export class AdvUserOffersPage {
                         this.nav.push(CreateOfferPage, { offer: resp });
                     })
             }
-            
+
     enableActivation(offer) {
         if (offer.status = 'deactive' && offer.reserved > this.balance) {
             let popover = this.popoverCtrl.create(CreateOfferInformationPopover, { balance: this.balance, reserved: offer.reserved });
@@ -111,9 +111,14 @@ export class AdvUserOffersPage {
         else {
             return true;
         }
-            }
+     }
 
-         
+     modalInfromation(offer){
+         let popover = this.popoverCtrl.create(CreateOfferInformationPopover, { balance: this.balance, reserved: offer.reserved });
+         popover.present();
+     }
+
+
     editStatus(offer) {
         if (this.enableActivation(offer)) {
                 let statusInfo = {
