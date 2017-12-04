@@ -12,7 +12,7 @@
         </div>
         <div class="block-lines">
             <ion-item no-lines>
-                <ion-input [(ngModel)]="phone" [value]="user.phone" class="bg-gray" type="text" placeholder=""></ion-input>
+                <ion-input (keyup)="validPhoneChange($event)" [(ngModel)]="phone" [value]="user.phone" class="bg-gray" type="tel" placeholder=""></ion-input>
             </ion-item>
         </div>
         <p margin>

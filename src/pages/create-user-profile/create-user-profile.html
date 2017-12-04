@@ -27,7 +27,7 @@
         </a>
       </div>
       <div item-end class="item-content">
-        <ion-input [(ngModel)]="user.name" class="bg-gray margin-bottom-small" type="text" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }}" name="name1"></ion-input>
+        <ion-input [(ngModel)]="user.name" class="bg-gray margin-bottom-small" type="text" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)" name="name1"></ion-input>
         <div class="input_relative">
           <ion-input  [(ngModel)]="user.email" class="bg-gray margin-bottom-small field-email" type="email" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}" name="email"></ion-input>
           <span *ngIf="user.email" class="text-gray icon_info">
@@ -143,13 +143,13 @@
       </ion-item>
     </div>
     <p margin text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}</p>
-    <div 
-    *ngIf="!coords.lat" 
+    <div
+    *ngIf="!coords.lat"
     padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
-      <agm-map [zoom]="15" 
-               [latitude]="coords.lat" 
-               [longitude]="coords.lng" 
+      <agm-map [zoom]="15"
+               [latitude]="coords.lat"
+               [longitude]="coords.lng"
                (centerChange)="onMapCenterChange($event)">
       </agm-map>
       <div id="marker"></div>
@@ -161,9 +161,9 @@
         </ion-card>-->
   </div>
   <p margin>
-    <button color="primary" 
-            (click)="createAccount()" 
-            [disabled]="!user.name || !user.email" 
+    <button color="primary"
+            (click)="createAccount()"
+            [disabled]="user.name?.length < 4 || !user.email"
             ion-button block>{{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
   </p>
 </ion-content>

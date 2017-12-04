@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AuthService } from '../../providers/auth.service';
 import { ProfileService } from '../../providers/profile.service';
+import { StringValidator } from '../../validators/string.validator';
 
 @Component({
     selector: 'page-settings-change-phone',
@@ -23,6 +24,10 @@ export class SettingsChangePhonePage {
         this.user = this.navParams.get('user');
     }
 
+    validPhoneChange(ev) {
+        StringValidator.validPhoneChange(ev);
+    }
+
     toggleChangePhone() {
         this.visibleChangePhone = false;
         this.otp = this.auth.getOtp(this.phone);
@@ -39,6 +44,6 @@ export class SettingsChangePhonePage {
                     resp => this.nav.pop(),
                     errResp => this.visibleChangePhone = true);
         }
- 
+
     }
 }

@@ -99,14 +99,14 @@ export class CreateAdvUserProfilePage {
             companyName: new FormControl(this.company.name ? this.company.name : '', Validators.compose([
                 StringValidator.validString,
                 Validators.maxLength(30),
-                Validators.minLength(3),
+                //Validators.minLength(2),
                 //Validators.pattern(/a-zA-Z0-9/),
                 Validators.required
             ])),
             companyDescription: new FormControl(this.company.description ? this.company.description : '', Validators.compose([
                 StringValidator.validString,
                 Validators.maxLength(250),
-                Validators.minLength(3),
+                //Validators.minLength(2),
                 //Validators.pattern(/a-zA-Z0-9/),
                 Validators.required
             ])),
@@ -267,7 +267,7 @@ export class CreateAdvUserProfilePage {
         this.company.address = this.address;
         this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
         this.company.radius = 30000;
-       
+
         if (!this.company.id) {
             this.placeService.set(this.company)
                 .subscribe(company => {
