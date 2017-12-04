@@ -127,7 +127,9 @@ export class CreateAdvUserProfilePage {
         this.offer.getSubCategories(this.selectedCategory.id)
             .subscribe(resp => {
                 // this.childCategories = resp.children;
-                let childCategoriesIds = categories[0].parent_id !== null ? categories.map(p => p.id) : undefined;
+                let childCategoriesIds = categories[0].parent_id !== null
+                    ? categories.map(p => p.id)
+                    : undefined;
                 if (childCategoriesIds) {
                     let selectedChildCategories: any = _(resp.children).keyBy('id').at(childCategoriesIds).value();
                     this.selectedChildCategories = selectedChildCategories.map(p => {
@@ -265,14 +267,13 @@ export class CreateAdvUserProfilePage {
         this.company.address = this.address;
         this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
         this.company.radius = 30000;
-
+       
         if (!this.company.id) {
             this.placeService.set(this.company)
                 .subscribe(company => {
                     let pictureUpload = this.picture_url
                         ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
                         : Promise.resolve();
-
                     pictureUpload.then(() => {
                         let coverUpload = this.cover_url
                             ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
@@ -284,6 +285,9 @@ export class CreateAdvUserProfilePage {
         }
         else {
             if (this.company.id) {
+                if(!this.company.about) {
+                    this.company.about = undefined;
+                }
                 this.placeService.putPlace(this.company)
                     .subscribe((company) => {
                         let pictureUpload = (this.picture_url && this.changedLogo)
