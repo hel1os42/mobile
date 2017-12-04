@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, URLSearchParams, Headers, Response } from '@angular/http';
+import { Headers, Http, QueryEncoder, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { ToastController, LoadingController, Loading } from "ionic-angular";
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/share';
@@ -8,6 +8,23 @@ import 'rxjs/add/operator/map';
 import { TokenService } from "./token.service";
 import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
 import { ToastService } from './toast.service';
+
+interface ApiRequestOptions {
+    showLoading?: boolean;
+    params?: any;
+    options?: RequestOptions;
+    ignoreHttpNotFound?: boolean;
+}
+
+class UriQueryEncoder extends QueryEncoder {
+    encodeKey(k: string): string {
+      return k;
+    }
+   
+    encodeValue(v: string): string {
+      return encodeURIComponent(v);
+    }
+}
 
 @Injectable()
 export class ApiService {
@@ -41,8 +58,14 @@ export class ApiService {
         return options;
     }
 
-    private wrapObservable(obs: Observable<Response>, showLoading: boolean = true, showToast?:boolean) {
+    private wrapObservable(obs: Observable<Response>, requestOptions?: ApiRequestOptions) {
         let loading: Loading;
+        
+        if (!requestOptions)
+            requestOptions = { };
+
+        let showLoading = requestOptions.showLoading
+            || typeof(requestOptions.showLoading) == 'undefined';
 
         if (showLoading) {
             loading = this.loading.create({ content: '' });
@@ -69,7 +92,7 @@ export class ApiService {
                 if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
                     messages.push('Too Many Attempts.')
                 }
-                if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND) {
+                else if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound) {
                     return;
                 }
                 else {
@@ -104,14 +127,18 @@ export class ApiService {
         })
     }
 
-    get(endpoint: string, showLoading: boolean = true, params?: any, options?: RequestOptions) {
+    get(endpoint: string, requestOptions?: ApiRequestOptions) {
+        if (!requestOptions)
+            requestOptions = { };
+        let { params, options } = requestOptions;        
+
         if (!options) {
             options = new RequestOptions();
         }
 
         // support easy query params for GET requests
         if (params) {
-            let p = new URLSearchParams();
+            let p = new URLSearchParams(undefined, new UriQueryEncoder());
             for (let k in params) {
                 p.set(k, params[k]);
             }
@@ -122,28 +149,32 @@ export class ApiService {
 
         return this.wrapObservable(
             this.http.get(this.url + '/' + endpoint, this.getOptions(options)),
-            showLoading
+            requestOptions
         );
     }
 
-    post(endpoint: string, body: any, options?: RequestOptions) {
+    post(endpoint: string, body: any, requestOptions?: ApiRequestOptions) {
+        let options = requestOptions ? requestOptions.options : undefined;
         return this.wrapObservable(
-            this.http.post(this.url + '/' + endpoint, body, this.getOptions(options)), true);
+            this.http.post(this.url + '/' + endpoint, body, this.getOptions(options)), requestOptions);
     }
 
-    put(endpoint: string, body: any, options?: RequestOptions) {
+    put(endpoint: string, body: any, requestOptions?: ApiRequestOptions) {
+        let options = requestOptions ? requestOptions.options : undefined;
         return this.wrapObservable(
-            this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)), true);
+            this.http.put(this.url + '/' + endpoint, body, this.getOptions(options)), requestOptions);
     }
 
-    delete(endpoint: string, options?: RequestOptions) {
+    delete(endpoint: string, requestOptions?: ApiRequestOptions) {
+        let options = requestOptions ? requestOptions.options : undefined;
         return this.wrapObservable(
-            this.http.delete(this.url + '/' + endpoint, this.getOptions(options)), true);
+            this.http.delete(this.url + '/' + endpoint, this.getOptions(options)), requestOptions);
     }
 
-    patch(endpoint: string, body: any, options?: RequestOptions) {
+    patch(endpoint: string, body: any, requestOptions?: ApiRequestOptions) {
+        let options = requestOptions ? requestOptions.options : undefined;
         return this.wrapObservable(
-            this.http.patch(this.url + '/' + endpoint, body, this.getOptions(options)), true);
+            this.http.patch(this.url + '/' + endpoint, body, this.getOptions(options)), requestOptions);
     }
 
     uploadImage(filePath, path, isShowLoading: boolean) {

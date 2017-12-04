@@ -1,5 +1,5 @@
-import { NamberValidator } from '../../app/validators/number.validator';
-import { StringValidator } from '../../app/validators/string.validator';
+import { StringValidator } from '../../validators/string.validator';
+import { NamberValidator } from '../../validators/number.validator';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';

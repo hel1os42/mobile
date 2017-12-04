@@ -29,7 +29,9 @@ export class ProfileService {
     }
 
     getTransactions(page) {
-        return this.api.get(`transactions?orderBy=created_at&sortedBy=desc&page=${page}`, page == 1);
+        return this.api.get(`transactions?orderBy=created_at&sortedBy=desc&page=${page}`, {
+            showLoading: page == 1
+        });
     }
 
     getWithAccounts() {

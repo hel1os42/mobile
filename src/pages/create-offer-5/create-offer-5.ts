@@ -1,13 +1,13 @@
-import { StringValidator } from '../../app/validators/string.validator';
-import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
+import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
-import { LoadingController, NavController, NavParams, ViewController } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, PopoverController, ViewController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ApiService } from '../../providers/api.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
+
 
 @Component({
     selector: 'page-create-offer-5',
@@ -30,6 +30,7 @@ export class CreateOffer5Page {
         private loading: LoadingController,
         private alert: AlertController,
         private viewCtrl: ViewController,
+        private popoverCtrl: PopoverController,
         private toast: ToastService) {
 
         this.offer = this.navParams.get('offer');
@@ -56,7 +57,7 @@ export class CreateOffer5Page {
                 loading.present();
                 this.timer = setInterval(() => {
 
-                    this.place.getOffer(offer_id, false)
+                    this.place.getOffer(offer_id)
                         .subscribe(offer => {
                             if (offer.id) {
                                 this.place.refreshPlace();
@@ -109,8 +110,8 @@ export class CreateOffer5Page {
 
     presentConfirm(action: string) {
         let isUpdate = action == 'updated' ? true : false;
-        let subTitle = isUpdate ? 
-        `Offer wasn't update. Please try again` : 
+        let subTitle = isUpdate ?
+        `Offer wasn't update. Please try again` :
         `Offer wasn't create. Please try again`;
         let alert = this.alert.create({
             title: 'Oops...ERROR',
@@ -169,5 +170,9 @@ export class CreateOffer5Page {
 
     disable() {
         return  parseInt(this.reserved) <= 0 || parseInt(this.reward) <= 0 || this.reserved == '' || this.reward == '';
+    }
+
+    close() {
+
     }
 }

@@ -34,9 +34,11 @@ export class DateTimeUtils {
         let timezone = -1 * (new Date().getTimezoneOffset() / 60);
         let timezoneStr = DateTimeUtils.timezoneToStr(timezone);
         let start = new Date(date).getTime() - (24 * 60 * 60 * 1000);
-        let startDate = encodeURIComponent(new Date(start).toISOString().slice(0, 10) + ' 23:59:59.999999' + timezoneStr);
+        //let startDate = encodeURIComponent(new Date(start).toISOString().slice(0, 10) + ' 23:59:59.999999' + timezoneStr);
+        let startDate = new Date(start).toISOString().slice(0, 10) + ' 23:59:59.999999' + timezoneStr;
         let finish = new Date(date).getTime() + (24 * 60 * 60 * 1000);
-        let finishDate = encodeURIComponent(new Date(finish).toISOString().slice(0, 10) + ' 00:00:00.000000' + timezoneStr);
+        //let finishDate = encodeURIComponent(new Date(finish).toISOString().slice(0, 10) + ' 00:00:00.000000' + timezoneStr);
+        let finishDate = new Date(finish).toISOString().slice(0, 10) + ' 00:00:00.000000' + timezoneStr;
         return { startDate, finishDate };
     }
 

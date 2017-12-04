@@ -38,7 +38,7 @@
             </ion-item>
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">{{ 'PAGE_CREATE-OFFER.TO' | translate }}</ion-label>
-                <ion-datetime doneText="Ok" [(ngModel)]="finishDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="startDate ? startDate : todayDate | date: 'yyyy-MM-dd'"
+                <ion-datetime doneText="Ok" [(ngModel)]="finishDate" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY" [min]="!getTime() ? startDate : todayDate | date: 'yyyy-MM-dd'"
                     max="2022" class="text-3E4B5D font-16 semibold">
                 </ion-datetime>
             </ion-item>

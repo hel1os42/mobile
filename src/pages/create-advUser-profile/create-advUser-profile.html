@@ -1,6 +1,7 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</ion-title>
+        <ion-title *ngIf="!company.id">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</ion-title>
+        <ion-title *ngIf="company.id">Edit account </ion-title>
     </ion-navbar>
     <ion-list class="margin-0">
         <div *ngIf="!cover_url || cover_url == 'O'" class="cover">
@@ -89,7 +90,8 @@
     </div>
 
     <p margin>
-        <button (click)="createAccount()" [disabled]="!formData.valid || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
+        <button *ngIf="!company.id" (click)="createAccount()" [disabled]="!formData.valid || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
+        <button *ngIf="company.id" (click)="createAccount()" [disabled]="!formData.valid || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">Edit account</button>
     </p>
 
 </ion-content>

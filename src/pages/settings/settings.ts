@@ -66,7 +66,7 @@ export class SettingsPage {
                 this.message = error.message;
             });
 
-        this.place.get()
+        this.place.get(true)
             .subscribe(
                 resp => {
                     this.nextPage = AdvTabsPage;

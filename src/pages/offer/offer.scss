@@ -13,7 +13,6 @@ page-offer{
   }
 
   .content-ios{
-    background-image: url(../assets/img/user_offers/img_bg.png);
     background-color: #484848;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -180,6 +179,19 @@ page-offer{
         height: auto;
         overflow: hidden;
         display: block;
+    }
+
+    .background_effect{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        filter: blur(5px) brightness(0.5);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
     }
 }
 

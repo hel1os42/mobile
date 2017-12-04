@@ -1,13 +1,14 @@
-import { AppModeService } from '../../providers/appMode.service';
-import { Subscription } from 'rxjs/Rx';
 import { Component, ViewChild } from '@angular/core';
 import { Content, NavController, NavParams } from 'ionic-angular';
+import { Subscription } from 'rxjs/Rx';
 import { Company } from '../../models/company';
 import { User } from '../../models/user';
+import { AppModeService } from '../../providers/appMode.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { StorageService } from '../../providers/storage.service';
 import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
+import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 import { CreateOfferPage } from '../create-offer/create-offer';
 import { SettingsPage } from '../settings/settings';
 import { StatisticPage } from '../statistic/statistic';
@@ -99,11 +100,15 @@ export class AdvUserProfilePage {
     }
 
     openUserOffers() {
-        this.nav.push(AdvUserOffersPage);
+        this.nav.push(AdvUserOffersPage, { balance: this.balance });
     }
 
     openStatistic() {
         this.nav.push(StatisticPage);
+    }
+
+    editProfile() {
+        this.nav.push(CreateAdvUserProfilePage, { company: this.company });
     }
 
     ionViewWillUnload() {

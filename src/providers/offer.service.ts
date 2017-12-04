@@ -39,13 +39,16 @@ export class OfferService {
             str += `${'category_ids[]'}=${id}&`;
         };
         
-        return this.api.get(`places?${str}`, page == 1, {
-            latitude: lat,
-            longitude: lng,
-            radius: radius,
-            with: 'categories',
-            search: search,
-            page: page
+        return this.api.get(`places?${str}`, {
+            showLoading: page == 1,
+            params: {
+                latitude: lat,
+                longitude: lng,
+                radius: radius,
+                with: 'categories',
+                search: search,
+                page: page
+            }
         });
     }
 
@@ -78,6 +81,6 @@ export class OfferService {
     }
 
     getRedemtionStatus(code: string) {
-        return this.api.get(`activation_codes/${code}`, false);
+        return this.api.get(`activation_codes/${code}`, { showLoading: false });
     }
 }
