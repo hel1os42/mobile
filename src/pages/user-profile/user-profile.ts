@@ -1,3 +1,4 @@
+import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { Subscription } from 'rxjs/Rx';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
@@ -56,15 +57,19 @@ export class UserProfilePage {
     }
 
     openUserOffers() {
-        this.nav.push(UserOffersPage)
+        this.nav.push(UserOffersPage);
     }
 
     openUserNau() {
-        this.nav.push(UserNauPage, { balance: this.balance, NAU_Id: this.NAU_Id })
+        this.nav.push(UserNauPage, { balance: this.balance, NAU_Id: this.NAU_Id });
     }
 
     openUserUsers() {
-        this.nav.push(UserUsersPage)
+        this.nav.push(UserUsersPage);
+    }
+
+    openCreateUserProfilePage() {
+        this.nav.push(CreateUserProfilePage, { user: this.user });
     }
 
     logout() {

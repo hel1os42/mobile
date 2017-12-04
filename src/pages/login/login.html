@@ -15,7 +15,16 @@
     <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover">
       <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
     </ion-select>
-    <ion-input (ionChange)="limitStr(authData.phone, 12)" (keyup)="updateList($event)" [(ngModel)]="authData.phone" required ngControl="phone" name="phone" [minlength]="7" class="tel" type="number" placeholder="1234567"></ion-input>
+    <ion-input (ionChange)="limitStr(authData.phone, 12)" 
+               (keyup)="updateList($event)" 
+               [(ngModel)]="authData.phone" 
+               required 
+               ngControl="phone" 
+               name="phone" 
+               [minlength]="7" 
+               class="tel" 
+               type="number" 
+               placeholder="1234567 {{ 'UNIT.MIN_SYMBOLS' | translate }} "></ion-input>
   </ion-item>
   </div>
 

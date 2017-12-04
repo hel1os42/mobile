@@ -50,10 +50,8 @@ export class AdvUserOffersPage {
                             this.balance = resp.accounts.NAU.balance;
                         })
                 }
-
             }
             this.processOffers(this.place.getOffers(this.page));
-
             this.segment = 'all';
         }
 
@@ -103,9 +101,8 @@ export class AdvUserOffersPage {
             }
 
     enableActivation(offer) {
-        if (offer.status = 'deactive' && offer.reserved > this.balance) {
-            let popover = this.popoverCtrl.create(CreateOfferInformationPopover, { balance: this.balance, reserved: offer.reserved });
-            popover.present();
+        if (offer.status == 'deactive' && offer.reserved > this.balance) {
+           this.modalInfromation(offer);
             return false;
         }
         else {
@@ -118,7 +115,6 @@ export class AdvUserOffersPage {
          popover.present();
      }
 
-
     editStatus(offer) {
         if (this.enableActivation(offer)) {
                 let statusInfo = {
@@ -126,9 +122,11 @@ export class AdvUserOffersPage {
                         ? 'deactive'
                         : 'active'
                 };
-                console.log(offer.status);
                 this.place.changeOfferStatus(statusInfo, offer.id)
                     .subscribe(resp => {
+                        offer.status = statusInfo.status;
+                        this.profile.refreshAccounts();
+                        // this.getStatus(offer);
                         // if(this.isFilterByDate) {
                         //     this.filterOffersByDate();
                         // }

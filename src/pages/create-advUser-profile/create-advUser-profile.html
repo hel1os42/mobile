@@ -33,11 +33,11 @@
     <div class="block-lines">
         <form [formGroup]="formData" (ngSubmit)="createAccount()">
             <ion-item no-lines>
-                <ion-input formControlName="companyName" maxlength="30" class="bg-gray" type="text" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }}"></ion-input>
+                <ion-input formControlName="companyName" maxlength="30" class="bg-gray" type="text" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"></ion-input>
             </ion-item>
 
             <ion-item no-lines margin-top>
-                <ion-textarea formControlName="companyDescription" maxlength="250" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }}"></ion-textarea>
+                <ion-textarea formControlName="companyDescription" maxlength="250" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"></ion-textarea>
             </ion-item>
         </form>
     </div>
