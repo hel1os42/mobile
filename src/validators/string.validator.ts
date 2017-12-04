@@ -25,14 +25,15 @@ export class StringValidator {
     }
 
     static validPhoneChange(ev) {
-        ev.target.value = (ev.target.value.replace(/\D+/g,""));
-        if (ev.target.value.substring(0,1) != "+"){
-            ev.target.value = "+" + ev.target.value;
+        ev = (ev.replace(/\D+/g,""));
+        if (ev.substring(0,1) != "+"){
+            ev = "+" + ev;
         }
 
-        if (ev.target.value.length > 12) {
+        if (ev.length > 15) {
             //alert(ev.target.value.length);
-            ev.target.value = ev.target.value.slice(0, ev.target.value.length - 1);
+            ev = ev.slice(0, ev.length - 1);
         }
+        return ev;
     }
 }

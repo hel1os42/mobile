@@ -22,10 +22,11 @@ export class SettingsChangePhonePage {
         private profile: ProfileService) {
 
         this.user = this.navParams.get('user');
+        // this.phone = this.user.phone;
     }
 
     validPhoneChange(ev) {
-        StringValidator.validPhoneChange(ev);
+        this.phone = StringValidator.validPhoneChange(ev);
     }
 
     toggleChangePhone() {

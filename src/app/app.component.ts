@@ -47,7 +47,7 @@ export class MyApp {
             else {
                 this.profile.get(true)
                     .subscribe(resp => {
-                        this.rootPage = (resp.name == '' && !resp.email)
+                        this.rootPage = (!resp.name && !resp.email)
                             ? CreateUserProfilePage
                             : TabsPage;
                         //this.rootPage = AdvTabsPage;
