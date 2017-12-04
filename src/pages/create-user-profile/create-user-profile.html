@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</ion-title>
+    <ion-title>{{ isEdit ? 'Edit Account' :  'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</ion-title>
   </ion-navbar>
   <div class="header-shadow"></div>
 </ion-header>
@@ -143,9 +143,14 @@
       </ion-item>
     </div>
     <p margin text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}</p>
-    <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
+    <div 
+    *ngIf="!coords.lat" 
+    padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
-      <agm-map [zoom]="15" [latitude]="coords.lat" [longitude]="coords.lng" (centerChange)="onMapCenterChange($event)">
+      <agm-map [zoom]="15" 
+               [latitude]="coords.lat" 
+               [longitude]="coords.lng" 
+               (centerChange)="onMapCenterChange($event)">
       </agm-map>
       <div id="marker"></div>
     </div>
@@ -156,6 +161,9 @@
         </ion-card>-->
   </div>
   <p margin>
-    <button color="primary" (click)="createAccount()" [disabled]="!user.name || !user.email" ion-button block>{{ 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
+    <button color="primary" 
+            (click)="createAccount()" 
+            [disabled]="!user.name || !user.email" 
+            ion-button block>{{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
   </p>
 </ion-content>

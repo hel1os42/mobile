@@ -12,6 +12,7 @@ import { LocationService } from '../../providers/location.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { TabsPage } from '../tabs/tabs';
+import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -33,6 +34,8 @@ export class CreateUserProfilePage {
     age: number;
     income;
     picture_url: string;
+    isEdit = false;
+    changedPicture = false;
 
     constructor(private nav: NavController,
         private location: LocationService,
@@ -40,30 +43,40 @@ export class CreateUserProfilePage {
         private profile: ProfileService,
         private toast: ToastService,
         private imagePicker: ImagePicker,
-        private api: ApiService) {
+        private api: ApiService,
+        private navParams: NavParams) {
 
-        this.profile.get(true)
-            .subscribe(resp => this.user = resp);
 
-        this.location.getByIp()
-            .subscribe(resp => {
-                this.coords = {
-                    lat: resp.latitude,
-                    lng: resp.longitude
-                };
-            })
+        if (this.navParams.get('user')) {
+            this.isEdit = true;
+            this.user = this.navParams.get('user');
+            this.coords.lat = this.user.latitude;
+            this.coords.lng = this.user.longitude;
+        }
+        else {
+            this.profile.get(true)
+                .subscribe(resp => this.user = resp);
 
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-            })
-            .catch((error) => {
-                this.message = error.message;
-                console.log(this.message);
-            });
+            this.location.getByIp()
+                .subscribe(resp => {
+                    this.coords = {
+                        lat: resp.latitude,
+                        lng: resp.longitude
+                    };
+                })
+
+            this.location.get()
+                .then((resp) => {
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                })
+                .catch((error) => {
+                    this.message = error.message;
+                    console.log(this.message);
+                });
+        }
     }
 
     onMapCenterChange(center: LatLngLiteral) {
@@ -107,7 +120,7 @@ export class CreateUserProfilePage {
         this.imagePicker.getPictures(options)
             .then(results => {
                 this.picture_url = results[0];
-                console.log(results[0]);
+                this.changedPicture = true;
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
@@ -116,19 +129,19 @@ export class CreateUserProfilePage {
 
     createAccount() {
         if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {
-        this.user.latitude = this.coords.lat;
-        this.user.longitude = this.coords.lng;
-        //this.account.points = this.point(); to do
-        this.profile.put(this.user)
-            .subscribe(resp => {
-                if (this.picture_url) {
-                    this.api.uploadImage(this.picture_url, 'profile/picture', true)
-                        .then(() => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
-                }
-                else {
-                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-                }
-            });
+            this.user.latitude = this.coords.lat;
+            this.user.longitude = this.coords.lng;
+            //this.account.points = this.point(); to do
+            this.profile.put(this.user)
+                .subscribe(user => {
+                    if (this.picture_url && this.changedPicture) {
+                        this.api.uploadImage(this.picture_url, 'profile/picture', true)
+                            .then(() => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
+                    }
+                    else {
+                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                    }
+                });
         }
     }
 
