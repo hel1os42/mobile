@@ -26,7 +26,7 @@ export class SettingsChangePhonePage {
     }
 
     validPhoneChange(ev) {
-        this.phone = StringValidator.validPhoneChange(ev);
+        ev.value = StringValidator.validPhoneChange(ev.value)
     }
 
     toggleChangePhone() {
