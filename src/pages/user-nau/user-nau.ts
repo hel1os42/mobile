@@ -49,9 +49,7 @@ export class UserNauPage {
             setTimeout(() => {
                 this.profile.getTransactions(this.page)
                     .subscribe(resp => {
-                        for (let i = 0; i < resp.data.length; i++) {
-                            this.transactions.push(resp.data[i]);
-                        }
+                        this.transactions = [...this.transactions, ...resp.data];
                         infiniteScroll.complete();
                     });
             });
