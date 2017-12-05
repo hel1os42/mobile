@@ -101,6 +101,7 @@
 
     "PAGE_CREATE-ADVUSER-PROFILE" : {
         "CREATE_ACCOUNT" : "Create account",
+        "EDIT_ACCOUNT" : "Edit account",
         "ADD" : "Add",
         "LOGO" : "logo",
         "SET_IMAGE" : "Set image",
@@ -169,6 +170,7 @@
 
     "PAGE_CREATE-USER-PROFILE" : {
         "CREATE_ACCOUNT" : "Create account",
+        "EDIT_ACCOUNT" : "Edit account",
         "NAME_EMAIL" : "Name & email",
         "YOU_HAVE" : "You have",
         "POINTS" : "points",
