@@ -1,3 +1,4 @@
+import { ProfileService } from '../../providers/profile.service';
 import { LatLngLiteral } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -52,7 +53,8 @@ export class CreateAdvUserProfilePage {
         private imagePicker: ImagePicker,
         private api: ApiService,
         private navParams: NavParams,
-        private builder: FormBuilder) {
+        private builder: FormBuilder,
+        private profile: ProfileService) {
 
         // this.company = this.navParams.get('company');
         this.coords.lat = this.navParams.get('latitude') ? this.navParams.get('latitude') : this.company.latitude;
@@ -252,7 +254,7 @@ export class CreateAdvUserProfilePage {
         this.imagePicker.getPictures(options)
             .then(results => {
                 this.cover_url = results[0];
-                this.changedCover;
+                this.changedCover = true;
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
@@ -299,7 +301,11 @@ export class CreateAdvUserProfilePage {
                                 ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
                                 : Promise.resolve();
 
-                            coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
+                            coverUpload.then(() => { 
+                                this.profile.refreshAccounts();
+                                this.placeService.refreshPlace();
+                                this.nav.pop()
+                            });
                         });
                     })
             }

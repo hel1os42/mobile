@@ -136,10 +136,24 @@ export class CreateUserProfilePage {
                 .subscribe(user => {
                     if (this.picture_url && this.changedPicture) {
                         this.api.uploadImage(this.picture_url, 'profile/picture', true)
-                            .then(() => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
+                            .then(() => {
+                                if (this.isEdit) {
+                                    this.profile.refreshAccounts();
+                                    this.nav.pop();
+                                }
+                                else {
+                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                }
+                            });
                     }
                     else {
-                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                        if (this.isEdit) {
+                            this.profile.refreshAccounts();
+                            this.nav.pop();
+                        }
+                        else {
+                            this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                        }
                     }
                 });
         }
