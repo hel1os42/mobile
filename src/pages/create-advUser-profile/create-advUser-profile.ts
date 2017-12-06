@@ -241,8 +241,10 @@ export class CreateAdvUserProfilePage {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
+                if (results[0] != 'O') {
                 this.picture_url = results[0];
                 this.changedLogo = true;
+                }
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
@@ -253,8 +255,11 @@ export class CreateAdvUserProfilePage {
         let options = { maximumImagesCount: 1, width: 2560, height: 1440, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                this.cover_url = results[0];
-                this.changedCover = true;
+                if (results[0] != 'O') {
+                    this.cover_url = results[0];
+                    this.changedCover = true;
+                }
+
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
@@ -287,7 +292,7 @@ export class CreateAdvUserProfilePage {
         }
         else {
             if (this.company.id) {
-                if(!this.company.about) {
+                if (!this.company.about) {
                     this.company.about = undefined;
                 }
                 this.placeService.putPlace(this.company)
@@ -301,7 +306,7 @@ export class CreateAdvUserProfilePage {
                                 ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
                                 : Promise.resolve();
 
-                            coverUpload.then(() => { 
+                            coverUpload.then(() => {
                                 this.profile.refreshAccounts();
                                 this.placeService.refreshPlace();
                                 this.nav.pop()
