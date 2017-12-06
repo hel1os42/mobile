@@ -34,6 +34,7 @@ export class UserProfilePage {
                 this.user = resp;
                 this.balance = resp.accounts.NAU.balance;
                 this.NAU_Id = resp.accounts.NAU.id;
+                document.getElementById('picture').style.backgroundImage = this.user.picture_url;
             })
 
         this.profile.getWithAccounts()

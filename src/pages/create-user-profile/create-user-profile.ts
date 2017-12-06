@@ -50,12 +50,16 @@ export class CreateUserProfilePage {
         if (this.navParams.get('user')) {
             this.isEdit = true;
             this.user = this.navParams.get('user');
+            this.picture_url = this.user.picture_url;
             this.coords.lat = this.user.latitude;
             this.coords.lng = this.user.longitude;
         }
         else {
             this.profile.get(true)
-                .subscribe(resp => this.user = resp);
+                .subscribe(resp => {
+                    this.user = resp;
+                    this.picture_url = this.user.picture_url;
+                });
 
             this.location.getByIp()
                 .subscribe(resp => {
@@ -140,8 +144,8 @@ export class CreateUserProfilePage {
                         this.api.uploadImage(this.picture_url, 'profile/picture', true)
                             .then(() => {
                                 if (this.isEdit) {
-                                    this.profile.refreshAccounts();
-                                    this.nav.pop();
+                                        this.profile.refreshAccounts();
+                                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
                                 }
                                 else {
                                     this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
@@ -150,8 +154,8 @@ export class CreateUserProfilePage {
                     }
                     else {
                         if (this.isEdit) {
-                            this.profile.refreshAccounts();
-                            this.nav.pop();
+                                this.profile.refreshAccounts();
+                                this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
                         }
                         else {
                             this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
