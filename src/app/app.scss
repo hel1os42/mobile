@@ -73,7 +73,6 @@
 button[ion-button] {
     border-radius: 25px;
     text-transform: uppercase;
-    font-weight: bold;
 }
 
 .popover-ios button[ion-button]{
@@ -1786,4 +1785,6 @@ a:active, a:hover, input:active, input.text-input.text-input-ios {
     outline: none;
 }
 
-
+body {
+    text-rendering: auto !important;
+}
