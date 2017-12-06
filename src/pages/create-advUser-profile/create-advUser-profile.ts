@@ -39,8 +39,8 @@ export class CreateAdvUserProfilePage {
     cover_url: string;
     noChild: boolean;//temporary
     formData: FormGroup;
-    changedLogo = false;
-    changedCover = false;
+    isChangedLogo = false;
+    isChangedCover = false;
 
     constructor(
         private location: LocationService,
@@ -241,9 +241,10 @@ export class CreateAdvUserProfilePage {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                if (results[0] != 'O') {
+                console.log(results.json())
+                if (results[0]) {
                 this.picture_url = results[0];
-                this.changedLogo = true;
+                this.isChangedLogo = true;
                 }
             })
             .catch(err => {
@@ -255,9 +256,10 @@ export class CreateAdvUserProfilePage {
         let options = { maximumImagesCount: 1, width: 2560, height: 1440, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                if (results[0] != 'O') {
+                console.log(results.json())
+                if (results[0]) {
                     this.cover_url = results[0];
-                    this.changedCover = true;
+                    this.isChangedCover = true;
                 }
 
             })
@@ -297,12 +299,12 @@ export class CreateAdvUserProfilePage {
                 }
                 this.placeService.putPlace(this.company)
                     .subscribe((company) => {
-                        let pictureUpload = (this.picture_url && this.changedLogo)
+                        let pictureUpload = (this.picture_url && this.isChangedLogo)
                             ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
                             : Promise.resolve();
 
                         pictureUpload.then(() => {
-                            let coverUpload = (this.cover_url && this.changedCover)
+                            let coverUpload = (this.cover_url && this.isChangedCover)
                                 ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
                                 : Promise.resolve();
 

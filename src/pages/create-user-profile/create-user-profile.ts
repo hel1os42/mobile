@@ -119,7 +119,7 @@ export class CreateUserProfilePage {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                if (results[0] != 'O') {
+                if (results[0]) {
                 this.picture_url = results[0];
                 this.changedPicture = true;
                 }
