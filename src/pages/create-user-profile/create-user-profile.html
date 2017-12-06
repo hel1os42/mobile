@@ -22,8 +22,7 @@
     <ion-item no-lines class="block-people">
       <div item-start>
         <a (click)="addLogo()">
-          <div *ngIf="picture_url && picture_url != 'O'" class="people" [style.background-image]="'url(' + picture_url + ')'"></div>
-          <div *ngIf="!picture_url || picture_url == 'O'" class="people"></div>
+          <div class="people" [ngStyle]="{'background-image': 'url(' + user.picture_url + '), url(assets/img/create_user_profile/people.svg)'}"></div>
         </a>
       </div>
       <div item-end class="item-content">
