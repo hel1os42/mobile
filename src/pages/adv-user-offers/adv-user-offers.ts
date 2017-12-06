@@ -28,6 +28,7 @@ export class AdvUserOffersPage {
     dates;
     balance: number;
     onRefreshBalance: Subscription;
+    time = new Date().valueOf();
 
     constructor(private nav: NavController,
         private place: PlaceService,

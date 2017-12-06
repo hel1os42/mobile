@@ -3,7 +3,7 @@ import { LatLngLiteral } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, App } from 'ionic-angular';
 import * as _ from 'lodash';
 import { ChildCategory } from '../../models/childCategory';
 import { Company } from '../../models/company';
@@ -54,6 +54,7 @@ export class CreateAdvUserProfilePage {
         private api: ApiService,
         private navParams: NavParams,
         private builder: FormBuilder,
+        private app: App,
         private profile: ProfileService) {
 
         // this.company = this.navParams.get('company');
@@ -241,10 +242,9 @@ export class CreateAdvUserProfilePage {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                console.log(results.json())
                 if (results[0]) {
-                this.picture_url = results[0];
-                this.isChangedLogo = true;
+                    this.picture_url = results[0];
+                    this.isChangedLogo = true;
                 }
             })
             .catch(err => {
@@ -256,12 +256,10 @@ export class CreateAdvUserProfilePage {
         let options = { maximumImagesCount: 1, width: 2560, height: 1440, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                console.log(results.json())
                 if (results[0]) {
                     this.cover_url = results[0];
                     this.isChangedCover = true;
                 }
-
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));

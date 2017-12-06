@@ -21,6 +21,7 @@ export class UserProfilePage {
     balance: number;
     NAU_Id: string;
     onRefreshAccounts: Subscription;
+    time = new Date().valueOf();
 
     @ViewChild(Slides) slides: Slides;
 
@@ -34,7 +35,6 @@ export class UserProfilePage {
                 this.user = resp;
                 this.balance = resp.accounts.NAU.balance;
                 this.NAU_Id = resp.accounts.NAU.id;
-                document.getElementById('picture').style.backgroundImage = this.user.picture_url;
             })
 
         this.profile.getWithAccounts()

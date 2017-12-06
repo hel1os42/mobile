@@ -23,6 +23,7 @@ export class LoginPage {
     numCodes = ['+7', '+49', '+63', '+57', '+380'];
     numCode: string = '+380';
     page;
+    clickMode = 0;
 
     constructor(
         private nav: NavController,
@@ -67,7 +68,13 @@ export class LoginPage {
     limitStr(str: string, length: number) {
         if (length == 12) this.authData.phone = StringValidator.stringLimitMax(str, length);
         else this.authData.code = StringValidator.stringLimitMax(str, length);
-        }
+    }
 
+    testingMode(){
+        this.clickMode = this.clickMode + 1;
+        if (this.clickMode == 5){
+            alert('Testing mode');
+        }
+    }
 
 }

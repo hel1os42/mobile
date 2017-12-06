@@ -34,6 +34,7 @@ export class SettingsPage {
     showEmail: boolean = false;
     nextPage: any;
     advPicture_url: string;
+    time = new Date().valueOf();
 
     constructor(
         private nav: NavController,
@@ -54,7 +55,7 @@ export class SettingsPage {
             this.profile.get(true)
                 .subscribe(user => this.user = user);
         }
-        
+
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -118,7 +119,7 @@ export class SettingsPage {
                     if (this.isAdvMode && !this.nextPage) {
                         this.app.getRootNav().setRoot(OnBoardingPage, {isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true, latitude: this.coords.lat, longitude: this.coords.lng});
                     }
-                    else 
+                    else
                     if (this.isAdvMode) {
                         if  (!isShownOnboard) {
                             this.app.getRootNav().setRoot(OnBoardingPage, {isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true});
@@ -130,7 +131,7 @@ export class SettingsPage {
                     else {
                         this.app.getRootNav().setRoot(TabsPage);
                     }
-                    
+
                 }
             // });
     }
