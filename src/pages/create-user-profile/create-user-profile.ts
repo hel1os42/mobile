@@ -131,7 +131,7 @@ export class CreateUserProfilePage {
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
             });
-    }
+    };
 
     createAccount() {
         if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {

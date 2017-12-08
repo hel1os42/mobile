@@ -264,7 +264,7 @@ export class CreateAdvUserProfilePage {
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
             });
-    }
+    };
 
     createAccount() {
         this.company.name = this.formData.value.companyName;

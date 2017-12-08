@@ -51,7 +51,7 @@ export class CreateOfferPage {
                 Validators.required
             ])),
         });
-    }
+    };
 
     openCreateOffer1Page() {
         this.offer.label = this.formData.value.offerLabel;
