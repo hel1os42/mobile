@@ -1,66 +1,56 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{( offer.id ? 'PAGE_CREATE-OFFER.EDIT_OFFER' : 'PAGE_CREATE-OFFER.CREATE_OFFER' ) | translate }}</ion-title>
-      <ion-buttons end class="padding-right-3vw">
-      <button (click)="openCreateOffer4Page()" ion-button icon-only color="dark" class="btn_search">
-        <span class="font-12 text-333333 no-bold">{{ 'PAGE_CREATE-OFFER.NEXT' | translate }}</span>
-        <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-  <ion-list no-lines>
-  <p margin>
-           <span class="progress-block">
-               <span class="progress-line"></span>
-               <span class="progress-line-fill"></span>
-               <span class="circle fill-first"></span>
-               <span class="circle fill-last"></span>
-               <span class="circle fill-last"></span>
-               <span class="circle fill-last"></span>
-               <span class="circle no-fill"></span>
-               <span class="circle no-fill"></span>
+    <ion-navbar>
+        <ion-title>{{( offer.id ? 'PAGE_CREATE-OFFER.EDIT_OFFER' : 'PAGE_CREATE-OFFER.CREATE_OFFER' ) | translate }}</ion-title>
+        <ion-buttons end class="padding-right-3vw">
+            <button (click)="openCreateOffer4Page()" ion-button icon-only color="dark" class="btn_search">
+                <span class="font-12 text-333333 no-bold">{{ 'PAGE_CREATE-OFFER.NEXT' | translate }}</span>
+                <ion-icon class="text-828282" name="arrow-forward"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-list no-lines>
+        <p margin>
+            <span class="progress-block">
+                <span class="progress-line"></span>
+                <span class="progress-line-fill"></span>
+                <span class="circle fill-first"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle fill-last"></span>
+                <span class="circle no-fill"></span>
+                <span class="circle no-fill"></span>
             </span>
-  </p>
-  </ion-list>
-<div class="header-shadow"></div>
+        </p>
+    </ion-list>
+    <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content>
 
-      <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-OFFER.WORKING_AREA' | translate }}</div>
-      <div class="block-lines">
-          <ion-item padding-left class="bg-gray" detail-push>
-              <ion-label class="text-3E4B5D font-16 bold">{{ city }}</ion-label>
-              <!-- <ion-select [(ngModel)]="city" (ngModelChange)="toCity($event)" interface="popover" class="text-3E4B5D font-16 bold">
-                  <ion-option (ionSelect)="toCity($event)" *ngFor=" let city of cities " [value]="city">{{ city }}</ion-option>
-              </ion-select> -->
-          </ion-item>
-      </div>
+    <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-OFFER.WORKING_AREA' | translate }}</div>
+    <div class="block-lines">
+        <ion-item padding-left class="bg-gray" detail-push>
+            <ion-label class="text-3E4B5D font-16 bold">{{ city }}</ion-label>
+        </ion-item>
+    </div>
 
-      <div class="block-lines">
-          <div class="text-4F4F4F font-14" text-uppercase>{{ 'UNIT.SETTING_MAP_RADIUS' | translate }}</div>
-      </div>
-        <!-- <ion-item>
-            <ion-range [(ngModel)]="radius" debounce="1500" min="1" max="50" pin="true"  color="secondary">
-                <ion-label range-left>1</ion-label>
-                <ion-label range-right>100</ion-label>
-            </ion-range>
-        </ion-item> -->
-      <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
-      <div *ngIf="coords.lat" class="block-map">
-            <agm-map  [zoom]="14" [latitude]="coords.lat" [longitude]="coords.lng" [fitBounds]="bounds">
-                <agm-circle [latitude]="coords.lat" [longitude]="coords.lng" [radius]="500" [fillColor]="'#ff8b10'" [fillOpacity]="0.2"></agm-circle>
-                <agm-marker [latitude]="coords.lat" [longitude]="coords.lng" [iconUrl]="'assets/img/create_user_profile/pin.svg'">
-                    <agm-info-window [disableAutoPan]="true">
-                        <div>title</div>
-                    </agm-info-window>
-                </agm-marker>
-            </agm-map>
-            <!-- <div id="marker"></div> -->
+    <div class="block-lines">
+        <div class="text-4F4F4F font-14" text-uppercase>{{ 'UNIT.SETTING_MAP_RADIUS' | translate }}</div>
+    </div>
+    <ion-item>
+        <ion-range (ionChange)="addMap()" [(ngModel)]="radius" debounce="200" min="5" max="100" pin="true" step="5" color="secondary">
+            <ion-label range-left>5</ion-label>
+            <ion-label range-right>100</ion-label>
+        </ion-range>
+    </ion-item>
+    <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
+    <div *ngIf="coords.lat" class="block-map">
+        <div class="leaflet-map" leaflet [leafletOptions]="options" [leafletZoom]="getZoom()" [leafletLayers]="layers">
         </div>
+    </div>
 
     <p margin>
-      <button (click)="openCreateOffer4Page()" ion-button block text-uppercase color="primary">{{ 'PAGE_CREATE-OFFER.NEXT' | translate }}</button>
+        <button (click)="openCreateOffer4Page()" ion-button block text-uppercase color="primary">{{ 'PAGE_CREATE-OFFER.NEXT' | translate }}</button>
     </p>
 
 </ion-content>

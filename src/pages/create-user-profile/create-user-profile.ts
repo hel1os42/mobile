@@ -1,9 +1,9 @@
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { LatLngLiteral } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController } from 'ionic-angular';
-import * as _ from 'lodash';
+import { NavParams } from 'ionic-angular/navigation/nav-params';
+import leaflet, { tileLayer, latLng, LeafletEvent } from 'leaflet';
+import { Map } from 'leaflet';
 import { Coords } from '../../models/coords';
 import { Register } from '../../models/register';
 import { User } from '../../models/user';
@@ -12,7 +12,6 @@ import { LocationService } from '../../providers/location.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { TabsPage } from '../tabs/tabs';
-import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -26,7 +25,6 @@ export class CreateUserProfilePage {
     message: string;
     isSelectVisible: boolean = false;
     visibleInfo: boolean = false;
-    address: string;
     facebookName: string;
     twitterName: string;
     instagramName: string;
@@ -36,6 +34,9 @@ export class CreateUserProfilePage {
     picture_url: string;
     isEdit = false;
     changedPicture = false;
+    tileLayer;
+    _map: Map;
+    options;
 
     constructor(private nav: NavController,
         private location: LocationService,
@@ -53,6 +54,7 @@ export class CreateUserProfilePage {
             this.picture_url = this.user.picture_url;
             this.coords.lat = this.user.latitude;
             this.coords.lng = this.user.longitude;
+            this.addMap();
         }
         else {
             this.profile.get(true)
@@ -67,41 +69,48 @@ export class CreateUserProfilePage {
                         lat: resp.latitude,
                         lng: resp.longitude
                     };
-                })
 
-            this.location.get()
-                .then((resp) => {
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
+                    this.location.get()
+                        .then((resp) => {
+                            this.coords = {
+                                lat: resp.coords.latitude,
+                                lng: resp.coords.longitude
+                            };
+                            this.addMap();
+                        })
+                        .catch((error) => {
+                            this.message = error.message;
+                            console.log(this.message);
+                        });
                 })
-                .catch((error) => {
-                    this.message = error.message;
-                    console.log(this.message);
-                });
         }
     }
 
-    onMapCenterChange(center: LatLngLiteral) {
-        this.coords.lat = center.lat;
-        this.coords.lng = center.lng;
-        this.geocodeDebounced();
+    onMapReady(map: Map) {
+        this._map = map;
+        this._map.on({
+            moveend: (event: LeafletEvent) => {
+                this.coords = this._map.getCenter();
+            }
+        })
     }
 
-    geocodeDebounced = _.debounce(this.geocode, 1000);
-
-    geocode() {
-        let google = window['google'];
-        let geocoder = new google.maps.Geocoder();
-        let latlng = { lat: this.coords.lat, lng: this.coords.lng };
-        geocoder.geocode({ 'location': latlng }, (results, status) => {
-            if (status === 'OK') {
-                this.address = results[1].formatted_address;
-                this.changeDetectorRef.detectChanges();
-                console.log(results);
-            }
+    addMap() {
+        this.tileLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            maxNativeZoom: 18,
+            minZoom: 1,
+            attribution: '...',
+            tileSize: 512,
+            zoomOffset: -1,
+            detectRetina: true,
+            tap: true,
         });
+        this.options = {
+            layers: [this.tileLayer],
+            zoom: 16,
+            center: latLng(this.coords)
+        };
     }
 
     point() {
@@ -123,7 +132,7 @@ export class CreateUserProfilePage {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                if (results[0]) {
+                if (results[0] && results[0] != 'O') {
                 this.picture_url = results[0];
                 this.changedPicture = true;
                 }
@@ -131,7 +140,7 @@ export class CreateUserProfilePage {
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
             });
-    }
+    };
 
     createAccount() {
         if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {

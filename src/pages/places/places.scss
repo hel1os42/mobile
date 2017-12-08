@@ -27,6 +27,12 @@ page-places {
   }
 
   agm-map {
+    height: calc(100vh - 248px);
+    height: -webkit-calc(100vh - 248px);
+    height: -moz-calc(100vh - 248px);
+  }
+
+  .leaflet-map {
     height: calc(100vh - 247px);
     height: -webkit-calc(100vh - 247px);
     height: -moz-calc(100vh - 247px);
@@ -38,6 +44,7 @@ page-places {
     .gmnoprint a, .gmnoprint span, .gm-style-cc {
         display:none;
     }
+
     .gm-svpc {
         display: none;
     }

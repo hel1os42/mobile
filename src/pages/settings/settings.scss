@@ -27,6 +27,12 @@ page-settings{
     height: 250px;
     }
 
+    
+  .leaflet-map {
+    height: 250px;
+    z-index: 111;
+  }
+
   .modal_create img{
     width: 50%;
     margin: 0 auto;

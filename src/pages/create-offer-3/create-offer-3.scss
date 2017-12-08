@@ -32,6 +32,11 @@ page-create-offer-3 {
         height: 250px;
     }
 
+    .leaflet-map {
+        height: 250px;
+        z-index: 111;
+      }
+
     .block-map{
         position: relative;
       }
