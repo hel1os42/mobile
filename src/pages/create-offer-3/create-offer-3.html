@@ -45,7 +45,7 @@
     </ion-item>
     <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
-        <div class="leaflet-map" leaflet [leafletOptions]="options" [leafletZoom]="getZoom()" [leafletLayers]="getLayers()">
+        <div class="leaflet-map" leaflet [leafletOptions]="options" [leafletZoom]="getZoom()" [leafletLayers]="layers">
         </div>
     </div>
 

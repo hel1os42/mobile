@@ -27,8 +27,7 @@ export class CreateOffer3Page {
     options;
     zoom = 11;
     radius = 5;//km
-    marker: Marker[];
-    cirkle;
+    layers;
 
     constructor(
         private nav: NavController,
@@ -50,22 +49,6 @@ export class CreateOffer3Page {
                 this.city = address.city || address.town || address.county || address.state;
                 this.offer.country = address.country;
             })
-
-        this.marker = [marker([this.coords.lat, this.coords.lng], {
-            icon: icon({
-                iconSize: [25, 35],
-                iconAnchor: [13, 35],
-                iconUrl: 'assets/img/places_pin.png',
-                //shadowUrl: 
-            })
-        })
-    ];
-        this.cirkle =   circle([this.coords.lat, this.coords.lng], {
-            radius: this.radius * 1000,
-            color: '#ff8b10',
-            opacity: 0.2,
-            stroke: false
-        }); 
     }
 
     addMap() {
@@ -82,16 +65,23 @@ export class CreateOffer3Page {
             zoom: this.zoom,
             center: latLng(this.coords)
         };
-    }
-
-    getLayers() {
-        return [
-            this.tileLayer,
-            ...this.marker,
-            ...this.cirkle,
+        this.layers = [this.tileLayer,
+        marker([this.coords.lat, this.coords.lng], {
+            icon: icon({
+                iconSize: [25, 35],
+                iconAnchor: [13, 35],
+                iconUrl: 'assets/img/places_pin.png',
+                //shadowUrl: 
+            })
+        }),
+        circle([this.coords.lat, this.coords.lng], {
+            radius: this.radius * 1000,
+            color: '#ff8b10',
+            opacity: 0.2,
+            stroke: false
+        })
         ]
     }
-
     getRadius() {
         return this.radius * 1000;
     }
@@ -100,13 +90,6 @@ export class CreateOffer3Page {
         this.zoom = ZOOM[this.radius];
         return this.zoom;
     }
-
-    findResult(results, name) {
-        let result = _.find(results, function (obj: any) {
-            return obj.types[0] == name && obj.types[1] == "political";
-        });
-        return result ? result.long_name : null;
-    };
 
     openCreateOffer4Page() {
         this.offer.radius = this.radius * 1000;//todo
