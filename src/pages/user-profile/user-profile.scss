@@ -295,6 +295,21 @@ page-user-profile{
         background: #FFC08B; /* NO FILL */
     }
 
+    .user-level-3 .label-ios{
+        background: rgba(0,0,0,0.5);
+        color: white;
+        border-radius: 5vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        border: 1vw solid white;
+    }
+
+    .user-level-3 .lbl1, .user-level-3 .lbl2{
+        color: #fff;
+    }
+
     /* LEVEL 4 */
 
     .user-level-4 .user-ava-name {
@@ -316,6 +331,21 @@ page-user-profile{
 
     .user-level-4 .box4{
         background: linear-gradient(0deg, #FF5A00, #FFC08B);
+    }
+
+    .user-level-4 .label-ios{
+        background: rgba(0,0,0,0.5);
+        color: white;
+        border-radius: 5vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        border: 1vw solid white;
+    }
+
+    .user-level-4 .lbl1, .user-level-4 .lbl2{
+        color: #fff;
     }
 
     .user-ava-name .circle-ava{
