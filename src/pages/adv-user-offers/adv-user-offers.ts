@@ -28,6 +28,7 @@ export class AdvUserOffersPage {
     dates;
     balance: number;
     onRefreshBalance: Subscription;
+    time = new Date().valueOf();
 
     constructor(private nav: NavController,
         private place: PlaceService,
@@ -160,9 +161,7 @@ export class AdvUserOffersPage {
                             }
                         }
                         obs.subscribe(resp => {
-                            for (let i = 0; i < resp.data.length; i++) {
-                                this.offers.push(resp.data[i]);
-                            }
+                            this.offers = [...this.offers, ...resp.data];
                             infiniteScroll.complete();
                         });
                     });

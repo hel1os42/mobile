@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ isEdit ? 'Edit Account' :  'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</ion-title>
+    <ion-title>{{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate)  :  ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate) }}</ion-title>
   </ion-navbar>
   <div class="header-shadow"></div>
 </ion-header>
@@ -22,8 +22,7 @@
     <ion-item no-lines class="block-people">
       <div item-start>
         <a (click)="addLogo()">
-          <div *ngIf="picture_url && picture_url != 'O'" class="people" [style.background-image]="'url(' + picture_url + ')'"></div>
-          <div *ngIf="!picture_url || picture_url == 'O'" class="people"></div>
+          <div class="people" [ngStyle]="{'background-image': 'url(' + picture_url + '), url(assets/img/create_user_profile/people.svg)'}"></div>
         </a>
       </div>
       <div item-end class="item-content">

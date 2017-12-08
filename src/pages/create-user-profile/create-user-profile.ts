@@ -50,12 +50,16 @@ export class CreateUserProfilePage {
         if (this.navParams.get('user')) {
             this.isEdit = true;
             this.user = this.navParams.get('user');
+            this.picture_url = this.user.picture_url;
             this.coords.lat = this.user.latitude;
             this.coords.lng = this.user.longitude;
         }
         else {
             this.profile.get(true)
-                .subscribe(resp => this.user = resp);
+                .subscribe(resp => {
+                    this.user = resp;
+                    this.picture_url = this.user.picture_url;
+                });
 
             this.location.getByIp()
                 .subscribe(resp => {
@@ -119,8 +123,10 @@ export class CreateUserProfilePage {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
+                if (results[0]) {
                 this.picture_url = results[0];
                 this.changedPicture = true;
+                }
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
@@ -136,10 +142,24 @@ export class CreateUserProfilePage {
                 .subscribe(user => {
                     if (this.picture_url && this.changedPicture) {
                         this.api.uploadImage(this.picture_url, 'profile/picture', true)
-                            .then(() => this.nav.setRoot(TabsPage, { selectedTabIndex: 1 }));
+                            .then(() => {
+                                if (this.isEdit) {
+                                        this.profile.refreshAccounts();
+                                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                }
+                                else {
+                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                }
+                            });
                     }
                     else {
-                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                        if (this.isEdit) {
+                                this.profile.refreshAccounts();
+                                this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                        }
+                        else {
+                            this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                        }
                     }
                 });
         }

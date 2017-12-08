@@ -40,10 +40,10 @@ export class ProfileService {
 
     put(user: User) {
         let obs = this.api.put('profile', user);
-        obs.subscribe(user => this.user = user);
+        obs.subscribe(resp => this.user = resp);
         return obs;
     }
-
+    
     refreshAccounts() {
         this.getWithAccounts().subscribe(user => this.onRefreshAccounts.emit(user));
     }

@@ -1,20 +1,10 @@
 <ion-header>
     <ion-navbar>
         <ion-title *ngIf="!company.id">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</ion-title>
-        <ion-title *ngIf="company.id">Edit account </ion-title>
+        <ion-title *ngIf="company.id">{{ 'PAGE_CREATE-ADVUSER-PROFILE.EDIT_ACCOUNT' | translate }}</ion-title>
     </ion-navbar>
     <ion-list class="margin-0">
-        <div *ngIf="!cover_url || cover_url == 'O'" class="cover">
-            <div *ngIf="picture_url && picture_url != 'O'" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
-            <div *ngIf="!picture_url || picture_url == 'O'" (click)="addLogo()" class="cover_logo_adv">
-                <span text-uppercase class="font-12 semibold">
-                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD' | translate }}<br>
-                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.LOGO' | translate }}
-                </span>
-            </div>
-            <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>{{ 'PAGE_CREATE-ADVUSER-PROFILE.SET_IMAGE' | translate }}</button>
-        </div>
-        <div *ngIf="cover_url && cover_url != 'O'" class="cover" [style.background-image]="'url(' + cover_url + ')'">
+        <div class="cover" [ngStyle]="{'background-image': 'url(' + cover_url + '), linear-gradient(89.86deg, #FF5A00 0.03%, #FF8B10 99.98%)'}">
             <div *ngIf="picture_url && picture_url != 'O'" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
             <div *ngIf="!picture_url || picture_url == 'O'" (click)="addLogo()" class="cover_logo_adv">
                 <span text-uppercase class="font-12 semibold">

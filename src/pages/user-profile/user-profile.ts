@@ -21,6 +21,7 @@ export class UserProfilePage {
     balance: number;
     NAU_Id: string;
     onRefreshAccounts: Subscription;
+    time = new Date().valueOf();
 
     @ViewChild(Slides) slides: Slides;
 

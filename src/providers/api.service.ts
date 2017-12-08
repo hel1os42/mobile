@@ -81,14 +81,15 @@ export class ApiService {
             })
             .subscribe(
             resp => { },
-            errResp => {
+            errResp => {  
+                let messages = [];
                 if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
-                    this.token.remove();
+                    let err = errResp.json();
+                    messages.push(err.message);
+                    this.toast.show(messages.join('\n'));
+                    setTimeout(() => this.token.remove(), 3000);
                     return;
                 }
-
-                let messages = [];
-
                 if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
                     messages.push('Too Many Attempts.')
                 }

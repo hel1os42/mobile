@@ -1,4 +1,3 @@
-import { ProfileService } from '../../providers/profile.service';
 import { MapsAPILoader } from '@agm/core';
 import { google } from '@agm/core/services/google-maps-types';
 import { Component } from '@angular/core';
@@ -11,6 +10,7 @@ import { SelectedCategory } from '../../models/selectedCategory';
 import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
+import { ProfileService } from '../../providers/profile.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
@@ -126,13 +126,6 @@ export class PlacesPage {
             .subscribe(companies => {
                 // this.companies = companies.data.filter(p => p.active_offers_count > 0);//temporaty companies filter
                 this.companies = companies.data;
-
-                //temporary offers list filter
-                // let companiesList = companies.data.filter(p => p.offers_count > 0);
-                // let i = 0;
-                // this.companies = [];
-                // this.nextPlace(i, companiesList);
-                //
                 this.mapsAPILoader.load()
                     .then(() => {
                         if (this.companies.length == 0 && this.coords) {
@@ -219,10 +212,7 @@ export class PlacesPage {
             setTimeout(() => {
                 this.offers.getPlaces(this.categoryFilter, this.coords.lat, this.coords.lng, this.radius, this.search, this.page)
                     .subscribe(companies => {
-                        let companiesWithOffers = companies.data.filter(p => p.offers_count > 0);
-                        for (let i = 0; i < companiesWithOffers.length; i++) {
-                            this.companies.push(companiesWithOffers[i])
-                        }
+                        this.companies = [...this.companies, ...companies.data];
                         this.lastPage = companies.last_page;
                         this.mapsAPILoader.load()
                             .then(() => {
@@ -235,7 +225,7 @@ export class PlacesPage {
                                         lng: this.companies[0].longitude,
                                     };
                                 };
-                                this.mapBounds = this.generateBounds(this.companies);
+                                    this.mapBounds = this.generateBounds(this.companies);
                             })
                         infiniteScroll.complete();
                     });
@@ -245,26 +235,4 @@ export class PlacesPage {
             infiniteScroll.complete();
         }
     }
-
-    // countPlaceActiveOffers(offersList) {//temporary offers list filter
-    //     let activeOffersList = offersList.filter(p => p.status == 'active');
-    //     let activeOffersCount = activeOffersList.length;
-    //     return activeOffersCount;
-    // }
-
-    // nextPlace(i, companiesList) {//temporary offers list filter
-    //     if (i < companiesList.length) {
-    //         this.offers.getPlaceOffers(companiesList[i].id)
-    //             .subscribe(resp => {
-    //                 companiesList[i].offers_count = this.countPlaceActiveOffers(resp.data);
-    //                 if (companiesList[i].offers_count > 0) {
-    //                     this.companies.push(companiesList[i]);
-    //                 }
-    //                 i++;
-    //                 this.nextPlace(i, companiesList);
-    //             })
-    //     }
-    //     this.mapBounds = this.generateBounds(this.companies);//temporary
-    // }
-
 }

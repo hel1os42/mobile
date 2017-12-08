@@ -12,11 +12,11 @@
         </div>
         <div class="block-lines">
             <ion-item no-lines>
-                <ion-input (ionChange)="validPhoneChange(phone)" [(ngModel)]="phone" [value]="user.phone" class="bg-gray" type="tel" placeholder=""></ion-input>
+                <ion-input (ionChange)="validPhoneChange($event)" [(ngModel)]="phone" [value]="user.phone" class="bg-gray" type="tel" maxLength="14" placeholder=""></ion-input>
             </ion-item>
         </div>
         <p margin>
-            <button (click)="toggleChangePhone()" [disabled]="phone.length < 10" color="primary" ion-button block>{{ 'PAGE_SETTINGS-CHANGE-PHONE.GET_CONFIRM_CODE' | translate }}</button>
+            <button (click)="toggleChangePhone()" [disabled]="phone.length < 11" color="primary" ion-button block>{{ 'PAGE_SETTINGS-CHANGE-PHONE.GET_CONFIRM_CODE' | translate }}</button>
         </p>
     </div>
 

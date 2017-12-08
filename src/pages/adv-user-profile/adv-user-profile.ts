@@ -30,6 +30,7 @@ export class AdvUserProfilePage {
     user = new User;
     onRefreshPlace: Subscription;
     onRefreshAccounts: Subscription;
+    time = new Date().valueOf();
 
     constructor(private nav: NavController,
         private storage: StorageService,
@@ -39,7 +40,7 @@ export class AdvUserProfilePage {
         private appMode: AppModeService) {
 
         this.appMode.setOnboardingVisible()
-        
+
         this.company = this.navParams.get('company');
         if (!this.company) {
             this.company = this.place.company;
@@ -63,14 +64,16 @@ export class AdvUserProfilePage {
                 this.user = resp;
                 this.balance = resp.accounts.NAU.balance;
                 this.NAU_Id = resp.accounts.NAU.id;
+                this.time = new Date().valueOf();
             })
-        
+
             if (!this.balance) {
         this.profile.getWithAccounts()
             .subscribe(resp => {
                 this.user = resp;
                 this.balance = resp.accounts.NAU.balance;
                 this.NAU_Id = resp.accounts.NAU.id;
+                this.time = new Date().valueOf();
             })
     }
 }
