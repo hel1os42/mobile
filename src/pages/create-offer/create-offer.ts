@@ -63,7 +63,7 @@ export class CreateOfferPage {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                if (results[0]) {
+                if (results[0] && results[0] != 'O') {
                 this.picture_url = results[0];
                 }
             })
