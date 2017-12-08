@@ -1,5 +1,3 @@
-import { MapsAPILoader } from '@agm/core';
-import { google } from '@agm/core/services/google-maps-types';
 import { Component } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
 import { ChildCategory } from '../../models/childCategory';
@@ -14,6 +12,9 @@ import { ProfileService } from '../../providers/profile.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
+import leaflet, { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBounds, LatLng, DomUtil } from 'leaflet';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { Map } from 'leaflet'
 
 @Component({
     selector: 'page-places',
@@ -38,6 +39,11 @@ export class PlacesPage {
     categoryFilter: string[];
     page = 1;
     lastPage: number;
+    tileLayer;
+    options;
+    markers: Marker[];
+    userPin: Marker[];
+    fitBounds;
 
     constructor(
         private nav: NavController,
@@ -45,7 +51,6 @@ export class PlacesPage {
         private appMode: AppModeService,
         private offers: OfferService,
         private popoverCtrl: PopoverController,
-        private mapsAPILoader: MapsAPILoader,
         private profile: ProfileService) {
 
         this.selectedCategory = this.categories[0];
@@ -56,31 +61,97 @@ export class PlacesPage {
                 lat: user.latitude,
                 lng: user.longitude
             };
-             if (!this.mapCenter) {
-                        this.mapCenter = {
-                            lat: this.coords.lat,
-                            lng: this.coords.lng
-                        };
-                    }
+            this.addMap();
             this.location.get()
                 .then((resp) => {
                     this.coords = {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
-                        this.mapCenter = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        };
-                        this.loadCompanies([this.selectedCategory.id], this.search, this.page);
-                        this.categoryFilter = [this.selectedCategory.id];
+                    this.addMap();
+                    this.loadCompanies([this.selectedCategory.id], this.search, this.page);
+                    this.categoryFilter = [this.selectedCategory.id];
+                    this.userPin = [marker([this.coords.lat, this.coords.lng], {
+                        icon: icon({
+                            iconSize: [25, 35],
+                            iconAnchor: [13, 35],
+                            iconUrl: 'assets/img/icon_user_map.svg',
+                            //shadowUrl: 
+                        })
+                    })]
                 })
                 .catch((error) => {
                     this.message = error.message;
                 });
-
-
         })
+    }
+
+    addMap() {
+        this.tileLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            maxNativeZoom: 18,
+            minZoom: 1,
+            attribution: '© OpenStreetMap',
+            tileSize: 512,
+            zoomOffset: -1,
+            detectRetina: true
+        });
+        this.options = {
+            zoom: 16,
+            center: latLng(this.coords)
+        };
+    }
+
+    getLayers() {
+        return [
+            this.tileLayer,
+            ...this.markers,
+            ...this.userPin,
+        ]
+    }
+
+    createMarker(lat, lng, company: Company) {
+        let markerLayer = marker([lat, lng], {
+            icon: icon({
+                iconSize: [25, 35],
+                iconAnchor: [13, 35],
+                iconUrl: 'assets/img/places_pin.png',
+                //shadowUrl: 
+            })
+        });
+
+        let popupContent = DomUtil.create('div');
+        popupContent.innerText = company.name;
+        popupContent.addEventListener('click', (event) => {
+            this.openPlace(company);
+        });
+        let popupLayer = popup().setContent(popupContent);
+
+        markerLayer.bindPopup(popupLayer);
+
+        markerLayer.on('click', (event: LeafletEvent) => {
+            console.log(company);
+        });
+
+        return markerLayer;
+    }
+
+    generateBounds(markers: Marker[]): any {
+        if (markers && markers.length > 0) {
+            let latLngPairs = markers.map(p => p.getLatLng());
+            let bounds = new LatLngBounds(this.coords, this.coords);
+            latLngPairs.forEach((latLng: LatLng) => {
+                bounds.extend(latLng);
+            });
+            if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+                return bounds;
+            }
+            let northEast = bounds.getNorthEast();
+            northEast.lat = northEast.lat + 0.2;
+            bounds.extend(northEast);
+            return bounds;
+        }
+        return undefined
     }
 
     ionSelected() {
@@ -98,47 +169,15 @@ export class PlacesPage {
         this.categoryFilter = [this.selectedCategory.id];
     }
 
-    generateBounds(markers): any {
-        let marker = {
-            latitude: this.coords.lat,
-            longitude: this.coords.lng
-        };
-
-        if (markers && markers.length > 0) {
-            let google = window['google'];
-            let bounds = new google.maps.LatLngBounds();
-                markers.forEach((marker: any) => {
-                    bounds.extend(new google.maps.LatLng({ lat: marker.latitude, lng: marker.longitude }));
-                    bounds.extend(new google.maps.LatLng({ lat: this.coords.lat, lng: this.coords.lng }));
-                });
-                //check if there is only one marker
-                if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                    bounds.extend(new google.maps.LatLng({ lat: this.coords.lat, lng: this.coords.lng }));
-                    return bounds;
-                }
-                return bounds;
-        }
-        return undefined;
-    }
-
     loadCompanies(categoryId, search, page) {
         this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search, page)
             .subscribe(companies => {
-                // this.companies = companies.data.filter(p => p.active_offers_count > 0);//temporaty companies filter
                 this.companies = companies.data;
-                this.mapsAPILoader.load()
-                    .then(() => {
-                        if (this.companies.length == 0 && this.coords) {
-                            this.mapCenter = this.coords;
-                        }
-                        else if (this.companies.length == 1) {
-                            this.mapCenter = {
-                                lat: this.companies[0].latitude,
-                                lng: this.companies[0].longitude,
-                            };
-                        };
-                        this.mapBounds = this.generateBounds(this.companies);
-                    })
+                this.markers = [];
+                this.companies.forEach((company) => {
+                    this.markers.push(this.createMarker(company.latitude, company.longitude, company));
+                })
+                this.fitBounds = this.generateBounds(this.markers);
             });
     }
 
@@ -146,8 +185,11 @@ export class PlacesPage {
         this.isMapVisible = !this.isMapVisible;
     }
 
-    openPlace(company, distance) {
-        this.nav.push(PlacePage, { company: company, distance: this.getDistance(company.latitude, company.longitude) });
+    openPlace(company: Company) {
+        this.nav.push(PlacePage, {
+            company: company,
+            distance: this.getDistance(company.latitude, company.longitude)
+        });
     }
 
     getStars(star: number) {
@@ -186,7 +228,6 @@ export class PlacesPage {
                     if (!categories) {
                         return;
                     }
-
                     let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
                     if (selectedCategories.length > 0) {
                         this.selectedChildCategories = selectedCategories;
@@ -194,7 +235,6 @@ export class PlacesPage {
                     }
                     else {
                         this.selectedChildCategories = undefined;
-                        // this.categoryFilter = this.childCategories.map(p => p.id);to do
                         this.categoryFilter = [this.selectedCategory.id];
                     }
                     this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
@@ -214,19 +254,11 @@ export class PlacesPage {
                     .subscribe(companies => {
                         this.companies = [...this.companies, ...companies.data];
                         this.lastPage = companies.last_page;
-                        this.mapsAPILoader.load()
-                            .then(() => {
-                                if (this.companies.length == 0 && this.coords) {
-                                    this.mapCenter = this.coords;
-                                }
-                                else if (this.companies.length == 1) {
-                                    this.mapCenter = {
-                                        lat: this.companies[0].latitude,
-                                        lng: this.companies[0].longitude,
-                                    };
-                                };
-                                    this.mapBounds = this.generateBounds(this.companies);
-                            })
+                        this.markers = [];
+                        this.companies.forEach((company) => {
+                            this.markers.push(this.createMarker(company.latitude, company.longitude, company));
+                        })
+                        this.fitBounds = this.generateBounds(this.markers);
                         infiniteScroll.complete();
                     });
             });

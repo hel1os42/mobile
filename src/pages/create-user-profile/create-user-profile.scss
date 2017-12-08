@@ -17,6 +17,10 @@ page-create-user-profile{
     height: 250px;
   }
 
+  .leaflet-map {
+    height: 250px;
+    z-index: 111;
+  }
   .select-block-desc {
     margin-top: 7px;
     margin-bottom: 0;

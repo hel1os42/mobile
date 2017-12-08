@@ -1,5 +1,5 @@
+import { GeocodeService } from '../providers/geocode.service';
 import 'rxjs/add/operator/map';
-import { AgmCoreModule } from '@agm/core';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -78,6 +78,7 @@ import { ToastService } from '../providers/toast.service';
 import { TokenService } from '../providers/token.service';
 import { MyApp } from './app.component';
 import { CreateOfferInformationPopover } from '../pages/adv-user-offers/information.popover';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -154,9 +155,7 @@ export function createTranslateLoader(http: Http) {
         scrollAssist: true,
         autoFocusAssist: false
       }),
-      AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyBAgndAbV-v4aQWTAHrUljUfSCAthdK-RY'
-      }),
+      LeafletModule.forRoot(),
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
@@ -238,7 +237,8 @@ export function createTranslateLoader(http: Http) {
       Geolocation,
       LocationService,
       PlaceService,
-      TimezoneService
+      TimezoneService,
+      GeocodeService
   ]
 })
 export class AppModule { }

@@ -1,10 +1,14 @@
+import { ZOOM } from '../../const/zoom.const';
+import { GeocodeService } from '../../providers/geocode.service';
 import { Offer } from '../../models/offer';
-import { LatLngLiteral } from '@agm/core';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Coords } from '../../models/coords';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
+import { TileLayer, latLng, tileLayer, marker, icon, circle, Marker } from 'leaflet';
+import { Map } from 'leaflet'
+import { debug } from 'util';
 
 
 @Component({
@@ -19,46 +23,82 @@ export class CreateOffer3Page {
     bounds;
     city: string;
     picture_url: string;
-    // cities: string[] = ['Moscow', 'Berlin', 'Manila', 'Bogotá', 'Kyiv'];
-    // country: string;
-    // address: string;
+    tileLayer;
+    options;
+    zoom = 11;
+    radius = 5;//km
+    marker: Marker[];
+    cirkle;
 
     constructor(
         private nav: NavController,
         private navParams: NavParams,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private geocoder: GeocodeService) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
+        if (this.offer.id) {
+            this.radius = this.offer.radius / 1000;
+            this.zoom = this.getZoom();
+        }
         this.coords.lat = this.offer.latitude;
         this.coords.lng = this.offer.longitude;
+        this.addMap();
+        this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+            .subscribe(data => {
+                let address = data.address;
+                this.city = address.city || address.town || address.county || address.state;
+                this.offer.country = address.country;
+            })
 
-        this.geocodeDebounced();
-
+        this.marker = [marker([this.coords.lat, this.coords.lng], {
+            icon: icon({
+                iconSize: [25, 35],
+                iconAnchor: [13, 35],
+                iconUrl: 'assets/img/places_pin.png',
+                //shadowUrl: 
+            })
+        })
+    ];
+        this.cirkle =   circle([this.coords.lat, this.coords.lng], {
+            radius: this.radius * 1000,
+            color: '#ff8b10',
+            opacity: 0.2,
+            stroke: false
+        }); 
     }
 
-    // onMapCenterChange(center: LatLngLiteral) {
-    //     this.coords.lat = center.lat;
-    //     this.coords.lng = center.lng;
-    //     this.geocodeDebounced();
-    // }
-
-    geocodeDebounced = _.debounce(this.geocode, 1000);
-
-    geocode() {
-        let google = window['google'];
-        let geocoder = new google.maps.Geocoder();
-        let latlng = { lat: this.offer.latitude, lng: this.offer.longitude };
-        geocoder.geocode({ 'location': latlng }, (results, status) => {
-            if (status === 'OK') {
-                // let timezone = results.timeZoneId;
-                results = results[0].address_components;
-                this.city = this.findResult(results, "locality");
-                this.offer.country = this.findResult(results, "country");
-                this.changeDetectorRef.detectChanges();
-                console.log(results);
-            }
+    addMap() {
+        this.tileLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            minZoom: 1,
+            maxNativeZoom: 18,
+            attribution: '...',
+            tileSize: 512,
+            zoomOffset: -1,
+            detectRetina: true,
         });
+        this.options = {
+            zoom: this.zoom,
+            center: latLng(this.coords)
+        };
+    }
+
+    getLayers() {
+        return [
+            this.tileLayer,
+            ...this.marker,
+            ...this.cirkle,
+        ]
+    }
+
+    getRadius() {
+        return this.radius * 1000;
+    }
+
+    getZoom() {
+        this.zoom = ZOOM[this.radius];
+        return this.zoom;
     }
 
     findResult(results, name) {
@@ -68,25 +108,10 @@ export class CreateOffer3Page {
         return result ? result.long_name : null;
     };
 
-    // toCity($event) {
-    //     let google = window['google'];
-    //     let geocoder = new google.maps.Geocoder();
-    //     geocoder.geocode({ 'address': this.city }, (results, status) => {
-    //         if (status === 'OK') {
-    //             let result = results[0].geometry.bounds;
-    //             let bounds = new google.maps.LatLngBounds();
-    //             bounds.extend(new google.maps.LatLng(result.f.b, result.b.b));
-    //             bounds.extend(new google.maps.LatLng(result.f.f, result.b.f));
-    //             this.bounds = bounds;
-    //         }
-    //     });
-
-    // }
-
     openCreateOffer4Page() {
-        this.offer.radius = 30000;//todo
+        this.offer.radius = this.radius * 1000;//todo
         this.offer.city = this.city;
-
+        debugger
         this.nav.push(CreateOffer4Page, { offer: this.offer, picture: this.picture_url });
     }
 

@@ -1,9 +1,10 @@
 import { ProfileService } from '../../providers/profile.service';
-import { LatLngLiteral } from '@agm/core';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { NavController, NavParams, PopoverController, App } from 'ionic-angular';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { Map } from 'leaflet';
+import leaflet, { latLng, LeafletEvent, tileLayer } from 'leaflet';
 import * as _ from 'lodash';
 import { ChildCategory } from '../../models/childCategory';
 import { Company } from '../../models/company';
@@ -11,10 +12,12 @@ import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
 import { SelectedCategory } from '../../models/selectedCategory';
 import { ApiService } from '../../providers/api.service';
+import { GeocodeService } from '../../providers/geocode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
 import { ToastService } from '../../providers/toast.service';
+import { AddressUtils } from '../../utils/address.utils';
 import { StringValidator } from '../../validators/string.validator';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
@@ -41,6 +44,9 @@ export class CreateAdvUserProfilePage {
     formData: FormGroup;
     isChangedLogo = false;
     isChangedCover = false;
+    tileLayer;
+    _map: Map;
+    options;
 
     constructor(
         private location: LocationService,
@@ -54,15 +60,12 @@ export class CreateAdvUserProfilePage {
         private api: ApiService,
         private navParams: NavParams,
         private builder: FormBuilder,
-        private app: App,
+        private geocoder: GeocodeService,
         private profile: ProfileService) {
-
-        // this.company = this.navParams.get('company');
-        this.coords.lat = this.navParams.get('latitude') ? this.navParams.get('latitude') : this.company.latitude;
-        this.coords.lng = this.navParams.get('longitude') ? this.navParams.get('longitude') : this.company.longitude;
 
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
+            this.address = this.company.address;
             this.placeService.getWithCategory()
                 .subscribe(company => {
                     this.company = company;
@@ -72,10 +75,21 @@ export class CreateAdvUserProfilePage {
                         lat: company.latitude,
                         lng: company.longitude
                     };
+                    this.addMap();
+                    this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+                        .subscribe(resp => {
+                            this.address = AddressUtils.get(resp);
+                        })
                     this.selectCategory(company.categories);
                 })
         }
         else {
+            this.coords.lat = this.navParams.get('latitude')
+                ? this.navParams.get('latitude')
+                : this.company.latitude;
+            this.coords.lng = this.navParams.get('longitude')
+                ? this.navParams.get('longitude')
+                : this.company.longitude;
             if (!this.coords.lat || !this.coords.lng) {
                 this.location.getByIp()
                     .subscribe(resp => {
@@ -91,12 +105,16 @@ export class CreateAdvUserProfilePage {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
+                    this.addMap();
+                    this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+                        .subscribe(resp => {
+                            this.address = AddressUtils.get(resp);
+                        })
                 })
                 .catch((error) => {
                     this.message = error.message;
                 });
         };
-        this.geocodeDebounced();
 
         this.formData = this.builder.group({
             companyName: new FormControl(this.company.name ? this.company.name : '', Validators.compose([
@@ -114,6 +132,24 @@ export class CreateAdvUserProfilePage {
                 Validators.required
             ])),
         });
+    }
+
+    addMap() {
+        this.tileLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            maxNativeZoom: 18,
+            minZoom: 1,
+            attribution: '...',
+            tileSize: 512,
+            zoomOffset: -1,
+            detectRetina: true,
+            tap: true,
+        });
+        this.options = {
+            layers: [this.tileLayer],
+            zoom: 14,
+            center: latLng(this.coords)
+        };
     }
 
     selectCategory(categories) {
@@ -149,29 +185,20 @@ export class CreateAdvUserProfilePage {
 
     }
 
-    onMapCenterChange(center: LatLngLiteral) {
-        this.coords.lat = center.lat;
-        this.coords.lng = center.lng;
-        this.geocodeDebounced();
-    }
-
-    geocodeDebounced = _.debounce(this.geocode, 500);
-
-    geocode() {
-        let google = window['google'];
-        let geocoder = new google.maps.Geocoder();
-        let latlng = { lat: this.coords.lat, lng: this.coords.lng };
-        geocoder.geocode({ 'location': latlng }, (results, status) => {
-            if (status === 'OK') {
-                this.address = results[0].formatted_address;
-                // this.city = this.findResult(results, "locality");
-                // this.country = this.findResult(results, "country");
-                this.changeDetectorRef.detectChanges();
-                console.log(results);
+    onMapReady(map: Map) {
+        this._map = map;
+        this._map.on({
+            moveend: (event: LeafletEvent) => {
+                this.coords = this._map.getCenter();
+                this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+                    .subscribe(resp => {
+                        this.address = AddressUtils.get(resp);
+                        this.changeDetectorRef.detectChanges();
+                    })
             }
-        });
+        }) 
     }
-
+  
     showCategoriesPopover() {
         let popover = this.popoverCtrl.create(CreateAdvUserProfileCategoryPopover, {
             categories: this.categories.map(p => {
@@ -235,7 +262,6 @@ export class CreateAdvUserProfilePage {
                     }
                 })
             })
-
     }
 
     addLogo() {

@@ -1,7 +1,6 @@
-import { LatLngLiteral } from '@agm/core';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { App, NavController, NavParams, PopoverController } from 'ionic-angular';
-import * as _ from 'lodash';
+import leaflet, { latLng, tileLayer } from 'leaflet';
 import { Coords } from '../../models/coords';
 import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
@@ -35,6 +34,8 @@ export class SettingsPage {
     nextPage: any;
     advPicture_url: string;
     time = new Date().valueOf();
+    tileLayer;
+    options;
 
     constructor(
         private nav: NavController,
@@ -43,15 +44,15 @@ export class SettingsPage {
         private appMode: AppModeService,
         private app: App,
         private popoverCtrl: PopoverController,
-        private changeDetectorRef: ChangeDetectorRef,
         private navParams: NavParams,
-        private place: PlaceService ) {
+        private place: PlaceService) {
 
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
         this.coords.lat = this.user.latitude;
         this.coords.lng = this.user.longitude;
-        if(!this.user.id) {
+        this.addMap();
+        if (!this.user.id) {
             this.profile.get(true)
                 .subscribe(user => this.user = user);
         }
@@ -69,37 +70,35 @@ export class SettingsPage {
 
         this.place.get(true)
             .subscribe(
-                resp => {
-                    this.nextPage = AdvTabsPage;
-                    this.advPicture_url = resp.picture_url;
-                },
-                errResp => this.nextPage = undefined);
+            resp => {
+                this.nextPage = AdvTabsPage;
+                this.advPicture_url = resp.picture_url;
+            },
+            errResp => this.nextPage = undefined);
     }
 
-    onMapCenterChange(center: LatLngLiteral) {
-        this.coords.lat = center.lat;
-        this.coords.lng = center.lng;
-        this.geocodeDebounced();
-    }
-
-    geocodeDebounced = _.debounce(this.geocode, 1000);
-
-    geocode() {
-        let google = window['google'];
-        let geocoder = new google.maps.Geocoder();
-        let latlng = { lat: this.coords.lat, lng: this.coords.lng };
-        geocoder.geocode({ 'location': latlng }, (results, status) => {
-            if (status === 'OK') {
-                this.changeDetectorRef.detectChanges();
-                console.log(results);
-            }
+    addMap() {
+        this.tileLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            maxNativeZoom: 18,
+            minZoom: 1,
+            attribution: '...',
+            tileSize: 512,
+            zoomOffset: -1,
+            detectRetina: true,
+            tap: true,
         });
+        this.options = {
+            layers: [this.tileLayer],
+            zoom: 13,
+            center: latLng(this.coords)
+        };
     }
 
     toggleAdvMode() {
         this.isChangeMode = !this.isChangeMode;
         if (this.isAdvMode && !this.nextPage) {
-            let popover = this.popoverCtrl.create(SettingsPopover, { page: CreateAdvUserProfilePage, latitude: this.coords.lat, longitude: this.coords.lng});
+            let popover = this.popoverCtrl.create(SettingsPopover, { page: CreateAdvUserProfilePage, latitude: this.coords.lat, longitude: this.coords.lng });
             popover.present();
         }
         return this.isAdvMode;
@@ -111,29 +110,29 @@ export class SettingsPage {
         // this.user.latitude = this.coords.lat;
         // this.user.longitude = this.coords.lng;
         // this.profile.put(this.user)
-            // .subscribe(resp => {to do
-                if (!this.isChangeMode) {
-                    this.nav.pop();
-                }
-                else {
-                    if (this.isAdvMode && !this.nextPage) {
-                        this.app.getRootNav().setRoot(OnBoardingPage, {isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true, latitude: this.coords.lat, longitude: this.coords.lng});
-                    }
-                    else
-                    if (this.isAdvMode) {
-                        if  (!isShownOnboard) {
-                            this.app.getRootNav().setRoot(OnBoardingPage, {isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true});
-                        }
-                        else {
-                            this.app.getRootNav().setRoot(AdvTabsPage, {isAdvMode: true, isAdvOnBoarding: true});
-                        }
+        // .subscribe(resp => {to do
+        if (!this.isChangeMode) {
+            this.nav.pop();
+        }
+        else {
+            if (this.isAdvMode && !this.nextPage) {
+                this.app.getRootNav().setRoot(OnBoardingPage, { isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true, latitude: this.coords.lat, longitude: this.coords.lng });
+            }
+            else
+                if (this.isAdvMode) {
+                    if (!isShownOnboard) {
+                        this.app.getRootNav().setRoot(OnBoardingPage, { isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true });
                     }
                     else {
-                        this.app.getRootNav().setRoot(TabsPage);
+                        this.app.getRootNav().setRoot(AdvTabsPage, { isAdvMode: true, isAdvOnBoarding: true });
                     }
-
                 }
-            // });
+                else {
+                    this.app.getRootNav().setRoot(TabsPage);
+                }
+
+        }
+        // });
     }
 
     toggleAccountsChoiceVisible() {

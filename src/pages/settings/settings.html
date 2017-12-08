@@ -7,15 +7,16 @@
     </a>
     -->
   </ion-navbar>
-    <div class="header-shadow"></div>
+  <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content class="padding-no">
   <div padding-top class="block-lines-bottom-left-right">
     <a class="select" (click)="toggleAccountsChoiceVisible()">
-        <span text-uppercase class="font-14 text-4F4F4F">
-            {{ 'PAGE_SETTINGS.CHOOSE_YOUR_ACCOUNT' | translate }} <span text-lowercase>({{ 'PAGE_SETTINGS.HIDE' | translate }})</span>
-        </span>
+      <span text-uppercase class="font-14 text-4F4F4F">
+        {{ 'PAGE_SETTINGS.CHOOSE_YOUR_ACCOUNT' | translate }}
+        <span text-lowercase>({{ 'PAGE_SETTINGS.HIDE' | translate }})</span>
+      </span>
       <ion-icon class="text-828282 icon" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
       <ion-icon class="text-828282 icon" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
     </a>
@@ -42,19 +43,19 @@
     </ion-grid>
   </div>
 
-    <p *ngIf="isAdvMode" margin>
-        <button (click)="openAdvRedeem()" color="primary" ion-button block>{{ 'PAGE_SETTINGS.CONFIRM_REDEMPTION' | translate }}</button>
-    </p>
+  <p *ngIf="isAdvMode" margin>
+    <button (click)="openAdvRedeem()" color="primary" ion-button block>{{ 'PAGE_SETTINGS.CONFIRM_REDEMPTION' | translate }}</button>
+  </p>
 
-    <div class="block-lines">
-        <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.YOUR_INVITE_CODE' | translate }}</div>
-    </div>
+  <div class="block-lines">
+    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.YOUR_INVITE_CODE' | translate }}</div>
+  </div>
 
-    <div class="block-lines">
-        <ion-item class="bg-gray">
-            <ion-label margin-left class="text-3E4B5D font-16">{{ user.invite_code }}</ion-label>
-        </ion-item>
-    </div>
+  <div class="block-lines">
+    <ion-item class="bg-gray">
+      <ion-label margin-left class="text-3E4B5D font-16">{{ user.invite_code }}</ion-label>
+    </ion-item>
+  </div>
 
   <div class="block-lines">
     <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.CHANGE_YOUR_PHONE_NUMBER' | translate }}</div>
@@ -97,7 +98,8 @@
   <div class="block-lines">
     <a class="text-4F4F4F font-14" (click)="toggleSelectRadiusVisible()">{{ 'PAGE_SETTINGS.SET_RADIUS' | translate }}</a>
   </div>
-  <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-top margin-bottom padding-left padding-right class="border-bottom-no">
+  <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-top margin-bottom padding-left padding-right
+    class="border-bottom-no">
     <ion-label>{{ 'PAGE_SETTINGS.OFFERS_RADIUS' | translate }}</ion-label>
     <ion-select [(ngModel)]="radius" (ionChange)="toggleSelectRadiusVisible()" (ionCancel)="toggleSelectRadiusVisible()" placeholder="50 {{ 'UNIT.M' | translate }}"
       name="radius" class="bg-gray width-100" interface="action-sheet">
@@ -108,8 +110,8 @@
   <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
 
   <div *ngIf="coords.lat" class="block-map">
-    <agm-map class="card" [zoom]="16" [latitude]="coords.lat" [longitude]="coords.lng">
-    </agm-map>
+    <div class="leaflet-map" leaflet [leafletOptions]="options">
+    </div>
     <div id="marker"></div>
   </div>
   <p margin>
