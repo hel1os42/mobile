@@ -77,10 +77,9 @@ export class CreateUserProfilePage {
                 })
                 .catch((error) => {
                     this.message = error.message;
-                    console.log(this.message);
                 });
             setTimeout(() => {
-                if (!this.coords) {
+                if (!this.coords.lat) {
                     this.location.getByIp()
                         .subscribe(resp => {
                             this.coords = {
@@ -91,7 +90,7 @@ export class CreateUserProfilePage {
                             this.addMap();
                         })
                 }
-            }, 5000)
+            }, 7000);
         }
     }
 

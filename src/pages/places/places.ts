@@ -82,7 +82,7 @@ export class PlacesPage {
                                 this.getCompaniesList();
                             })
                     }
-                }, 5000)
+                }, 7000);
     }
 
     getCompaniesList() {
