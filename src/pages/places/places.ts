@@ -68,9 +68,9 @@ export class PlacesPage {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
-                    this.addMap();
-                    this.loadCompanies([this.selectedCategory.id], this.search, this.page);
                     this.categoryFilter = [this.selectedCategory.id];
+                    this.loadCompanies([this.selectedCategory.id], this.search, this.page);
+                    this.addMap();
                     this.userPin = [marker([this.coords.lat, this.coords.lng], {
                         icon: icon({
                             iconSize: [25, 35],
