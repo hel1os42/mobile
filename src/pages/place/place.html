@@ -49,6 +49,16 @@
     </ion-segment-button>
   </ion-segment>
   <div class="header-shadow"></div>
+    <!-- <ion-footer no-shadow no-border padding>-->
+    <div class="footer_testimonials" *ngIf="segment == 'testimonials'">
+        <ion-list>
+            <ion-item no-lines>
+                <ion-input class="bg-gray" placeholder="{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}"></ion-input>
+                <!--<a item-end><img src="assets/img/user_home/icon_pin.svg"></a>-->
+                <a class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
+            </ion-item>
+        </ion-list>
+    </div>
 </ion-header>
 
 <ion-content [ngSwitch]="segment" padding no-bounce>
@@ -80,14 +90,5 @@
   </ion-list>
 
   <div *ngSwitchCase="'about'" [innerHTML]="company.about" margin-top class="item-block-nau"></div>
-    <!-- <ion-footer no-shadow no-border padding>-->
-    <div class="footer_testimonials" *ngIf="segment == 'testimonials'">
-        <ion-list>
-            <ion-item no-lines>
-                <ion-input class="bg-gray" placeholder="{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}"></ion-input>
-                <!--<a item-end><img src="assets/img/user_home/icon_pin.svg"></a>-->
-                <a class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
-            </ion-item>
-        </ion-list>
-    </div>
+
 </ion-content>

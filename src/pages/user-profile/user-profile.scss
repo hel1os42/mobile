@@ -226,18 +226,129 @@ page-user-profile{
         z-index: 11;
     }
 
-    .user-level-1{
-        left: 75%;
-        top: 12.5%;
+    /* LEVEL 1 */
+
+    .user-level-1 .user-ava-name {
+        left: 71%;
+        top: -2.5%;
     }
 
-    .user-level-2{
+    .user-level-1 .box1{
+        background: linear-gradient(180deg, #FF5A00, #FFC08B); /* GRADIENT */
+    }
+
+    .user-level-1 .box2{
+        background: #FFC08B; /* NO FILL */
+    }
+
+    .user-level-1 .box3{
+        background: #FFC08B; /* NO FILL */
+    }
+
+    .user-level-1 .box4{
+        background: #FFC08B; /* NO FILL */
+    }
+
+    /* LEVEL 2 */
+
+    .user-level-2 .user-ava-name {
         left: 68%;
         top: 55%; /* 50-14 = 36/ 36/2 = 18 + 50 */
     }
 
+    .user-level-2 .box1{
+        background: #FF5A00;   /* FILL */
+    }
+
+    .user-level-2 .box2{
+        background: linear-gradient(180deg, #FF5A00, #FFC08B); /* GRADIENT */
+    }
+
+    .user-level-2 .box3{
+        background: #FFC08B; /* NO FILL */
+    }
+
+    .user-level-2 .box4{
+        background: #FFC08B; /* NO FILL */
+    }
+
+    /* LEVEL 3 */
+
+    .user-level-3 .user-ava-name {
+        left: 3%;
+        top: 55%; /* 50-14 = 36/ 36/2 = 18 + 50 */
+    }
+
+    .user-level-3 .box1{
+        background: #FF5A00;   /* FILL */
+    }
+
+    .user-level-3 .box2{
+        background: #FF5A00;   /* FILL */
+    }
+
+    .user-level-3 .box3{
+        background: linear-gradient(0deg, #FF5A00, #FFC08B);
+    }
+
+    .user-level-3 .box4{
+        background: #FFC08B; /* NO FILL */
+    }
+
+    .user-level-3 .label-ios{
+        background: rgba(0,0,0,0.5);
+        color: white;
+        border-radius: 5vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        border: 1vw solid white;
+    }
+
+    .user-level-3 .lbl1, .user-level-3 .lbl2{
+        color: #fff;
+    }
+
+    /* LEVEL 4 */
+
+    .user-level-4 .user-ava-name {
+        left: 3%;
+        top: -2.5%;
+    }
+
+    .user-level-4 .box1{
+        background: #FF5A00;   /* FILL */
+    }
+
+    .user-level-4 .box2{
+        background: #FF5A00;   /* FILL */
+    }
+
+    .user-level-4 .box3{
+        background: #FF5A00;   /* FILL */
+    }
+
+    .user-level-4 .box4{
+        background: linear-gradient(0deg, #FF5A00, #FFC08B);
+    }
+
+    .user-level-4 .label-ios{
+        background: rgba(0,0,0,0.5);
+        color: white;
+        border-radius: 5vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        border: 1vw solid white;
+    }
+
+    .user-level-4 .lbl1, .user-level-4 .lbl2{
+        color: #fff;
+    }
+
     .user-ava-name .circle-ava{
-        background-image: url(../assets/img/user_achi/ava.png);
         background-color: #fff;
         background-position: 50% 50%;
         background-size: cover;
