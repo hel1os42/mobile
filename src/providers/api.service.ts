@@ -52,7 +52,6 @@ export class ApiService {
             .subscribe(resp => {
                 this.isDevMode = resp;
                 this.url = this.isDevMode ? this.devUrl : this.testUrl;
-                debugger
             })
         
     }

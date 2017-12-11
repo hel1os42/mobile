@@ -79,7 +79,7 @@ export class LoginPage {
             confirm('Development mode is already selected');
         }
         else {
-            if (this.clickMode == 5) {
+            if (this.clickMode >= 5) {
                 if (confirm('The test mode will be selected \nAre you sure?')) {
                     this.isDevMode = true;
                     this.appMode.setDevMode(this.isDevMode);
