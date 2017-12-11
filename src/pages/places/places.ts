@@ -35,7 +35,7 @@ export class PlacesPage {
     radius = 1000000;
     segment: string;
     distanceString: string;
-    search: string;
+    search = '';
     categoryFilter: string[];
     page = 1;
     lastPage: number;
@@ -60,7 +60,7 @@ export class PlacesPage {
             this.coords = {
                 lat: user.latitude,
                 lng: user.longitude
-            };
+            }
             this.addMap();
             this.location.get()
                 .then((resp) => {
