@@ -75,7 +75,6 @@ export class LoginPage {
 
     toggleMode() {
         this.clickMode = this.clickMode + 1;
-<<<<<<< HEAD
         if (this.appMode.getDevMode()) {
             confirm('Development mode is already selected');
         }
@@ -90,11 +89,6 @@ export class LoginPage {
                     this.clickMode = 0;
                 }
             }
-=======
-        if (this.clickMode == 5){
-            this.clickMode = 0;
-            alert('Testing mode');
->>>>>>> fd3f49605bcbbcbed1cfc6ff6d3f0699021cc2a5
         }
     }
 
