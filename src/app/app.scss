@@ -1788,3 +1788,11 @@ a:active, a:hover, input:active, input.text-input.text-input-ios {
 body {
     text-rendering: auto !important;
 }
+
+.devmode{
+    position: absolute;
+    bottom: 1vw;
+    right: 1vw;
+    font-size: 2vw;
+    color: red;
+}

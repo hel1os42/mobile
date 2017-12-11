@@ -44,6 +44,7 @@ page-place {
     position: fixed;
     left: 0;
     bottom: 0;
+    z-index: 999999;
   }
 
   .item-ios.item-block .item-inner{

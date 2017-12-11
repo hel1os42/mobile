@@ -73,6 +73,7 @@ export class LoginPage {
     testingMode(){
         this.clickMode = this.clickMode + 1;
         if (this.clickMode == 5){
+            this.clickMode = 0;
             alert('Testing mode');
         }
     }
