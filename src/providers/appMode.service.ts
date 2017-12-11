@@ -4,9 +4,10 @@ import { StorageService } from './storage.service';
 @Injectable()
 export class AppModeService {
 
-    HOME_MODE_KEY = "homeMode";
-    ADV_MODE_KEY = "isAdvMode";
-    ONBOARDING_KEY = "shownOnboarding";
+    HOME_MODE_KEY = 'homeMode';
+    ADV_MODE_KEY = 'isAdvMode';
+    ONBOARDING_KEY = 'shownOnboarding';
+    DEV_MODE_KEY = 'isDevMOde'
 
     onHomeChange = new EventEmitter<boolean>();
 
@@ -22,6 +23,18 @@ export class AppModeService {
 
     getHomeMode() {
         return !!this.storage.get(this.HOME_MODE_KEY);
+    }
+
+    getDevMode() {
+        return !!this.storage.get(this.DEV_MODE_KEY);
+    }
+
+    setDevMode(isDevMode: boolean) {
+        this.storage.set(this.DEV_MODE_KEY, isDevMode);
+    }
+
+    removeDevMode() {
+        this.storage.remove(this.DEV_MODE_KEY);
     }
 
     setHomeMode(showPlaces: boolean) {
