@@ -52,6 +52,7 @@ export class SettingsPage {
         this.coords.lat = this.user.latitude;
         this.coords.lng = this.user.longitude;
         this.addMap();
+        
         if (!this.user.id) {
             this.profile.get(true)
                 .subscribe(user => {
@@ -62,17 +63,17 @@ export class SettingsPage {
                 });
         }
 
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.addMap();
-            })
-            .catch((error) => {
-                this.message = error.message;
-            });
+        // this.location.get()
+        //     .then((resp) => {
+        //         this.coords = {
+        //             lat: resp.coords.latitude,
+        //             lng: resp.coords.longitude
+        //         };
+        //         this.addMap();
+        //     })
+        //     .catch((error) => {
+        //         this.message = error.message;
+        //     });
 
         this.place.get(true)
             .subscribe(
