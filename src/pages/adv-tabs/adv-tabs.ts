@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, isDevMode } from '@angular/core';
 import { AdvNotificationsPage } from '../adv-notifications/adv-notifications';
 import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { AdvUserProfilePage } from '../adv-user-profile/adv-user-profile';
 import { CreateOfferPage } from '../create-offer/create-offer';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-adv-tabs',
@@ -10,6 +11,7 @@ import { CreateOfferPage } from '../create-offer/create-offer';
 })
 export class AdvTabsPage {
 
+    isDevMode = false;
 
     tab1Root = AdvUserProfilePage;
     tab2Root = AdvUserProfilePage;
@@ -17,8 +19,8 @@ export class AdvTabsPage {
     tab4Root = AdvNotificationsPage;
     tab5Root = AdvUserOffersPage;
 
-    constructor() {
-
+    constructor(private appMode: AppModeService) {
+        this.isDevMode = this.appMode.getDevMode();
     }
 
 }
