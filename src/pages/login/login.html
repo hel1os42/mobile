@@ -4,7 +4,7 @@
 </ion-header>
 
 <ion-content class="padding-sign">
-  <div (click)="testingMode()" class="logo">
+  <div (click)="toggleMode()" class="logo">
   </div>
   <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
   <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}</div>
@@ -31,12 +31,30 @@
   <div margin-top class="bg-gray padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
-        <ion-input (ionChange)="limitStr(authData.code, 6)" (keyup)="updateList($event)" [(ngModel)]="authData.code" required ngControl="code" name="code" [minlength]="6" class="otp" type="number" placeholder="XXXXXX"></ion-input>
+        <ion-input (ionChange)="limitStr(authData.code, 6)" 
+                  (keyup)="updateList($event)" 
+                  [(ngModel)]="authData.code" 
+                  required 
+                  ngControl="code" 
+                  name="code" 
+                  [minlength]="6" 
+                  class="otp" 
+                  type="number" 
+                  placeholder="XXXXXX"></ion-input>
       </ion-item>
   </div>
 </form>
 
-  <button (click)="login()" [disabled]="!form.valid" type="submit" text-uppercase class="margin-top-5vw" ion-button block middle color="primary" >{{ 'UNIT.SIGN_IN' | translate }}</button>
+  <button (click)="login()" 
+          [disabled]="!form.valid" 
+          type="submit" 
+          text-uppercase 
+          class="margin-top-5vw" 
+          ion-button block 
+          middle 
+          color="primary" >
+          {{ 'UNIT.SIGN_IN' | translate }}
+</button>
 
 </ion-content>
 

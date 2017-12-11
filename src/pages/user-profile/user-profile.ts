@@ -11,6 +11,7 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-user-profile',
@@ -28,7 +29,8 @@ export class UserProfilePage {
     constructor(
         private profile: ProfileService,
         private nav: NavController,
-        private auth: AuthService) {
+        private auth: AuthService,
+        private appMode: AppModeService) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -76,6 +78,7 @@ export class UserProfilePage {
     logout() {
         if (confirm('Are you sure?'))
             this.auth.logout();
+            this.appMode.removeDevMode();
     }
 
     slideNext() {
