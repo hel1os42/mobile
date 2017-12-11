@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController } from 'ionic-angular';
+import { LoadingController, NavController, PopoverController } from 'ionic-angular';
 import { ChildCategory } from '../../models/childCategory';
 import { Company } from '../../models/company';
 import { Coords } from '../../models/coords';
@@ -51,39 +51,52 @@ export class PlacesPage {
         private appMode: AppModeService,
         private offers: OfferService,
         private popoverCtrl: PopoverController,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private loading: LoadingController) {
 
         this.selectedCategory = this.categories[0];
         this.segment = "alloffers";
-
-        this.profile.get(false).subscribe(user => {
-            this.coords = {
-                lat: user.latitude,
-                lng: user.longitude
-            }
-            this.addMap();
+        let loadingCompanies = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
+        loadingCompanies.present();
             this.location.get()
                 .then((resp) => {
                     this.coords = {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
-                    this.categoryFilter = [this.selectedCategory.id];
-                    this.loadCompanies([this.selectedCategory.id], this.search, this.page);
-                    this.addMap();
-                    this.userPin = [marker([this.coords.lat, this.coords.lng], {
-                        icon: icon({
-                            iconSize: [25, 35],
-                            iconAnchor: [13, 35],
-                            iconUrl: 'assets/img/icon_user_map.svg',
-                            //shadowUrl: 
-                        })
-                    })]
+                    loadingCompanies.dismiss();
+                    this.getCompaniesList();
                 })
                 .catch((error) => {
                     this.message = error.message;
                 });
-        })
+                setTimeout(() => {
+                    if (!this.coords) {
+                        this.location.getByIp()
+                            .subscribe(resp => {
+                                this.coords = {
+                                    lat: resp.latitude,
+                                    lng: resp.longitude
+                                }; 
+                                loadingCompanies.dismiss();
+                                this.getCompaniesList();
+                            })
+                    }
+                }, 5000)
+    }
+
+    getCompaniesList() {
+        this.categoryFilter = [this.selectedCategory.id];
+        this.loadCompanies([this.selectedCategory.id], this.search, this.page);
+        this.addMap();
+        this.userPin = [marker([this.coords.lat, this.coords.lng], {
+            icon: icon({
+                iconSize: [25, 35],
+                iconAnchor: [13, 35],
+                iconUrl: 'assets/img/icon_user_map.svg',
+                //shadowUrl: 
+            })
+        })]
     }
 
     addMap() {
