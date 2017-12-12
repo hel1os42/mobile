@@ -1,3 +1,4 @@
+import { Account } from '../../models/account';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { Subscription } from 'rxjs/Rx';
 import { Component, ViewChild } from '@angular/core';
@@ -20,9 +21,9 @@ import { AppModeService } from '../../providers/appMode.service';
 export class UserProfilePage {
     user: User = new User();
     balance: number;
-    NAU_Id: string;
     onRefreshAccounts: Subscription;
     time = new Date().valueOf();
+    NAU: Account;
 
     @ViewChild(Slides) slides: Slides;
 
@@ -35,15 +36,15 @@ export class UserProfilePage {
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
                 this.user = resp;
-                this.balance = resp.accounts.NAU.balance;
-                this.NAU_Id = resp.accounts.NAU.id;
+                this.NAU = resp.accounts.NAU;
+                this.balance = this.NAU.balance;
             })
 
         this.profile.getWithAccounts()
             .subscribe(resp => {
                 this.user = resp;
-                this.balance = this.user.accounts.NAU.balance;
-                this.NAU_Id = this.user.accounts.NAU.id;
+                this.NAU = resp.accounts.NAU;
+                this.balance = this.NAU.balance;
             });
     }
 
@@ -64,7 +65,7 @@ export class UserProfilePage {
     }
 
     openUserNau() {
-        this.nav.push(UserNauPage, { balance: this.balance, NAU_Id: this.NAU_Id });
+        this.nav.push(UserNauPage, { NAU: this.NAU });
     }
 
     openUserUsers() {
