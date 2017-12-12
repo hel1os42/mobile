@@ -68,23 +68,10 @@ page-places {
     width: 93%;
   }
 
-    .segment-ios{
+    .segment-ios {
         width: 100%;
         padding-left: 5%;
-        display: block;
-    }
-
-    .segment-ios .segment-button {
-        margin-left: 5.4%;
-        display: inline;
-    }
-
-    .segment-ios .segment-button:first-of-type{
-        margin-left: 0;
-    }
-
-    .segment-ios .segment-button:last-of-type {
-        margin-left: 5.4%;
+        padding-right: 5%;
     }
 
     .sticky{

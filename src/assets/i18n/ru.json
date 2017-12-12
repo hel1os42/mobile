@@ -1,15 +1,15 @@
 {
     "UNIT" : {
-        "KM" : "km",
-        "M" : "m",
-        "DETECTING_YOUR_LOCATION" : "Detecting your location...",
-        "SETTING_MAP_RADIUS" : "Setting map radius (km)",
-        "DONE" : "Done",
-        "CANCEL" : "Cancel",
-        "SIGN_UP" : "sign up",
-        "SIGN_IN" : "sign in",
+        "KM" : "км",
+        "M" : "м",
+        "DETECTING_YOUR_LOCATION" : "Обнаружение вашего местоположения ...",
+        "SETTING_MAP_RADIUS" : "Установка радиуса карты (км)",
+        "DONE" : "Готово",
+        "CANCEL" : "Отмена",
+        "SIGN_UP" : "Зарегистрироваться",
+        "SIGN_IN" : "Войти",
         "OFFERS" : "Offers",
-        "MIN_SYMBOLS" : "min:"
+        "MIN_SYMBOLS" : "мин:"
     },
 
     "MONTHS" : {
@@ -37,16 +37,15 @@
     },
 
     "PAGE_PLACES" : {
-        "ALL_OFFERS" : "All offers",
-        "DELIVERY" : "Delivery",
-        "NEW" : "New",
-        "MONTHLY" : "Monthly",
-        "FEATURED" : "Featured",
-        "OFFERS" : "Offers",
-        "LOADING_COMPANIES" : "Loading companies...",
-        "SELECT_CUISINE" : "Select Cuisine",
-        "CLEAR" : "Clear",
-        "MAP" : "Map"
+        "ALL_OFFERS" : "Все предложения",
+        "DELIVERY" : "Доставка",
+        "NEW" : "Новые",
+        "MONTHLY" : "Месяц",
+        "FEATURED" : "Рекомендуемые",
+        "LOADING_COMPANIES" : "Загрузка компаний ...",
+        "SELECT_CUISINE" : "Выберите кухню",
+        "CLEAR" : "Очистить",
+        "MAP" : "Карта"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
