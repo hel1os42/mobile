@@ -300,7 +300,8 @@
         "IT_HELPS_ME" : "It helps me advertise my business",
         "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
-        "TRY_IT_FOR_FREE" : "Try it for free"
+        "TRY_IT_FOR_FREE" : "Try it for free",
+        "LANG" : "Lang"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {
