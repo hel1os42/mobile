@@ -27,10 +27,10 @@
   </ion-item>
 
       <div class="block-user-level">
-          <div class="block-circle">
-              <ion-item no-lines class="user-ava-name user-level-2 overflow-visible">
+          <div class="block-circle user-level-2">
+              <ion-item no-lines class="user-ava-name overflow-visible">
                   <div [style.background-image]="'url(' + user.picture_url + '?' + time +')'" item-start class="circle-ava"></div>
-                  <div class="text-3E4B5D bold lbl1">{{user?.name}}</div>
+                  <div class="text-3E4B5D wrap-no bold lbl1">{{user?.name}}</div>
                   <div class="text-3E4B5D lbl2">2 500</div>
               </ion-item>
               <div class="circle-center">
@@ -48,16 +48,16 @@
               <div class="box box4 color-no-fill">
               </div>
 
-              <div class="box box1 color-fill">
+              <div class="box box1">
                   <div class="label-point circle-label-top">10 000</div>
                   <div class="next-level"><span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} 5</span></div>
               </div>
 
-              <div class="box box3 color-no-fill">
+              <div class="box box3">
                   <div class="label-point circle-label-left">7 500</div>
               </div>
 
-              <div class="box box2 color-grad">
+              <div class="box box2">
                   <div class="label-point circle-label-right">2 500</div>
                   <div class="label-point circle-label-bottom">5 000</div>
               </div>

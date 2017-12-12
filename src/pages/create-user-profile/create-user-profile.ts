@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { NavController } from 'ionic-angular';
+import { LoadingController, NavController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import leaflet, { tileLayer, latLng, LeafletEvent } from 'leaflet';
 import { Map } from 'leaflet';
@@ -45,7 +45,8 @@ export class CreateUserProfilePage {
         private toast: ToastService,
         private imagePicker: ImagePicker,
         private api: ApiService,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private loading: LoadingController) {
 
 
         if (this.navParams.get('user')) {
@@ -62,27 +63,34 @@ export class CreateUserProfilePage {
                     this.user = resp;
                     this.picture_url = this.user.picture_url;
                 });
+            let loadingCompanies = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
+            loadingCompanies.present();
 
-            this.location.getByIp()
-                .subscribe(resp => {
+            this.location.get()
+                .then((resp) => {
                     this.coords = {
-                        lat: resp.latitude,
-                        lng: resp.longitude
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
                     };
-
-                    this.location.get()
-                        .then((resp) => {
+                    loadingCompanies.dismiss();
+                    this.addMap();
+                })
+                .catch((error) => {
+                    this.message = error.message;
+                });
+            setTimeout(() => {
+                if (!this.coords.lat) {
+                    this.location.getByIp()
+                        .subscribe(resp => {
                             this.coords = {
-                                lat: resp.coords.latitude,
-                                lng: resp.coords.longitude
+                                lat: resp.latitude,
+                                lng: resp.longitude
                             };
+                            loadingCompanies.dismiss();
                             this.addMap();
                         })
-                        .catch((error) => {
-                            this.message = error.message;
-                            console.log(this.message);
-                        });
-                })
+                }
+            }, 7000);
         }
     }
 
@@ -108,7 +116,7 @@ export class CreateUserProfilePage {
         });
         this.options = {
             layers: [this.tileLayer],
-            zoom: 16,
+            zoom: 15,
             center: latLng(this.coords)
         };
     }
@@ -133,8 +141,8 @@ export class CreateUserProfilePage {
         this.imagePicker.getPictures(options)
             .then(results => {
                 if (results[0] && results[0] != 'O') {
-                this.picture_url = results[0];
-                this.changedPicture = true;
+                    this.picture_url = results[0];
+                    this.changedPicture = true;
                 }
             })
             .catch(err => {
@@ -153,8 +161,8 @@ export class CreateUserProfilePage {
                         this.api.uploadImage(this.picture_url, 'profile/picture', true)
                             .then(() => {
                                 if (this.isEdit) {
-                                        this.profile.refreshAccounts();
-                                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                    this.profile.refreshAccounts();
+                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
                                 }
                                 else {
                                     this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
@@ -163,8 +171,8 @@ export class CreateUserProfilePage {
                     }
                     else {
                         if (this.isEdit) {
-                                this.profile.refreshAccounts();
-                                this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                            this.profile.refreshAccounts();
+                            this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
                         }
                         else {
                             this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });

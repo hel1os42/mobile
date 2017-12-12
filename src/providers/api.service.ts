@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { Headers, Http, QueryEncoder, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { ToastController, LoadingController, Loading } from "ionic-angular";
@@ -8,6 +9,7 @@ import 'rxjs/add/operator/map';
 import { TokenService } from "./token.service";
 import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
 import { ToastService } from './toast.service';
+import { AppModeService } from './appMode.service';
 
 interface ApiRequestOptions {
     showLoading?: boolean;
@@ -31,14 +33,27 @@ export class ApiService {
     HTTP_STATUS_CODE_UNATHORIZED = 401;
     HTTP_STATUS_CODE_TOO_MANY_REQ = 429;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
-    url: string = 'https://nau.toavalon.com';
+    devUrl: string = 'https://nau.toavalon.com';
+    testUrl: string = 'https://api-test.nau.io';
+    url: string;
+    isDevMode: boolean;
 
     constructor(
         private http: Http,
         private toast: ToastService,
         private loading: LoadingController,
         private token: TokenService,
-        private fileTransfer: FileTransfer) {
+        private fileTransfer: FileTransfer,
+        private appMode: AppModeService) {
+
+        this.isDevMode = this.appMode.getDevMode();
+        this.url = this.isDevMode ? this.devUrl : this.testUrl;
+        this.appMode.onDevMode
+            .subscribe(resp => {
+                this.isDevMode = resp;
+                this.url = this.isDevMode ? this.devUrl : this.testUrl;
+            })
+        
     }
 
     private getOptions(options: RequestOptions): RequestOptions {

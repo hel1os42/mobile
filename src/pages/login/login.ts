@@ -24,6 +24,7 @@ export class LoginPage {
     numCode: string = '+380';
     page;
     clickMode = 0;
+    isDevMode: boolean;
 
     constructor(
         private nav: NavController,
@@ -31,6 +32,8 @@ export class LoginPage {
         private appMode: AppModeService,
         private profile: ProfileService,
         private builder: FormBuilder) {
+
+        this.isDevMode = this.appMode.getDevMode();
 
     }
 
@@ -70,10 +73,22 @@ export class LoginPage {
         else this.authData.code = StringValidator.stringLimitMax(str, length);
     }
 
-    testingMode(){
+    toggleMode() {
         this.clickMode = this.clickMode + 1;
-        if (this.clickMode == 5){
-            alert('Testing mode');
+        if (this.appMode.getDevMode()) {
+            confirm('Development mode is already selected');
+        }
+        else {
+            if (this.clickMode >= 5) {
+                if (confirm('The test mode will be selected \nAre you sure?')) {
+                    this.isDevMode = true;
+                    this.appMode.setDevMode(this.isDevMode);
+                    this.clickMode = 0;
+                }
+                else {
+                    this.clickMode = 0;
+                }
+            }
         }
     }
 

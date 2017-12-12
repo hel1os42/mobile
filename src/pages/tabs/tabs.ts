@@ -14,6 +14,8 @@ import { UserProfilePage } from '../user-profile/user-profile';
 })
 export class TabsPage {
 
+    isDevMode = false;
+
     private _onHomeChangeSubscription: Subscription;
 
     tab1Root;
@@ -26,12 +28,14 @@ export class TabsPage {
     @ViewChild('tabs') tabs: Tabs;
 
     constructor(private appMode: AppModeService,
-                private navParams: NavParams) {
+        private navParams: NavParams) {
+
+        this.isDevMode = this.appMode.getDevMode();
 
         // this.tab1Root = this.appMode.getHomeMode()
         //     ? PlacesPage
         //     : SplashScreenPage;to do
-        
+
         // this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
         //     this.tabs.getByIndex(0)
         //         .setRoot(showPlaces ? PlacesPage : SplashScreenPage);
@@ -50,7 +54,7 @@ export class TabsPage {
 
     tabChange() {
         if (this.tabs.getSelected().index > 0)
-           this.appMode.setHomeMode(false);
+            this.appMode.setHomeMode(false);
     }
 
     ionViewWillUnload() {
