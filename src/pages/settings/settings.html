@@ -26,7 +26,10 @@
     <ion-grid class="ava_user_adv">
       <ion-row text-center align-items-center>
         <ion-col>
-          <div margin-top class="thumb_image" [ngStyle]="{'background-image': 'url(' + user.picture_url + '?' + time + '), url(assets/img/create_user_profile/people.svg)'}"></div>
+          <div margin-top 
+              class="thumb_image" 
+              [ngStyle]="{'background-image': 'url(' + user.picture_url + '?' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+        </div>
           <!-- <img margin-top [src]="user.picture_url"> -->
           <div class="font-16 text-3E4B5D bold padding-top-3vw">{{ 'PAGE_SETTINGS.CLIENT' | translate }}</div>
         </ion-col>
@@ -36,7 +39,10 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <div margin-top class="thumb_image" [ngStyle]="{'background-image': 'url(' + advPicture_url + '?' + time + '), url(assets/img/create_user_profile/people.svg)'}"></div>
+          <div margin-top 
+              class="thumb_image" 
+              [ngStyle]="{'background-image': 'url(' + advPicture_url + '?' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+        </div>
           <div class="font-16 text-BDBDBD bold padding-top-3vw">{{ 'PAGE_SETTINGS.ADVERTISER' | translate }}</div>
         </ion-col>
       </ion-row>
@@ -69,7 +75,13 @@
         </ion-col>
         <ion-col col-4>
           <ion-item no-lines text-right>
-            <button (click)="openChangePhone()" color="primary" ion-button round class="font-12 regular">{{ 'PAGE_SETTINGS.CHANGE' | translate }}</button>
+            <button (click)="openChangePhone()" 
+                    color="primary" 
+                    ion-button 
+                    round 
+                    class="font-12 regular">
+            {{ 'PAGE_SETTINGS.CHANGE' | translate }}
+          </button>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -83,9 +95,12 @@
     <div class="block-lines">
         <div no-lines>
             <ion-item class="bg-gray" detail-push>
-                <ion-select multiple="true" class="selected-lang">
-                    <ion-option value="f" selected>English</ion-option>
-                    <ion-option value="m">Український</ion-option>
+                <ion-select [(ngModel)]="lang" 
+                            (ionChange)="changeLang()"
+                            multiple="false" 
+                            interface="popover" 
+                            class="selected-lang">
+                    <ion-option *ngFor="let lang of langs" [value]="lang">{{ lang }}</ion-option>
                 </ion-select>
             </ion-item>
         </div>
@@ -110,7 +125,7 @@
     </ion-item>
   </div>
 
-  <div class="block-lines">
+  <!-- <div class="block-lines">
     <a class="text-4F4F4F font-14" (click)="toggleSelectRadiusVisible()">{{ 'PAGE_SETTINGS.SET_RADIUS' | translate }}</a>
   </div>
   <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-top margin-bottom padding-left padding-right
@@ -120,7 +135,7 @@
       name="radius" class="bg-gray width-100" interface="action-sheet">
       <ion-option *ngFor="let radius of radiuses" [value]="radius">{{ radius }} {{ 'UNIT.M' | translate }}</ion-option>
     </ion-select>
-  </ion-item>
+  </ion-item> -->
 
   <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
 

@@ -1,3 +1,5 @@
+import { TranslateService } from '@ngx-translate/core';
+import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../../const/i18n.const';
 import { Component } from '@angular/core';
 import { App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import leaflet, { latLng, tileLayer } from 'leaflet';
@@ -23,11 +25,11 @@ export class SettingsPage {
     user: User = new User;
     message: string;
     coords: Coords = new Coords();
-    radiuses = [100, 150, 200, 250, 500, 1000];
+    // radiuses = [100, 150, 200, 250, 500, 1000];
     isAccountsChoiceVisible: boolean = false;
     isSelectRadiusVisible: boolean = false;
     isAdvMode = false;
-    isChangeMode = false;
+    isModeChanged = false;
     showData: boolean = false;
     showPhone: boolean = false;
     showEmail: boolean = false;
@@ -36,6 +38,9 @@ export class SettingsPage {
     time = new Date().valueOf();
     tileLayer;
     options;
+    lang: string;
+    langs = AVAILABLE_LANGUAGES.map(p => p.name);
+    isLangChanged = false;
 
     constructor(
         private nav: NavController,
@@ -45,14 +50,17 @@ export class SettingsPage {
         private app: App,
         private popoverCtrl: PopoverController,
         private navParams: NavParams,
-        private place: PlaceService) {
+        private place: PlaceService,
+        private translate: TranslateService, ) {
 
+        let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
+        this.lang = availableLang.name;
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
         this.coords.lat = this.user.latitude;
         this.coords.lng = this.user.longitude;
         this.addMap();
-        
+
         if (!this.user.id) {
             this.profile.get(true)
                 .subscribe(user => {
@@ -103,7 +111,7 @@ export class SettingsPage {
     }
 
     toggleAdvMode() {
-        this.isChangeMode = !this.isChangeMode;
+        this.isModeChanged = !this.isModeChanged;
         if (this.isAdvMode && !this.nextPage) {
             let popover = this.popoverCtrl.create(SettingsPopover, { page: CreateAdvUserProfilePage, latitude: this.coords.lat, longitude: this.coords.lng });
             popover.present();
@@ -111,14 +119,23 @@ export class SettingsPage {
         return this.isAdvMode;
     }
 
+    changeLang() {
+        this.isLangChanged = true;
+    }
+
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
         let isShownOnboard = this.appMode.getOnboardingVisible()
+        if (this.isLangChanged) {
+            let availableLang = AVAILABLE_LANGUAGES.find(i => i.name == this.lang);
+            this.translate.use(availableLang.code);
+            SYS_OPTIONS.LANG_CODE = availableLang.code;
+        }
         // this.user.latitude = this.coords.lat;
         // this.user.longitude = this.coords.lng;
         // this.profile.put(this.user)
         // .subscribe(resp => {to do
-        if (!this.isChangeMode) {
+        if (!this.isModeChanged) {
             this.nav.pop();
         }
         else {
