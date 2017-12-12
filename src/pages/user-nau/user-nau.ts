@@ -1,6 +1,7 @@
+import { TransferPage } from '../transfer/transfer';
 import { Account } from '../../models/account';
 import { Component } from '@angular/core';
-import { NavParams } from "ionic-angular";
+import { NavController, NavParams } from 'ionic-angular';
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
 import { DateTimeUtils } from '../../utils/date-time.utils';
@@ -21,7 +22,8 @@ export class UserNauPage {
 
     constructor(
         private profile: ProfileService,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private nav: NavController) {
        
         this.NAU = this.navParams.get('NAU');
         this.balance = this.NAU.balance; 
@@ -41,6 +43,10 @@ export class UserNauPage {
     filterByDate() {
         let dates = DateTimeUtils.getFilterDates(this.date);
         //to do
+    }
+
+    openTransfer() {
+        this.nav.push(TransferPage, { NAU: this.NAU });
     }
 
     doInfinite(infiniteScroll) {
