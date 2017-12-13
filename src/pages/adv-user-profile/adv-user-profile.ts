@@ -13,6 +13,7 @@ import { CreateOfferPage } from '../create-offer/create-offer';
 import { SettingsPage } from '../settings/settings';
 import { StatisticPage } from '../statistic/statistic';
 import { UserNauPage } from '../user-nau/user-nau';
+import { Account } from '../../models/account';
 
 @Component({
     selector: 'page-adv-user-profile',
@@ -26,7 +27,7 @@ export class AdvUserProfilePage {
     MODAL_VISIBLE_KEY = "modalVisible";
     company = new Company();
     balance: number;
-    NAU_Id: string;
+    NAU: Account;
     user = new User;
     onRefreshPlace: Subscription;
     onRefreshAccounts: Subscription;
@@ -62,8 +63,9 @@ export class AdvUserProfilePage {
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
                 this.user = resp;
-                this.balance = resp.accounts.NAU.balance;
-                this.NAU_Id = resp.accounts.NAU.id;
+                this.NAU = resp.accounts.NAU;
+                this.balance = this.NAU.balance;
+                
                 this.time = new Date().valueOf();
             })
 
@@ -71,8 +73,9 @@ export class AdvUserProfilePage {
         this.profile.getWithAccounts()
             .subscribe(resp => {
                 this.user = resp;
-                this.balance = resp.accounts.NAU.balance;
-                this.NAU_Id = resp.accounts.NAU.id;
+                this.NAU = resp.accounts.NAU;
+                this.balance = this.NAU.balance;
+                
                 this.time = new Date().valueOf();
             })
     }
@@ -99,7 +102,7 @@ export class AdvUserProfilePage {
     }
 
     openUserNau() {
-        this.nav.push(UserNauPage, { balance: this.balance, NAU_Id: this.NAU_Id });
+        this.nav.push(UserNauPage, { NAU: this.NAU });
     }
 
     openUserOffers() {

@@ -1,0 +1,10 @@
+<div text-center class="modal_content">
+    <a (click)="close()" class="close"><img src="assets/img/settings/close.svg"></a>
+    <div margin-top text-uppercase class="text-4F4F4F font-16 bold">{{ 'PAGE_TRANSFER.ADDRESS' | translate }}</div>
+    <div class="text-828282 font-14 regular margin-top-2vw">
+        {{ 'PAGE_TRANSFER.SCAN_QR_CODE' | translate }}
+    </div>
+    <div margin>
+        <qr-code [value]="sourceAddress" [size]="qrWith"></qr-code>
+    </div>
+</div>

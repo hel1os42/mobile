@@ -38,7 +38,7 @@
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
                 <div class="btn_map1" *ngIf="!isMapVisible">
                     <img src="assets/img/user_home/icon_pin_new.svg">
-                    <div class="text-828282 font-10">MAP</div>
+                    <div class="text-828282 font-10">{{ 'PAGE_PLACES.MAP' | translate }}</div>
                 </div>
                 <img class="btn_map2" *ngIf="isMapVisible" src="assets/img/user_home/icon_pin_hide.svg">
             </a>
@@ -75,7 +75,7 @@
                         {{ company?.active_offers_count }}
                     </div>
                     <div text-center class="font-10 text-828282">
-                        {{ 'PAGE_PLACES.OFFERS' | translate }}
+                        {{ 'UNIT.OFFERS' | translate }}
                     </div>
                 </div>
             </div>
@@ -85,9 +85,9 @@
 
     <div *ngIf="isMapVisible">
         <div class="leaflet-map"
-            leaflet 
-            [leafletOptions]="options" 
-            [leafletLayers]="getLayers()" 
+            leaflet
+            [leafletOptions]="options"
+            [leafletLayers]="getLayers()"
             [leafletFitBounds]="fitBounds">
         </div>
     </div>

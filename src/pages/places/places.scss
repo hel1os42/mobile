@@ -68,23 +68,25 @@ page-places {
     width: 93%;
   }
 
-    .segment-ios{
-        width: 100%;
-        padding-left: 5%;
-        display: block;
+    .segment-ios {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        display: -webkit-box;
+        justify-content: space-between;
     }
 
-    .segment-ios .segment-button {
-        margin-left: 5.4%;
-        display: inline;
+    .segment-ios .segment-button{
+        width: auto;
+        max-width: 20vw;
     }
 
     .segment-ios .segment-button:first-of-type{
-        margin-left: 0;
+        text-align: left;
     }
 
-    .segment-ios .segment-button:last-of-type {
-        margin-left: 5.4%;
+    .segment-ios .segment-button:last-of-type{
+        text-align: right;
     }
 
     .sticky{

@@ -1,0 +1,40 @@
+page-transfer {
+    .btn_scan {
+        position: absolute;
+        width: 5%;
+        top: 39%;
+        right: 8%;
+    }
+
+    .btn_scan img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .relative .text-input-ios{
+        width: 88%;
+    }
+
+    .relative .text-input-ios {
+        padding: 3vw 2.3vw 3vw 6.3vw;
+    }
+}
+
+transfer-popover-component {
+    .block-btn{
+      width: 60%;
+      margin-left: 20%;
+    }
+
+   .qr-code{
+       width: 50%;
+   }
+
+    .close{
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        width: 5vw;
+        height: 5vw;
+    }
+  }

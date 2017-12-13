@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
+import { TransactionCreate } from '../models/transactionCreate';
 
 @Injectable()
 export class ProfileService {
@@ -32,6 +33,10 @@ export class ProfileService {
         return this.api.get(`transactions?orderBy=created_at&sortedBy=desc&page=${page}`, {
             showLoading: page == 1
         });
+    }
+
+    postTransaction(transaction: TransactionCreate) {
+        return this.api.post('transactions', transaction);
     }
 
     getWithAccounts() {

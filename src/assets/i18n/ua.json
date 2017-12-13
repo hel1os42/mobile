@@ -1,15 +1,15 @@
 {
     "UNIT" : {
-        "KM" : "km",
-        "M" : "m",
-        "DETECTING_YOUR_LOCATION" : "Detecting your location...",
-        "SETTING_MAP_RADIUS" : "Setting map radius (km)",
-        "DONE" : "Done",
-        "CANCEL" : "Cancel",
-        "SIGN_UP" : "sign up",
-        "SIGN_IN" : "sign in",
+        "KM" : "км",
+        "M" : "м",
+        "DETECTING_YOUR_LOCATION" : "Виявлення вашого місцезнаходження ...",
+        "SETTING_MAP_RADIUS" : "Налаштування радіуса карти (км)",
+        "DONE" : "Готово",
+        "CANCEL" : "Скасувати",
+        "SIGN_UP" : "Зареєструватися",
+        "SIGN_IN" : "Увійти",
         "OFFERS" : "Offers",
-        "MIN_SYMBOLS" : "min:"
+        "MIN_SYMBOLS" : "мiн:"
     },
 
     "MONTHS" : {
@@ -37,16 +37,15 @@
     },
 
     "PAGE_PLACES" : {
-        "ALL_OFFERS" : "All offers",
-        "DELIVERY" : "Delivery",
-        "NEW" : "New",
-        "MONTHLY" : "Monthly",
-        "FEATURED" : "Featured",
-        "OFFERS" : "Offers",
-        "LOADING_COMPANIES" : "Loading companies...",
-        "SELECT_CUISINE" : "Select Cuisine",
-        "CLEAR" : "Clear",
-        "MAP" : "Map"
+        "ALL_OFFERS" : "Всі пропозиції",
+        "DELIVERY" : "Доставка",
+        "NEW" : "Нові",
+        "MONTHLY" : "Щомісяця",
+        "FEATURED" : "Рекомендовані",
+        "LOADING_COMPANIES" : "Завантаження компаній ...",
+        "SELECT_CUISINE" : "Виберіть кухню",
+        "CLEAR" : "Очистити",
+        "MAP" : "Мапа"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -302,7 +301,7 @@
         "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Try it for free",
-        "LANG" : "Language"
+        "LANG" : "Lang"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {
@@ -466,11 +465,11 @@
     },
 
     "PAGE_TRANSFER" : {
-        "TRANSFER" : "Transfer",
-        "SOURCE_ADDRESS" : "Source address",
-        "INPUT_ADDRESS" : "Input address",
-        "DESTINATION_ADDRESS" : "Destination address",
-        "AMOUNT" : "Amount",
+        "TRANSFER" : " Переказ",
+        "SOURCE_ADDRESS" : "Адреса відправника",
+        "INPUT_ADDRESS" : "Введіть адресу",
+        "DESTINATION_ADDRESS" : "Адреса одержувача",
+        "AMOUNT" : "Сума",
         "ADDRESS" : "Address",
         "SCAN_QR_CODE" : "Scan QR-code to see the address"
     }

@@ -27,7 +27,7 @@ page-settings{
     height: 250px;
     }
 
-    
+
   .leaflet-map {
     height: 250px;
     z-index: 111;
@@ -136,6 +136,14 @@ page-settings{
         width: 0;
         height: 0;
         right: 10vw;
+    }
+
+    .selected-lang .select-icon{
+        display: none;
+    }
+
+    .selected-lang.select.select-ios {
+        padding: 3vw 6.3vw 3vw 4.7vw;
     }
 }
 

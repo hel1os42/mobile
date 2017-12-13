@@ -1,5 +1,7 @@
+import { TransferPage } from '../transfer/transfer';
+import { Account } from '../../models/account';
 import { Component } from '@angular/core';
-import { NavParams } from "ionic-angular";
+import { NavController, NavParams } from 'ionic-angular';
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
 import { DateTimeUtils } from '../../utils/date-time.utils';
@@ -13,18 +15,18 @@ export class UserNauPage {
     transactions: Transaction[];
     balance: number;
     today: number = Date.now();
-    NAU_Id: string;
     date: string;
     page = 1;
     lastPage: number;
-
+    NAU: Account;
 
     constructor(
         private profile: ProfileService,
-        private navParams: NavParams) {
-
-        this.balance = this.navParams.get('balance');
-        this.NAU_Id = this.navParams.get('NAU_Id');
+        private navParams: NavParams,
+        private nav: NavController) {
+       
+        this.NAU = this.navParams.get('NAU');
+        this.balance = this.NAU.balance; 
 
         this.profile.getTransactions(this.page)
             .subscribe(resp => {
@@ -34,13 +36,17 @@ export class UserNauPage {
     }
 
     transactionSource(sourceId, transactionAmount) {
-        let amount = (this.NAU_Id == sourceId) ? -transactionAmount : transactionAmount;
+        let amount = (this.NAU.id == sourceId) ? -transactionAmount : transactionAmount;
         return amount;
     }
 
     filterByDate() {
         let dates = DateTimeUtils.getFilterDates(this.date);
         //to do
+    }
+
+    openTransfer() {
+        this.nav.push(TransferPage, { NAU: this.NAU });
     }
 
     doInfinite(infiniteScroll) {

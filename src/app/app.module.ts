@@ -1,8 +1,10 @@
-import { GeocodeService } from '../providers/geocode.service';
+import { TransferPopover } from '../pages/transfer/transfer.popover';
 import 'rxjs/add/operator/map';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -13,7 +15,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angular2-qrcode';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BarChartComponent } from '../components/bar-chart';
 import { LineChartComponent } from '../components/line-chart';
 import { AdvHomePage } from '../pages/adv-home/adv-home';
@@ -21,6 +22,7 @@ import { AdvNotificationsPage } from '../pages/adv-notifications/adv-notificatio
 import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
 import { AdvTabsPage } from '../pages/adv-tabs/adv-tabs';
 import { AdvUserOffersPage } from '../pages/adv-user-offers/adv-user-offers';
+import { CreateOfferInformationPopover } from '../pages/adv-user-offers/information.popover';
 import { AdvUserProfilePage } from '../pages/adv-user-profile/adv-user-profile';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
@@ -59,6 +61,7 @@ import { StatisticPage } from '../pages/statistic/statistic';
 import { Statistic1Page } from '../pages/statistic1/statistic1';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TestPage } from '../pages/test/test';
+import { TransferPage } from '../pages/transfer/transfer';
 import { UserAchievePage } from '../pages/user-achieve/user-achieve';
 import { UserNauPage } from '../pages/user-nau/user-nau';
 import { UserOffersPage } from '../pages/user-offers/user-offers';
@@ -68,6 +71,7 @@ import { UserUsersPage } from '../pages/user-users/user-users';
 import { ApiService } from '../providers/api.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
+import { GeocodeService } from '../providers/geocode.service';
 import { LocationService } from '../providers/location.service';
 import { OfferService } from '../providers/offer.service';
 import { PlaceService } from '../providers/place.service';
@@ -77,8 +81,6 @@ import { TimezoneService } from '../providers/timezone.service';
 import { ToastService } from '../providers/toast.service';
 import { TokenService } from '../providers/token.service';
 import { MyApp } from './app.component';
-import { CreateOfferInformationPopover } from '../pages/adv-user-offers/information.popover';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -125,6 +127,7 @@ export function createTranslateLoader(http: Http) {
       SettingsPopover,
       OfferRedeemPopover,
       PlacesPopover,
+      TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
       CreateAdvUserProfileChildCategoryPopover,
@@ -139,6 +142,7 @@ export function createTranslateLoader(http: Http) {
       FeedPage,
       StatisticPage,
       Statistic1Page,
+      TransferPage,
       LineChartComponent,
       BarChartComponent
   ],
@@ -202,6 +206,7 @@ export function createTranslateLoader(http: Http) {
       SettingsPopover,
       OfferRedeemPopover,
       PlacesPopover,
+      TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
       CreateAdvUserProfileChildCategoryPopover,
@@ -216,6 +221,7 @@ export function createTranslateLoader(http: Http) {
       FeedPage,
       StatisticPage,
       Statistic1Page,
+      TransferPage,
       LineChartComponent,
       BarChartComponent
   ],
