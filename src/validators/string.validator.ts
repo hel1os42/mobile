@@ -4,7 +4,7 @@ import {FormControl} from '@angular/forms';
 export class StringValidator {
 
     static stringLimitMax(str: string, length: number) {
-        if (str && str.length > length) {
+        if (str && str.length > length) { 
             return str = str.slice(0, str.length - 1);
         }
         else {
@@ -36,4 +36,9 @@ export class StringValidator {
         }
         return ev;
     }
+
+    static updateAmount(ev) {
+        ev.target.value = ev.target.value.replace(/[^.\d]+/g,"").replace( /^([^\.]*\.)|\./g, '$1' );//only numbers and one dot
+    }
+
 }

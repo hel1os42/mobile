@@ -1,11 +1,12 @@
+import { StringValidator } from '../../validators/string.validator';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { TransferPopover } from './transfer.popover';
 import { NamberValidator } from '../../validators/number.validator';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionCreate } from '../../models/transactionCreate';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Account } from '../../models/account';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from '../../providers/toast.service';
 
 @Component({
@@ -15,46 +16,35 @@ import { ToastService } from '../../providers/toast.service';
 export class TransferPage {
 
     NAU: Account;
-    transferData: TransactionCreate;
-    sourceAddress: string;
-    destinationAddress: string;
-    amount: number;
+    transferData = new TransactionCreate();
     balance: number;
-    formData: FormGroup;
+    amount = '1';
 
     constructor(
         private profile: ProfileService,
         private navParams: NavParams,
-        private builder: FormBuilder,
         private toast: ToastService,
         private nav: NavController,
-        private popoverCtrl: PopoverController) {
+        private popoverCtrl: PopoverController,
+        private barcode: BarcodeScanner) {
 
         this.NAU = this.navParams.get('NAU');
-        this.sourceAddress = this.NAU.address;
+        this.transferData.source = this.NAU.address;
         this.balance = this.NAU.balance;
 
-        this.formData = this.builder.group({
-            sourceAddress: new FormControl(this.sourceAddress, Validators.compose([
-                Validators.required,
-                Validators.minLength(20),
-                Validators.pattern('^[a-zA-Z0-9]*$'),
-            ])),
-            destinationAddress: new FormControl('', Validators.compose([
-                Validators.required,
-                Validators.minLength(20),
-                Validators.pattern('^[a-zA-Z0-9]*$'),
-            ])),
-            amount: new FormControl('1', Validators.compose([
-                NamberValidator.min(1),
-                Validators.required,
-            ])),
-        });
+    }
+
+    limitStr(str: string, length: number) {
+        this.amount = StringValidator.stringLimitMax(str, length);
+    }
+
+    updateAmount(event) {
+        StringValidator.updateAmount(event);
     }
 
     validateMax() {
-        let amount = parseInt(this.formData.value.amount);
-        if (amount > this.balance) {
+        this.transferData.amount = parseInt(this.amount);
+        if (this.transferData.amount > this.balance) {
             this.toast.show('Amount should be no more then balance');
             return false;
         }
@@ -63,24 +53,26 @@ export class TransferPage {
         }
     }
 
-    transfer() {
-        if (this.validateMax) {
-            let data = this.formData.value;
-            this.transferData = {
-                source: data.sourceAddress,
-                destination: data.destinationAddress,
-                amount: parseInt(data.amount)
-            };
-        this.profile.postTransaction(this.transferData)
-            .subscribe(() => {
-                this.profile.refreshAccounts();
-                this.nav.pop();
-            })
-        }
+    openPopover() {
+        let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.transferData.source });
+        popover.present();
     }
 
-    openPopover() {
-        let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.sourceAddress });
-        popover.present();
+    scanBarcode() {
+        this.barcode.scan()
+            .then(res => {
+                this.transferData.destination = res.text;
+            });
+    }
+
+    transfer() {
+        if (this.validateMax()) {
+            this.transferData.amount = parseFloat(this.amount);
+            this.profile.postTransaction(this.transferData)
+                .subscribe(() => {
+                    this.profile.refreshAccounts();
+                    this.nav.pop();
+                })
+        }
     }
 }
