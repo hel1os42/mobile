@@ -1,17 +1,27 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Transfer</ion-title>
+        <ion-title>{{ 'PAGE_TRANSFER.TRANSFER' | translate }}</ion-title>
     </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content class="padding-no">
+    <ion-item padding-top padding-left padding-right class="border-bottom-no top-block-nau">
+        <ion-avatar item-start>
+            <img src="assets/img/user_nau/icon_nau.svg">
+        </ion-avatar>
+        <div>
+            <div class="font-18 text-3E4B5D bold">0</div>
+            <div class="font-14 text-828282">NAU</div>
+        </div>
+    </ion-item>
+
     <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
-        User Address
+        {{ 'PAGE_TRANSFER.SOURCE_ADDRESS' | translate }}
     </div>
     <div class="block-lines relative">
         <ion-item no-lines>
-            <ion-input class="bg-gray" type="text" placeholder="Input address"></ion-input>
+            <ion-input class="bg-gray" type="text" placeholder="{{ 'PAGE_TRANSFER.INPUT_ADDRESS' | translate }}"></ion-input>
         </ion-item>
         <a class="btn_scan">
             <img src="assets/img/scan.svg">
@@ -19,11 +29,11 @@
     </div>
 
     <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
-        Address of the recipient
+        {{ 'PAGE_TRANSFER.DESTINATION_ADDRESS' | translate }}
     </div>
     <div class="block-lines relative">
         <ion-item no-lines>
-            <ion-input class="bg-gray" type="text" placeholder="Input address"></ion-input>
+            <ion-input class="bg-gray" type="text" placeholder="{{ 'PAGE_TRANSFER.INPUT_ADDRESS' | translate }}"></ion-input>
         </ion-item>
         <a class="btn_scan">
             <img src="assets/img/scan.svg">
@@ -31,15 +41,15 @@
     </div>
 
     <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
-        Amount
+        {{ 'PAGE_TRANSFER.AMOUNT' | translate }}
     </div>
     <div class="block-lines">
         <ion-item no-lines>
-            <ion-input class="bg-gray" type="text" placeholder="Amount"></ion-input>
+            <ion-input class="bg-gray" type="text" placeholder="{{ 'PAGE_TRANSFER.AMOUNT' | translate }}"></ion-input>
         </ion-item>
     </div>
 
     <p margin>
-        <button color="primary" ion-button block>Transfer</button>
+        <button color="primary" ion-button block>{{ 'PAGE_TRANSFER.TRANSFER' | translate }}</button>
     </p>
 </ion-content>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="981px" height="980px" viewBox="0 0 981 980" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Untitled 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="scan">
+            <path d="M34.7,334.4 C53.5,334.4 68.4,319.2 68.4,300.4 L68.4,137.2 C68.4,99.7 100.2,69 137.7,69 L300.9,69 C319.7,69 334.9,53.5 334.9,34.8 C334.9,16.1 319.7,0.6 300.9,0.6 L137.6,0.6 C62.6,0.5 1,62.2 1,137.2 L1,300.4 C1,319.2 15.9,334.4 34.7,334.4 Z" id="Shape" fill="#FF5A00" fill-rule="nonzero"></path>
+            <text id="FF5A00" font-family="Helvetica" font-size="48" font-weight="normal" fill="#FFFFFF">
+                <tspan x="405" y="508">FF5A00</tspan>
+            </text>
+            <path d="M845,0.5 L681.7,0.5 C662.9,0.5 647.7,16 647.7,34.7 C647.7,53.5 662.9,68.9 681.7,68.9 L845,68.9 C882.5,68.9 911.5,99.6 911.5,137.1 L911.5,300.3 C911.5,319.1 927,334.3 945.7,334.3 C964.4,334.3 979.9,319.1 979.9,300.3 L979.9,137.2 C980,62.2 920,0.5 845,0.5 Z" id="Shape" fill="#FF5A00" fill-rule="nonzero"></path>
+            <path d="M945.7,647.3 C926.9,647.3 911.5,662.5 911.5,681.3 L911.5,844.5 C911.5,882 882.5,911 845,911 L681.7,911 C662.9,911 647.7,926.5 647.7,945.2 C647.7,963.9 662.9,979.4 681.7,979.4 L845,979.4 C920,979.4 980,919.5 980,844.5 L980,681.3 C980,662.5 964.5,647.3 945.7,647.3 Z" id="Shape" fill="#FF5A00" fill-rule="nonzero"></path>
+            <text id="FF5A00" font-family="Helvetica" font-size="48" font-weight="normal" fill="#FFFFFF">
+                <tspan x="405" y="508">FF5A00</tspan>
+            </text>
+            <path d="M300.9,911 L137.6,911 C100.1,911 68.3,882 68.3,844.5 L68.3,681.3 C68.3,662.5 53.4,647.3 34.6,647.3 C15.8,647.3 0.9,662.5 0.9,681.3 L0.9,844.5 C0.9,919.5 62.5,979.4 137.5,979.4 L300.7,979.4 C319.5,979.4 334.7,963.9 334.7,945.2 C334.7,926.5 319.7,911 300.9,911 Z" id="Shape" fill="#FF5A00" fill-rule="nonzero"></path>
+            <path d="M947,454.1 L35.6,454.1 C16.8,454.1 1.6,469 1.6,487.8 C1.6,506.6 16.8,521.5 35.6,521.5 L947,521.5 C965.8,521.5 981,506.6 981,487.8 C981,469 965.8,454.1 947,454.1 Z" id="Shape" fill="#FF5A00" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

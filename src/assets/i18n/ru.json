@@ -462,6 +462,14 @@
         "LEVEL" : "Level",
         "OFFERS" : "Offers",
         "REGISTRATION_DATE" : "Registration date"
+    },
+
+    "PAGE_TRANSFER" : {
+        "TRANSFER" : " Перевод",
+        "SOURCE_ADDRESS" : "Адрес отправителя",
+        "INPUT_ADDRESS" : "Введите адрес",
+        "DESTINATION_ADDRESS" : "Адрес получателя",
+        "AMOUNT" : "Сумма"
     }
 }
 

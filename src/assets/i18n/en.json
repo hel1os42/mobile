@@ -463,6 +463,14 @@
         "LEVEL" : "Level",
         "OFFERS" : "Offers",
         "REGISTRATION_DATE" : "Registration date"
+    },
+
+    "PAGE_TRANSFER" : {
+        "TRANSFER" : "Transfer",
+        "SOURCE_ADDRESS" : "Source address",
+        "INPUT_ADDRESS" : "Input address",
+        "DESTINATION_ADDRESS" : "Destination address",
+        "AMOUNT" : "Amount"
     }
 }
 
