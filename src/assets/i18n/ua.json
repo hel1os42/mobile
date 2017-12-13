@@ -469,7 +469,9 @@
         "SOURCE_ADDRESS" : "Адреса відправника",
         "INPUT_ADDRESS" : "Введіть адресу",
         "DESTINATION_ADDRESS" : "Адреса одержувача",
-        "AMOUNT" : "Сума"
+        "AMOUNT" : "Сума",
+        "ADDRESS" : "Address",
+        "SCAN_QR_CODE" : "Scan QR-code to see the address"
     }
 }
 

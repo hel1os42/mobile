@@ -25,8 +25,16 @@ transfer-popover-component {
       width: 60%;
       margin-left: 20%;
     }
-  
+
    .qr-code{
        width: 50%;
    }
+
+    .close{
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        width: 5vw;
+        height: 5vw;
+    }
   }

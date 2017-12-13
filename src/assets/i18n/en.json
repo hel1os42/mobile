@@ -470,7 +470,9 @@
         "SOURCE_ADDRESS" : "Source address",
         "INPUT_ADDRESS" : "Input address",
         "DESTINATION_ADDRESS" : "Destination address",
-        "AMOUNT" : "Amount"
+        "AMOUNT" : "Amount",
+        "ADDRESS" : "Address",
+        "SCAN_QR_CODE" : "Scan QR-code to see the address"
     }
 }
 
