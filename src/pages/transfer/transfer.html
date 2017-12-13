@@ -6,40 +6,44 @@
 </ion-header>
 
 <ion-content class="padding-no">
-    <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
-        User Address
-    </div>
-    <div class="block-lines relative">
-        <ion-item no-lines>
-            <ion-input class="bg-gray" type="text" placeholder="Input address"></ion-input>
-        </ion-item>
-        <a class="btn_scan">
-            <img src="assets/img/scan.svg">
-        </a>
-    </div>
+    <form [formGroup]="formData">
+        <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
+            User Address
+        </div>
+        <div class="block-lines relative">
+            <ion-item no-lines>
+                <ion-input formControlName="sourceAddress" class="bg-gray" type="text" placeholder="Input address"></ion-input>
+            </ion-item>
+            <a class="btn_scan">
+                <img src="assets/img/scan.svg">
+            </a>
+        </div>
 
-    <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
-        Address of the recipient
-    </div>
-    <div class="block-lines relative">
-        <ion-item no-lines>
-            <ion-input class="bg-gray" type="text" placeholder="Input address"></ion-input>
-        </ion-item>
-        <a class="btn_scan">
-            <img src="assets/img/scan.svg">
-        </a>
-    </div>
+        <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
+            Address of the recipient
+        </div>
+        <div class="block-lines relative">
+            <ion-item no-lines>
+                <ion-input formControlName="destinationAddress" class="bg-gray" type="text" placeholder="Input address"></ion-input>
+            </ion-item>
+            <a class="btn_scan">
+                <img src="assets/img/scan.svg">
+            </a>
+        </div>
 
-    <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
-        Amount
-    </div>
-    <div class="block-lines">
-        <ion-item no-lines>
-            <ion-input class="bg-gray" type="text" placeholder="Amount"></ion-input>
-        </ion-item>
-    </div>
+        <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
+            Amount
+        </div>
+        <div class="block-lines">
+            <ion-item no-lines>
+                <ion-input formControlName="amount" class="bg-gray" type="number" placeholder=""></ion-input>
+            </ion-item>
+        </div>
+    </form>
 
     <p margin>
-        <button color="primary" ion-button block>Transfer</button>
+        <button (click)="transfer()" [disabled]="!formData.valid" color="primary" ion-button block>
+            Transfer
+        </button>
     </p>
 </ion-content>
