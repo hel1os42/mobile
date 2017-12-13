@@ -1,3 +1,4 @@
+import { TransferPopover } from '../pages/transfer/transfer.popover';
 import 'rxjs/add/operator/map';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -126,6 +127,7 @@ export function createTranslateLoader(http: Http) {
       SettingsPopover,
       OfferRedeemPopover,
       PlacesPopover,
+      TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
       CreateAdvUserProfileChildCategoryPopover,
@@ -204,6 +206,7 @@ export function createTranslateLoader(http: Http) {
       SettingsPopover,
       OfferRedeemPopover,
       PlacesPopover,
+      TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
       CreateAdvUserProfileChildCategoryPopover,

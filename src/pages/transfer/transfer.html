@@ -24,7 +24,7 @@
             <ion-item no-lines>
                 <ion-input formControlName="sourceAddress" class="bg-gray" type="text" placeholder="{{ 'PAGE_TRANSFER.INPUT_ADDRESS' | translate }}"></ion-input>
             </ion-item>
-            <a class="btn_scan">
+            <a (click)="openPopover()" class="btn_scan">
                 <img src="assets/img/scan.svg">
             </a>
         </div>

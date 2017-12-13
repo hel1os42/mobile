@@ -1,5 +1,6 @@
+import { TransferPopover } from './transfer.popover';
 import { NamberValidator } from '../../validators/number.validator';
-import { NavParams, NavController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionCreate } from '../../models/transactionCreate';
 import { Component } from '@angular/core';
@@ -26,7 +27,8 @@ export class TransferPage {
         private navParams: NavParams,
         private builder: FormBuilder,
         private toast: ToastService,
-        private nav: NavController) {
+        private nav: NavController,
+        private popoverCtrl: PopoverController) {
 
         this.NAU = this.navParams.get('NAU');
         this.sourceAddress = this.NAU.address;
@@ -75,5 +77,10 @@ export class TransferPage {
                 this.nav.pop();
             })
         }
+    }
+
+    openPopover() {
+        let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.sourceAddress });
+        popover.present();
     }
 }
