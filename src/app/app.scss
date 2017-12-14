@@ -1796,3 +1796,24 @@ body {
     font-size: 2vw;
     color: red;
 }
+
+.disabled-elements{
+    pointer-events: none;
+    -webkit-filter: grayscale(100%) brightness(70%);
+    filter: grayscale(100%) brightness(70%);
+}
+
+.disabled-elements:before {
+    font-size: 7vw;
+    content: "Coming soon ";
+    opacity: 0.7;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    bottom: 20vw;
+    z-index: 111111;
+    background: white;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+}

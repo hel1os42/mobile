@@ -69,9 +69,8 @@ page-places {
   }
 
     .segment-ios {
-        width: 90%;
-        margin-left: 5%;
-        margin-right: 5%;
+        width: 93%;
+        margin-left: 4%;
         display: -webkit-box;
         justify-content: space-between;
     }
@@ -79,14 +78,6 @@ page-places {
     .segment-ios .segment-button{
         width: auto;
         max-width: 20vw;
-    }
-
-    .segment-ios .segment-button:first-of-type{
-        text-align: left;
-    }
-
-    .segment-ios .segment-button:last-of-type{
-        text-align: right;
     }
 
     .sticky{
