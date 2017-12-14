@@ -6,8 +6,14 @@ import { Component } from '@angular/core';
 })
 export class AdvNotificationsPage {
 
+  isVisibleSearch: boolean = false;
+
   constructor() {
 
+  }
+
+  toggleSearch() {
+    this.isVisibleSearch = !this.isVisibleSearch;
   }
 
 }
