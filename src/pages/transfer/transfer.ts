@@ -1,5 +1,5 @@
 import { StringValidator } from '../../validators/string.validator';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { TransferPopover } from './transfer.popover';
 import { NamberValidator } from '../../validators/number.validator';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
@@ -19,6 +19,10 @@ export class TransferPage {
     transferData = new TransactionCreate();
     balance: number;
     amount = '1';
+    options: BarcodeScannerOptions = {
+        preferFrontCamera: true,
+        orientation: 'portrait'
+    };
 
     constructor(
         private profile: ProfileService,
