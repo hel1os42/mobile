@@ -20,7 +20,7 @@ export class LoginPage {
         phone: '',
         code: ''
     };
-    numCodes = ['+7', '+49', '+63', '+57', '+380'];
+    numCodes = ['+7', '+49', '+63', '+57', '+380', '+86'];
     numCode: string = '+380';
     page;
     clickMode = 0;
