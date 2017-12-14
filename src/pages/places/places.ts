@@ -56,15 +56,15 @@ export class PlacesPage {
 
         this.selectedCategory = this.categories[0];
         this.segment = "alloffers";
-        let loadingCompanies = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
-        loadingCompanies.present();
+        let loadingLocation = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
+        loadingLocation.present();
             this.location.get()
                 .then((resp) => {
                     this.coords = {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
-                    loadingCompanies.dismiss();
+                    loadingLocation.dismiss();
                     this.getCompaniesList();
                 })
                 .catch((error) => {
@@ -78,11 +78,11 @@ export class PlacesPage {
                                     lat: resp.latitude,
                                     lng: resp.longitude
                                 }; 
-                                loadingCompanies.dismiss();
+                                loadingLocation.dismiss();
                                 this.getCompaniesList();
                             })
                     }
-                }, 7000);
+                }, 10000);
     }
 
     getCompaniesList() {

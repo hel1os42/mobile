@@ -90,7 +90,7 @@ export class CreateUserProfilePage {
                             this.addMap();
                         })
                 }
-            }, 7000);
+            }, 10000);
         }
     }
 
