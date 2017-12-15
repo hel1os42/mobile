@@ -201,7 +201,7 @@ export class PlacesPage {
     openPlace(company: Company) {
         this.nav.push(PlacePage, {
             company: company,
-            distance: this.getDistance(company.latitude, company.longitude)
+            distanceStr: this.getDistance(company.latitude, company.longitude),
         });
     }
 

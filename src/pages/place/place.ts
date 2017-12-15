@@ -32,7 +32,7 @@ export class PlacePage {
         this.segment = "alloffers";
         this.company = this.navParams.get('company');
         let companyId = this.company.id;
-        this.distanceString = this.navParams.get('distance');
+        this.distanceString = this.navParams.get('distanceStr');
 
         this.offers.getPlace(companyId)
             .subscribe(companyWithOffers => {
@@ -65,9 +65,14 @@ export class PlacePage {
         this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
     }
 
-    openOffer(offer, company, distance) {
+    openOffer(offer, company) {
         //this.nav.setRoot(OfferPage, { offer: offer});
-        this.app.getRootNav().push(OfferPage, { offer: offer, company: this.company, distance: this.distanceString});
+        this.app.getRootNav().push(OfferPage, { 
+            offer: offer, 
+            company: this.company, 
+            distanceStr: this.distanceString,
+            coords: this.coords
+        });
     }
 
 }

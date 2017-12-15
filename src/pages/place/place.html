@@ -63,7 +63,7 @@
 
 <ion-content [ngSwitch]="segment" padding no-bounce>
   <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-    <ion-item *ngFor=" let offer of offersList" (click)="openOffer(offer)" class="relative">
+    <ion-item *ngFor=" let offer of offersList" class="relative">
       <ion-avatar item-start>
         <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
           <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '), url(assets/img/imagenotfound.svg)'}"></div>
@@ -72,7 +72,7 @@
       <div text-regular class="margin-top-10 width-88 font-12 text-828282 wrap text-overflow-35">{{ offer.description }}</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-10 flex">
-        <button ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
+        <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
         <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
         <img class="gift" src="assets/img/place/icon_gift.svg">
       </div>
