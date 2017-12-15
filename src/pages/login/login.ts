@@ -74,7 +74,7 @@ export class LoginPage {
         else this.authData.code = StringValidator.stringLimitMax(str, length);
     }
 
-    presentAlert(selected: boolean) {
+    presentConfirm(selected: boolean) {
         let content = selected ?
             {
                 title: 'Development mode is already selected',
@@ -118,18 +118,18 @@ export class LoginPage {
                     }
                 ]
             };
-        let alert = this.alertCtrl.create(content);
-        alert.present();
+        let confirm = this.alertCtrl.create(content);
+        confirm.present();
     }
 
     toggleMode() {
         this.clickMode = this.clickMode + 1;
         if (this.appMode.getDevMode()) {
-            this.presentAlert(true);
+            this.presentConfirm(true);
         }
         else {
             if (this.clickMode >= 5) {
-                this.presentAlert(false);
+                this.presentConfirm(false);
             }
         }
     }
