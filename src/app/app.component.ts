@@ -56,6 +56,8 @@ export class MyApp {
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
             });
+
+            //this.rootPage = TabsPage;
         });
 
         this.auth.onLogout.subscribe(() => {

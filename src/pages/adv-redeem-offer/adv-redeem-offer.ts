@@ -19,7 +19,8 @@ export class AdvRedeemOfferPage {
     constructor(private nav: NavController,
                 private place: PlaceService,
                 private barcode: BarcodeScanner,
-                private profile: ProfileService) {
+                private profile: ProfileService
+    ) {
 
     }
 
