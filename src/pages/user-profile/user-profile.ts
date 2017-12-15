@@ -13,6 +13,7 @@ import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
 import { AppModeService } from '../../providers/appMode.service';
+import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'page-user-profile',
@@ -31,7 +32,8 @@ export class UserProfilePage {
         private profile: ProfileService,
         private nav: NavController,
         private auth: AuthService,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        public alertCtrl: AlertController) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -77,9 +79,25 @@ export class UserProfilePage {
     }
 
     logout() {
-        if (confirm('Are you sure?'))
-            this.auth.logout();
-            this.appMode.removeDevMode();
+        let confirm = this.alertCtrl.create({
+            title: 'Logout',
+            message: 'Are you sure?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: () => {
+                    }
+                },
+                {
+                    text: 'Ok',
+                    handler: () => {
+                        this.auth.logout();
+                        this.appMode.removeDevMode();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 
     slideNext() {
