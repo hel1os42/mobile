@@ -1,4 +1,3 @@
-import { ProfileService } from '../../providers/profile.service';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -16,6 +15,7 @@ import { GeocodeService } from '../../providers/geocode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
+import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { AddressUtils } from '../../utils/address.utils';
 import { StringValidator } from '../../validators/string.validator';
@@ -75,45 +75,40 @@ export class CreateAdvUserProfilePage {
                         lat: company.latitude,
                         lng: company.longitude
                     };
-                    this.addMap();
-                    this.geocoder.getAddress(this.coords.lat, this.coords.lng)
-                        .subscribe(resp => {
-                            this.address = AddressUtils.get(resp);
-                        })
+                   this.mapPresent();
                     this.selectCategory(company.categories);
                 })
         }
         else {
-            this.coords.lat = this.navParams.get('latitude')
-                ? this.navParams.get('latitude')
-                : this.company.latitude;
-            this.coords.lng = this.navParams.get('longitude')
-                ? this.navParams.get('longitude')
-                : this.company.longitude;
-            if (!this.coords.lat || !this.coords.lng) {
-                this.location.getByIp()
-                    .subscribe(resp => {
+            this.coords.lat = this.navParams.get('latitude');
+            this.coords.lng = this.navParams.get('longitude');
+            this.mapPresent();
+
+            if (!this.coords.lat) {
+                this.location.get()
+                    .then((resp) => {
                         this.coords = {
-                            lat: resp.latitude,
-                            lng: resp.longitude
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
                         };
+                        this.mapPresent()
                     })
+                    .catch((error) => {
+                        this.message = error.message;
+                    });
+                setTimeout(() => {
+                    if (!this.coords.lat) {
+                        this.location.getByIp()
+                            .subscribe(resp => {
+                                this.coords = {
+                                    lat: resp.latitude,
+                                    lng: resp.longitude
+                                };
+                               this.mapPresent();
+                            })
+                    }
+                }, 10000);
             }
-            this.location.get()
-                .then((resp) => {
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    this.addMap();
-                    this.geocoder.getAddress(this.coords.lat, this.coords.lng)
-                        .subscribe(resp => {
-                            this.address = AddressUtils.get(resp);
-                        })
-                })
-                .catch((error) => {
-                    this.message = error.message;
-                });
         };
 
         this.formData = this.builder.group({
@@ -150,6 +145,14 @@ export class CreateAdvUserProfilePage {
             zoom: 14,
             center: latLng(this.coords)
         };
+    }
+
+    mapPresent() {
+        this.addMap();
+        this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+        .subscribe(resp => {
+            this.address = AddressUtils.get(resp);
+        })
     }
 
     selectCategory(categories) {
@@ -196,9 +199,9 @@ export class CreateAdvUserProfilePage {
                         this.changeDetectorRef.detectChanges();
                     })
             }
-        }) 
+        })
     }
-  
+
     showCategoriesPopover() {
         let popover = this.popoverCtrl.create(CreateAdvUserProfileCategoryPopover, {
             categories: this.categories.map(p => {
