@@ -79,7 +79,7 @@ export class CreateUserProfilePage {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
-                loadingLocation.dismiss();
+                loadingLocation.dismissAll();
                 this.addMap();
             })
             .catch((error) => {
@@ -92,18 +92,21 @@ export class CreateUserProfilePage {
                         this.coords = {
                             lat: resp.latitude,
                             lng: resp.longitude
-                        };  
-                        loadingLocation.dismiss();
-                        this.addMap();
+                        };
+                            loadingLocation.dismissAll(); 
+                            this.addMap(); 
                     })
             }
-        }, 10000);
+        }, 9000);
         setTimeout(() => {
             if (!this.coords.lat) {
+                loadingLocation.dismissAll();
                 this.presentConfirm();
-                loadingLocation.dismiss();
             }
-        },11500);
+            else {
+                loadingLocation.dismissAll();
+            }
+        },12000);
     }
 
     presentConfirm() {
