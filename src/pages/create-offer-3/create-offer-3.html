@@ -47,6 +47,7 @@
     <div *ngIf="coords.lat" class="block-map">
         <div class="leaflet-map" leaflet [leafletOptions]="options" [leafletZoom]="getZoom()" [leafletLayers]="layers">
         </div>
+        <div id="marker"></div>
     </div>
 
     <p margin>

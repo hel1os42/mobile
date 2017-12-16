@@ -145,21 +145,21 @@ page-create-user-profile{
     position: relative;
   }
 
-  #marker {
-    position: absolute;
-    z-index: 111;
-    background-color: rgba(255, 139, 16, 0.2);
-    background-image: url(../assets/img/create_user_profile/pin.svg);
-    background-position: 50% 50%;
-    background-size: auto 31px;
-    background-repeat: no-repeat;
-    width: 150px;
-    height: 150px;
-    left: calc(50% - 75px);
-    top: 50px;
-    border-radius: 150px;
-    pointer-events: none;
-  }
+    #marker {
+        position: absolute;
+        z-index: 111;
+        background-color: rgba(255, 139, 16, 0.2);
+        background-image: url(../assets/img/create_user_profile/pin.svg);
+        background-position: 50% 50%;
+        background-size: auto 35px;
+        background-repeat: no-repeat;
+        width: 190px;
+        height: 190px;
+        left: calc(50% - 95px);
+        top: 30px;
+        border-radius: 100vw;
+        pointer-events: none;
+    }
 
     .item-ios [item-left], .item-ios [item-start]{
         margin: 0;
