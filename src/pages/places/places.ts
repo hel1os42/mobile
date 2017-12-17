@@ -32,7 +32,7 @@ export class PlacesPage {
     mapBounds;
     mapCenter: Coords;
     message: string;
-    radius = 1000000;
+    radius = 19849000;
     segment: string;
     distanceString: string;
     search = '';
