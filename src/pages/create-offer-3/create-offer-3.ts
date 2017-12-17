@@ -1,14 +1,12 @@
-import { ZOOM } from '../../const/zoom.const';
-import { GeocodeService } from '../../providers/geocode.service';
-import { Offer } from '../../models/offer';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import * as _ from 'lodash';
+import { latLng, LeafletEvent, tileLayer } from 'leaflet';
+import { Map } from 'leaflet';
 import { Coords } from '../../models/coords';
+import { Offer } from '../../models/offer';
+import { GeocodeService } from '../../providers/geocode.service';
+import { MapUtils } from '../../utils/map';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
-import { TileLayer, latLng, tileLayer, marker, icon, circle, Marker } from 'leaflet';
-import { Map } from 'leaflet'
-import { debug } from 'util';
 
 
 @Component({
@@ -22,24 +20,25 @@ export class CreateOffer3Page {
     message: string;
     bounds;
     city: string;
+    country: string;
     picture_url: string;
     tileLayer;
+    _map: Map;
     options;
-    zoom = 11;
-    radius = 5;//km
-    layers;
+    zoom: number;
+    radius: number;
 
     constructor(
         private nav: NavController,
         private navParams: NavParams,
-        private geocoder: GeocodeService) {
+        private geocoder: GeocodeService,
+        private changeDetectorRef: ChangeDetectorRef) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
-        if (this.offer.id) {
-            this.radius = this.offer.radius / 1000;
-            this.zoom = this.getZoom();
-        }
+        
+        this.radius = this.offer.radius;
+        this.zoom = MapUtils.getZoom(this.offer.latitude, this.radius);
         this.coords.lat = this.offer.latitude;
         this.coords.lng = this.offer.longitude;
         this.addMap();
@@ -47,7 +46,7 @@ export class CreateOffer3Page {
             .subscribe(data => {
                 let address = data.address;
                 this.city = address.city || address.town || address.county || address.state;
-                this.offer.country = address.country;
+                this.country = address.country;
             })
     }
 
@@ -56,45 +55,42 @@ export class CreateOffer3Page {
             maxZoom: 20,
             minZoom: 1,
             maxNativeZoom: 18,
-            attribution: '...',
+            attribution: '© OpenStreetMap',
             tileSize: 512,
             zoomOffset: -1,
             detectRetina: true,
         });
         this.options = {
+            layers: [this.tileLayer],
             zoom: this.zoom,
             center: latLng(this.coords)
         };
-        this.layers = [this.tileLayer,
-        marker([this.coords.lat, this.coords.lng], {
-            icon: icon({
-                iconSize: [25, 35],
-                iconAnchor: [13, 35],
-                iconUrl: 'assets/img/places_pin.png',
-                //shadowUrl: 
-            })
-        }),
-        circle([this.coords.lat, this.coords.lng], {
-            radius: this.radius * 1000,
-            color: '#ff8b10',
-            opacity: 0.2,
-            stroke: false
-        })
-        ]
-    }
-    getRadius() {
-        return this.radius * 1000;
     }
 
-    getZoom() {
-        this.zoom = ZOOM[this.radius];
-        return this.zoom;
+    onMapReady(map: Map) {
+        this._map = map;
+        this._map.on({
+            moveend: (event: LeafletEvent) => {
+                this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+                .subscribe(data => {
+                    let address = data.address;
+                    this.city = address.city || address.town || address.county || address.state;
+                    this.country = address.country;
+                    this.changeDetectorRef.detectChanges();
+                })
+                this.coords = this._map.getCenter();
+                this.radius = MapUtils.getRadius(95, this._map);
+            }
+        })
     }
+
 
     openCreateOffer4Page() {
-        this.offer.radius = this.radius * 1000;//todo
+        this.offer.latitude = this.coords.lat;
+        this.offer.longitude = this.coords.lng;
+        this.offer.radius = Math.round(this.radius);
         this.offer.city = this.city;
-        debugger
+        this.offer.country = this.country;
         this.nav.push(CreateOffer4Page, { offer: this.offer, picture: this.picture_url });
     }
 

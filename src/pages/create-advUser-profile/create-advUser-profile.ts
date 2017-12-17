@@ -140,7 +140,7 @@ export class CreateAdvUserProfilePage {
             maxZoom: 20,
             maxNativeZoom: 18,
             minZoom: 1,
-            attribution: '...',
+            attribution: '© OpenStreetMap',
             tileSize: 512,
             zoomOffset: -1,
             detectRetina: true,

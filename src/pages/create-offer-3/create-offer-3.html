@@ -35,7 +35,7 @@
     </div>
 
     <div class="block-lines">
-        <div class="text-4F4F4F font-14" text-uppercase>{{ 'UNIT.SETTING_MAP_RADIUS' | translate }}</div>
+        <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-OFFER.SET_MAP_RADIUS' | translate }}</div>
     </div>
     <ion-item>
         <ion-range (ionChange)="addMap()" [(ngModel)]="radius" debounce="200" min="5" max="100" pin="true" step="5" color="secondary">
@@ -45,7 +45,10 @@
     </ion-item>
     <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
-        <div class="leaflet-map" leaflet [leafletOptions]="options" [leafletZoom]="getZoom()" [leafletLayers]="layers">
+        <div class="leaflet-map" 
+        leaflet 
+        [leafletOptions]="options" 
+        (leafletMapReady)="onMapReady($event)">
         </div>
         <div id="marker"></div>
     </div>
