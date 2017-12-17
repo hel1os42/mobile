@@ -38,7 +38,7 @@ export class CreateOffer3Page {
         this.picture_url = this.navParams.get('picture');
         
         this.radius = this.offer.radius;
-        this.zoom = MapUtils.getZoom(this.offer.latitude, this.radius);
+        this.zoom = MapUtils.round(MapUtils.getZoom(this.offer.latitude, this.radius), 0.5);
         this.coords.lat = this.offer.latitude;
         this.coords.lng = this.offer.longitude;
         this.addMap();
@@ -63,7 +63,9 @@ export class CreateOffer3Page {
         this.options = {
             layers: [this.tileLayer],
             zoom: this.zoom,
-            center: latLng(this.coords)
+            center: latLng(this.coords),
+            zoomSnap: 0.5,
+            zoomDelta: 0.5
         };
     }
 
@@ -80,6 +82,7 @@ export class CreateOffer3Page {
                 })
                 this.coords = this._map.getCenter();
                 this.radius = MapUtils.getRadius(95, this._map);
+                this.zoom = map.getZoom();
             }
         })
     }
@@ -88,7 +91,7 @@ export class CreateOffer3Page {
     openCreateOffer4Page() {
         this.offer.latitude = this.coords.lat;
         this.offer.longitude = this.coords.lng;
-        this.offer.radius = Math.round(this.radius);
+        this.offer.radius = this.zoom == 19 ?  Math.floor(this.radius) : Math.round(this.radius);
         this.offer.city = this.city;
         this.offer.country = this.country;
         this.nav.push(CreateOffer4Page, { offer: this.offer, picture: this.picture_url });

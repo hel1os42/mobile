@@ -69,7 +69,7 @@ export class CreateAdvUserProfilePage {
 
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
-            this.zoom = MapUtils.getZoom(this.company.latitude, this.company.radius);
+            this.zoom = MapUtils.round(MapUtils.getZoom(this.company.latitude, this.company.radius), 0.5);
             this.radius = this.company.radius;
             this.address = this.company.address;
             this.placeService.getWithCategory()
@@ -144,12 +144,14 @@ export class CreateAdvUserProfilePage {
             tileSize: 512,
             zoomOffset: -1,
             detectRetina: true,
-            tap: true,
+            tap: true
         });
         this.options = {
             layers: [this.tileLayer],
             zoom: this.zoom,
-            center: latLng(this.coords)
+            center: latLng(this.coords),
+            zoomSnap: 0.5,
+            zoomDelta: 0.5
         };
         // this.circle = circleMarker(this.coords, { 
         //     radius: 75,
@@ -215,6 +217,7 @@ export class CreateAdvUserProfilePage {
                         this.changeDetectorRef.detectChanges();
                     })
                 this.radius = MapUtils.getRadius(95, this._map);
+                this.zoom = map.getZoom();
                 // this.radius = 40075016.686 * Math.abs(Math.cos(map.getCenter().lat / 180 * Math.PI)) / Math.pow(2, map.getZoom()+8) * 75;
                 // this.circle.setLatLng(this.coords);
                 // let zoom = Math.log2(40075016.686 * 75 * Math.abs(Math.cos(this.coords.lat / 180 * Math.PI)) / this.radius) - 8;
@@ -322,8 +325,7 @@ export class CreateAdvUserProfilePage {
         this.company.longitude = this.coords.lng;
         this.company.address = this.address;
         this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
-        this.company.radius = Math.round(this.radius);
-
+        this.company.radius = this.zoom == 19 ? Math.floor(this.radius) : Math.round(this.radius);
         if (!this.company.id) {
             this.placeService.set(this.company)
                 .subscribe(company => {
