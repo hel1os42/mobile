@@ -18,6 +18,7 @@ import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { AddressUtils } from '../../utils/address.utils';
+import { MapUtils } from '../../utils/map';
 import { StringValidator } from '../../validators/string.validator';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
@@ -47,6 +48,9 @@ export class CreateAdvUserProfilePage {
     tileLayer;
     _map: Map;
     options;
+    // circle: CircleMarker;
+    zoom = 16;
+    radius: number;
 
     constructor(
         private location: LocationService,
@@ -65,6 +69,8 @@ export class CreateAdvUserProfilePage {
 
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
+            this.zoom = MapUtils.getZoom(this.company.latitude, this.company.radius);
+            this.radius = this.company.radius;
             this.address = this.company.address;
             this.placeService.getWithCategory()
                 .subscribe(company => {
@@ -75,14 +81,14 @@ export class CreateAdvUserProfilePage {
                         lat: company.latitude,
                         lng: company.longitude
                     };
-                   this.mapPresent();
+                    this.mapPresent();
                     this.selectCategory(company.categories);
                 })
         }
         else {
             this.coords.lat = this.navParams.get('latitude');
             this.coords.lng = this.navParams.get('longitude');
-            this.mapPresent();
+            this.mapPresent(true);
 
             if (!this.coords.lat) {
                 this.location.get()
@@ -91,7 +97,7 @@ export class CreateAdvUserProfilePage {
                             lat: resp.coords.latitude,
                             lng: resp.coords.longitude
                         };
-                        this.mapPresent()
+                        this.mapPresent(true)
                     })
                     .catch((error) => {
                         this.message = error.message;
@@ -104,7 +110,7 @@ export class CreateAdvUserProfilePage {
                                     lat: resp.latitude,
                                     lng: resp.longitude
                                 };
-                               this.mapPresent();
+                                this.mapPresent(true);
                             })
                     }
                 }, 10000);
@@ -142,17 +148,27 @@ export class CreateAdvUserProfilePage {
         });
         this.options = {
             layers: [this.tileLayer],
-            zoom: 14,
+            zoom: this.zoom,
             center: latLng(this.coords)
         };
+        // this.circle = circleMarker(this.coords, { 
+        //     radius: 75,
+        //     color: '#ff8b10',
+        //     opacity: 0.2,
+        //     stroke: false
+        // });
+        // this.layers = [this.tileLayer, ...[this.circle]];
     }
 
-    mapPresent() {
+    mapPresent(getRadius?) {
         this.addMap();
         this.geocoder.getAddress(this.coords.lat, this.coords.lng)
-        .subscribe(resp => {
-            this.address = AddressUtils.get(resp);
-        })
+            .subscribe(resp => {
+                this.address = AddressUtils.get(resp);
+                if (getRadius) {
+                    this.radius = MapUtils.getRadius(95, this._map);
+                }
+            })
     }
 
     selectCategory(categories) {
@@ -198,6 +214,10 @@ export class CreateAdvUserProfilePage {
                         this.address = AddressUtils.get(resp);
                         this.changeDetectorRef.detectChanges();
                     })
+                this.radius = MapUtils.getRadius(95, this._map);
+                // this.radius = 40075016.686 * Math.abs(Math.cos(map.getCenter().lat / 180 * Math.PI)) / Math.pow(2, map.getZoom()+8) * 75;
+                // this.circle.setLatLng(this.coords);
+                // let zoom = Math.log2(40075016.686 * 75 * Math.abs(Math.cos(this.coords.lat / 180 * Math.PI)) / this.radius) - 8;
             }
         })
     }
@@ -302,7 +322,7 @@ export class CreateAdvUserProfilePage {
         this.company.longitude = this.coords.lng;
         this.company.address = this.address;
         this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
-        this.company.radius = 30000;
+        this.company.radius = Math.round(this.radius);
 
         if (!this.company.id) {
             this.placeService.set(this.company)
