@@ -111,7 +111,7 @@
         "COMPANY_DESCRIPTION" : "Company description",
         "CATEGORY_TYPE" : "Category & type your place",
         "CHOOSE_CATEGORY" : "Choose category",
-        "CHOOSE_YOUR_OFFICE_LOCATION" : "Choose your office location",
+        "CHOOSE_YOUR_OFFICE_LOCATION" : "Choose your office location and set map radius",
         "CATEGORY" : "Category"
     },
 
@@ -138,6 +138,7 @@
         "DAY" : "Day",
         "WORK" : "Work",
         "WORKING_AREA" : "Working Area",
+        "SET_MAP_RADIUS" :"Set map radius and confirm offer location",
         "MAX_REDEMPTION_PER_USER" : "Max redemption per user",
         "OVERALL" : "Overall",
         "DAILY" : "Daily",
