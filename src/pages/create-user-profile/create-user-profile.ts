@@ -111,8 +111,8 @@ export class CreateUserProfilePage {
 
     presentConfirm() {
         let confirm = this.alertCtrl.create({
-            title: 'For create account need your location',
-            message: 'Please, enable location services, check conection. Then click Retry.',
+            title: 'To create account your location needed',
+            message: 'Enable location services, please, check conection. Then click Retry.',
             buttons: [
                 {
                   text: 'Exit',
