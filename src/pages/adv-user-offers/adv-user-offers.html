@@ -64,7 +64,7 @@
                     <img src="assets/img/adv-user-offers/edit.svg">
                     <div text-uppercase class="font-12 regular text-white">Edit</div>
                 </button>
-                <button [disabled]="offer.status == 'active'" ion-button class="bg-FF5A00">
+                <button (click)="delete(offer)" [disabled]="offer.status == 'active'" ion-button class="bg-FF5A00">
                     <img src="assets/img/adv-user-offers/delete.svg">
                     <div text-uppercase class="font-12 regular text-white">Delete</div>
                 </button>

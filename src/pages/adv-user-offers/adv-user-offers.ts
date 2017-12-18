@@ -8,6 +8,7 @@ import { PlaceService } from '../../providers/place.service';
 import { TimezoneService } from '../../providers/timezone.service';
 import { DateTimeUtils } from '../../utils/date-time.utils';
 import { CreateOfferPage } from '../create-offer/create-offer';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'page-adv-user-offers',
@@ -136,6 +137,16 @@ export class AdvUserOffersPage {
                         // }
                     })
             }
+        }
+
+        delete(offer: Offer) {
+            this.place.deleteOffer(offer.id)
+                .subscribe(() => {
+                    this.offers = _.reject(this.offers, (o) => {
+                        return o.id == offer.id;
+                    });
+                    this.total = this.total - 1;
+                });
         }
 
     doInfinite(infiniteScroll) {
