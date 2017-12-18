@@ -73,6 +73,7 @@ export class CreateOffer3Page {
         this._map = map;
         this._map.on({
             moveend: (event: LeafletEvent) => {
+                this.coords = this._map.getCenter();
                 this.geocoder.getAddress(this.coords.lat, this.coords.lng)
                 .subscribe(data => {
                     let address = data.address;
@@ -86,7 +87,6 @@ export class CreateOffer3Page {
             }
         })
     }
-
 
     openCreateOffer4Page() {
         this.offer.latitude = this.coords.lat;
