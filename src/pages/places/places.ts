@@ -77,7 +77,7 @@ export class PlacesPage {
                                 this.coords = {
                                     lat: resp.latitude,
                                     lng: resp.longitude
-                                }; 
+                                };
                                 loadingLocation.dismiss();
                                 this.getCompaniesList();
                             })
@@ -94,7 +94,7 @@ export class PlacesPage {
                 iconSize: [25, 35],
                 iconAnchor: [13, 35],
                 iconUrl: 'assets/img/icon_user_map.svg',
-                //shadowUrl: 
+                //shadowUrl:
             })
         })]
     }
@@ -129,7 +129,7 @@ export class PlacesPage {
                 iconSize: [25, 35],
                 iconAnchor: [13, 35],
                 iconUrl: 'assets/img/places_pin.png',
-                //shadowUrl: 
+                //shadowUrl:
             })
         });
 
@@ -196,6 +196,16 @@ export class PlacesPage {
 
     toggleMap() {
         this.isMapVisible = !this.isMapVisible;
+
+        function renderMap() {
+            if (document.getElementById("map_leaf")){
+                document.getElementById("map_leaf").style.height = window.innerHeight -
+                document.getElementsByClassName('grid-tabs-splash')[0].clientHeight -
+                document.getElementsByClassName('tabbar')[0].clientHeight -
+                document.getElementsByClassName('sticky')[0].clientHeight + "px";
+            }
+        }
+        setTimeout(renderMap, 1);
     }
 
     openPlace(company: Company) {
