@@ -39,6 +39,10 @@ export class PlaceService {
         return this.api.put(`advert/offers/${offer_id}`, offer);
     }
 
+    deleteOffer(offer_id: string) {
+        return this.api.delete(`advert/offers/${offer_id}`);
+    }
+
     changeOfferStatus(statusInfo, offer_id: string) {
         return this.api.put(`advert/offers/${offer_id}/status`, statusInfo);
     }

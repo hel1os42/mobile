@@ -136,10 +136,12 @@ export class ApiService {
             });
 
         // return sharableObs.map(resp => resp.json());
-        return sharableObs.map(resp => {
+        return sharableObs.map(resp => { 
             let obj = resp.json();
-            obj.http_headers = resp.headers;
-            return obj;
+            if(obj) {
+               obj.http_headers = resp.headers;
+            }
+            return obj; 
         })
     }
 
