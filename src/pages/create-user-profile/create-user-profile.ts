@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { LoadingController, NavController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, Platform } from 'ionic-angular';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import leaflet, { tileLayer, latLng, LeafletEvent } from 'leaflet';
 import { Map } from 'leaflet';
@@ -46,7 +46,9 @@ export class CreateUserProfilePage {
         private imagePicker: ImagePicker,
         private api: ApiService,
         private navParams: NavParams,
-        private loading: LoadingController) {
+        private loading: LoadingController,
+        private alertCtrl: AlertController,
+        private platform: Platform) {
 
 
         if (this.navParams.get('user')) {
@@ -63,35 +65,70 @@ export class CreateUserProfilePage {
                     this.user = resp;
                     this.picture_url = this.user.picture_url;
                 });
-            let loadingCompanies = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
-            loadingCompanies.present();
-
-            this.location.get()
-                .then((resp) => {
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    loadingCompanies.dismiss();
-                    this.addMap();
-                })
-                .catch((error) => {
-                    this.message = error.message;
-                });
-            setTimeout(() => {
-                if (!this.coords.lat) {
-                    this.location.getByIp()
-                        .subscribe(resp => {
-                            this.coords = {
-                                lat: resp.latitude,
-                                lng: resp.longitude
-                            };
-                            loadingCompanies.dismiss();
-                            this.addMap();
-                        })
-                }
-            }, 7000);
+            this.getLocation();
         }
+    }
+
+    getLocation() {
+        let loadingLocation = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
+        loadingLocation.present();
+
+        this.location.get()
+            .then((resp) => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                loadingLocation.dismissAll();
+                this.addMap();
+            })
+            .catch((error) => {
+                this.message = error.message;
+            });
+        setTimeout(() => {
+            if (!this.coords.lat) {
+                this.location.getByIp()
+                    .subscribe(resp => {
+                        this.coords = {
+                            lat: resp.latitude,
+                            lng: resp.longitude
+                        };
+                            loadingLocation.dismissAll(); 
+                            this.addMap(); 
+                    })
+            }
+        }, 9000);
+        setTimeout(() => {
+            if (!this.coords.lat) {
+                loadingLocation.dismissAll();
+                this.presentConfirm();
+            }
+            else {
+                loadingLocation.dismissAll();
+            }
+        },12000);
+    }
+
+    presentConfirm() {
+        let confirm = this.alertCtrl.create({
+            title: 'To create account your location needed',
+            message: 'Enable location services, please, check conection. Then click Retry.',
+            buttons: [
+                {
+                  text: 'Exit',
+                  handler: () => {
+                    this.platform.exitApp();
+                  }
+                },
+                {
+                  text: 'Retry',
+                  handler: () => {
+                    this.getLocation();
+                  }
+                }
+              ]
+        });
+        confirm.present();
     }
 
     onMapReady(map: Map) {
@@ -148,38 +185,6 @@ export class CreateUserProfilePage {
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
             });
-    };
-
-    createAccount() {
-        if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {
-            this.user.latitude = this.coords.lat;
-            this.user.longitude = this.coords.lng;
-            //this.account.points = this.point(); to do
-            this.profile.put(this.user)
-                .subscribe(user => {
-                    if (this.picture_url && this.changedPicture) {
-                        this.api.uploadImage(this.picture_url, 'profile/picture', true)
-                            .then(() => {
-                                if (this.isEdit) {
-                                    this.profile.refreshAccounts();
-                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-                                }
-                                else {
-                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-                                }
-                            });
-                    }
-                    else {
-                        if (this.isEdit) {
-                            this.profile.refreshAccounts();
-                            this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-                        }
-                        else {
-                            this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-                        }
-                    }
-                });
-        }
     }
 
     validateName(name) {
@@ -205,4 +210,36 @@ export class CreateUserProfilePage {
         }
     }
 
+    createAccount() {
+            if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {
+                this.user.latitude = this.coords.lat;
+                this.user.longitude = this.coords.lng;
+                //this.account.points = this.point(); to do
+                this.profile.put(this.user)
+                    .subscribe(user => {
+                        if (this.picture_url && this.changedPicture) {
+                            this.api.uploadImage(this.picture_url, 'profile/picture', true)
+                                .then(() => {
+                                    if (this.isEdit) {
+                                        this.profile.refreshAccounts();
+                                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                    }
+                                    else {
+                                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                    }
+                                });
+                        }
+                        else {
+                            if (this.isEdit) {
+                                this.profile.refreshAccounts();
+                                this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                            }
+                            else {
+                                this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                            }
+                        }
+                    });
+            }
+        }
 }
+

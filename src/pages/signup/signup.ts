@@ -10,7 +10,7 @@ import { SignUpCodePage } from '../signup-code/signup-code';
 })
 export class SignUpPage {
     formData = { phone: '' };
-    numCodes = ['+7', '+49', '+63', '+57', '+380'];
+    numCodes = ['+7', '+49', '+63', '+57', '+380', '+86'];
     numCode: string = '+380';
     phoneNumber: string;
 

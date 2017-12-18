@@ -1,3 +1,4 @@
+import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
 import { Component, isDevMode } from '@angular/core';
 import { AdvNotificationsPage } from '../adv-notifications/adv-notifications';
 import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
@@ -13,7 +14,7 @@ export class AdvTabsPage {
 
     isDevMode = false;
 
-    tab1Root = AdvUserProfilePage;
+    tab1Root = AdvRedeemOfferPage;
     tab2Root = AdvUserProfilePage;
     tab3Root = CreateOfferPage;
     tab4Root = AdvNotificationsPage;

@@ -26,8 +26,8 @@
     <ion-grid class="ava_user_adv">
       <ion-row text-center align-items-center>
         <ion-col>
-          <div margin-top 
-              class="thumb_image" 
+          <div margin-top
+              class="thumb_image"
               [ngStyle]="{'background-image': 'url(' + user.picture_url + '?' + time + '), url(assets/img/create_user_profile/people.svg)'}">
         </div>
           <!-- <img margin-top [src]="user.picture_url"> -->
@@ -39,8 +39,8 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <div margin-top 
-              class="thumb_image" 
+          <div margin-top
+              class="thumb_image"
               [ngStyle]="{'background-image': 'url(' + advPicture_url + '?' + time + '), url(assets/img/create_user_profile/people.svg)'}">
         </div>
           <div class="font-16 text-BDBDBD bold padding-top-3vw">{{ 'PAGE_SETTINGS.ADVERTISER' | translate }}</div>
@@ -49,9 +49,9 @@
     </ion-grid>
   </div>
 
-  <p *ngIf="isAdvMode" margin>
+  <!-- <p *ngIf="isAdvMode" margin>
     <button (click)="openAdvRedeem()" color="primary" ion-button block>{{ 'PAGE_SETTINGS.CONFIRM_REDEMPTION' | translate }}</button>
-  </p>
+  </p> -->
 
   <div class="block-lines">
     <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.YOUR_INVITE_CODE' | translate }}</div>
@@ -75,10 +75,10 @@
         </ion-col>
         <ion-col col-4>
           <ion-item no-lines text-right>
-            <button (click)="openChangePhone()" 
-                    color="primary" 
-                    ion-button 
-                    round 
+            <button (click)="openChangePhone()"
+                    color="primary"
+                    ion-button
+                    round
                     class="font-12 regular">
             {{ 'PAGE_SETTINGS.CHANGE' | translate }}
           </button>
@@ -88,6 +88,8 @@
     </ion-grid>
   </div>
 
+    <!--
+
     <div class="block-lines">
         <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.LANG' | translate }}</div>
     </div>
@@ -95,16 +97,17 @@
     <div class="block-lines">
         <div no-lines>
             <ion-item class="bg-gray" detail-push>
-                <ion-select [(ngModel)]="lang" 
+                <ion-select [(ngModel)]="lang"
                             (ionChange)="changeLang()"
-                            multiple="false" 
-                            interface="popover" 
+                            multiple="false"
+                            interface="popover"
                             class="selected-lang">
                     <ion-option *ngFor="let lang of langs" [value]="lang">{{ lang }}</ion-option>
                 </ion-select>
             </ion-item>
         </div>
     </div>
+   -->
 
   <div class="block-lines">
     <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.PRIVATE_DATA' | translate }}</div>

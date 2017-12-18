@@ -7,7 +7,7 @@
     <div class="header-shadow"></div>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="disabled-elements">
   <ion-item no-lines class="border-bottom-no top-block-nau">
     <ion-avatar item-start>
       <img src="assets/img/bookmarks/star.svg">
@@ -26,7 +26,7 @@
 
   <!-- PLACES -->
     <ion-list no-lines class="item-block-nau margin-top-10 block-places">
-        <a ion-item detail-none (click)="openPlace(company)">
+        <a ion-item detail-none>
             <ion-avatar item-start text-center>
                 <!-- <img [src]="company.picture_url"> -->
                 <div class="thumb_image" [style.background-image]="'url(assets/img/user_home/image1.png)'"></div>

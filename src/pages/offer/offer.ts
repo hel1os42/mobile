@@ -1,11 +1,13 @@
-import { ProfileService } from '../../providers/profile.service';
+import { DistanceUtils } from '../../utils/distanse';
+import { Coords } from '../../models/coords';
 import { Component } from '@angular/core';
-import { App, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Company } from '../../models/company';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { OfferService } from '../../providers/offer.service';
+import { ProfileService } from '../../providers/profile.service';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 
@@ -19,7 +21,9 @@ export class OfferPage {
     company = new Company;
     offerActivationCode: OfferActivationCode;
     timer;
-    distanceString: string
+    distanceString: string;
+    distance: number;
+    coords: Coords;
 
     constructor(
         private nav: NavController,
@@ -27,18 +31,15 @@ export class OfferPage {
         private navParams: NavParams,
         private offers: OfferService,
         private app: App,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private alertCtrl: AlertController) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
-        this.distanceString = this.navParams.get('distance');
+        this.distanceString = this.navParams.get('distanceStr');
+        this.coords = this.navParams.get('coords');
+        this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
     }
-
-    //ionViewDidLoad() {
-    //this.nav.pop();
-    //  let popover = this.popoverCtrl.create(CongratulationPopover);
-    //  popover.present();
-    //}
 
     getStars(star: number) {
         let showStars: boolean[] = [];
@@ -60,33 +61,55 @@ export class OfferPage {
         this.app.navPop();
     }
 
+    disable() {
+        if (this.offer.radius < this.distance) {//to do add delivery etc.
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    presentAlert() {
+        let alert = this.alertCtrl.create({
+          title: 'You are located too far',
+          buttons: ['Ok']
+        });
+        alert.present();
+      }
+
     openRedeemPopover() {
-        if (this.timer)
-            return;
-        
-        this.offers.getActivationCode(this.offer.id)
-            .subscribe((offerActivationCode: OfferActivationCode) => {
-                if (this.timer)
-                    return;
+        if (!this.disable) {
+            if (this.timer)
+                return;
 
-                let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
-                offerRedeemPopover.present();
-                offerRedeemPopover.onDidDismiss(() => this.stopTimer());
+            this.offers.getActivationCode(this.offer.id)
+                .subscribe((offerActivationCode: OfferActivationCode) => {
+                    if (this.timer)
+                        return;
 
-                this.timer = setInterval(() => {
-                    this.offers.getRedemtionStatus(offerActivationCode.code)
-                        .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
-                            if (offerRedemtionStatus.redemption_id) {
-                                this.stopTimer();
-                                this.profile.refreshAccounts();
-                                offerRedeemPopover.dismiss();
+                    let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
+                    offerRedeemPopover.present();
+                    offerRedeemPopover.onDidDismiss(() => this.stopTimer());
 
-                                let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company });
-                                offerRedeemedPopover.present();
-                                offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
-                            }
-                        });
-                }, 3000)
-            })       
+                    this.timer = setInterval(() => {
+                        this.offers.getRedemtionStatus(offerActivationCode.code)
+                            .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
+                                if (offerRedemtionStatus.redemption_id) {
+                                    this.stopTimer();
+                                    this.profile.refreshAccounts();
+                                    offerRedeemPopover.dismiss();
+
+                                    let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company });
+                                    offerRedeemedPopover.present();
+                                    offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
+                                }
+                            });
+                    }, 3000)
+                })
+        }
+        else {
+            this.presentAlert()
+        }
     }
 }

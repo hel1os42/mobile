@@ -20,4 +20,31 @@
         <p margin>
             <button (click)="confirm()" color="primary" ion-button block>{{ 'PAGE_ADV-REDEEM-OFFER.CONFIRM' | translate }}</button>
         </p>
+
+        <ion-grid text-center class="block-icon-bottom margin-top-20vw padding-bottom-5vw">
+            <ion-row>
+                <a (click)="openUserOffers()" ion-col class="text-gray" align-self-start>
+                    <div>
+                        <img src="assets/img/user_profile/offers.svg">
+                        <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ company?.offers_count }}</div>
+                        <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_ADV-USER-PROFILE.OFFERS' | translate }}</div>
+                    </div>
+                </a>
+                <a (click)="openUserNau()" ion-col class="text-gray" align-self-end>
+                    <div>
+                        <img src="assets/img/user_profile/nau.svg">
+                        <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ balance }}</div>
+                        <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_ADV-USER-PROFILE.NAU' | translate }}</div>
+                    </div>
+                </a>
+                <a (click)="openStatistic()" ion-col class="text-gray" align-self-start>
+                    <div>
+                        <img src="assets/img/adv-user-profile/static.svg">
+                        <div class="bold font-22 text-3E4B5D margin-bottom-1vw">0</div>
+                        <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_ADV-USER-PROFILE.STATISTIC' | translate }}</div>
+                    </div>
+                </a>
+            </ion-row>
+        </ion-grid>
+
 </ion-content>

@@ -20,7 +20,7 @@ export class SignUpCodePage {
         private navParams: NavParams) {
 
         this.register = this.navParams.get('register');
-        this.register.code = this.register.phone.slice(-6);
+        // this.register.code = this.register.phone.slice(-6);
     }
 
     updateList(ev) {

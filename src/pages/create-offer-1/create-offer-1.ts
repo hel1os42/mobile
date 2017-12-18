@@ -20,9 +20,9 @@ export class CreateOffer1Page {
     picture_url: string;
 
     constructor(private nav: NavController,
-                private navParams: NavParams,
-                private offerService: OfferService,
-                private place: PlaceService) {
+        private navParams: NavParams,
+        private offerService: OfferService,
+        private place: PlaceService) {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
@@ -35,10 +35,13 @@ export class CreateOffer1Page {
     }
 
     openCreateOffer2Page() {
-        this.offer.longitude = this.company.longitude;
-        this.offer.latitude = this.company.latitude;
-     
-        this.nav.push(CreateOffer2Page, { offer: this.offer, picture: this.picture_url});//add bindings (category & type, type)
+        if (!this.offer.id) {
+            this.offer.longitude = this.company.longitude;
+            this.offer.latitude = this.company.latitude;
+            this.offer.radius = this.company.radius;
+        }
+
+        this.nav.push(CreateOffer2Page, { offer: this.offer, picture: this.picture_url });//add bindings (category & type, type)
     }
 
     toggleDiscountDisabled($event, isDiscountSelectDisable) {

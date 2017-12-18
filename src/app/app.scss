@@ -71,7 +71,7 @@
 
 
 button[ion-button] {
-    border-radius: 25px;
+    border-radius: 100vw;
     text-transform: uppercase;
 }
 
@@ -1128,6 +1128,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-top: 14vw;
 }
 
+.margin-top-20vw{
+    margin-top: 20vw;
+}
+
 .margin-top-7vw{
     margin-top: 7vw;
 }
@@ -1795,4 +1799,25 @@ body {
     right: 1vw;
     font-size: 2vw;
     color: red;
+}
+
+.disabled-elements{
+    pointer-events: none;
+    -webkit-filter: grayscale(100%) brightness(70%);
+    filter: grayscale(100%) brightness(70%);
+}
+
+.disabled-elements:before {
+    font-size: 7vw;
+    content: "Coming soon ";
+    opacity: 0.7;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    bottom: 20vw;
+    z-index: 111111;
+    background: white;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
 }
