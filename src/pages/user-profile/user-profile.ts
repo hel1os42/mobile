@@ -41,13 +41,15 @@ export class UserProfilePage {
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
             })
+        if (!this.balance) {
+            this.profile.getWithAccounts()
+                .subscribe(resp => {
+                    this.user = resp;
+                    this.NAU = resp.accounts.NAU;
+                    this.balance = this.NAU.balance;
+                });
+        }
 
-        this.profile.getWithAccounts()
-            .subscribe(resp => {
-                this.user = resp;
-                this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU.balance;
-            });
     }
 
     openSettings() {

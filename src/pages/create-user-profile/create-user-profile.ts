@@ -222,7 +222,7 @@ export class CreateUserProfilePage {
                                 .then(() => {
                                     if (this.isEdit) {
                                         this.profile.refreshAccounts();
-                                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                        this.nav.pop();
                                     }
                                     else {
                                         this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
@@ -232,7 +232,7 @@ export class CreateUserProfilePage {
                         else {
                             if (this.isEdit) {
                                 this.profile.refreshAccounts();
-                                this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                this.nav.pop();
                             }
                             else {
                                 this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
