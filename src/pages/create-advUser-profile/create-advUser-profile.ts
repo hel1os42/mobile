@@ -137,7 +137,7 @@ export class CreateAdvUserProfilePage {
 
     addMap() {
         this.tileLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
+            maxZoom: 19,
             maxNativeZoom: 18,
             minZoom: 1,
             attribution: '© OpenStreetMap',
@@ -325,7 +325,7 @@ export class CreateAdvUserProfilePage {
         this.company.longitude = this.coords.lng;
         this.company.address = this.address;
         this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
-        this.company.radius = this.zoom == 19 ? Math.floor(this.radius) : Math.round(this.radius);
+        this.company.radius = Math.round(this.radius);
         if (!this.company.id) {
             this.placeService.set(this.company)
                 .subscribe(company => {

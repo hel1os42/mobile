@@ -52,7 +52,7 @@ export class CreateOffer3Page {
 
     addMap() {
         this.tileLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
+            maxZoom: 19,
             minZoom: 1,
             maxNativeZoom: 18,
             attribution: '© OpenStreetMap',
@@ -91,7 +91,7 @@ export class CreateOffer3Page {
     openCreateOffer4Page() {
         this.offer.latitude = this.coords.lat;
         this.offer.longitude = this.coords.lng;
-        this.offer.radius = this.zoom == 19 ?  Math.floor(this.radius) : Math.round(this.radius);
+        this.offer.radius = Math.round(this.radius);
         this.offer.city = this.city;
         this.offer.country = this.country;
         this.nav.push(CreateOffer4Page, { offer: this.offer, picture: this.picture_url });
