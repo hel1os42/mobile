@@ -1,3 +1,4 @@
+import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
 import { Component } from '@angular/core';
 import { LoadingController, NavController, PopoverController } from 'ionic-angular';
 import { ChildCategory } from '../../models/childCategory';
@@ -242,6 +243,8 @@ export class PlacesPage {
     }
 
     openPopover() {
+        let types = MockPlaceTypes.RetailTypes;//temporary mock
+        let features = MockPlaceTypes.Features;//temporary mock
         this.offers.getSubCategories(this.selectedCategory.id)
             .subscribe(category => {
                 this.search = "";
@@ -253,8 +256,23 @@ export class PlacesPage {
                             name: p.name,
                             isSelected: this.selectedChildCategories ? !!this.selectedChildCategories.find(k => k.id == p.id) : false
                         }
-                    })
-                });
+                    }),
+                    //temporary
+                retailTypes: types.map(t => {
+                    return {
+                        name: t.name,
+                        isSelected: false
+                    }
+                    }), 
+                
+                features: features.map(feature => {
+                     return {
+                        name: feature.name,
+                        isSelected: false
+                    }
+                }) 
+            });
+                //temporary
                 popover.present();
                 popover.onDidDismiss((categories) => {
                     if (!categories) {

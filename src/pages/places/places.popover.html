@@ -1,41 +1,44 @@
 <div margin class="modal_content">
 
-    <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
+    <a (click)="openTypesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">Select Type</ion-label>
       <div item-end>
-        <img src="assets/img/user_home/arrow_down.svg">
+        <img *ngIf="isOpenTypesSelect" src="assets/img/user_home/arrow_up.svg">
+        <img *ngIf="!isOpenTypesSelect" src="assets/img/user_home/arrow_down.svg">
       </div>
     </a>
 
-    <div class="block-checks">
-        <ion-item *ngFor="let category of categories" no-lines>
-            <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
+    <div *ngIf="isOpenTypesSelect" class="block-checks">
+        <ion-item *ngFor="let type of types" no-lines>
+            <ion-label margin-left item-end class="text-828282 font-16">{{ type.name }}</ion-label>
+            <ion-checkbox [(ngModel)]="type.isSelected" item-end></ion-checkbox>
         </ion-item>
     </div>
 
-    <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
+    <a (click)="openFeaturesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
         <ion-label text-uppercase class="text-4F4F4F font-16">Select Features</ion-label>
         <div item-end>
-            <img src="assets/img/user_home/arrow_down.svg">
+            <img *ngIf="isOpenFeaturesSelect" src="assets/img/user_home/arrow_up.svg">
+            <img *ngIf="!isOpenFeaturesSelect" src="assets/img/user_home/arrow_down.svg">
         </div>
     </a>
 
-    <div class="block-checks">
-        <ion-item *ngFor="let category of categories" no-lines>
-            <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
+    <div *ngIf="isOpenFeaturesSelect" class="block-checks">
+        <ion-item *ngFor="let feature of features" no-lines>
+            <ion-label margin-left item-end class="text-828282 font-16">{{ feature.name }}</ion-label>
+            <ion-checkbox [(ngModel)]="feature.isSelected" item-end></ion-checkbox>
         </ion-item>
     </div>
 
-    <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
+    <a (click)="openCuisineSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_CUISINE' | translate }}</ion-label>
       <div item-end>
-        <img src="assets/img/user_home/arrow_up.svg">
+        <img *ngIf="isOpenCuisineSelect" src="assets/img/user_home/arrow_up.svg">
+        <img *ngIf="!isOpenCuisineSelect" src="assets/img/user_home/arrow_down.svg">
       </div>
     </a>
 
-    <div class="block-checks">
+    <div *ngIf="isOpenCuisineSelect" class="block-checks">
       <ion-item *ngFor="let category of categories" no-lines>
           <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
           <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
@@ -46,7 +49,9 @@
     <ion-grid>
         <ion-row>
             <ion-col text-center class="margin-right-2proc">
-                <button (click)="clear()" ion-button block color="secondary">{{ 'PAGE_PLACES.CLEAR' | translate }}</button>
+                <button *ngIf="isOpenTypesSelect" (click)="clear(types)" ion-button block color="secondary">{{ 'PAGE_PLACES.CLEAR' | translate }}</button>
+                <button *ngIf="isOpenFeaturesSelect" (click)="clear(features)" ion-button block color="secondary">{{ 'PAGE_PLACES.CLEAR' | translate }}</button>
+                <button *ngIf="isOpenCuisineSelect" (click)="clear(categories)" ion-button block color="secondary">{{ 'PAGE_PLACES.CLEAR' | translate }}</button>
             </ion-col>
             <ion-col text-center class="margin-left-2proc">
                 <button (click)="close()" ion-button block color="primary">{{ 'UNIT.DONE' | translate }}</button>
