@@ -1,12 +1,33 @@
 <div margin class="modal_content">
-    <!--
+
     <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">Select Type</ion-label>
       <div item-end>
         <img src="assets/img/user_home/arrow_down.svg">
       </div>
     </a>
-    -->
+
+    <div class="block-checks">
+        <ion-item *ngFor="let category of categories" no-lines>
+            <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
+            <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
+        </ion-item>
+    </div>
+
+    <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
+        <ion-label text-uppercase class="text-4F4F4F font-16">Select Features</ion-label>
+        <div item-end>
+            <img src="assets/img/user_home/arrow_down.svg">
+        </div>
+    </a>
+
+    <div class="block-checks">
+        <ion-item *ngFor="let category of categories" no-lines>
+            <ion-label margin-left item-end class="text-828282 font-16">{{ category.name }}</ion-label>
+            <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
+        </ion-item>
+    </div>
+
     <a ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_CUISINE' | translate }}</ion-label>
       <div item-end>
