@@ -30,8 +30,10 @@ export class PlacePage {
         private app: App) {
 
         this.segment = "alloffers";
+        this.coords = this.navParams.get('coords');
         this.company = this.navParams.get('company');
         let companyId = this.company.id;
+
         this.distanceString = this.navParams.get('distanceStr');
 
         this.offers.getPlace(companyId)
@@ -40,13 +42,13 @@ export class PlacePage {
                 this.offersList = companyWithOffers.offers.filter(p => p.status == 'active');
             });
             
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-            });
+        // this.location.get()
+        //     .then((resp) => {
+        //         this.coords = {
+        //             lat: resp.coords.latitude,
+        //             lng: resp.coords.longitude
+        //         };
+        //     });
     }
 
     ionSelected() {

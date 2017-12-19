@@ -220,6 +220,7 @@ export class PlacesPage {
         this.nav.push(PlacePage, {
             company: company,
             distanceStr: this.getDistance(company.latitude, company.longitude),
+            coords: this.coords
         });
     }
 
