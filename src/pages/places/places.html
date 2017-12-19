@@ -84,7 +84,7 @@
     </ion-list>
 
     <div *ngIf="isMapVisible">
-        <div class="leaflet-map"
+        <div id="map_leaf" class="leaflet-map"
             leaflet
             [leafletOptions]="options"
             [leafletLayers]="getLayers()"

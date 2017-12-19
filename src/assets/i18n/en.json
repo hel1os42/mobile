@@ -66,7 +66,6 @@
     },
 
     "PAGE_ADV-USER-OFFERS" : {
-        "OFFERS" : "Offers",
         "CREATED_OFFERS" : "Created Offers",
         "CREATE_NEW" : "Create new",
         "ALL" : "All",
@@ -80,7 +79,10 @@
         "TOKENS_ARE_AVAILABLE" : "tokens are available",
         "YOU_NEED_TO_HAVE" : "You need to have",
         "TOKENS_FOR_ACTIVATION" : "tokens for activation",
-        "PLEASE_MAKE_A_PAYMENT_TO_YOUR_ACCOUNT" : "Please make a payment to your account"
+        "PLEASE_MAKE_A_PAYMENT_TO_YOUR_ACCOUNT" : "Please make a payment to your account",
+        "EDIT" : "Edit",
+        "DELETE" : "Delete",
+        "LOADING_OFFERS" : "Loading offers..."
     },
 
     "PAGE_ADV-USER-PROFILE" : {
@@ -109,10 +111,12 @@
         "ADD_COMPANY_NAME" : "Add company name & descriptions",
         "COMPANY_NAME" : "Company name",
         "COMPANY_DESCRIPTION" : "Company description",
-        "CATEGORY_TYPE" : "Category & type your place",
+        "CATEGORY_TYPE" : "Category your place",
         "CHOOSE_CATEGORY" : "Choose category",
         "CHOOSE_YOUR_OFFICE_LOCATION" : "Choose your office location and set map radius",
-        "CATEGORY" : "Category"
+        "CATEGORY" : "Category",
+        "CHOOSE_TYPE" : "Type your place",
+        "CHOOSE_FEATURES" : "Features your place"
     },
 
     "PAGE_CREATE-OFFER" : {

@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>{{ 'PAGE_ADV-USER-OFFERS.OFFERS' | translate }}</ion-title>
+        <ion-title>{{ 'UNIT.OFFERS' | translate }}</ion-title>
     </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
@@ -62,17 +62,17 @@
             <ion-item-options side="right">
                 <button (click)="openEditOffer(offer)" [disabled]="offer.status == 'active'" ion-button class="bg-3E4B5D">
                     <img src="assets/img/adv-user-offers/edit.svg">
-                    <div text-uppercase class="font-12 regular text-white">Edit</div>
+                    <div text-uppercase class="font-12 regular text-white">{{ 'PAGE_ADV-USER-OFFERS.EDIT' | translate }}</div>
                 </button>
-                <button [disabled]="offer.status == 'active'" ion-button class="bg-FF5A00">
+                <button (click)="delete(offer)" [disabled]="offer.status == 'active'" ion-button class="bg-FF5A00">
                     <img src="assets/img/adv-user-offers/delete.svg">
-                    <div text-uppercase class="font-12 regular text-white">Delete</div>
+                    <div text-uppercase class="font-12 regular text-white">{{ 'PAGE_ADV-USER-OFFERS.DELETE' | translate }}</div>
                 </button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
 
     <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="doInfinite($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading offers..."></ion-infinite-scroll-content>
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_ADV-USER-OFFERS.LOADING_OFFERS' | translate }}"></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

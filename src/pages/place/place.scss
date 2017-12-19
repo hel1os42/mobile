@@ -112,4 +112,42 @@ page-place {
     .company-address{
         min-height: 4vw;
     }
+
+    .header .list-ios{
+        margin: 0;
+    }
+
+    .header ion-item-options {
+        width: 90%;
+        padding-left: 15%;
+        padding-right: 5%;
+        display: block;
+        overflow: scroll;
+    }
+
+    .swipe{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        text-align: right;
+        bottom: 12vw;
+        padding-right: 5vw;
+    }
+
+    .cat-block{
+        padding-top: 17vw;
+        height: 87%;
+        overflow: scroll;
+    }
+
+    .type-food{
+        border: 0.3vw solid rgba(62, 75, 93, 0.5);
+        padding: 0.8vw;
+        font-size: 4.3vw;
+        color: #3E4B5D;
+        border-radius: 1vw;
+        margin-right: 1.5vw;
+        margin-top: 2vw;
+        display: inline-block;
+    }
 }

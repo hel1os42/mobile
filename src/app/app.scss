@@ -1810,14 +1810,15 @@ body {
 .disabled-elements:before {
     font-size: 7vw;
     content: "Coming soon ";
-    opacity: 0.7;
+    opacity: 1;
     position: fixed;
     text-align: center;
-    width: 100%;
+    width: 98%;
     left: 0;
-    bottom: 20vw;
+    bottom: 14vw;
     z-index: 111111;
     background: white;
     padding-top: 5vw;
     padding-bottom: 5vw;
+    border: 1vw solid lightgray;
 }

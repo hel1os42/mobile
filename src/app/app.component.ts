@@ -57,7 +57,7 @@ export class MyApp {
                 this.location.reset();
             });
 
-            //this.rootPage = TabsPage;
+            //this.rootPage = CreateAdvUserProfilePage;
         });
 
         this.auth.onLogout.subscribe(() => {
