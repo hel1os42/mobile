@@ -28,6 +28,8 @@ import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
 import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
 import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
+import { CreateAdvUserProfileTypesPopover } from '../pages/create-advUser-profile/create-advUser-profile.types.popover';
+import { CreateAdvUserProfileFeaturesPopover } from '../pages/create-advUser-profile/create-advUser-profile.features.popover';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
@@ -131,6 +133,8 @@ export function createTranslateLoader(http: Http) {
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
       CreateAdvUserProfileChildCategoryPopover,
+      CreateAdvUserProfileTypesPopover,
+      CreateAdvUserProfileFeaturesPopover,
       CreateOfferInformationPopover,
       OfferTermsPage,
       SettingsChangePhonePage,
@@ -210,6 +214,8 @@ export function createTranslateLoader(http: Http) {
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
       CreateAdvUserProfileChildCategoryPopover,
+      CreateAdvUserProfileTypesPopover,
+      CreateAdvUserProfileFeaturesPopover,
       CreateOfferInformationPopover,
       OfferTermsPage,
       SettingsChangePhonePage,

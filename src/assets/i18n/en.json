@@ -114,7 +114,9 @@
         "CATEGORY_TYPE" : "Category & type your place",
         "CHOOSE_CATEGORY" : "Choose category",
         "CHOOSE_YOUR_OFFICE_LOCATION" : "Choose your office location and set map radius",
-        "CATEGORY" : "Category"
+        "CATEGORY" : "Category",
+        "CHOOSE_TYPE" : "Choose type",
+        "CHOOSE_FEATURES" : "Choose features"
     },
 
     "PAGE_CREATE-OFFER" : {
