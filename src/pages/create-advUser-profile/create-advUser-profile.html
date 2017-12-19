@@ -8,8 +8,8 @@
             <div *ngIf="picture_url && picture_url != 'O'" (click)="addLogo()" class="cover_logo" [style.background-image]="'url(' + picture_url + ')'"></div>
             <div *ngIf="!picture_url || picture_url == 'O'" (click)="addLogo()" class="cover_logo_adv">
                 <span text-uppercase class="font-12 semibold">
-                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD' | translate }}<br>
-                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.LOGO' | translate }}
+                    {{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD' | translate }}
+                    <br> {{ 'PAGE_CREATE-ADVUSER-PROFILE.LOGO' | translate }}
                 </span>
             </div>
             <button (click)="addCover()" class="btn_right font-12" text-uppercase ion-button>{{ 'PAGE_CREATE-ADVUSER-PROFILE.SET_IMAGE' | translate }}</button>
@@ -52,7 +52,8 @@
             </ng-container>
         </a>
 
-        <a *ngIf="selectedCategory" (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray">
+        <a *ngIf="selectedCategory && selectedCategory.children_count > 0" (click)="showChildCategoriesPopover()" ion-item detail-push
+            padding-left class="bg-gray margin-bottom-small">
             <ng-container *ngIf="selectedChildCategories">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
                     {{ childCategoriesNames }}
@@ -65,14 +66,20 @@
                 </div>
             </ng-container>
         </a>
+    </div>
 
+    <div *ngIf="selectedCategory" class="block-lines">
+        <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_TYPE' | translate }}</div>
+    </div>
+
+    <div *ngIf="selectedCategory" class="block-lines">
         <a (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
             <ng-container *ngIf="selectedCategory">
                 <div class="text-3E4B5D font-16 semibold table">
                     <span class="table-cell font-0">
-                        <img class="choose-img" [src]="selectedCategory.image_url">
+                        <img class="choose-img">
                     </span>
-                    <span class="table-cell padding-left-2vw"> {{ selectedCategory.name }}</span>
+                    <span class="table-cell padding-left-2vw">TYPES</span>
                 </div>
             </ng-container>
 
@@ -80,14 +87,20 @@
                 <div class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_TYPE' | translate }}</div>
             </ng-container>
         </a>
+    </div>
 
+    <div *ngIf="selectedCategory" class="block-lines">
+        <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_FEATURES' | translate }}</div>
+    </div>
+
+    <div *ngIf="selectedCategory" class="block-lines">
         <a (click)="showChildCategoriesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
             <ng-container *ngIf="selectedCategory">
                 <div class="text-3E4B5D font-16 semibold table">
                     <span class="table-cell font-0">
-                        <img class="choose-img" [src]="selectedCategory.image_url">
+                        <img class="choose-img">
                     </span>
-                    <span class="table-cell padding-left-2vw"> {{ selectedCategory.name }}</span>
+                    <span class="table-cell padding-left-2vw">FEATURES</span>
                 </div>
             </ng-container>
 
@@ -96,7 +109,6 @@
             </ng-container>
         </a>
     </div>
-
     <div class="block-lines">
         <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_YOUR_OFFICE_LOCATION' | translate }}</div>
         <div>{{ address }}</div>
@@ -105,17 +117,16 @@
     <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
 
-        <div class="leaflet-map"
-            leaflet
-            [leafletOptions]="options"
-            (leafletMapReady)="onMapReady($event)">
-      </div>
+        <div class="leaflet-map" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)">
+        </div>
         <div id="marker"></div>
     </div>
 
     <p margin>
-        <button *ngIf="!company.id" (click)="createAccount()" [disabled]="!formData.valid || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
-        <button *ngIf="company.id" (click)="createAccount()" [disabled]="!formData.valid || (!selectedChildCategories && !noChild) || !coords || !address" ion-button block color="primary">Edit account</button>
+        <button *ngIf="!company.id" (click)="createAccount()" [disabled]="!formData.valid || !coords || !address" ion-button block
+            color="primary">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
+        <button *ngIf="company.id" (click)="createAccount()" [disabled]="!formData.valid || !coords || !address" ion-button block
+            color="primary">Edit account</button>
     </p>
 
 </ion-content>
