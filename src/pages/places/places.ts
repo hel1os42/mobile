@@ -14,7 +14,8 @@ import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import leaflet, { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBounds, LatLng, DomUtil } from 'leaflet';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { Map } from 'leaflet'
+import { Map } from 'leaflet';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'page-places',
@@ -54,7 +55,13 @@ export class PlacesPage {
         private profile: ProfileService,
         private loading: LoadingController) {
 
-        this.selectedCategory = this.categories[0];
+        this.offers.getCategories()
+            .subscribe(categories => {
+                this.categories.forEach((category) => {
+                     category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
+                })
+                this.selectedCategory = this.categories[0];
+       
         this.segment = "alloffers";
         let loadingLocation = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
         loadingLocation.present();
@@ -83,6 +90,7 @@ export class PlacesPage {
                             })
                     }
                 }, 10000);
+            })
     }
 
     getCompaniesList() {

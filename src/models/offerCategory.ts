@@ -4,6 +4,10 @@ export class OfferCategory {
     name_html?: string;
     parent_id?: string;
     children_count?: number;
+    retail_types_count?: number; 
+    parent?; 
+    children?;
+    retail_types?; 
     image_url?: string;
     imageAdvCreate_url?: string;
 
@@ -31,15 +35,15 @@ export class OfferCategory {
         },
         {
             id: '5e860198-f40a-4031-8fc6-f3e67f9d6b0c',
-            name: 'Attraction & Leisure',
-            name_html: '<div class="font-65 text-white">Attraction<br>& Leisure</div>',
+            name: 'Attractions & Leisure',
+            name_html: '<div class="font-65 text-white">Attractions<br>& Leisure</div>',
             image_url: 'assets/img/splash_screen/tab-icon4.svg',
             imageAdvCreate_url: 'assets/img/category/attractions.svg'
         },
         {
             id: '69d4ccac-0a2b-423b-97c9-7f560c5c8bdb',
-            name: 'Online & Others',
-            name_html: '<div class="font-65 text-white">Online &<br>Others</div>',
+            name: 'Other & Online',
+            name_html: '<div class="font-65 text-white">Other &<br>Online</div>',
             image_url: 'assets/img/splash_screen/tab-icon5.svg',
             imageAdvCreate_url: 'assets/img/category/other.svg'
         }
