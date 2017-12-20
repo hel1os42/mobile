@@ -1,7 +1,8 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate)
-      }}</ion-title>
+    <ion-title>
+      {{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate) }}
+    </ion-title>
   </ion-navbar>
   <div class="header-shadow"></div>
 </ion-header>
@@ -9,13 +10,16 @@
 <ion-content class="padding-no">
   <div class="block-lines-bottom-left-right">
     <ion-item no-lines class="block-name">
-      <div text-uppercase class="text-4F4F4F font-14">{{ 'PAGE_CREATE-USER-PROFILE.NAME_EMAIL' | translate }}</div>
+      <div text-uppercase class="text-4F4F4F font-14">
+        {{ 'PAGE_CREATE-USER-PROFILE.NAME_EMAIL' | translate }}
+      </div>
       <div item-end>
         <img src="assets/img/cards.svg">
       </div>
       <div item-end>
-        <span class="label label-ios points font-75">{{ 'PAGE_CREATE-USER-PROFILE.YOU_HAVE' | translate }} {{ point() }} {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate
-          }}</span>
+        <span class="label label-ios points font-75">
+          {{ 'PAGE_CREATE-USER-PROFILE.YOU_HAVE' | translate }} {{ point() }} {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate}}
+        </span>
       </div>
     </ion-item>
   </div>
@@ -28,11 +32,20 @@
         </a>
       </div>
       <div item-end class="item-content">
-        <ion-input [(ngModel)]="user.name" class="bg-gray margin-bottom-small" type="text" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"
-          name="name1"></ion-input>
+        <ion-input [(ngModel)]="user.name" 
+                  class="bg-gray margin-bottom-small" 
+                  type="text" maxlength="30" 
+                  placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"
+                  name="name1">
+      </ion-input>
         <div class="input_relative">
-          <ion-input [(ngModel)]="user.email" class="bg-gray margin-bottom-small field-email" type="email" maxlength="30" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}"
-            name="email"></ion-input>
+          <ion-input [(ngModel)]="user.email" 
+                    class="bg-gray margin-bottom-small field-email" 
+                    type="email" 
+                    maxlength="30" 
+                    placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}"
+                    name="email">
+          </ion-input>
           <span *ngIf="user.email" class="text-gray icon_info">
             <a (click)="toggleVisibleInfo()">
               <img src="assets/img/create_user_profile/info.svg">
@@ -150,15 +163,19 @@
     <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
 
-      <div class="leaflet-map" 
-          leaflet [leafletOptions]="options" 
-          (leafletMapReady)="onMapReady($event)">
+      <div class="leaflet-map" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)">
       </div>
       <div id="marker"></div>
     </div>
 
   </div>
   <p margin>
-    <button color="primary" (click)="createAccount()" [disabled]="user.name?.length < 4 || !user.email" ion-button block>{{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}</button>
+    <button color="primary" 
+            (click)="createAccount()" 
+            [disabled]="user.name?.length < 4 || !user.email" 
+            ion-button
+            block>
+     {{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}
+    </button>
   </p>
 </ion-content>
