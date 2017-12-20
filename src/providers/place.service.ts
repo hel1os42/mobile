@@ -68,6 +68,10 @@ export class PlaceService {
         });
     }
 
+    getRetailTypes(category_id) {
+        return this.api.get(`categories/${category_id}?with=retailTypes`);
+    }
+
     // getFilteredOffersByDate(startDate, finishDate, page) {
     //     return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and&page=${page}`, {
     //         showLoading: page == 1
