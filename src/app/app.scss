@@ -777,6 +777,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     width: 77vw;
     height: 10vw;
     min-height: inherit;
+    padding: 0 2vw;
 }
 
 .searchbar-ios.searchbar-left-aligned .searchbar-input {
@@ -1821,4 +1822,10 @@ body {
     padding-top: 5vw;
     padding-bottom: 5vw;
     border: 1vw solid lightgray;
+}
+
+ion-app.disable-scroll {
+    ion-content>.scroll-content {
+        overflow: hidden;
+    }
 }

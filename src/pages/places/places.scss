@@ -113,10 +113,14 @@ places-popover-component {
   }
 
   .bg-gray {
-    border-radius: 100px;
     border: none;
     background: #E0E0E0;
-    padding-right: 16px;
+    padding-right: 5%;
+  }
+
+  .bg-gray img{
+      display: flex;
+      height: 2.5vw
   }
 
   .item-ios.item-block .item-inner {
@@ -143,4 +147,8 @@ places-popover-component {
   .footer_btn .grid {
     padding-bottom: 0;
   }
+
+    .item.item-ios .checkbox-ios[item-right], .item.item-ios .checkbox-ios[item-end] {
+        margin: 0 2.3vw;
+    }
 }
