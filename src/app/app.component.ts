@@ -64,8 +64,6 @@ export class MyApp {
             this.app.getRootNav().setRoot(LoginPage);
         });
 
-
-
     }
 
 
