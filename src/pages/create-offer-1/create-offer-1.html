@@ -28,21 +28,11 @@
 <ion-content>
 
     <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-OFFER.CATEGORY_TYPE' | translate }}</div>
-    <div class="block-lines radio-nau">
-        <div radio-group no-lines>
-            <ion-item class="bg-gray">
-                <ion-label class="text-3E4B5D font-16 semibold">Delivery</ion-label>
-                <ion-radio disabled mode="md" value="delivery"></ion-radio>
-            </ion-item>
-            <ion-item class="bg-gray">
-                <ion-label class="text-3E4B5D font-16 semibold">Another</ion-label>
-                <ion-radio disabled mode="md" value="another1"></ion-radio>
-            </ion-item>
-            <ion-item class="bg-gray">
-                <ion-label class="text-3E4B5D font-16 semibold">Another 2</ion-label>
-                <ion-radio disabled mode="md" value="another2"></ion-radio>
-            </ion-item>
-        </div>
+    <div class="block-lines">
+        <ion-item class="bg-gray">
+            <ion-checkbox item-end value="delivery"></ion-checkbox>
+            <ion-label class="text-3E4B5D font-16 semibold">Delivery</ion-label>
+        </ion-item>
     </div>
 
     <div class="block-lines">
@@ -55,31 +45,37 @@
                     Discount
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
-                <ion-radio disabled (ionSelect)="toggleDiscountDisabled($event, false)" mode="md" value="discount"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, false)" mode="md" value="discount"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
                 <ion-label class="text-3E4B5D font-16 semibold">
                     Second Fee
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
-                <ion-radio disabled (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="another1"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="another1"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
                 <ion-label class="text-3E4B5D font-16 semibold">
                     Bonus or Gift
                     <p class="font-12 text-BDBDBD text-family-light">Description for this item</p>
                 </ion-label>
-                <ion-radio disabled (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="another2"></ion-radio>
+                <ion-radio (ionSelect)="toggleGiftDisabled($event, false)" mode="md" value="another2"></ion-radio>
             </ion-item>
         </div>
     </div>
 
-    <div class="block-lines">
+    <div class="block-lines" *ngIf="!isDiscountSelectDisable">
         <ion-item padding-left class="bg-gray" detail-push>
             <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.SET_DISCOUNT' | translate }} (%)</ion-label>
-            <ion-select [disabled]="isDiscountSelectDisable" [(ngModel)]="discount" interface="action-sheet" class="text-3E4B5D font-16 bold">
+            <ion-select [(ngModel)]="discount" interface="action-sheet" class="text-3E4B5D font-16 bold">
                 <ion-option class="text-3E4B5D font-16 bold" *ngFor=" let discount of discounts " [value]="discount">{{ discount }}</ion-option>
             </ion-select>
+        </ion-item>
+    </div>
+
+    <div class="block-lines" *ngIf="!isGiftSelectDisable">
+        <ion-item no-lines>
+            <ion-textarea maxlength="250" class="bg-gray-radius-small" placeholder="Description for bonus or gift"></ion-textarea>
         </ion-item>
     </div>
 

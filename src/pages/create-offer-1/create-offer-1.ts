@@ -16,6 +16,7 @@ export class CreateOffer1Page {
     discounts: number[] = [5, 10, 15, 20, 25, 30, 35, 40];//to do
     discount: number = 10;
     isDiscountSelectDisable: boolean = true;
+    isGiftSelectDisable: boolean = false;
     company = new Company();
     picture_url: string;
 
@@ -47,6 +48,10 @@ export class CreateOffer1Page {
     toggleDiscountDisabled($event, isDiscountSelectDisable) {
         this.isDiscountSelectDisable = isDiscountSelectDisable;
 
+    }
+
+    toggleGiftDisabled($event, isGiftSelectDisable) {
+        this.isGiftSelectDisable = isGiftSelectDisable;
     }
 
 }
