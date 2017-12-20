@@ -125,6 +125,10 @@ page-place {
         overflow: scroll;
     }
 
+    .header .list-ios ion-item-options {
+        border-bottom: none;
+    }
+
     .swipe{
         position: absolute;
         left: 0;
