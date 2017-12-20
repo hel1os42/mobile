@@ -275,13 +275,13 @@ export class PlacesPage {
                 //temporary
                 popover.present();
                 popover.onDidDismiss((data) => {
-                    let categories = data.categories;
-                    let types = data.types;
-                    let features = data.features;
-                    if (!categories) {
+                    // let types = data.types;
+                    // let features = data.features;  
+                  
+                    if (!data) {
                         return;
                     }
-                    let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
+                    let selectedCategories: SelectedCategory[] = data.categories.filter(p => p.isSelected);
                     if (selectedCategories.length > 0) {
                         this.selectedChildCategories = selectedCategories;
                         this.categoryFilter = this.selectedChildCategories.map(p => p.id);
