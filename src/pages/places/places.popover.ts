@@ -20,7 +20,7 @@ export class PlacesPopover {
         private viewCtrl: ViewController,
         private navParams: NavParams) {
 
-        this.types = this.navParams.get('retailTypes');
+        this.types = this.navParams.get('types');
         this.features = this.navParams.get('features');
         this.categories = this.navParams.get('childCategories');
     }
@@ -47,7 +47,7 @@ export class PlacesPopover {
     }
 
     close() {
-        this.viewCtrl.dismiss(this.categories);
+        this.viewCtrl.dismiss({ categories: this.categories, types: this.types, features: this.features });
     }
 
     clear(arr) {

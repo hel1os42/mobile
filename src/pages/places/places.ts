@@ -242,7 +242,7 @@ export class PlacesPage {
         return undefined;
     }
 
-    openPopover() {
+    presentPopover() {
         let types = MockPlaceTypes.RetailTypes;//temporary mock
         let features = MockPlaceTypes.Features;//temporary mock
         this.offers.getSubCategories(this.selectedCategory.id)
@@ -258,7 +258,7 @@ export class PlacesPage {
                         }
                     }),
                     //temporary
-                retailTypes: types.map(t => {
+                types: types.map(t => {
                     return {
                         name: t.name,
                         isSelected: false
@@ -274,7 +274,10 @@ export class PlacesPage {
             });
                 //temporary
                 popover.present();
-                popover.onDidDismiss((categories) => {
+                popover.onDidDismiss((data) => {
+                    let categories = data.categories;
+                    let types = data.types;
+                    let features = data.features;
                     if (!categories) {
                         return;
                     }

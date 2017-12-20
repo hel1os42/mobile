@@ -32,7 +32,7 @@
 
         <ion-item class="block-search relative" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
-            <a (click)="openPopover()" class="btn_search_settings">
+            <a (click)="presentPopover()" class="btn_search_settings">
                 <img src="assets/img/user_home/icon_settings.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
