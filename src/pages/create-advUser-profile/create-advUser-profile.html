@@ -52,7 +52,7 @@
             </ng-container>
         </a>
 
-        <a *ngIf="selectedCategory && selectedCategory.children_count > 0" (click)="presentChildCategoriesPopover()" ion-item detail-push
+        <a *ngIf="(selectedCategory && selectedCategory.children_count > 0) || selectedChildCategories" (click)="presentChildCategoriesPopover()" ion-item detail-push
             padding-left class="bg-gray margin-bottom-small">
             <ng-container *ngIf="selectedChildCategories">
                 <div class="text-3E4B5D font-16 semibold wrap-no">

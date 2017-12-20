@@ -396,7 +396,7 @@ export class CreateAdvUserProfilePage {
     }
 
     createAccount() {
-        if (this.validate()) {
+        // if (this.validate()) {to do
             this.company.name = this.formData.value.companyName;
             this.company.description = this.formData.value.companyDescription;
             this.company.latitude = this.coords.lat;
@@ -446,5 +446,5 @@ export class CreateAdvUserProfilePage {
             }
 
         }
-    }
+    // }
 }
