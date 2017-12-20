@@ -1829,3 +1829,13 @@ ion-app.disable-scroll {
         overflow: hidden;
     }
 }
+
+.modal-title-fixed{
+    background: white;
+    position: absolute;
+    z-index: 1111;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 5vw;
+}
