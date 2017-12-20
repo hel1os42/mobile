@@ -1,5 +1,4 @@
-import { TokenService } from './token.service';
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 
 @Injectable()
@@ -8,14 +7,12 @@ export class AppModeService {
     HOME_MODE_KEY = 'homeMode';
     ADV_MODE_KEY = 'isAdvMode';
     ONBOARDING_KEY = 'shownOnboarding';
-    DEV_MODE_KEY = 'isDevMode';
+    ENVIRONMENT_KEY = 'environmentName';
 
     onHomeChange = new EventEmitter<boolean>();
-    onDevMode = new EventEmitter<boolean>();
+    onEnvironmentMode = new EventEmitter<string>();
 
-    constructor(private storage: StorageService,
-        private token: TokenService) {
-        this.token.onRemove.subscribe(() => this.removeDevMode());
+    constructor(private storage: StorageService) {
     }
 
     getAdvMode() {
@@ -30,18 +27,13 @@ export class AppModeService {
         return !!this.storage.get(this.HOME_MODE_KEY);
     }
 
-    getDevMode() {
-        return !!this.storage.get(this.DEV_MODE_KEY);
+    getEnvironmentMode(): string {
+        return this.storage.get(this.ENVIRONMENT_KEY);
     }
 
-    setDevMode(isDevMode: boolean) {
-        this.storage.set(this.DEV_MODE_KEY, isDevMode);
-        this.onDevMode.emit(isDevMode);
-    }
-
-    removeDevMode() {
-        this.storage.remove(this.DEV_MODE_KEY);
-        this.onDevMode.emit(false);
+    setEnvironmentMode(environmentName: string) {
+        this.storage.set(this.ENVIRONMENT_KEY, environmentName);
+        this.onEnvironmentMode.emit(environmentName);
     }
 
     setHomeMode(showPlaces: boolean) {

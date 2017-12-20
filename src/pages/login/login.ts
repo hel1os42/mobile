@@ -24,7 +24,7 @@ export class LoginPage {
     numCode: string = '+380';
     page;
     clickMode = 0;
-    isDevMode: boolean;
+    environmentMode: string;
 
     constructor(
         private nav: NavController,
@@ -34,7 +34,7 @@ export class LoginPage {
         private builder: FormBuilder,
         private alertCtrl: AlertController) {
 
-        this.isDevMode = this.appMode.getDevMode();
+        this.environmentMode = this.appMode.getEnvironmentMode();
 
     }
 
@@ -74,11 +74,29 @@ export class LoginPage {
         else this.authData.code = StringValidator.stringLimitMax(str, length);
     }
 
-    presentConfirm(selected: boolean) {
-        let content = selected ?
-            {
-                title: 'Development mode is already selected',
-                message: 'Exit development mode?',
+    presentPrompt(selected: boolean) {
+        let prompt = this.alertCtrl.create({
+                title: 'Choose environment',
+                message: '',
+                inputs : [
+                    {
+                        type:'radio',
+                        label:'develop',
+                        value: 'dev',
+                        checked: this.environmentMode == 'dev'
+                    },
+                    {
+                        type:'radio',
+                        label:'test',
+                        value: 'test',
+                        checked: this.environmentMode == 'test'
+                    },
+                    {
+                        type:'radio',
+                        label:'production',
+                        value: 'prod',
+                        checked: this.environmentMode == 'prod'
+                    }],
                 buttons: [
                     {
                         text: 'Cancel',
@@ -89,48 +107,25 @@ export class LoginPage {
                     },
                     {
                         text: 'Ok',
-                        handler: () => {
-                            this.isDevMode = false;
-                            this.appMode.setDevMode(this.isDevMode);
+                        handler: (data) => {
+                            if (!data || this.environmentMode == data) {
+                                return;
+                            }
+                            else {
+                                this.environmentMode = data;
+                                this.appMode.setEnvironmentMode(data);
+                            }
                             this.clickMode = 0;
-                        }
                     }
-                ]
-            } :
-            {
-                title: 'The test mode will be selected',
-                message: 'Are you sure?',
-                buttons: [
-                    {
-                        text: 'Cancel',
-                        role: 'cancel',
-                        handler: () => {
-                            this.clickMode = 0;
-                        }
-                    },
-                    {
-                        text: 'Ok',
-                        handler: () => {
-                            this.isDevMode = true;
-                            this.appMode.setDevMode(this.isDevMode);
-                            this.clickMode = 0;
-                        }
-                    }
-                ]
-            };
-        let confirm = this.alertCtrl.create(content);
-        confirm.present();
+                }
+            ]});
+        prompt.present();
     }
 
     toggleMode() {
         this.clickMode = this.clickMode + 1;
-        if (this.appMode.getDevMode()) {
-            this.presentConfirm(true);
-        }
-        else {
             if (this.clickMode >= 5) {
-                this.presentConfirm(false);
+                this.presentPrompt(false);
             }
-        }
     }
 }

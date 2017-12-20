@@ -21,7 +21,7 @@ export class AdvTabsPage {
     tab5Root = AdvUserOffersPage;
 
     constructor(private appMode: AppModeService) {
-        this.isDevMode = this.appMode.getDevMode();
+        this.isDevMode = this.appMode.getEnvironmentMode() == 'dev';
     }
 
 }
