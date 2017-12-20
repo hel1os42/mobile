@@ -2,9 +2,9 @@
     <div text-uppercase text-center class="font-16 text-#4F4F4F semibold padding-bottom-5vw">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CATEGORY' | translate }}</div>
 
     <div class="block-checks">
-        <ion-item *ngFor="let category of categories" no-lines>
-            <ion-label item-end class="text-828282 font-16 semibold">{{ category.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="category.isSelected" item-end></ion-checkbox>
+        <ion-item *ngFor="let feature of features" no-lines>
+            <ion-label item-end class="text-828282 font-16 semibold">{{ feature.name }}</ion-label>
+            <ion-checkbox [(ngModel)]="feature.isSelected" item-end></ion-checkbox>
         </ion-item>
     </div>
 </div>

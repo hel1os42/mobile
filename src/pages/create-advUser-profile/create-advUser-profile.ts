@@ -2,9 +2,10 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
-import { Map } from 'leaflet';
 import leaflet, { latLng, LeafletEvent, tileLayer } from 'leaflet';
+import { Map } from 'leaflet';
 import * as _ from 'lodash';
+import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
 import { ChildCategory } from '../../models/childCategory';
 import { Company } from '../../models/company';
 import { Coords } from '../../models/coords';
@@ -23,6 +24,8 @@ import { StringValidator } from '../../validators/string.validator';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
 import { CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
+import { CreateAdvUserProfileFeaturesPopover } from './create-advUser-profile.features.popover';
+import { CreateAdvUserProfileTypesPopover } from './create-advUser-profile.types.popover';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -37,6 +40,12 @@ export class CreateAdvUserProfilePage {
     selectedCategory: SelectedCategory;
     selectedChildCategories: SelectedCategory[];
     childCategoriesNames: string[];
+    types = MockPlaceTypes.RetailTypes;//temporary
+    selectedTypes;//to do
+    typeNames: string[];
+    features = MockPlaceTypes.Features;//temporary
+    selectedFeatures;//to do
+    featureNames: string[];
     company: Company = new Company();
     address: string;
     picture_url: string;
@@ -75,72 +84,72 @@ export class CreateAdvUserProfilePage {
                     category.children_count = cat.children_count;
                 })
             });
-                if (this.navParams.get('company')) {
-                    this.company = this.navParams.get('company');
-                    this.zoom = MapUtils.round(MapUtils.getZoom(this.company.latitude, this.company.radius), 0.5);
-                    this.radius = this.company.radius;
-                    this.address = this.company.address;
-                    this.placeService.getWithCategory()
-                        .subscribe(company => {
-                            this.company = company;
-                            this.picture_url = this.company.picture_url;
-                            this.cover_url = this.company.cover_url;
-                            this.coords = {
-                                lat: company.latitude,
-                                lng: company.longitude
-                            };
-                            this.mapPresent();
-                            this.selectCategory(company.categories);
-                        })
-                }
-                else {
-                    this.coords.lat = this.navParams.get('latitude');
-                    this.coords.lng = this.navParams.get('longitude');
-                    this.mapPresent(true);
+        if (this.navParams.get('company')) {
+            this.company = this.navParams.get('company');
+            this.zoom = MapUtils.round(MapUtils.getZoom(this.company.latitude, this.company.radius), 0.5);
+            this.radius = this.company.radius;
+            this.address = this.company.address;
+            this.placeService.getWithCategory()
+                .subscribe(company => {
+                    this.company = company;
+                    this.picture_url = this.company.picture_url;
+                    this.cover_url = this.company.cover_url;
+                    this.coords = {
+                        lat: company.latitude,
+                        lng: company.longitude
+                    };
+                    this.mapPresent();
+                    this.selectCategory(company.categories);
+                })
+        }
+        else {
+            this.coords.lat = this.navParams.get('latitude');
+            this.coords.lng = this.navParams.get('longitude');
+            this.mapPresent(true);
 
+            if (!this.coords.lat) {
+                this.location.get()
+                    .then((resp) => {
+                        this.coords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        this.mapPresent(true)
+                    })
+                    .catch((error) => {
+                        this.message = error.message;
+                    });
+                setTimeout(() => {
                     if (!this.coords.lat) {
-                        this.location.get()
-                            .then((resp) => {
+                        this.location.getByIp()
+                            .subscribe(resp => {
                                 this.coords = {
-                                    lat: resp.coords.latitude,
-                                    lng: resp.coords.longitude
+                                    lat: resp.latitude,
+                                    lng: resp.longitude
                                 };
-                                this.mapPresent(true)
+                                this.mapPresent(true);
                             })
-                            .catch((error) => {
-                                this.message = error.message;
-                            });
-                        setTimeout(() => {
-                            if (!this.coords.lat) {
-                                this.location.getByIp()
-                                    .subscribe(resp => {
-                                        this.coords = {
-                                            lat: resp.latitude,
-                                            lng: resp.longitude
-                                        };
-                                        this.mapPresent(true);
-                                    })
-                            }
-                        }, 10000);
                     }
-                };
+                }, 10000);
+            }
+        };
 
-                this.formData = this.builder.group({
-                    companyName: new FormControl(this.company.name ? this.company.name : '', Validators.compose([
-                        StringValidator.validString,
-                        Validators.maxLength(30),
-                        //Validators.minLength(2),
-                        //Validators.pattern(/a-zA-Z0-9/),
-                        Validators.required
-                    ])),
-                    companyDescription: new FormControl(this.company.description ? this.company.description : '', Validators.compose([
-                        StringValidator.validString,
-                        Validators.maxLength(250),
-                        //Validators.minLength(2),
-                        //Validators.pattern(/a-zA-Z0-9/),
-                        Validators.required
-                    ])),
-                });
+        this.formData = this.builder.group({
+            companyName: new FormControl(this.company.name ? this.company.name : '', Validators.compose([
+                StringValidator.validString,
+                Validators.maxLength(30),
+                //Validators.minLength(2),
+                //Validators.pattern(/a-zA-Z0-9/),
+                Validators.required
+            ])),
+            companyDescription: new FormControl(this.company.description ? this.company.description : '', Validators.compose([
+                StringValidator.validString,
+                Validators.maxLength(250),
+                //Validators.minLength(2),
+                //Validators.pattern(/a-zA-Z0-9/),
+                Validators.required
+            ])),
+        });
     }
 
     addMap() {
@@ -234,7 +243,7 @@ export class CreateAdvUserProfilePage {
         })
     }
 
-    showCategoriesPopover() {
+    presentCategoriesPopover() {
         let popover = this.popoverCtrl.create(CreateAdvUserProfileCategoryPopover, {
             categories: this.categories.map(p => {
                 return {
@@ -262,7 +271,7 @@ export class CreateAdvUserProfilePage {
         })
     }
 
-    showChildCategoriesPopover() {
+    presentChildCategoriesPopover() {
         this.offer.getSubCategories(this.selectedCategory.id)
             .subscribe(resp => {
                 this.childCategories = resp.children;
@@ -295,6 +304,59 @@ export class CreateAdvUserProfilePage {
                     }
                 })
             })
+    }
+    //to do
+    presentTypesPopover() {
+        this.placeService.getRetailTypes(this.selectedCategory.id)
+            .subscribe(resp => {
+                let popover = this.popoverCtrl.create(CreateAdvUserProfileTypesPopover, { 
+                    types: this.types.map(t => {
+                        return {
+                            name: t.name,
+                            isSelected: false
+                        };
+                    }) 
+                });
+                popover.present();
+                popover.onDidDismiss(types => {
+                    if (!types) {
+                        return;
+                    } 
+                    let selectedTypes = types.filter(t => t.isSelected);
+                    if (selectedTypes.length > 0) {
+                        this.selectedTypes = selectedTypes;
+                        this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
+                    }
+                    else {
+                        this.selectedTypes = undefined;
+                    }
+                });
+            });
+    }
+    //to do
+    presentFeaturesPopover() {
+        let popover = this.popoverCtrl.create(CreateAdvUserProfileFeaturesPopover, { 
+            features: this.features.map(f => {
+                return {
+                    name: f.name,
+                    isSelected: false
+                };
+            }) 
+        });
+        popover.present();
+        popover.onDidDismiss(features => {
+            if (!features) {
+                return;
+            } 
+            let selectedFeatures = features.filter(f => f.isSelected);
+            if (selectedFeatures.length > 0) {
+                this.selectedFeatures = selectedFeatures;
+                this.featureNames = this.selectedFeatures.map(p => ' ' + p.name);
+            }
+            else {
+                this.selectedFeatures = undefined;
+            }
+        });
     }
 
     addLogo() {
