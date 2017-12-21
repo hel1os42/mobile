@@ -102,6 +102,7 @@ export class LoginPage {
                         text: 'Cancel',
                         role: 'cancel',
                         handler: () => {
+                            this.clickMode = 0;
                             return;
                         }
                     },
@@ -115,11 +116,11 @@ export class LoginPage {
                                 this.environmentMode = data;
                                 this.appMode.setEnvironmentMode(data);
                             }
-                            this.clickMode = 0;
                     }
                 }
             ]});
         prompt.present();
+        this.clickMode = 0;
     }
 
     toggleMode() {
