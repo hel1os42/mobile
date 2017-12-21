@@ -17,7 +17,6 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { BarChartComponent } from '../components/bar-chart';
 import { LineChartComponent } from '../components/line-chart';
-import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { AdvNotificationsPage } from '../pages/adv-notifications/adv-notifications';
 import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
 import { AdvTabsPage } from '../pages/adv-tabs/adv-tabs';
@@ -120,7 +119,6 @@ export function createTranslateLoader(http: Http) {
       AdvUserOffersPage,
       AdvTabsPage,
       AdvNotificationsPage,
-      AdvHomePage,
       CreateOffer1Page,
       PlaceFeedbackPage,
       PlacePage,
@@ -201,7 +199,6 @@ export function createTranslateLoader(http: Http) {
       AdvUserOffersPage,
       AdvTabsPage,
       AdvNotificationsPage,
-      AdvHomePage,
       CreateOffer1Page,
       PlaceFeedbackPage,
       PlacePage,
