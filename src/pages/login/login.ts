@@ -35,11 +35,14 @@ export class LoginPage {
         private alertCtrl: AlertController) {
 
         this.environmentMode = this.appMode.getEnvironmentMode();
-
     }
 
     updateList(ev) {
         StringValidator.updateList(ev);
+    }
+
+    getDevMode() {
+        return this.appMode.getEnvironmentMode() == 'dev';
     }
 
     login() {
