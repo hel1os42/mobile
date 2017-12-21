@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { AlertController, LoadingController, NavController, Platform } from 'ionic-angular';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
-import leaflet, { tileLayer, latLng, LeafletEvent } from 'leaflet';
 import { Map } from 'leaflet';
+import leaflet, { latLng, LeafletEvent, tileLayer } from 'leaflet';
 import { Coords } from '../../models/coords';
 import { Register } from '../../models/register';
 import { User } from '../../models/user';
@@ -40,7 +40,6 @@ export class CreateUserProfilePage {
 
     constructor(private nav: NavController,
         private location: LocationService,
-        private changeDetectorRef: ChangeDetectorRef,
         private profile: ProfileService,
         private toast: ToastService,
         private imagePicker: ImagePicker,

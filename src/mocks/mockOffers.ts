@@ -1,4 +1,3 @@
-import { Offer } from '../models/offer';
 
 export class MockOffers {
 

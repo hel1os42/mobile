@@ -1,15 +1,14 @@
-import { Subscription } from 'rxjs/Rx';
-import { Injectable } from '@angular/core';
-import { Headers, Http, QueryEncoder, RequestOptions, Response, URLSearchParams } from '@angular/http';
-import { ToastController, LoadingController, Loading } from "ionic-angular";
-import { Observable } from "rxjs";
-import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/map';
-import { TokenService } from "./token.service";
+import 'rxjs/add/operator/share';
+import { Injectable } from '@angular/core';
+import { Headers, Http, QueryEncoder, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
-import { ToastService } from './toast.service';
+import { Loading, LoadingController } from 'ionic-angular';
+import { Observable } from 'rxjs';
 import { AppModeService } from './appMode.service';
+import { ToastService } from './toast.service';
+import { TokenService } from './token.service';
 
 interface ApiRequestOptions {
     showLoading?: boolean;

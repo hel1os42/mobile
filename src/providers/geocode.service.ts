@@ -1,7 +1,6 @@
-import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import leaflet, { latLng } from 'leaflet';
+import { Observable } from 'rxjs/Rx';
 import { ToastService } from './toast.service';
 
 

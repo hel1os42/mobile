@@ -1,8 +1,7 @@
-import { Company } from "./company";
-import { OfferCategory } from "./offerCategory";
-import { OfferDate } from "./OfferDate";
-import { TimeFrames } from "./timeFrames";
-import { OfferCreate } from "./offerCreate";
+import { Company } from './company';
+import { OfferCategory } from './offerCategory';
+import { OfferCreate } from './offerCreate';
+import { TimeFrames } from './timeFrames';
 
 export class Offer extends OfferCreate {
     id: string;

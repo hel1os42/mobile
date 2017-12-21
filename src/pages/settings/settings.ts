@@ -1,12 +1,11 @@
-import { TranslateService } from '@ngx-translate/core';
-import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../../const/i18n.const';
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import leaflet, { latLng, tileLayer } from 'leaflet';
+import { AVAILABLE_LANGUAGES, SYS_OPTIONS } from '../../const/i18n.const';
 import { Coords } from '../../models/coords';
 import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
-import { LocationService } from '../../providers/location.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
@@ -45,7 +44,6 @@ export class SettingsPage {
     constructor(
         private nav: NavController,
         private profile: ProfileService,
-        private location: LocationService,
         private appMode: AppModeService,
         private app: App,
         private popoverCtrl: PopoverController,
@@ -70,18 +68,6 @@ export class SettingsPage {
                     this.addMap();
                 });
         }
-
-        // this.location.get()
-        //     .then((resp) => {
-        //         this.coords = {
-        //             lat: resp.coords.latitude,
-        //             lng: resp.coords.longitude
-        //         };
-        //         this.addMap();
-        //     })
-        //     .catch((error) => {
-        //         this.message = error.message;
-        //     });
 
         this.place.get(true)
             .subscribe(

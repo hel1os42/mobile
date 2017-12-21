@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController, NavParams } from 'ionic-angular';
 import { Offer } from '../../models/offer';
-import { PlaceService } from '../../providers/place.service';
 import { ToastService } from '../../providers/toast.service';
 import { StringValidator } from '../../validators/string.validator';
 import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
@@ -21,7 +20,6 @@ export class CreateOfferPage {
 
     constructor(private nav: NavController,
                 private navParams: NavParams,
-                private place: PlaceService,
                 private toast: ToastService,
                 private imagePicker: ImagePicker,
                 private builder: FormBuilder) {

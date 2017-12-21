@@ -1,10 +1,9 @@
-import { TransferPage } from '../transfer/transfer';
-import { Account } from '../../models/account';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Account } from '../../models/account';
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
-import { DateTimeUtils } from '../../utils/date-time.utils';
+import { TransferPage } from '../transfer/transfer';
 
 @Component({
     selector: 'page-user-nau',
@@ -41,7 +40,7 @@ export class UserNauPage {
     }
 
     filterByDate() {
-        let dates = DateTimeUtils.getFilterDates(this.date);
+        // let dates = DateTimeUtils.getFilterDates(this.date);
         //to do
     }
 

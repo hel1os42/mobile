@@ -1,8 +1,6 @@
 import { LocationService } from '../providers/location.service';
 import { Subscription } from 'rxjs/Rx';
 import { AdvTabsPage } from '../pages/adv-tabs/adv-tabs';
-import { CreateOfferPage } from '../pages/create-offer/create-offer';
-import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
 import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';

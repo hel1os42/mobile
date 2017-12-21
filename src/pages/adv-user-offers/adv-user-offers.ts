@@ -1,14 +1,13 @@
-import { CreateOfferInformationPopover } from './information.popover';
-import { ProfileService } from '../../providers/profile.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import * as _ from 'lodash';
 import { Observable, Subscription } from 'rxjs/Rx';
 import { Offer } from '../../models/offer';
 import { PlaceService } from '../../providers/place.service';
-import { TimezoneService } from '../../providers/timezone.service';
+import { ProfileService } from '../../providers/profile.service';
 import { DateTimeUtils } from '../../utils/date-time.utils';
 import { CreateOfferPage } from '../create-offer/create-offer';
-import * as _ from 'lodash';
+import { CreateOfferInformationPopover } from './information.popover';
 
 @Component({
     selector: 'page-adv-user-offers',
