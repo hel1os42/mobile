@@ -1,15 +1,14 @@
-import { Subscription } from 'rxjs/Rx';
-import { Injectable } from '@angular/core';
-import { Headers, Http, QueryEncoder, RequestOptions, Response, URLSearchParams } from '@angular/http';
-import { ToastController, LoadingController, Loading } from "ionic-angular";
-import { Observable } from "rxjs";
-import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/map';
-import { TokenService } from "./token.service";
+import 'rxjs/add/operator/share';
+import { Injectable } from '@angular/core';
+import { Headers, Http, QueryEncoder, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { FileTransfer, FileUploadOptions } from '@ionic-native/file-transfer';
-import { ToastService } from './toast.service';
+import { Loading, LoadingController } from 'ionic-angular';
+import { Observable } from 'rxjs';
 import { AppModeService } from './appMode.service';
+import { ToastService } from './toast.service';
+import { TokenService } from './token.service';
 
 interface ApiRequestOptions {
     showLoading?: boolean;
@@ -33,10 +32,11 @@ export class ApiService {
     HTTP_STATUS_CODE_UNATHORIZED = 401;
     HTTP_STATUS_CODE_TOO_MANY_REQ = 429;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
-    devUrl: string = 'https://nau.toavalon.com';
-    testUrl: string = 'https://api-test.nau.io';
+    prodUrl = 'https://api.nau.io';
+    devUrl = 'https://nau.toavalon.com';
+    testUrl = 'https://api-test.nau.io';
     url: string;
-    isDevMode: boolean;
+    environmentMode: string;
 
     constructor(
         private http: Http,
@@ -46,14 +46,23 @@ export class ApiService {
         private fileTransfer: FileTransfer,
         private appMode: AppModeService) {
 
-        this.isDevMode = this.appMode.getDevMode();
-        this.url = this.isDevMode ? this.devUrl : this.testUrl;
-        this.appMode.onDevMode
+        if (this.appMode.getEnvironmentMode()) {
+            this.environmentMode = this.appMode.getEnvironmentMode();
+        }
+        else {
+            this.environmentMode = 'prod';
+            this.appMode.setEnvironmentMode(this.environmentMode);
+        }
+
+        this.url = (this.environmentMode == 'prod') ? this.prodUrl 
+        : this.environmentMode == 'test' ? this.testUrl
+        : this.devUrl;
+        this.appMode.onEnvironmentMode
             .subscribe(resp => {
-                this.isDevMode = resp;
-                this.url = this.isDevMode ? this.devUrl : this.testUrl;
+                this.url = resp == 'prod' ? this.prodUrl 
+                : resp == 'test' ? this.testUrl
+                : this.devUrl;
             })
-        
     }
 
     private getOptions(options: RequestOptions): RequestOptions {

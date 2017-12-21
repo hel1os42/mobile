@@ -1,11 +1,10 @@
-import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { AlertController, NavController } from 'ionic-angular';
 import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { ProfileService } from '../../providers/profile.service';
+import { StringValidator } from '../../validators/string.validator';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SignUpInvitePage } from '../invite/invite';
 import { TabsPage } from '../tabs/tabs';
@@ -24,22 +23,24 @@ export class LoginPage {
     numCode: string = '+380';
     page;
     clickMode = 0;
-    isDevMode: boolean;
+    environmentMode: string;
 
     constructor(
         private nav: NavController,
         private auth: AuthService,
         private appMode: AppModeService,
         private profile: ProfileService,
-        private builder: FormBuilder,
         private alertCtrl: AlertController) {
 
-        this.isDevMode = this.appMode.getDevMode();
-
+        this.environmentMode = this.appMode.getEnvironmentMode();
     }
 
     updateList(ev) {
         StringValidator.updateList(ev);
+    }
+
+    getDevMode() {
+        return this.appMode.getEnvironmentMode() == 'dev';
     }
 
     login() {
@@ -74,63 +75,59 @@ export class LoginPage {
         else this.authData.code = StringValidator.stringLimitMax(str, length);
     }
 
-    presentConfirm(selected: boolean) {
-        let content = selected ?
-            {
-                title: 'Development mode is already selected',
-                message: 'Exit development mode?',
+    presentPrompt(selected: boolean) {
+        let prompt = this.alertCtrl.create({
+                title: 'Choose environment',
+                message: '',
+                inputs : [
+                    {
+                        type:'radio',
+                        label:'develop',
+                        value: 'dev',
+                        checked: this.environmentMode == 'dev'
+                    },
+                    {
+                        type:'radio',
+                        label:'test',
+                        value: 'test',
+                        checked: this.environmentMode == 'test'
+                    },
+                    {
+                        type:'radio',
+                        label:'production',
+                        value: 'prod',
+                        checked: this.environmentMode == 'prod'
+                    }],
                 buttons: [
                     {
                         text: 'Cancel',
                         role: 'cancel',
                         handler: () => {
+                            this.clickMode = 0;
                             return;
                         }
                     },
                     {
                         text: 'Ok',
-                        handler: () => {
-                            this.isDevMode = false;
-                            this.appMode.setDevMode(this.isDevMode);
-                            this.clickMode = 0;
-                        }
+                        handler: (data) => {
+                            if (!data || this.environmentMode == data) {
+                                return;
+                            }
+                            else {
+                                this.environmentMode = data;
+                                this.appMode.setEnvironmentMode(data);
+                            }
                     }
-                ]
-            } :
-            {
-                title: 'The test mode will be selected',
-                message: 'Are you sure?',
-                buttons: [
-                    {
-                        text: 'Cancel',
-                        role: 'cancel',
-                        handler: () => {
-                            this.clickMode = 0;
-                        }
-                    },
-                    {
-                        text: 'Ok',
-                        handler: () => {
-                            this.isDevMode = true;
-                            this.appMode.setDevMode(this.isDevMode);
-                            this.clickMode = 0;
-                        }
-                    }
-                ]
-            };
-        let confirm = this.alertCtrl.create(content);
-        confirm.present();
+                }
+            ]});
+        prompt.present();
+        this.clickMode = 0;
     }
 
     toggleMode() {
         this.clickMode = this.clickMode + 1;
-        if (this.appMode.getDevMode()) {
-            this.presentConfirm(true);
-        }
-        else {
             if (this.clickMode >= 5) {
-                this.presentConfirm(false);
+                this.presentPrompt(false);
             }
-        }
     }
 }

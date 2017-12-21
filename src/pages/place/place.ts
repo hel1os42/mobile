@@ -4,7 +4,6 @@ import { Company } from '../../models/company';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { AppModeService } from '../../providers/appMode.service';
-import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
@@ -23,7 +22,6 @@ export class PlacePage {
 
     constructor(
         private nav: NavController,
-        private location: LocationService,
         private offers: OfferService,
         private appMode: AppModeService,
         private navParams: NavParams,

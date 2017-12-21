@@ -1,19 +1,18 @@
-import { Account } from '../../models/account';
-import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
-import { Subscription } from 'rxjs/Rx';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Rx';
+import { Account } from '../../models/account';
 import { User } from '../../models/user';
 import { AuthService } from '../../providers/auth.service';
 import { ProfileService } from '../../providers/profile.service';
+import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SettingsPage } from '../settings/settings';
 import { UserAchievePage } from '../user-achieve/user-achieve';
 import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
-import { AppModeService } from '../../providers/appMode.service';
-import { AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'page-user-profile',
@@ -32,7 +31,6 @@ export class UserProfilePage {
         private profile: ProfileService,
         private nav: NavController,
         private auth: AuthService,
-        private appMode: AppModeService,
         public alertCtrl: AlertController) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
@@ -94,7 +92,6 @@ export class UserProfilePage {
                     text: 'Ok',
                     handler: () => {
                         this.auth.logout();
-                        this.appMode.removeDevMode();
                     }
                 }
             ]

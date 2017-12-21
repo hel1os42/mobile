@@ -1,11 +1,5 @@
 page-place {
 
-  .plus{
-      padding-top: 2vw;
-      padding-left: 2vw;
-      padding-right: 2vw;
-  }
-
     .gift{
         height: 8.4vw;
         width: auto;
@@ -123,6 +117,10 @@ page-place {
         padding-right: 5%;
         display: block;
         overflow: scroll;
+    }
+
+    .header .list-ios ion-item-options {
+        border-bottom: none;
     }
 
     .swipe{

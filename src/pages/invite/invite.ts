@@ -9,7 +9,7 @@ import { SignUpPage } from '../signup/signup';
 })
 
 export class SignUpInvitePage {
-    code = { inviteCode: '59c2af2' };//to do
+    code = { inviteCode: '' };//to do
     //data: Register = new Register();
 
     constructor(

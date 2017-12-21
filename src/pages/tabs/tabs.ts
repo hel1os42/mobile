@@ -30,7 +30,7 @@ export class TabsPage {
     constructor(private appMode: AppModeService,
         private navParams: NavParams) {
 
-        this.isDevMode = this.appMode.getDevMode();
+        this.isDevMode = this.appMode.getEnvironmentMode() == 'dev';
 
         // this.tab1Root = this.appMode.getHomeMode()
         //     ? PlacesPage

@@ -1,3 +1,4 @@
+import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
 import { Component } from '@angular/core';
 import { LoadingController, NavController, PopoverController } from 'ionic-angular';
 import { ChildCategory } from '../../models/childCategory';
@@ -8,14 +9,10 @@ import { SelectedCategory } from '../../models/selectedCategory';
 import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
-import { ProfileService } from '../../providers/profile.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import leaflet, { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBounds, LatLng, DomUtil } from 'leaflet';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { Map } from 'leaflet';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'page-places',
@@ -52,7 +49,6 @@ export class PlacesPage {
         private appMode: AppModeService,
         private offers: OfferService,
         private popoverCtrl: PopoverController,
-        private profile: ProfileService,
         private loading: LoadingController) {
 
         this.offers.getCategories()
@@ -241,7 +237,9 @@ export class PlacesPage {
         return undefined;
     }
 
-    openPopover() {
+    presentPopover() {
+        let types = MockPlaceTypes.RetailTypes;//temporary mock
+        let features = MockPlaceTypes.Features;//temporary mock
         this.offers.getSubCategories(this.selectedCategory.id)
             .subscribe(category => {
                 this.search = "";
@@ -253,14 +251,32 @@ export class PlacesPage {
                             name: p.name,
                             isSelected: this.selectedChildCategories ? !!this.selectedChildCategories.find(k => k.id == p.id) : false
                         }
-                    })
-                });
+                    }),
+                    //temporary
+                types: types.map(t => {
+                    return {
+                        name: t.name,
+                        isSelected: false
+                    }
+                    }), 
+                
+                features: features.map(feature => {
+                     return {
+                        name: feature.name,
+                        isSelected: false
+                    }
+                }) 
+            });
+                //temporary
                 popover.present();
-                popover.onDidDismiss((categories) => {
-                    if (!categories) {
+                popover.onDidDismiss((data) => {
+                    // let types = data.types;
+                    // let features = data.features;  
+                  
+                    if (!data) {
                         return;
                     }
-                    let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
+                    let selectedCategories: SelectedCategory[] = data.categories.filter(p => p.isSelected);
                     if (selectedCategories.length > 0) {
                         this.selectedChildCategories = selectedCategories;
                         this.categoryFilter = this.selectedChildCategories.map(p => p.id);

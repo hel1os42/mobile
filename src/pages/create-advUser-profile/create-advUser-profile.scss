@@ -116,9 +116,11 @@ create-advUser-profile-category-popover{
     }
 }
 
-create-advUser-profile-popover-childCategory{
+create-advUser-profile-popover-childCategory,
+create-advUser-profile-popover-features,
+create-advUser-profile-popover-types {
     .modal_content{
-        padding-top: 8vw;
+        padding-top: 14vw;
         padding-right: 7vw;
         padding-left: 10vw;
         padding-bottom: 21vw;

@@ -1,13 +1,12 @@
-import { StringValidator } from '../../validators/string.validator';
+import { Component } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { TransferPopover } from './transfer.popover';
-import { NamberValidator } from '../../validators/number.validator';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
-import { ProfileService } from '../../providers/profile.service';
-import { TransactionCreate } from '../../models/transactionCreate';
-import { ChangeDetectorRef, Component } from '@angular/core';
 import { Account } from '../../models/account';
+import { TransactionCreate } from '../../models/transactionCreate';
+import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
+import { StringValidator } from '../../validators/string.validator';
+import { TransferPopover } from './transfer.popover';
 
 @Component({
     selector: 'page-transfer',

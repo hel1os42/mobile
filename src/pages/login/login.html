@@ -31,27 +31,27 @@
   <div margin-top class="bg-gray padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
-        <ion-input (ionChange)="limitStr(authData.code, 6)" 
-                  (keyup)="updateList($event)" 
-                  [(ngModel)]="authData.code" 
-                  required 
-                  ngControl="code" 
-                  name="code" 
-                  [minlength]="6" 
-                  class="otp" 
-                  type="number" 
+        <ion-input (ionChange)="limitStr(authData.code, 6)"
+                  (keyup)="updateList($event)"
+                  [(ngModel)]="authData.code"
+                  required
+                  ngControl="code"
+                  name="code"
+                  [minlength]="6"
+                  class="otp"
+                  type="number"
                   placeholder="XXXXXX"></ion-input>
       </ion-item>
   </div>
 </form>
 
-  <button (click)="login()" 
-          [disabled]="!form.valid" 
-          type="submit" 
-          text-uppercase 
-          class="margin-top-5vw" 
-          ion-button block 
-          middle 
+  <button (click)="login()"
+          [disabled]="!form.valid"
+          type="submit"
+          text-uppercase
+          class="margin-top-5vw"
+          ion-button block
+          middle
           color="primary" >
           {{ 'UNIT.SIGN_IN' | translate }}
 </button>
@@ -62,4 +62,5 @@
   <div text-center>
     <div><a (click)="signup()" class="link-nau">{{ 'UNIT.SIGN_UP' | translate }}</a></div>
   </div>
+  <div  *ngIf="getDevMode()" class="devmode">Dev mode</div>
 </ion-footer>

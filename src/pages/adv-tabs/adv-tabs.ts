@@ -1,5 +1,5 @@
 import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
-import { Component, isDevMode } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdvNotificationsPage } from '../adv-notifications/adv-notifications';
 import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { AdvUserProfilePage } from '../adv-user-profile/adv-user-profile';
@@ -21,7 +21,7 @@ export class AdvTabsPage {
     tab5Root = AdvUserOffersPage;
 
     constructor(private appMode: AppModeService) {
-        this.isDevMode = this.appMode.getDevMode();
+        this.isDevMode = this.appMode.getEnvironmentMode() == 'dev';
     }
 
 }
