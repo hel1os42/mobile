@@ -9,14 +9,10 @@ import { SelectedCategory } from '../../models/selectedCategory';
 import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
-import { ProfileService } from '../../providers/profile.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import leaflet, { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBounds, LatLng, DomUtil } from 'leaflet';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { Map } from 'leaflet';
-import * as _ from 'lodash';
 
 @Component({
     selector: 'page-places',
@@ -53,7 +49,6 @@ export class PlacesPage {
         private appMode: AppModeService,
         private offers: OfferService,
         private popoverCtrl: PopoverController,
-        private profile: ProfileService,
         private loading: LoadingController) {
 
         this.offers.getCategories()

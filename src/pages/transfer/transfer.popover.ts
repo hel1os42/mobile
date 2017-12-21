@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams, NavController } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 
 @Component({
     selector: 'transfer-popover-component',
@@ -12,8 +12,7 @@ export class TransferPopover {
     qrWith: number;
 
     constructor(private viewCtrl: ViewController,
-                private navParams: NavParams,
-                private nav: NavController) { 
+                private navParams: NavParams) { 
         
         this.sourceAddress = this.navParams.get('sourceAddress');
         this.qrWith = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

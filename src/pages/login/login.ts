@@ -1,11 +1,10 @@
-import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { AlertController, NavController } from 'ionic-angular';
 import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { ProfileService } from '../../providers/profile.service';
+import { StringValidator } from '../../validators/string.validator';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SignUpInvitePage } from '../invite/invite';
 import { TabsPage } from '../tabs/tabs';
@@ -31,7 +30,6 @@ export class LoginPage {
         private auth: AuthService,
         private appMode: AppModeService,
         private profile: ProfileService,
-        private builder: FormBuilder,
         private alertCtrl: AlertController) {
 
         this.environmentMode = this.appMode.getEnvironmentMode();

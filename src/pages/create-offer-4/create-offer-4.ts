@@ -1,7 +1,7 @@
 import { StringValidator } from '../../validators/string.validator';
 import { NamberValidator } from '../../validators/number.validator';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ToastService } from '../../providers/toast.service';

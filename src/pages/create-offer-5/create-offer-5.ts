@@ -1,12 +1,12 @@
-import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
-import { LoadingController, NavController, NavParams, PopoverController, ViewController } from 'ionic-angular';
+import { LoadingController, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ApiService } from '../../providers/api.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
+import { StringValidator } from '../../validators/string.validator';
 
 
 @Component({
@@ -29,8 +29,6 @@ export class CreateOffer5Page {
         private api: ApiService,
         private loading: LoadingController,
         private alert: AlertController,
-        private viewCtrl: ViewController,
-        private popoverCtrl: PopoverController,
         private toast: ToastService) {
 
         this.offer = this.navParams.get('offer');

@@ -1,7 +1,5 @@
-import { Observable } from "rxjs";
-import { Http, Response } from '@angular/http';
 import * as _ from 'lodash';
-import { TimeFrames } from "../models/timeFrames";
+import { TimeFrames } from '../models/timeFrames';
 
 export class DateTimeUtils {
     public static MONDAY = 'monday';

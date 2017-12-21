@@ -17,7 +17,6 @@ import { QRCodeModule } from 'angular2-qrcode';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { BarChartComponent } from '../components/bar-chart';
 import { LineChartComponent } from '../components/line-chart';
-import { AdvHomePage } from '../pages/adv-home/adv-home';
 import { AdvNotificationsPage } from '../pages/adv-notifications/adv-notifications';
 import { AdvRedeemOfferPage } from '../pages/adv-redeem-offer/adv-redeem-offer';
 import { AdvTabsPage } from '../pages/adv-tabs/adv-tabs';
@@ -62,7 +61,6 @@ import { StartPage } from '../pages/start/start';
 import { StatisticPage } from '../pages/statistic/statistic';
 import { Statistic1Page } from '../pages/statistic1/statistic1';
 import { TabsPage } from '../pages/tabs/tabs';
-import { TestPage } from '../pages/test/test';
 import { TransferPage } from '../pages/transfer/transfer';
 import { UserAchievePage } from '../pages/user-achieve/user-achieve';
 import { UserNauPage } from '../pages/user-nau/user-nau';
@@ -111,7 +109,6 @@ export function createTranslateLoader(http: Http) {
       AdvUserProfilePage,
       UserOffersPage,
       OfferPage,
-      TestPage,
       SplashScreenPage,
       UserTasksPage,
       UserAchievePage,
@@ -120,7 +117,6 @@ export function createTranslateLoader(http: Http) {
       AdvUserOffersPage,
       AdvTabsPage,
       AdvNotificationsPage,
-      AdvHomePage,
       CreateOffer1Page,
       PlaceFeedbackPage,
       PlacePage,
@@ -192,7 +188,6 @@ export function createTranslateLoader(http: Http) {
       AdvUserProfilePage,
       UserOffersPage,
       OfferPage,
-      TestPage,
       SplashScreenPage,
       UserTasksPage,
       UserAchievePage,
@@ -201,7 +196,6 @@ export function createTranslateLoader(http: Http) {
       AdvUserOffersPage,
       AdvTabsPage,
       AdvNotificationsPage,
-      AdvHomePage,
       CreateOffer1Page,
       PlaceFeedbackPage,
       PlacePage,
