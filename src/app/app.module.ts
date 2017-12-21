@@ -61,7 +61,6 @@ import { StartPage } from '../pages/start/start';
 import { StatisticPage } from '../pages/statistic/statistic';
 import { Statistic1Page } from '../pages/statistic1/statistic1';
 import { TabsPage } from '../pages/tabs/tabs';
-import { TestPage } from '../pages/test/test';
 import { TransferPage } from '../pages/transfer/transfer';
 import { UserAchievePage } from '../pages/user-achieve/user-achieve';
 import { UserNauPage } from '../pages/user-nau/user-nau';
@@ -110,7 +109,6 @@ export function createTranslateLoader(http: Http) {
       AdvUserProfilePage,
       UserOffersPage,
       OfferPage,
-      TestPage,
       SplashScreenPage,
       UserTasksPage,
       UserAchievePage,
@@ -190,7 +188,6 @@ export function createTranslateLoader(http: Http) {
       AdvUserProfilePage,
       UserOffersPage,
       OfferPage,
-      TestPage,
       SplashScreenPage,
       UserTasksPage,
       UserAchievePage,
