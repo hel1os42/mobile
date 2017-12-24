@@ -40,9 +40,9 @@
     <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
         <div class="leaflet-map" 
-        leaflet 
-        [leafletOptions]="options" 
-        (leafletMapReady)="onMapReady($event)">
+                    leaflet 
+                    [leafletOptions]="options" 
+                    (leafletMapReady)="onMapReady($event)">
         </div>
         <div id="marker"></div>
     </div>
