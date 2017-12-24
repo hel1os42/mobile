@@ -34,24 +34,26 @@
         <div no-lines>
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">{{ 'PAGE_CREATE-OFFER.FROM' | translate }}</ion-label>
-                <ion-datetime doneText="Ok" 
-                                [(ngModel)]="startDate" 
-                                displayFormat="DDD DD/MM/YYYY" 
-                                pickerFormat="MMM/DD/YYYY" 
-                                [min]="todayDate | date: 'yyyy-MM-dd'"
-                                max="2021-12-31" 
-                                class="text-3E4B5D font-16 semibold">
+                <ion-datetime 
+                    doneText="Ok" 
+                    [(ngModel)]="startDate" 
+                    displayFormat="DDD DD/MM/YYYY" 
+                    pickerFormat="MMM/DD/YYYY" 
+                    [min]="todayDate | date: 'yyyy-MM-dd'"
+                    max="2021-12-31" 
+                    class="text-3E4B5D font-16 semibold">
                 </ion-datetime>
             </ion-item>
             <ion-item class="bg-gray" detail-push>
                 <ion-label class="text-BDBDBD font-16">{{ 'PAGE_CREATE-OFFER.TO' | translate }}</ion-label>
-                <ion-datetime doneText="Ok" 
-                                [(ngModel)]="finishDate" 
-                                displayFormat="DDD DD/MM/YYYY" 
-                                pickerFormat="MMM/DD/YYYY" 
-                                [min]="!getTime() ? startDate : todayDate | date: 'yyyy-MM-dd'"
-                                max="2022" 
-                                class="text-3E4B5D font-16 semibold">
+                <ion-datetime 
+                    doneText="Ok" 
+                    [(ngModel)]="finishDate" 
+                    displayFormat="DDD DD/MM/YYYY" 
+                    pickerFormat="MMM/DD/YYYY" 
+                    [min]="!getTime() ? startDate : todayDate | date: 'yyyy-MM-dd'"
+                    max="2022" 
+                    class="text-3E4B5D font-16 semibold">
                 </ion-datetime>
             </ion-item>
         </div>
@@ -80,23 +82,25 @@
             <div no-lines>
                 <ion-item class="bg-gray" detail-push>
                     <ion-label class="text-BDBDBD font-16">{{ 'PAGE_CREATE-OFFER.FROM' | translate }}</ion-label>
-                    <ion-datetime (ionChange)="selectStartTime()" 
-                                    [(ngModel)]="startTime" 
-                                    doneText="Ok" 
-                                    displayFormat="HH:mm" 
-                                    pickerFormat="HH:mm"
-                                    class="text-3E4B5D font-16 semibold">
+                    <ion-datetime 
+                        (ionChange)="selectStartTime()" 
+                        [(ngModel)]="startTime" 
+                        doneText="Ok" 
+                        displayFormat="HH:mm" 
+                        pickerFormat="HH:mm"
+                        class="text-3E4B5D font-16 semibold">
                     </ion-datetime>
                 </ion-item>
 
                 <ion-item class="bg-gray" detail-push>
                     <ion-label class="text-BDBDBD font-16">{{ 'PAGE_CREATE-OFFER.TO' | translate }}</ion-label>
-                    <ion-datetime (ionChange)="selectFinishTime()" 
-                                    [(ngModel)]="finishTime" 
-                                    doneText="Ok" 
-                                    displayFormat="HH:mm" 
-                                    pickerFormat="HH:mm"
-                                    class="text-3E4B5D font-16 semibold">
+                    <ion-datetime 
+                        (ionChange)="selectFinishTime()" 
+                        [(ngModel)]="finishTime" 
+                        doneText="Ok" 
+                        displayFormat="HH:mm" 
+                        pickerFormat="HH:mm"
+                        class="text-3E4B5D font-16 semibold">
                     </ion-datetime>
                 </ion-item>
             </div>
@@ -143,31 +147,34 @@
                         </ion-col>
                         <ion-col col-3>
                             <ion-item detail-push no-lines>
-                                <ion-datetime [(ngModel)]="frame.from" 
-                                                (ngModelChange)="removeTime('start', frame.isSelected)" 
-                                                [placeholder]="frame.from"  
-                                                doneText="Ok" 
-                                                displayFormat="HH:mm" 
-                                                class="text-3E4B5D font-16 semibold">
-                            </ion-datetime>
+                                <ion-datetime 
+                                    [(ngModel)]="frame.from" 
+                                    (ngModelChange)="removeTime('start', frame.isSelected)" 
+                                    [placeholder]="frame.from"  
+                                    doneText="Ok" 
+                                    displayFormat="HH:mm" 
+                                    class="text-3E4B5D font-16 semibold">
+                                </ion-datetime>
                             </ion-item>
                         </ion-col>
                         <ion-col col-3>
                             <ion-item class="padding-left-5vw" detail-push no-lines>
-                                <ion-datetime [(ngModel)]="frame.to" 
-                                                (ngModelChange)="removeTime('finish', frame.isSelected)" 
-                                                [placeholder]="frame.to" 
-                                                doneText="Ok" 
-                                                displayFormat="HH:mm" 
-                                                class="text-3E4B5D font-16 semibold">
+                                <ion-datetime 
+                                    [(ngModel)]="frame.to" 
+                                    (ngModelChange)="removeTime('finish', frame.isSelected)" 
+                                    [placeholder]="frame.to" 
+                                    doneText="Ok" 
+                                    displayFormat="HH:mm" 
+                                    class="text-3E4B5D font-16 semibold">
                                 </ion-datetime>
                             </ion-item>
                         </ion-col>
                         <ion-col col-3>
                             <ion-item no-lines>
-                                <ion-checkbox [(ngModel)]="frame.isSelected" 
-                                                (ngModelChange)="checkDays()"
-                                                [disabled]="!frame.from || !frame.to">
+                                <ion-checkbox 
+                                    [(ngModel)]="frame.isSelected" 
+                                    (ngModelChange)="checkDays()"
+                                    [disabled]="!frame.from || !frame.to">
                                 </ion-checkbox>
                             </ion-item>
                         </ion-col>
