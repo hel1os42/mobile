@@ -42,11 +42,17 @@
         "NEW" : "New",
         "MONTHLY" : "Monthly",
         "FEATURED" : "Featured",
-        "OFFERS" : "Offers",
         "LOADING_COMPANIES" : "Loading companies...",
         "SELECT_CUISINE" : "Select Cuisine",
         "CLEAR" : "Clear",
-        "MAP" : "Map"
+        "MAP" : "Map",
+        "FOOD_DRINKS" : "Food & Drinks",
+        "BEAUTY_FITNESS" : "Beauty & Fitness",
+        "RETAIL_SERVICES" : "Retail & Services",
+        "ATTRACTIONS_LEISURE" : "Attractions & Leisure",
+        "OTHER_ONLINE" : "Other & Online",
+        "SELECT_TYPE" : "Select Type",
+        "SELECT_FEATURES" : "Select Features"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -88,7 +94,6 @@
     "PAGE_ADV-USER-PROFILE" : {
         "ADVERTISER" : "Advertiser",
         "CREATE_OFFER" : "Create offer",
-        "OFFERS" : "Offers",
         "NAU" : "Nau",
         "STATISTIC" : "Statistic",
         "CATEGORY" : "Category"
@@ -97,7 +102,6 @@
     "PAGE_BOOKMARKS" : {
         "BOOKMARKS" : "Bookmarks",
         "PLACES" : "Places",
-        "OFFERS" : "Offers",
         "FEATURED" : "Featured",
         "REDEEM_NOW" : "Redeem now"
     },
@@ -158,7 +162,6 @@
         "YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT" : "You have tokens on your account",
         "CREATING_YOUR_OFFER" : "Creating your offer...",
         "ERROR" : "Oops...ERROR",
-        "OFFER_WASNT" : "Offer wasn't",
         "OFFER_WASNT_UPDATE_PLEASE_TRY_AGAIN" : "Offer wasn't update. Please try again",
         "OFFER_WASNT_CREATED_PLEASE_TRY_AGAIN" : "Offer wasn't create. Please try again",
         "PLEASE_TRY_AGAIN" : "Please try again",
@@ -171,7 +174,13 @@
         "RESERVED_TOKENS_AND_REWARD" : "Reserved tokens and reward should be multiple",
         "MAX_FOR_USER_VALID_OVERALL" : "Maximum amount of redemptions by user for definite period should be less than overall",
         "DAY_MAX_VALID" : "Daily redemptions amount should be less than overall",
-        "MAX_FOR_USER_VALID" : "Maximum amount of redemptions by user should be less than overall"
+        "MAX_FOR_USER_VALID" : "Maximum amount of redemptions by user should be less than overall",
+        "DESCRIPTION_FOR_BONUS" : "Description for bonus or gift",
+        "DISCOUNT" : "Discount",
+        "SECOND_FEE" : "Second Fee",
+        "BONUS_OR_GIFT" : "Bonus or Gift",
+        "DELIVERY" : "Delivery",
+        "DESCRIPTION_FOR" : "Description for this item"
     },
 
     "PAGE_CREATE-USER-PROFILE" : {
@@ -201,7 +210,6 @@
     "PAGE_FEED" : {
         "WHAT_HAPPEND" : "what happend",
         "TODAY" : "Today",
-        "OFFERS" : "Offers",
         "ALL" : "All",
         "PLACES" : "Places",
         "PEOPLE" : "People",
@@ -443,7 +451,6 @@
         "YOUR_TASKS_JOBS_FOR_TODAY" : "Your tasks & jobs for today",
         "GET_NEW_POINTS" : "Get New Points",
         "GET_NEW_OFFERS_NEARBY" : "Get new offers nearby for you place and improve your level",
-        "OFFERS" : "offers",
         "NAU" : "nau",
         "USERS" : "users",
         "LOGOUT" : "logout"
@@ -466,7 +473,6 @@
         "YOUR_REFERRALS" : "Your referrals",
         "USERS" : "Users",
         "LEVEL" : "Level",
-        "OFFERS" : "Offers",
         "REGISTRATION_DATE" : "Registration date"
     },
 
