@@ -31,7 +31,7 @@ export class UserProfilePage {
         private profile: ProfileService,
         private nav: NavController,
         private auth: AuthService,
-        public alertCtrl: AlertController) {
+        public alert: AlertController) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -79,7 +79,7 @@ export class UserProfilePage {
     }
 
     logout() {
-        let confirm = this.alertCtrl.create({
+        let confirm = this.alert.create({
             title: 'Logout',
             message: 'Are you sure?',
             buttons: [

@@ -30,7 +30,7 @@ export class LoginPage {
         private auth: AuthService,
         private appMode: AppModeService,
         private profile: ProfileService,
-        private alertCtrl: AlertController) {
+        private alert: AlertController) {
 
         this.environmentMode = this.appMode.getEnvironmentMode();
     }
@@ -76,7 +76,7 @@ export class LoginPage {
     }
 
     presentPrompt(selected: boolean) {
-        let prompt = this.alertCtrl.create({
+        let prompt = this.alert.create({
                 title: 'Choose environment',
                 message: '',
                 inputs : [

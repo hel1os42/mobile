@@ -86,7 +86,7 @@ export class CreateAdvUserProfilePage {
             });
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
-            this.zoom = MapUtils.round(MapUtils.getZoom(this.company.latitude, this.company.radius), 0.5);
+            this.zoom = MapUtils.round(MapUtils.getZoom(this.company.latitude, this.company.radius, 95), 0.5);
             this.radius = this.company.radius;
             this.address = this.company.address;
             this.placeService.getWithCategory()
