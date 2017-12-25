@@ -177,10 +177,11 @@ export class CreateOffer2Page {
         this.timezone.get(this.offer.latitude, this.offer.longitude, Math.round(this.todayDate.valueOf() / 1000))
             .subscribe(resp => {
                 timezoneStr = DateTimeUtils.getTimezone(resp);
-                let dateMask = DateTimeUtils.ZERO_DATETIME_SUFFIX;
+                let startDateMask = DateTimeUtils.ZERO_START_DATETIME_SUFFIX;
+                let finishDateMask = DateTimeUtils.ZERO_FINISH_DATETIME_SUFFIX;
                 let timeMask = DateTimeUtils.ZERO_TIME_SUFFIX;
-                    this.offer.start_date = this.startDate + dateMask + timezoneStr;
-                    this.offer.finish_date = this.finishDate + dateMask + timezoneStr;
+                    this.offer.start_date = this.startDate + startDateMask + timezoneStr;
+                    this.offer.finish_date = this.finishDate + finishDateMask + timezoneStr;
                 let selected = this.timeFrames.filter(p => p.isSelected);
                 this.offer.timeframes = selected.map(p => {
                     return {
