@@ -1,6 +1,6 @@
 <div margin class="modal_content">
 
-    <a (click)="openTypesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
+    <a disabled (click)="openTypesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_TYPE' | translate }}</ion-label>
       <div item-end>
         <img *ngIf="isOpenTypesSelect" src="assets/img/user_home/arrow_up.svg">
@@ -15,7 +15,7 @@
         </ion-item>
     </div>
 
-    <a (click)="openFeaturesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
+    <a disabled (click)="openFeaturesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
         <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_FEATURES' | translate }}</ion-label>
         <div item-end>
             <img *ngIf="isOpenFeaturesSelect" src="assets/img/user_home/arrow_up.svg">

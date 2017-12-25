@@ -115,12 +115,14 @@
         "ADD_COMPANY_NAME" : "Add company name & descriptions",
         "COMPANY_NAME" : "Company name",
         "COMPANY_DESCRIPTION" : "Company description",
-        "CATEGORY_TYPE" : "Category your place",
         "CHOOSE_CATEGORY" : "Choose category",
         "CHOOSE_YOUR_OFFICE_LOCATION" : "Choose your office location and set map radius",
         "CATEGORY" : "Category",
+        "CATEGORY_TYPE" : "Category of your place",
         "CHOOSE_TYPE" : "Type of your place",
-        "CHOOSE_FEATURES" : "Features your place"
+        "CHOOSE_FEATURES" : "Features of your place",
+        "TYPES" : "Types",
+        "FEATURES" : "Features"
     },
 
     "PAGE_CREATE-OFFER" : {
