@@ -19,9 +19,9 @@ export class DateTimeUtils {
         DateTimeUtils.SATURDAY,
         DateTimeUtils.SUNDAY
     ];
-
-    public static ZERO_DATETIME_SUFFIX = ' 00:00:00.000000';
     public static ZERO_TIME_SUFFIX = ':00.000000';
+    public static ZERO_START_DATETIME_SUFFIX = ' 00:00:00.000000';
+    public static ZERO_FINISH_DATETIME_SUFFIX = ' 23:59:59.999999'; 
 
     static getTimezone(timezoneData) {
         let timezone = (timezoneData.dstOffset + timezoneData.rawOffset) / 3600;
