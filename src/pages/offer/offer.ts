@@ -79,7 +79,7 @@ export class OfferPage {
       }
 
     openRedeemPopover() {
-        if (!this.disable) {
+        if (!this.disable()) {
             if (this.timer)
                 return;
 
