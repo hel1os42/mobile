@@ -51,7 +51,7 @@ export class CreateOffer5Page {
                 let location = resp.http_headers.get('location');
                 let offer_id = location.slice(- location.lastIndexOf('/') + 2);
 
-                let loading = this.loading.create({ content: 'Creating your offer...' });
+                let loading = this.loading.create({ content: 'Creating your offer...', spinner: 'bubbles' });
                 loading.present();
                 this.timer = setInterval(() => {
 
@@ -83,7 +83,7 @@ export class CreateOffer5Page {
         this.offer.reserved = parseInt(this.reserved);
         this.place.putOffer(this.offer, this.offer.id)
             .subscribe(() => {
-                let loading = this.loading.create({ content: 'Updating offer...' });
+                let loading = this.loading.create({ content: 'Updating offer...', spinner: 'bubbles' });
                 loading.present();
                 let promise = this.picture_url
                     ? this.api.uploadImage(this.picture_url, `offers/${this.offer.id}/picture`, false)

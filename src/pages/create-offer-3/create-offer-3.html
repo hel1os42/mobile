@@ -29,7 +29,7 @@
 
     <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-OFFER.WORKING_AREA' | translate }}</div>
     <div class="block-lines">
-        <ion-item padding-left class="bg-gray" detail-push>
+        <ion-item padding-left class="bg-gray">
             <ion-label class="text-3E4B5D font-16 bold">{{ city }}</ion-label>
         </ion-item>
     </div>
@@ -39,10 +39,10 @@
     </div>
     <div *ngIf="!coords.lat" class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
     <div *ngIf="coords.lat" class="block-map">
-        <div class="leaflet-map" 
-        leaflet 
-        [leafletOptions]="options" 
-        (leafletMapReady)="onMapReady($event)">
+        <div class="leaflet-map"
+                    leaflet
+                    [leafletOptions]="options"
+                    (leafletMapReady)="onMapReady($event)">
         </div>
         <div id="marker"></div>
     </div>

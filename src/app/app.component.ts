@@ -13,6 +13,7 @@ import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth.service';
 import { ProfileService } from '../providers/profile.service';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 
 @Component({
@@ -23,13 +24,14 @@ export class MyApp {
     private onResumeSubscription: Subscription;
 
     constructor(platform: Platform,
-        statusBar: StatusBar,
-        splashScreen: SplashScreen,
-        private auth: AuthService,
-        private app: App,
-        private profile: ProfileService,
-        private translate: TranslateService,
-        private location: LocationService) {
+                statusBar: StatusBar,
+                splashScreen: SplashScreen,
+                private auth: AuthService,
+                private app: App,
+                private profile: ProfileService,
+                private translate: TranslateService,
+                private location: LocationService,
+                private alert: AlertController) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -56,6 +58,16 @@ export class MyApp {
             });
 
             //this.rootPage = CreateAdvUserProfilePage;
+            platform.registerBackButtonAction(() => {
+                let nav = app.getActiveNavs()[0];
+
+                if (nav.canGoBack()) { //Can we go back?
+                    nav.pop();
+                }
+                else {
+                    this.presentConfirm(platform);
+                }
+            });
         });
 
         this.auth.onLogout.subscribe(() => {
@@ -63,7 +75,6 @@ export class MyApp {
         });
 
     }
-
 
     initTranslate() {
         // this language will be used as a fallback when a translation isn't found in the current language
@@ -85,8 +96,28 @@ export class MyApp {
         SYS_OPTIONS.LANG_CODE = langCode;
     }
 
+    presentConfirm(platform) {
+        const alert = this.alert.create({
+            title: 'Are you sure you want to close the application?',
+            // message: 'Do you want to close the app?',
+            buttons: [{
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Application exit prevented!');
+                    return;
+                }
+            }, {
+                text: 'Ok',
+                handler: () => {
+                    platform.exitApp(); // Close this application
+                }
+            }]
+        });
+        alert.present();
+    }
+
     ngOnDestroy() {
         this.onResumeSubscription.unsubscribe();
     }
-
 }

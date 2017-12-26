@@ -38,7 +38,7 @@ export class CreateOffer3Page {
         this.picture_url = this.navParams.get('picture');
         
         this.radius = this.offer.radius;
-        this.zoom = MapUtils.round(MapUtils.getZoom(this.offer.latitude, this.radius), 0.5);
+        this.zoom = MapUtils.round(MapUtils.getZoom(this.offer.latitude, this.radius, 95), 0.5);
         this.coords.lat = this.offer.latitude;
         this.coords.lng = this.offer.longitude;
         this.addMap();

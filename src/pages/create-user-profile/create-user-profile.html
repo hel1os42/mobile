@@ -32,17 +32,17 @@
         </a>
       </div>
       <div item-end class="item-content">
-        <ion-input [(ngModel)]="user.name" 
-                  class="bg-gray margin-bottom-small" 
-                  type="text" maxlength="30" 
+        <ion-input [(ngModel)]="user.name"
+                  class="bg-gray margin-bottom-small"
+                  type="text" maxlength="30"
                   placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"
                   name="name1">
       </ion-input>
         <div class="input_relative">
-          <ion-input [(ngModel)]="user.email" 
-                    class="bg-gray margin-bottom-small field-email" 
-                    type="email" 
-                    maxlength="30" 
+          <ion-input [(ngModel)]="user.email"
+                    class="bg-gray margin-bottom-small field-email"
+                    type="email"
+                    maxlength="30"
                     placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}"
                     name="email">
           </ion-input>
@@ -126,9 +126,9 @@
 
   <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
   <div *ngIf="isSelectVisible">
-    <div class="block-lines">
+    <div class="block-lines" disabled>
       <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-select [(ngModel)]="gender" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.GENDER' | translate }}" class="gender_select"
+        <ion-select disabled [(ngModel)]="gender" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.GENDER' | translate }}" class="gender_select"
           interface="action-sheet">
           <ion-option value="f">{{ 'PAGE_CREATE-USER-PROFILE.FEMALE' | translate }}</ion-option>
           <ion-option value="m">{{ 'PAGE_CREATE-USER-PROFILE.MALE' | translate }}</ion-option>
@@ -170,9 +170,9 @@
 
   </div>
   <p margin>
-    <button color="primary" 
-            (click)="createAccount()" 
-            [disabled]="user.name?.length < 4 || !user.email" 
+    <button color="primary"
+            (click)="createAccount()"
+            [disabled]="user.name?.length < 4 || !user.email"
             ion-button
             block>
      {{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}

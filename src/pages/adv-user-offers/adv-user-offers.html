@@ -14,13 +14,21 @@
             <div class="font-18 text-3E4B5D bold">{{ total }}</div>
             <div class="font-14 text-828282">{{ 'PAGE_ADV-USER-OFFERS.CREATED_OFFERS' | translate }}</div>
         </div>
-        <button (click)="openCreateOffer()" item-end ion-button class="btn_transfer font-14 text-white extrabold">{{ 'PAGE_ADV-USER-OFFERS.CREATE_NEW' | translate }}</button>
+        <button (click)="openCreateOffer()" item-end ion-button class="btn_transfer font-14 text-white extrabold">
+            {{ 'PAGE_ADV-USER-OFFERS.CREATE_NEW' | translate }}
+        </button>
         <a item-end margin-left class="font-0 btn_calendar_user">
             <a>
                 <img src="assets/img/user_offers/icon_right.svg">
             </a>
-            <ion-datetime doneText="Ok" [(ngModel)]="date" (ngModelChange)="filterOffersByDate()" displayFormat="DDD DD/MM/YYYY" pickerFormat="MMM/DD/YYYY"
-                min="2017-10-01" max="2021-12-31">
+            <ion-datetime 
+                doneText="Ok" 
+                [(ngModel)]="date" 
+                (ngModelChange)="filterOffersByDate()" 
+                displayFormat="DDD DD/MM/YYYY" 
+                pickerFormat="MMM/DD/YYYY"
+                min="2017-10-01" 
+                max="2021-12-31">
             </ion-datetime>
         </a>
     </ion-item>
@@ -43,13 +51,17 @@
         <ion-item-sliding *ngFor="let offer of offers">
             <ion-item>
                 <ion-avatar item-start>
-                    <!-- <div [ngClass]="{ 'grayscale' : (!offer.status == 'active') }" class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div> -->
-                    <div [ngClass]="{ 'grayscale' : (offer.status == 'deactive') }" class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url  + '?' + time + '), url(assets/img/imagenotfound.svg)'}"></div>
+                    <div 
+                        [ngClass]="{ 'grayscale' : (offer.status == 'deactive') }" 
+                        class="thumb_image" 
+                        [ngStyle]="{'background-image': 'url(' + offer.picture_url  + '?' + time + '), url(assets/img/imagenotfound.svg)'}">
+                    </div>
                 </ion-avatar>
                 <div item-content>
                     <div class="bold font-22 text-3E4B5D wrap-no width-44vw">{{ offer.label }}</div>
                     <div class="bold font-14 text-FF8B10 padding-top-1vw" text-uppercase>
-                        <span class="text-828282 no-bold">{{ 'PAGE_ADV-USER-OFFERS.REDEEMED' | translate }}</span> {{ offer.redemptions_count }} {{ 'PAGE_ADV-USER-OFFERS.TIMES' | translate }}
+                        <span class="text-828282 no-bold">{{ 'PAGE_ADV-USER-OFFERS.REDEEMED' | translate }}</span> 
+                        {{ offer.redemptions_count }} {{ 'PAGE_ADV-USER-OFFERS.TIMES' | translate }}
                     </div>
                     <div class="font-14 text-828282 regular padding-top-1vw">{{ 'PAGE_ADV-USER-OFFERS.WAS_CREATED' | translate }}
                         <br>{{ offer.created_at.slice(0, 10) }}</div>
