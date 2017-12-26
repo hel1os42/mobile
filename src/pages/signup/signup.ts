@@ -1,3 +1,4 @@
+import { Register } from '../../models/register';
 import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -23,13 +24,19 @@ export class SignUpPage {
         StringValidator.updateList(ev);
     }
 
-    getCode(phone) {
+    getCode() {
         this.phoneNumber = this.numCode + this.formData.phone;
         let inviteCode = this.auth.getInviteCode();
 
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
-            .subscribe(register => {
+            .subscribe(resp => {
+                let register: Register = {
+                    phone: resp.phone,
+                    code: '',
+                    referrer_id: resp.referrer_id,
+                }
                 this.nav.push(SignUpCodePage, { register: register });
+                // this.nav.push(SignUpCodePage, { register: resp })
             })
     }
 

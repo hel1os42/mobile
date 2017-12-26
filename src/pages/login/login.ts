@@ -55,8 +55,8 @@ export class LoginPage {
             resp => {
                 this.appMode.setHomeMode(true);
                 this.profile.get(true)
-                    .subscribe(resp => {
-                        if (resp.name == '' && !resp.email) {
+                    .subscribe(res => {
+                        if (res.name == '' && !res.email) {
                             this.nav.setRoot(CreateUserProfilePage)
                         }
                         else {

@@ -35,8 +35,9 @@ export class SignUpCodePage {
                         phone: this.register.phone,
                         code: this.register.code
                     })
-                    .subscribe(resp => {
+                    .subscribe(res => {
                         this.appMode.setHomeMode(false);
+                        // this.nav.setRoot(CreateUserProfilePage, { user: resp});
                         this.nav.setRoot(CreateUserProfilePage);
                     })
             })

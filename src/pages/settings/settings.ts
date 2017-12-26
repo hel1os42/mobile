@@ -130,12 +130,12 @@ export class SettingsPage {
             }
             else
                 if (this.isAdvMode) {
-                    if (!isShownOnboard) {
-                        this.app.getRootNav().setRoot(OnBoardingPage, { isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true });
-                    }
-                    else {
+                    // if (!isShownOnboard) {
+                    //     this.app.getRootNav().setRoot(OnBoardingPage, { isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true });
+                    // }
+                    // else {
                         this.app.getRootNav().setRoot(AdvTabsPage, { isAdvMode: true, isAdvOnBoarding: true });
-                    }
+                    // }
                 }
                 else {
                     this.app.getRootNav().setRoot(TabsPage);

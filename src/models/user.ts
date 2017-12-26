@@ -16,6 +16,8 @@ export class User {
     accounts_count: number;
     activation_codes_count: number
     accounts?: any;
+    roles?: any[];
+    approved: boolean;
 }
 /*missing:  
     facebookName: string;
