@@ -2,15 +2,17 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
-import leaflet, { latLng, LeafletEvent, tileLayer } from 'leaflet';
 import { Map } from 'leaflet';
+import leaflet, { latLng, LeafletEvent, tileLayer } from 'leaflet';
 import * as _ from 'lodash';
 import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
 import { ChildCategory } from '../../models/childCategory';
 import { Company } from '../../models/company';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
+import { RetailType } from '../../models/retailType';
 import { SelectedCategory } from '../../models/selectedCategory';
+import { SelectedRetailType } from '../../models/selectedRetailType';
 import { ApiService } from '../../providers/api.service';
 import { GeocodeService } from '../../providers/geocode.service';
 import { LocationService } from '../../providers/location.service';
@@ -40,8 +42,8 @@ export class CreateAdvUserProfilePage {
     selectedCategory: SelectedCategory;
     selectedChildCategories: SelectedCategory[];
     childCategoriesNames: string[];
-    types = MockPlaceTypes.RetailTypes;//temporary
-    selectedTypes;//to do
+    types: RetailType[];
+    selectedTypes: SelectedRetailType[];
     typeNames: string[];
     features = MockPlaceTypes.Features;//temporary
     selectedFeatures;//to do
@@ -79,9 +81,9 @@ export class CreateAdvUserProfilePage {
         this.offer.getCategories()
             .subscribe(categories => {
                 this.categories.forEach((category) => {
-                    let cat = categories.data.find(p => p.name == category.name)
-                    category.id = cat.id;//temporary - code
-                    category.children_count = cat.children_count;
+                    let placeCategories = categories.data.find(p => p.name == category.name)
+                    category.id = placeCategories.id;//temporary - code
+                    category.children_count = placeCategories.children_count;
                 })
             });
         if (this.navParams.get('company')) {
@@ -100,6 +102,10 @@ export class CreateAdvUserProfilePage {
                     };
                     this.mapPresent();
                     this.selectCategory(company.categories);
+
+                    if (company.retail_types && company.retail_types.length > 0) {//to do
+                       this.selectTypes(company.retail_types);//to do
+                    }
                 })
         }
         else {
@@ -221,7 +227,22 @@ export class CreateAdvUserProfilePage {
                     this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name);
                 }
             })
+    }
 
+    selectTypes(types) {
+        this.offer.getRetailTypes(this.selectedCategory.id)
+            .subscribe(resp => {
+                let typesSlugs = types.map(p => p.slug);
+                let selectedTypes: any = _(resp.retail_types).keyBy('slug').at(typesSlugs).value();
+                this.selectedTypes = selectedTypes.map(p => {
+                    return {
+                        name: p.name,
+                        slug: p.slug,
+                        isSelected: true
+                    }
+                })
+                this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
+            })
     }
 
     onMapReady(map: Map) {
@@ -307,13 +328,15 @@ export class CreateAdvUserProfilePage {
     }
     //to do
     presentTypesPopover() {
-        this.placeService.getRetailTypes(this.selectedCategory.id)
+        this.offer.getRetailTypes(this.selectedCategory.id)
             .subscribe(resp => {
+                this.types = resp.retail_types;
                 let popover = this.popoverCtrl.create(CreateAdvUserProfileTypesPopover, { 
                     types: this.types.map(t => {
                         return {
+                            slug: t.slug,
                             name: t.name,
-                            isSelected: false
+                            isSelected: this.selectedTypes ? this.selectedTypes.find(k => k.slug == t.slug) : false
                         };
                     }) 
                 });
@@ -403,7 +426,9 @@ export class CreateAdvUserProfilePage {
             this.company.longitude = this.coords.lng;
             this.company.address = this.address;
             this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
+            // this.company.retail_types = this.selectedTypes.map(p => p.slug);// to do
             this.company.radius = Math.round(this.radius);
+       
             if (!this.company.id) {
                 this.placeService.set(this.company)
                     .subscribe(company => {

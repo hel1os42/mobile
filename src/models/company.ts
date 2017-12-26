@@ -1,6 +1,7 @@
 import { PlaceCreate } from './placeCreate';
 import { OfferCategory } from "./offerCategory";
 import { Offer } from "./offer";
+import { RetailType } from './retailType';
 
 export class Company extends PlaceCreate  {
     id: string;
@@ -12,6 +13,7 @@ export class Company extends PlaceCreate  {
     offers_count: number;
     active_offers_count?: number;
     offers?: Offer[];
+    retail_types?: any;
     stars: number;
     is_featured: boolean;
     is_starred: boolean;

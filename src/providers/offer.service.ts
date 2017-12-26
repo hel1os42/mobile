@@ -72,6 +72,10 @@ export class OfferService {
         return this.api.get(`categories/${category_id}?with=children`);
     }
 
+    getRetailTypes(category_id) {
+        return this.api.get(`categories/${category_id}?with=retailTypes`);
+    }
+
     getRedeemedOffers() {
         return this.api.get('profile?with=offers');
     }

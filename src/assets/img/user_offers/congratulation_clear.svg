@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="213px" height="70px" viewBox="0 0 213 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #FFFFFF;">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Untitled</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 414 0 414 736 0 736"></polygon>
+        <linearGradient x1="1.41264151e-07%" y1="13.2653143%" x2="28.3018869%" y2="13.2653149%" id="linearGradient-3">
+            <stop stop-color="#FF5A00" offset="0%"></stop>
+            <stop stop-color="#FF8A23" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="4.99133333e-07%" y1="15.4762%" x2="100%" y2="15.4762008%" id="linearGradient-4">
+            <stop stop-color="#FF5A00" offset="0%"></stop>
+            <stop stop-color="#FF8A23" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="6.12146226e-08%" y1="5.7483%" x2="12.264151%" y2="5.74830029%" id="linearGradient-5">
+            <stop stop-color="#FF5A00" offset="0%"></stop>
+            <stop stop-color="#FF8A23" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="congratulation_clear" transform="translate(-96.000000, -210.000000)">
+            <rect id="Rectangle-path" fill="#F2F2F2" fill-rule="nonzero" x="97" y="210" width="212" height="70"></rect>
+            <g id="10-offer-redeem-Clipped">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Shape"></g>
+                <g id="10-offer-redeem" mask="url(#mask-2)" fill-rule="nonzero">
+                    <polygon id="Shape" fill="#FFFFFF" points="0 0 414 0 414 736 0 736"></polygon>
+                    <g id="Rectangle-6" fill="#333333">
+                        <g id="path0_fill-link">
+                            <polygon id="path0_fill" points="0 0 414 0 414 736 0 736"></polygon>
+                        </g>
+                    </g>
+                    <g id="Group" transform="translate(20.000000, 45.000000)">
+                        <g id="Rectangle-2" fill="#FFFFFF">
+                            <g id="path1_fill-link">
+                                <path d="M0,25 C0,11.1929 11.1929,0 25,0 L349,0 C362.807,0 374,11.1929 374,25 L374,445 C374,458.807 362.807,470 349,470 L25,470 C11.1929,470 0,458.807 0,445 L0,25 Z" id="path1_fill"></path>
+                            </g>
+                        </g>
+                        <g transform="translate(77.000000, 165.000000)">
+                            <g id="Ellipse-9" transform="translate(82.000000, 10.000000)" fill="url(#linearGradient-4)">
+                                <g id="path2_fill-link">
+                                    <path d="M60,30 C60,46.5685 46.5685,60 30,60 C13.4315,60 0,46.5685 0,30 C0,13.4315 13.4315,0 30,0 C46.5685,0 60,13.4315 60,30 Z" id="path2_fill"></path>
+                                </g>
+                            </g>
+                            <g id="Ellipse-9" transform="translate(76.000000, 2.000000)" fill="url(#linearGradient-4)">
+                                <g id="path3_fill-link">
+                                    <path d="M26,13 C26,20.1797 20.1797,26 13,26 C5.8203,26 0,20.1797 0,13 C0,5.8203 5.8203,0 13,0 C20.1797,0 26,5.8203 26,13 Z" id="path3_fill"></path>
+                                </g>
+                            </g>
+                            <g id="+" transform="translate(84.000000, 10.000000)" fill="#FFFFFF">
+                                <g id="path5_fill-link">
+                                    <polygon id="path5_fill" points="3.81445 6.51123 0 6.51123 0 3.76318 3.81445 3.76318 3.81445 0 6.57275 0 6.57275 3.76318 10.3872 3.76318 10.3872 6.51123 6.57275 6.51123 6.57275 10.2129 3.81445 10.2129"></polygon>
+                                </g>
+                            </g>
+                            <g id="Star" transform="translate(157.000000, 31.000000)" fill="#FEC282">
+                                <g id="path6_fill-link" transform="translate(15.306021, 15.079693) rotate(18.070619) translate(-15.306021, -15.079693) translate(3.306020, 4.079692)">
+                                    <polygon id="path6_fill" points="11.823501 0 14.9509013 7.63131065 23.068402 8.29180071 16.8837014 13.6687012 18.7732016 21.7082019 11.823501 17.4000015 4.87383042 21.7082019 6.76335058 13.6687012 0.57868505 8.29180071 8.69617075 7.63131065"></polygon>
+                                </g>
+                            </g>
+                            <g id="Star" transform="translate(34.000000, 34.000000)" fill="#FEC282">
+                                <g id="path6_fill-link" transform="translate(15.373003, 15.754494) rotate(-23.306964) translate(-15.373003, -15.754494) translate(3.373007, 4.754498)">
+                                    <polygon id="path6_fill" points="11.8234961 0 14.9508951 7.63130751 23.0683925 8.2917973 16.8836945 13.6686955 18.7731939 21.7081929 11.8234961 17.3999943 4.87382841 21.7081929 6.7633478 13.6686955 0.578684811 8.2917973 8.69616717 7.63130751"></polygon>
+                                </g>
+                            </g>
+                            <g id="Star" transform="translate(147.000000, 0.000000)" fill="#FEC282">
+                                <g id="path7_fill-link" transform="translate(10.081740, 9.442245) rotate(23.955682) translate(-10.081740, -9.442245) translate(2.581738, 2.442243)">
+                                    <polygon id="path7_fill" points="7.3632017 0 9.31079214 4.75246109 14.3660033 5.16378119 10.5145024 8.51229196 11.6912027 13.5190031 7.3632017 10.8360025 3.0352207 13.5190031 4.21193097 8.51229196 0.360381083 5.16378119 5.41561125 4.75246109"></polygon>
+                                </g>
+                            </g>
+                            <g id="Star" transform="translate(192.000000, 5.000000)" fill="#FEC282">
+                                <g id="path7_fill-link" transform="translate(10.081740, 9.442245) rotate(23.955682) translate(-10.081740, -9.442245) translate(2.581738, 2.442243)">
+                                    <polygon id="path7_fill" points="7.3632017 0 9.31079214 4.75246109 14.3660033 5.16378119 10.5145024 8.51229196 11.6912027 13.5190031 7.3632017 10.8360025 3.0352207 13.5190031 4.21193097 8.51229196 0.360381083 5.16378119 5.41561125 4.75246109"></polygon>
+                                </g>
+                            </g>
+                            <g id="Star" transform="translate(32.000000, 5.000000)" fill="#FEC282">
+                                <g id="path8_fill-link" transform="translate(10.228512, 10.507819) rotate(-47.453684) translate(-10.228512, -10.507819) translate(2.728512, 3.507819)">
+                                    <polygon id="path8_fill" points="7.00282026 0 8.95041033 4.75246017 14.0056005 5.16378019 10.1541004 8.51229031 11.3308004 13.5190005 7.00282026 10.8360004 2.6748401 13.5190005 3.85155014 8.51229031 0 5.16378019 5.05523018 4.75246017"></polygon>
+                                </g>
+                            </g>
+                            <g id="Star" transform="translate(0.000000, 25.000000)" fill="#FEC282">
+                                <g id="path9_fill-link" transform="translate(7.274585, 7.297275) rotate(-47.453684) translate(-7.274585, -7.297275) translate(2.274585, 2.297275)">
+                                    <polygon id="path9_fill" points="4.94143018 0 6.31572023 3.35350012 9.88286036 3.64374013 7.16507026 6.00656022 7.99540029 9.53944035 4.94143018 7.64625028 1.88746007 9.53944035 2.7177901 6.00656022 0 3.64374013 3.56714013 3.35350012"></polygon>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

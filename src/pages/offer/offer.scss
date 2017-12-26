@@ -217,4 +217,17 @@ congratulation-popover-component {
   .padding-top-25{
     padding-top: 25px;
   }
+
+  .num_points{
+      position: absolute;
+      left: 3%;
+      top: 34%;
+      z-index: 11111;
+      width: 98%;
+      text-align: center;
+  }
+
+    .img_num_points{
+        width: 65%;
+    }
 }
