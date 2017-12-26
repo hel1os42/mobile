@@ -1,3 +1,4 @@
+import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { Component } from '@angular/core';
 import { ViewController, App, NavParams } from 'ionic-angular';
 import { OnBoardingPage } from '../onboarding/onboarding';
@@ -25,7 +26,8 @@ export class SettingsPopover {
 
     openOnboarding() {
         this.viewCtrl.dismiss();
-            this.app.getRootNav().setRoot(OnBoardingPage, {page: this.page, isAdvMode: true, isAdvOnBoarding: true, latitude: this.latitude, longitude: this.longitude});
+            // this.app.getRootNav().setRoot(OnBoardingPage, {page: this.page, isAdvMode: true, isAdvOnBoarding: true, latitude: this.latitude, longitude: this.longitude});
+            this.app.getRootNav().setRoot(this.page, { latitude: this.latitude, longitude: this.longitude });
     }
 
     close() {
