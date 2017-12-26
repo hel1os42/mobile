@@ -426,7 +426,7 @@ export class CreateAdvUserProfilePage {
             this.company.longitude = this.coords.lng;
             this.company.address = this.address;
             this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
-            this.company.retail_types = this.selectedTypes.map(p => p.slug);// to do
+            // this.company.retail_types = this.selectedTypes.map(p => p.slug);// to do
             this.company.radius = Math.round(this.radius);
        
             if (!this.company.id) {
