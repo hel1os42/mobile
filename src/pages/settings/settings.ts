@@ -157,8 +157,4 @@ export class SettingsPage {
         this.nav.push(SettingsChangePhonePage, { user: this.user });
     }
 
-    openAdvRedeem() {
-        this.nav.push(AdvRedeemOfferPage);
-    }
-
 }
