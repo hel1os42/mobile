@@ -273,9 +273,13 @@
 
     "PAGE_ONBOARDING" : {
         "FOR_BUSINESS" : "For business",
-        "HELLO" : "Hello!",
+        "WELCOME" : "Welcome!",
+        "MAKE_PROFIT" : "Make Profit!",
+        "NAU_COINS" : "NAU Coins!",
         "ENJOY" : "Enjoy!",
-        "ARE_YOUR_READY" : "Enjoy the most attractive offers, gifts and discounts from various retailers in your location",
+        "ENJOY_THE_MOST" : "Enjoy the most attractive offers, gifts and discounts from various retailers in your location whether you are in your home town or on a vacation.",
+        "INVITE_YOUR_FRIENDS" : "Invite your friends and followers to join NAU using your invite code and get rewarded each time they use special offers from the retailers worldwide.",
+        "NAU_COINS_IS" : "NAU coins is a cryptocurrency which you will soon be able to exchange for the everyday value: other cryptocurrencies, goods and even traditional currencies!",
         "MAKE_MONEY" : "Make Money",
         "SKIP" : "Skip"
     },
