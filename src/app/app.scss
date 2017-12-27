@@ -174,7 +174,7 @@ ion-header ion-icon.back-button-icon.icon {
 .font-20, button.font-20{
     font-size: 20px;
     font-size: 5vw;
-    line-height: 6vw;
+    line-height: 6.3vw;
 }
 
 .font-22, button.font-22{
@@ -499,7 +499,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-radius: 0;
     height: 23vw;
     width: 23vw;
-    background-size: cover;
+    background-size: cover, 70%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
@@ -508,7 +508,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-radius: 0;
     height: 23vw;
     width: 23vw;
-    background-size: cover;
+    background-size: cover, 70%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
@@ -1648,4 +1648,19 @@ ion-app.disable-scroll {
 
 .active_cat{
     opacity: 0.5;
+}
+
+.smooth_transition{
+    position: relative;
+}
+
+.smooth_transition:before{
+    content: "";
+    display: block;
+    width: 5vw;
+    height: 83%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 100%);
 }
