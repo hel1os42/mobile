@@ -1657,10 +1657,16 @@ ion-app.disable-scroll {
 .smooth_transition:before{
     content: "";
     display: block;
-    width: 5vw;
+    width: 3vw;
     height: 83%;
     position: absolute;
     bottom: 0;
     right: 0;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 100%);
+}
+
+.smooth_transition .scroll_content{
+    overflow: scroll;
+    white-space: nowrap;
+    pointer-events: auto;
 }

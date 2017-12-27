@@ -60,10 +60,12 @@
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} </span>
                 <div class="bold font-20 text-3E4B5D text-ellipsis margin-top-1vw">{{ company.name }}</div>
-                <div class="wrap-no smooth_transition">
-                    <ng-container *ngFor="let category of company.categories">
-                        <span class="type-food">{{ category.name }}</span>
-                    </ng-container>
+                <div class="smooth_transition">
+                    <div class="scroll_content">
+                        <ng-container *ngFor="let category of company.categories">
+                            <span class="type-food">{{ category.name }}</span>
+                        </ng-container>
+                    </div>
                 </div>
                 <div margin-top class="text-828282 font-12 wrap text-overflow-2-font-12 margin-top-5">{{ company. description }}</div>
             </div>
