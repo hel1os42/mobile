@@ -49,8 +49,8 @@ export class CreateOffer5Page {
         this.place.setOffer(this.offer)
             .subscribe(resp => {
                 let location = resp.http_headers.get('location');
-                let offer_id = location.slice(- location.lastIndexOf('/') + 2);
-
+                // let offer_id = location.slice(- location.lastIndexOf('/') + 2);
+                let offer_id = location.split('offers/')[1];
                 let loading = this.loading.create({ content: 'Creating your offer...', spinner: 'bubbles' });
                 loading.present();
                 this.timer = setInterval(() => {
