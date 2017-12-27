@@ -28,6 +28,7 @@ export class AdvUserOffersPage {
     dates;
     balance: number;
     onRefreshBalance: Subscription;
+    onRefreshOffersList: Subscription;
     time = new Date().valueOf();
 
     constructor(private nav: NavController,
@@ -40,6 +41,11 @@ export class AdvUserOffersPage {
             .subscribe((resp) => {
                 this.balance = resp.accounts.NAU.balance;
             })
+
+        this.onRefreshOffersList = this.place.onRefreshCompany
+            .subscribe(() => {
+                this.processOffers(this.place.getOffers(this.page));
+            });
 
         if (this.navParams.get('balance')) {
             this.balance = this.navParams.get('balance');
@@ -127,13 +133,6 @@ export class AdvUserOffersPage {
                     .subscribe(resp => {
                         offer.status = statusInfo.status;
                         this.profile.refreshAccounts();
-                        // this.getStatus(offer);
-                        // if(this.isFilterByDate) {
-                        //     this.filterOffersByDate();
-                        // }
-                        // else {
-                        //     this.filterOffers();
-                        // }
                     })
             }
         }
@@ -183,5 +182,6 @@ export class AdvUserOffersPage {
 
     ionViewWillUnload() {
                 this.onRefreshBalance.unsubscribe();
+                this.onRefreshOffersList.unsubscribe();
             }
 }
