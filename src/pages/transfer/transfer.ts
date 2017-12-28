@@ -37,7 +37,7 @@ export class TransferPage {
         this.transferData.source = this.NAU.address;
         this.balance = this.NAU.balance;
 
-        
+
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
@@ -61,12 +61,12 @@ export class TransferPage {
             return false;
         }
         else {
-            if (this.transferData.amount < 1 ) {
+            if (this.transferData.amount < 1) {
                 this.toast.show('The amount must be at least 1');
                 return false;
             }
             else {
-               return true; 
+                return true;
             }
         }
     }
@@ -88,8 +88,10 @@ export class TransferPage {
             this.transferData.amount = parseFloat(this.amount);
             this.profile.postTransaction(this.transferData)
                 .subscribe(() => {
-                    this.profile.refreshAccounts();
-                    this.profile.refreshTransactions();
+                    setTimeout(() => {
+                        this.profile.refreshAccounts();
+                        this.profile.refreshTransactions();
+                    }, 500);//maybe to do(when new balance)
                     this.nav.pop();
                 })
         }
