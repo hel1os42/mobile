@@ -15,21 +15,21 @@
             <div class="font-18 text-3E4B5D bold">{{ balance }}</div>
             <div class="font-14 text-828282">NAU</div>
         </div>
-        <button (click)="openTransfer()" 
-                item-end 
-                ion-button 
+        <button (click)="openTransfer()"
+                item-end
+                ion-button
                 class="btn_transfer font-14 text-white">
                 {{ 'PAGE_USER-NAU.TRANSFER' | translate }}
         </button>
         <a item-end margin-left class="btn_calendar_user">
             <a (click)="showCalendar()">
                 <img src="assets/img/user_offers/icon_right.svg">
-                <ion-datetime doneText="Ok" 
-                            [(ngModel)]="date" 
-                            (ngModelChange)="filterByDate()" 
-                            displayFormat="DDD DD/MM/YYYY" 
+                <ion-datetime doneText="Ok"
+                            [(ngModel)]="date"
+                            (ngModelChange)="filterByDate()"
+                            displayFormat="DDD DD/MM/YYYY"
                             pickerFormat="MMM/DD/YYYY"
-                            min="2017-10-01" 
+                            min="2017-10-01"
                             max="2021-12-31">
                 </ion-datetime>
             </a>
@@ -45,7 +45,7 @@
             </div>
             <div [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0), 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}"
                 class="font-22 star_right" text-uppercase>
-                <span class="bold">{{ transactionSource( transaction.source_account_id, transaction.amount) }}</span>
+                <span class="bold"> ... {{ transactionSource( transaction.source_account_id, transaction.amount) }}</span>
                 <span class="regular" text-uppercase> {{ 'PAGE_USER-NAU.NAU' | translate }}</span>
             </div>
             <div class="font-14 text-828282">{{ transaction.created_at | date: 'dd/MM/y H:mm:ss' }}</div>
