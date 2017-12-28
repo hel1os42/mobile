@@ -67,11 +67,6 @@ export class UserNauPage {
     filterByDate() {
         // let dates = DateTimeUtils.getFilterDates(this.date);
         //to do
-        this.profile.getFilteredTransactionsByDate('2017-12-28 13:36:45.463000+0000', '2017-12-28 13:36:45.463000+0000', 1)
-        .subscribe(resp => {
-            this.transactions = resp.data;
-            this.lastPage = resp.last_page;
-        });
     }
 
     openTransfer() {
