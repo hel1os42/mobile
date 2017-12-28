@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Rx';
 import { Component } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
@@ -22,6 +23,7 @@ export class TransferPage {
         preferFrontCamera: true,
         orientation: 'portrait'
     };
+    onRefreshAccounts: Subscription;
 
     constructor(
         private profile: ProfileService,
@@ -34,6 +36,13 @@ export class TransferPage {
         this.NAU = this.navParams.get('NAU');
         this.transferData.source = this.NAU.address;
         this.balance = this.NAU.balance;
+
+        
+        this.onRefreshAccounts = this.profile.onRefreshAccounts
+            .subscribe((resp) => {
+                this.NAU = resp.accounts.NAU;
+                this.balance = this.NAU.balance;
+            })
 
     }
 
@@ -80,8 +89,13 @@ export class TransferPage {
             this.profile.postTransaction(this.transferData)
                 .subscribe(() => {
                     this.profile.refreshAccounts();
+                    this.profile.refreshTransactions();
                     this.nav.pop();
                 })
         }
+    }
+
+    ionViewWillUnload() {
+        this.onRefreshAccounts.unsubscribe();
     }
 }
