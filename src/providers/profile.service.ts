@@ -36,12 +36,12 @@ export class ProfileService {
         });
     }
 
-    postTransaction(transaction: TransactionCreate) {
-        return this.api.post('transactions', transaction);
+    postTransaction(transaction: TransactionCreate, showLoading?: boolean) {
+        return this.api.post('transactions', transaction, { showLoading: showLoading });
     }
 
-    getWithAccounts() {
-        return this.api.get('profile?with=accounts');
+    getWithAccounts(showLoading?: boolean) {
+        return this.api.get('profile?with=accounts', { showLoading: showLoading });
     }
 
     put(user: User) {

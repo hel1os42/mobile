@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs/Rx';
 import { Component } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Account } from '../../models/account';
 import { TransactionCreate } from '../../models/transactionCreate';
 import { ProfileService } from '../../providers/profile.service';
@@ -24,6 +24,7 @@ export class TransferPage {
         orientation: 'portrait'
     };
     onRefreshAccounts: Subscription;
+    timer;
 
     constructor(
         private profile: ProfileService,
@@ -31,7 +32,8 @@ export class TransferPage {
         private toast: ToastService,
         private nav: NavController,
         private popoverCtrl: PopoverController,
-        private barcode: BarcodeScanner) {
+        private barcode: BarcodeScanner,
+        private loading: LoadingController) {
 
         this.NAU = this.navParams.get('NAU');
         this.transferData.source = this.NAU.address;
@@ -86,14 +88,34 @@ export class TransferPage {
     transfer() {
         if (this.validateMax()) {
             this.transferData.amount = parseFloat(this.amount);
-            this.profile.postTransaction(this.transferData)
+            
+            let loading = this.loading.create();
+            loading.present();
+
+            this.profile.postTransaction(this.transferData, false)
                 .subscribe(() => {
-                    setTimeout(() => {
-                        this.profile.refreshAccounts();
-                        this.profile.refreshTransactions();
-                    }, 500);//maybe to do(when new balance)
-                    this.nav.pop();
+                    this.timer = setInterval(() => {
+                        this.profile.getWithAccounts(false)
+                            .subscribe(resp => {
+                                let NAU = resp.accounts.NAU;
+                                let balance = NAU.balance;
+                                if (this.balance != balance) {
+                                    this.profile.refreshAccounts();
+                                    this.profile.refreshTransactions();
+                                    this.stopTimer();
+                                    loading.dismiss();
+                                    this.nav.pop();
+                                }
+                            });
+                    }, 500);
                 })
+        }
+    }
+
+    stopTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = undefined;
         }
     }
 
