@@ -1,3 +1,4 @@
+import { UserNauPage } from '../user-nau/user-nau';
 import { Component, ViewChild } from '@angular/core';
 import { NavParams, Tabs } from 'ionic-angular';
 import { Subscription } from 'rxjs';
@@ -19,7 +20,8 @@ export class TabsPage {
     private _onHomeChangeSubscription: Subscription;
 
     tab1Root;
-    tab2Root = UserProfilePage;
+    // tab2Root = UserProfilePage;temporary
+    tab2Root = UserNauPage;
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
     tab5Root = FeedPage;
