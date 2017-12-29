@@ -1,0 +1,16 @@
+<ion-content scroll="false">
+        <div class="slide1">
+            <div class="slide-title-img">
+                <img src="assets/img/onboarding/n.svg"/>
+                <img src="assets/img/onboarding/a.svg"/>
+                <img src="assets/img/onboarding/u.svg"/>
+                <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">{{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}</div>
+            </div>
+            <div *ngIf="!isAdvMode" text-center class="title-big-sign">{{ 'PAGE_ONBOARDING.WELCOME' | translate }}</div>
+            <div *ngIf="isAdvMode" text-center class="title-big-sign">{{ 'PAGE_ONBOARDING.ENJOY' | translate }}</div>
+            <p text-center class="font-75 text-white onboarding-desc">{{ 'PAGE_ONBOARDING.ENJOY_THE_MOST' | translate }}</p>
+        </div>
+    <ion-footer no-shadow no-border class="no-border padding-sign">
+        <button color="white" ion-button block outline (click)="skip()">{{ 'PAGE_ONBOARDING.SKIP' | translate }}</button>
+    </ion-footer>
+</ion-content>
