@@ -10,7 +10,7 @@
   <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}</div>
 
   <form #form="ngForm" (ngSubmit)="login()">
-  <div class="bg-gray margin-top-6vw">
+  <div *ngIf="!isVisibleLLoginButton" class="bg-gray margin-top-6vw">
   <ion-item class="border-bottom-no">
     <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover">
       <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
@@ -28,7 +28,7 @@
   </ion-item>
   </div>
 
-  <div margin-top class="bg-gray padding-left-6a3vw">
+  <div *ngIf="isVisibleLLoginButton" margin-top class="bg-gray padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
         <ion-input (ionChange)="limitStr(authData.code, 6)"
@@ -45,7 +45,8 @@
   </div>
 </form>
 
-  <button (click)="login()"
+  <button *ngIf="isVisibleLLoginButton" 
+          (click)="login()"
           [disabled]="!form.valid"
           type="submit"
           text-uppercase
@@ -54,6 +55,18 @@
           middle
           color="primary" >
           {{ 'UNIT.SIGN_IN' | translate }}
+</button>
+
+<button *ngIf="!isVisibleLLoginButton" 
+        (click)="getOtp()"
+        [disabled]="!form.valid"
+        type="submit"
+        text-uppercase
+        class="margin-top-5vw"
+        ion-button block
+        middle
+        color="primary" >
+        Get otp
 </button>
 
 </ion-content>

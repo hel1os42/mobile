@@ -24,6 +24,7 @@ export class LoginPage {
     page;
     clickMode = 0;
     environmentMode: string;
+    isVisibleLLoginButton = false;
 
     constructor(
         private nav: NavController,
@@ -43,13 +44,15 @@ export class LoginPage {
         return this.appMode.getEnvironmentMode() == 'dev';
     }
 
+    getOtp() {
+        this.isVisibleLLoginButton = true;
+    }
+
     login() {
         this.authData
-        this.auth
-            .login({
+        this.auth.login({
                 phone: this.numCode + this.authData.phone,
                 code: this.authData.code
-                // code: this.authData.phone.slice(-6)
             })
             .subscribe(
             resp => {
