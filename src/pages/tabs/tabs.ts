@@ -32,15 +32,19 @@ export class TabsPage {
     @ViewChild('tabs') tabs: Tabs;
 
     constructor(private appMode: AppModeService,
-                private navParams: NavParams,
-                private profile: ProfileService) {
-//temporary
-            this.nauParams = this.navParams.get('NAU').NAU;
-            this.profile.getWithAccounts()
-                .subscribe(resp => {
+        private navParams: NavParams,
+        private profile: ProfileService) {
+        //temporary
+        if (this.navParams.get('NAU')) {
+            this.nauParams = this.navParams.get('NAU');
+        }
+        else {
+        this.profile.getWithAccounts()
+            .subscribe(resp => {
                 this.nauParams = { NAU: resp.accounts.NAU };
             });
-//temporary
+        }
+        //temporary
         this.isDevMode = this.appMode.getEnvironmentMode() == 'dev';
 
         // this.tab1Root = this.appMode.getHomeMode()
@@ -60,8 +64,7 @@ export class TabsPage {
             //    .setRoot(PlacesPage);
         });
 
-        // this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;return
-        this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex').selectedTabIndex : 0;//temporary
+        this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;
     }
 
     tabChange() {
