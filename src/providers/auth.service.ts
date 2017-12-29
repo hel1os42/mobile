@@ -51,6 +51,10 @@ export class AuthService {
         return this.api.get(`auth/register/${inviteCode}/${phone}/code`);
     }
 
+    getOtp(phone: string) {
+        return this.api.get(`auth/login/${phone}/code`)
+    }
+
     register(register: Register) {
         return this.api.post('users', register);
     }
@@ -65,10 +69,6 @@ export class AuthService {
     logout() {
         this.clearCookies();
         this.token.remove();
-    }
-
-    getOtp(phone) {
-        return phone.slice(-6);//to do
     }
 
     clearCookies() {

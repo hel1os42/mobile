@@ -30,21 +30,26 @@ export class SettingsChangePhonePage {
     }
 
     toggleChangePhone() {
-        this.visibleChangePhone = false;
-        this.otp = this.auth.getOtp(this.phone);
-    }
-
-    changePhone() {
         if (this.user.phone == this.phone) {
             this.nav.pop();
         }
         else {
+            this.visibleChangePhone = false;
+            this.otp = this.phone.slice(-6);//to do 
+        }
+    }
+
+    changePhone() {
+        // if (this.user.phone == this.phone) {
+        //     this.nav.pop();
+        // }
+        // else {
             this.user.phone = this.phone;
             this.profile.put(this.user)
                 .subscribe(
-                    resp => this.nav.pop(),
-                    errResp => this.visibleChangePhone = true);
-        }
+                resp => this.nav.pop(),
+                errResp => this.visibleChangePhone = true);
+        // }
 
     }
 }

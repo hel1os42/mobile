@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
@@ -18,20 +19,38 @@ export class UserNauPage {
     page = 1;
     lastPage: number;
     NAU: Account;
+    onRefreshAccounts: Subscription;
+    onRefreshTransactions: Subscription;
+    todayDate = new Date();
 
     constructor(
         private profile: ProfileService,
         private navParams: NavParams,
         private nav: NavController) {
-       
-        this.NAU = this.navParams.get('NAU');
-        this.balance = this.NAU.balance; 
 
-        this.profile.getTransactions(this.page)
+        this.date = this.todayDate.toISOString().slice(0, 10);
+        this.NAU = this.navParams.get('NAU');
+        this.balance = this.NAU.balance;
+
+        this.onRefreshAccounts = this.profile.onRefreshAccounts
+            .subscribe((resp) => {
+                this.NAU = resp.accounts.NAU;
+                this.balance = this.NAU.balance;
+            })
+
+        this.onRefreshTransactions = this.profile.onRefreshTransactions
             .subscribe(resp => {
                 this.transactions = resp.data;
                 this.lastPage = resp.last_page;
             });
+
+        if (!this.transactions) {
+            this.profile.getTransactions(this.page)
+                .subscribe(resp => {
+                    this.transactions = resp.data;
+                    this.lastPage = resp.last_page;
+                });
+        }
     }
 
     transactionSource(sourceId, transactionAmount) {
@@ -62,5 +81,11 @@ export class UserNauPage {
         else {
             infiniteScroll.complete();
         }
+    }
+
+    ionViewWillUnload() {
+        this.onRefreshAccounts.unsubscribe();
+        this.onRefreshTransactions.unsubscribe();
+        this.profile.refreshAccounts();
     }
 }

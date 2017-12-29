@@ -233,7 +233,8 @@
         "LOGIN" : "Login",
         "PLEASE_ENTER" : "Please enter your phone number and",
         "CONFIRMATION_CODE" : "confirmation code",
-        "OTP" : "OTP"
+        "OTP" : "OTP",
+        "GET_OTP" : "Get otp"
     },
 
     "PAGE_NOTIFICATIONS" : {

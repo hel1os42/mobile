@@ -25,7 +25,11 @@ export class DateTimeUtils {
 
     static getTimezone(timezoneData) {
         let timezone = (timezoneData.dstOffset + timezoneData.rawOffset) / 3600;
-        return DateTimeUtils.timezoneToStr(timezone);
+        let timezoneStr = DateTimeUtils.timezoneToStr(timezone);
+        return {
+            timezone: timezone,
+            timezoneStr: timezoneStr
+        };
     }
 
     static getFilterDates(date: string) {
@@ -47,7 +51,7 @@ export class DateTimeUtils {
         return timezoneStr;
     }
 
-    static groupTimeframes(timeframesData: TimeFrames[], simpleTimeFrames) {
+    static groupTimeframes(timeframesData: TimeFrames[], simpleTimeFrames, timezone: number) {
         let startTime: string;
         let finishTime: string;
         let isWorkingDays = false;
@@ -56,8 +60,8 @@ export class DateTimeUtils {
         let timeFrames = _.flatMap(timeframesData, function (obj) {
             return _.map(obj.days, function (day) {
                 return {
-                    from: obj.from,
-                    to: obj.to,
+                    from: DateTimeUtils.returnTime(obj.from, timezone),
+                    to: DateTimeUtils.returnTime(obj.to, timezone),
                     days: day
                 };
             });
@@ -118,6 +122,23 @@ export class DateTimeUtils {
             startTime: startTime,
             finishTime: finishTime
         }
+    }
+
+    static returnDate (str: string, timezone: number) {
+        let currentTime = new Date(str);
+        currentTime.setHours(currentTime.getHours() + timezone);
+        let date = currentTime.getFullYear() + "-" + ((+currentTime.getMonth() + 1) < 10 
+        ? ('0' + (+currentTime.getMonth() + 1)) 
+        : (+currentTime.getMonth() + 1)) + "-" + ((+currentTime.getDate()) < 10 
+        ? ('0' + (+currentTime.getDate())) : (+currentTime.getDate()));
+        return date;
+    }
+
+    static returnTime (time: string, timezone) {
+        let hour = parseInt(time.split(':')[0]) + timezone;
+        let returnedHour = hour >= 24 ? hour - 24 : hour;
+        let hourStr = (returnedHour < 10 ? '0' + returnedHour : returnedHour) + ':' + time.split(':')[1];
+        return hourStr;
     }
 
 }

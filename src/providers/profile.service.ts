@@ -9,6 +9,7 @@ import { TransactionCreate } from '../models/transactionCreate';
 export class ProfileService {
     user: User;
     onRefreshAccounts: EventEmitter<User> = new EventEmitter<User>();
+    onRefreshTransactions: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(private api: ApiService, private auth: AuthService) {
         auth.onLogout.subscribe(() => this.user = undefined);
@@ -35,12 +36,12 @@ export class ProfileService {
         });
     }
 
-    postTransaction(transaction: TransactionCreate) {
-        return this.api.post('transactions', transaction);
+    postTransaction(transaction: TransactionCreate, showLoading?: boolean) {
+        return this.api.post('transactions', transaction, { showLoading: showLoading });
     }
 
-    getWithAccounts() {
-        return this.api.get('profile?with=accounts');
+    getWithAccounts(showLoading?: boolean) {
+        return this.api.get('profile?with=accounts', { showLoading: showLoading });
     }
 
     put(user: User) {
@@ -51,5 +52,9 @@ export class ProfileService {
     
     refreshAccounts() {
         this.getWithAccounts().subscribe(user => this.onRefreshAccounts.emit(user));
+    }
+
+    refreshTransactions() {
+        this.getTransactions(1).subscribe(transactions => this.onRefreshTransactions.emit(transactions));
     }
 }

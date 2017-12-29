@@ -37,9 +37,9 @@ export class SettingsPage {
     time = new Date().valueOf();
     tileLayer;
     options;
-    lang: string;
-    langs = AVAILABLE_LANGUAGES.map(p => p.name);
-    isLangChanged = false;
+    // lang: string;
+    // langs = AVAILABLE_LANGUAGES.map(p => p.name);
+    // isLangChanged = false;
 
     constructor(
         private nav: NavController,
@@ -51,8 +51,8 @@ export class SettingsPage {
         private place: PlaceService,
         private translate: TranslateService, ) {
 
-        let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
-        this.lang = availableLang.name;
+        // let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
+        // this.lang = availableLang.name;
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
         this.coords.lat = this.user.latitude;
@@ -105,18 +105,18 @@ export class SettingsPage {
         return this.isAdvMode;
     }
 
-    changeLang() {
-        this.isLangChanged = true;
-    }
+    // changeLang() {
+    //     this.isLangChanged = true;
+    // }
 
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
         let isShownOnboard = this.appMode.getOnboardingVisible()
-        if (this.isLangChanged) {
-            let availableLang = AVAILABLE_LANGUAGES.find(i => i.name == this.lang);
-            this.translate.use(availableLang.code);
-            SYS_OPTIONS.LANG_CODE = availableLang.code;
-        }
+        // if (this.isLangChanged) {
+        //     let availableLang = AVAILABLE_LANGUAGES.find(i => i.name == this.lang);
+        //     this.translate.use(availableLang.code);
+        //     SYS_OPTIONS.LANG_CODE = availableLang.code;
+        // }
         // this.user.latitude = this.coords.lat;
         // this.user.longitude = this.coords.lng;
         // this.profile.put(this.user)

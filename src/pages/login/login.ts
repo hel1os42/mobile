@@ -24,6 +24,7 @@ export class LoginPage {
     page;
     clickMode = 0;
     environmentMode: string;
+    isVisibleLoginButton = false;
 
     constructor(
         private nav: NavController,
@@ -43,14 +44,18 @@ export class LoginPage {
         return this.appMode.getEnvironmentMode() == 'dev';
     }
 
+    getOtp() {
+        this.auth.getOtp(this.numCode + this.authData.phone)
+            .subscribe(() => {
+                this.isVisibleLoginButton = true;
+            });
+    }
+
     login() {
-        this.authData
-        this.auth
-            .login({
-                phone: this.numCode + this.authData.phone,
-                code: this.authData.code
-                // code: this.authData.phone.slice(-6)
-            })
+        this.auth.login({
+            phone: this.numCode + this.authData.phone,
+            code: this.authData.code
+        })
             .subscribe(
             resp => {
                 this.appMode.setHomeMode(true);
@@ -77,57 +82,58 @@ export class LoginPage {
 
     presentPrompt(selected: boolean) {
         let prompt = this.alert.create({
-                title: 'Choose environment',
-                message: '',
-                inputs : [
-                    {
-                        type:'radio',
-                        label:'develop',
-                        value: 'dev',
-                        checked: this.environmentMode == 'dev'
-                    },
-                    {
-                        type:'radio',
-                        label:'test',
-                        value: 'test',
-                        checked: this.environmentMode == 'test'
-                    },
-                    {
-                        type:'radio',
-                        label:'production',
-                        value: 'prod',
-                        checked: this.environmentMode == 'prod'
-                    }],
-                buttons: [
-                    {
-                        text: 'Cancel',
-                        role: 'cancel',
-                        handler: () => {
-                            this.clickMode = 0;
+            title: 'Choose environment',
+            message: '',
+            inputs: [
+                {
+                    type: 'radio',
+                    label: 'develop',
+                    value: 'dev',
+                    checked: this.environmentMode == 'dev'
+                },
+                {
+                    type: 'radio',
+                    label: 'test',
+                    value: 'test',
+                    checked: this.environmentMode == 'test'
+                },
+                {
+                    type: 'radio',
+                    label: 'production',
+                    value: 'prod',
+                    checked: this.environmentMode == 'prod'
+                }],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        this.clickMode = 0;
+                        return;
+                    }
+                },
+                {
+                    text: 'Ok',
+                    handler: (data) => {
+                        if (!data || this.environmentMode == data) {
                             return;
                         }
-                    },
-                    {
-                        text: 'Ok',
-                        handler: (data) => {
-                            if (!data || this.environmentMode == data) {
-                                return;
-                            }
-                            else {
-                                this.environmentMode = data;
-                                this.appMode.setEnvironmentMode(data);
-                            }
+                        else {
+                            this.environmentMode = data;
+                            this.appMode.setEnvironmentMode(data);
+                        }
                     }
                 }
-            ]});
+            ]
+        });
         prompt.present();
         this.clickMode = 0;
     }
 
     toggleMode() {
         this.clickMode = this.clickMode + 1;
-            if (this.clickMode >= 5) {
-                this.presentPrompt(false);
-            }
+        if (this.clickMode >= 5) {
+            this.presentPrompt(false);
+        }
     }
 }

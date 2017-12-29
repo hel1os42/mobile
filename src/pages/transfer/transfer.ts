@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs/Rx';
 import { Component } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Account } from '../../models/account';
 import { TransactionCreate } from '../../models/transactionCreate';
 import { ProfileService } from '../../providers/profile.service';
@@ -22,6 +23,8 @@ export class TransferPage {
         preferFrontCamera: true,
         orientation: 'portrait'
     };
+    onRefreshAccounts: Subscription;
+    timer;
 
     constructor(
         private profile: ProfileService,
@@ -29,11 +32,19 @@ export class TransferPage {
         private toast: ToastService,
         private nav: NavController,
         private popoverCtrl: PopoverController,
-        private barcode: BarcodeScanner) {
+        private barcode: BarcodeScanner,
+        private loading: LoadingController) {
 
         this.NAU = this.navParams.get('NAU');
         this.transferData.source = this.NAU.address;
         this.balance = this.NAU.balance;
+
+
+        this.onRefreshAccounts = this.profile.onRefreshAccounts
+            .subscribe((resp) => {
+                this.NAU = resp.accounts.NAU;
+                this.balance = this.NAU.balance;
+            })
 
     }
 
@@ -52,12 +63,12 @@ export class TransferPage {
             return false;
         }
         else {
-            if (this.transferData.amount < 1 ) {
+            if (this.transferData.amount < 1) {
                 this.toast.show('The amount must be at least 1');
                 return false;
             }
             else {
-               return true; 
+                return true;
             }
         }
     }
@@ -77,11 +88,38 @@ export class TransferPage {
     transfer() {
         if (this.validateMax()) {
             this.transferData.amount = parseFloat(this.amount);
-            this.profile.postTransaction(this.transferData)
+            
+            let loading = this.loading.create();
+            loading.present();
+
+            this.profile.postTransaction(this.transferData, false)
                 .subscribe(() => {
-                    this.profile.refreshAccounts();
-                    this.nav.pop();
+                    this.timer = setInterval(() => {
+                        this.profile.getWithAccounts(false)
+                            .subscribe(resp => {
+                                let NAU = resp.accounts.NAU;
+                                let balance = NAU.balance;
+                                if (this.balance != balance) {
+                                    this.profile.refreshAccounts();
+                                    this.profile.refreshTransactions();
+                                    this.stopTimer();
+                                    loading.dismiss();
+                                    this.nav.pop();
+                                }
+                            });
+                    }, 500);
                 })
         }
+    }
+
+    stopTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = undefined;
+        }
+    }
+
+    ionViewWillUnload() {
+        this.onRefreshAccounts.unsubscribe();
     }
 }
