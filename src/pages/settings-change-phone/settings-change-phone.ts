@@ -35,7 +35,7 @@ export class SettingsChangePhonePage {
         }
         else {
             this.visibleChangePhone = false;
-            this.otp = this.auth.getOtp(this.phone);//to do 
+            this.otp = this.phone.slice(-6);//to do 
         }
     }
 
