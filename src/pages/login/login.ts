@@ -1,3 +1,4 @@
+import { TemporaryPage } from '../temporary/temporary';
 import { Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { Login } from '../../models/login';
@@ -59,15 +60,18 @@ export class LoginPage {
             .subscribe(
             resp => {
                 this.appMode.setHomeMode(true);
-                this.profile.get(true)
-                    .subscribe(res => {
-                        if (res.name == '' && !res.email) {
-                            this.nav.setRoot(CreateUserProfilePage)
-                        }
-                        else {
-                            this.nav.setRoot(TabsPage, { index: 0 });
-                        }
-                    });
+                // this.profile.get(true)
+                //     .subscribe(res => {
+                //         if (res.name == '' && !res.email) {
+                //             this.nav.setRoot(CreateUserProfilePage)
+                //         }
+                //         else {
+                //             this.nav.setRoot(TabsPage, { index: 0 });
+                //         }
+                //     });temporary
+
+                this.nav.setRoot(TemporaryPage);//temporary(to remove)
+
             });
     }
 
