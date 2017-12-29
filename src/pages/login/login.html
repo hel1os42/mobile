@@ -28,7 +28,7 @@
   </ion-item>
   </div>
 
-  <div *ngIf="isVisibleLoginButton" margin-top class="bg-gray padding-left-6a3vw">
+  <div *ngIf="isVisibleLoginButton" class="bg-gray margin-top-6vw padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
         <ion-input (ionChange)="limitStr(authData.code, 6)"
