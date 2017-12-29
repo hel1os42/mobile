@@ -21,8 +21,8 @@ export class TabsPage {
     private _onHomeChangeSubscription: Subscription;
 
     tab1Root;
-    // tab2Root = UserProfilePage;temporary
-    tab2Root = UserNauPage;
+    // tab2Root = UserProfilePage;return
+    tab2Root = UserNauPage; //temporary
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
     tab5Root = FeedPage;
@@ -32,14 +32,19 @@ export class TabsPage {
     @ViewChild('tabs') tabs: Tabs;
 
     constructor(private appMode: AppModeService,
-                private navParams: NavParams,
-                private profile: ProfileService) {
-//temporary
-            this.profile.getWithAccounts()
-                .subscribe(resp => {
-                this.nauParams = { NAU: resp.accounts.NAU };
+        private navParams: NavParams,
+        private profile: ProfileService) {
+        //temporary
+        if (this.navParams.get('NAU')) {
+            this.nauParams = this.navParams.get('NAU');
+        }
+        else {
+        this.profile.getWithAccounts()
+            .subscribe(resp => {
+                this.nauParams = resp.accounts.NAU ;
             });
-//temporary
+        }
+        //temporary
         this.isDevMode = this.appMode.getEnvironmentMode() == 'dev';
 
         // this.tab1Root = this.appMode.getHomeMode()

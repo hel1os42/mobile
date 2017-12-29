@@ -14,7 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth.service';
 import { ProfileService } from '../providers/profile.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-
+import { TemporaryPage } from '../pages/temporary/temporary';
 
 @Component({
     templateUrl: 'app.html'
@@ -57,7 +57,7 @@ export class MyApp {
                 this.location.reset();
             });
 
-            //this.rootPage = CreateAdvUserProfilePage;
+            //this.rootPage = TemporaryPage;
             platform.registerBackButtonAction(() => {
                 let nav = app.getActiveNavs()[0];
 

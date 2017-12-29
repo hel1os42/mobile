@@ -1,3 +1,4 @@
+import { TemporaryPage } from '../temporary/temporary';
 import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -38,7 +39,8 @@ export class SignUpCodePage {
                     .subscribe(res => {
                         this.appMode.setHomeMode(false);
                         // this.nav.setRoot(CreateUserProfilePage, { user: resp});
-                        this.nav.setRoot(CreateUserProfilePage);
+                        // this.nav.setRoot(CreateUserProfilePage);temporary
+                        this.nav.setRoot(TemporaryPage);// temporary
                     })
             })
     }

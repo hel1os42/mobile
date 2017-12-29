@@ -1,3 +1,61 @@
 page-temporary {
-    
+    h1{
+        color: white;
+    }
+
+    .slide1{
+        background: url("../assets/img/onboarding/slice1.jpg") no-repeat 50% 50%/cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .title-big-sign{
+        color: #fff;
+        margin-bottom: 9vw;
+    }
+
+    .skip{
+        position: fixed;
+        color: #fff;
+        bottom: 3%;
+        right: 1%;
+        z-index: 1111;
+        background: transparent;
+    }
+
+    .slide-title-img{
+        height: 10.2vw;
+        margin-bottom: 23vw;
+        padding-top: 52vw;
+        text-align: center;
+    }
+
+    .slide-title-img img{
+        margin-left: 5vw;
+    }
+
+    .footer{
+        opacity: 0.5;
+    }
+
+    .scroll-content {
+        overflow-y: hidden !important;
+    }
+
+    .footer.footer-ios {
+        padding-left: 13.5vw;
+        padding-right: 13.5vw;
+        padding-bottom: 7vw;
+    }
+
+    .onboarding-desc{
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+
+    .font-75 {
+        font-size: 12px;
+        font-size: 4vw;
+        line-height: 7vw;
+    }
 }
