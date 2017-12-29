@@ -41,7 +41,7 @@ export class TabsPage {
         else {
         this.profile.getWithAccounts()
             .subscribe(resp => {
-                this.nauParams = { NAU: resp.accounts.NAU };
+                this.nauParams = resp.accounts.NAU ;
             });
         }
         //temporary
