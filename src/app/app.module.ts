@@ -1,3 +1,4 @@
+import { TemporaryPage } from '../pages/temporary/temporary';
 import { TransferPopover } from '../pages/transfer/transfer.popover';
 import 'rxjs/add/operator/map';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -122,6 +123,7 @@ export function createTranslateLoader(http: Http) {
       PlacePage,
       SplashInfoPage,
       SplashNewsPage,
+      TemporaryPage,
       SettingsPopover,
       OfferRedeemPopover,
       PlacesPopover,
@@ -201,6 +203,7 @@ export function createTranslateLoader(http: Http) {
       PlacePage,
       SplashInfoPage,
       SplashNewsPage,
+      TemporaryPage,
       SettingsPopover,
       OfferRedeemPopover,
       PlacesPopover,
