@@ -1,3 +1,4 @@
+import { ProfileService } from '../../providers/profile.service';
 import { UserNauPage } from '../user-nau/user-nau';
 import { Component, ViewChild } from '@angular/core';
 import { NavParams, Tabs } from 'ionic-angular';
@@ -26,12 +27,19 @@ export class TabsPage {
     tab4Root = NotificationsPage;
     tab5Root = FeedPage;
     selectedTabIndex = 0;
+    nauParams;//temporary
 
     @ViewChild('tabs') tabs: Tabs;
 
     constructor(private appMode: AppModeService,
-        private navParams: NavParams) {
-
+                private navParams: NavParams,
+                private profile: ProfileService) {
+//temporary
+            this.profile.getWithAccounts()
+                .subscribe(resp => {
+                this.nauParams = { NAU: resp.accounts.NAU };
+            });
+//temporary
         this.isDevMode = this.appMode.getEnvironmentMode() == 'dev';
 
         // this.tab1Root = this.appMode.getHomeMode()

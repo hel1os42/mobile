@@ -29,13 +29,8 @@ export class UserNauPage {
         private nav: NavController) {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
-        // this.NAU = this.navParams.get('NAU');
-        // this.balance = this.NAU.balance;//temporary
-        this.profile.getWithAccounts()
-            .subscribe(resp => {
-                this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU.balance;//temporary
-            });
+        this.NAU = this.navParams.get('NAU');
+        this.balance = this.NAU.balance;
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
