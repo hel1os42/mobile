@@ -1,8 +1,8 @@
 <ion-tabs [selectedIndex]="selectedTabIndex" #tabs (ionChange)="tabChange()">
     <ion-tab [root]="tab1Root"></ion-tab>
     <ion-tab [root]="tab2Root"></ion-tab>
-    <ion-tab [root]="tab3Root"></ion-tab>
-    <ion-tab [root]="tab4Root"></ion-tab>
-    <ion-tab [root]="tab5Root"></ion-tab>
+    <ion-tab [enabled] = false [root]="tab3Root"></ion-tab>
+    <ion-tab [enabled] = false [root]="tab4Root"></ion-tab>
+    <ion-tab [enabled] = false [root]="tab5Root"></ion-tab>
 </ion-tabs>
 <div *ngIf="isDevMode" class="devmode">Dev mode</div>
