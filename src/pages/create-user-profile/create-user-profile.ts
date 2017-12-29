@@ -239,7 +239,7 @@ export class CreateUserProfilePage {
                             //temporary
                             this.profile.getWithAccounts()
                                 .subscribe(resp => {
-                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1, NAU: resp.accounts.NAU });
+                                    this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
                                 });
                             //temporary
                         }
