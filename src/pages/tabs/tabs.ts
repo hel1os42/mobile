@@ -21,8 +21,8 @@ export class TabsPage {
     private _onHomeChangeSubscription: Subscription;
 
     tab1Root;
-    // tab2Root = UserProfilePage;temporary
-    tab2Root = UserNauPage;
+    // tab2Root = UserProfilePage;return
+    tab2Root = UserNauPage; //temporary
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
     tab5Root = FeedPage;
@@ -35,6 +35,7 @@ export class TabsPage {
                 private navParams: NavParams,
                 private profile: ProfileService) {
 //temporary
+            this.nauParams = this.navParams.get('NAU').NAU;
             this.profile.getWithAccounts()
                 .subscribe(resp => {
                 this.nauParams = { NAU: resp.accounts.NAU };
@@ -59,7 +60,8 @@ export class TabsPage {
             //    .setRoot(PlacesPage);
         });
 
-        this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;
+        // this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;return
+        this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex').selectedTabIndex : 0;//temporary
     }
 
     tabChange() {

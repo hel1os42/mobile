@@ -92,8 +92,8 @@ export class CreateUserProfilePage {
                             lat: resp.latitude,
                             lng: resp.longitude
                         };
-                            loadingLocation.dismissAll(); 
-                            this.addMap(); 
+                        loadingLocation.dismissAll();
+                        this.addMap();
                     })
             }
         }, 9000);
@@ -105,7 +105,7 @@ export class CreateUserProfilePage {
             else {
                 loadingLocation.dismissAll();
             }
-        },12000);
+        }, 12000);
     }
 
     presentConfirm() {
@@ -114,18 +114,18 @@ export class CreateUserProfilePage {
             message: 'Enable location services, please, check conection. Then click Retry.',
             buttons: [
                 {
-                  text: 'Exit',
-                  handler: () => {
-                    this.platform.exitApp();
-                  }
+                    text: 'Exit',
+                    handler: () => {
+                        this.platform.exitApp();
+                    }
                 },
                 {
-                  text: 'Retry',
-                  handler: () => {
-                    this.getLocation();
-                  }
+                    text: 'Retry',
+                    handler: () => {
+                        this.getLocation();
+                    }
                 }
-              ]
+            ]
         });
         confirm.present();
     }
@@ -210,35 +210,42 @@ export class CreateUserProfilePage {
     }
 
     createAccount() {
-            if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {
-                this.user.latitude = this.coords.lat;
-                this.user.longitude = this.coords.lng;
-                //this.account.points = this.point(); to do
-                this.profile.put(this.user)
-                    .subscribe(user => {
-                        if (this.picture_url && this.changedPicture) {
-                            this.api.uploadImage(this.picture_url, 'profile/picture', true)
-                                .then(() => {
-                                    if (this.isEdit) {
-                                        this.profile.refreshAccounts();
-                                        this.nav.pop();
-                                    }
-                                    else {
-                                        this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-                                    }
-                                });
+        if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {
+            this.user.latitude = this.coords.lat;
+            this.user.longitude = this.coords.lng;
+            //this.account.points = this.point(); to do
+            this.profile.put(this.user)
+                .subscribe(user => {
+                    if (this.picture_url && this.changedPicture) {
+                        this.api.uploadImage(this.picture_url, 'profile/picture', true)
+                            .then(() => {
+                                if (this.isEdit) {
+                                    this.profile.refreshAccounts();
+                                    this.nav.pop();
+                                }
+                                else {
+                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+                                }
+                            });
+                    }
+                    else {
+                        if (this.isEdit) {
+                            this.profile.refreshAccounts();
+                            this.nav.pop();
                         }
                         else {
-                            if (this.isEdit) {
-                                this.profile.refreshAccounts();
-                                this.nav.pop();
-                            }
-                            else {
-                                this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-                            }
+                            // this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });return
+                            
+                            //temporary
+                            this.profile.getWithAccounts()
+                                .subscribe(resp => {
+                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1, NAU: resp.accounts.NAU });
+                                });
+                            //temporary
                         }
-                    });
-            }
+                    }
+                });
         }
+    }
 }
 
