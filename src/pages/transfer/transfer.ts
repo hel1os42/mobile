@@ -63,14 +63,14 @@ export class TransferPage {
         //     return false;
         // }
         // else {
-            if (this.transferData.amount == 0) {
-                this.toast.show('The amount should be greater than 0');
-                return false;
-            }
-            else {
-                return true;
-            // }
+        if (this.transferData.amount < 1) {
+            this.toast.show('The amount must be at least 1');
+            return false;
         }
+        else {
+            return true;
+        }
+        // }
     }
 
     openPopover() {
@@ -88,7 +88,7 @@ export class TransferPage {
     transfer() {
         if (this.validateMax()) {
             this.transferData.amount = parseFloat(this.amount);
-            
+
             let loading = this.loading.create();
             loading.present();
 
