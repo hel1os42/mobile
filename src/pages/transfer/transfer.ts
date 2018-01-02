@@ -58,18 +58,18 @@ export class TransferPage {
 
     validateMax() {
         this.transferData.amount = parseInt(this.amount);
-        if (this.transferData.amount > this.balance) {
-            this.toast.show('The amount should be no more then balance');
-            return false;
-        }
-        else {
-            if (this.transferData.amount < 1) {
-                this.toast.show('The amount must be at least 1');
+        // if (this.transferData.amount > this.balance) {
+        //     this.toast.show('The amount should be no more then balance');
+        //     return false;
+        // }
+        // else {
+            if (this.transferData.amount == 0) {
+                this.toast.show('The amount should be greater than 0');
                 return false;
             }
             else {
                 return true;
-            }
+            // }
         }
     }
 
