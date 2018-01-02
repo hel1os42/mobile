@@ -72,6 +72,13 @@ export class TabsPage {
             this.appMode.setHomeMode(false);
     }
 
+    //temporary
+    refresh() {
+        this.profile.refreshAccounts();
+        this.profile.refreshTransactions();
+    }
+    //temporary
+
     ionViewWillUnload() {
         this._onHomeChangeSubscription.unsubscribe();
     }
