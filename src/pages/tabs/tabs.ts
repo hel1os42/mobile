@@ -28,6 +28,7 @@ export class TabsPage {
     tab5Root = FeedPage;
     selectedTabIndex = 0;
     nauParams;//temporary
+    shownTransactions: boolean;//temporary
 
     @ViewChild('tabs') tabs: Tabs;
 
@@ -74,8 +75,11 @@ export class TabsPage {
 
     //temporary
     refresh() {
-        this.profile.refreshAccounts();
-        this.profile.refreshTransactions();
+        if (this.shownTransactions) {
+            this.profile.refreshAccounts();
+            this.profile.refreshTransactions();
+        }
+        this.shownTransactions = true;
     }
     //temporary
 
