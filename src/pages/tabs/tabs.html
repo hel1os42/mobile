@@ -1,6 +1,6 @@
 <ion-tabs [selectedIndex]="selectedTabIndex" #tabs (ionChange)="tabChange()">
     <ion-tab [root]="tab1Root"></ion-tab>
-    <ion-tab [root]="tab2Root" [rootParams]="nauParams"></ion-tab>
+    <ion-tab (ionSelect)="refresh()" [root]="tab2Root" [rootParams]="nauParams"></ion-tab>
     <ion-tab [enabled] = false [root]="tab3Root"></ion-tab>
     <ion-tab [enabled] = false [root]="tab4Root"></ion-tab>
     <ion-tab [enabled] = false [root]="tab5Root"></ion-tab>

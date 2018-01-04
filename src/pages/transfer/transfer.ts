@@ -39,7 +39,6 @@ export class TransferPage {
         this.transferData.source = this.NAU.address;
         this.balance = this.NAU.balance;
 
-
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
@@ -48,28 +47,19 @@ export class TransferPage {
 
     }
 
-    limitStr(str: string, length: number) {
-        this.amount = StringValidator.stringLimitMax(str, length);
-    }
-
     updateAmount(event) {
-        StringValidator.updateAmount(event);
+        StringValidator.stringAmountLimit(event);
     }
 
     validateMax() {
         this.transferData.amount = parseInt(this.amount);
-        if (this.transferData.amount > this.balance) {
-            this.toast.show('The amount should be no more then balance');
+
+        if (this.transferData.amount < 1) {
+            this.toast.show('The amount must be at least 1');
             return false;
         }
         else {
-            if (this.transferData.amount < 1) {
-                this.toast.show('The amount must be at least 1');
-                return false;
-            }
-            else {
-                return true;
-            }
+            return true;
         }
     }
 
@@ -88,12 +78,10 @@ export class TransferPage {
     transfer() {
         if (this.validateMax()) {
             this.transferData.amount = parseFloat(this.amount);
-            
             let loading = this.loading.create();
             loading.present();
-
             this.profile.postTransaction(this.transferData, false)
-                .subscribe(() => {
+                .subscribe((resp) => {
                     this.timer = setInterval(() => {
                         this.profile.getWithAccounts(false)
                             .subscribe(resp => {
@@ -108,6 +96,10 @@ export class TransferPage {
                                 }
                             });
                     }, 500);
+                },
+                (err) => {
+                    this.stopTimer();
+                    loading.dismiss();
                 })
         }
     }

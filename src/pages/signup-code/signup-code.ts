@@ -13,6 +13,7 @@ import { CreateUserProfilePage } from '../create-user-profile/create-user-profil
 })
 export class SignUpCodePage {
     register: Register;
+    envMode: string;
 
     constructor(
         private nav: NavController,
@@ -21,7 +22,11 @@ export class SignUpCodePage {
         private navParams: NavParams) {
 
         this.register = this.navParams.get('register');
-        // this.register.code = this.register.phone.slice(-6);
+        this.envMode = this.appMode.getEnvironmentMode();
+        if (this.envMode === 'dev') {
+            this.register.code = this.register.phone.slice(-6);
+        }
+
     }
 
     updateList(ev) {

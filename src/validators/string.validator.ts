@@ -1,10 +1,10 @@
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 
 export class StringValidator {
 
     static stringLimitMax(str: string, length: number) {
-        if (str && str.length > length) { 
+        if (str && str.length > length) {
             return str = str.slice(0, str.length - 1);
         }
         else {
@@ -12,11 +12,11 @@ export class StringValidator {
         }
     }
 
-    static validString(fc: FormControl){
-        if(fc.value.replace(/\s+/g,'').length >= 3){
+    static validString(fc: FormControl) {
+        if (fc.value.replace(/\s+/g, '').length >= 3) {
             return (null);
         } else {
-            return ({validString: true});
+            return ({ validString: true });
         }
     }
 
@@ -25,8 +25,8 @@ export class StringValidator {
     }
 
     static validPhoneChange(ev) {
-        ev = (ev.replace(/\D+/g,""));
-        if (ev.substring(0,1) != "+"){
+        ev = (ev.replace(/\D+/g, ""));
+        if (ev.substring(0, 1) != "+") {
             ev = "+" + ev;
         }
 
@@ -37,8 +37,19 @@ export class StringValidator {
         return ev;
     }
 
-    static updateAmount(ev) {
-        ev.target.value = ev.target.value.replace(/[^.\d]+/g,"").replace( /^([^\.]*\.)|\./g, '$1' );//only numbers and one dot
-    }
+    static stringAmountLimit(ev) {
 
+        if (ev.target.value.split('.')[0] && ev.target.value.split('.')[0].length > 9) {
+            if (ev.target.value.split('.')[1]) {
+                ev.target.value = ev.target.value.split('.')[0].substr(0, 9) + '.' + ev.target.value.split('.')[1]
+            }
+            else {
+                ev.target.value = ev.target.value.split('.')[0].substr(0, 9)
+            }
+        }
+        // check num.1234
+        if (ev.target.value.split('.')[1] && ev.target.value.split('.')[1].length > 4) {
+                ev.target.value = ev.target.value.split('.')[0] + '.' + ev.target.value.split('.')[1].substr(0, 4);
+        }
+    }
 }

@@ -7,7 +7,7 @@ export class AppModeService {
     HOME_MODE_KEY = 'homeMode';
     ADV_MODE_KEY = 'isAdvMode';
     ONBOARDING_KEY = 'shownOnboarding';
-    ENVIRONMENT_KEY = 'environmentName';
+    ENVIRONMENT_KEY = 'envName';
 
     onHomeChange = new EventEmitter<boolean>();
     onEnvironmentMode = new EventEmitter<string>();

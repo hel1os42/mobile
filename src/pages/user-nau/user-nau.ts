@@ -54,6 +54,23 @@ export class UserNauPage {
         }
     }
 
+    //temporary
+    ionSelected() {
+        this.page = 1;
+        this.profile.getTransactions(this.page)
+            .subscribe(resp => {
+                this.transactions = resp.data;
+                this.lastPage = resp.last_page;
+            });
+
+        this.profile.getWithAccounts()
+            .subscribe((resp) => {
+                this.NAU = resp.accounts.NAU;
+                this.balance = this.NAU.balance;
+            });
+    }
+    //temporary
+
     transactionSource(sourceId, transactionAmount) {
         let amount = (this.NAU.id == sourceId) ? -transactionAmount : transactionAmount;
         return amount;

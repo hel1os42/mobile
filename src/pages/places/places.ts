@@ -59,7 +59,7 @@ export class PlacesPage {
                 this.selectedCategory = this.categories[0];
        
         this.segment = "alloffers";
-        let loadingLocation = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
+        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
             this.location.get()
                 .then((resp) => {

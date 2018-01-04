@@ -24,7 +24,7 @@ export class LoginPage {
     numCode: string = '+380';
     page;
     clickMode = 0;
-    environmentMode: string;
+    envMode: string;
     isVisibleLoginButton = false;
 
     constructor(
@@ -34,7 +34,8 @@ export class LoginPage {
         private profile: ProfileService,
         private alert: AlertController) {
 
-        this.environmentMode = this.appMode.getEnvironmentMode();
+        this.envMode = this.appMode.getEnvironmentMode();
+
     }
 
     updateList(ev) {
@@ -42,14 +43,21 @@ export class LoginPage {
     }
 
     getDevMode() {
-        return this.appMode.getEnvironmentMode() == 'dev';
+        return this.appMode.getEnvironmentMode() === 'dev';
     }
 
     getOtp() {
-        this.auth.getOtp(this.numCode + this.authData.phone)
-            .subscribe(() => {
-                this.isVisibleLoginButton = true;
-            });
+        if (this.getDevMode()) {
+            this.isVisibleLoginButton = true;
+            this.authData.code = this.authData.phone.slice(-6);
+        }
+        else {
+            this.auth.getOtp(this.numCode + this.authData.phone)
+                .subscribe(() => {
+                    this.isVisibleLoginButton = true;
+                });
+        }
+
     }
 
     login() {
@@ -93,19 +101,19 @@ export class LoginPage {
                     type: 'radio',
                     label: 'develop',
                     value: 'dev',
-                    checked: this.environmentMode == 'dev'
+                    checked: this.envMode == 'dev'
                 },
                 {
                     type: 'radio',
                     label: 'test',
                     value: 'test',
-                    checked: this.environmentMode == 'test'
+                    checked: this.envMode == 'test'
                 },
                 {
                     type: 'radio',
                     label: 'production',
                     value: 'prod',
-                    checked: this.environmentMode == 'prod'
+                    checked: this.envMode == 'prod'
                 }],
             buttons: [
                 {
@@ -119,11 +127,11 @@ export class LoginPage {
                 {
                     text: 'Ok',
                     handler: (data) => {
-                        if (!data || this.environmentMode == data) {
+                        if (!data || this.envMode == data) {
                             return;
                         }
                         else {
-                            this.environmentMode = data;
+                            this.envMode = data;
                             this.appMode.setEnvironmentMode(data);
                         }
                     }

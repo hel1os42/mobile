@@ -15,23 +15,25 @@
     <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover">
       <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
     </ion-select>
-    <ion-input (ionChange)="limitStr(authData.phone, 12)"
-               (keyup)="updateList($event)"
-               [(ngModel)]="authData.phone"
-               required
-               ngControl="phone"
-               name="phone"
-               [minlength]="7"
-               class="tel"
-               type="number"
-               placeholder="1234567"></ion-input>
+    <ion-input 
+                (ionChange)="limitStr(authData.phone, 12)"
+                (keyup)="updateList($event)"
+                [(ngModel)]="authData.phone"
+                required
+                ngControl="phone"
+                name="phone"
+                [minlength]="7"
+                class="tel"
+                type="number"
+                placeholder="1234567"></ion-input>
   </ion-item>
   </div>
 
   <div *ngIf="isVisibleLoginButton" class="bg-gray margin-top-6vw padding-left-6a3vw">
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
-        <ion-input (ionChange)="limitStr(authData.code, 6)"
+        <ion-input
+                  (ionChange)="limitStr(authData.code, 6)"
                   (keyup)="updateList($event)"
                   [(ngModel)]="authData.code"
                   required
