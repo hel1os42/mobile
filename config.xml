@@ -82,6 +82,12 @@
         <splash height="2208" src="resources/ios/splash/Default-736h.png" width="1242" />
         <splash height="1242" src="resources/ios/splash/Default-Landscape-736h.png" width="2208" />
     </platform>
+    <branch-config>
+        <branch-key value="key_live_lfsVMx9rPruF0HA1XhPGyfljDAhGpr4Y" />
+        <uri-scheme value="nau" />
+        <link-domain value="nau.app.link" />
+        <ios-team-release value="95864829T9" />
+    </branch-config>
     <engine name="android" spec="6.2.3" />
     <engine name="ios" spec="4.5.3" />
     <plugin name="cordova-plugin-device" spec="1.1.6" />
@@ -96,7 +102,8 @@
     <plugin name="cordova-plugin-file-transfer" spec="1.6.3" />
     <plugin name="cordova-plugin-cookiemaster" spec="1.0.5" />
     <plugin name="phonegap-plugin-barcodescanner" spec="6.0.8">
-        <variable name="CAMERA_USAGE_DESCRIPTION" value="Allow the app to use your camera" />
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes" />
         <variable name="NSCameraUsageDescription" value="Allow the app to use your camera" />
     </plugin>
+    <plugin name="branch-cordova-sdk" spec="2.6.11" />
 </widget>
