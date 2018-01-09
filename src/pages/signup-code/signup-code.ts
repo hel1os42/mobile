@@ -1,11 +1,10 @@
-import { TemporaryPage } from '../temporary/temporary';
-import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Register } from '../../models/register';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
-import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
+import { StringValidator } from '../../validators/string.validator';
+import { TemporaryPage } from '../temporary/temporary';
 
 @Component({
     selector: 'page-signup-code',

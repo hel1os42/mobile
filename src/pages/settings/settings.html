@@ -35,7 +35,7 @@
         </ion-col>
         <ion-col>
           <ion-item no-lines>
-            <ion-toggle disabled (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
+            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -58,9 +58,27 @@
   </div>
 
   <div class="block-lines">
-    <ion-item class="bg-gray">
-      <ion-label margin-left class="text-3E4B5D font-16">{{ user.invite_code }}</ion-label>
-    </ion-item>
+      <ion-item class="bg-gray label-copy">
+          <span class="text-3E4B5D font-16">{{ user.invite_code }}</span>
+          <a item-end>
+            <ion-icon (click)="copyInvCode()" class="text-FF5A00" name="ios-copy"></ion-icon>
+          </a>
+      </ion-item>
+  </div>
+
+  <div *ngIf="referralLink">
+    <div class="block-lines">
+      <div text-uppercase class="font-14 text-4F4F4F">Referral link</div>
+    </div>
+
+    <div class="block-lines">
+      <ion-item class="bg-gray label-copy">
+        <span class="text-3E4B5D font-16">{{ referralLink }}</span>
+          <a item-end>
+              <ion-icon (click)="copyReferralLink()" class="text-FF5A00" name="ios-copy"></ion-icon>
+          </a>
+      </ion-item>
+    </div>
   </div>
 
   <div class="block-lines">

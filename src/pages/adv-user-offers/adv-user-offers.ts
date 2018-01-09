@@ -54,7 +54,7 @@ export class AdvUserOffersPage {
             if (!this.balance) {
                     this.profile.getWithAccounts()
                         .subscribe(resp => {
-                            this.balance = resp.accounts.NAU.balance;
+                            this.balance = resp.accounts.length > 0 ? resp.accounts.NAU.balance : 0;
                         })
                 }
             }

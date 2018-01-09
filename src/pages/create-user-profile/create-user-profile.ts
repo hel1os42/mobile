@@ -69,7 +69,7 @@ export class CreateUserProfilePage {
     }
 
     getLocation() {
-        let loadingLocation = this.loading.create({ content: 'Detection location', spinner: 'bubbles' });
+        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
 
         this.location.get()

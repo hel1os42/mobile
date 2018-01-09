@@ -1,3 +1,4 @@
+import { StorageService } from '../../providers/storage.service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth.service';
@@ -14,7 +15,10 @@ export class SignUpInvitePage {
 
     constructor(
         private nav: NavController,
-        private auth: AuthService) {
+        private auth: AuthService,
+        private storage: StorageService) {
+
+        this.code.inviteCode = this.storage.get('invCode') ? this.storage.get('invCode') : '';
 
     }
 

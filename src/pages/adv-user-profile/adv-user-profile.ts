@@ -74,7 +74,7 @@ export class AdvUserProfilePage {
             .subscribe(resp => {
                 this.user = resp;
                 this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU.balance;
+                this.balance = this.NAU ? this.NAU.balance : 0;
                 
                 this.time = new Date().valueOf();
             })

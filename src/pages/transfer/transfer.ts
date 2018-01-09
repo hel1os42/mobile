@@ -37,7 +37,7 @@ export class TransferPage {
 
         this.NAU = this.navParams.get('NAU');
         this.transferData.source = this.NAU.address;
-        this.balance = this.NAU.balance;
+        this.balance = this.NAU ? this.NAU.balance : 0;
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {

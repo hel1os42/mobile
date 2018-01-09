@@ -37,7 +37,7 @@ export class AdvRedeemOfferPage {
         this.profile.getWithAccounts()
             .subscribe(resp => {
                 this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU.balance;
+                this.balance = this.NAU ? this.NAU.balance : 0;
             })
         }
         this.onRefreshPlace = this.place.onRefreshCompany
