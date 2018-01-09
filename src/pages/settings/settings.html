@@ -35,7 +35,7 @@
         </ion-col>
         <ion-col>
           <ion-item no-lines>
-            <ion-toggle disabled (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
+            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -59,8 +59,20 @@
 
   <div class="block-lines">
     <ion-item class="bg-gray">
-      <ion-label margin-left class="text-3E4B5D font-16">{{ user.invite_code }}</ion-label>
+      <ion-input [readonly] = true [value]="user.invite_code" margin-left class="text-3E4B5D font-16"></ion-input>
     </ion-item>
+  </div>
+
+  <div *ngIf="branchLink">
+    <div class="block-lines">
+      <div text-uppercase class="font-14 text-4F4F4F">Referral link</div>
+    </div>
+  
+    <div class="block-lines">
+      <ion-item class="bg-gray">
+        <ion-input [readonly] = true [value]="branchLink" margin-left class="text-3E4B5D font-16"></ion-input>
+      </ion-item>
+    </div>
   </div>
 
   <div class="block-lines">

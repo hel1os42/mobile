@@ -1,13 +1,13 @@
-import { ProfileService } from '../../providers/profile.service';
-import { UserNauPage } from '../user-nau/user-nau';
 import { Component, ViewChild } from '@angular/core';
 import { NavParams, Tabs } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 import { AppModeService } from '../../providers/appMode.service';
+import { ProfileService } from '../../providers/profile.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { FeedPage } from '../feed/feed';
 import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
+import { UserNauPage } from '../user-nau/user-nau';
 import { UserProfilePage } from '../user-profile/user-profile';
 
 @Component({
@@ -22,7 +22,7 @@ export class TabsPage {
 
     tab1Root;
     // tab2Root = UserProfilePage;return
-    tab2Root = UserNauPage; //temporary
+    tab2Root; //temporary
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
     tab5Root = FeedPage;
@@ -35,18 +35,23 @@ export class TabsPage {
     constructor(private appMode: AppModeService,
         private navParams: NavParams,
         private profile: ProfileService) {
+
         //temporary
-        if (this.navParams.get('NAU')) {
-            this.nauParams = this.navParams.get('NAU');
-        }
-        else {
-        this.profile.getWithAccounts()
-            .subscribe(resp => {
-                this.nauParams = resp.accounts.NAU ;
-            });
+        this.isDevMode = this.appMode.getEnvironmentMode() === 'dev';
+        this.tab2Root = this.isDevMode ? UserProfilePage : UserNauPage;
+
+        if (this.isDevMode) {
+            if (this.navParams.get('NAU')) {
+                this.nauParams = this.navParams.get('NAU');
+            }
+            else {
+                this.profile.getWithAccounts()
+                    .subscribe(resp => {
+                        this.nauParams = resp.accounts.NAU;
+                    });
+            }
         }
         //temporary
-        this.isDevMode = this.appMode.getEnvironmentMode() == 'dev';
 
         // this.tab1Root = this.appMode.getHomeMode()
         //     ? PlacesPage
