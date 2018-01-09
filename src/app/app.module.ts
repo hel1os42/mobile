@@ -82,6 +82,7 @@ import { TimezoneService } from '../providers/timezone.service';
 import { ToastService } from '../providers/toast.service';
 import { TokenService } from '../providers/token.service';
 import { MyApp } from './app.component';
+import { Clipboard } from '@ionic-native/clipboard';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -247,7 +248,8 @@ export function createTranslateLoader(http: Http) {
       LocationService,
       PlaceService,
       TimezoneService,
-      GeocodeService
+      GeocodeService,
+      Clipboard
   ]
 })
 export class AppModule { }

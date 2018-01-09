@@ -21,6 +21,7 @@
     "@asymmetrik/ngx-leaflet": "2.5.3",
     "@ionic-native/barcode-scanner": "4.3.3",
     "@ionic-native/calendar": "4.3.1",
+    "@ionic-native/clipboard": "4.5.2",
     "@ionic-native/core": "3.12.1",
     "@ionic-native/file-transfer": "4.3.1",
     "@ionic-native/geolocation": "4.1.0",
@@ -35,6 +36,7 @@
     "angular2-qrcode": "2.0.1",
     "chart.js": "2.7.1",
     "cordova-android": "6.2.3",
+    "cordova-clipboard": "1.1.1",
     "cordova-ios": "4.5.3",
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-cookiemaster": "1.0.5",
@@ -79,8 +81,10 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-cookiemaster": {},
       "phonegap-plugin-barcodescanner": {
-        "CAMERA_USAGE_DESCRIPTION": "To scan barcodes"
-      }
+        "CAMERA_USAGE_DESCRIPTION": "To scan barcodes",
+        "NSCameraUsageDescription": "Allow the app to use your camera"
+      },
+      "cordova-clipboard": {}
     },
     "platforms": [
       "android",

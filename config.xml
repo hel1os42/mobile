@@ -105,5 +105,6 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes" />
         <variable name="NSCameraUsageDescription" value="Allow the app to use your camera" />
     </plugin>
+    <plugin name="cordova-clipboard" spec="1.1.1" />
     <plugin name="branch-cordova-sdk" spec="2.6.11" />
 </widget>
