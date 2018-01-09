@@ -1,3 +1,5 @@
+import { SettingsPage } from '../pages/settings/settings';
+import { StorageService } from '../providers/storage.service';
 import { LocationService } from '../providers/location.service';
 import { Subscription } from 'rxjs/Rx';
 import { AdvTabsPage } from '../pages/adv-tabs/adv-tabs';
@@ -24,20 +26,22 @@ export class MyApp {
     private onResumeSubscription: Subscription;
 
     constructor(platform: Platform,
-                statusBar: StatusBar,
-                splashScreen: SplashScreen,
-                private auth: AuthService,
-                private app: App,
-                private profile: ProfileService,
-                private translate: TranslateService,
-                private location: LocationService,
-                private alert: AlertController) {
+        statusBar: StatusBar,
+        splashScreen: SplashScreen,
+        private auth: AuthService,
+        private app: App,
+        private profile: ProfileService,
+        private translate: TranslateService,
+        private location: LocationService,
+        private alert: AlertController,
+        private storage: StorageService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
+            this.branchInit(platform);
 
             this.initTranslate();
 
@@ -50,11 +54,12 @@ export class MyApp {
                         this.rootPage = (!resp.name && !resp.email)
                             ? CreateUserProfilePage
                             : TabsPage;
-                        //this.rootPage = AdvTabsPage;
+                        // this.rootPage = SettingsPage;
                     });
             }
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
+                this.branchInit(platform);
             });
 
             //this.rootPage = TemporaryPage;
@@ -115,6 +120,29 @@ export class MyApp {
             }]
         });
         alert.present();
+    }
+
+    branchInit(platform) {
+        // only on devices
+        if (platform.is('cordova')) {
+            const Branch = window['Branch'];
+            // Branch.setDebug(true);//for development and debugging only
+            // for better Android matching
+            // Branch.setCookieBasedMatching('nau.test-app.link')
+            Branch.initSession(data => {
+                if (data['+clicked_branch_link']) {
+                    // read deep link data on click
+                    // let alert = this.alert.create({
+                    //     title: 'Deep Link Data: ' + JSON.stringify(data),
+                    // });
+                    // alert.present();
+                    if (data.invite_code) {
+                        this.storage.set('invCode', data.invite_code);
+                    }
+                }
+            });
+        }
+        else return;
     }
 
     ngOnDestroy() {
