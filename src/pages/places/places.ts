@@ -89,6 +89,10 @@ export class PlacesPage {
             })
     }
 
+    getDevMode() {
+        return this.appMode.getEnvironmentMode() === 'dev';
+    }
+
     getCompaniesList() {
         this.categoryFilter = [this.selectedCategory.id];
         this.loadCompanies([this.selectedCategory.id], this.search, this.page);

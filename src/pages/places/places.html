@@ -1,4 +1,4 @@
-<ion-content no-bounce class="padding-no disabled-elements">
+<ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() }">
 
     <ion-grid text-center class="grid-tabs-splash">
         <ion-row align-items-end>
