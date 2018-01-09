@@ -31,7 +31,7 @@ export class UserNauPage {
         this.date = this.todayDate.toISOString().slice(0, 10);
         // this.NAU = this.navParams.get('NAU');return
         this.NAU = this.navParams.data;//temporary
-        this.balance = this.NAU.balance;
+        this.balance = this.NAU ? this.NAU.balance : 0;
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {

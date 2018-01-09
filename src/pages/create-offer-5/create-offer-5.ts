@@ -39,7 +39,7 @@ export class CreateOffer5Page {
         }
 
         this.profile.getWithAccounts()
-            .subscribe(user => this.balance = user.accounts.NAU.balance);
+            .subscribe(user => this.balance = user.accounts.length > 0 ? user.accounts.NAU.balance : 0);
     }
 
     createOffer() {
