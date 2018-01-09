@@ -1,14 +1,11 @@
-import { TemporaryPage } from '../temporary/temporary';
 import { Component } from '@angular/core';
 import { AlertController, NavController } from 'ionic-angular';
 import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
-import { ProfileService } from '../../providers/profile.service';
 import { StringValidator } from '../../validators/string.validator';
-import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SignUpInvitePage } from '../invite/invite';
-import { TabsPage } from '../tabs/tabs';
+import { TemporaryPage } from '../temporary/temporary';
 
 @Component({
     selector: 'page-login',
@@ -31,7 +28,6 @@ export class LoginPage {
         private nav: NavController,
         private auth: AuthService,
         private appMode: AppModeService,
-        private profile: ProfileService,
         private alert: AlertController) {
 
         this.envMode = this.appMode.getEnvironmentMode();

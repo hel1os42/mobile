@@ -1,22 +1,19 @@
-import { SettingsPage } from '../pages/settings/settings';
-import { StorageService } from '../providers/storage.service';
-import { LocationService } from '../providers/location.service';
-import { Subscription } from 'rxjs/Rx';
-import { AdvTabsPage } from '../pages/adv-tabs/adv-tabs';
-import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
-import { TranslateService } from '@ngx-translate/core';
 import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { App, Platform } from 'ionic-angular';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { Subscription } from 'rxjs/Rx';
+import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthService } from '../providers/auth.service';
+import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
-import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { TemporaryPage } from '../pages/temporary/temporary';
+import { StorageService } from '../providers/storage.service';
 
 @Component({
     templateUrl: 'app.html'

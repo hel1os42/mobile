@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Clipboard } from '@ionic-native/clipboard';
 import { App, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 import leaflet, { latLng, tileLayer } from 'leaflet';
-import { AVAILABLE_LANGUAGES, SYS_OPTIONS } from '../../const/i18n.const';
 import { Coords } from '../../models/coords';
 import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
-import { AdvRedeemOfferPage } from '../adv-redeem-offer/adv-redeem-offer';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 import { OnBoardingPage } from '../onboarding/onboarding';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { TabsPage } from '../tabs/tabs';
 import { SettingsPopover } from './settings.popover';
-import { Clipboard } from '@ionic-native/clipboard';
 
 @Component({
     selector: 'page-settings',
@@ -53,7 +50,6 @@ export class SettingsPage {
         private popoverCtrl: PopoverController,
         private navParams: NavParams,
         private place: PlaceService,
-        private translate: TranslateService,
         private clipboard: Clipboard) {
 
         // let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);

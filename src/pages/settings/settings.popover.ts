@@ -1,7 +1,5 @@
-import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { Component } from '@angular/core';
-import { ViewController, App, NavParams } from 'ionic-angular';
-import { OnBoardingPage } from '../onboarding/onboarding';
+import { App, NavParams, ViewController } from 'ionic-angular';
 
 @Component({
     selector: 'settings-popover-component',

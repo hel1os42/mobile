@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
-import { AuthService } from '../../providers/auth.service';
 import { ProfileService } from '../../providers/profile.service';
 import { StringValidator } from '../../validators/string.validator';
 
@@ -18,7 +17,6 @@ export class SettingsChangePhonePage {
 
     constructor(private nav: NavController,
         private navParams: NavParams,
-        private auth: AuthService,
         private profile: ProfileService) {
 
         this.user = this.navParams.get('user');
