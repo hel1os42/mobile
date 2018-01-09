@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { App, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { App, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 import leaflet, { latLng, tileLayer } from 'leaflet';
 import { AVAILABLE_LANGUAGES, SYS_OPTIONS } from '../../const/i18n.const';
 import { Coords } from '../../models/coords';
@@ -40,8 +40,10 @@ export class SettingsPage {
     // lang: string;
     // langs = AVAILABLE_LANGUAGES.map(p => p.name);
     // isLangChanged = false;
+    branchLink: string;
+    branchDomain = 'https://nau.test-app.link';
 
-    constructor(
+    constructor(platform: Platform,
         private nav: NavController,
         private profile: ProfileService,
         private appMode: AppModeService,
@@ -58,6 +60,7 @@ export class SettingsPage {
         this.coords.lat = this.user.latitude;
         this.coords.lng = this.user.longitude;
         this.addMap();
+        this.createBranchLink(this.user.invite_code);
 
         if (!this.user.id) {
             this.profile.get(true)
@@ -66,6 +69,7 @@ export class SettingsPage {
                     this.coords.lat = this.user.latitude;
                     this.coords.lng = this.user.longitude;
                     this.addMap();
+                    this.createBranchLink(this.user.invite_code);
                 });
         }
 
@@ -76,6 +80,33 @@ export class SettingsPage {
                 this.advPicture_url = resp.picture_url;
             },
             errResp => this.nextPage = undefined);
+    }
+
+    createBranchLink(invCode) {
+        this.branchLink = `${this.branchDomain}/?invite_code=${invCode}`;
+        // let properties = {
+        //     canonicalIdentifier: invCode,
+        //     canonicalUrl: `${this.branchDomain}/?invite_code=${invCode}`,
+        //     // title: 'Content 123 Title',
+        //     // contentDescription: 'Content 123 Description ' + Date.now(),
+        //     // contentImageUrl: 'http://lorempixel.com/400/400/',
+        //     // price: 12.12,
+        //     // currency: 'GBD',
+        //     // contentIndexingMode: 'private',
+        //     contentMetadata: {
+        //         custom: 'invite_code',
+        //         testing: invCode,
+        //         this_is: true
+        //     }
+        // }
+        // this.branchLink = properties.canonicalUrl;
+        // var branchUniversalObj = null;
+        // Branch.createBranchUniversalObject(properties).then(function (res) {
+        //     branchUniversalObj = res
+        //     alert('Response: ' + JSON.stringify(res))
+        // }).catch(function (err) {
+        //     alert('Error: ' + JSON.stringify(err))
+        // })
     }
 
     addMap() {
@@ -134,7 +165,7 @@ export class SettingsPage {
                     //     this.app.getRootNav().setRoot(OnBoardingPage, { isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true });
                     // }
                     // else {
-                        this.app.getRootNav().setRoot(AdvTabsPage, { isAdvMode: true, isAdvOnBoarding: true });
+                    this.app.getRootNav().setRoot(AdvTabsPage, { isAdvMode: true, isAdvOnBoarding: true });
                     // }
                 }
                 else {
