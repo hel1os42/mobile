@@ -15,6 +15,7 @@ import { OnBoardingPage } from '../onboarding/onboarding';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { TabsPage } from '../tabs/tabs';
 import { SettingsPopover } from './settings.popover';
+import { Clipboard } from '@ionic-native/clipboard';
 
 @Component({
     selector: 'page-settings',
@@ -40,8 +41,9 @@ export class SettingsPage {
     // lang: string;
     // langs = AVAILABLE_LANGUAGES.map(p => p.name);
     // isLangChanged = false;
-    branchLink: string;
-    branchDomain = 'https://nau.test-app.link';
+    referralLink: string;
+    // branchDomain = 'https://nau.test-app.link';for test only
+    branchDomain = 'https://nau.app.link';
 
     constructor(platform: Platform,
         private nav: NavController,
@@ -51,7 +53,8 @@ export class SettingsPage {
         private popoverCtrl: PopoverController,
         private navParams: NavParams,
         private place: PlaceService,
-        private translate: TranslateService, ) {
+        private translate: TranslateService,
+        private clipboard: Clipboard) {
 
         // let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
         // this.lang = availableLang.name;
@@ -83,7 +86,7 @@ export class SettingsPage {
     }
 
     createBranchLink(invCode) {
-        this.branchLink = `${this.branchDomain}/?invite_code=${invCode}`;
+        this.referralLink = `${this.branchDomain}/?invite_code=${invCode}`;
         // let properties = {
         //     canonicalIdentifier: invCode,
         //     canonicalUrl: `${this.branchDomain}/?invite_code=${invCode}`,
@@ -107,6 +110,14 @@ export class SettingsPage {
         // }).catch(function (err) {
         //     alert('Error: ' + JSON.stringify(err))
         // })
+    }
+
+    copyInvCode() {
+        this.clipboard.copy(this.user.invite_code);
+    }
+
+    copyReferralLink() {
+        this.clipboard.copy(this.referralLink);
     }
 
     addMap() {
