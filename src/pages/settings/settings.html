@@ -58,19 +58,25 @@
   </div>
 
   <div class="block-lines">
-    <ion-item class="bg-gray">
-      <ion-input [readonly] = true [value]="user.invite_code" margin-left class="text-3E4B5D font-16"></ion-input>
-    </ion-item>
+      <ion-item class="bg-gray label-copy">
+          <span class="text-3E4B5D font-16">{{user.invite_code}}</span>
+          <a item-end>
+            <ion-icon class="text-FF5A00" name="ios-copy"></ion-icon>
+          </a>
+      </ion-item>
   </div>
 
   <div *ngIf="branchLink">
     <div class="block-lines">
       <div text-uppercase class="font-14 text-4F4F4F">Referral link</div>
     </div>
-  
+
     <div class="block-lines">
-      <ion-item class="bg-gray">
-        <ion-input [readonly] = true [value]="branchLink" margin-left class="text-3E4B5D font-16"></ion-input>
+      <ion-item class="bg-gray label-copy">
+        <span class="text-3E4B5D font-16">{{branchLink}}</span>
+          <a item-end>
+              <ion-icon class="text-FF5A00" name="ios-copy"></ion-icon>
+          </a>
       </ion-item>
     </div>
   </div>
