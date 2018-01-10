@@ -1,3 +1,4 @@
+import { AppModeService } from '../../providers/appMode.service';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Rx';
@@ -25,12 +26,13 @@ export class UserNauPage {
 
     constructor(
         private profile: ProfileService,
+        private appMode: AppModeService,
         private navParams: NavParams,
         private nav: NavController) {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         // this.NAU = this.navParams.get('NAU');return
-        this.NAU = this.navParams.data;//temporary
+        this.NAU = this.appMode.getEnvironmentMode() === 'dev' ? this.navParams.get('NAU') : this.navParams.data;//temporary
         this.balance = this.NAU ? this.NAU.balance : 0;
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
