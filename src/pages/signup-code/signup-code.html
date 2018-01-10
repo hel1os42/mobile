@@ -30,4 +30,5 @@
         {{ 'PAGE_SIGNUP-CODE.ONE_TIME' | translate }}
         <br>{{ 'PAGE_SIGNUP-CODE.CONFIRM_PHONE_NUMBER' | translate }}.
     </div>
+    <div  *ngIf="getDevMode()" class="devmode">Dev mode</div>
 </ion-footer>
