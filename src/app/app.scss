@@ -584,6 +584,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     line-height: 4vw;
 }
 
+.platform-ios .grid-tabs-splash{
+    padding-top: 20px;
+}
+
 .grid-tabs-splash .col img {
     max-width: 100%;
     height: 100%;
@@ -1673,4 +1677,8 @@ ion-app.disable-scroll {
     overflow: scroll;
     white-space: nowrap;
     pointer-events: auto;
+}
+
+.tabs-ios[tabsPlacement=top] .tabbar {
+    padding-bottom: 0px;
 }
