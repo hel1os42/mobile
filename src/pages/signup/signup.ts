@@ -1,3 +1,4 @@
+import { AppModeService } from '../../providers/appMode.service';
 import { Register } from '../../models/register';
 import { StringValidator } from '../../validators/string.validator';
 import { Component } from '@angular/core';
@@ -17,7 +18,8 @@ export class SignUpPage {
 
     constructor(
         private nav: NavController,
-        private auth: AuthService) {
+        private auth: AuthService,
+        private appMode: AppModeService) {
     }
 
     updateList(ev) {
@@ -42,5 +44,10 @@ export class SignUpPage {
 
     limitStr(str: string, length: number) {
         this.formData.phone = StringValidator.stringLimitMax(str, length);
+    }
+
+
+    getDevMode() {
+        return this.appMode.getEnvironmentMode() === 'dev';
     }
 }

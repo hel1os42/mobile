@@ -32,25 +32,19 @@ export class TabsPage {
 
     @ViewChild('tabs') tabs: Tabs;
 
-    constructor(private appMode: AppModeService,
-        private navParams: NavParams,
-        private profile: ProfileService) {
+    constructor(
+                private appMode: AppModeService,
+                private navParams: NavParams,
+                private profile: ProfileService) {
 
         //temporary
         this.isDevMode = this.appMode.getEnvironmentMode() === 'dev';
         this.tab2Root = this.isDevMode ? UserProfilePage : UserNauPage;
 
-        if (this.isDevMode) {
-            if (this.navParams.get('NAU')) {
-                this.nauParams = this.navParams.get('NAU');
-            }
-            else {
                 this.profile.getWithAccounts()
                     .subscribe(resp => {
                         this.nauParams = resp.accounts.NAU;
                     });
-            }
-        }
         //temporary
 
         // this.tab1Root = this.appMode.getHomeMode()
