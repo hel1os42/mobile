@@ -52,4 +52,8 @@ export class SignUpCodePage {
     limitStr(str: string) {
         this.register.code = StringValidator.stringLimitMax(str, 6);
     }
+
+    getDevMode() {
+        return this.appMode.getEnvironmentMode() === 'dev';
+    }
 }

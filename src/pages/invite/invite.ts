@@ -1,3 +1,4 @@
+import { AppModeService } from '../../providers/appMode.service';
 import { StorageService } from '../../providers/storage.service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -16,6 +17,7 @@ export class SignUpInvitePage {
     constructor(
         private nav: NavController,
         private auth: AuthService,
+        private appMode: AppModeService,
         private storage: StorageService) {
 
         this.code.inviteCode = this.storage.get('invCode') ? this.storage.get('invCode') : '';
@@ -25,6 +27,10 @@ export class SignUpInvitePage {
     next() {
         this.auth.setInviteCode(this.code.inviteCode);
         this.nav.push(SignUpPage);
+    }
+
+    getDevMode() {
+        return this.appMode.getEnvironmentMode() === 'dev';
     }
 
 }
