@@ -15,7 +15,7 @@
         text-center placeholder="XXXXXXXX" class="bg-gray" type="text"></ion-input>
     </ion-item>
   </form>
-  
+
     <button (click)="next()" [disabled]="!form.valid" type="submit" text-uppercase class="margin-top-5vw" ion-button block middle
       color="primary">{{ 'UNIT.SIGN_UP' | translate }}</button>
 </ion-content>
@@ -24,4 +24,5 @@
   <div text-center class="font-75 text-828282">
     {{ 'PAGE_INVITE.PLEASE_ASK' | translate }}
   </div>
+    <div  *ngIf="getDevMode()" class="devmode">Dev mode</div>
 </ion-footer>

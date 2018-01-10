@@ -27,4 +27,5 @@
   <div text-center class="font-75 text-828282">
     {{ 'PAGE_SIGNUP.PLEASE_DO_NOT_DISTURB' | translate }}<br> {{ 'PAGE_SIGNUP.YOUR_PRIVATE' | translate }}
   </div>
+    <div  *ngIf="getDevMode()" class="devmode">Dev mode</div>
 </ion-footer>
