@@ -4,7 +4,7 @@
 </ion-header>
 
 <ion-content class="padding-sign">
-  <div (click)="toggleMode()" class="logo">
+  <div (tap)="toggleMode()" class="logo">
   </div>
   <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
   <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}</div>
@@ -15,7 +15,7 @@
     <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover">
       <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
     </ion-select>
-    <ion-input 
+    <ion-input
                 (ionChange)="limitStr(authData.phone, 12)"
                 (keyup)="updateList($event)"
                 [(ngModel)]="authData.phone"

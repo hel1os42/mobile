@@ -78,10 +78,12 @@ export class MyApp {
                     appElHeight = appEl.clientHeight;
 
                 window.addEventListener('native.keyboardshow', (e) => {
+                    console.log("native.keyboardshow");
                     appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
                 });
 
                 window.addEventListener('native.keyboardhide', () => {
+                    console.log("native.keyboardhide");
                     appEl.style.height = '100%';
                 });
             //}
