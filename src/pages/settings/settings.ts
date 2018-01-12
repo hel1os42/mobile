@@ -194,5 +194,4 @@ export class SettingsPage {
     openChangePhone(user: User) {
         this.nav.push(SettingsChangePhonePage, { user: this.user });
     }
-
 }
