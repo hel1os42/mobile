@@ -6,6 +6,7 @@ import { Account } from '../../models/account';
 import { Transaction } from '../../models/transaction';
 import { ProfileService } from '../../providers/profile.service';
 import { TransferPage } from '../transfer/transfer';
+import * as moment from 'moment';
 
 @Component({
     selector: 'page-user-nau',
@@ -77,6 +78,10 @@ export class UserNauPage {
     transactionSource(sourceId, transactionAmount) {
         let amount = (this.NAU.id == sourceId) ? -transactionAmount : transactionAmount;
         return amount;
+    }
+
+    getDate(date) {
+        return moment(date).format('DD/MM/YYYY hh:mm:ss');
     }
 
     filterByDate() {
