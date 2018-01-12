@@ -1,5 +1,5 @@
 import { AppModeService } from '../../providers/appMode.service';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
@@ -28,7 +28,8 @@ export class UserNauPage {
         private profile: ProfileService,
         private appMode: AppModeService,
         private navParams: NavParams,
-        private nav: NavController) {
+        private nav: NavController,
+        private changeDetectorRef: ChangeDetectorRef) {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         // this.NAU = this.navParams.get('NAU');return
@@ -45,6 +46,7 @@ export class UserNauPage {
             .subscribe(resp => {
                 this.transactions = resp.data;
                 this.lastPage = resp.last_page;
+                this.changeDetectorRef.detectChanges();
             });
 
         if (!this.transactions) {
@@ -52,6 +54,7 @@ export class UserNauPage {
                 .subscribe(resp => {
                     this.transactions = resp.data;
                     this.lastPage = resp.last_page;
+                    this.changeDetectorRef.detectChanges();
                 });
         }
     }
@@ -63,6 +66,7 @@ export class UserNauPage {
             .subscribe(resp => {
                 this.transactions = resp.data;
                 this.lastPage = resp.last_page;
+                this.changeDetectorRef.detectChanges();
             });
 
         this.profile.getWithAccounts()
@@ -95,6 +99,7 @@ export class UserNauPage {
                     .subscribe(resp => {
                         this.transactions = [...this.transactions, ...resp.data];
                         infiniteScroll.complete();
+                        this.changeDetectorRef.detectChanges();
                     });
             });
         }
