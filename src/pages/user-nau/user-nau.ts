@@ -1,5 +1,5 @@
 import { AppModeService } from '../../providers/appMode.service';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
@@ -29,7 +29,7 @@ export class UserNauPage {
         private appMode: AppModeService,
         private navParams: NavParams,
         private nav: NavController,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private zone: NgZone) {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         // this.NAU = this.navParams.get('NAU');return
@@ -46,15 +46,15 @@ export class UserNauPage {
             .subscribe(resp => {
                 this.transactions = resp.data;
                 this.lastPage = resp.last_page;
-                this.changeDetectorRef.detectChanges();
             });
 
         if (!this.transactions) {
             this.profile.getTransactions(this.page)
                 .subscribe(resp => {
+                    this.zone.run(() => {
                     this.transactions = resp.data;
                     this.lastPage = resp.last_page;
-                    this.changeDetectorRef.detectChanges();
+                    });
                 });
         }
     }
@@ -64,9 +64,10 @@ export class UserNauPage {
         this.page = 1;
         this.profile.getTransactions(this.page)
             .subscribe(resp => {
-                this.transactions = resp.data;
-                this.lastPage = resp.last_page;
-                this.changeDetectorRef.detectChanges();
+                this.zone.run(() => {
+                    this.transactions = resp.data;
+                    this.lastPage = resp.last_page;
+                    });
             });
 
         this.profile.getWithAccounts()
@@ -97,9 +98,10 @@ export class UserNauPage {
             setTimeout(() => {
                 this.profile.getTransactions(this.page)
                     .subscribe(resp => {
+                        this.zone.run(() => {
                         this.transactions = [...this.transactions, ...resp.data];
                         infiniteScroll.complete();
-                        this.changeDetectorRef.detectChanges();
+                        });
                     });
             });
         }
