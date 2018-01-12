@@ -51,10 +51,8 @@ export class UserNauPage {
         if (!this.transactions) {
             this.profile.getTransactions(this.page)
                 .subscribe(resp => {
-                    this.zone.run(() => {
                     this.transactions = resp.data;
                     this.lastPage = resp.last_page;
-                    });
                 });
         }
     }
@@ -64,10 +62,8 @@ export class UserNauPage {
         this.page = 1;
         this.profile.getTransactions(this.page)
             .subscribe(resp => {
-                this.zone.run(() => {
                     this.transactions = resp.data;
                     this.lastPage = resp.last_page;
-                    });
             });
 
         this.profile.getWithAccounts()
@@ -98,10 +94,8 @@ export class UserNauPage {
             setTimeout(() => {
                 this.profile.getTransactions(this.page)
                     .subscribe(resp => {
-                        this.zone.run(() => {
                         this.transactions = [...this.transactions, ...resp.data];
                         infiniteScroll.complete();
-                        });
                     });
             });
         }
