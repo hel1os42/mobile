@@ -1,8 +1,8 @@
 import { AppModeService } from '../../providers/appMode.service';
 import { Register } from '../../models/register';
 import { StringValidator } from '../../validators/string.validator';
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Select } from 'ionic-angular';
 import { AuthService } from '../../providers/auth.service';
 import { SignUpCodePage } from '../signup-code/signup-code';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
@@ -17,6 +17,8 @@ export class SignUpPage {
     numCode: string;
     phoneNumber: string;
     phoneCodes = PHONE_CODES;
+
+    @ViewChild('codeSelect') codeSelect: Select;
 
     constructor(
         private nav: NavController,
@@ -33,7 +35,7 @@ export class SignUpPage {
     getCode() {
         this.phoneNumber = this.numCode + this.formData.phone;
         let inviteCode = this.auth.getInviteCode();
-
+        debugger
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
             .subscribe(resp => {
                 let register: Register = {
@@ -50,8 +52,13 @@ export class SignUpPage {
         this.formData.phone = StringValidator.stringLimitMax(str, length);
     }
 
-
     getDevMode() {
         return this.appMode.getEnvironmentMode() === 'dev';
     }
+
+    dismissSelect(event) {
+        this.numCode = event;
+        this.codeSelect.close();
+    }
+    
 }

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AlertController, NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { AlertController, NavController, Select } from 'ionic-angular';
 import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
@@ -26,6 +26,8 @@ export class LoginPage {
     isVisibleLoginButton = false;
     phoneCodes = PHONE_CODES;
 
+    @ViewChild('codeSelect') codeSelect: Select;
+
     constructor(
         private nav: NavController,
         private auth: AuthService,
@@ -46,7 +48,7 @@ export class LoginPage {
         return this.appMode.getEnvironmentMode() === 'dev';
     }
 
-    getOtp() {
+    getOtp() { 
         if (this.getDevMode()) {
             this.isVisibleLoginButton = true;
             this.authData.code = this.authData.phone.slice(-6);
@@ -147,5 +149,10 @@ export class LoginPage {
         if (this.clickMode >= 5) {
             this.presentPrompt(false);
         }
+    }
+
+    dismissSelect(event) {
+        this.numCode = event;
+        this.codeSelect.close();
     }
 }
