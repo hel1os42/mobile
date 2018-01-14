@@ -12,8 +12,8 @@
   <form #form="ngForm" (ngSubmit)="login()">
   <div *ngIf="!isVisibleLoginButton" class="bg-gray margin-top-6vw">
   <ion-item class="border-bottom-no">
-    <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover">
-      <ion-option  *ngFor=" let numCode of numCodes " [value]="numCode">{{ numCode }}</ion-option>
+    <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover" [selectedText]="numCode">
+      <ion-option  *ngFor=" let phoneCode of phoneCodes " [value]="phoneCode.dial_code">{{ phoneCode.dial_code }} {{ phoneCode.name }}</ion-option>
     </ion-select>
     <ion-input
                 (ionChange)="limitStr(authData.phone, 12)"
