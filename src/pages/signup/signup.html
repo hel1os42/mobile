@@ -12,7 +12,7 @@
   <form #form="ngForm" (ngSubmit)="getCode()">
   <div class="bg-gray margin-top-6vw">
       <ion-item class="border-bottom-no">
-        <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" interface="popover" [selectedText]="numCode">
+        <ion-select [(ngModel)]="numCode" [ngModelOptions]="{standalone: true}" [selectOptions]="{cssClass: 'alert-full-no-button'}" interface="alert" [selectedText]="numCode">
             <ion-option  *ngFor=" let phoneCode of phoneCodes " [value]="phoneCode.dial_code">{{ phoneCode.dial_code }} {{ phoneCode.name }}</ion-option>
           </ion-select>
         <ion-input pattern="^[0-9]+$" required (keyup)="updateList($event)" (ionChange)="limitStr(formData.phone, 12)" [(ngModel)]="formData.phone" ngControl="phone" name="phone" [minlength]="7" type="number" placeholder="1234567" ></ion-input>
