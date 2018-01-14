@@ -1682,3 +1682,20 @@ ion-app.disable-scroll {
 .tabs-ios[tabsPlacement=top] .tabbar {
     padding-bottom: 0px;
 }
+
+.alert-full-no-button.alert-ios .alert-wrapper {
+    max-width: 90vw;
+    height: 90vh;
+}
+
+.alert-full-no-button .alert-head, .alert-full-no-button .alert-message{
+    display: none;
+}
+
+.alert-full-no-button.alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group{
+    max-height: 90vh;
+}
+
+.alert-full-no-button.alert-ios .alert-button-group{
+    display: none;
+}
