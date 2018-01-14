@@ -165,6 +165,18 @@ page-settings{
         overflow: scroll;
         text-overflow: initial;
     }
+
+    ion-col.col {
+        padding: 0;
+    }
+
+    .bg-gray .row {
+        min-height: 11.8vw;
+    }
+
+    ion-col.padding-right-3vw.col {
+        padding-right: 3vw;
+    }
 }
 
 settings-popover-component{
