@@ -34,7 +34,7 @@ export class LoginPage {
         private appMode: AppModeService,
         private alert: AlertController) {
 
-        this.numCode = this.phoneCodes[0].dial_code;
+        this.numCode = this.getNumCode();
 
         this.envMode = this.appMode.getEnvironmentMode();
     }
@@ -45,6 +45,10 @@ export class LoginPage {
 
     getDevMode() {
         return this.appMode.getEnvironmentMode() === 'dev';
+    }
+
+    getNumCode() {
+        return  this.numCode = this.getDevMode() ? '+380' : this.phoneCodes[0].dial_code;
     }
 
     getOtp() {
@@ -134,6 +138,7 @@ export class LoginPage {
                         else {
                             this.envMode = data;
                             this.appMode.setEnvironmentMode(data);
+                            this.getNumCode();
                         }
                     }
                 }
@@ -160,16 +165,16 @@ export class LoginPage {
         (<any>selectButton._overlay).didEnter.subscribe(
           () => {
             setTimeout(() => {
-              let i = 0
-              const len = options.length
+              let i = 0;
+              const len = options.length;
               for (i; i < len; i++) {
                 if ((options[i] as HTMLElement).attributes[3].nodeValue === 'true') {
                   var modalCodes = document.getElementsByClassName('alert-full-no-button')[0] as HTMLElement;
                   modalCodes.style.display = "flex";
-                  options[i].scrollIntoView({ block: 'center', behavior: 'instant' })
+                  options[i].scrollIntoView({ block: 'center', behavior: 'instant' });
                 }
               }
-            });
+            }, 5);
           }
         );
       }
