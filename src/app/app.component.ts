@@ -64,15 +64,15 @@ export class MyApp {
             platform.registerBackButtonAction(() => {
 
                 let activePortal = ionicApp._loadingPortal.getActive() ||
-                this.ionicApp._modalPortal.getActive() ||
-                ionicApp._toastPortal.getActive() ||
-                ionicApp._overlayPortal.getActive();
-                
+                    this.ionicApp._modalPortal.getActive() ||
+                    ionicApp._toastPortal.getActive() ||
+                    ionicApp._overlayPortal.getActive();
+
                 let nav = app.getActiveNavs()[0];
 
                 if (activePortal) {
                     activePortal.dismiss();
-                  }
+                }
                 //else if (this.menuCtrl.isOpen()) {
                 //this.menuCtrl.close();
                 //}
@@ -86,19 +86,19 @@ export class MyApp {
 
             // FIX KEYBOARD SCROLL
             //if (platform.is('ios')) {
-                let
-                    appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
-                    appElHeight = appEl.clientHeight;
+            let
+                appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
+                appElHeight = appEl.clientHeight;
 
-                window.addEventListener('native.keyboardshow', (e) => {
-                    console.log("native.keyboardshow");
-                    appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
-                });
+            window.addEventListener('native.keyboardshow', (e) => {
+                console.log("native.keyboardshow");
+                appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
+            });
 
-                window.addEventListener('native.keyboardhide', () => {
-                    console.log("native.keyboardhide");
-                    appEl.style.height = '100%';
-                });
+            window.addEventListener('native.keyboardhide', () => {
+                console.log("native.keyboardhide");
+                appEl.style.height = '100%';
+            });
             //}
         });
 
