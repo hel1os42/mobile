@@ -1703,3 +1703,8 @@ ion-app.disable-scroll {
 .alert-full-no-button.alert-ios .alert-button-group{
     display: none;
 }
+
+.popover-content {
+    left: unset !important;
+    right: 5%;
+}
