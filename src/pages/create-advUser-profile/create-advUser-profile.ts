@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Map } from 'leaflet';
-import leaflet, { latLng, LeafletEvent, tileLayer } from 'leaflet';
+import { latLng, LeafletEvent, tileLayer } from 'leaflet';
 import * as _ from 'lodash';
 import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
 import { ChildCategory } from '../../models/childCategory';

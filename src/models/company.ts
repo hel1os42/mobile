@@ -1,7 +1,6 @@
+import { Offer } from './offer';
+import { OfferCategory } from './offerCategory';
 import { PlaceCreate } from './placeCreate';
-import { OfferCategory } from "./offerCategory";
-import { Offer } from "./offer";
-import { RetailType } from './retailType';
 
 export class Company extends PlaceCreate  {
     id: string;

@@ -1,5 +1,5 @@
 import { AppModeService } from '../../providers/appMode.service';
-import { ChangeDetectorRef, Component, NgZone } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
@@ -29,8 +29,7 @@ export class UserNauPage {
         private profile: ProfileService,
         private appMode: AppModeService,
         private navParams: NavParams,
-        private nav: NavController,
-        private zone: NgZone) {
+        private nav: NavController) {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         // this.NAU = this.navParams.get('NAU');return
