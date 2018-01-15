@@ -47,7 +47,7 @@ export class LoginPage {
         return this.appMode.getEnvironmentMode() === 'dev';
     }
 
-    getOtp() { 
+    getOtp() {
         if (this.getDevMode()) {
             this.isVisibleLoginButton = true;
             this.authData.code = this.authData.phone.slice(-6);
@@ -164,6 +164,8 @@ export class LoginPage {
               const len = options.length
               for (i; i < len; i++) {
                 if ((options[i] as HTMLElement).attributes[3].nodeValue === 'true') {
+                  var modalCodes = document.getElementsByClassName('alert-full-no-button')[0] as HTMLElement;
+                  modalCodes.style.display = "flex";
                   options[i].scrollIntoView({ block: 'center', behavior: 'instant' })
                 }
               }

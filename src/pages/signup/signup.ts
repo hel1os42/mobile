@@ -70,6 +70,8 @@ export class SignUpPage {
               const len = options.length
               for (i; i < len; i++) {
                 if ((options[i] as HTMLElement).attributes[3].nodeValue === 'true') {
+                    var modalCodes = document.getElementsByClassName('alert-full-no-button')[0] as HTMLElement;
+                    modalCodes.style.display = "flex";
                   options[i].scrollIntoView({ block: 'center', behavior: 'instant' })
                 }
               }
@@ -77,5 +79,5 @@ export class SignUpPage {
           }
         );
       }
-    
+
 }
