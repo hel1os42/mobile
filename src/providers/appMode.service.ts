@@ -37,7 +37,7 @@ export class AppModeService {
     }
 
     setHomeMode(showPlaces: boolean) {
-        let oldShowPlaces = this.getHomeMode();
+        // let oldShowPlaces = this.getHomeMode();
         this.storage.set(this.HOME_MODE_KEY, showPlaces);
         this.onHomeChange.emit(showPlaces);
     }

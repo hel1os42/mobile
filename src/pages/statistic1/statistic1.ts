@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-var array_gradient = [];
+// var array_gradient = [];
 
 @Component({
   selector: 'page-statistic1',

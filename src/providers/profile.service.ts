@@ -11,8 +11,10 @@ export class ProfileService {
     onRefreshAccounts: EventEmitter<User> = new EventEmitter<User>();
     onRefreshTransactions: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(private api: ApiService, private auth: AuthService) {
-        auth.onLogout.subscribe(() => this.user = undefined);
+    constructor(private api: ApiService, 
+                private auth: AuthService) {
+
+        this.auth.onLogout.subscribe(() => this.user = undefined);
     }
 
     get(forceReload: boolean) {

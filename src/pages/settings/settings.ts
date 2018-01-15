@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Clipboard } from '@ionic-native/clipboard';
 import { App, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
-import leaflet, { latLng, tileLayer } from 'leaflet';
+import { latLng, tileLayer } from 'leaflet';
+
 import { Coords } from '../../models/coords';
 import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
@@ -149,7 +150,7 @@ export class SettingsPage {
 
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
-        let isShownOnboard = this.appMode.getOnboardingVisible()
+        // let isShownOnboard = this.appMode.getOnboardingVisible();
         // if (this.isLangChanged) {
         //     let availableLang = AVAILABLE_LANGUAGES.find(i => i.name == this.lang);
         //     this.translate.use(availableLang.code);
