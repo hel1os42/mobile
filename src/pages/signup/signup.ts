@@ -60,5 +60,22 @@ export class SignUpPage {
         this.numCode = event;
         this.codeSelect.close();
     }
+
+    onSelectClicked(selectButton: Select): void {
+        const options: HTMLCollectionOf<Element> = document.getElementsByClassName('alert-tappable alert-radio');
+        (<any>selectButton._overlay).didEnter.subscribe(
+          () => {
+            setTimeout(() => {
+              let i = 0
+              const len = options.length
+              for (i; i < len; i++) {
+                if ((options[i] as HTMLElement).attributes[3].nodeValue === 'true') {
+                  options[i].scrollIntoView({ block: 'center', behavior: 'instant' })
+                }
+              }
+            });
+          }
+        );
+      }
     
 }
