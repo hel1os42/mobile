@@ -1,4 +1,11 @@
+import { Specialities } from './specialities';
+
 export class RetailType {
-    slug: string;
+
+    id: string;
     name: string;
+    parent_id: string;
+    children_count: number;
+    specialities: Specialities[];
+
 }
