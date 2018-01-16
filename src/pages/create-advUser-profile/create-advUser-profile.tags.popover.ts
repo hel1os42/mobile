@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams } from 'ionic-angular';
-import { SelectedCategory } from '../../models/selectedCategory';
+import { NavParams, ViewController } from 'ionic-angular';
+import { SelectedTag } from '../../models/selectedTag';
 
 @Component({
     selector: 'create-advUser-profile-popover-tags',
@@ -9,19 +9,19 @@ import { SelectedCategory } from '../../models/selectedCategory';
 
 export class CreateAdvUserProfileTagsPopover {
 
-    categories: SelectedCategory[];
+    tags: SelectedTag[];
     categoryName: string;
 
     constructor(private viewCtrl: ViewController,
                 private navParams: NavParams) {
 
-        this.categories = this.navParams.get('categories');
+        this.tags = this.navParams.get('tags');
         this.categoryName = this.navParams.get('categoryName');
        
     }
 
     save() {
-        this.viewCtrl.dismiss(this.categories);
+        this.viewCtrl.dismiss(this.tags);
     } 
     
     cancel() {
