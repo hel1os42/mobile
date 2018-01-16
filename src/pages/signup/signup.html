@@ -16,15 +16,15 @@
   <div class="bg-gray margin-top-6vw">
       <ion-item class="border-bottom-no">
         <ion-select
-          #codeSelect 
-          [(ngModel)]="numCode" 
-          [ngModelOptions]="{standalone: true}" 
-          [selectOptions]="{cssClass: 'alert-full-no-button'}" 
-          interface="alert" 
+          #codeSelect
+          [(ngModel)]="numCode"
+          [ngModelOptions]="{standalone: true}"
+          [selectOptions]="{cssClass: 'alert-full-no-button'}"
+          interface="alert"
           [selectedText]="numCode"
           (click)="onSelectClicked(codeSelect)">
-            <ion-option  
-              *ngFor=" let phoneCode of phoneCodes " 
+            <ion-option
+              *ngFor=" let phoneCode of phoneCodes "
               [value]="phoneCode.dial_code"
               (ionSelect)="dismissSelect($event)">
               {{ phoneCode.dial_code }} {{ phoneCode.name }}

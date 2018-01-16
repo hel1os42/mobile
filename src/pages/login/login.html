@@ -14,16 +14,16 @@
   <form #form="ngForm" (ngSubmit)="login()">
   <div *ngIf="!isVisibleLoginButton" class="bg-gray margin-top-6vw">
   <ion-item class="border-bottom-no">
-    <ion-select 
+    <ion-select
       #codeSelect
       [(ngModel)]="numCode"
-      [ngModelOptions]="{standalone: true}" 
-      interface="alert" 
-      [selectOptions]="{cssClass: 'alert-full-no-button'}" 
+      [ngModelOptions]="{standalone: true}"
+      interface="alert"
+      [selectOptions]="{cssClass: 'alert-full-no-button'}"
       [selectedText]="numCode"
       (click)="onSelectClicked(codeSelect)">
-      <ion-option  
-        *ngFor=" let phoneCode of phoneCodes " 
+      <ion-option
+        *ngFor=" let phoneCode of phoneCodes "
         [value]="phoneCode.dial_code"
         (ionSelect)="dismissSelect($event)">
         {{ phoneCode.dial_code }} {{ phoneCode.name }}
@@ -62,7 +62,7 @@
   </div>
 </form>
 
-<button 
+<button
   *ngIf="isVisibleLoginButton"
   (click)="login()"
   [disabled]="!form.valid"
@@ -75,7 +75,7 @@
   {{ 'UNIT.SIGN_IN' | translate }}
 </button>
 
-<button 
+<button
   *ngIf="!isVisibleLoginButton"
   (click)="getOtp()"
   [disabled]="!form.valid"
