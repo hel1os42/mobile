@@ -1226,10 +1226,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     overflow: visible;
 }
 
-/* FIX KEYBOARD SCROLL
-.input-cover {
+/* FIX KEYBOARD SCROLL*/
+.platform-ios .input-cover{
   position: static;
-}*/
+}
 
 .item-multiple-inputs ion-select{
     z-index: 1;

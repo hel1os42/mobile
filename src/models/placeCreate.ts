@@ -1,4 +1,5 @@
 export class PlaceCreate {
+
     name: string;
     description: string;
     about: string;
@@ -7,4 +8,5 @@ export class PlaceCreate {
     latitude: number;
     longitude: number;
     radius: number;
+    
 }

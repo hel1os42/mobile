@@ -7,32 +7,56 @@
   <div class="logo">
   </div>
   <div text-center class="title-big-sign">{{ 'PAGE_SIGNUP.PHONE_NUMBER' | translate }}</div>
-  <div text-center class="margin-top-6vw font-75 text-4F4F4F">{{ 'PAGE_SIGNUP.PLEASE_CHOOSE' | translate }}<br>{{ 'PAGE_SIGNUP.AND_FILL' | translate }}</div>
+  <div text-center class="margin-top-6vw font-75 text-4F4F4F">
+    {{ 'PAGE_SIGNUP.PLEASE_CHOOSE' | translate }}
+    <br>{{ 'PAGE_SIGNUP.AND_FILL' | translate }}
+  </div>
 
   <form #form="ngForm" (ngSubmit)="getCode()">
   <div class="bg-gray margin-top-6vw">
       <ion-item class="border-bottom-no">
         <ion-select
-          #codeSelect 
-          [(ngModel)]="numCode" 
-          [ngModelOptions]="{standalone: true}" 
-          [selectOptions]="{cssClass: 'alert-full-no-button'}" 
-          interface="alert" 
+          #codeSelect
+          [(ngModel)]="numCode"
+          [ngModelOptions]="{standalone: true}"
+          [selectOptions]="{cssClass: 'alert-full-no-button'}"
+          interface="alert"
           [selectedText]="numCode"
           (click)="onSelectClicked(codeSelect)">
-            <ion-option  
-              *ngFor=" let phoneCode of phoneCodes " 
+            <ion-option
+              *ngFor=" let phoneCode of phoneCodes "
               [value]="phoneCode.dial_code"
               (ionSelect)="dismissSelect($event)">
               {{ phoneCode.dial_code }} {{ phoneCode.name }}
             </ion-option>
           </ion-select>
-        <ion-input pattern="^[0-9]+$" required (keyup)="updateList($event)" (ionChange)="limitStr(formData.phone, 12)" [(ngModel)]="formData.phone" ngControl="phone" name="phone" [minlength]="7" type="number" placeholder="1234567" ></ion-input>
+        <ion-input 
+          pattern="^[0-9]+$" 
+          required 
+          (keyup)="updateList($event)" 
+          (ionChange)="limitStr(formData.phone, 14)" 
+          [(ngModel)]="formData.phone" 
+          ngControl="phone" 
+          name="phone" 
+          [minlength]="7" 
+          type="number" 
+          placeholder="1234567">
+        </ion-input>
       </ion-item>
   </div>
 </form>
 
-<button text-uppercase class="margin-top-5vw" (click)="getCode()" [disabled]="!form.valid" ion-button block middle color="primary">{{ 'PAGE_SIGNUP.NEXT' | translate }}</button>
+<button 
+  text-uppercase 
+  class="margin-top-5vw" 
+  (click)="getCode()" 
+  [disabled]="!form.valid" 
+  ion-button 
+  block 
+  middle 
+  color="primary">
+  {{ 'PAGE_SIGNUP.NEXT' | translate }}
+</button>
 </ion-content>
 
 <ion-footer no-shadow no-border>

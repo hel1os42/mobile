@@ -86,6 +86,7 @@ export class MyApp {
 
             // FIX KEYBOARD SCROLL
             //if (platform.is('ios')) {
+            /*
             let
                 appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
                 appElHeight = appEl.clientHeight;
@@ -100,6 +101,7 @@ export class MyApp {
                 appEl.style.height = '100%';
             });
             //}
+            */
         });
 
         this.auth.onLogout.subscribe(() => {
