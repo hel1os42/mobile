@@ -93,7 +93,7 @@ export class LoginPage {
     }
 
     limitStr(str: string, length: number) {
-        if (length == 12) this.authData.phone = StringValidator.stringLimitMax(str, length);
+        if (length == 14) this.authData.phone = StringValidator.stringLimitMax(str, length);
         else this.authData.code = StringValidator.stringLimitMax(str, length);
     }
 

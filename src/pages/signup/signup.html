@@ -27,7 +27,7 @@
               {{ phoneCode.dial_code }} {{ phoneCode.name }}
             </ion-option>
           </ion-select>
-        <ion-input pattern="^[0-9]+$" required (keyup)="updateList($event)" (ionChange)="limitStr(formData.phone, 12)" [(ngModel)]="formData.phone" ngControl="phone" name="phone" [minlength]="7" type="number" placeholder="1234567" ></ion-input>
+        <ion-input pattern="^[0-9]+$" required (keyup)="updateList($event)" (ionChange)="limitStr(formData.phone, 14)" [(ngModel)]="formData.phone" ngControl="phone" name="phone" [minlength]="7" type="number" placeholder="1234567" ></ion-input>
       </ion-item>
   </div>
 </form>
