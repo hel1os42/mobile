@@ -47,42 +47,45 @@
       <ion-item class="border-bottom-no">
         <ion-label>{{ 'PAGE_LOGIN.OTP' | translate }}</ion-label>
         <ion-input
-                  (ionChange)="limitStr(authData.code, 6)"
-                  (keyup)="updateList($event)"
-                  [(ngModel)]="authData.code"
-                  required
-                  ngControl="code"
-                  name="code"
-                  [minlength]="6"
-                  class="otp"
-                  type="number"
-                  placeholder="XXXXXX"></ion-input>
+          (ionChange)="limitStr(authData.code, 6)"
+          (keyup)="updateList($event)"
+          [(ngModel)]="authData.code"
+          required
+          ngControl="code"
+          name="code"
+          [minlength]="6"
+          class="otp"
+          type="number"
+          placeholder="XXXXXX">
+        </ion-input>
       </ion-item>
   </div>
 </form>
 
-  <button *ngIf="isVisibleLoginButton"
-          (click)="login()"
-          [disabled]="!form.valid"
-          type="submit"
-          text-uppercase
-          class="margin-top-5vw"
-          ion-button block
-          middle
-          color="primary" >
-          {{ 'UNIT.SIGN_IN' | translate }}
+<button 
+  *ngIf="isVisibleLoginButton"
+  (click)="login()"
+  [disabled]="!form.valid"
+  type="submit"
+  text-uppercase
+  class="margin-top-5vw"
+  ion-button block
+  middle
+  color="primary" >
+  {{ 'UNIT.SIGN_IN' | translate }}
 </button>
 
-<button *ngIf="!isVisibleLoginButton"
-        (click)="getOtp()"
-        [disabled]="!form.valid"
-        type="submit"
-        text-uppercase
-        class="margin-top-5vw"
-        ion-button block
-        middle
-        color="primary" >
-        {{ 'PAGE_LOGIN.GET_OTP' | translate }}
+<button 
+  *ngIf="!isVisibleLoginButton"
+  (click)="getOtp()"
+  [disabled]="!form.valid"
+  type="submit"
+  text-uppercase
+  class="margin-top-5vw"
+  ion-button block
+  middle
+  color="primary" >
+  {{ 'PAGE_LOGIN.GET_OTP' | translate }}
 </button>
 
 </ion-content>
