@@ -1,6 +1,6 @@
 export class MockCategory {
 
-    public static items: {
+    public static items = {
 
         "id": "8fdbfe7b-f525-479c-ac34-b986fe3f96a8",
         "name": "Food & Drinks",
