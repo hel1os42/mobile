@@ -2,7 +2,7 @@ import { Offer } from './offer';
 import { OfferCategory } from './offerCategory';
 import { PlaceCreate } from './placeCreate';
 
-export class Company extends PlaceCreate  {
+export class Place extends PlaceCreate  {
     id: string;
     user_id: string;
     testimonials_count: number;

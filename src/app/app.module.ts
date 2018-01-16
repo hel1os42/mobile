@@ -213,7 +213,7 @@ export function createTranslateLoader(http: HttpClient) {
       TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
-      CreateAdvUserProfileTagsPopover
+      CreateAdvUserProfileTagsPopover,
       CreateAdvUserProfileTypesPopover,
       CreateAdvUserProfileFeaturesPopover,
       CreateOfferInformationPopover,

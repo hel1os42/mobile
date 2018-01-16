@@ -1,4 +1,4 @@
-import { Company } from '../../models/company';
+import { Place } from '../../models/place';
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
@@ -9,7 +9,7 @@ import { NavParams, ViewController } from 'ionic-angular';
 
 export class CongratulationPopover {
 
-    company: Company;
+    company: Place;
 
     constructor(
         private viewCtrl: ViewController,

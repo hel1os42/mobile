@@ -2,7 +2,7 @@ import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
 import { Component } from '@angular/core';
 import { LoadingController, NavController, PopoverController } from 'ionic-angular';
 import { ChildCategory } from '../../models/childCategory';
-import { Company } from '../../models/company';
+import { Place } from '../../models/place';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
 import { SelectedCategory } from '../../models/selectedCategory';
@@ -20,7 +20,7 @@ import { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBou
 })
 export class PlacesPage {
 
-    companies: Company[];
+    companies: Place[];
     categories: OfferCategory[] = OfferCategory.StaticList;
     childCategories: ChildCategory[];
     selectedChildCategories: SelectedCategory[];
@@ -131,7 +131,7 @@ export class PlacesPage {
         ]
     }
 
-    createMarker(lat, lng, company: Company) {
+    createMarker(lat, lng, company: Place) {
         let markerLayer = marker([lat, lng], {
             icon: icon({
                 iconSize: [25, 35],
@@ -216,7 +216,7 @@ export class PlacesPage {
         setTimeout(renderMap, 1);
     }
 
-    openPlace(company: Company) {
+    openPlace(company: Place) {
         this.nav.push(PlacePage, {
             company: company,
             distanceStr: this.getDistance(company.latitude, company.longitude),
