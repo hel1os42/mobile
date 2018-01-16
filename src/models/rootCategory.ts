@@ -1,4 +1,5 @@
 import { RetailType } from "./retailType";
+import { Tag } from "./tag";
 
 export class RootCategory {
 
@@ -8,4 +9,5 @@ export class RootCategory {
     children_count: number;
     parent?: any;
     retail_types: RetailType[];
+    tags: Tag[];
 }

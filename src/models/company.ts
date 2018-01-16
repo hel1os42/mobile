@@ -12,7 +12,6 @@ export class Company extends PlaceCreate  {
     offers_count: number;
     active_offers_count?: number;
     offers?: Offer[];
-    retail_types?: any;
     stars: number;
     is_featured: boolean;
     is_starred: boolean;
