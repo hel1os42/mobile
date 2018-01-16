@@ -160,9 +160,9 @@ export function createTranslateLoader(http: HttpClient) {
       IonicModule.forRoot(MyApp, {
         mode: "ios",
         backButtonText: "",
-        scrollPadding: false,
-        scrollAssist: true,
-        autoFocusAssist: false
+          scrollPadding: false,
+          scrollAssist: true,
+          autoFocusAssist: false
       }),
       LeafletModule.forRoot(),
       TranslateModule.forRoot({
