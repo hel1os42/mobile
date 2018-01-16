@@ -3,11 +3,11 @@ import { ViewController, NavParams } from 'ionic-angular';
 import { SelectedCategory } from '../../models/selectedCategory';
 
 @Component({
-    selector: 'create-advUser-profile-popover-childCategory',
-    templateUrl: 'create-advUser-profile.childCategory.popover.html'
+    selector: 'create-advUser-profile-popover-tags',
+    templateUrl: 'create-advUser-profile.tags.popover.html'
 })
 
-export class CreateAdvUserProfileChildCategoryPopover {
+export class CreateAdvUserProfileTagsPopover {
 
     categories: SelectedCategory[];
     categoryName: string;
