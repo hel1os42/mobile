@@ -25,7 +25,7 @@ export class SignUpPage {
         private auth: AuthService,
         private appMode: AppModeService) {
 
-        this.numCode = this.phoneCodes[0].dial_code;
+        this.numCode = this.getDevMode() ? '+380' : this.phoneCodes[0].dial_code;
     }
 
     updateList(ev) {
@@ -60,5 +60,24 @@ export class SignUpPage {
         this.numCode = event;
         this.codeSelect.close();
     }
-    
+
+    onSelectClicked(selectButton: Select): void {
+        const options: HTMLCollectionOf<Element> = document.getElementsByClassName('alert-tappable alert-radio');
+        (<any>selectButton._overlay).didEnter.subscribe(
+          () => {
+            setTimeout(() => {
+              let i = 0;
+              const len = options.length;
+              for (i; i < len; i++) {
+                if ((options[i] as HTMLElement).attributes[3].nodeValue === 'true') {
+                    var modalCodes = document.getElementsByClassName('alert-full-no-button')[0] as HTMLElement;
+                    modalCodes.style.display = "flex";
+                  options[i].scrollIntoView({ block: 'center', behavior: 'instant' })
+                }
+              }
+            }, 5);
+          }
+        );
+      }
+
 }

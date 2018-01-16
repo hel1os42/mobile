@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { App, Platform } from 'ionic-angular';
+import { App, IonicApp, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Subscription } from 'rxjs/Rx';
 import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
@@ -31,7 +31,8 @@ export class MyApp {
         private translate: TranslateService,
         private location: LocationService,
         private alert: AlertController,
-        private storage: StorageService) {
+        private storage: StorageService,
+        private ionicApp: IonicApp) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -61,9 +62,21 @@ export class MyApp {
 
             //this.rootPage = TemporaryPage;
             platform.registerBackButtonAction(() => {
+
+                let activePortal = ionicApp._loadingPortal.getActive() ||
+                    this.ionicApp._modalPortal.getActive() ||
+                    ionicApp._toastPortal.getActive() ||
+                    ionicApp._overlayPortal.getActive();
+
                 let nav = app.getActiveNavs()[0];
 
-                if (nav.canGoBack()) { //Can we go back?
+                if (activePortal) {
+                    activePortal.dismiss();
+                }
+                //else if (this.menuCtrl.isOpen()) {
+                //this.menuCtrl.close();
+                //}
+                else if (nav.canGoBack()) { //Can we go back?
                     nav.pop();
                 }
                 else {
@@ -73,19 +86,19 @@ export class MyApp {
 
             // FIX KEYBOARD SCROLL
             //if (platform.is('ios')) {
-                let
-                    appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
-                    appElHeight = appEl.clientHeight;
+            let
+                appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
+                appElHeight = appEl.clientHeight;
 
-                window.addEventListener('native.keyboardshow', (e) => {
-                    console.log("native.keyboardshow");
-                    appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
-                });
+            window.addEventListener('native.keyboardshow', (e) => {
+                console.log("native.keyboardshow");
+                appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
+            });
 
-                window.addEventListener('native.keyboardhide', () => {
-                    console.log("native.keyboardhide");
-                    appEl.style.height = '100%';
-                });
+            window.addEventListener('native.keyboardhide', () => {
+                console.log("native.keyboardhide");
+                appEl.style.height = '100%';
+            });
             //}
         });
 

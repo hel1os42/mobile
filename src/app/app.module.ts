@@ -1,12 +1,12 @@
-import { TemporaryPage } from '../pages/temporary/temporary';
-import { TransferPopover } from '../pages/transfer/transfer.popover';
 import 'rxjs/add/operator/map';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Http, HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Clipboard } from '@ionic-native/clipboard';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -28,8 +28,8 @@ import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
 import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
 import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
-import { CreateAdvUserProfileTypesPopover } from '../pages/create-advUser-profile/create-advUser-profile.types.popover';
 import { CreateAdvUserProfileFeaturesPopover } from '../pages/create-advUser-profile/create-advUser-profile.features.popover';
+import { CreateAdvUserProfileTypesPopover } from '../pages/create-advUser-profile/create-advUser-profile.types.popover';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
 import { CreateOffer2Page } from '../pages/create-offer-2/create-offer-2';
 import { CreateOffer3Page } from '../pages/create-offer-3/create-offer-3';
@@ -62,7 +62,9 @@ import { StartPage } from '../pages/start/start';
 import { StatisticPage } from '../pages/statistic/statistic';
 import { Statistic1Page } from '../pages/statistic1/statistic1';
 import { TabsPage } from '../pages/tabs/tabs';
+import { TemporaryPage } from '../pages/temporary/temporary';
 import { TransferPage } from '../pages/transfer/transfer';
+import { TransferPopover } from '../pages/transfer/transfer.popover';
 import { UserAchievePage } from '../pages/user-achieve/user-achieve';
 import { UserNauPage } from '../pages/user-nau/user-nau';
 import { UserOffersPage } from '../pages/user-offers/user-offers';
@@ -82,11 +84,10 @@ import { TimezoneService } from '../providers/timezone.service';
 import { ToastService } from '../providers/toast.service';
 import { TokenService } from '../providers/token.service';
 import { MyApp } from './app.component';
-import { Clipboard } from '@ionic-native/clipboard';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
-export function createTranslateLoader(http: Http) {
+export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -152,6 +153,7 @@ export function createTranslateLoader(http: Http) {
   imports: [
       BrowserModule,
       HttpModule,
+      HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
       QRCodeModule,
@@ -167,7 +169,7 @@ export function createTranslateLoader(http: Http) {
         loader: {
           provide: TranslateLoader,
           useFactory: (createTranslateLoader),
-          deps: [Http] },
+          deps: [HttpClient] },
       })
   ],
   bootstrap: [IonicApp],
