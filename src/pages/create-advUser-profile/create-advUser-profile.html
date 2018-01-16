@@ -65,15 +65,15 @@
             </ng-container>
         </a>
 
-        <a *ngIf="(selectedCategory && selectedCategory.children_count > 0) || selectedChildCategories" (click)="presentChildCategoriesPopover()" ion-item detail-push
+        <a *ngIf="(selectedCategory && tags.length > 0) || selectedTags" (click)="presentTagsPopover()" ion-item detail-push
             padding-left class="bg-gray margin-bottom-small">
-            <ng-container *ngIf="selectedChildCategories">
+            <ng-container *ngIf="selectedTags">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
-                    {{ childCategoriesNames }}
+                    {{ tagsNames }}
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="!selectedChildCategories">
+            <ng-container *ngIf="!selectedTag">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
                     {{ selectedCategory.name + ' categories' }}
                 </div>
