@@ -1,4 +1,4 @@
-import { Specialities } from './specialities';
+import { Speciality } from './speciality';
 
 export class RetailType {
 
@@ -6,6 +6,6 @@ export class RetailType {
     name: string;
     parent_id: string;
     children_count: number;
-    specialities: Specialities[];
+    specialities: Speciality[];
 
 }

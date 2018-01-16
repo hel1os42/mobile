@@ -1,4 +1,4 @@
-import { SpecialitiesCreate } from './specialitiesCreate';
+import { SpecialityCreate } from './specialityCreate';
 
 export class PlaceCreate {
     name: string;
@@ -11,5 +11,5 @@ export class PlaceCreate {
     longitude: number;
     radius: number;
     tags: string[];
-    specialities: SpecialitiesCreate[];
+    specialities: SpecialityCreate[];
 }
