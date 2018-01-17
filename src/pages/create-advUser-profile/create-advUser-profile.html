@@ -19,32 +19,36 @@
 </ion-header>
 
 <ion-content class="padding-no">
-    <div class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD_COMPANY_NAME' | translate }}</div>
+    <div 
+        class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw" 
+        text-uppercase 
+        margin-top 
+        margin-left 
+        margin-right>
+        {{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD_COMPANY_NAME' | translate }}
+    </div>
     <div class="block-lines">
         <form [formGroup]="formData" (ngSubmit)="createAccount()">
             <ion-item no-lines>
-                <ion-input formControlName="companyName" maxlength="30" class="bg-gray" type="text" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"></ion-input>
+                <ion-input 
+                    formControlName="companyName" 
+                    maxlength="30" class="bg-gray" 
+                    type="text" 
+                    placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)">
+                </ion-input>
             </ion-item>
 
             <ion-item no-lines margin-top>
-                <ion-textarea formControlName="companyDescription" maxlength="250" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"></ion-textarea>
+                <ion-textarea 
+                    formControlName="companyDescription" 
+                    maxlength="250" 
+                    class="bg-gray-radius-small" 
+                    placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)">
+                </ion-textarea>
             </ion-item>
         </form>
     </div>
-<!--
-    <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>About company</div>
-    <div class="block-lines">
-        <form [formGroup]="formData" (ngSubmit)="createAccount()">
-            <ion-item no-lines>
-                <ion-input maxlength="30" class="bg-gray" type="text" placeholder="Title"></ion-input>
-            </ion-item>
 
-            <ion-item no-lines margin-top>
-                <ion-textarea maxlength="250" class="bg-gray-radius-small" placeholder="Description"></ion-textarea>
-            </ion-item>
-        </form>
-    </div>
--->
     <div class="block-lines">
         <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CATEGORY_TYPE' | translate }}</div>
     </div>
@@ -99,19 +103,19 @@
         </a>
     </div>
 
-    <div *ngIf="selectedCategory" class="block-lines">
+    <div *ngIf="selectedTypes" class="block-lines">
         <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_FEATURES' | translate }}</div>
     </div>
 
-    <div *ngIf="selectedCategory" class="block-lines">
+    <div *ngIf="selectedTypes" class="block-lines">
         <a (click)="presentFeaturesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
-            <ng-container *ngIf="selectedFeatures">
+            <ng-container *ngIf="featuresNames">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
-                   {{featureNames}}
+                   {{ featuresNames }}
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="!selectedFeatures">
+            <ng-container *ngIf="!featuresNames">
                 <div class="text-3E4B5D font-16 semibold wrap-no">{{ 'PAGE_CREATE-ADVUSER-PROFILE.FEATURES' | translate }}</div>
             </ng-container>
         </a>

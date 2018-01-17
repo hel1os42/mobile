@@ -1,64 +1,55 @@
 page-create-advUser-profile {
-  .cover{
-    background-image: linear-gradient(89.86deg, #FF5A00 0.03%, #FF8B10 99.98%);
-  }
-
-  .cover_logo_adv{
-      position: absolute;
-      left: 4.8%;
-      bottom: -11vw;
-      width: 22vw;
-      height: 22vw;
-      border-radius: 100vw;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-      z-index: 11111111;
-      background-color: #fff;
-      background-image: url(../assets/img/create_advuser_profile/dotted.svg);
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: 80% 80%;
-      display: table;
-  }
-
-  .cover_logo_adv span{
-      margin: 0 auto;
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
-      line-height: 4.5vw;
-  }
-
-  .btn_right{
-      position: absolute;
-      right: 4.3vw;
-      bottom: 4.1vw;
-      background: #fff;
-      border-radius: 100vw;
-      height: 6vw;
-      color: #3E4B5D;
-  }
-
-    .padding-top-9vw{
+    .cover {
+        background-image: linear-gradient(89.86deg, #FF5A00 0.03%, #FF8B10 99.98%);
+    }
+    .cover_logo_adv {
+        position: absolute;
+        left: 4.8%;
+        bottom: -11vw;
+        width: 22vw;
+        height: 22vw;
+        border-radius: 100vw;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        z-index: 11111111;
+        background-color: #fff;
+        background-image: url(../assets/img/create_advuser_profile/dotted.svg);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 80% 80%;
+        display: table;
+    }
+    .cover_logo_adv span {
+        margin: 0 auto;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        line-height: 4.5vw;
+    }
+    .btn_right {
+        position: absolute;
+        right: 4.3vw;
+        bottom: 4.1vw;
+        background: #fff;
+        border-radius: 100vw;
+        height: 6vw;
+        color: #3E4B5D;
+    }
+    .padding-top-9vw {
         padding-top: 9vw;
     }
-
-    .label-ios{
+    .label-ios {
         margin: 0;
     }
-
     agm-map {
         height: 250px;
     }
-
     .leaflet-map {
         height: 250px;
         z-index: 111;
-      }
-
-    .block-map{
+    }
+    .block-map {
         position: relative;
-      }
-
+    }
     #marker {
         position: absolute;
         z-index: 111;
@@ -74,41 +65,34 @@ page-create-advUser-profile {
         border-radius: 100vw;
         pointer-events: none;
     }
-
-    .select-ios .select-icon{
+    .select-ios .select-icon {
         display: none;
     }
-
-    .category img{
+    .category img {
         width: 6.5vw;
         margin-left: 2vw;
         height: auto;
     }
-
-    .choose-img{
+    .choose-img {
         height: 7vw;
         width: auto;
     }
-
 }
 
-create-advUser-profile-category-popover{
+create-advUser-profile-category-popover {
     .item-ios {
         padding-left: 0;
         margin-bottom: 7vw;
     }
-
-    .block-checks img{
+    .block-checks img {
         height: 7.8vw;
         width: auto;
     }
-
-    .block-img-category{
+    .block-img-category {
         width: 23vw;
         text-align: center;
     }
-
-    .modal_content{
+    .modal_content {
         padding-top: 8vw;
         padding-right: 6vw;
         padding-left: 3vw;
@@ -117,34 +101,76 @@ create-advUser-profile-category-popover{
 }
 
 create-advUser-profile-popover-tags,
-create-advUser-profile-popover-features,
-create-advUser-profile-popover-types {
-    .modal_content{
+create-advUser-profile-popover-types,
+create-advUser-profile-popover-features {
+    .modal_content {
         padding-top: 14vw;
         padding-right: 7vw;
         padding-left: 10vw;
         padding-bottom: 21vw;
     }
-
     .block-checks {
         margin-right: 5px;
         margin-left: 8px;
     }
-
     .item-ios.item-block .item-inner {
         padding-right: 0;
     }
-
-    .item-block{
+    .item-block {
         min-height: 3.4rem;
     }
-
     .checkbox-ios .checkbox-icon {
         background-color: #fff;
         background-image: none;
     }
-
     .footer_btn .grid {
         padding-bottom: 0;
+    }
+}
+
+create-advUser-profile-popover-features {
+    .modal_content {
+        padding-bottom: 21vw;
+    }
+    .block-checks {
+        margin-right: 5px;
+        margin-left: 8px;
+    }
+    .bg-gray {
+        border: none;
+        background: #E0E0E0;
+        padding-right: 5%;
+    }
+    .bg-gray img {
+        display: flex;
+        height: 2.5vw
+    }
+    .item-ios.item-block .item-inner {
+        padding-right: 0;
+    }
+    .item-block {
+        min-height: 3.4rem;
+    }
+    .checkbox-ios .checkbox-icon {
+        background-color: #fff;
+        background-image: none;
+    }
+    .margin-left-2proc {
+        margin-left: 2%;
+    }
+    .margin-right-2proc {
+        margin-right: 2%;
+    }
+    .footer_btn .grid {
+        padding-bottom: 0;
+    }
+    .item.item-ios .checkbox-ios[item-right],
+    .item.item-ios .checkbox-ios[item-end] {
+        margin: 0 2.3vw;
+    }
+
+    .group {
+        margin-top: 10px;
+        border: rgb(190, 192, 196) 1px solid;
     }
 }

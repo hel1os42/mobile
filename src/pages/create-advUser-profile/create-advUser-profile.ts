@@ -2,17 +2,16 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
-import { Map } from 'leaflet';
 import { latLng, LeafletEvent, tileLayer } from 'leaflet';
+import { Map } from 'leaflet';
 import * as _ from 'lodash';
-import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
-import { ChildCategory } from '../../models/childCategory';
-import { Place } from '../../models/place';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
+import { Place } from '../../models/place';
 import { RetailType } from '../../models/retailType';
 import { SelectedCategory } from '../../models/selectedCategory';
-import { SelectedRetailType } from '../../models/selectedRetailType';
+import { SelectedTag } from '../../models/selectedTag';
+import { Tag } from '../../models/tag';
 import { ApiService } from '../../providers/api.service';
 import { GeocodeService } from '../../providers/geocode.service';
 import { LocationService } from '../../providers/location.service';
@@ -25,12 +24,9 @@ import { MapUtils } from '../../utils/map';
 import { StringValidator } from '../../validators/string.validator';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
-import { CreateAdvUserProfileTagsPopover } from './create-advUser-profile.tags.popover';
 import { CreateAdvUserProfileFeaturesPopover } from './create-advUser-profile.features.popover';
+import { CreateAdvUserProfileTagsPopover } from './create-advUser-profile.tags.popover';
 import { CreateAdvUserProfileTypesPopover } from './create-advUser-profile.types.popover';
-import { Tag } from '../../models/tag';
-import { SelectedTag } from '../../models/selectedTag';
-import { RootCategory } from '../../models/rootCategory';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -42,23 +38,17 @@ export class CreateAdvUserProfilePage {
     message: string;
     categories: OfferCategory[] = OfferCategory.StaticList;
     selectedCategory: SelectedCategory;
-    // childCategories: ChildCategory[];
-    // selectedChildCategories: SelectedCategory[];   
-    // childCategoriesNames: string[];
     tags: Tag[];
     selectedTags: SelectedTag[];
     tagsNames: string[];
     types: RetailType[];
-    selectedTypes: SelectedRetailType[];
+    selectedTypes: RetailType[];
     typeNames: string[];
-    features = MockPlaceTypes.Features;//temporary
-    selectedFeatures;//to do
-    featureNames: string[];
+    featuresNames: string[];
     company: Place = new Place();
     address: string;
     picture_url: string;
     cover_url: string;
-    noChild: boolean;//temporary
     formData: FormGroup;
     isChangedLogo = false;
     isChangedCover = false;
@@ -214,25 +204,6 @@ export class CreateAdvUserProfilePage {
             }
         })
         this.selectedCategory = rootCategories[0];
-        // this.offer.getSubCategories(this.selectedCategory.id)
-        //     .subscribe(resp => {
-        //         // this.childCategories = resp.children;
-        //         let childCategoriesIds = categories[0].parent_id !== null
-        //             ? categories.map(p => p.id)
-        //             : undefined;
-        //         if (childCategoriesIds) {
-        //             let selectedChildCategories: any = _(resp.children).keyBy('id').at(childCategoriesIds).value();
-        //             this.selectedChildCategories = selectedChildCategories.map(p => {
-        //                 return {
-        //                     id: p.id,
-        //                     name: p.name,
-        //                     image_url: '',
-        //                     isSelected: true
-        //                 }
-        //             })
-        //             this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name);
-        //         }
-        //     })
     }
 
     selectTypes(types) {
@@ -290,7 +261,7 @@ export class CreateAdvUserProfilePage {
 
             let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
             if (this.selectedCategory && selectedCategories[0].id != this.selectedCategory.id) {
-                this.selectedTags = undefined;//to do types, specialities, tags;
+                this.selectedTags = undefined;
                 this.selectedTypes = undefined;
             }
             if (selectedCategories.length > 0) {
@@ -332,69 +303,79 @@ export class CreateAdvUserProfilePage {
             }
         })
     }
-    //to do
+
     presentTypesPopover() {
-                let popover = this.popoverCtrl.create(CreateAdvUserProfileTypesPopover, { 
-                    types: this.types.map(t => {
-                        return {
-                            id: t.id,
-                            name: t.name,
-                            parent_id: t.parent_id,
-                            children_count: t.children_count,
-                            specialities: t.specialities,
-                            isSelected: this.selectedTypes ? this.selectedTypes.find(k => k.id == t.id) : false
-                        };
-                    }) 
-                });
-                popover.present();
-                popover.onDidDismiss(types => {
-                    if (!types) {
-                        return;
-                    } 
-                    let selectedTypes: SelectedRetailType[] = types.filter(t => t.isSelected);
-                    if (this.selectedTypes && selectedTypes) {
-                        //to do selected specialities list for update (foreach)
-                    }
-                    if (selectedTypes.length > 0) {
-                        this.selectedTypes = selectedTypes;
-                        this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
-                    }
-                    else {
-                        this.selectedTypes = undefined;
-                    }
-                });
+        if (this.selectedTypes && this.selectedTypes.length > 0) {
+            this.types = _.uniqBy([...this.selectedTypes, ...this.types], 'id');
+        }
+        let popover = this.popoverCtrl.create(CreateAdvUserProfileTypesPopover, {
+            types: this.types.map(t => {
+                return {
+                    id: t.id,
+                    name: t.name,
+                    parent_id: t.parent_id,
+                    children_count: t.children_count,
+                    specialities: t.specialities,
+                    isSelected: this.selectedTypes ? this.selectedTypes.find(k => k.id == t.id) : false
+                };
+            })
+        });
+        popover.present();
+        popover.onDidDismiss(types => {
+            if (!types) {
+                return;
+            }
+            let selectedTypes: RetailType[] = types.filter(t => t.isSelected);
+            if (selectedTypes.length > 0) {
+                this.selectedTypes = selectedTypes;
+                this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
+            }
+            else {
+                this.selectedTypes = undefined;
+            }
+        });
     }
-    //to do
+
     presentFeaturesPopover() {
-        // let popover = this.popoverCtrl.create(CreateAdvUserProfileFeaturesPopover, { 
-        //     features: this.features.map(f => {
-        //         return {
-        //             name: f.name,
-        //             isSelected: false
-        //         };
-        //     }) 
-        // });
-        // popover.present();
-        // popover.onDidDismiss(features => {
-        //     if (!features) {
-        //         return;
-        //     } 
-        //     let selectedFeatures = features.filter(f => f.isSelected);
-        //     if (selectedFeatures.length > 0) {
-        //         this.selectedFeatures = selectedFeatures;
-        //         this.featureNames = this.selectedFeatures.map(p => ' ' + p.name);
-        //     }
-        //     else {
-        //         this.selectedFeatures = undefined;
-        //     }
-        // });
+        this.selectedTypes.forEach(p => {
+            p.specialities.forEach(s => {
+                s.isSelected = s.isSelected ? s.isSelected : false
+            })
+        })
+        let popover = this.popoverCtrl.create(CreateAdvUserProfileFeaturesPopover, {
+            types: this.selectedTypes
+        });
+        popover.present();
+        popover.onDidDismiss(types => {
+            if (!types) {
+                return;
+            }
+            else {
+                this.selectedTypes = types;
+                let names = _.flatten(this.selectedTypes.map(t => t.specialities)).filter(p => p.isSelected);
+                this.featuresNames = names.map(n => n.name);
+            }
+        });
+    }
+
+    getFeatures(arr: RetailType[]) {
+        let specsArr: any = _.flatten(arr.map(t => t.specialities)).filter(p => p.isSelected);
+        specsArr = _.values(_(specsArr).groupBy(x => x.retail_type_id).value());
+        let groupedSpecs = [];
+        specsArr.forEach(s => {
+            groupedSpecs.push({
+                retail_type_id: s[0].retail_type_id,
+                specs: s.map(k => k.slug)
+            })
+        })
+        return groupedSpecs;
     }
 
     addLogo() {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                if (results[0] && results[0] != 'O') {
+                if (results[0] && results[0] !== 'O') {
                     this.picture_url = results[0];
                     this.isChangedLogo = true;
                 }
@@ -419,7 +400,7 @@ export class CreateAdvUserProfilePage {
     };
 
     validate() {
-        if ((!this.selectedTags && this.tags.length > 0) || (!this.selectedCategory)) {
+        if ((!this.selectedTags && this.tags && this.tags.length > 0) || (!this.selectedCategory) || (!this.selectedTypes)) {
             this.toast.show('Please select category, type and features');
             return false;
         }
@@ -427,59 +408,59 @@ export class CreateAdvUserProfilePage {
     }
 
     createAccount() {
-        // if (this.validate()) {to do
-        this.company.name = this.formData.value.companyName;
-        this.company.description = this.formData.value.companyDescription;
-        this.company.latitude = this.coords.lat;
-        this.company.longitude = this.coords.lng;
-        this.company.address = this.address;
-        this.company.category = this.selectedCategory.id;
-        this.company.retail_types = this.selectedTypes.map(p => p.id);
-        this.company.radius = Math.round(this.radius);
-        this.company.tags = this.selectedTags.map(p => p.slug);
-        debugger
+        if (this.validate()) {
+            this.company.name = this.formData.value.companyName;
+            this.company.description = this.formData.value.companyDescription;
+            this.company.latitude = this.coords.lat;
+            this.company.longitude = this.coords.lng;
+            this.company.address = this.address;
+            this.company.category = this.selectedCategory.id;
+            this.company.retail_types = this.selectedTypes.map(p => p.id);
+            this.company.radius = Math.round(this.radius);
+            this.company.tags = this.selectedTags ? this.selectedTags.map(p => p.slug) : undefined;
+            this.company.specialities = this.getFeatures(this.selectedTypes);
 
-        if (!this.company.id) {
-            this.placeService.set(this.company)
-                .subscribe(company => {
-                    let pictureUpload = this.picture_url
-                        ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
-                        : Promise.resolve();
-                    pictureUpload.then(() => {
-                        let coverUpload = this.cover_url
-                            ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
-                            : Promise.resolve();
-
-                        coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
-                    });
-                })
-        }
-        else {
-            if (this.company.id) {
-                if (!this.company.about) {
-                    this.company.about = undefined;
-                }
-                this.placeService.putPlace(this.company)
-                    .subscribe((company) => {
-                        let pictureUpload = (this.picture_url && this.isChangedLogo)
+            if (!this.company.id) {
+                this.placeService.set(this.company)
+                    .subscribe(company => {
+                        let pictureUpload = this.picture_url
                             ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
                             : Promise.resolve();
-
                         pictureUpload.then(() => {
-                            let coverUpload = (this.cover_url && this.isChangedCover)
+                            let coverUpload = this.cover_url
                                 ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
                                 : Promise.resolve();
 
-                            coverUpload.then(() => {
-                                this.profile.refreshAccounts();
-                                this.placeService.refreshPlace();
-                                this.nav.pop()
-                            });
+                            coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
                         });
                     })
             }
-        }
+            else {
+                if (this.company.id) {
+                    if (!this.company.about) {
+                        this.company.about = undefined;
+                    }
+                    this.placeService.putPlace(this.company)
+                        .subscribe((company) => {
+                            let pictureUpload = (this.picture_url && this.isChangedLogo)
+                                ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
+                                : Promise.resolve();
 
+                            pictureUpload.then(() => {
+                                let coverUpload = (this.cover_url && this.isChangedCover)
+                                    ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
+                                    : Promise.resolve();
+
+                                coverUpload.then(() => {
+                                    this.profile.refreshAccounts();
+                                    this.placeService.refreshPlace();
+                                    this.nav.pop()
+                                });
+                            });
+                        })
+                }
+            }
+
+        }
     }
-    // }
 }
