@@ -1,106 +1,100 @@
 page-places {
-  .grid{
-    padding: 0;
-  }
-
-  .grid img{
-    max-width: 30px;
-  }
-
-  .list{
-    margin: 0 0 16px;
-  }
-
-  .tb-background{
-    background: #aaa2a2;
-  }
-
-  .tb-background img{
-    height: auto;
-    width: 50%;
-  }
-
-  .item-md ion-avatar ion-img, .item-md ion-avatar img, .item-ios ion-avatar ion-img, .item-ios ion-avatar img{
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
-  }
-
-  agm-map {
-    height: calc(100vh - 248px);
-    height: -webkit-calc(100vh - 248px);
-    height: -moz-calc(100vh - 248px);
-  }
-
-  .leaflet-map {
-    height: calc(100vh - 247px);
-    height: -webkit-calc(100vh - 247px);
-    height: -moz-calc(100vh - 247px);
-  }
-
-    a[href^="http://maps.google.com/maps"]{display:none !important}
-    a[href^="https://maps.google.com/maps"]{display:none !important}
-
-    .gmnoprint a, .gmnoprint span, .gm-style-cc {
-        display:none;
+    .grid {
+        padding: 0;
     }
-
+    .grid img {
+        max-width: 30px;
+    }
+    .list {
+        margin: 0 0 16px;
+    }
+    .tb-background {
+        background: #aaa2a2;
+    }
+    .tb-background img {
+        height: auto;
+        width: 50%;
+    }
+    .item-md ion-avatar ion-img,
+    .item-md ion-avatar img,
+    .item-ios ion-avatar ion-img,
+    .item-ios ion-avatar img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    agm-map {
+        height: calc(100vh - 248px);
+        height: -webkit-calc(100vh - 248px);
+        height: -moz-calc(100vh - 248px);
+    }
+    .leaflet-map {
+        height: calc(100vh - 247px);
+        height: -webkit-calc(100vh - 247px);
+        height: -moz-calc(100vh - 247px);
+    }
+    a[href^="http://maps.google.com/maps"] {
+        display: none !important
+    }
+    a[href^="https://maps.google.com/maps"] {
+        display: none !important
+    }
+    .gmnoprint a,
+    .gmnoprint span,
+    .gm-style-cc {
+        display: none;
+    }
     .gm-svpc {
         display: none;
     }
-
-  .item-block-nau .item-ios [item-right], .item-ios [item-end]{
-    width: 33px;
-  }
-
-  .block-search.item-ios.item-block .item-inner {
-    padding-right: 0;
-  }
-
-  .star_right {
-    position: absolute;
-    right: 3%;
-    top: 7%;
-    width: 5.3vw;
-  }
-
-  .text-overflow-35{
-    width: 93%;
-  }
-
+    .item-block-nau .item-ios [item-right],
+    .item-ios [item-end] {
+        width: 33px;
+    }
+    .block-search.item-ios.item-block .item-inner {
+        padding-right: 0;
+    }
+    .star_right {
+        position: absolute;
+        right: 3%;
+        top: 7%;
+        width: 5.3vw;
+    }
+    .text-overflow-35 {
+        width: 93%;
+    }
     .segment-ios {
         width: 93%;
         margin-left: 4%;
         display: -webkit-box;
         justify-content: space-between;
     }
-
-    .segment-ios .segment-button{
+    .segment-ios .segment-button {
         width: auto;
         max-width: 20vw;
     }
-
-    .sticky{
+    .sticky {
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         top: -1px;
         background-color: white;
         z-index: 100;
     }
-
-    .item-block-nau .item{
+    .item-block-nau .item {
         padding: 2vw;
     }
-
-    .item-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start] {
+    .item-block-nau .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left],
+    .item-ios ion-avatar[item-start],
+    .item-ios ion-thumbnail[item-start] {
         margin: 0 2vw 0 0;
     }
-
     ion-avatar {
         border-radius: 100vw;
         overflow: hidden;
     }
-
 }
+
+
 /*
 .platform-ios page-places {
     .scroll-content{
@@ -110,52 +104,43 @@ page-places {
 */
 
 places-popover-component {
-  .modal_content{
-    padding-bottom: 21vw;
-  }
-
-  .block-checks {
-    margin-right: 5px;
-    margin-left: 8px;
-  }
-
-  .bg-gray {
-    border: none;
-    background: #E0E0E0;
-    padding-right: 5%;
-  }
-
-  .bg-gray img{
-      display: flex;
-      height: 2.5vw
-  }
-
-  .item-ios.item-block .item-inner {
-    padding-right: 0;
-  }
-
-  .item-block{
-    min-height: 3.4rem;
-  }
-
-  .checkbox-ios .checkbox-icon {
-    background-color: #fff;
-    background-image: none;
-  }
-
-  .margin-left-2proc{
-    margin-left: 2%;
-  }
-
-  .margin-right-2proc{
-    margin-right: 2%;
-  }
-
-  .footer_btn .grid {
-    padding-bottom: 0;
-  }
-
-    .item.item-ios .checkbox-ios[item-right], .item.item-ios .checkbox-ios[item-end] {
+    .modal_content {
+        padding-bottom: 21vw;
+    }
+    .block-checks {
+        margin-right: 5px;
+        margin-left: 8px;
+    }
+    .bg-gray {
+        border: none;
+        background: #E0E0E0;
+        padding-right: 5%;
+    }
+    .bg-gray img {
+        display: flex;
+        height: 2.5vw
+    }
+    .item-ios.item-block .item-inner {
+        padding-right: 0;
+    }
+    .item-block {
+        min-height: 3.4rem;
+    }
+    .checkbox-ios .checkbox-icon {
+        background-color: #fff;
+        background-image: none;
+    }
+    .margin-left-2proc {
+        margin-left: 2%;
+    }
+    .margin-right-2proc {
+        margin-right: 2%;
+    }
+    .footer_btn .grid {
+        padding-bottom: 0;
+    }
+    .item.item-ios .checkbox-ios[item-right],
+    .item.item-ios .checkbox-ios[item-end] {
         margin: 0 2.3vw;
     }
 }
