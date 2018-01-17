@@ -99,7 +99,6 @@ page-places {
         border-radius: 100vw;
         overflow: hidden;
     }
-
 }
 /*
 .platform-ios page-places {
@@ -108,6 +107,21 @@ page-places {
     }
 }
 */
+
+/* FIX STATUS BAR IOS */
+.platform-ios page-places .header-ios{
+    height: 20px;
+}
+.platform-ios page-places .fixed-content, .platform-ios page-places .scroll-content{
+    margin-top: 20px;
+}
+/* FIX STATUS BAR IPHONE_X */
+.iphonex page-places .header-ios{
+    height: 40px;
+}
+.iphonex page-places .fixed-content, .iphonex page-places .scroll-content{
+    margin-top: 40px;
+}
 
 places-popover-component {
   .modal_content{

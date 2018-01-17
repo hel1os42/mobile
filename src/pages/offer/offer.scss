@@ -197,6 +197,11 @@ page-offer{
     }
 }
 
+/* FIX IOS NAV TRANSPARENT */
+ion-app.platform-ios.disable-scroll page-offer ion-content > .scroll-content{
+    overflow: visible;
+}
+
 offerRedeem-popover-component {
   .block-btn{
     width: 60%;
