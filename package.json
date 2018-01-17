@@ -64,7 +64,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "3.1.7",
     "@types/leaflet": "1.2.5",
-    "ionic": "3.19.0",
+    "ionic": "3.19.1",
     "postcss": "6.0.14",
     "typescript": "2.6.2"
   },
