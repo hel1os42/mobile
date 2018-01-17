@@ -73,7 +73,7 @@
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="!selectedTag">
+            <ng-container *ngIf="!selectedTags">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
                     {{ selectedCategory.name + ' categories' }}
                 </div>
@@ -86,7 +86,7 @@
     </div>
 
     <div *ngIf="selectedCategory" class="block-lines">
-        <a disabled (click)="presentTypesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
+        <a (click)="presentTypesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
             <ng-container *ngIf="selectedTypes">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
                    {{ typeNames }}
@@ -104,7 +104,7 @@
     </div>
 
     <div *ngIf="selectedCategory" class="block-lines">
-        <a disabled (click)="presentFeaturesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
+        <a (click)="presentFeaturesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
             <ng-container *ngIf="selectedFeatures">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
                    {{featureNames}}

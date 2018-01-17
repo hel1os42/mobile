@@ -45,7 +45,7 @@ export class CreateAdvUserProfilePage {
     // childCategories: ChildCategory[];
     // selectedChildCategories: SelectedCategory[];   
     // childCategoriesNames: string[];
-    tags: Tag[] = [];
+    tags: Tag[];
     selectedTags: SelectedTag[];
     tagsNames: string[];
     types: RetailType[];
@@ -295,9 +295,8 @@ export class CreateAdvUserProfilePage {
             }
             if (selectedCategories.length > 0) {
                 this.selectedCategory = selectedCategories[0];
-                this.offer.getTypes(this.selectedCategory.id)
+                this.offer.getTypes(this.selectedCategory.id)//to do
                     .subscribe(resp => {
-                        debugger
                         this.types = resp.retail_types;
                         this.tags = resp.tags;
                     })
