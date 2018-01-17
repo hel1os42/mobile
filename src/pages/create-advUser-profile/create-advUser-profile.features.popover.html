@@ -1,11 +1,27 @@
 <div class="modal_content">
-    <div text-uppercase text-center class="modal-title-fixed font-16 text-#4F4F4F semibold padding-bottom-5vw">{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_FEATURES' | translate }}</div>
+    <div 
+        text-uppercase 
+        text-center 
+        class="modal-title-fixed font-16 text-#4F4F4F semibold padding-bottom-5vw">
+        {{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_FEATURES' | translate }}
+    </div>
+    <div *ngFor="let type of types" class="block-checks">
+        <a (click)="openSelect(type.name)" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
+            <ion-label text-uppercase class="text-4F4F4F font-16">{{ type.name }}</ion-label>
+            <div item-end>
+                <img *ngIf="isOpenSelect == type.name" src="assets/img/user_home/arrow_up.svg">
+                <img *ngIf="isOpenSelect != type.name" src="assets/img/user_home/arrow_down.svg">
+            </div>
+        </a>
 
-    <div class="block-checks">
-        <ion-item *ngFor="let feature of features" no-lines>
-            <ion-label item-end class="text-828282 font-16 semibold">{{ feature.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="feature.isSelected" item-end></ion-checkbox>
-        </ion-item>
+        <div *ngIf="isOpenSelect == type.name" class="block-checks">
+            <div [ngClass]="{ 'group' : specialities[0].group !== null }" *ngFor="let specialities of type.specialities">
+                <ion-item *ngFor="let speciality of specialities" no-lines>
+                    <ion-label margin-left item-end class="text-828282 font-16">{{ speciality.name }}</ion-label>
+                    <ion-checkbox (tap)="checkGroup(specialities, speciality)" [(ngModel)]="speciality.isSelected" item-end></ion-checkbox>
+                </ion-item>
+            </div>
+        </div>
     </div>
 </div>
 <div class="footer_btn" padding-left padding-right padding-bottom>
