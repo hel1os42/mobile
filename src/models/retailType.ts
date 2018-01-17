@@ -7,5 +7,6 @@ export class RetailType {
     parent_id: string;
     children_count: number;
     specialities: Speciality[];
+    isSelected?: boolean;
 
 }
