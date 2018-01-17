@@ -480,7 +480,8 @@
         "YOUR_REFERRALS" : "Your referrals",
         "USERS" : "Users",
         "LEVEL" : "Level",
-        "REGISTRATION_DATE" : "Registration date"
+        "REGISTRATION_DATE" : "Registration date",
+        "LOADING_REFERRALS" : "Loading referrals..."
     },
 
     "PAGE_TRANSFER" : {

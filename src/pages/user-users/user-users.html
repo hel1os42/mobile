@@ -33,5 +33,7 @@
       <img class="right-icon-ref" src="assets/img/user_users/icon_right.svg">
     </ion-item>
   </ion-list>
-
+  <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="doInfinite($event)" >
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_USER-USERS.LOADING_REFERRALS' | translate }}"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

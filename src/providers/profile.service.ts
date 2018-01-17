@@ -11,8 +11,8 @@ export class ProfileService {
     onRefreshAccounts: EventEmitter<User> = new EventEmitter<User>();
     onRefreshTransactions: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(private api: ApiService, 
-                private auth: AuthService) {
+    constructor(private api: ApiService,
+        private auth: AuthService) {
 
         this.auth.onLogout.subscribe(() => this.user = undefined);
     }
@@ -25,11 +25,13 @@ export class ProfileService {
         }
         else {
             return Observable.of(this.user);
-        }        
+        }
     }
 
-    getReferrals() {
-        return this.api.get('profile/referrals');
+    getReferrals(page) {
+        return this.api.get(`profile/referrals/?page=${page}`, {
+            showLoading: page == 1
+        });
     }
 
     getTransactions(page) {
@@ -51,7 +53,7 @@ export class ProfileService {
         obs.subscribe(resp => this.user = resp);
         return obs;
     }
-    
+
     refreshAccounts() {
         this.getWithAccounts().subscribe(user => this.onRefreshAccounts.emit(user));
     }
