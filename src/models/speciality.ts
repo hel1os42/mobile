@@ -5,5 +5,6 @@ export class Speciality {
     slug: string;
     name: string;
     group;
+    isSelected?: boolean;
     
 }
