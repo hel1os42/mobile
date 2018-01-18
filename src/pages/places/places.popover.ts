@@ -50,9 +50,13 @@ export class PlacesPopover {
         this.viewCtrl.dismiss({ categories: this.categories, types: this.types, features: this.features });
     }
 
-    clear(arr) {
-        for (let i = 0; i < arr.length; i++) {
-            arr[i].isSelected = false;
-        }
+    // clear(arr) {
+    //     for (let i = 0; i < arr.length; i++) {
+    //         arr[i].isSelected = false;
+    //     }
+    // }
+
+    cancel() {
+        this.viewCtrl.dismiss();
     }
 }
