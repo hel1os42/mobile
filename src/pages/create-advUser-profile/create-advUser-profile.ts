@@ -27,6 +27,7 @@ import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.ca
 import { CreateAdvUserProfileFeaturesPopover } from './create-advUser-profile.features.popover';
 import { CreateAdvUserProfileTagsPopover } from './create-advUser-profile.tags.popover';
 import { CreateAdvUserProfileTypesPopover } from './create-advUser-profile.types.popover';
+import { MockPlace } from '../../mocks/mockPlace';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -83,26 +84,44 @@ export class CreateAdvUserProfilePage {
                 })
             });
         if (this.navParams.get('company')) {
-            this.company = this.navParams.get('company');
+            // this.company = this.navParams.get('company');to do
+            this.company = MockPlace.place;
             this.zoom = MapUtils.round(MapUtils.getZoom(this.company.latitude, this.company.radius, 95), 0.5);
             this.radius = this.company.radius;
             this.address = this.company.address;
-            this.placeService.getWithCategory()
-                .subscribe(company => {
-                    this.company = company;
-                    this.picture_url = this.company.picture_url;
-                    this.cover_url = this.company.cover_url;
-                    this.coords = {
-                        lat: company.latitude,
-                        lng: company.longitude
-                    };
-                    this.mapPresent();
-                    this.selectCategory(company.categories);
+            // this.placeService.getWithCategory()
+            // .subscribe(company => {
+            //     this.company = company;
+            //     this.picture_url = this.company.picture_url;
+            //     this.cover_url = this.company.cover_url;
+            //     this.coords = {
+            //         lat: company.latitude,
+            //         lng: company.longitude
+            //     };to do 
+            let company = this.company//temporary
+            this.picture_url = this.company.picture_url;
+            this.cover_url = this.company.cover_url;
+            this.coords = {
+                lat: company.latitude,
+                lng: company.longitude
+            }
+            //temporary
+            this.mapPresent();
+            this.selectCategory(company.category);
 
-                    if (company.retail_types && company.retail_types.length > 0) {//to do
-                        this.selectTypes(company.retail_types);//to do
+            this.offer.getTypes(this.selectedCategory.id)//to do
+                .subscribe(resp => {
+                    this.types = resp.retail_types;
+                    this.tags = resp.tags;
+
+                    if ((company.tags && company.tags.length > 0) && (this.tags && this.tags.length > 0)) {
+                        this.selectTags(company.tags);
+                    }
+                    if (company.retail_types && company.retail_types.length > 0) {
+                        this.selectTypes(company.retail_types);
                     }
                 })
+            // })to do
         }
         else {
             this.coords.lat = this.navParams.get('latitude');
@@ -172,13 +191,6 @@ export class CreateAdvUserProfilePage {
             zoomSnap: 0.5,
             zoomDelta: 0.5
         };
-        // this.circle = circleMarker(this.coords, { 
-        //     radius: 75,
-        //     color: '#ff8b10',
-        //     opacity: 0.2,
-        //     stroke: false
-        // });
-        // this.layers = [this.tileLayer, ...[this.circle]];
     }
 
     mapPresent(getRadius?) {
@@ -192,34 +204,45 @@ export class CreateAdvUserProfilePage {
             })
     }
 
-    selectCategory(categories) {
-        let parentCategoryId = categories[0].parent_id === null ? categories[0].id : categories[0].parent_id;
-        let rootCategories = this.categories.filter(p => p.id == parentCategoryId).map(p => {
+    selectCategory(rootCategoryId: string) {
+        let rootCategories = this.categories.filter(p => p.id == rootCategoryId).map(p => {
             return {
                 id: p.id,
                 name: p.name,
                 image_url: p.imageAdvCreate_url,
-                isSelected: p.id == parentCategoryId,
+                isSelected: p.id == rootCategoryId,
                 children_count: p.children_count,
             }
         })
         this.selectedCategory = rootCategories[0];
     }
 
-    selectTypes(types) {
-        // this.offer.getRetailTypes(this.selectedCategory.id)
-        //     .subscribe(resp => {
-        //         let typesSlugs = types.map(p => p.slug);
-        //         let selectedTypes: any = _(resp.retail_types).keyBy('slug').at(typesSlugs).value();
-        //         this.selectedTypes = selectedTypes.map(p => {
-        //             return {
-        //                 name: p.name,
-        //                 slug: p.slug,
-        //                 isSelected: true
-        //             }
-        //         })
-        //         this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
-        //     })
+    selectTags(tags: string[]) {
+        let selectedTags: any = _(this.tags).keyBy('slug').at(tags).value();
+        this.selectedTags = selectedTags.map(t => {
+            return {
+                slug: t.slug,
+                name: t.name,
+                isSelected: true
+            }
+        })
+        this.tagsNames = this.selectedTags.map(t => ' ' + t.name);
+    }
+
+    selectTypes(types: string[]) {
+        let selectedTypes: any = _(this.types).keyBy('id').at(types).value();
+        this.selectedTypes = selectedTypes.map(p => {
+            return {
+                id: p.id,
+                name: p.name,
+                parent_id: p.parent_id,
+                children_count: p.children_count,
+                specialities: p.specialities,
+                isSelected: true
+            }
+        })
+        this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
+        this.getFeaturesNames();
     }
 
     onMapReady(map: Map) {
@@ -263,6 +286,7 @@ export class CreateAdvUserProfilePage {
             if (this.selectedCategory && selectedCategories[0].id != this.selectedCategory.id) {
                 this.selectedTags = undefined;
                 this.selectedTypes = undefined;
+                this.getFeaturesNames();
             }
             if (selectedCategories.length > 0) {
                 this.selectedCategory = selectedCategories[0];
@@ -329,6 +353,7 @@ export class CreateAdvUserProfilePage {
             if (selectedTypes.length > 0) {
                 this.selectedTypes = selectedTypes;
                 this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
+                this.getFeaturesNames();
             }
             else {
                 this.selectedTypes = undefined;
@@ -352,10 +377,19 @@ export class CreateAdvUserProfilePage {
             }
             else {
                 this.selectedTypes = types;
-                let names = _.flatten(this.selectedTypes.map(t => t.specialities)).filter(p => p.isSelected);
-                this.featuresNames = names.map(n => n.name);
+                this.getFeaturesNames();
             }
         });
+    }
+
+    getFeaturesNames() {
+        if (this.selectedTypes) {
+            let names = _.flatten(this.selectedTypes.map(t => t.specialities)).filter(p => p.isSelected);
+            this.featuresNames = names.map(n => ' ' + n.name);
+        }
+        else {
+            this.featuresNames = undefined;
+        }
     }
 
     getFeatures(arr: RetailType[]) {
@@ -400,7 +434,7 @@ export class CreateAdvUserProfilePage {
     };
 
     validate() {
-        if ((!this.selectedTags && this.tags && this.tags.length > 0) || (!this.selectedCategory) || (!this.selectedTypes)) {
+        if ((!this.selectedTags && this.tags && this.tags.length > 0) || !this.selectedCategory || !this.selectedTypes) {
             this.toast.show('Please select category, type and features');
             return false;
         }
