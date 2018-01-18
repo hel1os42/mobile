@@ -74,6 +74,7 @@
             </ion-item>
         </ion-list>
     </div>
+
     <div class="sticky">
         <ion-segment [(ngModel)]="segment" text-uppercase>
             <ion-segment-button value="alloffers">
@@ -87,6 +88,7 @@
             </ion-segment-button>
         </ion-segment>
     </div>
+
 <div padding>
   <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
     <ion-item *ngFor=" let offer of offersList" class="relative">
@@ -103,62 +105,6 @@
         <img class="gift" src="assets/img/place/icon_gift.svg">
       </div>
     </ion-item>
-
-      <ion-item class="relative item item-block item-ios"><ion-avatar item-start="">
-
-          <div class="thumb_image" ng-reflect-ng-style="[object Object]" style="background-image: url(&quot;https://nau.toavalon.com/offers/52019028-0766-4da9-841b-32dab6ed7624/picture.jpg&quot;), url(&quot;assets/img/imagenotfound.svg&quot;);"></div>
-      </ion-avatar><div class="item-inner"><div class="input-wrapper"><!--bindings={
-  "ng-reflect-ng-if": "true"
-}--><ion-label class="label label-ios">
-
-          <div class="bold font-22 text-3E4B5D width-88 wrap-no">10% Discount for cakes</div>
-          <div class="margin-top-10 width-88 font-12 text-828282 wrap text-overflow-35" text-regular="">10% discount for all cakes from 12:00 till 17:00 every day</div>
-          <img class="star_right" src="assets/img/place/icon_star.svg">
-          <div class="margin-top-10 flex">
-              <button class="btn_transfer font-14 text-white disable-hover item-button button button-ios button-default button-default-ios" ion-button=""><span class="button-inner">redeem now</span><div class="button-effect"></div></button>
-              <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-              <img class="gift" src="assets/img/place/icon_gift.svg">
-          </div>
-      </ion-label></div><!--bindings={
-  "ng-reflect-ng-if": "false"
-}--></div><div class="button-effect"></div></ion-item>
-      <ion-item class="relative item item-block item-ios"><ion-avatar item-start="">
-
-          <div class="thumb_image" ng-reflect-ng-style="[object Object]" style="background-image: url(&quot;https://nau.toavalon.com/offers/52019028-0766-4da9-841b-32dab6ed7624/picture.jpg&quot;), url(&quot;assets/img/imagenotfound.svg&quot;);"></div>
-      </ion-avatar><div class="item-inner"><div class="input-wrapper"><!--bindings={
-  "ng-reflect-ng-if": "true"
-}--><ion-label class="label label-ios">
-
-          <div class="bold font-22 text-3E4B5D width-88 wrap-no">10% Discount for cakes</div>
-          <div class="margin-top-10 width-88 font-12 text-828282 wrap text-overflow-35" text-regular="">10% discount for all cakes from 12:00 till 17:00 every day</div>
-          <img class="star_right" src="assets/img/place/icon_star.svg">
-          <div class="margin-top-10 flex">
-              <button class="btn_transfer font-14 text-white disable-hover item-button button button-ios button-default button-default-ios" ion-button=""><span class="button-inner">redeem now</span><div class="button-effect"></div></button>
-              <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-              <img class="gift" src="assets/img/place/icon_gift.svg">
-          </div>
-      </ion-label></div><!--bindings={
-  "ng-reflect-ng-if": "false"
-}--></div><div class="button-effect"></div></ion-item>
-      <ion-item class="relative item item-block item-ios"><ion-avatar item-start="">
-
-          <div class="thumb_image" ng-reflect-ng-style="[object Object]" style="background-image: url(&quot;https://nau.toavalon.com/offers/52019028-0766-4da9-841b-32dab6ed7624/picture.jpg&quot;), url(&quot;assets/img/imagenotfound.svg&quot;);"></div>
-      </ion-avatar><div class="item-inner"><div class="input-wrapper"><!--bindings={
-  "ng-reflect-ng-if": "true"
-}--><ion-label class="label label-ios">
-
-          <div class="bold font-22 text-3E4B5D width-88 wrap-no">10% Discount for cakes</div>
-          <div class="margin-top-10 width-88 font-12 text-828282 wrap text-overflow-35" text-regular="">10% discount for all cakes from 12:00 till 17:00 every day</div>
-          <img class="star_right" src="assets/img/place/icon_star.svg">
-          <div class="margin-top-10 flex">
-              <button class="btn_transfer font-14 text-white disable-hover item-button button button-ios button-default button-default-ios" ion-button=""><span class="button-inner">redeem now</span><div class="button-effect"></div></button>
-              <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-              <img class="gift" src="assets/img/place/icon_gift.svg">
-          </div>
-      </ion-label></div><!--bindings={
-  "ng-reflect-ng-if": "false"
-}--></div><div class="button-effect"></div></ion-item>
-
   </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
