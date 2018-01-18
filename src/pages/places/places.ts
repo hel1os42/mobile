@@ -1,6 +1,6 @@
 import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
-import { Component, ViewChild } from '@angular/core';
-import { Content, LoadingController, NavController, PopoverController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { LoadingController, NavController, PopoverController } from 'ionic-angular';
 import { ChildCategory } from '../../models/childCategory';
 import { Company } from '../../models/company';
 import { Coords } from '../../models/coords';
@@ -19,7 +19,6 @@ import { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBou
     templateUrl: 'places.html'
 })
 export class PlacesPage {
-    @ViewChild(Content) content: Content;
 
     companies: Company[];
     categories: OfferCategory[] = OfferCategory.StaticList;
@@ -88,15 +87,6 @@ export class PlacesPage {
                     }
                 }, 10000);
             })
-    }
-
-    scrollHandler() {
-        if (this.content.directionY === 'down') {
-            return true;
-        }
-        else {
-            return;
-        }
     }
 
     getDevMode() {
