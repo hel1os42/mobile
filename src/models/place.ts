@@ -7,7 +7,7 @@ export class Place extends PlaceCreate  {
     user_id: string;
     testimonials_count: number;
     testimonials;
-    categories_count: number;
+    categories_count?: number;
     categories?: OfferCategory[];
     offers_count: number;
     active_offers_count?: number;
