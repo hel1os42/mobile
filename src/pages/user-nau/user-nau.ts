@@ -70,6 +70,8 @@ export class UserNauPage {
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
+                if (this.appMode.getEnvironmentMode() === 'dev')
+                this.nav.popToRoot();
             });
     }
     //temporary
