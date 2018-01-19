@@ -108,7 +108,4 @@
     </plugin>
     <plugin name="cordova-clipboard" spec="1.1.1" />
     <plugin name="branch-cordova-sdk" spec="2.6.22" />
-    <plugin name="com.synconset.imagepicker">
-        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign offer images" />
-    </plugin>
 </widget>
