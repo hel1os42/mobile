@@ -49,9 +49,9 @@ export class PlacePage {
         //     });
     }
 
-    ionSelected() {
-        this.appMode.setHomeMode(false);
-    }
+    // ionSelected() {
+    //     this.appMode.setHomeMode(false);
+    // }
 
     getStars(star: number){
         let showStars: boolean[] = [];
