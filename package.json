@@ -87,11 +87,7 @@
         "NSCameraUsageDescription": "Allow the app to use your camera"
       },
       "cordova-clipboard": {},
-      "branch-cordova-sdk": {},
-      "com.synconset.imagepicker": {
-        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
-      },
-      "com.cordova.plugins.cookiemaster": {}
+      "branch-cordova-sdk": {}
     },
     "platforms": [
       "ios",
