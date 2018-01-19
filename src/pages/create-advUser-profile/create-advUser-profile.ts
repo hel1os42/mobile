@@ -59,6 +59,7 @@ export class CreateAdvUserProfilePage {
     // circle: CircleMarker;
     zoom = 16;
     radius: number;
+    lastOpened: string;
 
     constructor(
         private location: LocationService,
@@ -367,16 +368,24 @@ export class CreateAdvUserProfilePage {
                 s.isSelected = s.isSelected ? s.isSelected : false
             })
         })
+        this.selectedTypes.forEach(t => {
+            t.specialities = _.reverse(_.values(_(t.specialities).groupBy(x => x.group).value()));
+        });
         let popover = this.popoverCtrl.create(CreateAdvUserProfileFeaturesPopover, {
-            types: this.selectedTypes
+            types: this.selectedTypes,
+            name: this.lastOpened
         });
         popover.present();
-        popover.onDidDismiss(types => {
-            if (!types) {
+        popover.onDidDismiss(data => {
+            if (!data) {
                 return;
             }
             else {
-                this.selectedTypes = types;
+                this.selectedTypes = data.types;
+                this.lastOpened = data.name;
+                this.selectedTypes.forEach(t => {
+                    t.specialities = _.flatten(t.specialities);
+                })
                 this.getFeaturesNames();
             }
         });

@@ -10,19 +10,22 @@ import * as _ from 'lodash';
 export class CreateAdvUserProfileFeaturesPopover {
 
     types;
-    isOpenSelect: string;
+    openedSelect: string;
+    lastOpened: string;
+    isConverted: boolean;
 
     constructor(private viewCtrl: ViewController,
         private navParams: NavParams) {
 
         this.types = this.navParams.get('types');
-        this.types.forEach(t => {
-            t.specialities = _.reverse(_.values(_(t.specialities).groupBy(x => x.group).value()));
-        }); 
+        this.lastOpened = this.navParams.get('name');
+        let name = this.lastOpened ? this.lastOpened : this.types[this.types.length - 1].name;
+        this.openSelect(name);
     }
 
     openSelect(name) {
-        this.isOpenSelect = this.isOpenSelect == name ? undefined : name;
+        this.openedSelect = this.openedSelect == name ? undefined : name;
+        this.lastOpened = name;
     }
 
     checkGroup(arr, speciality) {
@@ -36,15 +39,21 @@ export class CreateAdvUserProfileFeaturesPopover {
     }
 
     save() {
-        this.types.forEach(t => {
-            t.specialities = _.flatten(t.specialities);
-        })
-        this.viewCtrl.dismiss(this.types);
+        this.isConverted = true;
+        this.viewCtrl.dismiss({ types: this.types, name: this.lastOpened });
     }
 
     cancel() {
         this.viewCtrl.dismiss();
     }
 
+    ngOnDestroy() {
+        if (!this.isConverted) {
+            this.types.forEach(t => {
+                t.specialities = _.flatten(t.specialities);
+            })
+        }
 
+        
+    }
 }

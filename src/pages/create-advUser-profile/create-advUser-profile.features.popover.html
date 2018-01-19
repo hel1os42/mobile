@@ -9,13 +9,13 @@
         <a (click)="openSelect(type.name)" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
             <ion-label text-uppercase class="text-4F4F4F font-16">{{ type.name }}</ion-label>
             <div item-end>
-                <img *ngIf="isOpenSelect == type.name" src="assets/img/user_home/arrow_up.svg">
-                <img *ngIf="isOpenSelect != type.name" src="assets/img/user_home/arrow_down.svg">
+                <img *ngIf="openedSelect == type.name" src="assets/img/user_home/arrow_up.svg">
+                <img *ngIf="openedSelect != type.name" src="assets/img/user_home/arrow_down.svg">
             </div>
         </a>
 
-        <div *ngIf="isOpenSelect == type.name" class="block-checks">
-            <div [ngClass]="{ 'group' : specialities[0].group !== null }" *ngFor="let specialities of type.specialities">
+        <div *ngIf="openedSelect == type.name" class="block-checks">
+            <div *ngFor="let specialities of type.specialities" [ngClass]="{ 'group' : specialities[0].group !== null }">
                 <ion-item *ngFor="let speciality of specialities" no-lines>
                     <ion-label margin-left item-end class="text-828282 font-16">{{ speciality.name }}</ion-label>
                     <ion-checkbox (tap)="checkGroup(specialities, speciality)" [(ngModel)]="speciality.isSelected" item-end></ion-checkbox>
