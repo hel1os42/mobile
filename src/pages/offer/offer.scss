@@ -197,6 +197,11 @@ page-offer{
     }
 }
 
+.iphonex.platform-ios page-offer .btn_footer{
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
+}
+
 /* FIX IOS NAV TRANSPARENT */
 ion-app.platform-ios.disable-scroll page-offer ion-content > .scroll-content{
     overflow: visible;

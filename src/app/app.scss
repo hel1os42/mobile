@@ -1709,3 +1709,8 @@ ion-app.disable-scroll {
 .platform-ios .input-cover{
     position: static;
 }
+
+.iphonex.platform-ios .footer.footer-ios{
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
+}
