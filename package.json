@@ -34,16 +34,16 @@
     "@types/lodash": "4.14.74",
     "android-versions": "1.2.1",
     "angular2-qrcode": "2.0.1",
-    "branch-cordova-sdk": "2.6.11",
+    "branch-cordova-sdk": "2.6.22",
     "chart.js": "2.7.1",
     "cordova-android": "6.3.0",
     "cordova-clipboard": "1.1.1",
     "cordova-ios": "4.5.3",
     "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-cookiemaster": "1.0.5",
-    "cordova-plugin-device": "1.1.6",
+    "cordova-plugin-device": "1.1.7",
     "cordova-plugin-file": "4.3.3",
-    "cordova-plugin-file-transfer": "1.6.3",
+    "cordova-plugin-file-transfer": "1.7.0",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-splashscreen": "5.0.1",
     "cordova-plugin-statusbar": "2.4.1",
@@ -64,7 +64,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "3.1.7",
     "@types/leaflet": "1.2.5",
-    "ionic": "3.19.0",
+    "ionic": "3.19.1",
     "postcss": "6.0.14",
     "typescript": "2.6.2"
   },
@@ -76,7 +76,6 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-whitelist": {},
       "ionic-plugin-keyboard": {},
-      "cordova-plugin-geolocation": {},
       "cordova-plugin-telerik-imagepicker": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
       },
@@ -88,10 +87,10 @@
       },
       "cordova-clipboard": {},
       "branch-cordova-sdk": {},
-      "com.synconset.imagepicker": {
-        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign offer images"
-      },
-      "com.cordova.plugins.cookiemaster": {}
+      "cordova-plugin-geolocation": {
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow the app to use your location",
+        "GEOLOCATION_USAGE_DESCRIPTION": "Allow the app to use your location"
+      }
     },
     "platforms": [
       "ios",

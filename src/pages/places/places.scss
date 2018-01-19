@@ -114,6 +114,7 @@ page-places {
 }
 .platform-ios page-places .fixed-content, .platform-ios page-places .scroll-content{
     margin-top: 20px;
+    /* -webkit-overflow-scrolling: auto;*/
 }
 /* FIX STATUS BAR IPHONE_X */
 .iphonex page-places .header-ios{
