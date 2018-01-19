@@ -104,14 +104,10 @@ create-advUser-profile-popover-tags,
 create-advUser-profile-popover-types,
 create-advUser-profile-popover-features {
     .modal_content {
-        padding-top: 14vw;
+        padding-top: 16vw;
         padding-right: 7vw;
-        padding-left: 10vw;
+        padding-left: 7vw;
         padding-bottom: 21vw;
-    }
-    .block-checks {
-        margin-right: 5px;
-        margin-left: 8px;
     }
     .item-ios.item-block .item-inner {
         padding-right: 0;
@@ -126,15 +122,19 @@ create-advUser-profile-popover-features {
     .footer_btn .grid {
         padding-bottom: 0;
     }
+
+    .item.item-ios .checkbox-ios[item-right], .item.item-ios .checkbox-ios[item-end]{
+        margin: 0;
+    }
+
+    ion-item.item.item-block.item-ios.item-checkbox{
+        padding-left: 0;
+    }
 }
 
 create-advUser-profile-popover-features {
     .modal_content {
         padding-bottom: 21vw;
-    }
-    .block-checks {
-        margin-right: 5px;
-        margin-left: 8px;
     }
     .bg-gray {
         border: none;
@@ -170,7 +170,7 @@ create-advUser-profile-popover-features {
     }
 
     .group {
-        margin-top: 10px;
+        margin-bottom: 3vw;
         border: rgb(190, 192, 196) 1px solid;
     }
 }
