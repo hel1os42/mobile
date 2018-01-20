@@ -27,12 +27,15 @@ export class CreateOffer1Page {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
-        this.place.getWithCategory()
-            .subscribe(company => {
-                this.company = company;
-                this.offerService.getCategory(this.company.categories[0].id)
-                    .subscribe(category => this.offer.category_id = category.parent_id !== null ? category.parent_id : this.company.categories[0].id)
-            });
+        if (!this.offer.id) {
+            this.place.getWithCategory()
+                .subscribe(company => {
+                    this.company = company;
+                    this.offerService.getCategory(this.company.categories[0].id)
+                        .subscribe(category => this.offer.category_id = category.parent_id !== null ? category.parent_id : this.company.categories[0].id)
+                });
+        }
+
     }
 
     openCreateOffer2Page() {
