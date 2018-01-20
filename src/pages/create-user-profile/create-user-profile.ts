@@ -236,7 +236,6 @@ export class CreateUserProfilePage {
             this.user.longitude = this.coords.lng;
             //this.account.points = this.point(); to do
             let differenceData = DataUtils.difference(this.user, this.baseData);
-            debugger
             let isEmpty = _.isEmpty(differenceData);
             let promise = this.picture_url && this.changedPicture
                 ? this.api.uploadImage(this.picture_url, 'profile/picture', true)
@@ -246,14 +245,12 @@ export class CreateUserProfilePage {
                     .subscribe(() => {
                         promise.then(() => {
                             this.navTo();
-                            debugger
                         })
                     })
             }
             else {
                 promise.then(() => {
                     this.navTo();
-                    debugger
                 })
             }
         }
