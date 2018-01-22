@@ -62,6 +62,10 @@ export class PlaceService {
         return this.api.put('profile/place', place);
     }
 
+    patchPlace(data) {
+        return this.api.patch('profile/place', data);
+    }
+
     getOffers(page) {
         return this.api.get(`advert/offers?page=${page}`, {
             showLoading: page == 1
