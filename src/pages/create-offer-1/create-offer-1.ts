@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Company } from '../../models/company';
+import { Place } from '../../models/place';
 import { Offer } from '../../models/offer';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
@@ -17,7 +17,7 @@ export class CreateOffer1Page {
     discount: number = 10;
     isDiscountSelectDisable = true;
     isGiftSelectDisable = true;
-    company = new Company();
+    company = new Place();
     picture_url: string;
 
     constructor(private nav: NavController,

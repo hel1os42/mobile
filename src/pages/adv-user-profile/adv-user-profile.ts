@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Content, NavController, NavParams } from 'ionic-angular';
 import { Subscription } from 'rxjs/Rx';
-import { Company } from '../../models/company';
+import { Place } from '../../models/place';
 import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
 import { PlaceService } from '../../providers/place.service';
@@ -25,7 +25,7 @@ export class AdvUserProfilePage {
 
     isModalVisible: boolean;
     MODAL_VISIBLE_KEY = "modalVisible";
-    company = new Company();
+    company = new Place();
     balance: number;
     NAU: Account;
     user = new User;

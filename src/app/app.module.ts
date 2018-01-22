@@ -27,7 +27,7 @@ import { AdvUserProfilePage } from '../pages/adv-user-profile/adv-user-profile';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
 import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
-import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
+import { CreateAdvUserProfileTagsPopover } from '../pages/create-advUser-profile/create-advUser-profile.tags.popover';
 import { CreateAdvUserProfileFeaturesPopover } from '../pages/create-advUser-profile/create-advUser-profile.features.popover';
 import { CreateAdvUserProfileTypesPopover } from '../pages/create-advUser-profile/create-advUser-profile.types.popover';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
@@ -132,7 +132,7 @@ export function createTranslateLoader(http: HttpClient) {
       TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
-      CreateAdvUserProfileChildCategoryPopover,
+      CreateAdvUserProfileTagsPopover,
       CreateAdvUserProfileTypesPopover,
       CreateAdvUserProfileFeaturesPopover,
       CreateOfferInformationPopover,
@@ -213,7 +213,7 @@ export function createTranslateLoader(http: HttpClient) {
       TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
-      CreateAdvUserProfileChildCategoryPopover,
+      CreateAdvUserProfileTagsPopover,
       CreateAdvUserProfileTypesPopover,
       CreateAdvUserProfileFeaturesPopover,
       CreateOfferInformationPopover,

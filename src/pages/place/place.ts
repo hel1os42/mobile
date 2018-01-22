@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { App, NavController, NavParams } from 'ionic-angular';
-import { Company } from '../../models/company';
+import { Place } from '../../models/place';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { AppModeService } from '../../providers/appMode.service';
@@ -14,7 +14,7 @@ import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 })
 export class PlacePage {
     coords: Coords;
-    company = new Company();
+    company = new Place();
     visibleFooter: boolean = false;
     segment: string;
     offersList: Offer[];

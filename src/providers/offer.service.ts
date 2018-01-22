@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import { ApiService } from "./api.service";
+import { MockCategory } from '../mocks/mockCategory';
 // import { MockCompanies } from '../mocks/mockCompanies';
 
 @Injectable()
@@ -72,8 +74,13 @@ export class OfferService {
         return this.api.get(`categories/${category_id}?with=children`);
     }
 
-    getRetailTypes(category_id) {
-        return this.api.get(`categories/${category_id}?with=retailTypes`);
+    // getRetailTypes(category_id) {
+    //     return this.api.get(`categories/${category_id}?with=retailTypes`);
+    // }
+
+    getTypes(category_id: string) {
+        // return this.api.get(`categories/${ category_id }?with=retailTypes;retailTypes.specialities;tags`);
+        return Observable.of(MockCategory.items);
     }
 
     getRedeemedOffers() {

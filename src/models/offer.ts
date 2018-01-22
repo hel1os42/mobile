@@ -1,4 +1,4 @@
-import { Company } from './company';
+import { Place } from './place';
 import { OfferCategory } from './offerCategory';
 import { OfferCreate } from './offerCreate';
 import { TimeFrames } from './timeFrames';
@@ -6,7 +6,7 @@ import { TimeFrames } from './timeFrames';
 export class Offer extends OfferCreate {
     id: string;
     picture_url: string;
-    company?: Company;
+    company?: Place;
     status: string;
     category?: OfferCategory
     deleted_at: string;

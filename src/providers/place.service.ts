@@ -2,14 +2,14 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { OfferCreate } from "../models/offerCreate";
 import { PlaceCreate } from "../models/placeCreate";
-import { Company } from "../models/company";
+import { Place } from "../models/place";
 import { Offer } from "../models/offer";
 
 @Injectable()
 export class PlaceService {
 
-    company: Company;
-    onRefreshCompany: EventEmitter<Company> = new EventEmitter<Company>();
+    company: Place;
+    onRefreshCompany: EventEmitter<Place> = new EventEmitter<Place>();
 
     constructor(private api: ApiService) { }
 
@@ -58,7 +58,7 @@ export class PlaceService {
         return obs;
     }
 
-    putPlace(place: Company) {
+    putPlace(place: Place) {
         return this.api.put('profile/place', place);
     }
 

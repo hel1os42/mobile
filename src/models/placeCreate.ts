@@ -4,7 +4,9 @@ export class PlaceCreate {
     description: string;
     about: string;
     address: string;
+    category?: string;
     category_ids?: string[];
+    retail_types: string[];
     latitude: number;
     longitude: number;
     radius: number;
