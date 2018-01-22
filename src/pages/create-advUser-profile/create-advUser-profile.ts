@@ -242,6 +242,19 @@ export class CreateAdvUserProfilePage {
                 isSelected: true
             }
         })
+        this.selectedTypes.forEach(t => {
+            let k = this.company.specialities.find(k => k.retail_type_id == t.id);
+                t.specialities = t.specialities.map(s => {
+                    return {
+                        id: s.id,
+                        retail_type_id: s.retail_type_id,
+                        slug: s.slug,
+                        name: s.name,
+                        group: s.group,
+                        isSelected: (k.specs.find(h => h === s.slug) && k.retail_type_id === t.id) ? true : false
+                    }
+                })
+        });
         this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
         this.getFeaturesNames();
     }
@@ -462,7 +475,7 @@ export class CreateAdvUserProfilePage {
             this.company.radius = Math.round(this.radius);
             this.company.tags = this.selectedTags ? this.selectedTags.map(p => p.slug) : undefined;
             this.company.specialities = this.getFeatures(this.selectedTypes);
-
+            
             if (!this.company.id) {
                 this.placeService.set(this.company)
                     .subscribe(company => {
