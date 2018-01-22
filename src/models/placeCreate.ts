@@ -1,5 +1,6 @@
-export class PlaceCreate {
+import { SpecialityCreate } from './specialityCreate';
 
+export class PlaceCreate {
     name: string;
     description: string;
     about: string;
@@ -10,5 +11,7 @@ export class PlaceCreate {
     latitude: number;
     longitude: number;
     radius: number;
-    
+    tags: string[];
+    specialities: SpecialityCreate[];
 }
+
