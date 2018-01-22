@@ -14,12 +14,13 @@ page-user-nau{
   }
 
   .star_right{
-      top: 4vw;
-      right: 4vw;
+      top: inherit;
+      right: 2vw;
       height: 8vw;
       width: auto;
       background: #fff;
       padding-left: 1vw;
+      bottom: 2vw;
   }
 
     .star_right:before{
@@ -37,4 +38,9 @@ page-user-nau{
       padding: 0;
       font-size: 0;
   }
+
+    .id-transaction{
+        line-height: 7vw;
+        font-size: 4.3vw;
+    }
 }
