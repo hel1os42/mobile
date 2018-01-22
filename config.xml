@@ -111,5 +111,6 @@
     <plugin name="cordova-plugin-geolocation" spec="4.0.1">
         <variable name="NSLocationAlwaysAndWhenInUseUsageDescription" value="Allow the app to use your location" />
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Allow the app to use your location" />
-    </plugin>
+    </plugin
+    <plugin name="cordova-plugin-ionic-webview" spec="1.1.16" />
 </widget>
