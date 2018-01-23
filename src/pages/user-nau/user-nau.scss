@@ -56,7 +56,7 @@ page-user-nau{
         position: absolute;
         width: 11%;
         height: 11vw;
-        top: 24%;
+        bottom: 16%;
         right: 6%;
         padding: 2vw;
     }
@@ -72,6 +72,24 @@ page-user-nau{
 
     .relative .text-input-ios {
         padding: 3vw 2.3vw 3vw 6.3vw;
+    }
+
+    .sticky{
+        z-index: 11111111;
+        background: #fff;
+        box-shadow: 0 12px 18px -2px rgba(0, 0, 0, 0.12);
+    }
+
+    .header-shadow{
+        box-shadow: none;
+    }
+
+    .item-block-nau .item{
+        padding: 5vw;
+    }
+
+    .item-block-nau.list.list-ios{
+        margin: 0;
     }
 }
 
