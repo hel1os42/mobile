@@ -60,7 +60,12 @@ export class CreateUserProfilePage {
             this.picture_url = this.user.picture_url;
             this.coords.lat = this.user.latitude;
             this.coords.lng = this.user.longitude;
-            this.addMap();
+            if (this.coords.lat) {
+                this.addMap();
+            }
+            else {
+                this.getLocation();
+            }
         }
         else {
             this.profile.get(true)
