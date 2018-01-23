@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { LoadingController, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, PopoverController, Content } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs/Rx';
@@ -12,12 +12,12 @@ import { ToastService } from '../../providers/toast.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TransferPopover } from './transfer.popover';
 
-
 @Component({
     selector: 'page-user-nau',
     templateUrl: 'user-nau.html'
 })
 export class UserNauPage {
+    @ViewChild(Content) content: Content;
 
     // transactions: Transaction[];
     transactions;
@@ -112,7 +112,23 @@ export class UserNauPage {
     }
 
     openTransfer() {
-        this.isFormVisible = !this.isFormVisible;
+        let form = document.getElementsByTagName('form');
+        let content = this.content.getContentDimensions();
+        if (form[0]) {
+             let height = form[0].clientHeight;
+             if (height / 2 < content.scrollTop) {
+                this.content.scrollToTop();
+             }
+             if (content.scrollTop < height / 2) {
+                this.isFormVisible = !this.isFormVisible;
+             }
+        }
+        else {
+            if (!form[0]) {
+                this.content.scrollToTop();
+                this.isFormVisible = !this.isFormVisible;
+            }
+        }
     }
 
     doInfinite(infiniteScroll) {
@@ -220,6 +236,7 @@ export class UserNauPage {
     }
 
     ionViewWillUnload() {
+        this.stopTimer();
         this.onRefreshAccounts.unsubscribe();
         this.onRefreshTransactions.unsubscribe();
         this.profile.refreshAccounts();
