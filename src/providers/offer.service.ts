@@ -74,13 +74,9 @@ export class OfferService {
         return this.api.get(`categories/${category_id}?with=children`);
     }
 
-    // getRetailTypes(category_id) {
-    //     return this.api.get(`categories/${category_id}?with=retailTypes`);
-    // }
-
     getTypes(category_id: string) {
-        // return this.api.get(`categories/${ category_id }?with=retailTypes;retailTypes.specialities;tags`);
-        return Observable.of(MockCategory.items);
+        return this.api.get(`categories/${ category_id }?with=retailTypes;retailTypes.specialities;tags`);
+        // return Observable.of(MockCategory.items);
     }
 
     getRedeemedOffers() {
