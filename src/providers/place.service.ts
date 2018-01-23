@@ -4,6 +4,9 @@ import { OfferCreate } from "../models/offerCreate";
 import { PlaceCreate } from "../models/placeCreate";
 import { Place } from "../models/place";
 import { Offer } from "../models/offer";
+import { Observable } from 'rxjs/Observable';
+import { MockGetPlace } from '../mocks/mockGetPlace';
+
 
 @Injectable()
 export class PlaceService {
@@ -24,7 +27,8 @@ export class PlaceService {
     }
 
     getWithCategory() {
-        return this.api.get('profile/place?with=categories');
+        // return this.api.get('profile/place?with=categories;categories.retailTypes;categories.retailTypes.specialities;categories.tags');
+        return Observable.of(MockGetPlace.place);
     }
 
     getOfferCreate() {
