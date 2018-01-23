@@ -38,7 +38,7 @@
         </a>
     </ion-item>
 
-    <div>
+    <div *ngIf="isFormVisible">
         <form #form="ngForm">
             <div text-uppercase margin-top padding-left class="font-14 text-4F4F4F margin-bottom-10">
                 {{ 'PAGE_TRANSFER.SOURCE_ADDRESS' | translate }}
@@ -111,11 +111,13 @@
         <ion-item class="relative" *ngFor="let transaction of transactions">
             <span class="bold wrap id-transaction"> <!--{{ 'PAGE_USER-NAU.PAY' | translate }}--> {{ transaction.id }}</span>
             <div
+                *ngIf="!isTransferLoading || (isTransferLoading && transaction.id !== 'Transfer process...')"
                 [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0),
                 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}"
                 class="font-22 margin-bottom-5 bold">
             </div>
             <div
+            *ngIf="!isTransferLoading || (isTransferLoading && transaction.id !== 'Transfer process...')"
                 [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0),
                 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}"
                 class="font-22 star_right" text-uppercase>
@@ -123,7 +125,7 @@
                 <span class="regular" text-uppercase> {{ 'PAGE_USER-NAU.NAU' | translate }}</span>
             </div>
             <div class="font-14 text-828282">{{ getDate(transaction.created_at) }}</div>
-            <ion-spinner name="bubbles"></ion-spinner>
+            <ion-spinner *ngIf="isTransferLoading && transaction.id === 'Transfer process...'" name="bubbles"></ion-spinner>
         </ion-item>
     </ion-list>
     <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="doInfinite($event)" >

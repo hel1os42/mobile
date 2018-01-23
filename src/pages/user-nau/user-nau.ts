@@ -1,12 +1,17 @@
-import { AppModeService } from '../../providers/appMode.service';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import { LoadingController, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
-import { Transaction } from '../../models/transaction';
+import { TransactionCreate } from '../../models/transactionCreate';
+import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
-import { TransferPage } from '../transfer/transfer';
-import * as moment from 'moment';
+import { ToastService } from '../../providers/toast.service';
+import { StringValidator } from '../../validators/string.validator';
+import { TransferPopover } from './transfer.popover';
+
 
 @Component({
     selector: 'page-user-nau',
@@ -14,26 +19,42 @@ import * as moment from 'moment';
 })
 export class UserNauPage {
 
-    transactions: Transaction[];
+    // transactions: Transaction[];
+    transactions;
     balance: number;
     today: number = Date.now();
     date: string;
     page = 1;
     lastPage: number;
     NAU: Account;
+    todayDate = new Date();
+    transferData = new TransactionCreate();
+    amount = '1';
+    timer;
     onRefreshAccounts: Subscription;
     onRefreshTransactions: Subscription;
-    todayDate = new Date();
+    isFormVisible = false;
+    isTransferLoading = false;
+    options: BarcodeScannerOptions = {
+        preferFrontCamera: true,
+        orientation: 'portrait'
+    };
 
     constructor(
         private profile: ProfileService,
         private appMode: AppModeService,
         private navParams: NavParams,
-        private nav: NavController) {
+        private nav: NavController,
+        private toast: ToastService,
+        private popoverCtrl: PopoverController,
+        private barcode: BarcodeScanner,
+        private loading: LoadingController,
+        private alert: AlertController) {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         // this.NAU = this.navParams.get('NAU');return
         this.NAU = this.appMode.getEnvironmentMode() === 'dev' ? this.navParams.get('NAU') : this.navParams.data;//temporary
+        this.transferData.source = this.NAU.address;
         this.balance = this.NAU ? this.NAU.balance : 0;
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
@@ -62,8 +83,8 @@ export class UserNauPage {
         this.page = 1;
         this.profile.getTransactions(this.page)
             .subscribe(resp => {
-                    this.transactions = resp.data;
-                    this.lastPage = resp.last_page;
+                this.transactions = resp.data;
+                this.lastPage = resp.last_page;
             });
 
         this.profile.getWithAccounts()
@@ -71,7 +92,7 @@ export class UserNauPage {
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
                 if (this.appMode.getEnvironmentMode() === 'dev')
-                this.nav.popToRoot();
+                    this.nav.popToRoot();
             });
     }
     //temporary
@@ -91,7 +112,7 @@ export class UserNauPage {
     }
 
     openTransfer() {
-        this.nav.push(TransferPage, { NAU: this.NAU });
+        this.isFormVisible = !this.isFormVisible;
     }
 
     doInfinite(infiniteScroll) {
@@ -108,6 +129,94 @@ export class UserNauPage {
         else {
             infiniteScroll.complete();
         }
+    }
+
+    updateAmount(event) {
+        StringValidator.stringAmountLimit(event);
+    }
+
+    validateMax() {
+        this.transferData.amount = parseInt(this.amount);
+
+        if (this.transferData.amount < 1) {
+            this.toast.show('The amount must be at least 1');
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    openPopover() {
+        let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.transferData.source });
+        popover.present();
+    }
+
+    scanBarcode() {
+        this.barcode.scan()
+            .then(res => {
+                this.transferData.destination = res.text;
+            });
+    }
+
+    transfer() {
+        if (this.validateMax()) {
+            this.transferData.amount = parseFloat(this.amount);
+            this.profile.postTransaction(this.transferData, true)
+                .subscribe((resp) => {
+                    let transaction = {
+                        amount: undefined,
+                        created_at: this.todayDate,
+                        destination_account_id: resp.destination_account_id,
+                        id:"Transfer process...",//to do
+                        source_account_id: resp.source_account_id
+                    }
+                    this.transactions = [...[transaction],...this.transactions];
+                    this.isTransferLoading = true;
+                    this.isFormVisible = !this.isTransferLoading;
+                    this.transferData.destination = undefined;
+                    this.transferData.amount = 1;
+                    this.timer = setInterval(() => {
+                        this.profile.getWithAccounts(false)
+                            .subscribe(resp => {
+                                let NAU = resp.accounts.NAU;
+                                let balance = NAU.balance;
+                                if (this.balance != balance) {
+                                    this.isTransferLoading = false;
+                                    this.profile.refreshAccounts();
+                                    this.profile.refreshTransactions();
+                                    this.stopTimer();
+                                }
+                            });
+                    }, 300);
+                },
+                (err) => {
+                    this.presentAlert();
+                })
+        }
+    }
+
+    stopTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = undefined;
+        }
+    }
+
+    presentAlert() {
+        let alert = this.alert.create({
+            title: 'Oops...ERROR',
+            buttons: [
+                {
+                    text: 'Ok',
+                    role: 'cancel',
+                    handler: () => {
+
+                    }
+                },
+            ]
+        });
+        alert.present();
     }
 
     ionViewWillUnload() {
