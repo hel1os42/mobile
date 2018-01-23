@@ -121,6 +121,7 @@ export class UserNauPage {
              }
              if (content.scrollTop < height / 2) {
                 this.isFormVisible = !this.isFormVisible;
+                this.content.scrollToTop();
              }
         }
         else {
