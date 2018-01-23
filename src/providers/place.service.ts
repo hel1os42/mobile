@@ -27,7 +27,11 @@ export class PlaceService {
     }
 
     getWithCategory() {
-        return this.api.get('profile/place?with=categories;categories.retailTypes;categories.retailTypes.specialities;categories.tags');
+        return this.api.get('profile/place', {
+            params: {
+                with: 'categories;categories.retailTypes;categories.retailTypes.specialities;categories.tags'
+            }
+        });
         // return Observable.of(MockGetPlace.place);
     }
 
@@ -76,10 +80,6 @@ export class PlaceService {
         });
     }
 
-    // getRetailTypes(category_id) {
-    //     return this.api.get(`categories/${category_id}?with=retailTypes`);
-    // }
-
     // getFilteredOffersByDate(startDate, finishDate, page) {
     //     return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and&page=${page}`, {
     //         showLoading: page == 1
@@ -102,14 +102,22 @@ export class PlaceService {
     }
 
     getActiveOffers(page) {
-        return this.api.get(`advert/offers?search=status:active&page=${page}`, {
-            showLoading: page == 1
+        return this.api.get('advert/offers', {
+            showLoading: page == 1,
+            params: {
+                search: 'status:active',
+                page: page
+            }
         });
     }
 
-    getDeActiveOffers(page) {
-        return this.api.get(`advert/offers?search=status:deactive&page=${page}`, {
-            showLoading: page == 1
+   getDeActiveOffers(page) {
+        return this.api.get('advert/offers', {
+            showLoading: page == 1,
+            params: {
+                search: 'status:deactive',
+                page: page
+            }
         });
     }
 
