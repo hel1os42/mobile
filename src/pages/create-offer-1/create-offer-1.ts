@@ -17,7 +17,8 @@ export class CreateOffer1Page {
     discount: number = 10;
     isDiscountSelectDisable = true;
     isGiftSelectDisable = true;
-    company = new Place();
+    // company = new Place();to do
+    company;
     picture_url: string;
 
     constructor(private nav: NavController,
