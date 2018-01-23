@@ -62,10 +62,10 @@ export class TransferPage {
         }
     }
 
-    // openPopover() {
-    //     let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.transferData.source });
-    //     popover.present();
-    // }
+    openPopover() {
+        // let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.transferData.source });
+        // popover.present();
+    }
 
     scanBarcode() {
         this.barcode.scan()
