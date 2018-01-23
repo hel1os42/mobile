@@ -27,8 +27,8 @@ export class PlaceService {
     }
 
     getWithCategory() {
-        // return this.api.get('profile/place?with=categories;categories.retailTypes;categories.retailTypes.specialities;categories.tags');
-        return Observable.of(MockGetPlace.place);
+        return this.api.get('profile/place?with=categories;categories.retailTypes;categories.retailTypes.specialities;categories.tags');
+        // return Observable.of(MockGetPlace.place);
     }
 
     getOfferCreate() {
