@@ -7,7 +7,6 @@ import { TransactionCreate } from '../../models/transactionCreate';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { StringValidator } from '../../validators/string.validator';
-import { TransferPopover } from './transfer.popover';
 
 @Component({
     selector: 'page-transfer',
@@ -63,10 +62,10 @@ export class TransferPage {
         }
     }
 
-    openPopover() {
-        let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.transferData.source });
-        popover.present();
-    }
+    // openPopover() {
+    //     let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.transferData.source });
+    //     popover.present();
+    // }
 
     scanBarcode() {
         this.barcode.scan()
