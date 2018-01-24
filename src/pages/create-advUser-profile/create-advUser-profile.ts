@@ -29,6 +29,8 @@ import { CreateAdvUserProfileFeaturesPopover } from './create-advUser-profile.fe
 import { CreateAdvUserProfileTagsPopover } from './create-advUser-profile.tags.popover';
 import { CreateAdvUserProfileTypesPopover } from './create-advUser-profile.types.popover';
 import { RootCategory } from '../../models/rootCategory';
+import { AboutUtils } from '../../utils/about.utils';
+import { Speciality } from '../../models/speciality';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -61,6 +63,8 @@ export class CreateAdvUserProfilePage {
     zoom = 16;
     radius: number;
     lastOpened: string;
+    aboutTitle: string;
+    aboutDescription: string;
 
     constructor(
         private location: LocationService,
@@ -96,21 +100,21 @@ export class CreateAdvUserProfilePage {
                 lat: this.company.latitude,
                 lng: this.company.longitude
             };
+            this.aboutTitle = AboutUtils.get(this.company.about).title;
+            this.aboutDescription = AboutUtils.get(this.company.about).description;
             this.mapPresent();
             this.placeService.getWithCategory()
-                .subscribe(resp => {
-                    let companyCategories = resp.categories.filter(c => c.parent_id === null);//to do
-                    let companyCategory = companyCategories[0];//to do
-                    this.offer.getTypes(companyCategory.id)//to do
+                .subscribe(company => {
+                    this.offer.getTypes(company.category[0].id)//to do
                         .subscribe(resp => {
                             this.types = resp.retail_types;
                             this.tags = resp.tags ? resp.tags : undefined;
-                            this.selectCategory(companyCategory);
-                            if ((companyCategory.tags && companyCategory.tags.length > 0) && (this.tags && this.tags.length > 0)) {
-                                this.selectTags(companyCategory.tags);
+                            this.selectCategory(company.category[0]);
+                            if ((company.tags && company.tags.length > 0) && (this.tags && this.tags.length > 0)) {
+                                this.selectTags(company.tags);
                             }
-                            if (companyCategory.retail_types && companyCategory.retail_types.length > 0) {
-                                this.selectTypes(companyCategory.retail_types);
+                            if (company.retail_types && company.retail_types.length > 0) {
+                                this.selectTypes(company.retail_types, company.specialities);
                             }
                         })
                 });
@@ -198,7 +202,7 @@ export class CreateAdvUserProfilePage {
             })
     }
 
-    selectCategory(category: RootCategory) {
+    selectCategory(category) {
         let rootCategories = this.categories.filter(p => p.id === category.id).map(p => {
             // let rootCategories = this.categories.filter(p => p.name === companyCategory.name).map(p => {// temporary
             return {
@@ -220,36 +224,32 @@ export class CreateAdvUserProfilePage {
                     name: t.name,
                     isSelected: true
                 }
-            })
-        })
-
+            });
+        });
         this.tagsNames = this.selectedTags.map(t => ' ' + t.name);
     }
 
-    selectTypes(types: RetailType[]) {
-        // let selectedTypes: any = _(this.types).keyBy('id').at(types).value();
+    selectTypes(types: RetailType[], specialities: Speciality[]) {
         this.selectedTypes = types.map(p => {
+            let selectedSpecialities = specialities.filter(s => s.retail_type_id === p.id);
             return {
                 id: p.id,
                 name: p.name,
                 parent_id: p.parent_id,
                 children_count: p.children_count,
-                specialities: p.specialities,
+                specialities: this.types.filter(t => t.id === p.id)[0].specialities
+                .map(i => {
+                    return {
+                        id: i.id,
+                        retail_type_id: i.retail_type_id,
+                        slug: i.slug,
+                        name: i.name,
+                        group: i.group,
+                        isSelected: selectedSpecialities.find(j => j.slug === i.slug) ? true: false
+                    }
+                }),
                 isSelected: true
             }
-        })
-        this.selectedTypes.forEach(t => {
-            // let k = this.company.specialities.find(k => k.retail_type_id == t.id);
-            t.specialities = t.specialities.map(s => {
-                return {
-                    id: s.id,
-                    retail_type_id: s.retail_type_id,
-                    slug: s.slug,
-                    name: s.name,
-                    group: s.group,
-                    isSelected: true
-                }
-            })
         });
         this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
         this.getFeaturesNames();
@@ -295,15 +295,16 @@ export class CreateAdvUserProfilePage {
             if (this.selectedCategory && selectedCategories[0].id != this.selectedCategory.id) {
                 this.selectedTags = undefined;
                 this.selectedTypes = undefined;
-            }
-            if (selectedCategories && selectedCategories.length > 0) {
-                this.selectedCategory = selectedCategories[0];
-                this.offer.getTypes(this.selectedCategory.id)//to do
+                this.offer.getTypes(selectedCategories[0].id)//to do
                     .subscribe(resp => {
                         this.types = resp.retail_types;
                         this.tags = resp.tags;
                         this.getFeaturesNames();
                     })
+            }
+            if (selectedCategories && selectedCategories.length > 0) {
+                this.selectedCategory = selectedCategories[0];
+
             }
         })
     }
@@ -470,9 +471,8 @@ export class CreateAdvUserProfilePage {
             this.company.tags = this.selectedTags ? this.selectedTags.map(p => p.slug) : [];
             this.company.specialities = this.getFeatures(this.selectedTypes);
             this.company.radius = Math.round(this.radius);
-            if (!this.company.about) {
-                this.company.about = undefined;
-            }
+            this.company.about = AboutUtils.set(this.aboutTitle, this.aboutDescription);
+
             let pictureUpload = (this.picture_url && this.isChangedLogo)
                 ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
                 : Promise.resolve();

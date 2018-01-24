@@ -54,9 +54,10 @@
     </div>
 
     <div class="block-lines">
-        <form>
+        <!-- <form> -->
             <ion-item no-lines>
                 <ion-input
+                    [(ngModel)]="aboutTitle"
                     maxlength="100" class="bg-gray"
                     type="text"
                     placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.ABOUT_TITLE' | translate }}">
@@ -65,12 +66,13 @@
 
             <ion-item no-lines margin-top>
                 <ion-textarea
+                    [(ngModel)]="aboutDescription"
                     maxlength="5000"
                     class="bg-gray-radius-small"
                     placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.ABOUT_DESCRIPTION' | translate }}">
                 </ion-textarea>
             </ion-item>
-        </form>
+        <!-- </form> -->
     </div>
 
     <div class="block-lines">
