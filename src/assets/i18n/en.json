@@ -5,6 +5,7 @@
         "DETECTING_YOUR_LOCATION" : "Detecting your location...",
         "SETTING_MAP_RADIUS" : "Setting map radius (km)",
         "DONE" : "Done",
+        "OK" : "Ok",
         "CANCEL" : "Cancel",
         "SIGN_UP" : "sign up",
         "SIGN_IN" : "sign in",
@@ -125,7 +126,10 @@
         "CHOOSE_TYPE" : "Type of your place",
         "CHOOSE_FEATURES" : "Features of your place",
         "TYPES" : "Types",
-        "FEATURES" : "Features"
+        "FEATURES" : "Features",
+        "WARNING" : "Warning!",
+        "PROCEEDING_WILL_SWITCH" : "Proceeding will switch your account into a disapproved state and offers will be deactivated until validation of Agent.",
+        "ARE_YOU_SURE" : "Are you sure you want to continue?"
     },
 
     "PAGE_CREATE-OFFER" : {
