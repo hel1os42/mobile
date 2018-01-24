@@ -119,7 +119,7 @@
                 class="font-22 margin-bottom-5 bold">
             </div>
             <div
-            *ngIf="!isTransferLoading || (isTransferLoading && transaction.id !== 'Transfer process...')"
+                *ngIf="!isTransferLoading || (isTransferLoading && transaction.id !== 'Transfer process...')"
                 [ngClass]="{ 'text-FF8B10' : (transactionSource( transaction.source_account_id, transaction.amount) < 0),
                 'text-3E4B5D' : (transactionSource( transaction.source_account_id, transaction.amount) > 0)}"
                 class="font-22 star_right" text-uppercase>

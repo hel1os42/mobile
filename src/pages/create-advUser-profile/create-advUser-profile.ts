@@ -240,16 +240,16 @@ export class CreateAdvUserProfilePage {
                 parent_id: p.parent_id,
                 children_count: p.children_count,
                 specialities: this.types.filter(t => t.id === p.id)[0].specialities
-                .map(i => {
-                    return {
-                        id: i.id,
-                        retail_type_id: i.retail_type_id,
-                        slug: i.slug,
-                        name: i.name,
-                        group: i.group,
-                        isSelected: selectedSpecialities.find(j => j.slug === i.slug) ? true: false
-                    }
-                }),
+                    .map(i => {
+                        return {
+                            id: i.id,
+                            retail_type_id: i.retail_type_id,
+                            slug: i.slug,
+                            name: i.name,
+                            group: i.group,
+                            isSelected: selectedSpecialities.find(j => j.slug === i.slug) ? true : false
+                        }
+                    }),
                 isSelected: true
             }
         });
@@ -509,33 +509,41 @@ export class CreateAdvUserProfilePage {
     }
 
     presentConfirm(pictureUpload: Promise<any>, coverUpload: Promise<any>) {
-        const alert = this.alert.create({
-            title: 'Warning!',
-            subTitle: 'Proceeding will switch your account into a disapproved state and offers will be deactivated until validation of Agent.',
-            message: 'Are you sure you want to continue?',
-            buttons: [{
-                text: 'Cancel',
-                role: 'cancel',
-                handler: () => {
-                    return;
-                }
-            }, {
-                text: 'Ok',
-                handler: () => {
-                    this.placeService.putPlace(this.company)
-                        .subscribe((company) => {
-                            pictureUpload.then(() => {
-                                coverUpload.then(() => {
-                                    this.profile.refreshAccounts();
-                                    this.placeService.refreshPlace();
-                                    this.nav.pop()
-                                });
-                            });
-                        })
-                }
-            }]
-        });
-        alert.present();
+        let adv = 'PAGE_CREATE-ADVUSER-PROFILE.';
+        let unit = 'UNIT.';
+        this.translate.get(
+            ['PAGE_CREATE-ADVUSER-PROFILE', 'UNIT'])
+            .subscribe(resp => {
+                let adv = resp['PAGE_CREATE-ADVUSER-PROFILE'];
+                let unit = resp['UNIT'];
+                const alert = this.alert.create({
+                    title: adv['WARNING'],
+                    subTitle: adv['PROCEEDING_WILL_SWITCH'],
+                    message: adv['ARE_YOU_SURE'],
+                    buttons: [{
+                        text: unit['CANCEL'],
+                        role: unit['CANCEL'],
+                        handler: () => {
+                            return;
+                        }
+                    }, {
+                        text: unit['OK'],
+                        handler: () => {
+                            this.placeService.putPlace(this.company)
+                                .subscribe((company) => {
+                                    pictureUpload.then(() => {
+                                        coverUpload.then(() => {
+                                            this.profile.refreshAccounts();
+                                            this.placeService.refreshPlace();
+                                            this.nav.pop()
+                                        });
+                                    });
+                                })
+                        }
+                    }]
+                });
+                alert.present();
+            })
     }
 }
 
