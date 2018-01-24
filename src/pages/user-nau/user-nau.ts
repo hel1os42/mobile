@@ -205,7 +205,7 @@ export class UserNauPage {
                                     this.stopTimer();
                                 }
                             });
-                    }, 300);
+                    }, 2000);
                 },
                 (err) => {
                     this.presentAlert();
