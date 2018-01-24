@@ -31,6 +31,7 @@ import { CreateAdvUserProfileTypesPopover } from './create-advUser-profile.types
 import { RootCategory } from '../../models/rootCategory';
 import { AboutUtils } from '../../utils/about.utils';
 import { Speciality } from '../../models/speciality';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -80,7 +81,8 @@ export class CreateAdvUserProfilePage {
         private builder: FormBuilder,
         private geocoder: GeocodeService,
         private profile: ProfileService,
-        private alert: AlertController) {
+        private alert: AlertController,
+        private translate: TranslateService) {
 
         this.offer.getCategories()
             .subscribe(categories => {
