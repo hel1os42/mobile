@@ -11,6 +11,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TransferPopover } from './transfer.popover';
+import { TransactionService } from '../../providers/transaction.service';
 
 @Component({
     selector: 'page-user-nau',
@@ -49,7 +50,8 @@ export class UserNauPage {
         private popoverCtrl: PopoverController,
         private barcode: BarcodeScanner,
         private loading: LoadingController,
-        private alert: AlertController) {
+        private alert: AlertController,
+        private transaction: TransactionService) {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         // this.NAU = this.navParams.get('NAU');return
@@ -63,14 +65,14 @@ export class UserNauPage {
                 this.balance = this.NAU.balance;
             })
 
-        this.onRefreshTransactions = this.profile.onRefreshTransactions
+        this.onRefreshTransactions = this.transaction.onRefreshTransactions
             .subscribe(resp => {
                 this.transactions = resp.data;
                 this.lastPage = resp.last_page;
             });
 
         if (!this.transactions) {
-            this.profile.getTransactions(this.page)
+            this.transaction.getList(this.page)
                 .subscribe(resp => {
                     this.transactions = resp.data;
                     this.lastPage = resp.last_page;
@@ -84,7 +86,7 @@ export class UserNauPage {
     //temporary
     ionSelected() {
         this.page = 1;
-        this.profile.getTransactions(this.page)
+        this.transaction.getList(this.page)
             .subscribe(resp => {
                 this.transactions = resp.data;
                 this.lastPage = resp.last_page;
@@ -139,7 +141,7 @@ export class UserNauPage {
         this.page = this.page + 1;
         if (this.page <= this.lastPage) {
             setTimeout(() => {
-                this.profile.getTransactions(this.page)
+                this.transaction.getList(this.page)
                     .subscribe(resp => {
                         this.transactions = [...this.transactions, ...resp.data];
                         infiniteScroll.complete();
@@ -182,7 +184,7 @@ export class UserNauPage {
     transfer() {
         if (this.validateMax()) {
             this.transferData.amount = parseFloat(this.amount);
-            this.profile.postTransaction(this.transferData, true)
+            this.transaction.set(this.transferData, true)
                 .subscribe((resp) => {
                     let transaction = {
                         amount: undefined,
@@ -204,7 +206,7 @@ export class UserNauPage {
                                 if (this.balance != balance) {
                                     this.isTransferLoading = false;
                                     this.profile.refreshAccounts();
-                                    this.profile.refreshTransactions();
+                                    this.transaction.refresh();
                                     this.stopTimer();
                                 }
                             });
