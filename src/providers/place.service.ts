@@ -29,7 +29,7 @@ export class PlaceService {
     getWithCategory() {
         return this.api.get('profile/place', {
             params: {
-                with: 'categories;categories.retailTypes;categories.retailTypes.specialities;categories.tags'
+                with: 'category;retailTypes;specialities;tags'
             }
         });
         // return Observable.of(MockGetPlace.place);
