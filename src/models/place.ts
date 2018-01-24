@@ -29,11 +29,11 @@ export class Place {
     offers?: Offer[];
     picture_url: string;
     cover_url: string;
-    retail_types?;
-    category?: string;
+    retail_types;
+    category?;
     categories?: RootCategory[];
     tags?: string[];
-    specialities?: SpecialityCreate[]
+    specialities?;
 }
 
 
