@@ -74,6 +74,9 @@ export class UserNauPage {
                 .subscribe(resp => {
                     this.transactions = resp.data;
                     this.lastPage = resp.last_page;
+                    if (!this.transactions || this.transactions.length == 0) {
+                        this.isFormVisible = true;
+                    }
                 });
         }
     }
