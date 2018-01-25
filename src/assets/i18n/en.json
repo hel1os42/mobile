@@ -446,7 +446,9 @@
         "LATEST_PAYMENTS" : "Latest payments",
         "PAY" : "Pay",
         "LOADING_TRANSACTIONS" : "Loading transactions...",
-        "NAU" : "NAU"
+        "NAU" : "NAU",
+        "FROM" : "from",
+        "TO" : "to"
     },
 
     "PAGE_USER-OFFERS" : {
