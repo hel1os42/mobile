@@ -14,12 +14,13 @@ page-user-nau{
   }
 
   .star_right{
-      top: 4vw;
-      right: 4vw;
+      top: inherit;
+      right: 2vw;
       height: 8vw;
       width: auto;
       background: #fff;
       padding-left: 1vw;
+      bottom: 2vw;
   }
 
     .star_right:before{
@@ -37,4 +38,77 @@ page-user-nau{
       padding: 0;
       font-size: 0;
   }
+
+    .id-user{
+        line-height: 7vw;
+        font-size: 3.2vw;
+        display: block;
+    }
+
+    /* TRANSACTION */
+
+    .item-block-nau ion-spinner {
+        position: absolute;
+        right: 2vw;
+        top: calc(50% - 14px);
+    }
+
+    .btn_scan {
+        position: absolute;
+        width: 11%;
+        height: 11vw;
+        bottom: 16%;
+        right: 6%;
+        padding: 2vw;
+    }
+
+    .btn_scan img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .relative .text-input-ios{
+        width: 88%;
+    }
+
+    .relative .text-input-ios {
+        padding: 3vw 2.3vw 3vw 6.3vw;
+    }
+
+    .sticky{
+        z-index: 11111111;
+        background: #fff;
+        box-shadow: 0 12px 18px -2px rgba(0, 0, 0, 0.12);
+    }
+
+    .header-shadow{
+        box-shadow: none;
+    }
+
+    .item-block-nau .item{
+        padding: 5vw;
+    }
+
+    .item-block-nau.list.list-ios{
+        margin: 0;
+    }
+}
+
+transfer-popover-component {
+    .block-btn{
+        width: 60%;
+        margin-left: 20%;
+    }
+
+    .qr-code{
+        width: 50%;
+    }
+
+    .close{
+        position: absolute;
+        right: 5%;
+        top: 5%;
+        width: 5vw;
+        height: 5vw;
+    }
 }

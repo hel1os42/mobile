@@ -12,6 +12,8 @@ import { LocationService } from '../../providers/location.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { TabsPage } from '../tabs/tabs';
+import * as _ from 'lodash';
+import { DataUtils } from '../../utils/data.utils';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -37,6 +39,7 @@ export class CreateUserProfilePage {
     tileLayer;
     _map: Map;
     options;
+    baseData;
 
     constructor(private nav: NavController,
         private location: LocationService,
@@ -53,15 +56,22 @@ export class CreateUserProfilePage {
         if (this.navParams.get('user')) {
             this.isEdit = true;
             this.user = this.navParams.get('user');
+            this.baseData = _.clone(this.user);
             this.picture_url = this.user.picture_url;
             this.coords.lat = this.user.latitude;
             this.coords.lng = this.user.longitude;
-            this.addMap();
+            if (this.coords.lat) {
+                this.addMap();
+            }
+            else {
+                this.getLocation();
+            }
         }
         else {
             this.profile.get(true)
                 .subscribe(resp => {
                     this.user = resp;
+                    this.baseData = _.clone(this.user);
                     this.picture_url = this.user.picture_url;
                 });
             this.getLocation();
@@ -209,43 +219,45 @@ export class CreateUserProfilePage {
         }
     }
 
+    navTo() {
+        if (this.isEdit) {
+            this.profile.refreshAccounts();
+            this.nav.pop();
+        }
+        else {
+            // this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
+            //temporary
+            this.profile.getWithAccounts()
+                .subscribe(resp => {
+                    this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
+                });
+            //temporary
+        }
+    }
+
     createAccount() {
         if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {
             this.user.latitude = this.coords.lat;
             this.user.longitude = this.coords.lng;
             //this.account.points = this.point(); to do
-            this.profile.put(this.user)
-                .subscribe(user => {
-                    if (this.picture_url && this.changedPicture) {
-                        this.api.uploadImage(this.picture_url, 'profile/picture', true)
-                            .then(() => {
-                                if (this.isEdit) {
-                                    this.profile.refreshAccounts();
-                                    this.nav.pop();
-                                }
-                                else {
-                                    this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-                                }
-                            });
-                    }
-                    else {
-                        if (this.isEdit) {
-                            this.profile.refreshAccounts();
-                            this.nav.pop();
-                        }
-                        else {
-                            // this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });return
-                            
-                            //temporary
-                            this.profile.getWithAccounts()
-                                .subscribe(resp => {
-                                    this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
-                                });
-                            //temporary
-                        }
-                    }
-                });
+            let differenceData = DataUtils.difference(this.user, this.baseData);
+            let isEmpty = _.isEmpty(differenceData);
+            let promise = this.picture_url && this.changedPicture
+                ? this.api.uploadImage(this.picture_url, 'profile/picture', true)
+                : Promise.resolve();
+            if (!isEmpty) {
+                this.profile.patch(differenceData)
+                    .subscribe(() => {
+                        promise.then(() => {
+                            this.navTo();
+                        })
+                    })
+            }
+            else {
+                promise.then(() => {
+                    this.navTo();
+                })
+            }
         }
     }
 }
-

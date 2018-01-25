@@ -2,14 +2,17 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { ApiService } from "./api.service";
 import { OfferCreate } from "../models/offerCreate";
 import { PlaceCreate } from "../models/placeCreate";
-import { Company } from "../models/company";
+import { Place } from "../models/place";
 import { Offer } from "../models/offer";
+import { Observable } from 'rxjs/Observable';
+import { MockGetPlace } from '../mocks/mockGetPlace';
+
 
 @Injectable()
 export class PlaceService {
 
-    company: Company;
-    onRefreshCompany: EventEmitter<Company> = new EventEmitter<Company>();
+    company: Place;
+    onRefreshCompany: EventEmitter<Place> = new EventEmitter<Place>();
 
     constructor(private api: ApiService) { }
 
@@ -24,7 +27,12 @@ export class PlaceService {
     }
 
     getWithCategory() {
-        return this.api.get('profile/place?with=categories');
+        return this.api.get('profile/place', {
+            params: {
+                with: 'category;retailTypes;specialities;tags'
+            }
+        });
+        // return Observable.of(MockGetPlace.place);
     }
 
     getOfferCreate() {
@@ -58,8 +66,12 @@ export class PlaceService {
         return obs;
     }
 
-    putPlace(place: Company) {
+    putPlace(place: Place) {
         return this.api.put('profile/place', place);
+    }
+
+    patchPlace(data) {
+        return this.api.patch('profile/place', data);
     }
 
     getOffers(page) {
@@ -67,10 +79,6 @@ export class PlaceService {
             showLoading: page == 1
         });
     }
-
-    // getRetailTypes(category_id) {
-    //     return this.api.get(`categories/${category_id}?with=retailTypes`);
-    // }
 
     // getFilteredOffersByDate(startDate, finishDate, page) {
     //     return this.api.get(`advert/offers?search=status:active;start_date:${startDate};finish_date:${finishDate}&searchJoin=and&page=${page}`, {
@@ -94,14 +102,22 @@ export class PlaceService {
     }
 
     getActiveOffers(page) {
-        return this.api.get(`advert/offers?search=status:active&page=${page}`, {
-            showLoading: page == 1
+        return this.api.get('advert/offers', {
+            showLoading: page == 1,
+            params: {
+                search: 'status:active',
+                page: page
+            }
         });
     }
 
-    getDeActiveOffers(page) {
-        return this.api.get(`advert/offers?search=status:deactive&page=${page}`, {
-            showLoading: page == 1
+   getDeActiveOffers(page) {
+        return this.api.get('advert/offers', {
+            showLoading: page == 1,
+            params: {
+                search: 'status:deactive',
+                page: page
+            }
         });
     }
 

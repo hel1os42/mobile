@@ -2,7 +2,7 @@ import { Subscription } from 'rxjs/Rx';
 import { StatisticPage } from '../statistic/statistic';
 import { UserNauPage } from '../user-nau/user-nau';
 import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
-import { Company } from '../../models/company';
+import { Place } from '../../models/place';
 import { ProfileService } from '../../providers/profile.service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -21,7 +21,7 @@ export class AdvRedeemOfferPage {
         preferFrontCamera: true,
         orientation: 'portrait'
     };
-    company = new Company();
+    company = new Place();
     balance: number;
     NAU: Account;
     onRefreshPlace: Subscription;

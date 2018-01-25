@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Company } from '../../models/company';
+import { Place } from '../../models/place';
 import { Offer } from '../../models/offer';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
@@ -17,7 +17,8 @@ export class CreateOffer1Page {
     discount: number = 10;
     isDiscountSelectDisable = true;
     isGiftSelectDisable = true;
-    company = new Company();
+    // company = new Place();to do
+    company;
     picture_url: string;
 
     constructor(private nav: NavController,
@@ -27,12 +28,15 @@ export class CreateOffer1Page {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
-        this.place.getWithCategory()
-            .subscribe(company => {
-                this.company = company;
-                this.offerService.getCategory(this.company.categories[0].id)
-                    .subscribe(category => this.offer.category_id = category.parent_id !== null ? category.parent_id : this.company.categories[0].id)
-            });
+        if (!this.offer.id) {
+            this.place.getWithCategory()
+                .subscribe(company => {
+                    this.company = company;
+                    this.offerService.getCategory(this.company.categories[0].id)
+                        .subscribe(category => this.offer.category_id = category.parent_id !== null ? category.parent_id : this.company.categories[0].id)
+                });
+        }
+
     }
 
     openCreateOffer2Page() {

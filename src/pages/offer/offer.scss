@@ -176,8 +176,8 @@ page-offer{
         margin-left: 6vw;
     }
 
-    .text-overflow-4line{
-        max-height: 22.5vw;
+    .text-overflow-3line{
+        max-height: 17.5vw;
         height: auto;
         overflow: hidden;
         display: block;
@@ -195,6 +195,16 @@ page-offer{
         background-position: 50% 50%;
         background-size: cover;
     }
+}
+
+.iphonex.platform-ios page-offer .btn_footer{
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* FIX IOS NAV TRANSPARENT */
+ion-app.platform-ios.disable-scroll page-offer ion-content > .scroll-content{
+    overflow: visible;
 }
 
 offerRedeem-popover-component {

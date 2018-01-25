@@ -7,7 +7,7 @@ import { TransactionCreate } from '../../models/transactionCreate';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { StringValidator } from '../../validators/string.validator';
-import { TransferPopover } from './transfer.popover';
+import { TransactionService } from '../../providers/transaction.service';
 
 @Component({
     selector: 'page-transfer',
@@ -33,7 +33,8 @@ export class TransferPage {
         private nav: NavController,
         private popoverCtrl: PopoverController,
         private barcode: BarcodeScanner,
-        private loading: LoadingController) {
+        private loading: LoadingController,
+        private transaction: TransactionService) {
 
         this.NAU = this.navParams.get('NAU');
         this.transferData.source = this.NAU.address;
@@ -64,8 +65,8 @@ export class TransferPage {
     }
 
     openPopover() {
-        let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.transferData.source });
-        popover.present();
+        // let popover = this.popoverCtrl.create(TransferPopover, { sourceAddress: this.transferData.source });
+        // popover.present();
     }
 
     scanBarcode() {
@@ -80,7 +81,7 @@ export class TransferPage {
             this.transferData.amount = parseFloat(this.amount);
             let loading = this.loading.create();
             loading.present();
-            this.profile.postTransaction(this.transferData, false)
+            this.transaction.set(this.transferData, false)
                 .subscribe((resp) => {
                     this.timer = setInterval(() => {
                         this.profile.getWithAccounts(false)
@@ -89,7 +90,7 @@ export class TransferPage {
                                 let balance = NAU.balance;
                                 if (this.balance != balance) {
                                     this.profile.refreshAccounts();
-                                    this.profile.refreshTransactions();
+                                    this.transaction.refresh();
                                     this.stopTimer();
                                     loading.dismiss();
                                     this.nav.pop();

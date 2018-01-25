@@ -270,6 +270,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     padding: 0;
 }
 
+.ios ion-nav > .ion-page > ion-content.padding-no.statusbar-padding:first-child .scroll-content{
+    padding-top: 0;
+}
+
 .border-bottom-no .list-md .item-block .item-inner,
 .border-bottom-no.item-md.item-block .item-inner,
 .border-bottom-no .list-ios .item-block .item-inner,
@@ -582,10 +586,6 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
     font-size: 2.8vw;
     line-height: 4vw;
-}
-
-.platform-ios .grid-tabs-splash{
-    /* padding-top: 20px; */
 }
 
 .grid-tabs-splash .col img {
@@ -915,6 +915,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-right: 2.4vw;
 }
 
+.margin-right-1vw{
+    margin-right: 1vw;
+}
+
 .margin-top-5{
     margin-top: 5px;
 }
@@ -1146,6 +1150,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-radius: 1vw;
     margin-right: 1.5vw;
     margin-top: 2vw;
+    margin-bottom: 0.3vw;
     display: inline-block;
 }
 
@@ -1224,11 +1229,6 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .overflow-visible{
     overflow: visible;
-}
-
-/* FIX KEYBOARD SCROLL*/
-.platform-ios .input-cover{
-  position: static;
 }
 
 .item-multiple-inputs ion-select{
@@ -1707,4 +1707,14 @@ ion-app.disable-scroll {
 .popover-content {
     left: unset !important;
     right: 5%;
+}
+
+/* FIX KEYBOARD SCROLL*/
+.platform-ios .input-cover{
+    position: static;
+}
+
+.iphonex.platform-ios .footer.footer-ios{
+    margin-bottom: constant(safe-area-inset-bottom);
+    margin-bottom: env(safe-area-inset-bottom);
 }

@@ -2,7 +2,7 @@ import { DistanceUtils } from '../../utils/distanse';
 import { Coords } from '../../models/coords';
 import { Component } from '@angular/core';
 import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
-import { Company } from '../../models/company';
+import { Place } from '../../models/place';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
@@ -18,7 +18,7 @@ import { OfferRedeemPopover } from './offerRedeem.popover';
 export class OfferPage {
 
     offer: Offer;
-    company = new Company;
+    company = new Place;
     offerActivationCode: OfferActivationCode;
     timer;
     distanceString: string;

@@ -10,7 +10,7 @@ import { StringValidator } from '../../validators/string.validator';
 })
 export class SettingsChangePhonePage {
 
-    user = new User;
+    user: User;
     visibleChangePhone: boolean = true;
     otp: string;
     phone: string
@@ -43,7 +43,7 @@ export class SettingsChangePhonePage {
         // }
         // else {
             this.user.phone = this.phone;
-            this.profile.put(this.user)
+            this.profile.patch({ phone: this.user.phone })
                 .subscribe(
                 resp => this.nav.pop(),
                 errResp => this.visibleChangePhone = true);

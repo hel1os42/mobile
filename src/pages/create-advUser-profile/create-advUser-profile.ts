@@ -2,17 +2,17 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Map } from 'leaflet';
 import { latLng, LeafletEvent, tileLayer } from 'leaflet';
 import * as _ from 'lodash';
-import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
-import { ChildCategory } from '../../models/childCategory';
-import { Company } from '../../models/company';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
+import { Place } from '../../models/place';
 import { RetailType } from '../../models/retailType';
 import { SelectedCategory } from '../../models/selectedCategory';
-import { SelectedRetailType } from '../../models/selectedRetailType';
+import { SelectedTag } from '../../models/selectedTag';
+import { Tag } from '../../models/tag';
 import { ApiService } from '../../providers/api.service';
 import { GeocodeService } from '../../providers/geocode.service';
 import { LocationService } from '../../providers/location.service';
@@ -25,9 +25,13 @@ import { MapUtils } from '../../utils/map';
 import { StringValidator } from '../../validators/string.validator';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';
-import { CreateAdvUserProfileChildCategoryPopover } from './create-advUser-profile.childCategory.popover';
 import { CreateAdvUserProfileFeaturesPopover } from './create-advUser-profile.features.popover';
+import { CreateAdvUserProfileTagsPopover } from './create-advUser-profile.tags.popover';
 import { CreateAdvUserProfileTypesPopover } from './create-advUser-profile.types.popover';
+import { RootCategory } from '../../models/rootCategory';
+import { AboutUtils } from '../../utils/about.utils';
+import { Speciality } from '../../models/speciality';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -38,21 +42,18 @@ export class CreateAdvUserProfilePage {
     coords: Coords = new Coords();
     message: string;
     categories: OfferCategory[] = OfferCategory.StaticList;
-    childCategories: ChildCategory[];
     selectedCategory: SelectedCategory;
-    selectedChildCategories: SelectedCategory[];
-    childCategoriesNames: string[];
+    tags: Tag[];
+    selectedTags: SelectedTag[];
+    tagsNames: string[];
     types: RetailType[];
-    selectedTypes: SelectedRetailType[];
+    selectedTypes: RetailType[];
     typeNames: string[];
-    features = MockPlaceTypes.Features;//temporary
-    selectedFeatures;//to do
-    featureNames: string[];
-    company: Company = new Company();
+    featuresNames: string[];
+    company = new Place();
     address: string;
     picture_url: string;
     cover_url: string;
-    noChild: boolean;//temporary
     formData: FormGroup;
     isChangedLogo = false;
     isChangedCover = false;
@@ -62,6 +63,9 @@ export class CreateAdvUserProfilePage {
     // circle: CircleMarker;
     zoom = 16;
     radius: number;
+    lastOpened: string;
+    aboutTitle: string;
+    aboutDescription: string;
 
     constructor(
         private location: LocationService,
@@ -76,14 +80,15 @@ export class CreateAdvUserProfilePage {
         private navParams: NavParams,
         private builder: FormBuilder,
         private geocoder: GeocodeService,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private alert: AlertController,
+        private translate: TranslateService) {
 
         this.offer.getCategories()
             .subscribe(categories => {
                 this.categories.forEach((category) => {
                     let placeCategories = categories.data.find(p => p.name == category.name)
                     category.id = placeCategories.id;//temporary - code
-                    category.children_count = placeCategories.children_count;
                 })
             });
         if (this.navParams.get('company')) {
@@ -91,29 +96,39 @@ export class CreateAdvUserProfilePage {
             this.zoom = MapUtils.round(MapUtils.getZoom(this.company.latitude, this.company.radius, 95), 0.5);
             this.radius = this.company.radius;
             this.address = this.company.address;
+            this.picture_url = this.company.picture_url;
+            this.cover_url = this.company.cover_url;
+            this.coords = {
+                lat: this.company.latitude,
+                lng: this.company.longitude
+            };
+            this.aboutTitle = AboutUtils.get(this.company.about).title;
+            this.aboutDescription = AboutUtils.get(this.company.about).description;
+            this.mapPresent();
             this.placeService.getWithCategory()
                 .subscribe(company => {
-                    this.company = company;
-                    this.picture_url = this.company.picture_url;
-                    this.cover_url = this.company.cover_url;
-                    this.coords = {
-                        lat: company.latitude,
-                        lng: company.longitude
-                    };
-                    this.mapPresent();
-                    this.selectCategory(company.categories);
-
-                    if (company.retail_types && company.retail_types.length > 0) {//to do
-                       this.selectTypes(company.retail_types);//to do
-                    }
-                })
+                    this.offer.getTypes(company.category[0].id)//to do
+                        .subscribe(resp => {
+                            this.types = resp.retail_types;
+                            this.tags = resp.tags ? resp.tags : undefined;
+                            this.selectCategory(company.category[0]);
+                            if ((company.tags && company.tags.length > 0) && (this.tags && this.tags.length > 0)) {
+                                this.selectTags(company.tags);
+                            }
+                            if (company.retail_types && company.retail_types.length > 0) {
+                                this.selectTypes(company.retail_types, company.specialities);
+                            }
+                        })
+                });
         }
         else {
             this.coords.lat = this.navParams.get('latitude');
             this.coords.lng = this.navParams.get('longitude');
-            this.mapPresent(true);
+            if (this.coords.lat) {
+                this.mapPresent(true);
+            }
 
-            if (!this.coords.lat) {
+            else {
                 this.location.get()
                     .then((resp) => {
                         this.coords = {
@@ -176,13 +191,6 @@ export class CreateAdvUserProfilePage {
             zoomSnap: 0.5,
             zoomDelta: 0.5
         };
-        // this.circle = circleMarker(this.coords, { 
-        //     radius: 75,
-        //     color: '#ff8b10',
-        //     opacity: 0.2,
-        //     stroke: false
-        // });
-        // this.layers = [this.tileLayer, ...[this.circle]];
     }
 
     mapPresent(getRadius?) {
@@ -196,53 +204,57 @@ export class CreateAdvUserProfilePage {
             })
     }
 
-    selectCategory(categories) {
-        let parentCategoryId = categories[0].parent_id === null ? categories[0].id : categories[0].parent_id;
-        let rootCategories = this.categories.filter(p => p.id == parentCategoryId).map(p => {
+    selectCategory(category) {
+        let rootCategories = this.categories.filter(p => p.id === category.id).map(p => {
+            // let rootCategories = this.categories.filter(p => p.name === companyCategory.name).map(p => {// temporary
             return {
                 id: p.id,
                 name: p.name,
                 image_url: p.imageAdvCreate_url,
-                isSelected: p.id == parentCategoryId,
+                isSelected: p.id === category.id,
                 children_count: p.children_count,
             }
         })
         this.selectedCategory = rootCategories[0];
-        this.offer.getSubCategories(this.selectedCategory.id)
-            .subscribe(resp => {
-                // this.childCategories = resp.children;
-                let childCategoriesIds = categories[0].parent_id !== null
-                    ? categories.map(p => p.id)
-                    : undefined;
-                if (childCategoriesIds) {
-                    let selectedChildCategories: any = _(resp.children).keyBy('id').at(childCategoriesIds).value();
-                    this.selectedChildCategories = selectedChildCategories.map(p => {
-                        return {
-                            id: p.id,
-                            name: p.name,
-                            image_url: '',
-                            isSelected: true
-                        }
-                    })
-                    this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name);
-                }
-            })
     }
 
-    selectTypes(types) {
-        this.offer.getRetailTypes(this.selectedCategory.id)
-            .subscribe(resp => {
-                let typesSlugs = types.map(p => p.slug);
-                let selectedTypes: any = _(resp.retail_types).keyBy('slug').at(typesSlugs).value();
-                this.selectedTypes = selectedTypes.map(p => {
-                    return {
-                        name: p.name,
-                        slug: p.slug,
-                        isSelected: true
-                    }
-                })
-                this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
-            })
+    selectTags(tags: Tag[]) {
+        tags.forEach(k => {
+            this.selectedTags = tags.map(t => {
+                return {
+                    slug: t.slug,
+                    name: t.name,
+                    isSelected: true
+                }
+            });
+        });
+        this.tagsNames = this.selectedTags.map(t => ' ' + t.name);
+    }
+
+    selectTypes(types: RetailType[], specialities: Speciality[]) {
+        this.selectedTypes = types.map(p => {
+            let selectedSpecialities = specialities.filter(s => s.retail_type_id === p.id);
+            return {
+                id: p.id,
+                name: p.name,
+                parent_id: p.parent_id,
+                children_count: p.children_count,
+                specialities: this.types.filter(t => t.id === p.id)[0].specialities
+                    .map(i => {
+                        return {
+                            id: i.id,
+                            retail_type_id: i.retail_type_id,
+                            slug: i.slug,
+                            name: i.name,
+                            group: i.group,
+                            isSelected: selectedSpecialities.find(j => j.slug === i.slug) ? true : false
+                        }
+                    }),
+                isSelected: true
+            }
+        });
+        this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
+        this.getFeaturesNames();
     }
 
     onMapReady(map: Map) {
@@ -281,112 +293,143 @@ export class CreateAdvUserProfilePage {
         popover.onDidDismiss(categories => {
             if (!categories)
                 return;
-
             let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
             if (this.selectedCategory && selectedCategories[0].id != this.selectedCategory.id) {
-                this.selectedChildCategories = undefined;
+                this.selectedTags = undefined;
+                this.selectedTypes = undefined;
+                this.offer.getTypes(selectedCategories[0].id)//to do
+                    .subscribe(resp => {
+                        this.types = resp.retail_types;
+                        this.tags = resp.tags;
+                        this.getFeaturesNames();
+                    })
             }
-            if (selectedCategories.length > 0) {
+            if (selectedCategories && selectedCategories.length > 0) {
                 this.selectedCategory = selectedCategories[0];
+
             }
         })
     }
 
-    presentChildCategoriesPopover() {
-        this.offer.getSubCategories(this.selectedCategory.id)
-            .subscribe(resp => {
-                this.childCategories = resp.children;
-
-                let popover = this.popoverCtrl.create(CreateAdvUserProfileChildCategoryPopover, {
-                    categoryName: this.selectedCategory.name,
-                    categories: this.childCategories.map(p => {
-                        return {
-                            id: p.id,
-                            name: p.name,
-                            image_url: '',
-                            isSelected: this.selectedChildCategories ? !!this.selectedChildCategories.find(k => k.id == p.id) : false
-                        }
-                    })
-
-                })
-                popover.present();
-                popover.onDidDismiss(categories => {
-                    if (!categories) {
-                        return;
-                    }
-
-                    let selectedCategories: SelectedCategory[] = categories.filter(p => p.isSelected);
-                    if (selectedCategories.length > 0) {
-                        this.selectedChildCategories = selectedCategories;
-                        this.childCategoriesNames = this.selectedChildCategories.map(p => ' ' + p.name);
-                    }
-                    else {
-                        this.selectedChildCategories = undefined;
-                    }
-                })
-            })
-    }
-    //to do
-    presentTypesPopover() {
-        this.offer.getRetailTypes(this.selectedCategory.id)
-            .subscribe(resp => {
-                this.types = resp.retail_types;
-                let popover = this.popoverCtrl.create(CreateAdvUserProfileTypesPopover, { 
-                    types: this.types.map(t => {
-                        return {
-                            slug: t.slug,
-                            name: t.name,
-                            isSelected: this.selectedTypes ? this.selectedTypes.find(k => k.slug == t.slug) : false
-                        };
-                    }) 
-                });
-                popover.present();
-                popover.onDidDismiss(types => {
-                    if (!types) {
-                        return;
-                    } 
-                    let selectedTypes = types.filter(t => t.isSelected);
-                    if (selectedTypes.length > 0) {
-                        this.selectedTypes = selectedTypes;
-                        this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
-                    }
-                    else {
-                        this.selectedTypes = undefined;
-                    }
-                });
-            });
-    }
-    //to do
-    presentFeaturesPopover() {
-        let popover = this.popoverCtrl.create(CreateAdvUserProfileFeaturesPopover, { 
-            features: this.features.map(f => {
+    presentTagsPopover() {
+        let popover = this.popoverCtrl.create(CreateAdvUserProfileTagsPopover, {
+            categoryName: this.selectedCategory.name,
+            tags: this.tags.map(p => {
                 return {
-                    name: f.name,
-                    isSelected: false
-                };
-            }) 
-        });
+                    name: p.name,
+                    slug: p.slug,
+                    isSelected: this.selectedTags ? !!this.selectedTags.find(k => k.slug == p.slug) : false
+                }
+            })
+
+        })
         popover.present();
-        popover.onDidDismiss(features => {
-            if (!features) {
+        popover.onDidDismiss(tags => {
+            if (!tags) {
                 return;
-            } 
-            let selectedFeatures = features.filter(f => f.isSelected);
-            if (selectedFeatures.length > 0) {
-                this.selectedFeatures = selectedFeatures;
-                this.featureNames = this.selectedFeatures.map(p => ' ' + p.name);
+            }
+
+            let selectedTags: SelectedTag[] = tags.filter(p => p.isSelected);
+            if (selectedTags.length > 0) {
+                this.selectedTags = selectedTags;
+                this.tagsNames = this.selectedTags.map(p => ' ' + p.name);
             }
             else {
-                this.selectedFeatures = undefined;
+                this.selectedTags = undefined;
+            }
+        })
+    }
+
+    presentTypesPopover() {
+        if (this.selectedTypes && this.selectedTypes.length > 0) {
+            this.types = _.uniqBy([...this.selectedTypes, ...this.types], 'id');
+        }
+        let popover = this.popoverCtrl.create(CreateAdvUserProfileTypesPopover, {
+            types: this.types.map(t => {
+                return {
+                    id: t.id,
+                    name: t.name,
+                    parent_id: t.parent_id,
+                    children_count: t.children_count,
+                    specialities: t.specialities,
+                    isSelected: this.selectedTypes ? this.selectedTypes.find(k => k.id == t.id) : false
+                };
+            })
+        });
+        popover.present();
+        popover.onDidDismiss(types => {
+            if (!types) {
+                return;
+            }
+            let selectedTypes: RetailType[] = types.filter(t => t.isSelected);
+            if (selectedTypes.length > 0) {
+                this.selectedTypes = selectedTypes;
+                this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
+                this.getFeaturesNames();
+            }
+            else {
+                this.selectedTypes = undefined;
             }
         });
+    }
+
+    presentFeaturesPopover() {
+        this.selectedTypes.forEach(p => {
+            p.specialities.forEach(s => {
+                s.isSelected = s.isSelected ? s.isSelected : false
+            })
+        })
+        this.selectedTypes.forEach(t => {
+            t.specialities = _.reverse(_.values(_(t.specialities).groupBy(x => x.group).value()));
+        });
+        let popover = this.popoverCtrl.create(CreateAdvUserProfileFeaturesPopover, {
+            types: this.selectedTypes,
+            name: this.lastOpened
+        });
+        popover.present();
+        popover.onDidDismiss(data => {
+            if (!data) {
+                return;
+            }
+            else {
+                this.selectedTypes = data.types;
+                this.lastOpened = data.name;
+                this.selectedTypes.forEach(t => {
+                    t.specialities = _.flatten(t.specialities);
+                })
+                this.getFeaturesNames();
+            }
+        });
+    }
+
+    getFeaturesNames() {
+        if (this.selectedTypes) {
+            let names = _.flatten(this.selectedTypes.map(t => t.specialities)).filter(p => p.isSelected);
+            this.featuresNames = names.map(n => ' ' + n.name);
+        }
+        else {
+            this.featuresNames = undefined;
+        }
+    }
+
+    getFeatures(arr: RetailType[]) {
+        let specsArr: any = _.flatten(arr.map(t => t.specialities)).filter(p => p.isSelected);
+        specsArr = _.values(_(specsArr).groupBy(x => x.retail_type_id).value());
+        let groupedSpecs = [];
+        specsArr.forEach(s => {
+            groupedSpecs.push({
+                retail_type_id: s[0].retail_type_id,
+                specs: s.map(k => k.slug)
+            })
+        })
+        return groupedSpecs;
     }
 
     addLogo() {
         let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
         this.imagePicker.getPictures(options)
             .then(results => {
-                if (results[0] && results[0] != 'O') {
+                if (results[0] && results[0] !== 'O') {
                     this.picture_url = results[0];
                     this.isChangedLogo = true;
                 }
@@ -411,65 +454,96 @@ export class CreateAdvUserProfilePage {
     };
 
     validate() {
-        if ((!this.selectedChildCategories && this.selectedCategory.children_count > 0) || (!this.selectedCategory)) {
-            this.toast.show('Please select offer category, type and features');
+        if ((!this.selectedTags && this.tags && this.tags.length > 0) || !this.selectedCategory || !this.selectedTypes) {
+            this.toast.show('Please select category, type and features');
             return false;
         }
         else return true;
     }
 
     createAccount() {
-        // if (this.validate()) {to do
+        if (this.validate()) {
             this.company.name = this.formData.value.companyName;
             this.company.description = this.formData.value.companyDescription;
             this.company.latitude = this.coords.lat;
             this.company.longitude = this.coords.lng;
             this.company.address = this.address;
-            this.company.category_ids = this.selectedChildCategories ? this.selectedChildCategories.map(p => p.id) : [this.selectedCategory.id];
-            // this.company.retail_types = this.selectedTypes.map(p => p.slug);// to do
+            this.company.category = this.selectedCategory.id;// to do
+            this.company.retail_types = this.selectedTypes.map(t => t.id);
+            this.company.tags = this.selectedTags ? this.selectedTags.map(p => p.slug) : [];
+            this.company.specialities = this.getFeatures(this.selectedTypes);
             this.company.radius = Math.round(this.radius);
-       
+            this.company.about = AboutUtils.set(this.aboutTitle, this.aboutDescription);
+
+            let pictureUpload = (this.picture_url && this.isChangedLogo)
+                ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
+                : Promise.resolve();
+            let coverUpload = (this.cover_url && this.isChangedCover)
+                ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
+                : Promise.resolve();
             if (!this.company.id) {
                 this.placeService.set(this.company)
                     .subscribe(company => {
-                        let pictureUpload = this.picture_url
-                            ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
-                            : Promise.resolve();
                         pictureUpload.then(() => {
-                            let coverUpload = this.cover_url
-                                ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
-                                : Promise.resolve();
-
                             coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
                         });
                     })
             }
             else {
-                if (this.company.id) {
-                    if (!this.company.about) {
-                        this.company.about = undefined;
-                    }
-                    this.placeService.putPlace(this.company)
-                        .subscribe((company) => {
-                            let pictureUpload = (this.picture_url && this.isChangedLogo)
-                                ? this.api.uploadImage(this.picture_url, 'profile/place/picture', false)
-                                : Promise.resolve();
-
-                            pictureUpload.then(() => {
-                                let coverUpload = (this.cover_url && this.isChangedCover)
-                                    ? this.api.uploadImage(this.cover_url, 'profile/place/cover', false)
-                                    : Promise.resolve();
-
-                                coverUpload.then(() => {
-                                    this.profile.refreshAccounts();
-                                    this.placeService.refreshPlace();
-                                    this.nav.pop()
-                                });
-                            });
-                        })
-                }
+                // let different = DataUtils.difference(this.company, this.baseData);
+                // let isEmpty = _.isEmpty(different);
+                // if (!isEmpty || this.isChangedLogo || this.isChangedCover) {
+                //     if (!isEmpty) {
+                //         let keys = _.keys(different);
+                //         for (let i = 0; i < keys.length; i++) {
+                //             different[keys[i]] = this.company[keys[i]];
+                //         }
+                //     }
+                this.presentConfirm(pictureUpload, coverUpload);
+                // }
+                // else {
+                //     this.nav.pop();
+                // }
             }
-
         }
-    // }
+    }
+
+    presentConfirm(pictureUpload: Promise<any>, coverUpload: Promise<any>) {
+        let adv = 'PAGE_CREATE-ADVUSER-PROFILE.';
+        let unit = 'UNIT.';
+        this.translate.get(
+            ['PAGE_CREATE-ADVUSER-PROFILE', 'UNIT'])
+            .subscribe(resp => {
+                let adv = resp['PAGE_CREATE-ADVUSER-PROFILE'];
+                let unit = resp['UNIT'];
+                const alert = this.alert.create({
+                    title: adv['WARNING'],
+                    subTitle: adv['PROCEEDING_WILL_SWITCH'],
+                    message: adv['ARE_YOU_SURE'],
+                    buttons: [{
+                        text: unit['CANCEL'],
+                        role: unit['CANCEL'],
+                        handler: () => {
+                            return;
+                        }
+                    }, {
+                        text: unit['OK'],
+                        handler: () => {
+                            this.placeService.putPlace(this.company)
+                                .subscribe((company) => {
+                                    pictureUpload.then(() => {
+                                        coverUpload.then(() => {
+                                            this.profile.refreshAccounts();
+                                            this.placeService.refreshPlace();
+                                            this.nav.pop()
+                                        });
+                                    });
+                                })
+                        }
+                    }]
+                });
+                alert.present();
+            })
+    }
 }
+

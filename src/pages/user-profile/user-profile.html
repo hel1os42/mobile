@@ -40,7 +40,8 @@
                       {{ 'PAGE_USER-PROFILE.GET' | translate }}
                       </div>
                       <span text-uppercase class="bold">
-                      {{ 'PAGE_USER-PROFILE.ADDITIONAL' | translate }}<br>{{ 'PAGE_USER-PROFILE.POINTS' | translate }}
+                      {{ 'PAGE_USER-PROFILE.ADDITIONAL' | translate }}
+                      <br>{{ 'PAGE_USER-PROFILE.POINTS' | translate }}
                       </span>
                   </div>
               </div>
@@ -50,7 +51,11 @@
 
               <div class="box box1">
                   <div class="label-point circle-label-top">10 000</div>
-                  <div class="next-level"><span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} 5</span></div>
+                  <div class="next-level">
+                    <span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}
+                      <br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} 5
+                    </span>
+                  </div>
               </div>
 
               <div class="box box3">
@@ -64,7 +69,9 @@
           </div>
       </div>
 
-  <div class="font-14 text-4F4F4F" margin-bottom text-uppercase text-center>{{ 'PAGE_USER-PROFILE.YOUR_TASKS_JOBS_FOR_TODAY' | translate }}</div>
+  <div class="font-14 text-4F4F4F" margin-bottom text-uppercase text-center>
+    {{ 'PAGE_USER-PROFILE.YOUR_TASKS_JOBS_FOR_TODAY' | translate }}
+  </div>
 
   <ion-grid text-center class="block-slider">
     <ion-row>
@@ -81,7 +88,9 @@
                   <img src="assets/img/user_profile/slide1.svg">
                 </ion-avatar>
                 <div class="bold font-22 text-white">{{ 'PAGE_USER-PROFILE.GET_NEW_POINTS' | translate }}</div>
-                <div text-wrap class="font-12 text-white margin-top-3vw text-overflow-3-font-12">{{ 'PAGE_USER-PROFILE.GET_NEW_OFFERS_NEARBY' | translate }}</div>
+                <div text-wrap class="font-12 text-white margin-top-3vw text-overflow-3-font-12">
+                  {{ 'PAGE_USER-PROFILE.GET_NEW_OFFERS_NEARBY' | translate }}
+                </div>
               </ion-item>
             </ion-list>
           </ion-slide>
@@ -120,7 +129,9 @@
   </ion-grid>
 
     <p margin>
-        <button (click)="logout()" color="primary" ion-button block text-uppercase>{{ 'PAGE_USER-PROFILE.LOGOUT' | translate }}</button>
+        <button (click)="logout()" color="primary" ion-button block text-uppercase>
+          {{ 'PAGE_USER-PROFILE.LOGOUT' | translate }}
+        </button>
     </p>
 
 </ion-content>

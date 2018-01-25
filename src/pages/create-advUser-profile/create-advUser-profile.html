@@ -19,32 +19,62 @@
 </ion-header>
 
 <ion-content class="padding-no">
-    <div class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw" text-uppercase margin-top margin-left margin-right>{{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD_COMPANY_NAME' | translate }}</div>
+    <div
+        class="text-4F4F4F font-14 margin-bottom-10 padding-top-9vw"
+        text-uppercase
+        margin-top
+        margin-left
+        margin-right>
+        {{ 'PAGE_CREATE-ADVUSER-PROFILE.ADD_COMPANY_NAME' | translate }}
+    </div>
     <div class="block-lines">
         <form [formGroup]="formData" (ngSubmit)="createAccount()">
             <ion-item no-lines>
-                <ion-input formControlName="companyName" maxlength="30" class="bg-gray" type="text" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"></ion-input>
+                <ion-input
+                    formControlName="companyName"
+                    maxlength="30" class="bg-gray"
+                    type="text"
+                    placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)">
+                </ion-input>
             </ion-item>
 
             <ion-item no-lines margin-top>
-                <ion-textarea formControlName="companyDescription" maxlength="250" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"></ion-textarea>
+                <ion-textarea
+                    formControlName="companyDescription"
+                    maxlength="250"
+                    class="bg-gray-radius-small"
+                    placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.COMPANY_DESCRIPTION' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)">
+                </ion-textarea>
             </ion-item>
         </form>
     </div>
-<!--
-    <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>About company</div>
+
     <div class="block-lines">
-        <form [formGroup]="formData" (ngSubmit)="createAccount()">
+        <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.ABOUT_COMPANY' | translate }}</div>
+    </div>
+
+    <div class="block-lines">
+        <!-- <form> -->
             <ion-item no-lines>
-                <ion-input maxlength="30" class="bg-gray" type="text" placeholder="Title"></ion-input>
+                <ion-input
+                    [(ngModel)]="aboutTitle"
+                    maxlength="100" class="bg-gray"
+                    type="text"
+                    placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.ABOUT_TITLE' | translate }}">
+                </ion-input>
             </ion-item>
 
             <ion-item no-lines margin-top>
-                <ion-textarea maxlength="250" class="bg-gray-radius-small" placeholder="Description"></ion-textarea>
+                <ion-textarea
+                    [(ngModel)]="aboutDescription"
+                    maxlength="5000"
+                    class="bg-gray-radius-small"
+                    placeholder="{{ 'PAGE_CREATE-ADVUSER-PROFILE.ABOUT_DESCRIPTION' | translate }}">
+                </ion-textarea>
             </ion-item>
-        </form>
+        <!-- </form> -->
     </div>
--->
+
     <div class="block-lines">
         <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CATEGORY_TYPE' | translate }}</div>
     </div>
@@ -65,15 +95,15 @@
             </ng-container>
         </a>
 
-        <a *ngIf="(selectedCategory && selectedCategory.children_count > 0) || selectedChildCategories" (click)="presentChildCategoriesPopover()" ion-item detail-push
+        <a *ngIf="(selectedCategory && tags && tags.length) || selectedTags" (click)="presentTagsPopover()" ion-item detail-push
             padding-left class="bg-gray margin-bottom-small">
-            <ng-container *ngIf="selectedChildCategories">
+            <ng-container *ngIf="selectedTags">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
-                    {{ childCategoriesNames }}
+                    {{ tagsNames }}
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="!selectedChildCategories">
+            <ng-container *ngIf="!selectedTags">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
                     {{ selectedCategory.name + ' categories' }}
                 </div>
@@ -86,7 +116,7 @@
     </div>
 
     <div *ngIf="selectedCategory" class="block-lines">
-        <a disabled (click)="presentTypesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
+        <a (click)="presentTypesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
             <ng-container *ngIf="selectedTypes">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
                    {{ typeNames }}
@@ -99,19 +129,19 @@
         </a>
     </div>
 
-    <div *ngIf="selectedCategory" class="block-lines">
+    <div *ngIf="selectedTypes" class="block-lines">
         <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-ADVUSER-PROFILE.CHOOSE_FEATURES' | translate }}</div>
     </div>
 
-    <div *ngIf="selectedCategory" class="block-lines">
-        <a disabled (click)="presentFeaturesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
-            <ng-container *ngIf="selectedFeatures">
+    <div *ngIf="selectedTypes" class="block-lines">
+        <a (click)="presentFeaturesPopover()" ion-item detail-push padding-left class="bg-gray margin-bottom-small">
+            <ng-container *ngIf="featuresNames && featuresNames.length > 0">
                 <div class="text-3E4B5D font-16 semibold wrap-no">
-                   {{featureNames}}
+                   {{ featuresNames }}
                 </div>
             </ng-container>
 
-            <ng-container *ngIf="!selectedFeatures">
+            <ng-container *ngIf="!featuresNames || featuresNames.length == 0">
                 <div class="text-3E4B5D font-16 semibold wrap-no">{{ 'PAGE_CREATE-ADVUSER-PROFILE.FEATURES' | translate }}</div>
             </ng-container>
         </a>

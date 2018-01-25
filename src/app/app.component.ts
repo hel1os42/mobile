@@ -37,8 +37,22 @@ export class MyApp {
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            statusBar.styleDefault();
             splashScreen.hide();
+
+            statusBar.styleDefault();
+
+            if (platform.is('ios')){
+                statusBar.overlaysWebView(true);
+            }
+
+            // IPhone X
+            if (platform.is('ios') && platform.width() == 375 && platform.height() == 812) {
+                let body = <HTMLElement>(document.getElementsByTagName('ion-app')[0]);
+                body.classList.add("iphonex");
+                console.log('Width: ' + platform.width());
+                console.log('Height: ' + platform.height());
+            }
+
             this.branchInit(platform);
 
             this.initTranslate();
@@ -85,23 +99,22 @@ export class MyApp {
             });
 
             // FIX KEYBOARD SCROLL
-            //if (platform.is('ios')) {
-            /*
-            let
-                appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
-                appElHeight = appEl.clientHeight;
+            if (platform.is('android')) {
+                let
+                    appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
+                    appElHeight = appEl.clientHeight;
 
-            window.addEventListener('native.keyboardshow', (e) => {
-                console.log("native.keyboardshow");
-                appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
-            });
+                window.addEventListener('native.keyboardshow', (e) => {
+                    console.log("native.keyboardshow");
+                    appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
+                });
 
-            window.addEventListener('native.keyboardhide', () => {
-                console.log("native.keyboardhide");
-                appEl.style.height = '100%';
-            });
-            //}
-            */
+                window.addEventListener('native.keyboardhide', () => {
+                    console.log("native.keyboardhide");
+                    appEl.style.height = '100%';
+                });
+            }
+
         });
 
         this.auth.onLogout.subscribe(() => {

@@ -5,6 +5,7 @@
         "DETECTING_YOUR_LOCATION" : "Detecting your location...",
         "SETTING_MAP_RADIUS" : "Setting map radius (km)",
         "DONE" : "Done",
+        "OK" : "Ok",
         "CANCEL" : "Cancel",
         "SIGN_UP" : "sign up",
         "SIGN_IN" : "sign in",
@@ -115,6 +116,9 @@
         "ADD_COMPANY_NAME" : "Add company name & descriptions",
         "COMPANY_NAME" : "Company name",
         "COMPANY_DESCRIPTION" : "Company description",
+        "ABOUT_COMPANY" : "Add about company",
+        "ABOUT_TITLE" : "About title",
+        "ABOUT_DESCRIPTION" : "About description",
         "CHOOSE_CATEGORY" : "Choose category",
         "CHOOSE_YOUR_OFFICE_LOCATION" : "Choose your office location and set map radius",
         "CATEGORY" : "Category",
@@ -122,7 +126,10 @@
         "CHOOSE_TYPE" : "Type of your place",
         "CHOOSE_FEATURES" : "Features of your place",
         "TYPES" : "Types",
-        "FEATURES" : "Features"
+        "FEATURES" : "Features",
+        "WARNING" : "Warning!",
+        "PROCEEDING_WILL_SWITCH" : "Proceeding will switch your account into a disapproved state and offers will be deactivated until validation of Agent.",
+        "ARE_YOU_SURE" : "Are you sure you want to continue?"
     },
 
     "PAGE_CREATE-OFFER" : {
@@ -439,7 +446,9 @@
         "LATEST_PAYMENTS" : "Latest payments",
         "PAY" : "Pay",
         "LOADING_TRANSACTIONS" : "Loading transactions...",
-        "NAU" : "NAU"
+        "NAU" : "NAU",
+        "FROM" : "from",
+        "TO" : "to"
     },
 
     "PAGE_USER-OFFERS" : {
@@ -480,7 +489,8 @@
         "YOUR_REFERRALS" : "Your referrals",
         "USERS" : "Users",
         "LEVEL" : "Level",
-        "REGISTRATION_DATE" : "Registration date"
+        "REGISTRATION_DATE" : "Registration date",
+        "LOADING_REFERRALS" : "Loading referrals..."
     },
 
     "PAGE_TRANSFER" : {

@@ -27,7 +27,7 @@ import { AdvUserProfilePage } from '../pages/adv-user-profile/adv-user-profile';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 import { CreateAdvUserProfilePage } from '../pages/create-advUser-profile/create-advUser-profile';
 import { CreateAdvUserProfileCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.category.popover';
-import { CreateAdvUserProfileChildCategoryPopover } from '../pages/create-advUser-profile/create-advUser-profile.childCategory.popover';
+import { CreateAdvUserProfileTagsPopover } from '../pages/create-advUser-profile/create-advUser-profile.tags.popover';
 import { CreateAdvUserProfileFeaturesPopover } from '../pages/create-advUser-profile/create-advUser-profile.features.popover';
 import { CreateAdvUserProfileTypesPopover } from '../pages/create-advUser-profile/create-advUser-profile.types.popover';
 import { CreateOffer1Page } from '../pages/create-offer-1/create-offer-1';
@@ -64,7 +64,7 @@ import { Statistic1Page } from '../pages/statistic1/statistic1';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TemporaryPage } from '../pages/temporary/temporary';
 import { TransferPage } from '../pages/transfer/transfer';
-import { TransferPopover } from '../pages/transfer/transfer.popover';
+import { TransferPopover } from '../pages/user-nau/transfer.popover';
 import { UserAchievePage } from '../pages/user-achieve/user-achieve';
 import { UserNauPage } from '../pages/user-nau/user-nau';
 import { UserOffersPage } from '../pages/user-offers/user-offers';
@@ -84,6 +84,8 @@ import { TimezoneService } from '../providers/timezone.service';
 import { ToastService } from '../providers/toast.service';
 import { TokenService } from '../providers/token.service';
 import { MyApp } from './app.component';
+import { TransactionService } from '../providers/transaction.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -132,7 +134,7 @@ export function createTranslateLoader(http: HttpClient) {
       TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
-      CreateAdvUserProfileChildCategoryPopover,
+      CreateAdvUserProfileTagsPopover,
       CreateAdvUserProfileTypesPopover,
       CreateAdvUserProfileFeaturesPopover,
       CreateOfferInformationPopover,
@@ -213,7 +215,7 @@ export function createTranslateLoader(http: HttpClient) {
       TransferPopover,
       CongratulationPopover,
       CreateAdvUserProfileCategoryPopover,
-      CreateAdvUserProfileChildCategoryPopover,
+      CreateAdvUserProfileTagsPopover,
       CreateAdvUserProfileTypesPopover,
       CreateAdvUserProfileFeaturesPopover,
       CreateOfferInformationPopover,
@@ -244,6 +246,7 @@ export function createTranslateLoader(http: HttpClient) {
       TokenService,
       ToastService,
       ProfileService,
+      TransactionService,
       OfferService,
       AppModeService,
       Geolocation,
@@ -251,7 +254,8 @@ export function createTranslateLoader(http: HttpClient) {
       PlaceService,
       TimezoneService,
       GeocodeService,
-      Clipboard
+      Clipboard,
+      InAppBrowser
   ]
 })
 export class AppModule { }

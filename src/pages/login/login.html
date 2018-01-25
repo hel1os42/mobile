@@ -22,8 +22,8 @@
       [selectOptions]="{cssClass: 'alert-full-no-button'}"
       [selectedText]="numCode"
       (click)="onSelectClicked(codeSelect)">
-      <ion-option
-        *ngFor=" let phoneCode of phoneCodes "
+      <ion-option  
+        *ngFor=" let phoneCode of phoneCodes " 
         [value]="phoneCode.dial_code"
         (ionSelect)="dismissSelect($event)">
         {{ phoneCode.dial_code }} {{ phoneCode.name }}

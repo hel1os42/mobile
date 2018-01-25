@@ -175,7 +175,6 @@ export class LoginPage {
                 }
               }
             }, 5);
-          }
-        );
+          });
       }
 }

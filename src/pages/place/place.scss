@@ -1,5 +1,4 @@
 page-place {
-
     .gift{
         height: 8.4vw;
         width: auto;
@@ -128,12 +127,14 @@ page-place {
         left: 0;
         width: 100%;
         text-align: right;
-        bottom: 12vw;
+        bottom: 0;
         padding-right: 5vw;
     }
 
     .cat-block{
         padding-top: 17vw;
+        padding-left: 5vw;
+        padding-right: 5vw;
         height: 87%;
         overflow: scroll;
     }
@@ -148,4 +149,19 @@ page-place {
         margin-top: 2vw;
         display: inline-block;
     }
+
+    .sticky{
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        top: -1px;
+        background-color: white;
+        z-index: 100;
+    }
+
+    .list-ios ion-item-options{
+        border-bottom: none;
+    }
+}
+
+.iphonex page-place .footer_testimonials {
+    padding-bottom: 25%;
 }

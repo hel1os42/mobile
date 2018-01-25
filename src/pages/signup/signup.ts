@@ -35,7 +35,6 @@ export class SignUpPage {
     getCode() {
         this.phoneNumber = this.numCode + this.formData.phone;
         let inviteCode = this.auth.getInviteCode();
-        debugger
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
             .subscribe(resp => {
                 let register: Register = {

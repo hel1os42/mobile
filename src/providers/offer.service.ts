@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import { ApiService } from "./api.service";
+import { MockCategory } from '../mocks/mockCategory';
 // import { MockCompanies } from '../mocks/mockCompanies';
 
 @Injectable()
@@ -33,12 +35,12 @@ export class OfferService {
     // }
 
     getPlaces(category_ids: string[], lat: number, lng: number, radius: number, search: string, page: number) {
-        let str = '';     
+        let str = '';
         for (let i = 0; i < category_ids.length; i++) {
             let id = category_ids[i];
             str += `${'category_ids[]'}=${id}&`;
         };
-        
+
         return this.api.get(`places?${str}`, {
             showLoading: page == 1,
             params: {
@@ -72,14 +74,19 @@ export class OfferService {
         return this.api.get(`categories/${category_id}?with=children`);
     }
 
-    getRetailTypes(category_id) {
-        return this.api.get(`categories/${category_id}?with=retailTypes`);
+    getTypes(category_id: string) {
+        return this.api.get(`categories/${category_id}`, {
+            params: {
+                with: 'retailTypes;retailTypes.specialities;tags'
+            }
+        });
+        // return Observable.of(MockCategory.items);
     }
 
     getRedeemedOffers() {
         return this.api.get('profile?with=offers');
     }
-    
+
     getActivationCode(offer_id: string) {
         return this.api.get(`offers/${offer_id}/activation_code`);
     }
