@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { LoadingController, NavController, NavParams, PopoverController, Content } from 'ionic-angular';
+import { LoadingController, NavController, NavParams, PopoverController, Content, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs/Rx';
@@ -12,6 +12,8 @@ import { ToastService } from '../../providers/toast.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TransferPopover } from './transfer.popover';
 import { TransactionService } from '../../providers/transaction.service';
+import { Cordova } from '@ionic-native/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-user-nau',
@@ -40,6 +42,8 @@ export class UserNauPage {
         preferFrontCamera: true,
         orientation: 'portrait'
     };
+    url: string;
+    envName: string;
 
     constructor(
         private profile: ProfileService,
@@ -51,11 +55,15 @@ export class UserNauPage {
         private barcode: BarcodeScanner,
         private loading: LoadingController,
         private alert: AlertController,
-        private transaction: TransactionService) {
+        private transaction: TransactionService,
+        private browser: InAppBrowser) {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
+        this.envName = this.appMode.getEnvironmentMode();
         // this.NAU = this.navParams.get('NAU');return
-        this.NAU = this.appMode.getEnvironmentMode() === 'dev' ? this.navParams.get('NAU') : this.navParams.data;//temporary
+        this.NAU = this.envName === 'dev' ? this.navParams.get('NAU') : this.navParams.data;//temporary
+        this.url = this.envName === 'dev' ? 'https://chain.nau.toavalon.com' : this.envName === 'prod'
+            ? 'http://explorer.nau.io' : '';
         this.transferData.source = this.NAU.address;
         this.balance = this.NAU ? this.NAU.balance : 0;
 
@@ -120,14 +128,14 @@ export class UserNauPage {
         let form = document.getElementsByTagName('form');
         let content = this.content.getContentDimensions();
         if (form[0]) {
-             let height = form[0].clientHeight;
-             if (height / 2 < content.scrollTop) {
+            let height = form[0].clientHeight;
+            if (height / 2 < content.scrollTop) {
                 this.content.scrollToTop();
-             }
-             if (content.scrollTop < height / 2) {
+            }
+            if (content.scrollTop < height / 2) {
                 this.isFormVisible = !this.isFormVisible;
                 this.content.scrollToTop();
-             }
+            }
         }
         else {
             if (!form[0]) {
@@ -181,6 +189,11 @@ export class UserNauPage {
             });
     }
 
+    loadUrl(txId) {
+        let url = this.url + '/search?q=' + txId;
+        this.browser.create(url, '_system');
+    }
+
     transfer() {
         if (this.validateMax()) {
             this.transferData.amount = parseFloat(this.amount);
@@ -190,10 +203,10 @@ export class UserNauPage {
                         amount: undefined,
                         created_at: this.todayDate,
                         destination_account_id: resp.destination_account_id,
-                        id:"Transfer process...",//to do
+                        id: "Transfer process...",//to do
                         source_account_id: resp.source_account_id
                     }
-                    this.transactions = [...[transaction],...this.transactions];
+                    this.transactions = [...[transaction], ...this.transactions];
                     this.isTransferLoading = true;
                     this.isFormVisible = !this.isTransferLoading;
                     this.transferData.destination = undefined;
