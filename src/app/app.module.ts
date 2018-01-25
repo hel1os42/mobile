@@ -85,6 +85,7 @@ import { ToastService } from '../providers/toast.service';
 import { TokenService } from '../providers/token.service';
 import { MyApp } from './app.component';
 import { TransactionService } from '../providers/transaction.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -253,7 +254,8 @@ export function createTranslateLoader(http: HttpClient) {
       PlaceService,
       TimezoneService,
       GeocodeService,
-      Clipboard
+      Clipboard,
+      InAppBrowser
   ]
 })
 export class AppModule { }
