@@ -84,6 +84,7 @@ import { TimezoneService } from '../providers/timezone.service';
 import { ToastService } from '../providers/toast.service';
 import { TokenService } from '../providers/token.service';
 import { MyApp } from './app.component';
+import { TransactionService } from '../providers/transaction.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -244,6 +245,7 @@ export function createTranslateLoader(http: HttpClient) {
       TokenService,
       ToastService,
       ProfileService,
+      TransactionService,
       OfferService,
       AppModeService,
       Geolocation,

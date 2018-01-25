@@ -3,15 +3,14 @@ import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
-import { TransactionCreate } from '../models/transactionCreate';
 
 @Injectable()
 export class ProfileService {
     user: User;
     onRefreshAccounts: EventEmitter<User> = new EventEmitter<User>();
-    onRefreshTransactions: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(private api: ApiService,
+    constructor(
+        private api: ApiService,
         private auth: AuthService) {
 
         this.auth.onLogout.subscribe(() => this.user = undefined);
@@ -34,16 +33,6 @@ export class ProfileService {
         });
     }
 
-    getTransactions(page) {
-        return this.api.get(`transactions?orderBy=created_at&sortedBy=desc&page=${page}`, {
-            showLoading: page == 1
-        });
-    }
-
-    postTransaction(transaction: TransactionCreate, showLoading?: boolean) {
-        return this.api.post('transactions', transaction, { showLoading: showLoading });
-    }
-
     getWithAccounts(showLoading?: boolean) {
         return this.api.get('profile?with=accounts', { showLoading: showLoading });
     }
@@ -60,7 +49,4 @@ export class ProfileService {
         this.getWithAccounts().subscribe(user => this.onRefreshAccounts.emit(user));
     }
 
-    refreshTransactions() {
-        this.getTransactions(1).subscribe(transactions => this.onRefreshTransactions.emit(transactions));
-    }
 }

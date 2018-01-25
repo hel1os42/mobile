@@ -9,6 +9,7 @@ import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserNauPage } from '../user-nau/user-nau';
 import { UserProfilePage } from '../user-profile/user-profile';
+import { TransactionService } from '../../providers/transaction.service';
 
 @Component({
     selector: 'page-tabs',
@@ -35,7 +36,8 @@ export class TabsPage {
     constructor(
                 private appMode: AppModeService,
                 private navParams: NavParams,
-                private profile: ProfileService) {
+                private profile: ProfileService,
+                private transaction: TransactionService) {
 
         //temporary
         this.isDevMode = this.appMode.getEnvironmentMode() === 'dev';
@@ -76,7 +78,7 @@ export class TabsPage {
     refresh() {
         if (this.shownTransactions) {
             this.profile.refreshAccounts();
-            this.profile.refreshTransactions();
+            this.transaction.refresh();
         }
         this.shownTransactions = true;
     }
