@@ -110,7 +110,7 @@
     <div *ngIf="transactions && transactions.length > 0" padding-left padding-top class="font-14 text-FF5A00" text-uppercase>{{ 'PAGE_USER-NAU.LATEST_PAYMENTS' | translate }}</div>
     <ion-list padding no-lines class="item-block-nau">
         <ion-item class="relative" *ngFor="let transaction of transactions">
-            <a href="#" class="bold wrap-no text-3E4B5D font-22"> <!--{{ 'PAGE_USER-NAU.PAY' | translate }}--> {{ transaction.id }}</a>
+            <a href="#" class="wrap-no text-3E4B5D font-20"> <!--{{ 'PAGE_USER-NAU.PAY' | translate }}--> {{ transaction.id }}</a>
             <div class="bold wrap id-user padding-top-2vw"> <!--{{ 'PAGE_USER-NAU.PAY' | translate }}--> {{ transaction.id }}</div>
             <div
                 *ngIf="!isTransferLoading || (isTransferLoading && transaction.id !== 'Transfer process...')"
