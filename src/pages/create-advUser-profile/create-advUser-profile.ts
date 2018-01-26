@@ -397,6 +397,7 @@ export class CreateAdvUserProfilePage {
                 this.selectedTypes.forEach(t => {
                     t.specialities = _.flatten(t.specialities);
                 })
+                this.lastOpened = data.name; 
                 this.getFeaturesNames();
             }
         });
