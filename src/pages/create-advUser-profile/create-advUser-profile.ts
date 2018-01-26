@@ -262,11 +262,15 @@ export class CreateAdvUserProfilePage {
         this._map.on({
             moveend: (event: LeafletEvent) => {
                 this.coords = this._map.getCenter();
+                if (this.coords.lng > 180 || this.coords.lng < -180) {
+                    this.coords.lng = MapUtils.correctLng(this.coords.lng);
+                    this._map.setView(this.coords, this._map.getZoom());    
+                }
                 this.geocoder.getAddress(this.coords.lat, this.coords.lng)
                     .subscribe(resp => {
                         this.address = AddressUtils.get(resp);
                         this.changeDetectorRef.detectChanges();
-                    })
+                });
                 this.radius = MapUtils.getRadius(95, this._map);
                 this.zoom = map.getZoom();
                 // this.radius = 40075016.686 * Math.abs(Math.cos(map.getCenter().lat / 180 * Math.PI)) / Math.pow(2, map.getZoom()+8) * 75;
