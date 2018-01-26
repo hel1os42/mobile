@@ -74,14 +74,19 @@ export class CreateOffer3Page {
         this._map.on({
             moveend: (event: LeafletEvent) => {
                 this.coords = this._map.getCenter();
+                if (this.coords.lng > 180 || this.coords.lng < -180) {
+                    this.coords.lng = MapUtils.correctLng(this.coords.lng);
+                    this._map.setView(this.coords, this._map.getZoom());    
+                }
                 this.geocoder.getAddress(this.coords.lat, this.coords.lng)
                 .subscribe(data => {
-                    let address = data.address;
-                    this.city = address.city || address.town || address.county || address.state;
-                    this.country = address.country;
+                    let address = !data.error ? data.address: undefined;
+                        this.city = address 
+                        ? (address.city || address.town || address.county || address.state)
+                        : undefined;
+                        this.country = address ? address.country : undefined;
                     this.changeDetectorRef.detectChanges();
                 })
-                this.coords = this._map.getCenter();
                 this.radius = MapUtils.getRadius(95, this._map);
                 this.zoom = map.getZoom();
             }

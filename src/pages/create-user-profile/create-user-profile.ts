@@ -14,6 +14,7 @@ import { ToastService } from '../../providers/toast.service';
 import { TabsPage } from '../tabs/tabs';
 import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
+import { MapUtils } from '../../utils/map';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -145,6 +146,10 @@ export class CreateUserProfilePage {
         this._map.on({
             moveend: (event: LeafletEvent) => {
                 this.coords = this._map.getCenter();
+                if (this.coords.lng > 180 || this.coords.lng < -180) {
+                    this.coords.lng = MapUtils.correctLng(this.coords.lng);
+                    this._map.setView(this.coords, this._map.getZoom());    
+                }
             }
         })
     }
@@ -154,7 +159,7 @@ export class CreateUserProfilePage {
             maxZoom: 20,
             maxNativeZoom: 18,
             minZoom: 1,
-            attribution: '...',
+            attribution: '© OpenStreetMap',
             tileSize: 512,
             zoomOffset: -1,
             detectRetina: true,
@@ -163,7 +168,9 @@ export class CreateUserProfilePage {
         this.options = {
             layers: [this.tileLayer],
             zoom: 15,
-            center: latLng(this.coords)
+            center: latLng(this.coords),
+            // zoomSnap: 0.5,
+            // zoomDelta: 0.5
         };
     }
 

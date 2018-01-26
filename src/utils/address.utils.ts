@@ -1,32 +1,43 @@
+import * as _ from 'lodash';
+
 export class AddressUtils {
 
     static get(data) {
-        let address = data.address;
-        // let display = data.display_name;
-        let addresses = [
-            address.building,
-            address.house_number,
-            address.hardware,
-            address.path,
-            address.village,
-            address.road,
-            address.town,
-            address.county,
-            address.city,
-            address.state,
-            address.postcode,
-            address.country
-        ]
-        let display = '';
-        addresses.forEach(address => {
-            if (address) {
-                display = display + address + ', ';
-            }
-            if (address == addresses[addresses.length - 1]) {
-                display = display.slice(0, -2) + '.';
-            }
-
-        });
-        return display;
+        if (!data.error) {
+            let addrData = data.address;
+            // let display = data.display_name;
+            let addresses = [
+                addrData.building,
+                addrData.house_number,
+                addrData.hardware,
+                addrData.path,
+                addrData.village,
+                addrData.road,
+                addrData.town,
+                addrData.county,
+                addrData.city,
+                addrData.state,
+                addrData.postcode,
+                addrData.country
+            ]
+            let display = '';
+            let empty = true;
+            addresses.forEach(address => {
+                if (address) {
+                    if (addrData.country !== address) {
+                        empty = false;
+                    }
+                    display = display + address + ', ';
+                }
+                if (address == addresses[addresses.length - 1]) {
+                    display = display.slice(0, -2) + '.';
+                }
+            });
+            display = empty ? undefined : display;
+            return display;
+        }
+        else {
+            return undefined;
+        }
     }
 }
