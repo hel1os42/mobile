@@ -49,35 +49,35 @@
                     {{ 'PAGE_CREATE-OFFER.DISCOUNT' | translate }}
                     <p class="font-12 text-BDBDBD text-family-light">{{ 'PAGE_CREATE-OFFER.DESCRIPTION_FOR' | translate }}</p>
                 </ion-label>
-                <ion-radio (ionSelect)="toggleDiscountDisabled($event, false)" mode="md" value="discount"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, false)"  mode="md" value="discount" [checked]="type === 'discount'"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
                 <ion-label class="text-3E4B5D font-16 semibold">
                     {{ 'PAGE_CREATE-OFFER.SECOND_FREE' | translate }}
                     <p class="font-12 text-BDBDBD text-family-light">{{ 'PAGE_CREATE-OFFER.DESCRIPTION_FOR' | translate }}</p>
                 </ion-label>
-                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="secondFee"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="second_free" [checked]="type === 'second_free'"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
                 <ion-label class="text-3E4B5D font-16 semibold">
                     {{ 'PAGE_CREATE-OFFER.BONUS' | translate }}
                     <p class="font-12 text-BDBDBD text-family-light">{{ 'PAGE_CREATE-OFFER.DESCRIPTION_FOR' | translate }}</p>
                 </ion-label>
-                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="bonus"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="bonus" [checked]="type === 'bonus'"></ion-radio>
             </ion-item>
             <ion-item class="bg-gray">
                 <ion-label class="text-3E4B5D font-16 semibold">
                     {{ 'PAGE_CREATE-OFFER.GIFT' | translate }}
                     <p class="font-12 text-BDBDBD text-family-light">{{ 'PAGE_CREATE-OFFER.DESCRIPTION_FOR' | translate }}</p>
                 </ion-label>
-                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="gift"></ion-radio>
+                <ion-radio (ionSelect)="toggleDiscountDisabled($event, true)" mode="md" value="gift" [checked]="type === 'gift'"></ion-radio>
             </ion-item>
         </div>
     </div>
 
     <div class="block-lines">
 
-        <ng-container *ngIf="!isDiscountSelectDisable">
+        <ng-container *ngIf="!isDiscountHidden">
             <ion-item padding-left class="bg-gray set-discount" detail-push>
                 <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.SET_DISCOUNT' | translate }} (%)</ion-label>
                 <ion-input
@@ -93,15 +93,14 @@
             </ion-item>
         </ng-container>
 
-        <ng-container *ngIf="!isGiftSelectDisable">
+        <ng-container *ngIf="!isGiftBonusHidden">
             <ion-item no-lines>
-                <ion-textarea maxlength="250" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-OFFER.DESCRIPTION_FOR_BONUS' | translate }}"></ion-textarea>
-            </ion-item>
-        </ng-container>
-
-        <ng-container *ngIf="!isGiftSelectDisable">
-            <ion-item no-lines>
-                <ion-textarea maxlength="250" class="bg-gray-radius-small" placeholder="{{ 'PAGE_CREATE-OFFER.DESCRIPTION_FOR_GIFT' | translate }}"></ion-textarea>
+                <ion-textarea 
+                    [(ngModel)]="giftBonusDescr" 
+                    maxlength="250" 
+                    class="bg-gray-radius-small" 
+                    placeholder="{{ type === 'gift' ? ('PAGE_CREATE-OFFER.DESCRIPTION_FOR_GIFT' | translate) : ('PAGE_CREATE-OFFER.DESCRIPTION_FOR_BONUS' | translate) }}">
+                </ion-textarea>
             </ion-item>
         </ng-container>
 
