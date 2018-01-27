@@ -5,6 +5,7 @@ import { Offer } from '../../models/offer';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
 import { CreateOffer2Page } from '../create-offer-2/create-offer-2';
+import { StringValidator } from '../../validators/string.validator';
 
 @Component({
     selector: 'page-create-offer-1',
@@ -57,6 +58,10 @@ export class CreateOffer1Page {
         else {
             this.isGiftSelectDisable = true;
         }
+    }
+
+    updateAmount(event) {
+        StringValidator.stringAmountLimit(event);
     }
 
 }
