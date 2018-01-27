@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Place } from '../../models/place';
 import { Offer } from '../../models/offer';
-import { OfferService } from '../../providers/offer.service';
+import { Place } from '../../models/place';
 import { PlaceService } from '../../providers/place.service';
-import { CreateOffer2Page } from '../create-offer-2/create-offer-2';
 import { StringValidator } from '../../validators/string.validator';
+import { CreateOffer2Page } from '../create-offer-2/create-offer-2';
 
 @Component({
     selector: 'page-create-offer-1',
@@ -23,7 +22,6 @@ export class CreateOffer1Page {
 
     constructor(private nav: NavController,
         private navParams: NavParams,
-        private offerService: OfferService,
         private place: PlaceService) {
 
         this.offer = this.navParams.get('offer');
