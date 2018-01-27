@@ -22,5 +22,5 @@ export class OfferCreate {
     radius: number;
     country: string;
     city: string;
-
+    delivery?: boolean;
 }

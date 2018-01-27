@@ -8,10 +8,10 @@ export class Offer extends OfferCreate {
     picture_url: string;
     company?: Place;
     status: string;
-    category?: OfferCategory
+    // category?: OfferCategory
     deleted_at: string;
     account_id: string;
-    categories?: OfferCategory[];
+    // categories?: OfferCategory[];
     created_at: string;
     updated_at: string;
     timeframes: TimeFrames[];
