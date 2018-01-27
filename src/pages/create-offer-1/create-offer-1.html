@@ -30,9 +30,11 @@
     <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>
         {{ 'PAGE_CREATE-OFFER.CATEGORY_TYPE' | translate }}
     </div>
-    <div class="block-lines">
+    <div 
+        *ngIf="company && company.category[0].name === 'Food & Drinks'" 
+        class="block-lines">
         <ion-item class="bg-gray">
-            <ion-checkbox disabled item-end value="delivery"></ion-checkbox>
+            <ion-checkbox [(ngModel)]="offer.delivery" item-end value="delivery"></ion-checkbox>
             <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.DELIVERY' | translate }}</ion-label>
         </ion-item>
     </div>
@@ -41,7 +43,7 @@
         <div class="text-4F4F4F font-14" text-uppercase>{{ 'PAGE_CREATE-OFFER.OFFER_TYPE' | translate }}</div>
     </div>
     <div class="block-lines radio-nau radio-nau-no-margin">
-        <div disabled radio-group no-lines>
+        <div radio-group no-lines>
             <ion-item class="bg-gray">
                 <ion-label class="text-3E4B5D font-16 semibold">
                     {{ 'PAGE_CREATE-OFFER.DISCOUNT' | translate }}

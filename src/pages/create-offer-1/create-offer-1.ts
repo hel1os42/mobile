@@ -17,8 +17,7 @@ export class CreateOffer1Page {
     discount: number = 10;
     isDiscountSelectDisable = true;
     isGiftSelectDisable = true;
-    // company = new Place();to do
-    company;
+    company: Place;
     picture_url: string;
 
     constructor(private nav: NavController,
@@ -28,15 +27,13 @@ export class CreateOffer1Page {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
-        if (!this.offer.id) {
-            this.place.getWithCategory()
-                .subscribe(company => {
-                    this.company = company;
-                    this.offerService.getCategory(this.company.categories[0].id)
-                        .subscribe(category => this.offer.category_id = category.parent_id !== null ? category.parent_id : this.company.categories[0].id)
-                });
-        }
-
+        this.place.getWithCategory()
+            .subscribe(company => {
+                this.company = company;
+                if (!this.offer.id) {
+                    this.offer.category_id = this.company.category[0].id;
+                }
+            });
     }
 
     openCreateOffer2Page() {
@@ -45,7 +42,6 @@ export class CreateOffer1Page {
             this.offer.latitude = this.company.latitude;
             this.offer.radius = this.company.radius;
         }
-
         this.nav.push(CreateOffer2Page, { offer: this.offer, picture: this.picture_url });//add bindings (category & type, type)
     }
 
