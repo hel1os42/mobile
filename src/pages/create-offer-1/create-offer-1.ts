@@ -6,6 +6,7 @@ import { PlaceService } from '../../providers/place.service';
 import { StringValidator } from '../../validators/string.validator';
 import { CreateOffer2Page } from '../create-offer-2/create-offer-2';
 import { ToastService } from '../../providers/toast.service';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'page-create-offer-1',
@@ -14,24 +15,32 @@ import { ToastService } from '../../providers/toast.service';
 export class CreateOffer1Page {
 
     offer: Offer;
-    discounts = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];//to do
-    discount: number = 10;
     isDiscountHidden = true;
     isGiftBonusHidden = true;
     company: Place;
     picture_url: string;
     giftBonusDescr: string;
     type: string;
+    formDiscount: FormGroup;
+    // currencyCode: string;
+    // currencies = CURRENCIES;
 
     constructor(
         private nav: NavController,
         private navParams: NavParams,
         private place: PlaceService,
-        private toast: ToastService) {
-
+        private toast: ToastService,
+        private builder: FormBuilder) {
+     
         this.offer = this.navParams.get('offer');
         if (this.offer.type) {
             this.type = this.offer.type;
+            if (this.offer.type === 'discount' && this.offer.discount_percent) {
+                this.isDiscountHidden = false; 
+            }
+            if ((this.offer.type === 'gift' || this.offer.type === 'bonus') && this.offer.discount_percent) {
+                this.isGiftBonusHidden = false; 
+            }
         }
         this.picture_url = this.navParams.get('picture');
         this.place.getWithCategory()
@@ -41,6 +50,19 @@ export class CreateOffer1Page {
                     this.offer.category_id = this.company.category[0].id;
                 }
             });
+
+        this.formDiscount = this.builder.group({
+            percent: new FormControl(this.offer.discount_percent ? this.offer.discount_percent : '', Validators.compose([
+                Validators.min(0.01),
+                Validators.max(99.99),
+                //Validators.pattern(/a-zA-Z0-9/),
+                Validators.required
+            ])),
+            srartPrice: new FormControl(this.offer.discount_start_price ? this.offer.discount_start_price : '', Validators.compose([
+                Validators.min(0.01),
+                Validators.max(9999999999.99),
+            ])),
+        });
     }
 
     toggleDiscountDisabled(event, isDiscountSelectDisable) {
@@ -54,17 +76,35 @@ export class CreateOffer1Page {
         this.type = event;
     }
 
-    updateAmount(event) {
-        StringValidator.stringAmountLimit(event);
-    }
-
     validate() {
-        if (!this.type) {// to do
-            this.toast.show('Please, set offer type with description!');
-            return false;
+        if (this.type === 'discount') {
+            if (this.formDiscount.controls.percent.invalid) {
+                this.toast.show('Please, set valid percent value!');
+                return false;
+            }
+            else {
+                if (this.formDiscount.controls.srartPrice.invalid) {
+                    this.toast.show('Please, set  valid price value!');
+                    return false;
+                }
+                // if (this.formDiscount.value.srartPrice && this.formDiscount.controls.srartPrice.valid && !this.currencyCode) {
+                //     this.toast.show('Please, set currency!');
+                //     return false;
+                // }
+                else return true;
+            }
+
         }
         else {
-            return true;
+            if (this.type === 'bonus' || this.type === 'gift') {
+                if (!this.giftBonusDescr || this.giftBonusDescr === '') {
+                    let type = this.type === 'bonus' ? 'bonus' : 'gift';
+                    this.toast.show(`Please, set ${type} description!`);
+                    return false;
+                }
+                else return true;
+            }
+            else return true;
         }
     }
 
@@ -73,13 +113,30 @@ export class CreateOffer1Page {
             this.offer.type = this.type;
             if (this.offer.type === 'gift' || this.offer.type === 'bonus') {
                 this.offer.gift_bonus_descr = this.giftBonusDescr;
+                this.offer.discount_percent = undefined;
+                this.offer.discount_start_price = undefined;
+                this.offer.discount_start_price = undefined;
+            }
+            if (this.offer.type === 'discount') {
+                this.offer.discount_percent = parseFloat(this.formDiscount.value.percent);
+                this.offer.discount_start_price = parseFloat(this.formDiscount.value.price)
+                    ? parseFloat(this.formDiscount.value.price)
+                    : undefined;
+                // this.offer.currency = this.currencyCode;
+                this.offer.gift_bonus_descr = undefined;
+            }
+            if (this.offer.type = 'second_free') {
+                this.offer.discount_percent = undefined;
+                this.offer.discount_start_price = undefined;
+                this.offer.discount_start_price = undefined;
+                this.offer.gift_bonus_descr = undefined;
             }
             if (!this.offer.id) {
                 this.offer.longitude = this.company.longitude;
                 this.offer.latitude = this.company.latitude;
                 this.offer.radius = this.company.radius;
             }
-            this.nav.push(CreateOffer2Page, { offer: this.offer, picture: this.picture_url });//add bindings (category & type, type)
+            this.nav.push(CreateOffer2Page, { offer: this.offer, picture: this.picture_url });
         }
     }
 
