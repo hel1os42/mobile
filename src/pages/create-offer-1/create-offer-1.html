@@ -30,8 +30,8 @@
     <div class="text-4F4F4F font-14 margin-bottom-10" text-uppercase margin-top margin-left margin-right>
         {{ 'PAGE_CREATE-OFFER.CATEGORY_TYPE' | translate }}
     </div>
-    <div 
-        *ngIf="company && company.category[0].name === 'Food & Drinks'" 
+    <div
+        *ngIf="company && company.category[0].name === 'Food & Drinks'"
         class="block-lines">
         <ion-item class="bg-gray">
             <ion-checkbox [(ngModel)]="offer.delivery" item-end value="delivery"></ion-checkbox>
@@ -78,27 +78,50 @@
     <div class="block-lines">
 
         <ng-container *ngIf="!isDiscountHidden">
-            <ion-item padding-left class="bg-gray set-discount" detail-push>
+            <ion-item padding-left class="bg-gray set-discount margin-bottom-3vw">
                 <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.SET_DISCOUNT' | translate }} (%)</ion-label>
                 <ion-input
                     (keyup)="updateAmount($event)"
                     required
                     type="number"
                     name="amount"
-                    placeholder="1">
+                    placeholder=""
+                    maxlength="5">
                 </ion-input>
                 <!--<ion-select [(ngModel)]="discount" interface="action-sheet" class="text-3E4B5D font-16 bold">
                     <ion-option class="text-3E4B5D font-16 bold" *ngFor=" let discount of discounts " [value]="discount">{{ discount }}</ion-option>
                 </ion-select>-->
             </ion-item>
+
+            <ion-item padding-left class="bg-gray set-discount margin-bottom-3vw">
+                <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.SET_START_PRICE' | translate }}</ion-label>
+                <ion-input
+                    (keyup)="updateAmount($event)"
+                    required
+                    type="number"
+                    name="amount"
+                    placeholder=""
+                    maxlength="5">
+                </ion-input>
+                <!--<ion-select [(ngModel)]="discount" interface="action-sheet" class="text-3E4B5D font-16 bold">
+                    <ion-option class="text-3E4B5D font-16 bold" *ngFor=" let discount of discounts " [value]="discount">{{ discount }}</ion-option>
+                </ion-select>-->
+            </ion-item>
+
+            <ion-item padding-left class="bg-gray" detail-push>
+                <ion-label class="text-3E4B5D font-16 semibold">{{ 'PAGE_CREATE-OFFER.SET_CURRENCY' | translate }}</ion-label>
+                <ion-select [(ngModel)]="discount" interface="alert" [selectOptions]="{cssClass: 'alert-full-no-button'}" class="text-3E4B5D font-16 bold">
+                    <ion-option class="text-3E4B5D font-16 bold" *ngFor=" let discount of discounts " [value]="discount">{{ discount }}</ion-option>
+                </ion-select>
+            </ion-item>
         </ng-container>
 
         <ng-container *ngIf="!isGiftBonusHidden">
             <ion-item no-lines>
-                <ion-textarea 
-                    [(ngModel)]="giftBonusDescr" 
-                    maxlength="250" 
-                    class="bg-gray-radius-small" 
+                <ion-textarea
+                    [(ngModel)]="giftBonusDescr"
+                    maxlength="250"
+                    class="bg-gray-radius-small"
                     placeholder="{{ type === 'gift' ? ('PAGE_CREATE-OFFER.DESCRIPTION_FOR_GIFT' | translate) : ('PAGE_CREATE-OFFER.DESCRIPTION_FOR_BONUS' | translate) }}">
                 </ion-textarea>
             </ion-item>

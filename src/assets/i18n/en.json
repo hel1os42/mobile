@@ -191,7 +191,9 @@
         "BONUS" : "Bonus",
         "GIFT" : "Gift",
         "DELIVERY" : "Delivery",
-        "DESCRIPTION_FOR" : "Description for this item"
+        "DESCRIPTION_FOR" : "Description for this item",
+        "SET_START_PRICE" : "Set start price",
+        "SET_CURRENCY" : "Set currency"
     },
 
     "PAGE_CREATE-USER-PROFILE" : {
