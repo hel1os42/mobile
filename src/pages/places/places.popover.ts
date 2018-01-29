@@ -10,8 +10,7 @@ import { SelectedCategory } from '../../models/selectedCategory';
 export class PlacesPopover {
 
     types;
-    features;
-    categories: SelectedCategory[];
+    tags;
     isOpenTypesSelect = false;
     isOpenFeaturesSelect = false;
     isOpenCuisineSelect = true;
@@ -21,8 +20,7 @@ export class PlacesPopover {
         private navParams: NavParams) {
 
         this.types = this.navParams.get('types');
-        this.features = this.navParams.get('features');
-        this.categories = this.navParams.get('childCategories');
+        this.tags = this.navParams.get('tags');
     }
 
     openTypesSelect() {
@@ -47,7 +45,7 @@ export class PlacesPopover {
     }
 
     close() {
-        this.viewCtrl.dismiss({ categories: this.categories, types: this.types, features: this.features });
+        this.viewCtrl.dismiss({ types: this.types, tags: this.tags });
     }
 
     // clear(arr) {
