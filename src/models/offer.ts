@@ -17,5 +17,4 @@ export class Offer extends OfferCreate {
     timeframes: TimeFrames[];
     redemptions_count?: number;
     type: string;
-    gift_bonus_descr?: string;
 }

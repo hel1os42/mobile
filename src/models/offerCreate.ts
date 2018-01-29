@@ -23,4 +23,10 @@ export class OfferCreate {
     country: string;
     city: string;
     delivery?: boolean;
+    gift_bonus_descr?: string;
+    discount_percent?: number;
+    discount_start_price?: number;
+    discount_finish_price?: number;
+    currency: string;
+
 }
