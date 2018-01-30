@@ -22,7 +22,7 @@ export class LoginPage {
     numCode: string;
     page;
     clickMode = 0;
-    envMode: string;
+    envName: string;
     isVisibleLoginButton = false;
     phoneCodes = PHONE_CODES;
 
@@ -33,10 +33,10 @@ export class LoginPage {
         private auth: AuthService,
         private appMode: AppModeService,
         private alert: AlertController) {
-
+        
+        this.envName = this.appMode.getEnvironmentMode();
         this.numCode = this.getNumCode();
-
-        this.envMode = this.appMode.getEnvironmentMode();
+        
     }
 
     updateList(ev) {
@@ -44,7 +44,7 @@ export class LoginPage {
     }
 
     getDevMode() {
-        return this.appMode.getEnvironmentMode() === 'dev';
+        return (this.envName === 'dev' || this.envName === 'test');
     }
 
     getNumCode() {
@@ -106,19 +106,19 @@ export class LoginPage {
                     type: 'radio',
                     label: 'develop',
                     value: 'dev',
-                    checked: this.envMode == 'dev'
+                    checked: this.envName == 'dev'
                 },
                 {
                     type: 'radio',
                     label: 'test',
                     value: 'test',
-                    checked: this.envMode == 'test'
+                    checked: this.envName == 'test'
                 },
                 {
                     type: 'radio',
                     label: 'production',
                     value: 'prod',
-                    checked: this.envMode == 'prod'
+                    checked: this.envName == 'prod'
                 }],
             buttons: [
                 {
@@ -132,11 +132,11 @@ export class LoginPage {
                 {
                     text: 'Ok',
                     handler: (data) => {
-                        if (!data || this.envMode == data) {
+                        if (!data || this.envName == data) {
                             return;
                         }
                         else {
-                            this.envMode = data;
+                            this.envName = data;
                             this.appMode.setEnvironmentMode(data);
                             this.getNumCode();
                         }

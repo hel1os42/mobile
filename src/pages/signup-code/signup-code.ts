@@ -12,7 +12,7 @@ import { TemporaryPage } from '../temporary/temporary';
 })
 export class SignUpCodePage {
     register: Register;
-    envMode: string;
+    envName: string;
 
     constructor(
         private nav: NavController,
@@ -21,8 +21,8 @@ export class SignUpCodePage {
         private navParams: NavParams) {
 
         this.register = this.navParams.get('register');
-        this.envMode = this.appMode.getEnvironmentMode();
-        if (this.envMode === 'dev') {
+        this.envName = this.appMode.getEnvironmentMode();
+        if (this.envName === 'dev' || this.envName === 'test') {
             this.register.code = this.register.phone.slice(-6);
         }
 
@@ -51,9 +51,5 @@ export class SignUpCodePage {
 
     limitStr(str: string) {
         this.register.code = StringValidator.stringLimitMax(str, 6);
-    }
-
-    getDevMode() {
-        return this.appMode.getEnvironmentMode() === 'dev';
     }
 }

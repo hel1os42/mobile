@@ -13,6 +13,7 @@ import { SignUpPage } from '../signup/signup';
 export class SignUpInvitePage {
     code = { inviteCode: '' };//to do
     //data: Register = new Register();
+    envName: string;
 
     constructor(
         private nav: NavController,
@@ -20,6 +21,7 @@ export class SignUpInvitePage {
         private appMode: AppModeService,
         private storage: StorageService) {
 
+        this.envName = this.appMode.getEnvironmentMode();
         this.code.inviteCode = this.storage.get('invCode') ? this.storage.get('invCode') : '';
 
     }
@@ -27,10 +29,6 @@ export class SignUpInvitePage {
     next() {
         this.auth.setInviteCode(this.code.inviteCode);
         this.nav.push(SignUpPage);
-    }
-
-    getDevMode() {
-        return this.appMode.getEnvironmentMode() === 'dev';
     }
 
 }

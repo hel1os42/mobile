@@ -95,7 +95,7 @@ export class PlacesPage {
     }
 
     getDevMode() {
-        return this.appMode.getEnvironmentMode() === 'dev';
+        return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
 
     getCompaniesList() {
