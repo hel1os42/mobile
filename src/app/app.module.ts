@@ -63,7 +63,6 @@ import { StatisticPage } from '../pages/statistic/statistic';
 import { Statistic1Page } from '../pages/statistic1/statistic1';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TemporaryPage } from '../pages/temporary/temporary';
-import { TransferPage } from '../pages/transfer/transfer';
 import { TransferPopover } from '../pages/user-nau/transfer.popover';
 import { UserAchievePage } from '../pages/user-achieve/user-achieve';
 import { UserNauPage } from '../pages/user-nau/user-nau';
@@ -148,7 +147,6 @@ export function createTranslateLoader(http: HttpClient) {
       FeedPage,
       StatisticPage,
       Statistic1Page,
-      TransferPage,
       LineChartComponent,
       BarChartComponent
   ],
@@ -229,7 +227,6 @@ export function createTranslateLoader(http: HttpClient) {
       FeedPage,
       StatisticPage,
       Statistic1Page,
-      TransferPage,
       LineChartComponent,
       BarChartComponent
   ],
