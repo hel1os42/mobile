@@ -13,7 +13,7 @@
         <br>{{ 'PAGE_SIGNUP-CODE.FROM_MESSAGE' | translate }}
     </div>
 
-    <form #form="ngForm" (ngSubmit)="next()">
+    <form #form="ngForm" (ngSubmit)="form.valid ? signUp() : undefined">
         <div margin-top class="bg-gray margin-top-6vw">
             <ion-item class="border-bottom-no">
                 <ion-label class="label-left">OTP</ion-label>
