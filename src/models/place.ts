@@ -30,8 +30,7 @@ export class Place {
     picture_url: string;
     cover_url: string;
     retail_types;
-    category?;
-    categories?: RootCategory[];
+    category;
     tags?: string[];
     specialities?;
 }

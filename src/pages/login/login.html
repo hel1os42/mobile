@@ -94,5 +94,6 @@
   <div text-center>
     <div><a (click)="signup()" class="link-nau">{{ 'UNIT.SIGN_UP' | translate }}</a></div>
   </div>
-  <div  *ngIf="getDevMode()" class="devmode">Dev mode</div>
+  <div *ngIf="envName === 'dev'" class="devmode">Dev mode</div>
+  <div *ngIf="envName === 'test'" class="devmode">Test mode</div>
 </ion-footer>

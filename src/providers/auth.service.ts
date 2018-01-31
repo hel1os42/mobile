@@ -30,7 +30,7 @@ export class AuthService {
                             this.token.remove();
                         });
             }
-        }, 1800 * 1000);  //every 5 min
+        }, 1800 * 1000);
     }
 
     getInviteCode() {

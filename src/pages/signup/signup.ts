@@ -17,6 +17,7 @@ export class SignUpPage {
     numCode: string;
     phoneNumber: string;
     phoneCodes = PHONE_CODES;
+    envName: string;
 
     @ViewChild('codeSelect') codeSelect: Select;
 
@@ -25,6 +26,7 @@ export class SignUpPage {
         private auth: AuthService,
         private appMode: AppModeService) {
 
+        this.envName = this.appMode.getEnvironmentMode();
         this.numCode = this.getDevMode() ? '+380' : this.phoneCodes[0].dial_code;
     }
 
@@ -52,7 +54,7 @@ export class SignUpPage {
     }
 
     getDevMode() {
-        return this.appMode.getEnvironmentMode() === 'dev';
+        return (this.envName === 'dev' || this.envName === 'test');
     }
 
     dismissSelect(event) {

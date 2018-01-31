@@ -50,7 +50,7 @@
         "FOOD_DRINKS" : "Food & Drinks",
         "BEAUTY_FITNESS" : "Beauty & Fitness",
         "RETAIL_SERVICES" : "Retail & Services",
-        "ATTRACTIONS_LEISURE" : "Attractions & Leisure",
+        "ACCOMMODATION_LEISURE" : "Accommodation & Leisure",
         "OTHER_ONLINE" : "Other & Online",
         "SELECT_TYPE" : "Select Type",
         "SELECT_FEATURES" : "Select Features"
@@ -184,12 +184,16 @@
         "MAX_FOR_USER_VALID_OVERALL" : "Maximum amount of redemptions by user for definite period should be less than overall",
         "DAY_MAX_VALID" : "Daily redemptions amount should be less than overall",
         "MAX_FOR_USER_VALID" : "Maximum amount of redemptions by user should be less than overall",
-        "DESCRIPTION_FOR_BONUS" : "Description for bonus or gift",
+        "DESCRIPTION_FOR_BONUS" : "Description for bonus",
+        "DESCRIPTION_FOR_GIFT" : "Description for gift",
         "DISCOUNT" : "Discount",
-        "SECOND_FEE" : "Second Fee",
-        "BONUS_OR_GIFT" : "Bonus or Gift",
+        "SECOND_FREE" : "Second Free",
+        "BONUS" : "Bonus",
+        "GIFT" : "Gift",
         "DELIVERY" : "Delivery",
-        "DESCRIPTION_FOR" : "Description for this item"
+        "DESCRIPTION_FOR" : "Description for this item",
+        "SET_START_PRICE" : "Set start price",
+        "SET_CURRENCY" : "Set currency"
     },
 
     "PAGE_CREATE-USER-PROFILE" : {

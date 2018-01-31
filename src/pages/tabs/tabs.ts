@@ -17,8 +17,6 @@ import { TransactionService } from '../../providers/transaction.service';
 })
 export class TabsPage {
 
-    isDevMode = false;
-
     private _onHomeChangeSubscription: Subscription;
 
     tab1Root;
@@ -30,6 +28,7 @@ export class TabsPage {
     selectedTabIndex = 0;
     nauParams;//temporary
     shownTransactions: boolean;//temporary
+    envName: string;
 
     @ViewChild('tabs') tabs: Tabs;
 
@@ -40,8 +39,9 @@ export class TabsPage {
                 private transaction: TransactionService) {
 
         //temporary
-        this.isDevMode = this.appMode.getEnvironmentMode() === 'dev';
-        this.tab2Root = this.isDevMode ? UserProfilePage : UserNauPage;
+        this.envName = this.appMode.getEnvironmentMode();
+        this.tab2Root = (this.envName === 'dev' || this.envName === 'test') 
+        ? UserProfilePage : UserNauPage;
 
                 this.profile.getWithAccounts()
                     .subscribe(resp => {

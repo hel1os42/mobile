@@ -1,6 +1,6 @@
 import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
 import { Component } from '@angular/core';
-import { LoadingController, NavController, PopoverController } from 'ionic-angular';
+import { LoadingController, NavController, PopoverController, Popover } from 'ionic-angular';
 import { ChildCategory } from '../../models/childCategory';
 import { Place } from '../../models/place';
 import { Coords } from '../../models/coords';
@@ -13,6 +13,8 @@ import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBounds, LatLng, DomUtil } from 'leaflet';
+import { RetailType } from '../../models/retailType';
+import { Tag } from '../../models/tag';
 
 @Component({
     selector: 'page-places',
@@ -42,6 +44,9 @@ export class PlacesPage {
     markers: Marker[];
     userPin: Marker[];
     fitBounds;
+    selectedTypes: RetailType[];
+    selectedTags: Tag[];
+    isChangedCategory = true;
 
     constructor(
         private nav: NavController,
@@ -54,25 +59,25 @@ export class PlacesPage {
         this.offers.getCategories()
             .subscribe(categories => {
                 this.categories.forEach((category) => {
-                     category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
+                    category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
                 })
                 this.selectedCategory = this.categories[0];
-       
-        this.segment = "alloffers";
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-        loadingLocation.present();
-            this.location.get()
-                .then((resp) => {
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    loadingLocation.dismiss();
-                    this.getCompaniesList();
-                })
-                .catch((error) => {
-                    this.message = error.message;
-                });
+
+                this.segment = "alloffers";
+                let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+                loadingLocation.present();
+                this.location.get()
+                    .then((resp) => {
+                        this.coords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        loadingLocation.dismiss();
+                        this.getCompaniesList();
+                    })
+                    .catch((error) => {
+                        this.message = error.message;
+                    });
                 setTimeout(() => {
                     if (!this.coords) {
                         this.location.getByIp()
@@ -90,7 +95,7 @@ export class PlacesPage {
     }
 
     getDevMode() {
-        return this.appMode.getEnvironmentMode() === 'dev';
+        return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
 
     getCompaniesList() {
@@ -184,6 +189,7 @@ export class PlacesPage {
     }
 
     selectCategory(category: OfferCategory) {
+        this.isChangedCategory = this.selectedCategory.id !== category.id;
         this.search = ""
         this.selectedCategory = category;
         this.loadCompanies([this.selectedCategory.id], this.search, this.page = 1);
@@ -206,11 +212,11 @@ export class PlacesPage {
         this.isMapVisible = !this.isMapVisible;
 
         function renderMap() {
-            if (document.getElementById("map_leaf")){
+            if (document.getElementById("map_leaf")) {
                 document.getElementById("map_leaf").style.height = window.innerHeight -
-                document.getElementsByClassName('grid-tabs-splash')[0].clientHeight -
-                document.getElementsByClassName('tabbar')[0].clientHeight -
-                document.getElementsByClassName('sticky')[0].clientHeight + "px";
+                    document.getElementsByClassName('grid-tabs-splash')[0].clientHeight -
+                    document.getElementsByClassName('tabbar')[0].clientHeight -
+                    document.getElementsByClassName('sticky')[0].clientHeight + "px";
             }
         }
         setTimeout(renderMap, 1);
@@ -241,57 +247,69 @@ export class PlacesPage {
         return undefined;
     }
 
-    presentPopover() {
-        let types = MockPlaceTypes.RetailTypes;//temporary mock
-        let features = MockPlaceTypes.Features;//temporary mock
-        this.offers.getSubCategories(this.selectedCategory.id)
-            .subscribe(category => {
-                this.search = "";
-                this.childCategories = category.children;
-                let popover = this.popoverCtrl.create(PlacesPopover, {
-                    childCategories: this.childCategories.map(p => {
+    createPopover() {
+        let popover: Popover;
+        if (this.isChangedCategory) {
+            this.offers.getTypes(this.selectedCategory.id)
+                .subscribe(resp => {
+                    this.selectedTypes = resp.retail_types.map(p => {
+                        let selectedSpecialities = p.specialities;
                         return {
                             id: p.id,
                             name: p.name,
-                            isSelected: this.selectedChildCategories ? !!this.selectedChildCategories.find(k => k.id == p.id) : false
+                            parent_id: p.parent_id,
+                            children_count: p.children_count,
+                            specialities: selectedSpecialities
+                                .map(i => {
+                                    return {
+                                        id: i.id,
+                                        retail_type_id: i.retail_type_id,
+                                        slug: i.slug,
+                                        name: i.name,
+                                        group: i.group,
+                                        isSelected: false
+                                    }
+                                }),
+                            isSelected: false
                         }
-                    }),
-                    //temporary
-                types: types.map(t => {
-                    return {
-                        name: t.name,
-                        isSelected: false
-                    }
-                    }), 
-                
-                features: features.map(feature => {
-                     return {
-                        name: feature.name,
-                        isSelected: false
-                    }
-                }) 
-            });
-                //temporary
-                popover.present();
-                popover.onDidDismiss((data) => {
-                    // let types = data.types;
-                    // let features = data.features;  
-                  
-                    if (!data) {
-                        return;
-                    }
-                    let selectedCategories: SelectedCategory[] = data.categories.filter(p => p.isSelected);
-                    if (selectedCategories.length > 0) {
-                        this.selectedChildCategories = selectedCategories;
-                        this.categoryFilter = this.selectedChildCategories.map(p => p.id);
-                    }
-                    else {
-                        this.selectedChildCategories = undefined;
-                        this.categoryFilter = [this.selectedCategory.id];
-                    }
-                    this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
-                })
-            });
+                    });
+                    this.selectedTags = resp.tags.length > 0
+                        ? resp.tags.map(t => {
+                            return {
+                                name: t.name,
+                                slug: t.slug,
+                                isSelected: false
+                            }
+                        })
+                        : undefined;
+                    popover = this.popoverCtrl.create(PlacesPopover, { types: this.selectedTypes, tags: this.selectedTags });
+                    this.presentPopover(popover);
+                });
+        }
+        else {
+            popover = this.popoverCtrl.create(PlacesPopover, { types: this.selectedTypes, tags: this.selectedTags });
+            this.presentPopover(popover);
+        }
+    }
+
+    presentPopover(popover) {
+        this.search = "";
+        popover.present();
+        popover.onDidDismiss((data) => {
+            if (!data) {
+                return;
+            }
+            let selectedCategories: SelectedCategory[] = data.categories.filter(p => p.isSelected);
+            if (selectedCategories.length > 0) {
+                this.selectedChildCategories = selectedCategories;
+                this.categoryFilter = this.selectedChildCategories.map(p => p.id);
+            }
+            else {
+                this.selectedChildCategories = undefined;
+                this.categoryFilter = [this.selectedCategory.id];
+            }
+            this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
+        })
     }
 
     searchCompanies($event) {

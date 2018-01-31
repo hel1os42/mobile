@@ -5,4 +5,5 @@
     <ion-tab [enabled] = false [root]="tab4Root"></ion-tab>
     <ion-tab [enabled] = false [root]="tab5Root"></ion-tab>
 </ion-tabs>
-<div *ngIf="isDevMode" class="devmode">Dev mode</div>
+<div *ngIf="envName === 'dev'" class="devmode">Dev mode</div>
+<div *ngIf="envName === 'test'" class="devmode">Test mode</div>

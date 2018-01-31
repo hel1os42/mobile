@@ -16,7 +16,7 @@ export class AppModeService {
     }
 
     getAdvMode() {
-        return !!this.storage.get(this.ADV_MODE_KEY)
+        return !!this.storage.get(this.ADV_MODE_KEY);
     }
 
     setAdvMode(advMode: boolean) {
