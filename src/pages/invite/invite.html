@@ -11,7 +11,7 @@
     {{ 'PAGE_INVITE.YOU_SHOULD_HAVE_RECEIVED' | translate }}
   </div>
 
-  <form #form="ngForm" (ngSubmit)="next()">
+  <form #form="ngForm" (ngSubmit)="form.valid ? next() : undefined">
     <ion-item class="border-bottom-no margin-top-6vw">
       <ion-input 
         [(ngModel)]="code.inviteCode" 
