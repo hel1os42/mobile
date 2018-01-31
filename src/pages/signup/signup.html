@@ -12,7 +12,7 @@
     <br>{{ 'PAGE_SIGNUP.AND_FILL' | translate }}
   </div>
 
-  <form #form="ngForm" (ngSubmit)="getCode()">
+  <form #form="ngForm" (ngSubmit)="form.valid ? getCode() : undefined">
     <div class="bg-gray margin-top-6vw">
       <ion-item class="border-bottom-no">
         <ion-select
