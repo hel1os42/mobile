@@ -37,7 +37,7 @@
             <div item-end class="item-content">
                 <form>
                 <ion-input 
-                    [(ngModel)]="user.name" 
+                    [(ngModel)]="baseData.name" 
                     class="bg-gray margin-bottom-small" 
                     type="text" 
                     maxlength="30" 
@@ -46,14 +46,14 @@
                 </ion-input>
                 <div class="input_relative">
                     <ion-input 
-                        [(ngModel)]="user.email" 
+                        [(ngModel)]="baseData.email" 
                         class="bg-gray margin-bottom-small field-email" 
                         type="email" 
                         maxlength="30" 
                         placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}"
                         name="email">
                     </ion-input>
-                    <span *ngIf="user.email" class="text-gray icon_info">
+                    <span *ngIf="baseData.email" class="text-gray icon_info">
                         <a (click)="toggleVisibleInfo()">
                             <img src="assets/img/create_user_profile/info.svg">
                         </a>
@@ -199,7 +199,7 @@
 
     </div>
     <p margin>
-        <button color="primary" (click)="createAccount()" [disabled]="user.name?.length < 4 || !user.email" ion-button block>
+        <button color="primary" (click)="createAccount()" [disabled]="baseData.name?.length < 4 || !baseData.email" ion-button block>
             {{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}
         </button>
     </p>

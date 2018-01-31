@@ -59,8 +59,8 @@ export class CreateUserProfilePage {
             this.user = this.navParams.get('user');
             this.baseData = _.clone(this.user);
             this.picture_url = this.user.picture_url;
-            this.coords.lat = this.user.latitude;
-            this.coords.lng = this.user.longitude;
+            this.coords.lat = this.baseData.latitude;
+            this.coords.lng = this.baseData.longitude;
             if (this.coords.lat) {
                 this.addMap();
             }
@@ -243,11 +243,11 @@ export class CreateUserProfilePage {
     }
 
     createAccount() {
-        if (this.validateName(this.user.name) && this.validateEmail(this.user.email)) {
-            this.user.latitude = this.coords.lat;
-            this.user.longitude = this.coords.lng;
+        if (this.validateName(this.baseData.name) && this.validateEmail(this.baseData.email)) {
+            this.baseData.latitude = this.coords.lat;
+            this.baseData.longitude = this.coords.lng;
             //this.account.points = this.point(); to do
-            let differenceData = DataUtils.difference(this.user, this.baseData);
+            let differenceData = DataUtils.difference(this.baseData, this.user);
             let isEmpty = _.isEmpty(differenceData);
             let promise = this.picture_url && this.changedPicture
                 ? this.api.uploadImage(this.picture_url, 'profile/picture', true)
