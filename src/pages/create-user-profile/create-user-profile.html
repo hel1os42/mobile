@@ -1,181 +1,204 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      {{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate) }}
-    </ion-title>
-  </ion-navbar>
-  <div class="header-shadow"></div>
+    <ion-navbar>
+        <ion-title>
+            {{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate)}}
+        </ion-title>
+    </ion-navbar>
+    <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content class="padding-no">
-  <div class="block-lines-bottom-left-right">
-    <ion-item no-lines class="block-name">
-      <div text-uppercase class="text-4F4F4F font-14">
-        {{ 'PAGE_CREATE-USER-PROFILE.NAME_EMAIL' | translate }}
-      </div>
-      <div item-end>
-        <img src="assets/img/cards.svg">
-      </div>
-      <div item-end>
-        <span class="label label-ios points font-75">
-          {{ 'PAGE_CREATE-USER-PROFILE.YOU_HAVE' | translate }} {{ point() }} {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate}}
-        </span>
-      </div>
-    </ion-item>
-  </div>
+    <div class="block-lines-bottom-left-right">
+        <ion-item no-lines class="block-name">
+            <div text-uppercase class="text-4F4F4F font-14">
+                {{ 'PAGE_CREATE-USER-PROFILE.NAME_EMAIL' | translate }}
+            </div>
+            <div item-end>
+                <img src="assets/img/cards.svg">
+            </div>
+            <div item-end>
+                <span class="label label-ios points font-75">
+                    {{ 'PAGE_CREATE-USER-PROFILE.YOU_HAVE' | translate }} {{ point() }} {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate}}
+                </span>
+            </div>
+        </ion-item>
+    </div>
 
-  <div class="block-lines">
-    <ion-item no-lines class="block-people">
-      <div item-start>
-        <a (click)="addLogo()">
-          <div class="people" [ngStyle]="{'background-image': 'url(' + picture_url + '), url(assets/img/create_user_profile/people.svg)'}"></div>
+    <div class="block-lines">
+        <ion-item no-lines class="block-people">
+            <div item-start>
+                <a (click)="addLogo()">
+                    <div 
+                        class="people" 
+                        [ngStyle]="{'background-image': 'url(' + picture_url + '), url(assets/img/create_user_profile/people.svg)'}">
+                    </div>
+                </a>
+            </div>
+            <div item-end class="item-content">
+                <ion-input 
+                    [(ngModel)]="user.name" 
+                    class="bg-gray margin-bottom-small" 
+                    type="text" 
+                    maxlength="30" 
+                    placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"
+                    name="name1">
+                </ion-input>
+                <div class="input_relative">
+                    <ion-input 
+                        [(ngModel)]="user.email" 
+                        class="bg-gray margin-bottom-small field-email" 
+                        type="email" 
+                        maxlength="30" 
+                        placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}"
+                        name="email">
+                    </ion-input>
+                    <span *ngIf="user.email" class="text-gray icon_info">
+                        <a (click)="toggleVisibleInfo()">
+                            <img src="assets/img/create_user_profile/info.svg">
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </ion-item>
+    </div>
+
+    <div class="block-lines">
+        <ion-item *ngIf="!visibleInfo" no-lines>
+            <div item-start>
+                <img class="img_lock" src="assets/img/create_user_profile/img_1.svg">
+            </div>
+            <div item-end text-left class="item-content">
+                <div class="bold font-16 text-3E4B5D">{{ 'PAGE_CREATE-USER-PROFILE.EARN_EXTRA_POINTS' | translate }}</div>
+                <div class="text-4F4F4F font-12 margin-top-2vw">{{ 'PAGE_CREATE-USER-PROFILE.OF_COURSE' | translate }}</div>
+            </div>
+        </ion-item>
+        <ion-item *ngIf="visibleInfo" no-lines>
+            <div item-start>
+                <img class="img_msg" src="assets/img/create_user_profile/img_2.svg">
+            </div>
+            <div item-end text-left class="item-content">
+                <div class="bold font-16 text-3E4B5D">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_EMAIL_ADDRESS' | translate }}</div>
+                <div class="text-4F4F4F font-12">{{ 'PAGE_CREATE-USER-PROFILE.WE_EMAILED' | translate }}</div>
+            </div>
+        </ion-item>
+    </div>
+
+    <div class="block-lines">
+        <div class="font-75">{{ 'PAGE_CREATE-USER-PROFILE.SOCIAL_ACCOUNTS' | translate }}</div>
+    </div>
+
+    <div class="block-lines">
+
+        <ion-item class="bg-gray margin-bottom-small" ion-item detail-push>
+            <ion-input disabled class="text-3E4B5D" [(ngModel)]="facebookName" placeholder="Facebook"></ion-input>
+            <div item-end>
+                <ion-label *ngIf="facebookName" class="label label-ios added font-75">
+                    <ion-icon name="md-checkmark">
+                    </ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}
+                </ion-label>
+                <ion-label *ngIf="!facebookName" class="label label-ios points font-75">
+                    + 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
+                </ion-label>
+            </div>
+        </ion-item>
+
+        <ion-item class="bg-gray margin-bottom-small" ion-item detail-push>
+            <ion-input disabled class="text-3E4B5D" [(ngModel)]="instagramName" placeholder="Instagram"></ion-input>
+            <div item-end>
+                <ion-label *ngIf="instagramName" class="label label-ios added font-75">
+                    <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+                <ion-label *ngIf="!instagramName" class="label label-ios points font-75">
+                    + 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
+                </ion-label>
+            </div>
+        </ion-item>
+
+        <ion-item class="bg-gray" ion-item detail-push>
+            <ion-input disabled class="text-3E4B5D" [(ngModel)]="twitterName" placeholder="Twitter"></ion-input>
+            <div item-end>
+                <ion-label *ngIf="twitterName" class="label label-ios added font-75">
+                    <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+                <ion-label *ngIf="!twitterName" class="label label-ios points font-75">
+                    + 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
+                </ion-label>
+            </div>
+        </ion-item>
+
+    </div>
+
+    <div class="block-lines">
+        <a (click)="toggleSelect()">
+            <div class="select-block-desc text-828282 font-14">
+                {{ 'PAGE_CREATE-USER-PROFILE.SHOW_ADDITIONAL_OPTIONS' | translate }}
+                <ion-icon *ngIf="isSelectVisible" name="arrow-up" class="icon-arrow"></ion-icon>
+                <ion-icon *ngIf="!isSelectVisible" name="arrow-down" class="icon-arrow"></ion-icon>
+            </div>
         </a>
-      </div>
-      <div item-end class="item-content">
-        <ion-input [(ngModel)]="user.name"
-                  class="bg-gray margin-bottom-small"
-                  type="text" maxlength="30"
-                  placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"
-                  name="name1">
-      </ion-input>
-        <div class="input_relative">
-          <ion-input [(ngModel)]="user.email"
-                    class="bg-gray margin-bottom-small field-email"
-                    type="email"
-                    maxlength="30"
-                    placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}"
-                    name="email">
-          </ion-input>
-          <span *ngIf="user.email" class="text-gray icon_info">
-            <a (click)="toggleVisibleInfo()">
-              <img src="assets/img/create_user_profile/info.svg">
-            </a>
-          </span>
-        </div>
-      </div>
-    </ion-item>
-  </div>
 
-  <div class="block-lines">
-    <ion-item *ngIf="!visibleInfo" no-lines>
-      <div item-start>
-        <img class="img_lock" src="assets/img/create_user_profile/img_1.svg">
-      </div>
-      <div item-end text-left class="item-content">
-        <div class="bold font-16 text-3E4B5D">{{ 'PAGE_CREATE-USER-PROFILE.EARN_EXTRA_POINTS' | translate }}</div>
-        <div class="text-4F4F4F font-12 margin-top-2vw">{{ 'PAGE_CREATE-USER-PROFILE.OF_COURSE' | translate }}</div>
-      </div>
-    </ion-item>
-    <ion-item *ngIf="visibleInfo" no-lines>
-      <div item-start>
-        <img class="img_msg" src="assets/img/create_user_profile/img_2.svg">
-      </div>
-      <div item-end text-left class="item-content">
-        <div class="bold font-16 text-3E4B5D">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_EMAIL_ADDRESS' | translate }}</div>
-        <div class="text-4F4F4F font-12">{{ 'PAGE_CREATE-USER-PROFILE.WE_EMAILED' | translate }}</div>
-      </div>
-    </ion-item>
-  </div>
-
-  <div class="block-lines">
-    <div class="font-75">{{ 'PAGE_CREATE-USER-PROFILE.SOCIAL_ACCOUNTS' | translate }}</div>
-  </div>
-
-  <div class="block-lines">
-
-    <ion-item class="bg-gray margin-bottom-small" ion-item detail-push>
-      <ion-input disabled class="text-3E4B5D" [(ngModel)]="facebookName" placeholder="Facebook"></ion-input>
-      <div item-end>
-        <ion-label *ngIf="facebookName" class="label label-ios added font-75">
-          <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
-        <ion-label *ngIf="!facebookName" class="label label-ios points font-75">+ 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
-      </div>
-    </ion-item>
-
-    <ion-item class="bg-gray margin-bottom-small" ion-item detail-push>
-      <ion-input disabled class="text-3E4B5D" [(ngModel)]="instagramName" placeholder="Instagram"></ion-input>
-      <div item-end>
-        <ion-label *ngIf="instagramName" class="label label-ios added font-75">
-          <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
-        <ion-label *ngIf="!instagramName" class="label label-ios points font-75">+ 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
-      </div>
-    </ion-item>
-
-    <ion-item class="bg-gray" ion-item detail-push>
-      <ion-input disabled class="text-3E4B5D" [(ngModel)]="twitterName" placeholder="Twitter"></ion-input>
-      <div item-end>
-        <ion-label *ngIf="twitterName" class="label label-ios added font-75">
-          <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
-        <ion-label *ngIf="!twitterName" class="label label-ios points font-75">+ 3 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
-      </div>
-    </ion-item>
-
-  </div>
-
-  <div class="block-lines">
-    <a (click)="toggleSelect()">
-      <div class="select-block-desc text-828282 font-14">
-        {{ 'PAGE_CREATE-USER-PROFILE.SHOW_ADDITIONAL_OPTIONS' | translate }}
-        <ion-icon *ngIf="isSelectVisible" name="arrow-up" class="icon-arrow"></ion-icon>
-        <ion-icon *ngIf="!isSelectVisible" name="arrow-down" class="icon-arrow"></ion-icon>
-      </div>
-    </a>
-
-    <p class="select-block-desc text-828282 font-12">{{ 'PAGE_CREATE-USER-PROFILE.IF_YOU_WILL' | translate }}</p>
-  </div>
-
-  <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
-  <div *ngIf="isSelectVisible">
-    <div class="block-lines" disabled>
-      <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-select disabled [(ngModel)]="gender" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.GENDER' | translate }}" class="gender_select"
-          interface="action-sheet">
-          <ion-option value="f">{{ 'PAGE_CREATE-USER-PROFILE.FEMALE' | translate }}</ion-option>
-          <ion-option value="m">{{ 'PAGE_CREATE-USER-PROFILE.MALE' | translate }}</ion-option>
-        </ion-select>
-        <!-- <ion-input [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender"></ion-input>-->
-        <div item-end>
-          <ion-label *ngIf="gender" class="label label-ios added font-75">
-            <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
-          <ion-label *ngIf="!gender" class="label label-ios points font-75">+ 5 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
-        </div>
-      </ion-item>
-
-      <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-input disabled [(ngModel)]="age" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.AGE' | translate }}"></ion-input>
-        <div item-end>
-          <ion-label *ngIf="age" class="label label-ios added font-75">
-            <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
-          <ion-label *ngIf="!age" class="label label-ios points font-75">+ 9 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
-        </div>
-      </ion-item>
-
-      <ion-item detail-push class="bg-gray margin-bottom-small">
-        <ion-input disabled [(ngModel)]="income" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.INCOME' | translate }}"></ion-input>
-        <div item-end>
-          <ion-label *ngIf="income" class="label label-ios added font-75">
-            <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
-          <ion-label *ngIf="!income" class="label label-ios points font-75">+ 9 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}</ion-label>
-        </div>
-      </ion-item>
-    </div>
-    <p margin text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}</p>
-    <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
-    <div *ngIf="coords.lat" class="block-map">
-
-      <div class="leaflet-map" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)">
-      </div>
-      <div id="marker"></div>
+        <p class="select-block-desc text-828282 font-12">{{ 'PAGE_CREATE-USER-PROFILE.IF_YOU_WILL' | translate }}</p>
     </div>
 
-  </div>
-  <p margin>
-    <button color="primary"
-            (click)="createAccount()"
-            [disabled]="user.name?.length < 4 || !user.email"
-            ion-button
-            block>
-     {{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}
-    </button>
-  </p>
+    <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
+    <div *ngIf="isSelectVisible">
+        <div class="block-lines" disabled>
+            <ion-item detail-push class="bg-gray margin-bottom-small">
+                <ion-select 
+                    disabled 
+                    [(ngModel)]="gender" 
+                    placeholder="{{ 'PAGE_CREATE-USER-PROFILE.GENDER' | translate }}" 
+                    class="gender_select"
+                    interface="action-sheet">
+                    <ion-option value="f">{{ 'PAGE_CREATE-USER-PROFILE.FEMALE' | translate }}</ion-option>
+                    <ion-option value="m">{{ 'PAGE_CREATE-USER-PROFILE.MALE' | translate }}</ion-option>
+                </ion-select>
+                <!-- <ion-input [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender"></ion-input>-->
+                <div item-end>
+                    <ion-label *ngIf="gender" class="label label-ios added font-75">
+                        <ion-icon name="md-checkmark">
+                        </ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+                    <ion-label *ngIf="!gender" class="label label-ios points font-75">
+                        + 5 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
+                    </ion-label>
+                </div>
+            </ion-item>
+
+            <ion-item detail-push class="bg-gray margin-bottom-small">
+                <ion-input disabled [(ngModel)]="age" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.AGE' | translate }}"></ion-input>
+                <div item-end>
+                    <ion-label *ngIf="age" class="label label-ios added font-75">
+                        <ion-icon name="md-checkmark"></ion-icon> {{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+                    <ion-label *ngIf="!age" class="label label-ios points font-75">
+                        + 9 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
+                    </ion-label>
+                </div>
+            </ion-item>
+
+            <ion-item detail-push class="bg-gray margin-bottom-small">
+                <ion-input disabled [(ngModel)]="income" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.INCOME' | translate }}">
+                </ion-input>
+                <div item-end>
+                    <ion-label *ngIf="income" class="label label-ios added font-75">
+                        <ion-icon name="md-checkmark">
+                        </ion-icon>{{ 'PAGE_CREATE-USER-PROFILE.ADDED' | translate }}</ion-label>
+                    <ion-label *ngIf="!income" class="label label-ios points font-75">
+                        + 9 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
+                    </ion-label>
+                </div>
+            </ion-item>
+        </div>
+        <p margin text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}</p>
+        <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
+        <div *ngIf="coords.lat" class="block-map">
+
+            <div class="leaflet-map" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)">
+            </div>
+            <div id="marker"></div>
+        </div>
+
+    </div>
+    <p margin>
+        <button color="primary" (click)="createAccount()" [disabled]="user.name?.length < 4 || !user.email" ion-button block>
+            {{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}
+        </button>
+    </p>
 </ion-content>
