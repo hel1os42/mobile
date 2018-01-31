@@ -70,8 +70,7 @@ export class LoginPage {
             phone: this.numCode + this.authData.phone,
             code: this.authData.code
         })
-            .subscribe(
-            resp => {
+            .subscribe(resp => {
                 this.appMode.setHomeMode(true);
                 // this.profile.get(true)
                 //     .subscribe(res => {

@@ -11,7 +11,9 @@
     {{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}
   </div>
 
-  <form #form="ngForm" (ngSubmit)="login()">
+  <form 
+    #form="ngForm" 
+    (ngSubmit)="(form.valid && isVisibleLoginButton) ? login() : (form.valid && !isVisibleLoginButton) ? getOtp() : undefined">
   <div *ngIf="!isVisibleLoginButton" class="bg-gray margin-top-6vw">
   <ion-item class="border-bottom-no">
     <ion-select
