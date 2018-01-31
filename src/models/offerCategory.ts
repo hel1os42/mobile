@@ -35,8 +35,8 @@ export class OfferCategory {
         },
         {
             id: '5e860198-f40a-4031-8fc6-f3e67f9d6b0c',
-            name: 'Attractions & Leisure',
-            name_html: '<div class="font-65 text-white">Attractions<br>& Leisure</div>',
+            name: 'Accommodation & Leisure',
+            name_html: '<div class="font-65 text-white">Accommodation<br>& Leisure</div>',
             image_url: 'assets/img/splash_screen/tab-icon4.svg',
             imageAdvCreate_url: 'assets/img/category/attractions.svg'
         },
