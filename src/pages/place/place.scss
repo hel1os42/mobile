@@ -160,6 +160,22 @@ page-place {
     .list-ios ion-item-options{
         border-bottom: none;
     }
+
+    .item-block-nau .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left],
+    .item-ios ion-avatar[item-start],
+    .item-ios ion-thumbnail[item-start] {
+        margin: 0 2vw 0 0;
+    }
+
+    .item-block-nau .item {
+        padding: 2vw;
+    }
+
+    .star_right{
+        right: 2vw;
+        top: 2vw;
+    }
 }
 
 .iphonex page-place .footer_testimonials {
