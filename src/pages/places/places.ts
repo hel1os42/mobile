@@ -104,7 +104,7 @@ export class PlacesPage {
         this.addMap();
         this.userPin = [marker([this.coords.lat, this.coords.lng], {
             icon: icon({
-                iconSize: [25, 35],
+                iconSize: [22, 26],
                 iconAnchor: [13, 35],
                 iconUrl: 'assets/img/icon_user_map.svg',
                 //shadowUrl:
@@ -139,9 +139,9 @@ export class PlacesPage {
     createMarker(lat, lng, company: Place) {
         let markerLayer = marker([lat, lng], {
             icon: icon({
-                iconSize: [25, 35],
+                iconSize: [24, 30],
                 iconAnchor: [13, 35],
-                iconUrl: 'assets/img/places_pin.png',
+                iconUrl: 'assets/img/create_user_profile/pin.svg',
                 //shadowUrl:
             })
         });
