@@ -177,6 +177,10 @@ ion-header ion-icon.back-button-icon.icon {
     line-height: 6.3vw;
 }
 
+.platform-ios .font-20, button.font-20{
+    letter-spacing: -1px;
+}
+
 .font-22, button.font-22{
     font-size: 22px;
     font-size: 5.7vw;
