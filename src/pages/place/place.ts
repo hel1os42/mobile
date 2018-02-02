@@ -37,7 +37,8 @@ export class PlacePage {
         this.offers.getPlace(companyId)
             .subscribe(companyWithOffers => {
                 this.company = companyWithOffers;
-                this.offersList = companyWithOffers.offers.filter(p => p.status == 'active');
+                this.company.about = '<span>test</span>testtt';//temporary
+                this.offersList = companyWithOffers.offers.filter(p => p.status === 'active');
             });
             
         // this.location.get()
