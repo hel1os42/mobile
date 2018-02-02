@@ -21,7 +21,7 @@ class UriQueryEncoder extends QueryEncoder {
     encodeKey(k: string): string {
       return k;
     }
-   
+
     encodeValue(v: string): string {
       return encodeURIComponent(v);
     }
@@ -54,12 +54,12 @@ export class ApiService {
             this.appMode.setEnvironmentMode(this.environmentMode);
         }
 
-        this.url = (this.environmentMode == 'prod') ? this.prodUrl 
+        this.url = (this.environmentMode == 'prod') ? this.prodUrl
         : this.environmentMode == 'test' ? this.testUrl
         : this.devUrl;
         this.appMode.onEnvironmentMode
             .subscribe(resp => {
-                this.url = resp == 'prod' ? this.prodUrl 
+                this.url = resp == 'prod' ? this.prodUrl
                 : resp == 'test' ? this.testUrl
                 : this.devUrl;
             })
@@ -84,7 +84,7 @@ export class ApiService {
 
     private wrapObservable(obs: Observable<Response>, requestOptions?: ApiRequestOptions) {
         let loading: Loading;
-        
+
         if (!requestOptions)
             requestOptions = { };
 
@@ -105,7 +105,7 @@ export class ApiService {
             })
             .subscribe(
             resp => { },
-            errResp => {  
+            errResp => {
                 let messages = [];
                 if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
                     let err = errResp.json();
@@ -145,19 +145,19 @@ export class ApiService {
             });
 
         // return sharableObs.map(resp => resp.json());
-        return sharableObs.map(resp => { 
+        return sharableObs.map(resp => {
             let obj = resp.json();
             if(obj) {
                obj.http_headers = resp.headers;
             }
-            return obj; 
+            return obj;
         })
     }
 
     get(endpoint: string, requestOptions?: ApiRequestOptions) {
         if (!requestOptions)
             requestOptions = { };
-        let { params, options } = requestOptions;        
+        let { params, options } = requestOptions;
 
         if (!options) {
             options = new RequestOptions();

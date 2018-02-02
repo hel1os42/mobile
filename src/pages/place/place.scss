@@ -176,6 +176,20 @@ page-place {
         right: 2vw;
         top: 2vw;
     }
+
+    .block-about{
+        color: #828282;
+        font-family: 'OpenSansNauLight';
+        font-size: 4vw;
+    }
+
+    .block-about span{
+        font-weight: bold;
+        font-size: 4.7vw;
+        color: #3E4B5D;
+        display: block;
+        margin-bottom: 5%;
+    }
 }
 
 .iphonex page-place .footer_testimonials {

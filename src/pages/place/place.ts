@@ -37,10 +37,9 @@ export class PlacePage {
         this.offers.getPlace(companyId)
             .subscribe(companyWithOffers => {
                 this.company = companyWithOffers;
-                this.company.about = '<span>test</span>testtt';//temporary
                 this.offersList = companyWithOffers.offers.filter(p => p.status === 'active');
             });
-            
+
         // this.location.get()
         //     .then((resp) => {
         //         this.coords = {
@@ -68,9 +67,9 @@ export class PlacePage {
 
     openOffer(offer, company) {
         //this.nav.setRoot(OfferPage, { offer: offer});
-        this.app.getRootNav().push(OfferPage, { 
-            offer: offer, 
-            company: this.company, 
+        this.app.getRootNav().push(OfferPage, {
+            offer: offer,
+            company: this.company,
             distanceStr: this.distanceString,
             coords: this.coords
         });
