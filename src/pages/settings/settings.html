@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content class="padding-no">
-    <div [hidden]="!isAdvMode">
+    <div [hidden]="envName !== 'dev'">
   <div padding-top class="block-lines-bottom-left-right">
     <a class="select" (click)="toggleAccountsChoiceVisible()">
       <span text-uppercase class="font-14 text-4F4F4F">
