@@ -137,6 +137,7 @@ export class CreateOffer5Page {
     navTo() {
         this.nav.setRoot(this.nav.first().component).then(() => {
             this.nav.parent.select(4);
+            this.place.refreshOffersList();
             // this.nav.first();
         })
     }
