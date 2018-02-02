@@ -44,8 +44,8 @@
                         </div>
                     </div>
                 </div>
-                <span class="font-12 text-FF5A00 swipe italic">
-                      swipe left
+                <span class="swipe">
+                      <img src="assets/img/place/swipe.svg">
                 </span>
             </ion-item>
 
@@ -96,7 +96,7 @@
         <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
           <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '), url(assets/img/imagenotfound.svg)'}"></div>
       </ion-avatar>
-      <div class="bold font-22 text-3E4B5D width-88 wrap-no">{{ offer.label }}</div>
+      <div class="bold font-20 text-3E4B5D width-88 wrap-no">{{ offer.label }}</div>
       <div text-regular class="margin-top-10 width-88 font-12 text-828282 wrap text-overflow-35">{{ offer.description }}</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-10 flex">
@@ -117,6 +117,7 @@
     </ion-item>
   </ion-list>
 
-  <div *ngSwitchCase="'about'" [innerHTML]="company.about" margin-top class="item-block-nau"></div>
+  <div *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>
+
 </div>
 </ion-content>

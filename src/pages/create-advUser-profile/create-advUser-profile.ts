@@ -205,14 +205,12 @@ export class CreateAdvUserProfilePage {
     }
 
     selectCategory(category) {
-        let rootCategories = this.categories.filter(p => p.id === category.id).map(p => {
+        let rootCategories = this.categories.filter(p => p.id === category.id).map(item => {
             // let rootCategories = this.categories.filter(p => p.name === companyCategory.name).map(p => {// temporary
             return {
-                id: p.id,
-                name: p.name,
-                image_url: p.imageAdvCreate_url,
-                isSelected: p.id === category.id,
-                children_count: p.children_count,
+                ...item,
+                image_url: item.imageAdvCreate_url,
+                isSelected: item.id === category.id,
             }
         })
         this.selectedCategory = rootCategories[0];
@@ -220,10 +218,9 @@ export class CreateAdvUserProfilePage {
 
     selectTags(tags: Tag[]) {
         tags.forEach(k => {
-            this.selectedTags = tags.map(t => {
+            this.selectedTags = tags.map(tag => {
                 return {
-                    slug: t.slug,
-                    name: t.name,
+                    ...tag,
                     isSelected: true
                 }
             });
@@ -232,22 +229,15 @@ export class CreateAdvUserProfilePage {
     }
 
     selectTypes(types: RetailType[], specialities: Speciality[]) {
-        this.selectedTypes = types.map(p => {
-            let selectedSpecialities = specialities.filter(s => s.retail_type_id === p.id);
+        this.selectedTypes = types.map(type => {
+            let selectedSpecialities = specialities.filter(s => s.retail_type_id === type.id);
             return {
-                id: p.id,
-                name: p.name,
-                parent_id: p.parent_id,
-                children_count: p.children_count,
-                specialities: this.types.filter(t => t.id === p.id)[0].specialities
-                    .map(i => {
+                ...type,
+                specialities: this.types.filter(t => t.id === type.id)[0].specialities
+                    .map(spec => {
                         return {
-                            id: i.id,
-                            retail_type_id: i.retail_type_id,
-                            slug: i.slug,
-                            name: i.name,
-                            group: i.group,
-                            isSelected: selectedSpecialities.find(j => j.slug === i.slug) ? true : false
+                            ...spec,
+                            isSelected: selectedSpecialities.find(j => j.slug === spec.slug) ? true : false
                         }
                     }),
                 isSelected: true
@@ -282,13 +272,11 @@ export class CreateAdvUserProfilePage {
 
     presentCategoriesPopover() {
         let popover = this.popoverCtrl.create(CreateAdvUserProfileCategoryPopover, {
-            categories: this.categories.map(p => {
+            categories: this.categories.map(item => {
                 return {
-                    id: p.id,
-                    name: p.name,
-                    image_url: p.imageAdvCreate_url,
-                    isSelected: this.selectedCategory && p.id == this.selectedCategory.id,
-                    children_count: p.children_count
+                    ...item,
+                    image_url: item.imageAdvCreate_url,
+                    isSelected: this.selectedCategory && item.id == this.selectedCategory.id,
                 }
             })
         });
@@ -318,11 +306,10 @@ export class CreateAdvUserProfilePage {
     presentTagsPopover() {
         let popover = this.popoverCtrl.create(CreateAdvUserProfileTagsPopover, {
             categoryName: this.selectedCategory.name,
-            tags: this.tags.map(p => {
+            tags: this.tags.map(tag => {
                 return {
-                    name: p.name,
-                    slug: p.slug,
-                    isSelected: this.selectedTags ? !!this.selectedTags.find(k => k.slug == p.slug) : false
+                    ...tag,
+                    isSelected: this.selectedTags ? !!this.selectedTags.find(k => k.slug == tag.slug) : false
                 }
             })
 
@@ -349,14 +336,10 @@ export class CreateAdvUserProfilePage {
             this.types = _.uniqBy([...this.selectedTypes, ...this.types], 'id');
         }
         let popover = this.popoverCtrl.create(CreateAdvUserProfileTypesPopover, {
-            types: this.types.map(t => {
+            types: this.types.map(type => {
                 return {
-                    id: t.id,
-                    name: t.name,
-                    parent_id: t.parent_id,
-                    children_count: t.children_count,
-                    specialities: t.specialities,
-                    isSelected: this.selectedTypes ? this.selectedTypes.find(k => k.id == t.id) : false
+                    ...type,
+                    isSelected: this.selectedTypes ? this.selectedTypes.find(k => k.id == type.id) : false
                 };
             })
         });

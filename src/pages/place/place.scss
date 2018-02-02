@@ -124,11 +124,10 @@ page-place {
 
     .swipe{
         position: absolute;
-        left: 0;
-        width: 100%;
-        text-align: right;
-        bottom: 0;
-        padding-right: 5vw;
+        right: 15vw;
+        width: 7vw;
+        height: auto;
+        bottom: -1vw;
     }
 
     .cat-block{
@@ -159,6 +158,36 @@ page-place {
 
     .list-ios ion-item-options{
         border-bottom: none;
+    }
+
+    .item-block-nau .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left],
+    .item-ios ion-avatar[item-start],
+    .item-ios ion-thumbnail[item-start] {
+        margin: 0 2vw 0 0;
+    }
+
+    .item-block-nau .item {
+        padding: 2vw;
+    }
+
+    .star_right{
+        right: 2vw;
+        top: 2vw;
+    }
+
+    .block-about{
+        color: #828282;
+        font-family: 'OpenSansNauLight';
+        font-size: 4vw;
+    }
+
+    .block-about span{
+        font-weight: bold;
+        font-size: 4.7vw;
+        color: #3E4B5D;
+        display: block;
+        margin-bottom: 5%;
     }
 }
 

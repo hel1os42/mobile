@@ -47,7 +47,6 @@
     "cordova-plugin-file-transfer": "1.7.0",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-inappbrowser": "2.0.1",
-    "cordova-plugin-ionic-webview": "1.1.16",
     "cordova-plugin-splashscreen": "5.0.1",
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-telerik-imagepicker": "2.1.8",
@@ -94,7 +93,6 @@
         "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow the app to use your location",
         "GEOLOCATION_USAGE_DESCRIPTION": "Allow the app to use your location"
       },
-      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-inappbrowser": {}
     },
     "platforms": [

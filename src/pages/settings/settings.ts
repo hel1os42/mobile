@@ -42,6 +42,7 @@ export class SettingsPage {
     referralLink: string;
     // branchDomain = 'https://nau.test-app.link';for test only
     branchDomain = 'https://nau.app.link';
+    envName;//temporary
 
     constructor(platform: Platform,
         private nav: NavController,
@@ -53,6 +54,7 @@ export class SettingsPage {
         private place: PlaceService,
         private clipboard: Clipboard) {
 
+        this.envName = this.appMode.getEnvironmentMode();//temporary
         // let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
         // this.lang = availableLang.name;
         this.isAdvMode = this.navParams.get('isAdvMode');

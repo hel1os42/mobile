@@ -28,6 +28,7 @@ export class AdvUserOffersPage {
     dates;
     balance: number;
     onRefreshBalance: Subscription;
+    onRefreshOffers: Subscription;
     onRefreshOffersList: Subscription;
     time = new Date().valueOf();
 
@@ -42,10 +43,17 @@ export class AdvUserOffersPage {
                 this.balance = resp.accounts.NAU.balance;
             })
 
-        this.onRefreshOffersList = this.place.onRefreshCompany
+        this.onRefreshOffers = this.place.onRefreshCompany
             .subscribe(() => {
                 this.processOffers(this.place.getOffers(this.page));
             });
+
+        this.onRefreshOffersList = this.place.onRefreshOffersList
+            .subscribe((offers) => {
+                this.offers = offers.data;
+                this.total = offers.total;
+                this.lastPage = offers.last_page;
+            })
 
         if (this.navParams.get('balance')) {
             this.balance = this.navParams.get('balance');
@@ -182,6 +190,7 @@ export class AdvUserOffersPage {
 
     ionViewWillUnload() {
                 this.onRefreshBalance.unsubscribe();
+                this.onRefreshOffers.unsubscribe();
                 this.onRefreshOffersList.unsubscribe();
             }
 }

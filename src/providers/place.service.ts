@@ -13,6 +13,7 @@ export class PlaceService {
 
     company: Place;
     onRefreshCompany: EventEmitter<Place> = new EventEmitter<Place>();
+    onRefreshOffersList:EventEmitter<any> = new EventEmitter();
 
     constructor(private api: ApiService) { }
 
@@ -134,6 +135,10 @@ export class PlaceService {
 
     refreshPlace() {
         this.get().subscribe(company => this.onRefreshCompany.emit(company));
+    }
+
+    refreshOffersList() {
+        this.getOffers(1).subscribe(list => this.onRefreshOffersList.emit(list));
     }
 
 }
