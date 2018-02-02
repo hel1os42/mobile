@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content class="padding-no">
-    <!--
+    <div [hidden]="!isAdvMode">
   <div padding-top class="block-lines-bottom-left-right">
     <a class="select" (click)="toggleAccountsChoiceVisible()">
       <span text-uppercase class="font-14 text-4F4F4F">
@@ -48,7 +48,7 @@
       </ion-row>
     </ion-grid>
   </div>
-    -->
+</div>
   <!-- <p *ngIf="isAdvMode" margin>
     <button (click)="openAdvRedeem()" color="primary" ion-button block>{{ 'PAGE_SETTINGS.CONFIRM_REDEMPTION' | translate }}</button>
   </p>
