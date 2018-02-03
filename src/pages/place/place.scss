@@ -124,10 +124,11 @@ page-place {
 
     .swipe{
         position: absolute;
-        right: 15vw;
+        left: 31%;
         width: 7vw;
         height: auto;
-        bottom: -1vw;
+        top: 4vw;
+        opacity: 0.5;
     }
 
     .cat-block{
