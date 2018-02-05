@@ -4,9 +4,9 @@ import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { StringValidator } from '../../validators/string.validator';
-import { SignUpInvitePage } from '../invite/invite';
 import { TemporaryPage } from '../temporary/temporary';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
+import { SignUpPage } from '../signup/signup';
 
 @Component({
     selector: 'page-login',
@@ -88,7 +88,7 @@ export class LoginPage {
     }
 
     signup() {
-        this.nav.push(SignUpInvitePage);
+        this.nav.push(SignUpPage);
     }
 
     limitStr(str: string, length: number) {
