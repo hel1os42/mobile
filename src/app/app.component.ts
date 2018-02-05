@@ -59,7 +59,7 @@ export class MyApp {
 
             this.initTranslate();
 
-            this.appMode.setForkMode;// only for fork mode;
+            // this.appMode.setForkMode;// only for fork mode;
 
             if (!this.auth.isLoggedIn()) {
                 this.rootPage = OnBoardingPage;
