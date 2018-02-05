@@ -458,7 +458,8 @@
     "PAGE_USER-OFFERS" : {
         "YOUR_REDEEMED_OFFERS" : "Your redeemed offers",
         "REDEEMED_OFFERS" : "Redeemed Offers",
-        "DATE" : "Date"
+        "DATE" : "Date",
+        "YOU_HAVE_NOT" : "You have not redeemed any offers yet"
     },
 
     "PAGE_USER-PROFILE" : {
