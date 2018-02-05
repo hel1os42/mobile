@@ -345,7 +345,7 @@
     },
 
     "PAGE_SIGNUP" : {
-        "PHONE_NUMBER" : "Phone Number",
+        "PHONE_NUMBER" : "Phone & Invite",
         "PLEASE_CHOOSE" : "Please choose your country phone code",
         "AND_FILL" : "and fill your phone number",
         "NEXT" : "Next",
