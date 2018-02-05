@@ -669,6 +669,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     height: 100%;
     background-size: 8vw;
     background-color: #fff;
+    background-position: 100% 50%;
     z-index: 111;
     border-radius: 0;
 }
@@ -1186,6 +1187,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .text-overflow-35{
     max-height: 8vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
+}
+
+.text-overflow-5-font-12{
+    max-height: 21vw;
     height: auto;
     display: block;
     overflow: hidden;
@@ -1721,4 +1729,8 @@ ion-app.disable-scroll {
 .iphonex.platform-ios .footer.footer-ios{
     margin-bottom: constant(safe-area-inset-bottom);
     margin-bottom: env(safe-area-inset-bottom);
+}
+
+.alert-ios .alert-button:last-child {
+    font-weight: normal;
 }

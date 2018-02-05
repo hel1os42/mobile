@@ -345,7 +345,7 @@
     },
 
     "PAGE_SIGNUP" : {
-        "PHONE_NUMBER" : "Phone Number",
+        "PHONE_NUMBER" : "Phone & Invite",
         "PLEASE_CHOOSE" : "Please choose your country phone code",
         "AND_FILL" : "and fill your phone number",
         "NEXT" : "Next",
@@ -458,7 +458,8 @@
     "PAGE_USER-OFFERS" : {
         "YOUR_REDEEMED_OFFERS" : "Your redeemed offers",
         "REDEEMED_OFFERS" : "Redeemed Offers",
-        "DATE" : "Date"
+        "DATE" : "Date",
+        "YOU_HAVE_NOT" : "You have not redeemed any offers yet"
     },
 
     "PAGE_USER-PROFILE" : {

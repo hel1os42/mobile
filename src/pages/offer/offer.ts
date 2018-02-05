@@ -41,6 +41,26 @@ export class OfferPage {
         this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
     }
 
+    ngAfterViewInit() {
+        let tabs = document.querySelectorAll('.show-tabbar');
+        if (tabs !== null) {
+            Object.keys(tabs).map((key) => {
+                tabs[key].style.opacity = '0';
+                tabs[key].style.pointerEvents = 'none';
+            });
+        }
+    }
+
+    ionViewWillUnload() {
+        let tabs = document.querySelectorAll('.show-tabbar');
+        if (tabs !== null) {
+            Object.keys(tabs).map((key) => {
+                tabs[key].style.opacity = '1';
+                tabs[key].style.pointerEvents = 'all';
+            });
+        }
+    }
+
     getStars(star: number) {
         let showStars: boolean[] = [];
         for (var i = 0; i < 5; i++) {

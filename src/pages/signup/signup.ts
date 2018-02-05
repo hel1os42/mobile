@@ -6,13 +6,16 @@ import { NavController, Select } from 'ionic-angular';
 import { AuthService } from '../../providers/auth.service';
 import { SignUpCodePage } from '../signup-code/signup-code';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
+import { StorageService } from '../../providers/storage.service';
 
 @Component({
     selector: 'page-signup',
     templateUrl: 'signup.html'
 })
 export class SignUpPage {
-    formData = { phone: '' };
+    formData = { 
+        phone: '',
+        code: '' };
     //numCodes = ['+7', '+49', '+63', '+57', '+380', '+86'];
     numCode: string;
     phoneNumber: string;
@@ -24,9 +27,11 @@ export class SignUpPage {
     constructor(
         private nav: NavController,
         private auth: AuthService,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private storage: StorageService) {
 
         this.envName = this.appMode.getEnvironmentMode();
+        this.formData.code = this.storage.get('invCode') ? this.storage.get('invCode') : '';
         this.numCode = this.getDevMode() ? '+380' : this.phoneCodes[0].dial_code;
     }
 
@@ -36,7 +41,8 @@ export class SignUpPage {
 
     getCode() {
         this.phoneNumber = this.numCode + this.formData.phone;
-        let inviteCode = this.auth.getInviteCode();
+        // let inviteCode = this.auth.getInviteCode();
+        let inviteCode = this.formData.code;
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
             .subscribe(resp => {
                 let register: Register = {

@@ -14,6 +14,7 @@ import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
+import { AppModeService } from '../providers/appMode.service';
 
 @Component({
     templateUrl: 'app.html'
@@ -32,7 +33,8 @@ export class MyApp {
         private location: LocationService,
         private alert: AlertController,
         private storage: StorageService,
-        private ionicApp: IonicApp) {
+        private ionicApp: IonicApp,
+        private appMode: AppModeService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -40,7 +42,9 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
-
+            
+            //this.appMode.setForkMode();// only for fork mode;
+            
             if (platform.is('ios')){
                 statusBar.overlaysWebView(true);
             }

@@ -33,20 +33,22 @@ export class TabsPage {
     @ViewChild('tabs') tabs: Tabs;
 
     constructor(
-                private appMode: AppModeService,
-                private navParams: NavParams,
-                private profile: ProfileService,
-                private transaction: TransactionService) {
+        private appMode: AppModeService,
+        private navParams: NavParams,
+        private profile: ProfileService,
+        private transaction: TransactionService) {
 
         //temporary
         this.envName = this.appMode.getEnvironmentMode();
-        this.tab2Root = (this.envName === 'dev' || this.envName === 'test') 
-        ? UserProfilePage : UserNauPage;
-
-                this.profile.getWithAccounts()
-                    .subscribe(resp => {
-                        this.nauParams = resp.accounts.NAU;
-                    });
+        this.tab2Root = (this.envName === 'dev' || this.envName === 'test')
+            ? UserProfilePage : UserNauPage;
+        if (this.appMode.getForkMode()) {
+            this.tab2Root = UserProfilePage;
+        }
+        this.profile.getWithAccounts()
+            .subscribe(resp => {
+                this.nauParams = resp.accounts.NAU;
+            });
         //temporary
 
         // this.tab1Root = this.appMode.getHomeMode()

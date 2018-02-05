@@ -117,6 +117,9 @@ export class ApiService {
                 if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
                     messages.push('Too Many Attempts.')
                 }
+                if (errResp.status == 0) {
+                    messages.push('Internet disconnected.') 
+                }
                 else if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound) {
                     return;
                 }

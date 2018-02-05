@@ -13,7 +13,7 @@
     </ion-avatar>
     <div item-content>
        <div class="font-18 text-3E4B5D bold">{{ total }}</div>
-       <div class="font-14 text-828282">{{ 'PAGE_USER-OFFERS.REDEEMED_OFFERS' | translate }}</div>
+       <div *ngIf="total > 0" class="font-14 text-828282">{{ 'PAGE_USER-OFFERS.REDEEMED_OFFERS' | translate }}</div>
     </div>
       <a item-end margin-left>
           <a class="btn_calendar_user">

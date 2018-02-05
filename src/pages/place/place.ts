@@ -37,7 +37,7 @@ export class PlacePage {
         this.offers.getPlace(companyId)
             .subscribe(companyWithOffers => {
                 this.company = companyWithOffers;
-                this.offersList = companyWithOffers.offers.filter(p => p.status === 'active');
+                this.offersList = companyWithOffers.offers;
             });
 
         // this.location.get()
@@ -67,7 +67,7 @@ export class PlacePage {
 
     openOffer(offer, company) {
         //this.nav.setRoot(OfferPage, { offer: offer});
-        this.app.getRootNav().push(OfferPage, {
+        this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,
             distanceStr: this.distanceString,
