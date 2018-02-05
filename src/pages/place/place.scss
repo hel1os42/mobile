@@ -98,10 +98,6 @@ page-place {
         margin: 0;
     }
 
-    .thumb_image{
-        border-radius: 100vw;
-    }
-
     .company-address{
         min-height: 4vw;
     }
@@ -189,6 +185,23 @@ page-place {
         color: #3E4B5D;
         display: block;
         margin-bottom: 5%;
+    }
+
+    ion-avatar {
+        overflow: hidden;
+        background-image: url(../assets/img/imagenotfound.svg);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 70%;
+    }
+
+    .item-block-nau .item-ios ion-avatar .thumb_image{
+        border-radius: 0;
+        height: 23vw;
+        width: 23vw;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
     }
 }
 

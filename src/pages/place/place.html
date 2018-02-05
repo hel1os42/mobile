@@ -94,7 +94,7 @@
     <ion-item *ngFor=" let offer of offersList" class="relative">
       <ion-avatar item-start>
         <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
-          <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '), url(assets/img/imagenotfound.svg)'}"></div>
+          <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + ')'}"></div>
       </ion-avatar>
       <div class="bold font-20 text-3E4B5D width-88 wrap-no">{{ offer.label }}</div>
       <div text-regular class="margin-top-10 width-88 font-12 text-828282 wrap text-overflow-35">{{ offer.description }}</div>
