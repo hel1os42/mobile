@@ -1730,3 +1730,7 @@ ion-app.disable-scroll {
     margin-bottom: constant(safe-area-inset-bottom);
     margin-bottom: env(safe-area-inset-bottom);
 }
+
+.alert-ios .alert-button:last-child {
+    font-weight: normal;
+}
