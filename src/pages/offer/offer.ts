@@ -45,7 +45,8 @@ export class OfferPage {
         let tabs = document.querySelectorAll('.show-tabbar');
         if (tabs !== null) {
             Object.keys(tabs).map((key) => {
-                tabs[key].style.display = 'none';
+                tabs[key].style.opacity = '0';
+                tabs[key].style.pointerEvents = 'none';
             });
         }
     }
@@ -54,9 +55,9 @@ export class OfferPage {
         let tabs = document.querySelectorAll('.show-tabbar');
         if (tabs !== null) {
             Object.keys(tabs).map((key) => {
-                tabs[key].style.display = 'flex';
+                tabs[key].style.opacity = '1';
+                tabs[key].style.pointerEvents = 'all';
             });
-
         }
     }
 
