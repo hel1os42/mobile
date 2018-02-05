@@ -8,7 +8,7 @@ import { OfferService } from '../../providers/offer.service';
 })
 export class UserOffersPage {
   offers: RedeemedOffer[];
-  total: number;
+  total;
 
   constructor(private offer: OfferService) {
 
@@ -17,8 +17,8 @@ export class UserOffersPage {
   ionViewDidLoad() {
     this.offer.getRedeemedOffers()
       .subscribe(resp => {            
-          this.offers = resp.offers;
-          this.total = resp.offers_count;
+            this.offers = resp.offers;
+            this.total = resp.offers_count > 0 ? resp.offers_count : "You have not redeemed any offers yet";
     })
 }
 
