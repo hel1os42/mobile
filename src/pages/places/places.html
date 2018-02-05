@@ -1,6 +1,6 @@
 <div class="header-ios"></div>
 
-<ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() }">
+<ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
 
     <ion-grid text-center class="grid-tabs-splash">
         <ion-row align-items-end>
@@ -37,7 +37,7 @@
 
         <ion-item class="block-search relative" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
-            <a (click)="createPopover()" class="btn_search_settings">
+            <a [disabled]="!getDevMode()" (click)="createPopover()" class="btn_search_settings">
                 <img src="assets/img/user_home/icon_settings.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">

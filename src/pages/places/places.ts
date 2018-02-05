@@ -47,6 +47,7 @@ export class PlacesPage {
     selectedTypes: RetailType[];
     selectedTags: Tag[];
     isChangedCategory = true;
+    isForkMode;
 
     constructor(
         private nav: NavController,
@@ -55,6 +56,8 @@ export class PlacesPage {
         private offers: OfferService,
         private popoverCtrl: PopoverController,
         private loading: LoadingController) {
+
+        this.isForkMode = this.appMode.getForkMode;
 
         this.offers.getCategories()
             .subscribe(categories => {
