@@ -195,6 +195,10 @@ page-offer{
         background-position: 50% 50%;
         background-size: cover;
     }
+
+    .tabs-ios .tabbar{
+        display: none;
+    }
 }
 
 .iphonex.platform-ios page-offer .btn_footer{
