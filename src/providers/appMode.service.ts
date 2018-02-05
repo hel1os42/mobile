@@ -8,6 +8,7 @@ export class AppModeService {
     ADV_MODE_KEY = 'isAdvMode';
     ONBOARDING_KEY = 'shownOnboarding';
     ENVIRONMENT_KEY = 'envName';
+    FORK_MODE_KEY = 'isForkMode';
 
     onHomeChange = new EventEmitter<boolean>();
     onEnvironmentMode = new EventEmitter<string>();
@@ -49,5 +50,13 @@ export class AppModeService {
 
     setOnboardingVisible() {
         this.storage.set(this.ONBOARDING_KEY, true);
+    }
+
+    getForkMode() {
+        this.storage.get(this.FORK_MODE_KEY);
+    }
+
+    setForkMode() {
+        this.storage.set(this.FORK_MODE_KEY, true);
     }
 }
