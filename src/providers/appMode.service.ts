@@ -53,7 +53,7 @@ export class AppModeService {
     }
 
     getForkMode() {
-        this.storage.get(this.FORK_MODE_KEY);
+        return !!this.storage.get(this.FORK_MODE_KEY);
     }
 
     setForkMode() {

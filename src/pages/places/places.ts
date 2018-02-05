@@ -57,7 +57,7 @@ export class PlacesPage {
         private popoverCtrl: PopoverController,
         private loading: LoadingController) {
 
-        this.isForkMode = this.appMode.getForkMode;
+        this.isForkMode = this.appMode.getForkMode();
 
         this.offers.getCategories()
             .subscribe(categories => {

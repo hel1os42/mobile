@@ -42,7 +42,9 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
-
+            
+            //this.appMode.setForkMode();// only for fork mode;
+            
             if (platform.is('ios')){
                 statusBar.overlaysWebView(true);
             }
@@ -58,8 +60,6 @@ export class MyApp {
             this.branchInit(platform);
 
             this.initTranslate();
-
-            // this.appMode.setForkMode;// only for fork mode;
 
             if (!this.auth.isLoggedIn()) {
                 this.rootPage = OnBoardingPage;
