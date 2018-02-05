@@ -40,7 +40,7 @@ export class CreateUserProfilePage {
     tileLayer;
     _map: Map;
     options;
-    baseData;
+    baseData = new User();
 
     constructor(private nav: NavController,
         private location: LocationService,
