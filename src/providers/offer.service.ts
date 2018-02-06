@@ -47,7 +47,7 @@ export class OfferService {
                 latitude: lat,
                 longitude: lng,
                 radius: radius,
-                with: 'categories',
+                with: 'category;retailTypes;specialities;tags',
                 search: search,
                 page: page
             }
