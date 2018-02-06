@@ -44,12 +44,12 @@
                         </div>
                     </div>
                 </div>
-                <span class="swipe">
+                <span *ngIf="features && features.length > 0" class="swipe">
                       <img src="assets/img/place/swipe.svg">
                 </span>
             </ion-item>
 
-            <ion-item-options side="right">
+            <ion-item-options *ngIf="features && features.length > 0" side="right">
                 <div class="cat-block">
                     <span *ngFor="let feature of features" class="type-food">{{ feature.name }}</span>
                 </div>
