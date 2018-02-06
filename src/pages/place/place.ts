@@ -7,6 +7,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { OfferService } from '../../providers/offer.service';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
+import { Speciality } from '../../models/speciality';
 
 @Component({
     selector: 'page-place',
@@ -19,6 +20,7 @@ export class PlacePage {
     segment: string;
     offersList: Offer[];
     distanceString: string;
+    features: Speciality[];
 
     constructor(
         private nav: NavController,
@@ -30,14 +32,15 @@ export class PlacePage {
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
         this.company = this.navParams.get('company');
+        this.features = this.navParams.get('features');
         let companyId = this.company.id;
 
         this.distanceString = this.navParams.get('distanceStr');
 
         this.offers.getPlace(companyId)
-            .subscribe(companyWithOffers => {
-                this.company = companyWithOffers;
-                this.offersList = companyWithOffers.offers;
+            .subscribe(company => {
+                this.company = company;
+                this.offersList = company.offers;
             });
 
         // this.location.get()

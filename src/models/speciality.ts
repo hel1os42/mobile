@@ -6,5 +6,5 @@ export class Speciality {
     name: string;
     group;
     isSelected?: boolean;
-    
+    pivot?;
 }

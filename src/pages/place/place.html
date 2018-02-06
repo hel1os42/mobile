@@ -51,12 +51,7 @@
 
             <ion-item-options side="right">
                 <div class="cat-block">
-                    <span class="type-food">Alcohol</span>
-                    <span class="type-food">Big Screen</span>
-                    <span class="type-food">Cards Accepted</span>
-                    <span class="type-food">Kids Welcome</span>
-                    <span class="type-food">Kids Room</span>
-                    <span class="type-food">Live Music</span>
+                    <span *ngFor="let feature of features" class="type-food">{{ feature.name }}</span>
                 </div>
             </ion-item-options>
 
