@@ -81,19 +81,19 @@ export class PlacesPage {
                     .catch((error) => {
                         this.message = error.message;
                     });
-                setTimeout(() => {
-                    if (!this.coords) {
-                        this.location.getByIp()
-                            .subscribe(resp => {
-                                this.coords = {
-                                    lat: resp.latitude,
-                                    lng: resp.longitude
-                                };
-                                loadingLocation.dismiss();
-                                this.getCompaniesList();
-                            })
-                    }
-                }, 10000);
+                // setTimeout(() => {
+                //     if (!this.coords) {
+                //         this.location.getByIp()
+                //             .subscribe(resp => {
+                //                 this.coords = {
+                //                     lat: resp.latitude,
+                //                     lng: resp.longitude
+                //                 };
+                //                 loadingLocation.dismiss();
+                //                 this.getCompaniesList();
+                //             })
+                //     }
+                // }, 10000);
             })
     }
 

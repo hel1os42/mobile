@@ -15,12 +15,13 @@ export class LocationService {
                 private toast: ToastService) { }
 
     get() {
-        if (this.geoposition)
-            return Promise.resolve(this.geoposition);
-        else
+        // if (this.geoposition)
+        //     return Promise.resolve(this.geoposition);
+        // else
             return this.geolocation.getCurrentPosition({
                 enableHighAccuracy: true,
-                timeout: 10000
+                // timeout: 10000,
+                maximumAge: 0, 
             }).then(geo => this.geoposition = geo);
     }
 
