@@ -40,7 +40,7 @@
                             {{ offersList?.length }}
                         </div>
                         <div text-center class="font-10 text-828282">
-                            {{ 'UNIT.OFFERS' | translate }}
+                            {{ offersList?.length > 1 ? ('UNIT.OFFERS' | translate) : ('UNIT.OFFER' | translate) }}
                         </div>
                     </div>
                 </div>

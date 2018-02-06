@@ -82,7 +82,7 @@
                         {{ company?.active_offers_count }}
                     </div>
                     <div text-center class="font-10 text-828282">
-                        {{ 'UNIT.OFFERS' | translate }}
+                        {{ company?.active_offers_count > 1 ? ('UNIT.OFFERS' | translate) : ('UNIT.OFFER' | translate) }}
                     </div>
                 </div>
             </div>
