@@ -64,15 +64,17 @@
                 <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} </span>
-                <div class="bold font-20 text-3E4B5D text-ellipsis margin-top-1vw">{{ company.name }}</div>
-                <div class="smooth_transition width-88">
+                <div class="smooth_transition margin-top-1vw">
+                    <div class="scroll_content">
+                        <div class="bold font-20 text-3E4B5D">{{ company.name }}</div>
+                    </div>
                     <div class="scroll_content">
                         <ng-container *ngFor="let tag of company.tags">
                             <span class="type-food">{{ tag.name }}</span>
                         </ng-container>
                     </div>
                 </div>
-                <div margin-top class="text-828282 font-12 wrap text-overflow-2-font-12 margin-top-5">{{ company. description }}</div>
+                <div margin-top class="text-828282 font-12 wrap text-overflow-3-font-12 margin-top-5">{{ company. description }}</div>
             </div>
             <img class="star_right" src="assets/img/place/icon_star.svg">
 
