@@ -256,21 +256,14 @@ export class PlacesPage {
         if (this.isChangedCategory) {
             this.offers.getTypes(this.selectedCategory.id)
                 .subscribe(resp => {
-                    this.selectedTypes = resp.retail_types.map(p => {
-                        let selectedSpecialities = p.specialities;
+                    this.selectedTypes = resp.retail_types.map(type => {
+                        let selectedSpecialities = type.specialities;
                         return {
-                            id: p.id,
-                            name: p.name,
-                            parent_id: p.parent_id,
-                            children_count: p.children_count,
+                            ...type,
                             specialities: selectedSpecialities
-                                .map(i => {
+                                .map(item => {
                                     return {
-                                        id: i.id,
-                                        retail_type_id: i.retail_type_id,
-                                        slug: i.slug,
-                                        name: i.name,
-                                        group: i.group,
+                                        ...item,
                                         isSelected: false
                                     }
                                 }),
@@ -278,10 +271,9 @@ export class PlacesPage {
                         }
                     });
                     this.selectedTags = resp.tags.length > 0
-                        ? resp.tags.map(t => {
+                        ? resp.tags.map(item => {
                             return {
-                                name: t.name,
-                                slug: t.slug,
+                                ...item,
                                 isSelected: false
                             }
                         })
