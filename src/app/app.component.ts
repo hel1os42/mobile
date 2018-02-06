@@ -15,6 +15,7 @@ import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { AppModeService } from '../providers/appMode.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @Component({
     templateUrl: 'app.html'
@@ -34,7 +35,8 @@ export class MyApp {
         private alert: AlertController,
         private storage: StorageService,
         private ionicApp: IonicApp,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private androidPermissions: AndroidPermissions) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -45,6 +47,8 @@ export class MyApp {
             
             //this.appMode.setForkMode();// only for fork mode;
             
+            this.androidPermissions.requestPermissions(['ACCESS_COARSE_LOCATION', 'ACCESS_FINE_LOCATION', 'ACCESS_LOCATION_EXTRA_COMMANDS']);//for location detection
+
             if (platform.is('ios')){
                 statusBar.overlaysWebView(true);
             }
