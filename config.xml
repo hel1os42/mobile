@@ -112,4 +112,5 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Allow the app to use your location" />
     </plugin>
     <plugin name="cordova-plugin-inappbrowser" spec="2.0.1" />
+    <plugin name="cordova-plugin-android-permissions" spec="1.0.0" />
 </widget>

@@ -151,7 +151,7 @@ export class CreateAdvUserProfilePage {
                                 this.mapPresent(true);
                             })
                     }
-                }, 10000);
+                }, 20000);
             }
         };
 
