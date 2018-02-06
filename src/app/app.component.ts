@@ -47,8 +47,9 @@ export class MyApp {
             
             //this.appMode.setForkMode();// only for fork mode;
             
-            this.androidPermissions.requestPermissions(['ACCESS_COARSE_LOCATION', 'ACCESS_FINE_LOCATION', 'ACCESS_LOCATION_EXTRA_COMMANDS']);//for location detection
-
+            this.androidPermissions.requestPermissions(['ACCESS_COARSE_LOCATION', 'ACCESS_FINE_LOCATION', 'ACCESS_LOCATION_EXTRA_COMMANDS'])//for location detection
+                .then();
+                
             if (platform.is('ios')){
                 statusBar.overlaysWebView(true);
             }
