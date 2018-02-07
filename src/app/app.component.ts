@@ -16,7 +16,6 @@ import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 
 @Component({
@@ -38,8 +37,7 @@ export class MyApp {
         private storage: StorageService,
         private ionicApp: IonicApp,
         private appMode: AppModeService,
-        private androidPermissions: AndroidPermissions,
-        private locationAccuracy: LocationAccuracy) {
+        private androidPermissions: AndroidPermissions) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -50,19 +48,25 @@ export class MyApp {
 
             //this.appMode.setForkMode();// only for fork mode;
 
+
+            if (!this.auth.isLoggedIn()) {
+                this.rootPage = OnBoardingPage;
+            }
+            else {
+                this.profile.get(true)
+                    .subscribe(resp => {
+                        this.rootPage = (!resp.name && !resp.email)
+                            ? CreateUserProfilePage
+                            : TabsPage;
+                        // this.rootPage = SettingsPage;
+                    });
+            }
+
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
                 // for location detection
-                this.locationAccuracy.canRequest().then((canRequest: boolean) => {
-                    if (canRequest) {
-                        this.presentIosConfirm(platform);
-                    }
-                    else {
-                        if (!canRequest) {
-                            return;
-                        }
-                    }
-                });
+            //     if (this.rootPage !== CreateUserProfilePage && this.rootPage !== TabsPage) {
+                   
             }
 
             // IPhone X
@@ -77,18 +81,6 @@ export class MyApp {
 
             this.initTranslate();
 
-            if (!this.auth.isLoggedIn()) {
-                this.rootPage = OnBoardingPage;
-            }
-            else {
-                this.profile.get(true)
-                    .subscribe(resp => {
-                        this.rootPage = (!resp.name && !resp.email)
-                            ? CreateUserProfilePage
-                            : TabsPage;
-                        // this.rootPage = SettingsPage;
-                    });
-            }
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform);
@@ -134,20 +126,23 @@ export class MyApp {
                     appEl.style.height = '100%';
                 });
                 //for location detection
-                this.androidPermissions.requestPermissions([
-                    this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
-                    this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
-                    this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
-                ])
-                    .then(
-                    result => {
-                        if (result.hasPermission === false) {
-                            this.location.setDenied(true);
-                            this.presentAndroidConfirm(platform);
-                        }
-                    },
-                    err => { console.log(err); }
-                    );
+                if (this.rootPage !== CreateUserProfilePage && this.rootPage !== TabsPage) {
+                    this.androidPermissions.requestPermissions([
+                        this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+                        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+                        this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
+                    ])
+                        .then(
+                        result => {
+                            if (result.hasPermission === false) {
+                                // this.location.setDenied(true);
+                                this.presentAndroidConfirm();
+                            }
+                            console.log(result)
+                        },
+                        err => { console.log(err); }
+                        );
+                }
             }
 
         });
@@ -199,7 +194,7 @@ export class MyApp {
         alert.present();
     }
 
-    presentAndroidConfirm(platform) {
+    presentAndroidConfirm() {
         const alert = this.alert.create({
             title: 'Location denied',
             // message: 'Do you want to close the app?',
@@ -209,29 +204,12 @@ export class MyApp {
                     // console.log('Application exit prevented!');
                     return;
                 }
-            }, {
-                text: 'Allow',
-                handler: () => {
-                    this.androidPermissions.requestPermissions([
-                        this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
-                        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
-                        this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
-                    ])
-                        .then(
-                        result => {
-                            if (result.hasPermission === false) {
-                                this.location.setDenied(true);
-                            }
-                        },
-                        err => { return },
-                    );
-                }
             }]
         });
         alert.present();
     }
 
-    presentIosConfirm(platform) {
+    presentIosConfirm() {
         const alert = this.alert.create({
             title: 'Location denied',
             // message: 'Do you want to close the app?',
@@ -245,10 +223,6 @@ export class MyApp {
             {
                 text: 'Allow',
                 handler: () => {
-                    this.locationAccuracy.request(4).then(
-                        () => { return },
-                        error => { return }
-                    );
                 }
             }]
         });
