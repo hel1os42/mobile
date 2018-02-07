@@ -83,7 +83,7 @@ export class PlacesPage {
                 // }
             )
         }
-        if (!platform.is('ios') || !platform.is('android')) {
+        if (platform.is('ios') || !platform.is('android')) {
             this.getLocation();
         }
     }
