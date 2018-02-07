@@ -44,13 +44,10 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
-            
+
             //this.appMode.setForkMode();// only for fork mode;
-            
-            this.androidPermissions.requestPermissions(['ACCESS_COARSE_LOCATION', 'ACCESS_FINE_LOCATION', 'ACCESS_LOCATION_EXTRA_COMMANDS'])//for location detection
-                .then();
-                
-            if (platform.is('ios')){
+
+            if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
             }
 
@@ -122,6 +119,19 @@ export class MyApp {
                     console.log("native.keyboardhide");
                     appEl.style.height = '100%';
                 });
+                //for location detection
+                this.androidPermissions.requestPermissions([
+                    this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+                    this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+                    this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
+                ])
+                    .then(
+                        result => {
+                            console.log(result);
+                            this.location.get();
+                        },
+                        err => console.log(err)
+                    );
             }
 
         });
