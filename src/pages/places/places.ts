@@ -385,7 +385,7 @@ export class PlacesPage {
     presentAndroidConfirm() {
         const alert = this.alert.create({
             title: 'Location denied',
-            // message: 'Do you want to close the app?',
+            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
             buttons: [{
                 text: 'Ok',
                 handler: () => {
