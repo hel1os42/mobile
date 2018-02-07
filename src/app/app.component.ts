@@ -129,8 +129,12 @@ export class MyApp {
                     this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
                 ])
                     .then(
-                        result => { return },
-                        err => this. presentAndroidConfirm(platform)
+                        result => { 
+                            if (result.hasPermission === false) {
+                                this.presentAndroidConfirm(platform);
+                            }
+                        },
+                        err => { console.log(err); }
                     );
             }
 
