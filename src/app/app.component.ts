@@ -16,6 +16,7 @@ import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     templateUrl: 'app.html'
@@ -36,7 +37,8 @@ export class MyApp {
         private storage: StorageService,
         private ionicApp: IonicApp,
         private appMode: AppModeService,
-        private androidPermissions: AndroidPermissions) {
+        private androidPermissions: AndroidPermissions,
+        private diagnostic: Diagnostic) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
