@@ -84,7 +84,7 @@ export class CreateAdvUserProfilePage {
         private alert: AlertController,
         private translate: TranslateService) {
 
-        this.offer.getCategories()
+        this.offer.getCategories(true)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
                     let placeCategories = categories.data.find(p => p.name == category.name)

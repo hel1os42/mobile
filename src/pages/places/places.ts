@@ -89,7 +89,7 @@ export class PlacesPage {
     }
 
     getLocation() {
-        this.offers.getCategories()
+        this.offers.getCategories(false)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
                     category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
@@ -110,7 +110,7 @@ export class PlacesPage {
                     .catch((error) => {
                         loadingLocation.dismiss();
                         // this.toast.show(error.message);
-                        this.profile.get(true)
+                        this.profile.get(false, false)
                             .subscribe(user => {
                                 this.coords = {
                                     lat: user.latitude,
