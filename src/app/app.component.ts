@@ -64,7 +64,7 @@ export class MyApp {
 
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
-                
+
                 this.location.get()
                     .then((resp) => {})
                     .catch((error) => {
@@ -200,7 +200,7 @@ export class MyApp {
     presentAndroidConfirm() {
         const alert = this.alert.create({
             title: 'Location denied',
-            // message: 'Do you want to close the app?',
+            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
             buttons: [{
                 text: 'Ok',
                 handler: () => {
@@ -215,7 +215,7 @@ export class MyApp {
     presentIosConfirm() {
         const alert = this.alert.create({
             title: 'Location denied',
-            // message: 'Do you want to close the app?',
+            message: 'You have denied access to geolocation. Set your coordinates in manual mode. To allow the application access to the geolocation, you need to go to the phone: Settings / Privacy / Location Services / NAU',
             buttons: [{
                 text: 'Ok',
                 handler: () => {
