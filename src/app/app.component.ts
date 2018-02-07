@@ -64,9 +64,12 @@ export class MyApp {
 
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
-                // for location detection
-            //     if (this.rootPage !== CreateUserProfilePage && this.rootPage !== TabsPage) {
-                   
+                
+                this.location.get()
+                    .then((resp) => {})
+                    .catch((error) => {
+                        this.presentIosConfirm();
+                    });
             }
 
             // IPhone X
@@ -218,11 +221,6 @@ export class MyApp {
                 handler: () => {
                     // console.log('Application exit prevented!');
                     return;
-                }
-            },
-            {
-                text: 'Allow',
-                handler: () => {
                 }
             }]
         });

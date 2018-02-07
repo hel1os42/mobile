@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { LoadingController, NavController, Popover, PopoverController } from 'ionic-angular';
+import { LoadingController, NavController, Popover, PopoverController, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer } from 'leaflet';
 import { ChildCategory } from '../../models/childCategory';
@@ -53,6 +53,7 @@ export class PlacesPage {
     isForkMode;
 
     constructor(
+        platform: Platform,
         private nav: NavController,
         private location: LocationService,
         private appMode: AppModeService,
@@ -66,20 +67,25 @@ export class PlacesPage {
 
         this.isForkMode = this.appMode.getForkMode();
         this.segment = "alloffers";
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS).then(
-            result => {
-                if (result.hasPermission === false) {
-                    this.requestPerm();
-                }
-                else {
-                    this.getLocation();
-                }
-            },
-            // err => {
-            //     this.requestPerm();
-            // }
-        )
-       
+
+        if (platform.is('android')) {
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS).then(
+                result => {
+                    if (result.hasPermission === false) {
+                        this.requestPerm();
+                    }
+                    else {
+                        this.getLocation();
+                    }
+                },
+                // err => {
+                //     this.requestPerm();
+                // }
+            )
+        }
+        if (!platform.is('ios') || !platform.is('android')) {
+            this.getLocation();
+        }
     }
 
     getLocation() {
