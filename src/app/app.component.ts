@@ -16,6 +16,7 @@ import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     templateUrl: 'app.html'
@@ -36,7 +37,8 @@ export class MyApp {
         private storage: StorageService,
         private ionicApp: IonicApp,
         private appMode: AppModeService,
-        private androidPermissions: AndroidPermissions) {
+        private androidPermissions: AndroidPermissions,
+        private diagnostic: Diagnostic) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -44,12 +46,20 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
-            
+
             //this.appMode.setForkMode();// only for fork mode;
-            
-            this.androidPermissions.requestPermissions(['ACCESS_COARSE_LOCATION', 'ACCESS_FINE_LOCATION', 'ACCESS_LOCATION_EXTRA_COMMANDS'])//for location detection
-                .then();
-                
+
+            this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION, this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION, this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS]).then(
+                result => console.log('Has permission?',result.hasPermission),
+                err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+            );
+
+            this.diagnostic.getLocationAuthorizationStatus().then((state) => {
+                window.alert(state);
+                // if IOS: DENIED
+                // if Android: DENIED
+            }).catch(e => console.error(e));
+
             if (platform.is('ios')){
                 statusBar.overlaysWebView(true);
             }
