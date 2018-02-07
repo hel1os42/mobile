@@ -100,15 +100,15 @@ export class PlacesPage {
                 loadingLocation.present();
                 this.location.get()
                     .then((resp) => {
+                        loadingLocation.dismissAll();
                         this.coords = {
                             lat: resp.coords.latitude,
                             lng: resp.coords.longitude
                         };
-                        loadingLocation.dismiss();
                         this.getCompaniesList();
                     })
                     .catch((error) => {
-                        loadingLocation.dismiss();
+                        loadingLocation.dismissAll();
                         // this.toast.show(error.message);
                         this.profile.get(false, false)
                             .subscribe(user => {
