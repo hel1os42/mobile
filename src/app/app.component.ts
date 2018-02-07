@@ -16,6 +16,7 @@ import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class MyApp {
         private storage: StorageService,
         private ionicApp: IonicApp,
         private appMode: AppModeService,
-        private androidPermissions: AndroidPermissions) {
+        private androidPermissions: AndroidPermissions,
+        private locationAccuracy: LocationAccuracy) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -50,8 +52,17 @@ export class MyApp {
 
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
-
-
+                // for location detection
+                this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+                    if (canRequest) {
+                        this.presentIosConfirm(platform);
+                    }
+                    else {
+                        if (!canRequest) {
+                            return;
+                        }
+                    }
+                });
             }
 
             // IPhone X
@@ -129,12 +140,13 @@ export class MyApp {
                     this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
                 ])
                     .then(
-                        result => { 
-                            if (result.hasPermission === false) {
-                                this.presentAndroidConfirm(platform);
-                            }
-                        },
-                        err => { console.log(err); }
+                    result => {
+                        if (result.hasPermission === false) {
+                            this.location.setDenied(true);
+                            this.presentAndroidConfirm(platform);
+                        }
+                    },
+                    err => { console.log(err); }
                     );
             }
 
@@ -206,9 +218,13 @@ export class MyApp {
                         this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
                     ])
                         .then(
-                            result => { return },
-                            err => { return },
-                        );
+                        result => {
+                            if (result.hasPermission === false) {
+                                this.location.setDenied(true);
+                            }
+                        },
+                        err => { return },
+                    );
                 }
             }]
         });
@@ -224,6 +240,15 @@ export class MyApp {
                 handler: () => {
                     // console.log('Application exit prevented!');
                     return;
+                }
+            },
+            {
+                text: 'Allow',
+                handler: () => {
+                    this.locationAccuracy.request(4).then(
+                        () => { return },
+                        error => { return }
+                    );
                 }
             }]
         });

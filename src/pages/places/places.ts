@@ -15,6 +15,8 @@ import { PlacesPopover } from './places.popover';
 import { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBounds, LatLng, DomUtil } from 'leaflet';
 import { RetailType } from '../../models/retailType';
 import { Tag } from '../../models/tag';
+import { Subscription } from 'rxjs';
+import { ProfileService } from '../../providers/profile.service';
 
 @Component({
     selector: 'page-places',
@@ -48,6 +50,7 @@ export class PlacesPage {
     selectedTags: Tag[];
     isChangedCategory = true;
     isForkMode;
+    isDenied: boolean;
 
     constructor(
         private nav: NavController,
@@ -55,46 +58,60 @@ export class PlacesPage {
         private appMode: AppModeService,
         private offers: OfferService,
         private popoverCtrl: PopoverController,
-        private loading: LoadingController) {
+        private loading: LoadingController,
+        private profile: ProfileService) {
 
         this.isForkMode = this.appMode.getForkMode();
+        this.segment = "alloffers";
+        this.isDenied = this.location.getDenied();
+      
+                this.offers.getCategories()
+                    .subscribe(categories => {
+                        this.categories.forEach((category) => {
+                            category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
+                        })
+                        this.selectedCategory = this.categories[0];
 
-        this.offers.getCategories()
-            .subscribe(categories => {
-                this.categories.forEach((category) => {
-                    category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
-                })
-                this.selectedCategory = this.categories[0];
-
-                this.segment = "alloffers";
-                let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-                loadingLocation.present();
-                this.location.get()
-                    .then((resp) => {
-                        this.coords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        };
-                        loadingLocation.dismiss();
-                        this.getCompaniesList();
+                        if (!this.isDenied) {
+                            let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+                            loadingLocation.present();
+                            this.location.get()
+                                .then((resp) => {
+                                    this.coords = {
+                                        lat: resp.coords.latitude,
+                                        lng: resp.coords.longitude
+                                    };
+                                    loadingLocation.dismiss();
+                                    this.getCompaniesList();
+                                })
+                                .catch((error) => {
+                                    this.message = error.message;
+                                });
+                            // setTimeout(() => {
+                            //     if (!this.coords) {
+                            //         this.location.getByIp()
+                            //             .subscribe(resp => {
+                            //                 this.coords = {
+                            //                     lat: resp.latitude,
+                            //                     lng: resp.longitude
+                            //                 };
+                            //                 loadingLocation.dismiss();
+                            //                 this.getCompaniesList();
+                            //             })
+                            //     }
+                            // }, 10000);
+                        }
+                        if (this.isDenied) {
+                            this.profile.get(true)
+                                .subscribe(user => {
+                                    this.coords = {
+                                        lat: user.latitude,
+                                        lng: user.longitude
+                                    };
+                                    this.getCompaniesList();
+                                })
+                        }
                     })
-                    .catch((error) => {
-                        this.message = error.message;
-                    });
-                // setTimeout(() => {
-                //     if (!this.coords) {
-                //         this.location.getByIp()
-                //             .subscribe(resp => {
-                //                 this.coords = {
-                //                     lat: resp.latitude,
-                //                     lng: resp.longitude
-                //                 };
-                //                 loadingLocation.dismiss();
-                //                 this.getCompaniesList();
-                //             })
-                //     }
-                // }, 10000);
-            })
     }
 
     getDevMode() {
@@ -333,4 +350,5 @@ export class PlacesPage {
             infiniteScroll.complete();
         }
     }
+
 }
