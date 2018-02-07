@@ -87,7 +87,6 @@ import { TransactionService } from '../providers/transaction.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { Diagnostic } from '@ionic-native/diagnostic';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -258,7 +257,6 @@ export function createTranslateLoader(http: HttpClient) {
         Clipboard,
         InAppBrowser,
         AndroidPermissions,
-        Diagnostic
     ]
 })
 export class AppModule { }

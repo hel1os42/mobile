@@ -16,7 +16,7 @@ import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { Diagnostic } from '@ionic-native/diagnostic';
+
 
 @Component({
     templateUrl: 'app.html'
@@ -37,8 +37,7 @@ export class MyApp {
         private storage: StorageService,
         private ionicApp: IonicApp,
         private appMode: AppModeService,
-        private androidPermissions: AndroidPermissions,
-        private diagnostic: Diagnostic) {
+        private androidPermissions: AndroidPermissions) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -51,6 +50,8 @@ export class MyApp {
 
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
+
+
             }
 
             // IPhone X
@@ -128,11 +129,8 @@ export class MyApp {
                     this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
                 ])
                     .then(
-                        result => {
-                            console.log(result);
-                            this.location.get();
-                        },
-                        err => console.log(err)
+                        result => { return },
+                        err => this. presentAndroidConfirm(platform)
                     );
             }
 
@@ -179,6 +177,49 @@ export class MyApp {
                 text: 'Ok',
                 handler: () => {
                     platform.exitApp(); // Close this application
+                }
+            }]
+        });
+        alert.present();
+    }
+
+    presentAndroidConfirm(platform) {
+        const alert = this.alert.create({
+            title: 'Location denied',
+            // message: 'Do you want to close the app?',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    // console.log('Application exit prevented!');
+                    return;
+                }
+            }, {
+                text: 'Allow',
+                handler: () => {
+                    this.androidPermissions.requestPermissions([
+                        this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+                        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+                        this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
+                    ])
+                        .then(
+                            result => { return },
+                            err => { return },
+                        );
+                }
+            }]
+        });
+        alert.present();
+    }
+
+    presentIosConfirm(platform) {
+        const alert = this.alert.create({
+            title: 'Location denied',
+            // message: 'Do you want to close the app?',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    // console.log('Application exit prevented!');
+                    return;
                 }
             }]
         });
