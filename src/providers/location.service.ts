@@ -9,7 +9,7 @@ import { ToastService } from './toast.service';
 export class LocationService {
     geoposition: Geoposition;
     url = 'https://freegeoip.net/json/';
-    isDenied = false;
+    // isDenied = false;
 
     constructor(private geolocation: Geolocation,
                 private http: Http,
@@ -22,7 +22,7 @@ export class LocationService {
             return this.geolocation.getCurrentPosition({
                 enableHighAccuracy: true,
                 // timeout: 10000,
-                maximumAge: 10000, 
+                maximumAge: 5000, 
             }).then(geo => this.geoposition = geo);
     }
 
@@ -47,11 +47,11 @@ export class LocationService {
         this.geoposition = undefined;
     }
 
-    getDenied() {
-        return this.isDenied;
-    }
+    // getDenied() {
+    //     return this.isDenied;
+    // }
 
-    setDenied(isDenied: boolean) {
-        this.isDenied = isDenied;
-    }
+    // setDenied(isDenied: boolean) {
+    //     this.isDenied = isDenied;
+    // }
 }

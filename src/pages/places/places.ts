@@ -1,22 +1,23 @@
-import { MockPlaceTypes } from '../../mocks/mockPlaceTypes';
 import { Component } from '@angular/core';
-import { LoadingController, NavController, PopoverController, Popover } from 'ionic-angular';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { LoadingController, NavController, Popover, PopoverController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer } from 'leaflet';
 import { ChildCategory } from '../../models/childCategory';
-import { Place } from '../../models/place';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
+import { Place } from '../../models/place';
+import { RetailType } from '../../models/retailType';
 import { SelectedCategory } from '../../models/selectedCategory';
+import { Tag } from '../../models/tag';
 import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
+import { ProfileService } from '../../providers/profile.service';
+import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { tileLayer, latLng, marker, popup, icon, LeafletEvent, Marker, LatLngBounds, LatLng, DomUtil } from 'leaflet';
-import { RetailType } from '../../models/retailType';
-import { Tag } from '../../models/tag';
-import { Subscription } from 'rxjs';
-import { ProfileService } from '../../providers/profile.service';
 
 @Component({
     selector: 'page-places',
@@ -50,7 +51,6 @@ export class PlacesPage {
     selectedTags: Tag[];
     isChangedCategory = true;
     isForkMode;
-    isDenied: boolean;
 
     constructor(
         private nav: NavController,
@@ -59,59 +59,84 @@ export class PlacesPage {
         private offers: OfferService,
         private popoverCtrl: PopoverController,
         private loading: LoadingController,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private toast: ToastService,
+        private alert: AlertController,
+        private androidPermissions: AndroidPermissions) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.segment = "alloffers";
-        this.isDenied = this.location.getDenied();
-      
-                this.offers.getCategories()
-                    .subscribe(categories => {
-                        this.categories.forEach((category) => {
-                            category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
-                        })
-                        this.selectedCategory = this.categories[0];
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS).then(
+            result => {
+                if (result.hasPermission === false) {
+                    this.requestPerm();
+                }
+                else {
+                    this.getLocation();
+                }
+            },
+            // err => {
+            //     this.requestPerm();
+            // }
+        )
+       
+    }
 
-                        if (!this.isDenied) {
-                            let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-                            loadingLocation.present();
-                            this.location.get()
-                                .then((resp) => {
-                                    this.coords = {
-                                        lat: resp.coords.latitude,
-                                        lng: resp.coords.longitude
-                                    };
-                                    loadingLocation.dismiss();
-                                    this.getCompaniesList();
-                                })
-                                .catch((error) => {
-                                    this.message = error.message;
-                                });
-                            // setTimeout(() => {
-                            //     if (!this.coords) {
-                            //         this.location.getByIp()
-                            //             .subscribe(resp => {
-                            //                 this.coords = {
-                            //                     lat: resp.latitude,
-                            //                     lng: resp.longitude
-                            //                 };
-                            //                 loadingLocation.dismiss();
-                            //                 this.getCompaniesList();
-                            //             })
-                            //     }
-                            // }, 10000);
-                        }
-                        if (this.isDenied) {
-                            this.profile.get(true)
-                                .subscribe(user => {
-                                    this.coords = {
-                                        lat: user.latitude,
-                                        lng: user.longitude
-                                    };
-                                    this.getCompaniesList();
-                                })
-                        }
+    getLocation() {
+        this.offers.getCategories()
+            .subscribe(categories => {
+                this.categories.forEach((category) => {
+                    category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
+                })
+                this.selectedCategory = this.categories[0];
+
+                let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+                loadingLocation.present();
+                this.location.get()
+                    .then((resp) => {
+                        this.coords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        loadingLocation.dismiss();
+                        this.getCompaniesList();
                     })
+                    .catch((error) => {
+                        loadingLocation.dismiss();
+                        // this.toast.show(error.message);
+                        this.profile.get(true)
+                            .subscribe(user => {
+                                this.coords = {
+                                    lat: user.latitude,
+                                    lng: user.longitude
+                                };
+                                this.getCompaniesList();
+                            })
+                    });
+            })
+    }
+
+    requestPerm() {
+        this.androidPermissions.requestPermissions([
+            this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+            this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+            this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
+        ])
+            .then(
+            result => {
+                if (result.hasPermission === false) {
+                    this.presentAndroidConfirm();
+                }
+                else {
+                    this.getLocation();
+                }
+            },
+            // err => {
+            //     this.presentAndroidConfirm();
+            //     debugger
+            // }
+        )
+
     }
 
     getDevMode() {
@@ -349,6 +374,21 @@ export class PlacesPage {
         else {
             infiniteScroll.complete();
         }
+    }
+
+    presentAndroidConfirm() {
+        const alert = this.alert.create({
+            title: 'Location denied',
+            // message: 'Do you want to close the app?',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    // console.log('Application exit prevented!');
+                    this.getLocation();
+                }
+            }]
+        });
+        alert.present();
     }
 
 }
