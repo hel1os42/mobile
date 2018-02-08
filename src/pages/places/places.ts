@@ -114,7 +114,7 @@ export class PlacesPage {
             .catch((error) => {
                 loadingLocation.dismissAll();
                 // this.toast.show(error.message);
-                this.profile.get(false, false)
+                this.profile.get(true, false)
                     .subscribe(user => {
                         this.coords = {
                             lat: user.latitude,
@@ -125,7 +125,7 @@ export class PlacesPage {
             });
         }
         else {
-            this.profile.get(false, false)
+            this.profile.get(true, false)
                 .subscribe(user => {
                     this.coords = {
                         lat: user.latitude,
