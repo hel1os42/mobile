@@ -68,27 +68,6 @@ export class PlacesPage {
         this.isForkMode = this.appMode.getForkMode();
         this.segment = "alloffers";
 
-        if (platform.is('android')) {
-            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS).then(
-                result => {
-                    if (result.hasPermission === false) {
-                        this.requestPerm();
-                    }
-                    else {
-                        this.getLocation();
-                    }
-                },
-                // err => {
-                //     this.requestPerm();
-                // }
-            )
-        }
-        if (platform.is('ios') || !platform.is('android')) {
-            this.getLocation();
-        }
-    }
-
-    getLocation() {
         this.offers.getCategories(false)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
@@ -96,30 +75,66 @@ export class PlacesPage {
                 })
                 this.selectedCategory = this.categories[0];
 
-                let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-                loadingLocation.present();
-                this.location.get()
-                    .then((resp) => {
-                        loadingLocation.dismissAll();
-                        this.coords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        };
-                        this.getCompaniesList();
-                    })
-                    .catch((error) => {
-                        loadingLocation.dismissAll();
-                        // this.toast.show(error.message);
-                        this.profile.get(false, false)
-                            .subscribe(user => {
-                                this.coords = {
-                                    lat: user.latitude,
-                                    lng: user.longitude
-                                };
-                                this.getCompaniesList();
-                            })
-                    });
+                if (platform.is('android')) {
+                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                        result => {
+                            if (result.hasPermission === false) {
+                                this.requestPerm();
+                            }
+                            else {
+                                this.getLocation(false);
+                            }
+                            console.log(result)
+                        },
+                        err => {
+                            this.requestPerm();
+                            console.log(err)
+                        }
+                    )
+                }
+                if (platform.is('ios') || !platform.is('android')) {
+                    this.getLocation(false);
+                }
             })
+    }
+
+    getLocation(isDenied: boolean) {
+        if (!isDenied) {
+            let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+            loadingLocation.present();
+            this.location.get()
+                .then((resp) => {
+                    loadingLocation.dismissAll();
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    this.getCompaniesList();
+                })
+                .catch((error) => {
+                    loadingLocation.dismissAll();
+                    // this.toast.show(error.message);
+                    this.profile.get(false, false)
+                        .subscribe(user => {
+                            this.coords = {
+                                lat: user.latitude,
+                                lng: user.longitude
+                            };
+                            this.getCompaniesList();
+                        })
+                });
+        }
+        else {
+            this.profile.get(false, false)
+                .subscribe(user => {
+                    this.coords = {
+                        lat: user.latitude,
+                        lng: user.longitude
+                    };
+                    this.getCompaniesList();
+                })
+        }
+
     }
 
     requestPerm() {
@@ -134,15 +149,15 @@ export class PlacesPage {
                     this.presentAndroidConfirm();
                 }
                 else {
-                    this.getLocation();
+                    this.getLocation(false);
                 }
+                console.log(result)
             },
-            // err => {
-            //     this.presentAndroidConfirm();
-            //     debugger
-            // }
+            err => {
+                this.requestPerm();
+                debugger
+            }
         )
-
     }
 
     getDevMode() {
@@ -390,7 +405,7 @@ export class PlacesPage {
                 text: 'Ok',
                 handler: () => {
                     // console.log('Application exit prevented!');
-                    this.getLocation();
+                    this.getLocation(true);
                 }
             }]
         });
