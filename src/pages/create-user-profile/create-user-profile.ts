@@ -79,7 +79,7 @@ export class CreateUserProfilePage {
                     this.baseData = _.clone(this.user);
                     this.picture_url = this.user.picture_url;
                 });
-                this.getLocationStatus(platform);
+            this.getLocationStatus(platform);
         }
     }
 
@@ -138,8 +138,8 @@ export class CreateUserProfilePage {
 
 
     getLocation(isDenied: boolean) {
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-        if (!isDenied) {
+        if (!isDenied) { 
+            let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
             loadingLocation.present();
             this.location.get()
                 .then((resp) => {
@@ -151,16 +151,9 @@ export class CreateUserProfilePage {
                     this.addMap();
                 })
                 .catch((error) => {
-                    this.location.getByIp()
-                        .subscribe(resp => {
-                            this.coords = {
-                                lat: resp.latitude,
-                                lng: resp.longitude
-                            };
-                            loadingLocation.dismissAll();
-                            this.addMap();
-                        })
-                });
+                    loadingLocation.dismissAll();
+                    this.presentConfirm();
+                })
         }
         else {
             this.location.getByIp()
@@ -169,7 +162,6 @@ export class CreateUserProfilePage {
                         lat: resp.latitude,
                         lng: resp.longitude
                     };
-                    loadingLocation.dismissAll();
                     this.addMap();
                 })
         }
@@ -315,6 +307,31 @@ export class CreateUserProfilePage {
             }]
         });
         alert.present();
+    }
+
+    presentConfirm() {
+        let confirm = this.alertCtrl.create({
+            title: 'To create account your location needed',
+            message: 'Enable location services, please, check conection. Then click "Retry". Otherwise, you have the option to set the coordinates manually.',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: () => {
+                        this.getLocation(true);
+                        this.isSelectVisible;
+                    }
+                },
+                {
+                    text: 'Retry',
+                    handler: () => {
+                        this.getLocation(false);
+                    }
+                }
+            ],
+            enableBackdropDismiss: false
+        },
+        );
+        confirm.present();
     }
 
 }

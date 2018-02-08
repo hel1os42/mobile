@@ -100,29 +100,21 @@ export class PlacesPage {
 
     getLocation(isDenied: boolean) {
         if (!isDenied) {
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-        loadingLocation.present();
-        this.location.get()
-            .then((resp) => {
-                loadingLocation.dismissAll();
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.getCompaniesList();
-            })
-            .catch((error) => {
-                loadingLocation.dismissAll();
-                // this.toast.show(error.message);
-                this.profile.get(true, false)
-                    .subscribe(user => {
-                        this.coords = {
-                            lat: user.latitude,
-                            lng: user.longitude
-                        };
-                        this.getCompaniesList();
-                    })
-            });
+            let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+            loadingLocation.present();
+            this.location.get()
+                .then((resp) => {
+                    loadingLocation.dismissAll();
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    this.getCompaniesList();
+                })
+                .catch((error) => {
+                    loadingLocation.dismissAll();
+                    this.presentConfirm();
+                });
         }
         else {
             this.profile.get(true, false)
@@ -134,7 +126,7 @@ export class PlacesPage {
                     this.getCompaniesList();
                 })
         }
-}
+    }
 
     requestPerm() {
         this.androidPermissions.requestPermissions([
@@ -417,6 +409,30 @@ export class PlacesPage {
             }]
         });
         alert.present();
+    }
+
+    presentConfirm() {
+        let confirm = this.alert.create({
+            title: 'Your location needed for the correct operation of the application',
+            message: 'Enable location services, please check the connection. Then click "Retry". Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile.)',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: () => {
+                        this.getLocation(true);
+                    }
+                },
+                {
+                    text: 'Retry',
+                    handler: () => {
+                        this.getLocation(false);
+                    }
+                }
+            ],
+            enableBackdropDismiss: false
+        },
+        );
+        confirm.present();
     }
 
 }

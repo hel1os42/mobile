@@ -63,12 +63,6 @@ export class MyApp {
 
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
-
-                this.location.get()
-                    .then((resp) => { })
-                    .catch((error) => {
-                        this.presentIosConfirm();
-                    });
             }
 
             // IPhone X
@@ -127,31 +121,6 @@ export class MyApp {
                     console.log("native.keyboardhide");
                     appEl.style.height = '100%';
                 });
-                //for location detection
-                if (this.rootPage === OnBoardingPage) {
-                    this.androidPermissions.requestPermissions([
-                        this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
-                        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
-                        this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
-                    ])
-                        .then(
-                        result => {
-                            if (result.hasPermission === false) {
-                                this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                                    result => {
-                                        if (result.hasPermission === false) {
-                                            this.presentAndroidConfirm()
-                                        }
-                                        else {
-                                            return;
-                                        }
-                                    });
-                            }
-                            console.log(result)
-                        },
-                        err => { console.log(err); }
-                        );
-                }
             }
 
         });
