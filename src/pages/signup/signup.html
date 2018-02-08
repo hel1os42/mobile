@@ -1,7 +1,7 @@
 <ion-header>
-        <ion-navbar>
-        </ion-navbar>
-    </ion-header>
+    <ion-navbar>
+    </ion-navbar>
+</ion-header>
 
     <ion-content class="padding-sign" scroll="false">
         <div class="logo">
@@ -10,7 +10,7 @@
 
         <form #form="ngForm" (ngSubmit)="form.valid ? getCode() : undefined">
             <div text-center class="font-75 text-4F4F4F margin-top-6vw">
-                    {{ 'PAGE_INVITE.YOU_SHOULD_HAVE_RECEIVED' | translate }}
+                {{ 'PAGE_INVITE.YOU_SHOULD_HAVE_RECEIVED' | translate }}
             </div>
             <div class="bg-gray margin-top-1vw">
                 <ion-item class="border-bottom-no">
@@ -34,7 +34,7 @@
             </div>
             <div class="bg-gray margin-top-1vw">
             <ion-item class="border-bottom-no">
-              <ion-select
+                <ion-select
                     #codeSelect
                     [(ngModel)]="numCode"
                     [ngModelOptions]="{standalone: true}"
