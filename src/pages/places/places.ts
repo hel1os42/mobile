@@ -100,42 +100,42 @@ export class PlacesPage {
 
     getLocation(isDenied: boolean) {
         if (!isDenied) {
-            let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-            loadingLocation.present();
-            this.location.get()
-                .then((resp) => {
-                    loadingLocation.dismissAll();
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    this.getCompaniesList();
-                })
-                .catch((error) => {
-                    loadingLocation.dismissAll();
-                    // this.toast.show(error.message);
-                    this.profile.get(false, false)
-                        .subscribe(user => {
-                            this.coords = {
-                                lat: user.latitude,
-                                lng: user.longitude
-                            };
-                            this.getCompaniesList();
-                        })
-                });
-        }
-        else {
-            this.profile.get(false, false)
-                .subscribe(user => {
-                    this.coords = {
-                        lat: user.latitude,
-                        lng: user.longitude
-                    };
-                    this.getCompaniesList();
-                })
-        }
-
+        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+        loadingLocation.present();
+        this.location.get()
+            .then((resp) => {
+                loadingLocation.dismissAll();
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                this.getCompaniesList();
+            })
+            .catch((error) => {
+                loadingLocation.dismissAll();
+                // this.toast.show(error.message);
+                this.profile.get(false, false)
+                    .subscribe(user => {
+                        this.coords = {
+                            lat: user.latitude,
+                            lng: user.longitude
+                        };
+                        this.getCompaniesList();
+                    })
+            });
     }
+    else {
+        this.profile.get(false, false)
+            .subscribe(user => {
+                this.coords = {
+                    lat: user.latitude,
+                    lng: user.longitude
+                };
+                this.getCompaniesList();
+            })
+    }
+
+}
 
     requestPerm() {
         this.androidPermissions.requestPermissions([
@@ -146,7 +146,15 @@ export class PlacesPage {
             .then(
             result => {
                 if (result.hasPermission === false) {
-                    this.presentAndroidConfirm();
+                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                        result => {
+                            if (result.hasPermission === false) {
+                                this.presentAndroidConfirm()
+                            }
+                            else {
+                                this.getLocation(false);
+                            }
+                        });
                 }
                 else {
                     this.getLocation(false);
@@ -157,7 +165,7 @@ export class PlacesPage {
                 this.requestPerm();
                 debugger
             }
-        )
+            )
     }
 
     getDevMode() {

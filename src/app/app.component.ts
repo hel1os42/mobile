@@ -66,7 +66,7 @@ export class MyApp {
                 statusBar.overlaysWebView(true);
 
                 this.location.get()
-                    .then((resp) => {})
+                    .then((resp) => { })
                     .catch((error) => {
                         this.presentIosConfirm();
                     });
@@ -129,7 +129,7 @@ export class MyApp {
                     appEl.style.height = '100%';
                 });
                 //for location detection
-                if (this.rootPage !== CreateUserProfilePage && this.rootPage !== TabsPage) {
+                if (this.rootPage === OnBoardingPage) {
                     this.androidPermissions.requestPermissions([
                         this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
                         this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
@@ -138,8 +138,15 @@ export class MyApp {
                         .then(
                         result => {
                             if (result.hasPermission === false) {
-                                // this.location.setDenied(true);
-                                this.presentAndroidConfirm();
+                                this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                                    result => {
+                                        if (result.hasPermission === false) {
+                                            this.presentAndroidConfirm()
+                                        }
+                                        else {
+                                            return;
+                                        }
+                                    });
                             }
                             console.log(result)
                         },
