@@ -53,7 +53,6 @@ export class CreateUserProfilePage {
         private api: ApiService,
         private navParams: NavParams,
         private loading: LoadingController,
-        private alertCtrl: AlertController,
         private alert: AlertController,
         private androidPermissions: AndroidPermissions) {
 
@@ -310,7 +309,7 @@ export class CreateUserProfilePage {
     }
 
     presentConfirm() {
-        let confirm = this.alertCtrl.create({
+        let confirm = this.alert.create({
             title: 'To create account your location needed',
             message: 'Enable location services, please, check conection. Then click "Retry". Otherwise, you have the option to set the coordinates manually.',
             buttons: [
@@ -318,7 +317,7 @@ export class CreateUserProfilePage {
                     text: 'Cancel',
                     handler: () => {
                         this.getLocation(true);
-                        this.isSelectVisible;
+                        this.isSelectVisible = true;
                     }
                 },
                 {
