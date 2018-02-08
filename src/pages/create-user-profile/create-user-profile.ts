@@ -15,6 +15,7 @@ import { TabsPage } from '../tabs/tabs';
 import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -42,7 +43,9 @@ export class CreateUserProfilePage {
     options;
     baseData = new User();
 
-    constructor(private nav: NavController,
+    constructor(
+        platform: Platform,
+        private nav: NavController,
         private location: LocationService,
         private profile: ProfileService,
         private toast: ToastService,
@@ -51,7 +54,8 @@ export class CreateUserProfilePage {
         private navParams: NavParams,
         private loading: LoadingController,
         private alertCtrl: AlertController,
-        private platform: Platform) {
+        private alert: AlertController,
+        private androidPermissions: AndroidPermissions) {
 
 
         if (this.navParams.get('user')) {
@@ -65,7 +69,7 @@ export class CreateUserProfilePage {
                 this.addMap();
             }
             else {
-                this.getLocation();
+                this.getLocationStatus(platform);
             }
         }
         else {
@@ -75,70 +79,101 @@ export class CreateUserProfilePage {
                     this.baseData = _.clone(this.user);
                     this.picture_url = this.user.picture_url;
                 });
-            this.getLocation();
+                this.getLocationStatus(platform);
         }
     }
 
-    getLocation() {
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-        loadingLocation.present();
-
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                loadingLocation.dismissAll();
-                this.addMap();
-            })
-            .catch((error) => {
-                this.message = error.message;
-            });
-        setTimeout(() => {
-            if (!this.coords.lat) {
-                this.location.getByIp()
-                    .subscribe(resp => {
-                        this.coords = {
-                            lat: resp.latitude,
-                            lng: resp.longitude
-                        };
-                        loadingLocation.dismissAll();
-                        this.addMap();
-                    })
-            }
-        }, 9000);
-        setTimeout(() => {
-            if (!this.coords.lat) {
-                loadingLocation.dismissAll();
-                this.presentConfirm();
-            }
-            else {
-                loadingLocation.dismissAll();
-            }
-        }, 12000);
+    getLocationStatus(platform: Platform) {
+        if (platform.is('android')) {
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                result => {
+                    if (result.hasPermission === false) {
+                        this.requestPerm();
+                    }
+                    else {
+                        this.getLocation(false);
+                    }
+                    console.log(result)
+                },
+                err => {
+                    this.requestPerm();
+                    console.log(err)
+                }
+            )
+        }
+        if (platform.is('ios') || !platform.is('android')) {
+            this.getLocation(false);
+        }
     }
 
-    presentConfirm() {
-        let confirm = this.alertCtrl.create({
-            title: 'To create account your location needed',
-            message: 'Enable location services, please, check conection. Then click Retry.',
-            buttons: [
-                {
-                    text: 'Exit',
-                    handler: () => {
-                        this.platform.exitApp();
-                    }
-                },
-                {
-                    text: 'Retry',
-                    handler: () => {
-                        this.getLocation();
-                    }
+    requestPerm() {
+        this.androidPermissions.requestPermissions([
+            this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+            this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+            this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
+        ])
+            .then(
+            result => {
+                if (result.hasPermission === false) {
+                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                        result => {
+                            if (result.hasPermission === false) {
+                                this.presentAndroidConfirm()
+                            }
+                            else {
+                                this.getLocation(false);
+                            }
+                        });
                 }
-            ]
-        });
-        confirm.present();
+                else {
+                    this.getLocation(false);
+                }
+                console.log(result)
+            },
+            err => {
+                this.requestPerm();
+            }
+            )
+    }
+
+
+    getLocation(isDenied: boolean) {
+        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+        if (!isDenied) {
+            loadingLocation.present();
+            this.location.get()
+                .then((resp) => {
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    loadingLocation.dismissAll();
+                    this.addMap();
+                })
+                .catch((error) => {
+                    this.location.getByIp()
+                        .subscribe(resp => {
+                            this.coords = {
+                                lat: resp.latitude,
+                                lng: resp.longitude
+                            };
+                            loadingLocation.dismissAll();
+                            this.addMap();
+                        })
+                });
+        }
+        else {
+            this.location.getByIp()
+                .subscribe(resp => {
+                    this.coords = {
+                        lat: resp.latitude,
+                        lng: resp.longitude
+                    };
+                    loadingLocation.dismissAll();
+                    this.addMap();
+                })
+        }
+
     }
 
     onMapReady(map: Map) {
@@ -148,7 +183,7 @@ export class CreateUserProfilePage {
                 this.coords = this._map.getCenter();
                 if (this.coords.lng > 180 || this.coords.lng < -180) {
                     this.coords.lng = MapUtils.correctLng(this.coords.lng);
-                    this._map.setView(this.coords, this._map.getZoom());    
+                    this._map.setView(this.coords, this._map.getZoom());
                 }
             }
         })
@@ -267,4 +302,19 @@ export class CreateUserProfilePage {
             }
         }
     }
+    presentAndroidConfirm() {
+        const alert = this.alert.create({
+            title: 'Location denied',
+            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    // console.log('Application exit prevented!');
+                    this.getLocation(true);
+                }
+            }]
+        });
+        alert.present();
+    }
+
 }

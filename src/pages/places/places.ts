@@ -123,18 +123,17 @@ export class PlacesPage {
                         this.getCompaniesList();
                     })
             });
-    }
-    else {
-        this.profile.get(false, false)
-            .subscribe(user => {
-                this.coords = {
-                    lat: user.latitude,
-                    lng: user.longitude
-                };
-                this.getCompaniesList();
-            })
-    }
-
+        }
+        else {
+            this.profile.get(false, false)
+                .subscribe(user => {
+                    this.coords = {
+                        lat: user.latitude,
+                        lng: user.longitude
+                    };
+                    this.getCompaniesList();
+                })
+        }
 }
 
     requestPerm() {
