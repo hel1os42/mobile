@@ -37,7 +37,7 @@
 
         <ion-item class="block-search relative" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
-            <a (click)="createPopover()" class="btn_search_settings">
+            <a disabled (click)="createPopover()" class="btn_search_settings">
                 <img src="assets/img/user_home/icon_settings.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
@@ -64,15 +64,17 @@
                 <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} </span>
-                <div class="bold font-20 text-3E4B5D text-ellipsis margin-top-1vw">{{ company.name }}</div>
-                <div class="smooth_transition width-88">
+                <div class="smooth_transition margin-top-1vw">
+                    <div class="scroll_content">
+                        <div class="bold font-20 text-3E4B5D">{{ company.name }}</div>
+                    </div>
                     <div class="scroll_content">
                         <ng-container *ngFor="let tag of company.tags">
                             <span class="type-food">{{ tag.name }}</span>
                         </ng-container>
                     </div>
                 </div>
-                <div margin-top class="text-828282 font-12 wrap text-overflow-2-font-12 margin-top-5">{{ company. description }}</div>
+                <div margin-top class="text-828282 font-12 wrap text-overflow-3-font-12 margin-top-5">{{ company. description }}</div>
             </div>
             <img class="star_right" src="assets/img/place/icon_star.svg">
 
@@ -82,7 +84,7 @@
                         {{ company?.active_offers_count }}
                     </div>
                     <div text-center class="font-10 text-828282">
-                        {{ 'UNIT.OFFERS' | translate }}
+                        {{ company?.active_offers_count > 1 ? ('UNIT.OFFERS' | translate) : ('UNIT.OFFER' | translate) }}
                     </div>
                 </div>
             </div>

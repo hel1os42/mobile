@@ -19,11 +19,11 @@ interface ApiRequestOptions {
 
 class UriQueryEncoder extends QueryEncoder {
     encodeKey(k: string): string {
-      return k;
+        return k;
     }
 
     encodeValue(v: string): string {
-      return encodeURIComponent(v);
+        return encodeURIComponent(v);
     }
 }
 
@@ -55,13 +55,13 @@ export class ApiService {
         }
 
         this.url = (this.environmentMode == 'prod') ? this.prodUrl
-        : this.environmentMode == 'test' ? this.testUrl
-        : this.devUrl;
+            : this.environmentMode == 'test' ? this.testUrl
+                : this.devUrl;
         this.appMode.onEnvironmentMode
             .subscribe(resp => {
                 this.url = resp == 'prod' ? this.prodUrl
-                : resp == 'test' ? this.testUrl
-                : this.devUrl;
+                    : resp == 'test' ? this.testUrl
+                        : this.devUrl;
             })
     }
 
@@ -86,10 +86,10 @@ export class ApiService {
         let loading: Loading;
 
         if (!requestOptions)
-            requestOptions = { };
+            requestOptions = {};
 
         let showLoading = requestOptions.showLoading
-            || typeof(requestOptions.showLoading) == 'undefined';
+            || typeof (requestOptions.showLoading) == 'undefined';
 
         if (showLoading) {
             loading = this.loading.create({ content: '' });
@@ -117,9 +117,6 @@ export class ApiService {
                 if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
                     messages.push('Too Many Attempts.')
                 }
-                if (errResp.status == 0) {
-                    messages.push('Internet disconnected.') 
-                }
                 else if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound) {
                     return;
                 }
@@ -130,11 +127,16 @@ export class ApiService {
                         messages.push(err.message)
                     }
                     else {
-                        for (let key in err) {
-                            let el = err[key];
-                            for (let i = 0; i < el.length; i++) {
-                                let msg = el[i];
-                                messages.push(msg);
+                        if (errResp.status == 0) {
+                            messages.push('Internet disconnected.');
+                        }
+                        else {
+                            for (let key in err) {
+                                let el = err[key];
+                                for (let i = 0; i < el.length; i++) {
+                                    let msg = el[i];
+                                    messages.push(msg);
+                                }
                             }
                         }
                     }
@@ -150,8 +152,8 @@ export class ApiService {
         // return sharableObs.map(resp => resp.json());
         return sharableObs.map(resp => {
             let obj = resp.json();
-            if(obj) {
-               obj.http_headers = resp.headers;
+            if (obj) {
+                obj.http_headers = resp.headers;
             }
             return obj;
         })
@@ -159,7 +161,7 @@ export class ApiService {
 
     get(endpoint: string, requestOptions?: ApiRequestOptions) {
         if (!requestOptions)
-            requestOptions = { };
+            requestOptions = {};
         let { params, options } = requestOptions;
 
         if (!options) {

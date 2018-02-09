@@ -15,6 +15,8 @@ import { TabsPage } from '../tabs/tabs';
 import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -42,7 +44,9 @@ export class CreateUserProfilePage {
     options;
     baseData = new User();
 
-    constructor(private nav: NavController,
+    constructor(
+        private platform: Platform,
+        private nav: NavController,
         private location: LocationService,
         private profile: ProfileService,
         private toast: ToastService,
@@ -50,8 +54,9 @@ export class CreateUserProfilePage {
         private api: ApiService,
         private navParams: NavParams,
         private loading: LoadingController,
-        private alertCtrl: AlertController,
-        private platform: Platform) {
+        private alert: AlertController,
+        private androidPermissions: AndroidPermissions,
+        private diagnostic: Diagnostic) {
 
 
         if (this.navParams.get('user')) {
@@ -65,7 +70,7 @@ export class CreateUserProfilePage {
                 this.addMap();
             }
             else {
-                this.getLocation();
+                this.getLocationStatus();
             }
         }
         else {
@@ -75,14 +80,91 @@ export class CreateUserProfilePage {
                     this.baseData = _.clone(this.user);
                     this.picture_url = this.user.picture_url;
                 });
-            this.getLocation();
+            this.getLocationStatus();
         }
     }
 
-    getLocation() {
+    getLocationStatus() {
+        if (this.platform.is('android')) {
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                result => {
+                    if (result.hasPermission === false) {
+                        this.requestPerm();
+                    }
+                    else {
+                        this.getLocation(false);
+                    }
+                    console.log(result)
+                },
+                err => {
+                    this.requestPerm();
+                    console.log(err)
+                }
+            )
+        }
+        if (this.platform.is('ios') || !this.platform.is('android')) {
+            this.getLocation(false);
+        }
+    }
+
+    requestPerm() {
+        this.androidPermissions.requestPermissions([
+            this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+            this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
+            this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
+        ])
+            .then(
+            result => {
+                if (result.hasPermission === false) {
+                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                        result => {
+                            if (result.hasPermission === false) {
+                                this.presentAndroidConfirm()
+                            }
+                            else {
+                                this.getLocation(false);
+                            }
+                        });
+                }
+                else {
+                    this.getLocation(false);
+                }
+                console.log(result)
+            },
+            err => {
+                this.requestPerm();
+            }
+            )
+    }
+
+
+    getLocation(isDenied: boolean) {
+        if (!isDenied) {
+            this.diagnostic.isLocationEnabled().then(result => {
+                if (!result) {
+                    this.presentConfirm();
+                }
+                else {
+                    this.getCoords();
+                }
+            });
+        }
+        else {
+            this.location.getByIp()
+                .subscribe(resp => {
+                    this.coords = {
+                        lat: resp.latitude,
+                        lng: resp.longitude
+                    };
+                    this.addMap();
+                    this._map.setView(this.coords, 15)
+                })
+        }
+    }
+
+    getCoords() {
         let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
-
         this.location.get()
             .then((resp) => {
                 this.coords = {
@@ -91,54 +173,12 @@ export class CreateUserProfilePage {
                 };
                 loadingLocation.dismissAll();
                 this.addMap();
+                this._map.setView(this.coords, 15)
             })
             .catch((error) => {
-                this.message = error.message;
-            });
-        setTimeout(() => {
-            if (!this.coords.lat) {
-                this.location.getByIp()
-                    .subscribe(resp => {
-                        this.coords = {
-                            lat: resp.latitude,
-                            lng: resp.longitude
-                        };
-                        loadingLocation.dismissAll();
-                        this.addMap();
-                    })
-            }
-        }, 9000);
-        setTimeout(() => {
-            if (!this.coords.lat) {
                 loadingLocation.dismissAll();
                 this.presentConfirm();
-            }
-            else {
-                loadingLocation.dismissAll();
-            }
-        }, 12000);
-    }
-
-    presentConfirm() {
-        let confirm = this.alertCtrl.create({
-            title: 'To create account your location needed',
-            message: 'Enable location services, please, check conection. Then click Retry.',
-            buttons: [
-                {
-                    text: 'Exit',
-                    handler: () => {
-                        this.platform.exitApp();
-                    }
-                },
-                {
-                    text: 'Retry',
-                    handler: () => {
-                        this.getLocation();
-                    }
-                }
-            ]
-        });
-        confirm.present();
+            })
     }
 
     onMapReady(map: Map) {
@@ -148,7 +188,7 @@ export class CreateUserProfilePage {
                 this.coords = this._map.getCenter();
                 if (this.coords.lng > 180 || this.coords.lng < -180) {
                     this.coords.lng = MapUtils.correctLng(this.coords.lng);
-                    this._map.setView(this.coords, this._map.getZoom());    
+                    this._map.setView(this.coords, this._map.getZoom());
                 }
             }
         })
@@ -267,4 +307,65 @@ export class CreateUserProfilePage {
             }
         }
     }
+    presentAndroidConfirm() {
+        const alert = this.alert.create({
+            title: 'Location denied',
+            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    // console.log('Application exit prevented!');
+                    this.getLocation(true);
+                }
+            }]
+        });
+        alert.present();
+    }
+
+    presentConfirm() {
+        let confirm = this.alert.create({
+            title: 'To create account your location needed',
+            message: 'To turn on location, please, click "Settings". Otherwise, you have the option to set the coordinates manually.',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: () => {
+                        this.getLocation(true);
+                        this.isSelectVisible = true;
+                    }
+                },
+                {
+                    text: 'Settings',
+                    handler: () => {
+                        if (this.platform.is('ios')) {
+                            this.diagnostic.switchToSettings();
+                        }
+                        else {
+                            this.diagnostic.switchToLocationSettings();
+                        }
+                        this.diagnostic.registerLocationStateChangeHandler(success => {
+                            if (success !== 'location_off') {
+                                this.getCoords();
+                                this.isSelectVisible = true;
+                                success = false;
+                                return; 
+                            }
+                            if (success === 'location_off') {
+                                // this.getLocation(true);
+                                // this.isSelectVisible = true;
+                                success = false;
+                                return;  
+                            }
+                            success = false;
+                        }); 
+                        this.getLocation(true);
+                        this.isSelectVisible = true;
+                    }
+                }
+            ],
+            enableBackdropDismiss: false
+        });
+        confirm.present();
+    }
+
 }

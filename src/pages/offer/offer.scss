@@ -38,6 +38,10 @@ page-offer{
     animation: pulse 2s infinite;
   }
 
+   .circles:hover{
+     animation-play-state: paused;
+   }
+
   .circle1{
     position: absolute;
     left: 0;

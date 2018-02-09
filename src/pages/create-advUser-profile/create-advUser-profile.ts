@@ -84,7 +84,7 @@ export class CreateAdvUserProfilePage {
         private alert: AlertController,
         private translate: TranslateService) {
 
-        this.offer.getCategories()
+        this.offer.getCategories(true)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
                     let placeCategories = categories.data.find(p => p.name == category.name)
@@ -127,31 +127,38 @@ export class CreateAdvUserProfilePage {
             if (this.coords.lat) {
                 this.mapPresent(true);
             }
-
             else {
-                this.location.get()
-                    .then((resp) => {
+                this.profile.get(true)
+                    .subscribe(user => {
                         this.coords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
+                            lat: user.latitude,
+                            lng: user.longitude
                         };
                         this.mapPresent(true)
-                    })
-                    .catch((error) => {
-                        this.message = error.message;
                     });
-                setTimeout(() => {
-                    if (!this.coords.lat) {
-                        this.location.getByIp()
-                            .subscribe(resp => {
-                                this.coords = {
-                                    lat: resp.latitude,
-                                    lng: resp.longitude
-                                };
-                                this.mapPresent(true);
-                            })
-                    }
-                }, 10000);
+                // this.location.get()
+                //     .then((resp) => {
+                //         this.coords = {
+                //             lat: resp.coords.latitude,
+                //             lng: resp.coords.longitude
+                //         };
+                //         this.mapPresent(true)
+                //     })
+                //     .catch((error) => {
+                //         this.message = error.message;
+                //     });
+                // setTimeout(() => {
+                //     if (!this.coords.lat) {
+                //         this.location.getByIp()
+                //             .subscribe(resp => {
+                //                 this.coords = {
+                //                     lat: resp.latitude,
+                //                     lng: resp.longitude
+                //                 };
+                //                 this.mapPresent(true);
+                //             })
+                //     }
+                // }, 20000);
             }
         };
 
@@ -254,13 +261,13 @@ export class CreateAdvUserProfilePage {
                 this.coords = this._map.getCenter();
                 if (this.coords.lng > 180 || this.coords.lng < -180) {
                     this.coords.lng = MapUtils.correctLng(this.coords.lng);
-                    this._map.setView(this.coords, this._map.getZoom());    
+                    this._map.setView(this.coords, this._map.getZoom());
                 }
                 this.geocoder.getAddress(this.coords.lat, this.coords.lng)
                     .subscribe(resp => {
                         this.address = AddressUtils.get(resp);
                         this.changeDetectorRef.detectChanges();
-                });
+                    });
                 this.radius = MapUtils.getRadius(95, this._map);
                 this.zoom = map.getZoom();
                 // this.radius = 40075016.686 * Math.abs(Math.cos(map.getCenter().lat / 180 * Math.PI)) / Math.pow(2, map.getZoom()+8) * 75;
@@ -384,7 +391,7 @@ export class CreateAdvUserProfilePage {
                 this.selectedTypes.forEach(t => {
                     t.specialities = _.flatten(t.specialities);
                 })
-                this.lastOpened = data.name; 
+                this.lastOpened = data.name;
                 this.getFeaturesNames();
             }
         });

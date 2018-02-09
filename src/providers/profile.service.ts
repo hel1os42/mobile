@@ -16,9 +16,9 @@ export class ProfileService {
         this.auth.onLogout.subscribe(() => this.user = undefined);
     }
 
-    get(forceReload: boolean) {
+    get(forceReload: boolean, showLoading?: boolean) {
         if (forceReload || !this.user) {
-            let obs = this.api.get('profile');
+            let obs = this.api.get('profile', { showLoading: showLoading });
             obs.subscribe(user => this.user = user);
             return obs;
         }

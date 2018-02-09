@@ -47,7 +47,7 @@ export class OfferService {
                 latitude: lat,
                 longitude: lng,
                 radius: radius,
-                with: 'categories',
+                with: 'category;retailTypes;specialities;tags',
                 search: search,
                 page: page
             }
@@ -62,8 +62,8 @@ export class OfferService {
         return this.api.get(`places/${place_id}/offers`);
     }
 
-    getCategories() {
-        return this.api.get('categories');
+    getCategories(showLoading?: boolean) {
+        return this.api.get('categories', { showLoading: showLoading });
     }
 
     getCategory(category_id) {

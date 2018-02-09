@@ -1070,7 +1070,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 /* HEADER. Page places */
 .cover{
     width: 100%;
-    height: 20vw;
+    height: 30vw;
     position: relative;
     background-size: cover;
     background-position: 50% 50%;
@@ -1085,7 +1085,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     height: 22vw;
     border-radius: 100vw;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-color: #fff;
@@ -1208,6 +1208,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .text-overflow-2-font-12{
     max-height: 8.5vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
+}
+
+.text-overflow-2-font-22{
+    max-height: 15.5vw;
     height: auto;
     display: block;
     overflow: hidden;
@@ -1681,7 +1688,7 @@ ion-app.disable-scroll {
     height: 83%;
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: -0.3vw;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 100%);
 }
 

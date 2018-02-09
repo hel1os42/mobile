@@ -15,6 +15,8 @@ import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { AppModeService } from '../providers/appMode.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+
 
 @Component({
     templateUrl: 'app.html'
@@ -34,7 +36,8 @@ export class MyApp {
         private alert: AlertController,
         private storage: StorageService,
         private ionicApp: IonicApp,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private androidPermissions: AndroidPermissions) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -42,10 +45,23 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
-            
-            //this.appMode.setForkMode();// only for fork mode;
-            
-            if (platform.is('ios')){
+
+            // this.appMode.setForkMode();// only for fork mode;
+
+            if (!this.auth.isLoggedIn()) {
+                this.rootPage = OnBoardingPage;
+            }
+            else {
+                this.profile.get(true)
+                    .subscribe(resp => {
+                        this.rootPage = (!resp.name && !resp.email)
+                            ? CreateUserProfilePage
+                            : TabsPage;
+                        // this.rootPage = SettingsPage;
+                    });
+            }
+
+            if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
             }
 
@@ -61,18 +77,6 @@ export class MyApp {
 
             this.initTranslate();
 
-            if (!this.auth.isLoggedIn()) {
-                this.rootPage = OnBoardingPage;
-            }
-            else {
-                this.profile.get(true)
-                    .subscribe(resp => {
-                        this.rootPage = (!resp.name && !resp.email)
-                            ? CreateUserProfilePage
-                            : TabsPage;
-                        // this.rootPage = SettingsPage;
-                    });
-            }
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform);
@@ -162,6 +166,36 @@ export class MyApp {
                 text: 'Ok',
                 handler: () => {
                     platform.exitApp(); // Close this application
+                }
+            }]
+        });
+        alert.present();
+    }
+
+    presentAndroidConfirm() {
+        const alert = this.alert.create({
+            title: 'Location denied',
+            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    // console.log('Application exit prevented!');
+                    return;
+                }
+            }]
+        });
+        alert.present();
+    }
+
+    presentIosConfirm() {
+        const alert = this.alert.create({
+            title: 'Location denied',
+            message: 'You have denied access to geolocation. Set your coordinates in manual mode. To allow the application access to the geolocation, you need to go to the phone: Settings / Privacy / Location Services / NAU',
+            buttons: [{
+                text: 'Ok',
+                handler: () => {
+                    // console.log('Application exit prevented!');
+                    return;
                 }
             }]
         });
