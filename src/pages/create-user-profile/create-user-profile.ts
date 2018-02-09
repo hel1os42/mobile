@@ -16,6 +16,7 @@ import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -54,7 +55,8 @@ export class CreateUserProfilePage {
         private navParams: NavParams,
         private loading: LoadingController,
         private alert: AlertController,
-        private androidPermissions: AndroidPermissions) {
+        private androidPermissions: AndroidPermissions,
+        private diagnostic: Diagnostic) {
 
 
         if (this.navParams.get('user')) {
@@ -137,22 +139,15 @@ export class CreateUserProfilePage {
 
 
     getLocation(isDenied: boolean) {
-        if (!isDenied) { 
-            let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-            loadingLocation.present();
-            this.location.get()
-                .then((resp) => {
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    loadingLocation.dismissAll();
-                    this.addMap();
-                })
-                .catch((error) => {
-                    loadingLocation.dismissAll();
+        if (!isDenied) {
+            this.diagnostic.isLocationEnabled().then(result => {
+                if (!result) {
                     this.presentConfirm();
-                })
+                }
+                else {
+                    this.getCoords();
+                }
+            });
         }
         else {
             this.location.getByIp()
@@ -162,9 +157,28 @@ export class CreateUserProfilePage {
                         lng: resp.longitude
                     };
                     this.addMap();
+                    this._map.setView(this.coords, 15)
                 })
         }
+    }
 
+    getCoords() {
+        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+        loadingLocation.present();
+        this.location.get()
+            .then((resp) => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                loadingLocation.dismissAll();
+                this.addMap();
+                this._map.setView(this.coords, 15)
+            })
+            .catch((error) => {
+                loadingLocation.dismissAll();
+                this.presentConfirm();
+            })
     }
 
     onMapReady(map: Map) {
@@ -311,7 +325,7 @@ export class CreateUserProfilePage {
     presentConfirm() {
         let confirm = this.alert.create({
             title: 'To create account your location needed',
-            message: 'Enable location services, please, check conection. Then click "Retry". Otherwise, you have the option to set the coordinates manually.',
+            message: 'To turn on location, please, click "Retry". Otherwise, you have the option to set the coordinates manually.',
             buttons: [
                 {
                     text: 'Cancel',
@@ -321,15 +335,31 @@ export class CreateUserProfilePage {
                     }
                 },
                 {
-                    text: 'Retry',
+                    text: 'Settings',
                     handler: () => {
-                        this.getLocation(false);
+                        this.diagnostic.switchToLocationSettings();
+                        this.diagnostic.registerLocationStateChangeHandler(success => {
+                            if (success !== 'location_off') {
+                                this.getCoords();
+                                this.isSelectVisible = true;
+                                success = false;
+                                return; 
+                            }
+                            if (success === 'location_off') {
+                                // this.getLocation(true);
+                                // this.isSelectVisible = true;
+                                success = false;
+                                return;  
+                            }
+                            success = false;
+                        }); 
+                        this.getLocation(true);
+                        this.isSelectVisible = true;
                     }
                 }
             ],
             enableBackdropDismiss: false
-        },
-        );
+        });
         confirm.present();
     }
 

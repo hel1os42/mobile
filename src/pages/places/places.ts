@@ -18,6 +18,7 @@ import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     selector: 'page-places',
@@ -63,7 +64,8 @@ export class PlacesPage {
         private profile: ProfileService,
         private toast: ToastService,
         private alert: AlertController,
-        private androidPermissions: AndroidPermissions) {
+        private androidPermissions: AndroidPermissions,
+        private diagnostic: Diagnostic) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.segment = "alloffers";
@@ -100,21 +102,14 @@ export class PlacesPage {
 
     getLocation(isDenied: boolean) {
         if (!isDenied) {
-            let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-            loadingLocation.present();
-            this.location.get()
-                .then((resp) => {
-                    loadingLocation.dismissAll();
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    this.getCompaniesList();
-                })
-                .catch((error) => {
-                    loadingLocation.dismissAll();
+            this.diagnostic.isLocationEnabled().then(result => {
+                if (!result) {
                     this.presentConfirm();
-                });
+                }
+                else {
+                    this.getCoords();
+                }
+            });
         }
         else {
             this.profile.get(true, false)
@@ -126,6 +121,24 @@ export class PlacesPage {
                     this.getCompaniesList();
                 })
         }
+    }
+
+    getCoords() {
+        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+        loadingLocation.present();
+        this.location.get()
+            .then((resp) => {
+                loadingLocation.dismissAll();
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                this.getCompaniesList();
+            })
+            .catch((error) => {
+                loadingLocation.dismissAll();
+                this.presentConfirm();
+            });
     }
 
     requestPerm() {
@@ -414,7 +427,7 @@ export class PlacesPage {
     presentConfirm() {
         let confirm = this.alert.create({
             title: 'Your location needed for the correct operation of the application',
-            message: 'Enable location services, please check the connection. Then click "Retry". Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile.)',
+            message: 'To turn on location, please, click "Retry". Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile.)',
             buttons: [
                 {
                     text: 'Cancel',
@@ -423,9 +436,23 @@ export class PlacesPage {
                     }
                 },
                 {
-                    text: 'Retry',
+                    text: 'Settings',
                     handler: () => {
-                        this.getLocation(false);
+                        this.diagnostic.switchToLocationSettings();
+                        this.diagnostic.registerLocationStateChangeHandler(success => {
+                            if (success !== 'location_off') {
+                                this.getCoords();
+                                success = false;
+                                return;
+                            }
+                            if (success === 'location_off') {
+                                // this.getLocation(true);
+                                success = false;
+                                return;
+                            }
+                            success = false;
+                        });
+                        this.getLocation(true);
                     }
                 }
             ],
