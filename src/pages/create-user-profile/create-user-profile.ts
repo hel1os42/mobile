@@ -325,7 +325,7 @@ export class CreateUserProfilePage {
     presentConfirm() {
         let confirm = this.alert.create({
             title: 'To create account your location needed',
-            message: 'To turn on location, please, click "Retry". Otherwise, you have the option to set the coordinates manually.',
+            message: 'To turn on location, please, click "Settings". Otherwise, you have the option to set the coordinates manually.',
             buttons: [
                 {
                     text: 'Cancel',

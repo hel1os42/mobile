@@ -427,7 +427,7 @@ export class PlacesPage {
     presentConfirm() {
         let confirm = this.alert.create({
             title: 'Your location needed for the correct operation of the application',
-            message: 'To turn on location, please, click "Retry". Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile.)',
+            message: 'To turn on location, please, click "Settings". Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile.)',
             buttons: [
                 {
                     text: 'Cancel',
