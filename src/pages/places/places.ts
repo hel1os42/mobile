@@ -126,18 +126,21 @@ export class PlacesPage {
     getCoords() {
         let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
-        this.location.get()
-            .then((resp) => {
-                loadingLocation.dismissAll();
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.getCompaniesList();
-            })
-            .catch((error) => {
-                loadingLocation.dismissAll();
-                this.presentConfirm();
+        this.diagnostic.getLocationMode()
+            .then(res => {
+                this.location.get(res === 'high_accuracy')
+                    .then((resp) => {
+                        loadingLocation.dismissAll();
+                        this.coords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        this.getCompaniesList();
+                    })
+                    .catch((error) => {
+                        loadingLocation.dismissAll();
+                        this.presentConfirm();
+                    });
             });
     }
 

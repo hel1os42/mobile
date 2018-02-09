@@ -165,20 +165,23 @@ export class CreateUserProfilePage {
     getCoords() {
         let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
-        this.location.get()
-            .then((resp) => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                loadingLocation.dismissAll();
-                this.addMap();
-                this._map.setView(this.coords, 15)
-            })
-            .catch((error) => {
-                loadingLocation.dismissAll();
-                this.presentConfirm();
-            })
+        this.diagnostic.getLocationMode()
+            .then(res => {
+                this.location.get(res === 'high_accuracy')
+                    .then((resp) => {
+                        this.coords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        loadingLocation.dismissAll();
+                        this.addMap();
+                        this._map.setView(this.coords, 15)
+                    })
+                    .catch((error) => {
+                        loadingLocation.dismissAll();
+                        this.presentConfirm();
+                    })
+            });
     }
 
     onMapReady(map: Map) {
@@ -348,16 +351,16 @@ export class CreateUserProfilePage {
                                 this.getCoords();
                                 this.isSelectVisible = true;
                                 success = false;
-                                return; 
+                                return;
                             }
                             if (success === 'location_off') {
                                 // this.getLocation(true);
                                 // this.isSelectVisible = true;
                                 success = false;
-                                return;  
+                                return;
                             }
                             success = false;
-                        }); 
+                        });
                         this.getLocation(true);
                         this.isSelectVisible = true;
                     }
