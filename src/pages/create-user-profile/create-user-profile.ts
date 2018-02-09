@@ -45,7 +45,7 @@ export class CreateUserProfilePage {
     baseData = new User();
 
     constructor(
-        platform: Platform,
+        private platform: Platform,
         private nav: NavController,
         private location: LocationService,
         private profile: ProfileService,
@@ -70,7 +70,7 @@ export class CreateUserProfilePage {
                 this.addMap();
             }
             else {
-                this.getLocationStatus(platform);
+                this.getLocationStatus();
             }
         }
         else {
@@ -80,12 +80,12 @@ export class CreateUserProfilePage {
                     this.baseData = _.clone(this.user);
                     this.picture_url = this.user.picture_url;
                 });
-            this.getLocationStatus(platform);
+            this.getLocationStatus();
         }
     }
 
-    getLocationStatus(platform: Platform) {
-        if (platform.is('android')) {
+    getLocationStatus() {
+        if (this.platform.is('android')) {
             this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
                 result => {
                     if (result.hasPermission === false) {
@@ -102,7 +102,7 @@ export class CreateUserProfilePage {
                 }
             )
         }
-        if (platform.is('ios') || !platform.is('android')) {
+        if (this.platform.is('ios') || !this.platform.is('android')) {
             this.getLocation(false);
         }
     }
@@ -337,7 +337,12 @@ export class CreateUserProfilePage {
                 {
                     text: 'Settings',
                     handler: () => {
-                        this.diagnostic.switchToLocationSettings();
+                        if (this.platform.is('ios')) {
+                            this.diagnostic.switchToSettings();
+                        }
+                        else {
+                            this.diagnostic.switchToLocationSettings();
+                        }
                         this.diagnostic.registerLocationStateChangeHandler(success => {
                             if (success !== 'location_off') {
                                 this.getCoords();

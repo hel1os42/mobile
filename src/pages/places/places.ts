@@ -54,7 +54,7 @@ export class PlacesPage {
     isForkMode;
 
     constructor(
-        platform: Platform,
+        private platform: Platform,
         private nav: NavController,
         private location: LocationService,
         private appMode: AppModeService,
@@ -438,7 +438,12 @@ export class PlacesPage {
                 {
                     text: 'Settings',
                     handler: () => {
-                        this.diagnostic.switchToLocationSettings();
+                        if (this.platform.is('ios')) {
+                            this.diagnostic.switchToSettings();
+                        }
+                        else {
+                            this.diagnostic.switchToLocationSettings();
+                        }
                         this.diagnostic.registerLocationStateChangeHandler(success => {
                             if (success !== 'location_off') {
                                 this.getCoords();
