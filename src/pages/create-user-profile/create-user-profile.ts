@@ -119,7 +119,7 @@ export class CreateUserProfilePage {
                     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
                         result => {
                             if (result.hasPermission === false) {
-                                this.presentAndroidConfirm()
+                                this.presentAndroidConfirm();
                             }
                             else {
                                 this.getLocation(false);
@@ -181,7 +181,7 @@ export class CreateUserProfilePage {
                         };
                         loadingLocation.dismissAll();
                         this.addMap();
-                        this._map.setView(this.coords, 15)
+                        // this._map.setView(this.coords, 15)
                     })
                     .catch((error) => {
                         loadingLocation.dismissAll();
@@ -198,7 +198,7 @@ export class CreateUserProfilePage {
                     lng: resp.coords.longitude
                 };
                 this.addMap();
-                this._map.setView(this.coords, 15)
+                // this._map.setView(this.coords, 15);
             })
             .catch((error) => {
                 loadingLocation.dismissAll();

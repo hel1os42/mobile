@@ -136,11 +136,11 @@ export class PlacesPage {
             .then(res => {
                 this.location.get(res === 'high_accuracy')
                     .then((resp) => {
-                        loadingLocation.dismissAll();
                         this.coords = {
                             lat: resp.coords.latitude,
                             lng: resp.coords.longitude
-                        };
+                        }; 
+                        loadingLocation.dismissAll();
                         this.getCompaniesList();
                     })
                     .catch((error) => {
@@ -178,7 +178,7 @@ export class PlacesPage {
                     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
                         result => {
                             if (result.hasPermission === false) {
-                                this.presentAndroidConfirm()
+                                this.presentAndroidConfirm();
                             }
                             else {
                                 this.getLocation(false);
@@ -192,7 +192,6 @@ export class PlacesPage {
             },
             err => {
                 this.requestPerm();
-                debugger
             }
             )
     }
