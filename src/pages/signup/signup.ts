@@ -7,6 +7,7 @@ import { AuthService } from '../../providers/auth.service';
 import { SignUpCodePage } from '../signup-code/signup-code';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { StorageService } from '../../providers/storage.service';
+import { LocationService } from '../../providers/location.service';
 
 @Component({
     selector: 'page-signup',
@@ -17,7 +18,7 @@ export class SignUpPage {
         phone: '',
         code: '' };
     //numCodes = ['+7', '+49', '+63', '+57', '+380', '+86'];
-    numCode: string;
+    numCode;
     phoneNumber: string;
     phoneCodes = PHONE_CODES;
     envName: string;
@@ -28,11 +29,31 @@ export class SignUpPage {
         private nav: NavController,
         private auth: AuthService,
         private appMode: AppModeService,
-        private storage: StorageService) {
+        private storage: StorageService,
+        private location: LocationService) {
 
         this.envName = this.appMode.getEnvironmentMode();
         this.formData.code = this.storage.get('invCode') ? this.storage.get('invCode') : '';
-        this.numCode = this.getDevMode() ? '+380' : this.phoneCodes[0].dial_code;
+        this.numCode = this.getNumCode();
+    }
+
+    getNumCode() {
+        if (this.getDevMode()) {
+            this.numCode = this.phoneCodes.find(item => item.dial_code === '+380');
+            return this.numCode;
+        }
+        else {
+            this.location.getByIp()
+                .subscribe(resp => {
+                    this.numCode = this.phoneCodes.find(item => item.code === resp.country_code);
+                    return this.numCode;
+                },
+                err => {
+                    this.numCode = this.phoneCodes[0];
+                    return this.numCode;
+                })
+
+        }
     }
 
     updateList(ev) {
@@ -40,7 +61,7 @@ export class SignUpPage {
     }
 
     getCode() {
-        this.phoneNumber = this.numCode + this.formData.phone;
+        this.phoneNumber = this.numCode.dial_code + this.formData.phone;
         // let inviteCode = this.auth.getInviteCode();
         let inviteCode = this.formData.code;
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
