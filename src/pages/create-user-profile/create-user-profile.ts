@@ -181,7 +181,7 @@ export class CreateUserProfilePage {
                         };
                         loadingLocation.dismissAll();
                         this.addMap();
-                        // this._map.setView(this.coords, 15)
+                        this._map.setView(this.coords, 15);
                     })
                     .catch((error) => {
                         loadingLocation.dismissAll();
