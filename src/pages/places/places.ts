@@ -77,7 +77,7 @@ export class PlacesPage {
                 })
                 this.selectedCategory = this.categories[0];
 
-                if (platform.is('android')) {
+                if (this.platform.is('android')) {
                     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
                         result => {
                             if (result.hasPermission === false) {
@@ -94,7 +94,7 @@ export class PlacesPage {
                         }
                     )
                 }
-                if (platform.is('ios') || !platform.is('android')) {
+                if (this.platform.is('ios') || !this.platform.is('android')) {
                     this.getLocation(false);
                 }
             })
@@ -102,14 +102,19 @@ export class PlacesPage {
 
     getLocation(isDenied: boolean) {
         if (!isDenied) {
-            this.diagnostic.isLocationEnabled().then(result => {
-                if (!result) {
-                    this.presentConfirm();
-                }
-                else {
-                    this.getCoords();
-                }
-            });
+            if (!this.platform.is('cordova')) {
+                this.getCoords();
+            }
+            else {
+                this.diagnostic.isLocationEnabled().then(result => {
+                    if (!result) {
+                        this.presentConfirm();
+                    }
+                    else {
+                        this.getCoords();
+                    }
+                });
+            }
         }
         else {
             this.profile.get(true, false)
@@ -126,6 +131,7 @@ export class PlacesPage {
     getCoords() {
         let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
+        if (this.platform.is('cordova')) {
         this.diagnostic.getLocationMode()
             .then(res => {
                 this.location.get(res === 'high_accuracy')
@@ -142,6 +148,22 @@ export class PlacesPage {
                         this.presentConfirm();
                     });
             });
+        }
+        else {
+            this.location.get(false)
+            .then((resp) => {
+                loadingLocation.dismissAll();
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                this.getCompaniesList();
+            })
+            .catch((error) => {
+                loadingLocation.dismissAll();
+                this.presentConfirm();
+            });
+        }
     }
 
     requestPerm() {
