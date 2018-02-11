@@ -167,43 +167,37 @@ export class CreateUserProfilePage {
         }
     }
 
-    getCoords() {
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-        loadingLocation.present();
-        if (this.platform.is('cordova')) {
-        this.diagnostic.getLocationMode()
-            .then(res => {
-                this.location.get(res === 'high_accuracy')
-                    .then((resp) => {
-                        this.coords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        };
-                        loadingLocation.dismissAll();
-                        this.addMap();
-                        this._map.setView(this.coords, 15);
-                    })
-                    .catch((error) => {
-                        loadingLocation.dismissAll();
-                        this.presentConfirm();
-                    })
-            });
-        }
-        else {
-            this.location.get(false)
+    getNativeCoords(isHighAccuracy: boolean, loadingLocation) {
+        this.location.get(isHighAccuracy)
             .then((resp) => {
-                loadingLocation.dismissAll();
                 this.coords = {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
+                loadingLocation.dismissAll();
                 this.addMap();
+                setTimeout(() => {
+                    this._map.setView(this.coords, 15);
+                }, 300);
                 // this._map.setView(this.coords, 15);
             })
             .catch((error) => {
                 loadingLocation.dismissAll();
                 this.presentConfirm();
-            });
+            })
+    }
+
+    getCoords() {
+        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+        loadingLocation.present();
+        if (this.platform.is('cordova')) {
+            this.diagnostic.getLocationMode()
+                .then(res => {
+                    this.getNativeCoords(res === 'high_accuracy', loadingLocation);
+                });
+        }
+        else {
+            this.getNativeCoords(false, loadingLocation);
         }
     }
 
