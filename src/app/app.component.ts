@@ -159,43 +159,12 @@ export class MyApp {
                 text: 'Cancel',
                 role: 'cancel',
                 handler: () => {
-                    console.log('Application exit prevented!');
                     return;
                 }
             }, {
                 text: 'Ok',
                 handler: () => {
                     platform.exitApp(); // Close this application
-                }
-            }]
-        });
-        alert.present();
-    }
-
-    presentAndroidConfirm() {
-        const alert = this.alert.create({
-            title: 'Location denied',
-            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
-            buttons: [{
-                text: 'Ok',
-                handler: () => {
-                    // console.log('Application exit prevented!');
-                    return;
-                }
-            }]
-        });
-        alert.present();
-    }
-
-    presentIosConfirm() {
-        const alert = this.alert.create({
-            title: 'Location denied',
-            message: 'You have denied access to geolocation. Set your coordinates in manual mode. To allow the application access to the geolocation, you need to go to the phone: Settings / Privacy / Location Services / NAU',
-            buttons: [{
-                text: 'Ok',
-                handler: () => {
-                    // console.log('Application exit prevented!');
-                    return;
                 }
             }]
         });
