@@ -10,12 +10,11 @@ import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-
 import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
+import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
-import { AppModeService } from '../providers/appMode.service';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 
 @Component({
@@ -36,8 +35,7 @@ export class MyApp {
         private alert: AlertController,
         private storage: StorageService,
         private ionicApp: IonicApp,
-        private appMode: AppModeService,
-        private androidPermissions: AndroidPermissions) {
+        private appMode: AppModeService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.

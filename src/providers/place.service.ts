@@ -1,11 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { ApiService } from "./api.service";
-import { OfferCreate } from "../models/offerCreate";
-import { PlaceCreate } from "../models/placeCreate";
-import { Place } from "../models/place";
-import { Offer } from "../models/offer";
-import { Observable } from 'rxjs/Observable';
-import { MockGetPlace } from '../mocks/mockGetPlace';
+import { Offer } from '../models/offer';
+import { OfferCreate } from '../models/offerCreate';
+import { Place } from '../models/place';
+import { PlaceCreate } from '../models/placeCreate';
+import { ApiService } from './api.service';
 
 
 @Injectable()

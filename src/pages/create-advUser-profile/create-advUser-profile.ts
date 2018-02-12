@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { TranslateService } from '@ngx-translate/core';
 import { NavController, NavParams, PopoverController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { Map } from 'leaflet';
-import { latLng, LeafletEvent, tileLayer } from 'leaflet';
+import { latLng, LeafletEvent, Map, tileLayer } from 'leaflet';
 import * as _ from 'lodash';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
@@ -12,14 +12,15 @@ import { Place } from '../../models/place';
 import { RetailType } from '../../models/retailType';
 import { SelectedCategory } from '../../models/selectedCategory';
 import { SelectedTag } from '../../models/selectedTag';
+import { Speciality } from '../../models/speciality';
 import { Tag } from '../../models/tag';
 import { ApiService } from '../../providers/api.service';
 import { GeocodeService } from '../../providers/geocode.service';
-import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
+import { AboutUtils } from '../../utils/about.utils';
 import { AddressUtils } from '../../utils/address.utils';
 import { MapUtils } from '../../utils/map';
 import { StringValidator } from '../../validators/string.validator';
@@ -28,10 +29,6 @@ import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.ca
 import { CreateAdvUserProfileFeaturesPopover } from './create-advUser-profile.features.popover';
 import { CreateAdvUserProfileTagsPopover } from './create-advUser-profile.tags.popover';
 import { CreateAdvUserProfileTypesPopover } from './create-advUser-profile.types.popover';
-import { RootCategory } from '../../models/rootCategory';
-import { AboutUtils } from '../../utils/about.utils';
-import { Speciality } from '../../models/speciality';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-create-advUser-profile',
@@ -68,7 +65,6 @@ export class CreateAdvUserProfilePage {
     aboutDescription: string;
 
     constructor(
-        private location: LocationService,
         private nav: NavController,
         private popoverCtrl: PopoverController,
         private offer: OfferService,
@@ -505,7 +501,6 @@ export class CreateAdvUserProfilePage {
 
     presentConfirm(pictureUpload: Promise<any>, coverUpload: Promise<any>) {
         let adv = 'PAGE_CREATE-ADVUSER-PROFILE.';
-        let unit = 'UNIT.';
         this.translate.get(
             ['PAGE_CREATE-ADVUSER-PROFILE', 'UNIT'])
             .subscribe(resp => {

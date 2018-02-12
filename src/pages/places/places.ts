@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { LoadingController, NavController, Popover, PopoverController, Platform } from 'ionic-angular';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { LoadingController, NavController, Platform, Popover, PopoverController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer } from 'leaflet';
 import { ChildCategory } from '../../models/childCategory';
@@ -14,11 +15,9 @@ import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
-import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     selector: 'page-places',
@@ -62,7 +61,6 @@ export class PlacesPage {
         private popoverCtrl: PopoverController,
         private loading: LoadingController,
         private profile: ProfileService,
-        private toast: ToastService,
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
         private diagnostic: Diagnostic) {

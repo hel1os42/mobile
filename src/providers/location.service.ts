@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Http, Response } from '@angular/http';
 import { Observable } from "rxjs";
@@ -9,7 +9,6 @@ import { ToastService } from './toast.service';
 export class LocationService {
     geoposition: Geoposition;
     url = 'https://freegeoip.net/json/';
-    // isDenied = false;
 
     constructor(private geolocation: Geolocation,
                 private http: Http,
@@ -47,11 +46,4 @@ export class LocationService {
         this.geoposition = undefined;
     }
 
-    // getDenied() {
-    //     return this.isDenied;
-    // }
-
-    // setDenied(isDenied: boolean) {
-    //     this.isDenied = isDenied;
-    // }
 }

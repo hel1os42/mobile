@@ -1,8 +1,4 @@
 import { Offer } from './offer';
-import { OfferCategory } from './offerCategory';
-import { RetailType } from './retailType';
-import { RootCategory } from './rootCategory';
-import { SpecialityCreate } from './specialityCreate';
 
 export class Place {
     id: string;
