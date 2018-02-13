@@ -110,7 +110,18 @@ export class PlacesPage {
                         }
                     )
                 }
-                if (this.platform.is('ios') || !this.platform.is('android')) {
+                else if (this.platform.is('ios')) {
+                    this.diagnostic.getLocationAuthorizationStatus()
+                        .then(resp => {
+                            if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED') {
+                                this.diagnostic.requestLocationAuthorization()
+                                .then(res => {
+                                    this.getLocation(false);
+                                })
+                            }
+                        })
+                }
+                else {
                     this.getLocation(false);
                 }
             })

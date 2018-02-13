@@ -120,7 +120,18 @@ export class CreateUserProfilePage {
                 }
             )
         }
-        if (this.platform.is('ios') || !this.platform.is('android')) {
+        else if (this.platform.is('ios')) {
+            this.diagnostic.getLocationAuthorizationStatus()
+                .then(resp => {
+                    if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED') {
+                        this.diagnostic.requestLocationAuthorization()
+                        .then(res => {
+                            this.getLocation(false);
+                        })
+                    }
+                })
+        }
+        else {
             this.getLocation(false);
         }
     }
@@ -305,8 +316,8 @@ export class CreateUserProfilePage {
 
     navTo() {
         if (this.isEdit) {
+            this.nav.pop(); 
             this.profile.refreshAccounts();
-            this.nav.pop();
         }
         else {
             // this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
