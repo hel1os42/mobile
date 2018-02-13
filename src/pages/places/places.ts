@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { LoadingController, NavController, Popover, PopoverController, Platform } from 'ionic-angular';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { LoadingController, NavController, Platform, Popover, PopoverController, IonicApp, App } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer } from 'leaflet';
+import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer, Map } from 'leaflet';
 import { ChildCategory } from '../../models/childCategory';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
@@ -14,11 +15,10 @@ import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
-import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { Diagnostic } from '@ionic-native/diagnostic';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'page-places',
@@ -52,6 +52,8 @@ export class PlacesPage {
     selectedTags: Tag[];
     isChangedCategory = true;
     isForkMode;
+    onResumeSubscription: Subscription;
+    isConfirm = false;
 
     constructor(
         private platform: Platform,
@@ -62,13 +64,27 @@ export class PlacesPage {
         private popoverCtrl: PopoverController,
         private loading: LoadingController,
         private profile: ProfileService,
-        private toast: ToastService,
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
         private diagnostic: Diagnostic) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.segment = "alloffers";
+        this.onResumeSubscription = this.platform.resume.subscribe(() => {
+            if (this.isConfirm) {
+                this.diagnostic.isLocationEnabled().then(result => {
+                    if (!result) {
+                        this.isConfirm = false;
+                        this.presentConfirm();
+                    }
+                    else {
+                        this.isConfirm = false;
+                        this.getCoords();
+                    }
+                });
+            }
+            else return;
+        });
 
         this.offers.getCategories(false)
             .subscribe(categories => {
@@ -77,7 +93,7 @@ export class PlacesPage {
                 })
                 this.selectedCategory = this.categories[0];
 
-                if (platform.is('android')) {
+                if (this.platform.is('android')) {
                     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
                         result => {
                             if (result.hasPermission === false) {
@@ -94,7 +110,21 @@ export class PlacesPage {
                         }
                     )
                 }
-                if (platform.is('ios') || !platform.is('android')) {
+                else if (this.platform.is('ios')) {
+                    this.diagnostic.getLocationAuthorizationStatus()
+                        .then(resp => {
+                            if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
+                                this.diagnostic.requestLocationAuthorization()
+                                .then(res => {
+                                    this.getLocation(false);
+                                })
+                            }
+                            else {
+                                this.getLocation(false);
+                            }
+                        })
+                }
+                else {
                     this.getLocation(false);
                 }
             })
@@ -102,14 +132,19 @@ export class PlacesPage {
 
     getLocation(isDenied: boolean) {
         if (!isDenied) {
-            this.diagnostic.isLocationEnabled().then(result => {
-                if (!result) {
-                    this.presentConfirm();
-                }
-                else {
-                    this.getCoords();
-                }
-            });
+            if (!this.platform.is('cordova')) {
+                this.getCoords();
+            }
+            else {
+                this.diagnostic.isLocationAvailable().then(result => {
+                    if (!result) {
+                        this.presentConfirm();
+                    }
+                    else {
+                        this.getCoords();
+                    }
+                });
+            }
         }
         else {
             this.profile.get(true, false)
@@ -126,19 +161,39 @@ export class PlacesPage {
     getCoords() {
         let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
-        this.location.get()
-            .then((resp) => {
-                loadingLocation.dismissAll();
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.getCompaniesList();
-            })
-            .catch((error) => {
-                loadingLocation.dismissAll();
-                this.presentConfirm();
-            });
+        if (this.platform.is('android')) {
+            this.diagnostic.getLocationMode()
+                .then(res => {
+                    this.location.get(res === 'high_accuracy')
+                        .then((resp) => {
+                            this.coords = {
+                                lat: resp.coords.latitude,
+                                lng: resp.coords.longitude
+                            };
+                            loadingLocation.dismissAll();
+                            this.getCompaniesList();
+                        })
+                        .catch((error) => {
+                            loadingLocation.dismissAll();
+                            this.presentConfirm();
+                        });
+                });
+        }
+        else {
+            this.location.get(false)
+                .then((resp) => {
+                    loadingLocation.dismissAll();
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    this.getCompaniesList();
+                })
+                .catch((error) => {
+                    loadingLocation.dismissAll();
+                    this.presentConfirm();
+                });
+        }
     }
 
     requestPerm() {
@@ -153,7 +208,7 @@ export class PlacesPage {
                     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
                         result => {
                             if (result.hasPermission === false) {
-                                this.presentAndroidConfirm()
+                                this.presentAndroidConfirm();
                             }
                             else {
                                 this.getLocation(false);
@@ -167,7 +222,6 @@ export class PlacesPage {
             },
             err => {
                 this.requestPerm();
-                debugger
             }
             )
     }
@@ -438,26 +492,13 @@ export class PlacesPage {
                 {
                     text: 'Settings',
                     handler: () => {
+                        this.isConfirm = true;
                         if (this.platform.is('ios')) {
                             this.diagnostic.switchToSettings();
                         }
                         else {
                             this.diagnostic.switchToLocationSettings();
                         }
-                        this.diagnostic.registerLocationStateChangeHandler(success => {
-                            if (success !== 'location_off') {
-                                this.getCoords();
-                                success = false;
-                                return;
-                            }
-                            if (success === 'location_off') {
-                                // this.getLocation(true);
-                                success = false;
-                                return;
-                            }
-                            success = false;
-                        });
-                        this.getLocation(true);
                     }
                 }
             ],
@@ -467,4 +508,7 @@ export class PlacesPage {
         confirm.present();
     }
 
+    ionViewDidLeave() {
+        this.onResumeSubscription.unsubscribe();
+    }
 }

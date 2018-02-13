@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import { ApiService } from "./api.service";
-import { MockCategory } from '../mocks/mockCategory';
+import { ApiService } from './api.service';
+
 // import { MockCompanies } from '../mocks/mockCompanies';
 
 @Injectable()

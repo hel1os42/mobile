@@ -1,6 +1,5 @@
-import { Place } from './place';
-import { OfferCategory } from './offerCategory';
 import { OfferCreate } from './offerCreate';
+import { Place } from './place';
 import { TimeFrames } from './timeFrames';
 
 export class Offer extends OfferCreate {

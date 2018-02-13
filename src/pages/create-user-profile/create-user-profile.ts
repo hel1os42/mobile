@@ -17,6 +17,7 @@ import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -43,6 +44,8 @@ export class CreateUserProfilePage {
     _map: Map;
     options;
     baseData = new User();
+    onResumeSubscription: Subscription;
+    isConfirm = false;
 
     constructor(
         private platform: Platform,
@@ -58,12 +61,27 @@ export class CreateUserProfilePage {
         private androidPermissions: AndroidPermissions,
         private diagnostic: Diagnostic) {
 
+        this.onResumeSubscription = this.platform.resume.subscribe(() => {
+            if (this.isConfirm) {
+                this.diagnostic.isLocationAvailable().then(result => {
+                    if (!result) {
+                        this.isConfirm = false;
+                        this.presentConfirm();
+                    }
+                    else {
+                        this.isConfirm = false;
+                        this.getCoords();
+                    }
+                });
+            }
+            else return;
+        });
 
         if (this.navParams.get('user')) {
             this.isEdit = true;
             this.user = this.navParams.get('user');
             this.baseData = _.clone(this.user);
-            this.picture_url = this.user.picture_url;
+            this.picture_url = this.baseData.picture_url;
             this.coords.lat = this.baseData.latitude;
             this.coords.lng = this.baseData.longitude;
             if (this.coords.lat) {
@@ -102,7 +120,21 @@ export class CreateUserProfilePage {
                 }
             )
         }
-        if (this.platform.is('ios') || !this.platform.is('android')) {
+        else if (this.platform.is('ios')) {
+            this.diagnostic.getLocationAuthorizationStatus()
+                .then(resp => {
+                    if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
+                        this.diagnostic.requestLocationAuthorization()
+                            .then(res => {
+                                this.getLocation(false);
+                            })
+                    }
+                    else {
+                        this.getLocation(false);
+                    }
+                })
+        }
+        else {
             this.getLocation(false);
         }
     }
@@ -119,7 +151,7 @@ export class CreateUserProfilePage {
                     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
                         result => {
                             if (result.hasPermission === false) {
-                                this.presentAndroidConfirm()
+                                this.presentAndroidConfirm();
                             }
                             else {
                                 this.getLocation(false);
@@ -140,14 +172,19 @@ export class CreateUserProfilePage {
 
     getLocation(isDenied: boolean) {
         if (!isDenied) {
-            this.diagnostic.isLocationEnabled().then(result => {
-                if (!result) {
-                    this.presentConfirm();
-                }
-                else {
-                    this.getCoords();
-                }
-            });
+            if (!this.platform.is('cordova')) {
+                this.getCoords();
+            }
+            else {
+                this.diagnostic.isLocationAvailable().then(result => {
+                    if (!result) {
+                        this.presentConfirm();
+                    }
+                    else {
+                        this.getCoords();
+                    }
+                });
+            }
         }
         else {
             this.location.getByIp()
@@ -157,15 +194,12 @@ export class CreateUserProfilePage {
                         lng: resp.longitude
                     };
                     this.addMap();
-                    this._map.setView(this.coords, 15)
                 })
         }
     }
 
-    getCoords() {
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-        loadingLocation.present();
-        this.location.get()
+    getNativeCoords(isHighAccuracy: boolean, loadingLocation) {
+        this.location.get(isHighAccuracy)
             .then((resp) => {
                 this.coords = {
                     lat: resp.coords.latitude,
@@ -173,12 +207,29 @@ export class CreateUserProfilePage {
                 };
                 loadingLocation.dismissAll();
                 this.addMap();
-                this._map.setView(this.coords, 15)
+                setTimeout(() => {
+                    this._map.setView(this.coords, 15);
+                }, 400);
+                // this._map.setView(this.coords, 15);
             })
             .catch((error) => {
                 loadingLocation.dismissAll();
                 this.presentConfirm();
             })
+    }
+
+    getCoords() {
+        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+        loadingLocation.present();
+        if (this.platform.is('android')) {
+            this.diagnostic.getLocationMode()
+                .then(res => {
+                    this.getNativeCoords(res === 'high_accuracy', loadingLocation);
+                });
+        }
+        else {
+            this.getNativeCoords(false, loadingLocation);
+        }
     }
 
     onMapReady(map: Map) {
@@ -268,8 +319,8 @@ export class CreateUserProfilePage {
 
     navTo() {
         if (this.isEdit) {
-            this.profile.refreshAccounts();
             this.nav.pop();
+            this.profile.refreshAccounts();
         }
         else {
             // this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
@@ -337,35 +388,23 @@ export class CreateUserProfilePage {
                 {
                     text: 'Settings',
                     handler: () => {
+                        this.isConfirm = true;
                         if (this.platform.is('ios')) {
                             this.diagnostic.switchToSettings();
                         }
                         else {
                             this.diagnostic.switchToLocationSettings();
                         }
-                        this.diagnostic.registerLocationStateChangeHandler(success => {
-                            if (success !== 'location_off') {
-                                this.getCoords();
-                                this.isSelectVisible = true;
-                                success = false;
-                                return; 
-                            }
-                            if (success === 'location_off') {
-                                // this.getLocation(true);
-                                // this.isSelectVisible = true;
-                                success = false;
-                                return;  
-                            }
-                            success = false;
-                        }); 
-                        this.getLocation(true);
-                        this.isSelectVisible = true;
                     }
                 }
             ],
             enableBackdropDismiss: false
         });
         confirm.present();
+    }
+
+    ionViewDidLeave() {
+        this.onResumeSubscription.unsubscribe();
     }
 
 }

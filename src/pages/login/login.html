@@ -7,12 +7,15 @@
     <div (tap)="toggleMode()" class="logo">
     </div>
     <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
-    <div text-center class="margin-top-6vw font-75 text-4F4F4F">
-        {{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}
+    <div *ngIf="!isVisibleLoginButton" text-center class="margin-top-6vw font-75 text-4F4F4F">
+        {{ 'PAGE_LOGIN.PLEASE_ENTER_PHONE' | translate }}
+    </div>
+    <div *ngIf="isVisibleLoginButton" text-center class="margin-top-6vw font-75 text-4F4F4F">
+        {{ 'PAGE_LOGIN.PLEASE_ENTER_OTP' | translate }}
     </div>
 
-    <form 
-        #form="ngForm" 
+    <form
+        #form="ngForm"
         (ngSubmit)="(form.valid && isVisibleLoginButton) ? login() : (form.valid && !isVisibleLoginButton) ? getOtp() : undefined">
     <div *ngIf="!isVisibleLoginButton" class="bg-gray margin-top-6vw">
     <ion-item class="border-bottom-no">
@@ -22,11 +25,11 @@
             [ngModelOptions]="{standalone: true}"
             interface="alert"
             [selectOptions]="{cssClass: 'alert-full-no-button'}"
-            [selectedText]="numCode"
+            [selectedText]="numCode?.dial_code"
             (click)="onSelectClicked(codeSelect)">
-            <ion-option  
-                *ngFor=" let phoneCode of phoneCodes " 
-                [value]="phoneCode.dial_code"
+            <ion-option
+                *ngFor=" let phoneCode of phoneCodes "
+                [value]="phoneCode"
                 (ionSelect)="dismissSelect($event)">
                 {{ phoneCode.dial_code }} {{ phoneCode.name }}
             </ion-option>

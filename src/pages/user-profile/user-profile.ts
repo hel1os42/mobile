@@ -22,7 +22,6 @@ export class UserProfilePage {
     user: User = new User();
     balance: number;
     onRefreshAccounts: Subscription;
-    time = new Date().valueOf();
     NAU: Account;
 
     @ViewChild(Slides) slides: Slides;
@@ -38,6 +37,7 @@ export class UserProfilePage {
                 this.user = resp;
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
+                this.user.picture_url = this.user.picture_url + '?' + new Date().valueOf();
             })
         if (!this.balance) {
             this.profile.getWithAccounts()

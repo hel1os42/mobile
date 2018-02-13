@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams } from 'ionic-angular';
-import { Place } from '../../models/place';
+import { NavController, NavParams } from 'ionic-angular';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
-import { AppModeService } from '../../providers/appMode.service';
+import { Place } from '../../models/place';
+import { Speciality } from '../../models/speciality';
 import { OfferService } from '../../providers/offer.service';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
-import { Speciality } from '../../models/speciality';
 
 @Component({
     selector: 'page-place',
@@ -25,9 +24,7 @@ export class PlacePage {
     constructor(
         private nav: NavController,
         private offers: OfferService,
-        private appMode: AppModeService,
-        private navParams: NavParams,
-        private app: App) {
+        private navParams: NavParams) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');

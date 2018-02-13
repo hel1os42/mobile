@@ -1,5 +1,3 @@
-import * as _ from 'lodash';
-
 export class AddressUtils {
 
     static get(data) {
