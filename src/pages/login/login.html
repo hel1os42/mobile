@@ -8,11 +8,14 @@
     </div>
     <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
     <div text-center class="margin-top-6vw font-75 text-4F4F4F">
-        {{ 'PAGE_LOGIN.PLEASE_ENTER' | translate }}<br>{{ 'PAGE_LOGIN.CONFIRMATION_CODE' | translate }}
+        {{ 'PAGE_LOGIN.PLEASE_ENTER_PHONE' | translate }}
+    </div>
+    <div text-center class="margin-top-6vw font-75 text-4F4F4F">
+        {{ 'PAGE_LOGIN.PLEASE_ENTER_OTP' | translate }}
     </div>
 
-    <form 
-        #form="ngForm" 
+    <form
+        #form="ngForm"
         (ngSubmit)="(form.valid && isVisibleLoginButton) ? login() : (form.valid && !isVisibleLoginButton) ? getOtp() : undefined">
     <div *ngIf="!isVisibleLoginButton" class="bg-gray margin-top-6vw">
     <ion-item class="border-bottom-no">
@@ -24,8 +27,8 @@
             [selectOptions]="{cssClass: 'alert-full-no-button'}"
             [selectedText]="numCode?.dial_code"
             (click)="onSelectClicked(codeSelect)">
-            <ion-option  
-                *ngFor=" let phoneCode of phoneCodes " 
+            <ion-option
+                *ngFor=" let phoneCode of phoneCodes "
                 [value]="phoneCode"
                 (ionSelect)="dismissSelect($event)">
                 {{ phoneCode.dial_code }} {{ phoneCode.name }}

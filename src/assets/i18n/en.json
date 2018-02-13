@@ -243,8 +243,8 @@
 
     "PAGE_LOGIN" : {
         "LOGIN" : "Login",
-        "PLEASE_ENTER" : "Please enter your phone number and",
-        "CONFIRMATION_CODE" : "confirmation code",
+        "PLEASE_ENTER_PHONE" : "Please enter your phone number",
+        "PLEASE_ENTER_OTP" : "Please enter your OTP code",
         "OTP" : "OTP",
         "GET_OTP" : "Get otp"
     },
