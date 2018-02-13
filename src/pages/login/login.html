@@ -7,10 +7,10 @@
     <div (tap)="toggleMode()" class="logo">
     </div>
     <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
-    <div text-center class="margin-top-6vw font-75 text-4F4F4F">
+    <div *ngIf="!isVisibleLoginButton" text-center class="margin-top-6vw font-75 text-4F4F4F">
         {{ 'PAGE_LOGIN.PLEASE_ENTER_PHONE' | translate }}
     </div>
-    <div text-center class="margin-top-6vw font-75 text-4F4F4F">
+    <div *ngIf="isVisibleLoginButton" text-center class="margin-top-6vw font-75 text-4F4F4F">
         {{ 'PAGE_LOGIN.PLEASE_ENTER_OTP' | translate }}
     </div>
 
