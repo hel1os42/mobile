@@ -81,7 +81,7 @@ export class CreateUserProfilePage {
             this.isEdit = true;
             this.user = this.navParams.get('user');
             this.baseData = _.clone(this.user);
-            this.picture_url = this.user.picture_url;
+            this.picture_url = this.baseData.picture_url;
             this.coords.lat = this.baseData.latitude;
             this.coords.lng = this.baseData.longitude;
             if (this.coords.lat) {
@@ -125,9 +125,9 @@ export class CreateUserProfilePage {
                 .then(resp => {
                     if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED') {
                         this.diagnostic.requestLocationAuthorization()
-                        .then(res => {
-                            this.getLocation(false);
-                        })
+                            .then(res => {
+                                this.getLocation(false);
+                            })
                     }
                 })
         }
@@ -316,7 +316,7 @@ export class CreateUserProfilePage {
 
     navTo() {
         if (this.isEdit) {
-            this.nav.pop(); 
+            this.nav.pop();
             this.profile.refreshAccounts();
         }
         else {
