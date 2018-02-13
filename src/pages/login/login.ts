@@ -175,21 +175,20 @@ export class LoginPage {
         this.codeSelect.close();
     }
 
-    onSelectClicked(selectButton: Select): void {
-        const options: HTMLCollectionOf<Element> = document.getElementsByClassName('alert-tappable alert-radio');
+    onSelectClicked(selectButton: Select) {
         (<any>selectButton._overlay).didEnter.subscribe(
             () => {
                 setTimeout(() => {
-                    let i = 0;
-                    const len = options.length;
-                    for (i; i < len; i++) {
-                        if ((options[i] as HTMLElement).attributes[3].nodeValue === 'true') {
-                            var modalCodes = document.getElementsByClassName('alert-full-no-button')[0] as HTMLElement;
-                            modalCodes.style.display = "flex";
-                            options[i].scrollIntoView({ block: 'center', behavior: 'instant' });
+                    // document.querySelector('[aria-checked="true"]')
+                    //     .scrollIntoView({ block: 'center', behavior: 'instant' });
+                    const options = document.getElementsByClassName('alert-tappable alert-radio');
+                    for (let i = 0; i < options.length; i++) {
+                        if (options[i].attributes[3].nodeValue === 'true') {
+                            options[i].scrollIntoView({ block: 'center', behavior: 'smooth' })
                         }
                     }
                 }, 5);
-            });
+            }
+        );
     }
 }
