@@ -123,11 +123,14 @@ export class CreateUserProfilePage {
         else if (this.platform.is('ios')) {
             this.diagnostic.getLocationAuthorizationStatus()
                 .then(resp => {
-                    if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED') {
+                    if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
                         this.diagnostic.requestLocationAuthorization()
                             .then(res => {
                                 this.getLocation(false);
                             })
+                    }
+                    else {
+                        this.getLocation(false);
                     }
                 })
         }

@@ -105,6 +105,7 @@ export class MyApp {
             });
 
             // FIX KEYBOARD SCROLL
+
             if (platform.is('android')) {
                 let
                     appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
@@ -120,6 +121,7 @@ export class MyApp {
                     appEl.style.height = '100%';
                 });
             }
+
 
         });
 
