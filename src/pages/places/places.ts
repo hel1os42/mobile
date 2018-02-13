@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { LoadingController, NavController, Platform, Popover, PopoverController } from 'ionic-angular';
+import { LoadingController, NavController, Platform, Popover, PopoverController, IonicApp, App } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer } from 'leaflet';
+import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer, Map } from 'leaflet';
 import { ChildCategory } from '../../models/childCategory';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
@@ -18,6 +18,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { DistanceUtils } from '../../utils/distanse';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'page-places',
@@ -51,6 +52,8 @@ export class PlacesPage {
     selectedTags: Tag[];
     isChangedCategory = true;
     isForkMode;
+    onResumeSubscription: Subscription;
+    isConfirm = false;
 
     constructor(
         private platform: Platform,
@@ -67,6 +70,21 @@ export class PlacesPage {
 
         this.isForkMode = this.appMode.getForkMode();
         this.segment = "alloffers";
+        this.onResumeSubscription = this.platform.resume.subscribe(() => {
+            if (this.isConfirm) {
+                this.diagnostic.isLocationAvailable().then(result => {
+                    if (!result) {
+                        this.isConfirm = false;
+                        this.presentConfirm();
+                    }
+                    else {
+                        this.isConfirm = false;
+                        this.getCoords();
+                    }
+                });
+            }
+            else return;
+        });
 
         this.offers.getCategories(false)
             .subscribe(categories => {
@@ -104,7 +122,7 @@ export class PlacesPage {
                 this.getCoords();
             }
             else {
-                this.diagnostic.isLocationEnabled().then(result => {
+                this.diagnostic.isLocationAvailable().then(result => {
                     if (!result) {
                         this.presentConfirm();
                     }
@@ -129,38 +147,38 @@ export class PlacesPage {
     getCoords() {
         let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
-        if (this.platform.is('cordova')) {
-        this.diagnostic.getLocationMode()
-            .then(res => {
-                this.location.get(res === 'high_accuracy')
-                    .then((resp) => {
-                        this.coords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        }; 
-                        loadingLocation.dismissAll();
-                        this.getCompaniesList();
-                    })
-                    .catch((error) => {
-                        loadingLocation.dismissAll();
-                        this.presentConfirm();
-                    });
-            });
+        if (this.platform.is('android')) {
+            this.diagnostic.getLocationMode()
+                .then(res => {
+                    this.location.get(res === 'high_accuracy')
+                        .then((resp) => {
+                            this.coords = {
+                                lat: resp.coords.latitude,
+                                lng: resp.coords.longitude
+                            };
+                            loadingLocation.dismissAll();
+                            this.getCompaniesList();
+                        })
+                        .catch((error) => {
+                            loadingLocation.dismissAll();
+                            this.presentConfirm();
+                        });
+                });
         }
         else {
             this.location.get(false)
-            .then((resp) => {
-                loadingLocation.dismissAll();
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.getCompaniesList();
-            })
-            .catch((error) => {
-                loadingLocation.dismissAll();
-                this.presentConfirm();
-            });
+                .then((resp) => {
+                    loadingLocation.dismissAll();
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    this.getCompaniesList();
+                })
+                .catch((error) => {
+                    loadingLocation.dismissAll();
+                    this.presentConfirm();
+                });
         }
     }
 
@@ -460,26 +478,13 @@ export class PlacesPage {
                 {
                     text: 'Settings',
                     handler: () => {
+                        this.isConfirm = true;
                         if (this.platform.is('ios')) {
                             this.diagnostic.switchToSettings();
                         }
                         else {
                             this.diagnostic.switchToLocationSettings();
                         }
-                        this.diagnostic.registerLocationStateChangeHandler(success => {
-                            if (success !== 'location_off') {
-                                this.getCoords();
-                                success = false;
-                                return;
-                            }
-                            if (success === 'location_off') {
-                                // this.getLocation(true);
-                                success = false;
-                                return;
-                            }
-                            success = false;
-                        });
-                        this.getLocation(true);
                     }
                 }
             ],
@@ -489,4 +494,7 @@ export class PlacesPage {
         confirm.present();
     }
 
+    ionViewDidLeave() {
+        this.onResumeSubscription.unsubscribe();
+    }
 }

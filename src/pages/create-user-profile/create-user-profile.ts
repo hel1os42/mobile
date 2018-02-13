@@ -17,6 +17,7 @@ import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'page-create-user-profile',
@@ -43,6 +44,8 @@ export class CreateUserProfilePage {
     _map: Map;
     options;
     baseData = new User();
+    onResumeSubscription: Subscription;
+    isConfirm = false;
 
     constructor(
         private platform: Platform,
@@ -58,6 +61,21 @@ export class CreateUserProfilePage {
         private androidPermissions: AndroidPermissions,
         private diagnostic: Diagnostic) {
 
+        this.onResumeSubscription = this.platform.resume.subscribe(() => {
+            if (this.isConfirm) {
+                this.diagnostic.isLocationAvailable().then(result => {
+                    if (!result) {
+                        this.isConfirm = false;
+                        this.presentConfirm();
+                    }
+                    else {
+                        this.isConfirm = false;
+                        this.getCoords();
+                    }
+                });
+            }
+            else return;
+        });
 
         if (this.navParams.get('user')) {
             this.isEdit = true;
@@ -144,7 +162,7 @@ export class CreateUserProfilePage {
                 this.getCoords();
             }
             else {
-                this.diagnostic.isLocationEnabled().then(result => {
+                this.diagnostic.isLocationAvailable().then(result => {
                     if (!result) {
                         this.presentConfirm();
                     }
@@ -162,7 +180,6 @@ export class CreateUserProfilePage {
                         lng: resp.longitude
                     };
                     this.addMap();
-                    this._map.setView(this.coords, 15)
                 })
         }
     }
@@ -178,7 +195,7 @@ export class CreateUserProfilePage {
                 this.addMap();
                 setTimeout(() => {
                     this._map.setView(this.coords, 15);
-                }, 300);
+                }, 400);
                 // this._map.setView(this.coords, 15);
             })
             .catch((error) => {
@@ -190,7 +207,7 @@ export class CreateUserProfilePage {
     getCoords() {
         let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
         loadingLocation.present();
-        if (this.platform.is('cordova')) {
+        if (this.platform.is('android')) {
             this.diagnostic.getLocationMode()
                 .then(res => {
                     this.getNativeCoords(res === 'high_accuracy', loadingLocation);
@@ -357,35 +374,23 @@ export class CreateUserProfilePage {
                 {
                     text: 'Settings',
                     handler: () => {
+                        this.isConfirm = true;
                         if (this.platform.is('ios')) {
                             this.diagnostic.switchToSettings();
                         }
                         else {
                             this.diagnostic.switchToLocationSettings();
                         }
-                        this.diagnostic.registerLocationStateChangeHandler(success => {
-                            if (success !== 'location_off') {
-                                this.getCoords();
-                                this.isSelectVisible = true;
-                                success = false;
-                                return;
-                            }
-                            if (success === 'location_off') {
-                                // this.getLocation(true);
-                                // this.isSelectVisible = true;
-                                success = false;
-                                return;
-                            }
-                            success = false;
-                        });
-                        this.getLocation(true);
-                        this.isSelectVisible = true;
                     }
                 }
             ],
             enableBackdropDismiss: false
         });
         confirm.present();
+    }
+
+    ionViewDidLeave() {
+        this.onResumeSubscription.unsubscribe();
     }
 
 }
