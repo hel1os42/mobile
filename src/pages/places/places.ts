@@ -73,7 +73,7 @@ export class PlacesPage {
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
                 if (this.isConfirm) {
-                    this.diagnostic.isLocationEnabled().then(result => {
+                    this.diagnostic.isLocationAvailable().then(result => {
                         if (!result) {
                             this.isConfirm = false;
                             this.presentConfirm();
