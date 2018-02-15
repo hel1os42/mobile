@@ -473,6 +473,7 @@ export class CreateUserProfilePage {
         if (this.platform.is('cordova')) {
             this.onResumeSubscription.unsubscribe();
         }
+        this.isCrop = false;
     }
 
 }
