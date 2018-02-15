@@ -28,28 +28,28 @@
         <ion-item no-lines class="block-people">
             <div item-start>
                 <a (click)="addLogo()">
-                    <div 
-                        class="people" 
+                    <div
+                        class="people"
                         [ngStyle]="{'background-image': 'url(' + picture_url + '), url(assets/img/create_user_profile/people.svg)'}">
                     </div>
                 </a>
             </div>
             <div item-end class="item-content">
                 <form>
-                <ion-input 
-                    [(ngModel)]="baseData.name" 
-                    class="bg-gray margin-bottom-small" 
-                    type="text" 
-                    maxlength="30" 
+                <ion-input
+                    [(ngModel)]="baseData.name"
+                    class="bg-gray margin-bottom-small"
+                    type="text"
+                    maxlength="30"
                     placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_NAME' | translate }} ({{ 'UNIT.MIN_SYMBOLS' | translate }} 3)"
                     name="name1">
                 </ion-input>
                 <div class="input_relative">
-                    <ion-input 
-                        [(ngModel)]="baseData.email" 
-                        class="bg-gray margin-bottom-small field-email" 
-                        type="email" 
-                        maxlength="30" 
+                    <ion-input
+                        [(ngModel)]="baseData.email"
+                        class="bg-gray margin-bottom-small field-email"
+                        type="email"
+                        maxlength="30"
                         placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}"
                         name="email">
                     </ion-input>
@@ -64,15 +64,10 @@
         </ion-item>
     </div>
 
-    <div *ngIf="isCrop" margin-bottom>
+    <div *ngIf="isCrop" margin-bottom class="crop-block">
     <img-cropper #cropper [image]="dataImg" [settings]="cropperSettings" (onCrop)="handleCropping($event)"></img-cropper>
-    <br>
-    <button
-        *ngIf="canSaveImg"
-        ion-button
-        block
-        color="primary"
-        (click)="saveImage()">Save Image</button>
+        <a *ngIf="canSaveImg" (click)="saveImage()" class="btn_check save"><img src="assets/img/place/btn_feed.svg"></a>
+        <a *ngIf="canSaveImg" (click)="saveImage()" class="btn_check cancel"><img src="assets/img/adv-user-offers/delete.svg"></a>
     </div>
 
     <div class="block-lines">
@@ -155,10 +150,10 @@
     <div *ngIf="isSelectVisible">
         <div class="block-lines" disabled>
             <ion-item detail-push class="bg-gray margin-bottom-small">
-                <ion-select 
-                    disabled 
-                    [(ngModel)]="gender" 
-                    placeholder="{{ 'PAGE_CREATE-USER-PROFILE.GENDER' | translate }}" 
+                <ion-select
+                    disabled
+                    [(ngModel)]="gender"
+                    placeholder="{{ 'PAGE_CREATE-USER-PROFILE.GENDER' | translate }}"
                     class="gender_select"
                     interface="action-sheet">
                     <ion-option value="f">{{ 'PAGE_CREATE-USER-PROFILE.FEMALE' | translate }}</ion-option>

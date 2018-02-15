@@ -83,7 +83,8 @@ export class CreateUserProfilePage {
         this.cropperSettings.croppedHeight = 192;
         // this.cropperSettings.canvasWidth = 400;
         this.cropperSettings.canvasWidth = this.platform.width();
-        this.cropperSettings.canvasHeight = 300;
+        this.cropperSettings.canvasHeight = this.platform.height();
+        this.cropperSettings.cropperClass = "cropper-style";
         // this.cropperSettings.preserveSize = true;
         this.dataImg = {};
 
@@ -311,18 +312,18 @@ export class CreateUserProfilePage {
     }
 
     addLogo() {
-        this.canSaveImg = false; 
-        let image = new Image();  
+        this.canSaveImg = false;
+        let image = new Image();
         let options = { maximumImagesCount: 1, width: 600, height: 600 };
         this.imagePicker.getPictures(options)
             .then(results => {
                 if (results[0] && results[0] != 'O') {
-                    // this.picture_url = results[0]; 
-                    image.src = results[0]; 
-                    this.isCrop = true;  
-                    setTimeout(() => { 
+                    // this.picture_url = results[0];
+                    image.src = results[0];
+                    this.isCrop = true;
+                    setTimeout(() => {
                         this.cropper.setImage(image)
-                    this.changeDetectorRef.detectChanges();  
+                    this.changeDetectorRef.detectChanges();
                 }, 500);
                 }
             })

@@ -114,6 +114,7 @@
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign images" />
     </plugin>
     <plugin name="cordova.plugins.diagnostic" spec="3.9.2" />
+    <plugin name="ionic-plugin-keyboard" spec="2.2.1" />
     <engine name="ios" spec="4.5.3" />
     <engine name="android" spec="6.3.0" />
 </widget>
