@@ -22,7 +22,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { AboutUtils } from '../../utils/about.utils';
 import { AddressUtils } from '../../utils/address.utils';
-import { MapUtils } from '../../utils/map';
+import { MapUtils } from '../../utils/map.utils';
 import { StringValidator } from '../../validators/string.validator';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfileCategoryPopover } from './create-advUser-profile.category.popover';

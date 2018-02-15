@@ -14,7 +14,7 @@ import { ToastService } from '../../providers/toast.service';
 import { TabsPage } from '../tabs/tabs';
 import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
-import { MapUtils } from '../../utils/map';
+import { MapUtils } from '../../utils/map.utils';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Subscription } from 'rxjs';

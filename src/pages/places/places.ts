@@ -15,7 +15,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
-import { DistanceUtils } from '../../utils/distanse';
+import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { Subscription } from 'rxjs/Subscription';
