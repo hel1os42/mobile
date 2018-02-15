@@ -52,6 +52,7 @@ export class CreateUserProfilePage {
     cropperSettings: CropperSettings;
     canSaveImg = false;
     isCrop = false;
+    backAction;
 
     @ViewChild('cropper', undefined)
     cropper: ImageCropperComponent;
@@ -72,21 +73,6 @@ export class CreateUserProfilePage {
         private androidPermissions: AndroidPermissions,
         private diagnostic: Diagnostic,
         private changeDetectorRef: ChangeDetectorRef) {
-
-        this.cropperSettings = new CropperSettings();
-        this.cropperSettings.noFileInput = true;
-        this.cropperSettings.cropOnResize = true;
-        this.cropperSettings.fileType = 'image/jpeg';
-        this.cropperSettings.width = 192;
-        this.cropperSettings.height = 192;
-        this.cropperSettings.croppedWidth = 192;
-        this.cropperSettings.croppedHeight = 192;
-        // this.cropperSettings.canvasWidth = 400;
-        this.cropperSettings.canvasWidth = this.platform.width();
-        this.cropperSettings.canvasHeight = this.platform.height();
-        this.cropperSettings.cropperClass = "cropper-style";
-        // this.cropperSettings.preserveSize = true;
-        this.dataImg = {};
 
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -129,6 +115,23 @@ export class CreateUserProfilePage {
                 });
             this.getLocationStatus();
         }
+        
+        this.cropperSettings = new CropperSettings();
+        this.cropperSettings.noFileInput = true;
+        this.cropperSettings.cropOnResize = true;
+        this.cropperSettings.fileType = 'image/jpeg';
+        this.cropperSettings.width = 192;
+        this.cropperSettings.height = 192;
+        this.cropperSettings.croppedWidth = 192;
+        this.cropperSettings.croppedHeight = 192;
+        // this.cropperSettings.canvasWidth = 400;
+        this.cropperSettings.canvasWidth = this.platform.width();
+        this.cropperSettings.canvasHeight = this.isEdit 
+        ? this.platform.height() - 50 
+        : this.platform.height();
+        this.cropperSettings.cropperClass = "cropper-style";
+        // this.cropperSettings.preserveSize = true;
+        this.dataImg = {};
     }
 
     getLocationStatus() {
@@ -321,6 +324,12 @@ export class CreateUserProfilePage {
                     // this.picture_url = results[0];
                     image.src = results[0];
                     this.isCrop = true;
+                    this. backAction = this.platform.registerBackButtonAction(() => {
+                        if (this.isCrop) {
+                            this.isCrop = false;
+                            this.backAction();
+                        }
+                    }, 1);
                     setTimeout(() => {
                         this.cropper.setImage(image)
                     this.changeDetectorRef.detectChanges();
@@ -337,6 +346,12 @@ export class CreateUserProfilePage {
         this.changedPicture = true;
         this.picture_url = this.dataImg.image;
         this.isCrop = false;
+        this.backAction();
+    }
+
+    cancel() {
+        this.isCrop = false;
+        this.backAction();
     }
 
     handleCropping(bounds: Bounds) {

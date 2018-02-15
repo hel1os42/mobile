@@ -64,10 +64,10 @@
         </ion-item>
     </div>
 
-    <div *ngIf="isCrop" margin-bottom class="crop-block">
+    <div *ngIf="isCrop"  [ngStyle]="{ 'height': isEdit ? 'calc(100% - 50px)' : '100%' }" margin-bottom class="crop-block">
     <img-cropper #cropper [image]="dataImg" [settings]="cropperSettings" (onCrop)="handleCropping($event)"></img-cropper>
         <a *ngIf="canSaveImg" (click)="saveImage()" class="btn_check save"><img src="assets/img/place/btn_feed.svg"></a>
-        <a *ngIf="canSaveImg" (click)="saveImage()" class="btn_check cancel"><img src="assets/img/adv-user-offers/delete.svg"></a>
+        <a *ngIf="canSaveImg" (click)="cancel()" class="btn_check cancel"><img src="assets/img/adv-user-offers/delete.svg"></a>
     </div>
 
     <div class="block-lines">
@@ -91,7 +91,7 @@
         </ion-item>
     </div>
 
-    <div class="block-lines">
+    <!-- <div class="block-lines">
         <div class="font-75">{{ 'PAGE_CREATE-USER-PROFILE.SOCIAL_ACCOUNTS' | translate }}</div>
     </div>
 
@@ -132,7 +132,7 @@
             </div>
         </ion-item>
 
-    </div>
+    </div> -->
 
     <div class="block-lines">
         <a (click)="toggleSelect()">
