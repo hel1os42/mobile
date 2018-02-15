@@ -1,4 +1,5 @@
-<ion-header  [ngStyle]="{ 'display': isCrop ? 'none' : 'block' }">
+
+<ion-header [hidden]="isCrop">
     <ion-navbar>
         <ion-title>
             {{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate) }}
