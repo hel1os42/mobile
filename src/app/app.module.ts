@@ -88,6 +88,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { ImageCropperComponent, ImageCropperModule } from 'ng2-img-cropper';
+import { Keyboard } from '@ionic-native/keyboard';
  
 
 // The translate loader needs to know where to load i18n files
@@ -236,6 +237,7 @@ export function createTranslateLoader(http: HttpClient) {
         BarChartComponent
     ],
     providers: [
+        Keyboard,
         StatusBar,
         SplashScreen,
         ImagePicker,
