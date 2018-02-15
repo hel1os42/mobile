@@ -474,6 +474,7 @@ export class CreateUserProfilePage {
             this.onResumeSubscription.unsubscribe();
         }
         this.isCrop = false;
+        this.backAction();
     }
 
 }
