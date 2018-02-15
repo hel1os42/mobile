@@ -64,6 +64,17 @@
         </ion-item>
     </div>
 
+    <div *ngIf="isCrop" margin-bottom>
+    <img-cropper #cropper [image]="dataImg" [settings]="cropperSettings" (onCrop)="handleCropping($event)"></img-cropper>
+    <br>
+    <button
+        *ngIf="canSaveImg"
+        ion-button
+        block
+        color="primary"
+        (click)="saveImage()">Save Image</button>
+    </div>
+
     <div class="block-lines">
         <ion-item *ngIf="!visibleInfo" no-lines>
             <div item-start>
