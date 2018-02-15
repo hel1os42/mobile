@@ -221,6 +221,7 @@ export class CreateUserProfilePage {
                         lat: resp.latitude,
                         lng: resp.longitude
                     };
+                    this.changeDetectorRef.detectChanges();
                     this.addMap();
                 })
         }
@@ -236,8 +237,9 @@ export class CreateUserProfilePage {
                 loadingLocation.dismissAll();
                 this.addMap();
                 setTimeout(() => {
+                    this.changeDetectorRef.detectChanges();
                     this._map.setView(this.coords, 15);
-                }, 400);
+                }, 600);
                 // this._map.setView(this.coords, 15);
             })
             .catch((error) => {
