@@ -113,7 +113,12 @@ export class MyApp {
 
                 window.addEventListener('native.keyboardshow', (e) => {
                     console.log("native.keyboardshow");
-                    appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
+                    //console.log("appElHeight " + appElHeight);
+                    //console.log("native.keyboardHeight " + (<any>e).keyboardHeight);
+                    setTimeout(function() {
+                        appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
+                    }, 50)
+                    //console.log("position scroll: " + window.pageYOffset || document.documentElement.scrollTop);
                 });
 
                 window.addEventListener('native.keyboardhide', () => {
