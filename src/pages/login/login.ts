@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, NavController, Select } from 'ionic-angular';
+import { AlertController, NavController, Select, Content, Platform } from 'ionic-angular';
 import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
@@ -8,6 +8,8 @@ import { TemporaryPage } from '../temporary/temporary';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { SignUpPage } from '../signup/signup';
 import { LocationService } from '../../providers/location.service';
+import { Keyboard } from '@ionic-native/keyboard';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'page-login',
@@ -26,15 +28,27 @@ export class LoginPage {
     isVisibleLoginButton = false;
     phoneCodes = PHONE_CODES;
     numCode;
+    onKeyboardShowSubscription: Subscription;
+    // onKeyboardHideSubscription: Subscription;
 
     @ViewChild('codeSelect') codeSelect: Select;
+    @ViewChild(Content) content: Content;
 
     constructor(
+        private platform: Platform,
         private nav: NavController,
         private auth: AuthService,
         private appMode: AppModeService,
         private alert: AlertController,
-        private location: LocationService) {
+        private location: LocationService,
+        private keyboard: Keyboard) {
+
+        if (this.platform.is('android')) {
+            this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
+                .subscribe(() => {
+                    this.content.scrollToBottom();
+                })
+        }
 
         this.envName = this.appMode.getEnvironmentMode();
         this.numCode = this.getNumCode();
@@ -190,5 +204,11 @@ export class LoginPage {
                 }, 5);
             }
         );
+    }
+
+    ionViewDidLeave() {
+        if (this.platform.is('android')) {
+            this.onKeyboardShowSubscription.unsubscribe();
+        }
     }
 }

@@ -2,12 +2,14 @@ import { AppModeService } from '../../providers/appMode.service';
 import { Register } from '../../models/register';
 import { StringValidator } from '../../validators/string.validator';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Select } from 'ionic-angular';
+import { NavController, Select, Platform, Content } from 'ionic-angular';
 import { AuthService } from '../../providers/auth.service';
 import { SignUpCodePage } from '../signup-code/signup-code';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { StorageService } from '../../providers/storage.service';
 import { LocationService } from '../../providers/location.service';
+import { Subscription } from 'rxjs';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
     selector: 'page-signup',
@@ -23,15 +25,27 @@ export class SignUpPage {
     phoneNumber: string;
     phoneCodes = PHONE_CODES;
     envName: string;
+    onKeyboardShowSubscription: Subscription;
+    // onKeyboardHideSubscription: Subscript
 
     @ViewChild('codeSelect') codeSelect: Select;
+    @ViewChild(Content) content: Content;
 
     constructor(
+        private platform: Platform,
         private nav: NavController,
         private auth: AuthService,
         private appMode: AppModeService,
         private storage: StorageService,
-        private location: LocationService) {
+        private location: LocationService,
+        private keyboard: Keyboard) {
+
+        if (this.platform.is('android')) {
+            this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
+                .subscribe((resp) => {
+                    this.content.scrollTo(1, resp.keyboardHeight - 30);
+                })
+        }
 
         this.envName = this.appMode.getEnvironmentMode();
         this.formData.code = this.storage.get('invCode') ? this.storage.get('invCode') : '';
@@ -105,6 +119,12 @@ export class SignUpPage {
                 }, 5);
             }
         );
+    }
+
+    ionViewDidLeave() {
+        if (this.platform.is('android')) {
+            this.onKeyboardShowSubscription.unsubscribe();
+        }
     }
 
 }
