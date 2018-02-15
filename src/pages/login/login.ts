@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, NavController, Select, Content, Platform } from 'ionic-angular';
+import { AlertController, NavController, Select, Content, Platform, Navbar } from 'ionic-angular';
 import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
@@ -30,9 +30,11 @@ export class LoginPage {
     numCode;
     onKeyboardShowSubscription: Subscription;
     // onKeyboardHideSubscription: Subscription;
+    backAction;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
+    @ViewChild('navbar') navBar: Navbar;
 
     constructor(
         private platform: Platform,
@@ -49,9 +51,18 @@ export class LoginPage {
                     this.content.scrollToBottom();
                 })
         }
-
         this.envName = this.appMode.getEnvironmentMode();
         this.numCode = this.getNumCode();
+    }
+
+    ionViewDidEnter() {
+        this.navBar.backButtonClick = (ev: UIEvent) => {
+            if (this.isVisibleLoginButton) {
+                this.isVisibleLoginButton = false;
+                this.backAction();
+            }
+            else this.nav.pop();
+        }
     }
 
     updateList(ev) {
@@ -92,7 +103,12 @@ export class LoginPage {
                     this.isVisibleLoginButton = true;
                 });
         }
-
+        this.backAction = this.platform.registerBackButtonAction(() => {
+            if (this.isVisibleLoginButton) {
+                this.isVisibleLoginButton = false;
+                this.backAction();
+            }
+        }, 1);
     }
 
     login() {
@@ -198,7 +214,7 @@ export class LoginPage {
                     const options = document.getElementsByClassName('alert-tappable alert-radio');
                     for (let i = 0; i < options.length; i++) {
                         if (options[i].attributes[3].nodeValue === 'true') {
-                            options[i].scrollIntoView({ block: 'center', behavior: 'smooth' })
+                            options[i].scrollIntoView({ block: 'center', behavior: 'instant' })
                         }
                     }
                 }, 5);
@@ -210,5 +226,6 @@ export class LoginPage {
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription.unsubscribe();
         }
+        this.backAction();
     }
 }
