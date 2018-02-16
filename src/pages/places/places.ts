@@ -15,7 +15,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
-import { DistanceUtils } from '../../utils/distanse';
+import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { Subscription } from 'rxjs/Subscription';
@@ -70,21 +70,23 @@ export class PlacesPage {
 
         this.isForkMode = this.appMode.getForkMode();
         this.segment = "alloffers";
-        this.onResumeSubscription = this.platform.resume.subscribe(() => {
-            if (this.isConfirm) {
-                this.diagnostic.isLocationEnabled().then(result => {
-                    if (!result) {
-                        this.isConfirm = false;
-                        this.presentConfirm();
-                    }
-                    else {
-                        this.isConfirm = false;
-                        this.getCoords();
-                    }
-                });
-            }
-            else return;
-        });
+        if (this.platform.is('cordova')) {
+            this.onResumeSubscription = this.platform.resume.subscribe(() => {
+                if (this.isConfirm) {
+                    this.diagnostic.isLocationAvailable().then(result => {
+                        if (!result) {
+                            this.isConfirm = false;
+                            this.presentConfirm();
+                        }
+                        else {
+                            this.isConfirm = false;
+                            this.getCoords();
+                        }
+                    });
+                }
+                else return;
+            });
+        }
 
         this.offers.getCategories(false)
             .subscribe(categories => {
@@ -93,37 +95,37 @@ export class PlacesPage {
                 })
                 this.selectedCategory = this.categories[0];
 
-                if (this.platform.is('android')) {
-                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                        result => {
-                            if (result.hasPermission === false) {
-                                this.requestPerm();
-                            }
-                            else {
-                                this.getLocation(false);
-                            }
-                            console.log(result)
-                        },
-                        err => {
-                            this.requestPerm();
-                            console.log(err)
-                        }
-                    )
-                }
-                else if (this.platform.is('ios')) {
-                    this.diagnostic.getLocationAuthorizationStatus()
-                        .then(resp => {
-                            if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
-                                this.diagnostic.requestLocationAuthorization()
-                                .then(res => {
+                    if (this.platform.is('android') && this.platform.is('cordova')) {
+                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                            result => {
+                                if (result.hasPermission === false) {
+                                    this.requestPerm();
+                                }
+                                else {
                                     this.getLocation(false);
-                                })
+                                }
+                                console.log(result)
+                            },
+                            err => {
+                                this.requestPerm();
+                                console.log(err)
                             }
-                            else {
-                                this.getLocation(false);
-                            }
-                        })
-                }
+                        )
+                    }
+                    else if (this.platform.is('ios') && this.platform.is('cordova')) {
+                        this.diagnostic.getLocationAuthorizationStatus()
+                            .then(resp => {
+                                if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
+                                    this.diagnostic.requestLocationAuthorization()
+                                        .then(res => {
+                                            this.getLocation(false);
+                                        })
+                                }
+                                else {
+                                    this.getLocation(false);
+                                }
+                            })
+                    }
                 else {
                     this.getLocation(false);
                 }
@@ -509,6 +511,8 @@ export class PlacesPage {
     }
 
     ionViewDidLeave() {
-        this.onResumeSubscription.unsubscribe();
+        if (this.platform.is('cordova')) {
+            this.onResumeSubscription.unsubscribe();
+        }
     }
 }

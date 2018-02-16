@@ -5,7 +5,7 @@ import { Map } from 'leaflet';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { GeocodeService } from '../../providers/geocode.service';
-import { MapUtils } from '../../utils/map';
+import { MapUtils } from '../../utils/map.utils';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
 
 

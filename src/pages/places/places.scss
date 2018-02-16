@@ -60,9 +60,6 @@ page-places {
         top: 7%;
         width: 5.3vw;
     }
-    .text-overflow-35 {
-        width: 93%;
-    }
     .segment-ios {
         width: 93%;
         margin-left: 4%;
@@ -105,6 +102,13 @@ page-places {
         background-repeat: no-repeat;
         background-position: 50% 50%;
         background-color: white;
+    }
+
+    .overflow-4line-description{
+        max-height: 16.5vw;
+        height: auto;
+        display: block;
+        overflow: hidden;
     }
 
 }

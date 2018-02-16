@@ -1,4 +1,4 @@
-import { DistanceUtils } from '../../utils/distanse';
+import { DistanceUtils } from '../../utils/distanse.utils';
 import { Coords } from '../../models/coords';
 import { Component } from '@angular/core';
 import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';

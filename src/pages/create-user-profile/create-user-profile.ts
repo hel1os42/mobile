@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { AlertController, LoadingController, NavController, Platform } from 'ionic-angular';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
@@ -14,10 +14,12 @@ import { ToastService } from '../../providers/toast.service';
 import { TabsPage } from '../tabs/tabs';
 import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
-import { MapUtils } from '../../utils/map';
+import { MapUtils } from '../../utils/map.utils';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Subscription } from 'rxjs';
+import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
+
 
 @Component({
     selector: 'page-create-user-profile',
@@ -46,6 +48,16 @@ export class CreateUserProfilePage {
     baseData = new User();
     onResumeSubscription: Subscription;
     isConfirm = false;
+    dataImg: any;
+    cropperSettings: CropperSettings;
+    canSaveImg = false;
+    isCrop = false;
+    backAction;
+
+    @ViewChild('cropper', undefined)
+    cropper: ImageCropperComponent;
+    croppedHeight;
+    croppedWidth;
 
     constructor(
         private platform: Platform,
@@ -59,23 +71,26 @@ export class CreateUserProfilePage {
         private loading: LoadingController,
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
-        private diagnostic: Diagnostic) {
+        private diagnostic: Diagnostic,
+        private changeDetectorRef: ChangeDetectorRef) {
 
-        this.onResumeSubscription = this.platform.resume.subscribe(() => {
-            if (this.isConfirm) {
-                this.diagnostic.isLocationAvailable().then(result => {
-                    if (!result) {
-                        this.isConfirm = false;
-                        this.presentConfirm();
-                    }
-                    else {
-                        this.isConfirm = false;
-                        this.getCoords();
-                    }
-                });
-            }
-            else return;
-        });
+        if (this.platform.is('cordova')) {
+            this.onResumeSubscription = this.platform.resume.subscribe(() => {
+                if (this.isConfirm) {
+                    this.diagnostic.isLocationAvailable().then(result => {
+                        if (!result) {
+                            this.isConfirm = false;
+                            this.presentConfirm();
+                        }
+                        else {
+                            this.isConfirm = false;
+                            this.getCoords();
+                        }
+                    });
+                }
+                else return;
+            });
+        }
 
         if (this.navParams.get('user')) {
             this.isEdit = true;
@@ -100,10 +115,28 @@ export class CreateUserProfilePage {
                 });
             this.getLocationStatus();
         }
+
+        this.cropperSettings = new CropperSettings();
+        this.cropperSettings.noFileInput = true;
+        this.cropperSettings.cropOnResize = true;
+        this.cropperSettings.fileType = 'image/jpeg';
+        this.cropperSettings.width = 192;
+        this.cropperSettings.height = 192;
+        this.cropperSettings.croppedWidth = 192;
+        this.cropperSettings.croppedHeight = 192;
+        // this.cropperSettings.canvasWidth = 400;
+        this.cropperSettings.canvasWidth = this.platform.width();
+        this.cropperSettings.canvasHeight = this.isEdit
+        ? this.platform.height() - 50
+        : this.platform.height();
+        //this.cropperSettings.cropperClass = "cropper-style";
+        //this.cropperSettings.croppingClass = "cropper-style2";
+        // this.cropperSettings.preserveSize = true;
+        this.dataImg = {};
     }
 
     getLocationStatus() {
-        if (this.platform.is('android')) {
+        if (this.platform.is('android') && this.platform.is('cordova')) {
             this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
                 result => {
                     if (result.hasPermission === false) {
@@ -120,7 +153,7 @@ export class CreateUserProfilePage {
                 }
             )
         }
-        else if (this.platform.is('ios')) {
+        else if (this.platform.is('ios') && this.platform.is('cordova')) {
             this.diagnostic.getLocationAuthorizationStatus()
                 .then(resp => {
                     if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
@@ -193,6 +226,7 @@ export class CreateUserProfilePage {
                         lat: resp.latitude,
                         lng: resp.longitude
                     };
+                    this.changeDetectorRef.detectChanges();
                     this.addMap();
                 })
         }
@@ -208,8 +242,9 @@ export class CreateUserProfilePage {
                 loadingLocation.dismissAll();
                 this.addMap();
                 setTimeout(() => {
+                    this.changeDetectorRef.detectChanges();
                     this._map.setView(this.coords, 15);
-                }, 400);
+                }, 600);
                 // this._map.setView(this.coords, 15);
             })
             .catch((error) => {
@@ -281,17 +316,49 @@ export class CreateUserProfilePage {
     }
 
     addLogo() {
-        let options = { maximumImagesCount: 1, width: 600, height: 600, quality: 75 };
+        this.canSaveImg = false;
+        let image = new Image();
+        let options = { maximumImagesCount: 1, width: 600, height: 600 };
         this.imagePicker.getPictures(options)
             .then(results => {
                 if (results[0] && results[0] != 'O') {
-                    this.picture_url = results[0];
-                    this.changedPicture = true;
+                    // this.picture_url = results[0];
+                    image.src = results[0];
+                    this.isCrop = true;
+                    this. backAction = this.platform.registerBackButtonAction(() => {
+                        if (this.isCrop) {
+                            this.isCrop = false;
+                            this.backAction();
+                        }
+                    }, 1);
+                    setTimeout(() => {
+                        this.cropper.setImage(image)
+                    this.changeDetectorRef.detectChanges();
+                }, 500);
                 }
             })
             .catch(err => {
                 this.toast.show(JSON.stringify(err));
+                console.log(err);
             });
+    }
+
+    saveImage() {
+        this.changedPicture = true;
+        this.picture_url = this.dataImg.image;
+        this.isCrop = false;
+        this.backAction();
+    }
+
+    cancel() {
+        this.isCrop = false;
+        this.backAction();
+    }
+
+    handleCropping(bounds: Bounds) {
+        this.croppedHeight = bounds.bottom - bounds.top;
+        this.croppedWidth = bounds.right - bounds.left;
+        this.canSaveImg = true;
     }
 
     validateName(name) {
@@ -404,7 +471,11 @@ export class CreateUserProfilePage {
     }
 
     ionViewDidLeave() {
-        this.onResumeSubscription.unsubscribe();
+        if (this.platform.is('cordova')) {
+            this.onResumeSubscription.unsubscribe();
+        }
+        this.isCrop = false;
+        this.backAction();
     }
 
 }

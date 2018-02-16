@@ -87,6 +87,9 @@ import { TransactionService } from '../providers/transaction.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { ImageCropperComponent, ImageCropperModule } from 'ng2-img-cropper';
+import { Keyboard } from '@ionic-native/keyboard';
+ 
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -150,7 +153,7 @@ export function createTranslateLoader(http: HttpClient) {
         StatisticPage,
         Statistic1Page,
         LineChartComponent,
-        BarChartComponent,
+        BarChartComponent
     ],
     imports: [
         BrowserModule,
@@ -172,7 +175,8 @@ export function createTranslateLoader(http: HttpClient) {
             provide: TranslateLoader,
             useFactory: (createTranslateLoader),
             deps: [HttpClient] },
-        })
+        }),
+        ImageCropperModule,
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -233,6 +237,7 @@ export function createTranslateLoader(http: HttpClient) {
         BarChartComponent
     ],
     providers: [
+        Keyboard,
         StatusBar,
         SplashScreen,
         ImagePicker,

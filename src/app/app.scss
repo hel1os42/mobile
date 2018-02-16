@@ -174,7 +174,7 @@ ion-header ion-icon.back-button-icon.icon {
 .font-20, button.font-20{
     font-size: 20px;
     font-size: 5vw;
-    line-height: 6.3vw;
+    line-height: 7vw;
 }
 
 .platform-ios .font-20, button.font-20{
@@ -1747,4 +1747,47 @@ ion-app.disable-scroll {
 
 .alert-ios .alert-button:last-child {
     font-weight: normal;
+}
+
+.crop-block{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    z-index: 1111111;
+    display: flex;
+}
+
+.crop-block img-cropper{
+    display: block;
+    margin: auto;
+}
+
+.crop-block .button{
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.crop-block .btn_check{
+    position: absolute;
+    bottom: 3vw;
+    background: linear-gradient(0deg, #FF5A00 0%, #FF8A23 100%);
+    border-radius: 100vw;
+    height: 10.4vw;
+    width: 10.4vw;
+}
+
+.crop-block .btn_check.save{
+    right: 3vw;
+    padding: 3.1vw 2.7vw 0 2.7vw;
+}
+
+.crop-block .btn_check.cancel{
+    left: 3vw;
+    padding: 3vw;
 }
