@@ -115,7 +115,7 @@ export class CreateUserProfilePage {
                 });
             this.getLocationStatus();
         }
-        
+
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
         this.cropperSettings.cropOnResize = true;
@@ -126,10 +126,11 @@ export class CreateUserProfilePage {
         this.cropperSettings.croppedHeight = 192;
         // this.cropperSettings.canvasWidth = 400;
         this.cropperSettings.canvasWidth = this.platform.width();
-        this.cropperSettings.canvasHeight = this.isEdit 
-        ? this.platform.height() - 50 
+        this.cropperSettings.canvasHeight = this.isEdit
+        ? this.platform.height() - 50
         : this.platform.height();
-        this.cropperSettings.cropperClass = "cropper-style";
+        //this.cropperSettings.cropperClass = "cropper-style";
+        //this.cropperSettings.croppingClass = "cropper-style2";
         // this.cropperSettings.preserveSize = true;
         this.dataImg = {};
     }
