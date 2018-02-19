@@ -512,7 +512,7 @@ export class CreateAdvUserProfilePage {
                     message: adv['ARE_YOU_SURE'],
                     buttons: [{
                         text: unit['CANCEL'],
-                        role: unit['CANCEL'],
+                        role: 'cancel',
                         handler: () => {
                             return;
                         }

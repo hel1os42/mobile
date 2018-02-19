@@ -7,6 +7,7 @@ import { Speciality } from '../../models/speciality';
 import { OfferService } from '../../providers/offer.service';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
+import { ProfileService } from '../../providers/profile.service';
 
 @Component({
     selector: 'page-place',
@@ -20,11 +21,13 @@ export class PlacePage {
     offersList: Offer[];
     distanceString: string;
     features: Speciality[];
+    branchDomain = 'https://nau.app.link';
 
     constructor(
         private nav: NavController,
         private offers: OfferService,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private profile: ProfileService) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -53,7 +56,7 @@ export class PlacePage {
     //     this.appMode.setHomeMode(false);
     // }
 
-    getStars(star: number){
+    getStars(star: number) {
         let showStars: boolean[] = [];
         for (var i = 0; i < 5; i++) {
             showStars.push(star > i);
@@ -63,6 +66,43 @@ export class PlacePage {
 
     openFeedback(testimonial) {
         this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
+    }
+
+    share() {
+        const Branch = window['Branch'];
+        let link: string;
+        this.profile.get(false)
+            .subscribe(profile => {
+                link = `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&id=${this.company.id}`;
+                let properties = {
+                    canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&id=${this.company.id}`,
+                    canonicalUrl: link,
+                    title: this.company.name,
+                    contentDescription: this.company.description,
+                    contentImageUrl: this.company.cover_url,
+                    // price: 12.12,
+                    // currency: 'GBD',
+                    contentIndexingMode: 'private',
+                    contentMetadata: {
+                        page: 'place',
+                        invite_code: profile.invite_code,
+                        id: this.company.id
+                    }
+                };
+                var branchUniversalObj = null;
+                Branch.createBranchUniversalObject(properties)
+                    .then(res => {
+                        branchUniversalObj = res;
+                        let analytics = {};
+                        let message = this.company.name + this.company.description
+                        branchUniversalObj.showShareSheet(analytics, properties, message)
+                            .then(resp => console.log(resp))
+                        alert('Response: ' + JSON.stringify(res))
+                    }).catch(function (err) {
+                        alert('Error: ' + JSON.stringify(err))
+                    })
+
+            })
     }
 
     openOffer(offer, company) {
