@@ -1791,3 +1791,17 @@ ion-app.disable-scroll {
     left: 3vw;
     padding: 3vw;
 }
+
+.disconnected{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: red;
+    color: #fff;
+    height: 50px;
+    font-size: 4vw;
+    text-align: center;
+    z-index: 11111111111;
+    line-height: 50px;
+}
