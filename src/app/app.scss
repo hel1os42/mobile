@@ -1792,9 +1792,9 @@ ion-app.disable-scroll {
     padding: 3vw;
 }
 
-.disconnected{
+.disconnected .toast-container {
     width: 100%;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     background: red;
@@ -1802,6 +1802,6 @@ ion-app.disable-scroll {
     height: 50px;
     font-size: 4vw;
     text-align: center;
-    z-index: 11111111111;
+    z-index: 111;
     line-height: 50px;
 }
