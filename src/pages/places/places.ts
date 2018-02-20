@@ -87,7 +87,7 @@ export class PlacesPage {
                         }
                     });
                 }
-                else this.getCoords();
+                else this.getCoords(true);
             });
         }
 
@@ -107,11 +107,9 @@ export class PlacesPage {
                             else {
                                 this.getLocation(false);
                             }
-                            console.log(result)
                         },
                         err => {
                             this.requestPerm();
-                            console.log(err)
                         }
                     )
                 }
@@ -135,10 +133,10 @@ export class PlacesPage {
             })
     }
 
-    getLocation(isDenied: boolean) {
+    getLocation(isDenied: boolean, isRefresh?: boolean) {
         if (!isDenied) {
             if (!this.platform.is('cordova')) {
-                this.getCoords();
+                this.getCoords(isRefresh);
             }
             else {
                 this.diagnostic.isLocationAvailable().then(result => {
@@ -146,7 +144,7 @@ export class PlacesPage {
                         this.presentConfirm();
                     }
                     else {
-                        this.getCoords();
+                        this.getCoords(isRefresh);
                     }
                 });
             }
@@ -479,7 +477,7 @@ export class PlacesPage {
     }
 
     doRefresh(refresher) {
-        this.getLocation(false);
+        this.getLocation(false, true);
         setTimeout(() => {
             refresher.complete();
         }, 1500);
