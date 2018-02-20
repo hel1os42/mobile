@@ -207,11 +207,6 @@ export class LoginPage {
         }
     }
 
-    dismissSelect(event) {
-        this.numCode = event;
-        this.codeSelect.close();
-    }
-
     onSelectClicked(selectButton: Select) {
         (<any>selectButton._overlay).didEnter.subscribe(
             () => {

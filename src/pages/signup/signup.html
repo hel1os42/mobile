@@ -40,12 +40,12 @@
                     [ngModelOptions]="{standalone: true}"
                     [selectOptions]="{cssClass: 'alert-full-no-button'}"
                     interface="alert"
+                    okText="Ok"
                     [selectedText]="numCode?.dial_code"
                     (click)="onSelectClicked(codeSelect)">
                     <ion-option
                         *ngFor=" let phoneCode of phoneCodes "
-                        [value]="phoneCode"
-                        (ionSelect)="dismissSelect($event)">
+                        [value]="phoneCode">
                         {{ phoneCode.dial_code }} {{ phoneCode.name }}
                     </ion-option>
                 </ion-select>
