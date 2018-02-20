@@ -1,7 +1,9 @@
 <div class="header-ios"></div>
 
 <ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
-
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
+      </ion-refresher>
     <ion-grid text-center class="grid-tabs-splash">
         <ion-row align-items-end>
             <a ion-col

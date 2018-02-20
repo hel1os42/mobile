@@ -500,7 +500,7 @@ export class CreateAdvUserProfilePage {
     }
 
     presentConfirm(pictureUpload: Promise<any>, coverUpload: Promise<any>) {
-        let adv = 'PAGE_CREATE-ADVUSER-PROFILE.';
+        // let adv = 'PAGE_CREATE-ADVUSER-PROFILE.';
         this.translate.get(
             ['PAGE_CREATE-ADVUSER-PROFILE', 'UNIT'])
             .subscribe(resp => {
@@ -512,7 +512,7 @@ export class CreateAdvUserProfilePage {
                     message: adv['ARE_YOU_SURE'],
                     buttons: [{
                         text: unit['CANCEL'],
-                        role: unit['CANCEL'],
+                        role: 'cancel',
                         handler: () => {
                             return;
                         }
