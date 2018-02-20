@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from "@angular/core";
 import { Network } from "@ionic-native/network";
 import { Subscription } from "rxjs";
 import { ToastService } from "./toast.service";
+import { Platform } from "ionic-angular";
 
 @Injectable()
 export class NetworkService {
@@ -9,13 +10,15 @@ export class NetworkService {
     isConnected: boolean;
     onDisconnectSubscription: Subscription;
     onConnectSubscription: Subscription;
+    onResumeSubscription: Subscription;
     onDisconnect = new EventEmitter();
     onConnect = new EventEmitter();
 
     constructor(
         private network: Network,
-        private toast: ToastService) {
-        
+        private toast: ToastService,
+        private platform: Platform) {
+
         if (this.network.type !== 'none' && this.network.type !== 'unknown') {
             this.isConnected = true;
         }
@@ -37,6 +40,17 @@ export class NetworkService {
                 this.toast.dismiss();
                 this.onConnect.emit(this.isConnected);
             });
+
+        this.onResumeSubscription = this.platform.resume.subscribe(() => {
+            if (this.network.type !== 'none' && this.network.type !== 'unknown') {
+                this.isConnected = true;
+                this.onConnect.emit(this.isConnected);
+            }
+            else {
+                this.isConnected = false;
+                this.onDisconnect.emit(this.isConnected);
+            }
+        });
     }
 
     getStatus() {
