@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { AppModeService } from './appMode.service';
 import { ToastService } from './toast.service';
 import { TokenService } from './token.service';
+import { NetworkService } from './network.service';
 
 interface ApiRequestOptions {
     showLoading?: boolean;
@@ -44,7 +45,8 @@ export class ApiService {
         private loading: LoadingController,
         private token: TokenService,
         private fileTransfer: FileTransfer,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private network: NetworkService) {
 
         if (this.appMode.getEnvironmentMode()) {
             this.environmentMode = this.appMode.getEnvironmentMode();
@@ -104,50 +106,51 @@ export class ApiService {
                     loading.dismiss();
             })
             .subscribe(
-            resp => { },
-            errResp => {
-                let messages = [];
-                if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
-                    let err = errResp.json();
-                    messages.push(err.message);
-                    this.toast.show(messages.join('\n'));
-                    setTimeout(() => this.token.remove(), 3000);
-                    return;
-                }
-                if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
-                    messages.push('Too Many Attempts.')
-                }
-                else if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound) {
-                    return;
-                }
-                else {
-                    let err = errResp.json();
-
-                    if (err.error && err.message) {
-                        messages.push(err.message)
+                resp => { },
+                errResp => {
+                    let messages = [];
+                    if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
+                        let err = errResp.json();
+                        messages.push(err.message);
+                        this.toast.show(messages.join('\n'));
+                        setTimeout(() => this.token.remove(), 3000);
+                        return;
+                    }
+                    if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
+                        messages.push('Too Many Attempts.')
+                    }
+                    else if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound) {
+                        return;
                     }
                     else {
-                        if (errResp.status == 0) {
-                            messages.push('Internet disconnected.');
+                        let err = errResp.json();
+
+                        if (err.error && err.message) {
+                            messages.push(err.message)
                         }
                         else {
-                            for (let key in err) {
-                                let el = err[key];
-                                for (let i = 0; i < el.length; i++) {
-                                    let msg = el[i];
-                                    messages.push(msg);
+                            if (errResp.status == 0) {
+                                messages.push('Internet disconnected');
+                                this.network.setStatus(false);
+                            }
+                            else {
+                                for (let key in err) {
+                                    let el = err[key];
+                                    for (let i = 0; i < el.length; i++) {
+                                        let msg = el[i];
+                                        messages.push(msg);
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                if (messages.length == 0) {
-                    messages.push('Unexpected error occured');
-                }
+                    if (messages.length == 0) {
+                        messages.push('Unexpected error occured');
+                    }
 
-                this.toast.show(messages.join('\n'));
-            });
+                    this.toast.show(messages.join('\n'), errResp.status == 0);
+                });
 
         // return sharableObs.map(resp => resp.json());
         return sharableObs.map(resp => {
@@ -211,7 +214,7 @@ export class ApiService {
 
     uploadImage(filePath, path, isShowLoading: boolean) {
         let token = this.token.get();
-
+        
         let options: FileUploadOptions = {
             fileKey: 'picture',
             headers: {
