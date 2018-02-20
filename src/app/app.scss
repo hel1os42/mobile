@@ -1132,8 +1132,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .num_right {
     position: absolute;
-    right: 3%;
-    bottom: 7%;
+    right: 2vw;
+    bottom: 2vw;
 }
 
 .flex{
@@ -1152,10 +1152,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     padding: 0.8vw;
     font-size: 2.3vw;
     color: #3E4B5D;
+    margin-bottom: 2vw;
     border-radius: 1vw;
     margin-right: 1.5vw;
-    margin-top: 2vw;
-    margin-bottom: 0.3vw;
     display: inline-block;
 }
 
@@ -1236,6 +1235,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .text-overflow-3-font-40{
     max-height: 44.5vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
+}
+
+.text-overflow-3-font-30{
+    max-height: 35vw;
     height: auto;
     display: block;
     overflow: hidden;
@@ -1730,6 +1736,13 @@ ion-app.disable-scroll {
     display: none;
 }
 
+.alert-full-no-button.alert-ios .alert-ios .alert-button-group{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
 .popover-content {
     left: unset !important;
     right: 5%;
@@ -1804,4 +1817,8 @@ ion-app.disable-scroll {
     text-align: center;
     z-index: 111;
     line-height: 51px;
+}
+
+.toolbar-ios ion-title {
+    padding: 0 40px 0 40px;
 }
