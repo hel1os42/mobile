@@ -54,7 +54,10 @@
         "ACCOMMODATION_LEISURE" : "Accommodation & Leisure",
         "OTHER_ONLINE" : "Other & Online",
         "SELECT_TYPE" : "Select Type",
-        "SELECT_FEATURES" : "Select Features"
+        "SELECT_FEATURES" : "Select Features",
+        "LOCATION_DETECTION" : "Location detection",
+        "LOCATION_DENIED" : "Location denied",
+        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. Set your coordinates in manual mode"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
