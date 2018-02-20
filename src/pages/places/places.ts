@@ -19,6 +19,8 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { Subscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
     selector: 'page-places',
@@ -66,6 +68,7 @@ export class PlacesPage {
         private profile: ProfileService,
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
+        private translate: TranslateService,
         private diagnostic: Diagnostic) {
 
         this.isForkMode = this.appMode.getForkMode();
@@ -483,18 +486,26 @@ export class PlacesPage {
     }
 
     presentAndroidConfirm() {
-        const alert = this.alert.create({
-            title: 'Location denied',
-            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
-            buttons: [{
-                text: 'Ok',
-                handler: () => {
-                    // console.log('Application exit prevented!');
-                    this.getLocation(true);
-                }
-            }]
-        });
-        alert.present();
+
+        this.translate.get(
+            ['PAGE_PLACES', 'UNIT'])
+            .subscribe(resp => {
+                let places = resp['PAGE_PLACES'];
+                let unit = resp['UNIT'];
+                const alert = this.alert.create({
+                    title: unit['DETECTING_YOUR_LOCATION'],
+                    message: places['YOU_HAVE_DENIED_ACCESS'],
+                    buttons: [{
+                        text: 'Ok',
+                        handler: () => {
+                            // console.log('Application exit prevented!');
+                            this.getLocation(true);
+                        }
+                    }]
+                });
+                alert.present();
+            })
+
     }
 
     presentConfirm() {

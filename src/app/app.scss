@@ -1723,10 +1723,10 @@ ion-app.disable-scroll {
 }
 
 .alert-full-no-button.alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group{
-    max-height: 80vh;
+    max-height: 73vh;
 }
 
-.alert-full-no-button.alert-ios .alert-button-group{
+.alert-full-no-button.alert-ios .alert-button-group button:first-child{
     display: none;
 }
 
@@ -1799,9 +1799,9 @@ ion-app.disable-scroll {
     left: 0;
     background: red;
     color: #fff;
-    height: 50px;
+    height: 51px;
     font-size: 4vw;
     text-align: center;
     z-index: 111;
-    line-height: 50px;
+    line-height: 51px;
 }
