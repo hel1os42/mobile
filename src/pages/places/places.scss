@@ -56,9 +56,9 @@ page-places {
     }
     .star_right {
         position: absolute;
-        right: 3%;
-        top: 7%;
-        width: 5.3vw;
+        right: 2vw;
+        top: 2vw;
+        width: auto;
     }
     .segment-ios {
         width: 93%;
@@ -105,12 +105,19 @@ page-places {
     }
 
     .overflow-4line-description{
-        max-height: 16.5vw;
+        max-height: 17.5vw;
         height: auto;
         display: block;
         overflow: hidden;
     }
 
+    .font-36{
+        padding-bottom: 0;
+    }
+
+    .font-75{
+        line-height: 3vw;
+    }
 }
 
 

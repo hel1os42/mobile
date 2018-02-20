@@ -89,6 +89,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { ImageCropperComponent, ImageCropperModule } from 'ng2-img-cropper';
 import { Keyboard } from '@ionic-native/keyboard';
+import { Network } from '@ionic-native/network';
+import { NetworkService } from '../providers/network.service';
  
 
 // The translate loader needs to know where to load i18n files
@@ -258,10 +260,12 @@ export function createTranslateLoader(http: HttpClient) {
         PlaceService,
         TimezoneService,
         GeocodeService,
+        NetworkService,
         Clipboard,
         InAppBrowser,
         AndroidPermissions,
-        Diagnostic
+        Diagnostic,
+        Network
     ]
 })
 export class AppModule { }

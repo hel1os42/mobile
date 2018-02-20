@@ -19,6 +19,8 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { Subscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
     selector: 'page-places',
@@ -66,6 +68,7 @@ export class PlacesPage {
         private profile: ProfileService,
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
+        private translate: TranslateService,
         private diagnostic: Diagnostic) {
 
         this.isForkMode = this.appMode.getForkMode();
@@ -84,7 +87,7 @@ export class PlacesPage {
                         }
                     });
                 }
-                else return;
+                else this.getCoords(true);
             });
         }
 
@@ -95,47 +98,45 @@ export class PlacesPage {
                 })
                 this.selectedCategory = this.categories[0];
 
-                    if (this.platform.is('android') && this.platform.is('cordova')) {
-                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                            result => {
-                                if (result.hasPermission === false) {
-                                    this.requestPerm();
-                                }
-                                else {
-                                    this.getLocation(false);
-                                }
-                                console.log(result)
-                            },
-                            err => {
+                if (this.platform.is('android') && this.platform.is('cordova')) {
+                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                        result => {
+                            if (result.hasPermission === false) {
                                 this.requestPerm();
-                                console.log(err)
                             }
-                        )
-                    }
-                    else if (this.platform.is('ios') && this.platform.is('cordova')) {
-                        this.diagnostic.getLocationAuthorizationStatus()
-                            .then(resp => {
-                                if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
-                                    this.diagnostic.requestLocationAuthorization()
-                                        .then(res => {
-                                            this.getLocation(false);
-                                        })
-                                }
-                                else {
-                                    this.getLocation(false);
-                                }
-                            })
-                    }
+                            else {
+                                this.getLocation(false);
+                            }
+                        },
+                        err => {
+                            this.requestPerm();
+                        }
+                    )
+                }
+                else if (this.platform.is('ios') && this.platform.is('cordova')) {
+                    this.diagnostic.getLocationAuthorizationStatus()
+                        .then(resp => {
+                            if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
+                                this.diagnostic.requestLocationAuthorization()
+                                    .then(res => {
+                                        this.getLocation(false);
+                                    })
+                            }
+                            else {
+                                this.getLocation(false);
+                            }
+                        })
+                }
                 else {
                     this.getLocation(false);
                 }
             })
     }
 
-    getLocation(isDenied: boolean) {
+    getLocation(isDenied: boolean, isRefresh?: boolean) {
         if (!isDenied) {
             if (!this.platform.is('cordova')) {
-                this.getCoords();
+                this.getCoords(isRefresh);
             }
             else {
                 this.diagnostic.isLocationAvailable().then(result => {
@@ -143,7 +144,7 @@ export class PlacesPage {
                         this.presentConfirm();
                     }
                     else {
-                        this.getCoords();
+                        this.getCoords(isRefresh);
                     }
                 });
             }
@@ -160,20 +161,25 @@ export class PlacesPage {
         }
     }
 
-    getCoords() {
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
+    getCoords(isRefresh?: boolean) {
+        let loadingLocation = this.loading.create(!isRefresh ? { content: 'Location detection', spinner: 'bubbles' } : undefined);
         loadingLocation.present();
         if (this.platform.is('android')) {
             this.diagnostic.getLocationMode()
                 .then(res => {
                     this.location.get(res === 'high_accuracy')
                         .then((resp) => {
-                            this.coords = {
-                                lat: resp.coords.latitude,
-                                lng: resp.coords.longitude
-                            };
-                            loadingLocation.dismissAll();
-                            this.getCompaniesList();
+                            if (isRefresh && this.coords.lat == resp.coords.latitude) {
+                                loadingLocation.dismissAll();
+                            }
+                            else {
+                                this.coords = {
+                                    lat: resp.coords.latitude,
+                                    lng: resp.coords.longitude
+                                };
+                                loadingLocation.dismissAll();
+                                this.getCompaniesList();
+                            }
                         })
                         .catch((error) => {
                             loadingLocation.dismissAll();
@@ -184,12 +190,17 @@ export class PlacesPage {
         else {
             this.location.get(false)
                 .then((resp) => {
-                    loadingLocation.dismissAll();
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    this.getCompaniesList();
+                    if (isRefresh && this.coords.lat == resp.coords.latitude) {
+                        loadingLocation.dismissAll();
+                    }
+                    else {
+                        this.coords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        loadingLocation.dismissAll();
+                        this.getCompaniesList();
+                    }
                 })
                 .catch((error) => {
                     loadingLocation.dismissAll();
@@ -205,26 +216,26 @@ export class PlacesPage {
             this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
         ])
             .then(
-            result => {
-                if (result.hasPermission === false) {
-                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                        result => {
-                            if (result.hasPermission === false) {
-                                this.presentAndroidConfirm();
-                            }
-                            else {
-                                this.getLocation(false);
-                            }
-                        });
+                result => {
+                    if (result.hasPermission === false) {
+                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                            result => {
+                                if (result.hasPermission === false) {
+                                    this.presentAndroidConfirm();
+                                }
+                                else {
+                                    this.getLocation(false);
+                                }
+                            });
+                    }
+                    else {
+                        this.getLocation(false);
+                    }
+                    console.log(result)
+                },
+                err => {
+                    this.requestPerm();
                 }
-                else {
-                    this.getLocation(false);
-                }
-                console.log(result)
-            },
-            err => {
-                this.requestPerm();
-            }
             )
     }
 
@@ -465,19 +476,34 @@ export class PlacesPage {
         }
     }
 
+    doRefresh(refresher) {
+        this.getLocation(false, true);
+        setTimeout(() => {
+            refresher.complete();
+        }, 600);
+    }
+
     presentAndroidConfirm() {
-        const alert = this.alert.create({
-            title: 'Location denied',
-            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
-            buttons: [{
-                text: 'Ok',
-                handler: () => {
-                    // console.log('Application exit prevented!');
-                    this.getLocation(true);
-                }
-            }]
-        });
-        alert.present();
+
+        this.translate.get(
+            ['PAGE_PLACES', 'UNIT'])
+            .subscribe(resp => {
+                let places = resp['PAGE_PLACES'];
+                let unit = resp['UNIT'];
+                const alert = this.alert.create({
+                    title: unit['DETECTING_YOUR_LOCATION'],
+                    message: places['YOU_HAVE_DENIED_ACCESS'],
+                    buttons: [{
+                        text: 'Ok',
+                        handler: () => {
+                            // console.log('Application exit prevented!');
+                            this.getLocation(true);
+                        }
+                    }]
+                });
+                alert.present();
+            })
+
     }
 
     presentConfirm() {

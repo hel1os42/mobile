@@ -15,6 +15,7 @@ import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
+import { NetworkService } from '../providers/network.service';
 
 
 @Component({
@@ -22,7 +23,8 @@ import { StorageService } from '../providers/storage.service';
 })
 export class MyApp {
     rootPage: any;
-    private onResumeSubscription: Subscription;
+    onResumeSubscription: Subscription;
+    onConnectSubscription: Subscription;
 
     constructor(platform: Platform,
         statusBar: StatusBar,
@@ -35,7 +37,8 @@ export class MyApp {
         private alert: AlertController,
         private storage: StorageService,
         private ionicApp: IonicApp,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private network: NetworkService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -45,18 +48,20 @@ export class MyApp {
             statusBar.styleDefault();
 
             // this.appMode.setForkMode();// only for fork mode;
-
-            if (!this.auth.isLoggedIn()) {
-                this.rootPage = OnBoardingPage;
+            if (this.network.getStatus()) {
+                if (!this.auth.isLoggedIn()) {
+                    this.rootPage = OnBoardingPage;
+                }
+                else {
+                    this.getRootPage();
+                }
             }
             else {
-                this.profile.get(true)
+                this.rootPage = OnBoardingPage;
+                this.onConnectSubscription = this.network.onConnect
                     .subscribe(resp => {
-                        this.rootPage = (!resp.name && !resp.email)
-                            ? CreateUserProfilePage
-                            : TabsPage;
-                        // this.rootPage = SettingsPage;
-                    });
+                        this.getRootPage();
+                    })
             }
 
             if (platform.is('ios')) {
@@ -134,6 +139,16 @@ export class MyApp {
             this.app.getRootNav().setRoot(LoginPage);
         });
 
+    }
+
+    getRootPage() {
+        this.profile.get(true)
+        .subscribe(resp => {
+            this.rootPage = (!resp.name && !resp.email)
+                ? CreateUserProfilePage
+                : TabsPage;
+            // this.rootPage = SettingsPage;
+        });
     }
 
     initTranslate() {

@@ -21,9 +21,9 @@ export class SignUpPage {
         code: ''
     };
     //numCodes = ['+7', '+49', '+63', '+57', '+380', '+86'];
-    numCode;
     phoneNumber: string;
     phoneCodes = PHONE_CODES;
+    numCode = PHONE_CODES.find(item => item.code === 'US');
     envName: string;
     onKeyboardShowSubscription: Subscription;
     // onKeyboardHideSubscription: Subscript
@@ -64,7 +64,7 @@ export class SignUpPage {
                     return this.numCode;
                 },
                 err => {
-                    this.numCode = this.phoneCodes[0];
+                    this.numCode = PHONE_CODES.find(item => item.code === 'US');
                     return this.numCode;
                 })
 
@@ -97,11 +97,6 @@ export class SignUpPage {
 
     getDevMode() {
         return (this.envName === 'dev' || this.envName === 'test');
-    }
-
-    dismissSelect(event) {
-        this.numCode = event;
-        this.codeSelect.close();
     }
 
     onSelectClicked(selectButton: Select) {

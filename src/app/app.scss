@@ -1070,7 +1070,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 /* HEADER. Page places */
 .cover{
     width: 100%;
-    height: 30vw;
+    height: 33.33vw;
     position: relative;
     background-size: cover;
     background-position: 50% 50%;
@@ -1132,8 +1132,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .num_right {
     position: absolute;
-    right: 3%;
-    bottom: 7%;
+    right: 2vw;
+    bottom: 2vw;
 }
 
 .flex{
@@ -1152,10 +1152,9 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     padding: 0.8vw;
     font-size: 2.3vw;
     color: #3E4B5D;
+    margin-bottom: 2vw;
     border-radius: 1vw;
     margin-right: 1.5vw;
-    margin-top: 2vw;
-    margin-bottom: 0.3vw;
     display: inline-block;
 }
 
@@ -1236,6 +1235,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .text-overflow-3-font-40{
     max-height: 44.5vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
+}
+
+.text-overflow-3-font-30{
+    max-height: 35vw;
     height: auto;
     display: block;
     overflow: hidden;
@@ -1723,11 +1729,18 @@ ion-app.disable-scroll {
 }
 
 .alert-full-no-button.alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group{
-    max-height: 80vh;
+    max-height: 73vh;
 }
 
-.alert-full-no-button.alert-ios .alert-button-group{
+.alert-full-no-button.alert-ios .alert-button-group button:first-child{
     display: none;
+}
+
+.alert-full-no-button.alert-ios .alert-ios .alert-button-group{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
 .popover-content {
@@ -1790,4 +1803,22 @@ ion-app.disable-scroll {
 .crop-block .btn_check.cancel{
     left: 3vw;
     padding: 3vw;
+}
+
+.disconnected .toast-container {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: red;
+    color: #fff;
+    height: 51px;
+    font-size: 4vw;
+    text-align: center;
+    z-index: 111;
+    line-height: 51px;
+}
+
+.toolbar-ios ion-title {
+    padding: 0 40px 0 40px;
 }

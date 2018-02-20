@@ -4,10 +4,7 @@
 
     <ion-grid text-center class="grid-tabs-splash">
         <ion-row align-items-end>
-            <a ion-col
-                *ngFor="let category of categories"
-                [ngClass]="{ 'active_cat': isSelectedCategory(category) }"
-                (click)="selectCategory(category)">
+            <a ion-col *ngFor="let category of categories" [ngClass]="{ 'active_cat': isSelectedCategory(category) }" (click)="selectCategory(category)">
                 <p>
                     <img [src]="category.image_url">
                 </p>
@@ -51,6 +48,9 @@
     </div>
 
     <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content pullingIcon="none"  refreshingSpinner="none"></ion-refresher-content>
+        </ion-refresher>
         <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">
             <ion-avatar item-start text-center>
                 <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + company.picture_url + ')'}"></div>
@@ -64,9 +64,9 @@
                 <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} </span>
-                <div class="smooth_transition margin-top-1vw">
-                    <div class="scroll_content">
-                        <div class="bold font-20 text-3E4B5D">{{ company.name }}</div>
+                <div class="smooth_transition">
+                    <div class="scroll_content margin-top-2vw margin-bottom-2vw">
+                        <div class="bold font-18 text-3E4B5D">{{ company.name }}</div>
                     </div>
                     <div class="scroll_content">
                         <ng-container *ngFor="let tag of company.tags">
@@ -74,7 +74,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <div margin-top class="text-828282 font-12 wrap overflow-4line-description margin-top-5">{{ company. description }}</div>
+                <div class="text-828282 font-12 wrap overflow-4line-description">{{ company. description }}</div>
             </div>
             <img class="star_right" src="assets/img/place/icon_star.svg">
 
@@ -93,10 +93,12 @@
     </ion-list>
 
     <div *ngIf="isMapVisible">
-        <div id="map_leaf" class="leaflet-map"
-            leaflet
-            [leafletOptions]="options"
-            [leafletLayers]="getLayers()"
+        <div 
+            id="map_leaf" 
+            class="leaflet-map" 
+            leaflet 
+            [leafletOptions]="options" 
+            [leafletLayers]="getLayers()" 
             [leafletFitBounds]="fitBounds">
         </div>
     </div>
