@@ -1,15 +1,10 @@
 <div class="header-ios"></div>
 
 <ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content refreshingSpinner="bubbles"></ion-refresher-content>
-      </ion-refresher>
+
     <ion-grid text-center class="grid-tabs-splash">
         <ion-row align-items-end>
-            <a ion-col
-                *ngFor="let category of categories"
-                [ngClass]="{ 'active_cat': isSelectedCategory(category) }"
-                (click)="selectCategory(category)">
+            <a ion-col *ngFor="let category of categories" [ngClass]="{ 'active_cat': isSelectedCategory(category) }" (click)="selectCategory(category)">
                 <p>
                     <img [src]="category.image_url">
                 </p>
@@ -53,6 +48,9 @@
     </div>
 
     <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content pullingIcon="none"  refreshingSpinner="none"></ion-refresher-content>
+        </ion-refresher>
         <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">
             <ion-avatar item-start text-center>
                 <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + company.picture_url + ')'}"></div>
@@ -95,10 +93,12 @@
     </ion-list>
 
     <div *ngIf="isMapVisible">
-        <div id="map_leaf" class="leaflet-map"
-            leaflet
-            [leafletOptions]="options"
-            [leafletLayers]="getLayers()"
+        <div 
+            id="map_leaf" 
+            class="leaflet-map" 
+            leaflet 
+            [leafletOptions]="options" 
+            [leafletLayers]="getLayers()" 
             [leafletFitBounds]="fitBounds">
         </div>
     </div>

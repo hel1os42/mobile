@@ -480,7 +480,7 @@ export class PlacesPage {
         this.getLocation(false, true);
         setTimeout(() => {
             refresher.complete();
-        }, 1500);
+        }, 600);
     }
 
     presentAndroidConfirm() {
