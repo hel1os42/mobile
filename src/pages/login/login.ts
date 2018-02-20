@@ -27,7 +27,7 @@ export class LoginPage {
     envName: string;
     isVisibleLoginButton = false;
     phoneCodes = PHONE_CODES;
-    numCode;
+    numCode = PHONE_CODES.find(item => item.code === 'US');
     onKeyboardShowSubscription: Subscription;
     // onKeyboardHideSubscription: Subscription;
     backAction;
@@ -84,10 +84,10 @@ export class LoginPage {
                     this.numCode = this.phoneCodes.find(item => item.code === resp.country_code);
                     return this.numCode;
                 },
-                err => {
-                    this.numCode = this.phoneCodes[0];
-                    return this.numCode;
-                })
+                    err => {
+                        this.numCode = this.phoneCodes.find(item => item.code === 'US');
+                        return this.numCode;
+                    })
 
         }
     }
@@ -96,19 +96,26 @@ export class LoginPage {
         if (this.getDevMode()) {
             this.isVisibleLoginButton = true;
             this.authData.code = this.authData.phone.slice(-6);
+            this.backAction = this.platform.registerBackButtonAction(() => {
+                if (this.isVisibleLoginButton) {
+                    this.isVisibleLoginButton = false;
+                    this.backAction();
+                }
+            }, 1);
         }
         else {
             this.auth.getOtp(this.numCode.dial_code + this.authData.phone)
                 .subscribe(() => {
                     this.isVisibleLoginButton = true;
+                    this.backAction = this.platform.registerBackButtonAction(() => {
+                        if (this.isVisibleLoginButton) {
+                            this.isVisibleLoginButton = false;
+                            this.backAction();
+                        }
+                    }, 1);
                 });
         }
-        this.backAction = this.platform.registerBackButtonAction(() => {
-            if (this.isVisibleLoginButton) {
-                this.isVisibleLoginButton = false;
-                this.backAction();
-            }
-        }, 1);
+
     }
 
     login() {
@@ -226,6 +233,8 @@ export class LoginPage {
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription.unsubscribe();
         }
-        this.backAction();
+        if (this.backAction) {
+            this.backAction();
+        }
     }
 }
