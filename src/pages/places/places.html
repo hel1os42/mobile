@@ -68,7 +68,7 @@
                     <div class="scroll_content margin-top-2vw margin-bottom-2vw">
                         <div class="bold font-18 text-3E4B5D">{{ company.name }}</div>
                     </div>
-                    <div class="scroll_content">
+                    <div *ngIf="company.tags && company.tags.length > 0" class="scroll_content">
                         <ng-container *ngFor="let tag of company.tags">
                             <span class="type-food">{{ tag.name }}</span>
                         </ng-container>
