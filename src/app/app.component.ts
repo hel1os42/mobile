@@ -16,6 +16,7 @@ import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { NetworkService } from '../providers/network.service';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class MyApp {
         private storage: StorageService,
         private ionicApp: IonicApp,
         private appMode: AppModeService,
-        private network: NetworkService) {
+        private network: NetworkService,
+        private ga: GoogleAnalytics) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -46,6 +48,16 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
+
+            //Google Analytics
+            this.ga.startTrackerWithId('UA-114471660-1')
+                .then(() => {
+                    this.ga.trackView('test');
+                    // Tracker is ready
+                    this.ga.debugMode();
+                    this.ga.setAllowIDFACollection(true);
+                })
+                .catch(err => console.log('Error starting GoogleAnalytics', err));
 
             // this.appMode.setForkMode();// only for fork mode;
             if (this.network.getStatus()) {
@@ -143,12 +155,12 @@ export class MyApp {
 
     getRootPage() {
         this.profile.get(true)
-        .subscribe(resp => {
-            this.rootPage = (!resp.name && !resp.email)
-                ? CreateUserProfilePage
-                : TabsPage;
-            // this.rootPage = SettingsPage;
-        });
+            .subscribe(resp => {
+                this.rootPage = (!resp.name && !resp.email)
+                    ? CreateUserProfilePage
+                    : TabsPage;
+                // this.rootPage = SettingsPage;
+            });
     }
 
     initTranslate() {

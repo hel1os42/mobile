@@ -27,6 +27,7 @@
     "@ionic-native/diagnostic": "4.5.3",
     "@ionic-native/file-transfer": "4.5.2",
     "@ionic-native/geolocation": "4.5.2",
+    "@ionic-native/google-analytics": "4.5.3",
     "@ionic-native/image-picker": "4.5.3",
     "@ionic-native/in-app-browser": "4.5.2",
     "@ionic-native/keyboard": "4.5.3",
@@ -51,6 +52,7 @@
     "cordova-plugin-file": "5.0.0",
     "cordova-plugin-file-transfer": "1.7.0",
     "cordova-plugin-geolocation": "4.0.1",
+    "cordova-plugin-google-analytics": "1.8.3",
     "cordova-plugin-image-picker": "git+https://github.com/abelabbesnabi/cordova-plugin-image-picker.git",
     "cordova-plugin-inappbrowser": "2.0.1",
     "cordova-plugin-network-information": "2.0.1",
@@ -104,7 +106,8 @@
       },
       "cordova.plugins.diagnostic": {},
       "ionic-plugin-keyboard": {},
-      "cordova-plugin-network-information": {}
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-google-analytics": {}
     },
     "platforms": [
       "ios",
