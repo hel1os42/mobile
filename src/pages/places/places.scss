@@ -153,6 +153,7 @@ places-popover-component {
       padding-top: 7vw;
       height: 80vh;
       overflow: auto;
+      -webkit-overflow-scrolling: touch;
   }
 
   .block-checks {
