@@ -1702,6 +1702,7 @@ ion-app.disable-scroll {
     bottom: 0;
     right: -0.3vw;
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 100%);
+    z-index: 1111111;
 }
 
 .smooth_transition .scroll_content{
