@@ -144,12 +144,6 @@ export class MyApp {
             //         appEl.style.height = '100%';
             //     });
             // }
-             //Refresh token
-             this.auth.clearCookies();
-             if (this.auth.isLoggedIn()) {
-                 this.auth.refreshToken();
-             }
-
         });
 
         this.auth.onLogout.subscribe(() => {
