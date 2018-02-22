@@ -251,7 +251,7 @@ export class PlacesPage {
 
     getCompaniesList() {
         // this.categoryFilter = [this.selectedCategory.id];
-        this.loadCompanies([this.selectedCategory.id], this.search, this.page);
+        this.loadCompanies(this.page, true);
         this.addMap();
         this.userPin = [marker([this.coords.lat, this.coords.lng], {
             icon: icon({
@@ -343,13 +343,20 @@ export class PlacesPage {
         this.isChangedCategory = this.selectedCategory.id !== category.id;
         this.search = ""
         this.selectedCategory = category;
-        this.loadCompanies([this.selectedCategory.id], this.search, this.page = 1);
-        // this.categoryFilter = [this.selectedCategory.id];
+        this.loadCompanies(this.page = 1, true);
+        if ( this.isChangedCategory) {
+            this.tagFilter = [];
+            this.typeFilter = [];
+            this.specialityFilter = [];
+        }
     }
 
-    loadCompanies(categoryId, search, page) {
-        this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search, page)
-            .subscribe(companies => {
+    loadCompanies(page, isRoot?: boolean) {
+        let obs = isRoot ? this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page)
+        : this.offers.getPlaces(this.selectedCategory.id, this.tagFilter, 
+            this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng, 
+            this.radius, this.search, page);
+            obs.subscribe(companies => {
                 this.companies = companies.data;
                 this.markers = [];
                 this.companies.forEach((company) => {
@@ -452,7 +459,7 @@ export class PlacesPage {
                     this.typeFilter = data.types.filter(p => p.isSelected).map(p => p.id);
                     this.isChangedFilters = true;
                 }
-                else if (data.types.map(t => t.isSelected).length == 0) {
+                else if (types.length == 0 && this.selectedTypes.length > 0) {
                     this.selectedTypes.forEach(type => {
                         type.isSelected = false;
                     });
@@ -463,7 +470,7 @@ export class PlacesPage {
                     this.tagFilter = data.tags.filter(p => p.isSelected).map(p => p.slug);
                     this.isChangedFilters = true;
                 }
-                else if (tags.length == 0) {
+                else if (tags.length == 0 && this.selectedTags) {
                     this.selectedTags.forEach(type => {
                         type.isSelected = false;
                     });
@@ -473,10 +480,10 @@ export class PlacesPage {
                     this.specialityFilter = data.specialities.map(p => p.slug);
                     this.isChangedFilters = true;
                 }
-                if (this.isChangedFilters) {
-                    this.loadCompanies([this.selectedCategory.id], this.search, this.page = 1);
-                    this.isChangedFilters = false;
+                else if (data.specialities.length == 0) {
+                    this.specialityFilter = [];
                 }
+                    this.loadCompanies(this.page = 1);
             }
         })
     }
@@ -495,14 +502,16 @@ export class PlacesPage {
     }
 
     searchCompanies($event) {
-        this.loadCompanies([this.selectedCategory.id], this.search, this.page = 1);
+        this.loadCompanies(this.page = 1);
     }
 
     infiniteScroll(infiniteScroll) {
         this.page = this.page + 1;
         if (this.page <= this.lastPage) {
             setTimeout(() => {
-                this.offers.getPlaces([this.selectedCategory.id], this.coords.lat, this.coords.lng, this.radius, this.search, this.page)
+                this.offers.getPlaces(this.selectedCategory.id, this.tagFilter, 
+                    this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng, 
+                    this.radius, this.search, this.page)
                     .subscribe(companies => {
                         this.companies = [...this.companies, ...companies.data];
                         this.lastPage = companies.last_page;
