@@ -60,8 +60,10 @@ export class AdvRedeemOfferPage {
     confirm() {
         this.place.setRedeemCode(this.code)
             .subscribe((resp) => {
+                this.code = '';
                 this.profile.refreshAccounts();
-                this.nav.pop()
+                this.nav.pop();
+
             });
     }
 
