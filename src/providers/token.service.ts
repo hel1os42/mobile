@@ -6,6 +6,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 @Injectable()
 export class TokenService {
     TOKEN_KEY = 'token';
+    TOKEN_START_TIME ='tokenStart';
     token: Token;
     onRemove = new EventEmitter();
     
@@ -25,6 +26,8 @@ export class TokenService {
     set(token: Token) {
         this.token = undefined;
         this.storage.set(this.TOKEN_KEY, token);
+        let date = new Date();
+        this.storage.set(this.TOKEN_START_TIME, date.valueOf());
     }
 
     remove(event?: string) {

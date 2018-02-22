@@ -4,6 +4,7 @@ import { Login } from '../models/login';
 import { ApiService } from './api.service';
 import { TokenService } from './token.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { StorageService } from './storage.service';
 
 declare var cookieMaster;
 
@@ -18,16 +19,21 @@ export class AuthService {
     constructor(
         private api: ApiService,
         private token: TokenService,
-        private analytics: GoogleAnalytics) {
+        private analytics: GoogleAnalytics,
+        private storage: StorageService) {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
         setInterval(() => {
             this.clearCookies();
-            if (this.isLoggedIn()) {
+            let date = new Date();
+            let time = date.valueOf();
+            let tokenStart = this.storage.get('tokenStart');
+            let differ = (time - tokenStart) / 1000;//seconds
+            if (differ > 129600 && this.isLoggedIn()) {//36 hours
                 this.refreshToken();
             }
-        }, 1800 * 1000);
+        }, 120 * 1000);
     }
 
     getInviteCode() {
