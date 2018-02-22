@@ -16,6 +16,8 @@ import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { NetworkService } from '../providers/network.service';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { TokenService } from '../providers/token.service';
 
 
 @Component({
@@ -38,7 +40,8 @@ export class MyApp {
         private storage: StorageService,
         private ionicApp: IonicApp,
         private appMode: AppModeService,
-        private network: NetworkService) {
+        private network: NetworkService,
+        private analytics: GoogleAnalytics) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -46,6 +49,16 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
+           
+            //Google Analytics
+            this.analytics.startTrackerWithId('UA-114471660-1')
+                .then(() => {
+                    this.analytics.trackView('test');
+                    // Tracker is ready
+                    this.analytics.debugMode();
+                    this.analytics.setAllowIDFACollection(true);
+                })
+                .catch(err => console.log('Error starting GoogleAnalytics', err));
 
             // this.appMode.setForkMode();// only for fork mode;
             if (this.network.getStatus()) {
@@ -81,7 +94,7 @@ export class MyApp {
             this.initTranslate();
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
-                this.location.reset();
+                // this.location.reset();
                 this.branchInit(platform);
             });
 
@@ -131,8 +144,6 @@ export class MyApp {
             //         appEl.style.height = '100%';
             //     });
             // }
-
-
         });
 
         this.auth.onLogout.subscribe(() => {
@@ -143,12 +154,12 @@ export class MyApp {
 
     getRootPage() {
         this.profile.get(true)
-        .subscribe(resp => {
-            this.rootPage = (!resp.name && !resp.email)
-                ? CreateUserProfilePage
-                : TabsPage;
-            // this.rootPage = SettingsPage;
-        });
+            .subscribe(resp => {
+                this.rootPage = (!resp.name && !resp.email)
+                    ? CreateUserProfilePage
+                    : TabsPage;
+                // this.rootPage = SettingsPage;
+            });
     }
 
     initTranslate() {
@@ -216,5 +227,6 @@ export class MyApp {
 
     ngOnDestroy() {
         this.onResumeSubscription.unsubscribe();
+        this.onConnectSubscription.unsubscribe();
     }
 }

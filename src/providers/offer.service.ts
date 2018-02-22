@@ -9,45 +9,47 @@ export class OfferService {
     constructor(
         private api: ApiService) { }
 
-    // getCompanies(categoryId?) {
-    //     // return this.api.get('companies', false, {
-    //     //     with: 'categories',
-    //     //     category_id: categoryId
-    //     // });
-    //     return Observable.of(MockCompanies.items);
-    // }
-
-    // getCompany(id) {
-    //     //return this.api.get(`company/${id}?with=offers`);
-    //     let companies = MockCompanies.items.filter(p => p.id == id);
-    //     if (companies.length == 0)
-    //         throw new Error('Invalid compamy ID');
-    //     let company = companies[0];
-    //     company.offers = MockOffers.items;
-    //     company.offers_count = MockOffers.items.length;
-    //     return Observable.of(company);
-    // }
-
-    // getOffers(category_ids: string[]) {
-    //     //return this.api.get(`offers?category_ids[0]=${category_ids[0]}`);
-    //     return Observable.of(MockOffers.items);
-    // }
-
-    getPlaces(category_ids: string[], lat: number, lng: number, radius: number, search: string, page: number) {
-        let str = '';
-        for (let i = 0; i < category_ids.length; i++) {
-            let id = category_ids[i];
-            str += `${'category_ids[]'}=${id}&`;
-        };
-
+    getPlacesOfRoot(category_ids: string, lat: number, lng: number, radius: number, page: number) {
+        let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
             showLoading: page == 1,
             params: {
                 latitude: lat,
                 longitude: lng,
                 radius: radius,
-                with: 'category;retailTypes;specialities;tags',
-                search: search,
+                with: 'category;retailTypes;tags;specialities',
+                page: page
+            }
+        });
+    }
+
+    getPlaces(category_ids: string, tags: string[], types: string[], specialities: string[], lat: number, lng: number, radius: number, search: string, page: number) {
+        let tag = 'tags.slug:';
+        let type = 'retailTypes.id:';
+        let speciality = 'specialities.slug:';
+        let searchStr = '';
+        if (tags.length > 0) {
+            searchStr += this.getSearch(tag, tags);
+        }
+        if (types.length > 0) {
+            searchStr += this.getSearch(type, types);
+        }
+        if (specialities.length > 0) {
+            searchStr += this.getSearch(speciality, specialities);
+        }
+        if (search && search !== '') {
+            searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+        }
+        let str = `${'category_ids[]'}=${category_ids}&`;
+        return this.api.get(`places?${str}`, {
+            showLoading: page == 1,
+            params: {
+                latitude: lat,
+                longitude: lng,
+                radius: radius,
+                search: searchStr,
+                searchJoin: 'and',
+                with: 'category;retailTypes;tags;specialities',
                 page: page
             }
         });
@@ -92,5 +94,23 @@ export class OfferService {
 
     getRedemtionStatus(code: string) {
         return this.api.get(`activation_codes/${code}`, { showLoading: false });
+    }
+
+    getSearch(str: string, arr: string[]) {
+        if (arr.length == 0) {
+            str += ';';
+        }
+        else {
+            for (let i = 0; i < arr.length; i++) {
+                str += arr[i];
+                if (i != arr.length - 1) {
+                    str += '|';
+                }
+                else {
+                    str += ';';
+                }
+            }
+        }
+        return str;
     }
 }

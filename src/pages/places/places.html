@@ -34,7 +34,7 @@
 
         <ion-item class="block-search relative" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
-            <a disabled (click)="createPopover()" class="btn_search_settings">
+            <a (click)="createPopover()" class="btn_search_settings">
                 <img src="assets/img/user_home/icon_settings.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
@@ -65,16 +65,16 @@
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} </span>
                 <div class="smooth_transition">
-                    <div class="scroll_content margin-top-2vw margin-bottom-2vw">
+                    <div class="scroll_content margin-top-2vw">
                         <div class="bold font-18 text-3E4B5D">{{ company.name }}</div>
                     </div>
-                    <div class="scroll_content">
+                    <div *ngIf="company.tags && company.tags.length > 0" class="scroll_content margin-top-2vw">
                         <ng-container *ngFor="let tag of company.tags">
                             <span class="type-food">{{ tag.name }}</span>
                         </ng-container>
                     </div>
                 </div>
-                <div class="text-828282 font-12 wrap overflow-4line-description">{{ company. description }}</div>
+                <div class="text-828282 font-12 wrap overflow-3line-description margin-top-2vw">{{ company. description }}</div>
             </div>
             <img class="star_right" src="assets/img/place/icon_star.svg">
 
@@ -93,12 +93,12 @@
     </ion-list>
 
     <div *ngIf="isMapVisible">
-        <div 
-            id="map_leaf" 
-            class="leaflet-map" 
-            leaflet 
-            [leafletOptions]="options" 
-            [leafletLayers]="getLayers()" 
+        <div
+            id="map_leaf"
+            class="leaflet-map"
+            leaflet
+            [leafletOptions]="options"
+            [leafletLayers]="getLayers()"
             [leafletFitBounds]="fitBounds">
         </div>
     </div>

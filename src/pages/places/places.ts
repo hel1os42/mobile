@@ -20,6 +20,8 @@ import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash';
+import { DataUtils } from '../../utils/data.utils';
 
 
 @Component({
@@ -31,7 +33,7 @@ export class PlacesPage {
     companies: Place[];
     categories: OfferCategory[] = OfferCategory.StaticList;
     childCategories: ChildCategory[];
-    selectedChildCategories: SelectedCategory[];
+    // selectedChildCategories: SelectedCategory[];
     selectedCategory = new OfferCategory;
     isMapVisible: boolean = false;
     coords: Coords;
@@ -42,7 +44,10 @@ export class PlacesPage {
     segment: string;
     distanceString: string;
     search = '';
-    categoryFilter: string[];
+    // categoryFilter: string[];
+    typeFilter = [];
+    specialityFilter = [];
+    tagFilter = [];
     page = 1;
     lastPage: number;
     tileLayer;
@@ -53,6 +58,7 @@ export class PlacesPage {
     selectedTypes: RetailType[];
     selectedTags: Tag[];
     isChangedCategory = true;
+    isChangedFilters = false;
     isForkMode;
     onResumeSubscription: Subscription;
     isConfirm = false;
@@ -244,8 +250,8 @@ export class PlacesPage {
     }
 
     getCompaniesList() {
-        this.categoryFilter = [this.selectedCategory.id];
-        this.loadCompanies([this.selectedCategory.id], this.search, this.page);
+        // this.categoryFilter = [this.selectedCategory.id];
+        this.loadCompanies(this.page, true);
         this.addMap();
         this.userPin = [marker([this.coords.lat, this.coords.lng], {
             icon: icon({
@@ -337,13 +343,20 @@ export class PlacesPage {
         this.isChangedCategory = this.selectedCategory.id !== category.id;
         this.search = ""
         this.selectedCategory = category;
-        this.loadCompanies([this.selectedCategory.id], this.search, this.page = 1);
-        this.categoryFilter = [this.selectedCategory.id];
+        this.loadCompanies(this.page = 1, true);
+        if ( this.isChangedCategory) {
+            this.tagFilter = [];
+            this.typeFilter = [];
+            this.specialityFilter = [];
+        }
     }
 
-    loadCompanies(categoryId, search, page) {
-        this.offers.getPlaces(categoryId, this.coords.lat, this.coords.lng, this.radius, search, page)
-            .subscribe(companies => {
+    loadCompanies(page, isRoot?: boolean) {
+        let obs = isRoot ? this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page)
+        : this.offers.getPlaces(this.selectedCategory.id, this.tagFilter, 
+            this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng, 
+            this.radius, this.search, page);
+            obs.subscribe(companies => {
                 this.companies = companies.data;
                 this.markers = [];
                 this.companies.forEach((company) => {
@@ -428,6 +441,7 @@ export class PlacesPage {
             popover = this.popoverCtrl.create(PlacesPopover, { types: this.selectedTypes, tags: this.selectedTags });
             this.presentPopover(popover);
         }
+        this.isChangedCategory = false;
     }
 
     presentPopover(popover) {
@@ -437,28 +451,67 @@ export class PlacesPage {
             if (!data) {
                 return;
             }
-            let selectedCategories: SelectedCategory[] = data.categories.filter(p => p.isSelected);
-            if (selectedCategories.length > 0) {
-                this.selectedChildCategories = selectedCategories;
-                this.categoryFilter = this.selectedChildCategories.map(p => p.id);
-            }
             else {
-                this.selectedChildCategories = undefined;
-                this.categoryFilter = [this.selectedCategory.id];
+                let types = data.types.filter(t => t.isSelected);
+                let tags = data.tags.filter(p => p.isSelected);
+                if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {
+                    this.selectedTypes = data.types;
+                    this.typeFilter = data.types.filter(p => p.isSelected).map(p => p.id);
+                    this.isChangedFilters = true;
+                }
+                else if (types.length == 0 && this.selectedTypes.length > 0) {
+                    this.selectedTypes.forEach(type => {
+                        type.isSelected = false;
+                    });
+                    this.typeFilter = [];
+                }
+                if (tags.length > 0 && this.getFilter(this.selectedTags, data.tags)) {
+                    this.selectedTags = data.tags;
+                    this.tagFilter = data.tags.filter(p => p.isSelected).map(p => p.slug);
+                    this.isChangedFilters = true;
+                }
+                else if (tags.length == 0 && this.selectedTags) {
+                    this.selectedTags.forEach(type => {
+                        type.isSelected = false;
+                    });
+                    this.tagFilter = [];
+                }
+                if (data.specialities.length > 0 && this.specialityFilter !== data.specialities) {
+                    this.specialityFilter = data.specialities.map(p => p.slug);
+                    this.isChangedFilters = true;
+                }
+                else if (data.specialities.length == 0) {
+                    this.specialityFilter = [];
+                }
+                    this.loadCompanies(this.page = 1);
             }
-            this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
         })
     }
 
+    getFilter(arr, newArr) {
+        let isDiff;
+        for (let i = 0; i < arr.length; i++) {
+            for (let k = 0; k < newArr.length; k++) {
+                let d = !_.isEmpty(DataUtils.difference(arr[i], newArr[k]));
+                if (d) {
+                    isDiff = true;
+                }
+            }
+        }
+        return isDiff;
+    }
+
     searchCompanies($event) {
-        this.loadCompanies(this.categoryFilter, this.search, this.page = 1);
+        this.loadCompanies(this.page = 1);
     }
 
     infiniteScroll(infiniteScroll) {
         this.page = this.page + 1;
         if (this.page <= this.lastPage) {
             setTimeout(() => {
-                this.offers.getPlaces(this.categoryFilter, this.coords.lat, this.coords.lng, this.radius, this.search, this.page)
+                this.offers.getPlaces(this.selectedCategory.id, this.tagFilter, 
+                    this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng, 
+                    this.radius, this.search, this.page)
                     .subscribe(companies => {
                         this.companies = [...this.companies, ...companies.data];
                         this.lastPage = companies.last_page;
@@ -484,7 +537,6 @@ export class PlacesPage {
     }
 
     presentAndroidConfirm() {
-
         this.translate.get(
             ['PAGE_PLACES', 'UNIT'])
             .subscribe(resp => {

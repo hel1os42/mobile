@@ -22,8 +22,8 @@ export class LocationService {
         // else
             return this.geolocation.getCurrentPosition({
                 enableHighAccuracy: isHighAccuracy,
-                timeout: 45000,
-                maximumAge: 4000, 
+                timeout: 40000,
+                maximumAge: 6000, 
             }).then(geo => this.geoposition = geo);
     }
 
