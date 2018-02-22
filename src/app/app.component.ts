@@ -94,7 +94,7 @@ export class MyApp {
             this.initTranslate();
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
-                this.location.reset();
+                // this.location.reset();
                 this.branchInit(platform);
             });
 
