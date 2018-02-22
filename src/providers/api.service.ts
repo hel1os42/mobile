@@ -113,7 +113,7 @@ export class ApiService {
                         let err = errResp.json();
                         messages.push(err.message);
                         this.toast.show(messages.join('\n'));
-                        setTimeout(() => this.token.remove(), 3000);
+                        setTimeout(() => this.token.remove('HTTP_STATUS_CODE_UNATHORIZED'), 3000);
                         return;
                     }
                     if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
@@ -131,7 +131,7 @@ export class ApiService {
                         else {
                             if (errResp.status == 0) {
                                 messages.push('Internet disconnected');
-                                this.network.setStatus(false);
+                                // this.network.setStatus(false);
                             }
                             else {
                                 for (let key in err) {

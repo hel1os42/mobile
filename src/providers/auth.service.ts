@@ -3,6 +3,7 @@ import { Register } from '../models/register';
 import { Login } from '../models/login';
 import { ApiService } from './api.service';
 import { TokenService } from './token.service';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 declare var cookieMaster;
 
@@ -16,19 +17,15 @@ export class AuthService {
 
     constructor(
         private api: ApiService,
-        private token: TokenService) {
+        private token: TokenService,
+        private analytics: GoogleAnalytics) {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
         setInterval(() => {
             this.clearCookies();
             if (this.isLoggedIn()) {
-                this.api.get('auth/token', { showLoading: false })
-                    .subscribe(
-                        token => this.token.set(token),
-                        errResp => {
-                            this.token.remove();
-                        });
+                this.refreshToken();
             }
         }, 1800 * 1000);
     }
@@ -63,16 +60,26 @@ export class AuthService {
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
         obs.subscribe(token => this.token.set(token));
+        this.analytics.trackEvent("Session", "Login", new Date().toISOString());
         return obs;
     }
 
     logout() {
         this.clearCookies();
-        this.token.remove();
+        this.token.remove('LOGOUT');
     }
 
     clearCookies() {
         if (typeof cookieMaster !== 'undefined')
             cookieMaster.clearCookies();
+    }
+
+    refreshToken() {
+        this.api.get('auth/token', { showLoading: false })
+            .subscribe(
+                token => this.token.set(token),
+                errResp => {
+                    this.token.remove('ERR_RESP_TOKEN_REFRESH');
+                });
     }
 }

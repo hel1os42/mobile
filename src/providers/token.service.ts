@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { StorageService } from "./storage.service";
 import { Token } from "../models/token";
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Injectable()
 export class TokenService {
@@ -9,7 +10,8 @@ export class TokenService {
     onRemove = new EventEmitter();
     
     constructor(
-        private storage: StorageService) {
+        private storage: StorageService,
+        private analytics: GoogleAnalytics) {
         
     }
 
@@ -25,9 +27,10 @@ export class TokenService {
         this.storage.set(this.TOKEN_KEY, token);
     }
 
-    remove() {
+    remove(event?: string) {
         this.storage.remove(this.TOKEN_KEY);
         this.token = undefined;
+        this.analytics.trackEvent("Session", "Logout", event + ' ' + new Date().toISOString());
         this.onRemove.emit();
     }
 }
