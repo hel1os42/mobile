@@ -17,6 +17,7 @@ import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
 import { NetworkService } from '../providers/network.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { TokenService } from '../providers/token.service';
 
 
 @Component({
@@ -40,7 +41,7 @@ export class MyApp {
         private ionicApp: IonicApp,
         private appMode: AppModeService,
         private network: NetworkService,
-        private ga: GoogleAnalytics) {
+        private analytics: GoogleAnalytics) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -48,14 +49,14 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
-
+           
             //Google Analytics
-            this.ga.startTrackerWithId('UA-114471660-1')
+            this.analytics.startTrackerWithId('UA-114471660-1')
                 .then(() => {
-                    this.ga.trackView('test');
+                    this.analytics.trackView('test');
                     // Tracker is ready
-                    this.ga.debugMode();
-                    this.ga.setAllowIDFACollection(true);
+                    this.analytics.debugMode();
+                    this.analytics.setAllowIDFACollection(true);
                 })
                 .catch(err => console.log('Error starting GoogleAnalytics', err));
 
@@ -143,7 +144,11 @@ export class MyApp {
             //         appEl.style.height = '100%';
             //     });
             // }
-
+             //Refresh token
+             this.auth.clearCookies();
+             if (this.auth.isLoggedIn()) {
+                 this.auth.refreshToken();
+             }
 
         });
 
@@ -228,5 +233,6 @@ export class MyApp {
 
     ngOnDestroy() {
         this.onResumeSubscription.unsubscribe();
+        this.onConnectSubscription.unsubscribe();
     }
 }
