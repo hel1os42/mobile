@@ -106,7 +106,8 @@ export class PlacePage {
                     .then(res => {
                         branchUniversalObj = res;
                         let analytics = {};
-                        let message = this.company.name + this.company.description
+                        // let message = this.company.name + this.company.description
+                        let message = 'NAU';
                         branchUniversalObj.showShareSheet(analytics, properties, message)
                             .then(resp => console.log(resp))
                     }).catch(function (err) {
