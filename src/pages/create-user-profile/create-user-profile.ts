@@ -120,10 +120,10 @@ export class CreateUserProfilePage {
         this.cropperSettings.noFileInput = true;
         this.cropperSettings.cropOnResize = true;
         this.cropperSettings.fileType = 'image/jpeg';
-        this.cropperSettings.width = 192;
-        this.cropperSettings.height = 192;
-        this.cropperSettings.croppedWidth = 192;
-        this.cropperSettings.croppedHeight = 192;
+        this.cropperSettings.width = 1024;
+        this.cropperSettings.height = 1024;
+        this.cropperSettings.croppedWidth = 1024;
+        this.cropperSettings.croppedHeight = 1024;
         // this.cropperSettings.canvasWidth = 400;
         this.cropperSettings.canvasWidth = this.platform.width();
         this.cropperSettings.canvasHeight = this.isEdit
@@ -321,7 +321,7 @@ export class CreateUserProfilePage {
     addLogo() {
         this.canSaveImg = false;
         let image = new Image();
-        let options = { maximumImagesCount: 1, width: 600, height: 600 };
+        let options = { maximumImagesCount: 1, width: 1024, height: 1024 };
         this.imagePicker.getPictures(options)
             .then(results => {
                 if (results[0] && results[0] != 'O') {
