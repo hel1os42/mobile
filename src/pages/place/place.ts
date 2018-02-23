@@ -42,14 +42,6 @@ export class PlacePage {
                 this.company = company;
                 this.offersList = company.offers;
             });
-
-        // this.location.get()
-        //     .then((resp) => {
-        //         this.coords = {
-        //             lat: resp.coords.latitude,
-        //             lng: resp.coords.longitude
-        //         };
-        //     });
     }
 
     // ionSelected() {
@@ -70,13 +62,11 @@ export class PlacePage {
 
     share() {
         const Branch = window['Branch'];
-        let link: string;
         this.profile.get(false)
             .subscribe(profile => {
-                link = `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&id=${this.company.id}`;
                 let properties = {
                     canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&id=${this.company.id}`,
-                    canonicalUrl: link,
+                    canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&id=${this.company.id}`,
                     title: this.company.name,
                     contentDescription: this.company.description,
                     contentImageUrl: this.company.cover_url,
@@ -97,9 +87,8 @@ export class PlacePage {
                         let message = this.company.name + this.company.description
                         branchUniversalObj.showShareSheet(analytics, properties, message)
                             .then(resp => console.log(resp))
-                        alert('Response: ' + JSON.stringify(res))
                     }).catch(function (err) {
-                        alert('Error: ' + JSON.stringify(err))
+                        console.log('Branch create obj error: ' + JSON.stringify(err))
                     })
 
             })
