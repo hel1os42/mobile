@@ -200,4 +200,8 @@ places-popover-component {
     .item.item-ios .checkbox-ios[item-right], .item.item-ios .checkbox-ios[item-end] {
         margin: 0 2.3vw;
     }
+
+    ion-item.item.item-block.item-ios.item-checkbox {
+        padding-left: 2vw;
+    }
 }
