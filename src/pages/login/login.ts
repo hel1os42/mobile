@@ -171,6 +171,12 @@ export class LoginPage {
                     label: 'production',
                     value: 'prod',
                     checked: this.envName == 'prod'
+                },
+                {
+                    type: 'radio',
+                    label: 'fork',
+                    value: 'fork',
+                    // checked: this.envName == 'prod'
                 }],
             buttons: [
                 {
@@ -188,9 +194,17 @@ export class LoginPage {
                             return;
                         }
                         else {
-                            this.envName = data;
-                            this.appMode.setEnvironmentMode(data);
-                            this.getNumCode();
+                            if (data === 'fork') {
+                                this.envName = 'prod';
+                                this.appMode.setForkMode();// only for fork mode;
+                                this.appMode.setEnvironmentMode('prod');
+                                debugger
+                            }
+                            else {
+                                this.envName = data;
+                                this.appMode.setEnvironmentMode(data);
+                                this.getNumCode();
+                            }
                         }
                     }
                 }
