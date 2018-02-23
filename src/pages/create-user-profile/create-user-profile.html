@@ -149,8 +149,8 @@
 
     <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
     <div *ngIf="isSelectVisible">
-        <div class="block-lines" disabled>
-            <ion-item detail-push class="bg-gray margin-bottom-small">
+        <!-- <div class="block-lines" disabled> -->
+            <!-- <ion-item detail-push class="bg-gray margin-bottom-small">
                 <ion-select
                     disabled
                     [(ngModel)]="gender"
@@ -160,7 +160,7 @@
                     <ion-option value="f">{{ 'PAGE_CREATE-USER-PROFILE.FEMALE' | translate }}</ion-option>
                     <ion-option value="m">{{ 'PAGE_CREATE-USER-PROFILE.MALE' | translate }}</ion-option>
                 </ion-select>
-                <!-- <ion-input [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender"></ion-input>-->
+                <ion-input [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender"></ion-input>
                 <div item-end>
                     <ion-label *ngIf="gender" class="label label-ios added font-75">
                         <ion-icon name="md-checkmark">
@@ -169,9 +169,9 @@
                         + 5 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
                     </ion-label>
                 </div>
-            </ion-item>
+            </ion-item> -->
 
-            <ion-item detail-push class="bg-gray margin-bottom-small">
+            <!-- <ion-item detail-push class="bg-gray margin-bottom-small">
                 <ion-input disabled [(ngModel)]="age" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.AGE' | translate }}"></ion-input>
                 <div item-end>
                     <ion-label *ngIf="age" class="label label-ios added font-75">
@@ -193,8 +193,8 @@
                         + 9 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
                     </ion-label>
                 </div>
-            </ion-item>
-        </div>
+            </ion-item> -->
+        <!-- </div> -->
         <p margin text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}</p>
         <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
         <div *ngIf="coords.lat" class="block-map">

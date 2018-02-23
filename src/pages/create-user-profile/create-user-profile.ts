@@ -127,8 +127,8 @@ export class CreateUserProfilePage {
         // this.cropperSettings.canvasWidth = 400;
         this.cropperSettings.canvasWidth = this.platform.width();
         this.cropperSettings.canvasHeight = this.isEdit
-        ? this.platform.height() - 50
-        : this.platform.height();
+            ? this.platform.height() - 50
+            : this.platform.height();
         //this.cropperSettings.cropperClass = "cropper-style";
         //this.cropperSettings.croppingClass = "cropper-style2";
         // this.cropperSettings.preserveSize = true;
@@ -179,26 +179,26 @@ export class CreateUserProfilePage {
             this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
         ])
             .then(
-            result => {
-                if (result.hasPermission === false) {
-                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                        result => {
-                            if (result.hasPermission === false) {
-                                this.presentAndroidConfirm();
-                            }
-                            else {
-                                this.getLocation(false);
-                            }
-                        });
+                result => {
+                    if (result.hasPermission === false) {
+                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                            result => {
+                                if (result.hasPermission === false) {
+                                    this.presentAndroidConfirm();
+                                }
+                                else {
+                                    this.getLocation(false);
+                                }
+                            });
+                    }
+                    else {
+                        this.getLocation(false);
+                    }
+                    console.log(result)
+                },
+                err => {
+                    this.requestPerm();
                 }
-                else {
-                    this.getLocation(false);
-                }
-                console.log(result)
-            },
-            err => {
-                this.requestPerm();
-            }
             )
     }
 
@@ -309,6 +309,9 @@ export class CreateUserProfilePage {
 
     toggleSelect() {
         this.isSelectVisible = !this.isSelectVisible;
+        if (this.isSelectVisible) {
+            this.addMap();
+        }
     }
 
     toggleVisibleInfo() {
@@ -325,7 +328,7 @@ export class CreateUserProfilePage {
                     // this.picture_url = results[0];
                     image.src = results[0];
                     this.isCrop = true;
-                    this. backAction = this.platform.registerBackButtonAction(() => {
+                    this.backAction = this.platform.registerBackButtonAction(() => {
                         if (this.isCrop) {
                             this.isCrop = false;
                             this.backAction();
@@ -333,8 +336,8 @@ export class CreateUserProfilePage {
                     }, 1);
                     setTimeout(() => {
                         this.cropper.setImage(image)
-                    this.changeDetectorRef.detectChanges();
-                }, 500);
+                        this.changeDetectorRef.detectChanges();
+                    }, 500);
                 }
             })
             .catch(err => {
@@ -475,7 +478,7 @@ export class CreateUserProfilePage {
             this.onResumeSubscription.unsubscribe();
         }
         this.isCrop = false;
-        this.backAction();
+        if (this.backAction) this.backAction();
     }
 
 }
