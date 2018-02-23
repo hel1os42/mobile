@@ -19,6 +19,8 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { Subscription } from 'rxjs/Subscription';
+import { ShareService } from '../../providers/share.service';
+import { Share } from '../../models/share';
 
 @Component({
     selector: 'page-places',
@@ -53,7 +55,9 @@ export class PlacesPage {
     isChangedCategory = true;
     isForkMode;
     onResumeSubscription: Subscription;
+    onShareSubscription: Subscription;
     isConfirm = false;
+    shareData: Share;
 
     constructor(
         private platform: Platform,
@@ -66,9 +70,18 @@ export class PlacesPage {
         private profile: ProfileService,
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
-        private diagnostic: Diagnostic) {
+        private diagnostic: Diagnostic,
+        private share: ShareService) {
 
         this.isForkMode = this.appMode.getForkMode();
+
+        // this.onShareSubscription = this.share.onShare
+        //     .subscribe(resp => {
+        //         this.shareData = resp;
+        //         debugger
+        //     })
+        this.shareData = this.share.get();
+
         this.segment = "alloffers";
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -95,37 +108,37 @@ export class PlacesPage {
                 })
                 this.selectedCategory = this.categories[0];
 
-                    if (this.platform.is('android') && this.platform.is('cordova')) {
-                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                            result => {
-                                if (result.hasPermission === false) {
-                                    this.requestPerm();
-                                }
-                                else {
-                                    this.getLocation(false);
-                                }
-                                console.log(result)
-                            },
-                            err => {
+                if (this.platform.is('android') && this.platform.is('cordova')) {
+                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                        result => {
+                            if (result.hasPermission === false) {
                                 this.requestPerm();
-                                console.log(err)
                             }
-                        )
-                    }
-                    else if (this.platform.is('ios') && this.platform.is('cordova')) {
-                        this.diagnostic.getLocationAuthorizationStatus()
-                            .then(resp => {
-                                if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
-                                    this.diagnostic.requestLocationAuthorization()
-                                        .then(res => {
-                                            this.getLocation(false);
-                                        })
-                                }
-                                else {
-                                    this.getLocation(false);
-                                }
-                            })
-                    }
+                            else {
+                                this.getLocation(false);
+                            }
+                            console.log(result)
+                        },
+                        err => {
+                            this.requestPerm();
+                            console.log(err)
+                        }
+                    )
+                }
+                else if (this.platform.is('ios') && this.platform.is('cordova')) {
+                    this.diagnostic.getLocationAuthorizationStatus()
+                        .then(resp => {
+                            if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
+                                this.diagnostic.requestLocationAuthorization()
+                                    .then(res => {
+                                        this.getLocation(false);
+                                    })
+                            }
+                            else {
+                                this.getLocation(false);
+                            }
+                        })
+                }
                 else {
                     this.getLocation(false);
                 }
@@ -155,6 +168,9 @@ export class PlacesPage {
                         lat: user.latitude,
                         lng: user.longitude
                     };
+                    if (this.shareData) {
+                        this.openPlace(this.shareData, true)
+                    }
                     this.getCompaniesList();
                 })
         }
@@ -172,6 +188,9 @@ export class PlacesPage {
                                 lat: resp.coords.latitude,
                                 lng: resp.coords.longitude
                             };
+                            if (this.shareData) {
+                                this.openPlace(this.shareData, true)
+                            }
                             loadingLocation.dismissAll();
                             this.getCompaniesList();
                         })
@@ -189,6 +208,9 @@ export class PlacesPage {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
+                    if (this.shareData) {
+                        this.openPlace(this.shareData, true)
+                    }
                     this.getCompaniesList();
                 })
                 .catch((error) => {
@@ -205,26 +227,26 @@ export class PlacesPage {
             this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
         ])
             .then(
-            result => {
-                if (result.hasPermission === false) {
-                    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                        result => {
-                            if (result.hasPermission === false) {
-                                this.presentAndroidConfirm();
-                            }
-                            else {
-                                this.getLocation(false);
-                            }
-                        });
+                result => {
+                    if (result.hasPermission === false) {
+                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+                            result => {
+                                if (result.hasPermission === false) {
+                                    this.presentAndroidConfirm();
+                                }
+                                else {
+                                    this.getLocation(false);
+                                }
+                            });
+                    }
+                    else {
+                        this.getLocation(false);
+                    }
+                    console.log(result)
+                },
+                err => {
+                    this.requestPerm();
                 }
-                else {
-                    this.getLocation(false);
-                }
-                console.log(result)
-            },
-            err => {
-                this.requestPerm();
-            }
             )
     }
 
@@ -356,13 +378,24 @@ export class PlacesPage {
         setTimeout(renderMap, 1);
     }
 
-    openPlace(company: Place) {
-        this.nav.push(PlacePage, {
-            company: company,
-            distanceStr: this.getDistance(company.latitude, company.longitude),
-            coords: this.coords,
-            features: company.specialities
-        });
+    openPlace(data, isShare?: boolean) {
+        let params;
+        if (isShare) {
+            params = {
+                page: data.page,
+                id: data.id,
+                coords: this.coords,
+            }
+        }
+        else {
+            params = {
+                company: data,
+                distanceStr: this.getDistance(data.latitude, data.longitude),
+                coords: this.coords,
+                features: data.specialities
+            }
+        }
+        this.nav.push(PlacePage, params);
     }
 
     getStars(star: number) {

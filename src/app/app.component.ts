@@ -15,6 +15,8 @@ import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
 import { ProfileService } from '../providers/profile.service';
 import { StorageService } from '../providers/storage.service';
+import { ShareService } from '../providers/share.service';
+import { Share } from '../models/share';
 
 
 @Component({
@@ -35,7 +37,8 @@ export class MyApp {
         private alert: AlertController,
         private storage: StorageService,
         private ionicApp: IonicApp,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private share: ShareService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -192,6 +195,13 @@ export class MyApp {
                     // alert.present();
                     if (data.invite_code) {
                         this.storage.set('invCode', data.invite_code);
+                    }
+                    if (data.id && data.id !== '') {
+                        let share: Share = {
+                            page: data.page,
+                            id: data.id
+                        }
+                        this.share.set(share);
                     }
                 }
             });

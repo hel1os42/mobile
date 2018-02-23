@@ -8,6 +8,7 @@ import { OfferService } from '../../providers/offer.service';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { ProfileService } from '../../providers/profile.service';
+import { DistanceUtils } from '../../utils/distanse.utils';
 
 @Component({
     selector: 'page-place',
@@ -22,6 +23,7 @@ export class PlacePage {
     distanceString: string;
     features: Speciality[];
     branchDomain = 'https://nau.app.link';
+    page: string;
 
     constructor(
         private nav: NavController,
@@ -31,17 +33,28 @@ export class PlacePage {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
-        this.company = this.navParams.get('company');
-        this.features = this.navParams.get('features');
-        let companyId = this.company.id;
-
-        this.distanceString = this.navParams.get('distanceStr');
-
-        this.offers.getPlace(companyId)
+        if (this.navParams.get('company')) {
+            this.company = this.navParams.get('company');
+            this.features = this.company.specialities;
+            this.distanceString = this.navParams.get('distanceStr');
+            this.offers.getPlace(this.company.id)
             .subscribe(company => {
                 this.company = company;
                 this.offersList = company.offers;
             });
+        }
+        else {
+            let companyId = this.navParams.get('id');
+            this.page = this.navParams.get('page');
+            this.offers.getPlace(companyId)
+            .subscribe(company => {
+                this.company = company;
+                this.offersList = company.offers;
+                this.distanceString = this.getDistance(this.company.latitude, this.company.longitude);
+                this.features = this.company.specialities;
+            })
+        }
+        // this.distanceString = this.navParams.get('distanceStr');
     }
 
     // ionSelected() {
@@ -60,6 +73,15 @@ export class PlacePage {
         this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
     }
 
+    getDistance(latitude: number, longitude: number) {
+        if (this.coords) {
+            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
+            return this.distanceString;
+        };
+        return undefined;
+    }
+
     share() {
         const Branch = window['Branch'];
         this.profile.get(false)
@@ -69,7 +91,7 @@ export class PlacePage {
                     canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&id=${this.company.id}`,
                     title: this.company.name,
                     contentDescription: this.company.description,
-                    contentImageUrl: this.company.cover_url,
+                    contentImageUrl: this.company.cover_url + '?size=mobile',
                     // price: 12.12,
                     // currency: 'GBD',
                     contentIndexingMode: 'private',
