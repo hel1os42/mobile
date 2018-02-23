@@ -5,7 +5,7 @@ import { Share } from '../models/share';
 export class ShareService {
 
     share: Share;
-    onShare: EventEmitter<Share>;
+    onShare = new EventEmitter<Share>();
 
     constructor() { }
 

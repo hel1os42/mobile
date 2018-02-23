@@ -53,8 +53,11 @@ export class OfferService {
         });
     }
 
-    getPlace(place_id: string) {
-        return this.api.get(`places/${place_id}?with=offers`);
+    getPlace(place_id: string, isShare?: boolean) {
+        let params = isShare 
+        ? `places/${place_id}?with=offers;specialities` 
+        : `places/${place_id}?with=offers`;
+        return this.api.get(params);
     }
 
     getPlaceOffers(place_id) {
