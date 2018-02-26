@@ -93,28 +93,19 @@ export class LoginPage {
     }
 
     getOtp() {
-        if (this.getDevMode()) {
-            this.isVisibleLoginButton = true;
-            this.authData.code = this.authData.phone.slice(-6);
-            this.backAction = this.platform.registerBackButtonAction(() => {
-                if (this.isVisibleLoginButton) {
-                    this.isVisibleLoginButton = false;
-                    this.backAction();
+        this.auth.getOtp(this.numCode.dial_code + this.authData.phone)
+            .subscribe(() => {
+                this.isVisibleLoginButton = true;
+                if (this.getDevMode()) {
+                    this.authData.code = this.authData.phone.slice(-6);
                 }
-            }, 1);
-        }
-        else {
-            this.auth.getOtp(this.numCode.dial_code + this.authData.phone)
-                .subscribe(() => {
-                    this.isVisibleLoginButton = true;
-                    this.backAction = this.platform.registerBackButtonAction(() => {
-                        if (this.isVisibleLoginButton) {
-                            this.isVisibleLoginButton = false;
-                            this.backAction();
-                        }
-                    }, 1);
-                });
-        }
+                this.backAction = this.platform.registerBackButtonAction(() => {
+                    if (this.isVisibleLoginButton) {
+                        this.isVisibleLoginButton = false;
+                        this.backAction();
+                    }
+                }, 1);
+            });
 
     }
 
