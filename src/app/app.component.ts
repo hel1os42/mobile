@@ -196,10 +196,11 @@ export class MyApp {
                     if (data.invite_code) {
                         this.storage.set('invCode', data.invite_code);
                     }
-                    if (data.id && data.id !== '') {
+                    if (data.placeId && data.placeId !== '') {
                         let share: Share = {
                             page: data.page,
-                            id: data.id
+                            placeId: data.placeId,
+                            offerId: data.offerId
                         }
                         this.share.set(share);
                     }

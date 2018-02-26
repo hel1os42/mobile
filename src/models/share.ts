@@ -1,4 +1,5 @@
 export class Share {
     page: string;
-    id: string;
+    placeId: string;
+    offerId?: string;
 } 
