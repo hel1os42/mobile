@@ -21,6 +21,7 @@ export class AppModeService {
     }
 
     setAdvMode(advMode: boolean) {
+        
         this.storage.set(this.ADV_MODE_KEY, advMode);
     }
 
@@ -33,6 +34,7 @@ export class AppModeService {
     }
 
     setEnvironmentMode(environmentName: string) {
+        this.storage.remove(this.ENVIRONMENT_KEY);
         this.storage.set(this.ENVIRONMENT_KEY, environmentName);
         this.onEnvironmentMode.emit(environmentName);
     }
