@@ -125,7 +125,7 @@ export class OfferPage {
                                     offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
                                 }
                             });
-                    }, 3000)
+                    }, 2000)
                 })
         }
         else {
