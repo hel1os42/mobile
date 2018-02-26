@@ -1826,3 +1826,10 @@ ion-app.disable-scroll {
 .toolbar-ios ion-title {
     padding: 0 40px 0 40px;
 }
+
+.overflow-3line-description{
+    max-height: 12.6vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
+}

@@ -92,11 +92,11 @@
           <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
       </ion-avatar>
         <div class="smooth_transition width-88">
-            <div class="scroll_content margin-bottom-2vw">
+            <div class="scroll_content">
                 <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
             </div>
         </div>
-      <div text-regular class="font-12 text-828282 wrap text-overflow-6-font-12">{{ offer.description }}</div>
+      <div text-regular class="font-12 text-828282 wrap overflow-3line-description margin-top-2vw">{{ offer.description }}</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-2vw flex">
         <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>

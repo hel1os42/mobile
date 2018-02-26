@@ -80,7 +80,8 @@
 
     <ion-footer no-shadow no-border>
         <div text-center class="font-75 text-828282">
-            {{ 'PAGE_SIGNUP.PLEASE_DO_NOT_DISTURB' | translate }}<br> {{ 'PAGE_SIGNUP.YOUR_PRIVATE' | translate }}
+            {{ 'PAGE_SIGNUP.BY_PRESSING' | translate }} <a href="http://nau.io/terms">{{ 'PAGE_SIGNUP.TERMS_AND_CONDITIONS' | translate }}</a>
+            {{ 'PAGE_SIGNUP.AND' | translate }} <a href="http://nau.io/privacy-policy">{{ 'PAGE_SIGNUP.PRIVACY_POLICY' | translate }}</a>
         </div>
         <div *ngIf="envName === 'dev'" class="devmode">Dev mode</div>
         <div *ngIf="envName === 'test'" class="devmode">Test mode</div>
