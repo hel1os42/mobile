@@ -52,6 +52,18 @@
         </feature>
     </platform>
     <platform name="ios">
+        <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Used to assign images</string>
+        </custom-config-file>
+        <custom-config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Allow the app to use your camera for scan QR-code</string>
+        </custom-config-file>
+        <custom-config-file parent="NSLocationWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Allow the app to use your location</string>
+        </custom-config-file>
+        <custom-config-file parent="NSLocationAlwaysUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Allow the app to use your location</string>
+        </custom-config-file>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="180" src="resources/ios/icon/icon-60@3x.png" width="180" />
@@ -121,4 +133,5 @@
     <plugin name="ionic-plugin-keyboard" spec="2.2.1" />
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <plugin name="cordova-plugin-google-analytics" spec="1.8.3" />
+    <plugin name="cordova-custom-config" spec="5.0.2" />
 </widget>
