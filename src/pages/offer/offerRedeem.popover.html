@@ -5,7 +5,7 @@
   <div margin>
       <qr-code [value]="redeemingResponse.code" [size]="qrWith"></qr-code>
     <div margin>
-      <a href="http://nau.io/terms" class="text-4F4F4F font-16">{{ 'PAGE_OFFER.AGREE_WITH_TERMS' | translate }}</a>
+      <a  href="#" (click)="loadUrl()" class="text-4F4F4F font-16">{{ 'PAGE_OFFER.AGREE_WITH_TERMS' | translate }}</a>
     </div>
     <div margin>
       <div class="block-btn">
