@@ -26,6 +26,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarBackgroundColor" value="#cccccc" />
     <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="android-targetSdkVersion" value="25" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon src="resources/android/icon/icon.png" />
@@ -107,7 +108,6 @@
         <ios-team-release value="95864829T9" />
     </branch-config>
     <engine name="ios" spec="4.5.3" />
-    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-device" spec="1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.1" />
@@ -134,4 +134,5 @@
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <plugin name="cordova-plugin-google-analytics" spec="1.8.3" />
     <plugin name="cordova-custom-config" spec="5.0.2" />
+    <engine name="android" spec="6.3.0" />
 </widget>
