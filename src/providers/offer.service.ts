@@ -96,7 +96,7 @@ export class OfferService {
     }
 
     getRedemtionStatus(code: string) {
-        return this.api.get(`activation_codes/${code}`, { showLoading: false });
+        return this.api.get(`activation_codes/${code}`, { showLoading: false, ignoreHttpNotFound: true });
     }
 
     getSearch(str: string, arr: string[]) {
