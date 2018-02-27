@@ -126,7 +126,7 @@ export class OfferPage {
                                     this.profile.refreshAccounts();
                                     offerRedeemPopover.dismiss();
 
-                                    let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company });
+                                    let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
                                     offerRedeemedPopover.present();
                                     offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
                                 }
@@ -139,7 +139,7 @@ export class OfferPage {
         }
     }
 
-    sharePlace() {
+    shareOffer() {
         const Branch = window['Branch'];
         this.profile.get(false)
             .subscribe(profile => {
