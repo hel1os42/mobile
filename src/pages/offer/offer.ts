@@ -131,7 +131,7 @@ export class OfferPage {
                                     offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
                                 }
                             });
-                    }, 2000)
+                    }, 2500)
                 })
         }
         else {
