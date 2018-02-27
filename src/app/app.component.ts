@@ -52,7 +52,7 @@ export class MyApp {
             splashScreen.hide();
 
             statusBar.styleDefault();
-           
+
             //Google Analytics
             this.analytics.startTrackerWithId('UA-114471660-1')
                 .then(() => {
@@ -63,7 +63,6 @@ export class MyApp {
                 })
                 .catch(err => console.log('Error starting GoogleAnalytics', err));
 
-            // this.appMode.setForkMode();// only for fork mode;
             if (this.network.getStatus()) {
                 if (!this.auth.isLoggedIn()) {
                     this.rootPage = OnBoardingPage;
@@ -82,6 +81,7 @@ export class MyApp {
 
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
+                this.appMode.setForkMode();// only for fork mode;
             }
 
             // IPhone X
