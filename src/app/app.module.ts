@@ -92,6 +92,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { NetworkService } from '../providers/network.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { ShareService } from '../providers/share.service';
  
 
 // The translate loader needs to know where to load i18n files
@@ -262,6 +263,7 @@ export function createTranslateLoader(http: HttpClient) {
         TimezoneService,
         GeocodeService,
         NetworkService,
+        ShareService,
         Clipboard,
         InAppBrowser,
         AndroidPermissions,

@@ -18,6 +18,8 @@ import { StorageService } from '../providers/storage.service';
 import { NetworkService } from '../providers/network.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { TokenService } from '../providers/token.service';
+import { ShareService } from '../providers/share.service';
+import { Share } from '../models/share';
 
 
 @Component({
@@ -41,7 +43,8 @@ export class MyApp {
         private ionicApp: IonicApp,
         private appMode: AppModeService,
         private network: NetworkService,
-        private analytics: GoogleAnalytics) {
+        private analytics: GoogleAnalytics,
+        private share: ShareService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -89,13 +92,13 @@ export class MyApp {
                 console.log('Height: ' + platform.height());
             }
 
-            this.branchInit(platform);
+            this.branchInit(platform, splashScreen);
 
             this.initTranslate();
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
-                // this.location.reset();
-                this.branchInit(platform);
+                this.location.reset();
+                this.branchInit(platform, splashScreen, true);
             });
 
             //this.rootPage = TemporaryPage;
@@ -202,7 +205,7 @@ export class MyApp {
         alert.present();
     }
 
-    branchInit(platform) {
+    branchInit(platform, splashScreen, isResume?: boolean) {
         // only on devices
         if (platform.is('cordova')) {
             const Branch = window['Branch'];
@@ -218,6 +221,19 @@ export class MyApp {
                     // alert.present();
                     if (data.invite_code) {
                         this.storage.set('invCode', data.invite_code);
+                    }
+                    if (data.placeId && data.placeId !== '') {
+                        let share: Share = {
+                            page: data.page,
+                            placeId: data.placeId,
+                            offerId: data.offerId
+                        }
+                        this.share.set(share);
+                        if (isResume) {
+                            this.storage.set('share', share)
+                            splashScreen.show();
+                            window.location.reload();
+                        }
                     }
                 }
             });

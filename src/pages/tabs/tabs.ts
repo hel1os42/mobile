@@ -1,15 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavParams, Tabs } from 'ionic-angular';
+import { NavParams, Platform, Tabs } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
+import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { FeedPage } from '../feed/feed';
 import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserNauPage } from '../user-nau/user-nau';
 import { UserProfilePage } from '../user-profile/user-profile';
-import { TransactionService } from '../../providers/transaction.service';
 
 @Component({
     selector: 'page-tabs',
@@ -29,10 +29,13 @@ export class TabsPage {
     nauParams;//temporary
     shownTransactions: boolean;//temporary
     envName: string;
+    onResumeSubscription: Subscription;
+    onShareSubscription: Subscription;
 
     @ViewChild('tabs') tabs: Tabs;
 
     constructor(
+        private platform: Platform,
         private appMode: AppModeService,
         private navParams: NavParams,
         private profile: ProfileService,
@@ -88,5 +91,7 @@ export class TabsPage {
 
     ionViewWillUnload() {
         this._onHomeChangeSubscription.unsubscribe();
+        // this.onResumeSubscription.unsubscribe();
+        // this.onShareSubscription.unsubscribe();
     }
 }

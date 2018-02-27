@@ -22,6 +22,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
+import { ShareService } from '../../providers/share.service';
+import { Share } from '../../models/share';
 
 
 @Component({
@@ -61,7 +63,9 @@ export class PlacesPage {
     isChangedFilters = false;
     isForkMode;
     onResumeSubscription: Subscription;
+    onShareSubscription: Subscription;
     isConfirm = false;
+    shareData: Share;
 
     constructor(
         private platform: Platform,
@@ -75,9 +79,18 @@ export class PlacesPage {
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
         private translate: TranslateService,
-        private diagnostic: Diagnostic) {
+        private diagnostic: Diagnostic,
+        private share: ShareService) {
 
         this.isForkMode = this.appMode.getForkMode();
+
+        // this.onShareSubscription = this.share.onShare
+        //     .subscribe(resp => {
+        //         this.shareData = resp;
+        //         debugger
+        //     })
+        this.shareData = this.share.get();
+
         this.segment = "alloffers";
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -162,6 +175,9 @@ export class PlacesPage {
                         lat: user.latitude,
                         lng: user.longitude
                     };
+                    if (this.shareData) {
+                        this.openPlace(this.shareData, true)
+                    }
                     this.getCompaniesList();
                 })
         }
@@ -184,6 +200,9 @@ export class PlacesPage {
                                     lng: resp.coords.longitude
                                 };
                                 loadingLocation.dismissAll();
+                                if (this.shareData) {
+                                    this.openPlace(this.shareData, true)
+                                }
                                 this.getCompaniesList();
                             }
                         })
@@ -205,6 +224,9 @@ export class PlacesPage {
                             lng: resp.coords.longitude
                         };
                         loadingLocation.dismissAll();
+                        if (this.shareData) {
+                            this.openPlace(this.shareData, true)
+                        }
                         this.getCompaniesList();
                     }
                 })
@@ -380,13 +402,23 @@ export class PlacesPage {
         setTimeout(renderMap, 1);
     }
 
-    openPlace(company: Place) {
-        this.nav.push(PlacePage, {
-            company: company,
-            distanceStr: this.getDistance(company.latitude, company.longitude),
-            coords: this.coords,
-            features: company.specialities
-        });
+    openPlace(data, isShare?: boolean) {
+        let params;
+        if (isShare) {
+            params = {
+               ...data,
+                coords: this.coords,
+            }
+        }
+        else {
+            params = {
+                company: data,
+                distanceStr: this.getDistance(data.latitude, data.longitude),
+                coords: this.coords,
+                features: data.specialities
+            }
+        }
+        this.nav.push(PlacePage, params);
     }
 
     getStars(star: number) {
