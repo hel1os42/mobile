@@ -31,7 +31,7 @@ class UriQueryEncoder extends QueryEncoder {
 @Injectable()
 export class ApiService {
     HTTP_STATUS_CODE_UNATHORIZED = 401;
-    HTTP_STATUS_CODE_TOO_MANY_REQ = 429;
+    HTTP_STATUS_CODE_TOO_MANY_REQ = 423;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
     prodUrl = 'https://api.nau.io';
     devUrl = 'https://nau.toavalon.com';
@@ -117,7 +117,8 @@ export class ApiService {
                         return;
                     }
                     if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
-                        messages.push('Too Many Attempts.')
+                        let err = errResp.json();
+                        messages.push(err.phone);
                     }
                     else if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound) {
                         return;

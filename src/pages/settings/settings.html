@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content class="padding-no">
-    <div [hidden]="envName !== 'dev'">
+    <div [hidden]="envName !== 'dev' && envName !== 'test'">
   <div padding-top class="block-lines-bottom-left-right">
     <a class="select" (click)="toggleAccountsChoiceVisible()">
       <span text-uppercase class="font-14 text-4F4F4F">
@@ -29,7 +29,7 @@
         <ion-col>
           <div margin-top
               class="thumb_image"
-              [ngStyle]="{'background-image': 'url(' + user.picture_url + '?' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+              [ngStyle]="{'background-image': 'url(' + user.picture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
         </div>
           <div class="font-16 text-3E4B5D bold padding-top-3vw">{{ 'PAGE_SETTINGS.CLIENT' | translate }}</div>
         </ion-col>
@@ -41,7 +41,7 @@
         <ion-col>
           <div margin-top
               class="thumb_image"
-              [ngStyle]="{'background-image': 'url(' + advPicture_url + '?' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+              [ngStyle]="{'background-image': 'url(' + advPicture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
         </div>
           <div class="font-16 text-BDBDBD bold padding-top-3vw">{{ 'PAGE_SETTINGS.ADVERTISER' | translate }}</div>
         </ion-col>
@@ -129,36 +129,38 @@
     </div>
    -->
 
-  <div class="block-lines">
-    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.PRIVATE_DATA' | translate }}</div>
-  </div>
 
-  <div class="block-lines" mode="md">
-    <ion-item class="bg-gray margin-bottom-small">
-      <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_PRIVATE_DATA' | translate }}</ion-label>
-      <ion-checkbox disabled [(ngModel)]="showData" item-end></ion-checkbox>
-    </ion-item>
-    <ion-item class="bg-gray margin-bottom-small">
-      <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_PHONE_NUMBER' | translate }}</ion-label>
-      <ion-checkbox disabled [(ngModel)]="showPhone" item-end></ion-checkbox>
-    </ion-item>
-    <ion-item class="bg-gray">
-      <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_EMAIL_ADDRESS' | translate }}</ion-label>
-      <ion-checkbox disabled [(ngModel)]="showEmail" item-end></ion-checkbox>
-    </ion-item>
-  </div>
+    <!--
+    <div class="block-lines">
+      <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.PRIVATE_DATA' | translate }}</div>
+    </div>
 
-  <!-- <div class="block-lines">
-    <a class="text-4F4F4F font-14" (click)="toggleSelectRadiusVisible()">{{ 'PAGE_SETTINGS.SET_RADIUS' | translate }}</a>
-  </div>
-  <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-top margin-bottom padding-left padding-right
-    class="border-bottom-no">
-    <ion-label>{{ 'PAGE_SETTINGS.OFFERS_RADIUS' | translate }}</ion-label>
-    <ion-select [(ngModel)]="radius" (ionChange)="toggleSelectRadiusVisible()" (ionCancel)="toggleSelectRadiusVisible()" placeholder="50 {{ 'UNIT.M' | translate }}"
-      name="radius" class="bg-gray width-100" interface="action-sheet">
-      <ion-option *ngFor="let radius of radiuses" [value]="radius">{{ radius }} {{ 'UNIT.M' | translate }}</ion-option>
-    </ion-select>
-  </ion-item> -->
+    <div class="block-lines" mode="md">
+      <ion-item class="bg-gray margin-bottom-small">
+        <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_PRIVATE_DATA' | translate }}</ion-label>
+        <ion-checkbox disabled [(ngModel)]="showData" item-end></ion-checkbox>
+      </ion-item>
+      <ion-item class="bg-gray margin-bottom-small">
+        <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_PHONE_NUMBER' | translate }}</ion-label>
+        <ion-checkbox disabled [(ngModel)]="showPhone" item-end></ion-checkbox>
+      </ion-item>
+      <ion-item class="bg-gray">
+        <ion-label margin-left item-end class="text-3E4B5D font-16">{{ 'PAGE_SETTINGS.SHOW_MY_EMAIL_ADDRESS' | translate }}</ion-label>
+        <ion-checkbox disabled [(ngModel)]="showEmail" item-end></ion-checkbox>
+      </ion-item>
+    </div>
+
+    <!-- <div class="block-lines">
+      <a class="text-4F4F4F font-14" (click)="toggleSelectRadiusVisible()">{{ 'PAGE_SETTINGS.SET_RADIUS' | translate }}</a>
+    </div>
+    <ion-item (click)="toggleSelectRadiusVisible()" *ngIf="isSelectRadiusVisible" margin-top margin-bottom padding-left padding-right
+      class="border-bottom-no">
+      <ion-label>{{ 'PAGE_SETTINGS.OFFERS_RADIUS' | translate }}</ion-label>
+      <ion-select [(ngModel)]="radius" (ionChange)="toggleSelectRadiusVisible()" (ionCancel)="toggleSelectRadiusVisible()" placeholder="50 {{ 'UNIT.M' | translate }}"
+        name="radius" class="bg-gray width-100" interface="action-sheet">
+        <ion-option *ngFor="let radius of radiuses" [value]="radius">{{ radius }} {{ 'UNIT.M' | translate }}</ion-option>
+      </ion-select>
+    </ion-item> -->
 
   <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
 

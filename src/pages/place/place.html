@@ -6,13 +6,13 @@
 
 <ion-content [ngSwitch]="segment" no-bounce>
     <ion-list class="margin-0">
-        <div class="cover" [style.background-image]="'url(' + company.cover_url + ')'">
-            <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + ')'"></div>
+        <div class="cover" [style.background-image]="'url(' + company.cover_url + '?size=mobile&)'">
+            <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
             <div class="cover_block_btn">
                 <button ion-button icon-only color="white">
                     <img src="assets/img/place/btn_star.svg">
                 </button>
-                <button ion-button icon-only color="white">
+                <button (click)="sharePlace()" ion-button icon-only color="white">
                     <img src="assets/img/place/btn_share.svg">
                 </button>
             </div>
@@ -89,14 +89,14 @@
     <ion-item *ngFor=" let offer of offersList" class="relative">
       <ion-avatar item-start>
         <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
-          <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + ')'}"></div>
+          <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
       </ion-avatar>
         <div class="smooth_transition width-88">
-            <div class="scroll_content margin-bottom-2vw">
+            <div class="scroll_content">
                 <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
             </div>
         </div>
-      <div text-regular class="font-12 text-828282 wrap text-overflow-6-font-12">{{ offer.description }}</div>
+      <div text-regular class="font-12 text-828282 wrap overflow-3line-description margin-top-2vw">{{ offer.description }}</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-2vw flex">
         <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
@@ -109,7 +109,7 @@
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
     <ion-item *ngFor=" let testimonial of company.testimonials" (click)="openFeedback(testimonial)">
       <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + ')'"></div>
+        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + '?size=mobile&)'"></div>
       </ion-avatar>
       <div class="bold font-18 text-3E4B5D">{{ testimonial.name }} <span class="font-12 text-828282 no-bold">{{ testimonial.date }}</span></div>
       <div class="margin-top-10 font-12 text-828282 wrap italic text-overflow-35">{{ testimonial.text }}</div>

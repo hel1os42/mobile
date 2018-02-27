@@ -104,13 +104,6 @@ page-places {
         background-color: white;
     }
 
-    .overflow-3line-description{
-        max-height: 12.5vw;
-        height: auto;
-        display: block;
-        overflow: hidden;
-    }
-
     .font-36{
         padding-bottom: 0;
     }
@@ -199,5 +192,9 @@ places-popover-component {
 
     .item.item-ios .checkbox-ios[item-right], .item.item-ios .checkbox-ios[item-end] {
         margin: 0 2.3vw;
+    }
+
+    ion-item.item.item-block.item-ios.item-checkbox {
+        padding-left: 2vw;
     }
 }

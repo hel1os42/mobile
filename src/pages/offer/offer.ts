@@ -10,6 +10,7 @@ import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
+import { ShareService } from '../../providers/share.service';
 
 @Component({
     selector: 'page-offer',
@@ -24,6 +25,7 @@ export class OfferPage {
     distanceString: string;
     distance: number;
     coords: Coords;
+    branchDomain = 'https://nau.app.link';
 
     constructor(
         private nav: NavController,
@@ -32,8 +34,12 @@ export class OfferPage {
         private offers: OfferService,
         private app: App,
         private profile: ProfileService,
-        private alertCtrl: AlertController) {
+        private alertCtrl: AlertController,
+        private share: ShareService) {
 
+        if (this.share.get()) {
+            this.share.remove();
+        }
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
         this.distanceString = this.navParams.get('distanceStr');
@@ -120,16 +126,52 @@ export class OfferPage {
                                     this.profile.refreshAccounts();
                                     offerRedeemPopover.dismiss();
 
-                                    let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company });
+                                    let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
                                     offerRedeemedPopover.present();
                                     offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
                                 }
                             });
-                    }, 3000)
+                    }, 2500)
                 })
         }
         else {
             this.presentAlert()
         }
+    }
+
+    shareOffer() {
+        const Branch = window['Branch'];
+        this.profile.get(false)
+            .subscribe(profile => {
+                let properties = {
+                    canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                    canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                    title: this.offer.label,
+                    contentDescription: this.offer.description,
+                    contentImageUrl: this.offer.picture_url + '?size=mobile',
+                    // price: 12.12,
+                    // currency: 'GBD',
+                    contentIndexingMode: 'private',
+                    contentMetadata: {
+                        page: 'offer',
+                        invite_code: profile.invite_code,
+                        placeId: this.company.id,
+                        offerId: this.offer.id
+                    }
+                };
+                var branchUniversalObj = null;
+                Branch.createBranchUniversalObject(properties)
+                    .then(res => {
+                        branchUniversalObj = res;
+                        let analytics = {};
+                        // let message = this.company.name + this.company.description
+                        let message = 'NAU';
+                        branchUniversalObj.showShareSheet(analytics, properties, message)
+                            .then(resp => console.log(resp))
+                    }).catch(function (err) {
+                        console.log('Branch create obj error: ' + JSON.stringify(err))
+                    })
+
+            })
     }
 }

@@ -10,6 +10,7 @@ import { StorageService } from '../../providers/storage.service';
 import { LocationService } from '../../providers/location.service';
 import { Subscription } from 'rxjs';
 import { Keyboard } from '@ionic-native/keyboard';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-signup',
@@ -20,13 +21,14 @@ export class SignUpPage {
         phone: '',
         code: ''
     };
-    //numCodes = ['+7', '+49', '+63', '+57', '+380', '+86'];
     phoneNumber: string;
     phoneCodes = PHONE_CODES;
     numCode = PHONE_CODES.find(item => item.code === 'US');
     envName: string;
     onKeyboardShowSubscription: Subscription;
     // onKeyboardHideSubscription: Subscript
+    termsUrl = 'http://nau.io/terms';
+    policyUrl = 'http://nau.io/privacy-policy';
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -38,7 +40,8 @@ export class SignUpPage {
         private appMode: AppModeService,
         private storage: StorageService,
         private location: LocationService,
-        private keyboard: Keyboard) {
+        private keyboard: Keyboard,
+        private browser: InAppBrowser) {
 
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
@@ -114,6 +117,10 @@ export class SignUpPage {
                 }, 5);
             }
         );
+    }
+
+    loadUrl(url) {
+        this.browser.create(url, '_system');
     }
 
     ionViewDidLeave() {

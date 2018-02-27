@@ -352,8 +352,10 @@
         "PLEASE_CHOOSE" : "Please choose your country phone code",
         "AND_FILL" : "and fill your phone number",
         "NEXT" : "Next",
-        "PLEASE_DO_NOT_DISTURB" : "Please do not disturb",
-        "YOUR_PRIVATE" : "your private data will be safety"
+        "BY_PRESSING" : "By pressing «Next», I accept",
+        "TERMS_AND_CONDITIONS" : "Terms and conditions",
+        "AND" : "and",
+        "PRIVACY_POLICY" : "privacy policy"
     },
 
     "PAGE_SIGNUP-CODE" : {

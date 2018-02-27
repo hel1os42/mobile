@@ -1799,6 +1799,11 @@ ion-app.disable-scroll {
     width: 10.4vw;
 }
 
+.iphonex .crop-block .btn_check{
+    bottom: calc(env(safe-area-inset-bottom) + 3vw);
+    bottom: calc(env(safe-area-inset-bottom) + 3vw);
+}
+
 .crop-block .btn_check.save{
     right: 3vw;
     padding: 3.1vw 2.7vw 0 2.7vw;
@@ -1825,4 +1830,11 @@ ion-app.disable-scroll {
 
 .toolbar-ios ion-title {
     padding: 0 40px 0 40px;
+}
+
+.overflow-3line-description{
+    max-height: 12.6vw;
+    height: auto;
+    display: block;
+    overflow: hidden;
 }
