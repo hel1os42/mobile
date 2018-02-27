@@ -382,8 +382,7 @@ export class PlacesPage {
         let params;
         if (isShare) {
             params = {
-                page: data.page,
-                id: data.id,
+               ...data,
                 coords: this.coords,
             }
         }

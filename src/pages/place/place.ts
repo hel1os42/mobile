@@ -5,10 +5,11 @@ import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
 import { Speciality } from '../../models/speciality';
 import { OfferService } from '../../providers/offer.service';
+import { ProfileService } from '../../providers/profile.service';
+import { ShareService } from '../../providers/share.service';
+import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
-import { ProfileService } from '../../providers/profile.service';
-import { DistanceUtils } from '../../utils/distanse.utils';
 
 @Component({
     selector: 'page-place',
@@ -29,7 +30,8 @@ export class PlacePage {
         private nav: NavController,
         private offers: OfferService,
         private navParams: NavParams,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private share: ShareService) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -44,17 +46,24 @@ export class PlacePage {
             });
         }
         else {
-            let companyId = this.navParams.get('id');
+            let companyId = this.navParams.get('placeId');
             this.page = this.navParams.get('page');
+            let offerId = this.navParams.get('offerId');
             this.offers.getPlace(companyId)
             .subscribe(company => {
                 this.company = company;
                 this.offersList = company.offers;
                 this.distanceString = this.getDistance(this.company.latitude, this.company.longitude);
                 this.features = this.company.specialities;
+                if (!offerId) {
+                    this.share.remove();
+                }
+                else if (offerId) {
+                    let offer = company.offers.filter(offer => offer.id === offerId);
+                    this.openOffer(offer[0], company);
+                }
             })
         }
-        // this.distanceString = this.navParams.get('distanceStr');
     }
 
     // ionSelected() {
@@ -82,13 +91,13 @@ export class PlacePage {
         return undefined;
     }
 
-    share() {
+    sharePlace() {
         const Branch = window['Branch'];
         this.profile.get(false)
             .subscribe(profile => {
                 let properties = {
-                    canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&id=${this.company.id}`,
-                    canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&id=${this.company.id}`,
+                    canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}`,
+                    canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}`,
                     title: this.company.name,
                     contentDescription: this.company.description,
                     contentImageUrl: this.company.cover_url + '?size=mobile',
@@ -98,7 +107,7 @@ export class PlacePage {
                     contentMetadata: {
                         page: 'place',
                         invite_code: profile.invite_code,
-                        id: this.company.id
+                        placeId: this.company.id,
                     }
                 };
                 var branchUniversalObj = null;
@@ -117,8 +126,7 @@ export class PlacePage {
             })
     }
 
-    openOffer(offer, company) {
-        //this.nav.setRoot(OfferPage, { offer: offer});
+    openOffer(offer, company?) {
         this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,
