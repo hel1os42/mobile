@@ -74,13 +74,13 @@ export class MyApp {
                 console.log('Height: ' + platform.height());
             }
 
-            this.branchInit(platform);
+            this.branchInit(platform, splashScreen);
 
             this.initTranslate();
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
-                this.branchInit(platform);
+                this.branchInit(platform, splashScreen, true);
             });
 
             //this.rootPage = TemporaryPage;
@@ -179,7 +179,7 @@ export class MyApp {
         alert.present();
     }
 
-    branchInit(platform) {
+    branchInit(platform, splashScreen, isResume?: boolean) {
         // only on devices
         if (platform.is('cordova')) {
             const Branch = window['Branch'];
@@ -203,6 +203,11 @@ export class MyApp {
                             offerId: data.offerId
                         }
                         this.share.set(share);
+                        if (isResume) {
+                            this.storage.set('share', share)
+                            splashScreen.show();
+                            window.location.reload();
+                        }
                     }
                 }
             });

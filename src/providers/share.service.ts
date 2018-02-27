@@ -1,13 +1,18 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Share } from '../models/share';
+import { StorageService } from './storage.service';
 
 @Injectable()
 export class ShareService {
+    SHARE_KEY = 'share';
+    share: Share = this.storage.get(this.SHARE_KEY);
 
-    share: Share;
-    onShare = new EventEmitter<Share>();
-
-    constructor() { }
+    constructor(private storage: StorageService) {
+        this.share = this.storage.get(this.SHARE_KEY);
+        if (this.share) {
+            this.storage.remove(this.SHARE_KEY);
+        }
+     }
 
     get() {
         return this.share;
@@ -15,7 +20,6 @@ export class ShareService {
 
     set(share) {
         this.share = share;
-        this.onShare.emit(this.share);
     }
 
     remove() {

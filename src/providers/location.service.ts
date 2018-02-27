@@ -18,11 +18,12 @@ export class LocationService {
         // if (this.geoposition)
         //     return Promise.resolve(this.geoposition);
         // else
-            return this.geolocation.getCurrentPosition({
-                enableHighAccuracy: isHighAccuracy,
-                timeout: 80000,
-                maximumAge: 10000, 
-            }).then(geo => this.geoposition = geo);
+        let promise = this.geolocation.getCurrentPosition({
+            enableHighAccuracy: isHighAccuracy,
+            timeout: 80000,
+            maximumAge: 10000})
+        promise.then(geo => this.geoposition = geo);
+        return promise;
     }
 
     getByIp() {

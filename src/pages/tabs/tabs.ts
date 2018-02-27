@@ -1,16 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavParams, Tabs, Platform } from 'ionic-angular';
+import { NavParams, Platform, Tabs } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
+import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { FeedPage } from '../feed/feed';
 import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserNauPage } from '../user-nau/user-nau';
 import { UserProfilePage } from '../user-profile/user-profile';
-import { TransactionService } from '../../providers/transaction.service';
-import { ShareService } from '../../providers/share.service';
 
 @Component({
     selector: 'page-tabs',
@@ -40,16 +39,8 @@ export class TabsPage {
         private appMode: AppModeService,
         private navParams: NavParams,
         private profile: ProfileService,
-        private transaction: TransactionService,
-        private share: ShareService) {
+        private transaction: TransactionService) {
 
-        // for resume sharing and needed save coords to service
-        // this.onResumeSubscription = platform.resume.subscribe(() => {
-        //     this.share.onShare.subscribe(resp => {
-        //         this.tabs.select(0);
-        //         debugger
-        //     })
-        // });
         //temporary
         this.envName = this.appMode.getEnvironmentMode();
         this.tab2Root = (this.envName === 'dev' || this.envName === 'test')
