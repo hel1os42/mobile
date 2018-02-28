@@ -29,8 +29,6 @@ export class TabsPage {
     nauParams;//temporary
     shownTransactions: boolean;//temporary
     envName: string;
-    onResumeSubscription: Subscription;
-    onShareSubscription: Subscription;
 
     @ViewChild('tabs') tabs: Tabs;
 
@@ -66,18 +64,19 @@ export class TabsPage {
         // temporary - always show PlacesPage
         this.tab1Root = PlacesPage;
 
-        this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
-            // this.tabs.getByIndex(0)
-            //    .setRoot(PlacesPage);
-        });
+        // this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
+        //     // this.tabs.getByIndex(0)
+        //     //    .setRoot(PlacesPage);
+        // });
 
         this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;
+        debugger
     }
 
-    tabChange() {
-        if (this.tabs.getSelected().index > 0)
-            this.appMode.setHomeMode(false);
-    }
+    // tabChange() {
+    //     if (this.tabs.getSelected().index > 0)
+    //         this.appMode.setHomeMode(false);
+    // }
 
     //temporary
     refresh() {
@@ -89,9 +88,9 @@ export class TabsPage {
     }
     //temporary
 
-    ionViewWillUnload() {
-        this._onHomeChangeSubscription.unsubscribe();
-        // this.onResumeSubscription.unsubscribe();
-        // this.onShareSubscription.unsubscribe();
-    }
+    // ionViewWillUnload() {
+    //     this._onHomeChangeSubscription.unsubscribe();
+    //     // this.onResumeSubscription.unsubscribe();
+    //     // this.onShareSubscription.unsubscribe();
+    // }
 }
