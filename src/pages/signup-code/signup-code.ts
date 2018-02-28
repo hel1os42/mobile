@@ -41,7 +41,6 @@ export class SignUpCodePage {
                         code: this.register.code
                     })
                     .subscribe(res => {
-                        this.appMode.setHomeMode(false);
                         // this.nav.setRoot(CreateUserProfilePage, { user: resp});
                         // this.nav.setRoot(CreateUserProfilePage);temporary
                         this.nav.setRoot(TemporaryPage);// temporary

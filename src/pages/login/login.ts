@@ -115,7 +115,6 @@ export class LoginPage {
             code: this.authData.code
         })
             .subscribe(resp => {
-                this.appMode.setHomeMode(true);
                 // this.profile.get(true)
                 //     .subscribe(res => {
                 //         if (res.name == '' && !res.email) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -6,6 +7,7 @@ import { App, IonicApp, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Subscription } from 'rxjs/Rx';
 import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
+import { Share } from '../models/share';
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
@@ -13,13 +15,10 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
-import { ProfileService } from '../providers/profile.service';
-import { StorageService } from '../providers/storage.service';
 import { NetworkService } from '../providers/network.service';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
-import { TokenService } from '../providers/token.service';
+import { ProfileService } from '../providers/profile.service';
 import { ShareService } from '../providers/share.service';
-import { Share } from '../models/share';
+import { StorageService } from '../providers/storage.service';
 
 
 @Component({
@@ -215,10 +214,6 @@ export class MyApp {
             Branch.initSession(data => {
                 if (data['+clicked_branch_link']) {
                     // read deep link data on click
-                    // let alert = this.alert.create({
-                    //     title: 'Deep Link Data: ' + JSON.stringify(data),
-                    // });
-                    // alert.present();
                     if (data.invite_code) {
                         this.storage.set('invCode', data.invite_code);
                     }

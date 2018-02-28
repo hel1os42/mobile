@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-splash-info',
@@ -7,11 +6,8 @@ import { AppModeService } from '../../providers/appMode.service';
 })
 export class SplashInfoPage {
 
-    constructor(private appMode: AppModeService) {
+    constructor() {
 
     }
 
-    openHome() {
-        this.appMode.setHomeMode(true);
-    }
 }

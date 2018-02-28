@@ -1,29 +1,28 @@
 import { Component } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { LoadingController, NavController, Platform, Popover, PopoverController, IonicApp, App } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+import { LoadingController, NavController, Platform, Popover, PopoverController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer, Map } from 'leaflet';
+import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer } from 'leaflet';
+import * as _ from 'lodash';
+import { Subscription } from 'rxjs/Subscription';
 import { ChildCategory } from '../../models/childCategory';
 import { Coords } from '../../models/coords';
 import { OfferCategory } from '../../models/offerCategory';
 import { Place } from '../../models/place';
 import { RetailType } from '../../models/retailType';
-import { SelectedCategory } from '../../models/selectedCategory';
+import { Share } from '../../models/share';
 import { Tag } from '../../models/tag';
 import { AppModeService } from '../../providers/appMode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
+import { ShareService } from '../../providers/share.service';
+import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { Subscription } from 'rxjs/Subscription';
-import { TranslateService } from '@ngx-translate/core';
-import * as _ from 'lodash';
-import { DataUtils } from '../../utils/data.utils';
-import { ShareService } from '../../providers/share.service';
-import { Share } from '../../models/share';
 
 
 @Component({
@@ -351,10 +350,6 @@ export class PlacesPage {
             return bounds;
         }
         return undefined
-    }
-
-    ionSelected() {
-        this.appMode.setHomeMode(false);
     }
 
     isSelectedCategory(category: OfferCategory) {

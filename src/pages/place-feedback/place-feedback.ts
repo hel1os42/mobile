@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-place-feedback',
@@ -11,13 +10,8 @@ export class PlaceFeedbackPage {
     testimonial = {};
 
     constructor(private nav: NavController,
-        private navParams: NavParams,
-        private appMode: AppModeService) {
+        private navParams: NavParams) {
 
-    }
-
-    ionSelected() {
-        this.appMode.setHomeMode(false);
     }
 
     ionViewDidLoad() {

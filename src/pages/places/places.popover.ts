@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, NavParams } from 'ionic-angular';
-import { SelectedCategory } from '../../models/selectedCategory';
+import { NavParams, ViewController } from 'ionic-angular';
 import * as _ from 'lodash';
 
 @Component({

@@ -10,7 +10,6 @@ export class AppModeService {
     ENVIRONMENT_KEY = 'envName';
     FORK_MODE_KEY = 'isForkMode';
 
-    onHomeChange = new EventEmitter<boolean>();
     onEnvironmentMode = new EventEmitter<string>();
 
     constructor(private storage: StorageService) {
@@ -25,10 +24,6 @@ export class AppModeService {
         this.storage.set(this.ADV_MODE_KEY, advMode);
     }
 
-    getHomeMode() {
-        return !!this.storage.get(this.HOME_MODE_KEY);
-    }
-
     getEnvironmentMode(): string {
         return this.storage.get(this.ENVIRONMENT_KEY);
     }
@@ -37,12 +32,6 @@ export class AppModeService {
         this.storage.remove(this.ENVIRONMENT_KEY);
         this.storage.set(this.ENVIRONMENT_KEY, environmentName);
         this.onEnvironmentMode.emit(environmentName);
-    }
-
-    setHomeMode(showPlaces: boolean) {
-        // let oldShowPlaces = this.getHomeMode();
-        this.storage.set(this.HOME_MODE_KEY, showPlaces);
-        this.onHomeChange.emit(showPlaces);
     }
 
     getOnboardingVisible() {
