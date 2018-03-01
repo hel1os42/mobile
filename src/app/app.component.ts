@@ -227,7 +227,12 @@ export class MyApp {
                         if (isResume) {
                             this.storage.set('share', share)
                             splashScreen.show();
-                            window.location.reload();
+                            if (platform.is('ios')) {
+                                window.location.reload(true);
+                            }
+                            if (!platform.is('ios')) {
+                                window.location.reload();
+                            }
                         }
                     }
                 }
