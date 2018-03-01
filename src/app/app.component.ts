@@ -28,6 +28,7 @@ export class MyApp {
     rootPage: any;
     onResumeSubscription: Subscription;
     onConnectSubscription: Subscription;
+    isResumeGlobal = false;
 
     constructor(platform: Platform,
         statusBar: StatusBar,
@@ -96,6 +97,7 @@ export class MyApp {
             this.initTranslate();
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
+                //window.alert('resume')
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
             });
@@ -205,6 +207,7 @@ export class MyApp {
     }
 
     branchInit(platform, splashScreen, isResume?: boolean) {
+        this.isResumeGlobal = isResume;
         // only on devices
         if (platform.is('cordova')) {
             const Branch = window['Branch'];
@@ -225,7 +228,7 @@ export class MyApp {
                         };
 
                         this.share.set(share);
-                        if (isResume) {
+                        if (this.isResumeGlobal) {
                             this.storage.set('share', share);
                             splashScreen.show();
                             window.location.reload(true);
