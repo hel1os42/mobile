@@ -98,7 +98,6 @@ export class MyApp {
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
-                window.alert('resume');
             });
 
             //this.rootPage = TemporaryPage;
@@ -225,13 +224,12 @@ export class MyApp {
                             offerId: data.offerId
                         };
 
-                        window.alert('isResume: ' + isResume);
                         this.share.set(share);
-                        //if (isResume && platform.is('android')) {
+                        if (isResume) {
                             this.storage.set('share', share);
                             splashScreen.show();
                             window.location.reload(true);
-                        //}
+                        }
                     }
                 }
             });
