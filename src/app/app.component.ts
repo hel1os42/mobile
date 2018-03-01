@@ -90,8 +90,11 @@ export class MyApp {
                 console.log('Width: ' + platform.width());
                 console.log('Height: ' + platform.height());
             }
-
-            this.branchInit(platform, splashScreen);
+       
+            let isResumeIos = this.storage.get('share');
+            if (!isResumeIos.isResumeIos) {
+                this.branchInit(platform, splashScreen);
+            }
 
             this.initTranslate();
 
@@ -227,11 +230,9 @@ export class MyApp {
                         if (isResume) {
                             this.storage.set('share', share)
                             splashScreen.show();
+                            window.location.reload(true);
                             if (platform.is('ios')) {
-                                window.location.reload(true);
-                            }
-                            if (!platform.is('ios')) {
-                                window.location.reload();
+                                share.isResumeIos = true;
                             }
                         }
                     }
