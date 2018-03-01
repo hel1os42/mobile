@@ -90,17 +90,15 @@ export class MyApp {
                 console.log('Width: ' + platform.width());
                 console.log('Height: ' + platform.height());
             }
-       
-            let isResumeIos = this.storage.get('share');
-            if (!isResumeIos.isResumeIos) {
-                this.branchInit(platform, splashScreen);
-            }
+
+            this.branchInit(platform, splashScreen);
 
             this.initTranslate();
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
+                window.alert('resume');
             });
 
             //this.rootPage = TemporaryPage;
@@ -225,16 +223,15 @@ export class MyApp {
                             page: data.page,
                             placeId: data.placeId,
                             offerId: data.offerId
-                        }
+                        };
+
+                        window.alert('isResume: ' + isResume);
                         this.share.set(share);
-                        if (isResume) {
-                            this.storage.set('share', share)
+                        //if (isResume && platform.is('android')) {
+                            this.storage.set('share', share);
                             splashScreen.show();
                             window.location.reload(true);
-                            if (platform.is('ios')) {
-                                share.isResumeIos = true;
-                            }
-                        }
+                        //}
                     }
                 }
             });
