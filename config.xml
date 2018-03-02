@@ -140,5 +140,4 @@
     <plugin name="cordova-plugin-image-picker" spec="1.1.3">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign images" />
     </plugin>
-    <plugin name="cordova-custom-config" spec="^5.0.2" />
 </widget>
