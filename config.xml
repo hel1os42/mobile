@@ -54,24 +54,6 @@
         </feature>
     </platform>
     <platform name="ios">
-        <comment>
-            <plugin name="cordova-custom-config" spec="^5.0.2" />
-            <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
-                <string>Used to assign images</string>
-            </custom-config-file>
-            <custom-config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
-                <string>Allow the app to use your camera for scan QR-code</string>
-            </custom-config-file>
-            <custom-config-file parent="NSLocationWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
-                <string>The application uses your location to get you to the bargains around the corner</string>
-            </custom-config-file>
-            <custom-config-file parent="NSLocationAlwaysUsageDescription" platform="ios" target="*-Info.plist">
-                <string>The application uses your location to get you to the bargains around the corner</string>
-            </custom-config-file>
-            <custom-config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
-                <string>The application uses your location to get you to the bargains around the corner</string>
-            </custom-config-file>
-        </comment>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="180" src="resources/ios/icon/icon-60@3x.png" width="180" />
@@ -139,8 +121,5 @@
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <plugin name="cordova-plugin-google-analytics" spec="1.8.3" />
     <plugin name="com.cordova.plugins.cookiemaster" />
-    <plugin name="cordova-plugin-image-picker" spec="1.1.3">
-        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign images" />
-    </plugin>
-    <plugin name="cordova-custom-config" spec="^5.0.2" />
+    <plugin name="cordova-plugin-image-picker" spec="https://github.com/abelabbesnabi/cordova-plugin-image-picker" />
 </widget>
