@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="021" id="com.nau.io" ios-CFBundleVersion="1.0.1" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="021" id="com.nau.io" ios-CFBundleVersion="1.0.2" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>NAU</name>
     <description>NAU</description>
     <content src="index.html" />
@@ -54,24 +54,24 @@
         </feature>
     </platform>
     <platform name="ios">
-        <!--
-        <plugin name="cordova-custom-config" spec="^5.0.2" />
-        <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
-            <string>Used to assign images</string>
-        </custom-config-file>
-        <custom-config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
-            <string>Allow the app to use your camera for scan QR-code</string>
-        </custom-config-file>
-        <custom-config-file parent="NSLocationWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
-            <string>The application uses your location to get you to the bargains around the corner</string>
-        </custom-config-file>
-        <custom-config-file parent="NSLocationAlwaysUsageDescription" platform="ios" target="*-Info.plist">
-            <string>The application uses your location to get you to the bargains around the corner</string>
-        </custom-config-file>
-        <custom-config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
-            <string>The application uses your location to get you to the bargains around the corner</string>
-        </custom-config-file>
-        -->
+        <comment>
+            <plugin name="cordova-custom-config" spec="^5.0.2" />
+            <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
+                <string>Used to assign images</string>
+            </custom-config-file>
+            <custom-config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
+                <string>Allow the app to use your camera for scan QR-code</string>
+            </custom-config-file>
+            <custom-config-file parent="NSLocationWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
+                <string>The application uses your location to get you to the bargains around the corner</string>
+            </custom-config-file>
+            <custom-config-file parent="NSLocationAlwaysUsageDescription" platform="ios" target="*-Info.plist">
+                <string>The application uses your location to get you to the bargains around the corner</string>
+            </custom-config-file>
+            <custom-config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
+                <string>The application uses your location to get you to the bargains around the corner</string>
+            </custom-config-file>
+        </comment>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="180" src="resources/ios/icon/icon-60@3x.png" width="180" />
@@ -142,4 +142,5 @@
     <plugin name="cordova-plugin-image-picker" spec="1.1.3">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Used to assign images" />
     </plugin>
+    <plugin name="cordova-custom-config" spec="^5.0.2" />
 </widget>
