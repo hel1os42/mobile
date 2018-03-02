@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavParams, Platform, Tabs } from 'ionic-angular';
-import { Subscription } from 'rxjs';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
@@ -17,8 +16,6 @@ import { UserProfilePage } from '../user-profile/user-profile';
 })
 export class TabsPage {
 
-    private _onHomeChangeSubscription: Subscription;
-
     tab1Root;
     // tab2Root = UserProfilePage;return
     tab2Root; //temporary
@@ -29,8 +26,6 @@ export class TabsPage {
     nauParams;//temporary
     shownTransactions: boolean;//temporary
     envName: string;
-    onResumeSubscription: Subscription;
-    onShareSubscription: Subscription;
 
     @ViewChild('tabs') tabs: Tabs;
 
@@ -54,29 +49,10 @@ export class TabsPage {
             });
         //temporary
 
-        // this.tab1Root = this.appMode.getHomeMode()
-        //     ? PlacesPage
-        //     : SplashScreenPage;to do
-
-        // this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
-        //     this.tabs.getByIndex(0)
-        //         .setRoot(showPlaces ? PlacesPage : SplashScreenPage);
-        // });
-
         // temporary - always show PlacesPage
         this.tab1Root = PlacesPage;
 
-        this._onHomeChangeSubscription = this.appMode.onHomeChange.subscribe(showPlaces => {
-            // this.tabs.getByIndex(0)
-            //    .setRoot(PlacesPage);
-        });
-
         this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;
-    }
-
-    tabChange() {
-        if (this.tabs.getSelected().index > 0)
-            this.appMode.setHomeMode(false);
     }
 
     //temporary
@@ -88,10 +64,4 @@ export class TabsPage {
         this.shownTransactions = true;
     }
     //temporary
-
-    ionViewWillUnload() {
-        this._onHomeChangeSubscription.unsubscribe();
-        // this.onResumeSubscription.unsubscribe();
-        // this.onShareSubscription.unsubscribe();
-    }
 }

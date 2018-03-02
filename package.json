@@ -44,7 +44,6 @@
     "chart.js": "2.7.1",
     "cordova-android": "6.3.0",
     "cordova-clipboard": "1.1.1",
-    "cordova-custom-config": "5.0.2",
     "cordova-ios": "4.5.3",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-compat": "1.2.0",
@@ -102,15 +101,12 @@
       },
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-android-permissions": {},
-      "cordova-plugin-image-picker": {
-        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "Used to assign images"
-      },
       "cordova.plugins.diagnostic": {},
       "ionic-plugin-keyboard": {},
       "cordova-plugin-network-information": {},
       "cordova-plugin-google-analytics": {},
-      "cordova-custom-config": {},
-      "com.cordova.plugins.cookiemaster": {}
+      "com.cordova.plugins.cookiemaster": {},
+      "cordova-plugin-image-picker": {}
     },
     "platforms": [
       "ios",

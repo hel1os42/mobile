@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides } from 'ionic-angular';
-import { SettingsPage } from "../settings/settings";
-import { CreateUserProfilePage } from "../create-user-profile/create-user-profile";
+import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
+import { SettingsPage } from '../settings/settings';
 import { SplashInfoPage } from '../splash-info/splash-info';
 import { SplashNewsPage } from '../splash-news/splash-news';
-import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-splash-screen',
@@ -15,9 +14,7 @@ export class SplashScreenPage {
     @ViewChild('slides') slides: Slides;
     @ViewChild('slidesNews') slidesNews: Slides;
 
-    constructor(
-        private appMode: AppModeService,
-        private nav: NavController) {
+    constructor(private nav: NavController) {
     }
 
     openSettings() {
@@ -45,7 +42,6 @@ export class SplashScreenPage {
     }
 
     openPlaces() {
-        this.appMode.setHomeMode(true);
     }
 
     openSplashInfo() {

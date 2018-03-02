@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 import { AppModeService } from './appMode.service';
 import { ToastService } from './toast.service';
 import { TokenService } from './token.service';
-import { NetworkService } from './network.service';
 
 interface ApiRequestOptions {
     showLoading?: boolean;
@@ -45,8 +44,7 @@ export class ApiService {
         private loading: LoadingController,
         private token: TokenService,
         private fileTransfer: FileTransfer,
-        private appMode: AppModeService,
-        private network: NetworkService) {
+        private appMode: AppModeService) {
 
         if (this.appMode.getEnvironmentMode()) {
             this.environmentMode = this.appMode.getEnvironmentMode();
