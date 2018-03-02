@@ -54,6 +54,7 @@
         </feature>
     </platform>
     <platform name="ios">
+        <!--
         <plugin name="cordova-custom-config" spec="^5.0.2" />
         <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
             <string>Used to assign images</string>
@@ -70,6 +71,7 @@
         <custom-config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
             <string>The application uses your location to get you to the bargains around the corner</string>
         </custom-config-file>
+        -->
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="180" src="resources/ios/icon/icon-60@3x.png" width="180" />
