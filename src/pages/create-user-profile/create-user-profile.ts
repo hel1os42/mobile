@@ -304,7 +304,8 @@ export class CreateUserProfilePage {
         let points = (this.user.name ? +8 : +0) + (this.facebookName ? +3 : +0) +
             (this.twitterName ? +3 : +0) + (this.instagramName ? +3 : +0) +
             (this.gender ? +5 : +0) + (this.age ? +9 : +0) + (this.income ? +9 : +0);
-        return points;
+        // return points;temporary
+        return 0;
     }
 
     toggleSelect() {
