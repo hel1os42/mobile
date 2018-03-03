@@ -21,6 +21,7 @@ export class CongratulationPopover {
         private profile: ProfileService) {
 
         this.company = this.navParams.get('company');
+        this.offer = this.navParams.get('offer');
     }
 
     close() {
