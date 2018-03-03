@@ -264,9 +264,9 @@
     },
 
     "PAGE_OFFER" : {
-        "CONGRATULATION" : "Congratulation!",
-        "OFFER_REDEMPTION_COMPLETED_AT" : "Offer redemption completed at",
-        "WE_ARE" : "We are appreciate your choice",
+        "CONGRATULATION" : "Поздравляем!",
+        "OFFER_REDEMPTION_COMPLETED_AT" : "Погашение акции завершено",
+        "WE_ARE" : "Мы ценим ваш выбор",
         "YOU_EARNED" : "Вы получили",
         "POINTS" : "очков",
         "OFFER" : "Акция",
@@ -304,7 +304,7 @@
         "ALL_OFFERS" : "Все акции",
         "TESTIMONIALS" : "Отзывы",
         "ABOUT" : "Подробнее",
-        "REDEEM_NOW" : "Использовать сейчас",
+        "REDEEM_NOW" : "Использовать",
         "ADD_YOUR_FEEDBACK" : "Добавьте отзыв"
     },
 
