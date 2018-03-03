@@ -97,7 +97,6 @@ export class MyApp {
             this.initTranslate();
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
-                //window.alert('resume')
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
             });
