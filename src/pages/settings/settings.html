@@ -108,21 +108,21 @@
     </ion-grid>
   </div>
 
-    
+
     <div *ngIf="envName === 'dev' || envName=== 'test'">
       <div class="block-lines">
         <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.LANG' | translate }}</div>
       </div>
-    
+
       <div class="block-lines">
         <div no-lines>
           <ion-item class="bg-gray" detail-push>
-            <ion-select 
-              [(ngModel)]="lang" 
+            <ion-select
+              [(ngModel)]="lang"
               (ionChange)="changeLang()"
-              [selectedText]="lang?.name" 
-              multiple="false" 
-              interface="popover" 
+              [selectedText]="lang?.name"
+              multiple="false"
+              interface="action-sheet"
               class="selected-lang">
               <ion-option *ngFor="let lang of langs" [value]="lang">{{ lang.name }}</ion-option>
             </ion-select>
