@@ -14,6 +14,8 @@ import { OnBoardingPage } from '../onboarding/onboarding';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { TabsPage } from '../tabs/tabs';
 import { SettingsPopover } from './settings.popover';
+import { AVAILABLE_LANGUAGES, SYS_OPTIONS, DEFAULT_LANG_CODE } from '../../const/i18n.const';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-settings',
@@ -36,11 +38,10 @@ export class SettingsPage {
     time = new Date().valueOf();
     tileLayer;
     options;
-    // lang: string;
-    // langs = AVAILABLE_LANGUAGES.map(p => p.name);
-    // isLangChanged = false;
+    lang;
+    langs = AVAILABLE_LANGUAGES;
+    isLangChanged = false;
     referralLink: string;
-    // branchDomain = 'https://nau.test-app.link';for test only
     branchDomain = 'https://nau.app.link';
     envName;//temporary
 
@@ -52,11 +53,16 @@ export class SettingsPage {
         private popoverCtrl: PopoverController,
         private navParams: NavParams,
         private place: PlaceService,
-        private clipboard: Clipboard) {
+        private clipboard: Clipboard,
+        private translate: TranslateService) {
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
-        // let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
-        // this.lang = availableLang.name;
+        
+        if (this.envName === 'dev' || this.envName.name === 'test') {
+            let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
+            this.lang = availableLang;
+        }
+      
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
         this.coords.lat = this.user.latitude;
@@ -86,29 +92,6 @@ export class SettingsPage {
 
     createBranchLink(invCode) {
         this.referralLink = `${this.branchDomain}/?invite_code=${invCode}`;
-        // let properties = {
-        //     canonicalIdentifier: invCode,
-        //     canonicalUrl: `${this.branchDomain}/?invite_code=${invCode}`,
-        //     // title: 'Content 123 Title',
-        //     // contentDescription: 'Content 123 Description ' + Date.now(),
-        //     // contentImageUrl: 'http://lorempixel.com/400/400/',
-        //     // price: 12.12,
-        //     // currency: 'GBD',
-        //     // contentIndexingMode: 'private',
-        //     contentMetadata: {
-        //         custom: 'invite_code',
-        //         testing: invCode,
-        //         this_is: true
-        //     }
-        // }
-        // this.branchLink = properties.canonicalUrl;
-        // var branchUniversalObj = null;
-        // Branch.createBranchUniversalObject(properties).then(function (res) {
-        //     branchUniversalObj = res
-        //     alert('Response: ' + JSON.stringify(res))
-        // }).catch(function (err) {
-        //     alert('Error: ' + JSON.stringify(err))
-        // })
     }
 
     copyInvCode() {
@@ -146,9 +129,13 @@ export class SettingsPage {
         return this.isAdvMode;
     }
 
-    // changeLang() {
-    //     this.isLangChanged = true;
-    // }
+    changeLang() {
+        this.isLangChanged = true;
+        let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === this.lang.code);
+        let langCode = isLang ? this.lang.code : DEFAULT_LANG_CODE;
+        this.translate.use(langCode);
+        SYS_OPTIONS.LANG_CODE = langCode;
+    }
 
     saveProfile() {
         this.appMode.setAdvMode(this.isAdvMode);
