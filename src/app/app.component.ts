@@ -177,11 +177,12 @@ export class MyApp {
         //     });
         // } else {
 
-        let browserLang = this.translate.getBrowserLang();
-        let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === browserLang);
-        let langCode = isLang ? browserLang : DEFAULT_LANG_CODE;
+        //temporary
+        // let browserLang = this.translate.getBrowserLang();
+        // let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === browserLang);
+        // let langCode = isLang ? browserLang : DEFAULT_LANG_CODE;
+        let langCode = this.storage.get('lang') ? this.storage.get('lang') : 'en';//temporary
         this.translate.use(langCode);
-
         SYS_OPTIONS.LANG_CODE = langCode;
     }
 

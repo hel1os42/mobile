@@ -16,6 +16,7 @@ import { TabsPage } from '../tabs/tabs';
 import { SettingsPopover } from './settings.popover';
 import { AVAILABLE_LANGUAGES, SYS_OPTIONS, DEFAULT_LANG_CODE } from '../../const/i18n.const';
 import { TranslateService } from '@ngx-translate/core';
+import { StorageService } from '../../providers/storage.service';
 
 @Component({
     selector: 'page-settings',
@@ -54,7 +55,8 @@ export class SettingsPage {
         private navParams: NavParams,
         private place: PlaceService,
         private clipboard: Clipboard,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private storage: StorageService) {
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
         
@@ -135,6 +137,7 @@ export class SettingsPage {
         let langCode = isLang ? this.lang.code : DEFAULT_LANG_CODE;
         this.translate.use(langCode);
         SYS_OPTIONS.LANG_CODE = langCode;
+        this.storage.set('lang', langCode);
     }
 
     saveProfile() {
