@@ -336,7 +336,8 @@
         "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Try it for free",
-        "LANG" : "Language"
+        "LANG" : "Language",
+        "COPY_NOTIFICATION" : "Сopied to clipboard"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {
