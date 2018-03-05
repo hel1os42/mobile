@@ -197,4 +197,16 @@ places-popover-component {
     ion-item.item.item-block.item-ios.item-checkbox {
         padding-left: 2vw;
     }
+
+    .item.item-block.item-ios.item-range{
+        padding-left: 0;
+    }
+
+    .range-ios.range-has-pin {
+        padding-top: 2.2vw;
+    }
+
+    .range-ios {
+        padding: 2.2vw 0;
+    }
 }

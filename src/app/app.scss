@@ -321,6 +321,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     width: 44vw;
 }
 
+.width-100{
+    width: 100%;
+}
+
 .bg-gray{
     border-radius: 100vw;
     border: 1px solid #E0E0E0;
@@ -1187,22 +1191,22 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     display: none;
 }
 
+.text-overflow-2{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.text-overflow-3{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .text-overflow-35{
     max-height: 8vw;
-    height: auto;
-    display: block;
-    overflow: hidden;
-}
-
-.text-overflow-5-font-12{
-    max-height: 21vw;
-    height: auto;
-    display: block;
-    overflow: hidden;
-}
-
-.text-overflow-6-font-12{
-    max-height: 25vw;
     height: auto;
     display: block;
     overflow: hidden;
@@ -1215,36 +1219,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     display: block;
 }
 
-.text-overflow-2-font-12{
-    max-height: 8.5vw;
-    height: auto;
-    display: block;
-    overflow: hidden;
-}
-
-.text-overflow-2-font-22{
-    max-height: 15.5vw;
-    height: auto;
-    display: block;
-    overflow: hidden;
-}
-
 .text-overflow-3-font-12{
     max-height: 12.5vw;
-    height: auto;
-    display: block;
-    overflow: hidden;
-}
-
-.text-overflow-3-font-40{
-    max-height: 44.5vw;
-    height: auto;
-    display: block;
-    overflow: hidden;
-}
-
-.text-overflow-3-font-30{
-    max-height: 35vw;
     height: auto;
     display: block;
     overflow: hidden;
@@ -1830,13 +1806,6 @@ ion-app.disable-scroll {
 
 .toolbar-ios ion-title {
     padding: 0 40px 0 40px;
-}
-
-.overflow-3line-description{
-    max-height: 12.6vw;
-    height: auto;
-    display: block;
-    overflow: hidden;
 }
 
 .notification-toast .toast-wrapper{

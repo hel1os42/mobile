@@ -32,9 +32,9 @@
                         <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                         <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75 text-828282">{{ distanceString }}</span>
                     </div>
-                    <div margin-top class="text-3E4B5D font-22 bold text-overflow-2-font-22 wrap">{{ company.name }}</div>
+                    <div margin-top class="text-3E4B5D font-22 bold text-overflow-2 wrap">{{ company.name }}</div>
                     <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc width-88 company-address">{{ company.address }}</div>
-                    <div class="font-12 text-828282 wrap text-overflow-3-font-12 margin-top-2proc width-88">{{ company.description }}</div>
+                    <div class="font-12 text-828282 wrap text-overflow-3 margin-top-2proc width-88">{{ company.description }}</div>
                     <div class="num_right">
                         <div class="font-36 bold text-FF5A00" text-center>
                             {{ offersList?.length }}
@@ -96,7 +96,7 @@
                 <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
             </div>
         </div>
-      <div text-regular class="font-12 text-828282 wrap overflow-3line-description margin-top-2vw">{{ offer.description }}</div>
+      <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
       <img class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-2vw flex">
         <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>

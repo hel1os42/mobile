@@ -56,7 +56,8 @@
         "SELECT_TYPE" : "Select Type",
         "SELECT_FEATURES" : "Select Features",
         "LOCATION_DENIED" : "Location denied",
-        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. Set your coordinates in manual mode"
+        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. Set your coordinates in manual mode",
+        "SELECT_RADIUS" : "Select radius"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
