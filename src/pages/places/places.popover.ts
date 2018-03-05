@@ -15,6 +15,9 @@ export class PlacesPopover {
     isOpenTypesSelect = true;
     isOpenSpecialitiesSelect = false;
     isOpenCuisineSelect = false;
+    STEPS = [0.2, 0.5, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 500];
+    radius: number;
+    slider;
 
     constructor(
         private viewCtrl: ViewController,
@@ -22,7 +25,19 @@ export class PlacesPopover {
 
         this.types = this.navParams.get('types');
         this.tags = this.navParams.get('tags') ? this.navParams.get('tags') : [];
+        this.radius = this.navParams.get('radius');
+        for (let i = 0; i < this.STEPS.length; i++) {
+            if (this.radius / 1000 == this.STEPS[i]) {
+                this.slider = i;
+                return;
+            }
+        }
         this.getSpecialities();
+        this.watchSlider();
+    }
+
+    watchSlider() {
+        this.radius = this.STEPS[this.slider] * 1000;
     }
 
     openTypesSelect() {
@@ -47,7 +62,12 @@ export class PlacesPopover {
     }
 
     close() {
-        this.viewCtrl.dismiss({ types: this.types, tags: this.tags, specialities: this.specialities.filter(spec => spec.isSelected) });
+        this.viewCtrl.dismiss({
+            types: this.types,
+            tags: this.tags,
+            specialities: this.specialities.filter(spec => spec.isSelected),
+            radius: this.radius
+        });
     }
 
     // clear(arr) {

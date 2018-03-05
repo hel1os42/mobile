@@ -344,7 +344,7 @@ export class PlacesPage {
                 return bounds;
             }
             let northEast = bounds.getNorthEast();
-            northEast.lat = northEast.lat + 0.2;
+            northEast.lat = northEast.lat + 0.3;
             bounds.extend(northEast);
             return bounds;
         }
@@ -459,18 +459,21 @@ export class PlacesPage {
                             }
                         })
                         : undefined;
-                    popover = this.popoverCtrl.create(PlacesPopover, { types: this.selectedTypes, tags: this.selectedTags });
-                    this.presentPopover(popover);
+                    this.presentPopover();
                 });
         }
         else {
-            popover = this.popoverCtrl.create(PlacesPopover, { types: this.selectedTypes, tags: this.selectedTags });
-            this.presentPopover(popover);
+            this.presentPopover();
         }
         this.isChangedCategory = false;
     }
 
-    presentPopover(popover) {
+    presentPopover() {
+        let popover = this.popoverCtrl.create(PlacesPopover, { 
+            types: this.selectedTypes, 
+            tags: this.selectedTags, 
+            radius: this.radius 
+        });
         this.search = "";
         popover.present();
         popover.onDidDismiss((data) => {
@@ -478,6 +481,7 @@ export class PlacesPage {
                 return;
             }
             else {
+                this.radius = data.radius;
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
                 if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {
@@ -577,7 +581,6 @@ export class PlacesPage {
                             // console.log('Application exit prevented!');
                             alert.dismiss().then(() => {
                                 this.getLocation(true);
-                                debugger
                             })
                             .catch(err => console.log(err));
                             
