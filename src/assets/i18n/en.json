@@ -56,7 +56,8 @@
         "SELECT_TYPE" : "Select Type",
         "SELECT_FEATURES" : "Select Features",
         "LOCATION_DENIED" : "Location denied",
-        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. Set your coordinates in manual mode"
+        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. Set your coordinates in manual mode",
+        "SELECT_RADIUS" : "Select radius"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -246,9 +247,9 @@
     "PAGE_LOGIN" : {
         "LOGIN" : "Login",
         "PLEASE_ENTER_PHONE" : "Please enter your phone number",
-        "PLEASE_ENTER_OTP" : "Please enter your OTP code",
-        "OTP" : "OTP",
-        "GET_OTP" : "Get otp"
+        "PLEASE_ENTER_OTP" : "Please enter your SMS code",
+        "OTP" : "SMS",
+        "GET_OTP" : "Get sms"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -336,7 +337,8 @@
         "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Try it for free",
-        "LANG" : "Language"
+        "LANG" : "Language",
+        "COPY_NOTIFICATION" : "Сopied to clipboard"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {

@@ -97,7 +97,6 @@ export class MyApp {
             this.initTranslate();
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
-                //window.alert('resume')
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
             });
@@ -178,11 +177,12 @@ export class MyApp {
         //     });
         // } else {
 
-        let browserLang = this.translate.getBrowserLang();
-        let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === browserLang);
-        let langCode = isLang ? browserLang : DEFAULT_LANG_CODE;
+        //temporary
+        // let browserLang = this.translate.getBrowserLang();
+        // let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === browserLang);
+        // let langCode = isLang ? browserLang : DEFAULT_LANG_CODE;
+        let langCode = this.storage.get('lang') ? this.storage.get('lang') : 'en';//temporary
         this.translate.use(langCode);
-
         SYS_OPTIONS.LANG_CODE = langCode;
     }
 

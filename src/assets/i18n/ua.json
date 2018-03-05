@@ -219,7 +219,7 @@
         "LOGIN" : "Login",
         "PLEASE_ENTER" : "Please enter your phone number and",
         "CONFIRMATION_CODE" : "confirmation code",
-        "OTP" : "OTP"
+        "OTP" : "SMS"
     },
 
     "PAGE_NOTIFICATIONS" : {

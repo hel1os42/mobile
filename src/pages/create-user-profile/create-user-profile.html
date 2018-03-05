@@ -1,4 +1,4 @@
-<ion-nav [hidden]="isCrop" swipeBackEnabled="false"></ion-nav>
+<!-- <ion-nav [hidden]="isCrop" swipeBackEnabled="false"></ion-nav> -->
 <ion-header [hidden]="isCrop">
     <ion-navbar>
         <ion-title>
@@ -148,7 +148,7 @@
             </div>
         </a>
 
-        <p class="select-block-desc text-828282 font-12">{{ 'PAGE_CREATE-USER-PROFILE.IF_YOU_WILL' | translate }}</p>
+        <!-- <p class="select-block-desc text-828282 font-12">{{ 'PAGE_CREATE-USER-PROFILE.IF_YOU_WILL' | translate }}</p> -->
     </div>
 
     <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
@@ -210,8 +210,8 @@
 
     </div>
     <p margin>
-        <button color="primary" (click)="createAccount()" [disabled]="baseData.name?.length < 4 || !baseData.email" ion-button block>
-            {{ isEdit ? 'Edit account' : 'PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate }}
+        <button color="primary" (click)="createAccount()" [disabled]="baseData.name?.length < 3 || !baseData.email" ion-button block>
+            {{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate) }}
         </button>
     </p>
 </ion-content>

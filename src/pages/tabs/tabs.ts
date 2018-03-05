@@ -21,7 +21,7 @@ export class TabsPage {
     tab2Root; //temporary
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
-    tab5Root = FeedPage;
+    // tab5Root = FeedPage;//temporary - to revert
     selectedTabIndex = 0;
     nauParams;//temporary
     shownTransactions: boolean;//temporary

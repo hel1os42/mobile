@@ -7,10 +7,10 @@ export const AVAILABLE_LANGUAGES = [
 	// 	code: 'ua',
 	// 	name: 'Українська'
 	// },
-	// {
-	// 	code: 'ru',
-	// 	name: 'Русский'
-	// }
+	{
+		code: 'ru',
+		name: 'Русский'
+	}
 ];
 
 export const DEFAULT_LANG_CODE = 'en';
