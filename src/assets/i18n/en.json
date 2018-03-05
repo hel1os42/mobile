@@ -247,9 +247,9 @@
     "PAGE_LOGIN" : {
         "LOGIN" : "Login",
         "PLEASE_ENTER_PHONE" : "Please enter your phone number",
-        "PLEASE_ENTER_SMS" : "Please enter your SMS code",
-        "OTP" : "OTP",
-        "GET_OTP" : "Get otp"
+        "PLEASE_ENTER_OTP" : "Please enter your SMS code",
+        "OTP" : "SMS",
+        "GET_OTP" : "Get sms"
     },
 
     "PAGE_NOTIFICATIONS" : {

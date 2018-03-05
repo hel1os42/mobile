@@ -16,7 +16,7 @@
     <form #form="ngForm" (ngSubmit)="form.valid ? signUp() : undefined">
         <div margin-top class="bg-gray margin-top-6vw">
             <ion-item class="border-bottom-no">
-                <ion-label class="label-left">OTP</ion-label>
+                <ion-label class="label-left">SMS</ion-label>
                 <ion-input 
                     (keyup)="updateList($event)" 
                     (ionChange)="limitStr(register.code)" 
