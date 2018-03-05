@@ -35,6 +35,17 @@ export class ToastService {
         }
     }
 
+    showNotification(message) {
+        let toast = this.toast.create({
+            message: message,
+            duration: 1500,
+            position: 'middle',
+            cssClass: 'notification-toast',
+            dismissOnPageChange: true
+        });
+        toast.present();
+    }
+
     dismiss() {
         this.disconnectedToast.dismiss();
         this.isShowed = false;

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Clipboard } from '@ionic-native/clipboard';
 import { App, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 import { latLng, tileLayer } from 'leaflet';
-
 import { Coords } from '../../models/coords';
 import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
@@ -17,6 +16,7 @@ import { SettingsPopover } from './settings.popover';
 import { AVAILABLE_LANGUAGES, SYS_OPTIONS, DEFAULT_LANG_CODE } from '../../const/i18n.const';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from '../../providers/storage.service';
+import { ToastService } from '../../providers/toast.service';
 
 @Component({
     selector: 'page-settings',
@@ -56,7 +56,8 @@ export class SettingsPage {
         private place: PlaceService,
         private clipboard: Clipboard,
         private translate: TranslateService,
-        private storage: StorageService) {
+        private storage: StorageService,
+        private toast: ToastService) {
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
         
@@ -98,10 +99,12 @@ export class SettingsPage {
 
     copyInvCode() {
         this.clipboard.copy(this.user.invite_code);
+        this.showCopyNotification();
     }
 
     copyReferralLink() {
         this.clipboard.copy(this.referralLink);
+        this.showCopyNotification();
     }
 
     addMap() {
@@ -186,5 +189,12 @@ export class SettingsPage {
 
     openChangePhone(user: User) {
         this.nav.push(SettingsChangePhonePage, { user: this.user });
+    }
+
+    showCopyNotification() {
+        this.translate.get('PAGE_SETTINGS.COPY_NOTIFICATION')
+            .subscribe(resp => {
+                this.toast.showNotification(resp);
+            })
     }
 }
