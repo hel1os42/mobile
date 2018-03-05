@@ -1839,8 +1839,13 @@ ion-app.disable-scroll {
     overflow: hidden;
 }
 
-.notification-toast{
-    color: #FF5A00;
+.notification-toast .toast-wrapper{
     background: #fff;
     border: 1px solid #FF5A00;
+    width: 50%;
+}
+
+.notification-toast .toast-message{
+    color: #FF5A00;
+    text-align: center;
 }
