@@ -10,6 +10,8 @@ import { ShareService } from '../../providers/share.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
+import { FavoritesService } from '../../providers/favorites.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'page-place',
@@ -25,13 +27,15 @@ export class PlacePage {
     features: Speciality[];
     branchDomain = 'https://nau.app.link';
     page: string;
+    onRefreshCompany: Subscription;
 
     constructor(
         private nav: NavController,
         private offers: OfferService,
         private navParams: NavParams,
         private profile: ProfileService,
-        private share: ShareService) {
+        private share: ShareService,
+        private favorites: FavoritesService) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -40,30 +44,39 @@ export class PlacePage {
             this.features = this.company.specialities;
             this.distanceString = this.navParams.get('distanceStr');
             this.offers.getPlace(this.company.id)
-            .subscribe(company => {
-                this.company = company;
-                this.offersList = company.offers;
-            });
+                .subscribe(company => {
+                    this.company = company;
+                    this.offersList = company.offers;
+                });
         }
         else {
             let companyId = this.navParams.get('placeId');
             this.page = this.navParams.get('page');
             let offerId = this.navParams.get('offerId');
             this.offers.getPlace(companyId)
-            .subscribe(company => {
-                this.company = company;
-                this.offersList = company.offers;
-                this.distanceString = this.getDistance(this.company.latitude, this.company.longitude);
-                this.features = this.company.specialities;
-                if (!offerId) {
-                    this.share.remove();
-                }
-                else if (offerId) {
-                    let offer = company.offers.filter(offer => offer.id === offerId);
-                    this.openOffer(offer[0], company);
-                }
-            })
+                .subscribe(company => {
+                    this.company = company;
+                    this.offersList = company.offers;
+                    this.distanceString = this.getDistance(this.company.latitude, this.company.longitude);
+                    this.features = this.company.specialities;
+                    if (!offerId) {
+                        this.share.remove();
+                    }
+                    else if (offerId) {
+                        let offer = company.offers.filter(offer => offer.id === offerId);
+                        this.openOffer(offer[0], company);
+                    }
+                })
         }
+
+        this.onRefreshCompany = this.favorites.onRefreshOffers
+            .subscribe(() => {
+                this.offers.getPlace(this.company.id)
+                    .subscribe(company => {
+                        this.company = company;
+                        this.offersList = company.offers;
+                    });
+            })
     }
 
     // ionSelected() {
@@ -133,6 +146,20 @@ export class PlacePage {
             distanceStr: this.distanceString,
             coords: this.coords
         });
+    }
+
+    removeFavorite() {
+        this.favorites.removePlace(this.company.id)
+            .subscribe(() => this.company.is_favorite = false);
+    }
+
+    addFavorite() {
+        this.favorites.setPlace(this.company.id)
+            .subscribe(() => this.company.is_favorite = true);
+    }
+
+    ionViewDidLeave() {
+        this.onRefreshCompany.unsubscribe();
     }
 
 }
