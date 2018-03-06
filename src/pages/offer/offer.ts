@@ -1,16 +1,16 @@
-import { DistanceUtils } from '../../utils/distanse.utils';
-import { Coords } from '../../models/coords';
 import { Component } from '@angular/core';
 import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
-import { Place } from '../../models/place';
+import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
+import { Place } from '../../models/place';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
+import { ShareService } from '../../providers/share.service';
+import { DistanceUtils } from '../../utils/distanse.utils';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
-import { ShareService } from '../../providers/share.service';
 
 @Component({
     selector: 'page-offer',
@@ -82,10 +82,6 @@ export class OfferPage {
         }
     }
 
-    ionViewDidLeave() {
-        this.stopTimer();
-        this.app.navPop();
-    }
 
     disable() {
         if (this.offer.radius < this.distance) {//to do add delivery etc.
@@ -98,14 +94,14 @@ export class OfferPage {
 
     presentAlert() {
         let alert = this.alertCtrl.create({
-          title: 'You are located too far',
-          buttons: ['Ok']
+            title: 'You are located too far',
+            buttons: ['Ok']
         });
         alert.present();
-      }
+    }
 
     openRedeemPopover() {
-        if (!this.disable()) {
+        // if (!this.disable()) {distance validation
             if (this.timer)
                 return;
 
@@ -133,10 +129,10 @@ export class OfferPage {
                             });
                     }, 2500)
                 })
-        }
-        else {
-            this.presentAlert()
-        }
+        // }
+        // else {
+        //     this.presentAlert()
+        // }
     }
 
     shareOffer() {
@@ -173,5 +169,10 @@ export class OfferPage {
                     })
 
             })
+    }
+
+    ionViewDidLeave() {
+        this.stopTimer();
+        this.app.navPop();
     }
 }
