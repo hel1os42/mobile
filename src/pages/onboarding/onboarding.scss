@@ -77,3 +77,10 @@ page-onboarding {
         bottom: 23vw;
     }
 }
+
+.iphonex.platform-ios page-onboarding {
+    .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets{
+        bottom: calc(constant(safe-area-inset-bottom) + 23vw);
+        bottom: calc(env(safe-area-inset-bottom) + 23vw);
+    }
+}

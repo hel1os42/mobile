@@ -32,12 +32,17 @@ export class PlacesPopover {
                 return;
             }
         }
+
+        this.slider = 1;
+
+        //this.watchSlider();
+
         this.getSpecialities();
-        this.watchSlider();
     }
 
     watchSlider() {
         this.radius = this.STEPS[this.slider] * 1000;
+        console.log(this.radius);
     }
 
     openTypesSelect() {
@@ -68,6 +73,7 @@ export class PlacesPopover {
             specialities: this.specialities.filter(spec => spec.isSelected),
             radius: this.radius
         });
+        console.log("radius: " + this.radius);
     }
 
     // clear(arr) {
