@@ -1776,7 +1776,7 @@ ion-app.disable-scroll {
 }
 
 .iphonex .crop-block .btn_check{
-    bottom: calc(env(safe-area-inset-bottom) + 3vw);
+    bottom: calc(constant(safe-area-inset-bottom) + 3vw);
     bottom: calc(env(safe-area-inset-bottom) + 3vw);
 }
 

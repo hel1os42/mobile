@@ -117,7 +117,7 @@ export class PlacesPage {
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
             })
-           
+
     }
 
     getLocationStatus() {
@@ -247,13 +247,13 @@ export class PlacesPage {
             .catch((error) => {
                 loadingLocation.dismiss().catch((err) => {console.log(err + 'err')});
                 // debugger
-                this.presentConfirm(); 
+                this.presentConfirm();
                 // error => console.log(error + 'err')
             })
     }
 
     getCoords(isRefresh?: boolean) {
-       
+
         if (this.platform.is('android')) {
             this.diagnostic.getLocationMode()
                 .then(res => {
@@ -469,13 +469,20 @@ export class PlacesPage {
     }
 
     presentPopover() {
-        let popover = this.popoverCtrl.create(PlacesPopover, { 
-            types: this.selectedTypes, 
-            tags: this.selectedTags, 
-            radius: this.radius 
+        let popover = this.popoverCtrl.create(PlacesPopover, {
+            types: this.selectedTypes,
+            tags: this.selectedTags,
+            radius: this.radius
         });
         this.search = "";
-        popover.present();
+        if (this.platform.is('ios')) {
+            setTimeout(() => {
+                popover.present();
+            }, 300)
+        }
+        else{
+            popover.present();
+        }
         popover.onDidDismiss((data) => {
             if (!data) {
                 return;
@@ -583,7 +590,7 @@ export class PlacesPage {
                                 this.getLocation(true);
                             })
                             .catch(err => console.log(err));
-                            
+
                         }
                     }]
                 });
