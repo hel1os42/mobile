@@ -19,21 +19,25 @@ export class NetworkService {
         private toast: ToastService,
         private platform: Platform) {
 
-        if (this.network.type !== 'none' && this.network.type !== 'unknown') {
-            this.isConnected = true;
-        }
-        else {
-            this.isConnected = false;
-        }
-        if (!this.isConnected) {
-            this.toast.showDisconnected();
-        }
-        this.onDisconnectSubscription = this.network.onDisconnect()
-            .subscribe(resp => {
+        setTimeout(() => {
+            if (this.network.type !== 'none' && this.network.type !== 'unknown') {
+                this.isConnected = true;
+            }
+            else {
                 this.isConnected = false;
+            }
+            if (!this.isConnected) {
                 this.toast.showDisconnected();
-                this.onDisconnect.emit(this.isConnected);
-            });
+            }
+
+            this.onDisconnectSubscription = this.network.onDisconnect()
+                .subscribe(resp => {
+                    this.isConnected = false;
+                    this.toast.showDisconnected();
+                    this.onDisconnect.emit(this.isConnected);
+                });
+        }, 200);
+
         this.onConnectSubscription = this.network.onConnect()
             .subscribe(resp => {
                 this.isConnected = true;
