@@ -63,7 +63,7 @@ export class PlacesPage {
     isForkMode;
     onResumeSubscription: Subscription;
     onShareSubscription: Subscription;
-    onRefreshList: Subscription;
+    onRefreshListSubscription: Subscription;
     isConfirm = false;
     shareData: Share;
 
@@ -116,19 +116,17 @@ export class PlacesPage {
             .subscribe(categories => {
                 this.categories.forEach((category) => {
                     category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
-                    //refresh list if changed favorites status
-                    this.onRefreshList = this.favorites.onRefreshPlaces
-                    .subscribe((resp) => {
-                        this.companies.forEach(company => {
-                            if (company.id === resp.id) {
-                                company.is_favorite = resp.isFavorite;
-                            }
-                        })
-                    })
-                    //
                 })
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
+            })
+        this.onRefreshListSubscription = this.favorites.onRefreshPlaces
+            .subscribe((resp) => {
+                this.companies.forEach(company => {
+                    if (company.id === resp.id) {
+                        company.is_favorite = resp.isFavorite;
+                    }
+                })
             })
 
     }
@@ -150,7 +148,7 @@ export class PlacesPage {
                     //     console.log(err + 'err');
                     // }
                 )
-                // .catch(err => console.log(err));
+            // .catch(err => console.log(err));
         }
         else if (this.platform.is('ios') && this.platform.is('cordova')) {
             this.diagnostic.getLocationAuthorizationStatus()
@@ -189,10 +187,10 @@ export class PlacesPage {
                                     this.getLocation(false);
                                 }
                             })
-                            // .catch(err => {
-                            //     debugger;
-                            //     console.log(err + 'err');
-                            // });
+                        // .catch(err => {
+                        //     debugger;
+                        //     console.log(err + 'err');
+                        // });
                     }
                     else {
                         this.getLocation(false);
@@ -204,10 +202,10 @@ export class PlacesPage {
                 //     debugger
                 // }
             )
-            // .catch(err => {
-            //     debugger;
-            //     console.log(err + 'err');
-            // });
+        // .catch(err => {
+        //     debugger;
+        //     console.log(err + 'err');
+        // });
     }
 
     getLocation(isDenied: boolean, isRefresh?: boolean) {
@@ -251,14 +249,14 @@ export class PlacesPage {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
-                loadingLocation.dismiss().catch((err) => {console.log(err + 'err')});
+                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                 if (this.shareData) {
                     this.openPlace(this.shareData, true)
                 }
                 this.getCompaniesList();
             })
             .catch((error) => {
-                loadingLocation.dismiss().catch((err) => {console.log(err + 'err')});
+                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                 // debugger
                 this.presentConfirm();
                 // error => console.log(error + 'err')
@@ -422,20 +420,19 @@ export class PlacesPage {
                 company: data,
                 distanceStr: this.getDistance(data.latitude, data.longitude),
                 coords: this.coords,
-                features: data.specialities
             }
         }
         this.nav.push(PlacePage, params);
-            // .then(() => {
-            //     this.onRefreshList = this.favorites.onRefreshPlaces
-            //         .subscribe((resp) => {
-            //             this.companies.forEach(company => {
-            //                 if (company.id === resp.id) {
-            //                     company.is_favorite = resp.isFavorite;
-            //                 }
-            //             })
-            //         })
-            // });
+        // .then(() => {
+        //     this.onRefreshList = this.favorites.onRefreshPlaces
+        //         .subscribe((resp) => {
+        //             this.companies.forEach(company => {
+        //                 if (company.id === resp.id) {
+        //                     company.is_favorite = resp.isFavorite;
+        //                 }
+        //             })
+        //         })
+        // });
     }
 
     getStars(star: number) {
@@ -503,7 +500,7 @@ export class PlacesPage {
                 popover.present();
             }, 300)
         }
-        else{
+        else {
             popover.present();
         }
         popover.onDidDismiss((data) => {
@@ -612,7 +609,7 @@ export class PlacesPage {
                             alert.dismiss().then(() => {
                                 this.getLocation(true);
                             })
-                            .catch(err => console.log(err));
+                                .catch(err => console.log(err));
 
                         }
                     }]
@@ -650,12 +647,12 @@ export class PlacesPage {
         confirm.present();
     }
 
-    ionViewDidLeave() {
+    ngOnDestroy() {
         if (this.platform.is('cordova')) {
             this.onResumeSubscription.unsubscribe();
         }
-        if (this.onRefreshList) {
-           this.onRefreshList.unsubscribe(); 
+        if (this.onRefreshListSubscription) {
+            this.onRefreshListSubscription.unsubscribe();
         }
-     }
+    }
 }
