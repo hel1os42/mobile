@@ -51,11 +51,30 @@ export class BookmarksPage {
                 this.offersLastPage = resp.last_page;
                 this.totalOffers = resp.total;
             })
-                let coords = this.location.getCache();
-                this.coords = {
-                    lat: coords.latitude,
-                    lng: coords.longitude
-                };
+        let coords = this.location.getCache();
+        this.coords = {
+            lat: coords.latitude,
+            lng: coords.longitude
+        };
+        this.onRefreshCompanies = this.favorites.onRefreshPlaces
+            .subscribe(resp => {
+                this.favorites.getPlaces(this.companiesPage)
+                    .subscribe(resp => {
+                        this.companies = resp.data;
+                        this.companiesLastPage = resp.last_page;
+                        this.totalCompanies = resp.total;
+                    });
+            })
+
+        this.onRefreshOffers = this.favorites.onRefreshOffers
+            .subscribe(resp => {
+                this.favorites.getOffers(this.offersPage)
+                    .subscribe(resp => {
+                        this.offers = resp.data;
+                        this.offersLastPage = resp.last_page;
+                        this.totalOffers = resp.total;
+                    })
+            })
     }
 
     getStars(star: number) {
@@ -84,7 +103,7 @@ export class BookmarksPage {
         }
         this.nav.push(PlacePage, params);
     }
-    
+
     openOffer(offer, company?) {
         // this.nav.push(OfferPage, {
         //     offer: offer,
@@ -95,9 +114,14 @@ export class BookmarksPage {
 
     getTotal() {
         let total = this.segment === 'places'
-        ? this.totalCompanies
-        : this.totalOffers;
+            ? this.totalCompanies
+            : this.totalOffers;
         return total;
+    }
+
+    ngOnDestroy() {
+        this.onRefreshCompanies.unsubscribe();
+        this.onRefreshOffers.unsubscribe();
     }
 
 

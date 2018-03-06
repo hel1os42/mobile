@@ -184,7 +184,7 @@ export class PlacePage {
         alert.present();
     }
 
-    ionViewDidLeave() {
+    ngOnDestroy() {
         this.onRefreshCompany.unsubscribe();
     }
 
