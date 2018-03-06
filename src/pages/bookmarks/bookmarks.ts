@@ -78,6 +78,7 @@ export class BookmarksPage {
     openPlace(data) {
         let params = {
             company: data,
+            coords: this.coords,
             distanceStr: this.getDistance(data.latitude, data.longitude),
             // coords: this.coords,
         }

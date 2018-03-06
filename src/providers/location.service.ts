@@ -49,6 +49,10 @@ export class LocationService {
         return sharableObs.map(resp => resp.json());
     }
 
+    getCache() {
+        return this.geoposition.coords;
+    }
+
     reset() {
         this.geoposition = undefined;
     }
