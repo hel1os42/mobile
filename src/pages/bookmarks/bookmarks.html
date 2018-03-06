@@ -1,32 +1,42 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      {{ 'PAGE_BOOKMARKS.BOOKMARKS' | translate }}
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>
+            {{ 'PAGE_BOOKMARKS.BOOKMARKS' | translate }}
+        </ion-title>
+    </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content padding>
-  <ion-item no-lines class="border-bottom-no top-block-nau">
-    <ion-avatar item-start>
-      <img src="assets/img/bookmarks/star.svg">
-    </ion-avatar>
-    <div class="font-18 text-3E4B5D bold wrap-no">123</div>
-    <div class="font-14 text-828282">{{ 'PAGE_BOOKMARKS.BOOKMARKS' | translate }}</div>
-  </ion-item>
-  <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="nau-segment">
-    <ion-segment-button value="places">
-      {{ 'PAGE_BOOKMARKS.PLACES' | translate }}
-    </ion-segment-button>
-    <ion-segment-button value="offers">
-        {{ 'UNIT.OFFERS' | translate }}
-    </ion-segment-button>
-  </ion-segment>
+    <ion-item no-lines class="border-bottom-no top-block-nau">
+        <ion-avatar item-start>
+            <img src="assets/img/bookmarks/star.svg">
+        </ion-avatar>
+        <div *ngIf="getTotal() && getTotal() > 0">
+            <div class="font-18 text-3E4B5D bold wrap-no">{{ getTotal() }}</div>
+            <div class="font-14 text-828282">
+                {{ getTotal() > 1 ? ('PAGE_BOOKMARKS.BOOKMARKS' | translate) : ('PAGE_BOOKMARKS.BOOKMARK' | translate) }}
+            </div>
+        </div>
+        <div *ngIf="!getTotal() || getTotal() < 1">
+            {{ 'PAGE_BOOKMARKS.YOU_DONT_HAVE' | translate }} {{ segment === 'places' ? ('PAGE_BOOKMARKS.PLACES1' | translate) : ('PAGE_BOOKMARKS.OFFERS'
+            | translate) }} {{ 'PAGE_BOOKMARKS.YET' | translate }}
+        </div>
 
-  <!-- PLACES -->
-    <ion-list no-lines class="item-block-nau margin-top-10 block-places">
-        <a ion-item detail-none>
+    </ion-item>
+    <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="nau-segment">
+        <ion-segment-button value="places">
+            {{ 'PAGE_BOOKMARKS.PLACES' | translate }}
+        </ion-segment-button>
+        <ion-segment-button value="offers">
+            {{ 'UNIT.OFFERS' | translate }}
+        </ion-segment-button>
+    </ion-segment>
+
+    <!-- PLACES -->
+    <ion-list *ngIf="segment === 'places'" no-lines class="item-block-nau margin-top-10 block-places">
+
+        <a *ngFor="let company of companies" (click)=" openPlace(company)" ion-item detail-none>
             <ion-avatar item-start text-center>
                 <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + company.picture_url + '?size=mobile&)'}"></div>
                 <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">{{ 'PAGE_PLACES.FEATURED' | translate }}</span>
@@ -67,26 +77,26 @@
 
     </ion-list>
 
-  <!-- OFFERS -->
-  <ion-list margin-top no-lines class="block-offers item-block-nau">
-      <ion-item *ngFor=" let offer of offersList" class="relative">
-          <ion-avatar item-start>
-              <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
-              <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
-          </ion-avatar>
-          <div class="smooth_transition width-88">
-              <div class="scroll_content">
-                  <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
-              </div>
-          </div>
-          <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
-          <img class="star_right" src="assets/img/place/icon_star.svg">
-          <div class="margin-top-2vw flex">
-              <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
-              <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-              <span class="gift extrabold">1</span>
-          </div>
-      </ion-item>
-  </ion-list>
+    <!-- OFFERS -->
+    <ion-list *ngIf="segment === 'offers'" margin-top no-lines class="item-block-nau">
+        <ion-item *ngFor=" let offer of offers" class="relative">
+            <ion-avatar item-start>
+                <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
+                <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
+            </ion-avatar>
+            <div class="smooth_transition width-88">
+                <div class="scroll_content">
+                    <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
+                </div>
+            </div>
+            <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
+            <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
+            <div class="margin-top-2vw flex">
+                <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
+                <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
+                <span class="gift extrabold">1</span>
+            </div>
+        </ion-item>
+    </ion-list>
 
 </ion-content>
