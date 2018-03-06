@@ -22,6 +22,7 @@ import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
+import { FavoritesService } from '../../providers/favorites.service';
 
 
 @Component({
@@ -62,6 +63,7 @@ export class PlacesPage {
     isForkMode;
     onResumeSubscription: Subscription;
     onShareSubscription: Subscription;
+    onRefreshList: Subscription;
     isConfirm = false;
     shareData: Share;
 
@@ -78,7 +80,8 @@ export class PlacesPage {
         private androidPermissions: AndroidPermissions,
         private translate: TranslateService,
         private diagnostic: Diagnostic,
-        private share: ShareService) {
+        private share: ShareService,
+        private favorites: FavoritesService) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -412,7 +415,17 @@ export class PlacesPage {
                 features: data.specialities
             }
         }
-        this.nav.push(PlacePage, params);
+        this.nav.push(PlacePage, params)
+            .then(() => {
+                this.onRefreshList = this.favorites.onRefreshPlaces
+                    .subscribe((resp) => {
+                        this.companies.forEach(company => {
+                            if (company.id === resp.id) {
+                                company.is_favorite = resp.isFavorite;
+                            }
+                        })
+                    })
+            });
     }
 
     getStars(star: number) {
@@ -630,6 +643,9 @@ export class PlacesPage {
     ionViewDidLeave() {
         if (this.platform.is('cordova')) {
             this.onResumeSubscription.unsubscribe();
+        }
+        if (this.onRefreshList) {
+           this.onRefreshList.unsubscribe(); 
         }
      }
 }

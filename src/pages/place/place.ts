@@ -12,6 +12,7 @@ import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { FavoritesService } from '../../providers/favorites.service';
 import { Subscription } from 'rxjs';
+import { ToastService } from '../../providers/toast.service';
 
 @Component({
     selector: 'page-place',
@@ -35,7 +36,8 @@ export class PlacePage {
         private navParams: NavParams,
         private profile: ProfileService,
         private share: ShareService,
-        private favorites: FavoritesService) {
+        private favorites: FavoritesService,
+        private toast: ToastService) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -70,12 +72,12 @@ export class PlacePage {
         }
 
         this.onRefreshCompany = this.favorites.onRefreshOffers
-            .subscribe(() => {
-                this.offers.getPlace(this.company.id)
-                    .subscribe(company => {
-                        this.company = company;
-                        this.offersList = company.offers;
-                    });
+            .subscribe((resp) => {
+               this.offersList.forEach(offer => {
+                   if (offer.id === resp.id) {
+                       offer.is_favorite = resp.isFavorite;
+                   }
+               })
             })
     }
 
@@ -155,7 +157,10 @@ export class PlacePage {
 
     addFavorite() {
         this.favorites.setPlace(this.company.id)
-            .subscribe(() => this.company.is_favorite = true);
+            .subscribe(() => {
+                this.company.is_favorite = true;
+                this.toast.showNotification('Added to favorites');
+            });
     }
 
     ionViewDidLeave() {
