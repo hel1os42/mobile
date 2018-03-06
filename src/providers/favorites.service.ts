@@ -10,17 +10,19 @@ export class FavoritesService {
     constructor(private api: ApiService) {
     }
 
-    getPlaces() {
-        return this.api.get('profile/favorite/places');
+    getPlaces(page: number) {
+        return this.api.get(`profile/favorite/places?page=${page}`);
     }
 
-    getOffers() {
-        return this.api.get('profile/favorite/offers');
+    getOffers(page: number) {
+        return this.api.get(`profile/favorite/offers?page=${page}`);
     }
 
     setPlace(placeId: string) {
         let obs = this.api.post('profile/favorite/places', { place_id: placeId });
-        obs.subscribe(() => this.onRefreshPlaces.emit({ id: placeId, isFavorite: true }));
+        obs.subscribe(() => {
+            this.onRefreshPlaces.emit({ id: placeId, isFavorite: true });
+        });
         return obs;
     }
     
