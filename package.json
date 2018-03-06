@@ -65,7 +65,7 @@
     "ionicons": "3.0.0",
     "leaflet": "1.2.0",
     "lodash": "4.17.4",
-    "moment": "2.18.1",
+    "moment": "2.21.0",
     "moment-timezone": "0.5.13",
     "ng2-img-cropper": "0.9.0",
     "phonegap-plugin-barcodescanner": "7.0.2",
