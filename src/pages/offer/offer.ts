@@ -12,6 +12,7 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { FavoritesService } from '../../providers/favorites.service';
+import { ToastService } from '../../providers/toast.service';
 
 @Component({
     selector: 'page-offer',
@@ -37,7 +38,9 @@ export class OfferPage {
         private profile: ProfileService,
         private alertCtrl: AlertController,
         private share: ShareService,
-        private favorites: FavoritesService) {
+        private favorites: FavoritesService,
+        private toast: ToastService,
+        private alert: AlertController) {
 
         if (this.share.get()) {
             this.share.remove();
@@ -180,7 +183,31 @@ export class OfferPage {
 
     addFavorite() {
         this.favorites.setOffer(this.offer.id)
-            .subscribe(() => this.offer.is_favorite = true);
+            .subscribe(() => {
+                this.offer.is_favorite = true;
+                this.toast.showNotification('Added to favorites');
+            });
+    }
+
+    
+    presentConfirm() {
+        const alert = this.alert.create({
+            title: 'Are you sure you want to remove offer from favorites?',
+            
+            buttons: [{
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                    return;
+                }
+            }, {
+                text: 'Ok',
+                handler: () => {
+                    this.removeFavorite();
+                }
+            }]
+        });
+        alert.present();
     }
 
     ionViewDidLeave() {

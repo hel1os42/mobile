@@ -9,7 +9,7 @@
         <div class="cover" [style.background-image]="'url(' + company.cover_url + '?size=mobile&)'">
             <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
             <div class="cover_block_btn">
-                <button *ngIf="company.is_favorite" (click)="removeFavorite()" ion-button icon-only color="white">
+                <button *ngIf="company.is_favorite" (click)="presentConfirm()" ion-button icon-only color="white">
                     <img src="assets/img/place/icon_star.svg">
                 </button>
                 <button *ngIf="!company.is_favorite" (click)="addFavorite()" ion-button icon-only class="grayscale" color="white">

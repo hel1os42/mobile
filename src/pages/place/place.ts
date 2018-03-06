@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
@@ -37,7 +37,8 @@ export class PlacePage {
         private profile: ProfileService,
         private share: ShareService,
         private favorites: FavoritesService,
-        private toast: ToastService) {
+        private toast: ToastService,
+        private alert: AlertController) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -161,6 +162,26 @@ export class PlacePage {
                 this.company.is_favorite = true;
                 this.toast.showNotification('Added to favorites');
             });
+    }
+
+    presentConfirm() {
+        const alert = this.alert.create({
+            title: 'Are you sure you want to remove offer from favorites?',
+            
+            buttons: [{
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                    return;
+                }
+            }, {
+                text: 'Ok',
+                handler: () => {
+                    this.removeFavorite();
+                }
+            }]
+        });
+        alert.present();
     }
 
     ionViewDidLeave() {
