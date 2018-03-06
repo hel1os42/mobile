@@ -116,6 +116,16 @@ export class PlacesPage {
             .subscribe(categories => {
                 this.categories.forEach((category) => {
                     category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
+                    //refresh list if changed favorites status
+                    this.onRefreshList = this.favorites.onRefreshPlaces
+                    .subscribe((resp) => {
+                        this.companies.forEach(company => {
+                            if (company.id === resp.id) {
+                                company.is_favorite = resp.isFavorite;
+                            }
+                        })
+                    })
+                    //
                 })
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
@@ -415,17 +425,17 @@ export class PlacesPage {
                 features: data.specialities
             }
         }
-        this.nav.push(PlacePage, params)
-            .then(() => {
-                this.onRefreshList = this.favorites.onRefreshPlaces
-                    .subscribe((resp) => {
-                        this.companies.forEach(company => {
-                            if (company.id === resp.id) {
-                                company.is_favorite = resp.isFavorite;
-                            }
-                        })
-                    })
-            });
+        this.nav.push(PlacePage, params);
+            // .then(() => {
+            //     this.onRefreshList = this.favorites.onRefreshPlaces
+            //         .subscribe((resp) => {
+            //             this.companies.forEach(company => {
+            //                 if (company.id === resp.id) {
+            //                     company.is_favorite = resp.isFavorite;
+            //                 }
+            //             })
+            //         })
+            // });
     }
 
     getStars(star: number) {
