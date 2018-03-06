@@ -475,7 +475,14 @@ export class PlacesPage {
             radius: this.radius
         });
         this.search = "";
-        popover.present();
+        if (this.platform.is('ios')) {
+            setTimeout(() => {
+                popover.present();
+            }, 300)
+        }
+        else{
+            popover.present();
+        }
         popover.onDidDismiss((data) => {
             if (!data) {
                 return;
