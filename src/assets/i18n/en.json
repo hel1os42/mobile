@@ -106,9 +106,14 @@
 
     "PAGE_BOOKMARKS" : {
         "BOOKMARKS" : "Bookmarks",
+        "BOOKMARK" : "Bookmark",
         "PLACES" : "Places",
         "FEATURED" : "Featured",
-        "REDEEM_NOW" : "Redeem now"
+        "REDEEM_NOW" : "Redeem now",
+        "YOU_DONT_HAVE" : "You don't have any favorites",
+        "YET" : "yet",
+        "OFFERS" : "offers",
+        "PLACES1" : "places" 
     },
 
     "PAGE_CREATE-ADVUSER-PROFILE" : {

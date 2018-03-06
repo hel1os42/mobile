@@ -16,5 +16,5 @@ export class Offer extends OfferCreate {
     timeframes: TimeFrames[];
     redemptions_count?: number;
     type: string;
-    is_favorite: boolean;
+    is_favorite?: boolean;
 }

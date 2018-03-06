@@ -44,12 +44,12 @@ export class PlacePage {
         this.coords = this.navParams.get('coords');
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
-            this.features = this.company.specialities;
             this.distanceString = this.navParams.get('distanceStr');
             this.offers.getPlace(this.company.id)
                 .subscribe(company => {
                     this.company = company;
                     this.offersList = company.offers;
+                    this.features = company.specialities;
                 });
         }
         else {
@@ -74,11 +74,11 @@ export class PlacePage {
 
         this.onRefreshCompany = this.favorites.onRefreshOffers
             .subscribe((resp) => {
-               this.offersList.forEach(offer => {
-                   if (offer.id === resp.id) {
-                       offer.is_favorite = resp.isFavorite;
-                   }
-               })
+                this.offersList.forEach(offer => {
+                    if (offer.id === resp.id) {
+                        offer.is_favorite = resp.isFavorite;
+                    }
+                })
             })
     }
 
@@ -167,7 +167,7 @@ export class PlacePage {
     presentConfirm() {
         const alert = this.alert.create({
             title: 'Are you sure you want to remove offer from favorites?',
-            
+
             buttons: [{
                 text: 'Cancel',
                 role: 'cancel',

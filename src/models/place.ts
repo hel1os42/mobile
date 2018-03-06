@@ -12,7 +12,7 @@ export class Place {
     radius: number;
     stars: number;
     is_featured: boolean;
-    is_favorite: boolean;
+    is_favorite?: boolean;
     is_starred?: boolean;
     created_at: string;
     updated_at: string;
