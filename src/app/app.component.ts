@@ -63,21 +63,21 @@ export class MyApp {
                 })
                 .catch(err => console.log('Error starting GoogleAnalytics', err));
 
-            if (this.network.getStatus()) {
+            // if (this.network.getStatus()) {
                 if (!this.auth.isLoggedIn()) {
                     this.rootPage = OnBoardingPage;
                 }
                 else {
                     this.getRootPage();
                 }
-            }
-            else {
-                this.rootPage = OnBoardingPage;
-                this.onConnectSubscription = this.network.onConnect
-                    .subscribe(resp => {
-                        this.getRootPage();
-                    })
-            }
+            // }
+            // else {
+            //     this.rootPage = OnBoardingPage;
+            //     this.onConnectSubscription = this.network.onConnect
+            //         .subscribe(resp => {
+            //             this.getRootPage();
+            //         })
+            // }
 
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
