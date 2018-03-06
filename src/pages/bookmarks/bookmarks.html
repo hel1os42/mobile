@@ -7,7 +7,7 @@
     <div class="header-shadow"></div>
 </ion-header>
 
-<ion-content padding class="disabled-elements">
+<ion-content padding>
   <ion-item no-lines class="border-bottom-no top-block-nau">
     <ion-avatar item-start>
       <img src="assets/img/bookmarks/star.svg">
@@ -28,34 +28,38 @@
     <ion-list no-lines class="item-block-nau margin-top-10 block-places">
         <a ion-item detail-none>
             <ion-avatar item-start text-center>
-                <!-- <img [src]="company.picture_url"> -->
-                <div class="thumb_image" [style.background-image]="'url(assets/img/user_home/image1.png)'"></div>
-                <span text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">{{ 'PAGE_BOOKMARKS.FEATURED' | translate }}</span>
+                <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + company.picture_url + '?size=mobile&)'}"></div>
+                <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">{{ 'PAGE_PLACES.FEATURED' | translate }}</span>
             </ion-avatar>
             <div class="font-0">
-                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
-                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
-                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
-                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
-                <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
-                <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">128</span>
+                <ng-container *ngFor="let showStar of getStars(company.stars)">
+                    <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+                </ng-container>
+                <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
+                <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
-                <span class="font-75 text-828282">100 {{ 'UNIT.M' | translate }}</span>
-                <div class="bold font-20 text-3E4B5D text-ellipsis margin-top-1vw">The Fair food</div>
-                <div class="wrap-no smooth_transition">
-                <span class="type-food">Bakkery</span>
+                <span class="font-75 text-828282"> {{ getDistance(company.latitude, company.longitude) }} </span>
+                <div class="smooth_transition">
+                    <div class="scroll_content margin-top-2vw">
+                        <div class="bold font-18 text-3E4B5D">{{ company.name }}</div>
+                    </div>
+                    <div *ngIf="company.tags && company.tags.length > 0" class="scroll_content margin-top-2vw">
+                        <ng-container *ngFor="let tag of company.tags">
+                            <span class="type-food">{{ tag.name }}</span>
+                        </ng-container>
+                    </div>
                 </div>
-                <div margin-top class="text-828282 font-12 wrap text-overflow-35 margin-top-5">Description</div>
+                <div class="text-828282 font-12 wrap text-overflow-3 margin-top-2vw">{{ company. description }}</div>
             </div>
-            <img class="star_right" src="assets/img/place/icon_star.svg">
+            <img *ngIf="company.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
 
             <div item-end>
                 <div class="num_right">
                     <div class="font-36 bold text-FF5A00" text-center>
-                        24
+                        {{ company?.active_offers_count }}
                     </div>
                     <div text-center class="font-10 text-828282">
-                        {{ 'UNIT.OFFERS' | translate }}
+                        {{ company?.active_offers_count > 1 ? ('UNIT.OFFERS' | translate) : ('UNIT.OFFER' | translate) }}
                     </div>
                 </div>
             </div>
@@ -65,19 +69,24 @@
 
   <!-- OFFERS -->
   <ion-list margin-top no-lines class="block-offers item-block-nau">
-    <ion-item class="relative">
-      <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
-      </ion-avatar>
-      <div class="bold font-22 text-3E4B5D">Chance for you</div>
-      <div text-regular class="margin-top-10 font-12 text-828282 wrap text-overflow-35">A hamburger or burger is a sandwich consisting of one</div>
-      <img class="star_right" src="assets/img/place/icon_star.svg">
-      <div class="margin-top-10 flex">
-        <button ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_BOOKMARKS.REDEEM_NOW' | translate }}</button>
-        <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-        <img class="gift" src="assets/img/place/icon_gift.svg">
-      </div>
-    </ion-item>
+      <ion-item *ngFor=" let offer of offersList" class="relative">
+          <ion-avatar item-start>
+              <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
+              <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
+          </ion-avatar>
+          <div class="smooth_transition width-88">
+              <div class="scroll_content">
+                  <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
+              </div>
+          </div>
+          <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
+          <img class="star_right" src="assets/img/place/icon_star.svg">
+          <div class="margin-top-2vw flex">
+              <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
+              <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
+              <span class="gift extrabold">1</span>
+          </div>
+      </ion-item>
   </ion-list>
 
 </ion-content>
