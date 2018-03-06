@@ -76,7 +76,7 @@
                 </div>
                 <div class="text-828282 font-12 wrap text-overflow-3 margin-top-2vw">{{ company. description }}</div>
             </div>
-            <img class="star_right" src="assets/img/place/icon_star.svg">
+            <img *ngIf="company.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
 
             <div item-end>
                 <div class="num_right">
