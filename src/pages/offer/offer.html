@@ -18,9 +18,12 @@
           <img src="assets/img/user_offers/icon1.svg">
         </button>
         -->
-        <button ion-button icon-only color="white">
-          <img src="assets/img/user_offers/icon2.svg">
-        </button>
+        <button *ngIf="offer.is_favorite" (click)="removeFavorite()" ion-button icon-only color="white">
+          <img src="assets/img/place/icon_star.svg">
+      </button>
+      <button *ngIf="!offer.is_favorite" (click)="addFavorite()" ion-button icon-only class="grayscale" color="white">
+          <img src="assets/img/place/icon_star.svg">
+      </button>
         <button (click)="shareOffer()" ion-button icon-only color="white">
           <img src="assets/img/user_offers/icon3.svg">
         </button>

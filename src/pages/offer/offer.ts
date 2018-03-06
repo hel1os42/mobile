@@ -11,6 +11,7 @@ import { ShareService } from '../../providers/share.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
+import { FavoritesService } from '../../providers/favorites.service';
 
 @Component({
     selector: 'page-offer',
@@ -35,7 +36,8 @@ export class OfferPage {
         private app: App,
         private profile: ProfileService,
         private alertCtrl: AlertController,
-        private share: ShareService) {
+        private share: ShareService,
+        private favorites: FavoritesService) {
 
         if (this.share.get()) {
             this.share.remove();
@@ -169,6 +171,16 @@ export class OfferPage {
                     })
 
             })
+    }
+
+    removeFavorite() {
+        this.favorites.removeOffer(this.offer.id)
+            .subscribe(() => this.offer.is_favorite = false);
+    }
+
+    addFavorite() {
+        this.favorites.setOffer(this.offer.id)
+            .subscribe(() => this.offer.is_favorite = true);
     }
 
     ionViewDidLeave() {
