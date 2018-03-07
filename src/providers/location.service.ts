@@ -50,7 +50,11 @@ export class LocationService {
     }
 
     getCache() {
-        return this.geoposition.coords;
+        let promise: Promise<Geoposition>;
+        promise = this.geoposition && this.geoposition.coords.latitude 
+        ? Promise.resolve(this.geoposition) 
+        : this.get(false);
+        return promise;
     }
 
     reset() {
