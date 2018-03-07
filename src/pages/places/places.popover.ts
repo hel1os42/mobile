@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import * as _ from 'lodash';
 
@@ -17,11 +17,12 @@ export class PlacesPopover {
     isOpenCuisineSelect = false;
     STEPS = [0.2, 0.5, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 500];
     radius: number;
-    slider;
+    slider = 14;
 
     constructor(
         private viewCtrl: ViewController,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private zone: NgZone) {
 
         this.types = this.navParams.get('types');
         this.tags = this.navParams.get('tags') ? this.navParams.get('tags') : [];
@@ -29,15 +30,16 @@ export class PlacesPopover {
         for (let i = 0; i < this.STEPS.length; i++) {
             if (this.radius / 1000 == this.STEPS[i]) {
                 this.slider = i;
-                return;
             }
         }
+
         this.getSpecialities();
-        this.watchSlider();
     }
 
     watchSlider() {
-        this.radius = this.STEPS[this.slider] * 1000;
+        this.zone.run(() => {
+            this.radius = this.STEPS[this.slider] * 1000;
+        })
     }
 
     openTypesSelect() {

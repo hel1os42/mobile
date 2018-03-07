@@ -1,50 +1,55 @@
+
 <ion-header>
   <ion-navbar>
     <ion-title>{{ 'PAGE_NOTIFICATIONS.NOTIFICATION' | translate }}</ion-title>
-    <ion-buttons class="btn_header" end margin-right>
+    <!-- <ion-buttons class="btn_header" end margin-right>
         <a *ngIf="!isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_active.svg"></a>
         <a *ngIf="isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_not_active.svg"></a>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
 
-<ion-content padding class="disabled-elements">
 
-  <ion-item *ngIf="isVisibleSearch" class="block-search" no-lines>
-    <ion-searchbar round placeholder=""></ion-searchbar>
-  </ion-item>
+<ion-content padding class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
+    <div text-center class="font-14 text-828282">
+        You don't have any notifications yet
+    </div>
+    <!--
+      <ion-item *ngIf="isVisibleSearch" class="block-search" no-lines>
+        <ion-searchbar round placeholder=""></ion-searchbar>
+      </ion-item>
 
-  <div class="font-14 text-4F4F4F" text-uppercase>{{ 'PAGE_NOTIFICATIONS.TODAY' | translate }}</div>
-  <ion-list no-lines class="item-block-nau font-0">
-    <ion-item detail-push class="today">
-      <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(assets/img/user_users/ava1.png)'"></div>
-      </ion-avatar>
-      <div class="bold font-20 text-3E4B5D wrap-no">Alex Miller</div>
-      <div text-regular class="font-12 text-828282 margin-top-3vw width-88 wrap-no">{{ 'PAGE_NOTIFICATIONS.SENT_NEW_MESSAGE_FOR_YOU' | translate }}</div>
-      <button ion-button class="btn_next font-14 text-white margin-top-3vw extrabold font-14">{{ 'PAGE_NOTIFICATIONS.READ' | translate }}</button>
-    </ion-item>
-  </ion-list>
+      <div class="font-14 text-4F4F4F" text-uppercase>{{ 'PAGE_NOTIFICATIONS.TODAY' | translate }}</div>
+      <ion-list no-lines class="item-block-nau font-0">
+        <ion-item detail-push class="today">
+          <ion-avatar item-start>
+            <div class="thumb_image" [style.background-image]="'url(assets/img/user_users/ava1.png)'"></div>
+          </ion-avatar>
+          <div class="bold font-20 text-3E4B5D wrap-no">Alex Miller</div>
+          <div text-regular class="font-12 text-828282 margin-top-3vw width-88 wrap-no">{{ 'PAGE_NOTIFICATIONS.SENT_NEW_MESSAGE_FOR_YOU' | translate }}</div>
+          <button ion-button class="btn_next font-14 text-white margin-top-3vw extrabold font-14">{{ 'PAGE_NOTIFICATIONS.READ' | translate }}</button>
+        </ion-item>
+      </ion-list>
 
-  <div class="font-14 text-4F4F4F padding-top-5vw" text-uppercase>{{ 'PAGE_NOTIFICATIONS.YESTERDAY' | translate }}</div>
-  <ion-list no-lines class="item-block-nau font-0">
-    <ion-item detail-push class="yesterday">
-      <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
-      </ion-avatar>
-      <div class="bold font-20 text-3E4B5D wrap-no">Happy Friday</div>
-      <div class="font-12 text-828282 wrap text-overflow-35 margin-top-3vw width-88">{{ 'PAGE_NOTIFICATIONS.OUR_RESTAURANT_WANTS' | translate }}</div>
-      <div text-uppercase class="bold font-14 text-FF8B10 margin-top-3vw">{{ 'PAGE_NOTIFICATIONS.Get_your_chance' | translate }}</div>
-    </ion-item>
+      <div class="font-14 text-4F4F4F padding-top-5vw" text-uppercase>{{ 'PAGE_NOTIFICATIONS.YESTERDAY' | translate }}</div>
+      <ion-list no-lines class="item-block-nau font-0">
+        <ion-item detail-push class="yesterday">
+          <ion-avatar item-start>
+            <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image1.png)'"></div>
+          </ion-avatar>
+          <div class="bold font-20 text-3E4B5D wrap-no">Happy Friday</div>
+          <div class="font-12 text-828282 wrap text-overflow-35 margin-top-3vw width-88">{{ 'PAGE_NOTIFICATIONS.OUR_RESTAURANT_WANTS' | translate }}</div>
+          <div text-uppercase class="bold font-14 text-FF8B10 margin-top-3vw">{{ 'PAGE_NOTIFICATIONS.Get_your_chance' | translate }}</div>
+        </ion-item>
 
-    <ion-item detail-push class="yesterday">
-      <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image2.png)'"></div>
-      </ion-avatar>
-      <div class="bold font-20 text-3E4B5D wrap-no">{{ 'PAGE_NOTIFICATIONS.SYSTEM_NOTIFICATION' | translate }}</div>
-      <div class="font-12 text-828282 wrap text-overflow-35 margin-top-3vw width-88">{{ 'PAGE_NOTIFICATIONS.PROPER_CREDIT' | translate }}</div>
-    </ion-item>
-  </ion-list>
-
+        <ion-item detail-push class="yesterday">
+          <ion-avatar item-start>
+            <div class="thumb_image" [style.background-image]="'url(assets/img/place/offers_image2.png)'"></div>
+          </ion-avatar>
+          <div class="bold font-20 text-3E4B5D wrap-no">{{ 'PAGE_NOTIFICATIONS.SYSTEM_NOTIFICATION' | translate }}</div>
+          <div class="font-12 text-828282 wrap text-overflow-35 margin-top-3vw width-88">{{ 'PAGE_NOTIFICATIONS.PROPER_CREDIT' | translate }}</div>
+        </ion-item>
+      </ion-list>
+    -->
 </ion-content>

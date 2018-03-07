@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { ApiService } from './api.service';
+import { RedeemedOffer } from '../models/redeemedOffer';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
 @Injectable()
 export class OfferService {
+
+    onRefreshRedeemedOffers: EventEmitter<RedeemedOffer[]> = new EventEmitter();
 
     constructor(
         private api: ApiService) { }
@@ -55,11 +58,8 @@ export class OfferService {
         });
     }
 
-    getPlace(place_id: string, isShare?: boolean) {
-        let params = isShare 
-        ? `places/${place_id}?with=offers;specialities` 
-        : `places/${place_id}?with=offers`;
-        return this.api.get(params);
+    getPlace(place_id: string) {
+        return this.api.get(`places/${place_id}?with=offers;specialities`);
     }
 
     getPlaceOffers(place_id) {
@@ -115,5 +115,12 @@ export class OfferService {
             }
         }
         return str;
+    }
+
+    refreshRedeemedOffers() {
+        this.getRedeemedOffers()
+            .subscribe(resp => {
+                this.onRefreshRedeemedOffers.emit(resp);
+            })
     }
 }

@@ -49,6 +49,14 @@ export class LocationService {
         return sharableObs.map(resp => resp.json());
     }
 
+    getCache() {
+        let promise: Promise<Geoposition>;
+        promise = this.geoposition && this.geoposition.coords.latitude 
+        ? Promise.resolve(this.geoposition) 
+        : this.get(false);
+        return promise;
+    }
+
     reset() {
         this.geoposition = undefined;
     }

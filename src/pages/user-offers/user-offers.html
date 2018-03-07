@@ -15,7 +15,7 @@
        <div class="font-18 text-3E4B5D bold">{{ total }}</div>
        <div *ngIf="total > 0" class="font-14 text-828282">{{ 'PAGE_USER-OFFERS.REDEEMED_OFFERS' | translate }}</div>
     </div>
-      <a item-end margin-left>
+      <a item-end margin-left hidden>
           <a class="btn_calendar_user">
               <img src="assets/img/user_offers/icon_right.svg">
               <ion-datetime doneText="Ok" [(ngModel)]="startDate" [min]="todayDate | date: 'yyyy-MM-dd'" max="2021-12-31">
@@ -30,9 +30,9 @@
        <!-- <div class="thumb_image" [style.background-image]="'url(' + offer.picture_url + ')'"></div> -->
        <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&), url(assets/img/imagenotfound.svg)'}" ></div>
       </ion-avatar>
-      <div class="bold font-22 text-3E4B5D wrap-no">{{ offer.label}}</div>
-      <div class="bold font-14 text-FF8B10" text-uppercase>{{ offer.city }}</div>
-      <div class="font-14 text-828282">{{ 'PAGE_USER-OFFERS.DATE' | translate }}: {{ offer.pivot.created_at.substring(0,10) }}</div>
+      <div class="bold font-18 text-3E4B5D wrap-no">{{ offer.label}}</div>
+      <div class="bold font-14 text-FF8B10 margin-top-2vw" text-uppercase>{{ offer.city }}</div>
+      <div class="font-14 text-828282 margin-top-2vw">{{ 'PAGE_USER-OFFERS.DATE' | translate }}: {{ offer.pivot.created_at.substring(0,10) }}</div>
     </ion-item>
   </ion-list>
 

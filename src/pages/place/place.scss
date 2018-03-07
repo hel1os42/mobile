@@ -1,8 +1,16 @@
 page-place {
     .gift{
         height: 8.4vw;
-        width: auto;
+        width: 8.4vw;
         margin-top: 0.5vw;
+        background-image: url(../assets/img/place/icon_gift.svg);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        color: #fff;
+        text-align: center;
+        font-size: 3vw;
+        line-height: 11.5vw;
     }
 
     .btn_transfer.item-button{

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
@@ -10,6 +10,9 @@ import { ShareService } from '../../providers/share.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
+import { FavoritesService } from '../../providers/favorites.service';
+import { Subscription } from 'rxjs';
+import { ToastService } from '../../providers/toast.service';
 
 @Component({
     selector: 'page-place',
@@ -25,45 +28,58 @@ export class PlacePage {
     features: Speciality[];
     branchDomain = 'https://nau.app.link';
     page: string;
+    onRefreshCompany: Subscription;
 
     constructor(
         private nav: NavController,
         private offers: OfferService,
         private navParams: NavParams,
         private profile: ProfileService,
-        private share: ShareService) {
+        private share: ShareService,
+        private favorites: FavoritesService,
+        private toast: ToastService,
+        private alert: AlertController) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
-            this.features = this.company.specialities;
             this.distanceString = this.navParams.get('distanceStr');
             this.offers.getPlace(this.company.id)
-            .subscribe(company => {
-                this.company = company;
-                this.offersList = company.offers;
-            });
+                .subscribe(company => {
+                    this.company = company;
+                    this.offersList = company.offers;
+                    this.features = company.specialities;
+                });
         }
         else {
             let companyId = this.navParams.get('placeId');
             this.page = this.navParams.get('page');
             let offerId = this.navParams.get('offerId');
             this.offers.getPlace(companyId)
-            .subscribe(company => {
-                this.company = company;
-                this.offersList = company.offers;
-                this.distanceString = this.getDistance(this.company.latitude, this.company.longitude);
-                this.features = this.company.specialities;
-                if (!offerId) {
-                    this.share.remove();
-                }
-                else if (offerId) {
-                    let offer = company.offers.filter(offer => offer.id === offerId);
-                    this.openOffer(offer[0], company);
-                }
-            })
+                .subscribe(company => {
+                    this.company = company;
+                    this.offersList = company.offers;
+                    this.distanceString = this.getDistance(this.company.latitude, this.company.longitude);
+                    this.features = this.company.specialities;
+                    if (!offerId) {
+                        this.share.remove();
+                    }
+                    else if (offerId) {
+                        let offer = company.offers.filter(offer => offer.id === offerId);
+                        this.openOffer(offer[0], company);
+                    }
+                })
         }
+
+        this.onRefreshCompany = this.favorites.onRefreshOffers
+            .subscribe((resp) => {
+                this.offersList.forEach(offer => {
+                    if (offer.id === resp.id) {
+                        offer.is_favorite = resp.isFavorite;
+                    }
+                })
+            })
     }
 
     // ionSelected() {
@@ -130,9 +146,46 @@ export class PlacePage {
         this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,
-            distanceStr: this.distanceString,
+            distanceStr:  this.getDistance(offer.latitude, offer.longitude),
             coords: this.coords
         });
+    }
+
+    removeFavorite() {
+        this.favorites.removePlace(this.company.id)
+            .subscribe(() => this.company.is_favorite = false);
+    }
+
+    addFavorite() {
+        this.favorites.setPlace(this.company.id)
+            .subscribe(() => {
+                this.company.is_favorite = true;
+                this.toast.showNotification('Added to favorites');
+            });
+    }
+
+    presentConfirm() {
+        const alert = this.alert.create({
+            title: 'Are you sure you want to remove offer from favorites?',
+
+            buttons: [{
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                    return;
+                }
+            }, {
+                text: 'Ok',
+                handler: () => {
+                    this.removeFavorite();
+                }
+            }]
+        });
+        alert.present();
+    }
+
+    ngOnDestroy() {
+        this.onRefreshCompany.unsubscribe();
     }
 
 }

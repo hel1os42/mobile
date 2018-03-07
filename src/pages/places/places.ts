@@ -22,6 +22,7 @@ import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
+import { FavoritesService } from '../../providers/favorites.service';
 
 
 @Component({
@@ -59,9 +60,10 @@ export class PlacesPage {
     selectedTags: Tag[];
     isChangedCategory = true;
     isChangedFilters = false;
-    isForkMode;
+    isForkMode: boolean;
     onResumeSubscription: Subscription;
     onShareSubscription: Subscription;
+    onRefreshListSubscription: Subscription;
     isConfirm = false;
     shareData: Share;
 
@@ -78,7 +80,8 @@ export class PlacesPage {
         private androidPermissions: AndroidPermissions,
         private translate: TranslateService,
         private diagnostic: Diagnostic,
-        private share: ShareService) {
+        private share: ShareService,
+        private favorites: FavoritesService) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -117,7 +120,15 @@ export class PlacesPage {
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
             })
-           
+        this.onRefreshListSubscription = this.favorites.onRefreshPlaces
+            .subscribe((resp) => {
+                this.companies.forEach(company => {
+                    if (company.id === resp.id) {
+                        company.is_favorite = resp.isFavorite;
+                    }
+                })
+            })
+
     }
 
     getLocationStatus() {
@@ -137,7 +148,7 @@ export class PlacesPage {
                     //     console.log(err + 'err');
                     // }
                 )
-                // .catch(err => console.log(err));
+            // .catch(err => console.log(err));
         }
         else if (this.platform.is('ios') && this.platform.is('cordova')) {
             this.diagnostic.getLocationAuthorizationStatus()
@@ -176,10 +187,10 @@ export class PlacesPage {
                                     this.getLocation(false);
                                 }
                             })
-                            // .catch(err => {
-                            //     debugger;
-                            //     console.log(err + 'err');
-                            // });
+                        // .catch(err => {
+                        //     debugger;
+                        //     console.log(err + 'err');
+                        // });
                     }
                     else {
                         this.getLocation(false);
@@ -191,10 +202,10 @@ export class PlacesPage {
                 //     debugger
                 // }
             )
-            // .catch(err => {
-            //     debugger;
-            //     console.log(err + 'err');
-            // });
+        // .catch(err => {
+        //     debugger;
+        //     console.log(err + 'err');
+        // });
     }
 
     getLocation(isDenied: boolean, isRefresh?: boolean) {
@@ -238,22 +249,22 @@ export class PlacesPage {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
-                loadingLocation.dismiss().catch((err) => {console.log(err + 'err')});
+                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                 if (this.shareData) {
                     this.openPlace(this.shareData, true)
                 }
                 this.getCompaniesList();
             })
             .catch((error) => {
-                loadingLocation.dismiss().catch((err) => {console.log(err + 'err')});
+                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                 // debugger
-                this.presentConfirm(); 
+                this.presentConfirm();
                 // error => console.log(error + 'err')
             })
     }
 
     getCoords(isRefresh?: boolean) {
-       
+
         if (this.platform.is('android')) {
             this.diagnostic.getLocationMode()
                 .then(res => {
@@ -409,10 +420,19 @@ export class PlacesPage {
                 company: data,
                 distanceStr: this.getDistance(data.latitude, data.longitude),
                 coords: this.coords,
-                features: data.specialities
             }
         }
         this.nav.push(PlacePage, params);
+        // .then(() => {
+        //     this.onRefreshList = this.favorites.onRefreshPlaces
+        //         .subscribe((resp) => {
+        //             this.companies.forEach(company => {
+        //                 if (company.id === resp.id) {
+        //                     company.is_favorite = resp.isFavorite;
+        //                 }
+        //             })
+        //         })
+        // });
     }
 
     getStars(star: number) {
@@ -469,13 +489,20 @@ export class PlacesPage {
     }
 
     presentPopover() {
-        let popover = this.popoverCtrl.create(PlacesPopover, { 
-            types: this.selectedTypes, 
-            tags: this.selectedTags, 
-            radius: this.radius 
+        let popover = this.popoverCtrl.create(PlacesPopover, {
+            types: this.selectedTypes,
+            tags: this.selectedTags,
+            radius: this.radius
         });
         this.search = "";
-        popover.present();
+        if (this.platform.is('ios')) {
+            setTimeout(() => {
+                popover.present();
+            }, 300)
+        }
+        else {
+            popover.present();
+        }
         popover.onDidDismiss((data) => {
             if (!data) {
                 return;
@@ -582,8 +609,8 @@ export class PlacesPage {
                             alert.dismiss().then(() => {
                                 this.getLocation(true);
                             })
-                            .catch(err => console.log(err));
-                            
+                                .catch(err => console.log(err));
+
                         }
                     }]
                 });
@@ -620,9 +647,12 @@ export class PlacesPage {
         confirm.present();
     }
 
-    ionViewDidLeave() {
+    ngOnDestroy() {
         if (this.platform.is('cordova')) {
             this.onResumeSubscription.unsubscribe();
         }
-     }
+        if (this.onRefreshListSubscription) {
+            this.onRefreshListSubscription.unsubscribe();
+        }
+    }
 }

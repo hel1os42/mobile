@@ -11,7 +11,7 @@ export class PlaceService {
 
     company: Place;
     onRefreshCompany: EventEmitter<Place> = new EventEmitter<Place>();
-    onRefreshOffersList:EventEmitter<any> = new EventEmitter();
+    onRefreshOffersList: EventEmitter<any> = new EventEmitter();
 
     constructor(private api: ApiService) { }
 

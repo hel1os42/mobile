@@ -23,7 +23,7 @@ export class SignUpCodePage {
         this.register = this.navParams.get('register');
         this.envName = this.appMode.getEnvironmentMode();
         if (this.envName === 'dev' || this.envName === 'test') {
-            this.register.code = this.register.phone.slice(-6);
+            this.register.code = this.register.phone.slice(-4);
         }
 
     }

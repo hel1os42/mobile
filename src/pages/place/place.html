@@ -9,8 +9,11 @@
         <div class="cover" [style.background-image]="'url(' + company.cover_url + '?size=mobile&)'">
             <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
             <div class="cover_block_btn">
-                <button ion-button icon-only color="white">
-                    <img src="assets/img/place/btn_star.svg">
+                <button *ngIf="company.is_favorite" (click)="presentConfirm()" ion-button icon-only color="white">
+                    <img src="assets/img/place/icon_star.svg">
+                </button>
+                <button *ngIf="!company.is_favorite" (click)="addFavorite()" ion-button icon-only class="grayscale" color="white">
+                    <img src="assets/img/place/icon_star.svg">
                 </button>
                 <button (click)="sharePlace()" ion-button icon-only color="white">
                     <img src="assets/img/place/btn_share.svg">
@@ -97,11 +100,11 @@
             </div>
         </div>
       <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
-      <img class="star_right" src="assets/img/place/icon_star.svg">
+      <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-2vw flex">
         <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
         <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-        <img class="gift" src="assets/img/place/icon_gift.svg">
+        <span class="gift extrabold">1</span>
       </div>
     </ion-item>
   </ion-list>

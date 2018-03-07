@@ -97,7 +97,7 @@ export class LoginPage {
             .subscribe(() => {
                 this.isVisibleLoginButton = true;
                 if (this.getDevMode()) {
-                    this.authData.code = this.authData.phone.slice(-6);
+                    this.authData.code = this.authData.phone.slice(-4);
                 }
                 this.backAction = this.platform.registerBackButtonAction(() => {
                     if (this.isVisibleLoginButton) {

@@ -108,7 +108,7 @@ export class UserProfilePage {
         this.slides.slidePrev();
     }
 
-    ionViewWillUnload() {
+    ngOnDestroy() {
         this.onRefreshAccounts.unsubscribe();
     }
 

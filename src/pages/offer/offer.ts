@@ -1,16 +1,18 @@
-import { DistanceUtils } from '../../utils/distanse.utils';
-import { Coords } from '../../models/coords';
 import { Component } from '@angular/core';
 import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
-import { Place } from '../../models/place';
+import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
+import { Place } from '../../models/place';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
+import { ShareService } from '../../providers/share.service';
+import { DistanceUtils } from '../../utils/distanse.utils';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
-import { ShareService } from '../../providers/share.service';
+import { FavoritesService } from '../../providers/favorites.service';
+import { ToastService } from '../../providers/toast.service';
 
 @Component({
     selector: 'page-offer',
@@ -35,7 +37,10 @@ export class OfferPage {
         private app: App,
         private profile: ProfileService,
         private alertCtrl: AlertController,
-        private share: ShareService) {
+        private share: ShareService,
+        private favorites: FavoritesService,
+        private toast: ToastService,
+        private alert: AlertController) {
 
         if (this.share.get()) {
             this.share.remove();
@@ -82,10 +87,6 @@ export class OfferPage {
         }
     }
 
-    ionViewDidLeave() {
-        this.stopTimer();
-        this.app.navPop();
-    }
 
     disable() {
         if (this.offer.radius < this.distance) {//to do add delivery etc.
@@ -98,14 +99,14 @@ export class OfferPage {
 
     presentAlert() {
         let alert = this.alertCtrl.create({
-          title: 'You are located too far',
-          buttons: ['Ok']
+            title: 'You are located too far',
+            buttons: ['Ok']
         });
         alert.present();
-      }
+    }
 
     openRedeemPopover() {
-        if (!this.disable()) {
+        // if (!this.disable()) {distance validation
             if (this.timer)
                 return;
 
@@ -125,7 +126,7 @@ export class OfferPage {
                                     this.stopTimer();
                                     this.profile.refreshAccounts();
                                     offerRedeemPopover.dismiss();
-
+                                    this.offers.refreshRedeemedOffers();
                                     let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
                                     offerRedeemedPopover.present();
                                     offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
@@ -133,10 +134,10 @@ export class OfferPage {
                             });
                     }, 2500)
                 })
-        }
-        else {
-            this.presentAlert()
-        }
+        // }
+        // else {
+        //     this.presentAlert()
+        // }
     }
 
     shareOffer() {
@@ -173,5 +174,44 @@ export class OfferPage {
                     })
 
             })
+    }
+
+    removeFavorite() {
+        this.favorites.removeOffer(this.offer.id)
+            .subscribe(() => this.offer.is_favorite = false);
+    }
+
+    addFavorite() {
+        this.favorites.setOffer(this.offer.id)
+            .subscribe(() => {
+                this.offer.is_favorite = true;
+                this.toast.showNotification('Added to favorites');
+            });
+    }
+
+    
+    presentConfirm() {
+        const alert = this.alert.create({
+            title: 'Are you sure you want to remove offer from favorites?',
+            
+            buttons: [{
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                    return;
+                }
+            }, {
+                text: 'Ok',
+                handler: () => {
+                    this.removeFavorite();
+                }
+            }]
+        });
+        alert.present();
+    }
+
+    ionViewDidLeave() {
+        this.stopTimer();
+        this.app.navPop();
     }
 }
