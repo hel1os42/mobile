@@ -7,7 +7,7 @@
     <div class="header-shadow"></div>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
     <ion-item no-lines class="border-bottom-no top-block-nau">
         <ion-avatar item-start>
             <img src="assets/img/bookmarks/star.svg">

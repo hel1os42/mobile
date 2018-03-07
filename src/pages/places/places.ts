@@ -60,7 +60,7 @@ export class PlacesPage {
     selectedTags: Tag[];
     isChangedCategory = true;
     isChangedFilters = false;
-    isForkMode;
+    isForkMode: boolean;
     onResumeSubscription: Subscription;
     onShareSubscription: Subscription;
     onRefreshListSubscription: Subscription;

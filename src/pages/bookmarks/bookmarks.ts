@@ -12,6 +12,7 @@ import { PlacePage } from '../place/place';
 import { LocationService } from '../../providers/location.service';
 import { OfferPage } from '../offer/offer';
 import * as _ from 'lodash';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-bookmarks',
@@ -32,12 +33,16 @@ export class BookmarksPage {
     totalCompanies: number;
     totalOffers: number;
     distanceString: string;
+    isForkMode: boolean;
 
     constructor(
         private favorites: FavoritesService,
         private profile: ProfileService,
         private nav: NavController,
-        private location: LocationService) {
+        private location: LocationService,
+        private appMode: AppModeService) {
+
+        this.isForkMode = this.appMode.getForkMode();
 
         this.segment = "places";
         this.location.getCache()
@@ -94,8 +99,8 @@ export class BookmarksPage {
             })
     }
 
-    ionViewDidEnter() {
-        this.getSegment();
+    getDevMode() {
+        return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
 
     getSegment() {
