@@ -110,6 +110,14 @@ button[ion-button] {
     background-size: contain;
 }
 
+.platform-tablet .logo-margin{
+    margin: 9vw auto 17vw auto;
+}
+
+.platform-tablet .logo{
+    margin: 0 auto 17vw auto;
+}
+
 .header-ios .toolbar-ios:last-child .toolbar-background-ios{
     border-width: 0;
 }
@@ -450,6 +458,11 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-top: 1px solid #F2F2F2;
     height: 25vw;
     padding: 7vw;
+}
+
+.platform-tablet .footer.footer-ios{
+    height: 15vw;
+    padding: 1vw;
 }
 
 .no-border.footer.footer-ios {
