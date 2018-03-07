@@ -15,7 +15,7 @@
        <div class="font-18 text-3E4B5D bold">{{ total }}</div>
        <div *ngIf="total > 0" class="font-14 text-828282">{{ 'PAGE_USER-OFFERS.REDEEMED_OFFERS' | translate }}</div>
     </div>
-      <a item-end margin-left>
+      <a item-end margin-left hidden>
           <a class="btn_calendar_user">
               <img src="assets/img/user_offers/icon_right.svg">
               <ion-datetime doneText="Ok" [(ngModel)]="startDate" [min]="todayDate | date: 'yyyy-MM-dd'" max="2021-12-31">
