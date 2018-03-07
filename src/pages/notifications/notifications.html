@@ -1,17 +1,17 @@
-<!--
+
 <ion-header>
   <ion-navbar>
     <ion-title>{{ 'PAGE_NOTIFICATIONS.NOTIFICATION' | translate }}</ion-title>
-    <ion-buttons class="btn_header" end margin-right>
+    <!-- <ion-buttons class="btn_header" end margin-right>
         <a *ngIf="!isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_active.svg"></a>
         <a *ngIf="isVisibleSearch" (click)="toggleSearch()"><img src="assets/img/notifications/btn_search_not_active.svg"></a>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
--->
 
-<ion-content padding class="disabled-elements">
+
+<ion-content padding class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
     <div text-center class="font-14 text-828282">
         You don't have any notifications yet
     </div>

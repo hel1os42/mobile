@@ -28,7 +28,7 @@ export class ProfileService {
     }
 
     getReferrals(page) {
-        return this.api.get(`profile/referrals/?page=${page}`, {
+        return this.api.get(`profile/referrals?page=${page}`, {
             showLoading: page == 1
         });
     }
