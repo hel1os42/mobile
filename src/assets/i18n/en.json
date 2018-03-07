@@ -258,7 +258,7 @@
     },
 
     "PAGE_NOTIFICATIONS" : {
-        "NOTIFICATION" : "Notification",
+        "NOTIFICATION" : "Notifications",
         "TODAY" : "Today",
         "YESTERDAY" : "Yesterday",
         "SENT_NEW_MESSAGE_FOR_YOU" : "Sent new message for you",
