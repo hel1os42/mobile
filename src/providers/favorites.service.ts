@@ -15,7 +15,12 @@ export class FavoritesService {
     }
 
     getOffers(page: number) {
-        return this.api.get(`profile/favorite/offers?page=${page}`);
+        return this.api.get('profile/favorite/offers', {
+            params: {
+                with: 'account.owner.place',
+                page: page
+            }
+        });
     }
 
     setPlace(placeId: string) {
