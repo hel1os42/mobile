@@ -17,26 +17,43 @@ page-bookmarks{
     display: none;
   }
 
-    .item-block-nau .item-ios [item-right], .item-ios [item-end]{
-        width: 33px;
+    .star_right{
+        right: 2vw;
+        top: 2vw;
     }
 
-    .star_right {
-        position: absolute;
-        right: 3%;
-        top: 7%;
-        width: 5.3vw;
+    .item-block-nau .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left],
+    .item-ios ion-avatar[item-start],
+    .item-ios ion-thumbnail[item-start] {
+        margin: 0 2vw 0 0;
     }
 
-    .text-overflow-35{
-        width: 93%;
-    }
-
-    .block-places.item-block-nau .item{
+    .item-block-nau .item {
         padding: 2vw;
     }
 
-    .item-block-nau .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start] {
-        margin: 0 2vw 0 0;
+    .font-36{
+        padding-bottom: 0;
+    }
+
+    .font-75{
+        line-height: 3vw;
+    }
+
+    /* offers */
+
+    .gift{
+        height: 8.4vw;
+        width: 8.4vw;
+        margin-top: 0.5vw;
+        background-image: url(../assets/img/place/icon_gift.svg);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        color: #fff;
+        text-align: center;
+        font-size: 3vw;
+        line-height: 11.5vw;
     }
 }
