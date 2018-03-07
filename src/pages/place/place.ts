@@ -146,7 +146,7 @@ export class PlacePage {
         this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,
-            distanceStr: this.distanceString,
+            distanceStr:  this.getDistance(offer.latitude, offer.longitude),
             coords: this.coords
         });
     }

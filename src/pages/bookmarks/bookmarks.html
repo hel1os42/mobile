@@ -79,7 +79,7 @@
 
     <!-- OFFERS -->
     <ion-list *ngIf="segment === 'offers'" margin-top no-lines class="item-block-nau">
-        <ion-item *ngFor=" let offer of offers" class="relative">
+        <ion-item (click)="openOffer(offer)" *ngFor=" let offer of offers" class="relative">
             <ion-avatar item-start>
                 <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
                 <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>

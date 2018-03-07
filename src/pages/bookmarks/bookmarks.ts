@@ -11,6 +11,7 @@ import { NavController } from 'ionic-angular';
 import { PlacePage } from '../place/place';
 import { LocationService } from '../../providers/location.service';
 import { OfferPage } from '../offer/offer';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'page-bookmarks',
@@ -39,42 +40,80 @@ export class BookmarksPage {
         private location: LocationService) {
 
         this.segment = "places";
-        this.favorites.getPlaces(this.companiesPage)
-            .subscribe(resp => {
-                this.companies = resp.data;
-                this.companiesLastPage = resp.last_page;
-                this.totalCompanies = resp.total;
-            });
-        this.favorites.getOffers(this.offersPage)
-            .subscribe(resp => {
-                this.offers = resp.data;
-                this.offersLastPage = resp.last_page;
-                this.totalOffers = resp.total;
-            })
-        let coords = this.location.getCache();
-        this.coords = {
-            lat: coords.latitude,
-            lng: coords.longitude
-        };
-        this.onRefreshCompanies = this.favorites.onRefreshPlaces
-            .subscribe(resp => {
+        this.location.getCache()
+            .then(resp => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+
                 this.favorites.getPlaces(this.companiesPage)
                     .subscribe(resp => {
                         this.companies = resp.data;
                         this.companiesLastPage = resp.last_page;
                         this.totalCompanies = resp.total;
+                        this.getSegment();
                     });
-            })
-
-        this.onRefreshOffers = this.favorites.onRefreshOffers
-            .subscribe(resp => {
                 this.favorites.getOffers(this.offersPage)
                     .subscribe(resp => {
                         this.offers = resp.data;
                         this.offersLastPage = resp.last_page;
                         this.totalOffers = resp.total;
+                        this.getSegment();
+                    })
+            });
+
+        this.onRefreshCompanies = this.favorites.onRefreshPlaces
+            .subscribe(resp => {
+                this.getLocation();
+                this.favorites.getPlaces(this.companiesPage)
+                    .subscribe(resp => {
+                        this.companies = resp.data;
+                        this.companiesLastPage = resp.last_page;
+                        this.totalCompanies = resp.total;
+                        this.segment = this.companies && this.companies.length > 0 && this.segment === 'places'
+                        ? 'places'
+                        : this.offers && this.offers.length > 0
+                            ? 'offers'
+                            : 'places';
+                    });
+            })
+
+        this.onRefreshOffers = this.favorites.onRefreshOffers
+            .subscribe(resp => {
+                this.getLocation();
+                this.favorites.getOffers(this.offersPage)
+                    .subscribe(resp => {
+                        this.offers = resp.data;
+                        this.offersLastPage = resp.last_page;
+                        this.totalOffers = resp.total;
+                        this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
+                        ? 'offers'
+                        : 'places';
                     })
             })
+    }
+
+    ionViewDidEnter() {
+        this.getSegment();
+    }
+
+    getSegment() {
+        this.segment = this.companies && this.companies.length > 0
+            ? 'places'
+            : this.offers && this.offers.length > 0
+                ? 'offers'
+                : 'places';
+    }
+
+    getLocation() {
+        this.location.getCache()
+            .then(resp => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+            });
     }
 
     getStars(star: number) {
@@ -95,8 +134,10 @@ export class BookmarksPage {
     }
 
     openPlace(data) {
+        let company = _.clone(data);
+        company.is_favorite = true;
         let params = {
-            company: data,
+            company: company,
             coords: this.coords,
             distanceStr: this.getDistance(data.latitude, data.longitude),
             // coords: this.coords,
@@ -104,12 +145,15 @@ export class BookmarksPage {
         this.nav.push(PlacePage, params);
     }
 
-    openOffer(offer, company?) {
-        // this.nav.push(OfferPage, {
-        //     offer: offer,
-        //     distanceStr: this.distanceString,
-        //     coords: this.coords
-        // });
+    openOffer(offer) {
+        let offerData = _.clone(offer);
+        offerData.is_favorite = true;
+        this.nav.push(OfferPage, {
+            offer: offerData,
+            distanceStr: this.getDistance(offer.latitude, offer.longitude),
+            coords: this.coords,
+            company: offer.account.owner.place
+        });
     }
 
     getTotal() {
