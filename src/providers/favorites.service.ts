@@ -37,15 +37,25 @@ export class FavoritesService {
         return obs;
     }
 
-    removePlace(placeId) {
+    removePlace(placeId, notRefresh?: boolean) {
         let obs = this.api.delete(`profile/favorite/places/${placeId}`);
-        obs.subscribe(() => this.onRefreshPlaces.emit({ id: placeId, isFavorite: false }));
+        obs.subscribe(() => this.onRefreshPlaces.emit({ 
+            id: placeId, 
+            isFavorite: false, 
+            notRefresh: notRefresh 
+        })
+    );
         return obs;
     }
 
-    removeOffer(offerId) {
+    removeOffer(offerId, notRefresh?: boolean) {
         let obs = this.api.delete(`profile/favorite/offers/${offerId}`);
-        obs.subscribe(() => this.onRefreshOffers.emit({ id: offerId, isFavorite: false }));
+        obs.subscribe(() => this.onRefreshOffers.emit({ 
+            id: offerId, 
+            isFavorite: false, 
+            notRefresh: notRefresh 
+        })
+    );
         return obs;
     }
 }

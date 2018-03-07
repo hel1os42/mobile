@@ -70,32 +70,36 @@ export class BookmarksPage {
 
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
             .subscribe(resp => {
-                this.getLocation();
-                this.favorites.getPlaces(this.companiesPage)
-                    .subscribe(resp => {
-                        this.companies = resp.data;
-                        this.companiesLastPage = resp.last_page;
-                        this.totalCompanies = resp.total;
-                        this.segment = this.companies && this.companies.length > 0 && this.segment === 'places'
-                        ? 'places'
-                        : this.offers && this.offers.length > 0
-                            ? 'offers'
-                            : 'places';
-                    });
+                if (!resp.notRefresh) {
+                    this.getLocation();
+                    this.favorites.getPlaces(this.companiesPage)
+                        .subscribe(resp => {
+                            this.companies = resp.data;
+                            this.companiesLastPage = resp.last_page;
+                            this.totalCompanies = resp.total;
+                            this.segment = this.companies && this.companies.length > 0 && this.segment === 'places'
+                                ? 'places'
+                                : this.offers && this.offers.length > 0
+                                    ? 'offers'
+                                    : 'places';
+                        });
+                }
             })
 
         this.onRefreshOffers = this.favorites.onRefreshOffers
             .subscribe(resp => {
-                this.getLocation();
-                this.favorites.getOffers(this.offersPage)
-                    .subscribe(resp => {
-                        this.offers = resp.data;
-                        this.offersLastPage = resp.last_page;
-                        this.totalOffers = resp.total;
-                        this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
-                        ? 'offers'
-                        : 'places';
-                    })
+                if (!resp.notRefresh) {
+                    this.getLocation();
+                    this.favorites.getOffers(this.offersPage)
+                        .subscribe(resp => {
+                            this.offers = resp.data;
+                            this.offersLastPage = resp.last_page;
+                            this.totalOffers = resp.total;
+                            this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
+                                ? 'offers'
+                                : 'places';
+                        })
+                }
             })
     }
 
@@ -166,6 +170,32 @@ export class BookmarksPage {
             ? this.totalCompanies
             : this.totalOffers;
         return total;
+    }
+
+    removePlace(company) {
+        this.favorites.removePlace(company.id, true)
+            .subscribe(() => {
+                this.companies.forEach(item => {
+                    if (item.id === company.id) {
+                        let i = _.indexOf(this.companies, item);
+                        this.companies.splice(i, 1);
+                        this.totalCompanies = this.companies.length;
+                    }
+                })
+            });
+    }
+
+    removeOffer(offer) {
+        this.favorites.removeOffer(offer.id, true)
+            .subscribe(() => {
+                this.offers.forEach(item => {
+                    if (item.id === offer.id) {
+                        let i = _.indexOf(this.offers, item);
+                        this.offers.splice(i, 1);
+                        this.totalOffers = this.offers.length;
+                    }
+                })
+            });
     }
 
     ngOnDestroy() {
