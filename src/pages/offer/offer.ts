@@ -126,7 +126,7 @@ export class OfferPage {
                                     this.stopTimer();
                                     this.profile.refreshAccounts();
                                     offerRedeemPopover.dismiss();
-
+                                    this.offers.refreshRedeemedOffers();
                                     let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
                                     offerRedeemedPopover.present();
                                     offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());

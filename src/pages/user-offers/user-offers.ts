@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RedeemedOffer } from '../../models/redeemedOffer';
 import { OfferService } from '../../providers/offer.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'page-user-offers',
@@ -10,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class UserOffersPage {
     offers: RedeemedOffer[];
     total;
+    onRefreshOffers: Subscription;
 
     constructor(
         private offer: OfferService,
@@ -17,7 +19,7 @@ export class UserOffersPage {
 
         this.offer.getRedeemedOffers()
             .subscribe(resp => {
-                this.offers = resp.offers;
+                this.offers = resp.offers.reverse();
                 if (resp.offers_count == 0) {
                     this.translate.get('PAGE_USER-OFFERS.YOU_HAVE_NOT')
                         .subscribe(resp => {
@@ -28,6 +30,15 @@ export class UserOffersPage {
                     this.total = resp.offers_count;
                 }
             });
+        this.onRefreshOffers = this.offer.onRefreshRedeemedOffers
+            .subscribe(resp => {
+                this.offers = resp.offers.reverse();
+                this.total = resp.offers_count;
+            })
+    }
+
+    ngOnDestroy() {
+        this.onRefreshOffers.unsubscribe();
     }
 
 }

@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { ApiService } from './api.service';
+import { RedeemedOffer } from '../models/redeemedOffer';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
 @Injectable()
 export class OfferService {
+
+    onRefreshRedeemedOffers: EventEmitter<RedeemedOffer[]> = new EventEmitter();
 
     constructor(
         private api: ApiService) { }
@@ -112,5 +115,12 @@ export class OfferService {
             }
         }
         return str;
+    }
+
+    refreshRedeemedOffers() {
+        this.getRedeemedOffers()
+            .subscribe(resp => {
+                this.onRefreshRedeemedOffers.emit(resp);
+            })
     }
 }
