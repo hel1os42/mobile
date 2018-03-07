@@ -9,8 +9,8 @@ page-user-users{
 
   .right-icon-ref{
     position: absolute;
-    right: 4vw;
-    top: 5vw;
+    right: 2vw;
+    top: 2vw;
     height: 7vw;
   }
 
@@ -21,5 +21,24 @@ page-user-users{
     .datetime-ios{
         padding: 0;
         font-size: 0;
+    }
+
+    .item-block-nau .item-ios ion-avatar[item-left],
+    .item-ios ion-thumbnail[item-left],
+    .item-ios ion-avatar[item-start],
+    .item-ios ion-thumbnail[item-start] {
+        margin: 0 2vw 0 0;
+    }
+
+    .item-block-nau .item {
+        padding: 2vw;
+    }
+
+    .item-block-nau ion-avatar {
+        overflow: hidden;
+        background-image: url(../assets/img/imagenotfound.svg);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 70%;
     }
 }

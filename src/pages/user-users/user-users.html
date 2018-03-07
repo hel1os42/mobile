@@ -31,17 +31,17 @@
       <ion-avatar item-start>
         <div class="thumb_image" [style.background-image]="'url(' + referral.picture_url + '?size=mobile&)'"></div>
       </ion-avatar>
-      <div class="happy_title font-18 bold text-3E4B5D padding-bottom-3vw">{{ referral.name }}</div>
-      <div text-uppercase class="font-14 text-4F4F4F">
+      <div class="happy_title font-18 bold text-3E4B5D">{{ referral.name }}</div>
+      <div text-uppercase class="font-14 text-4F4F4F margin-top-2vw">
         {{ 'PAGE_USER-USERS.LEVEL' | translate }}: <b>{{ referral.level }}</b>
         <span margin-left>
           {{ 'UNIT.OFFERS' | translate }}: <b>{{ referral.offers_count }}</b>
         </span>
       </div>
-      <div class="text-828282 font-14">
+      <div class="text-828282 font-14 margin-top-2vw">
         {{ 'PAGE_USER-USERS.REGISTRATION_DATE' | translate }}: {{ referral.created_at.substring(0,10)}}
       </div>
-      <img class="right-icon-ref" src="assets/img/user_users/icon_right.svg">
+      <img hidden class="right-icon-ref" src="assets/img/user_users/icon_right.svg">
     </ion-item>
   </ion-list>
   <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="doInfinite($event)" >

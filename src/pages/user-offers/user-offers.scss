@@ -14,4 +14,12 @@ page-user-offers{
     .item-block-nau .item {
         padding: 2vw;
     }
+
+    .item-block-nau ion-avatar {
+        overflow: hidden;
+        background-image: url(../assets/img/imagenotfound.svg);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 70%;
+    }
 }
