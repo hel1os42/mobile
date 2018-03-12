@@ -4,10 +4,10 @@
 
     <ion-grid text-center class="grid-tabs-splash">
         <ion-row align-items-end>
-            <a 
-                ion-col 
-                *ngFor="let category of categories" 
-                [ngClass]="{ 'active_cat': isSelectedCategory(category) }" 
+            <a
+                ion-col
+                *ngFor="let category of categories"
+                [ngClass]="{ 'active_cat': isSelectedCategory(category) }"
                 (click)="selectCategory(category)">
                 <p>
                     <img [src]="category.image_url">
@@ -51,8 +51,8 @@
         </ion-item>
     </div>
 
-<ion-content>
     <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
+
         <ion-refresher (ionRefresh)="doRefresh($event)">
             <ion-refresher-content pullingIcon="none" refreshingSpinner="none"></ion-refresher-content>
         </ion-refresher>
@@ -98,7 +98,6 @@
             </div>
         </a>
     </ion-list>
-</ion-content>
 
     <div *ngIf="isMapVisible">
         <div

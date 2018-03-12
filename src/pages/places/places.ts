@@ -655,4 +655,9 @@ export class PlacesPage {
             this.onRefreshListSubscription.unsubscribe();
         }
     }
+
+    ionViewDidLoad() {
+        //let imgEl: HTMLElement = document.getElementsByClassName('test')[0].getElementsByClassName('scroll-content')[0];
+        //imgEl.style.marginBottom = '0'
+    }
 }
