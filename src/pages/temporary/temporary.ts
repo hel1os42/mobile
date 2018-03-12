@@ -16,7 +16,7 @@ export class TemporaryPage {
     }
 
     skip() {
-        this.profile.get(true)
+        this.profile.get(true, false)
             .subscribe(res => {
                 if (res.name == '' && !res.email) {
                     this.nav.setRoot(CreateUserProfilePage);

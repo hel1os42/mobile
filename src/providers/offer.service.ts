@@ -12,10 +12,10 @@ export class OfferService {
     constructor(
         private api: ApiService) { }
 
-    getPlacesOfRoot(category_ids: string, lat: number, lng: number, radius: number, page: number) {
+    getPlacesOfRoot(category_ids: string, lat: number, lng: number, radius: number, page: number, showLoading: boolean) {
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
-            showLoading: page == 1,
+            showLoading: showLoading,
             params: {
                 latitude: lat,
                 longitude: lng,
@@ -26,7 +26,7 @@ export class OfferService {
         });
     }
 
-    getPlaces(category_ids: string, tags: string[], types: string[], specialities: string[], lat: number, lng: number, radius: number, search: string, page: number) {
+    getPlaces(category_ids: string, tags: string[], types: string[], specialities: string[], lat: number, lng: number, radius: number, search: string, page: number, showLoading: boolean) {
         let tag = 'tags.slug:';
         let type = 'retailTypes.id:';
         let speciality = 'specialities.slug:';
@@ -45,7 +45,7 @@ export class OfferService {
         }
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
-            showLoading: page == 1,
+            showLoading: showLoading,
             params: {
                 latitude: lat,
                 longitude: lng,
