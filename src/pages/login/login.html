@@ -97,7 +97,7 @@
     {{ 'PAGE_LOGIN.GET_OTP' | translate }}
 </button>
 
-<div margin-top *ngIf="isVisibleLoginButton && !isRetry">
+<div text-center margin-top *ngIf="isVisibleLoginButton && !isRetry">
     {{ 'PAGE_LOGIN.SMS_RESENDING' | translate }}
     <span class="bold font-16">{{ countDown | async | formatTime }}</span>
     {{ 'PAGE_LOGIN.SECONDS' | translate}}
