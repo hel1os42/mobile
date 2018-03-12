@@ -156,7 +156,7 @@ export class MyApp {
     }
 
     getRootPage() {
-        this.profile.get(true)
+        this.profile.get(true, false)
             .subscribe(resp => {
                 this.rootPage = (!resp.name && !resp.email)
                     ? CreateUserProfilePage
