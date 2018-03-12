@@ -93,6 +93,25 @@
     {{ 'PAGE_LOGIN.GET_OTP' | translate }}
 </button>
 
+<div *ngIf="isVisibleLoginButton && !isRetry">
+    {{ 'PAGE_LOGIN.SMS_RESENDING' | translate }}
+    <span>{{ countDown | async | formatTime }}</span>
+    {{ 'PAGE_LOGIN.SECONDS' | translate}}
+</div>
+
+<button
+    *ngIf="isRetry"
+    (click)="getOtp()"
+    [disabled]="!form.valid"
+    type="submit"
+    text-uppercase
+    class="margin-top-5vw"
+    ion-button block
+    middle
+    color="primary" >
+    {{ 'PAGE_LOGIN.RESEND_SMS' | translate }}
+</button>
+
 </ion-content>
 
 <ion-footer no-shadow no-border>

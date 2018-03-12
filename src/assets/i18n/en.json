@@ -254,7 +254,10 @@
         "PLEASE_ENTER_PHONE" : "Please enter your phone number",
         "PLEASE_ENTER_OTP" : "Please enter your SMS code",
         "OTP" : "SMS",
-        "GET_OTP" : "Get sms"
+        "GET_OTP" : "Get sms",
+        "RESEND_SMS" : "Resend SMS",
+        "SMS_RESENDING" : "SMS resending will be possible in 50",
+        "SECONDS" : "seconds"
     },
 
     "PAGE_NOTIFICATIONS" : {

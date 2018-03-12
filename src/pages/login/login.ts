@@ -9,7 +9,9 @@ import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { SignUpPage } from '../signup/signup';
 import { LocationService } from '../../providers/location.service';
 import { Keyboard } from '@ionic-native/keyboard';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+// import { FormatTimePipe } from '../../pipes/format-time.pipe';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'page-login',
@@ -31,6 +33,11 @@ export class LoginPage {
     onKeyboardShowSubscription: Subscription;
     // onKeyboardHideSubscription: Subscription;
     backAction;
+    countDown;
+    counter = 60;
+    tick = 1000;
+    timer;
+    isRetry = false;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -96,17 +103,26 @@ export class LoginPage {
         this.auth.getOtp(this.numCode.dial_code + this.authData.phone)
             .subscribe(() => {
                 this.isVisibleLoginButton = true;
+                this.isRetry = false;
                 if (this.getDevMode()) {
                     this.authData.code = this.authData.phone.slice(-4);
                 }
                 this.backAction = this.platform.registerBackButtonAction(() => {
                     if (this.isVisibleLoginButton) {
                         this.isVisibleLoginButton = false;
+                        this.cancelTimer();
                         this.backAction();
                     }
                 }, 1);
+                this.countDown = Observable.timer(0, this.tick)
+                    .take(this.counter)
+                    .map(() => --this.counter);
+                this.timer = setInterval(() => {
+                    if (this.counter < 1) {
+                        this.cancelTimer();
+                    }
+                }, 1000);
             });
-
     }
 
     login() {
@@ -128,6 +144,21 @@ export class LoginPage {
                 this.nav.setRoot(TemporaryPage);//temporary(to remove)
 
             });
+    }
+
+    cancelTimer() {
+        this.stopTimer();
+        this.countDown = undefined;
+        this.isRetry = true;
+        this.counter = 60;
+
+    }
+
+    stopTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = undefined;
+        }
     }
 
     signup() {
