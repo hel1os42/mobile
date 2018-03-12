@@ -191,12 +191,13 @@ export class LoginPage {
                     value: 'prod',
                     checked: this.envName == 'prod'
                 },
-                {
-                    type: 'radio',
-                    label: 'fork',
-                    value: 'fork',
-                    // checked: this.envName == 'prod'
-                }],
+                // {
+                //     type: 'radio',
+                //     label: 'fork',
+                //     value: 'fork',
+                //     // checked: this.envName == 'prod'
+                // }
+            ],
             buttons: [
                 {
                     text: 'Cancel',
@@ -212,19 +213,19 @@ export class LoginPage {
                         if (!data || this.envName == data) {
                             return;
                         }
-                        else {
-                            if (data === 'fork') {
-                                this.envName = 'prod';
-                                this.appMode.setForkMode();// only for fork mode;
-                                this.appMode.setEnvironmentMode('prod');
-                                debugger
-                            }
+                        // else {
+                        //     if (data === 'fork') {
+                        //         this.envName = 'prod';
+                        //         this.appMode.setForkMode();// only for fork mode;
+                        //         this.appMode.setEnvironmentMode('prod');
+                        //         debugger
+                        //     }
                             else {
                                 this.envName = data;
                                 this.appMode.setEnvironmentMode(data);
                                 this.getNumCode();
                             }
-                        }
+                        // }
                     }
                 }
             ]
