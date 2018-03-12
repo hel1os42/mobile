@@ -137,4 +137,7 @@
     <plugin name="cordova-plugin-google-analytics" spec="1.8.3" />
     <plugin name="com.cordova.plugins.cookiemaster" />
     <plugin name="cordova-plugin-image-picker" spec="git+https://github.com/abelabbesnabi/cordova-plugin-image-picker.git" />
+    <plugin name="cordova-android-support-gradle-release" spec="1.2.0">
+        <variable name="ANDROID_SUPPORT_VERSION" value="26.+" />
+    </plugin>
 </widget>
