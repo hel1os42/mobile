@@ -605,6 +605,7 @@ export class PlacesPage {
     }
 
     doRefresh(refresher) {
+        this.page = 1;
         this.isRefreshLoading = true;
         this.getLocation(false, true);
         this.refresher = refresher;
