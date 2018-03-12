@@ -74,7 +74,7 @@
 <button
     *ngIf="isVisibleLoginButton"
     (click)="login()"
-    [disabled]="!authData.phone || authData.phone.length < 7"
+    [disabled]="!form.valid"
     type="submit"
     text-uppercase
     class="margin-top-5vw"

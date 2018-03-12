@@ -10,7 +10,6 @@ import { SignUpPage } from '../signup/signup';
 import { LocationService } from '../../providers/location.service';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Subscription, Observable } from 'rxjs';
-// import { FormatTimePipe } from '../../pipes/format-time.pipe';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -111,6 +110,7 @@ export class LoginPage {
                     if (this.isVisibleLoginButton) {
                         this.isVisibleLoginButton = false;
                         this.cancelTimer();
+                        this.isRetry = false;
                         this.backAction();
                     }
                 }, 1);
@@ -120,6 +120,7 @@ export class LoginPage {
                 this.timer = setInterval(() => {
                     if (this.counter < 1) {
                         this.cancelTimer();
+                        this.isRetry = true;
                     }
                 }, 1000);
             });
@@ -149,7 +150,6 @@ export class LoginPage {
     cancelTimer() {
         this.stopTimer();
         this.countDown = undefined;
-        this.isRetry = true;
         this.counter = 60;
 
     }
