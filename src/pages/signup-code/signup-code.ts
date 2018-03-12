@@ -5,6 +5,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TemporaryPage } from '../temporary/temporary';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'page-signup-code',
@@ -13,6 +14,13 @@ import { TemporaryPage } from '../temporary/temporary';
 export class SignUpCodePage {
     register: Register;
     envName: string;
+    countDown;
+    counter = 60;
+    tick = 1000;
+    timer;
+    isRetry = false;
+    inviteCode: string;
+
 
     constructor(
         private nav: NavController,
@@ -21,11 +29,41 @@ export class SignUpCodePage {
         private navParams: NavParams) {
 
         this.register = this.navParams.get('register');
+        this.inviteCode = this.navParams.get('inviteCode');
         this.envName = this.appMode.getEnvironmentMode();
         if (this.envName === 'dev' || this.envName === 'test') {
             this.register.code = this.register.phone.slice(-4);
         }
 
+    }
+
+    ionViewDidLoad() {
+        this.countTime()
+    }
+
+    countTime() {
+        this.countDown = Observable.timer(0, this.tick)
+        .take(this.counter)
+        .map(() => --this.counter);
+    this.timer = setInterval(() => {
+        if (this.counter < 1) {
+            this.cancelTimer();
+            this.isRetry = true;
+        }
+    }, 1000);
+    }
+
+    cancelTimer() {
+        this.stopTimer();
+        this.countDown = undefined;
+        this.counter = 60;
+    }
+
+    stopTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = undefined;
+        }
     }
 
     updateList(ev) {
@@ -41,6 +79,8 @@ export class SignUpCodePage {
                         code: this.register.code
                     })
                     .subscribe(res => {
+                        this.cancelTimer();
+                        this.isRetry = false;
                         // this.nav.setRoot(CreateUserProfilePage, { user: resp});
                         // this.nav.setRoot(CreateUserProfilePage);temporary
                         this.nav.setRoot(TemporaryPage);// temporary
@@ -48,7 +88,17 @@ export class SignUpCodePage {
             })
     }
 
+    getOtp() {
+        this.auth.getReferrerId(this.inviteCode, this.register.phone)
+            .subscribe(resp => {
+                this.cancelTimer();
+                this.isRetry = false;
+                this.countTime();
+            })
+    }
+
     limitStr(str: string) {
         this.register.code = StringValidator.stringLimitMax(str, 6);
     }
+
 }

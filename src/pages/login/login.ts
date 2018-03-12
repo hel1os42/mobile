@@ -257,7 +257,7 @@ export class LoginPage {
         );
     }
 
-    ionViewDidLeave() {
+    ngOnDestroy() {
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription.unsubscribe();
         }

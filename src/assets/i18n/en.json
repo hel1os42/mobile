@@ -257,7 +257,8 @@
         "GET_OTP" : "Get sms",
         "RESEND_SMS" : "Resend SMS",
         "SMS_RESENDING" : "SMS resending will be possible in",
-        "SECONDS" : "seconds"
+        "SECONDS" : "seconds",
+        "SECOND" : "second"
     },
 
     "PAGE_NOTIFICATIONS" : {
