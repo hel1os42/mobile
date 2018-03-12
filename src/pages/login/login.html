@@ -44,6 +44,8 @@
             [minlength]="7"
             class="tel"
             type="number"
+            pattern="[0-9]*"
+            decimal="true"
             placeholder="1234567"></ion-input>
     </ion-item>
     </div>
@@ -61,6 +63,8 @@
                 [minlength]="4"
                 class="otp"
                 type="number"
+                pattern="[0-9]*"
+                decimal="true"
                 placeholder="XXXX">
             </ion-input>
         </ion-item>
@@ -70,7 +74,7 @@
 <button
     *ngIf="isVisibleLoginButton"
     (click)="login()"
-    [disabled]="!authData.phone || authData.phone.length < 7"
+    [disabled]="!form.valid"
     type="submit"
     text-uppercase
     class="margin-top-5vw"
@@ -91,6 +95,24 @@
     middle
     color="primary" >
     {{ 'PAGE_LOGIN.GET_OTP' | translate }}
+</button>
+
+<div text-center margin-top *ngIf="isVisibleLoginButton && !isRetry">
+    {{ 'PAGE_LOGIN.SMS_RESENDING' | translate }}
+    <span class="bold font-16">{{ countDown | async | formatTime }}</span>
+    {{ counter == 1 ? ('PAGE_LOGIN.SECOND' | translate) : ('PAGE_LOGIN.SECONDS' | translate) }}
+</div>
+
+<button
+    *ngIf="isRetry"
+    (click)="getOtp()"
+    type="submit"
+    text-uppercase
+    class="margin-top-5vw"
+    ion-button block
+    middle
+    color="primary" >
+    {{ 'PAGE_LOGIN.RESEND_SMS' | translate }}
 </button>
 
 </ion-content>

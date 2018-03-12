@@ -94,6 +94,7 @@ import { NetworkService } from '../providers/network.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { ShareService } from '../providers/share.service';
 import { FavoritesService } from '../providers/favorites.service';
+import { FormatTimePipe } from '../pipes/format-time.pipe';
  
 
 // The translate loader needs to know where to load i18n files
@@ -158,7 +159,8 @@ export function createTranslateLoader(http: HttpClient) {
         StatisticPage,
         Statistic1Page,
         LineChartComponent,
-        BarChartComponent
+        BarChartComponent,
+        FormatTimePipe
     ],
     imports: [
         BrowserModule,

@@ -13,7 +13,7 @@
 
 <ion-content padding class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
     <div text-center class="font-14 text-828282">
-        You don't have any notifications yet
+        {{ 'PAGE_NOTIFICATIONS.YOU_DONT_HAVE' | translate }}
     </div>
     <!--
       <ion-item *ngIf="isVisibleSearch" class="block-search" no-lines>

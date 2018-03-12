@@ -19,6 +19,7 @@ import { NetworkService } from '../providers/network.service';
 import { ProfileService } from '../providers/profile.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
+import { BookmarksPage } from '../pages/bookmarks/bookmarks';
 
 
 @Component({
@@ -81,8 +82,10 @@ export class MyApp {
 
             if (platform.is('ios')) {
                 statusBar.overlaysWebView(true);
-                this.appMode.setForkMode();// only for fork mode;
             }
+
+            // FORK
+            this.appMode.setForkMode();// only for fork mode;
 
             // IPhone X
             if (platform.is('ios') && platform.width() == 375 && platform.height() == 812) {
@@ -101,7 +104,8 @@ export class MyApp {
                 this.branchInit(platform, splashScreen, true);
             });
 
-            //this.rootPage = TemporaryPage;
+            //this.rootPage = BookmarksPage;
+
             platform.registerBackButtonAction(() => {
 
                 let activePortal = ionicApp._loadingPortal.getActive() ||
@@ -156,7 +160,7 @@ export class MyApp {
     }
 
     getRootPage() {
-        this.profile.get(true)
+        this.profile.get(true, false)
             .subscribe(resp => {
                 this.rootPage = (!resp.name && !resp.email)
                     ? CreateUserProfilePage

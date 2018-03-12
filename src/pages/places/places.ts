@@ -66,6 +66,8 @@ export class PlacesPage {
     onRefreshListSubscription: Subscription;
     isConfirm = false;
     shareData: Share;
+    isRefreshLoading = false;
+    refresher;
 
     constructor(
         private platform: Platform,
@@ -242,7 +244,9 @@ export class PlacesPage {
 
     getNativeCoords(isHighAccuracy: boolean, isRefresh?: boolean) {
         let loadingLocation = this.loading.create(!isRefresh ? { content: 'Location detection', spinner: 'bubbles' } : undefined);
-        loadingLocation.present();
+        if (!this.isRefreshLoading) {
+            loadingLocation.present();
+        }
         this.location.get(isHighAccuracy)
             .then((resp) => {
                 this.coords = {
@@ -379,18 +383,32 @@ export class PlacesPage {
     }
 
     loadCompanies(page, isRoot?: boolean) {
-        let obs = isRoot ? this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page)
+        let isRefreshLoading = !this.isRefreshLoading;
+        let obs = isRoot ? this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page, isRefreshLoading)
             : this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
                 this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
-                this.radius, this.search, page);
+                this.radius, this.search, page, isRefreshLoading);
         obs.subscribe(companies => {
+            this.isRefreshLoading = false;
+            if (this.refresher) {
+                this.refresher.complete();
+                this.refresher = undefined;
+            }
             this.companies = companies.data;
+            this.lastPage = companies.last_page;
             this.markers = [];
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
             this.fitBounds = this.generateBounds(this.markers);
-        });
+        },
+            err => {
+                this.isRefreshLoading = false;
+                if (this.refresher) {
+                    this.refresher.complete();
+                    this.refresher = undefined;
+                }
+            });
     }
 
     toggleMap() {
@@ -568,7 +586,7 @@ export class PlacesPage {
             setTimeout(() => {
                 this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
                     this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
-                    this.radius, this.search, this.page)
+                    this.radius, this.search, this.page, this.page == 1)
                     .subscribe(companies => {
                         this.companies = [...this.companies, ...companies.data];
                         this.lastPage = companies.last_page;
@@ -587,10 +605,14 @@ export class PlacesPage {
     }
 
     doRefresh(refresher) {
+        this.page = 1;
+        this.isRefreshLoading = true;
         this.getLocation(false, true);
-        setTimeout(() => {
-            refresher.complete();
-        }, 600);
+        this.refresher = refresher;
+        // setInterval(() => {
+        //     refresher.complete();
+
+        // }, 300);
     }
 
     presentAndroidConfirm() {
@@ -654,5 +676,10 @@ export class PlacesPage {
         if (this.onRefreshListSubscription) {
             this.onRefreshListSubscription.unsubscribe();
         }
+    }
+
+    ionViewDidLoad() {
+        //let imgEl: HTMLElement = document.getElementsByClassName('test')[0].getElementsByClassName('scroll-content')[0];
+        //imgEl.style.marginBottom = '0'
     }
 }

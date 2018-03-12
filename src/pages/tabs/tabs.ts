@@ -43,7 +43,7 @@ export class TabsPage {
         if (this.appMode.getForkMode()) {
             this.tab2Root = UserProfilePage;
         }
-        this.profile.getWithAccounts()
+        this.profile.getWithAccounts(false)
             .subscribe(resp => {
                 this.nauParams = resp.accounts.NAU;
             });

@@ -9,7 +9,8 @@ import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { SignUpPage } from '../signup/signup';
 import { LocationService } from '../../providers/location.service';
 import { Keyboard } from '@ionic-native/keyboard';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'page-login',
@@ -31,6 +32,11 @@ export class LoginPage {
     onKeyboardShowSubscription: Subscription;
     // onKeyboardHideSubscription: Subscription;
     backAction;
+    countDown;
+    counter = 60;
+    tick = 1000;
+    timer;
+    isRetry = false;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -96,6 +102,8 @@ export class LoginPage {
         this.auth.getOtp(this.numCode.dial_code + this.authData.phone)
             .subscribe(() => {
                 this.isVisibleLoginButton = true;
+                this.cancelTimer();
+                this.isRetry = false;
                 if (this.getDevMode()) {
                     this.authData.code = this.authData.phone.slice(-4);
                 }
@@ -105,8 +113,16 @@ export class LoginPage {
                         this.backAction();
                     }
                 }, 1);
+                this.countDown = Observable.timer(0, this.tick)
+                    .take(this.counter)
+                    .map(() => --this.counter);
+                this.timer = setInterval(() => {
+                    if (this.counter < 1) {
+                        this.cancelTimer();
+                        this.isRetry = true;
+                    }
+                }, 1000);
             });
-
     }
 
     login() {
@@ -128,6 +144,19 @@ export class LoginPage {
                 this.nav.setRoot(TemporaryPage);//temporary(to remove)
 
             });
+    }
+
+    cancelTimer() {
+        this.stopTimer();
+        this.countDown = undefined;
+        this.counter = 60;
+    }
+
+    stopTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = undefined;
+        }
     }
 
     signup() {
@@ -162,12 +191,13 @@ export class LoginPage {
                     value: 'prod',
                     checked: this.envName == 'prod'
                 },
-                {
-                    type: 'radio',
-                    label: 'fork',
-                    value: 'fork',
-                    // checked: this.envName == 'prod'
-                }],
+                // {
+                //     type: 'radio',
+                //     label: 'fork',
+                //     value: 'fork',
+                //     // checked: this.envName == 'prod'
+                // }
+            ],
             buttons: [
                 {
                     text: 'Cancel',
@@ -183,19 +213,19 @@ export class LoginPage {
                         if (!data || this.envName == data) {
                             return;
                         }
-                        else {
-                            if (data === 'fork') {
-                                this.envName = 'prod';
-                                this.appMode.setForkMode();// only for fork mode;
-                                this.appMode.setEnvironmentMode('prod');
-                                debugger
-                            }
+                        // else {
+                        //     if (data === 'fork') {
+                        //         this.envName = 'prod';
+                        //         this.appMode.setForkMode();// only for fork mode;
+                        //         this.appMode.setEnvironmentMode('prod');
+                        //         debugger
+                        //     }
                             else {
                                 this.envName = data;
                                 this.appMode.setEnvironmentMode(data);
                                 this.getNumCode();
                             }
-                        }
+                        // }
                     }
                 }
             ]
@@ -228,7 +258,7 @@ export class LoginPage {
         );
     }
 
-    ionViewDidLeave() {
+    ngOnDestroy() {
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription.unsubscribe();
         }

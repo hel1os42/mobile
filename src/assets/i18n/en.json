@@ -66,7 +66,8 @@
         "YESTERDAY" : "Yesterday",
         "VIEW_PLACE" : "View place",
         "REDEEMED_YOUR_OFFER_AT" : "Redeemed your offer at",
-        "NOW_AVAILABLE_IN_YOUR_REGION" : "Now available in your region"
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Now available in your region",
+        "YOU_DONT_HAVE" : "You don't have any notifications yet"
     },
 
     "PAGE_ADV-REDEEM-OFFER" : {
@@ -113,7 +114,7 @@
         "YOU_DONT_HAVE" : "You don't have any favorites",
         "YET" : "yet",
         "OFFERS" : "offers",
-        "PLACES1" : "places" 
+        "PLACES1" : "places"
     },
 
     "PAGE_CREATE-ADVUSER-PROFILE" : {
@@ -254,7 +255,11 @@
         "PLEASE_ENTER_PHONE" : "Please enter your phone number",
         "PLEASE_ENTER_OTP" : "Please enter your SMS code",
         "OTP" : "SMS",
-        "GET_OTP" : "Get sms"
+        "GET_OTP" : "Get sms",
+        "RESEND_SMS" : "Resend SMS",
+        "SMS_RESENDING" : "Resend SMS after",
+        "SECONDS" : "seconds",
+        "SECOND" : "second"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -266,7 +271,8 @@
         "Get_your_chance" : "Get your chance!",
         "SYSTEM_NOTIFICATION" : "System Notification",
         "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
-        "READ" : "Read"
+        "READ" : "Read",
+        "YOU_DONT_HAVE" : "You don't have any notifications yet"
     },
 
     "PAGE_OFFER" : {

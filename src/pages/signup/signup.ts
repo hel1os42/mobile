@@ -89,7 +89,7 @@ export class SignUpPage {
                     code: '',
                     referrer_id: resp.referrer_id,
                 }
-                this.nav.push(SignUpCodePage, { register: register });
+                this.nav.push(SignUpCodePage, { register: register, inviteCode: inviteCode });
                 // this.nav.push(SignUpCodePage, { register: resp })
             })
     }
