@@ -36,7 +36,7 @@ export class NetworkService {
                     this.toast.showDisconnected();
                     this.onDisconnect.emit(this.isConnected);
                 });
-        }, 200);
+        }, 1000);
 
         this.onConnectSubscription = this.network.onConnect()
             .subscribe(resp => {
