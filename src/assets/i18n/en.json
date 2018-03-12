@@ -256,7 +256,7 @@
         "OTP" : "SMS",
         "GET_OTP" : "Get sms",
         "RESEND_SMS" : "Resend SMS",
-        "SMS_RESENDING" : "SMS resending will be possible in 50",
+        "SMS_RESENDING" : "SMS resending will be possible in",
         "SECONDS" : "seconds"
     },
 
