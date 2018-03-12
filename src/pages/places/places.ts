@@ -395,6 +395,7 @@ export class PlacesPage {
                 this.refresher = undefined;
             }
             this.companies = companies.data;
+            this.lastPage = companies.last_page;
             this.markers = [];
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
