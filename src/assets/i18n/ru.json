@@ -66,7 +66,8 @@
         "YESTERDAY" : "Вчера",
         "VIEW_PLACE" : "Просмотр места",
         "REDEEMED_YOUR_OFFER_AT" : "Использовали акцию",
-        "NOW_AVAILABLE_IN_YOUR_REGION" : "Теперь доступно в вашем регионе"
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Теперь доступно в вашем регионе",
+        "YOU_DONT_HAVE" : "У вас пока нет уведомлений"
     },
 
     "PAGE_ADV-REDEEM-OFFER" : {
@@ -261,7 +262,8 @@
         "Get_your_chance" : "Get your chance!",
         "SYSTEM_NOTIFICATION" : "System Notification",
         "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
-        "READ" : "Read"
+        "READ" : "Read",
+        "YOU_DONT_HAVE" : "У вас пока нет уведомлений"
     },
 
     "PAGE_OFFER" : {
