@@ -102,6 +102,7 @@ export class LoginPage {
         this.auth.getOtp(this.numCode.dial_code + this.authData.phone)
             .subscribe(() => {
                 this.isVisibleLoginButton = true;
+                this.cancelTimer();
                 this.isRetry = false;
                 if (this.getDevMode()) {
                     this.authData.code = this.authData.phone.slice(-4);
@@ -109,8 +110,6 @@ export class LoginPage {
                 this.backAction = this.platform.registerBackButtonAction(() => {
                     if (this.isVisibleLoginButton) {
                         this.isVisibleLoginButton = false;
-                        this.cancelTimer();
-                        this.isRetry = false;
                         this.backAction();
                     }
                 }, 1);
@@ -151,7 +150,6 @@ export class LoginPage {
         this.stopTimer();
         this.countDown = undefined;
         this.counter = 60;
-
     }
 
     stopTimer() {
