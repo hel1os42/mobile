@@ -66,7 +66,8 @@
         "YESTERDAY" : "Yesterday",
         "VIEW_PLACE" : "View place",
         "REDEEMED_YOUR_OFFER_AT" : "Redeemed your offer at",
-        "NOW_AVAILABLE_IN_YOUR_REGION" : "Now available in your region"
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Now available in your region",
+        "YOU_DONT_HAVE" : "You don't have any notifications yet"
     },
 
     "PAGE_ADV-REDEEM-OFFER" : {
@@ -113,7 +114,7 @@
         "YOU_DONT_HAVE" : "You don't have any favorites",
         "YET" : "yet",
         "OFFERS" : "offers",
-        "PLACES1" : "places" 
+        "PLACES1" : "places"
     },
 
     "PAGE_CREATE-ADVUSER-PROFILE" : {
@@ -270,7 +271,8 @@
         "Get_your_chance" : "Get your chance!",
         "SYSTEM_NOTIFICATION" : "System Notification",
         "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
-        "READ" : "Read"
+        "READ" : "Read",
+        "YOU_DONT_HAVE" : "You don't have any notifications yet"
     },
 
     "PAGE_OFFER" : {
