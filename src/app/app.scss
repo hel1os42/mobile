@@ -1222,6 +1222,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     -webkit-box-orient: vertical;
 }
 
+.text-overflow-5{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
 .text-overflow-35{
     max-height: 8vw;
     height: auto;
