@@ -70,7 +70,7 @@ export class SettingsPage {
         this.user = this.navParams.get('user');
         this.coords.lat = this.user.latitude;
         this.coords.lng = this.user.longitude;
-        this.addMap();
+        // this.addMap();//hided map
         this.createBranchLink(this.user.invite_code);
 
         if (!this.user.id) {
@@ -79,7 +79,7 @@ export class SettingsPage {
                     this.user = user;
                     this.coords.lat = this.user.latitude;
                     this.coords.lng = this.user.longitude;
-                    this.addMap();
+                    // this.addMap();//hided map
                     this.createBranchLink(this.user.invite_code);
                 });
         }
@@ -136,14 +136,21 @@ export class SettingsPage {
 
     changeLang() {
         this.isLangChanged = true;
-        let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === this.lang.code);
-        let langCode = isLang ? this.lang.code : DEFAULT_LANG_CODE;
-        this.translate.use(langCode);
-        SYS_OPTIONS.LANG_CODE = langCode;
-        this.storage.set('lang', langCode);
+        // let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === this.lang.code);
+        // let langCode = isLang ? this.lang.code : DEFAULT_LANG_CODE;
+        // this.translate.use(langCode);
+        // SYS_OPTIONS.LANG_CODE = langCode;
+        // this.storage.set('lang', langCode);
     }
 
     saveProfile() {
+        if (this.isLangChanged) {
+            let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === this.lang.code);
+            let langCode = isLang ? this.lang.code : DEFAULT_LANG_CODE;
+            this.translate.use(langCode);
+            SYS_OPTIONS.LANG_CODE = langCode;
+            this.storage.set('lang', langCode);
+        }
         this.appMode.setAdvMode(this.isAdvMode);
         // let isShownOnboard = this.appMode.getOnboardingVisible();
         // if (this.isLangChanged) {

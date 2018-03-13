@@ -84,7 +84,10 @@
   </div>
 
   <div class="block-lines">
-    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.CHANGE_YOUR_PHONE_NUMBER' | translate }}</div>
+      <!-- temporary to revert-->
+    <!-- <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.CHANGE_YOUR_PHONE_NUMBER' | translate }}</div> -->
+    <!-- temporary to remove-->
+    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.YOUR_PHONE_NUMBER' | translate }}</div>
   </div>
 
   <div class="block-lines block-phone">
@@ -163,13 +166,13 @@
       </ion-select>
     </ion-item> -->
 
-  <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
+  <!-- <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
 
   <div *ngIf="coords.lat" class="block-map">
     <div class="leaflet-map" leaflet [leafletOptions]="options">
     </div>
     <div id="marker"></div>
-  </div>
+  </div> -->
   <p margin>
     <button (click)="saveProfile()" color="primary" ion-button block>{{ 'PAGE_SETTINGS.SAVE_CHANGES' | translate }}</button>
   </p>
