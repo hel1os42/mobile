@@ -21,6 +21,8 @@
     </ion-grid>
 
     <div class="sticky">
+
+        <!--
         <ion-segment [(ngModel)]="segment" text-uppercase class="semibold text-FF5A00">
             <ion-segment-button value="alloffers">
                 {{ 'PAGE_PLACES.ALL_OFFERS' | translate }}
@@ -38,8 +40,9 @@
                 {{ 'PAGE_PLACES.FEATURED' | translate }}
             </ion-segment-button>
         </ion-segment>
+        -->
 
-        <ion-item class="block-search relative" no-lines padding-left padding-right>
+        <ion-item class="block-search relative margin-top-3vw" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
             <a (click)="createPopover()" class="btn_search_settings">
                 <img src="assets/img/user_home/icon_settings.svg">
