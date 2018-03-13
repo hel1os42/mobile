@@ -15,9 +15,9 @@ export class PlacesPopover {
     isOpenTypesSelect = true;
     isOpenSpecialitiesSelect = false;
     isOpenCuisineSelect = false;
-    STEPS = [0.2, 0.5, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 500];
+    STEPS = [0.2, 0.5, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 500, 1000, 5000, 10000, 19849];
     radius: number;
-    slider = 14;
+    slider = 18;
 
     constructor(
         private viewCtrl: ViewController,
