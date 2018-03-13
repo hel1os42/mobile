@@ -17,8 +17,7 @@ import { UserProfilePage } from '../user-profile/user-profile';
 export class TabsPage {
 
     tab1Root;
-    // tab2Root = UserProfilePage;return
-    tab2Root; //temporary
+    tab2Root = UserProfilePage;
     tab3Root = BookmarksPage;
     tab4Root = NotificationsPage;
     // tab5Root = FeedPage;//temporary - to revert
@@ -38,11 +37,6 @@ export class TabsPage {
 
         //temporary
         this.envName = this.appMode.getEnvironmentMode();
-        this.tab2Root = (this.envName === 'dev' || this.envName === 'test')
-            ? UserProfilePage : UserNauPage;
-        if (this.appMode.getForkMode()) {
-            this.tab2Root = UserProfilePage;
-        }
         this.profile.getWithAccounts(false)
             .subscribe(resp => {
                 this.nauParams = resp.accounts.NAU;
@@ -51,7 +45,6 @@ export class TabsPage {
 
         // temporary - always show PlacesPage
         this.tab1Root = PlacesPage;
-
         this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;
     }
 
