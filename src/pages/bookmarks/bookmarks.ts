@@ -13,6 +13,7 @@ import { LocationService } from '../../providers/location.service';
 import { OfferPage } from '../offer/offer';
 import * as _ from 'lodash';
 import { AppModeService } from '../../providers/appMode.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 
 @Component({
     selector: 'page-bookmarks',
@@ -30,6 +31,7 @@ export class BookmarksPage {
     companiesLastPage: number;
     onRefreshCompanies: Subscription;
     onRefreshOffers: Subscription;
+    onRefreshTestimonials: Subscription;
     totalCompanies: number;
     totalOffers: number;
     distanceString: string;
@@ -40,7 +42,8 @@ export class BookmarksPage {
         private profile: ProfileService,
         private nav: NavController,
         private location: LocationService,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private testimonials: TestimonialsService) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -65,7 +68,7 @@ export class BookmarksPage {
                         this.offersLastPage = resp.last_page;
                         this.totalOffers = resp.total;
                         this.getSegment();
-                    })
+                    });
             });
 
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
@@ -83,8 +86,8 @@ export class BookmarksPage {
                                     ? 'offers'
                                     : 'places';
                         });
-                }
-            })
+                };
+            });
 
         this.onRefreshOffers = this.favorites.onRefreshOffers
             .subscribe(resp => {
@@ -98,9 +101,19 @@ export class BookmarksPage {
                             this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
                                 ? 'offers'
                                 : 'places';
-                        })
-                }
-            })
+                        });
+                };
+            });
+
+        this.onRefreshTestimonials = this.testimonials.onRefresh
+            .subscribe(resp => {
+                this.companies.forEach(company => {
+                    if (company.id === resp.place_id) {
+                        company.testimonials_count += company.testimonials_count;
+                        company.stars = resp.stars;
+                    };
+                });
+            });
     }
 
     getDevMode() {
