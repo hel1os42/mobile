@@ -13,6 +13,7 @@ import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { FavoritesService } from '../../providers/favorites.service';
 import { ToastService } from '../../providers/toast.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 
 @Component({
     selector: 'page-offer',
@@ -40,7 +41,8 @@ export class OfferPage {
         private share: ShareService,
         private favorites: FavoritesService,
         private toast: ToastService,
-        private alert: AlertController) {
+        private alert: AlertController,
+        private testimonials: TestimonialsService) {
 
         if (this.share.get()) {
             this.share.remove();
@@ -107,33 +109,38 @@ export class OfferPage {
 
     openRedeemPopover() {
         // if (!this.disable()) {distance validation
-            if (this.timer)
-                return;
+        if (this.timer)
+            return;
 
-            this.offers.getActivationCode(this.offer.id)
-                .subscribe((offerActivationCode: OfferActivationCode) => {
-                    if (this.timer)
-                        return;
+        this.offers.getActivationCode(this.offer.id)
+            .subscribe((offerActivationCode: OfferActivationCode) => {
+                if (this.timer)
+                    return;
 
-                    let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
-                    offerRedeemPopover.present();
-                    offerRedeemPopover.onDidDismiss(() => this.stopTimer());
+                let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
+                offerRedeemPopover.present();
+                offerRedeemPopover.onDidDismiss(() => this.stopTimer());
 
-                    this.timer = setInterval(() => {
-                        this.offers.getRedemtionStatus(offerActivationCode.code)
-                            .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
-                                if (offerRedemtionStatus.redemption_id) {
-                                    this.stopTimer();
-                                    this.profile.refreshAccounts();
-                                    offerRedeemPopover.dismiss();
-                                    this.offers.refreshRedeemedOffers();
-                                    let offerRedeemedPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
-                                    offerRedeemedPopover.present();
-                                    offerRedeemedPopover.onDidDismiss(() => this.nav.popToRoot());
-                                }
-                            });
-                    }, 2500)
-                })
+                this.timer = setInterval(() => {
+                    this.offers.getRedemtionStatus(offerActivationCode.code)
+                        .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
+                            if (offerRedemtionStatus.redemption_id) {
+                                this.stopTimer();
+                                this.profile.refreshAccounts();
+                                offerRedeemPopover.dismiss();
+                                this.offers.refreshRedeemedOffers();
+                                let offerCongratulationPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
+                                offerCongratulationPopover.present();
+                                offerCongratulationPopover.onDidDismiss(() => {
+                                    // this.nav.popToRoot();
+                                    // if (data.status === 'approved') {
+                                    //     this.company.testimonials_count = this.company.testimonials_count + 1;
+                                    // }
+                                });
+                            }
+                        });
+                }, 2500)
+            })
         // }
         // else {
         //     this.presentAlert()

@@ -13,6 +13,7 @@ import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { FavoritesService } from '../../providers/favorites.service';
 import { Subscription } from 'rxjs';
 import { ToastService } from '../../providers/toast.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 
 @Component({
     selector: 'page-place',
@@ -29,6 +30,7 @@ export class PlacePage {
     branchDomain = 'https://nau.app.link';
     page: string;
     onRefreshCompany: Subscription;
+    onRefreshTestimonials: Subscription;
 
     constructor(
         private nav: NavController,
@@ -38,7 +40,8 @@ export class PlacePage {
         private share: ShareService,
         private favorites: FavoritesService,
         private toast: ToastService,
-        private alert: AlertController) {
+        private alert: AlertController,
+        private testimonials: TestimonialsService) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -78,8 +81,15 @@ export class PlacePage {
                     if (offer.id === resp.id) {
                         offer.is_favorite = resp.isFavorite;
                     }
-                })
-            })
+                });
+            });
+
+        this.onRefreshTestimonials = this.testimonials.onRefresh
+            .subscribe(resp => {
+                if (resp.status === 'approved') {
+                    this.company.testimonials_count = this.company.testimonials_count + 1;
+                }
+            });
     }
 
     // ionSelected() {
@@ -146,7 +156,7 @@ export class PlacePage {
         this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,
-            distanceStr:  this.getDistance(offer.latitude, offer.longitude),
+            distanceStr: this.getDistance(offer.latitude, offer.longitude),
             coords: this.coords
         });
     }
@@ -186,6 +196,7 @@ export class PlacePage {
 
     ngOnDestroy() {
         this.onRefreshCompany.unsubscribe();
+        this.onRefreshTestimonials.unsubscribe();
     }
 
 }

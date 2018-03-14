@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ProfileService } from '../../providers/profile.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
+import { Testimonial } from '../../models/testimonial';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -14,18 +16,39 @@ export class CongratulationPopover {
     company: Place;
     offer: Offer;
     branchDomain = 'https://nau.app.link';
+    stars = 4;
 
     constructor(
         private viewCtrl: ViewController,
         private navParams: NavParams,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private testimonials: TestimonialsService) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
     }
 
-    close() {
-        this.viewCtrl.dismiss();
+    getStars() {
+        let showStars: boolean[] = [];
+        for (var i = 0; i < 5; i++) {
+            showStars.push(this.stars > i);
+        }
+        return showStars;
+    }
+
+    setStars(i) {
+        this.stars = i + 1;
+    }
+
+    send() {
+        let testimonial: Testimonial = {
+            stars: this.stars
+        }
+        this.testimonials.post(this.company.id, testimonial)
+            .subscribe(resp => {
+                // let status = resp ? resp.status : '';
+                this.viewCtrl.dismiss();
+            })
     }
 
     shareOffer() {

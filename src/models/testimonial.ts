@@ -1,5 +1,5 @@
 export class Testimonial {
-    text: string;
+    text?: string;
     stars: number;
     status?: string;
 }

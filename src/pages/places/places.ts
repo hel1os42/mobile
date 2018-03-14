@@ -24,6 +24,7 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { StorageService } from '../../providers/storage.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 
 
 @Component({
@@ -64,6 +65,8 @@ export class PlacesPage {
     onResumeSubscription: Subscription;
     onShareSubscription: Subscription;
     onRefreshListSubscription: Subscription;
+    onRefreshTestimonials: Subscription;
+
     isConfirm = false;
     shareData: Share;
     isRefreshLoading = false;
@@ -84,7 +87,8 @@ export class PlacesPage {
         private diagnostic: Diagnostic,
         private share: ShareService,
         private favorites: FavoritesService,
-        private storage: StorageService) {
+        private storage: StorageService,
+        private testimonials: TestimonialsService) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -130,8 +134,19 @@ export class PlacesPage {
                     if (company.id === resp.id) {
                         company.is_favorite = resp.isFavorite;
                     }
-                })
-            })
+                });
+            });
+
+        this.onRefreshTestimonials = this.testimonials.onRefresh
+            .subscribe(resp => {
+                if (resp.status === 'approved') {
+                    this.companies.forEach(company => {
+                        if (company.id === resp.place_id) {
+                            company.testimonials_count = company.testimonials_count + 1;
+                        };
+                    });
+                }
+            });
 
     }
 
@@ -530,7 +545,7 @@ export class PlacesPage {
             else {
                 this.radius = data.radius;
                 this.storage.set('radius', this.radius);
-                
+
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
                 if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {
@@ -680,6 +695,7 @@ export class PlacesPage {
         if (this.onRefreshListSubscription) {
             this.onRefreshListSubscription.unsubscribe();
         }
+        this.onRefreshTestimonials.unsubscribe();
     }
 
     ionViewDidLoad() {

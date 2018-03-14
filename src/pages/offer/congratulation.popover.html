@@ -21,16 +21,14 @@
   </div>
 
     <div margin padding-bottom class="block-star">
-        <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
-        <ion-icon class="text-FEC282 icon-star" name="star-outline"></ion-icon>
-        <ion-icon class="text-FEC282 icon-star" name="star-outline"></ion-icon>
-        <ion-icon class="text-FEC282 icon-star" name="star-outline"></ion-icon>
+        <ng-container *ngFor="let showStar of getStars(); let i = index">
+            <ion-icon (click)=" setStars(i)" class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+        </ng-container>
     </div>
 
   <div margin>
     <div class="block-btn">
-      <button (click)="close()" ion-button block color="primary">{{ 'PAGE_OFFER.SEND_REVIEW' | translate }}</button>
+      <button (click)="send()" ion-button block color="primary">{{ 'PAGE_OFFER.SEND_REVIEW' | translate }}</button>
     </div>
   </div>
 </div>

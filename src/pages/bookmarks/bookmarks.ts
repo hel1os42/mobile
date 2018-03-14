@@ -12,6 +12,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlacePage } from '../place/place';
+import { TestimonialsService } from '../../providers/testimonials.service';
 
 @Component({
     selector: 'page-bookmarks',
@@ -33,13 +34,15 @@ export class BookmarksPage {
     totalOffers: number;
     distanceString: string;
     isForkMode: boolean;
+    onRefreshTestimonials: Subscription;
 
     constructor(
         private favorites: FavoritesService,
         private profile: ProfileService,
         private nav: NavController,
         private location: LocationService,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private testimonials: TestimonialsService) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -99,6 +102,17 @@ export class BookmarksPage {
                                 : 'places';
                         });
                 };
+            });
+
+        this.onRefreshTestimonials = this.testimonials.onRefresh
+            .subscribe(resp => {
+                if (resp.status === 'approved') {
+                    this.companies.forEach(company => {
+                        if (company.id === resp.place_id) {
+                            company.testimonials_count = company.testimonials_count + 1;
+                        };
+                    });
+                }
             });
 
     }
@@ -201,6 +215,7 @@ export class BookmarksPage {
     ngOnDestroy() {
         this.onRefreshCompanies.unsubscribe();
         this.onRefreshOffers.unsubscribe();
+        this.onRefreshTestimonials.unsubscribe();
     }
 
 
