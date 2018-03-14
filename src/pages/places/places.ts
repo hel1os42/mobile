@@ -14,6 +14,7 @@ import { RetailType } from '../../models/retailType';
 import { Share } from '../../models/share';
 import { Tag } from '../../models/tag';
 import { AppModeService } from '../../providers/appMode.service';
+import { FavoritesService } from '../../providers/favorites.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -22,8 +23,6 @@ import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { FavoritesService } from '../../providers/favorites.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
 
 
 @Component({
@@ -64,7 +63,6 @@ export class PlacesPage {
     onResumeSubscription: Subscription;
     onShareSubscription: Subscription;
     onRefreshListSubscription: Subscription;
-    onRefreshTestimonials: Subscription;
     isConfirm = false;
     shareData: Share;
     isRefreshLoading = false;
@@ -84,8 +82,7 @@ export class PlacesPage {
         private translate: TranslateService,
         private diagnostic: Diagnostic,
         private share: ShareService,
-        private favorites: FavoritesService,
-        private testimonials: TestimonialsService) {
+        private favorites: FavoritesService) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -132,16 +129,6 @@ export class PlacesPage {
                     }
                 })
             })
-
-        this.onRefreshTestimonials = this.testimonials.onRefresh
-            .subscribe(resp => {
-                this.companies.forEach(company => {
-                    if (company.id === resp.place_id) {
-                        company.testimonials_count += company.testimonials_count;
-                        company.stars = resp.stars;
-                    };
-                });
-            });
 
     }
 

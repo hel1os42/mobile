@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
-import { Place } from '../../models/place';
-import { Offer } from '../../models/offer';
-import { Coords } from '../../models/coords';
-import { Subscription } from 'rxjs';
-import { FavoritesService } from '../../providers/favorites.service';
-import { ProfileService } from '../../providers/profile.service';
-import { User } from '../../models/user';
-import { DistanceUtils } from '../../utils/distanse.utils';
 import { NavController } from 'ionic-angular';
-import { PlacePage } from '../place/place';
-import { LocationService } from '../../providers/location.service';
-import { OfferPage } from '../offer/offer';
 import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
+import { Coords } from '../../models/coords';
+import { Offer } from '../../models/offer';
+import { Place } from '../../models/place';
 import { AppModeService } from '../../providers/appMode.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
+import { FavoritesService } from '../../providers/favorites.service';
+import { LocationService } from '../../providers/location.service';
+import { ProfileService } from '../../providers/profile.service';
+import { DistanceUtils } from '../../utils/distanse.utils';
+import { OfferPage } from '../offer/offer';
+import { PlacePage } from '../place/place';
 
 @Component({
     selector: 'page-bookmarks',
@@ -31,7 +29,6 @@ export class BookmarksPage {
     companiesLastPage: number;
     onRefreshCompanies: Subscription;
     onRefreshOffers: Subscription;
-    onRefreshTestimonials: Subscription;
     totalCompanies: number;
     totalOffers: number;
     distanceString: string;
@@ -42,8 +39,7 @@ export class BookmarksPage {
         private profile: ProfileService,
         private nav: NavController,
         private location: LocationService,
-        private appMode: AppModeService,
-        private testimonials: TestimonialsService) {
+        private appMode: AppModeService) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -105,15 +101,6 @@ export class BookmarksPage {
                 };
             });
 
-        this.onRefreshTestimonials = this.testimonials.onRefresh
-            .subscribe(resp => {
-                this.companies.forEach(company => {
-                    if (company.id === resp.place_id) {
-                        company.testimonials_count += company.testimonials_count;
-                        company.stars = resp.stars;
-                    };
-                });
-            });
     }
 
     getDevMode() {
