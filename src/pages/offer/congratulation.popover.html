@@ -5,9 +5,9 @@
     <img class="img_num_points" margin-top margin-bottom src="assets/img/user_offers/congratulation_clear.svg">
     <span class="num_points font-30 text-white extrabold">1</span>
   </div>
-  <div class="margin-bottom-10 font-16 text-828282">{{ 'PAGE_OFFER.WE_ARE' | translate }}<br> <span class="bold">{{ 'PAGE_OFFER.YOU_EARNED' | translate }} 1 {{ 'PAGE_OFFER.POINTS' | translate }}!</span></div>
+  <div margin-bottom class="font-16 text-828282">{{ 'PAGE_OFFER.WE_ARE' | translate }}<br> <span class="bold">{{ 'PAGE_OFFER.YOU_EARNED' | translate }} 1 {{ 'PAGE_OFFER.POINTS' | translate }}!</span></div>
 
-    <p text-center margin-bottom class="btn_social_icon">
+    <div text-center margin-bottom class="btn_social_icon">
     <!-- <button ion-button icon-only color="transparent" margin-right>
       <img src="assets/img/user_offers/soc_icon1.svg">
     </button>
@@ -18,11 +18,19 @@
       <!--<img src="assets/img/user_offers/soc_icon3.svg">-->
         <img src="assets/img/place/btn_share.svg">
     </button>
-  </p>
+  </div>
+
+    <div margin padding-bottom class="block-star">
+        <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
+        <ion-icon class="text-FEC282 icon-star" name="star"></ion-icon>
+        <ion-icon class="text-FEC282 icon-star" name="star-outline"></ion-icon>
+        <ion-icon class="text-FEC282 icon-star" name="star-outline"></ion-icon>
+        <ion-icon class="text-FEC282 icon-star" name="star-outline"></ion-icon>
+    </div>
 
   <div margin>
     <div class="block-btn">
-      <button (click)="close()" ion-button block color="primary">{{ 'UNIT.DONE' | translate }}</button>
+      <button (click)="close()" ion-button block color="primary">{{ 'PAGE_OFFER.SEND_REVIEW' | translate }}</button>
     </div>
   </div>
 </div>

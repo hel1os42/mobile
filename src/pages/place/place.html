@@ -63,35 +63,37 @@
     <!-- END SWIPE -->
 
     <!-- <ion-footer no-shadow no-border padding>-->
-    <div class="footer_testimonials" *ngIf="segment == 'testimonials'">
-        <ion-list>
-            <ion-item no-lines>
-                <ion-input disabled class="bg-gray" placeholder="{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}"></ion-input>
-                <!--<a item-end><img src="assets/img/user_home/icon_pin.svg"></a>-->
-                <a disabled class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
-            </ion-item>
-        </ion-list>
-    </div>
+    <!--
+        <div class="footer_testimonials" *ngIf="segment == 'testimonials'">
+            <ion-list>
+                <ion-item no-lines>
+                    <ion-input disabled class="bg-gray" placeholder="{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}"></ion-input>
+                    <a disabled class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
+                </ion-item>
+            </ion-list>
+        </div>
+    -->
+        <div class="sticky">
+            <ion-segment [(ngModel)]="segment" text-uppercase>
+                <ion-segment-button value="alloffers">
+                    {{ 'PAGE_PLACE.ALL_OFFERS' | translate }}
+                </ion-segment-button>
+                <!--
+                <ion-segment-button value="testimonials">
+                    {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
+                </ion-segment-button>
+                -->
+                <ion-segment-button value="about">
+                    {{ 'PAGE_PLACE.ABOUT' | translate }}
+                </ion-segment-button>
+            </ion-segment>
+        </div>
 
-    <div class="sticky">
-        <ion-segment [(ngModel)]="segment" text-uppercase>
-            <ion-segment-button value="alloffers">
-                {{ 'PAGE_PLACE.ALL_OFFERS' | translate }}
-            </ion-segment-button>
-            <ion-segment-button value="testimonials">
-                {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
-            </ion-segment-button>
-            <ion-segment-button value="about">
-                {{ 'PAGE_PLACE.ABOUT' | translate }}
-            </ion-segment-button>
-        </ion-segment>
-    </div>
-
-<div padding>
-  <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-    <ion-item *ngFor=" let offer of offersList" class="relative">
-      <ion-avatar item-start>
-        <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
+    <div padding>
+      <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
+        <ion-item *ngFor=" let offer of offersList" class="relative">
+          <ion-avatar item-start>
+            <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
           <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
       </ion-avatar>
         <div class="smooth_transition width-88">
@@ -102,9 +104,11 @@
       <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
       <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-2vw flex">
+        <!--
         <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
         <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
         <span class="gift extrabold">1</span>
+        -->
       </div>
     </ion-item>
   </ion-list>

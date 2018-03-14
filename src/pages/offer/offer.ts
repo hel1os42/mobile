@@ -189,11 +189,11 @@ export class OfferPage {
             });
     }
 
-    
+
     presentConfirm() {
         const alert = this.alert.create({
             title: 'Are you sure you want to remove offer from favorites?',
-            
+
             buttons: [{
                 text: 'Cancel',
                 role: 'cancel',

@@ -273,4 +273,14 @@ congratulation-popover-component {
     .img_num_points{
         width: 65%;
     }
+
+    .block-star{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .icon-star{
+        font-size: 12vw;
+        margin: 0;
+    }
 }
