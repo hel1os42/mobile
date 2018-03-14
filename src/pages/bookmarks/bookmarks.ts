@@ -109,6 +109,12 @@ export class BookmarksPage {
                 if (resp.status === 'approved') {
                     this.companies.forEach(company => {
                         if (company.id === resp.place_id) {
+                            // if (company.stars && company.stars > 0 && company.testimonials_count && company.testimonials_count > 0) {
+                            //     company.stars = (company.stars * company.testimonials_count + resp.stars) / company.testimonials_count + 1;
+                            // }
+                            // else {
+                            //     company.stars = resp.stars;
+                            // }
                             company.testimonials_count = company.testimonials_count + 1;
                         };
                     });

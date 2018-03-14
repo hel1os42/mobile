@@ -123,7 +123,7 @@ export class PlacesPage {
         this.offers.getCategories(false)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
-                    category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
+                    category.id = categories.data.find(p => p.name === category.name).id;//temporary - code
                 })
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
@@ -142,6 +142,12 @@ export class PlacesPage {
                 if (resp.status === 'approved') {
                     this.companies.forEach(company => {
                         if (company.id === resp.place_id) {
+                            // if (company.stars && company.stars > 0 && company.testimonials_count && company.testimonials_count > 0) {
+                            //     company.stars = (company.stars * company.testimonials_count + resp.stars) / company.testimonials_count + 1;
+                            // }
+                            // else {
+                            //     company.stars = resp.stars;
+                            // }
                             company.testimonials_count = company.testimonials_count + 1;
                         };
                     });

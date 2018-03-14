@@ -87,6 +87,12 @@ export class PlacePage {
         this.onRefreshTestimonials = this.testimonials.onRefresh
             .subscribe(resp => {
                 if (resp.status === 'approved') {
+                    // if (this.company.stars && this.company.stars > 0 && this.company.testimonials_count && this.company.testimonials_count > 0) {
+                    //     this.company.stars = (this.company.stars * this.company.testimonials_count + resp.stars) / this.company.testimonials_count + 1;
+                    // }
+                    // else {
+                    //     this.company.stars = resp.stars;
+                    // }
                     this.company.testimonials_count = this.company.testimonials_count + 1;
                 }
             });
