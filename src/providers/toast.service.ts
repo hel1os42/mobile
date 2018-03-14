@@ -47,7 +47,10 @@ export class ToastService {
     }
 
     dismiss() {
-        this.disconnectedToast.dismiss();
+        if (this.isShowed) {
+            this.disconnectedToast.dismiss();
+            this.disconnectedToast = undefined;
+        }
         this.isShowed = false;
     }
 }

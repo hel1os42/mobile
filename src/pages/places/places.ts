@@ -14,6 +14,7 @@ import { RetailType } from '../../models/retailType';
 import { Share } from '../../models/share';
 import { Tag } from '../../models/tag';
 import { AppModeService } from '../../providers/appMode.service';
+import { FavoritesService } from '../../providers/favorites.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -22,7 +23,7 @@ import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { FavoritesService } from '../../providers/favorites.service';
+import { StorageService } from '../../providers/storage.service';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class PlacesPage {
     mapCenter: Coords;
     message: string;
     // radius = 19849000;
-    radius = 500000;
+    radius: number;
     segment: string;
     distanceString: string;
     search = '';
@@ -82,9 +83,11 @@ export class PlacesPage {
         private translate: TranslateService,
         private diagnostic: Diagnostic,
         private share: ShareService,
-        private favorites: FavoritesService) {
+        private favorites: FavoritesService,
+        private storage: StorageService) {
 
         this.isForkMode = this.appMode.getForkMode();
+        this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
 
         // this.onShareSubscription = this.share.onShare
         //     .subscribe(resp => {
@@ -526,6 +529,8 @@ export class PlacesPage {
             }
             else {
                 this.radius = data.radius;
+                this.storage.set('radius', this.radius);
+                
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
                 if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {

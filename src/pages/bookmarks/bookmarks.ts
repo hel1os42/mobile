@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { Place } from '../../models/place';
-import { Offer } from '../../models/offer';
-import { Coords } from '../../models/coords';
-import { Subscription } from 'rxjs';
-import { FavoritesService } from '../../providers/favorites.service';
-import { ProfileService } from '../../providers/profile.service';
-import { User } from '../../models/user';
-import { DistanceUtils } from '../../utils/distanse.utils';
 import { NavController } from 'ionic-angular';
-import { PlacePage } from '../place/place';
-import { LocationService } from '../../providers/location.service';
-import { OfferPage } from '../offer/offer';
 import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
+import { Coords } from '../../models/coords';
+import { Offer } from '../../models/offer';
+import { Place } from '../../models/place';
 import { AppModeService } from '../../providers/appMode.service';
+import { FavoritesService } from '../../providers/favorites.service';
+import { LocationService } from '../../providers/location.service';
+import { ProfileService } from '../../providers/profile.service';
+import { DistanceUtils } from '../../utils/distanse.utils';
+import { OfferPage } from '../offer/offer';
+import { PlacePage } from '../place/place';
 
 @Component({
     selector: 'page-bookmarks',
@@ -65,7 +64,7 @@ export class BookmarksPage {
                         this.offersLastPage = resp.last_page;
                         this.totalOffers = resp.total;
                         this.getSegment();
-                    })
+                    });
             });
 
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
@@ -83,8 +82,8 @@ export class BookmarksPage {
                                     ? 'offers'
                                     : 'places';
                         });
-                }
-            })
+                };
+            });
 
         this.onRefreshOffers = this.favorites.onRefreshOffers
             .subscribe(resp => {
@@ -98,9 +97,10 @@ export class BookmarksPage {
                             this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
                                 ? 'offers'
                                 : 'places';
-                        })
-                }
-            })
+                        });
+                };
+            });
+
     }
 
     getDevMode() {
