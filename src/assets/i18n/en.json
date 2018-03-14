@@ -285,7 +285,8 @@
         "REDEEM" : "Redeem",
         "OFFER_REDEEMING" : "Offer redeeming",
         "OR_USE_QR_CODE" : "or use QR-code",
-        "AGREE_WITH_TERMS" : "Agree with Terms & Conditions"
+        "AGREE_WITH_TERMS" : "Agree with Terms & Conditions",
+        "SEND_REVIEW" : "Send review"
     },
 
     "PAGE_OFFER-TERMS" : {
@@ -333,6 +334,7 @@
         "CONFIRM_REDEMPTION" : "Confirm redemption",
         "YOUR_INVITE_CODE" : "Your invite code",
         "CHANGE_YOUR_PHONE_NUMBER" : "Change your phone number",
+        "YOUR_PHONE_NUMBER" : "Your phone number",
         "PRIVATE_DATA" : "Private data",
         "SHOW_MY_PRIVATE_DATA" : "Show my private data",
         "SHOW_MY_PHONE_NUMBER" : "Show my phone number",

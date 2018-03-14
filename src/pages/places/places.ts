@@ -14,6 +14,7 @@ import { RetailType } from '../../models/retailType';
 import { Share } from '../../models/share';
 import { Tag } from '../../models/tag';
 import { AppModeService } from '../../providers/appMode.service';
+import { FavoritesService } from '../../providers/favorites.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -22,7 +23,8 @@ import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { FavoritesService } from '../../providers/favorites.service';
+import { StorageService } from '../../providers/storage.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 
 
 @Component({
@@ -34,18 +36,17 @@ export class PlacesPage {
     companies: Place[];
     categories: OfferCategory[] = OfferCategory.StaticList;
     childCategories: ChildCategory[];
-    // selectedChildCategories: SelectedCategory[];
     selectedCategory = new OfferCategory;
     isMapVisible: boolean = false;
     coords: Coords;
     mapBounds;
     mapCenter: Coords;
     message: string;
-    radius = 500000;
+    // radius = 19849000;
+    radius: number;
     segment: string;
     distanceString: string;
     search = '';
-    // categoryFilter: string[];
     typeFilter = [];
     specialityFilter = [];
     tagFilter = [];
@@ -64,6 +65,8 @@ export class PlacesPage {
     onResumeSubscription: Subscription;
     onShareSubscription: Subscription;
     onRefreshListSubscription: Subscription;
+    onRefreshTestimonials: Subscription;
+
     isConfirm = false;
     shareData: Share;
     isRefreshLoading = false;
@@ -83,9 +86,12 @@ export class PlacesPage {
         private translate: TranslateService,
         private diagnostic: Diagnostic,
         private share: ShareService,
-        private favorites: FavoritesService) {
+        private favorites: FavoritesService,
+        private storage: StorageService,
+        private testimonials: TestimonialsService) {
 
         this.isForkMode = this.appMode.getForkMode();
+        this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
 
         // this.onShareSubscription = this.share.onShare
         //     .subscribe(resp => {
@@ -117,7 +123,7 @@ export class PlacesPage {
         this.offers.getCategories(false)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
-                    category.id = categories.data.find(p => p.name == category.name).id;//temporary - code
+                    category.id = categories.data.find(p => p.name === category.name).id;//temporary - code
                 })
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
@@ -128,8 +134,25 @@ export class PlacesPage {
                     if (company.id === resp.id) {
                         company.is_favorite = resp.isFavorite;
                     }
-                })
-            })
+                });
+            });
+
+        this.onRefreshTestimonials = this.testimonials.onRefresh
+            .subscribe(resp => {
+                if (resp.status === 'approved') {
+                    this.companies.forEach(company => {
+                        if (company.id === resp.place_id) {
+                            // if (company.stars && company.stars > 0 && company.testimonials_count && company.testimonials_count > 0) {
+                            //     company.stars = (company.stars * company.testimonials_count + resp.stars) / company.testimonials_count + 1;
+                            // }
+                            // else {
+                            //     company.stars = resp.stars;
+                            // }
+                            company.testimonials_count = company.testimonials_count + 1;
+                        };
+                    });
+                }
+            });
 
     }
 
@@ -527,6 +550,8 @@ export class PlacesPage {
             }
             else {
                 this.radius = data.radius;
+                this.storage.set('radius', this.radius);
+
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
                 if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {
@@ -676,6 +701,7 @@ export class PlacesPage {
         if (this.onRefreshListSubscription) {
             this.onRefreshListSubscription.unsubscribe();
         }
+        this.onRefreshTestimonials.unsubscribe();
     }
 
     ionViewDidLoad() {

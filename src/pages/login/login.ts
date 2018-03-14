@@ -1,16 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, NavController, Select, Content, Platform, Navbar } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
+import { AlertController, Content, Navbar, NavController, Platform, Select } from 'ionic-angular';
+import { Observable, Subscription } from 'rxjs';
+import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
-import { StringValidator } from '../../validators/string.validator';
-import { TemporaryPage } from '../temporary/temporary';
-import { PHONE_CODES } from '../../const/phoneCodes.const';
-import { SignUpPage } from '../signup/signup';
 import { LocationService } from '../../providers/location.service';
-import { Keyboard } from '@ionic-native/keyboard';
-import { Subscription, Observable } from 'rxjs';
-import { DatePipe } from '@angular/common';
+import { ProfileService } from '../../providers/profile.service';
+import { StringValidator } from '../../validators/string.validator';
+import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
+import { SignUpPage } from '../signup/signup';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
     selector: 'page-login',
@@ -49,7 +50,8 @@ export class LoginPage {
         private appMode: AppModeService,
         private alert: AlertController,
         private location: LocationService,
-        private keyboard: Keyboard) {
+        private keyboard: Keyboard,
+        private profile: ProfileService) {
 
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
@@ -131,17 +133,17 @@ export class LoginPage {
             code: this.authData.code
         })
             .subscribe(resp => {
-                // this.profile.get(true)
-                //     .subscribe(res => {
-                //         if (res.name == '' && !res.email) {
-                //             this.nav.setRoot(CreateUserProfilePage)
-                //         }
-                //         else {
-                //             this.nav.setRoot(TabsPage, { index: 0 });
-                //         }
-                //     });temporary
+                this.profile.get(true)
+                    .subscribe(res => {
+                        if (res.name == '' && !res.email) {
+                            this.nav.setRoot(CreateUserProfilePage)
+                        }
+                        else {
+                            this.nav.setRoot(TabsPage, { index: 0 });
+                        }
+                    })
 
-                this.nav.setRoot(TemporaryPage);//temporary(to remove)
+                // this.nav.setRoot(TemporaryPage);//temporary(to remove)
 
             });
     }

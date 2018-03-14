@@ -280,7 +280,8 @@
         "REDEEM" : "Купон",
         "OFFER_REDEEMING" : "Offer redeeming",
         "OR_USE_QR_CODE" : "или используйте QR-код",
-        "AGREE_WITH_TERMS" : "Подтверждаю согласия с Условиями использования акций"
+        "AGREE_WITH_TERMS" : "Подтверждаю согласия с Условиями использования акций",
+        "SEND_REVIEW" : "Отправить оценку"
     },
 
     "PAGE_OFFER-TERMS" : {

@@ -95,6 +95,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { ShareService } from '../providers/share.service';
 import { FavoritesService } from '../providers/favorites.service';
 import { FormatTimePipe } from '../pipes/format-time.pipe';
+import { TestimonialsService } from '../providers/testimonials.service';
  
 
 // The translate loader needs to know where to load i18n files
@@ -268,6 +269,7 @@ export function createTranslateLoader(http: HttpClient) {
         NetworkService,
         ShareService,
         FavoritesService,
+        TestimonialsService,
         Clipboard,
         InAppBrowser,
         AndroidPermissions,

@@ -638,6 +638,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin-bottom: 9px;
 }
 
+.grid-tabs-splash .font-65{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 /* SEARCH */
 .block-search{
     position: relative;
@@ -1219,6 +1226,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.text-overflow-5{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
 }
 

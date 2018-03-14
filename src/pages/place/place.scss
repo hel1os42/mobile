@@ -82,6 +82,12 @@ page-place {
         bottom: 0;
     }
 
+    .segment-ios .segment-button {
+        font-size: 4vw;
+        line-height: 12vw;
+    }
+
+    /*
     .segment-ios{
         width: 100%;
         display: block;
@@ -98,12 +104,12 @@ page-place {
         margin-left: 5%;
     }
 
-    .label-ios{
-        margin: 0;
-    }
-
     .segment-ios .segment-button:last-of-type {
         margin-left: 13%;
+    }
+*/
+    .label-ios{
+        margin: 0;
     }
 
     .item-block-nau.list.list-ios{
