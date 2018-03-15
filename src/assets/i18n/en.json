@@ -12,7 +12,10 @@
         "OFFERS" : "Offers",
         "OFFERS2" : "Offers",
         "OFFER" : "Offer",
-        "MIN_SYMBOLS" : "min:"
+        "MIN_SYMBOLS" : "min:",
+        "FRIENDS": "Friends",
+        "FRIENDS2": "Friends",
+        "FRIEND": "Friend"
     },
 
     "MONTHS" : {

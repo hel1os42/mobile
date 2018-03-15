@@ -12,7 +12,10 @@
         "OFFERS" : "Акций",
         "OFFERS2" : "Акции",
         "OFFER" : "Акция",
-        "MIN_SYMBOLS" : "мин:"
+        "MIN_SYMBOLS" : "мин:",
+        "FRIENDS": "Друзей",
+        "FRIENDS2": "Друга",
+        "FRIEND": "Друг"
     },
 
     "MONTHS" : {

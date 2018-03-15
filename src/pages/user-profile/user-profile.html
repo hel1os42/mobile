@@ -140,7 +140,13 @@
                 <div>
                     <img src="assets/img/user_profile/users.svg">
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.referrals_count }}</div>
-                    <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_USER-PROFILE.USERS' | translate }}</div>
+                    <div text-uppercase class="text-3E4B5D font-12">
+                        {{ user.referrals_count == 1 
+                        ? ('UNIT.FRIEND' | translate) 
+                        : (user.referrals_count >= 2 && user.referrals_count <= 4) 
+                        ? ('UNIT.FRIENDS2' | translate) 
+                        : ('UNIT.FRIENDS' | translate) }}
+                    </div>
                 </div>
             </a>
         </ion-row>
