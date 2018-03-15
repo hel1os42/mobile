@@ -15,7 +15,8 @@
                 <p>
                     <img [src]="category.image_url">
                 </p>
-                <span class="semibold" [innerHTML]="category.name_html"></span>
+                <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
+                <span class="semibold" [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate"></span>
             </a>
         </ion-row>
     </ion-grid>

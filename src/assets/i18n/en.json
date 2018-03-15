@@ -1,4 +1,12 @@
 {
+    "CATEGORIES" : {
+        "Food": "<div class='font-65 text-white'>Food &<br>Drinks</div>",
+        "Beauty": "<div class='font-65 text-white'>Beauty &<br>Fitness</div>",
+        "Retail": "<div class='font-65 text-white'>Retail &<br>Services</div>",
+        "Accommodation": "<div class='font-65 text-white'>Accommodation<br>& Leisure</div>",
+        "Other": "<div class='font-65 text-white'>Other &<br>Online</div>"
+    },
+
     "UNIT" : {
         "KM" : "km",
         "M" : "m",
