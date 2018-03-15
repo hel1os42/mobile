@@ -12,7 +12,13 @@
         </ion-avatar>
         <div item-content>
             <div class="font-18 text-3E4B5D bold">{{ total }}</div>
-            <div class="font-14 text-828282">{{ 'PAGE_ADV-USER-OFFERS.CREATED_OFFERS' | translate }}</div>
+            <div class="font-14 text-828282">
+                {{ total == 1 
+                ? ('PAGE_ADV-USER-OFFERS.CREATED_OFFER' | translate) 
+                : (total >= 2 && total <= 4) 
+                ? ('PAGE_ADV-USER-OFFERS.CREATED_OFFERS2' | translate) 
+                : ('PAGE_ADV-USER-OFFERS.CREATED_OFFERS' | translate) }}
+            </div>
         </div>
         <button (click)="openCreateOffer()" item-end ion-button class="btn_transfer font-14 text-white extrabold">
             {{ 'PAGE_ADV-USER-OFFERS.CREATE_NEW' | translate }}

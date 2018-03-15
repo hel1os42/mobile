@@ -79,7 +79,9 @@
     },
 
     "PAGE_ADV-USER-OFFERS" : {
-        "CREATED_OFFERS" : "Созданные акции",
+        "CREATED_OFFER" : "Созданная акция",
+        "CREATED_OFFERS" : "Созданных акций",
+        "CREATED_OFFERS2" : "Созданные акции",
         "CREATE_NEW" : "Создать",
         "ALL" : "Все",
         "FEATURED" : "Рекомендуемые",

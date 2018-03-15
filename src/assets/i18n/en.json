@@ -79,6 +79,8 @@
     },
 
     "PAGE_ADV-USER-OFFERS" : {
+        "CREATED_OFFER" : "Created Offer",
+        "CREATED_OFFERS2" : "Created Offers",
         "CREATED_OFFERS" : "Created Offers",
         "CREATE_NEW" : "Create new",
         "ALL" : "All",
