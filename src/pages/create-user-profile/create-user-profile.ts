@@ -305,7 +305,8 @@ export class CreateUserProfilePage {
             (this.twitterName ? +3 : +0) + (this.instagramName ? +3 : +0) +
             (this.gender ? +5 : +0) + (this.age ? +9 : +0) + (this.income ? +9 : +0);
         // return points;temporary
-        return 0;
+        // return 0;
+        return this.user.points;
     }
 
     toggleSelect() {
