@@ -29,7 +29,7 @@ export class OfferPage {
     distance: number;
     coords: Coords;
     branchDomain = 'https://nau.app.link';
-    points = 1;
+    points: number;
 
     constructor(
         private nav: NavController,
@@ -45,6 +45,7 @@ export class OfferPage {
         private alert: AlertController,
         private testimonials: TestimonialsService) {
 
+        this.points = 1;
         if (this.share.get()) {
             this.share.remove();
         }
