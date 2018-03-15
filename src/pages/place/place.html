@@ -33,7 +33,11 @@
                             <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
                         </ng-container>
                         <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">{{ company.testimonials_count }}</span>
-                        <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75 text-828282">{{ distanceString }}</span>
+                        <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+                        <span class="font-75 text-828282">
+                            {{ distanceObj.distance }} 
+                            {{ distanceObj.key | translate }}
+                        </span>
                     </div>
                     <div margin-top class="text-3E4B5D font-22 bold text-overflow-2 wrap">{{ company.name }}</div>
                     <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc width-88 company-address">{{ company.address }}</div>

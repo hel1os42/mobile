@@ -459,7 +459,7 @@ export class PlacesPage {
         else {
             params = {
                 company: data,
-                distanceStr: this.getDistance(data.latitude, data.longitude),
+                distanceObj: this.getDistance(data.latitude, data.longitude),
                 coords: this.coords,
             }
         }
@@ -486,9 +486,13 @@ export class PlacesPage {
 
     getDistance(latitude: number, longitude: number) {
         if (this.coords) {
-            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
-            this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
-            return this.distanceString;
+            let long = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = long >= 1000 ? long / 1000 : long;
+            let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+            return {
+                distance: distance,
+                key: key
+            }
         };
         return undefined;
     }

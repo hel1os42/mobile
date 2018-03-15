@@ -32,7 +32,7 @@ export class BookmarksPage {
     onRefreshOffers: Subscription;
     totalCompanies: number;
     totalOffers: number;
-    distanceString: string;
+    // distanceObj;
     isForkMode: boolean;
     onRefreshTestimonials: Subscription;
 
@@ -155,9 +155,13 @@ export class BookmarksPage {
 
     getDistance(latitude: number, longitude: number) {
         if (this.coords) {
-            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
-            this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
-            return this.distanceString;
+            let long = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = long >= 1000 ? long / 1000 : long;
+            let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+            return {
+                distance: distance,
+                key: key
+            }
         };
         return undefined;
     }
@@ -168,7 +172,7 @@ export class BookmarksPage {
         let params = {
             company: company,
             coords: this.coords,
-            distanceStr: this.getDistance(data.latitude, data.longitude),
+            distanceObj: this.getDistance(data.latitude, data.longitude),
             // coords: this.coords,
         }
         this.nav.push(PlacePage, params);
@@ -179,7 +183,7 @@ export class BookmarksPage {
         offerData.is_favorite = true;
         this.nav.push(OfferPage, {
             offer: offerData,
-            distanceStr: this.getDistance(offer.latitude, offer.longitude),
+            distanceObj: this.getDistance(offer.latitude, offer.longitude),
             coords: this.coords,
             company: offer.account.owner.place
         });

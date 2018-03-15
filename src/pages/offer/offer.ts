@@ -25,7 +25,7 @@ export class OfferPage {
     company = new Place;
     offerActivationCode: OfferActivationCode;
     timer;
-    distanceString: string;
+    distanceObj;
     distance: number;
     coords: Coords;
     branchDomain = 'https://nau.app.link';
@@ -49,7 +49,7 @@ export class OfferPage {
         }
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
-        this.distanceString = this.navParams.get('distanceStr');
+        this.distanceObj = this.navParams.get('distanceObj');
         this.coords = this.navParams.get('coords');
         this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
     }

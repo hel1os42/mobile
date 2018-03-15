@@ -25,7 +25,7 @@ export class PlacePage {
     visibleFooter: boolean = false;
     segment: string;
     offersList: Offer[];
-    distanceString: string;
+    distanceObj;
     features: Speciality[];
     branchDomain = 'https://nau.app.link';
     page: string;
@@ -47,7 +47,7 @@ export class PlacePage {
         this.coords = this.navParams.get('coords');
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
-            this.distanceString = this.navParams.get('distanceStr');
+            this.distanceObj = this.navParams.get('distanceObj');
             this.offers.getPlace(this.company.id)
                 .subscribe(company => {
                     this.company = company;
@@ -63,7 +63,7 @@ export class PlacePage {
                 .subscribe(company => {
                     this.company = company;
                     this.offersList = company.offers;
-                    this.distanceString = this.getDistance(this.company.latitude, this.company.longitude);
+                    this.distanceObj = this.getDistance(this.company.latitude, this.company.longitude);
                     this.features = this.company.specialities;
                     if (!offerId) {
                         this.share.remove();
@@ -116,9 +116,14 @@ export class PlacePage {
 
     getDistance(latitude: number, longitude: number) {
         if (this.coords) {
-            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
-            this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
-            return this.distanceString;
+            let long = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = long >= 1000 ? long / 1000 : long;
+            let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+            this.distanceObj = {
+                distance: distance,
+                key: key
+            } 
+            return this.distanceObj;
         };
         return undefined;
     }
@@ -162,7 +167,7 @@ export class PlacePage {
         this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,
-            distanceStr: this.getDistance(offer.latitude, offer.longitude),
+            distanceObj: this.getDistance(offer.latitude, offer.longitude),
             coords: this.coords
         });
     }
