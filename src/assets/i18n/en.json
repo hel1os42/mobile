@@ -351,7 +351,8 @@
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Try it for free",
         "LANG" : "Language",
-        "COPY_NOTIFICATION" : "Сopied to clipboard"
+        "COPY_NOTIFICATION" : "Сopied to clipboard",
+        "REFERRAL_LINK" : "Referral link"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {

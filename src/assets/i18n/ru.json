@@ -11,7 +11,7 @@
         "SIGN_IN" : "Войти",
         "OFFERS" : "Акций",
         "OFFER" : "Акция",
-        "MIN_SYMBOLS" : "min:"
+        "MIN_SYMBOLS" : "мин:"
     },
 
     "MONTHS" : {
@@ -109,7 +109,11 @@
         "BOOKMARKS" : "Закладки",
         "PLACES" : "Места",
         "FEATURED" : "Рекомендуемые",
-        "REDEEM_NOW" : "Использовать сейчас"
+        "REDEEM_NOW" : "Использовать сейчас",
+        "YOU_DONT_HAVE" : "У Вас пока нет избранных заведений",
+        "YET" : "yet",
+        "OFFERS" : "offers",
+        "PLACES1" : "places"
     },
 
     "PAGE_CREATE-ADVUSER-PROFILE" : {
@@ -258,7 +262,7 @@
     },
 
     "PAGE_NOTIFICATIONS" : {
-        "NOTIFICATION" : "Уведомление",
+        "NOTIFICATION" : "Уведомления",
         "TODAY" : "Сегодня",
         "YESTERDAY" : "Вчера",
         "SENT_NEW_MESSAGE_FOR_YOU" : "Sent new message for you",
@@ -276,7 +280,7 @@
         "WE_ARE" : "Мы ценим ваш выбор",
         "YOU_EARNED" : "Вы получили",
         "POINTS" : "очков",
-        "OFFER" : "Акция",
+        "OFFER" : "Акции",
         "REDEEM" : "Купон",
         "OFFER_REDEEMING" : "Offer redeeming",
         "OR_USE_QR_CODE" : "или используйте QR-код",
@@ -329,6 +333,7 @@
         "CONFIRM_REDEMPTION" : "Подтвердить погашение",
         "YOUR_INVITE_CODE" : "Ваш инвайт-код",
         "CHANGE_YOUR_PHONE_NUMBER" : "Изменить номер телефона",
+        "YOUR_PHONE_NUMBER" : "Ваш номер телефона",
         "PRIVATE_DATA" : "Личная информация",
         "SHOW_MY_PRIVATE_DATA" : "Показывать личную информацию",
         "SHOW_MY_PHONE_NUMBER" : "Показывать номер телефона",
@@ -345,7 +350,8 @@
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Попробовать бесплатно",
         "LANG" : "Язык",
-        "COPY_NOTIFICATION" : "Сopied to clipboard"
+        "COPY_NOTIFICATION" : "Сopied to clipboard",
+        "REFERRAL_LINK" : "Cсылка для приглашения друзей"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {
@@ -481,13 +487,13 @@
         "GET" : "Получить",
         "ADDITIONAL" : "дополнительные",
         "POINTS" : "очки",
-        "NEXT" : "СЛЕД.",
+        "NEXT" : "",
         "LVL" : "УРОВЕНЬ",
         "YOUR_TASKS_JOBS_FOR_TODAY" : "Ваши задания на сегодня",
         "GET_NEW_POINTS" : "Получить очки",
         "GET_NEW_OFFERS_NEARBY" : "Улучшайте уровень, пользуясь акциями рядом с вами",
         "NAU" : "NAU",
-        "USERS" : "пользователей",
+        "USERS" : "друзей",
         "LOGOUT" : "Выйти"
     },
 
