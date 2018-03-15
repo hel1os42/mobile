@@ -73,7 +73,11 @@
                             {{ company?.active_offers_count }}
                         </div>
                         <div text-center class="font-10 text-828282">
-                            {{ company?.active_offers_count > 1 ? ('UNIT.OFFERS' | translate) : ('UNIT.OFFER' | translate) }}
+                            {{ company?.active_offers_count == 1 
+                            ? ('UNIT.OFFER' | translate) 
+                            : (company?.active_offers_count >= 2 && company?.active_offers_count <= 4) 
+                            ? ('UNIT.OFFERS2' | translate) 
+                            : ('UNIT.OFFERS' | translate) }}
                         </div>
                     </div>
                 </div>
