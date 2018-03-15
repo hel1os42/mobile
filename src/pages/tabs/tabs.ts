@@ -35,26 +35,19 @@ export class TabsPage {
         private profile: ProfileService,
         private transaction: TransactionService) {
 
-        //temporary
-        this.envName = this.appMode.getEnvironmentMode();
-        this.profile.getWithAccounts(false)
-            .subscribe(resp => {
-                this.nauParams = resp.accounts.NAU;
-            });
-        //temporary
-
-        // temporary - always show PlacesPage
+        // this.envName = this.appMode.getEnvironmentMode();
+        // this.profile.getWithAccounts(false)
+        //     .subscribe(resp => {
+        //         this.nauParams = resp.accounts.NAU;
+        //     });
         this.tab1Root = PlacesPage;
-        this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;
+        this.selectedTabIndex = 0;
     }
-
-    //temporary
-    refresh() {
-        if (this.shownTransactions) {
-            this.profile.refreshAccounts();
-            this.transaction.refresh();
-        }
-        this.shownTransactions = true;
-    }
-    //temporary
+    // refresh() {
+    //     if (this.shownTransactions) {
+    //         this.profile.refreshAccounts();
+    //         this.transaction.refresh();
+    //     }
+    //     this.shownTransactions = true;
+    // }
 }

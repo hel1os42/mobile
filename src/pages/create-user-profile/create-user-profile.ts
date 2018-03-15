@@ -396,13 +396,11 @@ export class CreateUserProfilePage {
             this.profile.refreshAccounts();
         }
         else {
-            // this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-            //temporary
-            this.profile.getWithAccounts()
-                .subscribe(resp => {
-                    this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
-                });
-            //temporary
+            this.nav.setRoot(TabsPage);
+            // this.profile.getWithAccounts()
+            //     .subscribe(resp => {
+            //         this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
+            //     });
         }
     }
 

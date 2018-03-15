@@ -58,9 +58,9 @@ export class UserNauPage {
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         this.envName = this.appMode.getEnvironmentMode();
-        // this.NAU = this.navParams.get('NAU');return
-        this.NAU = (this.envName === 'dev' || this.envName === 'test') 
-        ? this.navParams.get('NAU') : this.navParams.data;//temporary
+        this.NAU = this.navParams.get('NAU');
+        // this.NAU = (this.envName === 'dev' || this.envName === 'test') 
+        // ? this.navParams.get('NAU') : this.navParams.data;//temporary
         this.url = this.envName === 'dev' ? 'https://chain.nau.toavalon.com' : this.envName === 'prod'
             ? 'http://explorer.nau.io' : '';
         this.transferData.source = this.NAU.address;
