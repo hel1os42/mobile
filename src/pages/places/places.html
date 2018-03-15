@@ -57,7 +57,7 @@
         </ion-item>
     </div>
 
-    <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
+    <ion-list *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
 
         <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">
             <ion-avatar item-start text-center>
@@ -74,7 +74,7 @@
                 <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282">
-                    {{ getDistance(company.latitude, company.longitude).distance }} 
+                    {{ getDistance(company.latitude, company.longitude).distance }}
                     {{ getDistance(company.latitude, company.longitude).key | translate }}
                 </span>
                 <div class="smooth_transition">

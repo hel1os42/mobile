@@ -35,7 +35,7 @@
                         <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                         <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                         <span class="font-75 text-828282">
-                            {{ distanceObj.distance }} 
+                            {{ distanceObj.distance }}
                             {{ distanceObj.key | translate }}
                         </span>
                     </div>
@@ -97,7 +97,7 @@
             </ion-segment>
         </div>
 
-    <div padding>
+    <div padding-top>
       <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
         <ion-item (click)="openOffer(offer)" *ngFor=" let offer of offersList" class="relative">
           <ion-avatar item-start>
@@ -131,7 +131,7 @@
     </ion-item>
   </ion-list>
 
-  <div *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>
+  <div padding-left padding-right *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>
 
 </div>
 </ion-content>
