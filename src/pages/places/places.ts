@@ -284,7 +284,6 @@ export class PlacesPage {
             })
             .catch((error) => {
                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                // debugger
                 this.presentConfirm();
                 // error => console.log(error + 'err')
             })
