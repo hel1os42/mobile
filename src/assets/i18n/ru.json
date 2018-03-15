@@ -113,13 +113,15 @@
 
     "PAGE_BOOKMARKS" : {
         "BOOKMARKS" : "Закладки",
+        "BOOKMARKS5" : "Закладок",
+        "BOOKMARK" : "Закладка",
         "PLACES" : "Места",
         "FEATURED" : "Рекомендуемые",
         "REDEEM_NOW" : "Использовать сейчас",
-        "YOU_DONT_HAVE" : "У Вас пока нет избранных заведений",
-        "YET" : "yet",
-        "OFFERS" : "offers",
-        "PLACES1" : "places"
+        "YOU_DONT_HAVE" : "У Вас пока нет избранных",
+        "YET" : "",
+        "OFFERS" : "акций",
+        "PLACES1" : "заведений"
     },
 
     "PAGE_CREATE-ADVUSER-PROFILE" : {
