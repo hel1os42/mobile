@@ -4,11 +4,7 @@
             {{ 'PAGE_BOOKMARKS.BOOKMARKS' | translate }}
         </ion-title>
     </ion-navbar>
-    <div class="header-shadow"></div>
-</ion-header>
-
-<ion-content padding class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
-    <ion-item no-lines class="border-bottom-no top-block-nau">
+    <ion-item padding-left padding-right no-lines class="border-bottom-no top-block-nau">
         <ion-avatar item-start>
             <img src="assets/img/bookmarks/star.svg">
         </ion-avatar>
@@ -19,12 +15,12 @@
             </div>
         </div>
         <div *ngIf="!getTotal() || getTotal() < 1">
-            {{ 'PAGE_BOOKMARKS.YOU_DONT_HAVE' | translate }} 
+            {{ 'PAGE_BOOKMARKS.YOU_DONT_HAVE' | translate }}
             {{ segment === 'places' ? ('PAGE_BOOKMARKS.PLACES1' | translate) : ('PAGE_BOOKMARKS.OFFERS' | translate) }} {{ 'PAGE_BOOKMARKS.YET' | translate }}
         </div>
 
     </ion-item>
-    <ion-segment [(ngModel)]="segment" text-uppercase margin-top class="nau-segment">
+    <ion-segment padding-left padding-right padding-bottom [(ngModel)]="segment" text-uppercase margin-top class="nau-segment">
         <ion-segment-button value="places">
             {{ 'PAGE_BOOKMARKS.PLACES' | translate }}
         </ion-segment-button>
@@ -32,6 +28,10 @@
             {{ 'UNIT.OFFERS' | translate }}
         </ion-segment-button>
     </ion-segment>
+    <div class="header-shadow"></div>
+</ion-header>
+
+<ion-content class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
 
     <!-- PLACES -->
     <ion-list *ngIf="segment === 'places'" no-lines class="item-block-nau margin-top-10 block-places">
@@ -49,8 +49,8 @@
                     <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
                     <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                     <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
-                    <span class="font-75 text-828282"> 
-                        {{ getDistance(company.latitude, company.longitude).distance }} 
+                    <span class="font-75 text-828282">
+                        {{ getDistance(company.latitude, company.longitude).distance }}
                         {{ getDistance(company.latitude, company.longitude).key | translate }}
                     </span>
                     <div class="smooth_transition">
