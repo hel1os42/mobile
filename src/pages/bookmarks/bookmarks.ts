@@ -53,21 +53,17 @@ export class BookmarksPage {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
-
-                this.favorites.getPlaces(this.companiesPage)
-                    .subscribe(resp => {
-                        this.companies = resp.data;
-                        this.companiesLastPage = resp.last_page;
-                        this.totalCompanies = resp.total;
-                        this.getSegment();
-                    });
-                this.favorites.getOffers(this.offersPage)
-                    .subscribe(resp => {
-                        this.offers = resp.data;
-                        this.offersLastPage = resp.last_page;
-                        this.totalOffers = resp.total;
-                        this.getSegment();
-                    });
+                this.getLists();
+            })
+            .catch(err => {
+                this.profile.get(false, false)
+                    .subscribe(user => {
+                        this.coords = {
+                            lat: user.latitude,
+                            lng: user.longitude
+                        };
+                        this.getLists();
+                    })
             });
 
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
@@ -121,6 +117,23 @@ export class BookmarksPage {
                 }
             });
 
+    }
+
+    getLists() {
+        this.favorites.getPlaces(this.companiesPage)
+            .subscribe(resp => {
+                this.companies = resp.data;
+                this.companiesLastPage = resp.last_page;
+                this.totalCompanies = resp.total;
+                this.getSegment();
+            });
+        this.favorites.getOffers(this.offersPage)
+            .subscribe(resp => {
+                this.offers = resp.data;
+                this.offersLastPage = resp.last_page;
+                this.totalOffers = resp.total;
+                this.getSegment();
+            });
     }
 
     getDevMode() {
