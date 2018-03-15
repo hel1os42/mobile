@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Http, Response } from '@angular/http';
 import { Observable } from "rxjs";
 import { ToastService } from './toast.service';
 import { NetworkService } from './network.service';
+import { Coords } from '../models/coords';
 
 
 @Injectable()
 export class LocationService {
     geoposition: Geoposition;
     url = 'https://freegeoip.net/json/';
+    onProfileCoordsChanged = new EventEmitter<Coords>();
 
     constructor(private geolocation: Geolocation,
                 private http: Http,
@@ -55,6 +57,10 @@ export class LocationService {
         ? Promise.resolve(this.geoposition) 
         : this.get(false);
         return promise;
+    }
+
+    refreshDefoultCoords(coords: Coords) {
+        this.onProfileCoordsChanged.emit(coords);
     }
 
     reset() {

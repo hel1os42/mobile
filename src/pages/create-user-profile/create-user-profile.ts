@@ -1,9 +1,13 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { AlertController, LoadingController, NavController, Platform } from 'ionic-angular';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
-import { latLng, LeafletEvent, tileLayer } from 'leaflet';
-import { Map } from 'leaflet';
+import { latLng, LeafletEvent, Map, tileLayer } from 'leaflet';
+import * as _ from 'lodash';
+import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
+import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
 import { Register } from '../../models/register';
 import { User } from '../../models/user';
@@ -11,14 +15,9 @@ import { ApiService } from '../../providers/api.service';
 import { LocationService } from '../../providers/location.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
-import { TabsPage } from '../tabs/tabs';
-import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map.utils';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { Diagnostic } from '@ionic-native/diagnostic';
-import { Subscription } from 'rxjs';
-import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
+import { TabsPage } from '../tabs/tabs';
 
 
 @Component({
@@ -53,6 +52,7 @@ export class CreateUserProfilePage {
     canSaveImg = false;
     isCrop = false;
     backAction;
+    isCoordsChenged = false;
 
     @ViewChild('cropper', undefined)
     cropper: ImageCropperComponent;
@@ -272,6 +272,7 @@ export class CreateUserProfilePage {
         this._map.on({
             moveend: (event: LeafletEvent) => {
                 this.coords = this._map.getCenter();
+                this.isCoordsChenged = true;
                 if (this.coords.lng > 180 || this.coords.lng < -180) {
                     this.coords.lng = MapUtils.correctLng(this.coords.lng);
                     this._map.setView(this.coords, this._map.getZoom());
@@ -293,7 +294,7 @@ export class CreateUserProfilePage {
         });
         this.options = {
             layers: [this.tileLayer],
-            zoom: 15,
+            zoom: 10,
             center: latLng(this.coords),
             // zoomSnap: 0.5,
             // zoomDelta: 0.5
@@ -406,6 +407,14 @@ export class CreateUserProfilePage {
     }
 
     createAccount() {
+        if (this.navParams.get('user') && this.isCoordsChenged) {
+            this.diagnostic.isLocationAvailable().then(result => {
+                if(!result) {
+                    this.location.refreshDefoultCoords(this.coords);
+                }
+                this.isCoordsChenged = false;
+            });
+        }
         if (this.validateName(this.baseData.name) && this.validateEmail(this.baseData.email)) {
             this.baseData.latitude = this.coords.lat;
             this.baseData.longitude = this.coords.lng;

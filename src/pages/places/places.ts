@@ -3,7 +3,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController, LoadingController, NavController, Platform, Popover, PopoverController } from 'ionic-angular';
-import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer } from 'leaflet';
+import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Map, Marker, marker, popup, tileLayer } from 'leaflet';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 import { ChildCategory } from '../../models/childCategory';
@@ -19,12 +19,12 @@ import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
+import { StorageService } from '../../providers/storage.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { StorageService } from '../../providers/storage.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
 
 
 @Component({
@@ -63,14 +63,14 @@ export class PlacesPage {
     isChangedFilters = false;
     isForkMode: boolean;
     onResumeSubscription: Subscription;
-    onShareSubscription: Subscription;
     onRefreshListSubscription: Subscription;
     onRefreshTestimonials: Subscription;
-
+    onRefreshDefoultCoords: Subscription;
     isConfirm = false;
     shareData: Share;
     isRefreshLoading = false;
     refresher;
+    _map: Map;
 
     constructor(
         private platform: Platform,
@@ -154,6 +154,28 @@ export class PlacesPage {
                 }
             });
 
+        this.onRefreshDefoultCoords = this.location.onProfileCoordsChanged
+            .subscribe(coords => {
+                this.coords = coords;
+                this.page = 1;
+                this.loadCompanies(this.page, true);
+                this.userPin = [marker([this.coords.lat, this.coords.lng], {
+                    icon: icon({
+                        iconSize: [22, 26],
+                        iconAnchor: [13, 35],
+                        iconUrl: 'assets/img/icon_user_map.svg',
+                        //shadowUrl:
+                    })
+                })]
+                // this.changeDetectorRef.detectChanges();
+            })
+
+    }
+
+    onMapReady(map: Map) {
+        if (!this._map && this.coords.lat) {
+            this._map = map;
+        }
     }
 
     getLocationStatus() {
@@ -385,7 +407,10 @@ export class PlacesPage {
             bounds.extend(northEast);
             return bounds;
         }
-        return undefined
+        if (this._map) {
+            this._map.setView(this.coords, this._map.getZoom());
+        }
+        return undefined;
     }
 
     isSelectedCategory(category: OfferCategory) {
@@ -394,7 +419,7 @@ export class PlacesPage {
 
     selectCategory(category: OfferCategory) {
         this.isChangedCategory = this.selectedCategory.id !== category.id;
-        this.search = ""
+        this.search = "";
         this.selectedCategory = category;
         this.loadCompanies(this.page = 1, true);
         if (this.isChangedCategory) {
