@@ -11,10 +11,10 @@
         <div *ngIf="getTotal() && getTotal() > 0">
             <div class="font-18 text-3E4B5D bold wrap-no">{{ getTotal() }}</div>
             <div class="font-14 text-828282">
-                {{ getTotal() == 1 
-                ? ('PAGE_BOOKMARKS.BOOKMARK' | translate) 
-                : (getTotal() >= 2 && getTotal() <= 4) 
-                ? ('PAGE_BOOKMARKS.BOOKMARKS' | translate) 
+                {{ getTotal() == 1
+                ? ('PAGE_BOOKMARKS.BOOKMARK' | translate)
+                : (getTotal() >= 2 && getTotal() <= 4)
+                ? ('PAGE_BOOKMARKS.BOOKMARKS' | translate)
                 : ('PAGE_BOOKMARKS.BOOKMARKS5' | translate) }}
             </div>
         </div>
@@ -38,7 +38,7 @@
 <ion-content class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
 
     <!-- PLACES -->
-    <ion-list *ngIf="segment === 'places'" no-lines class="item-block-nau margin-top-10 block-places">
+    <ion-list padding-left padding-right *ngIf="segment === 'places'" no-lines class="item-block-nau margin-top-10 block-places">
 
         <ion-item-sliding *ngFor="let company of companies">
             <ion-item (click)=" openPlace(company)" class="margin-no">
@@ -77,10 +77,10 @@
                             {{ company?.active_offers_count }}
                         </div>
                         <div text-center class="font-10 text-828282">
-                            {{ company?.active_offers_count == 1 
-                            ? ('UNIT.OFFER' | translate) 
-                            : (company?.active_offers_count >= 2 && company?.active_offers_count <= 4) 
-                            ? ('UNIT.OFFERS2' | translate) 
+                            {{ company?.active_offers_count == 1
+                            ? ('UNIT.OFFER' | translate)
+                            : (company?.active_offers_count >= 2 && company?.active_offers_count <= 4)
+                            ? ('UNIT.OFFERS2' | translate)
                             : ('UNIT.OFFERS' | translate) }}
                         </div>
                     </div>
@@ -97,7 +97,7 @@
     </ion-list>
 
     <!-- OFFERS -->
-    <ion-list *ngIf="segment === 'offers'" margin-top no-lines class="item-block-nau">
+    <ion-list padding-left padding-right *ngIf="segment === 'offers'" margin-top no-lines class="item-block-nau">
         <ion-item-sliding *ngFor=" let offer of offers" class="relative">
         <ion-item (click)="openOffer(offer)" class="margin-no">
             <ion-avatar item-start>

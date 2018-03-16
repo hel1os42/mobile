@@ -1,4 +1,8 @@
-<div class="header-ios"></div>
+<ion-header>
+    <ion-navbar>
+        <div class="header-ios"></div>
+    </ion-navbar>
+</ion-header>
 
 <ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
     <ion-refresher (ionRefresh)="doRefresh($event)">
@@ -43,7 +47,7 @@
         </ion-segment>
         -->
 
-        <ion-item class="block-search relative margin-top-3vw" no-lines padding-left padding-right>
+        <ion-item class="block-search relative padding-top-3vw" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
             <a (click)="createPopover()" class="btn_search_settings">
                 <img src="assets/img/user_home/icon_settings.svg">
@@ -58,7 +62,7 @@
         </ion-item>
     </div>
 
-    <ion-list *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
+    <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
 
         <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">
             <ion-avatar item-start text-center>
@@ -98,10 +102,10 @@
                         {{ company?.active_offers_count }}
                     </div>
                     <div text-center class="font-10 text-828282">
-                        {{ company?.active_offers_count == 1 
-                        ? ('UNIT.OFFER' | translate) 
-                        : (company?.active_offers_count >= 2 && company?.active_offers_count <= 4) 
-                        ? ('UNIT.OFFERS2' | translate) 
+                        {{ company?.active_offers_count == 1
+                        ? ('UNIT.OFFER' | translate)
+                        : (company?.active_offers_count >= 2 && company?.active_offers_count <= 4)
+                        ? ('UNIT.OFFERS2' | translate)
                         : ('UNIT.OFFERS' | translate) }}
                     </div>
                 </div>

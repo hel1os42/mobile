@@ -78,6 +78,8 @@ export class ApiService {
             options.headers = new Headers();
 
         options.headers.append('Authorization', `Bearer ${token.token}`);
+        //options.headers.append('Cache-Control', 'only-if-cached, max-age=31536000');
+        //options.headers.append('Content-Type', 'application/json');
 
         return options;
     }
@@ -213,7 +215,7 @@ export class ApiService {
 
     uploadImage(filePath, path, isShowLoading: boolean) {
         let token = this.token.get();
-        
+
         let options: FileUploadOptions = {
             fileKey: 'picture',
             headers: {

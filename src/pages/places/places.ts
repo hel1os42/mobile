@@ -28,6 +28,7 @@ import { PlacesPopover } from './places.popover';
 import { GeocodeService } from '../../providers/geocode.service';
 import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { COUNTRIES } from '../../const/countries';
+import { StatusBar } from '@ionic-native/status-bar';
 
 
 @Component({
@@ -92,7 +93,8 @@ export class PlacesPage {
         private favorites: FavoritesService,
         private storage: StorageService,
         private testimonials: TestimonialsService,
-        private geocoder: GeocodeService) {
+        private geocoder: GeocodeService,
+        private statusBar: StatusBar) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -174,6 +176,11 @@ export class PlacesPage {
                 // this.changeDetectorRef.detectChanges();
             })
 
+    }
+
+    ionViewDidLoad() {
+        this.statusBar.styleLightContent();
+        this.statusBar.overlaysWebView(true);
     }
 
     onMapReady(map: Map) {
@@ -777,8 +784,14 @@ export class PlacesPage {
         this.onRefreshTestimonials.unsubscribe();
     }
 
-    ionViewDidLoad() {
-        //let imgEl: HTMLElement = document.getElementsByClassName('test')[0].getElementsByClassName('scroll-content')[0];
-        //imgEl.style.marginBottom = '0'
+    ionViewDidLeave() {
+        if (this.platform.is('ios')){
+            this.statusBar.overlaysWebView(true);
+            this.statusBar.styleDefault();
+        }
+        else{
+            this.statusBar.overlaysWebView(false);
+            this.statusBar.backgroundColorByHexString("#b7b7b7");
+        }
     }
 }
