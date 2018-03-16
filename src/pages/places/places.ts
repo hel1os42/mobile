@@ -25,6 +25,8 @@ import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
+import { GeocodeService } from '../../providers/geocode.service';
+import { NoPlacesPopover } from '../places/noPlaces.popover';
 
 
 @Component({
@@ -88,7 +90,8 @@ export class PlacesPage {
         private share: ShareService,
         private favorites: FavoritesService,
         private storage: StorageService,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private geocoder: GeocodeService) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -320,7 +323,6 @@ export class PlacesPage {
             })
             .catch((error) => {
                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                debugger
                 this.presentConfirm();
                 // error => console.log(error + 'err')
             })
@@ -462,6 +464,12 @@ export class PlacesPage {
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
+            if (this.companies.length == 0 && this.radius <= 250000) {
+                this.noPlacesHandler();
+            }
+            
+            //
+
             this.fitBounds = this.generateBounds(this.markers);
         },
             err => {
@@ -471,6 +479,18 @@ export class PlacesPage {
                     this.refresher = undefined;
                 }
             });
+    }
+
+    noPlacesHandler() {
+        this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+        .subscribe(data => {
+            let address = !data.error ? data.address: undefined;
+                let city = address 
+                ? (address.city || address.town || address.county || address.state)
+                : undefined;
+                let country = address ? address.country : undefined;
+            // this.changeDetectorRef.detectChanges();
+        })
     }
 
     toggleMap() {
