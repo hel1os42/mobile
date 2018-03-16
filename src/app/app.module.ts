@@ -233,6 +233,7 @@ export function createTranslateLoader(http: HttpClient) {
         CreateAdvUserProfileTypesPopover,
         CreateAdvUserProfileFeaturesPopover,
         CreateOfferInformationPopover,
+        NoPlacesPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
