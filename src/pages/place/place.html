@@ -47,10 +47,10 @@
                             {{ offersList?.length }}
                         </div>
                         <div text-center class="font-10 text-828282">
-                            {{ offersList?.length == 1 
-                            ? ('UNIT.OFFER' | translate) 
-                            : (offersList?.length >= 2 && offersList?.length <= 4) 
-                            ? ('UNIT.OFFERS2' | translate) 
+                            {{ offersList?.length == 1
+                            ? ('UNIT.OFFER' | translate)
+                            : (offersList?.length >= 2 && offersList?.length <= 4)
+                            ? ('UNIT.OFFERS2' | translate)
                             : ('UNIT.OFFERS' | translate) }}
                         </div>
                     </div>
@@ -97,7 +97,7 @@
             </ion-segment>
         </div>
 
-    <div padding-top>
+    <div padding>
       <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
         <ion-item (click)="openOffer(offer)" *ngFor=" let offer of offersList" class="relative">
           <ion-avatar item-start>
@@ -131,7 +131,7 @@
     </ion-item>
   </ion-list>
 
-  <div padding-left padding-right *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>
+  <div *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>
 
 </div>
 </ion-content>

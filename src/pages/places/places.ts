@@ -28,6 +28,7 @@ import { PlacesPopover } from './places.popover';
 import { GeocodeService } from '../../providers/geocode.service';
 import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { COUNTRIES } from '../../const/countries';
+import { StatusBar } from '@ionic-native/status-bar';
 
 
 @Component({
@@ -92,7 +93,8 @@ export class PlacesPage {
         private favorites: FavoritesService,
         private storage: StorageService,
         private testimonials: TestimonialsService,
-        private geocoder: GeocodeService) {
+        private geocoder: GeocodeService,
+        private statusBar: StatusBar) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -174,6 +176,11 @@ export class PlacesPage {
                 // this.changeDetectorRef.detectChanges();
             })
 
+    }
+
+    ionViewDidLoad() {
+        this.statusBar.styleLightContent();
+        this.statusBar.overlaysWebView(true);
     }
 
     onMapReady(map: Map) {
@@ -469,7 +476,7 @@ export class PlacesPage {
             if (this.companies.length == 0 && this.radius <= 250000) {
                 this.noPlacesHandler();
             }
-            
+
             //
 
             this.fitBounds = this.generateBounds(this.markers);
@@ -487,14 +494,14 @@ export class PlacesPage {
         this.geocoder.getAddress(this.coords.lat, this.coords.lng)
         .subscribe(data => {
             let address = !data.error ? data.address: undefined;
-            let city = address 
+            let city = address
             ? (address.city || address.town || address.county || address.state)
             : undefined;
             let country = address ? address.country : undefined;
             let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
             let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
             popover.present();
-            debugger
+            //debugger
             // this.changeDetectorRef.detectChanges();
         })
     }
@@ -773,8 +780,14 @@ export class PlacesPage {
         this.onRefreshTestimonials.unsubscribe();
     }
 
-    ionViewDidLoad() {
-        //let imgEl: HTMLElement = document.getElementsByClassName('test')[0].getElementsByClassName('scroll-content')[0];
-        //imgEl.style.marginBottom = '0'
+    ionViewDidLeave() {
+        if (this.platform.is('ios')){
+            this.statusBar.overlaysWebView(true);
+            this.statusBar.styleDefault();
+        }
+        else{
+            this.statusBar.overlaysWebView(false);
+            this.statusBar.backgroundColorByHexString("#b7b7b7");
+        }
     }
 }

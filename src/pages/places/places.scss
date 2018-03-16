@@ -1,7 +1,4 @@
 page-places {
-    .grid {
-        padding: 0;
-    }
     .grid img {
         max-width: 30px;
     }
@@ -76,6 +73,7 @@ page-places {
         background-color: white;
         z-index: 100;
     }
+
     .item-block-nau .item {
         padding: 2vw;
     }
@@ -95,13 +93,13 @@ page-places {
     }
 
     .item-block-nau .item-ios ion-avatar .thumb_image{
-        border-radius: 0;
         height: 23vw;
         width: 23vw;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: 50% 50%;
         background-color: white;
+        border-radius: 100vw;
     }
 
     .font-36{
@@ -115,8 +113,25 @@ page-places {
     ion-refresher {
         top: 14px
     }
-}
 
+    /* STATUS BAR */
+    .sticky{
+        top: 20px;
+    }
+
+    .header-ios{
+        height: 20px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
+    }
+
+    ion-content{
+        margin-top: -20px;
+        height: calc(100% + 20px)
+    }
+}
 
 /*
 .platform-ios page-places {
@@ -126,20 +141,19 @@ page-places {
 }
 */
 
-/* FIX STATUS BAR IOS */
-.platform-ios page-places .header-ios{
-    height: 20px;
-}
-.platform-ios page-places .fixed-content, .platform-ios page-places .scroll-content{
-    margin-top: 20px;
-    /* -webkit-overflow-scrolling: auto;*/
-}
+
 /* FIX STATUS BAR IPHONE_X */
 .iphonex page-places .header-ios{
     height: 40px;
 }
-.iphonex page-places .fixed-content, .iphonex page-places .scroll-content{
-    margin-top: 40px;
+
+.iphonex page-places ion-content{
+    margin-top: -40px;
+    height: calc(100% + 40px)
+}
+
+.iphonex page-places .sticky{
+    top: 40px;
 }
 
 places-popover-component {
@@ -213,4 +227,39 @@ places-popover-component {
     .range-ios {
         padding: 2.2vw 0;
     }
+}
+
+noPlaces-popover-component {
+    .modal_content{
+        padding-left: 7vw;
+        padding-right: 7vw;
+        padding-top: 7vw;
+        height: 80vh;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .flag-big{
+        width: 20vw;
+    }
+
+    .flag-block div{
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .flag-block img{
+        width: 6vw;
+        margin-right: 1vw;
+    }
+
+    .block-2{
+        display: none;
+    }
+
 }

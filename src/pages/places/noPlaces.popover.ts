@@ -17,6 +17,6 @@ export class NoPlacesPopover {
         this.isCountryEnabled = this.navParams.get('isCountryEnabled');
         this.city = this.navParams.get('city') ? this.navParams.get('city') : '';
         this.country = this.navParams.get('country');
-        debugger
+        //debugger
     }
 }

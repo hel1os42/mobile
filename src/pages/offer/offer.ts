@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { AlertController, App, NavController, NavParams, PopoverController, Platform } from 'ionic-angular';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
@@ -14,6 +14,7 @@ import { OfferRedeemPopover } from './offerRedeem.popover';
 import { FavoritesService } from '../../providers/favorites.service';
 import { ToastService } from '../../providers/toast.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'page-offer',
@@ -43,7 +44,9 @@ export class OfferPage {
         private favorites: FavoritesService,
         private toast: ToastService,
         private alert: AlertController,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private statusBar: StatusBar,
+        private platform: Platform) {
 
         this.points = 1;
         if (this.share.get()) {
@@ -54,6 +57,17 @@ export class OfferPage {
         this.distanceObj = this.navParams.get('distanceObj');
         this.coords = this.navParams.get('coords');
         this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
+    }
+
+    ionViewDidLoad() {
+        this.statusBar.styleLightContent();
+        this.statusBar.overlaysWebView(true);
+        //if (this.platform.is('ios')) {
+        //    this.statusBar.overlaysWebView(true);
+        //}
+        //else{
+        //    this.statusBar.overlaysWebView(false);
+        //}
     }
 
     ngAfterViewInit() {
@@ -222,5 +236,14 @@ export class OfferPage {
     ionViewDidLeave() {
         this.stopTimer();
         this.app.navPop();
+
+        if (this.platform.is('ios')){
+            this.statusBar.overlaysWebView(true);
+            this.statusBar.styleDefault();
+        }
+        else{
+            this.statusBar.overlaysWebView(false);
+            this.statusBar.backgroundColorByHexString("#b7b7b7");
+        }
     }
 }

@@ -13,7 +13,7 @@
         "UKRAINE": "Ukraine",
         "PHILIPPINES": "Philippines"
     },
-   
+
     "UNIT" : {
         "KM" : "km",
         "M" : "m",
@@ -77,9 +77,10 @@
         "LOCATION_DENIED" : "Location denied",
         "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. You can set the coordinates in manual mode by updating the profile data.",
         "SELECT_RADIUS" : "Select radius",
+        "COMING_SOON": "Coming soon",
         "NAU_IS_NOT": "NAU is not active in your country yet, but may soon be.",
         "CURRENTLY_NAU": "Currently NAU offers are available in:",
-        "IF_YOU_WANT": "If you want to partner with NAU to launch it in your country, please contact ceo@nau.io.",
+        "IF_YOU_WANT": "If you want to partner with NAU to launch it in your country, please contact",
         "YOUR_REGION": "Your region has no active NAU offers yet, but that's temporary!",
         "YOUR_REGION2": "",
         "DISPLAY": "Display the nearest offers",
