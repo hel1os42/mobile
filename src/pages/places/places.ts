@@ -466,7 +466,7 @@ export class PlacesPage {
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
-            if (this.companies.length == 0 && this.radius <= 950000) {
+            if (this.companies.length == 0 && this.radius <= 250000) {
                 this.noPlacesHandler();
             }
             
