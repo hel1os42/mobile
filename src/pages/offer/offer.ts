@@ -237,13 +237,14 @@ export class OfferPage {
         this.stopTimer();
         this.app.navPop();
 
-        if (this.platform.is('ios')){
-            this.statusBar.overlaysWebView(true);
-            this.statusBar.styleDefault();
-        }
-        else{
-            this.statusBar.overlaysWebView(false);
-            this.statusBar.backgroundColorByHexString("#b7b7b7");
-        }
+        //if (this.platform.is('ios')){
+        //    this.statusBar.overlaysWebView(true);
+        //    this.statusBar.styleDefault();
+        //}
+        //else{
+        //    this.statusBar.overlaysWebView(false);
+        //    this.statusBar.backgroundColorByHexString("#b7b7b7");
+        //}
+        this.statusBar.styleDefault();
     }
 }

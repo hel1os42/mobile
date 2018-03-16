@@ -54,12 +54,13 @@ export class MyApp {
 
             //statusBar.styleLightContent();
             statusBar.styleDefault();
-            if (platform.is('ios')) {
-                statusBar.overlaysWebView(true);
-            }
-            else{
-                statusBar.overlaysWebView(false);
-            }
+            statusBar.overlaysWebView(true);
+            //if (platform.is('ios')) {
+            //    statusBar.overlaysWebView(true);
+            //}
+            //else{
+            //    statusBar.overlaysWebView(true);
+            //}
 
             //Google Analytics
             this.analytics.startTrackerWithId('UA-114471660-1')
