@@ -33,6 +33,7 @@ export class NoPlacesPopover {
     }
 
     getFlag(country) {
+        country = country.replace(/ /g,'-');
         return `assets/img/flags/${country.toLowerCase()}.svg`;
     }
 

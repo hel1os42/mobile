@@ -29,6 +29,7 @@ import { GeocodeService } from '../../providers/geocode.service';
 import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { COUNTRIES } from '../../const/countries';
 import { StatusBar } from '@ionic-native/status-bar';
+import { PHONE_CODES } from '../../const/phoneCodes.const';
 
 
 @Component({
@@ -499,7 +500,7 @@ export class PlacesPage {
                 let city = address
                     ? (address.city || address.town || address.county || address.state)
                     : undefined;
-                let country = address ? address.country : undefined;
+                let country = address ? PHONE_CODES.find(country => country.code === address.country_code.toUpperCase()).name : undefined;
                 let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
                 let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
                 popover.present();

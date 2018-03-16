@@ -15,7 +15,7 @@
             *ngFor="let country of enabledCountries" 
             class="font-14 text-828282 margin-bottom-3vw"
             [ngClass]="{ 'margin-bottom-3vw': country !== enabledCountries[enabledCountries.length - 1] }">
-                <img [src]="getFlag(country)">
+                <img *ngIf="country" [src]="getFlag(country)">
                 <span>
                     {{ getKey(country) | translate }}
                 </span>
