@@ -1,8 +1,8 @@
-<div class="modal_content">
+<div *ngIf="!isCountryEnabled" class="modal_content">
     <ion-label text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ 'PAGE_PLACES.COMING_SOON' | translate }}</ion-label>
     <div class="block-1">
         <div text-center margin>
-            <img class="flag-big" src="assets/img/flags/china.svg">
+            <img class="flag-big" [src]="getFlag(country)">
         </div>
         <div text-center class="bold font-16 text-3E4B5D">
             {{ 'PAGE_PLACES.NAU_IS_NOT' | translate }}
@@ -11,10 +11,18 @@
             {{ 'PAGE_PLACES.CURRENTLY_NAU' | translate }}
         </div>
         <div class="flag-block">
-            <div class="font-14 text-828282 margin-bottom-3vw"><img src="assets/img/flags/russia.svg"><span>{{ 'COUNTRIES.RUSSIA' | translate }}</span></div>
-            <div class="font-14 text-828282 margin-bottom-3vw"><img src="assets/img/flags/ukraine.svg"><span>{{ 'COUNTRIES.UKRAINE' | translate }}</span></div>
+            <div 
+            *ngFor="let country of enabledCountries" 
+            class="font-14 text-828282 margin-bottom-3vw"
+            [ngClass]="{ 'margin-bottom-3vw': country !== enabledCountries[enabledCountries.length - 1] }">
+                <img [src]="getFlag(country)">
+                <span>
+                    {{ getKey(country) | translate }}
+                </span>
+            </div>
+            <!-- <div class="font-14 text-828282 margin-bottom-3vw"><img src="assets/img/flags/ukraine.svg"><span>{{ 'COUNTRIES.UKRAINE' | translate }}</span></div>
             <div class="font-14 text-828282 margin-bottom-3vw"><img src="assets/img/flags/philippines.svg"><span>{{ 'COUNTRIES.PHILIPPINES' | translate }}</span></div>
-            <div class="font-14 text-828282"><img src="assets/img/flags/colombia.svg"><span>{{ 'COUNTRIES.COLOMBIA' | translate }}</span></div>
+            <div class="font-14 text-828282"><img src="assets/img/flags/colombia.svg"><span>{{ 'COUNTRIES.COLOMBIA' | translate }}</span></div> -->
         </div>
         <div margin-top margin-left margin-right text-center class="font-14 text-828282">
             {{ 'PAGE_PLACES.IF_YOU_WANT' | translate }} <a href="mailto:ceo@nau.io">ceo@nau.io</a>
@@ -43,7 +51,7 @@
         <ion-grid>
             <ion-row>
                 <ion-col text-center>
-                    <button ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+                    <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
                 </ion-col>
             </ion-row>
         </ion-grid>

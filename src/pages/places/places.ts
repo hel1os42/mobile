@@ -331,7 +331,12 @@ export class PlacesPage {
             })
             .catch((error) => {
                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                this.presentConfirm();
+                if (this.platform.is('cordova')) {
+                    this.presentConfirm();
+                }
+                else {
+                    this.getLocation(true);
+                }
                 // error => console.log(error + 'err')
             })
     }
