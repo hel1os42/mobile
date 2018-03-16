@@ -27,20 +27,33 @@
         <div margin-top margin-left margin-right text-center class="font-14 text-828282">
             {{ 'PAGE_PLACES.IF_YOU_WANT' | translate }} <a href="mailto:ceo@nau.io">ceo@nau.io</a>
         </div>
-        <div padding>
-            <ion-grid>
-                <ion-row>
-                    <ion-col text-center>
-                        <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </div>
     </div>
 
     <div class="block-2">
         <div text-center margin-top class="bold font-16 text-3E4B5D">
-            {{ 'PAGE_PLACES.YOUR_REGION' | translate }}
+            {{ 'PAGE_PLACES.YOUR_REGION' | translate }} name {{ 'PAGE_PLACES.YOUR_REGION2' | translate }}
         </div>
+
+        <div padding-top padding-bottom>
+            <button ion-button block color="primary">{{ 'PAGE_PLACES.DISPLAY' | translate }}</button>
+        </div>
+
+        <div class="font-14 text-828282">
+            {{ 'PAGE_PLACES.WE_ARE' | translate }} <a href="#">nau.io</a>
+        </div>
+
+        <div margin-top class="font-14 text-828282">
+            {{ 'PAGE_PLACES.ARE_YOU' | translate }} <a href="#">nau.io</a>
+        </div>
+    </div>
+
+    <div padding>
+        <ion-grid>
+            <ion-row>
+                <ion-col text-center>
+                    <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </div>
 </div>

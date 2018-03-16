@@ -99,7 +99,7 @@ page-places {
         background-repeat: no-repeat;
         background-position: 50% 50%;
         background-color: white;
-        border-radius: 100vw;
+        border-radius: 2.5vw;
     }
 
     .font-36{
@@ -234,9 +234,7 @@ noPlaces-popover-component {
         padding-left: 7vw;
         padding-right: 7vw;
         padding-top: 7vw;
-        height: 80vh;
         overflow: auto;
-        -webkit-overflow-scrolling: touch;
     }
 
     .flag-big{
@@ -258,7 +256,7 @@ noPlaces-popover-component {
         margin-right: 1vw;
     }
 
-    .block-2{
+    .block-1{
         display: none;
     }
 
