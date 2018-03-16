@@ -1,6 +1,5 @@
-import { Component, NgZone } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
-import * as _ from 'lodash';
+import { Component } from '@angular/core';
+import { NavParams } from 'ionic-angular';
 
 @Component({
     selector: 'noPlaces-popover-component',
@@ -9,5 +8,15 @@ import * as _ from 'lodash';
 
 export class NoPlacesPopover {
 
-    constructor() {}
+    isCountryEnabled: boolean;
+    city: string;
+    country: string;
+
+    constructor(private navParams: NavParams) {
+
+        this.isCountryEnabled = this.navParams.get('isCountryEnabled');
+        this.city = this.navParams.get('city') ? this.navParams.get('city') : '';
+        this.country = this.navParams.get('country');
+        debugger
+    }
 }

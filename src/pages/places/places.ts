@@ -27,6 +27,7 @@ import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { GeocodeService } from '../../providers/geocode.service';
 import { NoPlacesPopover } from '../places/noPlaces.popover';
+import { COUNTRIES } from '../../const/countries';
 
 
 @Component({
@@ -345,6 +346,7 @@ export class PlacesPage {
         return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
 
+
     getCompaniesList() {
         // this.categoryFilter = [this.selectedCategory.id];
         this.loadCompanies(this.page, true);
@@ -464,7 +466,7 @@ export class PlacesPage {
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
-            if (this.companies.length == 0 && this.radius <= 250000) {
+            if (this.companies.length == 0 && this.radius <= 950000) {
                 this.noPlacesHandler();
             }
             
@@ -485,10 +487,14 @@ export class PlacesPage {
         this.geocoder.getAddress(this.coords.lat, this.coords.lng)
         .subscribe(data => {
             let address = !data.error ? data.address: undefined;
-                let city = address 
-                ? (address.city || address.town || address.county || address.state)
-                : undefined;
-                let country = address ? address.country : undefined;
+            let city = address 
+            ? (address.city || address.town || address.county || address.state)
+            : undefined;
+            let country = address ? address.country : undefined;
+            let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
+            let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
+            popover.present();
+            debugger
             // this.changeDetectorRef.detectChanges();
         })
     }
