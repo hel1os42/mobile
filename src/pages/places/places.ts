@@ -263,7 +263,21 @@ export class PlacesPage {
             else {
                 this.diagnostic.isLocationAvailable().then(result => {
                     if (!result) {
-                        this.presentConfirm();
+                        if (this.platform.is('android')) {
+                            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+                                .then(result => {
+                                    if (result.hasPermission === false) {
+                                        this.requestPerm();
+                                    }
+                                    else {
+                                        this.presentConfirm();
+                                    }
+                                    // console
+                                })
+                        }
+                        if (this.platform.is('ios')) {
+                            this.presentConfirm();
+                        }
                     }
                     else {
                         this.getCoords(isRefresh);
@@ -306,6 +320,7 @@ export class PlacesPage {
             })
             .catch((error) => {
                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                debugger
                 this.presentConfirm();
                 // error => console.log(error + 'err')
             })
