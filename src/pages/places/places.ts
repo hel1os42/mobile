@@ -492,18 +492,22 @@ export class PlacesPage {
 
     noPlacesHandler() {
         this.geocoder.getAddress(this.coords.lat, this.coords.lng)
-        .subscribe(data => {
-            let address = !data.error ? data.address: undefined;
-            let city = address
-            ? (address.city || address.town || address.county || address.state)
-            : undefined;
-            let country = address ? address.country : undefined;
-            let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
-            let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
-            popover.present();
-            //debugger
-            // this.changeDetectorRef.detectChanges();
-        })
+            .subscribe(data => {
+                let address = !data.error ? data.address : undefined;
+                let city = address
+                    ? (address.city || address.town || address.county || address.state)
+                    : undefined;
+                let country = address ? address.country : undefined;
+                let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
+                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
+                popover.present();
+                popover.onDidDismiss(radius => {
+                    if (radius) {
+
+                    }
+                })
+                // this.changeDetectorRef.detectChanges();
+            })
     }
 
     toggleMap() {
