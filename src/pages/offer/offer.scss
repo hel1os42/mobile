@@ -228,6 +228,17 @@ page-offer{
     }
 }
 
+/*  statusbar for Android */
+
+.platform-android page-offer ion-header{
+    margin-top: 20px;
+}
+
+.platform-android page-offer .ion-page > ion-content{
+    margin-top: 20px;
+    height: calc(100% - 20px);
+}
+
 .iphonex.platform-ios page-offer .btn_footer{
     margin-bottom: constant(safe-area-inset-bottom);
     margin-bottom: env(safe-area-inset-bottom);
