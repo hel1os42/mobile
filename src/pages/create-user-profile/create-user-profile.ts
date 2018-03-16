@@ -294,7 +294,7 @@ export class CreateUserProfilePage {
         });
         this.options = {
             layers: [this.tileLayer],
-            zoom: 10,
+            zoom: 9,
             center: latLng(this.coords),
             // zoomSnap: 0.5,
             // zoomDelta: 0.5

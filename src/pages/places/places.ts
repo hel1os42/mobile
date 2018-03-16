@@ -481,9 +481,6 @@ export class PlacesPage {
             if (this.companies.length == 0 && this.radius <= 250000) {
                 this.noPlacesHandler();
             }
-
-            //
-
             this.fitBounds = this.generateBounds(this.markers);
         },
             err => {
@@ -506,9 +503,11 @@ export class PlacesPage {
                 let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
                 let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
                 popover.present();
-                popover.onDidDismiss(radius => {
-                    if (radius) {
-
+                popover.onDidDismiss(data => {
+                    if (data.radius) {
+                        this.page = 1;
+                        this.radius = data.radius;
+                        this.loadCompanies(this.page, true);
                     }
                 })
                 // this.changeDetectorRef.detectChanges();

@@ -1,6 +1,6 @@
-<div *ngIf="!isCountryEnabled" class="modal_content">
+<div class="modal_content">
     <ion-label text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ 'PAGE_PLACES.COMING_SOON' | translate }}</ion-label>
-    <div class="block-1">
+    <div *ngIf="!isCountryEnabled">
         <div text-center margin>
             <img class="flag-big" [src]="getFlag(country)">
         </div>
@@ -29,21 +29,29 @@
         </div>
     </div>
 
-    <div class="block-2">
+    <div *ngIf="isCountryEnabled">
         <div text-center margin-top class="bold font-16 text-3E4B5D">
-            {{ 'PAGE_PLACES.YOUR_REGION' | translate }} name {{ 'PAGE_PLACES.YOUR_REGION2' | translate }}
+            {{ city ? city : 'PAGE_PLACES.OOPS' | translate }}
+        </div>
+
+        <div text-center margin-top class="bold font-16 text-3E4B5D">
+            {{ 'PAGE_PLACES.YOUR_REGION' | translate }}
         </div>
 
         <div padding-top padding-bottom>
-            <button ion-button block color="primary">{{ 'PAGE_PLACES.DISPLAY' | translate }}</button>
+            <button (click)="close(radius)" ion-button block color="primary">
+                {{ 'PAGE_PLACES.DISPLAY' | translate }}
+            </button>
         </div>
 
         <div class="font-14 text-828282">
-            {{ 'PAGE_PLACES.WE_ARE' | translate }} <a href="#">nau.io</a>
+            {{ 'PAGE_PLACES.WE_ARE' | translate }}
+            <a href="#" (click)="loadUrl(businessUrl)">{{ businessUrl }}</a>
         </div>
 
         <div margin-top class="font-14 text-828282">
-            {{ 'PAGE_PLACES.ARE_YOU' | translate }} <a href="#">nau.io</a>
+            {{ 'PAGE_PLACES.ARE_YOU' | translate }}
+            <a href="#" (click)="loadUrl(retailerUrl)">{{ retailerUrl }}</a>
         </div>
     </div>
 
@@ -51,7 +59,7 @@
         <ion-grid>
             <ion-row>
                 <ion-col text-center>
-                    <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+                    <button (click)="close(false)" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
