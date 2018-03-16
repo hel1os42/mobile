@@ -406,12 +406,17 @@ export class CreateUserProfilePage {
 
     createAccount() {
         if (this.navParams.get('user') && this.isCoordsChenged) {
-            this.diagnostic.isLocationAvailable().then(result => {
-                if(!result) {
-                    this.location.refreshDefoultCoords(this.coords);
-                }
-                this.isCoordsChenged = false;
-            });
+            if (this.platform.is('cordova')) {
+                this.diagnostic.isLocationAvailable().then(result => {
+                    if (!result) {
+                        this.location.refreshDefoultCoords(this.coords);
+                    }
+                });
+            }
+            else {
+                this.location.refreshDefoultCoords(this.coords);
+            }
+            this.isCoordsChenged = false;
         }
         if (this.validateName(this.baseData.name) && this.validateEmail(this.baseData.email)) {
             this.baseData.latitude = this.coords.lat;
