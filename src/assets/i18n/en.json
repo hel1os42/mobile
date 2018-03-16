@@ -68,7 +68,7 @@
         "SELECT_TYPE" : "Select Type",
         "SELECT_FEATURES" : "Select Features",
         "LOCATION_DENIED" : "Location denied",
-        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. Set your coordinates in manual mode",
+        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. You can set the coordinates in manual mode by updating the profile data.",
         "SELECT_RADIUS" : "Select radius"
     },
 
@@ -241,6 +241,7 @@
         "FEMALE" : "Female",
         "MALE" : "Male",
         "CONFIRM_YOUR_LOCATION" : "Confirm your location:",
+        "YOU_CAN_SET": "You can set the coordinates in manual mode",
         "AGE" : "Age",
         "INCOME" : "Income"
     },

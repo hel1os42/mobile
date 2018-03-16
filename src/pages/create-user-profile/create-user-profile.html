@@ -200,7 +200,10 @@
                 </div>
             </ion-item> -->
         <!-- </div> -->
-        <p margin text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}</p>
+        <p margin text-uppercase class="font-14 text-4F4F4F">
+            {{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}
+        </p> 
+        <span margin-left class="font-13 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.YOU_CAN_SET' | translate }}</span>
         <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
         <div *ngIf="coords.lat" class="block-map">
 
