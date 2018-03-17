@@ -134,19 +134,16 @@ export class BookmarksPage {
     }
 
     getLocation(isGetLists?: boolean) {
-        let promise: Promise<any>;
         if (this.platform.is('cordova')) {
+            let promise: Promise<any>;
             this.diagnostic.isLocationAvailable().then(result => {
                 if (result) {
-                    debugger
                     promise = this.location.get(false);
                 }
                 else {
-                    debugger
                     promise = this.location.getCache();
                 }
                 promise.then(resp => {
-                    debugger
                     this.coords = {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
@@ -158,21 +155,17 @@ export class BookmarksPage {
             })
         }
         else {
-            promise = this.location.get(false);
-            debugger
-            promise.then(resp => {
-                debugger
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                if (isGetLists) {
-                    this.getLists();
-                }
-            })
-            //for browser if location detection denied
-            setTimeout(() => {
-                if (!this.coords) {
+            this.location.get(false)
+                .then(resp => {
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    if (isGetLists) {
+                        this.getLists();
+                    }
+                }) // for browser if location detection denied
+                .catch((error) => {
                     this.location.getCache()
                         .then(resp => {
                             this.coords = {
@@ -183,8 +176,7 @@ export class BookmarksPage {
                                 this.getLists();
                             }
                         })
-                }
-            }, 4000)
+                })
         }
     }
 
