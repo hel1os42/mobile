@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
-import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { AlertController, App, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { Place } from '../../models/place';
+import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
+import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
+import { BookmarksPage } from '../bookmarks/bookmarks';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
-import { FavoritesService } from '../../providers/favorites.service';
-import { ToastService } from '../../providers/toast.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
 
 @Component({
     selector: 'page-offer',
@@ -25,10 +27,11 @@ export class OfferPage {
     company = new Place;
     offerActivationCode: OfferActivationCode;
     timer;
-    distanceString: string;
+    distanceObj;
     distance: number;
     coords: Coords;
     branchDomain = 'https://nau.app.link';
+    points: number;
 
     constructor(
         private nav: NavController,
@@ -42,16 +45,23 @@ export class OfferPage {
         private favorites: FavoritesService,
         private toast: ToastService,
         private alert: AlertController,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private statusBar: StatusBar,
+        private platform: Platform) {
 
+        this.points = 1;
         if (this.share.get()) {
             this.share.remove();
         }
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
-        this.distanceString = this.navParams.get('distanceStr');
+        this.distanceObj = this.navParams.get('distanceObj');
         this.coords = this.navParams.get('coords');
         this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
+    }
+
+    ionViewDidLoad() {
+        this.statusBar.styleLightContent();
     }
 
     ngAfterViewInit() {
@@ -220,5 +230,12 @@ export class OfferPage {
     ionViewDidLeave() {
         this.stopTimer();
         this.app.navPop();
+        //
+        let nav: any = this.nav;
+        let root = nav.root;
+        if (root === BookmarksPage) {
+            this.statusBar.styleDefault();
+        }
     }
+    
 }

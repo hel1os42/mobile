@@ -1,10 +1,4 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{ company.name }}</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content [ngSwitch]="segment" no-bounce>
     <ion-list class="margin-0">
         <div class="cover" [style.background-image]="'url(' + company.cover_url + '?size=mobile&)'">
             <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
@@ -21,6 +15,12 @@
             </div>
         </div>
     </ion-list>
+    <ion-navbar>
+        <ion-title>{{ company.name }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content [ngSwitch]="segment" no-bounce>
 
     <!-- START SWIPE -->
     <ion-list class="margin-0">
@@ -33,17 +33,25 @@
                             <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
                         </ng-container>
                         <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">{{ company.testimonials_count }}</span>
-                        <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg"><span class="font-75 text-828282">{{ distanceString }}</span>
+                        <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+                        <span class="font-75 text-828282">
+                            {{ distanceObj.distance }}
+                            {{ distanceObj.key | translate }}
+                        </span>
                     </div>
                     <div margin-top class="text-3E4B5D font-22 bold text-overflow-2 wrap">{{ company.name }}</div>
-                    <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc width-88 company-address">{{ company.address }}</div>
+                    <div *ngIf="company.address" class="text-4F4F4F font-12 semibold wrap margin-top-2proc width-88 company-address">{{ company.address }}</div>
                     <div class="font-12 text-828282 wrap text-overflow-3 margin-top-2proc width-88">{{ company.description }}</div>
                     <div class="num_right">
                         <div class="font-36 bold text-FF5A00" text-center>
                             {{ offersList?.length }}
                         </div>
                         <div text-center class="font-10 text-828282">
-                            {{ offersList?.length > 1 ? ('UNIT.OFFERS' | translate) : ('UNIT.OFFER' | translate) }}
+                            {{ offersList?.length == 1
+                            ? ('UNIT.OFFER' | translate)
+                            : (offersList?.length >= 2 && offersList?.length <= 4)
+                            ? ('UNIT.OFFERS2' | translate)
+                            : ('UNIT.OFFERS' | translate) }}
                         </div>
                     </div>
                 </div>
@@ -73,8 +81,8 @@
             </ion-list>
         </div>
     -->
-        <div class="sticky">
-            <ion-segment [(ngModel)]="segment" text-uppercase>
+    <!--<div class="sticky">-->
+            <ion-segment [(ngModel)]="segment" text-uppercase class="segment-offers">
                 <ion-segment-button value="alloffers">
                     {{ 'PAGE_PLACE.ALL_OFFERS' | translate }}
                 </ion-segment-button>
@@ -87,7 +95,6 @@
                     {{ 'PAGE_PLACE.ABOUT' | translate }}
                 </ion-segment-button>
             </ion-segment>
-        </div>
 
     <div padding>
       <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">

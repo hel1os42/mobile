@@ -35,7 +35,7 @@
                     </div>
                     <div *ngIf='changedPicture'
                         class="people"
-                        [ngStyle]="{'background-image': 'url(' + picture_url + '), url(assets/img/create_user_profile/people.svg)'}">
+                        [ngStyle]="{'background-image': 'url(' + picture_url + '?size=mobile), url(assets/img/create_user_profile/people.svg)'}">
                     </div>
                 </a>
             </div>
@@ -74,7 +74,7 @@
         <a *ngIf="canSaveImg" (click)="saveImage()" class="btn_check save"><img src="assets/img/place/btn_feed.svg"></a>
         <a *ngIf="canSaveImg" (click)="cancel()" class="btn_check cancel"><img src="assets/img/adv-user-offers/delete.svg"></a>
     </div>
-
+<!-- 
     <div class="block-lines">
         <ion-item *ngIf="!visibleInfo" no-lines>
             <div item-start>
@@ -94,7 +94,7 @@
                 <div class="text-4F4F4F font-12">{{ 'PAGE_CREATE-USER-PROFILE.WE_EMAILED' | translate }}</div>
             </div>
         </ion-item>
-    </div>
+    </div> -->
 
     <!-- <div class="block-lines">
         <div class="font-75">{{ 'PAGE_CREATE-USER-PROFILE.SOCIAL_ACCOUNTS' | translate }}</div>
@@ -139,20 +139,21 @@
 
     </div> -->
 
-    <div class="block-lines">
+    <!-- <div class="block-lines">
         <a (click)="toggleSelect()">
             <div class="select-block-desc text-828282 font-14">
                 {{ 'PAGE_CREATE-USER-PROFILE.SHOW_ADDITIONAL_OPTIONS' | translate }}
                 <ion-icon *ngIf="isSelectVisible" name="arrow-up" class="icon-arrow"></ion-icon>
                 <ion-icon *ngIf="!isSelectVisible" name="arrow-down" class="icon-arrow"></ion-icon>
             </div>
-        </a>
+        </a> -->
 
         <!-- <p class="select-block-desc text-828282 font-12">{{ 'PAGE_CREATE-USER-PROFILE.IF_YOU_WILL' | translate }}</p> -->
-    </div>
+    <!-- </div> -->
 
     <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
-    <div *ngIf="isSelectVisible">
+    <!-- <div *ngIf="isSelectVisible"> temporary-->
+    <div>
         <!-- <div class="block-lines" disabled> -->
             <!-- <ion-item detail-push class="bg-gray margin-bottom-small">
                 <ion-select
@@ -199,7 +200,10 @@
                 </div>
             </ion-item> -->
         <!-- </div> -->
-        <p margin text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}</p>
+        <p margin text-uppercase class="font-14 text-4F4F4F">
+            {{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}
+        </p> 
+        <span margin-left class="font-13 text-4F4F4F">{{ 'PAGE_CREATE-USER-PROFILE.YOU_CAN_SET' | translate }}</span>
         <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
         <div *ngIf="coords.lat" class="block-map">
 

@@ -1,4 +1,5 @@
 page-place {
+
     .gift{
         height: 8.4vw;
         width: 8.4vw;
@@ -120,10 +121,6 @@ page-place {
         min-height: 4vw;
     }
 
-    .header .list-ios{
-        margin: 0;
-    }
-
     .header ion-item-options {
         width: 90%;
         padding-left: 15%;
@@ -171,6 +168,10 @@ page-place {
         z-index: 100;
     }
 
+    .segment-offers{
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
     .list-ios ion-item-options{
         border-bottom: none;
     }
@@ -214,7 +215,7 @@ page-place {
     }
 
     .item-block-nau .item-ios ion-avatar .thumb_image{
-        border-radius: 0;
+        border-radius: 2.5vw;
         height: 23vw;
         width: 23vw;
         background-size: contain;
@@ -225,6 +226,20 @@ page-place {
 
     .font-36{
         padding-bottom: 0;
+    }
+
+    .toolbar-title-ios{
+        color: #fff;
+    }
+
+    ion-header ion-icon.back-button-icon.icon {
+        color: #fff;
+    }
+
+    .toolbar.toolbar-ios{
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 }
 

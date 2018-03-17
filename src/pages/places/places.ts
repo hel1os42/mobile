@@ -3,7 +3,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController, LoadingController, NavController, Platform, Popover, PopoverController } from 'ionic-angular';
-import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Marker, marker, popup, tileLayer } from 'leaflet';
+import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Map, Marker, marker, popup, tileLayer } from 'leaflet';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 import { ChildCategory } from '../../models/childCategory';
@@ -19,12 +19,17 @@ import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
+import { StorageService } from '../../providers/storage.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
-import { StorageService } from '../../providers/storage.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
+import { GeocodeService } from '../../providers/geocode.service';
+import { NoPlacesPopover } from '../places/noPlaces.popover';
+import { COUNTRIES } from '../../const/countries';
+import { StatusBar } from '@ionic-native/status-bar';
+import { PHONE_CODES } from '../../const/phoneCodes.const';
 
 
 @Component({
@@ -63,14 +68,14 @@ export class PlacesPage {
     isChangedFilters = false;
     isForkMode: boolean;
     onResumeSubscription: Subscription;
-    onShareSubscription: Subscription;
     onRefreshListSubscription: Subscription;
     onRefreshTestimonials: Subscription;
-
+    onRefreshDefoultCoords: Subscription;
     isConfirm = false;
     shareData: Share;
     isRefreshLoading = false;
     refresher;
+    _map: Map;
 
     constructor(
         private platform: Platform,
@@ -88,7 +93,9 @@ export class PlacesPage {
         private share: ShareService,
         private favorites: FavoritesService,
         private storage: StorageService,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private geocoder: GeocodeService,
+        private statusBar: StatusBar) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -154,6 +161,28 @@ export class PlacesPage {
                 }
             });
 
+        this.onRefreshDefoultCoords = this.location.onProfileCoordsChanged
+            .subscribe(coords => {
+                this.coords = coords;
+                this.page = 1;
+                this.loadCompanies(this.page, true);
+                this.userPin = [marker([this.coords.lat, this.coords.lng], {
+                    icon: icon({
+                        iconSize: [22, 26],
+                        iconAnchor: [13, 35],
+                        iconUrl: 'assets/img/icon_user_map.svg',
+                        //shadowUrl:
+                    })
+                })]
+                // this.changeDetectorRef.detectChanges();
+            })
+
+    }
+
+    onMapReady(map: Map) {
+        if (!this._map && this.coords.lat) {
+            this._map = map;
+        }
     }
 
     getLocationStatus() {
@@ -241,7 +270,21 @@ export class PlacesPage {
             else {
                 this.diagnostic.isLocationAvailable().then(result => {
                     if (!result) {
-                        this.presentConfirm();
+                        if (this.platform.is('android')) {
+                            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+                                .then(result => {
+                                    if (result.hasPermission === false) {
+                                        this.requestPerm();
+                                    }
+                                    else {
+                                        this.presentConfirm();
+                                    }
+                                    // console
+                                })
+                        }
+                        if (this.platform.is('ios')) {
+                            this.presentConfirm();
+                        }
                     }
                     else {
                         this.getCoords(isRefresh);
@@ -284,8 +327,12 @@ export class PlacesPage {
             })
             .catch((error) => {
                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                // debugger
-                this.presentConfirm();
+                if (this.platform.is('cordova')) {
+                    this.presentConfirm();
+                }
+                else {
+                    this.getLocation(true);
+                }
                 // error => console.log(error + 'err')
             })
     }
@@ -306,6 +353,7 @@ export class PlacesPage {
     getDevMode() {
         return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
+
 
     getCompaniesList() {
         // this.categoryFilter = [this.selectedCategory.id];
@@ -386,7 +434,10 @@ export class PlacesPage {
             bounds.extend(northEast);
             return bounds;
         }
-        return undefined
+        if (this._map) {
+            this._map.setView(this.coords, this._map.getZoom());
+        }
+        return undefined;
     }
 
     isSelectedCategory(category: OfferCategory) {
@@ -395,7 +446,7 @@ export class PlacesPage {
 
     selectCategory(category: OfferCategory) {
         this.isChangedCategory = this.selectedCategory.id !== category.id;
-        this.search = ""
+        this.search = "";
         this.selectedCategory = category;
         this.loadCompanies(this.page = 1, true);
         if (this.isChangedCategory) {
@@ -423,6 +474,9 @@ export class PlacesPage {
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
+            if (this.companies.length == 0 && this.radius <= 250000) {
+                this.noPlacesHandler();
+            }
             this.fitBounds = this.generateBounds(this.markers);
         },
             err => {
@@ -432,6 +486,28 @@ export class PlacesPage {
                     this.refresher = undefined;
                 }
             });
+    }
+
+    noPlacesHandler() {
+        this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+            .subscribe(data => {
+                let address = !data.error ? data.address : undefined;
+                let city = address
+                    ? (address.city || address.town || address.county || address.state)
+                    : undefined;
+                let country = address ? PHONE_CODES.find(country => country.code === address.country_code.toUpperCase()).name : undefined;
+                let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
+                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
+                popover.present();
+                popover.onDidDismiss(data => {
+                    if (data.radius) {
+                        this.page = 1;
+                        this.radius = data.radius;
+                        this.loadCompanies(this.page, true);
+                    }
+                })
+                // this.changeDetectorRef.detectChanges();
+            })
     }
 
     toggleMap() {
@@ -459,7 +535,7 @@ export class PlacesPage {
         else {
             params = {
                 company: data,
-                distanceStr: this.getDistance(data.latitude, data.longitude),
+                distanceObj: this.getDistance(data.latitude, data.longitude),
                 coords: this.coords,
             }
         }
@@ -486,9 +562,13 @@ export class PlacesPage {
 
     getDistance(latitude: number, longitude: number) {
         if (this.coords) {
-            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
-            this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
-            return this.distanceString;
+            let long = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = long >= 1000 ? long / 1000 : long;
+            let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+            return {
+                distance: distance,
+                key: key
+            }
         };
         return undefined;
     }
@@ -704,8 +784,4 @@ export class PlacesPage {
         this.onRefreshTestimonials.unsubscribe();
     }
 
-    ionViewDidLoad() {
-        //let imgEl: HTMLElement = document.getElementsByClassName('test')[0].getElementsByClassName('scroll-content')[0];
-        //imgEl.style.marginBottom = '0'
-    }
 }

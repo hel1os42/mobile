@@ -1,9 +1,13 @@
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { AlertController, LoadingController, NavController, Platform } from 'ionic-angular';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
-import { latLng, LeafletEvent, tileLayer } from 'leaflet';
-import { Map } from 'leaflet';
+import { latLng, LeafletEvent, Map, tileLayer } from 'leaflet';
+import * as _ from 'lodash';
+import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
+import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
 import { Register } from '../../models/register';
 import { User } from '../../models/user';
@@ -11,14 +15,9 @@ import { ApiService } from '../../providers/api.service';
 import { LocationService } from '../../providers/location.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
-import { TabsPage } from '../tabs/tabs';
-import * as _ from 'lodash';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map.utils';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
-import { Diagnostic } from '@ionic-native/diagnostic';
-import { Subscription } from 'rxjs';
-import { ImageCropperComponent, CropperSettings, Bounds } from 'ng2-img-cropper';
+import { TabsPage } from '../tabs/tabs';
 
 
 @Component({
@@ -53,6 +52,7 @@ export class CreateUserProfilePage {
     canSaveImg = false;
     isCrop = false;
     backAction;
+    isCoordsChenged = false;
 
     @ViewChild('cropper', undefined)
     cropper: ImageCropperComponent;
@@ -272,6 +272,7 @@ export class CreateUserProfilePage {
         this._map.on({
             moveend: (event: LeafletEvent) => {
                 this.coords = this._map.getCenter();
+                this.isCoordsChenged = true;
                 if (this.coords.lng > 180 || this.coords.lng < -180) {
                     this.coords.lng = MapUtils.correctLng(this.coords.lng);
                     this._map.setView(this.coords, this._map.getZoom());
@@ -293,7 +294,7 @@ export class CreateUserProfilePage {
         });
         this.options = {
             layers: [this.tileLayer],
-            zoom: 15,
+            zoom: 9,
             center: latLng(this.coords),
             // zoomSnap: 0.5,
             // zoomDelta: 0.5
@@ -305,7 +306,8 @@ export class CreateUserProfilePage {
             (this.twitterName ? +3 : +0) + (this.instagramName ? +3 : +0) +
             (this.gender ? +5 : +0) + (this.age ? +9 : +0) + (this.income ? +9 : +0);
         // return points;temporary
-        return 0;
+        // return 0;
+        return this.user.points;
     }
 
     toggleSelect() {
@@ -394,17 +396,31 @@ export class CreateUserProfilePage {
             this.profile.refreshAccounts();
         }
         else {
-            // this.nav.setRoot(TabsPage, { selectedTabIndex: 1 });
-            //temporary
-            this.profile.getWithAccounts()
-                .subscribe(resp => {
-                    this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
-                });
-            //temporary
+            this.nav.setRoot(TabsPage);
+            // this.profile.getWithAccounts()
+            //     .subscribe(resp => {
+            //         this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
+            //     });
         }
     }
 
     createAccount() {
+        let refreshed = false;
+        if (this.navParams.get('user') && this.isCoordsChenged) {
+            if (this.platform.is('cordova')) {
+                this.diagnostic.isLocationAvailable().then(result => {
+                    if (!result) {
+                        this.location.refreshDefaultCoords(this.coords);
+                        refreshed = true;
+                    }
+                });
+            }
+            else {
+                this.location.refreshDefaultCoords(this.coords);
+                refreshed = true;
+            }
+            this.isCoordsChenged = false;
+        }
         if (this.validateName(this.baseData.name) && this.validateEmail(this.baseData.email)) {
             this.baseData.latitude = this.coords.lat;
             this.baseData.longitude = this.coords.lng;
@@ -417,6 +433,9 @@ export class CreateUserProfilePage {
             if (!isEmpty) {
                 this.profile.patch(differenceData)
                     .subscribe(() => {
+                        if (!refreshed) {
+                           this.location.refreshDefaultCoords(this.coords, true); 
+                        }
                         promise.then(() => {
                             this.navTo();
                         })
@@ -429,6 +448,7 @@ export class CreateUserProfilePage {
             }
         }
     }
+
     presentAndroidConfirm() {
         const alert = this.alert.create({
             title: 'Location denied',

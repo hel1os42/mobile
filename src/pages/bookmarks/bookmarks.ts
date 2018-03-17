@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -13,6 +13,7 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlacePage } from '../place/place';
 import { TestimonialsService } from '../../providers/testimonials.service';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     selector: 'page-bookmarks',
@@ -32,7 +33,7 @@ export class BookmarksPage {
     onRefreshOffers: Subscription;
     totalCompanies: number;
     totalOffers: number;
-    distanceString: string;
+    // distanceObj;
     isForkMode: boolean;
     onRefreshTestimonials: Subscription;
 
@@ -42,39 +43,19 @@ export class BookmarksPage {
         private nav: NavController,
         private location: LocationService,
         private appMode: AppModeService,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private diagnostic: Diagnostic,
+        private platform: Platform) {
 
         this.isForkMode = this.appMode.getForkMode();
 
         this.segment = "places";
-        this.location.getCache()
-            .then(resp => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-
-                this.favorites.getPlaces(this.companiesPage)
-                    .subscribe(resp => {
-                        this.companies = resp.data;
-                        this.companiesLastPage = resp.last_page;
-                        this.totalCompanies = resp.total;
-                        this.getSegment();
-                    });
-                this.favorites.getOffers(this.offersPage)
-                    .subscribe(resp => {
-                        this.offers = resp.data;
-                        this.offersLastPage = resp.last_page;
-                        this.totalOffers = resp.total;
-                        this.getSegment();
-                    });
-            });
-
+        this.getLocation(true);
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
             .subscribe(resp => {
                 if (!resp.notRefresh) {
                     this.getLocation();
-                    this.favorites.getPlaces(this.companiesPage)
+                    this.favorites.getPlaces(this.companiesPage, false)
                         .subscribe(resp => {
                             this.companies = resp.data;
                             this.companiesLastPage = resp.last_page;
@@ -92,7 +73,7 @@ export class BookmarksPage {
             .subscribe(resp => {
                 if (!resp.notRefresh) {
                     this.getLocation();
-                    this.favorites.getOffers(this.offersPage)
+                    this.favorites.getOffers(this.offersPage, false)
                         .subscribe(resp => {
                             this.offers = resp.data;
                             this.offersLastPage = resp.last_page;
@@ -123,6 +104,23 @@ export class BookmarksPage {
 
     }
 
+    getLists() {
+        this.favorites.getPlaces(this.companiesPage)
+            .subscribe(resp => {
+                this.companies = resp.data;
+                this.companiesLastPage = resp.last_page;
+                this.totalCompanies = resp.total;
+                this.getSegment();
+            });
+        this.favorites.getOffers(this.offersPage, false)
+            .subscribe(resp => {
+                this.offers = resp.data;
+                this.offersLastPage = resp.last_page;
+                this.totalOffers = resp.total;
+                this.getSegment();
+            });
+    }
+
     getDevMode() {
         return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
@@ -135,14 +133,51 @@ export class BookmarksPage {
                 : 'places';
     }
 
-    getLocation() {
-        this.location.getCache()
-            .then(resp => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-            });
+    getLocation(isGetLists?: boolean) {
+        if (this.platform.is('cordova')) {
+            let promise: Promise<any>;
+            this.diagnostic.isLocationAvailable().then(result => {
+                if (result) {
+                    promise = this.location.get(false);
+                }
+                else {
+                    promise = this.location.getCache();
+                }
+                promise.then(resp => {
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    if (isGetLists) {
+                        this.getLists();
+                    }
+                })
+            })
+        }
+        else {
+            this.location.get(false)
+                .then(resp => {
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    if (isGetLists) {
+                        this.getLists();
+                    }
+                }) // for browser if location detection denied
+                .catch((error) => {
+                    this.location.getCache()
+                        .then(resp => {
+                            this.coords = {
+                                lat: resp.coords.latitude,
+                                lng: resp.coords.longitude
+                            };
+                            if (isGetLists) {
+                                this.getLists();
+                            }
+                        })
+                })
+        }
     }
 
     getStars(star: number) {
@@ -155,9 +190,13 @@ export class BookmarksPage {
 
     getDistance(latitude: number, longitude: number) {
         if (this.coords) {
-            let distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
-            this.distanceString = distance >= 1000 ? distance / 1000 + " km" : distance + " m";
-            return this.distanceString;
+            let long = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = long >= 1000 ? long / 1000 : long;
+            let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+            return {
+                distance: distance,
+                key: key
+            }
         };
         return undefined;
     }
@@ -168,7 +207,7 @@ export class BookmarksPage {
         let params = {
             company: company,
             coords: this.coords,
-            distanceStr: this.getDistance(data.latitude, data.longitude),
+            distanceObj: this.getDistance(data.latitude, data.longitude),
             // coords: this.coords,
         }
         this.nav.push(PlacePage, params);
@@ -179,7 +218,7 @@ export class BookmarksPage {
         offerData.is_favorite = true;
         this.nav.push(OfferPage, {
             offer: offerData,
-            distanceStr: this.getDistance(offer.latitude, offer.longitude),
+            distanceObj: this.getDistance(offer.latitude, offer.longitude),
             coords: this.coords,
             company: offer.account.owner.place
         });

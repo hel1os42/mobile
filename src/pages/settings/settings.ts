@@ -61,7 +61,7 @@ export class SettingsPage {
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
         
-        if (this.envName === 'dev' || this.envName.name === 'test') {
+        if (this.envName === 'dev' || this.envName === 'test') {
             let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
             this.lang = availableLang;
         }

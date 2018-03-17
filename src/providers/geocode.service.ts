@@ -14,7 +14,8 @@ constructor(private http: Http,
 
 }
     
-getAddress(lat: number, lng: number) {
+getAddress(lat: number, lng: number, isEn?: boolean) {
+        // this.url = this.url + '&accept-language=ru&';
     return this.wrapObservable(this.http.get(this.url + `&lat=${lat}&lon=${lng}`));
 }
 

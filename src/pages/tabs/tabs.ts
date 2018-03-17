@@ -1,13 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
+import { StatusBar } from '@ionic-native/status-bar';
 import { NavParams, Platform, Tabs } from 'ionic-angular';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
-import { FeedPage } from '../feed/feed';
 import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
-import { UserNauPage } from '../user-nau/user-nau';
 import { UserProfilePage } from '../user-profile/user-profile';
 
 @Component({
@@ -33,28 +32,34 @@ export class TabsPage {
         private appMode: AppModeService,
         private navParams: NavParams,
         private profile: ProfileService,
-        private transaction: TransactionService) {
+        private transaction: TransactionService,
+        private statusBar: StatusBar) {
 
-        //temporary
-        this.envName = this.appMode.getEnvironmentMode();
-        this.profile.getWithAccounts(false)
-            .subscribe(resp => {
-                this.nauParams = resp.accounts.NAU;
-            });
-        //temporary
-
-        // temporary - always show PlacesPage
+        // this.envName = this.appMode.getEnvironmentMode();
+        // this.profile.getWithAccounts(false)
+        //     .subscribe(resp => {
+        //         this.nauParams = resp.accounts.NAU;
+        //     });
         this.tab1Root = PlacesPage;
-        this.selectedTabIndex = this.navParams.get('selectedTabIndex') ? this.navParams.get('selectedTabIndex') : 0;
+        this.selectedTabIndex = 0;
     }
 
-    //temporary
-    refresh() {
-        if (this.shownTransactions) {
-            this.profile.refreshAccounts();
-            this.transaction.refresh();
+    refreshStatusBar(event) {
+        let root = event.root;
+        let views = event.getViews();
+        let length = views.length;
+        if (root === PlacesPage || (root === BookmarksPage && length > 1)) {
+            this.statusBar.styleLightContent();
         }
-        this.shownTransactions = true;
+        else {
+            this.statusBar.styleDefault();
+        }
     }
-    //temporary
+    // refresh() {
+    //     if (this.shownTransactions) {
+    //         this.profile.refreshAccounts();
+    //         this.transaction.refresh();
+    //     }
+    //     this.shownTransactions = true;
+    // }
 }

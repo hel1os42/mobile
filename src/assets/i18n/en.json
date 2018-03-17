@@ -1,4 +1,19 @@
 {
+    "CATEGORIES" : {
+        "Food": "<div class='font-65 text-white'>Food &<br>Drinks</div>",
+        "Beauty": "<div class='font-65 text-white'>Beauty &<br>Fitness</div>",
+        "Retail": "<div class='font-65 text-white'>Retail &<br>Services</div>",
+        "Accommodation": "<div class='font-65 text-white'>Accommodation<br>& Leisure</div>",
+        "Other": "<div class='font-65 text-white'>Other &<br>Online</div>"
+    },
+
+    "COUNTRIES" : {
+        "COLOMBIA": "Colombia",
+        "RUSSIA": "Russia",
+        "UKRAINE": "Ukraine",
+        "PHILIPPINES": "Philippines"
+    },
+
     "UNIT" : {
         "KM" : "km",
         "M" : "m",
@@ -10,8 +25,12 @@
         "SIGN_UP" : "sign up",
         "SIGN_IN" : "sign in",
         "OFFERS" : "Offers",
+        "OFFERS2" : "Offers",
         "OFFER" : "Offer",
-        "MIN_SYMBOLS" : "min:"
+        "MIN_SYMBOLS" : "min:",
+        "FRIENDS": "Friends",
+        "FRIENDS2": "Friends",
+        "FRIEND": "Friend"
     },
 
     "MONTHS" : {
@@ -56,8 +75,18 @@
         "SELECT_TYPE" : "Select Type",
         "SELECT_FEATURES" : "Select Features",
         "LOCATION_DENIED" : "Location denied",
-        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. Set your coordinates in manual mode",
-        "SELECT_RADIUS" : "Select radius"
+        "YOU_HAVE_DENIED_ACCESS" : "You have denied access to geolocation. You can set the coordinates in manual mode by updating the profile data.",
+        "SELECT_RADIUS" : "Select radius",
+        "COMING_SOON": "Coming soon",
+        "NAU_IS_NOT": "NAU is not active in your country yet, but may soon be.",
+        "CURRENTLY_NAU": "Currently NAU offers are available in:",
+        "IF_YOU_WANT": "If you want to partner with NAU to launch it in your country, please contact",
+        "YOUR_REGION": "Your region has no active NAU offers yet, but that's temporary!",
+        "DISPLAY": "Display the nearest",
+        "NAU_WILL": "NAU will soon launch in:",
+        "WE_ARE": "We are actively seeking for regional agents - start a profitable business in your city with NAU:",
+        "ARE_YOU": "Are you a retailer? Join NAU among the first in your region prior to the official launch!",
+        "OOPS": "Ooops..."
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -78,6 +107,8 @@
     },
 
     "PAGE_ADV-USER-OFFERS" : {
+        "CREATED_OFFER" : "Created Offer",
+        "CREATED_OFFERS2" : "Created Offers",
         "CREATED_OFFERS" : "Created Offers",
         "CREATE_NEW" : "Create new",
         "ALL" : "All",
@@ -107,6 +138,7 @@
 
     "PAGE_BOOKMARKS" : {
         "BOOKMARKS" : "Bookmarks",
+        "BOOKMARKS5" : "Bookmarks",
         "BOOKMARK" : "Bookmark",
         "PLACES" : "Places",
         "FEATURED" : "Featured",
@@ -226,6 +258,7 @@
         "FEMALE" : "Female",
         "MALE" : "Male",
         "CONFIRM_YOUR_LOCATION" : "Confirm your location:",
+        "YOU_CAN_SET": "You can set the coordinates in manual mode",
         "AGE" : "Age",
         "INCOME" : "Income"
     },
@@ -281,6 +314,8 @@
         "WE_ARE" : "We are appreciate your choice",
         "YOU_EARNED" : "You earned",
         "POINTS" : "points",
+        "POINTS2" : "points",
+        "POINT" : "point",
         "OFFER" : "Offer",
         "REDEEM" : "Redeem",
         "OFFER_REDEEMING" : "Offer redeeming",
@@ -351,7 +386,8 @@
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Try it for free",
         "LANG" : "Language",
-        "COPY_NOTIFICATION" : "Сopied to clipboard"
+        "COPY_NOTIFICATION" : "Сopied to clipboard",
+        "REFERRAL_LINK" : "Referral link"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {

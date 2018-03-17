@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { StartPage } from '../start/start';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'page-onboarding',
@@ -15,7 +16,8 @@ export class OnBoardingPage {
 
     constructor(
         private nav: NavController,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private statusBar: StatusBar) {
 
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.isAdvOnBoarding = this.navParams.get('isAdvOnBoarding');
@@ -32,5 +34,13 @@ export class OnBoardingPage {
         else {
             this.nav.setRoot(StartPage);
         }
+    }
+
+    ionViewDidLoad() {
+        this.statusBar.styleLightContent();
+    }
+
+    ngOnDestroy() {
+        this.statusBar.styleDefault();
     }
 }

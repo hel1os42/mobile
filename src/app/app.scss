@@ -563,6 +563,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     margin-bottom: 3%;
     padding: 4vw;
+    border-radius: 2vw;
+}
+
+.item-block-nau ion-item-sliding {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    margin-bottom: 3%;
+    border-radius: 2vw;
 }
 
 .item-block-nau .input-wrapper .label-ios, .item-block-nau-slider .input-wrapper .label-ios{
@@ -601,16 +608,19 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     margin: 5vw 0 5vw;
 }
 
-.item-block-nau ion-item-sliding {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    margin-bottom: 3%;
-}
-
 /* TABS */
 .grid-tabs-splash{
     background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
     font-size: 2.8vw;
     line-height: 4vw;
+}
+
+.grid-tabs-splash{
+    padding-top: 20px;
+}
+
+.iphonex .grid-tabs-splash{
+    padding-top: 40px;
 }
 
 .grid-tabs-splash .col img {
@@ -627,6 +637,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .grid-tabs-splash .col {
     display: table-cell;
     width: 25vw;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .grid-tabs-splash p{
@@ -652,8 +666,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .btn_search_settings img{
     position: absolute;
-    right: 21vw;
-    bottom: 2vw;
+    right: 18vw;
+    bottom: 0.5vw;
     height: 92%;
     width: 7.5vw;
 }
@@ -662,7 +676,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     background: #fff;
     border: 1px solid #E0E0E0;
     border-radius: 2vw;
-    width: 77vw;
+    width: 80vw;
     height: 10vw;
     min-height: inherit;
     padding: 0 2vw;
@@ -1328,10 +1342,8 @@ a:active, .button:active{
 
 .btn_map1{
     position: absolute;
-    top: 0;
-    height: 100%;
-    width: 18vw;
-    right: 0;
+    top: 3vw;
+    right: 5vw;
 }
 
 .btn_map1 img{
@@ -1848,4 +1860,24 @@ ion-app.disable-scroll {
 .notification-toast .toast-message{
     color: #FF5A00;
     text-align: center;
+}
+
+/* Status bar padding */
+
+ion-navbar.toolbar.toolbar-ios {
+    padding-top: calc(20px + 4px);
+    padding-top: calc(constant(safe-area-inset-top) + 4px);
+    padding-top: calc(env(safe-area-inset-top) + 4px);
+    min-height: calc(44px + 20px);
+    min-height: calc(44px + constant(safe-area-inset-top));
+    min-height: calc(44px + env(safe-area-inset-top));
+}
+
+ion-title.title.title-ios{
+    padding-top: calc(20px + 4px);
+    padding-top: calc(constant(safe-area-inset-top) + 4px);
+    padding-top: calc(env(safe-area-inset-top) + 4px);
+    min-height: calc(44px + 20px);
+    min-height: calc(44px + constant(safe-area-inset-top));
+    min-height: calc(44px + env(safe-area-inset-top));
 }

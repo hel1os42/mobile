@@ -52,7 +52,15 @@ export class MyApp {
             // Here you can do any higher level native things you might need.
             splashScreen.hide();
 
+            //statusBar.styleLightContent();
             statusBar.styleDefault();
+            statusBar.overlaysWebView(true);
+            //if (platform.is('ios')) {
+            //    statusBar.overlaysWebView(true);
+            //}
+            //else{
+            //    statusBar.overlaysWebView(true);
+            //}
 
             //Google Analytics
             this.analytics.startTrackerWithId('UA-114471660-1')
@@ -83,9 +91,6 @@ export class MyApp {
                     })
             }
 
-            if (platform.is('ios')) {
-                statusBar.overlaysWebView(true);
-            }
 
             // FORK
             this.appMode.setForkMode();// only for fork mode;

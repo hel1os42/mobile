@@ -1,24 +1,30 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{ 'PAGE_USER-PROFILE.YOUR_ACCOUNT' | translate }}</ion-title>
-      <ion-buttons class="btn_header" margin-right end>
-          <a (click)="openCreateUserProfilePage()"><img src="assets/img/edit.svg"></a>
-      </ion-buttons>
-    <ion-buttons class="btn_header" margin-right end>
-      <a (click)="openSettings()"><img src="assets/img/settings.svg"></a>
-    </ion-buttons>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>{{ 'PAGE_USER-PROFILE.YOUR_ACCOUNT' | translate }}</ion-title>
+        <ion-buttons class="btn_header" margin-right end>
+            <a (click)="openCreateUserProfilePage()">
+                <img src="assets/img/edit.svg">
+            </a>
+        </ion-buttons>
+        <ion-buttons class="btn_header" margin-right end>
+            <a (click)="openSettings()">
+                <img src="assets/img/settings.svg">
+            </a>
+        </ion-buttons>
+    </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content class="padding-no">
-  <ion-item class="border-bottom-no top-block-nau padding-top-5vw padding-left-5vw padding-right-5vw">
-    <ion-avatar item-start>
-      <div text-center class="user_level font-22 text-white table"><span class="table-cell">L{{user.level}}</span></div>
-    </ion-avatar>
-    <div class="font-18 text-3E4B5D bold wrap-no">{{ user?.name }}</div>
-    <div class="font-14 text-828282">{{ user.points }}</div>
-    <!--
+    <ion-item class="border-bottom-no top-block-nau padding-top-5vw padding-left-5vw padding-right-5vw">
+        <ion-avatar item-start>
+            <div text-center class="user_level font-22 text-white table">
+                <span class="table-cell">L{{user.level}}</span>
+            </div>
+        </ion-avatar>
+        <div class="font-18 text-3E4B5D bold wrap-no">{{ user?.name }}</div>
+        <div class="font-14 text-828282">{{ user.points }}</div>
+        <!--
     <a (click)="openRewards()" item-end>
       <a><img src="assets/img/user_profile/btn_icon1.svg"></a>
     </a>
@@ -26,113 +32,130 @@
       <a class="margin-left-6vw"><img src="assets/img/user_profile/btn_icon2.svg"></a>
     </a>
     -->
-  </ion-item>
+    </ion-item>
 
-      <div class="block-user-level">
-          <div class="block-circle user-level-1">
-              <ion-item no-lines class="user-ava-name overflow-visible">
-                  <div [style.background-image]="'url(' + user.picture_url + '?size=mobile&)'" item-start class="circle-ava"></div>
-                  <div class="text-3E4B5D wrap-no bold lbl1">{{user?.name}}</div>
-                  <div class="text-3E4B5D lbl2">{{user.points}}</div>
-              </ion-item>
-              <div class="circle-center">
-                  <div class="block-get">
-                      <img src="assets/img/user_profile/cards.svg">
-                      <div text-uppercase class="bold">
-                      {{ 'PAGE_USER-PROFILE.GET' | translate }}
-                      </div>
-                      <span text-uppercase class="bold">
-                      {{ 'PAGE_USER-PROFILE.ADDITIONAL' | translate }}
-                      <br>{{ 'PAGE_USER-PROFILE.POINTS' | translate }}
-                      </span>
-                  </div>
-              </div>
-
-              <div class="box box4 color-no-fill">
-              </div>
-
-              <div class="box box1">
-                  <div class="label-point circle-label-top">10 000</div>
-                  <div class="next-level">
-                    <span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}
-                      <br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ level }}
+    <div class="block-user-level">
+        <div class="block-circle user-level-1">
+            <ion-item no-lines class="user-ava-name overflow-visible">
+                <div [style.background-image]="'url(' + user.picture_url + '?size=mobile)'" item-start class="circle-ava"></div>
+                <div class="text-3E4B5D wrap-no bold lbl1">{{ user?.name }}</div>
+                <div class="text-3E4B5D lbl2">{{ user.points }}</div>
+            </ion-item>
+            <div class="circle-center">
+                <!-- <div class="block-get">
+                    <img src="assets/img/user_profile/cards.svg">
+                    <div text-uppercase class="bold">
+                        {{ 'PAGE_USER-PROFILE.GET' | translate }}
+                    </div>
+                    <span text-uppercase class="bold">
+                        {{ 'PAGE_USER-PROFILE.ADDITIONAL' | translate }}
+                        <br>{{ 'PAGE_USER-PROFILE.POINTS' | translate }}
                     </span>
-                  </div>
-              </div>
+                </div> -->
+            </div>
 
-              <div class="box box3">
-                  <div class="label-point circle-label-left">7 500</div>
-              </div>
+            <div class="box box4 color-no-fill">
+            </div>
 
-              <div class="box box2">
-                  <div class="label-point circle-label-right">2 500</div>
-                  <div class="label-point circle-label-bottom">5 000</div>
-              </div>
-          </div>
-      </div>
-
-  <div class="font-14 text-4F4F4F" margin-bottom text-uppercase text-center>
-    {{ 'PAGE_USER-PROFILE.YOUR_TASKS_JOBS_FOR_TODAY' | translate }}
-  </div>
-
-  <ion-grid text-center class="block-slider">
-    <ion-row>
-      <ion-col col-1 align-self-center>
-        <a><ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon></a>
-      </ion-col>
-      <ion-col class="grid" col-10 align-self-center>
-        <ion-slides spaceBetween="10">
-          <!-- <ion-slide (click)="openRewards()"> temporary-->
-        <ion-slide>
-            <ion-list no-lines>
-              <ion-item class="text-white">
-                <ion-avatar item-start>
-                  <img src="assets/img/user_profile/slide1.svg">
-                </ion-avatar>
-                <div class="bold font-22 text-white">{{ 'PAGE_USER-PROFILE.GET_NEW_POINTS' | translate }}</div>
-                <div text-wrap class="font-12 text-white margin-top-3vw text-overflow-3-font-12">
-                  {{ 'PAGE_USER-PROFILE.GET_NEW_OFFERS_NEARBY' | translate }}
+            <div class="box box1">
+                <div class="label-point circle-label-top">10 000</div>
+                <div class="next-level">
+                    <span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}
+                        <br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ level }}
+                    </span>
                 </div>
-              </ion-item>
-            </ion-list>
-          </ion-slide>
-        </ion-slides>
-      </ion-col>
-      <ion-col col-1 align-self-center>
-        <a><ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200 text-828282"></ion-icon></a>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            </div>
 
-  <ion-grid text-center padding-top padding-bottom class="block-icon-bottom">
-    <ion-row>
-      <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
-        <div>
-          <img src="assets/img/user_profile/offers.svg">
-          <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.offers_count }}</div>
-          <div text-uppercase class="text-3E4B5D font-12">{{ 'UNIT.OFFERS' | translate }}</div>
+            <div class="box box3">
+                <div class="label-point circle-label-left">7 500</div>
+            </div>
+
+            <div class="box box2">
+                <div class="label-point circle-label-right">2 500</div>
+                <div class="label-point circle-label-bottom">5 000</div>
+            </div>
         </div>
-      </a>
-      <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
-        <div>
-          <img src="assets/img/user_profile/nau.svg">
-          <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ balance }}</div>
-          <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_USER-PROFILE.NAU' | translate }}</div>
-        </div>
-      </a>
-      <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
-        <div>
-          <img src="assets/img/user_profile/users.svg">
-          <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.referrals_count }}</div>
-          <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_USER-PROFILE.USERS' | translate }}</div>
-        </div>
-      </a>
-    </ion-row>
-  </ion-grid>
+    </div>
+
+    <!-- <div class="font-14 text-4F4F4F" margin-bottom text-uppercase text-center>
+        {{ 'PAGE_USER-PROFILE.YOUR_TASKS_JOBS_FOR_TODAY' | translate }}
+    </div> -->
+
+    <!-- <ion-grid text-center class="block-slider">
+        <ion-row>
+            <ion-col col-1 align-self-center>
+                <a>
+                    <ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon>
+                </a>
+            </ion-col>
+            <ion-col class="grid" col-10 align-self-center>
+                <ion-slides spaceBetween="10"> -->
+                    <!-- <ion-slide (click)="openRewards()"> temporary-->
+                    <!-- <ion-slide>
+                        <ion-list no-lines>
+                            <ion-item class="text-white">
+                                <ion-avatar item-start>
+                                    <img src="assets/img/user_profile/slide1.svg">
+                                </ion-avatar>
+                                <div class="bold font-22 text-white">{{ 'PAGE_USER-PROFILE.GET_NEW_POINTS' | translate }}</div>
+                                <div text-wrap class="font-12 text-white margin-top-3vw text-overflow-3-font-12">
+                                    {{ 'PAGE_USER-PROFILE.GET_NEW_OFFERS_NEARBY' | translate }}
+                                </div>
+                            </ion-item>
+                        </ion-list>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+            <ion-col col-1 align-self-center>
+                <a>
+                    <ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200 text-828282"></ion-icon>
+                </a>
+            </ion-col>
+        </ion-row>
+    </ion-grid> -->
+
+    <ion-grid text-center padding-bottom class="block-icon-bottom">
+    <!-- <ion-grid text-center padding-top padding-bottom class="block-icon-bottom"> -->
+        <ion-row>
+            <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
+                <div>
+                    <img src="assets/img/user_profile/offers.svg">
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.offers_count }}</div>
+                    <div text-uppercase class="text-3E4B5D font-12">
+                        {{ user.offers_count == 1 
+                        ? ('UNIT.OFFER' | translate) 
+                        : (user.offers_count >= 2 && user.offers_count <= 4) 
+                        ? ('UNIT.OFFERS2' | translate) 
+                        : ('UNIT.OFFERS' | translate) }}
+                    </div>
+                </div>
+            </a>
+            <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
+                <div>
+                    <img src="assets/img/user_profile/nau.svg">
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ balance }}</div>
+                    <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_USER-PROFILE.NAU' | translate }}</div>
+                </div>
+            </a>
+            <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
+                <div>
+                    <img src="assets/img/user_profile/users.svg">
+                    <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.referrals_count }}</div>
+                    <div text-uppercase class="text-3E4B5D font-12">
+                        {{ user.referrals_count == 1 
+                        ? ('UNIT.FRIEND' | translate) 
+                        : (user.referrals_count >= 2 && user.referrals_count <= 4) 
+                        ? ('UNIT.FRIENDS2' | translate) 
+                        : ('UNIT.FRIENDS' | translate) }}
+                    </div>
+                </div>
+            </a>
+        </ion-row>
+    </ion-grid>
 
     <p margin>
         <button (click)="logout()" color="primary" ion-button block text-uppercase>
-          {{ 'PAGE_USER-PROFILE.LOGOUT' | translate }}
+            {{ 'PAGE_USER-PROFILE.LOGOUT' | translate }}
         </button>
     </p>
 

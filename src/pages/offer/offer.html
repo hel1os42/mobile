@@ -7,10 +7,18 @@
     <div [style.background-image]="'url(' + offer.picture_url + '?size=mobile&)'" class="background_effect"></div>
   <ion-item no-lines color="transparent" class="overflow-visible padding-left-offer padding-top-5vw padding-right-offer">
     <div item-start class="relative">
-      <div class="user_level font-30 text-white extrabold table"><span class="table-cell">1</span></div>
+      <div class="user_level font-30 text-white extrabold table">
+          <span class="table-cell">{{ points }}</span>
+        </div>
       <div class="icon-plus">+</div>
     </div>
-    <span class="font-16 text-E0E0E0">{{ 'PAGE_OFFER.POINTS' | translate }}</span>
+    <span class="font-16 text-E0E0E0">
+        {{ points == 1
+        ? ('PAGE_OFFER.POINT' | translate)
+        : (points >= 2 && points <= 4)
+        ? ('PAGE_OFFER.POINTS2' | translate)
+        : ('PAGE_OFFER.POINTS' | translate) }}
+</span>
     <div item-end class="btn_social">
       <div>
           <!--
@@ -36,7 +44,11 @@
       <ion-icon class="text-FEC282 font-22 stars" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
     </ng-container>
     <img class="icon_user" src="assets/img/user_offers/icon_user.svg"><span class="font-16 text-E0E0E0">{{ company.testimonials_count }}</span>
-    <img class="icon_arrow" src="assets/img/user_offers/icon_arrow.svg"><span class="font-16 text-E0E0E0">{{ distanceString }}</span>
+    <img class="icon_arrow" src="assets/img/user_offers/icon_arrow.svg">
+    <span class="font-16 text-E0E0E0">
+        {{ distanceObj?.distance }}
+        {{ distanceObj?.key | translate }}
+    </span>
   </div>
 
   <div class="bold font-30 extrabold text-white padding-left-offer padding-right-offer padding-top-5vw text-overflow-3">{{ offer.label }}</div>

@@ -1,0 +1,67 @@
+<div class="modal_content">
+    <ion-label text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ 'PAGE_PLACES.COMING_SOON' | translate }}</ion-label>
+    <div *ngIf="!isCountryEnabled">
+        <div text-center margin>
+            <img class="flag-big" [src]="getFlag(country)">
+        </div>
+        <div text-center class="bold font-16 text-3E4B5D">
+            {{ 'PAGE_PLACES.NAU_IS_NOT' | translate }}
+        </div>
+        <div margin text-center class="font-14 text-828282">
+            {{ 'PAGE_PLACES.CURRENTLY_NAU' | translate }}
+        </div>
+        <div class="flag-block">
+            <div 
+            *ngFor="let country of enabledCountries" 
+            class="font-14 text-828282 margin-bottom-3vw"
+            [ngClass]="{ 'margin-bottom-3vw': country !== enabledCountries[enabledCountries.length - 1] }">
+                <img *ngIf="country" [src]="getFlag(country)">
+                <span>
+                    {{ getKey(country) | translate }}
+                </span>
+            </div>
+            <!-- <div class="font-14 text-828282 margin-bottom-3vw"><img src="assets/img/flags/ukraine.svg"><span>{{ 'COUNTRIES.UKRAINE' | translate }}</span></div>
+            <div class="font-14 text-828282 margin-bottom-3vw"><img src="assets/img/flags/philippines.svg"><span>{{ 'COUNTRIES.PHILIPPINES' | translate }}</span></div>
+            <div class="font-14 text-828282"><img src="assets/img/flags/colombia.svg"><span>{{ 'COUNTRIES.COLOMBIA' | translate }}</span></div> -->
+        </div>
+        <div margin-top margin-left margin-right text-center class="font-14 text-828282">
+            {{ 'PAGE_PLACES.IF_YOU_WANT' | translate }} <a href="mailto:ceo@nau.io">ceo@nau.io</a>
+        </div>
+    </div>
+
+    <div *ngIf="isCountryEnabled">
+        <div text-center margin-top class="bold font-16 text-3E4B5D">
+            {{ city ? city : 'PAGE_PLACES.OOPS' | translate }}
+        </div>
+
+        <div text-center margin-top class="bold font-16 text-3E4B5D">
+            {{ 'PAGE_PLACES.YOUR_REGION' | translate }}
+        </div>
+
+        <div padding-top padding-bottom>
+            <button (click)="close(radius)" ion-button block color="primary">
+                {{ 'PAGE_PLACES.DISPLAY' | translate }}
+            </button>
+        </div>
+
+        <div class="font-14 text-828282">
+            {{ 'PAGE_PLACES.WE_ARE' | translate }}
+            <a href="#" (click)="loadUrl(businessUrl)">{{ businessUrl }}</a>
+        </div>
+
+        <div margin-top class="font-14 text-828282">
+            {{ 'PAGE_PLACES.ARE_YOU' | translate }}
+            <a href="#" (click)="loadUrl(retailerUrl)">{{ retailerUrl }}</a>
+        </div>
+    </div>
+
+    <div padding>
+        <ion-grid>
+            <ion-row>
+                <ion-col text-center>
+                    <button (click)="close(false)" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</div>

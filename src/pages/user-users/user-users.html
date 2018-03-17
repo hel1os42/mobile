@@ -12,7 +12,13 @@
     </ion-avatar>
     <div item-content>
         <div class="font-18 text-3E4B5D bold">{{ total }}</div>
-        <div class="font-14 text-828282">{{ 'PAGE_USER-USERS.USERS' | translate }}</div>
+        <div class="font-14 text-828282">
+            {{ total == 1 
+            ? ('UNIT.FRIEND' | translate) 
+            : (total >= 2 && total <= 4) 
+            ? ('UNIT.FRIENDS2' | translate) 
+            : ('UNIT.FRIENDS' | translate) }}
+        </div>
     </div>
       <a item-end margin-left class="btn_calendar_user" hidden>
           <a><img src="assets/img/user_offers/icon_right.svg">
@@ -35,7 +41,12 @@
       <div text-uppercase class="font-14 text-4F4F4F margin-top-2vw">
         {{ 'PAGE_USER-USERS.LEVEL' | translate }}: <b>{{ referral.level }}</b>
         <span margin-left>
-          {{ 'UNIT.OFFERS' | translate }}: <b>{{ referral.offers_count }}</b>
+            {{ referral.offers_count == 1 
+            ? ('UNIT.OFFER' | translate) 
+            : (referral.offers_count >= 2 && referral.offers_count <= 4) 
+            ? ('UNIT.OFFERS2' | translate) 
+            : ('UNIT.OFFERS' | translate) }}: 
+          <b>{{ referral.offers_count }}</b>
         </span>
       </div>
       <div class="text-828282 font-14 margin-top-2vw">

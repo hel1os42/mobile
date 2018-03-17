@@ -1,4 +1,19 @@
 {
+    "CATEGORIES" : {
+        "Food": "<div class='font-65 text-white'>Еда и<br>Напитки</div>",
+        "Beauty": "<div class='font-65 text-white'>Красота и<br>Здоровье</div>",
+        "Retail": "<div class='font-65 text-white'>Ретейл и<br>Услуги</div>",
+        "Accommodation": "<div class='font-65 text-white'>Проживание <br>и Отдых</div>",
+        "Other": "<div class='font-65 text-white'>Прочее и<br>Интернет</div>"
+    },
+
+     "COUNTRIES" : {
+        "COLOMBIA": "Колумбия",
+        "RUSSIA": "Россия",
+        "UKRAINE": "Украина",
+        "PHILIPPINES": "Филиппины"
+    },
+
     "UNIT" : {
         "KM" : "км",
         "M" : "м",
@@ -10,8 +25,12 @@
         "SIGN_UP" : "Зарегистрироваться",
         "SIGN_IN" : "Войти",
         "OFFERS" : "Акций",
+        "OFFERS2" : "Акции",
         "OFFER" : "Акция",
-        "MIN_SYMBOLS" : "min:"
+        "MIN_SYMBOLS" : "мин:",
+        "FRIENDS": "Друзей",
+        "FRIENDS2": "Друга",
+        "FRIEND": "Друг"
     },
 
     "MONTHS" : {
@@ -57,7 +76,17 @@
         "SELECT_FEATURES" : "Выберите особенности",
         "LOCATION_DENIED" : "Запрет геолокации",
         "YOU_HAVE_DENIED_ACCESS" : "Вы запретили доступ к геолокации. Пожалуйста, укажите ваши координаты вручную.",
-        "SELECT_RADIUS" : "Выберите радиус"
+        "SELECT_RADIUS" : "Выберите радиус",
+        "COMING_SOON": "В скором времени",
+        "NAU_IS_NOT": "В вашей стране еще не запущена NAU, но мы работаем над этим.",
+        "CURRENTLY_NAU": "Офферы НАУ доступны в следующих странах:",
+        "IF_YOU_WANT": "Если вы хотите стать партнером NAU и запустить платформу в вашей стране, пожалуйста, пишите на",
+        "YOUR_REGION": "В вашем регионе пока нет акций NAU, но это вопрос ближайшего времени!",
+        "DISPLAY": "Показать ближайшие",
+        "NAU_WILL": "NAU скоро появится в городах:",
+        "WE_ARE": "Мы активно ищем региональных агентов - стройте прибыльный бизнес в вашем городе вместе с NAU:",
+        "ARE_YOU": "Являетесь владельцем или представителем торговой точки или заведения? Успейте присоединиться до старта NAU в вашем городе!",
+        "OOPS": "Упсс..."
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -78,7 +107,9 @@
     },
 
     "PAGE_ADV-USER-OFFERS" : {
-        "CREATED_OFFERS" : "Созданные акции",
+        "CREATED_OFFER" : "Созданная акция",
+        "CREATED_OFFERS" : "Созданных акций",
+        "CREATED_OFFERS2" : "Созданные акции",
         "CREATE_NEW" : "Создать",
         "ALL" : "Все",
         "FEATURED" : "Рекомендуемые",
@@ -107,9 +138,15 @@
 
     "PAGE_BOOKMARKS" : {
         "BOOKMARKS" : "Закладки",
+        "BOOKMARKS5" : "Закладок",
+        "BOOKMARK" : "Закладка",
         "PLACES" : "Места",
         "FEATURED" : "Рекомендуемые",
-        "REDEEM_NOW" : "Использовать сейчас"
+        "REDEEM_NOW" : "Использовать сейчас",
+        "YOU_DONT_HAVE" : "У Вас пока нет избранных",
+        "YET" : "",
+        "OFFERS" : "акций",
+        "PLACES1" : "заведений"
     },
 
     "PAGE_CREATE-ADVUSER-PROFILE" : {
@@ -258,7 +295,7 @@
     },
 
     "PAGE_NOTIFICATIONS" : {
-        "NOTIFICATION" : "Уведомление",
+        "NOTIFICATION" : "Уведомления",
         "TODAY" : "Сегодня",
         "YESTERDAY" : "Вчера",
         "SENT_NEW_MESSAGE_FOR_YOU" : "Sent new message for you",
@@ -276,7 +313,9 @@
         "WE_ARE" : "Мы ценим ваш выбор",
         "YOU_EARNED" : "Вы получили",
         "POINTS" : "очков",
-        "OFFER" : "Акция",
+        "POINTS2" : "очка",
+        "POINT" : "очко",
+        "OFFER" : "Акции",
         "REDEEM" : "Купон",
         "OFFER_REDEEMING" : "Offer redeeming",
         "OR_USE_QR_CODE" : "или используйте QR-код",
@@ -329,6 +368,7 @@
         "CONFIRM_REDEMPTION" : "Подтвердить погашение",
         "YOUR_INVITE_CODE" : "Ваш инвайт-код",
         "CHANGE_YOUR_PHONE_NUMBER" : "Изменить номер телефона",
+        "YOUR_PHONE_NUMBER" : "Ваш номер телефона",
         "PRIVATE_DATA" : "Личная информация",
         "SHOW_MY_PRIVATE_DATA" : "Показывать личную информацию",
         "SHOW_MY_PHONE_NUMBER" : "Показывать номер телефона",
@@ -345,7 +385,8 @@
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Попробовать бесплатно",
         "LANG" : "Язык",
-        "COPY_NOTIFICATION" : "Сopied to clipboard"
+        "COPY_NOTIFICATION" : "Сopied to clipboard",
+        "REFERRAL_LINK" : "Cсылка для приглашения друзей"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {
@@ -481,13 +522,13 @@
         "GET" : "Получить",
         "ADDITIONAL" : "дополнительные",
         "POINTS" : "очки",
-        "NEXT" : "СЛЕД.",
+        "NEXT" : "",
         "LVL" : "УРОВЕНЬ",
         "YOUR_TASKS_JOBS_FOR_TODAY" : "Ваши задания на сегодня",
         "GET_NEW_POINTS" : "Получить очки",
         "GET_NEW_OFFERS_NEARBY" : "Улучшайте уровень, пользуясь акциями рядом с вами",
         "NAU" : "NAU",
-        "USERS" : "пользователей",
+        "USERS" : "друзей",
         "LOGOUT" : "Выйти"
     },
 
