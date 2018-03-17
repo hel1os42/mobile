@@ -40,7 +40,7 @@
                         </span>
                     </div>
                     <div margin-top class="text-3E4B5D font-22 bold text-overflow-2 wrap">{{ company.name }}</div>
-                    <div class="text-4F4F4F font-12 semibold wrap margin-top-2proc width-88 company-address">{{ company.address }}</div>
+                    <div *ngIf="company.address" class="text-4F4F4F font-12 semibold wrap margin-top-2proc width-88 company-address">{{ company.address }}</div>
                     <div class="font-12 text-828282 wrap text-overflow-3 margin-top-2proc width-88">{{ company.description }}</div>
                     <div class="num_right">
                         <div class="font-36 bold text-FF5A00" text-center>
