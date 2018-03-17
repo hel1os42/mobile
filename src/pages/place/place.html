@@ -81,8 +81,8 @@
             </ion-list>
         </div>
     -->
-        <div class="sticky">
-            <ion-segment [(ngModel)]="segment" text-uppercase>
+    <!--<div class="sticky">-->
+            <ion-segment [(ngModel)]="segment" text-uppercase class="segment-offers">
                 <ion-segment-button value="alloffers">
                     {{ 'PAGE_PLACE.ALL_OFFERS' | translate }}
                 </ion-segment-button>
@@ -95,7 +95,6 @@
                     {{ 'PAGE_PLACE.ABOUT' | translate }}
                 </ion-segment-button>
             </ion-segment>
-        </div>
 
     <div padding>
       <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
