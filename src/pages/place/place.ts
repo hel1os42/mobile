@@ -14,6 +14,8 @@ import { FavoritesService } from '../../providers/favorites.service';
 import { Subscription } from 'rxjs';
 import { ToastService } from '../../providers/toast.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
+import { StatusBar } from '@ionic-native/status-bar';
+import { BookmarksPage } from '../bookmarks/bookmarks';
 
 @Component({
     selector: 'page-place',
@@ -41,7 +43,8 @@ export class PlacePage {
         private favorites: FavoritesService,
         private toast: ToastService,
         private alert: AlertController,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private statusBar: StatusBar) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -101,6 +104,10 @@ export class PlacePage {
     // ionSelected() {
     //     this.appMode.setHomeMode(false);
     // }
+
+    ionViewDidLoad() {
+        this.statusBar.styleLightContent();
+    }
 
     getStars(star: number) {
         let showStars: boolean[] = [];
@@ -208,6 +215,12 @@ export class PlacePage {
     ngOnDestroy() {
         this.onRefreshCompany.unsubscribe();
         this.onRefreshTestimonials.unsubscribe();
+        //
+        let nav: any = this.nav;
+        let root = nav.root;
+        if (root === BookmarksPage) {
+            this.statusBar.styleDefault();
+        }
     }
 
 }

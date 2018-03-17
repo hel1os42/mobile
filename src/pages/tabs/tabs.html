@@ -1,4 +1,4 @@
-<ion-tabs [selectedIndex]="selectedTabIndex" #tabs>
+<ion-tabs [selectedIndex]="selectedTabIndex" (ionChange)="refreshStatusBar($event)" #tabs>
     <ion-tab [root]="tab1Root"></ion-tab>
     <!-- <ion-tab (ionSelect)="refresh()" [root]="tab2Root" [rootParams]="nauParams"></ion-tab> -->
     <ion-tab [root]="tab2Root"></ion-tab>

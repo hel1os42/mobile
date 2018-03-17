@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import { AlertController, App, NavController, NavParams, PopoverController, Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { AlertController, App, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { Place } from '../../models/place';
+import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
+import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
+import { BookmarksPage } from '../bookmarks/bookmarks';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
-import { FavoritesService } from '../../providers/favorites.service';
-import { ToastService } from '../../providers/toast.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
-import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'page-offer',
@@ -61,13 +62,6 @@ export class OfferPage {
 
     ionViewDidLoad() {
         this.statusBar.styleLightContent();
-        this.statusBar.overlaysWebView(true);
-        //if (this.platform.is('ios')) {
-        //    this.statusBar.overlaysWebView(true);
-        //}
-        //else{
-        //    this.statusBar.overlaysWebView(false);
-        //}
     }
 
     ngAfterViewInit() {
@@ -236,15 +230,12 @@ export class OfferPage {
     ionViewDidLeave() {
         this.stopTimer();
         this.app.navPop();
-
-        //if (this.platform.is('ios')){
-        //    this.statusBar.overlaysWebView(true);
-        //    this.statusBar.styleDefault();
-        //}
-        //else{
-        //    this.statusBar.overlaysWebView(false);
-        //    this.statusBar.backgroundColorByHexString("#b7b7b7");
-        //}
-        this.statusBar.styleDefault();
+        //
+        let nav: any = this.nav;
+        let root = nav.root;
+        if (root === BookmarksPage) {
+            this.statusBar.styleDefault();
+        }
     }
+    
 }

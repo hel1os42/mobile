@@ -179,10 +179,6 @@ export class PlacesPage {
 
     }
 
-    ionViewDidLoad() {
-        this.statusBar.styleLightContent();
-    }
-
     onMapReady(map: Map) {
         if (!this._map && this.coords.lat) {
             this._map = map;
@@ -788,15 +784,4 @@ export class PlacesPage {
         this.onRefreshTestimonials.unsubscribe();
     }
 
-    ionViewDidLeave() {
-        //if (this.platform.is('ios')){
-        //    this.statusBar.overlaysWebView(true);
-        //    this.statusBar.styleDefault();
-        //}
-        //else{
-        //    this.statusBar.overlaysWebView(false);
-        //    this.statusBar.backgroundColorByHexString("#b7b7b7");
-        //}
-        this.statusBar.styleDefault();
-    }
 }

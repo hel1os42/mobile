@@ -1,13 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
+import { StatusBar } from '@ionic-native/status-bar';
 import { NavParams, Platform, Tabs } from 'ionic-angular';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
-import { FeedPage } from '../feed/feed';
 import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
-import { UserNauPage } from '../user-nau/user-nau';
 import { UserProfilePage } from '../user-profile/user-profile';
 
 @Component({
@@ -33,7 +32,8 @@ export class TabsPage {
         private appMode: AppModeService,
         private navParams: NavParams,
         private profile: ProfileService,
-        private transaction: TransactionService) {
+        private transaction: TransactionService,
+        private statusBar: StatusBar) {
 
         // this.envName = this.appMode.getEnvironmentMode();
         // this.profile.getWithAccounts(false)
@@ -42,6 +42,18 @@ export class TabsPage {
         //     });
         this.tab1Root = PlacesPage;
         this.selectedTabIndex = 0;
+    }
+
+    refreshStatusBar(event) {
+        let root = event.root;
+        let views = event.getViews();
+        let length = views.length;
+        if (root === PlacesPage || (root === BookmarksPage && length > 1)) {
+            this.statusBar.styleLightContent();
+        }
+        else {
+            this.statusBar.styleDefault();
+        }
     }
     // refresh() {
     //     if (this.shownTransactions) {
