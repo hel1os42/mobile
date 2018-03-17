@@ -135,6 +135,7 @@ export class LoginPage {
             .subscribe(resp => {
                 this.profile.get(true)
                     .subscribe(res => {
+                        this.location.refreshDefaultCoords({ lat: res.latitude, lng: res.longitude }, true);
                         if (res.name == '' && !res.email) {
                             this.nav.setRoot(CreateUserProfilePage)
                         }

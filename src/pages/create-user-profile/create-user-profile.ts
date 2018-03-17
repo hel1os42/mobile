@@ -405,16 +405,19 @@ export class CreateUserProfilePage {
     }
 
     createAccount() {
+        let refreshed = false;
         if (this.navParams.get('user') && this.isCoordsChenged) {
             if (this.platform.is('cordova')) {
                 this.diagnostic.isLocationAvailable().then(result => {
                     if (!result) {
-                        this.location.refreshDefoultCoords(this.coords);
+                        this.location.refreshDefaultCoords(this.coords);
+                        refreshed = true;
                     }
                 });
             }
             else {
-                this.location.refreshDefoultCoords(this.coords);
+                this.location.refreshDefaultCoords(this.coords);
+                refreshed = true;
             }
             this.isCoordsChenged = false;
         }
@@ -430,6 +433,9 @@ export class CreateUserProfilePage {
             if (!isEmpty) {
                 this.profile.patch(differenceData)
                     .subscribe(() => {
+                        if (!refreshed) {
+                           this.location.refreshDefaultCoords(this.coords, true); 
+                        }
                         promise.then(() => {
                             this.navTo();
                         })
@@ -442,6 +448,7 @@ export class CreateUserProfilePage {
             }
         }
     }
+
     presentAndroidConfirm() {
         const alert = this.alert.create({
             title: 'Location denied',

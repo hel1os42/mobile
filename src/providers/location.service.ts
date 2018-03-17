@@ -80,8 +80,10 @@ export class LocationService {
         );
     }
 
-    refreshDefoultCoords(coords: Coords) {
-        this.onProfileCoordsChanged.emit(coords);
+    refreshDefaultCoords(coords: Coords, notEmit?: boolean) {
+        if (!notEmit) {
+            this.onProfileCoordsChanged.emit(coords); 
+        }
         this.profileCoords = coords;
     }
 
