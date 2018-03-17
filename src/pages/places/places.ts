@@ -300,7 +300,6 @@ export class PlacesPage {
                         lat: user.latitude,
                         lng: user.longitude
                     };
-                    this.location.refreshDefoultCoords(this.coords);
                     if (this.shareData) {
                         this.openPlace(this.shareData, true)
                     }
