@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -13,6 +13,7 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlacePage } from '../place/place';
 import { TestimonialsService } from '../../providers/testimonials.service';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     selector: 'page-bookmarks',
@@ -42,30 +43,14 @@ export class BookmarksPage {
         private nav: NavController,
         private location: LocationService,
         private appMode: AppModeService,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private diagnostic: Diagnostic,
+        private platform: Platform) {
 
         this.isForkMode = this.appMode.getForkMode();
 
         this.segment = "places";
-        this.location.getCache()
-            .then(resp => {
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.getLists();
-            })
-            .catch(err => {
-                this.profile.get(false, false)
-                    .subscribe(user => {
-                        this.coords = {
-                            lat: user.latitude,
-                            lng: user.longitude
-                        };
-                        this.getLists();
-                    })
-            });
-
+        this.getLocation(true);
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
             .subscribe(resp => {
                 if (!resp.notRefresh) {
@@ -148,14 +133,59 @@ export class BookmarksPage {
                 : 'places';
     }
 
-    getLocation() {
-        this.location.getCache()
-            .then(resp => {
+    getLocation(isGetLists?: boolean) {
+        let promise: Promise<any>;
+        if (this.platform.is('cordova')) {
+            this.diagnostic.isLocationAvailable().then(result => {
+                if (result) {
+                    debugger
+                    promise = this.location.get(false);
+                }
+                else {
+                    debugger
+                    promise = this.location.getCache();
+                }
+                promise.then(resp => {
+                    debugger
+                    this.coords = {
+                        lat: resp.coords.latitude,
+                        lng: resp.coords.longitude
+                    };
+                    if (isGetLists) {
+                        this.getLists();
+                    }
+                })
+            })
+        }
+        else {
+            promise = this.location.get(false);
+            debugger
+            promise.then(resp => {
+                debugger
                 this.coords = {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
-            });
+                if (isGetLists) {
+                    this.getLists();
+                }
+            })
+            //for browser if location detection denied
+            setTimeout(() => {
+                if (!this.coords) {
+                    this.location.getCache()
+                        .then(resp => {
+                            this.coords = {
+                                lat: resp.coords.latitude,
+                                lng: resp.coords.longitude
+                            };
+                            if (isGetLists) {
+                                this.getLists();
+                            }
+                        })
+                }
+            }, 4000)
+        }
     }
 
     getStars(star: number) {
