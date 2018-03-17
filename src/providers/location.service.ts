@@ -20,13 +20,6 @@ export class LocationService {
         private network: NetworkService,
         private profile: ProfileService) {
 
-        this.profile.get(false)
-            .subscribe(profile => {
-                this.profileCoords = {
-                    lat: profile.latitude,
-                    lng: profile.longitude
-                }
-            })
     }
 
     get(isHighAccuracy: boolean) {
