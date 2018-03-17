@@ -1,10 +1,4 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{ company.name }}</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content [ngSwitch]="segment" no-bounce>
     <ion-list class="margin-0">
         <div class="cover" [style.background-image]="'url(' + company.cover_url + '?size=mobile&)'">
             <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
@@ -21,6 +15,12 @@
             </div>
         </div>
     </ion-list>
+    <ion-navbar>
+        <ion-title>{{ company.name }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content [ngSwitch]="segment" no-bounce>
 
     <!-- START SWIPE -->
     <ion-list class="margin-0">

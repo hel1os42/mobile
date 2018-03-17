@@ -111,7 +111,9 @@ page-places {
     }
 
     ion-refresher {
-        top: 14px
+        margin-top: -35px;
+        background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
+        height: 170px;
     }
 
     /* STATUS BAR */
@@ -124,12 +126,17 @@ page-places {
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 999;
         background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
     }
 
     ion-content{
         margin-top: -20px;
         height: calc(100% + 20px)
+    }
+
+    .has-refresher > .scroll-content{
+        border-top: 0;
     }
 }
 
@@ -154,6 +161,10 @@ page-places {
 
 .iphonex page-places .sticky{
     top: 40px;
+}
+
+.iphonex page-places ion-refresher {
+    margin-top: -20px;
 }
 
 places-popover-component {

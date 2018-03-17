@@ -1862,6 +1862,8 @@ ion-app.disable-scroll {
     text-align: center;
 }
 
+/* Status bar padding */
+
 ion-navbar.toolbar.toolbar-ios {
     padding-top: calc(20px + 4px);
     padding-top: calc(constant(safe-area-inset-top) + 4px);
