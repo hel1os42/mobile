@@ -138,6 +138,10 @@ page-places {
     .has-refresher > .scroll-content{
         border-top: 0;
     }
+
+    ion-navbar.toolbar.toolbar-ios{
+        pointer-events: none;
+    }
 }
 
 /*
