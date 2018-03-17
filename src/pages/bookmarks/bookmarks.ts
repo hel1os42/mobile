@@ -70,7 +70,7 @@ export class BookmarksPage {
             .subscribe(resp => {
                 if (!resp.notRefresh) {
                     this.getLocation();
-                    this.favorites.getPlaces(this.companiesPage)
+                    this.favorites.getPlaces(this.companiesPage, false)
                         .subscribe(resp => {
                             this.companies = resp.data;
                             this.companiesLastPage = resp.last_page;
@@ -88,7 +88,7 @@ export class BookmarksPage {
             .subscribe(resp => {
                 if (!resp.notRefresh) {
                     this.getLocation();
-                    this.favorites.getOffers(this.offersPage)
+                    this.favorites.getOffers(this.offersPage, false)
                         .subscribe(resp => {
                             this.offers = resp.data;
                             this.offersLastPage = resp.last_page;
@@ -127,7 +127,7 @@ export class BookmarksPage {
                 this.totalCompanies = resp.total;
                 this.getSegment();
             });
-        this.favorites.getOffers(this.offersPage)
+        this.favorites.getOffers(this.offersPage, false)
             .subscribe(resp => {
                 this.offers = resp.data;
                 this.offersLastPage = resp.last_page;
