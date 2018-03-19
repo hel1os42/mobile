@@ -475,7 +475,7 @@ export class PlacesPage {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
             if (this.companies.length == 0) {
-            this.noPlacesHandler();
+                this.noPlacesHandler();
             }
             this.fitBounds = this.generateBounds(this.markers);
         },
@@ -494,14 +494,15 @@ export class PlacesPage {
                 let address = !data.error ? data.address : undefined;
                 let city = address
                     // ? (address.city || address.town || address.county || address.state)
-                    ? (address.city || address.town)
+                    // ? (address.city || address.town)
+                    ? address.city
                     : undefined;
-                let state = address
-                    ? (address.state || address.county)
-                    : undefined;
+                // let state = address
+                //     ? (address.state || address.county)
+                //     : undefined;
                 let country = address ? PHONE_CODES.find(country => country.code === address.country_code.toUpperCase()).name : undefined;
                 let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
-                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country, state: state });
+                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
                 popover.present();
                 popover.onDidDismiss(data => {
                     if (data.radius) {
