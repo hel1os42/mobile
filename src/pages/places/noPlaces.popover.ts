@@ -13,7 +13,8 @@ export class NoPlacesPopover {
     isCountryEnabled: boolean;
     city: string;
     country: string;
-    radius = 1000000;
+    state: string;
+    radius = 19849000;
     enabledCountries = COUNTRIES;
     businessUrl = 'nau.io';
     retailerUrl = 'nau.io';
@@ -24,8 +25,9 @@ export class NoPlacesPopover {
         private browser: InAppBrowser) {
 
         this.isCountryEnabled = this.navParams.get('isCountryEnabled');
-        this.city = this.navParams.get('city') ? this.navParams.get('city') : '';
+        this.city = this.navParams.get('city');
         this.country = this.navParams.get('country');
+        this.state = this.navParams.get('state');
     }
 
     loadUrl(url) {

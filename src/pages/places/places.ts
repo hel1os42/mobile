@@ -474,8 +474,8 @@ export class PlacesPage {
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
-            if (this.companies.length == 0 && this.radius <= 250000) {
-                this.noPlacesHandler();
+            if (this.companies.length == 0) {
+            this.noPlacesHandler();
             }
             this.fitBounds = this.generateBounds(this.markers);
         },
@@ -489,20 +489,30 @@ export class PlacesPage {
     }
 
     noPlacesHandler() {
-        this.geocoder.getAddress(this.coords.lat, this.coords.lng)
+        this.geocoder.getAddress(this.coords.lat, this.coords.lng, true, true)
             .subscribe(data => {
                 let address = !data.error ? data.address : undefined;
                 let city = address
-                    ? (address.city || address.town || address.county || address.state)
+                    // ? (address.city || address.town || address.county || address.state)
+                    ? (address.city || address.town)
+                    : undefined;
+                let state = address
+                    ? (address.state || address.county)
                     : undefined;
                 let country = address ? PHONE_CODES.find(country => country.code === address.country_code.toUpperCase()).name : undefined;
                 let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
-                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
+                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country, state: state });
                 popover.present();
                 popover.onDidDismiss(data => {
                     if (data.radius) {
                         this.page = 1;
                         this.radius = data.radius;
+                        //to test
+                        this.tagFilter = [];
+                        this.typeFilter = [];
+                        this.specialityFilter = [];
+                        this.search = '';
+                        //
                         this.loadCompanies(this.page, true);
                     }
                 })
