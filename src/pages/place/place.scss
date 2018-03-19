@@ -229,7 +229,7 @@ page-place {
     }
 
     .toolbar-title-ios{
-        color: #fff;
+        display: none;
     }
 
     ion-header ion-icon.back-button-icon.icon {
@@ -240,6 +240,13 @@ page-place {
         position: absolute;
         top: 0;
         left: 0;
+    }
+
+    .cover-brightness {
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.25);
+        z-index: 0;
     }
 }
 

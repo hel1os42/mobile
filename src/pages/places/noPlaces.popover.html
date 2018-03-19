@@ -30,8 +30,19 @@
     </div>
 
     <div *ngIf="isCountryEnabled">
-        <div text-center margin-top class="bold font-16 text-3E4B5D">
-            {{ city ? city : 'PAGE_PLACES.OOPS' | translate }}
+        <!-- <div *ngIf="city">
+        <div *ngIf="state" text-center margin-top class="bold font-16 text-3E4B5D">
+            {{ state }}
+        </div>
+        <div text-center class="bold font-16 text-3E4B5D">
+            {{ city }}
+        </div>
+        </div> -->
+        <div *ngIf="city" text-center margin-top class="bold font-16 text-3E4B5D">
+            {{ city }}
+        </div>
+        <div *ngIf="!city" text-center margin-top class="bold font-16 text-3E4B5D">
+            {{ 'PAGE_PLACES.OOPS' | translate }}
         </div>
 
         <div text-center margin-top class="bold font-16 text-3E4B5D">
