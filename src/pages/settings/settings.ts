@@ -61,10 +61,10 @@ export class SettingsPage {
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
         
-        if (this.envName === 'dev' || this.envName === 'test') {
+        // if (this.envName === 'dev' || this.envName === 'test') {
             let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
             this.lang = availableLang;
-        }
+        // }
       
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
