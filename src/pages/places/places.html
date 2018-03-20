@@ -4,7 +4,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
+<ion-content class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
     <ion-refresher *ngIf="!isMapVisible" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="none" refreshingSpinner="bubbles">
         </ion-refresher-content>
@@ -54,7 +54,7 @@
                 *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
                 src="assets/img/user_home/icon_settings.svg">
                 <img
-                *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0" 
+                *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0"
                 src="assets/img/user_home/icon_settings_active.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
@@ -133,5 +133,4 @@
     <ion-infinite-scroll threshold="5px" *ngIf="page <= lastPage && !isMapVisible" (ionInfinite)="infiniteScroll($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_PLACES.LOADING_COMPANIES' | translate }}"></ion-infinite-scroll-content>
     </ion-infinite-scroll>
-
 </ion-content>
