@@ -50,8 +50,12 @@
         <ion-item class="block-search relative padding-top-3vw" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
             <a (click)="createPopover()" class="btn_search_settings">
-                <img src="assets/img/user_home/icon_settings.svg">
-                <img src="assets/img/user_home/icon_settings_active.svg">
+                <img
+                *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
+                src="assets/img/user_home/icon_settings.svg">
+                <img
+                *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0" 
+                src="assets/img/user_home/icon_settings_active.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
                 <div class="btn_map1" *ngIf="!isMapVisible">
