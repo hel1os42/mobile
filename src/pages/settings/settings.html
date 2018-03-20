@@ -1,140 +1,132 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>{{ 'PAGE_SETTINGS.SETTINGS' | translate }}</ion-title>
-    <!--
+    <ion-navbar>
+        <ion-title>{{ 'PAGE_SETTINGS.SETTINGS' | translate }}</ion-title>
+        <!--
     <a (click)="saveProfile()">
       <ion-icon padding-right color="dark" class="font-300" name="checkmark"></ion-icon>
     </a>
     -->
-  </ion-navbar>
-  <div class="header-shadow"></div>
+    </ion-navbar>
+    <div class="header-shadow"></div>
 </ion-header>
 
 <ion-content class="padding-no">
     <div [hidden]="envName !== 'dev' && envName !== 'test'">
-  <div padding-top class="block-lines-bottom-left-right">
-    <a class="select" (click)="toggleAccountsChoiceVisible()">
-      <span text-uppercase class="font-14 text-4F4F4F">
-        {{ 'PAGE_SETTINGS.CHOOSE_YOUR_ACCOUNT' | translate }}
-        <span text-lowercase>({{ 'PAGE_SETTINGS.HIDE' | translate }})</span>
-      </span>
-      <ion-icon class="text-828282 icon" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
-      <ion-icon class="text-828282 icon" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
-    </a>
-  </div>
+        <div padding-top class="block-lines-bottom-left-right">
+            <a class="select" (click)="toggleAccountsChoiceVisible()">
+                <span text-uppercase class="font-14 text-4F4F4F">
+                    {{ 'PAGE_SETTINGS.CHOOSE_YOUR_ACCOUNT' | translate }}
+                    <span text-lowercase>({{ 'PAGE_SETTINGS.HIDE' | translate }})</span>
+                </span>
+                <ion-icon class="text-828282 icon" *ngIf="isAccountsChoiceVisible" name="arrow-down"></ion-icon>
+                <ion-icon class="text-828282 icon" *ngIf="!isAccountsChoiceVisible" name="arrow-up"></ion-icon>
+            </a>
+        </div>
 
-  <div *ngIf="!isAccountsChoiceVisible" class="block-lines">
-    <ion-grid class="ava_user_adv">
-      <ion-row text-center align-items-center>
-        <ion-col>
-          <div margin-top
-              class="thumb_image"
-              [ngStyle]="{'background-image': 'url(' + user.picture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+        <div *ngIf="!isAccountsChoiceVisible" class="block-lines">
+            <ion-grid class="ava_user_adv">
+                <ion-row text-center align-items-center>
+                    <ion-col>
+                        <div margin-top class="thumb_image" [ngStyle]="{'background-image': 'url(' + user.picture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+                        </div>
+                        <div class="font-16 text-3E4B5D bold padding-top-3vw">{{ 'PAGE_SETTINGS.CLIENT' | translate }}</div>
+                    </ion-col>
+                    <ion-col>
+                        <ion-item no-lines>
+                            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col>
+                        <div margin-top class="thumb_image" [ngStyle]="{'background-image': 'url(' + advPicture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+                        </div>
+                        <div class="font-16 text-BDBDBD bold padding-top-3vw">{{ 'PAGE_SETTINGS.ADVERTISER' | translate }}</div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </div>
-          <div class="font-16 text-3E4B5D bold padding-top-3vw">{{ 'PAGE_SETTINGS.CLIENT' | translate }}</div>
-        </ion-col>
-        <ion-col>
-          <ion-item no-lines>
-            <ion-toggle (ionChange)="toggleAdvMode()" [(ngModel)]="isAdvMode"></ion-toggle>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <div margin-top
-              class="thumb_image"
-              [ngStyle]="{'background-image': 'url(' + advPicture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
-        </div>
-          <div class="font-16 text-BDBDBD bold padding-top-3vw">{{ 'PAGE_SETTINGS.ADVERTISER' | translate }}</div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-</div>
-  <!-- <p *ngIf="isAdvMode" margin>
+    </div>
+    <!-- <p *ngIf="isAdvMode" margin>
     <button (click)="openAdvRedeem()" color="primary" ion-button block>{{ 'PAGE_SETTINGS.CONFIRM_REDEMPTION' | translate }}</button>
   </p>
 
   -->
 
-  <div class="block-lines">
-    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.YOUR_INVITE_CODE' | translate }}</div>
-  </div>
-
-  <div class="block-lines">
-      <ion-item class="bg-gray label-copy">
-          <span class="text-3E4B5D font-16">{{ user.invite_code }}</span>
-          <a item-end>
-            <ion-icon (click)="copyInvCode()" class="text-FF5A00" name="ios-copy"></ion-icon>
-          </a>
-      </ion-item>
-  </div>
-
-  <div *ngIf="referralLink">
     <div class="block-lines">
-      <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.REFERRAL_LINK' | translate }}</div>
+        <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.YOUR_INVITE_CODE' | translate }}</div>
     </div>
 
     <div class="block-lines">
-      <ion-item class="bg-gray label-copy">
-        <span class="text-3E4B5D font-16">{{ referralLink }}</span>
-          <a item-end>
-              <ion-icon (click)="copyReferralLink()" class="text-FF5A00" name="ios-copy"></ion-icon>
-          </a>
-      </ion-item>
+        <ion-item class="bg-gray label-copy">
+            <span class="text-3E4B5D font-16">{{ user.invite_code }}</span>
+            <a item-end>
+                <ion-icon (click)="copyInvCode()" class="text-FF5A00" name="ios-copy"></ion-icon>
+            </a>
+        </ion-item>
     </div>
-  </div>
 
-  <div class="block-lines">
-      <!-- temporary to revert-->
-    <!-- <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.CHANGE_YOUR_PHONE_NUMBER' | translate }}</div> -->
-    <!-- temporary to remove-->
-    <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.YOUR_PHONE_NUMBER' | translate }}</div>
-  </div>
+    <div *ngIf="referralLink">
+        <div class="block-lines">
+            <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.REFERRAL_LINK' | translate }}</div>
+        </div>
 
-  <div class="block-lines block-phone">
-    <ion-grid class="bg-gray">
-      <ion-row align-items-center>
-        <ion-col col-8 text-left padding-left>
-          <div class="text-3E4B5D font-16">{{ user.phone }}</div>
-        </ion-col>
-        <ion-col col-4 class="padding-right-3vw">
-          <ion-item no-lines text-right>
-            <!--<button (click)="openChangePhone()"
+        <div class="block-lines">
+            <ion-item class="bg-gray label-copy">
+                <span class="text-3E4B5D font-16">{{ referralLink }}</span>
+                <a item-end>
+                    <ion-icon (click)="copyReferralLink()" class="text-FF5A00" name="ios-copy"></ion-icon>
+                </a>
+            </ion-item>
+        </div>
+    </div>
+
+    <div class="block-lines">
+        <!-- temporary to revert-->
+        <!-- <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.CHANGE_YOUR_PHONE_NUMBER' | translate }}</div> -->
+        <!-- temporary to remove-->
+        <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.YOUR_PHONE_NUMBER' | translate }}</div>
+    </div>
+
+    <div class="block-lines block-phone">
+        <ion-grid class="bg-gray">
+            <ion-row align-items-center>
+                <ion-col col-8 text-left padding-left>
+                    <div class="text-3E4B5D font-16">{{ user.phone }}</div>
+                </ion-col>
+                <ion-col col-4 class="padding-right-3vw">
+                    <ion-item no-lines text-right>
+                        <!--<button (click)="openChangePhone()"
                     color="primary"
                     ion-button
                     round
                     class="font-12 regular">
             {{ 'PAGE_SETTINGS.CHANGE' | translate }}
           </button>-->
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-
-
-    <div *ngIf="envName === 'dev' || envName=== 'test'">
-      <div class="block-lines">
-        <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.LANG' | translate }}</div>
-      </div>
-
-      <div class="block-lines">
-        <div no-lines>
-          <ion-item class="bg-gray" detail-push>
-            <ion-select
-              [(ngModel)]="lang"
-              (ionChange)="changeLang()"
-              [selectedText]="lang?.name"
-              multiple="false"
-              interface="action-sheet"
-              class="selected-lang">
-              <ion-option *ngFor="let lang of langs" [value]="lang">{{ lang.name }}</ion-option>
-            </ion-select>
-          </ion-item>
-        </div>
-      </div>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </div>
 
-    <!--
+
+    <!-- <div *ngIf="envName === 'dev' || envName=== 'test'"> -->
+    <dev>
+        <div class="block-lines">
+            <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.LANG' | translate }}</div>
+        </div>
+
+        <div class="block-lines">
+            <div no-lines>
+                <ion-item class="bg-gray" detail-push>
+                    <ion-select [(ngModel)]="lang" (ionChange)="changeLang()" [selectedText]="lang?.name" multiple="false" interface="action-sheet"
+                        class="selected-lang">
+                        <ion-option *ngFor="let lang of langs" [value]="lang">{{ lang.name }}</ion-option>
+                    </ion-select>
+                </ion-item>
+            </div>
+        </div>
+        </div>
+
+        <!--
     <div class="block-lines">
       <div text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_SETTINGS.PRIVATE_DATA' | translate }}</div>
     </div>
@@ -166,14 +158,14 @@
       </ion-select>
     </ion-item> -->
 
-  <!-- <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
+        <!-- <div *ngIf="!coords.lat" padding-left class="font-12 text-4F4F4F">{{ 'UNIT.DETECTING_YOUR_LOCATION' | translate }}</div>
 
   <div *ngIf="coords.lat" class="block-map">
     <div class="leaflet-map" leaflet [leafletOptions]="options">
     </div>
     <div id="marker"></div>
   </div> -->
-  <p margin>
-    <button (click)="saveProfile()" color="primary" ion-button block>{{ 'PAGE_SETTINGS.SAVE_CHANGES' | translate }}</button>
-  </p>
+        <p margin>
+            <button (click)="saveProfile()" color="primary" ion-button block>{{ 'PAGE_SETTINGS.SAVE_CHANGES' | translate }}</button>
+        </p>
 </ion-content>
