@@ -674,7 +674,12 @@ export class PlacesPage {
                 else if (data.specialities.length == 0) {
                     this.specialityFilter = [];
                 }
-                this.loadCompanies(this.page = 1);
+                if (data.tags.length == 0 && data.types.length == 0 && data.specialities.length == 0) {
+                    this.loadCompanies(this.page = 1, true);
+                }
+                else {
+                    this.loadCompanies(this.page = 1);
+                }
             }
         })
     }

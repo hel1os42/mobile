@@ -98,7 +98,15 @@ export class PlacesPopover {
 
     }
 
-    cancel() {
-        this.viewCtrl.dismiss();
+    clear() {
+        this.types = [];
+        this.tags = [];
+        this.specialities = [];
+        this.viewCtrl.dismiss({
+            types: this.types,
+            tags: this.tags,
+            specialities: this.specialities,
+            radius: this.radius
+        });
     }
 }
