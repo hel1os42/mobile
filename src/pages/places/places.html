@@ -51,6 +51,7 @@
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
             <a (click)="createPopover()" class="btn_search_settings">
                 <img src="assets/img/user_home/icon_settings.svg">
+                <img src="assets/img/user_home/icon_settings_active.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
                 <div class="btn_map1" *ngIf="!isMapVisible">
