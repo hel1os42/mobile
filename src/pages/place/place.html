@@ -99,7 +99,7 @@
 
     <div padding>
       <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-        <ion-item (click)="openOffer(offer)" *ngFor=" let offer of offersList" class="relative">
+        <ion-item (tap)="openOffer(offer)" *ngFor=" let offer of offersList" class="relative">
           <ion-avatar item-start>
             <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
           <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
