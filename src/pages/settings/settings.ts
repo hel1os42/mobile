@@ -68,12 +68,12 @@ export class SettingsPage {
       
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
-        this.coords.lat = this.user.latitude;
-        this.coords.lng = this.user.longitude;
+        // this.coords.lat = this.user.latitude;
+        // this.coords.lng = this.user.longitude;
         // this.addMap();//hided map
-        this.createBranchLink(this.user.invite_code);
+        // this.createBranchLink(this.user.invite_code);
 
-        if (!this.user.id) {
+        // if (!this.user.id) {
             this.profile.get(true)
                 .subscribe(user => {
                     this.user = user;
@@ -82,7 +82,7 @@ export class SettingsPage {
                     // this.addMap();//hided map
                     this.createBranchLink(this.user.invite_code);
                 });
-        }
+        // }
 
         this.place.get(true)
             .subscribe(
