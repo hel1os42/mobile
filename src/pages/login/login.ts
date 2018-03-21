@@ -32,7 +32,7 @@ export class LoginPage {
     phoneCodes = PHONE_CODES;
     numCode = PHONE_CODES.find(item => item.code === 'US');
     onKeyboardShowSubscription: Subscription;
-    // onKeyboardHideSubscription: Subscription;
+    onKeyboardHideSubscription: Subscription;
     backAction;
     countDown;
     counter = 60;
@@ -56,9 +56,18 @@ export class LoginPage {
         private analytics: GoogleAnalytics) {
 
         if (this.platform.is('android')) {
+            let
+                appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
+                appElHeight = appEl.clientHeight;
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
                 .subscribe(() => {
+                    appEl.style.height = (appElHeight - (appElHeight / 3)) + 'px';
                     this.content.scrollToBottom();
+                })
+
+            this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
+                .subscribe(() => {
+                    appEl.style.height = (appElHeight) + 'px';
                 })
         }
         this.envName = this.appMode.getEnvironmentMode();

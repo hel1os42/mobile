@@ -27,7 +27,7 @@ export class SignUpPage {
     numCode = PHONE_CODES.find(item => item.code === 'US');
     envName: string;
     onKeyboardShowSubscription: Subscription;
-    // onKeyboardHideSubscription: Subscript
+    onKeyboardHideSubscription: Subscription;
     termsUrl = 'http://nau.io/terms';
     policyUrl = 'http://nau.io/privacy-policy';
 
@@ -46,9 +46,22 @@ export class SignUpPage {
         private analytics: GoogleAnalytics) {
 
         if (this.platform.is('android')) {
+            //this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
+            //    .subscribe((resp) => {
+            //        this.content.scrollTo(1, resp.keyboardHeight - 30);
+            //    })
+            let
+                appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
+                appElHeight = appEl.clientHeight;
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
-                .subscribe((resp) => {
-                    this.content.scrollTo(1, resp.keyboardHeight - 30);
+                .subscribe(() => {
+                    appEl.style.height = (appElHeight - (appElHeight / 3)) + 'px';
+                    this.content.scrollToBottom();
+                })
+
+            this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
+                .subscribe(() => {
+                    appEl.style.height = (appElHeight) + 'px';
                 })
         }
 
