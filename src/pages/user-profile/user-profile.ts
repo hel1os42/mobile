@@ -13,6 +13,7 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
+import { TransactionService } from '../../providers/transaction.service';
 
 @Component({
     selector: 'page-user-profile',
@@ -31,7 +32,8 @@ export class UserProfilePage {
         private profile: ProfileService,
         private nav: NavController,
         private auth: AuthService,
-        public alert: AlertController) {
+        public alert: AlertController,
+        private transaction: TransactionService) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -49,6 +51,11 @@ export class UserProfilePage {
                 });
         }
 
+    }
+
+    ionSelected() {
+        this.profile.refreshAccounts(false);
+        this.transaction.refresh();
     }
 
     openSettings() {
