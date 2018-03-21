@@ -225,9 +225,9 @@ export class CreateUserProfilePage {
                     this.coords = {
                         lat: resp.latitude,
                         lng: resp.longitude
-                    };
-                    this.changeDetectorRef.detectChanges();
+                    }; 
                     this.addMap();
+                    this.changeDetectorRef.detectChanges();
                 })
         }
     }
@@ -276,7 +276,8 @@ export class CreateUserProfilePage {
                 if (this.coords.lng > 180 || this.coords.lng < -180) {
                     this.coords.lng = MapUtils.correctLng(this.coords.lng);
                     this._map.setView(this.coords, this._map.getZoom());
-                }
+                };
+                this.changeDetectorRef.detectChanges();
             }
         })
     }

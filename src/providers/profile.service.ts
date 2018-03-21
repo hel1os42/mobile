@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 export class ProfileService {
     user: User;
     onRefreshAccounts: EventEmitter<User> = new EventEmitter<User>();
+    onRefresh: EventEmitter<User> = new EventEmitter<User>();
 
     constructor(
         private api: ApiService,
@@ -19,7 +20,10 @@ export class ProfileService {
     get(forceReload: boolean, showLoading?: boolean) {
         if (forceReload || !this.user) {
             let obs = this.api.get('profile', { showLoading: showLoading });
-            obs.subscribe(user => this.user = user);
+            obs.subscribe(user => {
+                this.user = user;
+                this.onRefresh.emit(user);
+            });
             return obs;
         }
         else {

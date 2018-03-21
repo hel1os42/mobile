@@ -6,6 +6,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { StringValidator } from '../../validators/string.validator';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
     selector: 'page-signup-code',
@@ -26,7 +27,8 @@ export class SignUpCodePage {
         private nav: NavController,
         private auth: AuthService,
         private appMode: AppModeService,
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private analytics: GoogleAnalytics) {
 
         this.register = this.navParams.get('register');
         this.inviteCode = this.navParams.get('inviteCode');
@@ -79,6 +81,7 @@ export class SignUpCodePage {
                         code: this.register.code
                     })
                     .subscribe(res => {
+                        this.analytics.trackEvent("Session", 'event_phoneconfirm');
                         this.cancelTimer();
                         this.isRetry = false;
                         // this.nav.setRoot(CreateUserProfilePage, { user: resp});

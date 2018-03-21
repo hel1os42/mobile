@@ -1,0 +1,56 @@
+<svg width="31" height="24" viewBox="0 0 31 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-986 371)">
+<g id="Group">
+<g id="Ellipse">
+<mask id="mask0_outline_ins">
+<use xlink:href="#path0_fill" fill="white" transform="translate(990.5 -371)"/>
+</mask>
+<g mask="url(#mask0_outline_ins)">
+<use xlink:href="#path1_stroke_2x" transform="translate(990.5 -371)" fill="#FF5A00"/>
+</g>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 5.55112e-17 -5.55112e-17 1 998 -367)" fill="#FF5A00"/>
+</g>
+<g id="Line">
+<use xlink:href="#path3_stroke" transform="matrix(1 5.55112e-17 -5.55112e-17 1 987 -367)" fill="#FF5A00"/>
+</g>
+<g id="Ellipse">
+<mask id="mask1_outline_ins">
+<use xlink:href="#path0_fill" fill="white" transform="translate(990.5 -355)"/>
+</mask>
+<g mask="url(#mask1_outline_ins)">
+<use xlink:href="#path1_stroke_2x" transform="translate(990.5 -355)" fill="#FF5A00"/>
+</g>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(1 5.55112e-17 -5.55112e-17 1 998 -351)" fill="#FF5A00"/>
+</g>
+<g id="Line">
+<use xlink:href="#path3_stroke" transform="matrix(1 5.55112e-17 -5.55112e-17 1 987 -351)" fill="#FF5A00"/>
+</g>
+<g id="Ellipse">
+<mask id="mask2_outline_ins">
+<use xlink:href="#path0_fill" fill="white" transform="matrix(-1 0 0 1 1012 -363)"/>
+</mask>
+<g mask="url(#mask2_outline_ins)">
+<use xlink:href="#path1_stroke_2x" transform="matrix(-1 0 0 1 1012 -363)" fill="#FF5A00"/>
+</g>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(-1 5.55112e-17 5.55112e-17 1 1004.5 -359)" fill="#FF5A00"/>
+</g>
+<g id="Line">
+<use xlink:href="#path3_stroke" transform="matrix(-1 5.55112e-17 5.55112e-17 1 1015.5 -359)" fill="#FF5A00"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 8 4C 8 6.20914 6.20914 8 4 8C 1.79086 8 0 6.20914 0 4C 0 1.79086 1.79086 0 4 0C 6.20914 0 8 1.79086 8 4Z"/>
+<path id="path1_stroke_2x" d="M 6.5 4C 6.5 5.38071 5.38071 6.5 4 6.5L 4 9.5C 7.03757 9.5 9.5 7.03757 9.5 4L 6.5 4ZM 4 6.5C 2.61929 6.5 1.5 5.38071 1.5 4L -1.5 4C -1.5 7.03757 0.962434 9.5 4 9.5L 4 6.5ZM 1.5 4C 1.5 2.61929 2.61929 1.5 4 1.5L 4 -1.5C 0.962434 -1.5 -1.5 0.962434 -1.5 4L 1.5 4ZM 4 1.5C 5.38071 1.5 6.5 2.61929 6.5 4L 9.5 4C 9.5 0.962434 7.03757 -1.5 4 -1.5L 4 1.5Z"/>
+<path id="path2_stroke" d="M 0 -0.75C -0.414214 -0.75 -0.75 -0.414214 -0.75 0C -0.75 0.414214 -0.414214 0.75 0 0.75L 0 -0.75ZM 17.5 0.75C 17.9142 0.75 18.25 0.414214 18.25 0C 18.25 -0.414214 17.9142 -0.75 17.5 -0.75L 17.5 0.75ZM 0 0.75L 17.5 0.75L 17.5 -0.75L 0 -0.75L 0 0.75Z"/>
+<path id="path3_stroke" d="M 1.66533e-16 -0.75C -0.414214 -0.75 -0.75 -0.414214 -0.75 -1.66533e-16C -0.75 0.414214 -0.414214 0.75 -1.66533e-16 0.75L 1.66533e-16 -0.75ZM 3.5 0.75C 3.91421 0.75 4.25 0.414214 4.25 9.4369e-16C 4.25 -0.414214 3.91421 -0.75 3.5 -0.75L 3.5 0.75ZM -1.66533e-16 0.75L 3.5 0.75L 3.5 -0.75L 1.66533e-16 -0.75L -1.66533e-16 0.75Z"/>
+</defs>
+</svg>

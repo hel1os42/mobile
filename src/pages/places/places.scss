@@ -142,6 +142,21 @@ page-places {
     ion-navbar.toolbar.toolbar-ios{
         pointer-events: none;
     }
+
+    .scroll-content{
+        background-image: url(../assets/img/user_home/bg-content.jpg);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: 100% 50%;
+    }
+
+    .item-block-nau.list.list-ios {
+        margin: 0 0 5vw;
+        padding-top: 5vw;
+        background: #fff;
+        min-height: 40vh;
+    }
+
 }
 
 /*

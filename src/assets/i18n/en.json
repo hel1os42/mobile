@@ -22,6 +22,7 @@
         "DONE" : "Done",
         "OK" : "Ok",
         "CANCEL" : "Cancel",
+        "CLEAR": "Clear",
         "SIGN_UP" : "sign up",
         "SIGN_IN" : "sign in",
         "OFFERS" : "Offers",

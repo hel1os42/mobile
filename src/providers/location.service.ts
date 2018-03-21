@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Coords } from '../models/coords';
 import { NetworkService } from './network.service';
 import { ToastService } from './toast.service';
@@ -12,7 +12,8 @@ export class LocationService {
     geoposition: Geoposition;
     url = 'https://freegeoip.net/json/';
     onProfileCoordsChanged = new EventEmitter<Coords>();
-    profileCoords: Coords;
+    profileCoords = new Coords;
+    onProfileCoordsRefresh: Subscription;
 
     constructor(private geolocation: Geolocation,
         private http: Http,
@@ -20,6 +21,11 @@ export class LocationService {
         private network: NetworkService,
         private profile: ProfileService) {
 
+        this.onProfileCoordsRefresh = this.profile.onRefresh
+            .subscribe(resp => {
+                this.profileCoords.lat = resp.latitude;
+                this.profileCoords.lng = resp.longitude;
+            })
     }
 
     get(isHighAccuracy: boolean) {
@@ -75,7 +81,7 @@ export class LocationService {
 
     refreshDefaultCoords(coords: Coords, notEmit?: boolean) {
         if (!notEmit) {
-            this.onProfileCoordsChanged.emit(coords); 
+            this.onProfileCoordsChanged.emit(coords);
         }
         this.profileCoords = coords;
     }

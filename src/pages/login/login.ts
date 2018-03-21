@@ -12,6 +12,7 @@ import { StringValidator } from '../../validators/string.validator';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SignUpPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
     selector: 'page-login',
@@ -51,7 +52,8 @@ export class LoginPage {
         private alert: AlertController,
         private location: LocationService,
         private keyboard: Keyboard,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private analytics: GoogleAnalytics) {
 
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
@@ -101,6 +103,7 @@ export class LoginPage {
     }
 
     getOtp() {
+        this.analytics.trackEvent("Session", 'event_signin');
         this.auth.getOtp(this.numCode.dial_code + this.authData.phone)
             .subscribe(() => {
                 this.isVisibleLoginButton = true;
@@ -133,6 +136,7 @@ export class LoginPage {
             code: this.authData.code
         })
             .subscribe(resp => {
+                this.analytics.trackEvent("Session", 'event_phoneconfirm');
                 this.profile.get(true)
                     .subscribe(res => {
                         this.location.refreshDefaultCoords({ lat: res.latitude, lng: res.longitude }, true);

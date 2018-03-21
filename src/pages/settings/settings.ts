@@ -61,19 +61,19 @@ export class SettingsPage {
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
         
-        if (this.envName === 'dev' || this.envName === 'test') {
+        // if (this.envName === 'dev' || this.envName === 'test') {
             let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
             this.lang = availableLang;
-        }
+        // }
       
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
-        this.coords.lat = this.user.latitude;
-        this.coords.lng = this.user.longitude;
+        // this.coords.lat = this.user.latitude;
+        // this.coords.lng = this.user.longitude;
         // this.addMap();//hided map
-        this.createBranchLink(this.user.invite_code);
+        // this.createBranchLink(this.user.invite_code);
 
-        if (!this.user.id) {
+        // if (!this.user.id) {
             this.profile.get(true)
                 .subscribe(user => {
                     this.user = user;
@@ -82,7 +82,7 @@ export class SettingsPage {
                     // this.addMap();//hided map
                     this.createBranchLink(this.user.invite_code);
                 });
-        }
+        // }
 
         this.place.get(true)
             .subscribe(
