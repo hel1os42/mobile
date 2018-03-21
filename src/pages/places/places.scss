@@ -29,6 +29,7 @@ page-places {
         height: calc(100vh - 247px);
         height: -webkit-calc(100vh - 247px);
         height: -moz-calc(100vh - 247px);
+        position: relative;
     }
     a[href^="http://maps.google.com/maps"] {
         display: none !important
@@ -141,6 +142,74 @@ page-places {
 
     ion-navbar.toolbar.toolbar-ios{
         pointer-events: none;
+    }
+
+    .user-pin{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        pointer-events: none;
+        background-image: url(../assets/img/icon_user_map.svg);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 5vw;
+        z-index: 111111;
+    }
+
+    .user-location{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        z-index: 111111;
+        color: #FF5A00;
+        background: #fff;
+        width: 15vw;
+        height: 15vw;
+        border-radius: 100vw;
+        border: 1px solid lightgray;
+        display: flex;
+    }
+
+    .user-location:active{
+        opacity: 0.5;
+    }
+
+    ion-icon{
+        margin: auto;
+        font-size: 9vw;
+    }
+
+    .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+        border: none;
+    }
+
+    .leaflet-touch .leaflet-bar a{
+        background: #FF5A00;
+        color: #fff;
+        width: 10vw;
+        height: 10vw;
+        font-size: 7vw;
+    }
+
+    .leaflet-bar a:hover{
+        background: #FF5A00;
+        color: #fff;
+    }
+
+    .leaflet-touch .leaflet-bar a:first-child {
+        border-top-left-radius: 100vw;
+        border-top-right-radius: 100vw;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        line-height: 9vw;
+    }
+
+    .leaflet-touch .leaflet-bar a:last-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 100vw;
+        border-bottom-right-radius: 100vw;
+        line-height: 8vw;
     }
 }
 

@@ -54,7 +54,7 @@
                 *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
                 src="assets/img/user_home/icon_settings.svg">
                 <img
-                *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0" 
+                *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0"
                 src="assets/img/user_home/icon_settings_active.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
@@ -127,6 +127,8 @@
             [leafletLayers]="getLayers()"
             [leafletFitBounds]="fitBounds"
             (leafletMapReady)="onMapReady($event)">
+            <span class="user-pin"></span>
+            <span class="user-location"><ion-icon name="ios-locate-outline"></ion-icon></span>
         </div>
     </div>
 
