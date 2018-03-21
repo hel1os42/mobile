@@ -99,7 +99,7 @@
 
     <div padding>
       <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-        <ion-item (tap)="openOffer(offer)" *ngFor=" let offer of offersList" class="relative">
+        <a ion-item detail-none (tap)="openOffer(offer)" *ngFor=" let offer of offersList" class="relative">
           <ion-avatar item-start>
             <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
           <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
@@ -118,7 +118,7 @@
         <span class="gift extrabold">1</span>
         -->
       </div>
-    </ion-item>
+    </a>
   </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
