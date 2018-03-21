@@ -118,7 +118,7 @@
         </a>
     </ion-list>
 
-    <div *ngIf="isMapVisible">
+    <div (touchend)="addMapEvent($event)" *ngIf="isMapVisible">
         <div
             id="map_leaf"
             class="leaflet-map"

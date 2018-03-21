@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController, LoadingController, NavController, Platform, Popover, PopoverController } from 'ionic-angular';
-import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Map, Marker, marker, popup, tileLayer } from 'leaflet';
+import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarker, CircleMarkerOptions } from 'leaflet';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 import { ChildCategory } from '../../models/childCategory';
@@ -30,6 +30,7 @@ import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { COUNTRIES } from '../../const/countries';
 import { StatusBar } from '@ionic-native/status-bar';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
+import { MapUtils } from '../../utils/map.utils';
 
 
 @Component({
@@ -76,6 +77,9 @@ export class PlacesPage {
     isRefreshLoading = false;
     refresher;
     _map: Map;
+    circle: Circle;
+    circleRadius = 10000;
+    isMapEvent = false;
 
     constructor(
         private platform: Platform,
@@ -95,7 +99,8 @@ export class PlacesPage {
         private storage: StorageService,
         private testimonials: TestimonialsService,
         private geocoder: GeocodeService,
-        private statusBar: StatusBar) {
+        private statusBar: StatusBar,
+        private changeDetectorRef: ChangeDetectorRef) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -182,6 +187,38 @@ export class PlacesPage {
     onMapReady(map: Map) {
         if (!this._map && this.coords.lat) {
             this._map = map;
+            this.generateBounds(this.markers);
+        }
+        this._map.on({
+            moveend: (event: LeafletEvent) => {
+                setTimeout(() => {
+                    if (this.coords.lat != this._map.getCenter().lat && this.isMapEvent) {
+                        this.coords = this._map.getCenter();
+                        if (this.coords.lng > 180 || this.coords.lng < -180) {
+                            this.coords.lng = MapUtils.correctLng(this.coords.lng);
+                            this._map.panTo(this.coords);
+                        };
+                        if ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0) {
+                            this.loadCompanies(this.page, true);
+                        }
+                        else {
+                            this.loadCompanies(this.page);
+                        }
+                        this.changeDetectorRef.detectChanges();
+                    }
+                    this.isMapEvent = false;
+                }, 200)
+            }
+        })
+    }
+
+    addMapEvent(event) {
+        if (this._map
+            && event.target.className !== 'leaflet-control-zoom-in'
+            && event.target.className !== 'leaflet-control-zoom-in activated'
+            && event.target.className !== 'leaflet-control-zoom-out'
+            && event.target.className !== 'leaflet-control-zoom-out activated') {
+            this.isMapEvent = true;
         }
     }
 
@@ -356,9 +393,13 @@ export class PlacesPage {
 
 
     getCompaniesList() {
-        // this.categoryFilter = [this.selectedCategory.id];
-        this.loadCompanies(this.page, true);
         this.addMap();
+        if ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0) {
+            this.loadCompanies(this.page, true);
+        }
+        else {
+            this.loadCompanies(this.page);
+        }
         this.userPin = [marker([this.coords.lat, this.coords.lng], {
             icon: icon({
                 iconSize: [22, 26],
@@ -377,11 +418,14 @@ export class PlacesPage {
             attribution: '© OpenStreetMap',
             tileSize: 512,
             zoomOffset: -1,
-            detectRetina: true
+            detectRetina: true,
+            circle: this.circle
         });
         this.options = {
             zoom: 16,
-            center: latLng(this.coords)
+            center: latLng(this.coords),
+            zoomSnap: 0.5,
+            zoomDelta: 0.5
         };
     }
 
@@ -420,24 +464,52 @@ export class PlacesPage {
     }
 
     generateBounds(markers: Marker[]): any {
-        if (markers && markers.length > 0) {
-            let latLngPairs = markers.map(p => p.getLatLng());
-            let bounds = new LatLngBounds(this.coords, this.coords);
-            latLngPairs.forEach((latLng: LatLng) => {
-                bounds.extend(latLng);
-            });
-            if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-                return bounds;
-            }
-            let northEast = bounds.getNorthEast();
-            northEast.lat = northEast.lat + 0.3;
-            bounds.extend(northEast);
-            return bounds;
-        }
+        //     if (markers && markers.length > 0) {
+        //         let latLngPairs = markers.map(p => p.getLatLng());
+        //         let bounds = new LatLngBounds(this.coords, this.coords);
+        //         latLngPairs.forEach((latLng: LatLng) => {
+        //             bounds.extend(latLng);
+        //         });
+        //         if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+        //             return bounds;
+        //         }
+        //         let northEast = bounds.getNorthEast();
+        //         northEast.lat = northEast.lat + 0.3;
+        //         bounds.extend(northEast);
+        //         return bounds;
+        //     }
+        //     if (this._map) {
+        //         this._map.setView(this.coords, this._map.getZoom());
+        //     }
+        //     return undefined;
         if (this._map) {
-            this._map.setView(this.coords, this._map.getZoom());
+            let distance: number;
+            if (markers && markers.length > 0) {
+                let latLngPairs = markers.map(p => p.getLatLng());
+                let distanceArr = [];
+                latLngPairs.forEach((latLng: LatLng) => {
+                    distanceArr.push(this._map.distance(this.coords, latLng))
+                });
+                distance = _.max(distanceArr);
+                this.circleRadius = distance;
+                if (this.circle) {
+                    this.circle.remove();
+                    this.circle = undefined;
+                }
+                let options: CircleMarkerOptions = {
+                    // stroke: false,
+                    // fill: false
+                }
+                this.circle = new Circle(this.coords, distance, options).addTo(this._map);
+                this.fitBounds = this.circle.getBounds();
+                let zoom = this._map.getBoundsZoom(this.fitBounds);
+                this.changeDetectorRef.detectChanges();
+            }
+            else {
+                distance = this.circleRadius;
+            }
+
         }
-        return undefined;
     }
 
     isSelectedCategory(category: OfferCategory) {
@@ -477,7 +549,8 @@ export class PlacesPage {
             if (this.companies.length == 0) {
                 this.noPlacesHandler();
             }
-            this.fitBounds = this.generateBounds(this.markers);
+            // this.fitBounds = this.generateBounds(this.markers);
+            this.generateBounds(this.markers);
         },
             err => {
                 this.isRefreshLoading = false;
@@ -715,7 +788,7 @@ export class PlacesPage {
                         this.companies.forEach((company) => {
                             this.markers.push(this.createMarker(company.latitude, company.longitude, company));
                         })
-                        this.fitBounds = this.generateBounds(this.markers);
+                        this.generateBounds(this.markers);
                         infiniteScroll.complete();
                     });
             });
