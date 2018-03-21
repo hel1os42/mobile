@@ -55,11 +55,11 @@ export class TabsPage {
             this.statusBar.styleDefault();
         }
     }
-    // refresh() {
-    //     if (this.shownTransactions) {
-    //         this.profile.refreshAccounts();
-    //         this.transaction.refresh();
-    //     }
-    //     this.shownTransactions = true;
-    // }
+    refresh() {
+        if (this.shownTransactions) {
+            this.profile.refreshAccounts(false);
+            this.transaction.refresh();
+        }
+        this.shownTransactions = true;
+    }
 }

@@ -49,8 +49,8 @@ export class ProfileService {
         return this.api.patch('profile', data);
     }
 
-    refreshAccounts() {
-        this.getWithAccounts().subscribe(user => this.onRefreshAccounts.emit(user));
+    refreshAccounts(isLoading?) {
+        this.getWithAccounts(isLoading).subscribe(user => this.onRefreshAccounts.emit(user));
     }
 
 }
