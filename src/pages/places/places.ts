@@ -30,6 +30,7 @@ import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { COUNTRIES } from '../../const/countries';
 import { StatusBar } from '@ionic-native/status-bar';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 
 @Component({
@@ -95,7 +96,8 @@ export class PlacesPage {
         private storage: StorageService,
         private testimonials: TestimonialsService,
         private geocoder: GeocodeService,
-        private statusBar: StatusBar) {
+        private statusBar: StatusBar,
+        private analytics: GoogleAnalytics) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -536,6 +538,7 @@ export class PlacesPage {
     }
 
     openPlace(data, isShare?: boolean) {
+        this.analytics.trackEvent("Session", 'event_chooseplace');
         let params;
         if (isShare) {
             params = {

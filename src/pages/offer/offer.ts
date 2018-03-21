@@ -16,6 +16,7 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
     selector: 'page-offer',
@@ -47,7 +48,8 @@ export class OfferPage {
         private alert: AlertController,
         private testimonials: TestimonialsService,
         private statusBar: StatusBar,
-        private platform: Platform) {
+        private platform: Platform,
+        private analytics: GoogleAnalytics) {
 
         this.points = 1;
         if (this.share.get()) {
@@ -118,6 +120,7 @@ export class OfferPage {
     }
 
     openRedeemPopover() {
+        this.analytics.trackEvent("Session", 'event_showqr');
         // if (!this.disable()) {distance validation
         if (this.timer)
             return;
@@ -141,6 +144,7 @@ export class OfferPage {
                                 this.offers.refreshRedeemedOffers();
                                 let offerCongratulationPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
                                 offerCongratulationPopover.present();
+                                this.analytics.trackEvent("Session", 'event_redeemoffer');
                                 offerCongratulationPopover.onDidDismiss(() => {
                                     // this.nav.popToRoot();
                                     // if (data.status === 'approved') {

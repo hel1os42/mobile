@@ -11,6 +11,7 @@ import { LocationService } from '../../providers/location.service';
 import { Subscription } from 'rxjs';
 import { Keyboard } from '@ionic-native/keyboard';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
     selector: 'page-signup',
@@ -41,7 +42,8 @@ export class SignUpPage {
         private storage: StorageService,
         private location: LocationService,
         private keyboard: Keyboard,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private analytics: GoogleAnalytics) {
 
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
@@ -79,6 +81,7 @@ export class SignUpPage {
     }
 
     getCode() {
+        this.analytics.trackEvent("Session", 'event_signup');
         this.phoneNumber = this.numCode.dial_code + this.formData.phone;
         // let inviteCode = this.auth.getInviteCode();
         let inviteCode = this.formData.code;

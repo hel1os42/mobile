@@ -16,6 +16,7 @@ import { ToastService } from '../../providers/toast.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
 import { StatusBar } from '@ionic-native/status-bar';
 import { BookmarksPage } from '../bookmarks/bookmarks';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
     selector: 'page-place',
@@ -44,7 +45,8 @@ export class PlacePage {
         private toast: ToastService,
         private alert: AlertController,
         private testimonials: TestimonialsService,
-        private statusBar: StatusBar) {
+        private statusBar: StatusBar,
+        private analytics: GoogleAnalytics) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -171,6 +173,7 @@ export class PlacePage {
     }
 
     openOffer(offer, company?) {
+        this.analytics.trackEvent("Session", 'event_chooseoffe');
         this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,
