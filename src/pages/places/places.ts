@@ -417,8 +417,8 @@ export class PlacesPage {
         }
         this.userPin = [marker([this.coords.lat, this.coords.lng], {
             icon: icon({
-                iconSize: [24, 30],
-                iconAnchor: [13, 35],
+                iconSize: [40, 50],
+                iconAnchor: [20, 50],
                 // iconUrl: 'assets/img/icon_user_map.svg',
                 iconUrl: 'assets/img/user_home/pin_user.svg',
                 //shadowUrl:
