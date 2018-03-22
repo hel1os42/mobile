@@ -52,16 +52,22 @@ export class SignUpPage {
             //    })
             let
                 appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
-                appElHeight = appEl.clientHeight;
+                appEl2 = <HTMLElement>(document.getElementsByTagName('BODY')[0]),
+                appElHeight = appEl.clientHeight,
+                appElHeight2 = appEl2.clientHeight;
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
                 .subscribe(() => {
-                    appEl.style.height = (appElHeight - (appElHeight / 3)) + 'px';
+                console.log('signup open')
+                    appEl.style.height = (appElHeight2 - (appElHeight2 / 3)) + 'px';
                     this.content.scrollToBottom();
                 })
 
             this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
                 .subscribe(() => {
-                    appEl.style.height = (appElHeight) + 'px';
+                    //window.alert(appElHeight)
+                    //window.alert(appElHeight2)
+                    console.log('signup hide')
+                    appEl.style.height = (appElHeight2) + 'px';
                 })
         }
 
@@ -142,6 +148,7 @@ export class SignUpPage {
     ionViewDidLeave() {
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription.unsubscribe();
+            this.onKeyboardHideSubscription.unsubscribe();
         }
     }
 
