@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="39px" viewBox="0 0 31 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Untitled 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="1.3322%" y1="2.23050513%" x2="94.1892968%" y2="4.12305641%" id="linearGradient-1">
+            <stop stop-color="#FF5A00" offset="0.552486%"></stop>
+            <stop stop-color="#FF8A0F" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="1.3322%" y1="2.26647821%" x2="94.1892968%" y2="4.18955212%" id="linearGradient-2">
+            <stop stop-color="#FF5A00" offset="0.552486%"></stop>
+            <stop stop-color="#FF8A0F" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="pin_user" transform="translate(-109.000000, -167.000000)" fill-rule="nonzero" fill="url(#linearGradient-2)">
+            <g id="Ellipse-2" transform="translate(109.000000, 167.000000)">
+                <g id="path0_fill-link">
+                    <path d="M31,15.5 C31,24.0604 15.5,38.381 15.5,38.381 C15.5,38.381 0,24.0604 0,15.5 C0,6.93959 6.93959,0 15.5,0 C24.0604,0 31,6.93959 31,15.5 Z" id="path0_fill"></path>
+                </g>
+            </g>
+        </g>
+        <g id="man-user" transform="translate(8.000000, 5.000000)" fill-rule="nonzero">
+            <path d="M7.50006386,10 C9.98520521,10 12,7.76144602 12,5.00002921 C12,2.23855398 11.3385133,0 7.50006386,0 C3.66161444,0 3,2.23855398 3,5.00002921 C3,7.76144602 5.01479479,10 7.50006386,10 Z" id="Shape" fill="#FFFFFF"></path>
+            <path d="M0.00692820323,17.5 C0.00092820323,16.5270717 -0.00507179677,17.2258786 0.00692820323,17.5 L0.00692820323,17.5 Z" id="Shape" fill="#EEEDED"></path>
+            <path d="M15,17.5 C15.019,17.3493069 15.0065,16.454507 15,17.5 L15,17.5 Z" id="Shape" fill="#EEEDED"></path>
+            <path d="M14.9916033,17.0043539 C14.9180617,12.224254 14.3120341,10.8621851 9.67451987,10 C9.67451987,10 9.02171871,10.8569024 7.50016906,10.8569024 C5.97861941,10.8569024 5.32570555,10 5.32570555,10 C0.738796886,10.8527807 0.0959139817,12.1946476 0.0113834455,16.8490654 C0.00445194157,17.2291304 0.0012397812,17.2491002 0,17.2049808 C0.000281768454,17.2876466 0.000619890599,17.440555 0.000619890599,17.7071868 C0.000619890599,17.7071868 1.1047014,20 7.50016906,20 C13.895524,20 14.9997182,17.7071868 14.9997182,17.7071868 C14.9997182,17.535876 14.9998309,17.4167537 15,17.3357135 C14.9987602,17.3629978 14.9962807,17.3101126 14.9916033,17.0043539 Z" id="Shape" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>
