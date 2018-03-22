@@ -27,7 +27,7 @@ export class SignUpPage {
     numCode = PHONE_CODES.find(item => item.code === 'US');
     envName: string;
     onKeyboardShowSubscription: Subscription;
-    // onKeyboardHideSubscription: Subscript
+    onKeyboardHideSubscription: Subscription;
     termsUrl = 'http://nau.io/terms';
     policyUrl = 'http://nau.io/privacy-policy';
 
@@ -46,9 +46,28 @@ export class SignUpPage {
         private analytics: GoogleAnalytics) {
 
         if (this.platform.is('android')) {
+            //this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
+            //    .subscribe((resp) => {
+            //        this.content.scrollTo(1, resp.keyboardHeight - 30);
+            //    })
+            let
+                appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
+                appEl2 = <HTMLElement>(document.getElementsByTagName('BODY')[0]),
+                appElHeight = appEl.clientHeight,
+                appElHeight2 = appEl2.clientHeight;
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
-                .subscribe((resp) => {
-                    this.content.scrollTo(1, resp.keyboardHeight - 30);
+                .subscribe(() => {
+                console.log('signup open')
+                    appEl.style.height = (appElHeight2 - (appElHeight2 / 3)) + 'px';
+                    this.content.scrollToBottom();
+                })
+
+            this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
+                .subscribe(() => {
+                    //window.alert(appElHeight)
+                    //window.alert(appElHeight2)
+                    console.log('signup hide')
+                    appEl.style.height = (appElHeight2) + 'px';
                 })
         }
 
@@ -129,6 +148,7 @@ export class SignUpPage {
     ionViewDidLeave() {
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription.unsubscribe();
+            this.onKeyboardHideSubscription.unsubscribe();
         }
     }
 

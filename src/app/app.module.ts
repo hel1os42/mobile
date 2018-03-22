@@ -97,7 +97,7 @@ import { FavoritesService } from '../providers/favorites.service';
 import { FormatTimePipe } from '../pipes/format-time.pipe';
 import { TestimonialsService } from '../providers/testimonials.service';
 import { NoPlacesPopover } from '../pages/places/noPlaces.popover';
- 
+
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.

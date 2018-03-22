@@ -41,6 +41,7 @@
     "android-versions": "1.2.1",
     "angular2-qrcode": "2.0.1",
     "branch-cordova-sdk": "2.6.22",
+    "build": "0.1.4",
     "chart.js": "2.7.1",
     "cordova-android": "6.3.0",
     "cordova-android-support-gradle-release": "1.2.0",
@@ -105,12 +106,12 @@
       "cordova.plugins.diagnostic": {},
       "ionic-plugin-keyboard": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-google-analytics": {},
       "com.cordova.plugins.cookiemaster": {},
       "cordova-plugin-image-picker": {},
       "cordova-android-support-gradle-release": {
         "ANDROID_SUPPORT_VERSION": "26.+"
-      }
+      },
+      "cordova-plugin-google-analytics": {}
     },
     "platforms": [
       "ios",
