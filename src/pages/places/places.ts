@@ -79,7 +79,9 @@ export class PlacesPage {
     _map: Map;
     circle: Circle;
     circleRadius = 10000;
-    isMapEvent = false;
+    // isMapEvent = false;
+    zoom: number;
+    isRevertCoords = false;
 
     constructor(
         private platform: Platform,
@@ -170,7 +172,7 @@ export class PlacesPage {
             .subscribe(coords => {
                 this.coords = coords;
                 this.page = 1;
-                this.loadCompanies(this.page, true);
+                this.loadCompanies(true, this.page, true);
                 this.userPin = [marker([this.coords.lat, this.coords.lng], {
                     icon: icon({
                         iconSize: [22, 26],
@@ -179,47 +181,50 @@ export class PlacesPage {
                         //shadowUrl:
                     })
                 })]
-                // this.changeDetectorRef.detectChanges();
+                this.changeDetectorRef.detectChanges();
             })
 
     }
 
     onMapReady(map: Map) {
+        // console.log(map);
+        let width = this.platform.width();
+        let heigth = document.getElementById("map_leaf").offsetHeight;
         if (!this._map && this.coords.lat) {
             this._map = map;
             this.generateBounds(this.markers);
         }
+        this._map = map;
         this._map.on({
             moveend: (event: LeafletEvent) => {
-                setTimeout(() => {
-                    if (this.coords.lat != this._map.getCenter().lat && this.isMapEvent) {
-                        this.coords = this._map.getCenter();
-                        if (this.coords.lng > 180 || this.coords.lng < -180) {
-                            this.coords.lng = MapUtils.correctLng(this.coords.lng);
-                            this._map.panTo(this.coords);
-                        };
-                        if ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0) {
-                            this.loadCompanies(this.page, true);
-                        }
-                        else {
-                            this.loadCompanies(this.page);
-                        }
-                        this.changeDetectorRef.detectChanges();
+                // console.log(event);
+                this.zoom = event.target._zoom;
+                // let distance = this._map.distance(this.coords, this._map.getCenter());
+                if (this.coords.lat != this._map.getCenter().lat) {
+                    this.coords = this._map.getCenter();
+                    if (this.coords.lng > 180 || this.coords.lng < -180) {
+                        this.coords.lng = MapUtils.correctLng(this.coords.lng);
+                        this._map.panTo(this.coords);
+                        // this._map.setView(this.coords, this._map.getZoom());
+                    };
+                    let radius = MapUtils.getRadius(heigth / 2, this._map);
+                    this.radius = Math.round(radius);
+                    if ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0) {
+                        this.loadCompanies(false, this.page, true, true);
                     }
-                    this.isMapEvent = false;
-                }, 200)
+                    else {
+                        this.loadCompanies(false,this.page, false, true);
+                    }
+                    this.changeDetectorRef.detectChanges();
+                }
             }
         })
     }
 
-    addMapEvent(event) {
-        if (this._map
-            && event.target.className !== 'leaflet-control-zoom-in'
-            && event.target.className !== 'leaflet-control-zoom-in activated'
-            && event.target.className !== 'leaflet-control-zoom-out'
-            && event.target.className !== 'leaflet-control-zoom-out activated') {
-            this.isMapEvent = true;
-        }
+    revertedLocation() {
+        this.isRevertCoords = true;
+        this.getLocationStatus();
+        // this._map.setView(this.coords, this.zoom);
     }
 
     getLocationStatus() {
@@ -337,6 +342,11 @@ export class PlacesPage {
                         lat: user.latitude,
                         lng: user.longitude
                     };
+                    if (this.isRevertCoords) {
+                        // this._map.setView(this.coords, this.zoom);
+                        this._map.panTo(this.coords);
+                        this.isRevertCoords = false;
+                    }
                     if (this.shareData) {
                         this.openPlace(this.shareData, true)
                     }
@@ -356,6 +366,11 @@ export class PlacesPage {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
+                if (this.isRevertCoords) {
+                    // this._map.setView(this.coords, this.zoom);
+                    this._map.panTo(this.coords);
+                    this.isRevertCoords = false;
+                }
                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                 if (this.shareData) {
                     this.openPlace(this.shareData, true)
@@ -395,10 +410,10 @@ export class PlacesPage {
     getCompaniesList() {
         this.addMap();
         if ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0) {
-            this.loadCompanies(this.page, true);
+            this.loadCompanies(true, this.page, true);
         }
         else {
-            this.loadCompanies(this.page);
+            this.loadCompanies(true, this.page);
         }
         this.userPin = [marker([this.coords.lat, this.coords.lng], {
             icon: icon({
@@ -414,7 +429,7 @@ export class PlacesPage {
         this.tileLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 20,
             maxNativeZoom: 18,
-            minZoom: 1,
+            minZoom: 1.5,
             attribution: '© OpenStreetMap',
             tileSize: 512,
             zoomOffset: -1,
@@ -422,6 +437,7 @@ export class PlacesPage {
             circle: this.circle
         });
         this.options = {
+            layer: [this.tileLayer],
             zoom: 16,
             center: latLng(this.coords),
             zoomSnap: 0.5,
@@ -434,6 +450,7 @@ export class PlacesPage {
             this.tileLayer,
             ...this.markers,
             ...this.userPin,
+            // ...[this.circle]
         ]
     }
 
@@ -497,12 +514,12 @@ export class PlacesPage {
                     this.circle = undefined;
                 }
                 let options: CircleMarkerOptions = {
-                    // stroke: false,
-                    // fill: false
+                    stroke: false,
+                    fill: false
                 }
                 this.circle = new Circle(this.coords, distance, options).addTo(this._map);
                 this.fitBounds = this.circle.getBounds();
-                let zoom = this._map.getBoundsZoom(this.fitBounds);
+                // let zoom = this._map.getBoundsZoom(this.fitBounds);
                 this.changeDetectorRef.detectChanges();
             }
             else {
@@ -520,7 +537,7 @@ export class PlacesPage {
         this.isChangedCategory = this.selectedCategory.id !== category.id;
         this.search = "";
         this.selectedCategory = category;
-        this.loadCompanies(this.page = 1, true);
+        this.loadCompanies(true, this.page = 1, true);
         if (this.isChangedCategory) {
             this.tagFilter = [];
             this.typeFilter = [];
@@ -528,8 +545,8 @@ export class PlacesPage {
         }
     }
 
-    loadCompanies(page, isRoot?: boolean) {
-        let isRefreshLoading = !this.isRefreshLoading;
+    loadCompanies(isHandler: boolean, page, isRoot?: boolean, isNoBounds?: boolean) {
+        let isRefreshLoading = !this.isRefreshLoading && !this.isMapVisible;
         let obs = isRoot ? this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page, isRefreshLoading)
             : this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
                 this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
@@ -546,11 +563,13 @@ export class PlacesPage {
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
-            if (this.companies.length == 0) {
+            if (this.companies.length == 0 && isHandler) {
                 this.noPlacesHandler();
             }
             // this.fitBounds = this.generateBounds(this.markers);
-            this.generateBounds(this.markers);
+            if (!isNoBounds) {
+                this.generateBounds(this.markers);
+            }
         },
             err => {
                 this.isRefreshLoading = false;
@@ -587,7 +606,7 @@ export class PlacesPage {
                         this.specialityFilter = [];
                         this.search = '';
                         //
-                        this.loadCompanies(this.page, true);
+                        this.loadCompanies(true, this.page, true);
                     }
                 })
                 // this.changeDetectorRef.detectChanges();
@@ -596,7 +615,6 @@ export class PlacesPage {
 
     toggleMap() {
         this.isMapVisible = !this.isMapVisible;
-
         function renderMap() {
             if (document.getElementById("map_leaf")) {
                 document.getElementById("map_leaf").style.height = window.innerHeight -
@@ -748,10 +766,10 @@ export class PlacesPage {
                     this.specialityFilter = [];
                 }
                 if (data.tags.length == 0 && data.types.length == 0 && data.specialities.length == 0) {
-                    this.loadCompanies(this.page = 1, true);
+                    this.loadCompanies(true, this.page = 1, true);
                 }
                 else {
-                    this.loadCompanies(this.page = 1);
+                    this.loadCompanies(true, this.page = 1);
                 }
             }
         })
@@ -771,7 +789,7 @@ export class PlacesPage {
     }
 
     searchCompanies($event) {
-        this.loadCompanies(this.page = 1);
+        this.loadCompanies(true, this.page = 1);
     }
 
     infiniteScroll(infiniteScroll) {
