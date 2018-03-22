@@ -625,8 +625,8 @@ export class PlacesPage {
 
     presentPopover() {
         let popover = this.popoverCtrl.create(PlacesPopover, {
-            types: this.selectedTypes,
-            tags: this.selectedTags,
+            types: _.cloneDeep(this.selectedTypes),
+            tags: _.cloneDeep(this.selectedTags),
             radius: this.radius
         });
         this.search = "";
@@ -643,9 +643,6 @@ export class PlacesPage {
                 return;
             }
             else {
-                this.radius = data.radius;
-                this.storage.set('radius', this.radius);
-
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
                 if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {
@@ -653,51 +650,71 @@ export class PlacesPage {
                     this.typeFilter = data.types.filter(p => p.isSelected).map(p => p.id);
                     this.isChangedFilters = true;
                 }
-                else if (types.length == 0 && this.selectedTypes.length > 0) {
+                else if (types.length == 0 && this.typeFilter.length > 0) {
                     this.selectedTypes.forEach(type => {
                         type.isSelected = false;
                     });
                     this.typeFilter = [];
+                    this.isChangedFilters = true;
                 }
                 if (tags.length > 0 && this.getFilter(this.selectedTags, data.tags)) {
                     this.selectedTags = data.tags;
                     this.tagFilter = data.tags.filter(p => p.isSelected).map(p => p.slug);
                     this.isChangedFilters = true;
                 }
-                else if (tags.length == 0 && this.selectedTags) {
+                else if (tags.length == 0 && this.tagFilter && this.tagFilter.length > 0) {
                     this.selectedTags.forEach(type => {
                         type.isSelected = false;
                     });
                     this.tagFilter = [];
+                    this.isChangedFilters = true;
                 }
-                if (data.specialities.length > 0 && this.specialityFilter !== data.specialities) {
+                if (data.specialities.length > 0 && this.getFilter(this.specialityFilter, data.specialities, true)) {
                     this.specialityFilter = data.specialities.map(p => p.slug);
                     this.isChangedFilters = true;
                 }
-                else if (data.specialities.length == 0) {
+                else if (data.specialities.length == 0 && this.specialityFilter.length > 0) {
                     this.specialityFilter = [];
+                    this.isChangedFilters = true;
                 }
-                if (data.tags.length == 0 && data.types.length == 0 && data.specialities.length == 0) {
-                    this.loadCompanies(this.page = 1, true);
-                }
-                else {
-                    this.loadCompanies(this.page = 1);
+                if (this.isChangedFilters || this.radius != data.radius) {
+                    if (data.tags.length == 0 && data.types.length == 0 && data.specialities.length == 0) {
+                        this.loadCompanies(this.page = 1, true);
+                    }
+                    else {
+                        this.loadCompanies(this.page = 1);
+                    }
+                    this.radius = data.radius;
+                    this.storage.set('radius', this.radius);
+                    this.isChangedFilters = false;
                 }
             }
         })
     }
 
-    getFilter(arr, newArr) {
-        let isDiff;
-        for (let i = 0; i < arr.length; i++) {
-            for (let k = 0; k < newArr.length; k++) {
-                let d = !_.isEmpty(DataUtils.difference(arr[i], newArr[k]));
-                if (d) {
-                    isDiff = true;
+    getFilter(arr, newArr, isSpecialities?: boolean) {
+        if (arr.length != newArr.length) {
+            return true;
+        }
+        else {
+            let counter = 0;
+            for (let i = 0; i < arr.length; i++) {
+                for (let k = 0; k < newArr.length; k++) {
+                    if (isSpecialities) {
+                        if (arr[i] === newArr[i].slug) {
+                            counter++;
+                        }
+                    }
+                    else {
+                        if (arr[i].id === newArr[i].id && arr[i].isSelected === newArr[i].isSelected) {
+                            counter++;
+                        }
+                    }
+
                 }
             }
+            return counter != arr.length * newArr.length;
         }
-        return isDiff;
     }
 
     searchCompanies($event) {
