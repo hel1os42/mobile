@@ -79,9 +79,8 @@ export class PlacesPage {
     _map: Map;
     circle: Circle;
     circleRadius = 10000;
-    // isMapEvent = false;
-    zoom: number;
     isRevertCoords = false;
+    userCoords: Coords;
 
     constructor(
         private platform: Platform,
@@ -170,10 +169,14 @@ export class PlacesPage {
 
         this.onRefreshDefoultCoords = this.location.onProfileCoordsChanged
             .subscribe(coords => {
+                this.userCoords = {
+                    lat: coords.lat,
+                    lng: coords.lng
+                };
                 this.coords = coords;
                 this.page = 1;
                 this.loadCompanies(true, this.page, true);
-                this.userPin = [marker([this.coords.lat, this.coords.lng], {
+                this.userPin = [marker([this.userCoords.lat, this.userCoords.lng], {
                     icon: icon({
                         iconSize: [22, 26],
                         iconAnchor: [13, 35],
@@ -197,9 +200,6 @@ export class PlacesPage {
         this._map = map;
         this._map.on({
             moveend: (event: LeafletEvent) => {
-                // console.log(event);
-                this.zoom = event.target._zoom;
-                // let distance = this._map.distance(this.coords, this._map.getCenter());
                 if (this.coords.lat != this._map.getCenter().lat) {
                     this.coords = this._map.getCenter();
                     if (this.coords.lng > 180 || this.coords.lng < -180) {
@@ -213,7 +213,7 @@ export class PlacesPage {
                         this.loadCompanies(false, this.page, true, true);
                     }
                     else {
-                        this.loadCompanies(false,this.page, false, true);
+                        this.loadCompanies(false, this.page, false, true);
                     }
                     this.changeDetectorRef.detectChanges();
                 }
@@ -338,6 +338,10 @@ export class PlacesPage {
         else {
             this.profile.get(true, false)
                 .subscribe(user => {
+                    this.userCoords = {
+                        lat: user.latitude,
+                        lng: user.longitude
+                    };
                     this.coords = {
                         lat: user.latitude,
                         lng: user.longitude
@@ -362,6 +366,10 @@ export class PlacesPage {
         }
         this.location.get(isHighAccuracy)
             .then((resp) => {
+                this.userCoords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
                 this.coords = {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
@@ -415,7 +423,7 @@ export class PlacesPage {
         else {
             this.loadCompanies(true, this.page);
         }
-        this.userPin = [marker([this.coords.lat, this.coords.lng], {
+        this.userPin = [marker([this.userCoords.lat, this.userCoords.lng], {
             icon: icon({
                 iconSize: [40, 50],
                 iconAnchor: [20, 50],
@@ -564,7 +572,7 @@ export class PlacesPage {
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
-            if (this.companies.length == 0 && isHandler) {
+            if (this.companies.length == 0 && isHandler && !this.isMapVisible) {
                 this.noPlacesHandler();
             }
             // this.fitBounds = this.generateBounds(this.markers);
@@ -598,7 +606,7 @@ export class PlacesPage {
                 let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
                 popover.present();
                 popover.onDidDismiss(data => {
-                    if (data.radius) {
+                    if (data && data.radius) {
                         this.page = 1;
                         this.radius = data.radius;
                         //to test
@@ -632,14 +640,14 @@ export class PlacesPage {
         if (isShare) {
             params = {
                 ...data,
-                coords: this.coords,
+                coords: this.userCoords,
             }
         }
         else {
             params = {
                 company: data,
                 distanceObj: this.getDistance(data.latitude, data.longitude),
-                coords: this.coords,
+                coords: this.userCoords,
             }
         }
         this.nav.push(PlacePage, params);
@@ -664,8 +672,8 @@ export class PlacesPage {
     }
 
     getDistance(latitude: number, longitude: number) {
-        if (this.coords) {
-            let long = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+        if (this.userCoords) {
+            let long = DistanceUtils.getDistanceFromLatLon(this.userCoords.lat, this.userCoords.lng, latitude, longitude);
             let distance = long >= 1000 ? long / 1000 : long;
             let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
             return {
@@ -734,7 +742,6 @@ export class PlacesPage {
             else {
                 this.radius = data.radius;
                 this.storage.set('radius', this.radius);
-
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
                 if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {
