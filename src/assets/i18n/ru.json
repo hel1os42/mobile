@@ -2,7 +2,7 @@
     "CATEGORIES" : {
         "Food": "<div class='font-65 text-white'>Еда и<br>Напитки</div>",
         "Beauty": "<div class='font-65 text-white'>Красота и<br>Здоровье</div>",
-        "Retail": "<div class='font-65 text-white'>Ретейл и<br>Услуги</div>",
+        "Retail": "<div class='font-65 text-white'>Товары и<br>Услуги</div>",
         "Accommodation": "<div class='font-65 text-white'>Проживание <br>и Отдых</div>",
         "Other": "<div class='font-65 text-white'>Прочее и<br>Интернет</div>"
     },
