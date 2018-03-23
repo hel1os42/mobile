@@ -572,7 +572,8 @@ export class PlacesPage {
             this.companies.forEach((company) => {
                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
             })
-            if (this.companies.length == 0 && isHandler && !this.isMapVisible) {
+            // if (this.companies.length == 0 && isHandler && !this.isMapVisible) {
+                if (this.companies.length == 0 && isHandler) {
                 this.noPlacesHandler();
             }
             // this.fitBounds = this.generateBounds(this.markers);
@@ -826,6 +827,7 @@ export class PlacesPage {
 
     doRefresh(refresher) {
         this.page = 1;
+        // this.isRevertCoords = true;
         this.isRefreshLoading = true;
         this.getLocation(false, true);
         this.refresher = refresher;
