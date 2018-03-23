@@ -128,7 +128,7 @@
             [leafletFitBounds]="fitBounds"
             (leafletMapReady)="onMapReady($event)">
             <span (click)="revertedLocation()" class="user-location"><ion-icon name="ios-navigate"></ion-icon></span>
-            <span class="radius">{{ 'PAGE_PLACES.RADIUS' | translate }}: </span>
+            <span class="radius">{{ 'PAGE_PLACES.RADIUS' | translate }}: {{ getRadius().distance }} {{ getRadius().key | translate }}</span>
         </div>
     </div>
 

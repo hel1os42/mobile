@@ -417,7 +417,6 @@ export class PlacesPage {
         return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
 
-
     getCompaniesList() {
         this.addMap();
         this.loadCompanies(true, this.page);
@@ -702,6 +701,15 @@ export class PlacesPage {
         return undefined;
     }
 
+    getRadius() {
+        let distance = this.radius >= 1000 ? Math.round(this.radius / 1000) : this.radius;
+        let key = this.radius >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+        return {
+            distance: distance,
+            key: key
+        }
+    }
+
     createPopover() {
         let popover: Popover;
         if (this.isChangedCategory) {
@@ -791,7 +799,7 @@ export class PlacesPage {
                 else if (data.specialities.length == 0) {
                     this.specialityFilter = [];
                 }
-                    this.loadCompanies(true, this.page = 1);
+                this.loadCompanies(true, this.page = 1);
             }
         })
     }
