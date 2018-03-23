@@ -18,6 +18,7 @@ export class PlacesPopover {
     STEPS = [0.2, 0.5, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 500, 1000, 5000, 10000, 19849];
     radius: number;
     slider = 18;
+    lengthSteps: number;
 
     constructor(
         private viewCtrl: ViewController,
@@ -26,20 +27,40 @@ export class PlacesPopover {
 
         this.types = this.navParams.get('types');
         this.tags = this.navParams.get('tags') ? this.navParams.get('tags') : [];
-        this.radius = this.navParams.get('radius');
+        let radius = this.navParams.get('radius');
+        this.radius = radius > 1 ? Math.round(radius) : radius;
+        let step = this.radius / 1000 > 1
+            ? Math.round(this.radius / 1000)
+            : Math.round(this.radius / 1000 * 100) / 100;
+        if (!this.STEPS.find(item => item == step)) {
+            this.STEPS.push(step);
+            this.STEPS = _.sortBy(this.STEPS);
+        }
+        this.lengthSteps = this.STEPS.length - 1;
         for (let i = 0; i < this.STEPS.length; i++) {
-            if (this.radius / 1000 == this.STEPS[i]) {
+            if (Math.round(radius / 1000) == this.STEPS[i] || Math.round(this.radius / 1000 * 100) / 100 == this.STEPS[i]) {
                 this.slider = i;
             }
         }
-
         this.getSpecialities();
+    }
+
+    getRadius() {
+        let radius = this.radius / 1000 > 1
+            ? Math.round(this.radius / 1000)
+            : Math.round(this.radius / 1000 * 100) / 100;
+        return radius;
     }
 
     watchSlider() {
         this.zone.run(() => {
             this.radius = this.STEPS[this.slider] * 1000;
+            this.STEPS;
         })
+    }
+
+    getLength() {
+        return this.STEPS.length - 1;
     }
 
     openTypesSelect() {

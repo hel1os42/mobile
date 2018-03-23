@@ -131,11 +131,10 @@ export class PlacePage {
             let long = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
             let distance = long >= 1000 ? long / 1000 : long;
             let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
-            this.distanceObj = {
+            return {
                 distance: distance,
                 key: key
             }
-            return this.distanceObj;
         };
         return undefined;
     }

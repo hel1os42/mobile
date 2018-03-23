@@ -35,12 +35,16 @@ export class NoPlacesPopover {
     }
 
     getFlag(country) {
-        country = country.replace(/ /g,'-');
-        return `assets/img/flags/${country.toLowerCase()}.svg`;
+        if (country) {
+           country = country.replace(/ /g,'-');
+        return `assets/img/flags/${country.toLowerCase()}.svg`; 
+        }
     }
 
     getKey(country) {
-        return `COUNTRIES.${country.toUpperCase()}`;
+        if (country) {
+            return `COUNTRIES.${country.toUpperCase()}`;
+        }
     }
 
     close(radius) {

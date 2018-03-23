@@ -1,11 +1,11 @@
 <div class="modal_content">
     <ion-item no-lines>
         <ion-label text-left text-uppercase class="width-100 text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_RADIUS' | translate }}
-            <ion-badge color="secondary" item-right>{{ radius / 1000 }} {{ 'UNIT.KM' | translate }} </ion-badge>
+            <ion-badge color="secondary" item-right>{{ getRadius() }} {{ 'UNIT.KM' | translate }} </ion-badge>
         </ion-label>
         <ion-range item-end
             min="0"
-            max="18"
+            [max]="getLength()"
             [(ngModel)]="slider"
             (ionChange)="watchSlider()">
             <ion-label range-left>0.2</ion-label>
