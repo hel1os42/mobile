@@ -127,7 +127,8 @@
             [leafletLayers]="getLayers()"
             [leafletFitBounds]="fitBounds"
             (leafletMapReady)="onMapReady($event)">
-            <span (click)="revertedLocation()" class="user-location"><ion-icon name="ios-locate-outline"></ion-icon></span>
+            <span (click)="revertedLocation()" class="user-location"><ion-icon name="ios-navigate"></ion-icon></span>
+            <span class="radius">{{ 'PAGE_PLACES.RADIUS' | translate }}: </span>
         </div>
     </div>
 
