@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { StatusBar } from '@ionic-native/status-bar';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
+import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
 import { Speciality } from '../../models/speciality';
+import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
+import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
+import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
-import { FavoritesService } from '../../providers/favorites.service';
-import { Subscription } from 'rxjs';
-import { ToastService } from '../../providers/toast.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
-import { StatusBar } from '@ionic-native/status-bar';
-import { BookmarksPage } from '../bookmarks/bookmarks';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
     selector: 'page-place',
@@ -57,7 +58,8 @@ export class PlacePage {
                 .subscribe(company => {
                     this.company = company;
                     this.offersList = company.offers;
-                    this.features = company.specialities;
+                    // this.features = this.company.specialities;
+                    this.features = _.uniqBy(company.specialities, 'slug');
                 });
         }
         else {
@@ -69,7 +71,8 @@ export class PlacePage {
                     this.company = company;
                     this.offersList = company.offers;
                     this.distanceObj = this.getDistance(this.company.latitude, this.company.longitude);
-                    this.features = this.company.specialities;
+                    // this.features = this.company.specialities;
+                    this.features = _.uniqBy(company.specialities, 'slug');
                     if (!offerId) {
                         this.share.remove();
                     }
@@ -131,7 +134,7 @@ export class PlacePage {
             this.distanceObj = {
                 distance: distance,
                 key: key
-            } 
+            }
             return this.distanceObj;
         };
         return undefined;
