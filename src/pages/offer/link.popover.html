@@ -1,7 +1,7 @@
-<div margin text-center>
-    <div margin-top text-uppercase class="text-4F4F4F font-16 bold">{{ link.title }}</div>
-    <div [innerHTML]="link.description"></div>
-    <div margin>
+<div class="modal_content">
+    <div text-center text-uppercase class="text-4F4F4F font-16 bold">{{ link.title }}</div>
+    <div class="font-16 text-828282" [innerHTML]="link.description"></div>
+    <div margin-top margin-left margin-right>
         <div class="block-btn">
             <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
         </div>

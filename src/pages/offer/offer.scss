@@ -226,6 +226,10 @@ page-offer{
             opacity: 0.7;
         }
     }
+
+    a{
+        color: #FF5A00;
+    }
 }
 
 .iphonex.platform-ios page-offer .btn_footer{
@@ -286,5 +290,20 @@ congratulation-popover-component {
 
     .icon-star:active{
         opacity: 0.5;
+    }
+}
+
+link-popover-component {
+    .modal_content{
+        padding-bottom: 7vw;
+        padding-left: 7vw;
+        padding-right: 7vw;
+        padding-top: 7vw;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    a{
+        color: #FF5A00;
     }
 }
