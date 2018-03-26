@@ -51,6 +51,8 @@ export class PlacesPage {
     message: string;
     // radius = 19849000;
     radius: number;
+    listRadius: number;
+    mapRadius: number;
     segment: string;
     distanceString: string;
     search = '';
@@ -108,7 +110,7 @@ export class PlacesPage {
         private changeDetectorRef: ChangeDetectorRef) {
 
         this.isForkMode = this.appMode.getForkMode();
-        this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
+        this.mapRadius = this.listRadius = this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
 
         // this.onShareSubscription = this.share.onShare
         //     .subscribe(resp => {
@@ -220,7 +222,7 @@ export class PlacesPage {
                     this.changeDetectorRef.detectChanges();
                     // this._map.panTo(this.coords);
                     let radius = MapUtils.getRadius(heigth / 2, this._map);
-                    this.radius = Math.round(radius);
+                    this. mapRadius = this.radius = Math.round(radius);
                     this.loadCompanies(false, 1, true);
                 }
             }
@@ -618,7 +620,13 @@ export class PlacesPage {
                 popover.onDidDismiss(data => {
                     if (data && data.radius) {
                         this.page = 1;
-                        this.radius = data.radius;
+                        // this.radius = data.radius;
+                        if (this.isMapVisible) {
+                            this.radius = this.mapRadius = data.radius;
+                        }
+                        else {
+                            this.radius = this.listRadius = data.radius;
+                        }
                         //to test
                         this.tagFilter = [];
                         this.typeFilter = [];
@@ -641,6 +649,7 @@ export class PlacesPage {
                 this.generateBounds(this.markers);
             }
             else {
+                this.radius = this.mapRadius;
                 this.coords = this.mapCenter;
                 this.loadCompanies(false, 1, true);
                 this._map.setView(this.mapCenter, this.zoom);
@@ -650,6 +659,7 @@ export class PlacesPage {
         else {
             this.companies = [];
             this.coords = this.userCoords;
+            this.radius = this.listRadius;
             this.loadCompanies(true, 1, true);
         }
         function renderMap() {
@@ -714,8 +724,8 @@ export class PlacesPage {
     }
 
     getRadius() {
-        let distance = this.radius >= 1000 ? Math.round(this.radius / 1000) : this.radius;
-        let key = this.radius >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+        let distance = this.mapRadius >= 1000 ? Math.round(this.mapRadius / 1000) : this.mapRadius;
+        let key = this.mapRadius >= 1000 ? 'UNIT.KM' : 'UNIT.M';
         return {
             distance: distance,
             key: key
