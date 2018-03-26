@@ -1,2 +1,9 @@
-<div>{{ link.title }}</div>
-<div [innerHTML]="link.description" ></div>
+<div margin text-center>
+    <div margin-top text-uppercase class="text-4F4F4F font-16 bold">{{ link.title }}</div>
+    <div [innerHTML]="link.description"></div>
+    <div margin>
+        <div class="block-btn">
+            <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+        </div>
+    </div>
+</div>

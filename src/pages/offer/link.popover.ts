@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 
 @Component({
     selector: 'link-popover-component',
@@ -11,8 +11,13 @@ export class LinkPopover {
 link;
 
     constructor(
-        private navParams: NavParams) {
+        private navParams: NavParams,
+        private viewCtrl: ViewController) {
 
         this.link = this.navParams.get('link');
+    }
+
+    close() {
+        this.viewCtrl.dismiss();
     }
 }
