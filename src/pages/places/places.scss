@@ -164,29 +164,25 @@ page-places {
         bottom: 0;
         left: inherit;
         top: 36vw;
-        z-index: 111111;
-        color: #FF5A00;
-        background: #fff;
         width: 15vw;
         height: 15vw;
+        z-index: 111111;
         border-radius: 100vw;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
-        overflow: hidden;
         margin: auto;
+        background-color: #FF5A00;
+        background-size: 50%;
+        background-repeat: no-repeat;
+        background-image: url(../assets/img/user_home/navigation-symbol.svg);
+        background-position: 44% 55%;
         opacity: 0.7;
     }
 
     .user-location:active{
         opacity: 0.5;
-    }
-
-    .user-location ion-icon{
-        margin: auto;
-        font-size: 18.4vw;
-        line-height: 0;
     }
 
     .leaflet-left {
@@ -219,11 +215,6 @@ page-places {
         background-repeat: no-repeat;
         background-position: 50% 50%;
         background-size: 50%;
-    }
-
-    .leaflet-bar a:hover{
-        background: #FF5A00;
-        color: #fff;
     }
 
     .leaflet-touch .leaflet-bar a:first-child {
