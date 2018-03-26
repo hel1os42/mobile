@@ -17,6 +17,8 @@ import { BookmarksPage } from '../bookmarks/bookmarks';
 import { CongratulationPopover } from './congratulation.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { LinkPopover } from './link.popover';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-offer',
@@ -33,6 +35,8 @@ export class OfferPage {
     coords: Coords;
     branchDomain = 'https://nau.app.link';
     points: number;
+    links = [];
+    isDismissLinkPopover = true;
 
     constructor(
         private nav: NavController,
@@ -49,7 +53,8 @@ export class OfferPage {
         private testimonials: TestimonialsService,
         private statusBar: StatusBar,
         private platform: Platform,
-        private analytics: GoogleAnalytics) {
+        private analytics: GoogleAnalytics,
+        private browser: InAppBrowser) {
 
         this.points = 1;
         if (this.share.get()) {
@@ -84,6 +89,60 @@ export class OfferPage {
                 tabs[key].style.pointerEvents = 'all';
             });
         }
+    }
+
+    // descriptionHandler() {
+    //     let test = this.offer.rich_description + this.offer.rich_description;
+    //     if (this.offer.rich_description && this.offer.rich_description.length > 0) {
+    //         let arr = [];
+    //         for (var i = 0; i < test.split('<a').length - 1; i++) {
+    //             arr[arr.length] = test.split('<a')[i + 1].split('</a>')[0];
+    //         }
+    //     }
+    // }
+
+    openLinkPopover(event) {
+        if (event.target.localName === 'a' && this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let title = event.target.innerText;
+            let split = event.target.href.slice(event.target.href.length - 1);
+            let host: string;
+            let href: string;
+            if (split && split === '#') {
+                let link = this.links.find(link => link.title === title);
+                href = link.href;
+                host = link.host; 
+            }
+            else {
+                href = event.target.href;
+                host = event.target.host;
+            }
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                if (this.links.filter(link => link.title === title).length == 0) {
+                    this.links.push({
+                        host: host,
+                        title: title,
+                        href: href
+                    });
+                }
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offers.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
+
+
+
     }
 
     getStars(star: number) {
@@ -241,5 +300,5 @@ export class OfferPage {
             this.statusBar.styleDefault();
         }
     }
-    
+
 }

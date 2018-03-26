@@ -10,6 +10,7 @@ export class DistanceUtils {
             Math.sin(dLon / 2) * Math.sin(dLon / 2);
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         var d = R * c; // Distance in km
-        return Math.round(d) * 1000;
+        let result = d < 1 ? Math.round(d * 1000) : Math.round(d) * 1000;
+        return result;
     }
 }

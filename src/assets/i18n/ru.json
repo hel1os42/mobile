@@ -2,7 +2,7 @@
     "CATEGORIES" : {
         "Food": "<div class='font-65 text-white'>Еда и<br>Напитки</div>",
         "Beauty": "<div class='font-65 text-white'>Красота и<br>Здоровье</div>",
-        "Retail": "<div class='font-65 text-white'>Ретейл и<br>Услуги</div>",
+        "Retail": "<div class='font-65 text-white'>Товары и<br>Услуги</div>",
         "Accommodation": "<div class='font-65 text-white'>Проживание <br>и Отдых</div>",
         "Other": "<div class='font-65 text-white'>Прочее и<br>Интернет</div>"
     },
@@ -87,7 +87,8 @@
         "NAU_WILL": "NAU скоро появится в городах:",
         "WE_ARE": "Мы активно ищем региональных агентов - стройте прибыльный бизнес в вашем городе вместе с NAU:",
         "ARE_YOU": "Являетесь владельцем или представителем торговой точки или заведения? Успейте присоединиться до старта NAU в вашем городе!",
-        "OOPS": "Упсс..."
+        "OOPS": "Упсс...",
+        "RADIUS": "Радиус"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {

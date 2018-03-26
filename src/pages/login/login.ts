@@ -32,7 +32,7 @@ export class LoginPage {
     phoneCodes = PHONE_CODES;
     numCode = PHONE_CODES.find(item => item.code === 'US');
     onKeyboardShowSubscription: Subscription;
-    // onKeyboardHideSubscription: Subscription;
+    onKeyboardHideSubscription: Subscription;
     backAction;
     countDown;
     counter = 60;
@@ -56,9 +56,20 @@ export class LoginPage {
         private analytics: GoogleAnalytics) {
 
         if (this.platform.is('android')) {
+            let
+                appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
+                appElHeight = appEl.clientHeight;
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
                 .subscribe(() => {
+                    console.log('login open')
+                    appEl.style.height = (appElHeight - (appElHeight / 3)) + 'px';
                     this.content.scrollToBottom();
+                })
+
+            this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
+                .subscribe(() => {
+                    console.log('login hide')
+                    appEl.style.height = (appElHeight) + 'px';
                 })
         }
         this.envName = this.appMode.getEnvironmentMode();
@@ -268,6 +279,7 @@ export class LoginPage {
     ngOnDestroy() {
         if (this.platform.is('android')) {
             this.onKeyboardShowSubscription.unsubscribe();
+            this.onKeyboardHideSubscription.unsubscribe();
         }
         if (this.backAction) {
             this.backAction();

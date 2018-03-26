@@ -99,6 +99,10 @@ export class OfferService {
         return this.api.get(`activation_codes/${code}`, { showLoading: false, ignoreHttpNotFound: true });
     }
 
+    getLink(endpoint: string) {
+        return this.api.get(`places${endpoint}`, { showLoading: false });
+    }
+
     getSearch(str: string, arr: string[]) {
         if (arr.length == 0) {
             str += ';';

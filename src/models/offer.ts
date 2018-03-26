@@ -17,4 +17,5 @@ export class Offer extends OfferCreate {
     redemptions_count?: number;
     type: string;
     is_favorite?: boolean;
+    rich_description?: string;
 }

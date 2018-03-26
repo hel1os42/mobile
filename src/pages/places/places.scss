@@ -29,6 +29,7 @@ page-places {
         height: calc(100vh - 247px);
         height: -webkit-calc(100vh - 247px);
         height: -moz-calc(100vh - 247px);
+        position: relative;
     }
     a[href^="http://maps.google.com/maps"] {
         display: none !important
@@ -157,6 +158,97 @@ page-places {
         min-height: 40vh;
     }
 
+    .user-location{
+        position: absolute;
+        right: 2vw;
+        bottom: 0;
+        left: inherit;
+        top: 36vw;
+        width: 15vw;
+        height: 15vw;
+        z-index: 111111;
+        border-radius: 100vw;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin: auto;
+        background-color: #FF5A00;
+        background-size: 50%;
+        background-repeat: no-repeat;
+        background-image: url(../assets/img/user_home/navigation-symbol.svg);
+        background-position: 44% 55%;
+        opacity: 0.7;
+    }
+
+    .user-location:active{
+        opacity: 0.5;
+    }
+
+    .leaflet-left {
+        left: inherit;
+        right: 2vw;
+    }
+
+    .leaflet-top{
+        top: -18vw;
+        height: 33vw;
+        margin: auto;
+        bottom: 0;
+        opacity: 0.7;
+    }
+
+    .leaflet-left .leaflet-control, .leaflet-top .leaflet-control {
+        margin: 0;
+    }
+
+    .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+        border: none;
+    }
+
+    .leaflet-touch .leaflet-bar a{
+        color: #fff;
+        width: 15vw;
+        height: 15vw;
+        font-size: 0;
+        background-color: #FF5A00;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 50%;
+        border: 0;
+    }
+
+    .leaflet-touch .leaflet-bar a:first-child {
+        border-top-left-radius: 100vw;
+        border-top-right-radius: 100vw;
+        border-bottom-left-radius: 100vw;
+        border-bottom-right-radius: 100vw;
+        margin-bottom: 3vw;
+        background-image: url(../assets/img/user_home/plus-symbol.svg);
+    }
+
+    .leaflet-touch .leaflet-bar a:last-child {
+        border-top-left-radius: 100vw;
+        border-top-right-radius: 100vw;
+        border-bottom-left-radius: 100vw;
+        border-bottom-right-radius: 100vw;
+        background-image: url(../assets/img/user_home/minus-symbol.svg);
+    }
+
+    .leaflet-container a {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .radius{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 111111111;
+        font-size: 11px;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 0 5px;
+        color: #FF5A00;
+    }
 }
 
 /*

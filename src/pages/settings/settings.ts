@@ -17,6 +17,7 @@ import { AVAILABLE_LANGUAGES, SYS_OPTIONS, DEFAULT_LANG_CODE } from '../../const
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from '../../providers/storage.service';
 import { ToastService } from '../../providers/toast.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'page-settings',
@@ -45,6 +46,7 @@ export class SettingsPage {
     referralLink: string;
     branchDomain = 'https://nau.app.link';
     envName;//temporary
+    onRefreshProfile: Subscription;
 
     constructor(platform: Platform,
         private nav: NavController,
@@ -60,20 +62,20 @@ export class SettingsPage {
         private toast: ToastService) {
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
-        
+
         // if (this.envName === 'dev' || this.envName === 'test') {
-            let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
-            this.lang = availableLang;
+        let availableLang = AVAILABLE_LANGUAGES.find(i => i.code == SYS_OPTIONS.LANG_CODE);
+        this.lang = availableLang;
         // }
-      
+
         this.isAdvMode = this.navParams.get('isAdvMode');
         this.user = this.navParams.get('user');
-        // this.coords.lat = this.user.latitude;
-        // this.coords.lng = this.user.longitude;
+        this.coords.lat = this.user.latitude;
+        this.coords.lng = this.user.longitude;
         // this.addMap();//hided map
         // this.createBranchLink(this.user.invite_code);
 
-        // if (!this.user.id) {
+        if (!this.user.id) {
             this.profile.get(true)
                 .subscribe(user => {
                     this.user = user;
@@ -82,15 +84,22 @@ export class SettingsPage {
                     // this.addMap();//hided map
                     this.createBranchLink(this.user.invite_code);
                 });
-        // }
+        }
 
         this.place.get(true)
             .subscribe(
-            resp => {
-                this.nextPage = AdvTabsPage;
-                this.advPicture_url = resp.picture_url;
-            },
-            errResp => this.nextPage = undefined);
+                resp => {
+                    this.nextPage = AdvTabsPage;
+                    this.advPicture_url = resp.picture_url;
+                },
+                errResp => this.nextPage = undefined);
+
+        this.onRefreshProfile = this.profile.onRefreshAccounts
+            .subscribe((resp) => {
+                this.user = resp;
+                this.coords.lat = this.user.latitude;
+                this.coords.lng = this.user.longitude;
+            })
     }
 
     createBranchLink(invCode) {
