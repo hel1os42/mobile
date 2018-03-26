@@ -36,6 +36,7 @@ export class OfferPage {
     branchDomain = 'https://nau.app.link';
     points: number;
     links = [];
+    isDismissLinkPopover = true;
 
     constructor(
         private nav: NavController,
@@ -101,7 +102,8 @@ export class OfferPage {
     // }
 
     openLinkPopover(event) {
-        if (event.target.localName === 'a') {
+        if (event.target.localName === 'a' && this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
             let title = event.target.innerText;
             let split = event.target.href.slice(event.target.href.length - 1);
             let host: string;
@@ -130,6 +132,7 @@ export class OfferPage {
                         event.target.href = href;
                         let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
                         linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
                     })
             }
             else {

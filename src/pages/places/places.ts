@@ -85,7 +85,7 @@ export class PlacesPage {
     isRevertCoords = false;
     userCoords: Coords;
     zoom = 16;
-    isDismissNoPlacesPopoap = true;
+    isDismissNoPlacesPopover = true;
 
     constructor(
         private platform: Platform,
@@ -557,8 +557,8 @@ export class PlacesPage {
     }
 
     loadCompanies(isHandler: boolean, page, isNoBounds?: boolean) {
-        if (this.isDismissNoPlacesPopoap) {
-            this.isDismissNoPlacesPopoap = false;
+        if (this.isDismissNoPlacesPopover) {
+            this.isDismissNoPlacesPopover = false;
             let isRefreshLoading = !this.isRefreshLoading && !this.isMapVisible;
             let obs = ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== '')
                 ? this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
@@ -581,10 +581,10 @@ export class PlacesPage {
                 // if (this.companies.length == 0 && isHandler && !this.isMapVisible) {
                 if (this.companies.length == 0 && isHandler) {
                     this.noPlacesHandler();
-                    this.isDismissNoPlacesPopoap = false;
+                    this.isDismissNoPlacesPopover = false;
                 }
                 if (this.companies.length > 0 || this.companies.length == 0 && !isHandler) {
-                    this.isDismissNoPlacesPopoap = true;
+                    this.isDismissNoPlacesPopover = true;
                 }
                 // this.fitBounds = this.generateBounds(this.markers);
                 if (!isNoBounds) {
@@ -635,7 +635,7 @@ export class PlacesPage {
                         //
                         this.loadCompanies(true, this.page);
                     }
-                    this.isDismissNoPlacesPopoap = true;
+                    this.isDismissNoPlacesPopover = true;
                 })
                 // this.changeDetectorRef.detectChanges();
             })
