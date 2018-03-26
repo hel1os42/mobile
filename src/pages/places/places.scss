@@ -211,14 +211,14 @@ page-places {
     }
 
     .leaflet-touch .leaflet-bar a{
-        background: #FF5A00;
         color: #fff;
         width: 15vw;
         height: 15vw;
-        font-size: 11vw;
-        text-indent: 0;
-        line-height: 16vw;
-        font-weight: normal;
+        font-size: 0;
+        background-color: #FF5A00;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 50%;
     }
 
     .leaflet-bar a:hover{
@@ -232,6 +232,7 @@ page-places {
         border-bottom-left-radius: 100vw;
         border-bottom-right-radius: 100vw;
         margin-bottom: 3vw;
+        background-image: url(../assets/img/user_home/plus-symbol.svg);
     }
 
     .leaflet-touch .leaflet-bar a:last-child {
@@ -239,6 +240,7 @@ page-places {
         border-top-right-radius: 100vw;
         border-bottom-left-radius: 100vw;
         border-bottom-right-radius: 100vw;
+        background-image: url(../assets/img/user_home/minus-symbol.svg);
     }
 
     .leaflet-container a {
