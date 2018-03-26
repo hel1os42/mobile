@@ -97,6 +97,7 @@ import { FavoritesService } from '../providers/favorites.service';
 import { FormatTimePipe } from '../pipes/format-time.pipe';
 import { TestimonialsService } from '../providers/testimonials.service';
 import { NoPlacesPopover } from '../pages/places/noPlaces.popover';
+import { LinkPopover } from '../pages/offer/link.popover';
 
 
 // The translate loader needs to know where to load i18n files
@@ -151,6 +152,7 @@ export function createTranslateLoader(http: HttpClient) {
         CreateAdvUserProfileFeaturesPopover,
         CreateOfferInformationPopover,
         NoPlacesPopover,
+        LinkPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
@@ -234,6 +236,7 @@ export function createTranslateLoader(http: HttpClient) {
         CreateAdvUserProfileFeaturesPopover,
         CreateOfferInformationPopover,
         NoPlacesPopover,
+        LinkPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
