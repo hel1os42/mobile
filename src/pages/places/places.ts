@@ -221,7 +221,7 @@ export class PlacesPage {
                     };
                     // this._map.panTo(this.coords);
                     let radius = MapUtils.getRadius(heigth / 2, this._map);
-                    this. mapRadius = this.radius = Math.round(radius);
+                    this.mapRadius = this.radius = Math.round(radius);
                     this.changeDetectorRef.detectChanges();
                     this.loadCompanies(false, 1, true);
                 }
@@ -823,10 +823,10 @@ export class PlacesPage {
                     this.isChangedFilters = true;
                 }
                 if (this.isChangedFilters || this.radius != data.radius) {
-                    this.loadCompanies(true, this.page = 1);
                     this.radius = data.radius;
                     this.storage.set('radius', this.radius);
                     this.isChangedFilters = false;
+                    this.loadCompanies(true, this.page = 1);
                 }
             }
         })
