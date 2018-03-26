@@ -219,10 +219,10 @@ export class PlacesPage {
                         lat: this.coords.lat,
                         lng: this.coords.lng
                     };
-                    this.changeDetectorRef.detectChanges();
                     // this._map.panTo(this.coords);
                     let radius = MapUtils.getRadius(heigth / 2, this._map);
                     this. mapRadius = this.radius = Math.round(radius);
+                    this.changeDetectorRef.detectChanges();
                     this.loadCompanies(false, 1, true);
                 }
             }
