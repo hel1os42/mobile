@@ -83,6 +83,7 @@ export class PlacesPage {
     isRevertCoords = false;
     userCoords: Coords;
     zoom = 16;
+    isDismissNoPlacesPopoap = true;
 
     constructor(
         private platform: Platform,
@@ -554,41 +555,48 @@ export class PlacesPage {
     }
 
     loadCompanies(isHandler: boolean, page, isNoBounds?: boolean) {
-        let isRefreshLoading = !this.isRefreshLoading && !this.isMapVisible;
-        let obs = ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== '')
-            ? this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
-                this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
-                this.radius, this.search, page, isRefreshLoading)
-            : this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page, isRefreshLoading);
+        if (this.isDismissNoPlacesPopoap) {
+            this.isDismissNoPlacesPopoap = false;
+            let isRefreshLoading = !this.isRefreshLoading && !this.isMapVisible;
+            let obs = ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== '')
+                ? this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
+                    this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
+                    this.radius, this.search, page, isRefreshLoading)
+                : this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page, isRefreshLoading);
 
-        obs.subscribe(companies => {
-            this.isRefreshLoading = false;
-            if (this.refresher) {
-                this.refresher.complete();
-                this.refresher = undefined;
-            }
-            this.companies = companies.data;
-            this.lastPage = companies.last_page;
-            this.markers = [];
-            this.companies.forEach((company) => {
-                this.markers.push(this.createMarker(company.latitude, company.longitude, company));
-            })
-            // if (this.companies.length == 0 && isHandler && !this.isMapVisible) {
-            if (this.companies.length == 0 && isHandler) {
-                this.noPlacesHandler();
-            }
-            // this.fitBounds = this.generateBounds(this.markers);
-            if (!isNoBounds) {
-                this.generateBounds(this.markers);
-            }
-        },
-            err => {
+            obs.subscribe(companies => {
                 this.isRefreshLoading = false;
                 if (this.refresher) {
                     this.refresher.complete();
                     this.refresher = undefined;
                 }
-            });
+                this.companies = companies.data;
+                this.lastPage = companies.last_page;
+                this.markers = [];
+                this.companies.forEach((company) => {
+                    this.markers.push(this.createMarker(company.latitude, company.longitude, company));
+                })
+                // if (this.companies.length == 0 && isHandler && !this.isMapVisible) {
+                if (this.companies.length == 0 && isHandler) {
+                    this.noPlacesHandler();
+                    this.isDismissNoPlacesPopoap = false;
+                }
+                if (this.companies.length > 0 || this.companies.length == 0 && !isHandler) {
+                    this.isDismissNoPlacesPopoap = true;
+                }
+                // this.fitBounds = this.generateBounds(this.markers);
+                if (!isNoBounds) {
+                    this.generateBounds(this.markers);
+                }
+            },
+                err => {
+                    this.isRefreshLoading = false;
+                    if (this.refresher) {
+                        this.refresher.complete();
+                        this.refresher = undefined;
+                    }
+                });
+        }
     }
 
     noPlacesHandler() {
@@ -619,6 +627,7 @@ export class PlacesPage {
                         //
                         this.loadCompanies(true, this.page);
                     }
+                    this.isDismissNoPlacesPopoap = true;
                 })
                 // this.changeDetectorRef.detectChanges();
             })
