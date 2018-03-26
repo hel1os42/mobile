@@ -56,7 +56,8 @@
     class="bold font-30 extrabold text-white padding-left-offer padding-right-offer padding-top-5vw text-overflow-3">{{ offer.label }}
 </div>
 
-<div 
+<div
+    (click)="openLinkPopover($event)"
     margin-top 
     [innerHTML]="offer.rich_description" 
     class="text-overflow-6 text-E0E0E0 font-16 padding-left-offer padding-right-offer padding-right-offer">
