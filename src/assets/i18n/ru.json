@@ -17,7 +17,8 @@
     "TOAST" : {
         "ADDED_TO_FAVORITES": "Добавлено в избранное",
         "COPY_NOTIFICATION" : "Скопировано",
-        "LOCATION_DETECTION": "Определение местоположения"
+        "LOCATION_DETECTION": "Определение местоположения",
+        "INTERNET_CONNECTION": "Ошибка подключения"
     },
 
      "CONFIRM" : {

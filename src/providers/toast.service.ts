@@ -26,31 +26,34 @@ export class ToastService {
 
     showDisconnected() {
         if (!this.isShowed) {
-            this.isShowed = true;
-            this.disconnectedToast = this.toast.create({
-                message: 'Internet connection error',
-                // position: 'bottom',
-                // showCloseButton: true,
-                // closeButtonText: 'Close',
-                cssClass: 'disconnected',
-            });
-            this.disconnectedToast.present();
+            this.translate.get('TOAST.INTERNET_CONNECTION')
+                .subscribe(resp => {
+                    this.isShowed = true;
+                    this.disconnectedToast = this.toast.create({
+                        message: resp,
+                        // position: 'bottom',
+                        // showCloseButton: true,
+                        // closeButtonText: 'Close',
+                        cssClass: 'disconnected',
+                    });
+                    this.disconnectedToast.present();
+                })
         }
     }
 
-    showNotification(key: string) {   
+    showNotification(key: string) {
         this.translate.get(key)
             .subscribe(resp => {
-                    let toast = this.toast.create({
-            message: resp,
-            duration: 1500,
-            position: 'middle',
-            cssClass: 'notification-toast',
-            dismissOnPageChange: true
-        });
-        toast.present();
+                let toast = this.toast.create({
+                    message: resp,
+                    duration: 1500,
+                    position: 'middle',
+                    cssClass: 'notification-toast',
+                    dismissOnPageChange: true
+                });
+                toast.present();
             })
-    
+
     }
 
     dismiss() {
