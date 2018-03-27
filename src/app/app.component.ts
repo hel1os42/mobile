@@ -199,23 +199,28 @@ export class MyApp {
     }
 
     presentConfirm(platform) {
-        const alert = this.alert.create({
-            title: 'Are you sure you want to close the application?',
-            // message: 'Do you want to close the app?',
-            buttons: [{
-                text: 'Cancel',
-                role: 'cancel',
-                handler: () => {
-                    return;
-                }
-            }, {
-                text: 'Ok',
-                handler: () => {
-                    platform.exitApp(); // Close this application
-                }
-            }]
-        });
-        alert.present();
+        this.translate.get(['CONFIRM.CLOSE_APPLICATION', 'UNIT'])
+            .subscribe(resp => {
+                let unit = resp['UNIT'];
+                let title = resp['CONFIRM.CLOSE_APPLICATION'];
+                const alert = this.alert.create({
+                    title: title,
+                    // message: 'Do you want to close the app?',
+                    buttons: [{
+                        text: unit['CANCEL'],
+                        role: 'cancel',
+                        handler: () => {
+                            return;
+                        }
+                    }, {
+                        text: unit['OK'],
+                        handler: () => {
+                            platform.exitApp(); // Close this application
+                        }
+                    }]
+                });
+                alert.present();
+            });
     }
 
     branchInit(platform, splashScreen, isResume?: boolean) {
