@@ -26,6 +26,8 @@
         "REMOVE_FAVORITE_OFFER": "Are you sure you want to remove offer from favorites?",
         "REMOVE_FAVORITE_PLACE": "Are you sure you want to remove place from favorites?",
         "CLOSE_APPLICATION": "Are you sure you want to close the application?",
+        "LOGOUT": "Logout",
+        "ARE_YOU_SHURE": "Are you sure?",
         "LOCATION_DENIED": "Location denied",
         "YOU_HAVE_DENIED": "You have denied access to geolocation. Set your coordinates in manual mode.",
         "LOCATION_NEEDED_PROFILE": "Your location needed to create account",
