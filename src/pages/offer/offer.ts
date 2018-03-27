@@ -113,7 +113,7 @@ export class OfferPage {
             if (split && split === '#') {
                 let link = this.links.find(link => link.title === title);
                 href = link.href;
-                host = link.host; 
+                host = link.host;
             }
             else {
                 href = event.target.href;
@@ -267,30 +267,34 @@ export class OfferPage {
         this.favorites.setOffer(this.offer.id)
             .subscribe(() => {
                 this.offer.is_favorite = true;
-                this.translate 
+                this.translate
                 this.toast.showNotification('TOAST.ADDED_TO_FAVORITES');
             });
     }
 
 
     presentConfirm() {
-        const alert = this.alert.create({
-            title: 'Are you sure you want to remove offer from favorites?',
-
-            buttons: [{
-                text: 'Cancel',
-                role: 'cancel',
-                handler: () => {
-                    return;
-                }
-            }, {
-                text: 'Ok',
-                handler: () => {
-                    this.removeFavorite();
-                }
-            }]
-        });
-        alert.present();
+        this.translate.get(['CONFIRM.REMOVE_FAVORITE_OFFER', 'UNIT'])
+            .subscribe(resp => {
+                let unit = resp['UNIT'];
+                let title = resp['CONFIRM.REMOVE_FAVORITE_OFFER'];
+                const alert = this.alert.create({
+                    title: title,
+                    buttons: [{
+                        text: unit['CANCEL'],
+                        role: 'cancel',
+                        handler: () => {
+                            return;
+                        }
+                    }, {
+                        text: unit['OK'],
+                        handler: () => {
+                            this.removeFavorite();
+                        }
+                    }]
+                });
+                alert.present();
+            })
     }
 
     ionViewDidLeave() {

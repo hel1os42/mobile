@@ -19,6 +19,11 @@
         "COPY_NOTIFICATION" : "Сopied to clipboard"
     },
 
+    "CONFIRM" : {
+        "REMOVE_FAVORITE_OFFER": "Are you sure you want to remove offer from favorites?",
+        "REMOVE_FAVORITE_PLACE": "Are you sure you want to remove place from favorites?"
+    },
+
     "UNIT" : {
         "KM" : "km",
         "M" : "m",
