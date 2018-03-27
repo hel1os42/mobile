@@ -391,7 +391,10 @@ export class CreateUserProfilePage {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = re.test(email);
         if (!isValid) {
-            this.toast.show('Incorrect email, please, correct it');
+            this.translate.get('TOAST.INCORRECT_EMAIL')
+                .subscribe(resp => {
+                    this.toast.show(resp);
+                })
             return false;
         }
         else {

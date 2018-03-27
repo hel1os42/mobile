@@ -18,7 +18,8 @@
         "ADDED_TO_FAVORITES": "Added to favorites",
         "COPY_NOTIFICATION" : "Сopied to clipboard",
         "LOCATION_DETECTION": "Location detection",
-        "INTERNET_CONNECTION": "Internet connection error"
+        "INTERNET_CONNECTION": "Internet connection error",
+        "INCORRECT_EMAIL": "Incorrect email, please, correct it"
     },
 
     "CONFIRM" : {
