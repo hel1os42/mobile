@@ -25,7 +25,9 @@
     "CONFIRM" : {
         "REMOVE_FAVORITE_OFFER": "Are you sure you want to remove offer from favorites?",
         "REMOVE_FAVORITE_PLACE": "Are you sure you want to remove place from favorites?",
-        "CLOSE_APPLICATION": "Are you sure you want to close the application?"
+        "CLOSE_APPLICATION": "Are you sure you want to close the application?",
+        "LOCATION_DENIED": "Location denied",
+        "YOU_HAVE_DENIED": "You have denied access to geolocation. Set your coordinates in manual mode."
     },
 
     "UNIT" : {

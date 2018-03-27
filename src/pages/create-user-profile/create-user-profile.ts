@@ -462,18 +462,24 @@ export class CreateUserProfilePage {
     }
 
     presentAndroidConfirm() {
-        const alert = this.alert.create({
-            title: 'Location denied',
-            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
-            buttons: [{
-                text: 'Ok',
-                handler: () => {
-                    // console.log('Application exit prevented!');
-                    this.getLocation(true);
-                }
-            }]
-        });
-        alert.present();
+        this.translate.get(['CONFIRM', 'UNIT.OK'])
+            .subscribe(resp => {
+                let confirm = resp['CONFIRM'];
+                let title = confirm['LOCATION_DENIED'];
+                let message = confirm['YOU_HAVE_DENIED'];
+                const alert = this.alert.create({
+                    title: title,
+                    message: message,
+                    buttons: [{
+                        text: resp['UNIT.OK'],
+                        handler: () => {
+                            // console.log('Application exit prevented!');
+                            this.getLocation(true);
+                        }
+                    }]
+                });
+                alert.present();
+            })
     }
 
     presentConfirm() {

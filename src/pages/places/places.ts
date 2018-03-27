@@ -913,10 +913,10 @@ export class PlacesPage {
                 let places = resp['PAGE_PLACES'];
                 let unit = resp['UNIT'];
                 const alert = this.alert.create({
-                    title: unit['DETECTING_YOUR_LOCATION'],
+                    title: places['LOCATION_DENIED'],
                     message: places['YOU_HAVE_DENIED_ACCESS'],
                     buttons: [{
-                        text: 'Ok',
+                        text: unit['OK'],
                         handler: () => {
                             // console.log('Application exit prevented!');
                             alert.dismiss().then(() => {
