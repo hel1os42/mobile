@@ -368,40 +368,49 @@ export class PlacesPage {
     }
 
     getNativeCoords(isHighAccuracy: boolean, isRefresh?: boolean) {
-        let loadingLocation = this.loading.create(!isRefresh ? { content: 'Location detection', spinner: 'bubbles' } : undefined);
-        if (!this.isRefreshLoading) {
-            loadingLocation.present();
-        }
-        this.location.get(isHighAccuracy)
-            .then((resp) => {
-                this.userCoords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                if (this.isRevertCoords) {
-                    // this._map.setView(this.coords, this.zoom);
-                    this._map.panTo(this.coords);
-                    this.isRevertCoords = false;
+        this.translate.get('TOAST.LOCATION_DETECTION')
+            .subscribe(resp => {
+                let loadingLocation = this.loading.create(
+                    !isRefresh ?
+                        {
+                            content: resp,
+                            spinner: 'bubbles'
+                        }
+                        : undefined);
+                if (!this.isRefreshLoading) {
+                    loadingLocation.present();
                 }
-                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                if (this.shareData) {
-                    this.openPlace(this.shareData, true)
-                }
-                this.getCompaniesList();
-            })
-            .catch((error) => {
-                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                if (this.platform.is('cordova')) {
-                    this.presentConfirm();
-                }
-                else {
-                    this.getLocation(true);
-                }
-                // error => console.log(error + 'err')
+                this.location.get(isHighAccuracy)
+                    .then((resp) => {
+                        this.userCoords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        this.coords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        if (this.isRevertCoords) {
+                            // this._map.setView(this.coords, this.zoom);
+                            this._map.panTo(this.coords);
+                            this.isRevertCoords = false;
+                        }
+                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                        if (this.shareData) {
+                            this.openPlace(this.shareData, true)
+                        }
+                        this.getCompaniesList();
+                    })
+                    .catch((error) => {
+                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                        if (this.platform.is('cordova')) {
+                            this.presentConfirm();
+                        }
+                        else {
+                            this.getLocation(true);
+                        }
+                        // error => console.log(error + 'err')
+                    })
             })
     }
 

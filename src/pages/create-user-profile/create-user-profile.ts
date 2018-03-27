@@ -18,6 +18,7 @@ import { ToastService } from '../../providers/toast.service';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map.utils';
 import { TabsPage } from '../tabs/tabs';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -72,7 +73,8 @@ export class CreateUserProfilePage {
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
         private diagnostic: Diagnostic,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private translate: TranslateService) {
 
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -225,7 +227,7 @@ export class CreateUserProfilePage {
                     this.coords = {
                         lat: resp.latitude,
                         lng: resp.longitude
-                    }; 
+                    };
                     this.addMap();
                     this.changeDetectorRef.detectChanges();
                 })
@@ -254,17 +256,23 @@ export class CreateUserProfilePage {
     }
 
     getCoords() {
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-        loadingLocation.present();
-        if (this.platform.is('android')) {
-            this.diagnostic.getLocationMode()
-                .then(res => {
-                    this.getNativeCoords(res === 'high_accuracy', loadingLocation);
+        this.translate.get('TOAST.LOCATION_DETECTION')
+            .subscribe(resp => {
+                let loadingLocation = this.loading.create({
+                    content: resp,
+                    spinner: 'bubbles'
                 });
-        }
-        else {
-            this.getNativeCoords(false, loadingLocation);
-        }
+                loadingLocation.present();
+                if (this.platform.is('android')) {
+                    this.diagnostic.getLocationMode()
+                        .then(res => {
+                            this.getNativeCoords(res === 'high_accuracy', loadingLocation);
+                        });
+                }
+                else {
+                    this.getNativeCoords(false, loadingLocation);
+                }
+            })
     }
 
     onMapReady(map: Map) {
@@ -435,7 +443,7 @@ export class CreateUserProfilePage {
                 this.profile.patch(differenceData)
                     .subscribe(() => {
                         if (!refreshed) {
-                           this.location.refreshDefaultCoords(this.coords, true); 
+                            this.location.refreshDefaultCoords(this.coords, true);
                         }
                         promise.then(() => {
                             this.navTo();

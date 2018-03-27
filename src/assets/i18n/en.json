@@ -16,7 +16,8 @@
 
     "TOAST" : {
         "ADDED_TO_FAVORITES": "Added to favorites",
-        "COPY_NOTIFICATION" : "Сopied to clipboard"
+        "COPY_NOTIFICATION" : "Сopied to clipboard",
+        "LOCATION_DETECTION": "Location detection"
     },
 
     "CONFIRM" : {
