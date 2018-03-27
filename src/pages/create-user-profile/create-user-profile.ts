@@ -129,7 +129,7 @@ export class CreateUserProfilePage {
         // this.cropperSettings.canvasWidth = 400;
         this.cropperSettings.canvasWidth = this.platform.width();
         this.cropperSettings.canvasHeight = this.isEdit
-            ? this.platform.height() - 50
+            ? this.platform.height() - 24
             : this.platform.height();
         //this.cropperSettings.cropperClass = "cropper-style";
         //this.cropperSettings.croppingClass = "cropper-style2";
