@@ -28,8 +28,8 @@ export class SignUpPage {
     envName: string;
     onKeyboardShowSubscription: Subscription;
     onKeyboardHideSubscription: Subscription;
-    termsUrl = 'http://nau.io/terms';
-    policyUrl = 'http://nau.io/privacy-policy';
+    termsUrl = 'https://nau.io/terms';
+    policyUrl = 'https://nau.io/privacy-policy';
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;

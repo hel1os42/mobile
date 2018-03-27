@@ -11,7 +11,7 @@ export class OfferRedeemPopover {
 
     redeemingResponse;
     qrWith: number;
-    termsUrl = 'http://nau.io/terms';
+    termsUrl = 'https://nau.io/terms';
 
     constructor(
         private viewCtrl: ViewController,
