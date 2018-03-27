@@ -21,7 +21,8 @@
 
     "CONFIRM" : {
         "REMOVE_FAVORITE_OFFER": "Are you sure you want to remove offer from favorites?",
-        "REMOVE_FAVORITE_PLACE": "Are you sure you want to remove place from favorites?"
+        "REMOVE_FAVORITE_PLACE": "Are you sure you want to remove place from favorites?",
+        "CLOSE_APPLICATION": "Are you sure you want to close the application?"
     },
 
     "UNIT" : {
