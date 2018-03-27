@@ -48,9 +48,11 @@
                             {{ offersList?.length }}
                         </div>
                         <div text-center class="font-10 text-828282">
-                            {{ offersList?.length == 1
+                            {{ offersList?.length >= 10 && offersList?.length <= 20
+                            ? ('UNIT.OFFERS' | translate)
+                            : offersList?.length % 10 == 1
                             ? ('UNIT.OFFER' | translate)
-                            : (offersList?.length >= 2 && offersList?.length <= 4)
+                            : (offersList?.length % 10 >= 2 && offersList?.length % 10 <= 4)
                             ? ('UNIT.OFFERS2' | translate)
                             : ('UNIT.OFFERS' | translate) }}
                         </div>
