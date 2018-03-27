@@ -13,6 +13,11 @@
         "UKRAINE": "Украина",
         "PHILIPPINES": "Филиппины"
     },
+    
+    "TOAST" : {
+        "ADDED_TO_FAVORITES": "Добавлено в избранное",
+        "COPY_NOTIFICATION" : "Скопировано"
+    },
 
     "UNIT" : {
         "KM" : "км",
@@ -388,7 +393,6 @@
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Попробовать бесплатно",
         "LANG" : "Язык",
-        "COPY_NOTIFICATION" : "Сopied to clipboard",
         "REFERRAL_LINK" : "Cсылка для приглашения друзей"
     },
 

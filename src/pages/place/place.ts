@@ -193,7 +193,7 @@ export class PlacePage {
         this.favorites.setPlace(this.company.id)
             .subscribe(() => {
                 this.company.is_favorite = true;
-                this.toast.showNotification('Added to favorites');
+                this.toast.showNotification('TOAST.ADDED_TO_FAVORITES');
             });
     }
 

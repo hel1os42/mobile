@@ -19,6 +19,7 @@ import { OfferRedeemPopover } from './offerRedeem.popover';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { LinkPopover } from './link.popover';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-offer',
@@ -54,7 +55,8 @@ export class OfferPage {
         private statusBar: StatusBar,
         private platform: Platform,
         private analytics: GoogleAnalytics,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private translate: TranslateService) {
 
         this.points = 1;
         if (this.share.get()) {
@@ -265,7 +267,8 @@ export class OfferPage {
         this.favorites.setOffer(this.offer.id)
             .subscribe(() => {
                 this.offer.is_favorite = true;
-                this.toast.showNotification('Added to favorites');
+                this.translate 
+                this.toast.showNotification('TOAST.ADDED_TO_FAVORITES');
             });
     }
 

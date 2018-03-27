@@ -14,6 +14,11 @@
         "PHILIPPINES": "Philippines"
     },
 
+    "TOAST" : {
+        "ADDED_TO_FAVORITES": "Added to favorites",
+        "COPY_NOTIFICATION" : "Сopied to clipboard"
+    },
+
     "UNIT" : {
         "KM" : "km",
         "M" : "m",
@@ -388,7 +393,6 @@
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Try it for free",
         "LANG" : "Language",
-        "COPY_NOTIFICATION" : "Сopied to clipboard",
         "REFERRAL_LINK" : "Referral link"
     },
 
