@@ -98,6 +98,7 @@ import { FormatTimePipe } from '../pipes/format-time.pipe';
 import { TestimonialsService } from '../providers/testimonials.service';
 import { NoPlacesPopover } from '../pages/places/noPlaces.popover';
 import { LinkPopover } from '../pages/offer/link.popover';
+import { OneSignal } from '@ionic-native/onesignal';
 
 
 // The translate loader needs to know where to load i18n files
@@ -281,7 +282,8 @@ export function createTranslateLoader(http: HttpClient) {
         AndroidPermissions,
         Diagnostic,
         Network,
-        GoogleAnalytics
+        GoogleAnalytics,
+        OneSignal
     ]
 })
 export class AppModule { }
