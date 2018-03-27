@@ -207,4 +207,57 @@ page-create-user-profile{
     .item-select-disabled .points{
         opacity: 1;
     }
+
+    .leaflet-left {
+        left: inherit;
+        right: 2vw;
+    }
+
+    .leaflet-top{
+        height: 125px;
+        margin: auto;
+        bottom: 0;
+        opacity: 0.7;
+    }
+
+    .leaflet-left .leaflet-control, .leaflet-top .leaflet-control {
+        margin: 0;
+    }
+
+    .leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+        border: none;
+    }
+
+    .leaflet-touch .leaflet-bar a{
+        color: #fff;
+        width: 15vw;
+        height: 15vw;
+        font-size: 0;
+        background-color: #FF5A00;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 7vw;
+        border: 0;
+    }
+
+    .leaflet-touch .leaflet-bar a:first-child {
+        border-top-left-radius: 100vw;
+        border-top-right-radius: 100vw;
+        border-bottom-left-radius: 100vw;
+        border-bottom-right-radius: 100vw;
+        margin-bottom: 3vw;
+        background-image: url(../assets/img/user_home/plus-symbol.svg);
+    }
+
+    .leaflet-touch .leaflet-bar a:last-child {
+        border-top-left-radius: 100vw;
+        border-top-right-radius: 100vw;
+        border-bottom-left-radius: 100vw;
+        border-bottom-right-radius: 100vw;
+        background-image: url(../assets/img/user_home/minus-symbol.svg);
+    }
+
+    .leaflet-container a {
+        -webkit-tap-highlight-color: transparent;
+    }
 }
