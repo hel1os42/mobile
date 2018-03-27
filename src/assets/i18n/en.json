@@ -27,7 +27,11 @@
         "REMOVE_FAVORITE_PLACE": "Are you sure you want to remove place from favorites?",
         "CLOSE_APPLICATION": "Are you sure you want to close the application?",
         "LOCATION_DENIED": "Location denied",
-        "YOU_HAVE_DENIED": "You have denied access to geolocation. Set your coordinates in manual mode."
+        "YOU_HAVE_DENIED": "You have denied access to geolocation. Set your coordinates in manual mode.",
+        "LOCATION_NEEDED_PROFILE": "Your location needed to create account",
+        "TURN_ON_LOCATION_PROFILE": "To turn on location, please, click 'Settings'. Otherwise, you have the option to set the coordinates manually.",
+        "LOCATION_NEEDED_PLACES": "Your location needed for the correct operation of the application",
+        "TURN_ON_LOCATION_PLACES": "To turn on location, please, click 'Settings'. Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile)."
     },
 
     "UNIT" : {
@@ -47,7 +51,8 @@
         "MIN_SYMBOLS" : "min:",
         "FRIENDS": "Friends",
         "FRIENDS2": "Friends",
-        "FRIEND": "Friend"
+        "FRIEND": "Friend",
+        "SETTINGS": "Settings"
     },
 
     "MONTHS" : {

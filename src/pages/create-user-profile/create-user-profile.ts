@@ -483,33 +483,38 @@ export class CreateUserProfilePage {
     }
 
     presentConfirm() {
-        let confirm = this.alert.create({
-            title: 'To create account your location needed',
-            message: 'To turn on location, please, click "Settings". Otherwise, you have the option to set the coordinates manually.',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: () => {
-                        this.getLocation(true);
-                        this.isSelectVisible = true;
-                    }
-                },
-                {
-                    text: 'Settings',
-                    handler: () => {
-                        this.isConfirm = true;
-                        if (this.platform.is('ios')) {
-                            this.diagnostic.switchToSettings();
+        this.translate.get(['CONFIRM', 'UNIT'])
+            .subscribe(resp => {
+                let content = resp['CONFIRM'];
+                let unit = resp['UNIT'];
+                let confirm = this.alert.create({
+                    title: content['LOCATION_NEEDED_PROFILE'],
+                    message: content['TURN_ON_LOCATION_PROFILE'],
+                    buttons: [
+                        {
+                            text: unit['CANCEL'],
+                            handler: () => {
+                                this.getLocation(true);
+                                this.isSelectVisible = true;
+                            }
+                        },
+                        {
+                            text: unit['SETTINGS'],
+                            handler: () => {
+                                this.isConfirm = true;
+                                if (this.platform.is('ios')) {
+                                    this.diagnostic.switchToSettings();
+                                }
+                                else {
+                                    this.diagnostic.switchToLocationSettings();
+                                }
+                            }
                         }
-                        else {
-                            this.diagnostic.switchToLocationSettings();
-                        }
-                    }
-                }
-            ],
-            enableBackdropDismiss: false
-        });
-        confirm.present();
+                    ],
+                    enableBackdropDismiss: false
+                });
+                confirm.present();
+            })
     }
 
     ionViewDidLeave() {

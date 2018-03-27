@@ -932,32 +932,37 @@ export class PlacesPage {
     }
 
     presentConfirm() {
-        let confirm = this.alert.create({
-            title: 'Your location needed for the correct operation of the application',
-            message: 'To turn on location, please, click "Settings". Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile.)',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: () => {
-                        this.getLocation(true);
-                    }
-                },
-                {
-                    text: 'Settings',
-                    handler: () => {
-                        this.isConfirm = true;
-                        if (this.platform.is('ios')) {
-                            this.diagnostic.switchToSettings();
+        this.translate.get(['CONFIRM', 'UNIT'])
+            .subscribe(resp => {
+                let content = resp['CONFIRM'];
+                let unit = resp['UNIT'];
+                let confirm = this.alert.create({
+                    title: content['LOCATION_NEEDED_PLACES'],
+                    message: content['TURN_ON_LOCATION_PLACES'],
+                    buttons: [
+                        {
+                            text: unit['CANCEL'],
+                            handler: () => {
+                                this.getLocation(true);
+                            }
+                        },
+                        {
+                            text: unit['SETTINGS'],
+                            handler: () => {
+                                this.isConfirm = true;
+                                if (this.platform.is('ios')) {
+                                    this.diagnostic.switchToSettings();
+                                }
+                                else {
+                                    this.diagnostic.switchToLocationSettings();
+                                }
+                            }
                         }
-                        else {
-                            this.diagnostic.switchToLocationSettings();
-                        }
-                    }
-                }
-            ],
-            enableBackdropDismiss: false
-        });
-        confirm.present();
+                    ],
+                    enableBackdropDismiss: false
+                });
+                confirm.present();
+            })
     }
 
     ngOnDestroy() {
