@@ -133,4 +133,5 @@
         <variable name="ANDROID_SUPPORT_VERSION" value="26.+" />
     </plugin>
     <plugin name="cordova-plugin-google-analytics" spec="1.8.3" />
+    <plugin name="onesignal-cordova-plugin" spec="2.3.3" />
 </widget>
