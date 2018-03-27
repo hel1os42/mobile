@@ -20,6 +20,7 @@ import { ProfileService } from '../providers/profile.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
 import { BookmarksPage } from '../pages/bookmarks/bookmarks';
+import { OneSignal } from '@ionic-native/onesignal';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class MyApp {
         private appMode: AppModeService,
         private network: NetworkService,
         private analytics: GoogleAnalytics,
-        private share: ShareService) {
+        private share: ShareService,
+        private oneSignal: OneSignal) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -61,7 +63,11 @@ export class MyApp {
             //else{
             //    statusBar.overlaysWebView(true);
             //}
-
+            
+            this.branchInit(platform, splashScreen);
+            this.initTranslate();
+            this.oneSignalInit();
+            
             //Google Analytics
             this.analytics.startTrackerWithId('UA-114471660-1')
                 .then(() => {
@@ -103,10 +109,8 @@ export class MyApp {
                 console.log('Height: ' + platform.height());
             }
 
-            this.branchInit(platform, splashScreen);
-
-            this.initTranslate();
-
+            // this.branchInit(platform, splashScreen);
+            // this.initTranslate();
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
@@ -199,23 +203,28 @@ export class MyApp {
     }
 
     presentConfirm(platform) {
-        const alert = this.alert.create({
-            title: 'Are you sure you want to close the application?',
-            // message: 'Do you want to close the app?',
-            buttons: [{
-                text: 'Cancel',
-                role: 'cancel',
-                handler: () => {
-                    return;
-                }
-            }, {
-                text: 'Ok',
-                handler: () => {
-                    platform.exitApp(); // Close this application
-                }
-            }]
-        });
-        alert.present();
+        this.translate.get(['CONFIRM.CLOSE_APPLICATION', 'UNIT'])
+            .subscribe(resp => {
+                let unit = resp['UNIT'];
+                let title = resp['CONFIRM.CLOSE_APPLICATION'];
+                const alert = this.alert.create({
+                    title: title,
+                    // message: 'Do you want to close the app?',
+                    buttons: [{
+                        text: unit['CANCEL'],
+                        role: 'cancel',
+                        handler: () => {
+                            return;
+                        }
+                    }, {
+                        text: unit['OK'],
+                        handler: () => {
+                            platform.exitApp(); // Close this application
+                        }
+                    }]
+                });
+                alert.present();
+            });
     }
 
     branchInit(platform, splashScreen, isResume?: boolean) {
@@ -250,6 +259,24 @@ export class MyApp {
             });
         }
         else return;
+    }
+
+    oneSignalInit() {
+        this.oneSignal.startInit('b08f4540-f5f5-426a-a7e1-3611e2a11187', '943098821317');
+
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+
+        this.oneSignal.handleNotificationReceived().subscribe(() => {
+            // do something when notification is received
+        });
+
+        this.oneSignal.handleNotificationOpened().subscribe(() => {
+            // do something when a notification is opened
+        });
+
+        this.oneSignal.endInit();
+        this.oneSignal.enableVibrate(true);
+        this.oneSignal.enableSound(true);
     }
 
     ngOnDestroy() {

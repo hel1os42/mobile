@@ -122,9 +122,11 @@
                     <img src="assets/img/user_profile/offers.svg">
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.offers_count }}</div>
                     <div text-uppercase class="text-3E4B5D font-12">
-                        {{ user.offers_count == 1 
+                        {{ user.offers_count >= 10 && user.offers_count <= 20
+                        ? ('UNIT.OFFERS' | translate)
+                        : user.offers_count % 10 == 1 
                         ? ('UNIT.OFFER' | translate) 
-                        : (user.offers_count >= 2 && user.offers_count <= 4) 
+                        : (user.offers_count % 10 >= 2 && user.offers_count % 10 <= 4) 
                         ? ('UNIT.OFFERS2' | translate) 
                         : ('UNIT.OFFERS' | translate) }}
                     </div>
@@ -142,9 +144,11 @@
                     <img src="assets/img/user_profile/users.svg">
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.referrals_count }}</div>
                     <div text-uppercase class="text-3E4B5D font-12">
-                        {{ user.referrals_count == 1 
+                        {{ user.referrals_count >= 10 && user.referrals_count <= 20
+                        ? ('UNIT.FRIENDS' | translate)
+                        : user.referrals_count % 10 == 1 
                         ? ('UNIT.FRIEND' | translate) 
-                        : (user.referrals_count >= 2 && user.referrals_count <= 4) 
+                        : (user.referrals_count % 10 >= 2 && user.referrals_count % 10 <= 4) 
                         ? ('UNIT.FRIENDS2' | translate) 
                         : ('UNIT.FRIENDS' | translate) }}
                     </div>

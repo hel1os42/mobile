@@ -73,7 +73,7 @@ export class SettingsPage {
         this.coords.lat = this.user.latitude;
         this.coords.lng = this.user.longitude;
         // this.addMap();//hided map
-        // this.createBranchLink(this.user.invite_code);
+        this.createBranchLink(this.user.invite_code);
 
         if (!this.user.id) {
             this.profile.get(true)
@@ -208,9 +208,6 @@ export class SettingsPage {
     }
 
     showCopyNotification() {
-        this.translate.get('PAGE_SETTINGS.COPY_NOTIFICATION')
-            .subscribe(resp => {
-                this.toast.showNotification(resp);
-            })
+        this.toast.showNotification('TOAST.COPY_NOTIFICATION');
     }
 }

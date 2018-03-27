@@ -18,6 +18,7 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-place',
@@ -47,7 +48,8 @@ export class PlacePage {
         private alert: AlertController,
         private testimonials: TestimonialsService,
         private statusBar: StatusBar,
-        private analytics: GoogleAnalytics) {
+        private analytics: GoogleAnalytics,
+        private translate: TranslateService) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -193,28 +195,32 @@ export class PlacePage {
         this.favorites.setPlace(this.company.id)
             .subscribe(() => {
                 this.company.is_favorite = true;
-                this.toast.showNotification('Added to favorites');
+                this.toast.showNotification('TOAST.ADDED_TO_FAVORITES');
             });
     }
 
     presentConfirm() {
-        const alert = this.alert.create({
-            title: 'Are you sure you want to remove offer from favorites?',
-
-            buttons: [{
-                text: 'Cancel',
-                role: 'cancel',
-                handler: () => {
-                    return;
-                }
-            }, {
-                text: 'Ok',
-                handler: () => {
-                    this.removeFavorite();
-                }
-            }]
-        });
-        alert.present();
+        this.translate.get(['CONFIRM.REMOVE_FAVORITE_PLACE', 'UNIT'])
+            .subscribe(resp => {
+                let unit = resp['UNIT'];
+                let title = resp['CONFIRM.REMOVE_FAVORITE_PLACE'];
+                const alert = this.alert.create({
+                    title: title,
+                    buttons: [{
+                        text: unit['CANCEL'],
+                        role: 'cancel',
+                        handler: () => {
+                            return;
+                        }
+                    }, {
+                        text: unit['OK'],
+                        handler: () => {
+                            this.removeFavorite();
+                        }
+                    }]
+                });
+                alert.present();
+            });
     }
 
     ngOnDestroy() {

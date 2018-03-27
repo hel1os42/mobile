@@ -368,40 +368,49 @@ export class PlacesPage {
     }
 
     getNativeCoords(isHighAccuracy: boolean, isRefresh?: boolean) {
-        let loadingLocation = this.loading.create(!isRefresh ? { content: 'Location detection', spinner: 'bubbles' } : undefined);
-        if (!this.isRefreshLoading) {
-            loadingLocation.present();
-        }
-        this.location.get(isHighAccuracy)
-            .then((resp) => {
-                this.userCoords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
-                };
-                if (this.isRevertCoords) {
-                    // this._map.setView(this.coords, this.zoom);
-                    this._map.panTo(this.coords);
-                    this.isRevertCoords = false;
+        this.translate.get('TOAST.LOCATION_DETECTION')
+            .subscribe(resp => {
+                let loadingLocation = this.loading.create(
+                    !isRefresh ?
+                        {
+                            content: resp,
+                            spinner: 'bubbles'
+                        }
+                        : undefined);
+                if (!this.isRefreshLoading) {
+                    loadingLocation.present();
                 }
-                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                if (this.shareData) {
-                    this.openPlace(this.shareData, true)
-                }
-                this.getCompaniesList();
-            })
-            .catch((error) => {
-                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                if (this.platform.is('cordova')) {
-                    this.presentConfirm();
-                }
-                else {
-                    this.getLocation(true);
-                }
-                // error => console.log(error + 'err')
+                this.location.get(isHighAccuracy)
+                    .then((resp) => {
+                        this.userCoords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        this.coords = {
+                            lat: resp.coords.latitude,
+                            lng: resp.coords.longitude
+                        };
+                        if (this.isRevertCoords) {
+                            // this._map.setView(this.coords, this.zoom);
+                            this._map.panTo(this.coords);
+                            this.isRevertCoords = false;
+                        }
+                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                        if (this.shareData) {
+                            this.openPlace(this.shareData, true)
+                        }
+                        this.getCompaniesList();
+                    })
+                    .catch((error) => {
+                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                        if (this.platform.is('cordova')) {
+                            this.presentConfirm();
+                        }
+                        else {
+                            this.getLocation(true);
+                        }
+                        // error => console.log(error + 'err')
+                    })
             })
     }
 
@@ -904,10 +913,10 @@ export class PlacesPage {
                 let places = resp['PAGE_PLACES'];
                 let unit = resp['UNIT'];
                 const alert = this.alert.create({
-                    title: unit['DETECTING_YOUR_LOCATION'],
+                    title: places['LOCATION_DENIED'],
                     message: places['YOU_HAVE_DENIED_ACCESS'],
                     buttons: [{
-                        text: 'Ok',
+                        text: unit['OK'],
                         handler: () => {
                             // console.log('Application exit prevented!');
                             alert.dismiss().then(() => {
@@ -923,32 +932,37 @@ export class PlacesPage {
     }
 
     presentConfirm() {
-        let confirm = this.alert.create({
-            title: 'Your location needed for the correct operation of the application',
-            message: 'To turn on location, please, click "Settings". Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile.)',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: () => {
-                        this.getLocation(true);
-                    }
-                },
-                {
-                    text: 'Settings',
-                    handler: () => {
-                        this.isConfirm = true;
-                        if (this.platform.is('ios')) {
-                            this.diagnostic.switchToSettings();
+        this.translate.get(['CONFIRM', 'UNIT'])
+            .subscribe(resp => {
+                let content = resp['CONFIRM'];
+                let unit = resp['UNIT'];
+                let confirm = this.alert.create({
+                    title: content['LOCATION_NEEDED_PLACES'],
+                    message: content['TURN_ON_LOCATION_PLACES'],
+                    buttons: [
+                        {
+                            text: unit['CANCEL'],
+                            handler: () => {
+                                this.getLocation(true);
+                            }
+                        },
+                        {
+                            text: unit['SETTINGS'],
+                            handler: () => {
+                                this.isConfirm = true;
+                                if (this.platform.is('ios')) {
+                                    this.diagnostic.switchToSettings();
+                                }
+                                else {
+                                    this.diagnostic.switchToLocationSettings();
+                                }
+                            }
                         }
-                        else {
-                            this.diagnostic.switchToLocationSettings();
-                        }
-                    }
-                }
-            ],
-            enableBackdropDismiss: false
-        });
-        confirm.present();
+                    ],
+                    enableBackdropDismiss: false
+                });
+                confirm.present();
+            })
     }
 
     ngOnDestroy() {

@@ -14,6 +14,28 @@
         "PHILIPPINES": "Philippines"
     },
 
+    "TOAST" : {
+        "ADDED_TO_FAVORITES": "Added to favorites",
+        "COPY_NOTIFICATION" : "Сopied to clipboard",
+        "LOCATION_DETECTION": "Location detection",
+        "INTERNET_CONNECTION": "Internet connection error",
+        "INCORRECT_EMAIL": "Incorrect email, please, correct it"
+    },
+
+    "CONFIRM" : {
+        "REMOVE_FAVORITE_OFFER": "Are you sure you want to remove offer from favorites?",
+        "REMOVE_FAVORITE_PLACE": "Are you sure you want to remove place from favorites?",
+        "CLOSE_APPLICATION": "Are you sure you want to close the application?",
+        "LOGOUT": "Logout",
+        "ARE_YOU_SHURE": "Are you sure?",
+        "LOCATION_DENIED": "Location denied",
+        "YOU_HAVE_DENIED": "You have denied access to geolocation. Set your coordinates in manual mode.",
+        "LOCATION_NEEDED_PROFILE": "Your location needed to create account",
+        "TURN_ON_LOCATION_PROFILE": "To turn on location, please, click 'Settings'. Otherwise, you have the option to set the coordinates manually.",
+        "LOCATION_NEEDED_PLACES": "Your location needed for the correct operation of the application",
+        "TURN_ON_LOCATION_PLACES": "To turn on location, please, click 'Settings'. Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile)."
+    },
+
     "UNIT" : {
         "KM" : "km",
         "M" : "m",
@@ -31,7 +53,8 @@
         "MIN_SYMBOLS" : "min:",
         "FRIENDS": "Friends",
         "FRIENDS2": "Friends",
-        "FRIEND": "Friend"
+        "FRIEND": "Friend",
+        "SETTINGS": "Settings"
     },
 
     "MONTHS" : {
@@ -64,7 +87,7 @@
         "NEW" : "New",
         "MONTHLY" : "Monthly",
         "FEATURED" : "Featured",
-        "LOADING_COMPANIES" : "Loading companies...",
+        "LOADING_COMPANIES" : "Loading places...",
         "SELECT_CUISINE" : "Select Cuisine",
         "CLEAR" : "Clear",
         "MAP" : "Map",
@@ -388,7 +411,6 @@
         "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
         "TRY_IT_FOR_FREE" : "Try it for free",
         "LANG" : "Language",
-        "COPY_NOTIFICATION" : "Сopied to clipboard",
         "REFERRAL_LINK" : "Referral link"
     },
 

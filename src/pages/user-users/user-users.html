@@ -13,9 +13,11 @@
     <div item-content>
         <div class="font-18 text-3E4B5D bold">{{ total }}</div>
         <div class="font-14 text-828282">
-            {{ total == 1 
+            {{ total >= 10 && total <= 20
+            ?  ('UNIT.FRIENDS' | translate)
+            : total % 10 == 1 
             ? ('UNIT.FRIEND' | translate) 
-            : (total >= 2 && total <= 4) 
+            : (total % 10 >= 2 && total % 10 <= 4) 
             ? ('UNIT.FRIENDS2' | translate) 
             : ('UNIT.FRIENDS' | translate) }}
         </div>
@@ -37,13 +39,15 @@
       <ion-avatar item-start>
         <div class="thumb_image" [style.background-image]="'url(' + referral.picture_url + '?size=mobile&)'"></div>
       </ion-avatar>
-      <div class="happy_title font-18 bold text-3E4B5D">{{ referral.name }}</div>
+      <div class="happy_title font-18 bold text-3E4B5D">{{ referral.name }} ({{referral.invite_code}})</div>
       <div text-uppercase class="font-14 text-4F4F4F margin-top-2vw">
         {{ 'PAGE_USER-USERS.LEVEL' | translate }}: <b>{{ referral.level }}</b>
         <span margin-left>
-            {{ referral.offers_count == 1 
+            {{ referral.offers_count >= 10 && referral.offers_count <= 20
+            ? ('UNIT.OFFERS' | translate)
+            : referral.offers_count % 10 == 1 
             ? ('UNIT.OFFER' | translate) 
-            : (referral.offers_count >= 2 && referral.offers_count <= 4) 
+            : (referral.offers_count % 10 >= 2 && referral.offers_count % 10 <= 4) 
             ? ('UNIT.OFFERS2' | translate) 
             : ('UNIT.OFFERS' | translate) }}: 
           <b>{{ referral.offers_count }}</b>

@@ -14,6 +14,7 @@ import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
 import { TransactionService } from '../../providers/transaction.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-user-profile',
@@ -33,7 +34,8 @@ export class UserProfilePage {
         private nav: NavController,
         private auth: AuthService,
         public alert: AlertController,
-        private transaction: TransactionService) {
+        private transaction: TransactionService,
+        private translate: TranslateService) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -87,24 +89,29 @@ export class UserProfilePage {
     }
 
     logout() {
-        let confirm = this.alert.create({
-            title: 'Logout',
-            message: 'Are you sure?',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: () => {
-                    }
-                },
-                {
-                    text: 'Ok',
-                    handler: () => {
-                        this.auth.logout();
-                    }
-                }
-            ]
-        });
-        confirm.present();
+        this.translate.get(['CONFIRM', 'UNIT'])
+            .subscribe(resp => {
+                let content = resp['CONFIRM'];
+                let unit = resp['UNIT'];
+                let confirm = this.alert.create({
+                    title: content['LOGOUT'],
+                    message: content['ARE_YOU_SHURE'],
+                    buttons: [
+                        {
+                            text: unit['CANCEL'],
+                            handler: () => {
+                            }
+                        },
+                        {
+                            text: unit['OK'],
+                            handler: () => {
+                                this.auth.logout();
+                            }
+                        }
+                    ]
+                });
+                confirm.present();
+            })
     }
 
     slideNext() {

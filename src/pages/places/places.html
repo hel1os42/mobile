@@ -107,9 +107,11 @@
                         {{ company?.active_offers_count }}
                     </div>
                     <div text-center class="font-10 text-828282">
-                        {{ company?.active_offers_count == 1
+                        {{ company?.active_offers_count >= 10 && company?.active_offers_count <= 20
+                        ? ('UNIT.OFFERS' | translate)
+                        : company?.active_offers_count % 10 == 1
                         ? ('UNIT.OFFER' | translate)
-                        : (company?.active_offers_count >= 2 && company?.active_offers_count <= 4)
+                        : (company?.active_offers_count % 10 >= 2 && company?.active_offers_count % 10 <= 4)
                         ? ('UNIT.OFFERS2' | translate)
                         : ('UNIT.OFFERS' | translate) }}
                     </div>

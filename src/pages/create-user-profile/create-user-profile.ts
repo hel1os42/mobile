@@ -18,6 +18,7 @@ import { ToastService } from '../../providers/toast.service';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map.utils';
 import { TabsPage } from '../tabs/tabs';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -72,7 +73,8 @@ export class CreateUserProfilePage {
         private alert: AlertController,
         private androidPermissions: AndroidPermissions,
         private diagnostic: Diagnostic,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private translate: TranslateService) {
 
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -127,7 +129,7 @@ export class CreateUserProfilePage {
         // this.cropperSettings.canvasWidth = 400;
         this.cropperSettings.canvasWidth = this.platform.width();
         this.cropperSettings.canvasHeight = this.isEdit
-            ? this.platform.height() - 50
+            ? this.platform.height() - 24
             : this.platform.height();
         //this.cropperSettings.cropperClass = "cropper-style";
         //this.cropperSettings.croppingClass = "cropper-style2";
@@ -225,7 +227,7 @@ export class CreateUserProfilePage {
                     this.coords = {
                         lat: resp.latitude,
                         lng: resp.longitude
-                    }; 
+                    };
                     this.addMap();
                     this.changeDetectorRef.detectChanges();
                 })
@@ -254,17 +256,23 @@ export class CreateUserProfilePage {
     }
 
     getCoords() {
-        let loadingLocation = this.loading.create({ content: 'Location detection', spinner: 'bubbles' });
-        loadingLocation.present();
-        if (this.platform.is('android')) {
-            this.diagnostic.getLocationMode()
-                .then(res => {
-                    this.getNativeCoords(res === 'high_accuracy', loadingLocation);
+        this.translate.get('TOAST.LOCATION_DETECTION')
+            .subscribe(resp => {
+                let loadingLocation = this.loading.create({
+                    content: resp,
+                    spinner: 'bubbles'
                 });
-        }
-        else {
-            this.getNativeCoords(false, loadingLocation);
-        }
+                loadingLocation.present();
+                if (this.platform.is('android')) {
+                    this.diagnostic.getLocationMode()
+                        .then(res => {
+                            this.getNativeCoords(res === 'high_accuracy', loadingLocation);
+                        });
+                }
+                else {
+                    this.getNativeCoords(false, loadingLocation);
+                }
+            })
     }
 
     onMapReady(map: Map) {
@@ -383,7 +391,10 @@ export class CreateUserProfilePage {
         let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         let isValid = re.test(email);
         if (!isValid) {
-            this.toast.show('Incorrect email, please, correct it');
+            this.translate.get('TOAST.INCORRECT_EMAIL')
+                .subscribe(resp => {
+                    this.toast.show(resp);
+                })
             return false;
         }
         else {
@@ -435,7 +446,7 @@ export class CreateUserProfilePage {
                 this.profile.patch(differenceData)
                     .subscribe(() => {
                         if (!refreshed) {
-                           this.location.refreshDefaultCoords(this.coords, true); 
+                            this.location.refreshDefaultCoords(this.coords, true);
                         }
                         promise.then(() => {
                             this.navTo();
@@ -451,48 +462,59 @@ export class CreateUserProfilePage {
     }
 
     presentAndroidConfirm() {
-        const alert = this.alert.create({
-            title: 'Location denied',
-            message: 'You have denied access to geolocation. Set your coordinates in manual mode.',
-            buttons: [{
-                text: 'Ok',
-                handler: () => {
-                    // console.log('Application exit prevented!');
-                    this.getLocation(true);
-                }
-            }]
-        });
-        alert.present();
+        this.translate.get(['CONFIRM', 'UNIT.OK'])
+            .subscribe(resp => {
+                let confirm = resp['CONFIRM'];
+                let title = confirm['LOCATION_DENIED'];
+                let message = confirm['YOU_HAVE_DENIED'];
+                const alert = this.alert.create({
+                    title: title,
+                    message: message,
+                    buttons: [{
+                        text: resp['UNIT.OK'],
+                        handler: () => {
+                            // console.log('Application exit prevented!');
+                            this.getLocation(true);
+                        }
+                    }]
+                });
+                alert.present();
+            })
     }
 
     presentConfirm() {
-        let confirm = this.alert.create({
-            title: 'To create account your location needed',
-            message: 'To turn on location, please, click "Settings". Otherwise, you have the option to set the coordinates manually.',
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: () => {
-                        this.getLocation(true);
-                        this.isSelectVisible = true;
-                    }
-                },
-                {
-                    text: 'Settings',
-                    handler: () => {
-                        this.isConfirm = true;
-                        if (this.platform.is('ios')) {
-                            this.diagnostic.switchToSettings();
+        this.translate.get(['CONFIRM', 'UNIT'])
+            .subscribe(resp => {
+                let content = resp['CONFIRM'];
+                let unit = resp['UNIT'];
+                let confirm = this.alert.create({
+                    title: content['LOCATION_NEEDED_PROFILE'],
+                    message: content['TURN_ON_LOCATION_PROFILE'],
+                    buttons: [
+                        {
+                            text: unit['CANCEL'],
+                            handler: () => {
+                                this.getLocation(true);
+                                this.isSelectVisible = true;
+                            }
+                        },
+                        {
+                            text: unit['SETTINGS'],
+                            handler: () => {
+                                this.isConfirm = true;
+                                if (this.platform.is('ios')) {
+                                    this.diagnostic.switchToSettings();
+                                }
+                                else {
+                                    this.diagnostic.switchToLocationSettings();
+                                }
+                            }
                         }
-                        else {
-                            this.diagnostic.switchToLocationSettings();
-                        }
-                    }
-                }
-            ],
-            enableBackdropDismiss: false
-        });
-        confirm.present();
+                    ],
+                    enableBackdropDismiss: false
+                });
+                confirm.present();
+            })
     }
 
     ionViewDidLeave() {

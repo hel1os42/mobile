@@ -11,9 +11,11 @@
         <div *ngIf="getTotal() && getTotal() > 0">
             <div class="font-18 text-3E4B5D bold wrap-no">{{ getTotal() }}</div>
             <div class="font-14 text-828282">
-                {{ getTotal() == 1
+                {{ getTotal() >= 10 && getTotal() <= 20
+                ? ('PAGE_BOOKMARKS.BOOKMARKS5' | translate)
+                : getTotal() % 10 == 1
                 ? ('PAGE_BOOKMARKS.BOOKMARK' | translate)
-                : (getTotal() >= 2 && getTotal() <= 4)
+                : (getTotal() % 10 >= 2 && getTotal() % 10 <= 4)
                 ? ('PAGE_BOOKMARKS.BOOKMARKS' | translate)
                 : ('PAGE_BOOKMARKS.BOOKMARKS5' | translate) }}
             </div>
