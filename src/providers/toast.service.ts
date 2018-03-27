@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class ToastService {
@@ -7,7 +8,9 @@ export class ToastService {
     disconnectedToast;
     isShowed: boolean;
 
-    constructor(private toast: ToastController) { }
+    constructor(
+        private toast: ToastController,
+        private translate: TranslateService) { }
 
     show(message: string, isDisconnected?: boolean) {
         let position = isDisconnected ? 'middle' : 'bottom';
@@ -35,15 +38,19 @@ export class ToastService {
         }
     }
 
-    showNotification(message) {
-        let toast = this.toast.create({
-            message: message,
+    showNotification(key: string) {   
+        this.translate.get(key)
+            .subscribe(resp => {
+                    let toast = this.toast.create({
+            message: resp,
             duration: 1500,
             position: 'middle',
             cssClass: 'notification-toast',
             dismissOnPageChange: true
         });
         toast.present();
+            })
+    
     }
 
     dismiss() {
