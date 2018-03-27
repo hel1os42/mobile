@@ -264,7 +264,7 @@ export class MyApp {
     oneSignalInit() {
         this.oneSignal.startInit('b08f4540-f5f5-426a-a7e1-3611e2a11187', '943098821317');
 
-        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
 
         this.oneSignal.handleNotificationReceived().subscribe(() => {
             // do something when notification is received

@@ -50,6 +50,7 @@
         <feature name="Geolocation">
             <param name="android-package" value="org.apache.cordova.GeoBroker" />
         </feature>
+        <hook src="hooks/copy_android_notification_icons.js" type="after_prepare" />
     </platform>
     <platform name="ios">
         <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
