@@ -16,8 +16,9 @@ export class NoPlacesPopover {
     state: string;
     radius = 19849000;
     enabledCountries = COUNTRIES;
-    businessUrl = 'nau.io';
-    retailerUrl = 'nau.io';
+    businessUrl = 'https://nau.io';
+    retailerUrl = 'https://nau.io';
+    url = 'nau.io';
 
     constructor(
         private navParams: NavParams,
