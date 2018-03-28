@@ -20,6 +20,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { LinkPopover } from './link.popover';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { DateTimeUtils } from '../../utils/date-time.utils';
 
 @Component({
     selector: 'page-offer',
@@ -38,6 +39,7 @@ export class OfferPage {
     points: number;
     links = [];
     isDismissLinkPopover = true;
+    today: Date;
 
     constructor(
         private nav: NavController,
@@ -58,6 +60,7 @@ export class OfferPage {
         private browser: InAppBrowser,
         private translate: TranslateService) {
 
+        this.today = new Date();
         this.points = 1;
         if (this.share.get()) {
             this.share.remove();
@@ -66,7 +69,13 @@ export class OfferPage {
         this.offer = this.navParams.get('offer');
         this.distanceObj = this.navParams.get('distanceObj');
         this.coords = this.navParams.get('coords');
-        this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
+        this.offers.get(this.offer.id)
+            .subscribe(offer => {
+                this.offer = offer;
+                this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
+                this.timeframesHandler();
+                console.log(this.offer.timeframes);
+            })
     }
 
     ionViewDidLoad() {
@@ -93,16 +102,12 @@ export class OfferPage {
         }
     }
 
-    // descriptionHandler() {
-    //     let test = this.offer.rich_description + this.offer.rich_description;
-    //     if (this.offer.rich_description && this.offer.rich_description.length > 0) {
-    //         let arr = [];
-    //         for (var i = 0; i < test.split('<a').length - 1; i++) {
-    //             arr[arr.length] = test.split('<a')[i + 1].split('</a>')[0];
-    //         }
-    //     }
-    // }
+    timeframesHandler() {
+        if (this.offer.timeframes && this.offer.timeframes.length > 0) {
+            DateTimeUtils.getOfferTimeframes(this.today, this.offer.timeframes)
+        }
 
+    }
     openLinkPopover(event) {
         if (event.target.localName === 'a' && this.isDismissLinkPopover) {
             this.isDismissLinkPopover = false;
