@@ -63,11 +63,7 @@ export class MyApp {
             //else{
             //    statusBar.overlaysWebView(true);
             //}
-            
-            this.branchInit(platform, splashScreen);
-            this.initTranslate();
-            this.oneSignalInit();
-            
+
             //Google Analytics
             this.analytics.startTrackerWithId('UA-114471660-1')
                 .then(() => {
@@ -97,7 +93,6 @@ export class MyApp {
                     })
             }
 
-
             // FORK
             this.appMode.setForkMode();// only for fork mode;
 
@@ -109,8 +104,12 @@ export class MyApp {
                 console.log('Height: ' + platform.height());
             }
 
-            // this.branchInit(platform, splashScreen);
-            // this.initTranslate();
+            this.branchInit(platform, splashScreen);
+            this.initTranslate();
+            if (platform.is('cordova')) {
+                this.oneSignalInit();
+            }
+
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
