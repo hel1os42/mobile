@@ -642,6 +642,7 @@ export class PlacesPage {
                         this.specialityFilter = [];
                         this.search = '';
                         //
+                        this.isDismissNoPlacesPopover = true;
                         this.loadCompanies(true, this.page);
                     }
                     this.isDismissNoPlacesPopover = true;
