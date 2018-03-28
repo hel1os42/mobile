@@ -21,7 +21,7 @@ export class DateTimeUtils {
     ];
     public static ZERO_TIME_SUFFIX = ':00.000000';
     public static ZERO_START_DATETIME_SUFFIX = ' 00:00:00.000000';
-    public static ZERO_FINISH_DATETIME_SUFFIX = ' 23:59:59.999999'; 
+    public static ZERO_FINISH_DATETIME_SUFFIX = ' 23:59:59.999999';
 
     static getTimezone(timezoneData) {
         let timezone = (timezoneData.dstOffset + timezoneData.rawOffset) / 3600;
@@ -124,21 +124,48 @@ export class DateTimeUtils {
         }
     }
 
-    static returnDate (str: string, timezone: number) {
+    static returnDate(str: string, timezone: number) {
         let currentTime = new Date(str);
         currentTime.setHours(currentTime.getHours() + timezone);
-        let date = currentTime.getFullYear() + "-" + ((+currentTime.getMonth() + 1) < 10 
-        ? ('0' + (+currentTime.getMonth() + 1)) 
-        : (+currentTime.getMonth() + 1)) + "-" + ((+currentTime.getDate()) < 10 
-        ? ('0' + (+currentTime.getDate())) : (+currentTime.getDate()));
+        let date = currentTime.getFullYear() + "-" + ((+currentTime.getMonth() + 1) < 10
+            ? ('0' + (+currentTime.getMonth() + 1))
+            : (+currentTime.getMonth() + 1)) + "-" + ((+currentTime.getDate()) < 10
+                ? ('0' + (+currentTime.getDate())) : (+currentTime.getDate()));
         return date;
     }
 
-    static returnTime (time: string, timezone) {
+    static returnTime(time: string, timezone) {
         let hour = parseInt(time.split(':')[0]) + timezone;
         let returnedHour = hour >= 24 ? hour - 24 : hour;
         let hourStr = (returnedHour < 10 ? '0' + returnedHour : returnedHour) + ':' + time.split(':')[1];
         return hourStr;
+    }
+
+    static getOfferTimeframes(date: Date, timeframesData: TimeFrames[], timezone?) {
+        let timeFrames = _.flatMap(timeframesData, function (obj) {
+            return _.map(obj.days, function (day) {
+                return {
+                    from: obj.from,
+                    to: obj.to,
+                    day: day
+                };
+            });
+        });
+        let day = timeFrames.find(item => item.day === this.ALL_DAYS[date.getUTCDay() - 1].slice(0, 2));
+        let isIncluded: boolean;
+        if (day) {
+            let h = date.getUTCHours();
+            let timeInMinutes = date.getUTCHours() * 60 + date.getUTCMinutes();
+            let fromInMinutes = parseInt(day.from.split(':')[0]) * 60 + parseInt(day.from.split(':')[1].slice(0, 2));
+            let toInMinutes = parseInt(day.to.split(':')[0]) * 60 + parseInt(day.to.split(':')[1].slice(0, 2));
+            isIncluded = timeInMinutes > fromInMinutes && timeInMinutes < toInMinutes;
+        }
+        //to do convert timeframes time (+ timezone)
+        return {
+            isIncluded: isIncluded,
+            day: day,
+            timeFrames: timeFrames
+        }
     }
 
 }
