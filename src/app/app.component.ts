@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { OneSignal } from '@ionic-native/onesignal';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { App, IonicApp, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Subscription } from 'rxjs/Rx';
-import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
+import { DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { Share } from '../models/share';
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { LoginPage } from '../pages/login/login';
@@ -19,8 +20,6 @@ import { NetworkService } from '../providers/network.service';
 import { ProfileService } from '../providers/profile.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
-import { BookmarksPage } from '../pages/bookmarks/bookmarks';
-import { OneSignal } from '@ionic-native/onesignal';
 
 
 @Component({

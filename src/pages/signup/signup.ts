@@ -53,7 +53,7 @@ export class SignUpPage {
             let
                 appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
                 appEl2 = <HTMLElement>(document.getElementsByTagName('BODY')[0]),
-                appElHeight = appEl.clientHeight,
+                // appElHeight = appEl.clientHeight,
                 appElHeight2 = appEl2.clientHeight;
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
                 .subscribe(() => {
@@ -66,7 +66,7 @@ export class SignUpPage {
                 .subscribe(() => {
                     //window.alert(appElHeight)
                     //window.alert(appElHeight2)
-                    console.log('signup hide')
+                    // console.log('signup hide')
                     appEl.style.height = (appElHeight2) + 'px';
                 })
         }

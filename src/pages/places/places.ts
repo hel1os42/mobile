@@ -2,8 +2,8 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, Platform, Popover, PopoverController } from 'ionic-angular';
-import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarker, CircleMarkerOptions } from 'leaflet';
+import { AlertController, LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
+import { DomUtil, icon, LatLng, latLng, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarkerOptions } from 'leaflet';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 import { ChildCategory } from '../../models/childCategory';
@@ -21,14 +21,12 @@ import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
 import { StorageService } from '../../providers/storage.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
-import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { GeocodeService } from '../../providers/geocode.service';
 import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { COUNTRIES } from '../../const/countries';
-import { StatusBar } from '@ionic-native/status-bar';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
@@ -105,7 +103,6 @@ export class PlacesPage {
         private storage: StorageService,
         private testimonials: TestimonialsService,
         private geocoder: GeocodeService,
-        private statusBar: StatusBar,
         private analytics: GoogleAnalytics,
         private changeDetectorRef: ChangeDetectorRef) {
 
@@ -197,7 +194,7 @@ export class PlacesPage {
 
     onMapReady(map: Map) {
         // console.log(map);
-        let width = this.platform.width();
+        // let width = this.platform.width();
         let heigth = document.getElementById("map_leaf").offsetHeight;
         if (!this._map && this.coords.lat) {
             this._map = map;
@@ -743,7 +740,6 @@ export class PlacesPage {
     }
 
     createPopover() {
-        let popover: Popover;
         if (this.isChangedCategory) {
             this.offers.getTypes(this.selectedCategory.id)
                 .subscribe(resp => {
