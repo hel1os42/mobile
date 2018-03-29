@@ -3,9 +3,8 @@ import { Http, Response } from '@angular/http';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import { Observable, Subscription } from 'rxjs';
 import { Coords } from '../models/coords';
-import { NetworkService } from './network.service';
-import { ToastService } from './toast.service';
 import { ProfileService } from './profile.service';
+import { ToastService } from './toast.service';
 
 @Injectable()
 export class LocationService {
@@ -18,7 +17,6 @@ export class LocationService {
     constructor(private geolocation: Geolocation,
         private http: Http,
         private toast: ToastService,
-        private network: NetworkService,
         private profile: ProfileService) {
 
         this.onProfileCoordsRefresh = this.profile.onRefresh

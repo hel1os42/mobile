@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
-import { NavParams, Platform, Tabs } from 'ionic-angular';
-import { AppModeService } from '../../providers/appMode.service';
+import { Tabs } from 'ionic-angular';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
@@ -28,9 +27,6 @@ export class TabsPage {
     @ViewChild('tabs') tabs: Tabs;
 
     constructor(
-        private platform: Platform,
-        private appMode: AppModeService,
-        private navParams: NavParams,
         private profile: ProfileService,
         private transaction: TransactionService,
         private statusBar: StatusBar) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { NavController, Platform } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
@@ -8,12 +9,10 @@ import { Place } from '../../models/place';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { LocationService } from '../../providers/location.service';
-import { ProfileService } from '../../providers/profile.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlacePage } from '../place/place';
-import { TestimonialsService } from '../../providers/testimonials.service';
-import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Component({
     selector: 'page-bookmarks',
@@ -39,7 +38,6 @@ export class BookmarksPage {
 
     constructor(
         private favorites: FavoritesService,
-        private profile: ProfileService,
         private nav: NavController,
         private location: LocationService,
         private appMode: AppModeService,

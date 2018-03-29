@@ -55,6 +55,7 @@ export class PlacePage {
         this.coords = this.navParams.get('coords');
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
+            this.offersList = this.company.offers;
             this.distanceObj = this.navParams.get('distanceObj');
             this.offers.getPlace(this.company.id)
                 .subscribe(company => {

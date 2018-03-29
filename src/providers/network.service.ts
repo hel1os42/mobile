@@ -1,8 +1,7 @@
-import { Injectable, EventEmitter } from "@angular/core";
-import { Network } from "@ionic-native/network";
-import { Subscription } from "rxjs";
-import { ToastService } from "./toast.service";
-import { Platform } from "ionic-angular";
+import { EventEmitter, Injectable } from '@angular/core';
+import { Network } from '@ionic-native/network';
+import { Subscription } from 'rxjs';
+import { ToastService } from './toast.service';
 
 @Injectable()
 export class NetworkService {
@@ -15,8 +14,7 @@ export class NetworkService {
 
     constructor(
         private network: Network,
-        private toast: ToastService,
-        private platform: Platform) {
+        private toast: ToastService) {
     }
 
     getStatus() {

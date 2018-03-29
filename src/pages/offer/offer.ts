@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { StatusBar } from '@ionic-native/status-bar';
-import { AlertController, App, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
@@ -10,16 +13,12 @@ import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
 import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { CongratulationPopover } from './congratulation.popover';
-import { OfferRedeemPopover } from './offerRedeem.popover';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { LinkPopover } from './link.popover';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { TranslateService } from '@ngx-translate/core';
+import { OfferRedeemPopover } from './offerRedeem.popover';
 
 @Component({
     selector: 'page-offer',
@@ -51,9 +50,7 @@ export class OfferPage {
         private favorites: FavoritesService,
         private toast: ToastService,
         private alert: AlertController,
-        private testimonials: TestimonialsService,
         private statusBar: StatusBar,
-        private platform: Platform,
         private analytics: GoogleAnalytics,
         private browser: InAppBrowser,
         private translate: TranslateService) {
