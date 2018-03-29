@@ -89,7 +89,7 @@
         "ADVERTISER" : "Advertiser",
         "CREATE_OFFER" : "Create offer",
         "OFFERS" : "Offers",
-        "NAU" : "Nau",
+        "NAU" : "NAU",
         "STATISTIC" : "Statistic",
         "CATEGORY" : "Category"
     },
@@ -298,7 +298,7 @@
         "SAVE_CHANGES" : "Save changes",
         "CHANGE" : "Change",
         "GET_ACCOUNT_FOR_BUSINESS" : "Get account for business",
-        "WHY_I_NEED_ACCOUNT_FOR_BUSINESS" : "Why I need Account for business?",
+        "WHY_I_NEED" : "Why I need Account for business?",
         "HIDE" : "hide",
         "IT_HELPS_ME" : "It helps me advertise my business",
         "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
@@ -352,7 +352,7 @@
 
     "PAGE_START" : {
         "SIGN_UP" : "Sign Up",
-        "PLEASE_CHOOSE_YOUR_CONVENIENT_WAY" : "Please choose your convenient way",
+        "PLEASE_CHOOSE" : "Please choose your convenient way",
         "TO_ENTER_NAU" : "to enter NAU",
         "OR_SIGN_UP_WITH" : "or Sign up with",
         "ALREADY_HAVE_ACCOUNT" : "Already have account"
@@ -376,7 +376,7 @@
         "RATING_FEEDBACK" : "Rating & Feedback",
         "REQUESTS_FOR_OFFERS_REDEEMED" : "Requests for offers redeemed",
         "MONEY_WASTED_FOR_REDEEMS" : "money wasted for redeems",
-        "WEEKLY_DETAILED_GRAPHIC_INFORMATION" : "Weekly detailed graphic information",
+        "WEEKLY_DETAILED" : "Weekly detailed graphic information",
         "USERS" : "Users",
         "VIEWED_MY_PLACE" : "Viewed my place",
         "SAVE_PDF" : "save pdf",
