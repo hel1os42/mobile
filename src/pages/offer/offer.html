@@ -18,7 +18,7 @@
         : (points >= 2 && points <= 4)
         ? ('PAGE_OFFER.POINTS2' | translate)
         : ('PAGE_OFFER.POINTS' | translate) }}
-</span>
+    </span>
 <div item-end class="btn_social">
     <div>
         <!--
@@ -26,6 +26,7 @@
           <img src="assets/img/user_offers/icon1.svg">
         </button>
         -->
+        <span *ngIf="todayTimeframe">{{todayTimeframe.from}} - {{todayTimeframe.to}}</span>
         <button *ngIf="offer.is_favorite" (click)="presentConfirm()" ion-button icon-only color="white">
             <img src="assets/img/place/icon_star.svg">
         </button>
