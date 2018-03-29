@@ -40,6 +40,9 @@ export class OfferPage {
     links = [];
     isDismissLinkPopover = true;
     today: Date;
+    todayTimeframe;
+    timeframes;
+    isTodayIncluded = false;
 
     constructor(
         private nav: NavController,
@@ -71,10 +74,11 @@ export class OfferPage {
         this.coords = this.navParams.get('coords');
         this.offers.get(this.offer.id)
             .subscribe(offer => {
-                this.offer = offer;
+                if (offer.timeframes) {
+                    this.offer = offer;
+                }
                 this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
                 this.timeframesHandler();
-                console.log(this.offer.timeframes);
             })
     }
 
@@ -103,11 +107,18 @@ export class OfferPage {
     }
 
     timeframesHandler() {
-        if (this.offer.timeframes && this.offer.timeframes.length > 0) {
-            DateTimeUtils.getOfferTimeframes(this.today, this.offer.timeframes)
+        this.company.timezone = '-0300';//temporary - will removed
+        if (this.offer.timeframes && this.offer.timeframes.length > 0 && this.company.timezone && this.company.timezone !== '') {
+            let timeframe = DateTimeUtils.getOfferTimeframes(this.today, this.offer.timeframes, this.company.timezone);
+            this.isTodayIncluded = timeframe.isIncluded;
+            this.todayTimeframe = timeframe.day;
+            this.timeframes = timeframe.timeFrames;
         }
-
+        else {
+            this.isTodayIncluded = true;
+        }
     }
+
     openLinkPopover(event) {
         if (event.target.localName === 'a' && this.isDismissLinkPopover) {
             this.isDismissLinkPopover = false;

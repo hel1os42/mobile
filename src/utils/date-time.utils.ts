@@ -136,13 +136,15 @@ export class DateTimeUtils {
 
     static returnTime(time: string, timezone) {
         let hour = parseInt(time.split(':')[0]) + timezone;
-        let returnedHour = hour >= 24 ? hour - 24 : hour;
+        let returnedHour = hour >= 24 ? hour - 24 : hour < 0 ? 24 + hour : hour;
         let hourStr = (returnedHour < 10 ? '0' + returnedHour : returnedHour) + ':' + time.split(':')[1];
         return hourStr;
     }
 
-    static getOfferTimeframes(date: Date, timeframesData: TimeFrames[], timezone?) {
-        let timeFrames = _.flatMap(timeframesData, function (obj) {
+    static getOfferTimeframes(date: Date, timeframesData: TimeFrames[], timezone: string) {
+        let timezoneNumber = parseInt(timezone.slice(1, 3));
+        timezoneNumber = timezone.slice(0, 1) === '-' ? timezoneNumber * -1 : timezoneNumber;
+        let timeFrames: any = _.flatMap(timeframesData, function (obj) {
             return _.map(obj.days, function (day) {
                 return {
                     from: obj.from,
@@ -154,13 +156,27 @@ export class DateTimeUtils {
         let day = timeFrames.find(item => item.day === this.ALL_DAYS[date.getUTCDay() - 1].slice(0, 2));
         let isIncluded: boolean;
         if (day) {
-            let h = date.getUTCHours();
             let timeInMinutes = date.getUTCHours() * 60 + date.getUTCMinutes();
             let fromInMinutes = parseInt(day.from.split(':')[0]) * 60 + parseInt(day.from.split(':')[1].slice(0, 2));
             let toInMinutes = parseInt(day.to.split(':')[0]) * 60 + parseInt(day.to.split(':')[1].slice(0, 2));
             isIncluded = timeInMinutes > fromInMinutes && timeInMinutes < toInMinutes;
         }
-        //to do convert timeframes time (+ timezone)
+        timeFrames = timeFrames.map(item => {
+            return {
+                from: DateTimeUtils.returnTime(item.from, timezoneNumber),
+                to: DateTimeUtils.returnTime(item.to, timezoneNumber),
+                day: DateTimeUtils.ALL_DAYS.find(day => day.slice(0, 2) === item.day)
+            }
+        });
+        day = timeFrames.find(item => item.day === this.ALL_DAYS[date.getUTCDay() - 1]);
+        let  index = (item, days) => {
+            for (let i = 0; i < 7; i++) {
+                if (item.day === days[i]) {
+                    return i;
+                }
+            }
+        }
+        timeFrames = _.sortBy(timeFrames, function (o) { return index(o, DateTimeUtils.ALL_DAYS) });
         return {
             isIncluded: isIncluded,
             day: day,
