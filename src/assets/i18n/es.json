@@ -1,10 +1,10 @@
 {
     "CATEGORIES" : {
-        "Food": "<div class='font-65 text-white'>Food &<br>Drinks</div>",
-        "Beauty": "<div class='font-65 text-white'>Beauty &<br>Fitness</div>",
-        "Retail": "<div class='font-65 text-white'>Retail &<br>Services</div>",
-        "Accommodation": "<div class='font-65 text-white'>Accommodation<br>& Leisure</div>",
-        "Other": "<div class='font-65 text-white'>Other &<br>Online</div>"
+        "Food": "<div class='font-65 text-white'>Comida y<br>Bebidas</div>",
+        "Beauty": "<div class='font-65 text-white'>Belleza y<br>Salud</div>",
+        "Retail": "<div class='font-65 text-white'>Productos y<br>Servicios</div>",
+        "Accommodation": "<div class='font-65 text-white'>Alojamiento<br>y Descanso</div>",
+        "Other": "<div class='font-65 text-white'>Internet y<br>Otras cosas</div>"
     },
 
     "COUNTRIES" : {
@@ -15,25 +15,25 @@
     },
 
     "TOAST" : {
-        "ADDED_TO_FAVORITES": "Added to favorites",
-        "COPY_NOTIFICATION" : "Сopied to clipboard",
-        "LOCATION_DETECTION": "Location detection",
-        "INTERNET_CONNECTION": "Internet connection error",
-        "INCORRECT_EMAIL": "Incorrect email, please, correct it"
+        "ADDED_TO_FAVORITES": "Agregar al favoritos",
+        "COPY_NOTIFICATION" : "Copiado",
+        "LOCATION_DETECTION": "Determinación de la posicion",
+        "INTERNET_CONNECTION": "Error de conexión",
+        "INCORRECT_EMAIL": "La dirección de correo electrónico no es válida"
     },
 
     "CONFIRM" : {
-        "REMOVE_FAVORITE_OFFER": "Are you sure you want to remove offer from favorites?",
-        "REMOVE_FAVORITE_PLACE": "Are you sure you want to remove place from favorites?",
-        "CLOSE_APPLICATION": "Are you sure you want to close the application?",
-        "LOGOUT": "Logout",
-        "ARE_YOU_SHURE": "Are you sure?",
-        "LOCATION_DENIED": "Location denied",
-        "YOU_HAVE_DENIED": "You have denied access to geolocation. Set your coordinates in manual mode.",
-        "LOCATION_NEEDED_PROFILE": "Your location needed to create account",
-        "TURN_ON_LOCATION_PROFILE": "To turn on location, please, click 'Settings'. Otherwise, you have the option to set the coordinates manually.",
-        "LOCATION_NEEDED_PLACES": "Your location needed for the correct operation of the application",
-        "TURN_ON_LOCATION_PLACES": "To turn on location, please, click 'Settings'. Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile)."
+        "REMOVE_FAVORITE_OFFER": "¿Eliminar la oferta de la favoritos?",
+        "REMOVE_FAVORITE_PLACE": "¿Eliminar el lugar de la favoritos?",
+        "CLOSE_APPLICATION": "¿Cerrar la aplicación?",
+        "LOGOUT": "Cerrar sesión",
+        "ARE_YOU_SHURE": "¿Esta seguro?",
+        "LOCATION_DENIED": "Posicion no disponible",
+        "YOU_HAVE_DENIED": "Usted ha prohibido el acceso a la posicion. Puede establecer las coordenadas manualmente.",
+        "LOCATION_NEEDED_PROFILE": "Necesito la posicion para crear una cuenta",
+        "TURN_ON_LOCATION_PROFILE": "Para habilitar la posicion, haga clic en 'Configuraciones'. O establece las coordenadas manualmente.",
+        "LOCATION_NEEDED_PLACES": "Tu posicion es necesaria para el adecuado funcionamiento de la aplicacion",
+        "TURN_ON_LOCATION_PLACES": "Para habilitar la posicion, haga clic en 'Configuraciones'. O coordenadas se asuman de su perfil. (Para actualizar las coordenadas, actualiza tu perfil)"
     },
 
     "UNIT" : {
@@ -44,17 +44,17 @@
         "DONE" : "Hecho",
         "OK" : "DE ACUERDO",
         "CANCEL" : "Cancelar",
-        "CLEAR": "Clear",
+        "CLEAR": "Claro",
         "SIGN_UP" : "Regístrese",
         "SIGN_IN" : "Registrarse",
         "OFFERS" : "Ofertas",
         "OFFERS2" : "Ofertas",
         "OFFER" : "Oferta",
         "MIN_SYMBOLS" : "min:",
-        "FRIENDS": "Friends",
-        "FRIENDS2": "Friends",
-        "FRIEND": "Friend",
-        "SETTINGS": "Settings"
+        "FRIENDS": "Amigos",
+        "FRIENDS2": "Amigos",
+        "FRIEND": "Amigo",
+        "SETTINGS": "Configuraciones"
     },
 
     "MONTHS" : {
@@ -101,18 +101,18 @@
         "SELECT_FEATURES" : "Seleccionar características",
         "LOCATION_DENIED" : "Detección de ubicación denegada",
         "YOU_HAVE_DENIED_ACCESS" : "Has denegado el acceso a la geolocalización. Por favor, configure sus coordenadas manualmente.",
-        "SELECT_RADIUS" : "Select radius",
-        "COMING_SOON": "Coming soon",
-        "NAU_IS_NOT": "NAU is not active in your country yet, but may soon be.",
-        "CURRENTLY_NAU": "Currently NAU offers are available in:",
-        "IF_YOU_WANT": "If you want to partner with NAU to launch it in your country, please contact",
-        "YOUR_REGION": "Your region has no active NAU offers yet, but that's temporary!",
-        "DISPLAY": "Display the nearest",
-        "NAU_WILL": "NAU will soon launch in:",
-        "WE_ARE": "We are actively seeking for regional agents - start a profitable business in your city with NAU:",
-        "ARE_YOU": "Are you a retailer? Join NAU among the first in your region prior to the official launch!",
+        "SELECT_RADIUS" : "Selección de radio",
+        "COMING_SOON": "Próximamente",
+        "NAU_IS_NOT": "NAU aun no lo lanzamos en nuestro pais, pero estamos trabajando en eso.",
+        "CURRENTLY_NAU": "Las NAU ofertas estan disponibles en los siguientas paises:",
+        "IF_YOU_WANT": "Si desea ",
+        "YOUR_REGION": "Aun no tengo las ofertas de NAU en su región, pero la razón del tiempo!",
+        "DISPLAY": "Mostrar siguiente",
+        "NAU_WILL": " NAU Llegará enseguida en las ciudades:",
+        "WE_ARE": "Estamos buscando activamente las federales regionales - puedes construir un buen negocio en su ciudad junto con NAU:",
+        "ARE_YOU": "¿Posee usted en propiedad de los puntos o sitios o la representante? ",
         "OOPS": "Ooops...",
-        "RADIUS": "Radius"
+        "RADIUS": "Radio"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -122,7 +122,7 @@
         "VIEW_PLACE" : "Ver lugar",
         "REDEEMED_YOUR_OFFER_AT" : "Canjeó su oferta en",
         "NOW_AVAILABLE_IN_YOUR_REGION" : "Ahora disponible en su región",
-        "YOU_DONT_HAVE" : "You don't have any notifications yet"
+        "YOU_DONT_HAVE" : "Todavia no tienes notificación"
     },
 
     "PAGE_ADV-REDEEM-OFFER" : {
@@ -148,7 +148,7 @@
         "TOKENS_ARE_AVAILABLE" : "tokens están disponibles",
         "YOU_NEED_TO_HAVE" : "Necesita tener",
         "TOKENS_FOR_ACTIVATION" : "tokens para la activación",
-        "PLEASE_MAKE_A_PAYMENT" : "Please make a payment to your account",
+        "PLEASE_MAKE_A_PAYMENT" : "Haga un pago a su cuenta, por favor",
         "EDIT" : "Editar",
         "DELETE" : "Borrar",
         "LOADING_OFFERS" : "Cargando ofertas..."
@@ -169,10 +169,10 @@
         "PLACES" : "Lugares",
         "FEATURED" : "Destacado",
         "REDEEM_NOW" : "Canjear ahora",
-        "YOU_DONT_HAVE" : "You don't have any favorites",
-        "YET" : "yet",
-        "OFFERS" : "offers",
-        "PLACES1" : "places"
+        "YOU_DONT_HAVE" : "Todavia no tienes marcadores",
+        "YET" : "ya",
+        "OFFERS" : "ofertas",
+        "PLACES1" : "lugares"
     },
 
     "PAGE_CREATE-ADVUSER-PROFILE" : {
@@ -284,7 +284,7 @@
         "FEMALE" : "Femenino",
         "MALE" : "Masculino",
         "CONFIRM_YOUR_LOCATION" : "Confirma su ubicación:",
-        "YOU_CAN_SET": "You can set the coordinates in manual mode",
+        "YOU_CAN_SET": "Puede configurar su ubicación manualmente",
         "AGE" : "Edad",
         "INCOME" : "Ingresos"
     },
@@ -315,11 +315,11 @@
         "PLEASE_ENTER_OTP" : "Por favor ingresa OTP",
         "OTP" : "SMS",
         "GET_OTP" : "Obtener SMS",
-        "RESEND_SMS" : "Resend SMS",
-        "SMS_RESENDING" : "Resend SMS after",
-        "SECONDS" : "seconds",
-        "SECONDS2" : "seconds",
-        "SECOND" : "second"
+        "RESEND_SMS" : "Segunda vez SMS",
+        "SMS_RESENDING" : "Segunda vez SMS después de un tiempo",
+        "SECONDS" : "segundos",
+        "SECONDS2" : "segundos",
+        "SECOND" : "segundo"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -332,7 +332,7 @@
         "SYSTEM_NOTIFICATION" : "Notificación del sistema",
         "PROPER_CREDIT" : "Crédito apropiado, use el crédito integrado en el ícono que descargo",
         "READ" : "Leer",
-        "YOU_DONT_HAVE" : "You don't have any notifications yet"
+        "YOU_DONT_HAVE" : "Todavia no tienes notificación"
     },
 
     "PAGE_OFFER" : {
@@ -348,7 +348,7 @@
         "OFFER_REDEEMING" : "Ofrecer canje",
         "OR_USE_QR_CODE" : "o use el código QR",
         "AGREE_WITH_TERMS" : "Acepto los Términos y Condiciones",
-        "SEND_REVIEW" : "Send review"
+        "SEND_REVIEW" : "Enviar comentario"
     },
 
     "PAGE_OFFER-TERMS" : {
@@ -384,7 +384,7 @@
     },
 
     "PAGE_PLACE-FEEDBACK" : {
-        "TESTIMONIAL" : "Testimonial",
+        "TESTIMONIAL" : "Testimonios",
         "BACK" : "Atrás"
     },
 
@@ -413,7 +413,7 @@
         "GOOD_OPPORTUNITY" : "Buena oportunidad de ganar dinero",
         "TRY_IT_FOR_FREE" : "Pruébelo gratis",
         "LANG" : "Idioma",
-        "REFERRAL_LINK" : "Referral link"
+        "REFERRAL_LINK" : "Enlace para invitar amigos"
     },
 
     "PAGE_SETTINGS-CHANGE-PHONE" : {
@@ -429,10 +429,10 @@
         "PLEASE_CHOOSE" : "Por favor, elija el código de su país",
         "AND_FILL" : "e ingrese su número de teléfono",
         "NEXT" : "Siguiente",
-        "BY_PRESSING" : "By pressing «Next», I accept",
-        "TERMS_AND_CONDITIONS" : "Terms and conditions",
+        "BY_PRESSING" : "Presionando «Siguiente», yo estoy de acuerdo",
+        "TERMS_AND_CONDITIONS" : "Términos y Condiciones",
         "AND" : "y",
-        "PRIVACY_POLICY" : "privacy policy"
+        "PRIVACY_POLICY" : "política de privacidad"
     },
 
     "PAGE_SIGNUP-CODE" : {
@@ -463,9 +463,9 @@
 
     "PAGE_START" : {
         "SIGN_UP" : "REGÍSTRESE",
-        "PLEASE_CHOOSE_YOUR_CONVENIENT_WAY" : "Please choose your convenient way",
-        "TO_ENTER_NAU" : "to enter NAU",
-        "OR_SIGN_UP_WITH" : "or Sign up with",
+        "PLEASE_CHOOSE_YOUR_CONVENIENT_WAY" : "Elija una manera conveniente, por favor",
+        "TO_ENTER_NAU" : "ingresar en NAU",
+        "OR_SIGN_UP_WITH" : "o registrarse",
         "ALREADY_HAVE_ACCOUNT" : "Ya tiene una cuenta"
     },
 
