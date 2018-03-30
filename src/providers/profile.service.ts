@@ -24,11 +24,7 @@ export class ProfileService {
             let obs = this.api.get('profile', { showLoading: showLoading });
             obs.subscribe(user => {
                 if (!this.user || this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email) {
-                    this.oneSignal.sendTags({
-                        'userName': user.name,
-                        'userPhone': user.phone.split('+')[1],
-                        'userEmail': user.email
-                    });
+                    this.sendTags(user);
                 }
                 this.user = user;
                 this.onRefresh.emit(user);
@@ -54,12 +50,24 @@ export class ProfileService {
         return this.api.put('profile', data);
     }
 
-    patch(data) {
+    patch(data, user: User) {
+        if (this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email) {
+            this.sendTags(user);
+        }
+        this.user = user;
         return this.api.patch('profile', data);
     }
 
     refreshAccounts(isLoading?) {
         this.getWithAccounts(isLoading).subscribe(user => this.onRefreshAccounts.emit(user));
+    }
+
+    sendTags(user) {
+        this.oneSignal.sendTags({
+            'userName': user.name,
+            'userPhone': user.phone.split('+')[1],
+            'userEmail': user.email
+        });
     }
 
 }
