@@ -23,7 +23,7 @@ export class ProfileService {
         if (forceReload || !this.user) {
             let obs = this.api.get('profile', { showLoading: showLoading });
             obs.subscribe(user => {
-                if (!this.user) {
+                if (!this.user || this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email) {
                     this.oneSignal.sendTags({
                         'userName': user.name,
                         'userPhone': user.phone.split('+')[1],
