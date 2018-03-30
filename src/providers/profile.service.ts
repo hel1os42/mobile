@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Injectable()
 export class ProfileService {
@@ -12,7 +13,8 @@ export class ProfileService {
 
     constructor(
         private api: ApiService,
-        private auth: AuthService) {
+        private auth: AuthService,
+        private oneSignal: OneSignal) {
 
         this.auth.onLogout.subscribe(() => this.user = undefined);
     }
@@ -21,6 +23,13 @@ export class ProfileService {
         if (forceReload || !this.user) {
             let obs = this.api.get('profile', { showLoading: showLoading });
             obs.subscribe(user => {
+                if (!this.user) {
+                    this.oneSignal.sendTags({
+                        'userName': user.name,
+                        'userPhone': user.phone.split('+')[1],
+                        'userEmail': user.email
+                    });
+                }
                 this.user = user;
                 this.onRefresh.emit(user);
             });
@@ -44,7 +53,7 @@ export class ProfileService {
     put(data) {
         return this.api.put('profile', data);
     }
-    
+
     patch(data) {
         return this.api.patch('profile', data);
     }
