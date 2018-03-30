@@ -345,7 +345,7 @@
         "POINT" : "очко",
         "OFFER" : "Акции",
         "REDEEM" : "Купон",
-        "OFFER_REDEEMING" : "Offer redeeming",
+        "OFFER_REDEEMING" : "Погашение акции",
         "OR_USE_QR_CODE" : "или используйте QR-код",
         "AGREE_WITH_TERMS" : "Подтверждаю согласия с Условиями использования акций",
         "SEND_REVIEW" : "Отправить оценку"
