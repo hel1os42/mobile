@@ -2,7 +2,6 @@
   <ion-navbar>
     <ion-title>{{ company.name }}</ion-title>
   </ion-navbar>
-    <div text-center class="text-white bold" *ngIf="todayTimeframe"><span class="text-FF5A00">( </span>{{todayTimeframe.from}} - {{todayTimeframe.to}}<span class="text-FF5A00"> )</span></div>
 </ion-header>
 <ion-content scroll="false" class="padding-no font-0">
     <div [style.background-image]="'url(' + offer.picture_url + '?size=mobile&)'" class="background_effect"></div>
@@ -56,6 +55,8 @@
 <div
     class="bold font-30 extrabold text-white padding-left-offer padding-right-offer padding-top-5vw text-overflow-3">{{ offer.label }}
 </div>
+
+<div text-center class="text-white bold font-16" *ngIf="todayTimeframe"><span class="text-FF5A00">( </span>{{todayTimeframe.from}} - {{todayTimeframe.to}}<span class="text-FF5A00"> )</span></div>
 
 <div
     (click)="openLinkPopover($event)"
