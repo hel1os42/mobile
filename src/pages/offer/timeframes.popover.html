@@ -1,0 +1,17 @@
+<div class="modal_content">
+    <div text-center text-uppercase class="text-4F4F4F font-16 bold">{{ label }}</div>
+    <div text-center text-uppercase class="text-4F4F4F font-16 bold">{{ 'PAGE_OFFER.OFFER_IS_UNAVAILABLE' | translate }}</div>
+   <div margin
+        *ngFor="let timeFrame of timeFrames"
+        [ngClass]="{ 'text-FF5A00' : timeFrame.day === day }"
+        text-center
+        text-uppercase
+        class="text-4F4F4F font-16">
+        {{ getKey(timeFrame.day) | translate }} : {{ timeFrame.from }} - {{ timeFrame.to }}
+   </div>
+    <div margin-left margin-right>
+        <div class="block-btn">
+            <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+        </div>
+    </div>
+</div>
