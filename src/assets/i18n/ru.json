@@ -349,7 +349,7 @@
         "OR_USE_QR_CODE" : "или используйте QR-код",
         "AGREE_WITH_TERMS" : "Подтверждаю согласия с Условиями использования акций",
         "SEND_REVIEW" : "Отправить оценку",
-        "OFFER_IS_UNAVAILABLE ": "Акция сейчас недоступна"
+        "OFFER_IS_UNAVAILABLE": "Акция сейчас недоступна"
     },
 
     "PAGE_OFFER-TERMS" : {
