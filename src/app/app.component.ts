@@ -81,7 +81,8 @@ export class MyApp {
                     this.rootPage = OnBoardingPage;
                 }
                 else {
-                    this.getRootPage();
+                    // this.getRootPage();
+                    this.rootPage = TabsPage;
                 }
             }
             else {
@@ -169,15 +170,15 @@ export class MyApp {
 
     }
 
-    getRootPage() {
-        this.profile.get(true, false)
-            .subscribe(resp => {
-                this.rootPage = (!resp.name && !resp.email)
-                    ? CreateUserProfilePage
-                    : TabsPage;
-                // this.rootPage = SettingsPage;
-            });
-    }
+    // getRootPage() {
+    //     this.profile.get(true, false)
+    //         .subscribe(resp => {
+    //             this.rootPage = (!resp.name && !resp.email)
+    //                 ? CreateUserProfilePage
+    //                 : TabsPage;
+    //             // this.rootPage = SettingsPage;
+    //         });
+    // }
 
     initTranslate() {
         // this language will be used as a fallback when a translation isn't found in the current language

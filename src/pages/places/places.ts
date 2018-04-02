@@ -343,23 +343,15 @@ export class PlacesPage {
         else {
             this.profile.get(true, false)
                 .subscribe(user => {
-                    this.userCoords = {
-                        lat: user.latitude,
-                        lng: user.longitude
-                    };
-                    this.coords = {
-                        lat: user.latitude,
-                        lng: user.longitude
-                    };
-                    if (this.isRevertCoords) {
-                        // this._map.setView(this.coords, this.zoom);
-                        this._map.panTo(this.coords);
-                        this.isRevertCoords = false;
+                    if (user.latitude) {
+                       this.getDefaultCoords(user.latitude, user.longitude); 
                     }
-                    if (this.shareData) {
-                        this.openPlace(this.shareData, true)
-                    }
-                    this.getCompaniesList();
+                  else {
+                    this.location.getByIp()
+                    .subscribe(resp => {
+                        this.getDefaultCoords(resp.latitude, resp.longitude); 
+                    });
+                  }
                 })
         }
     }
@@ -379,24 +371,8 @@ export class PlacesPage {
                 }
                 this.location.get(isHighAccuracy)
                     .then((resp) => {
-                        this.userCoords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        };
-                        this.coords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        };
-                        if (this.isRevertCoords) {
-                            // this._map.setView(this.coords, this.zoom);
-                            this._map.panTo(this.coords);
-                            this.isRevertCoords = false;
-                        }
+                       this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
                         loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                        if (this.shareData) {
-                            this.openPlace(this.shareData, true)
-                        }
-                        this.getCompaniesList();
                     })
                     .catch((error) => {
                         loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
@@ -409,6 +385,26 @@ export class PlacesPage {
                         // error => console.log(error + 'err')
                     })
             })
+    }
+
+    getDefaultCoords(lat: number, lng: number) {
+        this.userCoords = {
+            lat: lat,
+            lng: lng
+        };
+        this.coords = {
+            lat: lat,
+            lng: lng
+        };
+        if (this.isRevertCoords) {
+            // this._map.setView(this.coords, this.zoom);
+            this._map.panTo(this.coords);
+            this.isRevertCoords = false;
+        }
+        if (this.shareData) {
+            this.openPlace(this.shareData, true)
+        }
+        this.getCompaniesList();
     }
 
     getCoords(isRefresh?: boolean) {
