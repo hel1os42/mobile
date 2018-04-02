@@ -63,7 +63,8 @@ export class OfferService {
             searchStr += this.getSearch(speciality, specialities);
         }
         if (search && search !== '') {
-            searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+            // searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+            searchStr += 'name:' + `${search}`;
         }
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
