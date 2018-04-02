@@ -349,7 +349,10 @@ export class PlacesPage {
                   else {
                     this.location.getByIp()
                     .subscribe(resp => {
-                        this.getDefaultCoords(resp.latitude, resp.longitude); 
+                        this.getDefaultCoords(resp.latitude, resp.longitude);
+                        user.latitude = resp.latitude;
+                        user.longitude = resp.longitude;
+                        this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, user, true);
                     });
                   }
                 })

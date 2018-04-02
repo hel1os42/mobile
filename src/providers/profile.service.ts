@@ -50,12 +50,12 @@ export class ProfileService {
         return this.api.put('profile', data);
     }
 
-    patch(data, user: User) {
+    patch(data, user: User, isNoShowLoading?: boolean) {
         if (this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email) {
             this.sendTags(user);
         }
         this.user = user;
-        return this.api.patch('profile', data);
+        return this.api.patch('profile', data, { showLoading: !isNoShowLoading });
     }
 
     refreshAccounts(isLoading?) {
