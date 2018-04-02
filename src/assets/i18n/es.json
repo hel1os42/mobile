@@ -349,7 +349,7 @@
         "OR_USE_QR_CODE" : "o use el código QR",
         "AGREE_WITH_TERMS" : "Acepto los Términos y Condiciones",
         "SEND_REVIEW" : "Enviar comentario",
-        "OFFER_IS_UNAVAILABLE": "Offer is unavailable now"
+        "OFFER_IS_UNAVAILABLE": "La oferta no está disponible en este momento"
     },
 
     "PAGE_OFFER-TERMS" : {
