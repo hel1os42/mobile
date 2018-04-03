@@ -115,7 +115,7 @@ export class PlacesPage {
         //         debugger
         //     })
         this.shareData = this.share.get();
-
+        
         this.segment = "alloffers";
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {

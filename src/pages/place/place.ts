@@ -170,7 +170,8 @@ export class PlacePage {
                         let message = 'NAU';
                         branchUniversalObj.showShareSheet(analytics, properties, message)
                             .then(resp => console.log(resp))
-                    }).catch(function (err) {
+                    })
+                    .catch(function (err) {
                         console.log('Branch create obj error: ' + JSON.stringify(err))
                     })
 

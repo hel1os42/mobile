@@ -36,8 +36,8 @@
                         <img class="icon_people" src="assets/img/user_home/icon_small_user.svg"><span class="font-75 text-828282">{{ company.testimonials_count }}</span>
                         <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                         <span class="font-75 text-828282">
-                            {{ distanceObj.distance }}
-                            {{ distanceObj.key | translate }}
+                            {{ distanceObj?.distance }}
+                            {{ distanceObj?.key | translate }}
                         </span>
                     </div>
                     <div margin-top class="text-3E4B5D font-22 bold text-overflow-2 wrap">{{ company.name }}</div>
