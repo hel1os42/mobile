@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { Keyboard } from '@ionic-native/keyboard';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
     selector: 'page-signup',
@@ -43,7 +44,8 @@ export class SignUpPage {
         private location: LocationService,
         private keyboard: Keyboard,
         private browser: InAppBrowser,
-        private analytics: GoogleAnalytics) {
+        private analytics: GoogleAnalytics,
+        private oneSignal: OneSignal) {
 
         if (this.platform.is('android')) {
             //this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
@@ -104,6 +106,7 @@ export class SignUpPage {
         this.phoneNumber = this.numCode.dial_code + this.formData.phone;
         // let inviteCode = this.auth.getInviteCode();
         let inviteCode = this.formData.code;
+        this.oneSignal.sendTag('refferalInviteCode', inviteCode);
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
             .subscribe(resp => {
                 let register: Register = {

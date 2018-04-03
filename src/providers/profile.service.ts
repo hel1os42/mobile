@@ -62,12 +62,12 @@ export class ProfileService {
         this.getWithAccounts(isLoading).subscribe(user => this.onRefreshAccounts.emit(user));
     }
 
-    sendTags(user) {
+    sendTags(user: User) {
         this.oneSignal.sendTags({
             'userName': user.name,
             'userPhone': user.phone.split('+')[1],
-            'userEmail': user.email
         });
+        this.oneSignal.syncHashedEmail(user.email);
     }
 
 }
