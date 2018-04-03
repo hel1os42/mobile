@@ -51,11 +51,14 @@ export class ProfileService {
     }
 
     patch(data, user: User, isNoShowLoading?: boolean) {
-        if (this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email) {
-            this.sendTags(user);
-        }
-        this.user = user;
-        return this.api.patch('profile', data, { showLoading: !isNoShowLoading });
+        let obs = this.api.patch('profile', data, { showLoading: !isNoShowLoading });
+        obs.subscribe(resp => {
+            if (!this.user || this.user.name !== resp.name || this.user.phone !== resp.phone || this.user.email !== resp.email) {
+                this.sendTags(resp);
+            }
+            this.user = resp;
+        })
+        return obs;
     }
 
     refreshAccounts(isLoading?) {
@@ -66,8 +69,10 @@ export class ProfileService {
         this.oneSignal.sendTags({
             'userName': user.name,
             'userPhone': user.phone.split('+')[1],
+            'userEmail': user.email
         });
-        this.oneSignal.syncHashedEmail(user.email);
+        // this.oneSignal.syncHashedEmail(user.email);
+        // window['plugins'].OneSignal.setEmail(user.email);
     }
 
 }

@@ -95,18 +95,18 @@ export class CreateUserProfilePage {
         }
 
         // if (this.navParams.get('user')) {
-            // this.isEdit = true;
-            this.user = this.navParams.get('user');
-            this.baseData = _.clone(this.user);
-            this.picture_url = this.user.picture_url;
-            this.coords.lat = this.baseData.latitude;
-            this.coords.lng = this.baseData.longitude;
-            if (this.coords.lat) {
-                this.addMap();
-            }
-            else {
-                this.getLocationStatus();
-            }
+        // this.isEdit = true;
+        this.user = this.navParams.get('user');
+        this.baseData = _.clone(this.user);
+        this.picture_url = this.user.picture_url;
+        this.coords.lat = this.baseData.latitude;
+        this.coords.lng = this.baseData.longitude;
+        if (this.coords.lat) {
+            this.addMap();
+        }
+        else {
+            this.getLocationStatus();
+        }
         // }
         // else {
         //     this.profile.get(true)
@@ -405,15 +405,15 @@ export class CreateUserProfilePage {
 
     navTo() {
         // if (this.isEdit) {
-            this.nav.pop();
-            this.profile.refreshAccounts();
+        this.nav.pop();
+        this.profile.refreshAccounts();
         // }
         // else {
-            // this.nav.setRoot(TabsPage);
-            // this.profile.getWithAccounts()
-            //     .subscribe(resp => {
-            //         this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
-            //     });
+        // this.nav.setRoot(TabsPage);
+        // this.profile.getWithAccounts()
+        //     .subscribe(resp => {
+        //         this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
+        //     });
         // }
     }
 
@@ -451,7 +451,7 @@ export class CreateUserProfilePage {
                         }
                         promise.then(() => {
                             this.navTo();
-                        })
+                        });
                     })
             }
             else {
