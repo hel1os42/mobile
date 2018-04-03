@@ -30,6 +30,7 @@ export class Place {
     category;
     tags?: string[];
     specialities?;
+    timezone?: string;
 }
 
 

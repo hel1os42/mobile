@@ -13,7 +13,7 @@
         "UKRAINE": "Украина",
         "PHILIPPINES": "Филиппины"
     },
-    
+
     "TOAST" : {
         "ADDED_TO_FAVORITES": "Добавлено в избранное",
         "COPY_NOTIFICATION" : "Скопировано",
@@ -62,6 +62,7 @@
         "FEB" : "ФЕВ",
         "MAR" : "МАР",
         "APR" : "АПР",
+        "MAY" : "МАЙ",
         "JUN" : "ИЮН",
         "JUL" : "ИЮЛ",
         "AUG" : "АВГ",
@@ -91,11 +92,11 @@
         "SELECT_CUISINE" : "Выберите кухню",
         "CLEAR" : "Очистить",
         "MAP" : "Карта",
-        "FOOD_DRINKS" : "Еда & Напитки",
-        "BEAUTY_FITNESS" : "Красота & Здоровье",
-        "RETAIL_SERVICES" : "Магазины & Услуги",
-        "ACCOMMODATION_LEISURE" : "Развлечения & Размещение",
-        "OTHER_ONLINE" : "Онлайн & Другие",
+        "FOOD_DRINKS" : "Еда и Напитки",
+        "BEAUTY_FITNESS" : "Красота и Здоровье",
+        "RETAIL_SERVICES" : "Товары и Услуги",
+        "ACCOMMODATION_LEISURE" : "Проживание и Отдых",
+        "OTHER_ONLINE" : "Прочее и Интернет",
         "SELECT_TYPE" : "Выберите тип заведения",
         "SELECT_FEATURES" : "Выберите особенности",
         "LOCATION_DENIED" : "Геолокация не доступна",
@@ -147,7 +148,7 @@
         "TOKENS_ARE_AVAILABLE" : "токенов доступно",
         "YOU_NEED_TO_HAVE" : "Вам необходимо",
         "TOKENS_FOR_ACTIVATION" : "токенов для активации",
-        "PLEASE_MAKE_A_PAYMENT_TO_YOUR_ACCOUNT" : "Добавьте монет NAU в кошелек",
+        "PLEASE_MAKE_A_PAYMENT" : "Добавьте монет NAU в кошелек",
         "EDIT" : "Редактировать",
         "DELETE" : "Удалить",
         "LOADING_OFFERS" : "Загрузка акций..."
@@ -235,11 +236,11 @@
         "REWARDS_OPTIONS" : "Rewards options",
         "REWARD_FOR_REDEMPTION" : "Вознаграждение за погашение",
         "TOKEN_RESERVATION" : "Резервирование монет",
-        "YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT" : "На счету монет",
+        "YOU_HAVE_TOKENS" : "На счету монет",
         "CREATING_YOUR_OFFER" : "Создается акция...",
         "ERROR" : "Произошла ошибка",
-        "OFFER_WASNT_UPDATE_PLEASE_TRY_AGAIN" : "Акция не обновилась, попробуйте снова",
-        "OFFER_WASNT_CREATED_PLEASE_TRY_AGAIN" : "Акция не создалась, попробуйте снова",
+        "OFFER_WASNT_UPDATE" : "Акция не обновилась, попробуйте снова",
+        "OFFER_WASNT_CREATED" : "Акция не создалась, попробуйте снова",
         "PLEASE_TRY_AGAIN" : "Пожалуйста, попробуйте снова",
         "RETRY" : "Повторить попытку",
         "UPDATING_OFFER" : "Обновляется акция...",
@@ -314,9 +315,10 @@
         "PLEASE_ENTER_OTP" : "Пожалуйста, введите код из SMS",
         "OTP" : "Код из SMS",
         "GET_OTP" : "Получить код из SMS",
-        "RESEND_SMS" : "Resend SMS",
+        "RESEND_SMS" : "Повтороно отправить SMS",
         "SMS_RESENDING" : "Повторно отправить SMS через",
         "SECONDS" : "секунд",
+        "SECONDS2" : "секунды",
         "SECOND" : "секунда"
     },
 
@@ -326,7 +328,7 @@
         "YESTERDAY" : "Вчера",
         "SENT_NEW_MESSAGE_FOR_YOU" : "Sent new message for you",
         "OUR_RESTAURANT_WANTS" : "Our restaurant wants offer your ineresting proposition!",
-        "Get_your_chance" : "Get your chance!",
+        "GET_YOUR_CHANCE" : "Get your chance!",
         "SYSTEM_NOTIFICATION" : "System Notification",
         "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
         "READ" : "Read",
@@ -343,10 +345,11 @@
         "POINT" : "очко",
         "OFFER" : "Акции",
         "REDEEM" : "Купон",
-        "OFFER_REDEEMING" : "Offer redeeming",
+        "OFFER_REDEEMING" : "Погашение акции",
         "OR_USE_QR_CODE" : "или используйте QR-код",
         "AGREE_WITH_TERMS" : "Подтверждаю согласия с Условиями использования акций",
-        "SEND_REVIEW" : "Отправить оценку"
+        "SEND_REVIEW" : "Отправить оценку",
+        "OFFER_IS_UNAVAILABLE": "Акция сейчас недоступна"
     },
 
     "PAGE_OFFER-TERMS" : {
@@ -404,7 +407,7 @@
         "SAVE_CHANGES" : "Сохранить",
         "CHANGE" : "Изменить",
         "GET_ACCOUNT_FOR_BUSINESS" : "Получить аккаунт для бизнеса",
-        "WHY_I_NEED_ACCOUNT_FOR_BUSINESS" : "Зачем мне бизнес-аккаунт?",
+        "WHY_I_NEED" : "Зачем мне бизнес-аккаунт?",
         "HIDE" : "спрятать",
         "IT_HELPS_ME" : "It helps me advertise my business",
         "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
@@ -461,9 +464,9 @@
 
     "PAGE_START" : {
         "SIGN_UP" : "Регистрация",
-        "PLEASE_CHOOSE_YOUR_CONVENIENT_WAY" : "Выберите удобный способ",
+        "PLEASE_CHOOSE" : "Выберите удобный способ",
         "TO_ENTER_NAU" : "войти в NAU",
-        "OR_SIGN_UP_WITH" : "или зарегистрируйтесь",
+        "OR_SIGN_UP_WITH" : "или зарегистрируйтесь через:",
         "ALREADY_HAVE_ACCOUNT" : "Уже есть аккаунт"
     },
 
@@ -485,7 +488,7 @@
         "RATING_FEEDBACK" : "Rating & Feedback",
         "REQUESTS_FOR_OFFERS_REDEEMED" : "Requests for offers redeemed",
         "MONEY_WASTED_FOR_REDEEMS" : "money wasted for redeems",
-        "WEEKLY_DETAILED_GRAPHIC_INFORMATION" : "Weekly detailed graphic information",
+        "WEEKLY_DETAILED" : "Weekly detailed graphic information",
         "USERS" : "Users",
         "VIEWED_MY_PLACE" : "Viewed my place",
         "SAVE_PDF" : "save pdf",

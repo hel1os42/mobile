@@ -40,7 +40,7 @@ export class CreateUserProfilePage {
     age: number;
     income;
     picture_url: string;
-    isEdit = false;
+    // isEdit = false;
     changedPicture = false;
     tileLayer;
     _map: Map;
@@ -94,11 +94,11 @@ export class CreateUserProfilePage {
             });
         }
 
-        if (this.navParams.get('user')) {
-            this.isEdit = true;
+        // if (this.navParams.get('user')) {
+            // this.isEdit = true;
             this.user = this.navParams.get('user');
             this.baseData = _.clone(this.user);
-            this.picture_url = this.baseData.picture_url;
+            this.picture_url = this.user.picture_url;
             this.coords.lat = this.baseData.latitude;
             this.coords.lng = this.baseData.longitude;
             if (this.coords.lat) {
@@ -107,16 +107,16 @@ export class CreateUserProfilePage {
             else {
                 this.getLocationStatus();
             }
-        }
-        else {
-            this.profile.get(true)
-                .subscribe(resp => {
-                    this.user = resp;
-                    this.baseData = _.clone(this.user);
-                    this.picture_url = this.user.picture_url;
-                });
-            this.getLocationStatus();
-        }
+        // }
+        // else {
+        //     this.profile.get(true)
+        //         .subscribe(resp => {
+        //             this.user = resp;
+        //             this.baseData = _.clone(this.user);
+        //             this.picture_url = this.user.picture_url;
+        //         });
+        //     this.getLocationStatus();
+        // }
 
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
@@ -128,9 +128,10 @@ export class CreateUserProfilePage {
         this.cropperSettings.croppedHeight = 1024;
         // this.cropperSettings.canvasWidth = 400;
         this.cropperSettings.canvasWidth = this.platform.width();
-        this.cropperSettings.canvasHeight = this.isEdit
-            ? this.platform.height() - 24
-            : this.platform.height();
+        // this.cropperSettings.canvasHeight = this.isEdit
+        //     ? this.platform.height() - 24
+        //     : this.platform.height();
+        this.cropperSettings.canvasHeight = this.platform.height() - 24
         //this.cropperSettings.cropperClass = "cropper-style";
         //this.cropperSettings.croppingClass = "cropper-style2";
         // this.cropperSettings.preserveSize = true;
@@ -311,9 +312,9 @@ export class CreateUserProfilePage {
     }
 
     point() {
-        let points = (this.user.name ? +8 : +0) + (this.facebookName ? +3 : +0) +
-            (this.twitterName ? +3 : +0) + (this.instagramName ? +3 : +0) +
-            (this.gender ? +5 : +0) + (this.age ? +9 : +0) + (this.income ? +9 : +0);
+        // let points = (this.user.name ? +8 : +0) + (this.facebookName ? +3 : +0) +
+        //     (this.twitterName ? +3 : +0) + (this.instagramName ? +3 : +0) +
+        //     (this.gender ? +5 : +0) + (this.age ? +9 : +0) + (this.income ? +9 : +0);
         // return points;temporary
         // return 0;
         return this.user.points;
@@ -403,17 +404,17 @@ export class CreateUserProfilePage {
     }
 
     navTo() {
-        if (this.isEdit) {
+        // if (this.isEdit) {
             this.nav.pop();
             this.profile.refreshAccounts();
-        }
-        else {
-            this.nav.setRoot(TabsPage);
+        // }
+        // else {
+            // this.nav.setRoot(TabsPage);
             // this.profile.getWithAccounts()
             //     .subscribe(resp => {
             //         this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
             //     });
-        }
+        // }
     }
 
     createAccount() {
@@ -443,7 +444,7 @@ export class CreateUserProfilePage {
                 ? this.api.uploadImage(this.picture_url, 'profile/picture', true)
                 : Promise.resolve();
             if (!isEmpty) {
-                this.profile.patch(differenceData)
+                this.profile.patch(differenceData, this.baseData)
                     .subscribe(() => {
                         if (!refreshed) {
                             this.location.refreshDefaultCoords(this.coords, true);

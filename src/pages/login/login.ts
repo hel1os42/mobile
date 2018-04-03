@@ -148,19 +148,16 @@ export class LoginPage {
         })
             .subscribe(resp => {
                 this.analytics.trackEvent("Session", 'event_phoneconfirm');
-                this.profile.get(true)
-                    .subscribe(res => {
-                        this.location.refreshDefaultCoords({ lat: res.latitude, lng: res.longitude }, true);
-                        if (res.name == '' && !res.email) {
-                            this.nav.setRoot(CreateUserProfilePage)
-                        }
-                        else {
-                            this.nav.setRoot(TabsPage, { index: 0 });
-                        }
-                    })
-
-                // this.nav.setRoot(TemporaryPage);//temporary(to remove)
-
+                // this.profile.get(true)
+                //     .subscribe(res => {
+                //         this.location.refreshDefaultCoords({ lat: res.latitude, lng: res.longitude }, true);
+                //         if (res.name == '' && !res.email) {
+                //             this.nav.setRoot(CreateUserProfilePage)
+                //         }
+                //         else {
+                this.nav.setRoot(TabsPage, { index: 0 });
+                //     }
+                // })
             });
     }
 
@@ -238,11 +235,11 @@ export class LoginPage {
                         //         this.appMode.setEnvironmentMode('prod');
                         //         debugger
                         //     }
-                            else {
-                                this.envName = data;
-                                this.appMode.setEnvironmentMode(data);
-                                this.getNumCode();
-                            }
+                        else {
+                            this.envName = data;
+                            this.appMode.setEnvironmentMode(data);
+                            this.getNumCode();
+                        }
                         // }
                     }
                 }

@@ -46,7 +46,13 @@
 <div text-center margin-top *ngIf="!isRetry">
     {{ 'PAGE_LOGIN.SMS_RESENDING' | translate }}
     <span class="bold font-16">{{ countDown | async | formatTime }}</span>
-    {{ counter == 1 ? ('PAGE_LOGIN.SECOND' | translate) : ('PAGE_LOGIN.SECONDS' | translate) }}
+    {{ counter >= 10 && counter <= 20
+    ?  ('PAGE_LOGIN.SECONDS' | translate)
+    : counter % 10 == 1 
+    ? ('PAGE_LOGIN.SECOND' | translate) 
+    : (counter % 10 >= 2 && counter % 10 <= 4) 
+    ? ('PAGE_LOGIN.SECONDS2' | translate) 
+    : ('PAGE_LOGIN.SECONDS' | translate) }}
 </div>
 
 <button 

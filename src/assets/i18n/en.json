@@ -62,6 +62,7 @@
         "FEB" : "FEB",
         "MAR" : "MAR",
         "APR" : "APR",
+        "MAY" : "MAY",
         "JUN" : "JUN",
         "JUL" : "JUL",
         "AUG" : "AUG",
@@ -147,7 +148,7 @@
         "TOKENS_ARE_AVAILABLE" : "tokens are available",
         "YOU_NEED_TO_HAVE" : "You need to have",
         "TOKENS_FOR_ACTIVATION" : "tokens for activation",
-        "PLEASE_MAKE_A_PAYMENT_TO_YOUR_ACCOUNT" : "Please make a payment to your account",
+        "PLEASE_MAKE_A_PAYMENT" : "Please make a payment to your account",
         "EDIT" : "Edit",
         "DELETE" : "Delete",
         "LOADING_OFFERS" : "Loading offers..."
@@ -156,7 +157,7 @@
     "PAGE_ADV-USER-PROFILE" : {
         "ADVERTISER" : "Advertiser",
         "CREATE_OFFER" : "Create offer",
-        "NAU" : "Nau",
+        "NAU" : "NAU",
         "STATISTIC" : "Statistic",
         "CATEGORY" : "Category"
     },
@@ -235,11 +236,11 @@
         "REWARDS_OPTIONS" : "Rewards options",
         "REWARD_FOR_REDEMPTION" : "Reward for redemption",
         "TOKEN_RESERVATION" : "Token reservation",
-        "YOU_HAVE_TOKENS_ON_YOUR_ACCOUNT" : "You have tokens on your account",
+        "YOU_HAVE_TOKENS" : "You have tokens on your account",
         "CREATING_YOUR_OFFER" : "Creating your offer...",
         "ERROR" : "Oops...ERROR",
-        "OFFER_WASNT_UPDATE_PLEASE_TRY_AGAIN" : "Offer wasn't update. Please try again",
-        "OFFER_WASNT_CREATED_PLEASE_TRY_AGAIN" : "Offer wasn't create. Please try again",
+        "OFFER_WASNT_UPDATE" : "Offer wasn't update. Please try again",
+        "OFFER_WASNT_CREATED" : "Offer wasn't create. Please try again",
         "PLEASE_TRY_AGAIN" : "Please try again",
         "RETRY" : "Retry",
         "UPDATING_OFFER" : "Updating your offer...",
@@ -317,6 +318,7 @@
         "RESEND_SMS" : "Resend SMS",
         "SMS_RESENDING" : "Resend SMS after",
         "SECONDS" : "seconds",
+        "SECONDS2" : "seconds",
         "SECOND" : "second"
     },
 
@@ -326,7 +328,7 @@
         "YESTERDAY" : "Yesterday",
         "SENT_NEW_MESSAGE_FOR_YOU" : "Sent new message for you",
         "OUR_RESTAURANT_WANTS" : "Our restaurant wants offer your ineresting proposition!",
-        "Get_your_chance" : "Get your chance!",
+        "GET_YOUR_CHANCE" : "Get your chance!",
         "SYSTEM_NOTIFICATION" : "System Notification",
         "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
         "READ" : "Read",
@@ -346,7 +348,8 @@
         "OFFER_REDEEMING" : "Offer redeeming",
         "OR_USE_QR_CODE" : "or use QR-code",
         "AGREE_WITH_TERMS" : "Agree with Terms & Conditions",
-        "SEND_REVIEW" : "Send review"
+        "SEND_REVIEW" : "Send review",
+        "OFFER_IS_UNAVAILABLE" : "Offer is unavailable now"
     },
 
     "PAGE_OFFER-TERMS" : {
@@ -404,7 +407,7 @@
         "SAVE_CHANGES" : "Save changes",
         "CHANGE" : "Change",
         "GET_ACCOUNT_FOR_BUSINESS" : "Get account for business",
-        "WHY_I_NEED_ACCOUNT_FOR_BUSINESS" : "Why I need Account for business?",
+        "WHY_I_NEED" : "Why I need Account for business?",
         "HIDE" : "hide",
         "IT_HELPS_ME" : "It helps me advertise my business",
         "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
@@ -461,7 +464,7 @@
 
     "PAGE_START" : {
         "SIGN_UP" : "Sign Up",
-        "PLEASE_CHOOSE_YOUR_CONVENIENT_WAY" : "Please choose your convenient way",
+        "PLEASE_CHOOSE" : "Please choose your convenient way",
         "TO_ENTER_NAU" : "to enter NAU",
         "OR_SIGN_UP_WITH" : "or Sign up with",
         "ALREADY_HAVE_ACCOUNT" : "Already have account"
@@ -485,7 +488,7 @@
         "RATING_FEEDBACK" : "Rating & Feedback",
         "REQUESTS_FOR_OFFERS_REDEEMED" : "Requests for offers redeemed",
         "MONEY_WASTED_FOR_REDEEMS" : "money wasted for redeems",
-        "WEEKLY_DETAILED_GRAPHIC_INFORMATION" : "Weekly detailed graphic information",
+        "WEEKLY_DETAILED" : "Weekly detailed graphic information",
         "USERS" : "Users",
         "VIEWED_MY_PLACE" : "Viewed my place",
         "SAVE_PDF" : "save pdf",

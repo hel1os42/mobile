@@ -55,6 +55,7 @@ export class PlacePage {
         this.coords = this.navParams.get('coords');
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
+            this.offersList = this.company.offers;
             this.distanceObj = this.navParams.get('distanceObj');
             this.offers.getPlace(this.company.id)
                 .subscribe(company => {
@@ -169,7 +170,8 @@ export class PlacePage {
                         let message = 'NAU';
                         branchUniversalObj.showShareSheet(analytics, properties, message)
                             .then(resp => console.log(resp))
-                    }).catch(function (err) {
+                    })
+                    .catch(function (err) {
                         console.log('Branch create obj error: ' + JSON.stringify(err))
                     })
 

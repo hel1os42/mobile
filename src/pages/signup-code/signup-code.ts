@@ -7,6 +7,7 @@ import { AuthService } from '../../providers/auth.service';
 import { StringValidator } from '../../validators/string.validator';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
     selector: 'page-signup-code',
@@ -84,9 +85,8 @@ export class SignUpCodePage {
                         this.analytics.trackEvent("Session", 'event_phoneconfirm');
                         this.cancelTimer();
                         this.isRetry = false;
-                        // this.nav.setRoot(CreateUserProfilePage, { user: resp});
-                        this.nav.setRoot(CreateUserProfilePage);
-                        // this.nav.setRoot(TemporaryPage);
+                        this.nav.setRoot(TabsPage, { index: 0 });
+                        // this.nav.setRoot(CreateUserProfilePage);
                     })
             })
     }

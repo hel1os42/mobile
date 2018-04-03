@@ -4,13 +4,17 @@ export const AVAILABLE_LANGUAGES = [
 		name: 'English'
 	},
 	// {
-	// 	code: 'ua',
+	// 	code: 'uk',
 	// 	name: 'Українська'
 	// },
 	{
 		code: 'ru',
 		name: 'Русский'
-	}
+    },
+    {
+        code: 'es',
+        name: 'Español'
+    }
 ];
 
 export const DEFAULT_LANG_CODE = 'en';

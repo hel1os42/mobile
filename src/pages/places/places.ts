@@ -2,8 +2,8 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, Platform, Popover, PopoverController } from 'ionic-angular';
-import { DomUtil, icon, LatLng, latLng, LatLngBounds, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarker, CircleMarkerOptions } from 'leaflet';
+import { AlertController, LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
+import { DomUtil, icon, LatLng, latLng, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarkerOptions } from 'leaflet';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 import { ChildCategory } from '../../models/childCategory';
@@ -21,14 +21,12 @@ import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
 import { StorageService } from '../../providers/storage.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
-import { DataUtils } from '../../utils/data.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
 import { PlacesPopover } from './places.popover';
 import { GeocodeService } from '../../providers/geocode.service';
 import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { COUNTRIES } from '../../const/countries';
-import { StatusBar } from '@ionic-native/status-bar';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
@@ -105,7 +103,6 @@ export class PlacesPage {
         private storage: StorageService,
         private testimonials: TestimonialsService,
         private geocoder: GeocodeService,
-        private statusBar: StatusBar,
         private analytics: GoogleAnalytics,
         private changeDetectorRef: ChangeDetectorRef) {
 
@@ -118,7 +115,7 @@ export class PlacesPage {
         //         debugger
         //     })
         this.shareData = this.share.get();
-
+        
         this.segment = "alloffers";
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -197,7 +194,7 @@ export class PlacesPage {
 
     onMapReady(map: Map) {
         // console.log(map);
-        let width = this.platform.width();
+        // let width = this.platform.width();
         let heigth = document.getElementById("map_leaf").offsetHeight;
         if (!this._map && this.coords.lat) {
             this._map = map;
@@ -346,23 +343,18 @@ export class PlacesPage {
         else {
             this.profile.get(true, false)
                 .subscribe(user => {
-                    this.userCoords = {
-                        lat: user.latitude,
-                        lng: user.longitude
-                    };
-                    this.coords = {
-                        lat: user.latitude,
-                        lng: user.longitude
-                    };
-                    if (this.isRevertCoords) {
-                        // this._map.setView(this.coords, this.zoom);
-                        this._map.panTo(this.coords);
-                        this.isRevertCoords = false;
+                    if (user.latitude) {
+                       this.getDefaultCoords(user.latitude, user.longitude); 
                     }
-                    if (this.shareData) {
-                        this.openPlace(this.shareData, true)
-                    }
-                    this.getCompaniesList();
+                  else {
+                    this.location.getByIp()
+                    .subscribe(resp => {
+                        this.getDefaultCoords(resp.latitude, resp.longitude);
+                        user.latitude = resp.latitude;
+                        user.longitude = resp.longitude;
+                        this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, user, true);
+                    });
+                  }
                 })
         }
     }
@@ -382,24 +374,8 @@ export class PlacesPage {
                 }
                 this.location.get(isHighAccuracy)
                     .then((resp) => {
-                        this.userCoords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        };
-                        this.coords = {
-                            lat: resp.coords.latitude,
-                            lng: resp.coords.longitude
-                        };
-                        if (this.isRevertCoords) {
-                            // this._map.setView(this.coords, this.zoom);
-                            this._map.panTo(this.coords);
-                            this.isRevertCoords = false;
-                        }
+                       this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
                         loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                        if (this.shareData) {
-                            this.openPlace(this.shareData, true)
-                        }
-                        this.getCompaniesList();
                     })
                     .catch((error) => {
                         loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
@@ -412,6 +388,26 @@ export class PlacesPage {
                         // error => console.log(error + 'err')
                     })
             })
+    }
+
+    getDefaultCoords(lat: number, lng: number) {
+        this.userCoords = {
+            lat: lat,
+            lng: lng
+        };
+        this.coords = {
+            lat: lat,
+            lng: lng
+        };
+        if (this.isRevertCoords) {
+            // this._map.setView(this.coords, this.zoom);
+            this._map.panTo(this.coords);
+            this.isRevertCoords = false;
+        }
+        if (this.shareData) {
+            this.openPlace(this.shareData, true)
+        }
+        this.getCompaniesList();
     }
 
     getCoords(isRefresh?: boolean) {
@@ -642,6 +638,7 @@ export class PlacesPage {
                         this.specialityFilter = [];
                         this.search = '';
                         //
+                        this.isDismissNoPlacesPopover = true;
                         this.loadCompanies(true, this.page);
                     }
                     this.isDismissNoPlacesPopover = true;
@@ -742,7 +739,6 @@ export class PlacesPage {
     }
 
     createPopover() {
-        let popover: Popover;
         if (this.isChangedCategory) {
             this.offers.getTypes(this.selectedCategory.id)
                 .subscribe(resp => {

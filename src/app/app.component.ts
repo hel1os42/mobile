@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { OneSignal } from '@ionic-native/onesignal';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { App, IonicApp, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Subscription } from 'rxjs/Rx';
-import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
+import { DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { Share } from '../models/share';
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { LoginPage } from '../pages/login/login';
@@ -19,8 +20,6 @@ import { NetworkService } from '../providers/network.service';
 import { ProfileService } from '../providers/profile.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
-import { BookmarksPage } from '../pages/bookmarks/bookmarks';
-import { OneSignal } from '@ionic-native/onesignal';
 
 
 @Component({
@@ -63,11 +62,7 @@ export class MyApp {
             //else{
             //    statusBar.overlaysWebView(true);
             //}
-            
-            this.branchInit(platform, splashScreen);
-            this.initTranslate();
-            this.oneSignalInit();
-            
+
             //Google Analytics
             this.analytics.startTrackerWithId('UA-114471660-1')
                 .then(() => {
@@ -86,7 +81,8 @@ export class MyApp {
                     this.rootPage = OnBoardingPage;
                 }
                 else {
-                    this.getRootPage();
+                    // this.getRootPage();
+                    this.rootPage = TabsPage;
                 }
             }
             else {
@@ -96,7 +92,6 @@ export class MyApp {
                         window.location.reload(true);
                     })
             }
-
 
             // FORK
             this.appMode.setForkMode();// only for fork mode;
@@ -109,8 +104,12 @@ export class MyApp {
                 console.log('Height: ' + platform.height());
             }
 
-            // this.branchInit(platform, splashScreen);
-            // this.initTranslate();
+            this.branchInit(platform, splashScreen);
+            this.initTranslate();
+            if (platform.is('cordova')) {
+                this.oneSignalInit();
+            }
+
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
@@ -171,15 +170,15 @@ export class MyApp {
 
     }
 
-    getRootPage() {
-        this.profile.get(true, false)
-            .subscribe(resp => {
-                this.rootPage = (!resp.name && !resp.email)
-                    ? CreateUserProfilePage
-                    : TabsPage;
-                // this.rootPage = SettingsPage;
-            });
-    }
+    // getRootPage() {
+    //     this.profile.get(true, false)
+    //         .subscribe(resp => {
+    //             this.rootPage = (!resp.name && !resp.email)
+    //                 ? CreateUserProfilePage
+    //                 : TabsPage;
+    //             // this.rootPage = SettingsPage;
+    //         });
+    // }
 
     initTranslate() {
         // this language will be used as a fallback when a translation isn't found in the current language

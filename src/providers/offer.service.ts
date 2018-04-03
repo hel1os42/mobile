@@ -12,7 +12,18 @@ export class OfferService {
     constructor(
         private api: ApiService) { }
 
-    getPlacesOfRoot(category_ids: string, lat: number, lng: number, radius: number, page: number, showLoading: boolean) {
+    get(offerId) {
+        return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: false });
+    }
+
+    getPlacesOfRoot(
+        category_ids: string,
+        lat: number,
+        lng: number,
+        radius: number,
+        page: number,
+        showLoading: boolean) {
+
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
             showLoading: showLoading,
@@ -26,7 +37,18 @@ export class OfferService {
         });
     }
 
-    getPlaces(category_ids: string, tags: string[], types: string[], specialities: string[], lat: number, lng: number, radius: number, search: string, page: number, showLoading: boolean) {
+    getPlaces(
+        category_ids: string,
+        tags: string[],
+        types: string[],
+        specialities: string[],
+        lat: number,
+        lng: number,
+        radius: number,
+        search: string,
+        page: number,
+        showLoading: boolean) {
+
         let tag = 'tags.slug:';
         let type = 'retailTypes.id:';
         let speciality = 'specialities.slug:';
@@ -41,7 +63,8 @@ export class OfferService {
             searchStr += this.getSearch(speciality, specialities);
         }
         if (search && search !== '') {
-            searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+            // searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+            searchStr += 'name:' + `${search}`;
         }
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {

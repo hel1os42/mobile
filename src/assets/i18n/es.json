@@ -1,0 +1,594 @@
+{
+    "CATEGORIES" : {
+        "Food": "<div class='font-65 text-white'>Comida y<br>Bebidas</div>",
+        "Beauty": "<div class='font-65 text-white'>Belleza y<br>Salud</div>",
+        "Retail": "<div class='font-65 text-white'>Productos y<br>Servicios</div>",
+        "Accommodation": "<div class='font-65 text-white'>Alojamiento<br>y Descanso</div>",
+        "Other": "<div class='font-65 text-white'>Internet y<br>Otras cosas</div>"
+    },
+
+    "COUNTRIES" : {
+        "COLOMBIA": "Colombia",
+        "RUSSIA": "Rusia",
+        "UKRAINE": "Ucrania",
+        "PHILIPPINES": "Filipinas"
+    },
+
+    "TOAST" : {
+        "ADDED_TO_FAVORITES": "Agregar al favoritos",
+        "COPY_NOTIFICATION" : "Copiado",
+        "LOCATION_DETECTION": "Determinación de la posicion",
+        "INTERNET_CONNECTION": "Error de conexión",
+        "INCORRECT_EMAIL": "La dirección de correo electrónico no es válida"
+    },
+
+    "CONFIRM" : {
+        "REMOVE_FAVORITE_OFFER": "¿Eliminar la oferta de la favoritos?",
+        "REMOVE_FAVORITE_PLACE": "¿Eliminar el lugar de la favoritos?",
+        "CLOSE_APPLICATION": "¿Cerrar la aplicación?",
+        "LOGOUT": "Cerrar sesión",
+        "ARE_YOU_SHURE": "¿Esta seguro?",
+        "LOCATION_DENIED": "Posicion no disponible",
+        "YOU_HAVE_DENIED": "Usted ha prohibido el acceso a la posicion. Puede establecer las coordenadas manualmente.",
+        "LOCATION_NEEDED_PROFILE": "Necesito la posicion para crear una cuenta",
+        "TURN_ON_LOCATION_PROFILE": "Para habilitar la posicion, haga clic en 'Configuraciones'. O establece las coordenadas manualmente.",
+        "LOCATION_NEEDED_PLACES": "Tu posicion es necesaria para el adecuado funcionamiento de la aplicacion",
+        "TURN_ON_LOCATION_PLACES": "Para habilitar la posicion, haga clic en 'Configuraciones'. O coordenadas se asuman de su perfil. (Para actualizar las coordenadas, actualiza tu perfil)"
+    },
+
+    "UNIT" : {
+        "KM" : "km",
+        "M" : "m",
+        "DETECTING_YOUR_LOCATION" : "NAU está detectando su ubicación...",
+        "SETTING_MAP_RADIUS" : "Establecer radio del mapa",
+        "DONE" : "Hecho",
+        "OK" : "DE ACUERDO",
+        "CANCEL" : "Cancelar",
+        "CLEAR": "Claro",
+        "SIGN_UP" : "Regístrese",
+        "SIGN_IN" : "Registrarse",
+        "OFFERS" : "Ofertas",
+        "OFFERS2" : "Ofertas",
+        "OFFER" : "Oferta",
+        "MIN_SYMBOLS" : "min:",
+        "FRIENDS": "Amigos",
+        "FRIENDS2": "Amigos",
+        "FRIEND": "Amigo",
+        "SETTINGS": "Configuraciones"
+    },
+
+    "MONTHS" : {
+        "JAN" : "ENE",
+        "FEB" : "FEB",
+        "MAR" : "MAR",
+        "APR" : "ABR",
+        "MAY" : "MAY",
+        "JUN" : "JUN",
+        "JUL" : "JUL",
+        "AUG" : "AGO",
+        "SEP" : "SEP",
+        "OCT" : "OCT",
+        "NOV" : "NOV",
+        "DEC" : "DIC"
+    },
+
+    "DAYS" : {
+        "MON" : "LUN",
+        "TUE" : "MAR",
+        "WED" : "MIE",
+        "THU" : "JUE",
+        "FRI" : "VIE",
+        "SAT" : "SAB",
+        "SUN" : "DOM"
+    },
+
+    "PAGE_PLACES" : {
+        "ALL_OFFERS" : "Todas las ofertas",
+        "DELIVERY" : "Entrega",
+        "NEW" : "Nuevo",
+        "MONTHLY" : "Mensual",
+        "FEATURED" : "Destacado",
+        "LOADING_COMPANIES" : "Cargando comercios...",
+        "SELECT_CUISINE" : "Seleccionar cocina",
+        "CLEAR" : "Claro",
+        "MAP" : "Mapa",
+        "FOOD_DRINKS" : "Comida y Bebidas",
+        "BEAUTY_FITNESS" : "Belleza y Salud",
+        "RETAIL_SERVICES" : "Comercio y Servicios",
+        "ACCOMMODATION_LEISURE" : "Alojamiento y Ocio",
+        "OTHER_ONLINE" : "Otros y En línea",
+        "SELECT_TYPE" : "Seleccionar tipo de comercio",
+        "SELECT_FEATURES" : "Seleccionar características",
+        "LOCATION_DENIED" : "Detección de ubicación denegada",
+        "YOU_HAVE_DENIED_ACCESS" : "Has denegado el acceso a la geolocalización. Por favor, configure sus coordenadas manualmente.",
+        "SELECT_RADIUS" : "Selección de radio",
+        "COMING_SOON": "Próximamente",
+        "NAU_IS_NOT": "NAU aun no lo lanzamos en nuestro pais, pero estamos trabajando en eso.",
+        "CURRENTLY_NAU": "Las NAU ofertas estan disponibles en los siguientas paises:",
+        "IF_YOU_WANT": "Si desea ",
+        "YOUR_REGION": "Aun no tengo las ofertas de NAU en su región, pero la razón del tiempo!",
+        "DISPLAY": "Mostrar siguiente",
+        "NAU_WILL": " NAU Llegará enseguida en las ciudades:",
+        "WE_ARE": "Estamos buscando activamente las federales regionales - puedes construir un buen negocio en su ciudad junto con NAU:",
+        "ARE_YOU": "¿Posee usted en propiedad de los puntos o sitios o la representante? ",
+        "OOPS": "Ooops...",
+        "RADIUS": "Radio"
+    },
+
+    "PAGE_ADV-NOTIFICATIONS" : {
+        "NOTIFICATION" : "Notificación",
+        "TODAY" : "Hoy",
+        "YESTERDAY" : "Ayer",
+        "VIEW_PLACE" : "Ver lugar",
+        "REDEEMED_YOUR_OFFER_AT" : "Canjeó su oferta en",
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Ahora disponible en su región",
+        "YOU_DONT_HAVE" : "Todavia no tienes notificación"
+    },
+
+    "PAGE_ADV-REDEEM-OFFER" : {
+        "CONFIRM_REDEMPTION" : "Confirmar canje",
+        "CODE" : "Código",
+        "SCAN_QR_CODE" : "Escanear código QR",
+        "CONFIRM" : "Confirmar"
+    },
+
+    "PAGE_ADV-USER-OFFERS" : {
+        "CREATED_OFFER" : "Ofertas creada",
+        "CREATED_OFFERS2" : "Ofertas creadas",
+        "CREATED_OFFERS" : "Ofertas creadas",
+        "CREATE_NEW" : "Crear nuevo",
+        "ALL" : "Todas",
+        "FEATURED" : "Destacado",
+        "ACTIVE" : "Activo",
+        "OFF" : "Desactivado",
+        "REDEEMED" : "Canjeada/Canjeado",
+        "TIMES" : "veces",
+        "WAS_CREATED" : "Fue creado:",
+        "NOW" : "Ahora",
+        "TOKENS_ARE_AVAILABLE" : "tokens están disponibles",
+        "YOU_NEED_TO_HAVE" : "Necesita tener",
+        "TOKENS_FOR_ACTIVATION" : "tokens para la activación",
+        "PLEASE_MAKE_A_PAYMENT" : "Haga un pago a su cuenta, por favor",
+        "EDIT" : "Editar",
+        "DELETE" : "Borrar",
+        "LOADING_OFFERS" : "Cargando ofertas..."
+    },
+
+    "PAGE_ADV-USER-PROFILE" : {
+        "ADVERTISER" : "Anunciante",
+        "CREATE_OFFER" : "Crear oferta",
+        "NAU" : "NAU",
+        "STATISTIC" : "Estadísticas",
+        "CATEGORY" : "Categoría"
+    },
+
+    "PAGE_BOOKMARKS" : {
+        "BOOKMARKS" : "Marcadore",
+        "BOOKMARKS5" : "Marcadores",
+        "BOOKMARK" : "Marcadore",
+        "PLACES" : "Lugares",
+        "FEATURED" : "Destacado",
+        "REDEEM_NOW" : "Canjear ahora",
+        "YOU_DONT_HAVE" : "Todavia no tienes marcadores",
+        "YET" : "ya",
+        "OFFERS" : "ofertas",
+        "PLACES1" : "lugares"
+    },
+
+    "PAGE_CREATE-ADVUSER-PROFILE" : {
+        "CREATE_ACCOUNT" : "Crear una cuenta",
+        "EDIT_ACCOUNT" : "Editar cuenta",
+        "ADD" : "Añadir",
+        "LOGO" : "logo",
+        "SET_IMAGE" : "Establecer imagen",
+        "ADD_COMPANY_NAME" : "Añadir nombre y descripción de la empresa",
+        "COMPANY_NAME" : "Nombre de empresa",
+        "COMPANY_DESCRIPTION" : "Descripción de la empresa",
+        "ABOUT_COMPANY" : "Añadir sección ACERCA DE",
+        "ABOUT_TITLE" : "Título de ACERCA DE",
+        "ABOUT_DESCRIPTION" : "Texto de ACERCA DE",
+        "CHOOSE_CATEGORY" : "Elegir la categoría",
+        "CHOOSE_YOUR_OFFICE_LOCATION" : "Elija la ubicación de su lugar y establezca el radio de canje",
+        "CATEGORY" : "Categoría",
+        "CATEGORY_TYPE" : "Categoría de lugar",
+        "CHOOSE_TYPE" : "Tipo de lugar",
+        "CHOOSE_FEATURES" : "Colocar características",
+        "TYPES" : "Tipos",
+        "FEATURES" : "Caracteristicas",
+        "WARNING" : "¡Advertencia!",
+        "PROCEEDING_WILL_SWITCH" : "Si procede cambiará su cuenta a un modo desaprobado y las ofertas se desactivarán hasta la validación.",
+        "ARE_YOU_SURE" : "Está seguro de que desea continuar?"
+    },
+
+    "PAGE_CREATE-OFFER" : {
+        "CREATE_OFFER" : "Crear oferta",
+        "EDIT_OFFER" : "Editar oferta",
+        "NEXT" : "Siguiente",
+        "NAME_DESCRIPTION" : "Nombre y descripción",
+        "OFFER_NAME" : "Nombre de la oferta",
+        "OFFER_DESCRIPTION" : "Descripción de la oferta",
+        "ADD_PICTURE" : "Añada una foto",
+        "NEXT_STEP" : "Próximo paso",
+        "CATEGORY_TYPE" : "Categoría y tipo",
+        "OFFER_TYPE" : "Tipo de oferta",
+        "SET_DISCOUNT" : "Tasa de descuento (%)",
+        "WORKING_DATES" : "Período de oferta",
+        "FROM" : "de",
+        "TO" : "a",
+        "WORKING_DAYS" : "Activo en días",
+        "WEEKEND" : "Fin de semana",
+        "WORKING_TIME" : "Horario de trabajo",
+        "DETAILED_SETTINGS" : "Configuraciones específicas",
+        "YOU_CAN_SET_WORKING_TIME" : "Puede establecer el horario de trabajo de forma más flexible",
+        "DAY" : "Día",
+        "WORK" : "Trabajo",
+        "WORKING_AREA" : "Área de trabajo",
+        "SET_MAP_RADIUS" :"Establecer el radio del mapa y confirmar la ubicación de la oferta",
+        "MAX_REDEMPTION_PER_USER" : "Canje máximo por usuario",
+        "OVERALL" : "En general",
+        "DAILY" : "Diario",
+        "WEEKLY" : "Semanal",
+        "MONTHLY" : "Mensual",
+        "OTHER_LIMITS" : "Otros límites",
+        "MINIMAL_USER_LEVEL" : "Nivel de usuario mínimo",
+        "UNLIMITED" : "Ilimitado",
+        "FINISH" : "Aprobar",
+        "REWARDS_OPTIONS" : "Opciones de recompensas",
+        "REWARD_FOR_REDEMPTION" : "Recompensa por redención",
+        "TOKEN_RESERVATION" : "Reserva de tokens",
+        "YOU_HAVE_TOKENS" : "Tiene tokens en su cuenta",
+        "CREATING_YOUR_OFFER" : "Creando su oferta",
+        "ERROR" : "Oops... ERROR",
+        "OFFER_WASNT_UPDATE" : "La oferta no fue actualizada. Por favor inténtelo nuevamente",
+        "OFFER_WASNT_CREATED" : "La oferta no fue creada. Por favor inténtelo nuevamente",
+        "PLEASE_TRY_AGAIN" : "Por favor inténtelo nuevamente",
+        "RETRY" : "Intentar nuevamente",
+        "UPDATING_OFFER" : "Actualizando su oferta",
+        "CREATING_OFFER" : "Creando su oferta",
+        "UPDATED" : "actualizado",
+        "CREATED" : "creado",
+        "RESERVED_TOKENS_SHOULD" : "Los tokens reservados deben ser al menos 10 veces la recompensa",
+        "RESERVED_TOKENS_AND_REWARD" : "Los tokens reservados y la recompensa deben ser divisibles",
+        "MAX_FOR_USER_VALID_OVERALL" : "El monto máximo de canjes por usuario para un período definido debe ser menor que el total",
+        "DAY_MAX_VALID" : "El monto de los canjes diarios debe ser menor que el total",
+        "MAX_FOR_USER_VALID" : "La cantidad máxima de canjes por usuario debe ser menor que la general",
+        "DESCRIPTION_FOR_BONUS" : "Descripción de la bonificación",
+        "DESCRIPTION_FOR_GIFT" : "Descripción del regalo",
+        "DISCOUNT" : "Descuento",
+        "SECOND_FREE" : "El segundo es gratis",
+        "BONUS" : "Bono",
+        "GIFT" : "Regalo",
+        "DELIVERY" : "Entrega",
+        "DESCRIPTION_FOR" : "Descripción del artículo",
+        "SET_START_PRICE" : "Establecer precio inicial",
+        "SET_CURRENCY" : "Elegir moneda"
+    },
+
+    "PAGE_CREATE-USER-PROFILE" : {
+        "CREATE_ACCOUNT" : "Crear una cuenta",
+        "EDIT_ACCOUNT" : "Editar cuenta",
+        "NAME_EMAIL" : "Nombre y correo electrónico",
+        "YOU_HAVE" : "Tiene",
+        "POINTS" : "puntos",
+        "YOUR_NAME" : "Su nombre",
+        "YOUR_EMAIL" : "Su correo electrónico",
+        "EARN_EXTRA_POINTS" : "Gane puntos extra",
+        "OF_COURSE" : "¡Una oportunidad única de obtener puntos extra!",
+        "CONFIRM_EMAIL_ADDRESS" : "Confirmar correo electrónico",
+        "WE_EMAILED" : "Le enviamos un enlace de confirmación a su dirección de correo electrónico. Haga clic en el enlace para completar el registro.",
+        "SOCIAL_ACCOUNTS" : "Redes sociales (cada elemento añade + 3 puntos)",
+        "ADDED" : "¡Éxito!",
+        "SHOW_ADDITIONAL_OPTIONS" : "Mostrar opciones adicionales (más puntos)",
+        "IF_YOU_WILL" : "Permítanos mejorar su experiencia utilizando información adicional sobre usted",
+        "GENDER" : "Género",
+        "FEMALE" : "Femenino",
+        "MALE" : "Masculino",
+        "CONFIRM_YOUR_LOCATION" : "Confirma su ubicación:",
+        "YOU_CAN_SET": "Puede configurar su ubicación manualmente",
+        "AGE" : "Edad",
+        "INCOME" : "Ingresos"
+    },
+
+    "PAGE_FEED" : {
+        "WHAT_HAPPEND" : "que sucedió",
+        "TODAY" : "Hoy",
+        "ALL" : "Todas",
+        "PLACES" : "Lugares",
+        "PEOPLE" : "Personas",
+        "REDEEMED_YOUR" : "Redimió su oferta en",
+        "REDEEM_OFFER" : "canjear la oferta",
+        "YESTERDAY" : "Ayer",
+        "OUR_RESTAURANT_WANTS" : "¡Nuestro restaurante quiere ofrecerle una propuesta inigualable!",
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Ahora disponible en su región",
+        "VIEW_OFFERS" : "Ver ofertas"
+    },
+
+    "PAGE_INVITE" : {
+        "INVITATION" : "Invitación",
+        "YOU_SHOULD_HAVE_RECEIVED" : "Debería haber recibido un código de su amigo que le recomendó NAU",
+        "PLEASE_ASK" : "Por favor, pregunte a su amigo de nuevo o ... Búsquelo en google :)"
+    },
+
+    "PAGE_LOGIN" : {
+        "LOGIN" : "Iniciar sesión",
+        "PLEASE_ENTER_PHONE" : "Por favor, introduzca su número de teléfono",
+        "PLEASE_ENTER_OTP" : "Por favor ingresa OTP",
+        "OTP" : "SMS",
+        "GET_OTP" : "Obtener SMS",
+        "RESEND_SMS" : "Segunda vez SMS",
+        "SMS_RESENDING" : "Segunda vez SMS después de un tiempo",
+        "SECONDS" : "segundos",
+        "SECONDS2" : "segundos",
+        "SECOND" : "segundo"
+    },
+
+    "PAGE_NOTIFICATIONS" : {
+        "NOTIFICATION" : "Notificación",
+        "TODAY" : "Hoy",
+        "YESTERDAY" : "Ayer",
+        "SENT_NEW_MESSAGE_FOR_YOU" : "Enviado nuevo mensaje para usted",
+        "OUR_RESTAURANT_WANTS" : "¡Nuestro restaurante quiere ofrecerle una propuesta inigualable!",
+        "GET_YOUR_CHANCE" : "¡Tenga su oportunidad!",
+        "SYSTEM_NOTIFICATION" : "Notificación del sistema",
+        "PROPER_CREDIT" : "Crédito apropiado, use el crédito integrado en el ícono que descargo",
+        "READ" : "Leer",
+        "YOU_DONT_HAVE" : "Todavia no tienes notificación"
+    },
+
+    "PAGE_OFFER" : {
+        "CONGRATULATION" : "¡Enhorabuena!",
+        "OFFER_REDEMPTION_COMPLETED_AT" : "Oferta canjeable completada en",
+        "WE_ARE" : "Agradecemos su elección",
+        "YOU_EARNED" : "Usted ganó",
+        "POINTS" : "puntos",
+        "POINTS2" : "puntos",
+        "POINT" : "punto",
+        "OFFER" : "Oferta",
+        "REDEEM" : "Canjear",
+        "OFFER_REDEEMING" : "Ofrecer canje",
+        "OR_USE_QR_CODE" : "o use el código QR",
+        "AGREE_WITH_TERMS" : "Acepto los Términos y Condiciones",
+        "SEND_REVIEW" : "Enviar comentario",
+        "OFFER_IS_UNAVAILABLE": "La oferta no está disponible en este momento"
+    },
+
+    "PAGE_OFFER-TERMS" : {
+        "TERMS_CONDITIONS" : "¡Términos y Condiciones!",
+        "AVAILABLE_TOKENS" : "Los tokens disponibles son 50",
+        "SOME_OF_OUR_SERVICES" : "Algunos de nuestros servicios le permiten cargar, agregar, almacenar, enviar o recibir contenido. Al mismo tiempo, todos los derechos de propiedad intelectual en relación con estos materiales permanecen con su propietario. En pocas palabras, todo lo que es suyo seguirá siéndolo.",
+        "PRIVACY" : "Privacidad y protección de derechos de autor",
+        "WHILE_WORKING_WITH" : "Al trabajar con nuestros Servicios, nos autoriza a usar su información personal de acuerdo con la política de privacidad de Google. Este último describe por qué usamos estos datos y cómo aseguramos la confidencialidad de los usuarios cuando trabajan con los servicios.",
+        "WE_CHECK_ALL" : "Comprobamos todos los informes de supuestas infracciones de derechos de autor y, guiados por la Ley de derechos de autor de la Era Digital, cancelamos cuentas de propietarios que violan sistemáticamente los derechos de autor.",
+        "BACK" : "Atrás"
+    },
+
+    "PAGE_ONBOARDING" : {
+        "FOR_BUSINESS" : "Para los negocios",
+        "WELCOME" : "¡Bienvenido!",
+        "MAKE_PROFIT" : "¡Lucre!",
+        "NAU_COINS" : "Monedas NAU!",
+        "ENJOY" : "¡Disfrute!",
+        "ENJOY_THE_MOST" : "Disfrute de las ofertas, obsequios y descuentos más atractivos de varios comercios en su ubicación, ya sea que esté en su ciudad de residencia o de vacaciones.",
+        "INVITE_YOUR_FRIENDS" : "Invite a sus amigos y seguidores a unirse a NAU con su código de invitación y obtenga recompensas cada vez que usen ofertas especiales de los comercios de todo el mundo.",
+        "NAU_COINS_IS" : "Las monedas de NAU son una criptomoneda que pronto podra cambiar por el valor diario: ¡otras criptomonedas, bienes e incluso monedas tradicionales!",
+        "MAKE_MONEY" : "Gane dinero",
+        "SKIP" : "Omitir"
+    },
+
+    "PAGE_PLACE" : {
+        "FEATURED" : "Destacado",
+        "ALL_OFFERS" : "Todas las ofertas",
+        "TESTIMONIALS" : "Testimonios",
+        "ABOUT" : "Acerca de",
+        "REDEEM_NOW" : "canjear ahora",
+        "ADD_YOUR_FEEDBACK" : "Agregue sus comentarios"
+    },
+
+    "PAGE_PLACE-FEEDBACK" : {
+        "TESTIMONIAL" : "Testimonios",
+        "BACK" : "Atrás"
+    },
+
+    "PAGE_SETTINGS" : {
+        "SETTINGS" : "Configuraciones",
+        "CHOOSE_YOUR_ACCOUNT" : "Elija su cuenta",
+        "CLIENT" : "Usuario",
+        "ADVERTISER" : "Anunciante",
+        "CONFIRM_REDEMPTION" : "Confirmar canje",
+        "YOUR_INVITE_CODE" : "Su código de invitación",
+        "CHANGE_YOUR_PHONE_NUMBER" : "Cambie su número de teléfono",
+        "YOUR_PHONE_NUMBER" : "Su número de teléfono",
+        "PRIVATE_DATA" : "Información personal",
+        "SHOW_MY_PRIVATE_DATA" : "Mostrar mi información personal",
+        "SHOW_MY_PHONE_NUMBER" : "Mostrar mi número de teléfono",
+        "SHOW_MY_EMAIL_ADDRESS" : "Mostrar mi dirección de correo electrónico",
+        "SET_RADIUS" : "Establecer el radio para sus ofertas de interés",
+        "OFFERS_RADIUS" : "Radio de ofertas",
+        "SAVE_CHANGES" : "Guardar cambios",
+        "CHANGE" : "Cambio",
+        "GET_ACCOUNT_FOR_BUSINESS" : "Obtener una cuenta de negocios",
+        "WHY_I_NEED_ACCOUNT_FOR_BUSINESS" : "¿Por qué necesito una cuenta de negocios?",
+        "HIDE" : "esconder",
+        "IT_HELPS_ME" : "Me ayuda a publicitar mi negocio",
+        "BRAND_NEW_CLIENTS" : "Los nuevos clientes se enteran de mí",
+        "GOOD_OPPORTUNITY" : "Buena oportunidad de ganar dinero",
+        "TRY_IT_FOR_FREE" : "Pruébelo gratis",
+        "LANG" : "Idioma",
+        "REFERRAL_LINK" : "Enlace para invitar amigos"
+    },
+
+    "PAGE_SETTINGS-CHANGE-PHONE" : {
+        "CHANGE_PHONE_NUMBER" : "Cambiar el número de teléfono",
+        "ENTER_NEW_PHONE_NUMBER" : "Ingrese un nuevo número de teléfono",
+        "GET_CONFIRM_CODE" : "Obtener código de confirmación",
+        "ENTER_CONFIRMATION_CODE" : "Introducir código de confirmacióne",
+        "CHANGE_NUMBER" : "Cambie el número"
+    },
+
+    "PAGE_SIGNUP" : {
+        "PHONE_NUMBER" : "Llame e Invite",
+        "PLEASE_CHOOSE" : "Por favor, elija el código de su país",
+        "AND_FILL" : "e ingrese su número de teléfono",
+        "NEXT" : "Siguiente",
+        "BY_PRESSING" : "Presionando «Siguiente», yo estoy de acuerdo",
+        "TERMS_AND_CONDITIONS" : "Términos y Condiciones",
+        "AND" : "y",
+        "PRIVACY_POLICY" : "política de privacidad"
+    },
+
+    "PAGE_SIGNUP-CODE" : {
+        "CONFIRM" : "Confirmar",
+        "PLEASE_FILL_CONFIRMATION_CODE" : "Por favor ingrese el código de confirmación",
+        "FROM_MESSAGE" : "del mensaje",
+        "NEXT" : "Siguiente",
+        "ONE_TIME" : "La contraseña de un solo uso le ayuda a",
+        "CONFIRM_PHONE_NUMBER" : "confirmar su número de teléfono"
+    },
+
+    "PAGE_SPLASH-INFO" : {
+        "INFORMATION" : "Información",
+        "SEARCH_OFFERS" : "Buscar ofertas",
+        "SOME_OF_OUR_SERVICES" : "Algunos de nuestros servicios le permiten cargar, agregar, almacenar, enviar o recibir contenido. Al mismo tiempo, todos los derechos de propiedad intelectual en relación con estos materiales permanecen con su propietario.",
+        "OUR_SERVICES_ALLOW_YOU" : "Nuestros servicios le permiten subir, agregar, almacenar, enviar o recibir contenido. Al mismo tiempo, todos los derechos de propiedad intelectual en relación con estos materiales permanecen con su propietario. En pocas palabras, todo lo que es suyo seguirá siéndolo.",
+        "ALLOW_YOU_TO_UPLOAD" : "Le permite subir, agregar, almacenar, enviar o recibir contenido. Al mismo tiempo, todos los derechos de propiedad intelectual en relación con estos materiales permanecen con su propietario. En pocas palabras, todo lo que es suyo seguirá siéndolo.",
+        "SEARCH_NEW_OFFERS" : "buscar nuevas ofertas"
+    },
+
+    "PAGE_SPLASH-NEWS" : {
+        "NEWS_EVENTS" : "Noticias y Eventos",
+        "NEW_RESTAURANT" : "Restaurante nuevo",
+        "OUR_SERVICES_ALLOW_YOU" : "Nuestros servicios le permiten subir, agregar, almacenar, enviar o recibir contenido. Al mismo tiempo, todos los derechos de propiedad intelectual en relación con estos materiales permanecen con su propietario. En pocas palabras, todo lo que es suyo seguirá siéndolo.",
+        "ALLOW_YOU_TO_UPLOAD" : "Le permite subir, agregar, almacenar, enviar o recibir contenido. Al mismo tiempo, todos los derechos de propiedad intelectual en relación con estos materiales permanecen con su propietario. En pocas palabras, todo lo que es suyo seguirá siéndolo.",
+        "GO_TO_RESTAURANT" : "Ir al restaurante"
+    },
+
+    "PAGE_START" : {
+        "SIGN_UP" : "REGÍSTRESE",
+        "PLEASE_CHOOSE_YOUR_CONVENIENT_WAY" : "Elija una manera conveniente, por favor",
+        "TO_ENTER_NAU" : "ingresar en NAU",
+        "OR_SIGN_UP_WITH" : "o registrarse",
+        "ALREADY_HAVE_ACCOUNT" : "Ya tiene una cuenta"
+    },
+
+    "PAGE_STATISTIC" : {
+        "STATISTIC" : "Estadística",
+        "DATE_FILTER" : "Filtro de fecha",
+        "ALL_OFFERS" : "Todas las ofertas",
+        "ACTIVE_OFFERS" : "Ofertas activas",
+        "TODAY" : "Hoy",
+        "YESTERDAY" : "Ayer",
+        "WEEK" : "Semana",
+        "MONTH" : "Mes",
+        "MAIN_POSITIONS" : "Posiciones principales",
+        "VIEWED" : "Visto",
+        "MY_PLACE" : "mi lugar",
+        "DETAILED" : "Detallado",
+        "REDEEMED" : "canjeado",
+        "ADDITIONAL_STATISTICS" : "Estadísticas adicionales",
+        "RATING_FEEDBACK" : "Clasificación y comentarios",
+        "REQUESTS_FOR_OFFERS_REDEEMED" : "Solicitudes de ofertas canjeadas",
+        "MONEY_WASTED_FOR_REDEEMS" : "dinero desperdiciado para canjear",
+        "WEEKLY_DETAILED_GRAPHIC_INFORMATION" : "Información gráfica semanal detallada",
+        "USERS" : "Usuarios",
+        "VIEWED_MY_PLACE" : "Mi lugar ha sido visto",
+        "SAVE_PDF" : "guardar pdf",
+        "WEEK_VIEWERS" : "visitantes semanales",
+        "USED_OFFERS" : "Ofertas usadas",
+        "VIEWED_DATE" : "Fecha de consulta",
+        "CHOOSE_PERIOD_OF_TIME" : "Elije un período de tiempo",
+        "FROM" : "de",
+        "TO" : "a",
+        "COMPARE_WITH" : "Comparar con",
+        "SHOW_RESULTS" : "Mostrar resultados",
+        "COMPARE_SEVERAL" : "Compare varios períodos de tiempo",
+        "ADD_PERIOD" : "agregar período",
+        "COMPARE_YOUR_DATE" : "Compare su fecha. Eligió varios períodos de tiempo para",
+        "RESULTS_COMPARING" : "comparando resultados"
+    },
+
+    "PAGE_STATISTIC1" : {
+        "COMPARE_DIFFERENT_DATES" : "comparar fechas diferentes",
+        "REAL_DATA" : "Datos reales",
+        "PERCENTAGE" : "Porcentaje %",
+        "COMPARISON_PERIODS" : "Comparación de períodos de tiempo en la imagen",
+        "USERS" : "Usuarios",
+        "VIEWED_MY_PLACE" : "Vio mi lugar 2 veces",
+        "SAVE_PDF" : "guardar pdf"
+    },
+
+    "PAGE_USER-ACHIEVE" : {
+        "YOUR_ACHIEVEMENT" : "Su logro",
+        "POINTS" : "puntos",
+        "ACHIEVEMENT_LEVEL" : "Nivel de logros",
+        "AWARD_FOR_FIRST_5_OFFERS" : "Premio a las primeras 5 ofertas",
+        "RECEIVED" : "Recibido",
+        "MEDAL_FOR_FIRST_10_OFFERS" : "Medalla para las primeras 10 ofertas",
+        "AWARD_FOR_REDEEMED_OFFER" : "Premio por canje de oferta",
+        "GIFT_FOR_YOU_ACTIVITY" : "Premio de actividad"
+    },
+
+    "PAGE_USER-NAU" : {
+        "NAU_TRANSACTIONS" : "Transacciones NAU",
+        "TRANSFER" : "Transferir",
+        "LATEST_PAYMENTS" : "Últimos pagos",
+        "PAY" : "Paga",
+        "LOADING_TRANSACTIONS" : "Cargando transacciones...",
+        "NAU" : "NAU",
+        "FROM" : "de",
+        "TO" : "a"
+    },
+
+    "PAGE_USER-OFFERS" : {
+        "YOUR_REDEEMED_OFFERS" : "Sus ofertas canjeadas",
+        "REDEEMED_OFFERS" : "Ofertas canjeadas",
+        "DATE" : "Fecha",
+        "YOU_HAVE_NOT" : "Aún no ha canjeado ninguna oferta"
+    },
+
+    "PAGE_USER-PROFILE" : {
+        "YOUR_ACCOUNT" : "Su cuenta",
+        "GET" : "Obtener",
+        "ADDITIONAL" : "adicional",
+        "POINTS" : "puntos",
+        "NEXT" : "SIGUIENTE",
+        "LVL" : "LVL",
+        "YOUR_TASKS_JOBS_FOR_TODAY" : "Sus tareas y trabajos para hoy",
+        "GET_NEW_POINTS" : "Obtener puntos",
+        "GET_NEW_OFFERS_NEARBY" : "Experimente nuevas ofertas cercanas y mejore su nivel",
+        "NAU" : "nau",
+        "USERS" : "usuarios",
+        "LOGOUT" : "cerrar sesión"
+    },
+
+    "PAGE_USER-TASKS" : {
+        "YOUR_TASKS_JOBS" : "Sus tareas y trabajos",
+        "ACTIVE" : "Activo",
+        "COMPLETED" : "Completado",
+        "TASKS_FOR_TODAY" : "Tareas para hoy",
+        "FIND_NEW_PLACES" : "Encontrar nuevos lugares",
+        "TO_PROVIDE_PROPER_CREDIT" : "Para proporcionar crédito correctamente, utilice el crédito integrado que ya se encuentra en el ícono que descargó, para proporcionar el crédito correcto use el crédito integrado que ya se encuentra en el ícono que descargó",
+        "TASKS_FOR_LEVEL" : "Tareas del nivel",
+        "REDEEM_NEW_OFFERS" : "Canjear nuevas ofertas",
+        "PROPER_CREDIT" : "Crédito correcto, use el crédito integrado que se encuentra en el ícono que descargo",
+        "POINTS" : "Canjear nuevas ofertas"
+    },
+
+    "PAGE_USER-USERS" : {
+        "YOUR_REFERRALS" : "Sus referencias",
+        "USERS" : "Usuarios",
+        "LEVEL" : "Nivel",
+        "REGISTRATION_DATE" : "Fecha de Registro",
+        "LOADING_REFERRALS" : "Cargando referencias..."
+    },
+
+    "PAGE_TRANSFER" : {
+        "TRANSFER" : "Transferir",
+        "SOURCE_ADDRESS" : "Dirección de la fuente",
+        "INPUT_ADDRESS" : "Dirección de entrada",
+        "DESTINATION_ADDRESS" : "Dirección de destino",
+        "AMOUNT" : "Cantidad",
+        "ADDRESS" : "Dirección",
+        "SCAN_QR_CODE" : "Escanee el código QR para ver la dirección"
+    }
+}
+
