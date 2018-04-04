@@ -68,6 +68,13 @@
         <custom-config-file parent="NSLocationAlwaysAndWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
             <string>The application uses your location to get you to the bargains around the corner</string>
         </custom-config-file>
+        <custom-config-file parent="LSApplicationQueriesSchemes" platform="ios" target="*-Info.plist">
+            <array>
+                <string>twitter</string>
+                <string>fb</string>
+                <string>instagram</string>
+            </array>
+        </custom-config-file>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
@@ -142,4 +149,5 @@
     </plugin>
     <plugin name="cordova-plugin-file" spec="5.0.0" />
     <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
+
 </widget>
