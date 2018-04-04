@@ -293,7 +293,7 @@ export function createTranslateLoader(http: HttpClient) {
         OneSignal,
         TwitterConnect,
         File,
-        AppAvailability
+        AppAvailability,
     ]
 })
 export class AppModule { }

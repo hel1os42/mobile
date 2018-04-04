@@ -11,7 +11,7 @@ export class SocialService {
 
     constructor(
         private twitter: TwitterConnect,
-        // private twitter: TwitterService,
+          // private twitter: TwitterService,
         private toast: ToastService) {
 
     }
@@ -29,20 +29,20 @@ export class SocialService {
 
     getTwProfile() {
         return this.twitter.showUser();
-        // return this.twitter.get(
-        //     'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
+        // return this.twitterService.get(
+        //     'https://api.twitter.com/1.1/account/verify_credentials.json',
         //     {
         //         count: 1
         //     },
         //     {
         //         consumerKey: 'bW9h6Yb4ZDwXcWTy3yfiEB6Ra',
-        //         consumerSecret: 'fspg3Nfpa1Ydtn6wbAcamTNiNKd22ywSAYbpPqKQx0MHWZ0wq8'
+        //         consumerSecret: 'M6kucNze3VQElCLwN3O2yKOO8kFj1ETbNp9HulkkhV7pi6CUFf'
         //     },
         //     {
-        //         // token: '909746010884370432-LT1iPQ2vHu6KAXutOK1xlCkukKdqDp9',
-        //         // tokenSecret: 'h41QtP8Gt83OZcKVXuqdCOjgH3NdMwNn3qh3xataW49UM'
-        //         token: this.token,
-        //         tokenSecret: this.secret
+        //         token: '909746010884370432-LT1iPQ2vHu6KAXutOK1xlCkukKdqDp9',
+        //         tokenSecret: 'h41QtP8Gt83OZcKVXuqdCOjgH3NdMwNn3qh3xataW49UM'
+        //         // token: this.token,
+        //         // tokenSecret: this.secret
         //     }
         // )
         //     .map(res => res.json());
