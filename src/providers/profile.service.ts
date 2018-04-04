@@ -50,7 +50,7 @@ export class ProfileService {
         return this.api.put('profile', data);
     }
 
-    patch(data, user: User, isNoShowLoading?: boolean) {
+    patch(data, isNoShowLoading?: boolean) {
         let obs = this.api.patch('profile', data, { showLoading: !isNoShowLoading });
         obs.subscribe(resp => {
             if (!this.user || this.user.name !== resp.name || this.user.phone !== resp.phone || this.user.email !== resp.email) {

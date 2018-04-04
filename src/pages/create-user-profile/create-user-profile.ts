@@ -444,7 +444,7 @@ export class CreateUserProfilePage {
                 ? this.api.uploadImage(this.picture_url, 'profile/picture', true)
                 : Promise.resolve();
             if (!isEmpty) {
-                this.profile.patch(differenceData, this.baseData)
+                this.profile.patch(differenceData)
                     .subscribe(() => {
                         if (!refreshed) {
                             this.location.refreshDefaultCoords(this.coords, true);
