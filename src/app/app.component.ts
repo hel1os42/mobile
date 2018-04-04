@@ -70,7 +70,6 @@ export class MyApp {
                     // Tracker is ready
                     this.analytics.debugMode();
                     this.analytics.setAllowIDFACollection(true);
-                    this.analytics.setAllowIDFACollection(true);
                     this.analytics.enableUncaughtExceptionReporting(true);
                 })
                 .catch(err => console.log('Error starting GoogleAnalytics', err));
