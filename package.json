@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "5.0.1",
     "@asymmetrik/ngx-leaflet": "2.5.3",
     "@ionic-native/android-permissions": "4.5.3",
+    "@ionic-native/app-availability": "4.6.0",
     "@ionic-native/barcode-scanner": "4.5.2",
     "@ionic-native/calendar": "4.5.2",
     "@ionic-native/clipboard": "4.5.2",
@@ -51,6 +52,7 @@
     "cordova-clipboard": "1.1.1",
     "cordova-ios": "4.5.4",
     "cordova-plugin-android-permissions": "1.0.0",
+    "cordova-plugin-appavailability": "0.4.2",
     "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-cookiemaster": "1.0.5",
     "cordova-plugin-device": "1.1.7",
@@ -123,7 +125,8 @@
         "TWITTER_KEY": "bW9h6Yb4ZDwXcWTy3yfiEB6Ra",
         "TWITTER_SECRET": "fspg3Nfpa1Ydtn6wbAcamTNiNKd22ywSAYbpPqKQx0MHWZ0wq8"
       },
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-appavailability": {}
     },
     "platforms": [
       "ios",
