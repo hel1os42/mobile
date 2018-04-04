@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
 import { OneSignal } from '@ionic-native/onesignal';
+import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class ProfileService {
@@ -14,7 +15,8 @@ export class ProfileService {
     constructor(
         private api: ApiService,
         private auth: AuthService,
-        private oneSignal: OneSignal) {
+        private oneSignal: OneSignal,
+        private platform: Platform) {
 
         this.auth.onLogout.subscribe(() => this.user = undefined);
     }
@@ -23,7 +25,8 @@ export class ProfileService {
         if (forceReload || !this.user) {
             let obs = this.api.get('profile', { showLoading: showLoading });
             obs.subscribe(user => {
-                if (!this.user || this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email) {
+                if (this.platform.is('cordova') 
+                && (!this.user || this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email)) {
                     this.sendTags(user);
                 }
                 this.user = user;
@@ -53,7 +56,8 @@ export class ProfileService {
     patch(data, isNoShowLoading?: boolean) {
         let obs = this.api.patch('profile', data, { showLoading: !isNoShowLoading });
         obs.subscribe(resp => {
-            if (!this.user || this.user.name !== resp.name || this.user.phone !== resp.phone || this.user.email !== resp.email) {
+            if (this.platform.is('cordova') 
+            && (!this.user || this.user.name !== resp.name || this.user.phone !== resp.phone || this.user.email !== resp.email)) {
                 this.sendTags(resp);
             }
             this.user = resp;
