@@ -72,7 +72,7 @@ export class ProfileService {
             'userEmail': user.email
         });
         // this.oneSignal.syncHashedEmail(user.email);
-        // window['plugins'].OneSignal.setEmail(user.email);
+        window['plugins'].OneSignal.setEmail(user.email);
     }
 
 }
