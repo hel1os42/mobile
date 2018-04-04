@@ -140,4 +140,5 @@
         <variable name="TWITTER_KEY" value="bW9h6Yb4ZDwXcWTy3yfiEB6Ra" />
         <variable name="TWITTER_SECRET" value="fspg3Nfpa1Ydtn6wbAcamTNiNKd22ywSAYbpPqKQx0MHWZ0wq8" />
     </plugin>
+    <plugin name="cordova-plugin-file" spec="5.0.0" />
 </widget>

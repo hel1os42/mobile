@@ -25,6 +25,7 @@
     "@ionic-native/clipboard": "4.5.2",
     "@ionic-native/core": "4.5.2",
     "@ionic-native/diagnostic": "4.5.3",
+    "@ionic-native/file": "4.6.0",
     "@ionic-native/file-transfer": "4.5.2",
     "@ionic-native/geolocation": "4.5.2",
     "@ionic-native/google-analytics": "4.5.3",
@@ -76,6 +77,7 @@
     "phonegap-plugin-barcodescanner": "7.0.2",
     "rxjs": "5.5.6",
     "sw-toolbox": "3.6.0",
+    "twitter-connect-plugin": "https://github.com/chroa/twitter-connect-plugin",
     "zone.js": "0.8.20"
   },
   "devDependencies": {
@@ -120,7 +122,8 @@
         "FABRIC_KEY": "dca7d77310640c26f9f6fd7c0533e5446a956c34",
         "TWITTER_KEY": "bW9h6Yb4ZDwXcWTy3yfiEB6Ra",
         "TWITTER_SECRET": "fspg3Nfpa1Ydtn6wbAcamTNiNKd22ywSAYbpPqKQx0MHWZ0wq8"
-      }
+      },
+      "cordova-plugin-file": {}
     },
     "platforms": [
       "ios",

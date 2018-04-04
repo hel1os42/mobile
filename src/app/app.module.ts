@@ -102,7 +102,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 import { TimeframesPopover } from '../pages/offer/timeframes.popover';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { SocialService } from '../providers/social.service';
-
+import { File } from '@ionic-native/file';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -290,7 +290,8 @@ export function createTranslateLoader(http: HttpClient) {
         Network,
         GoogleAnalytics,
         OneSignal,
-        TwitterConnect
+        TwitterConnect,
+        File
     ]
 })
 export class AppModule { }
