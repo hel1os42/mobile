@@ -2,7 +2,7 @@ import { AppModeService } from '../../providers/appMode.service';
 import { Register } from '../../models/register';
 import { StringValidator } from '../../validators/string.validator';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Select, Platform, Content } from 'ionic-angular';
+import { NavController, Select, Platform, Content, NavParams } from 'ionic-angular';
 import { AuthService } from '../../providers/auth.service';
 import { SignUpCodePage } from '../signup-code/signup-code';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
@@ -31,6 +31,7 @@ export class SignUpPage {
     onKeyboardHideSubscription: Subscription;
     termsUrl = 'https://nau.io/terms';
     policyUrl = 'https://nau.io/privacy-policy';
+    socialData;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -45,7 +46,10 @@ export class SignUpPage {
         private keyboard: Keyboard,
         private browser: InAppBrowser,
         private analytics: GoogleAnalytics,
-        private oneSignal: OneSignal) {
+        private oneSignal: OneSignal,
+        private navParams: NavParams) {
+
+        this.socialData = this.navParams.get('social');
 
         if (this.platform.is('android')) {
             //this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
@@ -114,7 +118,7 @@ export class SignUpPage {
                     code: '',
                     referrer_id: resp.referrer_id,
                 }
-                this.nav.push(SignUpCodePage, { register: register, inviteCode: inviteCode });
+                this.nav.push(SignUpCodePage, { register: register, inviteCode: inviteCode, social: this.socialData });
                 // this.nav.push(SignUpCodePage, { register: resp })
             })
     }
