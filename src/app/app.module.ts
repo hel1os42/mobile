@@ -104,6 +104,7 @@ import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { SocialService } from '../providers/social.service';
 import { File } from '@ionic-native/file';
 import { AppAvailability } from '@ionic-native/app-availability';
+import { Facebook } from '@ionic-native/facebook';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -294,6 +295,7 @@ export function createTranslateLoader(http: HttpClient) {
         TwitterConnect,
         File,
         AppAvailability,
+        Facebook
     ]
 })
 export class AppModule { }
