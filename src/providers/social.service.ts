@@ -55,10 +55,11 @@ export class SocialService {
     }
 
     fbLogin() {
-        return this.fb.login(['public_profile', 'email']);
+        // return this.fb.login(['public_profile', 'email']);
+        return this.fb.getLoginStatus();
     }
 
     getFbProfile(userId) {
-        return this.fb.api(`Profile /${userId}`, ['public_profile', 'email'])
+        return this.fb.api(`/${userId}`, ['public_profile', 'email']);
     }
 }

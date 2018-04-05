@@ -105,6 +105,13 @@ export class StartPage {
                 let userId = res.authResponse.userID;
                 this.social.getFbProfile(userId)
                     .then(resp => {
+                        this.socialData = {
+                            name: resp.first_name,
+                            // name: user.screen_name,
+                            email: resp.email,
+                            picture: resp.profile_pic
+                        };
+                        this.nav.push(SignUpPage, { social: this.socialData });
                         console.log(resp);
                         debugger;
                     })
