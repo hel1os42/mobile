@@ -135,15 +135,17 @@ export class DateTimeUtils {
     }
 
     static returnTime(time: string, timezone) {
-        let hour = parseInt(time.split(':')[0]) + timezone;
-        let returnedHour = hour >= 24 ? hour - 24 : hour < 0 ? 24 + hour : hour;
-        let hourStr = (returnedHour < 10 ? '0' + returnedHour : returnedHour) + ':' + time.split(':')[1];
+        let date = new Date('August 19, 1975' + ' ' + time.split(':')[0] + ':' + time.split(':')[1] + ':00');
+        let offsetInMinutes =  parseInt(timezone.slice(1, 3)) * 60 + parseInt(timezone.slice(-2));
+        offsetInMinutes = timezone.slice(0, 1) === '-' ? offsetInMinutes * (-1) : offsetInMinutes;
+        date.setMinutes(date.getMinutes() + offsetInMinutes);
+        let hour = date.getHours();
+        let minutes = date.getMinutes();
+        let hourStr = (hour < 10 ? '0' + hour : hour) + ':' + (minutes < 10 ? '0' + minutes : minutes);
         return hourStr;
     }
 
     static getOfferTimeframes(date: Date, timeframesData: TimeFrames[], timezone: string) {
-        let timezoneNumber = parseInt(timezone.slice(1, 3));
-        timezoneNumber = timezone.slice(0, 1) === '-' ? timezoneNumber * -1 : timezoneNumber;
         let timeFrames: any = _.flatMap(timeframesData, function (obj) {
             return _.map(obj.days, function (day) {
                 return {
@@ -163,8 +165,8 @@ export class DateTimeUtils {
         }
         timeFrames = timeFrames.map(item => {
             return {
-                from: DateTimeUtils.returnTime(item.from, timezoneNumber),
-                to: DateTimeUtils.returnTime(item.to, timezoneNumber),
+                from: DateTimeUtils.returnTime(item.from, timezone),
+                to: DateTimeUtils.returnTime(item.to, timezone),
                 day: DateTimeUtils.ALL_DAYS.find(day => day.slice(0, 2) === item.day)
             }
         });

@@ -10,21 +10,37 @@
   </div>
 
 
-    <div text-center class="font-75 text-828282 margin-top-5vw">
+    <div *ngIf="isFbApp" text-center class="font-75 text-828282 margin-top-5vw">
       {{ 'PAGE_START.OR_SIGN_UP_WITH' | translate }}
     </div>
 
     <div text-center class="btn_social margin-top-5vw">
-      <button ion-button icon-only color="transparent" margin-right>
+        
+      <button 
+        *ngIf="isFbApp"
+        (click)="getFbProfile()"
+        ion-button 
+        icon-only 
+        color="transparent" 
+        margin-right>
         <img src="assets/img/start/icon1.svg">
       </button>
-      <button ion-button icon-only color="transparent" margin-right>
+     
+      <!-- <button 
+        *ngIf="isTwApp" 
+        (click)="getTwitterProfile()" 
+        ion-button 
+        icon-only 
+        color="transparent" 
+        margin-right>
         <img src="assets/img/start/icon2.svg">
-      </button>
-      <button ion-button icon-only color="transparent">
-        <img src="assets/img/start/icon3.svg">
-      </button>
-    </div>
+      </button> -->
+        <!--
+     <button ion-button icon-only color="transparent">
+       <img src="assets/img/start/icon3.svg">
+     </button>
+      -->
+   </div>
 
 </ion-content>
 

@@ -43,7 +43,7 @@ export class SettingsChangePhonePage {
         // }
         // else {
             this.user.phone = this.phone;
-            this.profile.patch({ phone: this.user.phone }, this.user)
+            this.profile.patch({ phone: this.user.phone })
                 .subscribe(
                 resp => this.nav.pop(),
                 errResp => this.visibleChangePhone = true);

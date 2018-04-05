@@ -100,7 +100,11 @@ import { NoPlacesPopover } from '../pages/places/noPlaces.popover';
 import { LinkPopover } from '../pages/offer/link.popover';
 import { OneSignal } from '@ionic-native/onesignal';
 import { TimeframesPopover } from '../pages/offer/timeframes.popover';
-
+import { TwitterConnect } from '@ionic-native/twitter-connect';
+import { SocialService } from '../providers/social.service';
+import { File } from '@ionic-native/file';
+import { AppAvailability } from '@ionic-native/app-availability';
+import { Facebook } from '@ionic-native/facebook';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -280,13 +284,18 @@ export function createTranslateLoader(http: HttpClient) {
         ShareService,
         FavoritesService,
         TestimonialsService,
+        SocialService,
         Clipboard,
         InAppBrowser,
         AndroidPermissions,
         Diagnostic,
         Network,
         GoogleAnalytics,
-        OneSignal
+        OneSignal,
+        TwitterConnect,
+        File,
+        AppAvailability,
+        Facebook
     ]
 })
 export class AppModule { }

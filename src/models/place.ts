@@ -28,9 +28,11 @@ export class Place {
     cover_url: string;
     retail_types;
     category;
-    tags?: string[];
-    specialities?;
+    tags?: string[]; 
     timezone?: string;
+    timezone_offset?: string
+    specialities?;
+   
 }
 
 

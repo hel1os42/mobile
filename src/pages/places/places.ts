@@ -352,7 +352,7 @@ export class PlacesPage {
                         this.getDefaultCoords(resp.latitude, resp.longitude);
                         user.latitude = resp.latitude;
                         user.longitude = resp.longitude;
-                        this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, user, true);
+                        this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
                     });
                   }
                 })

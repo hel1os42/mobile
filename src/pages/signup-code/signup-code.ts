@@ -8,6 +8,10 @@ import { StringValidator } from '../../validators/string.validator';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { TabsPage } from '../tabs/tabs';
+import { ProfileService } from '../../providers/profile.service';
+import { ApiService } from '../../providers/api.service';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 @Component({
     selector: 'page-signup-code',
@@ -22,6 +26,7 @@ export class SignUpCodePage {
     timer;
     isRetry = false;
     inviteCode: string;
+    socialData;
 
 
     constructor(
@@ -29,8 +34,13 @@ export class SignUpCodePage {
         private auth: AuthService,
         private appMode: AppModeService,
         private navParams: NavParams,
-        private analytics: GoogleAnalytics) {
+        private analytics: GoogleAnalytics,
+        private profile: ProfileService,
+        private api: ApiService,
+        private fileTransfer: FileTransfer,
+        private file: File) {
 
+        this.socialData = this.navParams.get('social');
         this.register = this.navParams.get('register');
         this.inviteCode = this.navParams.get('inviteCode');
         this.envName = this.appMode.getEnvironmentMode();
@@ -46,14 +56,14 @@ export class SignUpCodePage {
 
     countTime() {
         this.countDown = Observable.timer(0, this.tick)
-        .take(this.counter)
-        .map(() => --this.counter);
-    this.timer = setInterval(() => {
-        if (this.counter < 1) {
-            this.cancelTimer();
-            this.isRetry = true;
-        }
-    }, 1000);
+            .take(this.counter)
+            .map(() => --this.counter);
+        this.timer = setInterval(() => {
+            if (this.counter < 1) {
+                this.cancelTimer();
+                this.isRetry = true;
+            }
+        }, 1000);
     }
 
     cancelTimer() {
@@ -85,10 +95,29 @@ export class SignUpCodePage {
                         this.analytics.trackEvent("Session", 'event_phoneconfirm');
                         this.cancelTimer();
                         this.isRetry = false;
+                        if (this.socialData) {
+                            this.setProfile();
+                        }
                         this.nav.setRoot(TabsPage, { index: 0 });
                         // this.nav.setRoot(CreateUserProfilePage);
                     })
             })
+    }
+
+    setProfile() {
+        let profile = {//add email
+            name: this.socialData.name,
+            email: this.socialData.email
+        }
+        this.profile.patch(profile, false);
+        if (this.socialData.picture && this.socialData.picture !== '') {
+            let transfer = this.fileTransfer.create();
+            let uri = encodeURI(this.socialData.picture);
+            transfer.download(uri, this.file.dataDirectory + 'profileAva.jpg')
+                .then(entry => {
+                    this.api.uploadImage(entry.toURL(), 'profile/picture', false);
+                })
+        }
     }
 
     getOtp() {
