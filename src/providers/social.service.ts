@@ -35,12 +35,12 @@ export class SocialService {
         //         count: 1
         //     },
         //     {
-        //         consumerKey: 'bW9h6Yb4ZDwXcWTy3yfiEB6Ra',
-        //         consumerSecret: 'M6kucNze3VQElCLwN3O2yKOO8kFj1ETbNp9HulkkhV7pi6CUFf'
+        //         consumerKey: '1t57CCFvafiX2oaEJuREbE0sz',
+        //         consumerSecret: 'O5pryneH5CALpAcZBbiCrmie62VjvPwmJy0EZQYkRFKbcTbBPa'
         //     },
         //     {
-        //         token: '909746010884370432-LT1iPQ2vHu6KAXutOK1xlCkukKdqDp9',
-        //         tokenSecret: 'h41QtP8Gt83OZcKVXuqdCOjgH3NdMwNn3qh3xataW49UM'
+        //         token: '909746010884370432-7eWkN323lWr6eZQ8UbYLOkHednWoFTY',
+        //         tokenSecret: 'lKqCslBNEPHYBecgsruwr7eIZxIUdqv2ZDdhSZ9YWjRkv'
         //         // token: this.token,
         //         // tokenSecret: this.secret
         //     }

@@ -79,7 +79,7 @@
     "phonegap-plugin-barcodescanner": "7.0.2",
     "rxjs": "5.5.6",
     "sw-toolbox": "3.6.0",
-    "twitter-connect-plugin": "https://github.com/chroa/twitter-connect-plugin",
+    "twitter-connect-plugin": "git+https://github.com/chroa/twitter-connect-plugin.git",
     "zone.js": "0.8.20"
   },
   "devDependencies": {
@@ -120,13 +120,13 @@
       },
       "cordova-plugin-google-analytics": {},
       "onesignal-cordova-plugin": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-appavailability": {},
       "twitter-connect-plugin": {
         "FABRIC_KEY": "dca7d77310640c26f9f6fd7c0533e5446a956c34",
-        "TWITTER_KEY": "4Ul53x9SWpXQMPjNbvYT8g6Io",
-        "TWITTER_SECRET": "M6kucNze3VQElCLwN3O2yKOO8kFj1ETbNp9HulkkhV7pi6CUFf"
-      },
-      "cordova-plugin-file": {},
-      "cordova-plugin-appavailability": {}
+        "TWITTER_KEY": "1t57CCFvafiX2oaEJuREbE0sz",
+        "TWITTER_SECRET": "O5pryneH5CALpAcZBbiCrmie62VjvPwmJy0EZQYkRFKbcTbBPa"
+      }
     },
     "platforms": [
       "ios",
