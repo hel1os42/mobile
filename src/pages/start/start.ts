@@ -60,6 +60,7 @@ export class StartPage {
             this.isSocial = false;
             this.social.twLogin()
                 .then(resp => {
+                    console.log('resp ' + resp)
                     this.social.getTwProfile()
                         .then(res => {
                             //?
@@ -93,7 +94,7 @@ export class StartPage {
 
                 })
                 .catch(err => {
-                    // console.log(err);
+                    console.log("catch: " + err);
                     this.isSocial = true;
                 })
         }
