@@ -101,23 +101,42 @@ export class StartPage {
     }
 
     getFbProfile() {
-        this.social.fbLogin()
-            .then((res: FacebookLoginResponse) => {
-                let userId = res.authResponse.userID;
-                this.social.getFbProfile(userId)
-                    .then(resp => {
-                        this.socialData = {
-                            name: resp.first_name,
-                            // name: user.screen_name,
-                            email: resp.email,
-                            picture: resp.profile_pic
-                        };
-                        this.nav.push(SignUpPage, { social: this.socialData });
-                        console.log(resp);
-                        debugger;
+        if (this.isSocial) {
+            this.isSocial = false;
+            this.social.getFbLoginStatus()
+                .then((res) => {
+                    // let userId: string;
+                    let promise: Promise<any>;
+                    if (res.status === 'unknown') {
+                        promise = this.social.fbLogin();
+                    }
+                    else if (res.status === 'connected') {
+                        promise = Promise.resolve();
+                        // userId = res.authResponse.userID;
+                    }
+                    // console.log(res);
+                    promise.then(resp => {
+                        // if (resp && resp.authResponse) {
+                        //     userId = resp.authResponse.userID;
+                        // }
+                        // console.log(resp);
+                        this.social.getFbProfile()
+                            .then(user => {
+                                this.socialData = {
+                                    name: user.name,
+                                    email: user.email,
+                                    picture: user.picture_large.data.url
+                                };
+                                this.nav.push(SignUpPage, { social: this.socialData });
+                                this.isSocial = true;
+                                // console.log(user);
+                            })
                     })
-
-            })
-            .catch(e => console.log('Error logging into Facebook', e));
+                })
+                .catch(e => {
+                    this.isSocial = true;
+                    console.log('Error logging into Facebook', e);
+                });
+        }
     }
 }

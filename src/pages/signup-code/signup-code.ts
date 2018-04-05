@@ -107,6 +107,7 @@ export class SignUpCodePage {
     setProfile() {
         let profile = {//add email
             name: this.socialData.name,
+            email: this.socialData.email
         }
         this.profile.patch(profile, false);
         if (this.socialData.picture && this.socialData.picture !== '') {

@@ -12,7 +12,7 @@ export class SocialService {
 
     constructor(
         private twitter: TwitterConnect,
-          // private twitter: TwitterService,
+        // private twitter: TwitterService,
         private toast: ToastService,
         private fb: Facebook) {
 
@@ -54,12 +54,15 @@ export class SocialService {
         return this.twitter.logout();
     }
 
-    fbLogin() {
-        // return this.fb.login(['public_profile', 'email']);
+    getFbLoginStatus() {
         return this.fb.getLoginStatus();
     }
 
-    getFbProfile(userId) {
-        return this.fb.api(`/${userId}`, ['public_profile', 'email']);
+    fbLogin() {
+        return this.fb.login(['public_profile', 'email']);
+    }
+
+    getFbProfile() {
+        return this.fb.api('me?fields=name,email,picture.width(720).height(720).as(picture_large)', ['public_profile', 'email']);
     }
 }

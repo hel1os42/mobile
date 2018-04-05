@@ -123,6 +123,7 @@
         <link-domain value="nau.app.link" />
         <ios-team-release value="95864829T9" />
     </branch-config>
+    <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-device" spec="1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.1" />
@@ -163,5 +164,4 @@
         <variable name="APP_ID" value="160629844770662" />
         <variable name="APP_NAME" value="NAU" />
     </plugin>
-    <engine name="ios" spec="~4.5.4" />
 </widget>
