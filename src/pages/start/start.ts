@@ -102,8 +102,13 @@ export class StartPage {
     getFbProfile() {
         this.social.fbLogin()
             .then((res: FacebookLoginResponse) => {
-                console.log(res);
-                debugger
+                let userId = res.authResponse.userID;
+                this.social.getFbProfile(userId)
+                    .then(resp => {
+                        console.log(resp);
+                        debugger;
+                    })
+
             })
             .catch(e => console.log('Error logging into Facebook', e));
     }

@@ -57,4 +57,8 @@ export class SocialService {
     fbLogin() {
         return this.fb.login(['public_profile', 'email']);
     }
+
+    getFbProfile(userId) {
+        return this.fb.api(`Profile /${userId}`, ['public_profile', 'email'])
+    }
 }
