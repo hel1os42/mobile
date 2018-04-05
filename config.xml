@@ -149,7 +149,7 @@
         <variable name="TWITTER_KEY" value="1t57CCFvafiX2oaEJuREbE0sz" />
         <variable name="TWITTER_SECRET" value="O5pryneH5CALpAcZBbiCrmie62VjvPwmJy0EZQYkRFKbcTbBPa" />
     </plugin>
-    <plugin name="cordova-plugin-facebook4" spec="1.9.1">
+    <plugin name="cordova-plugin-facebook4" spec="1.7.4">
         <variable name="APP_ID" value="160629844770662" />
         <variable name="APP_NAME" value="NAU" />
     </plugin>
