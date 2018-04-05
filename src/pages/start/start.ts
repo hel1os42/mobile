@@ -4,6 +4,7 @@ import { LoginPage } from '../login/login';
 import { SignUpPage } from '../signup/signup';
 import { SocialService } from '../../providers/social.service';
 import { AppAvailability } from '@ionic-native/app-availability';
+import { FacebookLoginResponse } from '@ionic-native/facebook';
 
 @Component({
     selector: 'page-start',
@@ -14,6 +15,7 @@ export class StartPage {
 
     socialData;
     isTwApp = false;
+    isFbApp = false;
     isSocial = true;
 
     constructor(
@@ -23,11 +25,14 @@ export class StartPage {
         private appAvailability: AppAvailability) {
 
         let twApp;
+        let fbApp;
 
         if (this.platform.is('ios')) {
             twApp = 'twitter://';
+            fbApp = 'fb://';
         } else if (this.platform.is('android')) {
             twApp = 'com.twitter.android';
+            fbApp = 'com.facebook.katana'
         }
 
         this.appAvailability.check(twApp)
@@ -35,7 +40,11 @@ export class StartPage {
                 (yes: boolean) => this.isTwApp = true,
                 (no: boolean) => this.isTwApp = false
             );
-
+        this.appAvailability.check(fbApp)
+            .then(
+                (yes: boolean) => this.isFbApp = true,
+                (no: boolean) => this.isFbApp = false
+            );
     }
 
     login() {
@@ -88,5 +97,14 @@ export class StartPage {
                     this.isSocial = true;
                 })
         }
+    }
+
+    getFbProfile() {
+        this.social.fbLogin()
+            .then((res: FacebookLoginResponse) => {
+                console.log(res);
+                debugger
+            })
+            .catch(e => console.log('Error logging into Facebook', e));
     }
 }

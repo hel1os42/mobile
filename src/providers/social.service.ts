@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { TwitterConnect } from "@ionic-native/twitter-connect";
 import { ToastService } from "./toast.service";
 import { Observable } from "rxjs";
+import { Facebook } from "@ionic-native/facebook";
 
 @Injectable()
 export class SocialService {
@@ -12,7 +13,8 @@ export class SocialService {
     constructor(
         private twitter: TwitterConnect,
           // private twitter: TwitterService,
-        private toast: ToastService) {
+        private toast: ToastService,
+        private fb: Facebook) {
 
     }
 
@@ -50,5 +52,9 @@ export class SocialService {
 
     twLogout() {
         return this.twitter.logout();
+    }
+
+    fbLogin() {
+        return this.fb.login(['public_profile', 'email']);
     }
 }

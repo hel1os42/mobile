@@ -15,11 +15,17 @@
     </div>
 
     <div text-center class="btn_social margin-top-5vw">
-        <!--
-      <button ion-button icon-only color="transparent" margin-right>
+        
+      <button 
+        *ngIf="isFbApp"
+        (click)="getFbProfile()"
+        ion-button 
+        icon-only 
+        color="transparent" 
+        margin-right>
         <img src="assets/img/start/icon1.svg">
       </button>
-      -->
+     
       <!-- <button 
         *ngIf="isTwApp" 
         (click)="getTwitterProfile()" 
