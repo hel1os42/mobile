@@ -21,6 +21,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimeframesPopover } from './timeframes.popover';
+import { NoticePopover } from './notice.popover';
 
 @Component({
     selector: 'page-offer',
@@ -60,6 +61,8 @@ export class OfferPage {
         private analytics: GoogleAnalytics,
         private browser: InAppBrowser,
         private translate: TranslateService) {
+        let noticePopover = this.popoverCtrl.create(NoticePopover);
+        noticePopover.present();//temporary to remove
 
         this.today = new Date();
         this.points = 1;
@@ -206,8 +209,10 @@ export class OfferPage {
                     if (this.timer)
                         return;
 
+                    let noticePopover = this.popoverCtrl.create(NoticePopover);
                     let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
-                    offerRedeemPopover.present();
+                    noticePopover.present();
+                    noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                     offerRedeemPopover.onDidDismiss(() => this.stopTimer());
 
                     this.timer = setInterval(() => {
@@ -237,10 +242,10 @@ export class OfferPage {
             // }
         }
         else {
-            let popover = this.popoverCtrl.create(TimeframesPopover, { 
-                timeFrames: this.timeframes, 
+            let popover = this.popoverCtrl.create(TimeframesPopover, {
+                timeFrames: this.timeframes,
                 label: this.offer.label,
-                day: this.todayTimeframe 
+                day: this.todayTimeframe
             });
             popover.present();
         }
