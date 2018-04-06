@@ -196,7 +196,7 @@ export class OfferPage {
     }
 
     openRedeemPopover() {
-        this.analytics.trackEvent("Session", 'event_showqr');
+
         // if (!this.disable()) {distance validation
         if (this.isTodayIncluded) {
             if (this.timer)
@@ -211,7 +211,10 @@ export class OfferPage {
                     let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
                     noticePopover.present();
                     noticePopover.onDidDismiss(() => offerRedeemPopover.present());
-                    offerRedeemPopover.onDidDismiss(() => this.stopTimer());
+                    offerRedeemPopover.onDidDismiss(() => {
+                        this.stopTimer();
+                        this.analytics.trackEvent("Session", 'event_showqr');
+                    });
 
                     this.timer = setInterval(() => {
                         this.offers.getRedemtionStatus(offerActivationCode.code)
