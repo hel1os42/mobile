@@ -15,7 +15,7 @@ export class StartPage {
 
     socialData;
     isTwApp = false;
-    isFbApp = false;
+    // isFbApp = false;
     isSocial = true;
 
     constructor(
@@ -25,14 +25,14 @@ export class StartPage {
         private appAvailability: AppAvailability) {
 
         let twApp;
-        let fbApp;
+        // let fbApp;
 
         if (this.platform.is('ios')) {
             twApp = 'twitter://';
-            fbApp = 'fb://';
+            // fbApp = 'fb://';
         } else if (this.platform.is('android')) {
             twApp = 'com.twitter.android';
-            fbApp = 'com.facebook.katana'
+            // fbApp = 'com.facebook.katana'
         }
 
         this.appAvailability.check(twApp)
@@ -40,11 +40,11 @@ export class StartPage {
                 (yes: boolean) => this.isTwApp = true,
                 (no: boolean) => this.isTwApp = false
             );
-        this.appAvailability.check(fbApp)
-            .then(
-                (yes: boolean) => this.isFbApp = true,
-                (no: boolean) => this.isFbApp = false
-            );
+        // this.appAvailability.check(fbApp)
+        //     .then(
+        //         (yes: boolean) => this.isFbApp = true,
+        //         (no: boolean) => this.isFbApp = false
+        //     );
     }
 
     login() {
@@ -105,6 +105,7 @@ export class StartPage {
             this.isSocial = false;
             this.social.getFbLoginStatus()
                 .then((res) => {
+                    this.isSocial = true;
                     // let userId: string;
                     let promise: Promise<any>;
                     if (res.status === 'unknown') {
@@ -128,8 +129,11 @@ export class StartPage {
                                     picture: user.picture_large.data.url
                                 };
                                 this.nav.push(SignUpPage, { social: this.socialData });
-                                this.isSocial = true;
+                                this.social.fbLogout();
                                 // console.log(user);
+                            })
+                            .catch(err => {
+                                // console.log(err);
                             })
                     })
                 })
