@@ -61,8 +61,6 @@ export class OfferPage {
         private analytics: GoogleAnalytics,
         private browser: InAppBrowser,
         private translate: TranslateService) {
-        let noticePopover = this.popoverCtrl.create(NoticePopover);
-        noticePopover.present();//temporary to remove
 
         this.today = new Date();
         this.points = 1;

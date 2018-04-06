@@ -34,11 +34,11 @@
         "TURN_ON_LOCATION_PROFILE": "Para habilitar la posicion, haga clic en 'Configuraciones'. O establece las coordenadas manualmente.",
         "LOCATION_NEEDED_PLACES": "Tu posicion es necesaria para el adecuado funcionamiento de la aplicacion",
         "TURN_ON_LOCATION_PLACES": "Para habilitar la posicion, haga clic en 'Configuraciones'. O coordenadas se asuman de su perfil. (Para actualizar las coordenadas, actualiza tu perfil)",
-        "IMPORTANT_NOTICE": "IMPORTANT NOTICE",
-        "PLEASE_INFORM": "Please inform the retailer you want to redeem a coupon in advance. While NAU is still a new thing for the retailers, some of the staff may be unaware of it. In this case please call the manager.",
-        "IF_THE_PROBLEM": "If the problem persists, contact us at",
-        "SO_THAT": "so that we can fix the issue as soon as possible.",
-        "GOT_IT": "Got it!"
+        "IMPORTANT_NOTICE": "Notices importante",
+        "PLEASE_INFORM": "Le pedimos amablemente que informe al representante de la tienda por adelantado sobre su intencion de usar el cupon NAU. Seguimos siendo novatos para muchos, por lo que algunos personal pueden no estar listos. En este caso le recomendamos que se contacte con el administrador de la establecimiento.",
+        "IF_THE_PROBLEM": "Siempre que el problema persiste contactenos en la direccion",
+        "SO_THAT": "﻿para la correcion de la situacion mas rapida.",
+        "GOT_IT": "﻿Continuar"
     },
 
     "UNIT" : {
