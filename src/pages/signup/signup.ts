@@ -63,7 +63,7 @@ export class SignUpPage {
                 appElHeight2 = appEl2.clientHeight;
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
                 .subscribe(() => {
-                console.log('signup open')
+                    console.log('signup open')
                     appEl.style.height = (appElHeight2 - (appElHeight2 / 3)) + 'px';
                     this.content.scrollToBottom();
                 })
@@ -93,10 +93,10 @@ export class SignUpPage {
                     this.numCode = this.phoneCodes.find(item => item.code === resp.country_code);
                     return this.numCode;
                 },
-                err => {
-                    this.numCode = PHONE_CODES.find(item => item.code === 'US');
-                    return this.numCode;
-                })
+                    err => {
+                        this.numCode = PHONE_CODES.find(item => item.code === 'US');
+                        return this.numCode;
+                    })
 
         }
     }
@@ -109,7 +109,15 @@ export class SignUpPage {
         this.analytics.trackEvent("Session", 'event_signup');
         this.phoneNumber = this.numCode.dial_code + this.formData.phone;
         // let inviteCode = this.auth.getInviteCode();
-        let inviteCode = this.formData.code;
+        let inviteCode: string;
+        if (this.envName === 'prod') {
+            inviteCode = this.formData.code && this.formData.code !== ''
+                ? this.formData.code
+                : 'NAU';
+        }
+        else {
+            inviteCode = this.formData.code;
+        }
         this.oneSignal.sendTag('refferalInviteCode', inviteCode);
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
             .subscribe(resp => {

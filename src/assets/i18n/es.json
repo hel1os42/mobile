@@ -33,7 +33,12 @@
         "LOCATION_NEEDED_PROFILE": "Necesito la posicion para crear una cuenta",
         "TURN_ON_LOCATION_PROFILE": "Para habilitar la posicion, haga clic en 'Configuraciones'. O establece las coordenadas manualmente.",
         "LOCATION_NEEDED_PLACES": "Tu posicion es necesaria para el adecuado funcionamiento de la aplicacion",
-        "TURN_ON_LOCATION_PLACES": "Para habilitar la posicion, haga clic en 'Configuraciones'. O coordenadas se asuman de su perfil. (Para actualizar las coordenadas, actualiza tu perfil)"
+        "TURN_ON_LOCATION_PLACES": "Para habilitar la posicion, haga clic en 'Configuraciones'. O coordenadas se asuman de su perfil. (Para actualizar las coordenadas, actualiza tu perfil)",
+        "IMPORTANT_NOTICE": "Notices importante",
+        "PLEASE_INFORM": "Le pedimos amablemente que informe al representante de la tienda por adelantado sobre su intencion de usar el cupon NAU. Seguimos siendo novatos para muchos, por lo que algunos personal pueden no estar listos. En este caso le recomendamos que se contacte con el administrador de la establecimiento.",
+        "IF_THE_PROBLEM": "Siempre que el problema persiste contactenos en la direccion",
+        "SO_THAT": "﻿para la correcion de la situacion mas rapida.",
+        "GOT_IT": "﻿Continuar"
     },
 
     "UNIT" : {
@@ -370,7 +375,7 @@
         "ENJOY" : "¡Disfrute!",
         "ENJOY_THE_MOST" : "Disfrute de las ofertas, obsequios y descuentos más atractivos de varios comercios en su ubicación, ya sea que esté en su ciudad de residencia o de vacaciones.",
         "INVITE_YOUR_FRIENDS" : "Invite a sus amigos y seguidores a unirse a NAU con su código de invitación y obtenga recompensas cada vez que usen ofertas especiales de los comercios de todo el mundo.",
-        "NAU_COINS_IS" : "Las monedas de NAU son una criptomoneda que pronto podra cambiar por el valor diario: ¡otras criptomonedas, bienes e incluso monedas tradicionales!",
+        "NAU_COINS_IS" : "Las monedas de NAU son una criptomoneda que pronto podra cambiar por el valor diario: ¡ otras criptomonedas incluso monedas tradicionales!",
         "MAKE_MONEY" : "Gane dinero",
         "SKIP" : "Omitir"
     },

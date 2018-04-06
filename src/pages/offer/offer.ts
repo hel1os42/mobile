@@ -21,6 +21,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimeframesPopover } from './timeframes.popover';
+import { NoticePopover } from './notice.popover';
 
 @Component({
     selector: 'page-offer',
@@ -195,7 +196,7 @@ export class OfferPage {
     }
 
     openRedeemPopover() {
-        this.analytics.trackEvent("Session", 'event_showqr');
+
         // if (!this.disable()) {distance validation
         if (this.isTodayIncluded) {
             if (this.timer)
@@ -206,9 +207,14 @@ export class OfferPage {
                     if (this.timer)
                         return;
 
+                    let noticePopover = this.popoverCtrl.create(NoticePopover);
                     let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
-                    offerRedeemPopover.present();
-                    offerRedeemPopover.onDidDismiss(() => this.stopTimer());
+                    noticePopover.present();
+                    noticePopover.onDidDismiss(() => offerRedeemPopover.present());
+                    offerRedeemPopover.onDidDismiss(() => {
+                        this.stopTimer();
+                        this.analytics.trackEvent("Session", 'event_showqr');
+                    });
 
                     this.timer = setInterval(() => {
                         this.offers.getRedemtionStatus(offerActivationCode.code)
@@ -237,10 +243,10 @@ export class OfferPage {
             // }
         }
         else {
-            let popover = this.popoverCtrl.create(TimeframesPopover, { 
-                timeFrames: this.timeframes, 
+            let popover = this.popoverCtrl.create(TimeframesPopover, {
+                timeFrames: this.timeframes,
                 label: this.offer.label,
-                day: this.todayTimeframe 
+                day: this.todayTimeframe
             });
             popover.present();
         }

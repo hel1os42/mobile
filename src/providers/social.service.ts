@@ -62,6 +62,10 @@ export class SocialService {
         return this.fb.login(['public_profile', 'email']);
     }
 
+    fbLogout() {
+        return this.fb.logout();
+    }
+
     getFbProfile() {
         return this.fb.api('me?fields=name,email,picture.width(720).height(720).as(picture_large)', ['public_profile', 'email']);
     }

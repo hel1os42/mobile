@@ -105,6 +105,7 @@ import { SocialService } from '../providers/social.service';
 import { File } from '@ionic-native/file';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { Facebook } from '@ionic-native/facebook';
+import { NoticePopover } from '../pages/offer/notice.popover';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -160,6 +161,7 @@ export function createTranslateLoader(http: HttpClient) {
         NoPlacesPopover,
         LinkPopover,
         TimeframesPopover,
+        NoticePopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
@@ -245,6 +247,7 @@ export function createTranslateLoader(http: HttpClient) {
         NoPlacesPopover,
         LinkPopover,
         TimeframesPopover,
+        NoticePopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,

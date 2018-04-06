@@ -33,7 +33,12 @@
         "LOCATION_NEEDED_PROFILE": "Your location needed to create account",
         "TURN_ON_LOCATION_PROFILE": "To turn on location, please, click 'Settings'. Otherwise, you have the option to set the coordinates manually.",
         "LOCATION_NEEDED_PLACES": "Your location needed for the correct operation of the application",
-        "TURN_ON_LOCATION_PLACES": "To turn on location, please, click 'Settings'. Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile)."
+        "TURN_ON_LOCATION_PLACES": "To turn on location, please, click 'Settings'. Otherwise, the coordinates will be taken from your profile. (To update the coordinates, update your profile).",
+        "IMPORTANT_NOTICE": "IMPORTANT NOTICE",
+        "PLEASE_INFORM": "Please inform the retailer you want to redeem a coupon in advance. While NAU is still a new thing for the retailers, some of the staff may be unaware of it. In this case please call the manager.",
+        "IF_THE_PROBLEM": "If the problem persists, contact us at",
+        "SO_THAT": "so that we can fix the issue as soon as possible.",
+        "GOT_IT": "Got it!"
     },
 
     "UNIT" : {
@@ -370,7 +375,7 @@
         "ENJOY" : "Enjoy!",
         "ENJOY_THE_MOST" : "Enjoy the most attractive offers, gifts and discounts from various retailers in your location whether you are in your home town or on a vacation.",
         "INVITE_YOUR_FRIENDS" : "Invite your friends and followers to join NAU using your invite code and get rewarded each time they use special offers from the retailers worldwide.",
-        "NAU_COINS_IS" : "NAU coins is a cryptocurrency which you will soon be able to exchange for the everyday value: other cryptocurrencies, goods and even traditional currencies!",
+        "NAU_COINS_IS" : "NAU coins is a cryptocurrency which you will soon be able to exchange for the everyday value: other cryptocurrencies and even traditional currencies!",
         "MAKE_MONEY" : "Make Money",
         "SKIP" : "Skip"
     },
