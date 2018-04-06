@@ -123,8 +123,8 @@
         <link-domain value="nau.app.link" />
         <ios-team-release value="95864829T9" />
     </branch-config>
-    <engine name="android" spec="6.3.0" />
     <engine name="ios" spec="4.5.4" />
+    <engine name="android" spec="6.3.0" />
     <plugin name="cordova-plugin-device" spec="1.1.7" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.1" />
@@ -155,13 +155,13 @@
     <plugin name="onesignal-cordova-plugin" spec="2.3.3" />
     <plugin name="cordova-plugin-file" spec="5.0.0" />
     <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
-    <plugin name="cordova-plugin-facebook4" spec="1.7.4">
-        <variable name="APP_ID" value="160629844770662" />
-        <variable name="APP_NAME" value="NAU" />
-    </plugin>
-    <plugin name="twitter-connect-plugin" spec="git+https://github.com/chroa/twitter-connect-plugin.git">
+    <plugin name="twitter-connect-plugin" spec="https://github.com/chroa/twitter-connect-plugin.git">
         <variable name="FABRIC_KEY" value="dca7d77310640c26f9f6fd7c0533e5446a956c34" />
         <variable name="TWITTER_KEY" value="1t57CCFvafiX2oaEJuREbE0sz" />
         <variable name="TWITTER_SECRET" value="O5pryneH5CALpAcZBbiCrmie62VjvPwmJy0EZQYkRFKbcTbBPa" />
+    </plugin>
+    <plugin name="cordova-plugin-facebook4" spec="1.7.4">
+        <variable name="APP_ID" value="160629844770662" />
+        <variable name="APP_NAME" value="NAU" />
     </plugin>
 </widget>
