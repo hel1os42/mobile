@@ -107,6 +107,7 @@ import { AppAvailability } from '@ionic-native/app-availability';
 import { Facebook } from '@ionic-native/facebook';
 import { NoticePopover } from '../pages/offer/notice.popover';
 import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -300,7 +301,8 @@ export function createTranslateLoader(http: HttpClient) {
         File,
         AppAvailability,
         Facebook,
-        FlurryAnalytics
+        FlurryAnalytics,
+        LaunchNavigator
     ]
 })
 export class AppModule { }
