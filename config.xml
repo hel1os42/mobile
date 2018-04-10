@@ -164,4 +164,5 @@
         <variable name="APP_ID" value="160629844770662" />
         <variable name="APP_NAME" value="NAU" />
     </plugin>
+    <plugin name="cordova-plugin-flurryanalytics" spec="1.4.6" />
 </widget>

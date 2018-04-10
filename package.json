@@ -29,6 +29,7 @@
     "@ionic-native/facebook": "4.6.0",
     "@ionic-native/file": "4.6.0",
     "@ionic-native/file-transfer": "4.5.2",
+    "@ionic-native/flurry-analytics": "4.7.0",
     "@ionic-native/geolocation": "4.5.2",
     "@ionic-native/google-analytics": "4.5.3",
     "@ionic-native/image-picker": "4.5.3",
@@ -54,12 +55,14 @@
     "cordova-ios": "4.5.4",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-appavailability": "0.4.2",
+    "cordova-plugin-cocoapod-support": "1.3.0",
     "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-cookiemaster": "1.0.5",
     "cordova-plugin-device": "1.1.7",
     "cordova-plugin-facebook4": "1.7.4",
     "cordova-plugin-file": "5.0.0",
     "cordova-plugin-file-transfer": "1.7.0",
+    "cordova-plugin-flurryanalytics": "1.4.6",
     "cordova-plugin-geolocation": "4.0.1",
     "cordova-plugin-google-analytics": "1.8.3",
     "cordova-plugin-image-picker": "https://github.com/abelabbesnabi/cordova-plugin-image-picker.git",
@@ -132,7 +135,8 @@
       "cordova-plugin-facebook4": {
         "APP_ID": "160629844770662",
         "APP_NAME": "NAU"
-      }
+      },
+      "cordova-plugin-flurryanalytics": {}
     },
     "platforms": [
       "ios",
