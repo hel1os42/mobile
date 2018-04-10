@@ -23,6 +23,8 @@ import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimeframesPopover } from './timeframes.popover';
 import { NoticePopover } from './notice.popover';
 
+declare var window;
+
 @Component({
     selector: 'page-offer',
     templateUrl: 'offer.html'
@@ -76,6 +78,9 @@ export class OfferPage {
                 if (offer.timeframes) {
                     this.offer = offer;
                 }
+                
+                this.offer.is_favorite = this.navParams.get('offer').is_favorite;//temporary fix
+
                 this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
                 this.timeframesHandler();
             })
@@ -297,11 +302,17 @@ export class OfferPage {
         this.favorites.setOffer(this.offer.id)
             .subscribe(() => {
                 this.offer.is_favorite = true;
-                this.translate
                 this.toast.showNotification('TOAST.ADDED_TO_FAVORITES');
             });
     }
 
+    dial() {
+        window.location = 'tel:' + this.company.phone;
+    }
+
+    openSite() {
+        this.browser.create(this.company.site, '_system');
+    }
 
     presentConfirm() {
         this.translate.get(['CONFIRM.REMOVE_FAVORITE_OFFER', 'UNIT'])
