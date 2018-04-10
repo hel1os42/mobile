@@ -307,6 +307,10 @@ export class OfferPage {
         window.location = 'tel:' + this.company.phone;
     }
 
+    openSite() {
+        this.browser.create(this.company.site, '_system');
+    }
+
     presentConfirm() {
         this.translate.get(['CONFIRM.REMOVE_FAVORITE_OFFER', 'UNIT'])
             .subscribe(resp => {

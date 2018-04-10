@@ -28,7 +28,7 @@
         -->
         <button *ngIf="company.phone" (click)="dial()" ion-button icon-only color="white"> <!-- call -->
         </button>
-        <button *ngIf="company.site" ion-button icon-only color="white"> <!-- web -->
+        <button *ngIf="company.site" (click)="openSite()" ion-button icon-only color="white"> <!-- web -->
         </button>
         <button *ngIf="offer.is_favorite" (click)="presentConfirm()" ion-button icon-only color="white">
         </button>
