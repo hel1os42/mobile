@@ -20,6 +20,7 @@ import { NetworkService } from '../providers/network.service';
 import { ProfileService } from '../providers/profile.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
+import { FlurryAnalytics, FlurryAnalyticsObject, FlurryAnalyticsOptions } from '@ionic-native/flurry-analytics';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class MyApp {
     onConnectSubscription: Subscription;
     isResumeGlobal = false;
 
-    constructor(platform: Platform,
+    constructor(
+        platform: Platform,
         statusBar: StatusBar,
         splashScreen: SplashScreen,
         private auth: AuthService,
@@ -46,7 +48,8 @@ export class MyApp {
         private network: NetworkService,
         private analytics: GoogleAnalytics,
         private share: ShareService,
-        private oneSignal: OneSignal) {
+        private oneSignal: OneSignal,
+        private flurryAnalytics: FlurryAnalytics) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -101,14 +104,15 @@ export class MyApp {
             if (platform.is('ios') && platform.width() == 375 && platform.height() == 812) {
                 let body = <HTMLElement>(document.getElementsByTagName('ion-app')[0]);
                 body.classList.add("iphonex");
-                console.log('Width: ' + platform.width());
-                console.log('Height: ' + platform.height());
+                // console.log('Width: ' + platform.width());
+                // console.log('Height: ' + platform.height());
             }
 
             this.branchInit(platform, splashScreen);
             this.initTranslate();
             if (platform.is('cordova')) {
                 this.oneSignalInit();
+                this.flurryAnalyticsInit(platform);
             }
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
@@ -277,6 +281,22 @@ export class MyApp {
         this.oneSignal.endInit();
         this.oneSignal.enableVibrate(true);
         this.oneSignal.enableSound(true);
+    }
+
+    flurryAnalyticsInit(platform: Platform) {
+        let appKey: string;
+        if (platform.is('android')) {
+            appKey = 'WGQND43HCBMFK3Y4Y7X4';
+        }
+        else if (platform.is('ios')) {
+            appKey = 'XXCDHNFF247F7SDQQFC4';
+        }
+        const options: FlurryAnalyticsOptions = {
+            appKey: appKey,
+            reportSessionsOnClose: true,
+            enableLogging: true
+        };
+        let fa: FlurryAnalyticsObject = this.flurryAnalytics.create(options);
     }
 
     ngOnDestroy() {
