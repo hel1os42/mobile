@@ -19,6 +19,7 @@ import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { TranslateService } from '@ngx-translate/core';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 @Component({
     selector: 'page-place',
@@ -49,7 +50,8 @@ export class PlacePage {
         private testimonials: TestimonialsService,
         private statusBar: StatusBar,
         private analytics: GoogleAnalytics,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private launchNavigator: LaunchNavigator) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -199,6 +201,13 @@ export class PlacePage {
                 this.company.is_favorite = true;
                 this.toast.showNotification('TOAST.ADDED_TO_FAVORITES');
             });
+    }
+
+    navigate() {
+        // if (this.company.latitude) {
+            // this.launchNavigator.navigate([this.company.latitude, this.company.longitude]);
+            this.launchNavigator.navigate(this.company.address);
+        // }
     }
 
     presentConfirm() {
