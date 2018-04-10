@@ -107,12 +107,27 @@ page-offer{
       margin-top: 0;
       margin-bottom: 0;
       margin-left: 2.2vw;
+      background-size: 60% auto;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
   }
 
-    .btn_social .button img {
-        width: 4vw;
-        height: auto;
+    .btn_social .button:nth-child(1){
+        background-image: url(../assets/img/user_offers/icon_call.svg);
     }
+
+    .btn_social .button:nth-child(2){
+        background-image: url(../assets/img/user_offers/icon_web.svg);
+    }
+
+    .btn_social .button:nth-child(3){
+        background-image: url(../assets/img/place/icon_star.svg);
+    }
+
+    .btn_social .button:nth-child(4){
+        background-image: url(../assets/img/user_offers/icon3.svg);
+    }
+
 
   .user_level{
       background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
