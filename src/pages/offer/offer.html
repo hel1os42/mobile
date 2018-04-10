@@ -26,9 +26,9 @@
           <img src="assets/img/user_offers/icon1.svg">
         </button>
         -->
-        <button ion-button icon-only color="white"> <!-- call -->
+        <button *ngIf="company.phone" (click)="dial()" ion-button icon-only color="white"> <!-- call -->
         </button>
-        <button ion-button icon-only color="white"> <!-- web -->
+        <button *ngIf="company.site" ion-button icon-only color="white"> <!-- web -->
         </button>
         <button *ngIf="offer.is_favorite" (click)="presentConfirm()" ion-button icon-only color="white">
         </button>

@@ -23,6 +23,8 @@ import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimeframesPopover } from './timeframes.popover';
 import { NoticePopover } from './notice.popover';
 
+declare var window;
+
 @Component({
     selector: 'page-offer',
     templateUrl: 'offer.html'
@@ -297,11 +299,13 @@ export class OfferPage {
         this.favorites.setOffer(this.offer.id)
             .subscribe(() => {
                 this.offer.is_favorite = true;
-                this.translate
                 this.toast.showNotification('TOAST.ADDED_TO_FAVORITES');
             });
     }
 
+    dial() {
+        window.location = 'tel:' + this.company.phone;
+    }
 
     presentConfirm() {
         this.translate.get(['CONFIRM.REMOVE_FAVORITE_OFFER', 'UNIT'])
