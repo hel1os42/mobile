@@ -117,10 +117,11 @@ page-places {
         height: 170px;
     }
 
-    /* STATUS BAR */
+    /* STATUS BAR
     .sticky{
         top: 20px;
     }
+    */
 
     .header-ios{
         height: 20px;
@@ -270,9 +271,11 @@ page-places {
     height: calc(100% + 40px)
 }
 
+/*
 .iphonex page-places .sticky{
     top: 40px;
 }
+*/
 
 .iphonex page-places ion-refresher {
     margin-top: -20px;
