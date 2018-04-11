@@ -99,36 +99,6 @@ page-offer{
     min-height: 178px;
   }
 
-  .btn_social .button {
-      width: 7.5vw;
-      height: 7.5vw;
-      border-radius: 100vw;
-      margin-right: 0;
-      margin-top: 0;
-      margin-bottom: 0;
-      margin-left: 2.2vw;
-      background-size: 60% auto;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-  }
-
-    .btn_social .button.icon_1{
-        background-image: url(../assets/img/user_offers/icon_call.svg);
-    }
-
-    .btn_social .button.icon_2{
-        background-image: url(../assets/img/user_offers/icon_web.svg);
-    }
-
-    .btn_social .button.icon_3{
-        background-image: url(../assets/img/place/icon_star.svg);
-    }
-
-    .btn_social .button.icon_4{
-        background-image: url(../assets/img/user_offers/icon3.svg);
-    }
-
-
   .user_level{
       background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
       border-radius: 100vw;
