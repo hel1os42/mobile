@@ -4,6 +4,10 @@
             <div class="cover-brightness"></div>
             <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
             <div class="cover_block_btn">
+                <button ion-button icon-only color="white" class="icon_call"> <!-- call -->
+                </button>
+                <button  ion-button icon-only color="white" class="icon_web"> <!-- web -->
+                </button>
                 <button *ngIf="company.is_favorite" (click)="presentConfirm()" class="icon_bookmarks" ion-button icon-only color="white">
                 </button>
                 <button *ngIf="!company.is_favorite" (click)="addFavorite()" ion-button icon-only class="grayscale icon_bookmarks" color="white">
