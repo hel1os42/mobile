@@ -20,6 +20,9 @@ import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { TranslateService } from '@ngx-translate/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+declare var window;
 
 @Component({
     selector: 'page-place',
@@ -51,7 +54,8 @@ export class PlacePage {
         private statusBar: StatusBar,
         private analytics: GoogleAnalytics,
         private translate: TranslateService,
-        private launchNavigator: LaunchNavigator) {
+        private launchNavigator: LaunchNavigator,
+        private browser: InAppBrowser) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -208,6 +212,14 @@ export class PlacePage {
             // this.launchNavigator.navigate([this.company.latitude, this.company.longitude]);
             this.launchNavigator.navigate(this.company.address);
         // }
+    }
+
+    dial() {
+        window.location = 'tel:' + this.company.phone;
+    }
+
+    openSite() {
+        this.browser.create(this.company.site, '_system');
     }
 
     presentConfirm() {
