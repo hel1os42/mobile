@@ -78,7 +78,8 @@ export class OfferPage {
                 if (offer.timeframes) {
                     this.offer = offer;
                 }
-
+                console.log(this.offer);
+                console.log(this.company);
                 this.offer.is_favorite = this.navParams.get('offer').is_favorite;//temporary fix
 
                 this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);

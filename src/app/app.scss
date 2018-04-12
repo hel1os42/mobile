@@ -1458,7 +1458,6 @@ ion-app.ios [margin], ion-app.ios [margin] .scroll-content{
 
 .item-ios .item-button {
     font-size: 2.6vw;
-
     padding: 2vw;
     height: 8.5vw;
 }
@@ -1888,8 +1887,8 @@ ion-title.title.title-ios{
 }
 
 .btn_social .button {
-    width: 7.5vw;
-    height: 7.5vw;
+    width: 8vw;
+    height: 8vw;
     border-radius: 100vw;
     margin-right: 0;
     margin-top: 0;
@@ -1898,6 +1897,11 @@ ion-title.title.title-ios{
     background-size: 60% auto;
     background-position: 50% 50%;
     background-repeat: no-repeat;
+}
+
+.btn_social .button img {
+    width: 6vw;
+    height: 6vw;
 }
 
 .button.icon_call{
