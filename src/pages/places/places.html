@@ -1,5 +1,5 @@
 <ion-header>
-    <div>
+    <div class="block-places-header">
         <ion-grid text-center class="grid-tabs-splash">
             <ion-row align-items-end>
                 <a
@@ -37,7 +37,7 @@
     </div>
 </ion-header>
 
-<ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
+<ion-content no-bounce [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
     <ion-refresher *ngIf="!isMapVisible" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="none" refreshingSpinner="bubbles">
         </ion-refresher-content>

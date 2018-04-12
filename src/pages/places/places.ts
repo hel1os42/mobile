@@ -115,7 +115,7 @@ export class PlacesPage {
         //         debugger
         //     })
         this.shareData = this.share.get();
-        
+
         this.segment = "alloffers";
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -344,7 +344,7 @@ export class PlacesPage {
             this.profile.get(true, false)
                 .subscribe(user => {
                     if (user.latitude) {
-                       this.getDefaultCoords(user.latitude, user.longitude); 
+                       this.getDefaultCoords(user.latitude, user.longitude);
                     }
                   else {
                     this.location.getByIp()
@@ -671,9 +671,8 @@ export class PlacesPage {
         function renderMap() {
             if (document.getElementById("map_leaf")) {
                 document.getElementById("map_leaf").style.height = window.innerHeight -
-                    document.getElementsByClassName('grid-tabs-splash')[0].clientHeight -
-                    document.getElementsByClassName('tabbar')[0].clientHeight -
-                    document.getElementsByClassName('sticky')[0].clientHeight + "px";
+                    document.getElementsByClassName('block-places-header')[0].clientHeight -
+                    document.getElementsByClassName('tabbar')[0].clientHeight + "px";
             }
         }
         setTimeout(renderMap, 1);
