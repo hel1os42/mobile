@@ -5,6 +5,15 @@ page-offer{
     overflow: visible;
   }
 
+    /* FIX FOR IOS */
+    .scroll-content{
+        pointer-events: none;
+    }
+
+    .point-event{
+        pointer-events: auto;
+    }
+
   .header {
     -webkit-box-shadow: none;
     box-shadow: none;
