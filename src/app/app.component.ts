@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FlurryAnalytics, FlurryAnalyticsObject, FlurryAnalyticsOptions } from '@ionic-native/flurry-analytics';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { OneSignal } from '@ionic-native/onesignal';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -9,7 +10,6 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { Subscription } from 'rxjs/Rx';
 import { DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { Share } from '../models/share';
-import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -17,10 +17,8 @@ import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
-import { ProfileService } from '../providers/profile.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
-import { FlurryAnalytics, FlurryAnalyticsObject, FlurryAnalyticsOptions } from '@ionic-native/flurry-analytics';
 
 
 @Component({
@@ -38,7 +36,6 @@ export class MyApp {
         splashScreen: SplashScreen,
         private auth: AuthService,
         private app: App,
-        private profile: ProfileService,
         private translate: TranslateService,
         private location: LocationService,
         private alert: AlertController,

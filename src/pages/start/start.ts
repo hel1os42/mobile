@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+import { AppAvailability } from '@ionic-native/app-availability';
 import { NavController, Platform } from 'ionic-angular';
+import { SocialService } from '../../providers/social.service';
 import { LoginPage } from '../login/login';
 import { SignUpPage } from '../signup/signup';
-import { SocialService } from '../../providers/social.service';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { FacebookLoginResponse } from '@ionic-native/facebook';
 
 @Component({
     selector: 'page-start',

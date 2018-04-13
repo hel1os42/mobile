@@ -1,8 +1,6 @@
-import { Injectable } from "@angular/core";
-import { TwitterConnect } from "@ionic-native/twitter-connect";
-import { ToastService } from "./toast.service";
-import { Observable } from "rxjs";
-import { Facebook } from "@ionic-native/facebook";
+import { Injectable } from '@angular/core';
+import { Facebook } from '@ionic-native/facebook';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
 
 @Injectable()
 export class SocialService {
@@ -13,7 +11,6 @@ export class SocialService {
     constructor(
         private twitter: TwitterConnect,
         // private twitter: TwitterService,
-        private toast: ToastService,
         private fb: Facebook) {
 
     }

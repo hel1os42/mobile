@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AlertController, Content, Navbar, NavController, Platform, Select } from 'ionic-angular';
 import { Observable, Subscription } from 'rxjs';
@@ -9,10 +10,8 @@ import { AuthService } from '../../providers/auth.service';
 import { LocationService } from '../../providers/location.service';
 import { ProfileService } from '../../providers/profile.service';
 import { StringValidator } from '../../validators/string.validator';
-import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SignUpPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
     selector: 'page-login',
