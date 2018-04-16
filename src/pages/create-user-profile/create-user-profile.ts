@@ -347,7 +347,7 @@ export class CreateUserProfilePage {
                         }
                     }, 1);
                     setTimeout(() => {
-                        this.cropper.setImage(image)
+                        this.cropper.setImage(image);
                         this.changeDetectorRef.detectChanges();
                     }, 500);
                 }
