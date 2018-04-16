@@ -629,14 +629,15 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .grid-tabs-splash .row {
-    display: table;
     width: 100%;
     padding: 2%;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
 }
 
 .grid-tabs-splash .col {
-    display: table-cell;
-    width: 25vw;
     padding-left: 0;
     padding-right: 0;
     padding-top: 5px;
