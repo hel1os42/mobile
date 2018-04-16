@@ -108,6 +108,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { NoticePopover } from '../pages/offer/notice.popover';
 import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { PushTokenService } from '../providers/pushToken.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -290,6 +291,7 @@ export function createTranslateLoader(http: HttpClient) {
         FavoritesService,
         TestimonialsService,
         SocialService,
+        PushTokenService,
         Clipboard,
         InAppBrowser,
         AndroidPermissions,
