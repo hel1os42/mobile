@@ -5,6 +5,9 @@ import { ApiService } from './api.service';
 import { TokenService } from './token.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { StorageService } from './storage.service';
+import { OneSignal } from '@ionic-native/onesignal';
+import { PushTokenCreate } from '../models/pushTokenCreate';
+import { PushTokenService } from './pushToken.service';
 
 declare var cookieMaster;
 
@@ -20,7 +23,9 @@ export class AuthService {
         private api: ApiService,
         private token: TokenService,
         private analytics: GoogleAnalytics,
-        private storage: StorageService) {
+        private storage: StorageService,
+        private oneSignal: OneSignal,
+        private pushToken: PushTokenService) {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
@@ -65,7 +70,23 @@ export class AuthService {
     login(login: Login) {
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
-        obs.subscribe(token => this.token.set(token));
+        obs.subscribe(token => {
+            this.token.set(token);
+            this.oneSignal.getIds()
+                .then(resp => {
+                    let pushToken: PushTokenCreate = {
+                        device_id: resp.userId,
+                        token: resp.pushToken
+                    };
+                    this.pushToken.get(resp.userId)
+                        .subscribe(resp => { },
+                            err => {
+                                if (err.status == 404) {
+                                    this.pushToken.post(pushToken);
+                                }
+                            })
+                })
+        });
         this.analytics.trackEvent("Session", "Login", new Date().toISOString());
         return obs;
     }
