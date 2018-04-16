@@ -1,10 +1,10 @@
 {
     "CATEGORIES" : {
         "Food": "<div class='font-65 text-white'>Еда и<br>Напитки</div>",
-        "Beauty": "<div class='font-65 text-white'>Красота и<br>Здоровье</div>",
+        "Beauty": "<div class='font-65 text-white'>Здоровье и<br>Красота</div>",
         "Retail": "<div class='font-65 text-white'>Товары и<br>Услуги</div>",
         "Accommodation": "<div class='font-65 text-white'>Проживание <br>и Отдых</div>",
-        "Other": "<div class='font-65 text-white'>Прочее и<br>Интернет</div>"
+        "Other": "<div class='font-65 text-white'>Онлайн и<br>Прочее</div>"
     },
 
     "COUNTRIES" : {
@@ -98,7 +98,7 @@
         "CLEAR" : "Очистить",
         "MAP" : "Карта",
         "FOOD_DRINKS" : "Еда и Напитки",
-        "BEAUTY_FITNESS" : "Красота и Здоровье",
+        "BEAUTY_FITNESS" : "Здоровье и Красота",
         "RETAIL_SERVICES" : "Товары и Услуги",
         "ACCOMMODATION_LEISURE" : "Проживание и Отдых",
         "OTHER_ONLINE" : "Прочее и Интернет",
