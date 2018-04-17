@@ -187,7 +187,7 @@ export class PlacePage {
     }
 
     openOffer(offer, company?) {
-        this.analytics.trackEvent("Session", 'event_chooseoffe');
+        this.analytics.trackEvent("Session", 'event_chooseoffer');
         this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,

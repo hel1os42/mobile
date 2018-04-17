@@ -22,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimeframesPopover } from './timeframes.popover';
 import { NoticePopover } from './notice.popover';
+import { AnalyticsService } from '../../providers/analytics.service';
 
 declare var window;
 
@@ -60,7 +61,8 @@ export class OfferPage {
         private toast: ToastService,
         private alert: AlertController,
         private statusBar: StatusBar,
-        private analytics: GoogleAnalytics,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
         private browser: InAppBrowser,
         private translate: TranslateService) {
 
@@ -219,7 +221,7 @@ export class OfferPage {
                     noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                     offerRedeemPopover.onDidDismiss(() => {
                         this.stopTimer();
-                        this.analytics.trackEvent("Session", 'event_showqr');
+                        this.gAnalytics.trackEvent("Session", 'event_showqr');
                     });
 
                     this.timer = setInterval(() => {
@@ -232,7 +234,8 @@ export class OfferPage {
                                     this.offers.refreshRedeemedOffers();
                                     let offerCongratulationPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
                                     offerCongratulationPopover.present();
-                                    this.analytics.trackEvent("Session", 'event_redeemoffer');
+                                    this.gAnalytics.trackEvent("Session", 'event_redeemoffer');
+                                    this.analytics.faLogEvent('event_redeemoffer');
                                     offerCongratulationPopover.onDidDismiss(() => {
                                         // this.nav.popToRoot();
                                         // if (data.status === 'approved') {

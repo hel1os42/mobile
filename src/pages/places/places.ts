@@ -30,6 +30,7 @@ import { COUNTRIES } from '../../const/countries';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
+import { AnalyticsService } from '../../providers/analytics.service';
 
 
 @Component({
@@ -103,7 +104,8 @@ export class PlacesPage {
         private storage: StorageService,
         private testimonials: TestimonialsService,
         private geocoder: GeocodeService,
-        private analytics: GoogleAnalytics,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
         private changeDetectorRef: ChangeDetectorRef) {
 
         this.isForkMode = this.appMode.getForkMode();
@@ -679,7 +681,8 @@ export class PlacesPage {
     }
 
     openPlace(data, isShare?: boolean) {
-        this.analytics.trackEvent("Session", 'event_chooseplace');
+        this.gAnalytics.trackEvent("Session", 'event_chooseplace');
+        this.analytics.faLogEvent('event_chooseplace');
         let params;
         if (isShare) {
             params = {

@@ -10,6 +10,7 @@ import { PushTokenCreate } from '../models/pushTokenCreate';
 import { PushTokenService } from './pushToken.service';
 import { FlurryAnalytics, FlurryAnalyticsOptions, FlurryAnalyticsObject } from '@ionic-native/flurry-analytics';
 import { Platform } from 'ionic-angular';
+import { AnalyticsService } from './analytics.service';
 
 declare var cookieMaster;
 
@@ -19,13 +20,12 @@ export class AuthService {
     inviteCode: string = '';
     registerData: Register = new Register();
     onLogout = new EventEmitter();
-    fa: FlurryAnalyticsObject;
 
     constructor(
         private api: ApiService,
         private token: TokenService,
         private gAnalytics: GoogleAnalytics,
-        private fAnalytics: FlurryAnalytics,
+        private analytics: AnalyticsService,
         private storage: StorageService,
         private oneSignal: OneSignal,
         private pushToken: PushTokenService,
@@ -45,19 +45,6 @@ export class AuthService {
             }
         }, 120 * 1000);
 
-        let appKey: string;
-        if (this.platform.is('android')) {
-            appKey = 'WGQND43HCBMFK3Y4Y7X4';
-        }
-        else if (this.platform.is('ios')) {
-            appKey = 'XXCDHNFF247F7SDQQFC4';
-        }
-        const options: FlurryAnalyticsOptions = {
-            appKey: appKey,
-            reportSessionsOnClose: true,
-            enableLogging: true
-        };
-        this.fa = this.fAnalytics.create(options);
     }
 
     getInviteCode() {
@@ -86,14 +73,14 @@ export class AuthService {
     register(register: Register) {
         let obs = this.api.post('users', register);
         obs.subscribe(() => {
-            this.fa.logEvent('event_signup');
+            this.analytics.faLogEvent('event_signup');
         })
         return this.api.post('users', register);
     }
 
     login(login: Login, isAnalitics: boolean) {
         this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
-        this.fa.logEvent('event_phoneconfirm');
+        this.analytics.faLogEvent('event_phoneconfirm');
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
         obs.subscribe(token => {

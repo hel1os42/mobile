@@ -19,6 +19,7 @@ import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
+import { AnalyticsService } from '../providers/analytics.service';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class MyApp {
         private ionicApp: IonicApp,
         private appMode: AppModeService,
         private network: NetworkService,
-        private analytics: GoogleAnalytics,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
         private share: ShareService,
         private oneSignal: OneSignal,
         private flurryAnalytics: FlurryAnalytics) {
@@ -64,13 +66,13 @@ export class MyApp {
             //}
 
             //Google Analytics
-            this.analytics.startTrackerWithId('UA-114471660-1')
+            this.gAnalytics.startTrackerWithId('UA-114471660-1')
                 .then(() => {
-                    this.analytics.trackView('test');
+                    this.gAnalytics.trackView('test');
                     // Tracker is ready
-                    this.analytics.debugMode();
-                    this.analytics.setAllowIDFACollection(true);
-                    this.analytics.enableUncaughtExceptionReporting(true);
+                    this.gAnalytics.debugMode();
+                    this.gAnalytics.setAllowIDFACollection(true);
+                    this.gAnalytics.enableUncaughtExceptionReporting(true);
                 })
                 .catch(err => console.log('Error starting GoogleAnalytics', err));
 
@@ -109,7 +111,7 @@ export class MyApp {
             this.initTranslate();
             if (platform.is('cordova')) {
                 this.oneSignalInit();
-                this.flurryAnalyticsInit(platform);
+                this.analytics.flurryAnalyticsInit();
             }
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
@@ -278,22 +280,6 @@ export class MyApp {
         this.oneSignal.endInit();
         this.oneSignal.enableVibrate(true);
         this.oneSignal.enableSound(true);
-    }
-
-    flurryAnalyticsInit(platform: Platform) {
-        let appKey: string;
-        if (platform.is('android')) {
-            appKey = 'WGQND43HCBMFK3Y4Y7X4';
-        }
-        else if (platform.is('ios')) {
-            appKey = 'XXCDHNFF247F7SDQQFC4';
-        }
-        const options: FlurryAnalyticsOptions = {
-            appKey: appKey,
-            reportSessionsOnClose: true,
-            enableLogging: true
-        };
-        let fa: FlurryAnalyticsObject = this.flurryAnalytics.create(options);
     }
 
     ngOnDestroy() {
