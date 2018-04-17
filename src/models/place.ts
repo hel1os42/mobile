@@ -30,7 +30,7 @@ export class Place {
     category;
     tags?: string[]; 
     timezone: string;
-    timezone_offset: string
+    timezone_offset: number;
     phone: string;
     site: string;
     specialities?;
