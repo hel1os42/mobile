@@ -23,6 +23,7 @@
     },
 
     "COMPLAINT" : {
+        "COMPLAINT_TITLE": "Report a problem",
         "STAFF_IS_NOT": "Staff is not aware of NAU",
         "STAFF_HAS_DENIED" : "Staff has denied service through NAU",
         "DISCOUNT_OR_BONUS": "Discount or bonus are not as described",
