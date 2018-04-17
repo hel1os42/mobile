@@ -144,7 +144,7 @@ export class LoginPage {
         this.auth.login({
             phone: this.numCode.dial_code + this.authData.phone,
             code: this.authData.code
-        })
+        }, true)
             .subscribe(resp => {
                 // this.analytics.trackEvent("Session", 'event_phoneconfirm');
                 this.profile.get(true, false);//for sending one signal tags

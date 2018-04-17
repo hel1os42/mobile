@@ -91,7 +91,7 @@ export class AuthService {
         return this.api.post('users', register);
     }
 
-    login(login: Login) {
+    login(login: Login, isAnalitics: boolean) {
         this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
         this.fa.logEvent('event_phoneconfirm');
         this.clearCookies();
@@ -112,7 +112,9 @@ export class AuthService {
                                 }
                             })
                 })
-            this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
+            if (isAnalitics) {
+                this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
+            }
         });
         return obs;
     }
@@ -135,5 +137,5 @@ export class AuthService {
                     this.token.remove('ERR_RESP_TOKEN_REFRESH');
                 });
     }
-    
+
 }
