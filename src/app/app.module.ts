@@ -110,6 +110,7 @@ import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { PushTokenService } from '../providers/pushToken.service';
 import { ComplaintPopover } from '../pages/place/complaint.popover';
+import { AnalyticsService } from '../providers/analytics.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -295,6 +296,7 @@ export function createTranslateLoader(http: HttpClient) {
         TestimonialsService,
         SocialService,
         PushTokenService,
+        AnalyticsService,
         Clipboard,
         InAppBrowser,
         AndroidPermissions,
