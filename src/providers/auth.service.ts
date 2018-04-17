@@ -5,6 +5,12 @@ import { ApiService } from './api.service';
 import { TokenService } from './token.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { StorageService } from './storage.service';
+import { OneSignal } from '@ionic-native/onesignal';
+import { PushTokenCreate } from '../models/pushTokenCreate';
+import { PushTokenService } from './pushToken.service';
+import { FlurryAnalytics, FlurryAnalyticsOptions, FlurryAnalyticsObject } from '@ionic-native/flurry-analytics';
+import { Platform } from 'ionic-angular';
+import { AnalyticsService } from './analytics.service';
 
 declare var cookieMaster;
 
@@ -13,14 +19,18 @@ export class AuthService {
 
     inviteCode: string = '';
     registerData: Register = new Register();
-
     onLogout = new EventEmitter();
 
     constructor(
         private api: ApiService,
         private token: TokenService,
-        private analytics: GoogleAnalytics,
-        private storage: StorageService) {
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
+        private storage: StorageService,
+        private oneSignal: OneSignal,
+        private pushToken: PushTokenService,
+        private platform: Platform
+    ) {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
@@ -34,6 +44,7 @@ export class AuthService {
                 this.refreshToken();
             }
         }, 120 * 1000);
+
     }
 
     getInviteCode() {
@@ -51,6 +62,7 @@ export class AuthService {
     }
 
     getReferrerId(inviteCode: string, phone: string) {
+        this.gAnalytics.trackEvent("Session", 'event_signup');
         return this.api.get(`auth/register/${inviteCode}/${phone}/code`);
     }
 
@@ -59,14 +71,38 @@ export class AuthService {
     }
 
     register(register: Register) {
+        let obs = this.api.post('users', register);
+        obs.subscribe(() => {
+            this.analytics.faLogEvent('event_signup');
+        })
         return this.api.post('users', register);
     }
 
-    login(login: Login) {
+    login(login: Login, isAnalitics: boolean) {
+        this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
+        this.analytics.faLogEvent('event_phoneconfirm');
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
-        obs.subscribe(token => this.token.set(token));
-        this.analytics.trackEvent("Session", "Login", new Date().toISOString());
+        obs.subscribe(token => {
+            this.token.set(token);
+            this.oneSignal.getIds()
+                .then(resp => {
+                    let pushToken: PushTokenCreate = {
+                        device_id: resp.userId,
+                        token: resp.pushToken
+                    };
+                    this.pushToken.get(resp.userId)
+                        .subscribe(resp => { },
+                            err => {
+                                if (err.status == 404) {
+                                    this.pushToken.post(pushToken);
+                                }
+                            })
+                })
+            if (isAnalitics) {
+                this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
+            }
+        });
         return obs;
     }
 
@@ -88,4 +124,5 @@ export class AuthService {
                     this.token.remove('ERR_RESP_TOKEN_REFRESH');
                 });
     }
+
 }

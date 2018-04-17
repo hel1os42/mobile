@@ -629,14 +629,15 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .grid-tabs-splash .row {
-    display: table;
     width: 100%;
     padding: 2%;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
 }
 
 .grid-tabs-splash .col {
-    display: table-cell;
-    width: 25vw;
     padding-left: 0;
     padding-right: 0;
     padding-top: 5px;
@@ -1144,11 +1145,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     width: 8vw;
     height: 8vw;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-.cover_block_btn .button img{
-    width: 60%;
-    height: auto;
+    background-size: 60% auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    margin-left: 2.2vw;
 }
 
 .relative{
@@ -1460,7 +1460,6 @@ ion-app.ios [margin], ion-app.ios [margin] .scroll-content{
 
 .item-ios .item-button {
     font-size: 2.6vw;
-
     padding: 2vw;
     height: 8.5vw;
 }
@@ -1887,4 +1886,38 @@ ion-title.title.title-ios{
     min-height: calc(44px + 20px);
     min-height: calc(44px + constant(safe-area-inset-top));
     min-height: calc(44px + env(safe-area-inset-top));
+}
+
+.btn_social .button {
+    width: 8vw;
+    height: 8vw;
+    border-radius: 100vw;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 2.2vw;
+    background-size: 60% auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.btn_social .button img {
+    width: 6vw;
+    height: 6vw;
+}
+
+.button.icon_call{
+    background-image: url(../assets/img/user_offers/icon_call.svg);
+}
+
+.button.icon_web{
+    background-image: url(../assets/img/user_offers/icon_web.svg);
+}
+
+.button.icon_bookmarks{
+    background-image: url(../assets/img/place/icon_star.svg);
+}
+
+.button.icon_sharing{
+    background-image: url(../assets/img/user_offers/icon3.svg);
 }

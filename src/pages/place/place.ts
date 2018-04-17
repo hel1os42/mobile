@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { StatusBar } from '@ionic-native/status-bar';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams, PopoverController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -20,6 +20,10 @@ import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { TranslateService } from '@ngx-translate/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { ComplaintPopover } from './complaint.popover';
+
+declare var window;
 
 @Component({
     selector: 'page-place',
@@ -51,7 +55,9 @@ export class PlacePage {
         private statusBar: StatusBar,
         private analytics: GoogleAnalytics,
         private translate: TranslateService,
-        private launchNavigator: LaunchNavigator) {
+        private launchNavigator: LaunchNavigator,
+        private browser: InAppBrowser,
+        private popoverCtrl: PopoverController) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -181,7 +187,7 @@ export class PlacePage {
     }
 
     openOffer(offer, company?) {
-        this.analytics.trackEvent("Session", 'event_chooseoffe');
+        this.analytics.trackEvent("Session", 'event_chooseoffer');
         this.nav.push(OfferPage, {
             offer: offer,
             company: this.company,
@@ -208,6 +214,19 @@ export class PlacePage {
             // this.launchNavigator.navigate([this.company.latitude, this.company.longitude]);
             this.launchNavigator.navigate(this.company.address);
         // }
+    }
+
+    dial() {
+        window.location = 'tel:' + this.company.phone;
+    }
+
+    openSite() {
+        this.browser.create(this.company.site, '_system');
+    }
+
+    openComplaint() {
+        let complaintPopover = this.popoverCtrl.create(ComplaintPopover);
+        complaintPopover.present();
     }
 
     presentConfirm() {

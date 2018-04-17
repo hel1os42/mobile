@@ -1,10 +1,10 @@
 {
     "CATEGORIES" : {
         "Food": "<div class='font-65 text-white'>Еда и<br>Напитки</div>",
-        "Beauty": "<div class='font-65 text-white'>Красота и<br>Здоровье</div>",
+        "Beauty": "<div class='font-65 text-white'>Здоровье и<br>Красота</div>",
         "Retail": "<div class='font-65 text-white'>Товары и<br>Услуги</div>",
         "Accommodation": "<div class='font-65 text-white'>Проживание <br>и Отдых</div>",
-        "Other": "<div class='font-65 text-white'>Прочее и<br>Интернет</div>"
+        "Other": "<div class='font-65 text-white'>Онлайн и<br>Прочее</div>"
     },
 
     "COUNTRIES" : {
@@ -20,6 +20,14 @@
         "LOCATION_DETECTION": "Определение местоположения",
         "INTERNET_CONNECTION": "Ошибка подключения",
         "INCORRECT_EMAIL": "Неправильный адрес электронной почты"
+    },
+
+    "COMPLAINT" : {
+        "COMPLAINT_TITLE": "Сообщить о проблеме",
+        "STAFF_IS_NOT": "Персонал не знает о NAU",
+        "STAFF_HAS_DENIED" : "Персонал отказал в обслуживании по NAU",
+        "DISCOUNT_OR_BONUS": "Скидка или бонус не соответствуют описанию",
+        "OTHER_REASON": "Другая причина"
     },
 
     "CONFIRM" : {
@@ -98,10 +106,10 @@
         "CLEAR" : "Очистить",
         "MAP" : "Карта",
         "FOOD_DRINKS" : "Еда и Напитки",
-        "BEAUTY_FITNESS" : "Красота и Здоровье",
+        "BEAUTY_FITNESS" : "Здоровье и Красота",
         "RETAIL_SERVICES" : "Товары и Услуги",
         "ACCOMMODATION_LEISURE" : "Проживание и Отдых",
-        "OTHER_ONLINE" : "Прочее и Интернет",
+        "OTHER_ONLINE" : "Онлайн и Прочее",
         "SELECT_TYPE" : "Выберите тип заведения",
         "SELECT_FEATURES" : "Выберите особенности",
         "LOCATION_DENIED" : "Геолокация не доступна",
@@ -274,16 +282,16 @@
         "EDIT_ACCOUNT" : "Редактировать аккаунт",
         "NAME_EMAIL" : "Имя и email",
         "YOU_HAVE" : "У вас",
-        "POINTS" : "очков",
+        "POINTS" : "баллов",
         "YOUR_NAME" : "Ваше имя",
         "YOUR_EMAIL" : "Ваш E-mail",
-        "EARN_EXTRA_POINTS" : "Получить доп. очки",
-        "OF_COURSE" : "Специальная возможность получить доп. очки!",
+        "EARN_EXTRA_POINTS" : "Получить доп. баллы",
+        "OF_COURSE" : "Специальная возможность получить доп. баллы!",
         "CONFIRM_EMAIL_ADDRESS" : "Подтвердить email",
         "WE_EMAILED" : "Мы выслали ссылку на ваш email. Перейдите по ней для завершения регистрации.",
-        "SOCIAL_ACCOUNTS" : "Социальные сети (каждая добавляет 3 очка)",
+        "SOCIAL_ACCOUNTS" : "Социальные сети (каждая добавляет 3 балла)",
         "ADDED" : "Успешно!",
-        "SHOW_ADDITIONAL_OPTIONS" : "Дополнительные опции (больше очков)",
+        "SHOW_ADDITIONAL_OPTIONS" : "Дополнительные опции (больше баллов)",
         "IF_YOU_WILL" : "Получив доп. информацию, мы сможем улучшить приложение для вас",
         "GENDER" : "Пол",
         "FEMALE" : "Женщина",
@@ -345,9 +353,9 @@
         "OFFER_REDEMPTION_COMPLETED_AT" : "Погашение акции завершено",
         "WE_ARE" : "Мы ценим ваш выбор",
         "YOU_EARNED" : "Вы получили",
-        "POINTS" : "очков",
-        "POINTS2" : "очка",
-        "POINT" : "очко",
+        "POINTS" : "баллов",
+        "POINTS2" : "балла",
+        "POINT" : "балл",
         "OFFER" : "Акции",
         "REDEEM" : "Купон",
         "OFFER_REDEEMING" : "Погашение акции",
@@ -522,7 +530,7 @@
     },
 
     "PAGE_USER-ACHIEVE" : {
-        "YOUR_ACHIEVEMENT" : "Ваши очки",
+        "YOUR_ACHIEVEMENT" : "Ваши баллы",
         "POINTS" : "достижений",
         "ACHIEVEMENT_LEVEL" : "Уровень достижений",
         "AWARD_FOR_FIRST_5_OFFERS" : "Награда за первые 5 акций",
@@ -554,11 +562,11 @@
         "YOUR_ACCOUNT" : "Ваш аккаунт",
         "GET" : "Получить",
         "ADDITIONAL" : "дополнительные",
-        "POINTS" : "очки",
+        "POINTS" : "баллы",
         "NEXT" : "",
         "LVL" : "УРОВЕНЬ",
         "YOUR_TASKS_JOBS_FOR_TODAY" : "Ваши задания на сегодня",
-        "GET_NEW_POINTS" : "Получить очки",
+        "GET_NEW_POINTS" : "Получить баллы",
         "GET_NEW_OFFERS_NEARBY" : "Улучшайте уровень, пользуясь акциями рядом с вами",
         "NAU" : "NAU",
         "USERS" : "друзей",
@@ -575,7 +583,7 @@
         "TASKS_FOR_LEVEL" : "Задания для вашего уровня",
         "REDEEM_NEW_OFFERS" : "Воспользоваться новыми акциями",
         "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
-        "POINTS" : "очки"
+        "POINTS" : "баллы"
     },
 
     "PAGE_USER-USERS" : {

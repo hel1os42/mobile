@@ -22,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimeframesPopover } from './timeframes.popover';
 import { NoticePopover } from './notice.popover';
+import { AnalyticsService } from '../../providers/analytics.service';
 
 declare var window;
 
@@ -60,7 +61,8 @@ export class OfferPage {
         private toast: ToastService,
         private alert: AlertController,
         private statusBar: StatusBar,
-        private analytics: GoogleAnalytics,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
         private browser: InAppBrowser,
         private translate: TranslateService) {
 
@@ -78,7 +80,8 @@ export class OfferPage {
                 if (offer.timeframes) {
                     this.offer = offer;
                 }
-                
+                console.log(this.offer);
+                console.log(this.company);
                 this.offer.is_favorite = this.navParams.get('offer').is_favorite;//temporary fix
 
                 this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
@@ -111,9 +114,9 @@ export class OfferPage {
     }
 
     timeframesHandler() {
-        // this.company.timezone_offset = '+1245';//temporary - will removed
-        if (this.offer.timeframes && this.offer.timeframes.length > 0 && this.company.timezone_offset && this.company.timezone_offset !== '') {
-            let timeframe = DateTimeUtils.getOfferTimeframes(this.today, this.offer.timeframes, this.company.timezone_offset);
+        // this.offer.timezone_offset = -10800;//temporary - will removed
+        if (this.offer.timeframes && this.offer.timeframes.length > 0 && this.offer.timezone_offset) {
+            let timeframe = DateTimeUtils.getOfferTimeframes(this.today, this.offer.timeframes, this.offer.timezone_offset);
             this.isTodayIncluded = timeframe.isIncluded;
             this.todayTimeframe = timeframe.day;
             this.timeframes = timeframe.timeFrames;
@@ -218,7 +221,7 @@ export class OfferPage {
                     noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                     offerRedeemPopover.onDidDismiss(() => {
                         this.stopTimer();
-                        this.analytics.trackEvent("Session", 'event_showqr');
+                        this.gAnalytics.trackEvent("Session", 'event_showqr');
                     });
 
                     this.timer = setInterval(() => {
@@ -231,7 +234,8 @@ export class OfferPage {
                                     this.offers.refreshRedeemedOffers();
                                     let offerCongratulationPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
                                     offerCongratulationPopover.present();
-                                    this.analytics.trackEvent("Session", 'event_redeemoffer');
+                                    this.gAnalytics.trackEvent("Session", 'event_redeemoffer');
+                                    this.analytics.faLogEvent('event_redeemoffer');
                                     offerCongratulationPopover.onDidDismiss(() => {
                                         // this.nav.popToRoot();
                                         // if (data.status === 'approved') {

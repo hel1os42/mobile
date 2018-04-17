@@ -9,7 +9,6 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { Subscription } from 'rxjs/Rx';
 import { DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { Share } from '../models/share';
-import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -17,10 +16,10 @@ import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
-import { ProfileService } from '../providers/profile.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
-import { FlurryAnalytics, FlurryAnalyticsObject, FlurryAnalyticsOptions } from '@ionic-native/flurry-analytics';
+import { AnalyticsService } from '../providers/analytics.service';
+import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
 
 
 @Component({
@@ -38,7 +37,6 @@ export class MyApp {
         splashScreen: SplashScreen,
         private auth: AuthService,
         private app: App,
-        private profile: ProfileService,
         private translate: TranslateService,
         private location: LocationService,
         private alert: AlertController,
@@ -46,7 +44,8 @@ export class MyApp {
         private ionicApp: IonicApp,
         private appMode: AppModeService,
         private network: NetworkService,
-        private analytics: GoogleAnalytics,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
         private share: ShareService,
         private oneSignal: OneSignal,
         private flurryAnalytics: FlurryAnalytics) {
@@ -67,13 +66,13 @@ export class MyApp {
             //}
 
             //Google Analytics
-            this.analytics.startTrackerWithId('UA-114471660-1')
+            this.gAnalytics.startTrackerWithId('UA-114471660-1')
                 .then(() => {
-                    this.analytics.trackView('test');
+                    this.gAnalytics.trackView('test');
                     // Tracker is ready
-                    this.analytics.debugMode();
-                    this.analytics.setAllowIDFACollection(true);
-                    this.analytics.enableUncaughtExceptionReporting(true);
+                    this.gAnalytics.debugMode();
+                    this.gAnalytics.setAllowIDFACollection(true);
+                    this.gAnalytics.enableUncaughtExceptionReporting(true);
                 })
                 .catch(err => console.log('Error starting GoogleAnalytics', err));
 
@@ -112,7 +111,7 @@ export class MyApp {
             this.initTranslate();
             if (platform.is('cordova')) {
                 this.oneSignalInit();
-                this.flurryAnalyticsInit(platform);
+                this.analytics.flurryAnalyticsInit();
             }
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
@@ -281,22 +280,6 @@ export class MyApp {
         this.oneSignal.endInit();
         this.oneSignal.enableVibrate(true);
         this.oneSignal.enableSound(true);
-    }
-
-    flurryAnalyticsInit(platform: Platform) {
-        let appKey: string;
-        if (platform.is('android')) {
-            appKey = 'WGQND43HCBMFK3Y4Y7X4';
-        }
-        else if (platform.is('ios')) {
-            appKey = 'XXCDHNFF247F7SDQQFC4';
-        }
-        const options: FlurryAnalyticsOptions = {
-            appKey: appKey,
-            reportSessionsOnClose: true,
-            enableLogging: true
-        };
-        let fa: FlurryAnalyticsObject = this.flurryAnalytics.create(options);
     }
 
     ngOnDestroy() {

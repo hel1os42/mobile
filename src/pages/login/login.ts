@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Keyboard } from '@ionic-native/keyboard';
 import { AlertController, Content, Navbar, NavController, Platform, Select } from 'ionic-angular';
 import { Observable, Subscription } from 'rxjs';
@@ -9,10 +10,8 @@ import { AuthService } from '../../providers/auth.service';
 import { LocationService } from '../../providers/location.service';
 import { ProfileService } from '../../providers/profile.service';
 import { StringValidator } from '../../validators/string.validator';
-import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SignUpPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 @Component({
     selector: 'page-login',
@@ -145,9 +144,9 @@ export class LoginPage {
         this.auth.login({
             phone: this.numCode.dial_code + this.authData.phone,
             code: this.authData.code
-        })
+        }, true)
             .subscribe(resp => {
-                this.analytics.trackEvent("Session", 'event_phoneconfirm');
+                // this.analytics.trackEvent("Session", 'event_phoneconfirm');
                 this.profile.get(true, false);//for sending one signal tags
                 //     .subscribe(res => {
                 //         this.location.refreshDefaultCoords({ lat: res.latitude, lng: res.longitude }, true);

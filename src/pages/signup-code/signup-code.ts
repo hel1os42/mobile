@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Register } from '../../models/register';
+import { ApiService } from '../../providers/api.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
-import { StringValidator } from '../../validators/string.validator';
-import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
-import { TabsPage } from '../tabs/tabs';
 import { ProfileService } from '../../providers/profile.service';
-import { ApiService } from '../../providers/api.service';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { File } from '@ionic-native/file';
+import { StringValidator } from '../../validators/string.validator';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
     selector: 'page-signup-code',
@@ -34,7 +33,6 @@ export class SignUpCodePage {
         private auth: AuthService,
         private appMode: AppModeService,
         private navParams: NavParams,
-        private analytics: GoogleAnalytics,
         private profile: ProfileService,
         private api: ApiService,
         private fileTransfer: FileTransfer,
@@ -90,9 +88,9 @@ export class SignUpCodePage {
                     .login({
                         phone: this.register.phone,
                         code: this.register.code
-                    })
+                    }, false)
                     .subscribe(res => {
-                        this.analytics.trackEvent("Session", 'event_phoneconfirm');
+                        // this.analytics.trackEvent("Session", 'event_phoneconfirm');
                         this.cancelTimer();
                         this.isRetry = false;
                         if (this.socialData) {

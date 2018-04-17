@@ -4,16 +4,18 @@
             <div class="cover-brightness"></div>
             <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
             <div class="cover_block_btn">
-                <button *ngIf="company.is_favorite" (click)="presentConfirm()" ion-button icon-only color="white">
-                    <img src="assets/img/place/icon_star.svg">
+                <button *ngIf="company.phone" (click)="dial()" ion-button icon-only color="white" class="icon_call"> <!-- call -->
                 </button>
-                <button *ngIf="!company.is_favorite" (click)="addFavorite()" ion-button icon-only class="grayscale" color="white">
-                    <img src="assets/img/place/icon_star.svg">
+                <button *ngIf="company.site" (click)="openSite()" ion-button icon-only color="white" class="icon_web"> <!-- web -->
                 </button>
-                <button (click)="sharePlace()" ion-button icon-only color="white">
-                    <img src="assets/img/place/btn_share.svg">
+                <button *ngIf="company.is_favorite" (click)="presentConfirm()" class="icon_bookmarks" ion-button icon-only color="white">
+                </button>
+                <button *ngIf="!company.is_favorite" (click)="addFavorite()" ion-button icon-only class="grayscale icon_bookmarks" color="white">
+                </button>
+                <button (click)="sharePlace()" ion-button icon-only color="white" class="icon_sharing">
                 </button>
             </div>
+            <button hidden (click)="openComplaint()" ion-button icon-only color="white" class="icon_complaint"> <!-- complaint --></button>
         </div>
     </ion-list>
     <ion-navbar>
@@ -41,9 +43,9 @@
                         </span>
                     </div>
                     <div margin-top class="text-3E4B5D font-22 bold text-overflow-2 wrap">{{ company.name }}</div>
-                    <div 
+                    <div
                         (click)="navigate()"
-                        *ngIf="company.address" 
+                        *ngIf="company.address"
                         class="text-4F4F4F font-12 semibold wrap margin-top-2proc width-88 company-address">
                         {{ company.address }}
                     </div>

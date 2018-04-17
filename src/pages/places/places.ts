@@ -30,6 +30,7 @@ import { COUNTRIES } from '../../const/countries';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
+import { AnalyticsService } from '../../providers/analytics.service';
 
 
 @Component({
@@ -103,7 +104,8 @@ export class PlacesPage {
         private storage: StorageService,
         private testimonials: TestimonialsService,
         private geocoder: GeocodeService,
-        private analytics: GoogleAnalytics,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
         private changeDetectorRef: ChangeDetectorRef) {
 
         this.isForkMode = this.appMode.getForkMode();
@@ -115,7 +117,7 @@ export class PlacesPage {
         //         debugger
         //     })
         this.shareData = this.share.get();
-        
+
         this.segment = "alloffers";
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -344,7 +346,7 @@ export class PlacesPage {
             this.profile.get(true, false)
                 .subscribe(user => {
                     if (user.latitude) {
-                       this.getDefaultCoords(user.latitude, user.longitude); 
+                       this.getDefaultCoords(user.latitude, user.longitude);
                     }
                   else {
                     this.location.getByIp()
@@ -671,16 +673,16 @@ export class PlacesPage {
         function renderMap() {
             if (document.getElementById("map_leaf")) {
                 document.getElementById("map_leaf").style.height = window.innerHeight -
-                    document.getElementsByClassName('grid-tabs-splash')[0].clientHeight -
-                    document.getElementsByClassName('tabbar')[0].clientHeight -
-                    document.getElementsByClassName('sticky')[0].clientHeight + "px";
+                    document.getElementsByClassName('block-places-header')[0].clientHeight -
+                    document.getElementsByClassName('tabbar')[0].clientHeight + "px";
             }
         }
         setTimeout(renderMap, 1);
     }
 
     openPlace(data, isShare?: boolean) {
-        this.analytics.trackEvent("Session", 'event_chooseplace');
+        this.gAnalytics.trackEvent("Session", 'event_chooseplace');
+        this.analytics.faLogEvent('event_chooseplace');
         let params;
         if (isShare) {
             params = {

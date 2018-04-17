@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { TranslateService } from '@ngx-translate/core';
 import { AlertController, LoadingController, NavController, Platform } from 'ionic-angular';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { latLng, LeafletEvent, Map, tileLayer } from 'leaflet';
@@ -17,8 +18,6 @@ import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map.utils';
-import { TabsPage } from '../tabs/tabs';
-import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -348,7 +347,7 @@ export class CreateUserProfilePage {
                         }
                     }, 1);
                     setTimeout(() => {
-                        this.cropper.setImage(image)
+                        this.cropper.setImage(image);
                         this.changeDetectorRef.detectChanges();
                     }, 500);
                 }

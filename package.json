@@ -141,7 +141,9 @@
         "APP_NAME": "NAU"
       },
       "cordova-plugin-flurryanalytics": {},
-      "uk.co.workingedge.phonegap.plugin.launchnavigator": {}
+      "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+        "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
+      }
     },
     "platforms": [
       "ios",

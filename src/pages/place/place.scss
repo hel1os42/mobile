@@ -248,8 +248,41 @@ page-place {
         background: rgba(0,0,0,0.25);
         z-index: 0;
     }
+
+    .button.icon_complaint{
+        background-image: url(../assets/img/place/icon_complaint.svg);
+        width: 8vw;
+        height: 8vw;
+        border-radius: 100vw;
+        background-size: 60% auto;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        position: absolute;
+        right: 5vw;
+        top: 1.5vw;
+        margin-top: calc(20px + 4px);
+        margin-top: calc(constant(safe-area-inset-top) + 4px);
+        margin-top: calc(env(safe-area-inset-top) + 4px);
+    }
 }
 
 .iphonex page-place .footer_testimonials {
     padding-bottom: 25%;
+}
+
+complaint-popover-component {
+    .modal_content{
+        padding-left: 7vw;
+        padding-right: 7vw;
+        padding-top: 7vw;
+        overflow: auto;
+    }
+
+    a{
+        color: #FF5A00;
+    }
+
+    .text-input-ios {
+        padding: 3vw;
+    }
 }

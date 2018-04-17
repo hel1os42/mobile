@@ -1,61 +1,30 @@
 <ion-header>
-    <ion-navbar>
-        <div class="header-ios"></div>
-    </ion-navbar>
-</ion-header>
-
-<ion-content no-bounce class="padding-no" [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
-    <ion-refresher *ngIf="!isMapVisible" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content pullingIcon="none" refreshingSpinner="bubbles">
-        </ion-refresher-content>
-    </ion-refresher>
-    <ion-grid text-center class="grid-tabs-splash">
-        <ion-row align-items-end>
-            <a
-                ion-col
-                *ngFor="let category of categories"
-                [ngClass]="{ 'active_cat': isSelectedCategory(category) }"
-                (click)="selectCategory(category)">
-                <p>
-                    <img [src]="category.image_url">
-                </p>
-                <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
-                <span class="semibold" [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate"></span>
-            </a>
-        </ion-row>
-    </ion-grid>
-
-    <div class="sticky">
-
-        <!--
-        <ion-segment [(ngModel)]="segment" text-uppercase class="semibold text-FF5A00">
-            <ion-segment-button value="alloffers">
-                {{ 'PAGE_PLACES.ALL_OFFERS' | translate }}
-            </ion-segment-button>
-            <ion-segment-button value="delivery">
-                {{ 'PAGE_PLACES.DELIVERY' | translate }}
-            </ion-segment-button>
-            <ion-segment-button value="new">
-                {{ 'PAGE_PLACES.NEW' | translate }}
-            </ion-segment-button>
-            <ion-segment-button value="monthly">
-                {{ 'PAGE_PLACES.MONTHLY' | translate }}
-            </ion-segment-button>
-            <ion-segment-button value="cheer">
-                {{ 'PAGE_PLACES.FEATURED' | translate }}
-            </ion-segment-button>
-        </ion-segment>
-        -->
+    <div class="block-places-header">
+        <ion-grid text-center class="grid-tabs-splash">
+            <ion-row align-items-end>
+                <a
+                    ion-col
+                    *ngFor="let category of categories"
+                    [ngClass]="{ 'active_cat': isSelectedCategory(category) }"
+                    (click)="selectCategory(category)">
+                    <p>
+                        <img [src]="category.image_url">
+                    </p>
+                    <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
+                    <span class="semibold" [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate"></span>
+                </a>
+            </ion-row>
+        </ion-grid>
 
         <ion-item class="block-search relative padding-top-3vw" no-lines padding-left padding-right>
             <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
             <a (click)="createPopover()" class="btn_search_settings">
                 <img
-                *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
-                src="assets/img/user_home/icon_settings.svg">
+                    *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
+                    src="assets/img/user_home/icon_settings.svg">
                 <img
-                *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0"
-                src="assets/img/user_home/icon_settings_active.svg">
+                    *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0"
+                    src="assets/img/user_home/icon_settings_active.svg">
             </a>
             <a (click)="toggleMap()" text-center class="searchbar-right-block">
                 <div class="btn_map1" *ngIf="!isMapVisible">
@@ -66,7 +35,51 @@
             </a>
         </ion-item>
     </div>
+</ion-header>
 
+<ion-content no-bounce [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
+    <ion-refresher *ngIf="!isMapVisible" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="none" refreshingSpinner="bubbles">
+        </ion-refresher-content>
+    </ion-refresher>
+    <!--
+    <div class="sticky">
+    <ion-grid text-center class="grid-tabs-splash">
+        <ion-row align-items-end>
+            <a
+                ion-col
+                *ngFor="let category of categories"
+                [ngClass]="{ 'active_cat': isSelectedCategory(category) }"
+                (click)="selectCategory(category)">
+                <p>
+                    <img [src]="category.image_url">
+                </p>
+
+                <span class="semibold" [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate"></span>
+            </a>
+        </ion-row>
+    </ion-grid>
+
+    <ion-item class="block-search relative padding-top-3vw" no-lines padding-left padding-right>
+        <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
+        <a (click)="createPopover()" class="btn_search_settings">
+            <img
+            *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
+            src="assets/img/user_home/icon_settings.svg">
+            <img
+            *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0"
+            src="assets/img/user_home/icon_settings_active.svg">
+        </a>
+        <a (click)="toggleMap()" text-center class="searchbar-right-block">
+            <div class="btn_map1" *ngIf="!isMapVisible">
+                <img src="assets/img/user_home/icon_pin_new.svg">
+                <div class="text-828282 font-10">{{ 'PAGE_PLACES.MAP' | translate }}</div>
+            </div>
+            <img class="btn_map2" *ngIf="isMapVisible" src="assets/img/user_home/icon_pin_hide.svg">
+        </a>
+    </ion-item>
+    </div>
+-->
     <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
 
         <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">

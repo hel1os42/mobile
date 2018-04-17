@@ -4,7 +4,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content scroll="false" class="padding-no font-0">
-    <div [style.background-image]="'url(' + offer.picture_url + '?size=mobile&)'" class="background_effect"></div>
+  <div [style.background-image]="'url(' + offer.picture_url + '?size=mobile&)'" class="background_effect"></div>
+    <div class = "point-event">
   <ion-item no-lines color="transparent" class="overflow-visible padding-left-offer padding-top-5vw padding-right-offer">
     <div item-start class="relative">
       <div class="user_level font-30 text-white extrabold table">
@@ -20,23 +21,21 @@
         : ('PAGE_OFFER.POINTS' | translate) }}
     </span>
 <div item-end class="btn_social">
-    <div>
         <!--
         <button ion-button icon-only color="white">
           <img src="assets/img/user_offers/icon1.svg">
         </button>
         -->
-        <button *ngIf="company.phone" (click)="dial()" ion-button icon-only color="white" class="icon_1"> <!-- call -->
+        <button *ngIf="company.phone" (click)="dial()" ion-button icon-only color="white" class="icon_call"> <!-- call -->
         </button>
-        <button *ngIf="company.site" (click)="openSite()" ion-button icon-only color="white" class="icon_2"> <!-- web -->
+        <button *ngIf="company.site" (click)="openSite()" ion-button icon-only color="white" class="icon_web"> <!-- web -->
         </button>
-        <button *ngIf="offer.is_favorite" (click)="presentConfirm()" ion-button icon-only color="white" class="icon_3">
+        <button *ngIf="offer.is_favorite" (click)="presentConfirm()" ion-button icon-only color="white" class="icon_bookmarks">
         </button>
-        <button *ngIf="!offer.is_favorite" (click)="addFavorite()" ion-button icon-only class="grayscale icon_3" color="white">
+        <button *ngIf="!offer.is_favorite" (click)="addFavorite()" ion-button icon-only class="grayscale icon_bookmarks" color="white">
         </button>
-        <button (click)="shareOffer()" ion-button icon-only color="white" class="icon_4">
+        <button (click)="shareOffer()" ion-button icon-only color="white" class="icon_sharing">
         </button>
-    </div>
 </div>
 </ion-item>
 
@@ -78,4 +77,5 @@
         </div>
     </a>
 </div>
+    </div>
 </ion-content>
