@@ -112,9 +112,9 @@ export class OfferPage {
     }
 
     timeframesHandler() {
-        // this.company.timezone_offset = '+1245';//temporary - will removed
-        if (this.offer.timeframes && this.offer.timeframes.length > 0 && this.company.timezone_offset && this.company.timezone_offset !== '') {
-            let timeframe = DateTimeUtils.getOfferTimeframes(this.today, this.offer.timeframes, this.company.timezone_offset);
+        // this.offer.timezone_offset = -10800;//temporary - will removed
+        if (this.offer.timeframes && this.offer.timeframes.length > 0 && this.offer.timezone_offset) {
+            let timeframe = DateTimeUtils.getOfferTimeframes(this.today, this.offer.timeframes, this.offer.timezone_offset);
             this.isTodayIncluded = timeframe.isIncluded;
             this.todayTimeframe = timeframe.day;
             this.timeframes = timeframe.timeFrames;
