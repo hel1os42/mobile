@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { StatusBar } from '@ionic-native/status-bar';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams, PopoverController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -21,6 +21,7 @@ import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { TranslateService } from '@ngx-translate/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { ComplaintPopover } from './complaint.popover';
 
 declare var window;
 
@@ -55,7 +56,8 @@ export class PlacePage {
         private analytics: GoogleAnalytics,
         private translate: TranslateService,
         private launchNavigator: LaunchNavigator,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private popoverCtrl: PopoverController) {
 
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
@@ -220,6 +222,11 @@ export class PlacePage {
 
     openSite() {
         this.browser.create(this.company.site, '_system');
+    }
+
+    openComplaint() {
+        let complaintPopover = this.popoverCtrl.create(ComplaintPopover);
+        complaintPopover.present();
     }
 
     presentConfirm() {
