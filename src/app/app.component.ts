@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FlurryAnalytics, FlurryAnalyticsObject, FlurryAnalyticsOptions } from '@ionic-native/flurry-analytics';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { OneSignal } from '@ionic-native/onesignal';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -20,6 +19,7 @@ import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
 import { AnalyticsService } from '../providers/analytics.service';
+import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
 
 
 @Component({

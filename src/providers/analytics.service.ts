@@ -11,25 +11,31 @@ export class AnalyticsService {
         private fAnalytics: FlurryAnalytics,
         private platform: Platform) {
 
+        // this.flurryAnalyticsInit();
     }
 
     flurryAnalyticsInit() {
-        let appKey: string;
-        if (this.platform.is('android')) {
-            appKey = 'WGQND43HCBMFK3Y4Y7X4';
+        if (this.platform.is('cordova')) {
+            let appKey: string;
+            if (this.platform.is('android')) {
+                appKey = 'WGQND43HCBMFK3Y4Y7X4';
+            }
+            else if (this.platform.is('ios')) {
+                appKey = 'XXCDHNFF247F7SDQQFC4';
+            }
+            const options: FlurryAnalyticsOptions = {
+                appKey: appKey,
+                reportSessionsOnClose: true,
+                enableLogging: true
+            };
+            this.fa = this.fAnalytics.create(options);
         }
-        else if (this.platform.is('ios')) {
-            appKey = 'XXCDHNFF247F7SDQQFC4';
-        }
-        const options: FlurryAnalyticsOptions = {
-            appKey: appKey,
-            reportSessionsOnClose: true,
-            enableLogging: true
-        };
-        this.fa = this.fAnalytics.create(options);
     }
 
     faLogEvent(event: string) {
-        this.fa.logEvent(event);
+        if (this.platform.is('cordova')) {
+            return this.fa.logEvent(event);
+        }
+        else return;
     }
 }
