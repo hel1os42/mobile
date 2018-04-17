@@ -134,10 +134,11 @@ export class DateTimeUtils {
         return date;
     }
 
-    static returnTime(time: string, timezone) {
+    static returnTime(time: string, timeOffset) {
         let date = new Date('August 19, 1975' + ' ' + time.split(':')[0] + ':' + time.split(':')[1] + ':00');
-        let offsetInMinutes =  parseInt(timezone.slice(1, 3)) * 60 + parseInt(timezone.slice(-2));
-        offsetInMinutes = timezone.slice(0, 1) === '-' ? offsetInMinutes * (-1) : offsetInMinutes;
+        // let offsetInMinutes =  parseInt(timeOffset.slice(1, 3)) * 60 + parseInt(timeOffset.slice(-2));
+        // offsetInMinutes = timeOffset.slice(0, 1) === '-' ? offsetInMinutes * (-1) : offsetInMinutes;
+        let offsetInMinutes = timeOffset / 60;
         date.setMinutes(date.getMinutes() + offsetInMinutes);
         let hour = date.getHours();
         let minutes = date.getMinutes();
@@ -145,7 +146,7 @@ export class DateTimeUtils {
         return hourStr;
     }
 
-    static getOfferTimeframes(date: Date, timeframesData: TimeFrames[], timezone: string) {
+    static getOfferTimeframes(date: Date, timeframesData: TimeFrames[], timezone: number) {
         let timeFrames: any = _.flatMap(timeframesData, function (obj) {
             return _.map(obj.days, function (day) {
                 return {
