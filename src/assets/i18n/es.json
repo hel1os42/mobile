@@ -1,10 +1,10 @@
 {
     "CATEGORIES" : {
         "Food": "<div class='font-65 text-white'>Comida y<br>Bebidas</div>",
-        "Beauty": "<div class='font-65 text-white'>Belleza y<br>Salud</div>",
+        "Beauty": "<div class='font-65 text-white'>Salud y<br>Belleza</div>",
         "Retail": "<div class='font-65 text-white'>Productos y<br>Servicios</div>",
         "Accommodation": "<div class='font-65 text-white'>Alojamiento<br>y Descanso</div>",
-        "Other": "<div class='font-65 text-white'>Internet y<br>Otras cosas</div>"
+        "Other": "<div class='font-65 text-white'>Online y<br>Otros</div>"
     },
 
     "COUNTRIES" : {
@@ -98,10 +98,10 @@
         "CLEAR" : "Claro",
         "MAP" : "Mapa",
         "FOOD_DRINKS" : "Comida y Bebidas",
-        "BEAUTY_FITNESS" : "Belleza y Salud",
+        "BEAUTY_FITNESS" : "Salud y Belleza",
         "RETAIL_SERVICES" : "Comercio y Servicios",
         "ACCOMMODATION_LEISURE" : "Alojamiento y Ocio",
-        "OTHER_ONLINE" : "Otros y En línea",
+        "OTHER_ONLINE" : "Online y Otros",
         "SELECT_TYPE" : "Seleccionar tipo de comercio",
         "SELECT_FEATURES" : "Seleccionar características",
         "LOCATION_DENIED" : "Detección de ubicación denegada",
