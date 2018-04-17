@@ -22,6 +22,14 @@
         "INCORRECT_EMAIL": "La dirección de correo electrónico no es válida"
     },
 
+    "COMPLAINT" : {
+        "COMPLAINT_TITLE": "Informar de un problema",
+        "STAFF_IS_NOT": "El personal no sabe de NAU",
+        "STAFF_HAS_DENIED" : "El personal rechazo en la prestación de servicios de NAU",
+        "DISCOUNT_OR_BONUS": "Descuento o bonus no coincidían con las descripciones",
+        "OTHER_REASON": "Otra razon"
+    },
+
     "CONFIRM" : {
         "REMOVE_FAVORITE_OFFER": "¿Eliminar la oferta de la favoritos?",
         "REMOVE_FAVORITE_PLACE": "¿Eliminar el lugar de la favoritos?",

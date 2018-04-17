@@ -269,3 +269,20 @@ page-place {
 .iphonex page-place .footer_testimonials {
     padding-bottom: 25%;
 }
+
+complaint-popover-component {
+    .modal_content{
+        padding-left: 7vw;
+        padding-right: 7vw;
+        padding-top: 7vw;
+        overflow: auto;
+    }
+
+    a{
+        color: #FF5A00;
+    }
+
+    .text-input-ios {
+        padding: 3vw;
+    }
+}
