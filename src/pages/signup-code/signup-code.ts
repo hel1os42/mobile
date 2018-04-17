@@ -33,7 +33,6 @@ export class SignUpCodePage {
         private auth: AuthService,
         private appMode: AppModeService,
         private navParams: NavParams,
-        private analytics: GoogleAnalytics,
         private profile: ProfileService,
         private api: ApiService,
         private fileTransfer: FileTransfer,
@@ -91,7 +90,7 @@ export class SignUpCodePage {
                         code: this.register.code
                     })
                     .subscribe(res => {
-                        this.analytics.trackEvent("Session", 'event_phoneconfirm');
+                        // this.analytics.trackEvent("Session", 'event_phoneconfirm');
                         this.cancelTimer();
                         this.isRetry = false;
                         if (this.socialData) {

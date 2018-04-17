@@ -146,7 +146,7 @@ export class LoginPage {
             code: this.authData.code
         })
             .subscribe(resp => {
-                this.analytics.trackEvent("Session", 'event_phoneconfirm');
+                // this.analytics.trackEvent("Session", 'event_phoneconfirm');
                 this.profile.get(true, false);//for sending one signal tags
                 //     .subscribe(res => {
                 //         this.location.refreshDefaultCoords({ lat: res.latitude, lng: res.longitude }, true);

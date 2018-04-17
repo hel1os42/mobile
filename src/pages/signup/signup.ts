@@ -106,7 +106,7 @@ export class SignUpPage {
     }
 
     getCode() {
-        this.analytics.trackEvent("Session", 'event_signup');
+        // this.analytics.trackEvent("Session", 'event_signup');
         this.phoneNumber = this.numCode.dial_code + this.formData.phone;
         // let inviteCode = this.auth.getInviteCode();
         let inviteCode: string;
