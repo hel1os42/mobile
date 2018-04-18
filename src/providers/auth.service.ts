@@ -92,7 +92,7 @@ export class AuthService {
                         token: resp.pushToken
                     };
                     this.pushToken.get(resp.userId)
-                        .subscribe(resp => { },
+                        .subscribe(res => { },
                             err => {
                                 if (err.status == 404) {
                                     this.pushToken.post(pushToken);
