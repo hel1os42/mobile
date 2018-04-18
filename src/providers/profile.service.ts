@@ -53,12 +53,12 @@ export class ProfileService {
         return this.api.put('profile', data);
     }
 
-    patch(data, isNoShowLoading?: boolean) {
+    patch(data, isNoShowLoading?: boolean, gender?: string) {//temporary parametr "gender"
         let obs = this.api.patch('profile', data, { showLoading: !isNoShowLoading });
         obs.subscribe(resp => {
             if (this.platform.is('cordova') 
             && (!this.user || this.user.name !== resp.name || this.user.phone !== resp.phone || this.user.email !== resp.email)) {
-                this.sendTags(resp);
+                this.sendTags(resp, gender);
             }
             this.user = resp;
         })
@@ -69,14 +69,25 @@ export class ProfileService {
         this.getWithAccounts(isLoading).subscribe(user => this.onRefreshAccounts.emit(user));
     }
 
-    sendTags(user: User) {
-        this.oneSignal.sendTags({
+    sendTags(user: User, gender?: string) {//temporary parametr "gender"
+        let tagObj: any = {
             'userName': user.name,
             'userPhone': user.phone.split('+')[1],
             'userEmail': user.email
-        });
+        };
+        if (gender && gender !== '') {
+            tagObj.gender = gender;
+        }
+        // this.oneSignal.sendTags({
+        //     'userName': user.name,
+        //     'userPhone': user.phone.split('+')[1],
+        //     'userEmail': user.email
+        // });
+        this.oneSignal.sendTags(tagObj);
         // this.oneSignal.syncHashedEmail(user.email);
-        window['plugins'].OneSignal.setEmail(user.email);
+        if (this.platform.is('cordova')) {
+            window['plugins'].OneSignal.setEmail(user.email);
+        }
     }
 
 }

@@ -18,6 +18,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map.utils';
+import { StorageService } from '../../providers/storage.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class CreateUserProfilePage {
     facebookName: string;
     twitterName: string;
     instagramName: string;
-    gender: string;
+    gender: string;//temporary
+    baseGender: string;//temporary
     age: number;
     income;
     picture_url: string;
@@ -73,8 +75,11 @@ export class CreateUserProfilePage {
         private androidPermissions: AndroidPermissions,
         private diagnostic: Diagnostic,
         private changeDetectorRef: ChangeDetectorRef,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private storage: StorageService) {
 
+        this.gender = this.storage.get('gender');//temporary
+        this.baseGender = this.gender;//temporary
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
                 if (this.isConfirm) {
@@ -443,7 +448,13 @@ export class CreateUserProfilePage {
                 ? this.api.uploadImage(this.picture_url, 'profile/picture', true)
                 : Promise.resolve();
             if (!isEmpty) {
-                this.profile.patch(differenceData)
+                //temporary
+                if (this.gender && this.gender !== this.baseGender) {
+                    this.storage.set('gender', this.gender);
+                }
+                this.gender = this.gender ? this.gender : 'other';
+                //
+                this.profile.patch(differenceData, false, this.gender)//temporary parametr "gender"
                     .subscribe(() => {
                         if (!refreshed) {
                             this.location.refreshDefaultCoords(this.coords, true);
@@ -454,6 +465,15 @@ export class CreateUserProfilePage {
                     })
             }
             else {
+                //temporary
+                if (!this.gender || this.gender !== this.baseGender) {
+                    if (this.gender) {
+                        this.storage.set('gender', this.gender);
+                    }
+                    this.gender = this.gender ? this.gender : 'other';
+                    this.profile.sendTags(this.user, this.gender);
+                }
+                //
                 promise.then(() => {
                     this.navTo();
                 })

@@ -158,15 +158,15 @@
      <div class="block-lines">
             <ion-item detail-push class="bg-gray margin-bottom-small">
                 <ion-select
-                    disabled
                     [(ngModel)]="gender"
                     placeholder="{{ 'PAGE_CREATE-USER-PROFILE.GENDER' | translate }}"
                     class="gender_select"
                     interface="action-sheet">
-                    <ion-option value="f">{{ 'PAGE_CREATE-USER-PROFILE.FEMALE' | translate }}</ion-option>
-                    <ion-option value="m">{{ 'PAGE_CREATE-USER-PROFILE.MALE' | translate }}</ion-option>
+                    <ion-option value="female">{{ 'PAGE_CREATE-USER-PROFILE.FEMALE' | translate }}</ion-option>
+                    <ion-option value="male">{{ 'PAGE_CREATE-USER-PROFILE.MALE' | translate }}</ion-option>
+                    <ion-option value="other">{{ 'PAGE_CREATE-USER-PROFILE.OTHER' | translate }}</ion-option>
                 </ion-select>
-                <ion-input [(ngModel)]="account.gender" [ngModelOptions]="{standalone: true}" placeholder="Gender"></ion-input>
+                <!-- <ion-input [(ngModel)]="gender" [ngModelOptions]="{standalone: true}" placeholder="Gender"></ion-input>
                 <div item-end>
                     <ion-label *ngIf="gender" class="label label-ios added font-75">
                         <ion-icon name="md-checkmark">
@@ -174,7 +174,7 @@
                     <ion-label *ngIf="!gender" class="label label-ios points font-75">
                         + 5 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
                     </ion-label>
-                </div>
+                </div> -->
             </ion-item>
 
             <!-- <ion-item detail-push class="bg-gray margin-bottom-small">
