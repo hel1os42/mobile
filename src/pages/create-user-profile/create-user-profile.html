@@ -155,9 +155,8 @@
 
     <!-- <div [ngClass]="{ 'accord-visibility' : (isSelectVisible), 'accord-hidden' : (!isSelectVisible) }"> -->
     <!-- <div *ngIf="isSelectVisible"> temporary-->
-    <div>
-        <!-- <div class="block-lines" disabled> -->
-            <!-- <ion-item detail-push class="bg-gray margin-bottom-small">
+     <div class="block-lines">
+            <ion-item detail-push class="bg-gray margin-bottom-small">
                 <ion-select
                     disabled
                     [(ngModel)]="gender"
@@ -176,7 +175,7 @@
                         + 5 {{ 'PAGE_CREATE-USER-PROFILE.POINTS' | translate }}
                     </ion-label>
                 </div>
-            </ion-item> -->
+            </ion-item>
 
             <!-- <ion-item detail-push class="bg-gray margin-bottom-small">
                 <ion-input disabled [(ngModel)]="age" placeholder="{{ 'PAGE_CREATE-USER-PROFILE.AGE' | translate }}"></ion-input>
@@ -201,7 +200,7 @@
                     </ion-label>
                 </div>
             </ion-item> -->
-        <!-- </div> -->
+        </div>
         <div class="block-lines">
             <div text-uppercase class="font-14 text-4F4F4F">
                 {{ 'PAGE_CREATE-USER-PROFILE.CONFIRM_YOUR_LOCATION' | translate }}
@@ -216,7 +215,6 @@
             <div id="marker"></div>
         </div>
 
-    </div>
     <p margin>
         <button color="primary" (click)="createAccount()" [disabled]="baseData.name?.length < 3 || !baseData.email" ion-button block>
             <!-- {{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate) }} -->
