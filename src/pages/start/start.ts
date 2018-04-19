@@ -142,4 +142,19 @@ export class StartPage {
                 });
         }
     }
+
+    getInstaProfile() {
+        this.social.instaLogin()
+            .then(resp => {
+                debugger
+                this.social.getInstaProfile(resp)
+                    .subscribe(user => {
+                        debugger
+                    })
+            },
+                (error) => {
+                    debugger
+                    console.log(JSON.stringify('Error logging into Instagram'));
+                });
+    }
 }

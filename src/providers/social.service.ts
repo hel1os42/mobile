@@ -1,17 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Facebook } from '@ionic-native/facebook';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
+import { Instagram } from "ng2-cordova-oauth/core";
+import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
+import { Http, Response } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class SocialService {
 
     token;
     secret;
+    oauth: OauthCordova = new OauthCordova();
+    instagramProvider: Instagram = new Instagram({
+        clientId: '585f9305ab1946a6b7ca1ef576b5246c',
+        redirectUri: 'http://ionic.local/*',  // Let is be localhost for Mobile Apps
+        responseType: 'token',  
+        appScope: ['basic', 'public_content']
+    });
+    fbPath = 'me?fields=name,email,picture.width(720).height(720).as(picture_large)';
+    instaUrl = 'https://api.instagram.com/v1/users/self/media/recent?access_token=';
 
     constructor(
         private twitter: TwitterConnect,
         // private twitter: TwitterService,
-        private fb: Facebook) {
+        private fb: Facebook,
+        public http: Http) {
 
     }
 
@@ -64,6 +78,15 @@ export class SocialService {
     }
 
     getFbProfile() {
-        return this.fb.api('me?fields=name,email,picture.width(720).height(720).as(picture_large)', ['public_profile', 'email']);
+        return this.fb.api(this.fbPath, ['public_profile', 'email']);
+    }
+
+    instaLogin() {
+        return this.oauth.logInVia(this.instagramProvider);
+    }
+
+    getInstaProfile(response) {
+        return this.http.get(this.instaUrl + response.access_token + '&count=5')
+            .map((res: Response) => res.json());
     }
 }

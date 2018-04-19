@@ -60,14 +60,14 @@ export class LoginPage {
                 appElHeight = appEl.clientHeight;
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
                 .subscribe(() => {
-                    console.log('login open')
+                    // console.log('login open')
                     appEl.style.height = (appElHeight - (appElHeight / 3)) + 'px';
                     this.content.scrollToBottom();
                 })
 
             this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
                 .subscribe(() => {
-                    console.log('login hide')
+                    // console.log('login hide')
                     appEl.style.height = (appElHeight) + 'px';
                 })
         }
