@@ -82,6 +82,7 @@
     "lodash": "4.17.4",
     "moment": "2.21.0",
     "moment-timezone": "0.5.13",
+    "ng2-cordova-oauth": "0.0.8",
     "ng2-img-cropper": "0.9.0",
     "onesignal-cordova-plugin": "2.3.3",
     "phonegap-plugin-barcodescanner": "7.0.2",
