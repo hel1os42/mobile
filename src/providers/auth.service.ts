@@ -11,6 +11,7 @@ import { PushTokenService } from './pushToken.service';
 import { FlurryAnalytics, FlurryAnalyticsOptions, FlurryAnalyticsObject } from '@ionic-native/flurry-analytics';
 import { Platform } from 'ionic-angular';
 import { AnalyticsService } from './analytics.service';
+import { AppModeService } from './appMode.service';
 
 declare var cookieMaster;
 
@@ -29,7 +30,8 @@ export class AuthService {
         private storage: StorageService,
         private oneSignal: OneSignal,
         private pushToken: PushTokenService,
-        private platform: Platform
+        private platform: Platform,
+        private appMode: AppModeService
     ) {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
@@ -102,6 +104,8 @@ export class AuthService {
             if (isAnalitics) {
                 this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
             }
+            let envName = this.appMode.getEnvironmentMode();
+            this.oneSignal.sendTag('environment', envName);
         });
         return obs;
     }
