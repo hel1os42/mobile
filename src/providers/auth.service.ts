@@ -93,19 +93,21 @@ export class AuthService {
                         device_id: resp.userId,
                         token: resp.pushToken
                     };
-                    this.pushToken.get(resp.userId)
-                        .subscribe(res => { },
-                            err => {
-                                if (err.status == 404) {
-                                    this.pushToken.post(pushToken);
-                                }
-                            })
+                    // this.pushToken.get(resp.userId)
+                    //     .subscribe(res => { },
+                    //         err => {
+                    //             if (err.status == 404) {
+                    this.pushToken.post(pushToken);
+                    //     }
+                    // })
                 })
             if (isAnalitics) {
                 this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
             }
             let envName = this.appMode.getEnvironmentMode();
-            this.oneSignal.sendTag('environment', envName);
+            if (this.platform.is('cordova')) {
+                this.oneSignal.sendTag('environment', envName);
+            }
         });
         return obs;
     }
