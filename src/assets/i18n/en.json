@@ -296,6 +296,7 @@
         "GENDER" : "Gender",
         "FEMALE" : "Female",
         "MALE" : "Male",
+        "OTHER" : "Other",
         "CONFIRM_YOUR_LOCATION" : "Confirm your location:",
         "YOU_CAN_SET": "You can set the coordinates in manual mode",
         "AGE" : "Age",

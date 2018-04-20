@@ -18,5 +18,5 @@ export class Offer extends OfferCreate {
     type: string;
     is_favorite?: boolean;
     rich_description?: string;
-    timezone_offset: number;
+    timeframes_offset: number;
 }

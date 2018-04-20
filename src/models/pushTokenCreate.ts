@@ -1,4 +1,4 @@
 export class PushTokenCreate {
-    device_id: string;
+    user_id: string;
     token: string;
 }

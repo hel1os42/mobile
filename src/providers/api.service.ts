@@ -129,7 +129,7 @@ export class ApiService {
                         }
                         else {
                             if (errResp.status == 0) {
-                                messages.push('Internet disconnected');
+                                messages.push('Internet connection error');
                                 // this.network.setStatus(false);
                             }
                             else {

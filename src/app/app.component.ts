@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { App, IonicApp, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Subscription } from 'rxjs/Rx';
-import { DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
+import { DEFAULT_LANG_CODE, SYS_OPTIONS, AVAILABLE_LANGUAGES } from '../const/i18n.const';
 import { Share } from '../models/share';
 import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
@@ -196,11 +196,10 @@ export class MyApp {
         //     });
         // } else {
 
-        //temporary
-        // let browserLang = this.translate.getBrowserLang();
-        // let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === browserLang);
-        // let langCode = isLang ? browserLang : DEFAULT_LANG_CODE;
-        let langCode = this.storage.get('lang') ? this.storage.get('lang') : 'en';//temporary
+        let browserLang = this.translate.getBrowserLang();
+        let isLang = AVAILABLE_LANGUAGES.map(p => p.code).find(i => i === browserLang);
+        let lang = isLang ? browserLang : DEFAULT_LANG_CODE;
+        let langCode = this.storage.get('lang') ? this.storage.get('lang') : lang;
         this.translate.use(langCode);
         SYS_OPTIONS.LANG_CODE = langCode;
     }
