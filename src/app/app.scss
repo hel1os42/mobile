@@ -627,6 +627,13 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     max-width: 100%;
     height: 100%;
 }
+.platform-tablet .grid-tabs-splash .col img {
+    height: 7vw;
+}
+
+.platform-tablet .tabs-ios .tab-button{
+    min-height: 70px;
+}
 
 .grid-tabs-splash .row {
     width: 100%;
