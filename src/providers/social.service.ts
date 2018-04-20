@@ -19,7 +19,7 @@ export class SocialService {
         appScope: ['basic', 'public_content']
     });
     fbPath = 'me?fields=name,email,picture.width(720).height(720).as(picture_large)';
-    instaUrl = 'https://api.instagram.com/v1/users/self/media/recent?access_token=';
+    instaUrl = 'https://api.instagram.com/v1/users/self/?access_token=';
 
     constructor(
         private twitter: TwitterConnect,
@@ -85,8 +85,8 @@ export class SocialService {
         return this.oauth.logInVia(this.instagramProvider);
     }
 
-    getInstaProfile(response) {
-        return this.http.get(this.instaUrl + response.access_token + '&count=5')
-            .map((res: Response) => res.json());
-    }
+    // getInstaProfile(response) {
+    //     return this.http.get(this.instaUrl + response.access_token + '&count=5')
+    //         .map((res: Response) => res.json());
+    // }
 }

@@ -145,12 +145,12 @@ export class StartPage {
 
     getInstaProfile() {
         this.social.instaLogin()
-            .then(resp => {
-                debugger
-                this.social.getInstaProfile(resp)
-                    .subscribe(user => {
-                        debugger
-                    })
+            .then((resp: any) => {
+                this.socialData = {
+                    name: resp.user.name,
+                    email: resp.user.email,
+                    picture: resp.user.picture_large.data.url
+                };
             },
                 (error) => {
                     debugger
