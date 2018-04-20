@@ -71,18 +71,13 @@ export class ProfileService {
 
     sendTags(user: User, gender?: string) {//temporary parametr "gender"
         let tagObj: any = {
-            'userName': user.name,
-            'userPhone': user.phone.split('+')[1],
-            'userEmail': user.email
+            userName: user.name,
+            userPhone: user.phone.split('+')[1],
+            userEmail: user.email
         };
         if (gender && gender !== '') {
             tagObj.gender = gender;
         }
-        // this.oneSignal.sendTags({
-        //     'userName': user.name,
-        //     'userPhone': user.phone.split('+')[1],
-        //     'userEmail': user.email
-        // });
         this.oneSignal.sendTags(tagObj);
         // this.oneSignal.syncHashedEmail(user.email);
         if (this.platform.is('cordova')) {
