@@ -8,7 +8,6 @@ import { Login } from '../../models/login';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { LocationService } from '../../providers/location.service';
-import { ProfileService } from '../../providers/profile.service';
 import { StringValidator } from '../../validators/string.validator';
 import { SignUpPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
@@ -51,7 +50,6 @@ export class LoginPage {
         private alert: AlertController,
         private location: LocationService,
         private keyboard: Keyboard,
-        private profile: ProfileService,
         private analytics: GoogleAnalytics) {
 
         if (this.platform.is('android')) {
@@ -147,7 +145,7 @@ export class LoginPage {
         }, true)
             .subscribe(resp => {
                 // this.analytics.trackEvent("Session", 'event_phoneconfirm');
-                this.profile.get(true, false);//for sending one signal tags
+                // this.profile.get(true, false);//for sending one signal tags
                 //     .subscribe(res => {
                 //         this.location.refreshDefaultCoords({ lat: res.latitude, lng: res.longitude }, true);
                 //         if (res.name == '' && !res.email) {

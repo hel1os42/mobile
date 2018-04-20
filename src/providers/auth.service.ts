@@ -12,6 +12,8 @@ import { FlurryAnalytics, FlurryAnalyticsOptions, FlurryAnalyticsObject } from '
 import { Platform } from 'ionic-angular';
 import { AnalyticsService } from './analytics.service';
 import { AppModeService } from './appMode.service';
+import { ProfileService } from './profile.service';
+import { User } from '../models/user';
 
 declare var cookieMaster;
 
@@ -31,7 +33,8 @@ export class AuthService {
         private oneSignal: OneSignal,
         private pushToken: PushTokenService,
         private platform: Platform,
-        private appMode: AppModeService
+        private appMode: AppModeService,
+        private profile: ProfileService
     ) {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
@@ -89,17 +92,20 @@ export class AuthService {
             this.token.set(token);
             this.oneSignal.getIds()
                 .then(resp => {
-                    let pushToken: PushTokenCreate = {
-                        device_id: resp.userId,
-                        token: resp.pushToken
-                    };
-                    // this.pushToken.get(resp.userId)
-                    //     .subscribe(res => { },
-                    //         err => {
-                    //             if (err.status == 404) {
-                    this.pushToken.post(pushToken);
-                    //     }
-                    // })
+                    this.profile.get(false, false)//for sending one signal tags
+                        .subscribe((user: User) => {
+                            let pushToken: PushTokenCreate = {
+                                user_id: user.id,
+                                token: resp.pushToken
+                            };
+                            // this.pushToken.get(resp.userId)
+                            //     .subscribe(res => { },
+                            //         err => {
+                            //             if (err.status == 404) {
+                            this.pushToken.set(pushToken, resp.userId);
+                            //     }
+                            // })
+                        })
                 })
             if (isAnalitics) {
                 this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());

@@ -1,10 +1,10 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { OneSignal } from '@ionic-native/onesignal';
+import { Platform } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { ApiService } from './api.service';
-import { AuthService } from './auth.service';
-import { OneSignal } from '@ionic-native/onesignal';
-import { Platform } from 'ionic-angular';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class ProfileService {
@@ -14,11 +14,11 @@ export class ProfileService {
 
     constructor(
         private api: ApiService,
-        private auth: AuthService,
+        private token: TokenService,
         private oneSignal: OneSignal,
         private platform: Platform) {
 
-        this.auth.onLogout.subscribe(() => this.user = undefined);
+        this.token.onRemove.subscribe(() => this.user = undefined);
     }
 
     get(forceReload: boolean, showLoading?: boolean) {
