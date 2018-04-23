@@ -24,7 +24,7 @@ export class TimezoneService {
             resp => { },
             errResp => {
                 if (errResp.status == 0) {
-                    this.toast.show('Internet disconnected', true);
+                    this.toast.show('Timezone service error', true);
                     // this.network.setStatus(false);
                 }
                 let messages = [];
