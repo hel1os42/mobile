@@ -32,8 +32,8 @@ export class ApiService {
     HTTP_STATUS_CODE_UNATHORIZED = 401;
     HTTP_STATUS_CODE_TOO_MANY_REQ = 423;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
-    // prodUrl = 'https://api.nau.io';
-    prodUrl = 'http://88.99.124.83';
+    prodUrl = 'https://api.nau.io';
+    // prodUrl = 'http://88.99.124.83';
     devUrl = 'https://nau.toavalon.com';
     testUrl = 'https://api-test.nau.io';
     url: string;
