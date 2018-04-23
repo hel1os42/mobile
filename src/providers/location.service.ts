@@ -10,6 +10,7 @@ import { ToastService } from './toast.service';
 export class LocationService {
     geoposition: Geoposition;
     url = 'https://freegeoip.net/json/';
+    //url = 'http://api.ipstack.com/186.116.207.169?access_key=YOUR_ACCESS_KEY&output=json&legacy=1';//to do before july
     onProfileCoordsChanged = new EventEmitter<Coords>();
     profileCoords = new Coords;
     onProfileCoordsRefresh: Subscription;
@@ -49,7 +50,7 @@ export class LocationService {
             resp => { },
             errResp => {
                 if (errResp.status == 0) {
-                    this.toast.show('Internet disconnected', true);
+                    this.toast.show('Location service error', true);
                     // this.network.setStatus(false);
                 }
                 let messages = [];
