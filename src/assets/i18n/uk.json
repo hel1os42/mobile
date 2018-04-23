@@ -1,0 +1,608 @@
+{
+    "CATEGORIES" : {
+        "Food": "<div class='font-65 text-white'>Їжа і(та)<br>Напої</div>",
+        "Beauty": "<div class='font-65 text-white'>Здоров'я і<br>Краса</div>",
+        "Retail": "<div class='font-65 text-white'>Товари і<br>Послуги</div>",
+        "Accommodation": "<div class='font-65 text-white'>Проживання <br>і Відпочинок</div>",
+        "Other": "<div class='font-65 text-white'>Онлайн та<br>Інше</div>"
+    },
+
+    "COUNTRIES" : {
+        "COLOMBIA": "Колумбія",
+        "RUSSIA": "Росія",
+        "UKRAINE": "Україна",
+        "PHILIPPINES": "Філіппіни"
+    },
+
+    "TOAST" : {
+        "ADDED_TO_FAVORITES": "Додано у вибране",
+        "COPY_NOTIFICATION" : "Збережено",
+        "LOCATION_DETECTION": "Визначення місцеположення",
+        "INTERNET_CONNECTION": "Помилка підключення",
+        "INCORRECT_EMAIL": "Некоректна адреса електронної пошти"
+    },
+
+    "COMPLAINT" : {
+        "COMPLAINT_TITLE": "Повідомити про проблему",
+        "STAFF_IS_NOT": "Персонал не знає про NAU",
+        "STAFF_HAS_DENIED" : "Відмова обслуговування через NAU",
+        "DISCOUNT_OR_BONUS": "Знижка чи бонус не відповідають опису",
+        "OTHER_REASON": "Інша причина"
+    },
+
+    "CONFIRM" : {
+        "REMOVE_FAVORITE_OFFER": "Ви насправді бажаєте видалити акцію з обраних?",
+        "REMOVE_FAVORITE_PLACE": "Ви справді хочете видалити заклад з обраних?",
+        "CLOSE_APPLICATION": "Ви дійсно бажаєте закрити додаток NAU?",
+        "LOGOUT": "Вихід",
+        "ARE_YOU_SHURE": "Підтвердіть дію",
+        "LOCATION_DENIED": "Визначення місцеположення недоступне",
+        "YOU_HAVE_DENIED": "Ви заборонили доступ до геолокації. Будь-ласка, вкажіть координати вручну.",
+        "LOCATION_NEEDED_PROFILE": "Ваше місцеположення необхідне для створення облікового запису",
+        "TURN_ON_LOCATION_PROFILE": "Щоб увімкнути геолокацію, будь-ласка, перейдіть у налаштування телефону, або вкажіть координати вручну.",
+        "LOCATION_NEEDED_PLACES": "Ваше місцеположення необхідне для коректної роботи додатку",
+        "TURN_ON_LOCATION_PLACES": "Щоб увімкнути геолокацію, будь-ласка, перейдіть у налаштування телефону, або вкажіть координати вручну.",
+        "IMPORTANT_NOTICE": "IMPORTANT NOTICE",
+        "PLEASE_INFORM": "Please inform the retailer you want to redeem a coupon in advance. While NAU is still a new thing for the retailers, some of the staff may be unaware of it. In this case please call the manager.",
+        "IF_THE_PROBLEM": "If the problem persists, contact us at",
+        "SO_THAT": "so that we can fix the issue as soon as possible.",
+        "GOT_IT": "Got it!"
+    },
+
+    "UNIT" : {
+        "KM" : "км",
+        "M" : "м",
+        "DETECTING_YOUR_LOCATION" : "Визначення місцеположення",
+        "SETTING_MAP_RADIUS" : "Встановлення радіусу",
+        "DONE" : "Готово",
+        "OK" : "ОК",
+        "CANCEL" : "Відміна",
+        "CLEAR": "Очистити",
+        "SIGN_UP" : "Реєстрація",
+        "SIGN_IN" : "Вхід",
+        "OFFERS" : "Акцій",
+        "OFFERS2" : "Акції",
+        "OFFER" : "Акція",
+        "MIN_SYMBOLS" : "мін:",
+        "FRIENDS": "Друзів",
+        "FRIENDS2": "Друга",
+        "FRIEND": "Друг",
+        "SETTINGS": "Налаштування"
+    },
+
+    "MONTHS" : {
+        "JAN" : "СІЧ",
+        "FEB" : "ЛЮТ",
+        "MAR" : "БЕР",
+        "APR" : "КВІ",
+        "MAY" : "ТРА",
+        "JUN" : "ЧЕР",
+        "JUL" : "ЛИП",
+        "AUG" : "СЕР",
+        "SEP" : "ВЕР",
+        "OCT" : "ЖОВ",
+        "NOV" : "ЛИС",
+        "DEC" : "ГРУ"
+    },
+
+    "DAYS" : {
+        "MON" : "ПН",
+        "TUE" : "ВТ",
+        "WED" : "СР",
+        "THU" : "ЧТ",
+        "FRI" : "ПТ",
+        "SAT" : "СБ",
+        "SUN" : "НД"
+    },
+
+    "PAGE_PLACES" : {
+        "ALL_OFFERS" : "Всі акції",
+        "DELIVERY" : "Доставка",
+        "NEW" : "Нові",
+        "MONTHLY" : "В цьому місяці",
+        "FEATURED" : "Рекомендовані",
+        "LOADING_COMPANIES" : "Завантаження...",
+        "SELECT_CUISINE" : "Оберіть кухню",
+        "CLEAR" : "Очистити",
+        "MAP" : "Мапа",
+        "FOOD_DRINKS" : "Їжа і напої",
+        "BEAUTY_FITNESS" : "Здоров'я і краса",
+        "RETAIL_SERVICES" : "Товари і послуги",
+        "ACCOMMODATION_LEISURE" : "Проживання і відпочинок",
+        "OTHER_ONLINE" : "Онлайн та інші",
+        "SELECT_TYPE" : "Оберіть тип закладу",
+        "SELECT_FEATURES" : "Оберіть особливості",
+        "LOCATION_DENIED" : "Геолокація недоступна",
+        "YOU_HAVE_DENIED_ACCESS" : "Ви заборонили доступ до геолокації. Будь-ласка, вкажіть координати вручну у налаштуваннях профілю.",
+        "SELECT_RADIUS" : "Вкажіть радіус",
+        "COMING_SOON": "Coming soon",
+        "NAU_IS_NOT": "NAU is not active in your country yet, but may soon be.",
+        "CURRENTLY_NAU": "Currently NAU offers are available in:",
+        "IF_YOU_WANT": "If you want to partner with NAU to launch it in your country, please contact",
+        "YOUR_REGION": "У вашому регіоні поки що немає акцій NAU, але це тимчасова ситуація!",
+        "DISPLAY": "Показати найближчі акції",
+        "NAU_WILL": "Незабаром NAU з'явиться у таких містах:",
+        "WE_ARE": "Ми активно шукаємо агентів у регіонах, приєднуйтесь!",
+        "ARE_YOU": "Представляєте заклад і хочете приєднатись до NAU?",
+        "OOPS": "Упс...",
+        "RADIUS": "Радіус"
+    },
+
+    "PAGE_ADV-NOTIFICATIONS" : {
+        "NOTIFICATION" : "Повідомлення",
+        "TODAY" : "Сьогодні",
+        "YESTERDAY" : "Вчора",
+        "VIEW_PLACE" : "Перегляд місця",
+        "REDEEMED_YOUR_OFFER_AT" : "Використали акцію в",
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Тепер доступно у вашому регіоні",
+        "YOU_DONT_HAVE" : "Наразі у вас немає повідомлень"
+    },
+
+    "PAGE_ADV-REDEEM-OFFER" : {
+        "CONFIRM_REDEMPTION" : "Підтвердити використання",
+        "CODE" : "Код",
+        "SCAN_QR_CODE" : "Сканування QR-коду",
+        "CONFIRM" : "Підтвердити"
+    },
+
+    "PAGE_ADV-USER-OFFERS" : {
+        "CREATED_OFFER" : "Створена акція",
+        "CREATED_OFFERS2" : "Створених акцій",
+        "CREATED_OFFERS" : "Створені акції",
+        "CREATE_NEW" : "Створити",
+        "ALL" : "Всі",
+        "FEATURED" : "Рекомендовані",
+        "ACTIVE" : "Активні",
+        "OFF" : "Неактивні",
+        "REDEEMED" : "Використано",
+        "TIMES" : "разів",
+        "WAS_CREATED" : "Створено:",
+        "NOW" : "Зараз",
+        "TOKENS_ARE_AVAILABLE" : "токенів доступно",
+        "YOU_NEED_TO_HAVE" : "Вам необхідно",
+        "TOKENS_FOR_ACTIVATION" : "токенів для активації",
+        "PLEASE_MAKE_A_PAYMENT" : "Додайте монети NAU до гаманця",
+        "EDIT" : "Редагувати",
+        "DELETE" : "Видалити",
+        "LOADING_OFFERS" : "Завантаження акцій..."
+    },
+
+    "PAGE_ADV-USER-PROFILE" : {
+        "ADVERTISER" : "Рекламодавець",
+        "CREATE_OFFER" : "Створити акцію",
+        "NAU" : "NAU",
+        "STATISTIC" : "Статистика",
+        "CATEGORY" : "Категорія"
+    },
+
+    "PAGE_BOOKMARKS" : {
+        "BOOKMARKS" : "Закладки",
+        "BOOKMARKS5" : "Закладок",
+        "BOOKMARK" : "Закладка",
+        "PLACES" : "Місця",
+        "FEATURED" : "Рекомендовані",
+        "REDEEM_NOW" : "Використати",
+        "YOU_DONT_HAVE" : "У вас немає обраних",
+        "YET" : "",
+        "OFFERS" : "акцій",
+        "PLACES1" : "закладів"
+    },
+
+    "PAGE_CREATE-ADVUSER-PROFILE" : {
+        "CREATE_ACCOUNT" : "Створити аккаунт",
+        "EDIT_ACCOUNT" : "Редагувати аккаунт",
+        "ADD" : "Додати",
+        "LOGO" : "логотип",
+        "SET_IMAGE" : "Встановити зображення",
+        "ADD_COMPANY_NAME" : "Назва і опис компанії",
+        "COMPANY_NAME" : "Назва компанії",
+        "COMPANY_DESCRIPTION" : "Опис компанії",
+        "ABOUT_COMPANY" : "Додати детальний опис",
+        "ABOUT_TITLE" : "Заголовок детального опису",
+        "ABOUT_DESCRIPTION" : "Текст детального опису",
+        "CHOOSE_CATEGORY" : "Оберіть категорію",
+        "CHOOSE_YOUR_OFFICE_LOCATION" : "Вкажіть місцезнаходження торгівельної точки",
+        "CATEGORY" : "Категорія",
+        "CATEGORY_TYPE" : "Категорія торгівельної точки",
+        "CHOOSE_TYPE" : "Тип торгівельної точки",
+        "CHOOSE_FEATURES" : "Особливості торгівельної точки",
+        "TYPES" : "Типи",
+        "FEATURES" : "Особливості",
+        "WARNING" : "Увага!",
+        "PROCEEDING_WILL_SWITCH" : "Ваш аккаунт буде деактивовано, і всі акції будуть недоступні до повторної активації аккаунту.",
+        "ARE_YOU_SURE" : "Бажаєте продовжити?"
+    },
+
+    "PAGE_CREATE-OFFER" : {
+        "CREATE_OFFER" : "Створити акцію",
+        "EDIT_OFFER" : "Редагувати акцію",
+        "NEXT" : "Далі",
+        "NAME_DESCRIPTION" : "Назва та опис",
+        "OFFER_NAME" : "Назва акції",
+        "OFFER_DESCRIPTION" : "Опис акції",
+        "ADD_PICTURE" : "Додати зображення",
+        "NEXT_STEP" : "Далі",
+        "CATEGORY_TYPE" : "Категорія і тип",
+        "OFFER_TYPE" : "Тип акції",
+        "SET_DISCOUNT" : "Вказати знижку",
+        "WORKING_DATES" : "Період дії",
+        "FROM" : "від",
+        "TO" : "до",
+        "WORKING_DAYS" : "Акція доступна",
+        "WEEKEND" : "Вихідні",
+        "WORKING_TIME" : "Час",
+        "DETAILED_SETTINGS" : "Розширенні налаштування",
+        "YOU_CAN_SET_WORKING_TIME" : "Тонке налаштування часу активності акції",
+        "DAY" : "День",
+        "WORK" : "Work",
+        "WORKING_AREA" : "Working Area",
+        "SET_MAP_RADIUS" :"Set map radius and confirm offer location",
+        "MAX_REDEMPTION_PER_USER" : "Макс. використань на людину",
+        "OVERALL" : "Всього",
+        "DAILY" : "На день",
+        "WEEKLY" : "На тиждень",
+        "MONTHLY" : "На місяць",
+        "OTHER_LIMITS" : "Інші обмеження",
+        "MINIMAL_USER_LEVEL" : "Мін. рівень користувача",
+        "UNLIMITED" : "Без обмежень",
+        "FINISH" : "Підтвердити",
+        "REWARDS_OPTIONS" : "Rewards options",
+        "REWARD_FOR_REDEMPTION" : "Винагорода за погашення",
+        "TOKEN_RESERVATION" : "Резервування токенів",
+        "YOU_HAVE_TOKENS" : "Токенів на рахунку",
+        "CREATING_YOUR_OFFER" : "Створення акції...",
+        "ERROR" : "Сталась помилка",
+        "OFFER_WASNT_UPDATE" : "Акцію не оновлено. Будь-ласка, спробуйте ще раз",
+        "OFFER_WASNT_CREATED" : "Акцію не створено. Будь-ласка, спробуйте ще раз",
+        "PLEASE_TRY_AGAIN" : "Будь-ласка, спробуйте ще раз",
+        "RETRY" : "Повторити спробу",
+        "UPDATING_OFFER" : "Оновлення акції...",
+        "CREATING_OFFER" : "Створення акції...",
+        "UPDATED" : "оновлено",
+        "CREATED" : "створено",
+        "RESERVED_TOKENS_SHOULD" : "Резерв токенів повинен у 10 разів перевищувати винагороду",
+        "RESERVED_TOKENS_AND_REWARD" : "Резерв токенів повинен ділитись на винагороду",
+        "MAX_FOR_USER_VALID_OVERALL" : "Макс. погашень за період має бути менше, ніж 'Всього'",
+        "DAY_MAX_VALID" : "Погашень на день має бути менше, ніж 'Всього'",
+        "MAX_FOR_USER_VALID" : "Погашень на користувача має бути менше, ніж 'Всього'",
+        "DESCRIPTION_FOR_BONUS" : "Опис бонусу",
+        "DESCRIPTION_FOR_GIFT" : "Опис подарунку",
+        "DISCOUNT" : "Знижка",
+        "SECOND_FREE" : "2 за ціною 1",
+        "BONUS" : "Бонус",
+        "GIFT" : "Подарунок",
+        "DELIVERY" : "Доставка",
+        "DESCRIPTION_FOR" : "Опис",
+        "SET_START_PRICE" : "Встановіть початкову ціну",
+        "SET_CURRENCY" : "Оберіть валюту"
+    },
+
+    "PAGE_CREATE-USER-PROFILE" : {
+        "CREATE_ACCOUNT" : "Створити аккаунт",
+        "EDIT_ACCOUNT" : "Редагувати аккаунт",
+        "NAME_EMAIL" : "Ім'я та email",
+        "YOU_HAVE" : "У вас",
+        "POINTS" : "балів",
+        "YOUR_NAME" : "Ваше ім'я",
+        "YOUR_EMAIL" : "Ваш email",
+        "EARN_EXTRA_POINTS" : "Отримати дод. бали",
+        "OF_COURSE" : "Спеціальна можливість отримати дод. бали!",
+        "CONFIRM_EMAIL_ADDRESS" : "Підтвердити email",
+        "WE_EMAILED" : "Ми надіслали посилання на ваш email. Будь-ласка, перейдіть за ним для завершення реєстрації.",
+        "SOCIAL_ACCOUNTS" : "Соціальні мережі (кожна додає 3 бали)",
+        "ADDED" : "Додано",
+        "SHOW_ADDITIONAL_OPTIONS" : "Додаткові опції (більше балів)",
+        "IF_YOU_WILL" : "Отримавши дод. інформацію, ми зможемо покращити додаток для вас",
+        "GENDER" : "Стать",
+        "FEMALE" : "Жіноча",
+        "MALE" : "Чоловіча",
+        "OTHER" : "Інше",
+        "CONFIRM_YOUR_LOCATION" : "Підтвердіть місцеположення:",
+        "YOU_CAN_SET": "Ви можете вказати місцеположення вручну",
+        "AGE" : "Вік",
+        "INCOME" : "Дохід"
+    },
+
+    "PAGE_FEED" : {
+        "WHAT_HAPPEND" : "what happend",
+        "TODAY" : "Сегодня",
+        "ALL" : "All",
+        "PLACES" : "Места",
+        "PEOPLE" : "People",
+        "REDEEMED_YOUR" : "Redeemed your offer at",
+        "REDEEM_OFFER" : "redeem offer",
+        "YESTERDAY" : "Вчера",
+        "OUR_RESTAURANT_WANTS" : "Our restaurant wants offer your ineresting proposition!",
+        "NOW_AVAILABLE_IN_YOUR_REGION" : "Доступно у вашому регіоні",
+        "VIEW_OFFERS" : "Переглянути акції"
+    },
+
+    "PAGE_INVITE" : {
+        "INVITATION" : "Запрошення",
+        "YOU_SHOULD_HAVE_RECEIVED" : "Друг, що рекомендував вам NAU, вірогідно повідомив свій код запрошення.",
+        "PLEASE_ASK" : "Будь-ласка, уточніть його або використайте код за замовчуванням"
+    },
+
+    "PAGE_LOGIN" : {
+        "LOGIN" : "Вхід",
+        "PLEASE_ENTER_PHONE" : "Будь-ласка, введіть номер телефону",
+        "PLEASE_ENTER_OTP" : "Будь-ласка, введіть код з SMS",
+        "OTP" : "Код з SMS",
+        "GET_OTP" : "Отримати SMS",
+        "RESEND_SMS" : "Повторно відправити SMS через",
+        "SMS_RESENDING" : "Повторно відправити SMS через",
+        "SECONDS" : "секунд",
+        "SECONDS2" : "секунди",
+        "SECOND" : "секунду"
+    },
+
+    "PAGE_NOTIFICATIONS" : {
+        "NOTIFICATION" : "Повідомлення",
+        "TODAY" : "Сьогодні",
+        "YESTERDAY" : "Вчора",
+        "SENT_NEW_MESSAGE_FOR_YOU" : "Sent new message for you",
+        "OUR_RESTAURANT_WANTS" : "Our restaurant wants offer your ineresting proposition!",
+        "GET_YOUR_CHANCE" : "Get your chance!",
+        "SYSTEM_NOTIFICATION" : "System Notification",
+        "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
+        "READ" : "Read",
+        "YOU_DONT_HAVE" : "У вас немає повідомлень"
+    },
+
+    "PAGE_OFFER" : {
+        "CONGRATULATION" : "Вітаємо!",
+        "OFFER_REDEMPTION_COMPLETED_AT" : "Акцію успішно використано",
+        "WE_ARE" : "Ми цінуємо ваш вибір",
+        "YOU_EARNED" : "Ви отримали",
+        "POINTS" : "балів",
+        "POINTS2" : "бала",
+        "POINT" : "бал",
+        "OFFER" : "акції",
+        "REDEEM" : "Купон",
+        "OFFER_REDEEMING" : "Погашення купону",
+        "OR_USE_QR_CODE" : "або використайте QR-код",
+        "AGREE_WITH_TERMS" : "Підтверджую згоду з Умовами використання акцій",
+        "SEND_REVIEW" : "Відправити оцінку",
+        "OFFER_IS_UNAVAILABLE" : "Акція наразі недоступна"
+    },
+
+    "PAGE_OFFER-TERMS" : {
+        "TERMS_CONDITIONS" : "Умови використання акцій",
+        "AVAILABLE_TOKENS" : "Available tokens are 50",
+        "SOME_OF_OUR_SERVICES" : "Some of our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.",
+        "PRIVACY" : "Privacy and copyright protection",
+        "WHILE_WORKING_WITH" : "While working with our Services, you authorize us to use your personal information in accordance with Google's privacy policy. The latter describes why we use this data and how we ensure the confidentiality of users when working with the Services.",
+        "WE_CHECK_ALL" : "We check all reports of alleged copyright infringement and, being guided by the Digital Millennium Copyright Act, we terminate accounts whose owners systematically violate copyrights",
+        "BACK" : "Back"
+    },
+
+    "PAGE_ONBOARDING" : {
+        "FOR_BUSINESS" : "Для бізнесу",
+        "WELCOME" : "Ласкаво просимо!",
+        "MAKE_PROFIT" : "Заробляйте!",
+        "NAU_COINS" : "Токени NAU!",
+        "ENJOY" : "Заощаджуйте!",
+        "ENJOY_THE_MOST" : "Насолоджуйтесь найбільш привабливими пропозиціями, подарунками та знижками від різноманітних рітейлерів поруч з вами, незалежно від того, знаходитесь ви вдома чи у відпустці.",
+        "INVITE_YOUR_FRIENDS" : "Запрошуйте друзів і фолловерів приєднуватись до NAU з використанням вашого інвайт-коду. Отримуйте винагороду щоразу, як вони будут користуватись пропозиціями від ритейлерів по всьому світу.",
+        "NAU_COINS_IS" : "Монети NAU - це криптовалюта, яку прямо зараз можна обмінювати на інші криптовалюти або національну валюту, а невдовзі за неї можна буде отримувати товари та послуги!",
+        "MAKE_MONEY" : "Заробляйте!",
+        "SKIP" : "Пропустити"
+    },
+
+    "PAGE_PLACE" : {
+        "FEATURED" : "Рекомендовані",
+        "ALL_OFFERS" : "Всі акції",
+        "TESTIMONIALS" : "Відгуки",
+        "ABOUT" : "Детально",
+        "REDEEM_NOW" : "Використати",
+        "ADD_YOUR_FEEDBACK" : "Додайте відгук"
+    },
+
+    "PAGE_PLACE-FEEDBACK" : {
+        "TESTIMONIAL" : "Відгук",
+        "BACK" : "Назад"
+    },
+
+    "PAGE_SETTINGS" : {
+        "SETTINGS" : "Налаштування",
+        "CHOOSE_YOUR_ACCOUNT" : "Оберіть аккаунт",
+        "CLIENT" : "Користувач",
+        "ADVERTISER" : "Рекламодавець",
+        "CONFIRM_REDEMPTION" : "Підтвердити погашення",
+        "YOUR_INVITE_CODE" : "Ваш інвайт-код",
+        "CHANGE_YOUR_PHONE_NUMBER" : "Змінити номер телефону",
+        "YOUR_PHONE_NUMBER" : "Ваш номер телефону",
+        "PRIVATE_DATA" : "Особиста інформація",
+        "SHOW_MY_PRIVATE_DATA" : "Показувати особисту інформацію",
+        "SHOW_MY_PHONE_NUMBER" : "Показувати номер телефону",
+        "SHOW_MY_EMAIL_ADDRESS" : "Показувати email",
+        "SET_RADIUS" : "Встановіть радіус для доступних акцій",
+        "OFFERS_RADIUS" : "Радіус доступних акцій",
+        "SAVE_CHANGES" : "Зберегти",
+        "CHANGE" : "Змінити",
+        "GET_ACCOUNT_FOR_BUSINESS" : "Отримати аккаунт для бізнесу",
+        "WHY_I_NEED" : "Навіщо мені бізнес-аккаунт?",
+        "HIDE" : "приховати",
+        "IT_HELPS_ME" : "It helps me advertise my business",
+        "BRAND_NEW_CLIENTS" : "Brand new clients get know about me",
+        "GOOD_OPPORTUNITY" : "Good opportunity to earn money",
+        "TRY_IT_FOR_FREE" : "Спробувати безкоштовно",
+        "LANG" : "Мова",
+        "REFERRAL_LINK" : "Посилання для запрошення друзів"
+    },
+
+    "PAGE_SETTINGS-CHANGE-PHONE" : {
+        "CHANGE_PHONE_NUMBER" : "Змінити номер телефону",
+        "ENTER_NEW_PHONE_NUMBER" : "Ввести номер телефону",
+        "GET_CONFIRM_CODE" : "Отримати код підтвердження",
+        "ENTER_CONFIRMATION_CODE" : "Ввести код підтвердження",
+        "CHANGE_NUMBER" : "Змінити номер"
+    },
+
+    "PAGE_SIGNUP" : {
+        "PHONE_NUMBER" : "Телефон та інвайт-код",
+        "PLEASE_CHOOSE" : "Будь-ласка, оберіть код країни",
+        "AND_FILL" : "і введіть номер телефону",
+        "NEXT" : "Далі",
+        "BY_PRESSING" : "Натискаючи 'Далі', я приймаю",
+        "TERMS_AND_CONDITIONS" : "Умови та положення",
+        "AND" : "і",
+        "PRIVACY_POLICY" : "політику конфіденційності"
+    },
+
+    "PAGE_SIGNUP-CODE" : {
+        "CONFIRM" : "Підтвердити",
+        "PLEASE_FILL_CONFIRMATION_CODE" : "Введіть код підтвердження",
+        "FROM_MESSAGE" : "з SMS",
+        "NEXT" : "Далі",
+        "ONE_TIME" : "One-time password helps to you",
+        "CONFIRM_PHONE_NUMBER" : "підтверджує номер телефону"
+    },
+
+    "PAGE_SPLASH-INFO" : {
+        "INFORMATION" : "Інформація",
+        "SEARCH_OFFERS" : "Пошук акцій",
+        "SOME_OF_OUR_SERVICES" : "Some of our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner.",
+        "OUR_SERVICES_ALLOW_YOU" : "Our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.",
+        "ALLOW_YOU_TO_UPLOAD" : "Allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.",
+        "SEARCH_NEW_OFFERS" : "search new offers"
+    },
+
+    "PAGE_SPLASH-NEWS" : {
+        "NEWS_EVENTS" : "News & events",
+        "NEW_RESTAURANT" : "New Restaurant",
+        "OUR_SERVICES_ALLOW_YOU" : "Our Services allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.",
+        "ALLOW_YOU_TO_UPLOAD" : "Allow you to upload, add, store, send or receive content. At the same time, all rights to intellectual property in relation to these materials remain with their owner. Simply put, everything that was yours will remain so.",
+        "GO_TO_RESTAURANT" : "Go To Restaurant"
+    },
+
+    "PAGE_START" : {
+        "SIGN_UP" : "Реєстрація",
+        "PLEASE_CHOOSE" : "Оберіть зручний спосіб",
+        "TO_ENTER_NAU" : "логіну до NAU",
+        "OR_SIGN_UP_WITH" : "або зареєструйтесь за допомогою:",
+        "ALREADY_HAVE_ACCOUNT" : "Вже є аккаунт"
+    },
+
+    "PAGE_STATISTIC" : {
+        "STATISTIC" : "Статистика",
+        "DATE_FILTER" : "Date filter",
+        "ALL_OFFERS" : "All offers",
+        "ACTIVE_OFFERS" : "Active offers",
+        "TODAY" : "Today",
+        "YESTERDAY" : "Yesterday",
+        "WEEK" : "Week",
+        "MONTH" : "Month",
+        "MAIN_POSITIONS" : "Main positions",
+        "VIEWED" : "Viewed",
+        "MY_PLACE" : "my place",
+        "DETAILED" : "Detailed",
+        "REDEEMED" : "redeemed",
+        "ADDITIONAL_STATISTICS" : "Additional statistics",
+        "RATING_FEEDBACK" : "Rating & Feedback",
+        "REQUESTS_FOR_OFFERS_REDEEMED" : "Requests for offers redeemed",
+        "MONEY_WASTED_FOR_REDEEMS" : "money wasted for redeems",
+        "WEEKLY_DETAILED" : "Weekly detailed graphic information",
+        "USERS" : "Users",
+        "VIEWED_MY_PLACE" : "Viewed my place",
+        "SAVE_PDF" : "save pdf",
+        "WEEK_VIEWERS" : "week viewers",
+        "USED_OFFERS" : "Used Offers",
+        "VIEWED_DATE" : "Viewed date",
+        "CHOOSE_PERIOD_OF_TIME" : "Choose period of time",
+        "FROM" : "from",
+        "TO" : "to",
+        "COMPARE_WITH" : "Compare with",
+        "SHOW_RESULTS" : "Show results",
+        "COMPARE_SEVERAL" : "Compare several periods of time",
+        "ADD_PERIOD" : "add period",
+        "COMPARE_YOUR_DATE" : "Compare your date. Chose several period of time for",
+        "RESULTS_COMPARING" : "results comparing"
+    },
+
+    "PAGE_STATISTIC1" : {
+        "COMPARE_DIFFERENT_DATES" : "compare different dates",
+        "REAL_DATA" : "Real data",
+        "PERCENTAGE" : "Percentage %",
+        "COMPARISON_PERIODS" : "Comparison periods of time in diagram",
+        "USERS" : "Users",
+        "VIEWED_MY_PLACE" : "Viewed my place for 2 periods of time",
+        "SAVE_PDF" : "save pdf"
+    },
+
+    "PAGE_USER-ACHIEVE" : {
+        "YOUR_ACHIEVEMENT" : "Ваші бали",
+        "POINTS" : "досягнень",
+        "ACHIEVEMENT_LEVEL" : "Рівень досягнень",
+        "AWARD_FOR_FIRST_5_OFFERS" : "Нагорода за перші 5 акцій",
+        "RECEIVED" : "Отримано",
+        "MEDAL_FOR_FIRST_10_OFFERS" : "Медаль за 10 акцій",
+        "AWARD_FOR_REDEEMED_OFFER" : "Нагорода за використання акції",
+        "GIFT_FOR_YOU_ACTIVITY" : "Нагорода за активність"
+    },
+
+    "PAGE_USER-NAU" : {
+        "NAU_TRANSACTIONS" : "Транзакції NAU",
+        "TRANSFER" : "Переказ",
+        "LATEST_PAYMENTS" : "Останні платежі",
+        "PAY" : "Переказати",
+        "LOADING_TRANSACTIONS" : "Завантаження транзакцій...",
+        "NAU" : "NAU",
+        "FROM" : "від",
+        "TO" : "кому"
+    },
+
+    "PAGE_USER-OFFERS" : {
+        "YOUR_REDEEMED_OFFERS" : "Використані акції",
+        "REDEEMED_OFFERS" : "Історія використання",
+        "DATE" : "Дата",
+        "YOU_HAVE_NOT" : "Ви не використовували купони акцій"
+    },
+
+    "PAGE_USER-PROFILE" : {
+        "YOUR_ACCOUNT" : "Ваш аккаунт",
+        "GET" : "Отримати",
+        "ADDITIONAL" : "додаткові",
+        "POINTS" : "бали",
+        "NEXT" : "",
+        "LVL" : "РІВЕНЬ",
+        "YOUR_TASKS_JOBS_FOR_TODAY" : "Ваші завдання на сьогодні",
+        "GET_NEW_POINTS" : "Отримайте бали",
+        "GET_NEW_OFFERS_NEARBY" : "Підвищуйте рівень, користуючись акціями",
+        "NAU" : "NAU",
+        "USERS" : "друзів",
+        "LOGOUT" : "Вихід"
+    },
+
+    "PAGE_USER-TASKS" : {
+        "YOUR_TASKS_JOBS" : "Ваші завдання",
+        "ACTIVE" : "Активні",
+        "COMPLETED" : "Завершені",
+        "TASKS_FOR_TODAY" : "Завдання на сьогодні",
+        "FIND_NEW_PLACES" : "Додати нові місця",
+        "TO_PROVIDE_PROPER_CREDIT" : "To provide proper credit, use the embedded credit already in the icon you downloaded to provide proper credit, use the embedded credit already in the icon you downloaded",
+        "TASKS_FOR_LEVEL" : "Завдання для вашого рівня",
+        "REDEEM_NEW_OFFERS" : "Скористатись новими акціями",
+        "PROPER_CREDIT" : "Proper credit, use the embedded credit already in the icon you downloaded",
+        "POINTS" : "бали"
+    },
+
+    "PAGE_USER-USERS" : {
+        "YOUR_REFERRALS" : "Ви запросили",
+        "USERS" : "Користувачів",
+        "LEVEL" : "Рівень",
+        "REGISTRATION_DATE" : "Дата реєстрації",
+        "LOADING_REFERRALS" : "Завантаження друзів..."
+    },
+
+    "PAGE_TRANSFER" : {
+        "TRANSFER" : "Відправити",
+        "SOURCE_ADDRESS" : "Вихідна адреса",
+        "INPUT_ADDRESS" : "Введіть адресу гаманця",
+        "DESTINATION_ADDRESS" : "Куди",
+        "AMOUNT" : "Сума",
+        "ADDRESS" : "Адреса гаманця",
+        "SCAN_QR_CODE" : "Скануйте QR-код, щоб побачити адресу"
+    }
+}
+
