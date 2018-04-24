@@ -37,7 +37,8 @@
     </div>
 </ion-header>
 
-<ion-content no-bounce [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }">
+<!-- <ion-content no-bounce [ngClass]="{ 'disabled-elements': !getDevMode() && !isForkMode }"> -->
+<ion-content no-bounce>
     <ion-refresher *ngIf="!isMapVisible" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="none" refreshingSpinner="bubbles">
         </ion-refresher-content>
