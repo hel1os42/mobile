@@ -1,6 +1,6 @@
 {
     "CATEGORIES" : {
-        "Food": "<div class='font-65 text-white'>Їжа і(та)<br>Напої</div>",
+        "Food": "<div class='font-65 text-white'>Їжа і<br>Напої</div>",
         "Beauty": "<div class='font-65 text-white'>Здоров'я і<br>Краса</div>",
         "Retail": "<div class='font-65 text-white'>Товари і<br>Послуги</div>",
         "Accommodation": "<div class='font-65 text-white'>Проживання <br>і Відпочинок</div>",

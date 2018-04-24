@@ -3,10 +3,10 @@ export const AVAILABLE_LANGUAGES = [
 		code: 'en',
 		name: 'English'
 	},
-	// {
-	// 	code: 'uk',
-	// 	name: 'Українська'
-	// },
+	{
+		code: 'uk',
+		name: 'Українська'
+	},
 	{
 		code: 'ru',
 		name: 'Русский'
