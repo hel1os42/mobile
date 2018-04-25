@@ -106,6 +106,7 @@
         </form>
     </div>
 
+    <!--
     <div
         *ngIf="transactions && transactions.length > 0"
         padding-left
@@ -114,6 +115,7 @@
         text-uppercase>
         {{ 'PAGE_USER-NAU.LATEST_PAYMENTS' | translate }}
     </div>
+    -->
     <ion-list padding no-lines class="item-block-nau">
         <ion-item class="relative" *ngFor="let transaction of transactions">
             <a href="#" (click)="loadUrl(transaction.id)" class="wrap-no text-3E4B5D font-20">
