@@ -10,13 +10,13 @@ export class FavoritesService {
     constructor(private api: ApiService) {
     }
 
-    getPlaces(page: number, showLoading?: boolean) {
-        return this.api.get(`profile/favorite/places?page=${page}`, { showLoading: showLoading });
+    getPlaces(page: number) {
+        return this.api.get(`profile/favorite/places?page=${page}`, { showLoading: false });
     }
 
-    getOffers(page: number, showLoading?: boolean) {
+    getOffers(page: number) {
         return this.api.get('profile/favorite/offers', {
-            showLoading: showLoading,
+            showLoading: false,
             params: {
                 with: 'account.owner.place',
                 page: page
