@@ -105,7 +105,9 @@ export class ApiService {
                     loading.dismiss();
             })
             .subscribe(
-                resp => { },
+                resp => {
+                    this.toast.dismiss();
+                 },
                 errResp => {
                     let messages = [];
                     if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
