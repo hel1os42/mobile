@@ -35,8 +35,8 @@ export class LocationService {
         // else
         let promise = this.geolocation.getCurrentPosition({
             enableHighAccuracy: isHighAccuracy,
-            timeout: 30000,
-            maximumAge: 6000
+            timeout: 40000,
+            maximumAge: 12000
         })
         promise.then(geo => this.geoposition = geo);
         return promise;
@@ -69,15 +69,21 @@ export class LocationService {
         //     ? Promise.resolve(this.geoposition)
         //     : this.get(false);
         // return promise;
-        return Promise.resolve(
-            {
-                coords: {
-                    latitude: this.profileCoords.lat,
-                    longitude: this.profileCoords.lng
-                }
-
+        let coords;
+        if (this.geoposition && this.geoposition.coords.latitude) {
+            coords = {
+                latitude: this.geoposition.coords.latitude,
+                longitude: this.geoposition.coords.longitude
+            };
+        }
+        else {
+            coords = {
+                latitude: this.profileCoords.lat,
+                longitude: this.profileCoords.lng
             }
-        );
+
+        }
+        return Promise.resolve({ coords: coords });
     }
 
     refreshDefaultCoords(coords: Coords, notEmit?: boolean) {
