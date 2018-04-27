@@ -329,7 +329,7 @@
         "PLEASE_ENTER_OTP" : "Пожалуйста, введите код из SMS",
         "OTP" : "Код из SMS",
         "GET_OTP" : "Получить код из SMS",
-        "RESEND_SMS" : "Повтороно отправить SMS",
+        "RESEND_SMS" : "Повторно отправить SMS",
         "SMS_RESENDING" : "Повторно отправить SMS через",
         "SECONDS" : "секунд",
         "SECONDS2" : "секунды",
