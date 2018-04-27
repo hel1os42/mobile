@@ -447,7 +447,8 @@
         "BY_PRESSING" : "By pressing «Next», I accept",
         "TERMS_AND_CONDITIONS" : "Terms and conditions",
         "AND" : "and",
-        "PRIVACY_POLICY" : "privacy policy"
+        "PRIVACY_POLICY" : "privacy policy",
+        "INVITE_OPTIONAL" : "Optional"
     },
 
     "PAGE_SIGNUP-CODE" : {

@@ -329,7 +329,7 @@
         "PLEASE_ENTER_OTP" : "Пожалуйста, введите код из SMS",
         "OTP" : "Код из SMS",
         "GET_OTP" : "Получить код из SMS",
-        "RESEND_SMS" : "Повтороно отправить SMS",
+        "RESEND_SMS" : "Повторно отправить SMS",
         "SMS_RESENDING" : "Повторно отправить SMS через",
         "SECONDS" : "секунд",
         "SECONDS2" : "секунды",
@@ -357,8 +357,8 @@
         "POINTS" : "баллов",
         "POINTS2" : "балла",
         "POINT" : "балл",
-        "OFFER" : "Акции",
-        "REDEEM" : "Купон",
+        "OFFER" : "Купон",
+        "REDEEM" : "Погасить",
         "OFFER_REDEEMING" : "Погашение акции",
         "OR_USE_QR_CODE" : "или используйте QR-код",
         "AGREE_WITH_TERMS" : "Подтверждаю согласия с Условиями использования акций",
@@ -447,7 +447,8 @@
         "BY_PRESSING" : "Нажимая «Далее», я принимаю",
         "TERMS_AND_CONDITIONS" : "Условия и положения",
         "AND" : "и",
-        "PRIVACY_POLICY" : "Политику конфиденциальности"
+        "PRIVACY_POLICY" : "Политику конфиденциальности",
+        "INVITE_OPTIONAL" : "Не обязательно"
     },
 
     "PAGE_SIGNUP-CODE" : {
@@ -564,8 +565,8 @@
         "GET" : "Получить",
         "ADDITIONAL" : "дополнительные",
         "POINTS" : "баллы",
-        "NEXT" : "",
-        "LVL" : "УРОВЕНЬ",
+        "NEXT" : "УРОВЕНЬ",
+        "LVL" : "",
         "YOUR_TASKS_JOBS_FOR_TODAY" : "Ваши задания на сегодня",
         "GET_NEW_POINTS" : "Получить баллы",
         "GET_NEW_OFFERS_NEARBY" : "Улучшайте уровень, пользуясь акциями рядом с вами",
