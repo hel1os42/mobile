@@ -262,31 +262,31 @@ export class BookmarksPage {
         return total;
     }
 
-    // removePlace(company) {
-    //     this.favorites.removePlace(company.id, true)
-    //         .subscribe(() => {
-    //             this.companies.forEach(item => {
-    //                 if (item.id === company.id) {
-    //                     let i = _.indexOf(this.companies, item);
-    //                     this.companies.splice(i, 1);
-    //                     this.totalCompanies = this.companies.length;
-    //                 }
-    //             })
-    //         });
-    // }
+    removePlace(company) {
+        this.favorites.removePlace(company.id, true)
+            .subscribe(() => {
+                this.companies.forEach(item => {
+                    if (item.id === company.id) {
+                        let i = _.indexOf(this.companies, item);
+                        this.companies.splice(i, 1);
+                        this.totalCompanies = this.companies.length;
+                    }
+                })
+            });
+    }
 
-    // removeOffer(offer) {
-    //     this.favorites.removeOffer(offer.id, true)
-    //         .subscribe(() => {
-    //             this.offers.forEach(item => {
-    //                 if (item.id === offer.id) {
-    //                     let i = _.indexOf(this.offers, item);
-    //                     this.offers.splice(i, 1);
-    //                     this.totalOffers = this.offers.length;
-    //                 }
-    //             })
-    //         });
-    // }
+    removeOffer(offer) {
+        this.favorites.removeOffer(offer.id, true)
+            .subscribe(() => {
+                this.offers.forEach(item => {
+                    if (item.id === offer.id) {
+                        let i = _.indexOf(this.offers, item);
+                        this.offers.splice(i, 1);
+                        this.totalOffers = this.offers.length;
+                    }
+                })
+            });
+    }
 
     ngOnDestroy() {
         this.onRefreshCompanies.unsubscribe();
