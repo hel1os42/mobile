@@ -216,7 +216,11 @@ export class OfferPage {
                         return;
 
                     let noticePopover = this.popoverCtrl.create(NoticePopover);
-                    let offerRedeemPopover = this.popoverCtrl.create(OfferRedeemPopover, { offerActivationCode: offerActivationCode });
+                    let offerRedeemPopover = this.popoverCtrl.create(
+                        OfferRedeemPopover,
+                        { offerActivationCode: offerActivationCode },
+                        { enableBackdropDismiss: false }
+                    );
                     noticePopover.present();
                     noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                     offerRedeemPopover.onDidDismiss(() => {

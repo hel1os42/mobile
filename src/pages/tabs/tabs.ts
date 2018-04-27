@@ -14,10 +14,10 @@ import { UserProfilePage } from '../user-profile/user-profile';
 })
 export class TabsPage {
 
-    tab1Root;
-    tab2Root = UserProfilePage;
-    tab3Root = BookmarksPage;
-    tab4Root = NotificationsPage;
+    tab1Root = PlacesPage;
+    tab2Root = BookmarksPage;
+    tab3Root = NotificationsPage;
+    tab4Root = UserProfilePage;
     // tab5Root = FeedPage;//temporary - to revert
     selectedTabIndex = 0;
     nauParams;//temporary
@@ -36,7 +36,7 @@ export class TabsPage {
         //     .subscribe(resp => {
         //         this.nauParams = resp.accounts.NAU;
         //     });
-        this.tab1Root = PlacesPage;
+        // this.tab1Root = PlacesPage;
         this.selectedTabIndex = 0;
     }
 

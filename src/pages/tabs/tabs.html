@@ -1,9 +1,9 @@
 <ion-tabs [selectedIndex]="selectedTabIndex" (ionChange)="refreshStatusBar($event)" #tabs>
     <ion-tab [root]="tab1Root"></ion-tab>
     <!-- <ion-tab (ionSelect)="refresh()" [root]="tab2Root" [rootParams]="nauParams"></ion-tab> -->
-    <ion-tab [root]="tab2Root" (ionSelect)="refresh()"></ion-tab>
+    <ion-tab [root]="tab2Root"></ion-tab>
     <ion-tab [root]="tab3Root"></ion-tab>
-    <ion-tab [root]="tab4Root"></ion-tab>
+    <ion-tab [root]="tab4Root" (ionSelect)="refresh()"></ion-tab>
     <!-- <ion-tab [enabled] = false [root]="tab5Root"></ion-tab> -->
 </ion-tabs>
 <div *ngIf="envName === 'dev'" class="devmode">Dev mode</div>
