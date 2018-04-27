@@ -14,6 +14,7 @@ export class LocationService {
     onProfileCoordsChanged = new EventEmitter<Coords>();
     profileCoords = new Coords;
     onProfileCoordsRefresh: Subscription;
+    onRefreshCoords = new EventEmitter<Coords>();
 
     constructor(private geolocation: Geolocation,
         private http: Http,
@@ -29,7 +30,7 @@ export class LocationService {
             })
     }
 
-    get(isHighAccuracy: boolean) {
+    get(isHighAccuracy: boolean, isBookmarks?: boolean) {
         // if (this.geoposition)
         //     return Promise.resolve(this.geoposition);
         // else
@@ -38,7 +39,17 @@ export class LocationService {
             timeout: 40000,
             maximumAge: 12000
         })
-        promise.then(geo => this.geoposition = geo);
+        promise.then(geo => {
+            this.geoposition = geo;
+            if (!isBookmarks) {
+                let coords: Coords = {
+                    lat: geo.coords.latitude,
+                    lng: geo.coords.longitude
+                };
+                this.onRefreshCoords.emit(coords);
+            }
+
+        });
         return promise;
     }
 
