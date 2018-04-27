@@ -173,7 +173,6 @@ export class BookmarksPage {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
-                debugger
                 this.getLists(isPlaces, isOffers);
             })
             // .catch(() => {
