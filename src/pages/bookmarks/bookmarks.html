@@ -20,7 +20,7 @@
                 : ('PAGE_BOOKMARKS.BOOKMARKS5' | translate) }}
             </div>
         </div>
-        <div *ngIf="!getTotal() || getTotal() < 1">
+        <div *ngIf="(!getTotal() || getTotal() < 1) && !loadingLocation">
             {{ 'PAGE_BOOKMARKS.YOU_DONT_HAVE' | translate }}
             {{ segment === 'places' ? ('PAGE_BOOKMARKS.PLACES1' | translate) : ('PAGE_BOOKMARKS.OFFERS' | translate) }} {{ 'PAGE_BOOKMARKS.YET' | translate }}
         </div>

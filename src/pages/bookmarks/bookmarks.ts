@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, Loading, LoadingController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -35,6 +35,7 @@ export class BookmarksPage {
     // distanceObj;
     isForkMode: boolean;
     onRefreshTestimonials: Subscription;
+    loadingLocation;
 
     constructor(
         private favorites: FavoritesService,
@@ -43,7 +44,8 @@ export class BookmarksPage {
         private appMode: AppModeService,
         private testimonials: TestimonialsService,
         private diagnostic: Diagnostic,
-        private platform: Platform) {
+        private platform: Platform,
+        private loading: LoadingController) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -53,7 +55,7 @@ export class BookmarksPage {
             .subscribe(resp => {
                 if (!resp.notRefresh) {
                     this.getLocation();
-                    this.favorites.getPlaces(this.companiesPage, false)
+                    this.favorites.getPlaces(this.companiesPage)
                         .subscribe(resp => {
                             this.companies = resp.data;
                             this.companiesLastPage = resp.last_page;
@@ -71,7 +73,7 @@ export class BookmarksPage {
             .subscribe(resp => {
                 if (!resp.notRefresh) {
                     this.getLocation();
-                    this.favorites.getOffers(this.offersPage, false)
+                    this.favorites.getOffers(this.offersPage)
                         .subscribe(resp => {
                             this.offers = resp.data;
                             this.offersLastPage = resp.last_page;
@@ -109,14 +111,27 @@ export class BookmarksPage {
                 this.companiesLastPage = resp.last_page;
                 this.totalCompanies = resp.total;
                 this.getSegment();
-            });
-        this.favorites.getOffers(this.offersPage, false)
+                this.dismissLoading();
+            },
+                err => this.dismissLoading()
+            );
+        this.favorites.getOffers(this.offersPage)
             .subscribe(resp => {
                 this.offers = resp.data;
                 this.offersLastPage = resp.last_page;
                 this.totalOffers = resp.total;
                 this.getSegment();
-            });
+                this.dismissLoading();
+            },
+                err => this.dismissLoading()
+            );
+    }
+
+    dismissLoading() {
+        if (this.loadingLocation) {
+            this.loadingLocation.dismiss();
+            this.loading = undefined;
+        }
     }
 
     getDevMode() {
@@ -134,6 +149,8 @@ export class BookmarksPage {
     getLocation(isGetLists?: boolean) {
         if (this.platform.is('cordova')) {
             let promise: Promise<any>;
+            this.loadingLocation = this.loading.create({ content: '' });
+            this.loadingLocation.present();
             this.diagnostic.isLocationAvailable().then(result => {
                 if (result) {
                     promise = this.location.get(false);
@@ -150,6 +167,18 @@ export class BookmarksPage {
                         this.getLists();
                     }
                 })
+                    .catch(() => {
+                        this.location.getCache()
+                            .then(resp => {
+                                this.coords = {
+                                    lat: resp.coords.latitude,
+                                    lng: resp.coords.longitude
+                                };
+                                if (isGetLists) {
+                                    this.getLists();
+                                }
+                            })
+                    })
             })
         }
         else {
