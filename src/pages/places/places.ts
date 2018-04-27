@@ -346,17 +346,23 @@ export class PlacesPage {
             this.profile.get(true, false)
                 .subscribe(user => {
                     if (user.latitude) {
-                       this.getDefaultCoords(user.latitude, user.longitude);
+                        this.getDefaultCoords(user.latitude, user.longitude);
                     }
-                  else {
-                    this.location.getByIp()
-                    .subscribe(resp => {
-                        this.getDefaultCoords(resp.latitude, resp.longitude);
-                        user.latitude = resp.latitude;
-                        user.longitude = resp.longitude;
-                        this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
-                    });
-                  }
+                    else {
+                        this.location.getByIp()
+                            .subscribe(resp => {
+                                this.getDefaultCoords(resp.latitude, resp.longitude);
+                                user.latitude = resp.latitude;
+                                user.longitude = resp.longitude;
+                                this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
+                            },
+                                err => {
+                                    this.getDefaultCoords(0, 0);
+                                    user.latitude = 0;
+                                    user.longitude = 0;
+                                    this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
+                                });
+                    }
                 })
         }
     }
@@ -376,7 +382,7 @@ export class PlacesPage {
                 }
                 this.location.get(isHighAccuracy)
                     .then((resp) => {
-                       this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
+                        this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
                         loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                     })
                     .catch((error) => {
