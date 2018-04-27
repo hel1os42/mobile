@@ -35,6 +35,7 @@ export class BookmarksPage {
     // distanceObj;
     isForkMode: boolean;
     onRefreshTestimonials: Subscription;
+    onRefreshCoords: Subscription;
     loadingLocation;
 
     constructor(
@@ -50,38 +51,24 @@ export class BookmarksPage {
         this.isForkMode = this.appMode.getForkMode();
 
         this.segment = "places";
-        this.getLocation(true);
+        this.getLocation(true, true);
+
+        this.onRefreshCoords = this.location.onRefreshCoords
+            .subscribe(coords => {
+                this.coords = coords;
+            });
+
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
             .subscribe(resp => {
                 if (!resp.notRefresh) {
-                    this.getLocation();
-                    this.favorites.getPlaces(this.companiesPage)
-                        .subscribe(resp => {
-                            this.companies = resp.data;
-                            this.companiesLastPage = resp.last_page;
-                            this.totalCompanies = resp.total;
-                            this.segment = this.companies && this.companies.length > 0 && this.segment === 'places'
-                                ? 'places'
-                                : this.offers && this.offers.length > 0
-                                    ? 'offers'
-                                    : 'places';
-                        });
+                    this.getPlacesList();
                 };
             });
 
         this.onRefreshOffers = this.favorites.onRefreshOffers
             .subscribe(resp => {
                 if (!resp.notRefresh) {
-                    this.getLocation();
-                    this.favorites.getOffers(this.offersPage)
-                        .subscribe(resp => {
-                            this.offers = resp.data;
-                            this.offersLastPage = resp.last_page;
-                            this.totalOffers = resp.total;
-                            this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
-                                ? 'offers'
-                                : 'places';
-                        });
+                    this.getOffersList(false);
                 };
             });
 
@@ -104,33 +91,54 @@ export class BookmarksPage {
 
     }
 
-    getLists() {
+    getPlacesList() {
         this.favorites.getPlaces(this.companiesPage)
             .subscribe(resp => {
                 this.companies = resp.data;
                 this.companiesLastPage = resp.last_page;
                 this.totalCompanies = resp.total;
-                this.getSegment();
-                this.dismissLoading();
-            },
-                err => this.dismissLoading()
-            );
-        this.favorites.getOffers(this.offersPage)
-            .subscribe(resp => {
-                this.offers = resp.data;
-                this.offersLastPage = resp.last_page;
-                this.totalOffers = resp.total;
+                // this.segment = this.companies && this.companies.length > 0 && this.segment === 'places'
+                //     ? 'places'
+                //     : this.offers && this.offers.length > 0
+                //         ? 'offers'
+                //         : 'places';
                 this.getSegment();
                 this.dismissLoading();
             },
                 err => this.dismissLoading()
             );
     }
+    getOffersList(isGetSegment: boolean) {
+        this.favorites.getOffers(this.offersPage)
+            .subscribe(res => {
+                this.offers = res.data;
+                this.offersLastPage = res.last_page;
+                this.totalOffers = res.total;
+                this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
+                    ? 'offers'
+                    : 'places';
+                if (isGetSegment) {
+                    this.getSegment();
+                }
+                this.dismissLoading();
+            },
+                err => this.dismissLoading()
+            );
+    }
+
+    getLists(isPlaces: boolean, isOffers) {
+        if (isPlaces) {
+            this.getPlacesList();
+        }
+        if (isOffers) {
+            this.getOffersList(isPlaces && isOffers);
+        }
+    }
 
     dismissLoading() {
         if (this.loadingLocation) {
             this.loadingLocation.dismiss();
-            this.loading = undefined;
+            this.loadingLocation = undefined;
         }
     }
 
@@ -146,64 +154,60 @@ export class BookmarksPage {
                 : 'places';
     }
 
-    getLocation(isGetLists?: boolean) {
+    getLocation(isPlaces: boolean, isOffers: boolean) {
         if (this.platform.is('cordova')) {
             let promise: Promise<any>;
-            this.loadingLocation = this.loading.create({ content: '' });
-            this.loadingLocation.present();
-            this.diagnostic.isLocationAvailable().then(result => {
-                if (result) {
-                    promise = this.location.get(false);
-                }
-                else {
-                    promise = this.location.getCache();
-                }
-                promise.then(resp => {
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    if (isGetLists) {
-                        this.getLists();
-                    }
-                })
-                    .catch(() => {
-                        this.location.getCache()
-                            .then(resp => {
-                                this.coords = {
-                                    lat: resp.coords.latitude,
-                                    lng: resp.coords.longitude
-                                };
-                                if (isGetLists) {
-                                    this.getLists();
-                                }
-                            })
-                    })
+            if (isPlaces && isOffers) {
+                this.loadingLocation = this.loading.create({ content: '' });
+                this.loadingLocation.present();
+            }
+            // this.diagnostic.isLocationAvailable().then(result => {
+            //     if (result) {
+            //         promise = this.location.get(false, true);
+            //     }
+            //     else {
+            promise = this.location.getCache();
+            // }
+            promise.then(resp => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                debugger
+                this.getLists(isPlaces, isOffers);
             })
+            // .catch(() => {
+            //     this.location.getCache()
+            //         .then(resp => {
+            //             this.coords = {
+            //                 lat: resp.coords.latitude,
+            //                 lng: resp.coords.longitude
+            //             };
+            //             debugger
+            //             this.getLists(isPlaces, isOffers);
+            //         })
+            // })
+            // })
         }
         else {
-            this.location.get(false)
+            // this.location.get(false, true)
+            //     .then(resp => {
+            //         this.coords = {
+            //             lat: resp.coords.latitude,
+            //             lng: resp.coords.longitude
+            //         };
+            //         this.getLists(isPlaces, isOffers);
+            //     }) // for browser if location detection denied
+            //     .catch((error) => {
+            this.location.getCache()
                 .then(resp => {
                     this.coords = {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
-                    if (isGetLists) {
-                        this.getLists();
-                    }
-                }) // for browser if location detection denied
-                .catch((error) => {
-                    this.location.getCache()
-                        .then(resp => {
-                            this.coords = {
-                                lat: resp.coords.latitude,
-                                lng: resp.coords.longitude
-                            };
-                            if (isGetLists) {
-                                this.getLists();
-                            }
-                        })
+                    this.getLists(isPlaces, isOffers);
                 })
+            // })
         }
     }
 
@@ -258,31 +262,31 @@ export class BookmarksPage {
         return total;
     }
 
-    removePlace(company) {
-        this.favorites.removePlace(company.id, true)
-            .subscribe(() => {
-                this.companies.forEach(item => {
-                    if (item.id === company.id) {
-                        let i = _.indexOf(this.companies, item);
-                        this.companies.splice(i, 1);
-                        this.totalCompanies = this.companies.length;
-                    }
-                })
-            });
-    }
+    // removePlace(company) {
+    //     this.favorites.removePlace(company.id, true)
+    //         .subscribe(() => {
+    //             this.companies.forEach(item => {
+    //                 if (item.id === company.id) {
+    //                     let i = _.indexOf(this.companies, item);
+    //                     this.companies.splice(i, 1);
+    //                     this.totalCompanies = this.companies.length;
+    //                 }
+    //             })
+    //         });
+    // }
 
-    removeOffer(offer) {
-        this.favorites.removeOffer(offer.id, true)
-            .subscribe(() => {
-                this.offers.forEach(item => {
-                    if (item.id === offer.id) {
-                        let i = _.indexOf(this.offers, item);
-                        this.offers.splice(i, 1);
-                        this.totalOffers = this.offers.length;
-                    }
-                })
-            });
-    }
+    // removeOffer(offer) {
+    //     this.favorites.removeOffer(offer.id, true)
+    //         .subscribe(() => {
+    //             this.offers.forEach(item => {
+    //                 if (item.id === offer.id) {
+    //                     let i = _.indexOf(this.offers, item);
+    //                     this.offers.splice(i, 1);
+    //                     this.totalOffers = this.offers.length;
+    //                 }
+    //             })
+    //         });
+    // }
 
     ngOnDestroy() {
         this.onRefreshCompanies.unsubscribe();
