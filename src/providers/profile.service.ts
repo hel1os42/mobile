@@ -56,6 +56,7 @@ export class ProfileService {
     patch(data, isNoShowLoading?: boolean, gender?: string) {//temporary parametr "gender"
         let obs = this.api.patch('profile', data, { showLoading: !isNoShowLoading });
         obs.subscribe(resp => {
+            this.onRefresh.emit(resp);
             if (this.platform.is('cordova') 
             && (!this.user || this.user.name !== resp.name || this.user.phone !== resp.phone || this.user.email !== resp.email)) {
                 this.sendTags(resp, gender);

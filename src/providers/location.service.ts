@@ -22,8 +22,10 @@ export class LocationService {
 
         this.onProfileCoordsRefresh = this.profile.onRefresh
             .subscribe(resp => {
-                this.profileCoords.lat = resp.latitude;
-                this.profileCoords.lng = resp.longitude;
+                if (resp.latitude) {
+                    this.profileCoords.lat = resp.latitude;
+                    this.profileCoords.lng = resp.longitude;
+                }
             })
     }
 
