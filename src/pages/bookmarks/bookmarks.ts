@@ -227,8 +227,13 @@ export class BookmarksPage {
                 distance: distance,
                 key: key
             }
-        };
-        return undefined;
+        } else {
+            return {
+                distance: undefined,
+                key: undefined
+            }
+        }
+        
     }
 
     openPlace(data) {
