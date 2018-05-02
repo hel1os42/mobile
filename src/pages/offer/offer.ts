@@ -75,13 +75,13 @@ export class OfferPage {
         this.offer = this.navParams.get('offer');
         this.distanceObj = this.navParams.get('distanceObj');
         this.coords = this.navParams.get('coords');
-        this.offers.get(this.offer.id)
+        this.offers.get(this.offer.id, true)
             .subscribe(offer => {
                 if (offer.timeframes) {
                     this.offer = offer;
                 }
-                console.log(this.offer);
-                console.log(this.company);
+                // console.log(this.offer);
+                // console.log(this.company);
                 this.offer.is_favorite = this.navParams.get('offer').is_favorite;//temporary fix
 
                 this.distance = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, this.offer.latitude, this.offer.longitude);
