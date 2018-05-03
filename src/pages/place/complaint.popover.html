@@ -21,8 +21,8 @@
             <ion-col text-center>
                 <button (click)="close()" ion-button block color="primary">{{ 'UNIT.CANCEL' | translate }}</button>
             </ion-col>
-            <ion-col text-center class="margin-left-2proc">
-                <button *ngIf="isInputVisible" (click)="setComplaint()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+            <ion-col *ngIf="isInputVisible" text-center class="margin-left-2proc">
+                <button (click)="setComplaint()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
             </ion-col>
         </ion-row>
     </ion-grid>
