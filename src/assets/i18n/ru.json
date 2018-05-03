@@ -27,7 +27,8 @@
         "STAFF_IS_NOT": "Персонал не знает о NAU",
         "STAFF_HAS_DENIED" : "Персонал отказал в обслуживании по NAU",
         "DISCOUNT_OR_BONUS": "Скидка или бонус не соответствуют описанию",
-        "OTHER_REASON": "Другая причина"
+        "OTHER_REASON": "Другая причина",
+        "NOTIFICATION": "Отчет отправлен"
     },
 
     "CONFIRM" : {

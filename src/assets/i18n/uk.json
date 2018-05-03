@@ -27,7 +27,8 @@
         "STAFF_IS_NOT": "Персонал не знає про NAU",
         "STAFF_HAS_DENIED" : "Відмова обслуговування через NAU",
         "DISCOUNT_OR_BONUS": "Знижка чи бонус не відповідають опису",
-        "OTHER_REASON": "Інша причина"
+        "OTHER_REASON": "Інша причина",
+        "NOTIFICATION": "Звіт відправлений"
     },
 
     "CONFIRM" : {

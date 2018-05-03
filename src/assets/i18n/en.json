@@ -27,7 +27,8 @@
         "STAFF_IS_NOT": "Staff is not aware of NAU",
         "STAFF_HAS_DENIED" : "Staff has denied service through NAU",
         "DISCOUNT_OR_BONUS": "Discount or bonus are not as described",
-        "OTHER_REASON": "Other reason"
+        "OTHER_REASON": "Other reason",
+        "NOTIFICATION": "Report was submitted"
     },
 
     "CONFIRM" : {
