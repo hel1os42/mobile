@@ -330,7 +330,7 @@
         "PLEASE_ENTER_OTP" : "Будь-ласка, введіть код з SMS",
         "OTP" : "Код з SMS",
         "GET_OTP" : "Отримати SMS",
-        "RESEND_SMS" : "Повторно відправити SMS через",
+        "RESEND_SMS" : "Повторно відправити SMS",
         "SMS_RESENDING" : "Повторно відправити SMS через",
         "SECONDS" : "секунд",
         "SECONDS2" : "секунди",
