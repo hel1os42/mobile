@@ -263,6 +263,7 @@ page-place {
         margin-top: calc(20px + 4px);
         margin-top: calc(constant(safe-area-inset-top) + 4px);
         margin-top: calc(env(safe-area-inset-top) + 4px);
+        z-index: 111;
     }
 }
 

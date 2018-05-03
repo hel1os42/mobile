@@ -1,35 +1,44 @@
 <div class="modal_content">
     <ion-label padding-bottom text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ 'COMPLAINT.COMPLAINT_TITLE' | translate }}</ion-label>
 
-    <div class="block-lines">
-        <a class="font-14">{{ 'COMPLAINT.STAFF_IS_NOT' | translate }}</a>
+    <div>
+
+        <div class="block-lines">
+            <a class="font-14">{{ 'COMPLAINT.STAFF_IS_NOT' | translate }}</a>
+        </div>
+
+        <div class="block-lines">
+            <a class="font-14">{{ 'COMPLAINT.STAFF_HAS_DENIED' | translate }}</a>
+        </div>
+
+        <div class="block-lines">
+            <a class="font-14">{{ 'COMPLAINT.DISCOUNT_OR_BONUS' | translate }}</a>
+        </div>
+
+        <div class="block-lines">
+            <a class="font-14">{{ 'COMPLAINT.OTHER_REASON' | translate }}</a>
+        </div>
+
     </div>
 
-    <div class="block-lines">
-        <a class="font-14">{{ 'COMPLAINT.STAFF_HAS_DENIED' | translate }}</a>
-    </div>
-
-    <div class="block-lines">
-        <a class="font-14">{{ 'COMPLAINT.DISCOUNT_OR_BONUS' | translate }}</a>
-    </div>
-
-    <div class="block-lines">
-        <a class="font-14">{{ 'COMPLAINT.OTHER_REASON' | translate }}</a>
+    <div hidden>
+        <div margin-bottom class="font-14">{{ 'COMPLAINT.OTHER_REASON' | translate }}</div>
         <ion-textarea
-            margin-top
             maxlength="250"
             class="bg-gray-radius-small"
             placeholder="">
         </ion-textarea>
     </div>
 
-    <div padding>
-        <ion-grid>
-            <ion-row>
-                <ion-col text-center>
-                    <button (click)="close(false)" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </div>
+    <ion-grid padding-top padding-bottom>
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="close(false)" ion-button block color="primary">{{ 'UNIT.CANCEL' | translate }}</button>
+            </ion-col>
+            <ion-col text-center class="margin-left-2proc" hidden>
+                <button ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
 </div>
