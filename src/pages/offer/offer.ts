@@ -43,7 +43,7 @@ export class OfferPage {
     points: number;
     links = [];
     isDismissLinkPopover = true;
-    today: Date;
+    // today: Date;
     todayTimeframe;
     timeframes;
     isTodayIncluded = false;
@@ -66,7 +66,7 @@ export class OfferPage {
         private browser: InAppBrowser,
         private translate: TranslateService) {
 
-        this.today = new Date();
+        // this.today = new Date();
         this.points = 1;
         if (this.share.get()) {
             this.share.remove();
@@ -116,7 +116,7 @@ export class OfferPage {
     timeframesHandler() {
         // this.offer.timezone_offset = -10800;//temporary - will removed
         if (this.offer.timeframes && this.offer.timeframes.length > 0 && this.offer.timeframes_offset) {
-            let timeframe = DateTimeUtils.getOfferTimeframes(this.today, this.offer.timeframes, this.offer.timeframes_offset);
+            let timeframe = DateTimeUtils.getOfferTimeframes(this.offer.timeframes, this.offer.timeframes_offset);
             this.isTodayIncluded = timeframe.isIncluded;
             this.todayTimeframe = timeframe.day;
             this.timeframes = timeframe.timeFrames;

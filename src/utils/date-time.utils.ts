@@ -146,7 +146,8 @@ export class DateTimeUtils {
         return hourStr;
     }
 
-    static getOfferTimeframes(date: Date, timeframesData: TimeFrames[], timezone: number) {
+    static getOfferTimeframes(timeframesData: TimeFrames[], timeOffset: number) {
+        let date = new Date();
         let timeFrames: any = _.flatMap(timeframesData, function (obj) {
             return _.map(obj.days, function (day) {
                 return {
@@ -163,15 +164,15 @@ export class DateTimeUtils {
             let fromInMinutes = parseInt(day.from.split(':')[0]) * 60 + parseInt(day.from.split(':')[1].slice(0, 2));
             let toInMinutes = parseInt(day.to.split(':')[0]) * 60 + parseInt(day.to.split(':')[1].slice(0, 2));
             if ((fromInMinutes < toInMinutes && timeInMinutes >= fromInMinutes && timeInMinutes <= toInMinutes) 
-            || (fromInMinutes > toInMinutes)) {
+                || ((fromInMinutes > toInMinutes) && (timeInMinutes >= fromInMinutes || timeInMinutes <= toInMinutes))) {
                 isIncluded = true;
             }
             else isIncluded = false;
         }
         timeFrames = timeFrames.map(item => {
             return {
-                from: DateTimeUtils.returnTime(item.from, timezone),
-                to: DateTimeUtils.returnTime(item.to, timezone),
+                from: DateTimeUtils.returnTime(item.from, timeOffset),
+                to: DateTimeUtils.returnTime(item.to, timeOffset),
                 day: DateTimeUtils.ALL_DAYS.find(day => day.slice(0, 2) === item.day)
             }
         });
