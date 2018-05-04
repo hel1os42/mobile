@@ -1,7 +1,19 @@
 export const COUNTRIES =
     [
-        'Colombia',
-        'Russia',
-        'Ukraine',
-        'Philippines'
+        {
+            name: 'Colombia',
+            code: 'co'
+        },
+        {
+            name: 'Russia',
+            code: 'ru'
+        },
+        {
+            name: 'Ukraine',
+            code: 'ua'
+        },
+        {
+            name: 'Philippines',
+            code: 'ph'
+        }
     ]
