@@ -627,8 +627,14 @@ export class PlacesPage {
                 //     ? (address.state || address.county)
                 //     : undefined;
                 let countryCode = address ? address.country_code : undefined;
-                let country =  PHONE_CODES.find(country => country.code === address.country_code.toUpperCase()).name;
-                let isCountryEnabled = COUNTRIES.find(item => item.name === country) ? true : false;
+                let isCountryEnabled;
+                if (countryCode) {
+                    let country = PHONE_CODES.find(country => country.code === countryCode.toUpperCase()).name;
+                    isCountryEnabled = COUNTRIES.find(item => item.name === country) ? true : false;
+                }
+                else {
+                    isCountryEnabled = false;
+                }
                 let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, countryCode: countryCode });
                 popover.present();
                 popover.onDidDismiss(data => {

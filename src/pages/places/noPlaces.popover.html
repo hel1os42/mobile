@@ -1,10 +1,10 @@
 <div class="modal_content">
     <ion-label text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ 'PAGE_PLACES.COMING_SOON' | translate }}</ion-label>
     <div *ngIf="!isCountryEnabled">
-        <div text-center margin>
+        <div *ngIf="countryCode" text-center margin>
             <img class="flag-big" [src]="getFlag(countryCode)">
         </div>
-        <div text-center class="bold font-16 text-3E4B5D">
+        <div *ngIf="countryCode" text-center class="bold font-16 text-3E4B5D">
             {{ 'PAGE_PLACES.NAU_IS_NOT' | translate }}
         </div>
         <div margin text-center class="font-14 text-828282">
