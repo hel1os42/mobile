@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import { TimeFrames } from '../models/timeFrames';
 
 export class DateTimeUtils {
@@ -136,8 +137,6 @@ export class DateTimeUtils {
 
     static returnTime(time: string, timeOffset) {
         let date = new Date('August 19, 1975' + ' ' + time.split(':')[0] + ':' + time.split(':')[1] + ':00');
-        // let offsetInMinutes =  parseInt(timeOffset.slice(1, 3)) * 60 + parseInt(timeOffset.slice(-2));
-        // offsetInMinutes = timeOffset.slice(0, 1) === '-' ? offsetInMinutes * (-1) : offsetInMinutes;
         let offsetInMinutes = timeOffset / 60;
         date.setMinutes(date.getMinutes() + offsetInMinutes);
         let hour = date.getHours();
@@ -148,6 +147,8 @@ export class DateTimeUtils {
 
     static getOfferTimeframes(timeframesData: TimeFrames[], timeOffset: number) {
         let date = new Date();
+        let offerDate = moment().utcOffset(timeOffset / 60).format("dddd, DD MMMM YYYY, HH:mm:ss");
+        let offerDay = offerDate.split(',')[0].toLowerCase();
         let timeFrames: any = _.flatMap(timeframesData, function (obj) {
             return _.map(obj.days, function (day) {
                 return {
@@ -157,13 +158,14 @@ export class DateTimeUtils {
                 };
             });
         });
-        let day = timeFrames.find(item => item.day === this.ALL_DAYS[date.getUTCDay() - 1].slice(0, 2));
+        // let day = timeFrames.find(item => item.day === this.ALL_DAYS[date.getUTCDay() - 1].slice(0, 2));
+        let day = timeFrames.find(item => item.day === offerDay.slice(0, 2));
         let isIncluded: boolean;
         if (day) {
             let timeInMinutes = date.getUTCHours() * 60 + date.getUTCMinutes();
             let fromInMinutes = parseInt(day.from.split(':')[0]) * 60 + parseInt(day.from.split(':')[1].slice(0, 2));
             let toInMinutes = parseInt(day.to.split(':')[0]) * 60 + parseInt(day.to.split(':')[1].slice(0, 2));
-            if ((fromInMinutes < toInMinutes && timeInMinutes >= fromInMinutes && timeInMinutes <= toInMinutes) 
+            if ((fromInMinutes < toInMinutes && timeInMinutes >= fromInMinutes && timeInMinutes <= toInMinutes)
                 || ((fromInMinutes > toInMinutes) && (timeInMinutes >= fromInMinutes || timeInMinutes <= toInMinutes))) {
                 isIncluded = true;
             }
@@ -176,8 +178,9 @@ export class DateTimeUtils {
                 day: DateTimeUtils.ALL_DAYS.find(day => day.slice(0, 2) === item.day)
             }
         });
-        day = timeFrames.find(item => item.day === this.ALL_DAYS[date.getUTCDay() - 1]);
-        let  index = (item, days) => {
+        // day = timeFrames.find(item => item.day === this.ALL_DAYS[date.getUTCDay() - 1]);
+        day = timeFrames.find(item => item.day === offerDay);
+        let index = (item, days) => {
             for (let i = 0; i < 7; i++) {
                 if (item.day === days[i]) {
                     return i;
