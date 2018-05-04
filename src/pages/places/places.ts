@@ -626,9 +626,10 @@ export class PlacesPage {
                 // let state = address
                 //     ? (address.state || address.county)
                 //     : undefined;
-                let country = address ? PHONE_CODES.find(country => country.code === address.country_code.toUpperCase()).name : undefined;
-                let isCountryEnabled = COUNTRIES.find(item => item === country) ? true : false;
-                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, country: country });
+                let countryCode = address ? address.country_code : undefined;
+                let country =  PHONE_CODES.find(country => country.code === address.country_code.toUpperCase()).name;
+                let isCountryEnabled = COUNTRIES.find(item => item.name === country) ? true : false;
+                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, countryCode: countryCode });
                 popover.present();
                 popover.onDidDismiss(data => {
                     if (data && data.radius) {

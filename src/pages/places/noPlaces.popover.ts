@@ -12,7 +12,7 @@ export class NoPlacesPopover {
 
     isCountryEnabled: boolean;
     city: string;
-    country: string;
+    countryCode: string;
     state: string;
     radius = 19849000;
     enabledCountries = COUNTRIES;
@@ -27,7 +27,7 @@ export class NoPlacesPopover {
 
         this.isCountryEnabled = this.navParams.get('isCountryEnabled');
         this.city = this.navParams.get('city');
-        this.country = this.navParams.get('country');
+        this.countryCode = this.navParams.get('countryCode');
         // this.state = this.navParams.get('state');
     }
 
