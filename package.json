@@ -37,7 +37,7 @@
     "@ionic-native/keyboard": "4.5.3",
     "@ionic-native/launch-navigator": "4.7.0",
     "@ionic-native/network": "4.5.3",
-    "@ionic-native/onesignal": "^4.6.0",
+    "@ionic-native/onesignal": "4.6.0",
     "@ionic-native/splash-screen": "4.5.2",
     "@ionic-native/status-bar": "4.5.2",
     "@ionic-native/twitter-connect": "4.6.0",
