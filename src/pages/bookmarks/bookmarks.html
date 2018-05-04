@@ -54,7 +54,7 @@
                     </ng-container>
                     <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
                     <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
-                    <ng-container *ngIf="getDistance(company.latitude, company.longitude).distance && getDistance(company.latitude, company.longitude)">
+                    <ng-container *ngIf="getDistance(company.latitude, company.longitude) && getDistance(company.latitude, company.longitude).distance">
                         <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                         <span  class="font-75 text-828282">
                             {{ getDistance(company.latitude, company.longitude).distance }}
