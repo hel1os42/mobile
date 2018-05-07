@@ -27,7 +27,8 @@
         "STAFF_IS_NOT": "El personal no sabe de NAU",
         "STAFF_HAS_DENIED" : "El personal rechazo en la prestación de servicios de NAU",
         "DISCOUNT_OR_BONUS": "Descuento o bonus no coincidían con las descripciones",
-        "OTHER_REASON": "Otra razon"
+        "OTHER_REASON": "Otra razon",
+        "NOTIFICATION": "El informe fue enviado"
     },
 
     "CONFIRM" : {
@@ -447,7 +448,8 @@
         "BY_PRESSING" : "Presionando «Siguiente», yo estoy de acuerdo",
         "TERMS_AND_CONDITIONS" : "Términos y Condiciones",
         "AND" : "y",
-        "PRIVACY_POLICY" : "política de privacidad"
+        "PRIVACY_POLICY" : "política de privacidad",
+        "INVITE_OPTIONAL" : "Opcional"
     },
 
     "PAGE_SIGNUP-CODE" : {

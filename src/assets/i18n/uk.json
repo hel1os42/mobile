@@ -27,7 +27,8 @@
         "STAFF_IS_NOT": "Персонал не знає про NAU",
         "STAFF_HAS_DENIED" : "Відмова обслуговування через NAU",
         "DISCOUNT_OR_BONUS": "Знижка чи бонус не відповідають опису",
-        "OTHER_REASON": "Інша причина"
+        "OTHER_REASON": "Інша причина",
+        "NOTIFICATION": "Звіт відправлений"
     },
 
     "CONFIRM" : {
@@ -329,7 +330,7 @@
         "PLEASE_ENTER_OTP" : "Будь-ласка, введіть код з SMS",
         "OTP" : "Код з SMS",
         "GET_OTP" : "Отримати SMS",
-        "RESEND_SMS" : "Повторно відправити SMS через",
+        "RESEND_SMS" : "Повторно відправити SMS",
         "SMS_RESENDING" : "Повторно відправити SMS через",
         "SECONDS" : "секунд",
         "SECONDS2" : "секунди",
@@ -357,8 +358,8 @@
         "POINTS" : "балів",
         "POINTS2" : "бала",
         "POINT" : "бал",
-        "OFFER" : "акції",
-        "REDEEM" : "Купон",
+        "OFFER" : "Купон",
+        "REDEEM" : "Погасити",
         "OFFER_REDEEMING" : "Погашення купону",
         "OR_USE_QR_CODE" : "або використайте QR-код",
         "AGREE_WITH_TERMS" : "Підтверджую згоду з Умовами використання акцій",
@@ -447,7 +448,8 @@
         "BY_PRESSING" : "Натискаючи 'Далі', я приймаю",
         "TERMS_AND_CONDITIONS" : "Умови та положення",
         "AND" : "і",
-        "PRIVACY_POLICY" : "політику конфіденційності"
+        "PRIVACY_POLICY" : "політику конфіденційності",
+        "INVITE_OPTIONAL" : "Не обов'язково"
     },
 
     "PAGE_SIGNUP-CODE" : {

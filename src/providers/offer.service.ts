@@ -12,8 +12,8 @@ export class OfferService {
     constructor(
         private api: ApiService) { }
 
-    get(offerId) {
-        return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: false });
+    get(offerId, showLoading?: boolean) {
+        return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
     }
 
     getPlacesOfRoot(

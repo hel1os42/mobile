@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, Loading, LoadingController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -35,6 +35,8 @@ export class BookmarksPage {
     // distanceObj;
     isForkMode: boolean;
     onRefreshTestimonials: Subscription;
+    onRefreshCoords: Subscription;
+    loadingLocation;
 
     constructor(
         private favorites: FavoritesService,
@@ -43,43 +45,30 @@ export class BookmarksPage {
         private appMode: AppModeService,
         private testimonials: TestimonialsService,
         private diagnostic: Diagnostic,
-        private platform: Platform) {
+        private platform: Platform,
+        private loading: LoadingController) {
 
         this.isForkMode = this.appMode.getForkMode();
 
         this.segment = "places";
-        this.getLocation(true);
+        this.getLocation(true, true);
+
+        this.onRefreshCoords = this.location.onRefreshCoords
+            .subscribe(coords => {
+                this.coords = coords;
+            });
+
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
             .subscribe(resp => {
                 if (!resp.notRefresh) {
-                    this.getLocation();
-                    this.favorites.getPlaces(this.companiesPage, false)
-                        .subscribe(resp => {
-                            this.companies = resp.data;
-                            this.companiesLastPage = resp.last_page;
-                            this.totalCompanies = resp.total;
-                            this.segment = this.companies && this.companies.length > 0 && this.segment === 'places'
-                                ? 'places'
-                                : this.offers && this.offers.length > 0
-                                    ? 'offers'
-                                    : 'places';
-                        });
+                    this.getPlacesList();
                 };
             });
 
         this.onRefreshOffers = this.favorites.onRefreshOffers
             .subscribe(resp => {
                 if (!resp.notRefresh) {
-                    this.getLocation();
-                    this.favorites.getOffers(this.offersPage, false)
-                        .subscribe(resp => {
-                            this.offers = resp.data;
-                            this.offersLastPage = resp.last_page;
-                            this.totalOffers = resp.total;
-                            this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
-                                ? 'offers'
-                                : 'places';
-                        });
+                    this.getOffersList(false);
                 };
             });
 
@@ -102,21 +91,55 @@ export class BookmarksPage {
 
     }
 
-    getLists() {
+    getPlacesList() {
         this.favorites.getPlaces(this.companiesPage)
             .subscribe(resp => {
                 this.companies = resp.data;
                 this.companiesLastPage = resp.last_page;
                 this.totalCompanies = resp.total;
+                // this.segment = this.companies && this.companies.length > 0 && this.segment === 'places'
+                //     ? 'places'
+                //     : this.offers && this.offers.length > 0
+                //         ? 'offers'
+                //         : 'places';
                 this.getSegment();
-            });
-        this.favorites.getOffers(this.offersPage, false)
-            .subscribe(resp => {
-                this.offers = resp.data;
-                this.offersLastPage = resp.last_page;
-                this.totalOffers = resp.total;
-                this.getSegment();
-            });
+                this.dismissLoading();
+            },
+                err => this.dismissLoading()
+            );
+    }
+    getOffersList(isGetSegment: boolean) {
+        this.favorites.getOffers(this.offersPage)
+            .subscribe(res => {
+                this.offers = res.data;
+                this.offersLastPage = res.last_page;
+                this.totalOffers = res.total;
+                this.segment = this.offers && this.offers.length > 0 && this.segment === 'offers'
+                    ? 'offers'
+                    : 'places';
+                if (isGetSegment) {
+                    this.getSegment();
+                }
+                this.dismissLoading();
+            },
+                err => this.dismissLoading()
+            );
+    }
+
+    getLists(isPlaces: boolean, isOffers) {
+        if (isPlaces) {
+            this.getPlacesList();
+        }
+        if (isOffers) {
+            this.getOffersList(isPlaces && isOffers);
+        }
+    }
+
+    dismissLoading() {
+        if (this.loadingLocation) {
+            this.loadingLocation.dismiss();
+            this.loadingLocation = undefined;
+        }
     }
 
     getDevMode() {
@@ -131,50 +154,59 @@ export class BookmarksPage {
                 : 'places';
     }
 
-    getLocation(isGetLists?: boolean) {
+    getLocation(isPlaces: boolean, isOffers: boolean) {
         if (this.platform.is('cordova')) {
             let promise: Promise<any>;
-            this.diagnostic.isLocationAvailable().then(result => {
-                if (result) {
-                    promise = this.location.get(false);
-                }
-                else {
-                    promise = this.location.getCache();
-                }
-                promise.then(resp => {
-                    this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
-                    };
-                    if (isGetLists) {
-                        this.getLists();
-                    }
-                })
+            if (isPlaces && isOffers) {
+                this.loadingLocation = this.loading.create({ content: '' });
+                this.loadingLocation.present();
+            }
+            // this.diagnostic.isLocationAvailable().then(result => {
+            //     if (result) {
+            //         promise = this.location.get(false, true);
+            //     }
+            //     else {
+            promise = this.location.getCache();
+            // }
+            promise.then(resp => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                this.getLists(isPlaces, isOffers);
             })
+            // .catch(() => {
+            //     this.location.getCache()
+            //         .then(resp => {
+            //             this.coords = {
+            //                 lat: resp.coords.latitude,
+            //                 lng: resp.coords.longitude
+            //             };
+            //             debugger
+            //             this.getLists(isPlaces, isOffers);
+            //         })
+            // })
+            // })
         }
         else {
-            this.location.get(false)
+            // this.location.get(false, true)
+            //     .then(resp => {
+            //         this.coords = {
+            //             lat: resp.coords.latitude,
+            //             lng: resp.coords.longitude
+            //         };
+            //         this.getLists(isPlaces, isOffers);
+            //     }) // for browser if location detection denied
+            //     .catch((error) => {
+            this.location.getCache()
                 .then(resp => {
                     this.coords = {
                         lat: resp.coords.latitude,
                         lng: resp.coords.longitude
                     };
-                    if (isGetLists) {
-                        this.getLists();
-                    }
-                }) // for browser if location detection denied
-                .catch((error) => {
-                    this.location.getCache()
-                        .then(resp => {
-                            this.coords = {
-                                lat: resp.coords.latitude,
-                                lng: resp.coords.longitude
-                            };
-                            if (isGetLists) {
-                                this.getLists();
-                            }
-                        })
+                    this.getLists(isPlaces, isOffers);
                 })
+            // })
         }
     }
 
@@ -195,8 +227,13 @@ export class BookmarksPage {
                 distance: distance,
                 key: key
             }
-        };
-        return undefined;
+        } else {
+            return {
+                distance: undefined,
+                key: undefined
+            }
+        }
+        
     }
 
     openPlace(data) {

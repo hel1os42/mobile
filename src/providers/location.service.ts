@@ -14,6 +14,7 @@ export class LocationService {
     onProfileCoordsChanged = new EventEmitter<Coords>();
     profileCoords = new Coords;
     onProfileCoordsRefresh: Subscription;
+    onRefreshCoords = new EventEmitter<Coords>();
 
     constructor(private geolocation: Geolocation,
         private http: Http,
@@ -22,21 +23,33 @@ export class LocationService {
 
         this.onProfileCoordsRefresh = this.profile.onRefresh
             .subscribe(resp => {
-                this.profileCoords.lat = resp.latitude;
-                this.profileCoords.lng = resp.longitude;
+                if (resp.latitude) {
+                    this.profileCoords.lat = resp.latitude;
+                    this.profileCoords.lng = resp.longitude;
+                }
             })
     }
 
-    get(isHighAccuracy: boolean) {
+    get(isHighAccuracy: boolean, isBookmarks?: boolean) {
         // if (this.geoposition)
         //     return Promise.resolve(this.geoposition);
         // else
         let promise = this.geolocation.getCurrentPosition({
             enableHighAccuracy: isHighAccuracy,
-            timeout: 30000,
-            maximumAge: 6000
+            timeout: 40000,
+            maximumAge: 12000
         })
-        promise.then(geo => this.geoposition = geo);
+        promise.then(geo => {
+            this.geoposition = geo;
+            if (!isBookmarks) {
+                let coords: Coords = {
+                    lat: geo.coords.latitude,
+                    lng: geo.coords.longitude
+                };
+                this.onRefreshCoords.emit(coords);
+            }
+
+        });
         return promise;
     }
 
@@ -67,15 +80,21 @@ export class LocationService {
         //     ? Promise.resolve(this.geoposition)
         //     : this.get(false);
         // return promise;
-        return Promise.resolve(
-            {
-                coords: {
-                    latitude: this.profileCoords.lat,
-                    longitude: this.profileCoords.lng
-                }
-
+        let coords;
+        if (this.geoposition && this.geoposition.coords.latitude) {
+            coords = {
+                latitude: this.geoposition.coords.latitude,
+                longitude: this.geoposition.coords.longitude
+            };
+        }
+        else {
+            coords = {
+                latitude: this.profileCoords.lat,
+                longitude: this.profileCoords.lng
             }
-        );
+
+        }
+        return Promise.resolve({ coords: coords });
     }
 
     refreshDefaultCoords(coords: Coords, notEmit?: boolean) {

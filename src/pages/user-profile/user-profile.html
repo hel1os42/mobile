@@ -60,8 +60,7 @@
             <div class="box box1">
                 <div class="label-point circle-label-top">10 000</div>
                 <div class="next-level">
-                    <span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}
-                        <br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ level }}
+                    <span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ level }}
                     </span>
                 </div>
             </div>
@@ -124,15 +123,16 @@
                     <div text-uppercase class="text-3E4B5D font-12">
                         {{ user.offers_count >= 10 && user.offers_count <= 20
                         ? ('UNIT.OFFERS' | translate)
-                        : user.offers_count % 10 == 1 
-                        ? ('UNIT.OFFER' | translate) 
-                        : (user.offers_count % 10 >= 2 && user.offers_count % 10 <= 4) 
-                        ? ('UNIT.OFFERS2' | translate) 
+                        : user.offers_count % 10 == 1
+                        ? ('UNIT.OFFER' | translate)
+                        : (user.offers_count % 10 >= 2 && user.offers_count % 10 <= 4)
+                        ? ('UNIT.OFFERS2' | translate)
                         : ('UNIT.OFFERS' | translate) }}
                     </div>
                 </div>
             </a>
-            <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
+            <!-- <a ion-col class="text-gray" (click)="openUserNau()" align-self-end> -->
+                <a ion-col class="text-gray" align-self-end>
                 <div>
                     <img src="assets/img/user_profile/nau.svg">
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ balance }}</div>
@@ -146,10 +146,10 @@
                     <div text-uppercase class="text-3E4B5D font-12">
                         {{ user.referrals_count >= 10 && user.referrals_count <= 20
                         ? ('UNIT.FRIENDS' | translate)
-                        : user.referrals_count % 10 == 1 
-                        ? ('UNIT.FRIEND' | translate) 
-                        : (user.referrals_count % 10 >= 2 && user.referrals_count % 10 <= 4) 
-                        ? ('UNIT.FRIENDS2' | translate) 
+                        : user.referrals_count % 10 == 1
+                        ? ('UNIT.FRIEND' | translate)
+                        : (user.referrals_count % 10 >= 2 && user.referrals_count % 10 <= 4)
+                        ? ('UNIT.FRIENDS2' | translate)
                         : ('UNIT.FRIENDS' | translate) }}
                     </div>
                 </div>
