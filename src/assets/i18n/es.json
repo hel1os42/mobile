@@ -590,11 +590,11 @@
     },
 
     "PAGE_USER-USERS" : {
-        "YOUR_REFERRALS" : "Sus referencias",
+        "YOUR_REFERRALS" : "Sus amigos",
         "USERS" : "Usuarios",
         "LEVEL" : "Nivel",
         "REGISTRATION_DATE" : "Fecha de Registro",
-        "LOADING_REFERRALS" : "Cargando referencias..."
+        "LOADING_REFERRALS" : "Cargando amigos..."
     },
 
     "PAGE_TRANSFER" : {
