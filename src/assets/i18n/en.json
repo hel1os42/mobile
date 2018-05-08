@@ -594,7 +594,8 @@
         "USERS" : "Users",
         "LEVEL" : "Level",
         "REGISTRATION_DATE" : "Registration date",
-        "LOADING_REFERRALS" : "Loading friends..."
+        "LOADING_REFERRALS" : "Loading...",
+        "YOU_DONT_HAVE": "You don't have any friends yet"
     },
 
     "PAGE_TRANSFER" : {

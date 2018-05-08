@@ -594,7 +594,8 @@
         "USERS" : "Пользователи",
         "LEVEL" : "Уровень",
         "REGISTRATION_DATE" : "Дата регистрации",
-        "LOADING_REFERRALS" : "Загрузка приглашенных..."
+        "LOADING_REFERRALS" : "Загрузка...",
+        "YOU_DONT_HAVE": "У Вас еще нет друзей"
     },
 
     "PAGE_TRANSFER" : {
