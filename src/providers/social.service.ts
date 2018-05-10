@@ -15,13 +15,13 @@ export class SocialService {
     oauth: OauthCordova = new OauthCordova();
     instagramProvider: Instagram = new Instagram({
         clientId: 'f3e53b167fef46e5a361ab3dd1887d86',
-        redirectUri: 'http://localhost/',  // Let is be localhost for Mobile Apps
+        redirectUri: 'http://localhost',  // Let is be localhost for Mobile Apps
         responseType: 'token',
         appScope: ['basic', 'public_content']
     });
     vkProvider: VK = new VK({
         clientId: '6473105',
-        redirectUri: 'http://localhost/',
+        redirectUri: 'http://localhost',
         appScope: ['basic', 'public_content', 'email'],
     })
     fbPath = 'me?fields=name,email,picture.width(720).height(720).as(picture_large)';
@@ -45,10 +45,10 @@ export class SocialService {
         return promise;
     }
 
-    getTwProfile() {
+    getTwProfile(response) {
         return this.twitter.showUser();
         // return this.twitterService.get(
-        //     'https://api.twitter.com/1.1/account/verify_credentials.json',
+        //     'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
         //     {
         //         count: 1
         //     },
@@ -57,10 +57,8 @@ export class SocialService {
         //         consumerSecret: 'O5pryneH5CALpAcZBbiCrmie62VjvPwmJy0EZQYkRFKbcTbBPa'
         //     },
         //     {
-        //         token: '909746010884370432-7eWkN323lWr6eZQ8UbYLOkHednWoFTY',
-        //         tokenSecret: 'lKqCslBNEPHYBecgsruwr7eIZxIUdqv2ZDdhSZ9YWjRkv'
-        //         // token: this.token,
-        //         // tokenSecret: this.secret
+        //         token: response.token,
+        //         tokenSecret: response.secret
         //     }
         // )
         //     .map(res => res.json());
@@ -90,10 +88,10 @@ export class SocialService {
         return this.oauth.logInVia(this.instagramProvider);
     }
 
-    // getInstaProfile(response) {
-    //     return this.http.get(this.instaUrl + response.access_token)
-    //         .map((res: Response) => res.json());
-    // }
+    getInstaProfile(token) {
+        return this.http.get(this.instaUrl + token)
+            .map((res: Response) => res.json());
+    }
 
     vkLogin() {
         return this.oauth.logInVia(this.vkProvider);
