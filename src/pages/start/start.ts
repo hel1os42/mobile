@@ -153,8 +153,24 @@ export class StartPage {
                 };
             },
                 (error) => {
-                    debugger
                     console.log(JSON.stringify('Error logging into Instagram'));
                 });
+    }
+
+    getVkProfile() {
+        this.social.vkLogin()
+            .then((resp: any) => {
+                this.social.getVkProfile(resp.access_token, resp.user_id)
+                    .subscribe(profile => {
+                        this.socialData = {
+                            name: profile.response[0].first_name,
+                            email: resp.email,
+                            picture: profile.response[0].photo_200
+                        }
+                        this.nav.push(SignUpPage, { social: this.socialData });
+                    },
+                        error => console.log('VK get profile error' + error));
+            })
+            .catch(err => console.log('VK login error' + err));
     }
 }
