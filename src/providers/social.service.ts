@@ -5,6 +5,7 @@ import { Instagram, VK } from "ng2-cordova-oauth/core";
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Injectable()
 export class SocialService {
@@ -13,26 +14,24 @@ export class SocialService {
     secret;
     oauth: OauthCordova = new OauthCordova();
     instagramProvider: Instagram = new Instagram({
-        clientId: '585f9305ab1946a6b7ca1ef576b5246c',
-        redirectUri: 'http://localhost/callback',  // Let is be localhost for Mobile Apps
+        clientId: 'f3e53b167fef46e5a361ab3dd1887d86',
+        redirectUri: 'http://localhost/',  // Let is be localhost for Mobile Apps
         responseType: 'token',
         appScope: ['basic', 'public_content']
     });
     vkProvider: VK = new VK({
-        clientId: '',
-        redirectUri: '',
-        appScope: ['basic', 'public_content'],
+        clientId: '6473105',
+        redirectUri: 'http://localhost/',
+        appScope: ['basic', 'public_content', 'email'],
     })
     fbPath = 'me?fields=name,email,picture.width(720).height(720).as(picture_large)';
     instaUrl = 'https://api.instagram.com/v1/users/self/?access_token=';
-    vkUrl = 'https://api.vk.com/method/users.get?user_id=210700286&v=5.52&access_token='
 
     constructor(
         private twitter: TwitterConnect,
         // private twitter: TwitterService,
         private fb: Facebook,
-        public http: Http) {
-
+        private http: Http) {
     }
 
     // setTokens(token, secret) {
@@ -100,8 +99,10 @@ export class SocialService {
         return this.oauth.logInVia(this.vkProvider);
     }
 
-    getVkProfile(token) {
-        return this.http.get(this.vkUrl + token)
+    getVkProfile(token, user_id) {
+        let url = `https://api.vk.com/method/users.get?&v=5.74&user_id=${user_id}&access_token=${token}&fields=photo_200`;
+        return this.http.get(url)
             .map((res: Response) => res.json());
     }
+  
 }
