@@ -75,7 +75,7 @@ export class AuthService {
         obs.subscribe(() => {
             this.analytics.faLogEvent('event_signup');
         })
-        return this.api.post('users', register);
+        return obs;
     }
 
     login(login: Login, isAnalitics: boolean) {
