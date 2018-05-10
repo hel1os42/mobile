@@ -60,7 +60,7 @@ export class StartPage {
             this.social.twLogin()
                 .then(resp => {
                     console.log('resp ' + resp)
-                    this.social.getTwProfile()
+                    this.social.getTwProfile(resp)
                         .then(res => {
                             //?
                         })
@@ -146,15 +146,20 @@ export class StartPage {
     getInstaProfile() {
         this.social.instaLogin()
             .then((resp: any) => {
-                this.socialData = {
-                    name: resp.user.name,
-                    email: resp.user.email,
-                    picture: resp.user.picture_large.data.url
-                };
-            },
-                (error) => {
-                    console.log(JSON.stringify('Error logging into Instagram'));
-                });
+                this.social.getInstaProfile(resp.access_token)
+                    .subscribe(profile => {
+                        this.socialData = {
+                            name: profile.data.full_name,
+                            email: profile.data.email,
+                            picture: profile.data.profile_picture
+                        };
+                        this.nav.push(SignUpPage, { social: this.socialData });
+                    },
+                        error => console.log('Instagram get profile error' + error));
+            })
+            .catch(error => {
+                console.log(JSON.stringify('Error logging into Instagram'));
+            });
     }
 
     getVkProfile() {
