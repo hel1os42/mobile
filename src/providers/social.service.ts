@@ -1,18 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Facebook } from '@ionic-native/facebook';
-import { TwitterConnect } from '@ionic-native/twitter-connect';
-import { Instagram, VK } from "ng2-cordova-oauth/core";
-import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
-import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Facebook } from '@ionic-native/facebook';
+import { Instagram, Twitter, VK } from 'ng2-cordova-oauth-with-twitter/core';
+import { OauthCordova } from 'ng2-cordova-oauth-with-twitter/platform/cordova';
+import { TwitterService } from 'ng2-twitter';
 
 @Injectable()
+
 export class SocialService {
 
-    token;
-    secret;
     oauth: OauthCordova = new OauthCordova();
+
     instagramProvider: Instagram = new Instagram({
         clientId: 'f3e53b167fef46e5a361ab3dd1887d86',
         redirectUri: 'http://localhost',  // Let is be localhost for Mobile Apps
@@ -24,49 +23,53 @@ export class SocialService {
         redirectUri: 'http://localhost',
         appScope: ['basic', 'public_content', 'email'],
     })
+    twitterProvider: Twitter = new Twitter({
+        // clientId: '1t57CCFvafiX2oaEJuREbE0sz',
+        consumerKey: '1t57CCFvafiX2oaEJuREbE0sz',
+        consumerSecret: 'O5pryneH5CALpAcZBbiCrmie62VjvPwmJy0EZQYkRFKbcTbBPa',
+        redirectUri: 'http://localhost',
+        responseType: 'token',
+        appScope: ['basic', 'public_content'],
+        // token: '	909746010884370432-7eWkN323lWr6eZQ8UbYLOkHednWoFTY',
+        // tokenSecret: 'lKqCslBNEPHYBecgsruwr7eIZxIUdqv2ZDdhSZ9YWjRkv'
+    })
     fbPath = 'me?fields=name,email,picture.width(720).height(720).as(picture_large)';
     instaUrl = 'https://api.instagram.com/v1/users/self/?access_token=';
+    twitterUrl = 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true';
 
     constructor(
-        private twitter: TwitterConnect,
-        // private twitter: TwitterService,
+        // private twitter: TwitterConnect,
+        private twitterService: TwitterService,
         private fb: Facebook,
         private http: Http) {
     }
 
-    // setTokens(token, secret) {
-    //     this.token = token;
-    //     this.secret = secret;
-    // }
-
     twLogin() {
-        let promise = this.twitter.login();
-        // promise.then(resp => this.setTokens(resp.token, resp.secret));
-        return promise;
+        // return this.twitter.login();
+        return this.oauth.login(this.twitterProvider);
     }
 
     getTwProfile(response) {
-        return this.twitter.showUser();
-        // return this.twitterService.get(
-        //     'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
-        //     {
-        //         count: 1
-        //     },
-        //     {
-        //         consumerKey: '1t57CCFvafiX2oaEJuREbE0sz',
-        //         consumerSecret: 'O5pryneH5CALpAcZBbiCrmie62VjvPwmJy0EZQYkRFKbcTbBPa'
-        //     },
-        //     {
-        //         token: response.token,
-        //         tokenSecret: response.secret
-        //     }
-        // )
-        //     .map(res => res.json());
+        return this.twitterService.get(
+            'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
+            {
+                count: 1
+            },
+            {
+                consumerKey: '1t57CCFvafiX2oaEJuREbE0sz',
+                consumerSecret: 'O5pryneH5CALpAcZBbiCrmie62VjvPwmJy0EZQYkRFKbcTbBPa'
+            },
+            {
+                token: response.token,
+                tokenSecret: response.secret
+            }
+        )
+            .map(res => res.json());
     }
 
-    twLogout() {
-        return this.twitter.logout();
-    }
+    // twLogout() {
+    //     return this.twitter.logout();
+    // }
 
     getFbLoginStatus() {
         return this.fb.getLoginStatus();

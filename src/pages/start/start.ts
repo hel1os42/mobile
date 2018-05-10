@@ -4,6 +4,7 @@ import { NavController, Platform } from 'ionic-angular';
 import { SocialService } from '../../providers/social.service';
 import { LoginPage } from '../login/login';
 import { SignUpPage } from '../signup/signup';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'page-start',
@@ -59,42 +60,45 @@ export class StartPage {
             this.isSocial = false;
             this.social.twLogin()
                 .then(resp => {
-                    console.log('resp ' + resp)
                     this.social.getTwProfile(resp)
-                        .then(res => {
-                            //?
-                        })
-                        .catch(user => {
+                        // .then(res => {
+                        //     //?
+                        // })
+                        // .catch(user => {
+                        //     this.socialData = {
+                        //         name: user.name,
+                        //         // name: user.screen_name,
+                        //         // email: user.email,
+                        //         picture: user.profile_image_url_https
+                        //     };
+                        //     // this.social.twLogout()
+                        //     // .then(() => {
+                        //     this.nav.push(SignUpPage, { social: this.socialData });
+                        //     this.isSocial = true;
+                        //     // });
+                        // })
+                        .subscribe(user => {
                             this.socialData = {
                                 name: user.name,
-                                // name: user.screen_name,
+                                //name: user.screen_name,
                                 // email: user.email,
                                 picture: user.profile_image_url_https
                             };
-                            this.social.twLogout()
-                                .then(() => {
-                                    this.nav.push(SignUpPage, { social: this.socialData });
-                                    this.isSocial = true;
-                                });
-                        })
-                    // .subscribe(user => {
-                    //     this.socialData = {
-                    //         name: user.name,
-                    //         //name: user.screen_name,
-                    //         // email: user.email,
-                    //         picture: user.profile_image_url_https
-                    //     };
-                    //     console.log(user);
-                    //     debugger
-                    //     this.social.twLogout()
-                    //         .then(() => this.nav.push(SignUpPage, { social: this.socialData }));
-                    //     this.isSocial = true;
-                    // })
-
-                })
+                            console.log(user);
+                            this.nav.push(SignUpPage, { social: this.socialData });
+                            this.isSocial = true;
+                        },
+                            err => {
+                                this.isSocial = true;
+                            })
+                },
+                    error => {
+                        this.isSocial = true;
+                    })
                 .catch(err => {
                     console.log("catch: " + err);
                     this.isSocial = true;
+                    debugger
                 })
         }
     }
@@ -104,7 +108,6 @@ export class StartPage {
             this.isSocial = false;
             this.social.getFbLoginStatus()
                 .then((res) => {
-                    this.isSocial = true;
                     // let userId: string;
                     let promise: Promise<any>;
                     if (res.status === 'unknown') {
@@ -129,13 +132,21 @@ export class StartPage {
                                 };
                                 this.nav.push(SignUpPage, { social: this.socialData });
                                 this.social.fbLogout();
+                                this.isSocial = true;
                                 // console.log(user);
                             })
                             .catch(err => {
+                                this.isSocial = true;
                                 // console.log(err);
                             })
+                    },
+                        err => {
+                            this.isSocial = true;
+                        })
+                },
+                    error => {
+                        this.isSocial = true;
                     })
-                })
                 .catch(e => {
                     this.isSocial = true;
                     console.log('Error logging into Facebook', e);
@@ -144,38 +155,62 @@ export class StartPage {
     }
 
     getInstaProfile() {
-        this.social.instaLogin()
-            .then((resp: any) => {
-                this.social.getInstaProfile(resp.access_token)
-                    .subscribe(profile => {
-                        this.socialData = {
-                            name: profile.data.full_name,
-                            email: profile.data.email,
-                            picture: profile.data.profile_picture
-                        };
-                        this.nav.push(SignUpPage, { social: this.socialData });
-                    },
-                        error => console.log('Instagram get profile error' + error));
-            })
-            .catch(error => {
-                console.log(JSON.stringify('Error logging into Instagram'));
-            });
+        if (this.isSocial) {
+            this.isSocial = false;
+            this.social.instaLogin()
+                .then((resp: any) => {
+                    this.social.getInstaProfile(resp.access_token)
+                        .subscribe(profile => {
+                            this.socialData = {
+                                name: profile.data.full_name,
+                                email: profile.data.email,
+                                picture: profile.data.profile_picture
+                            };
+                            this.nav.push(SignUpPage, { social: this.socialData });
+                            this.isSocial = true;
+                        },
+                            error => {
+                                console.log('Instagram get profile error' + error);
+                                this.isSocial = true;
+                            });
+                },
+                    error => {
+                        this.isSocial = true;
+                    })
+                .catch(error => {
+                    this.isSocial = true;
+                    console.log(JSON.stringify('Error logging into Instagram'));
+                });
+        }
     }
 
     getVkProfile() {
-        this.social.vkLogin()
-            .then((resp: any) => {
-                this.social.getVkProfile(resp.access_token, resp.user_id)
-                    .subscribe(profile => {
-                        this.socialData = {
-                            name: profile.response[0].first_name,
-                            email: resp.email,
-                            picture: profile.response[0].photo_200
-                        }
-                        this.nav.push(SignUpPage, { social: this.socialData });
-                    },
-                        error => console.log('VK get profile error' + error));
-            })
-            .catch(err => console.log('VK login error' + err));
+        if (this.isSocial) {
+            this.isSocial = false;
+            this.social.vkLogin()
+                .then((resp: any) => {
+                    this.social.getVkProfile(resp.access_token, resp.user_id)
+                        .subscribe(profile => {
+                            this.socialData = {
+                                name: profile.response[0].first_name,
+                                email: resp.email,
+                                picture: profile.response[0].photo_200
+                            }
+                            this.nav.push(SignUpPage, { social: this.socialData });
+                            this.isSocial = true;
+                        },
+                            error => {
+                                console.log('VK get profile error' + error);
+                                this.isSocial = true;
+                            });
+                },
+                    error => {
+                        this.isSocial = true;
+                    })
+                .catch(err => {
+                    this.isSocial = true;
+                    console.log('VK login error' + err);
+                });
+        }
     }
 }
