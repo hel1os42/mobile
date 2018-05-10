@@ -111,6 +111,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { PushTokenService } from '../providers/pushToken.service';
 import { ComplaintPopover } from '../pages/place/complaint.popover';
 import { AnalyticsService } from '../providers/analytics.service';
+import { TwitterService } from 'ng2-twitter';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -305,6 +306,7 @@ export function createTranslateLoader(http: HttpClient) {
         GoogleAnalytics,
         OneSignal,
         TwitterConnect,
+        TwitterService,
         File,
         AppAvailability,
         Facebook,
