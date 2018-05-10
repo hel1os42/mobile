@@ -20,6 +20,7 @@
 
         <button
             (click)="getFbProfile()"
+            [disabled]="!isSocial"
             ion-button
             icon-only
             color="transparent"
@@ -28,17 +29,18 @@
         </button>
 
         <!-- <button
-        *ngIf="isTwApp"
-        (click)="getTwitterProfile()"
-        ion-button
-        icon-only
-        color="transparent"
-        margin-right>
-        <img src="assets/img/start/icon2.svg">
-      </button> -->
+            (click)="getTwitterProfile()"
+            [disabled]="!isSocial"
+            ion-button
+            icon-only
+            color="transparent"
+            margin-right>
+            <img src="assets/img/start/icon2.svg">
+        </button> -->
 
         <button
             (click)="getInstaProfile()"
+            [disabled]="!isSocial"
             ion-button
             icon-only
             margin-right
@@ -48,6 +50,7 @@
 
         <button
             (click)="getVkProfile()"
+            [disabled]="!isSocial"
             ion-button
             icon-only
             color="transparent">
