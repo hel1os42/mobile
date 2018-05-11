@@ -1928,3 +1928,13 @@ ion-title.title.title-ios{
 .button.icon_sharing{
     background-image: url(../assets/img/user_offers/icon3.svg);
 }
+
+ion-item-sliding .button-ios.activated {
+    background-color: #FF5A00;
+    opacity: 0.7;
+}
+
+.segment-ios .segment-button:hover:not(.segment-activated){
+    background-color: rgba(255, 90, 0, 0.1);
+}
+
