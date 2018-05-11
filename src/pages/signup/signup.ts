@@ -13,6 +13,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { OneSignal } from '@ionic-native/onesignal';
+import { SocialData } from '../../models/socialData';
 
 @Component({
     selector: 'page-signup',
@@ -31,7 +32,7 @@ export class SignUpPage {
     onKeyboardHideSubscription: Subscription;
     termsUrl = 'https://nau.io/terms';
     policyUrl = 'https://nau.io/privacy-policy';
-    socialData;
+    socialData: SocialData;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
