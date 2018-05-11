@@ -40,7 +40,6 @@ export class OfferPage {
     distance: number;
     coords: Coords;
     branchDomain = 'https://nau.app.link';
-    points: number;
     links = [];
     isDismissLinkPopover = true;
     // today: Date;
@@ -67,7 +66,6 @@ export class OfferPage {
         private translate: TranslateService) {
 
         // this.today = new Date();
-        this.points = 1;
         if (this.share.get()) {
             this.share.remove();
         }

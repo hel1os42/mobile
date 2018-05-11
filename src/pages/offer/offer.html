@@ -8,14 +8,14 @@
   <ion-item no-lines color="transparent" class="overflow-visible padding-left-offer padding-top-5vw padding-right-offer">
     <div item-start class="relative">
       <div class="user_level font-30 text-white extrabold table">
-          <span class="table-cell">{{ points }}</span>
+          <span class="table-cell">{{ offer.points }}</span>
         </div>
       <div class="icon-plus">+</div>
     </div>
     <span class="font-16 text-E0E0E0">
-        {{ points == 1
+        {{ offer.points == 1
         ? ('PAGE_OFFER.POINT' | translate)
-        : (points >= 2 && points <= 4)
+        : (points >= 2 && offer.points <= 4)
         ? ('PAGE_OFFER.POINTS2' | translate)
         : ('PAGE_OFFER.POINTS' | translate) }}
     </span>
