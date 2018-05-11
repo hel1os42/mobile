@@ -82,7 +82,6 @@
     "moment-timezone": "0.5.13",
     "ng2-cordova-oauth": "0.0.8",
     "ng2-img-cropper": "0.9.0",
-    "ng2-twitter": "0.3.0",
     "onesignal-cordova-plugin": "2.3.3",
     "phonegap-plugin-barcodescanner": "7.0.2",
     "rxjs": "5.5.6",
