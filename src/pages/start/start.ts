@@ -60,40 +60,47 @@ export class StartPage {
             this.isSocial = false;
             this.social.twLogin()
                 .then(resp => {
+                    debugger
                     this.social.getTwProfile(resp)
-                        // .then(res => {
-                        //     //?
-                        // })
-                        // .catch(user => {
-                        //     this.socialData = {
-                        //         name: user.name,
-                        //         // name: user.screen_name,
-                        //         // email: user.email,
-                        //         picture: user.profile_image_url_https
-                        //     };
-                        //     // this.social.twLogout()
-                        //     // .then(() => {
-                        //     this.nav.push(SignUpPage, { social: this.socialData });
-                        //     this.isSocial = true;
-                        //     // });
-                        // })
-                        .subscribe(user => {
+                        .then(res => {
+                            debugger
+                            //?
+                        })
+                    // err => {debugger;})
+                        .catch(user => {
+                            debugger
                             this.socialData = {
                                 name: user.name,
-                                //name: user.screen_name,
+                                // name: user.screen_name,
                                 // email: user.email,
                                 picture: user.profile_image_url_https
                             };
-                            console.log(user);
+                            // this.social.twLogout()
+                            // .then(() => {
                             this.nav.push(SignUpPage, { social: this.socialData });
                             this.isSocial = true;
-                        },
-                            err => {
-                                this.isSocial = true;
-                            })
+                            // });
+                        })
+                        // .subscribe(user => {
+                        //     debugger
+                        //     this.socialData = {
+                        //         name: user.name,
+                        //         //name: user.screen_name,
+                        //         // email: user.email,
+                        //         picture: user.profile_image_url_https
+                        //     };
+                        //     console.log(user);
+                        //     this.nav.push(SignUpPage, { social: this.socialData });
+                        //     this.isSocial = true;
+                        // },
+                        //     err => {
+                        //         this.isSocial = true;
+                        //         debugger
+                        //     })
                 },
                     error => {
                         this.isSocial = true;
+                        debugger
                     })
                 .catch(err => {
                     console.log("catch: " + err);
