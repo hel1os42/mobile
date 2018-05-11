@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="048" id="com.nau.io" ios-CFBundleVersion="1.4.6" version="1.4.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="051" id="com.nau.io" ios-CFBundleVersion="1.4.9" version="1.4.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>NAU</name>
     <description>NAU</description>
     <content src="index.html" />
@@ -153,7 +153,6 @@
     <plugin name="cordova-plugin-google-analytics" spec="1.8.3" />
     <plugin name="onesignal-cordova-plugin" spec="2.3.3" />
     <plugin name="cordova-plugin-file" spec="5.0.0" />
-    <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
     <plugin name="twitter-connect-plugin" spec="https://github.com/chroa/twitter-connect-plugin.git">
         <variable name="FABRIC_KEY" value="dca7d77310640c26f9f6fd7c0533e5446a956c34" />
         <variable name="TWITTER_KEY" value="1t57CCFvafiX2oaEJuREbE0sz" />

@@ -13,6 +13,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { OneSignal } from '@ionic-native/onesignal';
+import { SocialData } from '../../models/socialData';
 
 @Component({
     selector: 'page-signup',
@@ -31,7 +32,7 @@ export class SignUpPage {
     onKeyboardHideSubscription: Subscription;
     termsUrl = 'https://nau.io/terms';
     policyUrl = 'https://nau.io/privacy-policy';
-    socialData;
+    socialData: SocialData;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -108,16 +109,18 @@ export class SignUpPage {
     getCode() {
         // this.analytics.trackEvent("Session", 'event_signup');
         this.phoneNumber = this.numCode.dial_code + this.formData.phone;
-        // let inviteCode = this.auth.getInviteCode();
-        let inviteCode: string;
-        if (this.envName === 'prod') {
-            inviteCode = this.formData.code && this.formData.code !== ''
-                ? this.formData.code
-                : 'NAU';
-        }
-        else {
-            inviteCode = this.formData.code;
-        }
+
+        let defaultInvite = this.envName === 'prod' ? 'NAU'
+            : this.envName === 'test' ? '5a4' : '59c';
+        let inviteCode = this.formData.code && this.formData.code !== '' ? this.formData.code : defaultInvite;
+        // if (this.envName === 'prod') {
+        //     inviteCode = this.formData.code && this.formData.code !== ''
+        //         ? this.formData.code
+        //         : 'NAU';
+        // }
+        // else {
+        //     inviteCode = this.formData.code;
+        // }
         this.oneSignal.sendTag('refferalInviteCode', inviteCode);
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
             .subscribe(resp => {

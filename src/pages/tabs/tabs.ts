@@ -7,6 +7,7 @@ import { BookmarksPage } from '../bookmarks/bookmarks';
 import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
+import { AppModeService } from '../../providers/appMode.service';
 
 @Component({
     selector: 'page-tabs',
@@ -29,9 +30,10 @@ export class TabsPage {
     constructor(
         private profile: ProfileService,
         private transaction: TransactionService,
-        private statusBar: StatusBar) {
+        private statusBar: StatusBar,
+        private appMode: AppModeService) {
 
-        // this.envName = this.appMode.getEnvironmentMode();
+        this.envName = this.appMode.getEnvironmentMode();
         // this.profile.getWithAccounts(false)
         //     .subscribe(resp => {
         //         this.nauParams = resp.accounts.NAU;

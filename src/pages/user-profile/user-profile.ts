@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Slides } from 'ionic-angular';
+import { NavController, Slides, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
@@ -35,7 +35,8 @@ export class UserProfilePage {
         private auth: AuthService,
         public alert: AlertController,
         private transaction: TransactionService,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private platform: Platform) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -77,7 +78,9 @@ export class UserProfilePage {
     }
 
     openUserNau() {
-        this.nav.push(UserNauPage, { NAU: this.NAU });
+        if (!this.platform.is('ios')) {
+            this.nav.push(UserNauPage, { NAU: this.NAU });
+        }
     }
 
     openUserUsers() {

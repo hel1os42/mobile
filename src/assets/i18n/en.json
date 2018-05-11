@@ -590,11 +590,11 @@
     },
 
     "PAGE_USER-USERS" : {
-        "YOUR_REFERRALS" : "Your referrals",
-        "USERS" : "Users",
+        "YOUR_REFERRALS" : "Your friends",
         "LEVEL" : "Level",
         "REGISTRATION_DATE" : "Registration date",
-        "LOADING_REFERRALS" : "Loading referrals..."
+        "LOADING_REFERRALS" : "Loading...",
+        "YOU_DONT_HAVE": "You don't have any friends yet"
     },
 
     "PAGE_TRANSFER" : {

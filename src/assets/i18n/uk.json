@@ -591,10 +591,10 @@
 
     "PAGE_USER-USERS" : {
         "YOUR_REFERRALS" : "Ви запросили",
-        "USERS" : "Користувачів",
         "LEVEL" : "Рівень",
         "REGISTRATION_DATE" : "Дата реєстрації",
-        "LOADING_REFERRALS" : "Завантаження друзів..."
+        "LOADING_REFERRALS" : "Завантаження...",
+        "YOU_DONT_HAVE": "У Вас ще не має друзів"
     },
 
     "PAGE_TRANSFER" : {

@@ -7,11 +7,9 @@ page-offer{
 
     /* FIX FOR IOS */
     .scroll-content{
-        pointer-events: none;
-    }
-
-    .scroll-content .point-event-on{
-        pointer-events: auto;
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        padding-top: 50px;
     }
 
   .header {
@@ -34,7 +32,7 @@ page-offer{
     position: absolute;
     display: flex;
     left: 0;
-    bottom: -30px;
+    bottom: 25px;
     width: 100%;
   }
 
@@ -230,6 +228,10 @@ page-offer{
 .iphonex.platform-ios page-offer .btn_footer{
     margin-bottom: constant(safe-area-inset-bottom);
     margin-bottom: env(safe-area-inset-bottom);
+}
+
+.iphonex.platform-ios page-offer .scroll-content{
+    padding-top: 23%;
 }
 
 /* FIX IOS NAV TRANSPARENT */
