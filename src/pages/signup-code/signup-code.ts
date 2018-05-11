@@ -11,6 +11,7 @@ import { AuthService } from '../../providers/auth.service';
 import { ProfileService } from '../../providers/profile.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TabsPage } from '../tabs/tabs';
+import { SocialData } from '../../models/socialData';
 
 @Component({
     selector: 'page-signup-code',
@@ -25,8 +26,7 @@ export class SignUpCodePage {
     timer;
     isRetry = false;
     inviteCode: string;
-    socialData;
-
+    socialData: SocialData;
 
     constructor(
         private nav: NavController,
