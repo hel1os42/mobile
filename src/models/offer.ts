@@ -19,4 +19,5 @@ export class Offer extends OfferCreate {
     is_favorite?: boolean;
     rich_description?: string;
     timeframes_offset: number;
+    points: number;
 }
