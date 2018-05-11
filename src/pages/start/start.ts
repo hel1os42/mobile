@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { AppAvailability } from '@ionic-native/app-availability';
 import { NavController, Platform } from 'ionic-angular';
 import { SocialService } from '../../providers/social.service';
 import { LoginPage } from '../login/login';
 import { SignUpPage } from '../signup/signup';
-import { StatusBar } from '@ionic-native/status-bar';
+import { SocialData } from '../../models/socialData';
 
 @Component({
     selector: 'page-start',
@@ -13,38 +12,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 export class StartPage {
 
-    socialData;
-    isTwApp = false;
-    // isFbApp = false;
+    socialData: SocialData;
     isSocial = true;
 
     constructor(
         private nav: NavController,
         private social: SocialService,
-        private platform: Platform,
-        private appAvailability: AppAvailability) {
+        private platform: Platform) {
 
-        let twApp;
-        // let fbApp;
-
-        if (this.platform.is('ios')) {
-            twApp = 'twitter://';
-            // fbApp = 'fb://';
-        } else if (this.platform.is('android')) {
-            twApp = 'com.twitter.android';
-            // fbApp = 'com.facebook.katana'
-        }
-
-        this.appAvailability.check(twApp)
-            .then(
-                (yes: boolean) => this.isTwApp = true,
-                (no: boolean) => this.isTwApp = false
-            );
-        // this.appAvailability.check(fbApp)
-        //     .then(
-        //         (yes: boolean) => this.isFbApp = true,
-        //         (no: boolean) => this.isFbApp = false
-        //     );
     }
 
     login() {
@@ -60,52 +35,45 @@ export class StartPage {
             this.isSocial = false;
             this.social.twLogin()
                 .then(resp => {
-                    debugger
                     this.social.getTwProfile(resp)
                         .then(res => {
-                            debugger
                             //?
                         })
-                    // err => {debugger;})
-                        .catch(user => {
-                            debugger
-                            this.socialData = {
-                                name: user.name,
-                                // name: user.screen_name,
-                                // email: user.email,
-                                picture: user.profile_image_url_https
-                            };
-                            // this.social.twLogout()
-                            // .then(() => {
+                        // err => {debugger;})
+                        .catch(profile => {
+                            this.createSocData(profile.name, profile.profile_image_url_https, profile.id, 'twitter');
+                            // socialId: resp.userId
+                            // email: user.email,
+                            this.social.twLogout();
+                            // .then((resp) => {
                             this.nav.push(SignUpPage, { social: this.socialData });
                             this.isSocial = true;
                             // });
                         })
-                        // .subscribe(user => {
-                        //     debugger
-                        //     this.socialData = {
-                        //         name: user.name,
-                        //         //name: user.screen_name,
-                        //         // email: user.email,
-                        //         picture: user.profile_image_url_https
-                        //     };
-                        //     console.log(user);
-                        //     this.nav.push(SignUpPage, { social: this.socialData });
-                        //     this.isSocial = true;
-                        // },
-                        //     err => {
-                        //         this.isSocial = true;
-                        //         debugger
-                        //     })
+                    // .subscribe(user => {
+                    //     debugger
+                    //     this.socialData = {
+                    //         name: user.name,
+                    //         //name: user.screen_name,
+                    //         // email: user.email,
+                    //         picture: user.profile_image_url_https
+                    //     };
+                    //     console.log(user);
+                    //     this.nav.push(SignUpPage, { social: this.socialData });
+                    //     this.isSocial = true;
+                    // },
+                    //     err => {
+                    //         this.isSocial = true;
+                    //         debugger
+                    //     })
                 },
                     error => {
+                        this.social.twLogout();
                         this.isSocial = true;
-                        debugger
                     })
                 .catch(err => {
                     console.log("catch: " + err);
                     this.isSocial = true;
-                    debugger
                 })
         }
     }
@@ -131,12 +99,8 @@ export class StartPage {
                         // }
                         // console.log(resp);
                         this.social.getFbProfile()
-                            .then(user => {
-                                this.socialData = {
-                                    name: user.name,
-                                    email: user.email,
-                                    picture: user.picture_large.data.url
-                                };
+                            .then(profile => {
+                                this.createSocData(profile.name, profile.picture_large.data.url, profile.id, 'facebook', profile.email, )
                                 this.nav.push(SignUpPage, { social: this.socialData });
                                 this.social.fbLogout();
                                 this.isSocial = true;
@@ -167,12 +131,10 @@ export class StartPage {
             this.social.instaLogin()
                 .then((resp: any) => {
                     this.social.getInstaProfile(resp.access_token)
-                        .subscribe(profile => {
-                            this.socialData = {
-                                name: profile.data.full_name,
-                                email: profile.data.email,
-                                picture: profile.data.profile_picture
-                            };
+                        .subscribe(data => {
+                            let profile = data.data;
+                            this.createSocData(profile.full_name, profile.profile_picture, profile.id, 'instagram');
+                            // email: profile.email
                             this.nav.push(SignUpPage, { social: this.socialData });
                             this.isSocial = true;
                         },
@@ -197,12 +159,9 @@ export class StartPage {
             this.social.vkLogin()
                 .then((resp: any) => {
                     this.social.getVkProfile(resp.access_token, resp.user_id)
-                        .subscribe(profile => {
-                            this.socialData = {
-                                name: profile.response[0].first_name,
-                                email: resp.email,
-                                picture: profile.response[0].photo_200
-                            }
+                        .subscribe(data => {
+                            let profile = data.response[0];
+                            this.createSocData(profile.first_name, profile.photo_200, resp.user_id, 'vk', resp.email);
                             this.nav.push(SignUpPage, { social: this.socialData });
                             this.isSocial = true;
                         },
@@ -219,5 +178,15 @@ export class StartPage {
                     console.log('VK login error' + err);
                 });
         }
+    }
+
+    createSocData(name: string, picture: string, socialId: string, socialName: string, email?: string) {
+        this.socialData = {
+            name: name,
+            email: email,
+            picture: picture,
+            socialId: socialId,
+            socialName: socialName
+        };
     }
 }
