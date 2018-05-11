@@ -103,7 +103,6 @@ import { TimeframesPopover } from '../pages/offer/timeframes.popover';
 import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { SocialService } from '../providers/social.service';
 import { File } from '@ionic-native/file';
-import { AppAvailability } from '@ionic-native/app-availability';
 import { Facebook } from '@ionic-native/facebook';
 import { NoticePopover } from '../pages/offer/notice.popover';
 import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
@@ -308,7 +307,6 @@ export function createTranslateLoader(http: HttpClient) {
         TwitterConnect,
         TwitterService,
         File,
-        AppAvailability,
         Facebook,
         FlurryAnalytics,
         LaunchNavigator

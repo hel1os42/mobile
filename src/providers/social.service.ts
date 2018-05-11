@@ -2,10 +2,10 @@ import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Facebook } from '@ionic-native/facebook';
+import { TwitterConnect } from '@ionic-native/twitter-connect';
 import { Instagram, VK } from 'ng2-cordova-oauth/core';
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova';
-import { TwitterService } from 'ng2-twitter';
-import { TwitterConnect } from '@ionic-native/twitter-connect';
+// import { TwitterService } from 'ng2-twitter';
 
 @Injectable()
 
@@ -40,7 +40,7 @@ export class SocialService {
 
     constructor(
         private twitter: TwitterConnect,
-        private twitterService: TwitterService,
+        // private twitterService: TwitterService,
         private fb: Facebook,
         private http: Http) {
     }
