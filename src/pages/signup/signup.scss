@@ -37,4 +37,21 @@ page-signup {
     .footer.footer-ios {
         padding: 7vw 15% 7vw 15%;
     }
+
+    .lbl-edit{
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 111;
+        height: 100%;
+        display: flex;
+        margin-right: 6vw;
+        pointer-events: none;
+        font-size: 2vw;
+        padding-top: 0.7vw;
+    }
+
+    .lbl-edit span{
+        margin: auto;
+    }
 }

@@ -449,7 +449,8 @@
         "TERMS_AND_CONDITIONS" : "Условия и положения",
         "AND" : "и",
         "PRIVACY_POLICY" : "Политику конфиденциальности",
-        "INVITE_OPTIONAL" : "Не обязательно"
+        "INVITE_OPTIONAL" : "Не обязательно",
+        "EDIT" : "Изменить"
     },
 
     "PAGE_SIGNUP-CODE" : {
