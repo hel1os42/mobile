@@ -9,10 +9,48 @@
         <div text-center class="title-big-sign">{{ 'PAGE_SIGNUP.PHONE_NUMBER' | translate }}</div>
 
         <form #form="ngForm" (ngSubmit)="form.valid ? getCode() : undefined">
+            <div text-center class="margin-top-6vw font-75 text-4F4F4F">
+                {{ 'PAGE_SIGNUP.PLEASE_CHOOSE' | translate }}
+                <br>{{ 'PAGE_SIGNUP.AND_FILL' | translate }}
+            </div>
+            <div class="bg-gray margin-top-1vw">
+                <ion-item class="border-bottom-no">
+                    <ion-select
+                        #codeSelect
+                        [(ngModel)]="numCode"
+                        [ngModelOptions]="{standalone: true}"
+                        [selectOptions]="{cssClass: 'alert-full-no-button'}"
+                        interface="alert"
+                        okText="Ok"
+                        [selectedText]="numCode?.dial_code"
+                        (click)="onSelectClicked(codeSelect)">
+                        <ion-option
+                            *ngFor=" let phoneCode of phoneCodes "
+                            [value]="phoneCode">
+                            {{ phoneCode.dial_code }} {{ phoneCode.name }}
+                        </ion-option>
+                    </ion-select>
+                    <ion-input
+                        pattern="^[0-9]+$"
+                        required
+                        (keyup)="updateList($event)"
+                        (ionChange)="limitStr(formData.phone, 14)"
+                        [(ngModel)]="formData.phone"
+                        ngControl="phone"
+                        name="phone"
+                        [minlength]="7"
+                        type="number"
+                        pattern="[0-9]*"
+                        decimal="true"
+                        placeholder="1234567">
+                    </ion-input>
+                </ion-item>
+            </div>
+
             <div text-center class="font-75 text-4F4F4F margin-top-6vw">
                 {{ 'PAGE_INVITE.YOU_SHOULD_HAVE_RECEIVED' | translate }}
             </div>
-            <div class="bg-gray margin-top-1vw">
+            <div class="bg-gray margin-top-1vw relative">
                 <ion-item class="border-bottom-no">
                     <ion-input
                         [(ngModel)]="formData.code"
@@ -25,44 +63,8 @@
                         type="text">
                     </ion-input>
                 </ion-item>
+                <div text-uppercase class="lbl-edit bold"><span>{{ 'PAGE_SIGNUP.EDIT' | translate }}</span></div>
             </div>
-            <div text-center class="margin-top-6vw font-75 text-4F4F4F">
-                {{ 'PAGE_SIGNUP.PLEASE_CHOOSE' | translate }}
-                <br>{{ 'PAGE_SIGNUP.AND_FILL' | translate }}
-            </div>
-            <div class="bg-gray margin-top-1vw">
-            <ion-item class="border-bottom-no">
-                <ion-select
-                    #codeSelect
-                    [(ngModel)]="numCode"
-                    [ngModelOptions]="{standalone: true}"
-                    [selectOptions]="{cssClass: 'alert-full-no-button'}"
-                    interface="alert"
-                    okText="Ok"
-                    [selectedText]="numCode?.dial_code"
-                    (click)="onSelectClicked(codeSelect)">
-                    <ion-option
-                        *ngFor=" let phoneCode of phoneCodes "
-                        [value]="phoneCode">
-                        {{ phoneCode.dial_code }} {{ phoneCode.name }}
-                    </ion-option>
-                </ion-select>
-                <ion-input
-                    pattern="^[0-9]+$"
-                    required
-                    (keyup)="updateList($event)"
-                    (ionChange)="limitStr(formData.phone, 14)"
-                    [(ngModel)]="formData.phone"
-                    ngControl="phone"
-                    name="phone"
-                    [minlength]="7"
-                    type="number"
-                    pattern="[0-9]*"
-                    decimal="true"
-                    placeholder="1234567">
-                </ion-input>
-            </ion-item>
-          </div>
         </form>
 
         <button

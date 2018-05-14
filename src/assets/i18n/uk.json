@@ -448,7 +448,8 @@
         "TERMS_AND_CONDITIONS" : "Умови та положення",
         "AND" : "і",
         "PRIVACY_POLICY" : "політику конфіденційності",
-        "INVITE_OPTIONAL" : "Не обов'язково"
+        "INVITE_OPTIONAL" : "Не обов'язково",
+        "EDIT" : "Змінити"
     },
 
     "PAGE_SIGNUP-CODE" : {
