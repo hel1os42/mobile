@@ -320,7 +320,6 @@
 
     "PAGE_INVITE" : {
         "INVITATION" : "Invitation",
-        "YOU_SHOULD_HAVE_RECEIVED" : "You should have received a code from the friend who recommended NAU to you",
         "PLEASE_ASK" : "Please ask your friend again"
     },
 
@@ -442,8 +441,8 @@
 
     "PAGE_SIGNUP" : {
         "PHONE_NUMBER" : "Phone & Invite",
-        "PLEASE_CHOOSE" : "Please choose your country phone code",
-        "AND_FILL" : "and fill your phone number",
+        "YOUR_PHONE" : "Your phone number is required to sign up",
+        "YOUR_INVITE" : "Your invite code",
         "NEXT" : "Next",
         "BY_PRESSING" : "By pressing «Next», I accept",
         "TERMS_AND_CONDITIONS" : "Terms and conditions",

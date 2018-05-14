@@ -320,7 +320,6 @@
 
     "PAGE_INVITE" : {
         "INVITATION" : "Invitación",
-        "YOU_SHOULD_HAVE_RECEIVED" : "Debería haber recibido un código de su amigo que le recomendó NAU",
         "PLEASE_ASK" : "Por favor, pregunte a su amigo de nuevo o ... Búsquelo en google :)"
     },
 
@@ -442,8 +441,8 @@
 
     "PAGE_SIGNUP" : {
         "PHONE_NUMBER" : "Llame e Invite",
-        "PLEASE_CHOOSE" : "Por favor, elija el código de su país",
-        "AND_FILL" : "e ingrese su número de teléfono",
+        "YOUR_PHONE" : "Se requiere tu número de teléfono para registrarte",
+        "YOUR_INVITE" : "Tu código de invitación",
         "NEXT" : "Siguiente",
         "BY_PRESSING" : "Presionando «Siguiente», yo estoy de acuerdo",
         "TERMS_AND_CONDITIONS" : "Términos y Condiciones",
