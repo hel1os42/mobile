@@ -10,8 +10,7 @@
 
         <form #form="ngForm" (ngSubmit)="form.valid ? getCode() : undefined">
             <div text-center class="margin-top-6vw font-75 text-4F4F4F">
-                {{ 'PAGE_SIGNUP.PLEASE_CHOOSE' | translate }}
-                <br>{{ 'PAGE_SIGNUP.AND_FILL' | translate }}
+                {{ 'PAGE_SIGNUP.YOUR_PHONE' | translate }}
             </div>
             <div class="bg-gray margin-top-1vw">
                 <ion-item class="border-bottom-no">
@@ -48,7 +47,7 @@
             </div>
 
             <div text-center class="font-75 text-4F4F4F margin-top-6vw">
-                {{ 'PAGE_INVITE.YOU_SHOULD_HAVE_RECEIVED' | translate }}
+                {{ 'PAGE_SIGNUP.YOUR_INVITE' | translate }}
             </div>
             <div class="bg-gray margin-top-1vw relative">
                 <ion-item class="border-bottom-no">
