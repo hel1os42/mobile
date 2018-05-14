@@ -25,7 +25,6 @@ export class UserProfilePage {
     balance: number;
     onRefreshAccounts: Subscription;
     NAU: Account;
-    level = 2;
 
     @ViewChild(Slides) slides: Slides;
 
