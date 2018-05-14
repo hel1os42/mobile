@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { OneSignal } from '@ionic-native/onesignal';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -7,19 +8,18 @@ import { TranslateService } from '@ngx-translate/core';
 import { App, IonicApp, Platform } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Subscription } from 'rxjs/Rx';
-import { DEFAULT_LANG_CODE, SYS_OPTIONS, AVAILABLE_LANGUAGES } from '../const/i18n.const';
+import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { Share } from '../models/share';
-import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
+import { StartPage } from '../pages/start/start';
 import { TabsPage } from '../pages/tabs/tabs';
+import { AnalyticsService } from '../providers/analytics.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
-import { AnalyticsService } from '../providers/analytics.service';
-import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
 
 
 @Component({
@@ -169,7 +169,8 @@ export class MyApp {
         });
 
         this.auth.onLogout.subscribe(() => {
-            this.app.getRootNav().setRoot(LoginPage);
+            // this.app.getRootNav().setRoot(LoginPage);
+            this.app.getRootNav().setRoot(StartPage);
         });
 
     }
