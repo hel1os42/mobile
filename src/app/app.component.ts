@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs/Rx';
 import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { Share } from '../models/share';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
-import { StartPage } from '../pages/start/start';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AnalyticsService } from '../providers/analytics.service';
 import { AppModeService } from '../providers/appMode.service';
@@ -20,6 +19,7 @@ import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
+import { LoginPage } from '../pages/login/login';
 
 
 @Component({
@@ -169,8 +169,7 @@ export class MyApp {
         });
 
         this.auth.onLogout.subscribe(() => {
-            // this.app.getRootNav().setRoot(LoginPage);
-            this.app.getRootNav().setRoot(StartPage);
+            this.app.getRootNav().setRoot(LoginPage);
         });
 
     }
