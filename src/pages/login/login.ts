@@ -78,15 +78,15 @@ export class LoginPage {
         this.numCode = this.getNumCode();
     }
 
-    ionViewDidEnter() {
-        this.navBar.backButtonClick = (ev: UIEvent) => {
-            if (this.isVisibleLoginButton) {
-                this.isVisibleLoginButton = false;
-                this.backAction();
-            }
-            else this.nav.pop();
-        }
-    }
+    // ionViewDidEnter() {
+    //     this.navBar.backButtonClick = (ev: UIEvent) => {
+    //         if (this.isVisibleLoginButton) {
+    //             this.isVisibleLoginButton = false;
+    //             this.backAction();
+    //         }
+    //         else this.nav.pop();
+    //     }
+    // }
 
     updateList(ev) {
         StringValidator.updateList(ev);
