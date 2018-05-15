@@ -112,7 +112,7 @@ export class PlacePage {
                     // else {
                     //     this.company.stars = resp.stars;
                     // }
-                    this.company.testimonials_count = this.company.testimonials_count + 1;
+                    // this.company.testimonials_count = this.company.testimonials_count + 1;
                 }
             });
     }
