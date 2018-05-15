@@ -38,7 +38,6 @@ import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
 import { CreateOfferPage } from '../pages/create-offer/create-offer';
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { FeedPage } from '../pages/feed/feed';
-import { SignUpInvitePage } from '../pages/invite/invite';
 import { LoginPage } from '../pages/login/login';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { OfferTermsPage } from '../pages/offer-terms/offer-terms';
@@ -123,7 +122,6 @@ export function createTranslateLoader(http: HttpClient) {
         StartPage,
         SignUpPage,
         SignUpCodePage,
-        SignUpInvitePage,
         LoginPage,
         CreateUserProfilePage,
         CreateAdvUserProfilePage,
@@ -210,7 +208,6 @@ export function createTranslateLoader(http: HttpClient) {
         StartPage,
         SignUpPage,
         SignUpCodePage,
-        SignUpInvitePage,
         LoginPage,
         CreateUserProfilePage,
         CreateAdvUserProfilePage,
