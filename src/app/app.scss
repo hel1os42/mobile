@@ -97,7 +97,7 @@ button[ion-button] {
 .logo {
     width: auto;
     height: 22vw;
-    margin: 12vw auto 17vw auto;
+    margin: 0 auto 12vw auto;
     background: url(../assets/img/logo.svg) no-repeat center center;
     background-size: contain;
 }
@@ -105,7 +105,7 @@ button[ion-button] {
 .logo-margin {
     width: auto;
     height: 22vw;
-    margin: 27vw auto 17vw auto;
+    margin: 64px auto 12vw auto;
     background: url(../assets/img/logo.svg) no-repeat center center;
     background-size: contain;
 }
