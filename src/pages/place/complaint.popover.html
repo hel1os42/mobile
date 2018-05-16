@@ -11,8 +11,8 @@
             <ion-textarea
                 [(ngModel)]="complaint"
                 maxlength="250"
-                class="bg-gray-radius-small"
-                (keyup.enter)="setComplaint()">
+                autofocus
+                class="bg-gray-radius-small">
             </ion-textarea>
         </div>
         <ion-grid padding-top padding-bottom>
@@ -21,7 +21,7 @@
                     <button (click)="close()" ion-button block color="primary">{{ 'UNIT.CANCEL' | translate }}</button>
                 </ion-col>
                 <ion-col *ngIf="isInputVisible" text-center class="margin-left-2proc">
-                    <button (click)="setComplaint()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+                    <button (click)="setComplaint()" [disabled]="!complaint || complaint.length < 3" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
