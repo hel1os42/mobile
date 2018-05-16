@@ -109,6 +109,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { PushTokenService } from '../providers/pushToken.service';
 import { ComplaintPopover } from '../pages/place/complaint.popover';
 import { AnalyticsService } from '../providers/analytics.service';
+import { ReportService } from '../providers/report.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -292,6 +293,7 @@ export function createTranslateLoader(http: HttpClient) {
         TestimonialsService,
         SocialService,
         PushTokenService,
+        ReportService,
         AnalyticsService,
         Clipboard,
         InAppBrowser,
