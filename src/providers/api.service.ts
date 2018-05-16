@@ -15,6 +15,7 @@ interface ApiRequestOptions {
     params?: any;
     options?: RequestOptions;
     ignoreHttpNotFound?: boolean;
+    ignoreHttpLeftComplaint?: boolean;
 }
 
 class UriQueryEncoder extends QueryEncoder {
@@ -32,6 +33,7 @@ export class ApiService {
     HTTP_STATUS_CODE_UNATHORIZED = 401;
     HTTP_STATUS_CODE_TOO_MANY_REQ = 423;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
+    HTTP_STATUS_CODE_LEFT_COMPLAINT = 422;
     prodUrl = 'https://api.nau.io';
     // prodUrl = 'http://88.99.124.83';
     devUrl = 'https://nau.toavalon.com';
@@ -107,7 +109,7 @@ export class ApiService {
             .subscribe(
                 resp => {
                     this.toast.dismiss();
-                 },
+                },
                 errResp => {
                     let messages = [];
                     if (errResp.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
@@ -121,7 +123,9 @@ export class ApiService {
                         let err = errResp.json();
                         messages.push(err.phone);
                     }
-                    else if (errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound) {
+                    else if ((errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound)
+                            || (errResp.status == this.HTTP_STATUS_CODE_LEFT_COMPLAINT && requestOptions.ignoreHttpLeftComplaint)) {
+                            // || (errResp.status == this.HTTP_STATUS_CODE_LEFT_COMPLAINT && requestOptions.ignoreHttpLeftComplaint && !errResp.json().text)) {
                         return;
                     }
                     else {
@@ -150,8 +154,7 @@ export class ApiService {
                     if (messages.length == 0) {
                         messages.push('Unexpected error occured');
                     }
-
-                    this.toast.show(messages.join('\n'), errResp.status == 0);
+                        this.toast.show(messages.join('\n'), errResp.status == 0);
                 });
 
         // return sharableObs.map(resp => resp.json());
