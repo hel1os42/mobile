@@ -225,7 +225,7 @@ export class PlacePage {
     }
 
     openComplaint() {
-        let complaintPopover = this.popoverCtrl.create(ComplaintPopover);
+        let complaintPopover = this.popoverCtrl.create(ComplaintPopover, { companyId: this.company.id });
         complaintPopover.present();
     }
 
