@@ -10,7 +10,7 @@ stages:
   - deploy
 
 build:
-  image: beevelop/ionic:v3.20.0
+  image: agileek/ionic-framework:3.19.1
   stage: build
   before_script:
     - npm install
@@ -24,7 +24,7 @@ build:
       - ./www
 
 build develop:
-  image: beevelop/ionic:v3.20.0
+  image: agileek/ionic-framework:3.19.1
   stage: build
   before_script:
     - npm install
