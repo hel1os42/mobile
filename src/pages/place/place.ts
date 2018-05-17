@@ -22,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ComplaintPopover } from './complaint.popover';
+import { AppModeService } from '../../providers/appMode.service';
 
 declare var window;
 
@@ -41,6 +42,7 @@ export class PlacePage {
     page: string;
     onRefreshCompany: Subscription;
     onRefreshTestimonials: Subscription;
+    envName: string;//temporary
 
     constructor(
         private nav: NavController,
@@ -57,8 +59,10 @@ export class PlacePage {
         private translate: TranslateService,
         private launchNavigator: LaunchNavigator,
         private browser: InAppBrowser,
-        private popoverCtrl: PopoverController) {
+        private popoverCtrl: PopoverController,
+        private appMode: AppModeService) {
 
+        this.envName = this.appMode.getEnvironmentMode();//temporary
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
         if (this.navParams.get('company')) {
@@ -112,7 +116,7 @@ export class PlacePage {
                     // else {
                     //     this.company.stars = resp.stars;
                     // }
-                    this.company.testimonials_count = this.company.testimonials_count + 1;
+                    // this.company.testimonials_count = this.company.testimonials_count + 1;
                 }
             });
     }
@@ -225,7 +229,7 @@ export class PlacePage {
     }
 
     openComplaint() {
-        let complaintPopover = this.popoverCtrl.create(ComplaintPopover);
+        let complaintPopover = this.popoverCtrl.create(ComplaintPopover, { companyId: this.company.id });
         complaintPopover.present();
     }
 

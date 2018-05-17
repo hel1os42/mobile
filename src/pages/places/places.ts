@@ -166,7 +166,7 @@ export class PlacesPage {
                             // else {
                             //     company.stars = resp.stars;
                             // }
-                            company.testimonials_count = company.testimonials_count + 1;
+                            // company.testimonials_count = company.testimonials_count + 1;
                         };
                     });
                 }

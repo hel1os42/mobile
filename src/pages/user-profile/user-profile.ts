@@ -25,7 +25,6 @@ export class UserProfilePage {
     balance: number;
     onRefreshAccounts: Subscription;
     NAU: Account;
-    level = 2;
 
     @ViewChild(Slides) slides: Slides;
 
@@ -78,9 +77,9 @@ export class UserProfilePage {
     }
 
     openUserNau() {
-        if (!this.platform.is('ios')) {
+        // if (!this.platform.is('ios')) {
             this.nav.push(UserNauPage, { NAU: this.NAU });
-        }
+        // }
     }
 
     openUserUsers() {

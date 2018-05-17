@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { StartPage } from '../start/start';
 import { StatusBar } from '@ionic-native/status-bar';
+import { NavController, NavParams } from 'ionic-angular';
+import { LoginPage } from '../login/login';
 
 @Component({
     selector: 'page-onboarding',
@@ -32,7 +32,7 @@ export class OnBoardingPage {
             this.nav.setRoot(this.navParams.get('page'), { latitude: this.latitude, longitude: this.longitude });
         }
         else {
-            this.nav.setRoot(StartPage);
+            this.nav.setRoot(LoginPage);
         }
     }
 

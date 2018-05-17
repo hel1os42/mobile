@@ -6,25 +6,23 @@
             <a (click)="getComplaint(key, i)" class="font-14">{{ key | translate }}</a>
         </div>
     </div>
-
-    <div *ngIf="isInputVisible">
+        <div *ngIf="isInputVisible">
         <div margin-bottom class="font-14">{{ 'COMPLAINT.OTHER_REASON' | translate }}</div>
-        <ion-textarea
-        [(ngModel)]="complaint"
-            maxlength="250"
-            class="bg-gray-radius-small">
-        </ion-textarea>
-    </div>
-
-    <ion-grid padding-top padding-bottom>
-        <ion-row>
-            <ion-col text-center>
-                <button (click)="close()" ion-button block color="primary">{{ 'UNIT.CANCEL' | translate }}</button>
-            </ion-col>
-            <ion-col *ngIf="isInputVisible" text-center class="margin-left-2proc">
-                <button (click)="setComplaint()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-
+            <ion-textarea
+                [(ngModel)]="complaint"
+                maxlength="250"
+                autofocus
+                class="bg-gray-radius-small">
+            </ion-textarea>
+        </div>
+        <ion-grid padding-top padding-bottom>
+            <ion-row>
+                <ion-col text-center>
+                    <button (click)="close()" ion-button block color="primary">{{ 'UNIT.CANCEL' | translate }}</button>
+                </ion-col>
+                <ion-col *ngIf="isInputVisible" text-center class="margin-left-2proc">
+                    <button (click)="setComplaint()" [disabled]="!complaint || complaint.length < 3" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
 </div>

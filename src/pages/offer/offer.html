@@ -43,7 +43,7 @@
         <ion-icon class="text-FEC282 font-22 stars" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
     </ng-container>
     <img class="icon_user" src="assets/img/user_offers/icon_user.svg">
-    <span class="font-16 text-E0E0E0">{{ company.testimonials_count }}</span>
+    <span class="font-16 text-E0E0E0">{{ offer.redemptions_count !== undefined ? offer.redemptions_count : company.testimonials_count }}</span>
     <img class="icon_arrow" src="assets/img/user_offers/icon_arrow.svg">
     <span class="font-16 text-E0E0E0">
         {{ distanceObj?.distance }}

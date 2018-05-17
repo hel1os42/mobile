@@ -19,6 +19,7 @@ export class Place {
     alias: string;
     has_active_offers: boolean;
     testimonials_count: number;
+    redemptions_count: number;
     testimonials;
     categories_count?: number;
     offers_count: number;

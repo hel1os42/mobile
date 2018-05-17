@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from '../../providers/toast.service';
+import { ReportService } from '../../providers/report.service';
+import { Complaint } from '../../models/complaint';
 
 @Component({
     selector: 'complaint-popover-component',
@@ -18,17 +20,21 @@ export class ComplaintPopover {
         'COMPLAINT.OTHER_REASON'
     ];
     isInputVisible: boolean;
+    companyId: string;
 
     constructor(
         private viewCtrl: ViewController,
         private translate: TranslateService,
-        private toast: ToastService) {
+        private toast: ToastService,
+        private navParams: NavParams,
+        private report: ReportService) {
 
+        this.companyId = this.navParams.get('companyId');
     }
 
     getComplaint(key, i) {
         if (i == 3) {
-            // this.complaint = undefined;
+            this.complaint = undefined;
             this.isInputVisible = true;
         }
         else {
@@ -46,9 +52,14 @@ export class ComplaintPopover {
 
     setComplaint() {
         if (this.complaint && this.complaint !== '') {
-            console.log(this.complaint);//to do
-            this.toast.showNotification('COMPLAINT.NOTIFICATION');
-            this.close();
+            let complaint: Complaint = {
+                text: this.complaint
+            }
+            this.report.set(this.companyId, complaint)
+                .subscribe(resp => {
+                    this.toast.showNotification('COMPLAINT.NOTIFICATION');
+                    this.close();
+                })
         }
     }
 

@@ -95,7 +95,7 @@
                     <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
                 </ng-container>
                 <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
-                <span class="font-75 text-828282">{{ company.testimonials_count }}</span>
+                <span class="font-75 text-828282">{{ company.redemptions_count !== undefined ? company.redemptions_count : company.testimonials_count }}</span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282">
                     {{ getDistance(company.latitude, company.longitude).distance }}

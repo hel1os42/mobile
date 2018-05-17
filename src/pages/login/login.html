@@ -1,10 +1,5 @@
-<ion-header>
-    <ion-navbar #navbar>
-    </ion-navbar>
-</ion-header>
-
 <ion-content class="padding-sign">
-    <div (tap)="toggleMode()" class="logo">
+    <div (tap)="toggleMode()" class="logo-margin">
     </div>
     <div text-center class="title-big-sign">{{ 'PAGE_LOGIN.LOGIN' | translate }}</div>
     <div *ngIf="!isVisibleLoginButton" text-center class="margin-top-6vw font-75 text-4F4F4F">
@@ -121,6 +116,52 @@
     color="primary" >
     {{ 'PAGE_LOGIN.RESEND_SMS' | translate }}
 </button>
+
+    <div text-center class="font-75 text-828282 margin-top-5vw">
+        {{ 'PAGE_START.OR_SIGN_UP_WITH' | translate }}
+    </div>
+
+    <div margin-top margin-bottom text-center class="btn_social">
+        <button
+            (click)="getFbProfile()"
+            [disabled]="!isSocial"
+            ion-button
+            icon-only
+            color="transparent"
+            margin-right>
+            <img src="assets/img/start/icon1.svg">
+        </button>
+
+        <button
+            (click)="getTwitterProfile()"
+            [disabled]="!isSocial"
+            ion-button
+            icon-only
+            color="transparent"
+            margin-right>
+            <img src="assets/img/start/icon2.svg">
+        </button>
+
+        <!-- <button
+            (click)="getInstaProfile()"
+            [disabled]="!isSocial"
+            ion-button
+            icon-only
+            margin-right
+            color="transparent">
+            <img src="assets/img/start/icon3.svg">
+        </button> -->
+
+        <button
+            (click)="getVkProfile()"
+            [disabled]="!isSocial"
+            ion-button
+            icon-only
+            color="transparent">
+            <img src="assets/img/start/icon4.svg">
+        </button>
+
+    </div>
 
 </ion-content>
 

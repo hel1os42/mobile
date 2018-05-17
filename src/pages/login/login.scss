@@ -32,6 +32,8 @@ page-login {
 
   .footer.footer-ios{
     min-height: inherit;
+      height: auto;
+      padding: 3vw;
   }
 
     .tel .text-input-ios {
@@ -40,5 +42,12 @@ page-login {
 
     .otp{
         padding-left: 7vw;
+    }
+
+    .btn_social .button{
+        width: 10vw;
+        height: 10vw;
+        padding: 2vw;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     }
 }
