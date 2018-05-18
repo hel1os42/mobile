@@ -1,19 +1,18 @@
-import { AppModeService } from '../../providers/appMode.service';
-import { Register } from '../../models/register';
-import { StringValidator } from '../../validators/string.validator';
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Select, Platform, Content, NavParams } from 'ionic-angular';
-import { AuthService } from '../../providers/auth.service';
-import { SignUpCodePage } from '../signup-code/signup-code';
-import { PHONE_CODES } from '../../const/phoneCodes.const';
-import { StorageService } from '../../providers/storage.service';
-import { LocationService } from '../../providers/location.service';
-import { Subscription } from 'rxjs';
-import { Keyboard } from '@ionic-native/keyboard';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { Keyboard } from '@ionic-native/keyboard';
 import { OneSignal } from '@ionic-native/onesignal';
+import { Content, NavController, NavParams, Platform, Select } from 'ionic-angular';
+import { Subscription } from 'rxjs';
+import { PHONE_CODES } from '../../const/phoneCodes.const';
+import { Register } from '../../models/register';
 import { SocialData } from '../../models/socialData';
+import { AppModeService } from '../../providers/appMode.service';
+import { AuthService } from '../../providers/auth.service';
+import { LocationService } from '../../providers/location.service';
+import { StorageService } from '../../providers/storage.service';
+import { StringValidator } from '../../validators/string.validator';
+import { SignUpCodePage } from '../signup-code/signup-code';
 
 @Component({
     selector: 'page-signup',
@@ -46,7 +45,6 @@ export class SignUpPage {
         private location: LocationService,
         private keyboard: Keyboard,
         private browser: InAppBrowser,
-        private analytics: GoogleAnalytics,
         private oneSignal: OneSignal,
         private navParams: NavParams) {
 

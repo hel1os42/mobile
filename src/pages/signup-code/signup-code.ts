@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Register } from '../../models/register';
+import { SocialData } from '../../models/socialData';
 import { ApiService } from '../../providers/api.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { ProfileService } from '../../providers/profile.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TabsPage } from '../tabs/tabs';
-import { SocialData } from '../../models/socialData';
 
 @Component({
     selector: 'page-signup-code',

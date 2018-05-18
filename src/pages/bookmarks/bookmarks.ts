@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Diagnostic } from '@ionic-native/diagnostic';
-import { NavController, Platform, Loading, LoadingController } from 'ionic-angular';
+import { LoadingController, NavController, Platform } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -44,7 +43,6 @@ export class BookmarksPage {
         private location: LocationService,
         private appMode: AppModeService,
         private testimonials: TestimonialsService,
-        private diagnostic: Diagnostic,
         private platform: Platform,
         private loading: LoadingController) {
 
