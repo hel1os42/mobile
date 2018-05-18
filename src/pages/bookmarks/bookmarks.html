@@ -43,7 +43,7 @@
     <ion-list padding-left padding-right *ngIf="segment === 'places'" no-lines class="item-block-nau margin-top-10 block-places">
 
         <ion-item-sliding *ngFor="let company of companies">
-            <ion-item (click)="openPlace(company)" class="margin-no">
+            <ion-item (tap)="openPlace(company)" class="margin-no">
                 <ion-avatar item-start text-center>
                     <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + company.picture_url + '?size=mobile&)'}"></div>
                     <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">
@@ -66,7 +66,7 @@
                             {{ getDistance(company.latitude, company.longitude).key | translate }}
                         </span>
                     </ng-container>
-                   
+
                     <div class="smooth_transition">
                         <div class="scroll_content margin-top-2vw">
                             <div class="bold font-18 text-3E4B5D">{{ company.name }}</div>
