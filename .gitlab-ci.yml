@@ -14,6 +14,7 @@ build:
   stage: build
   before_script:
     - npm install
+    - cordova -v
   script:
     - ionic --version
     - ionic build --prod
@@ -28,6 +29,7 @@ build develop:
   stage: build
   before_script:
     - npm install
+    - cordova -v
   script:
     - ionic --version
     - ionic build --prod
@@ -41,7 +43,7 @@ android:
     - npm install
   script:
     - echo "$ANDROID_PRIVATE_KEY" | base64 -d > android.key
-    - ionic cordova prepare
+    - ionic cordova platform add android --fetch
     - ionic cordova build android --prod --release --no-build -- -- --keystore=android.key --alias=nau-release --storePassword="$ANDROID_KEY_PASSWORD" --password="$ANDROID_KEY_PASSWORD"
     - mv ./platforms/android/build/outputs/apk/android-release.apk nau.apk
   only:
