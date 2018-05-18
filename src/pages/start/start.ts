@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import { SocialData } from '../../models/socialData';
 import { SocialService } from '../../providers/social.service';
 import { LoginPage } from '../login/login';
 import { SignUpPage } from '../signup/signup';
-import { SocialData } from '../../models/socialData';
 
 @Component({
     selector: 'page-start',
@@ -17,8 +17,7 @@ export class StartPage {
 
     constructor(
         private nav: NavController,
-        private social: SocialService,
-        private platform: Platform) {
+        private social: SocialService) {
 
     }
 

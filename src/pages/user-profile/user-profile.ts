@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Slides, Platform } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
+import { AlertController, NavController, Slides } from 'ionic-angular';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
 import { User } from '../../models/user';
 import { AuthService } from '../../providers/auth.service';
 import { ProfileService } from '../../providers/profile.service';
+import { TransactionService } from '../../providers/transaction.service';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SettingsPage } from '../settings/settings';
 import { UserAchievePage } from '../user-achieve/user-achieve';
@@ -13,8 +14,6 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
-import { TransactionService } from '../../providers/transaction.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-user-profile',
@@ -34,8 +33,7 @@ export class UserProfilePage {
         private auth: AuthService,
         public alert: AlertController,
         private transaction: TransactionService,
-        private translate: TranslateService,
-        private platform: Platform) {
+        private translate: TranslateService) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {

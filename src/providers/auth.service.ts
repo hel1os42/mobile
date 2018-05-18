@@ -1,19 +1,18 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Register } from '../models/register';
-import { Login } from '../models/login';
-import { ApiService } from './api.service';
-import { TokenService } from './token.service';
+import { EventEmitter, Injectable } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
-import { StorageService } from './storage.service';
 import { OneSignal } from '@ionic-native/onesignal';
-import { PushTokenCreate } from '../models/pushTokenCreate';
-import { PushTokenService } from './pushToken.service';
-import { FlurryAnalytics, FlurryAnalyticsOptions, FlurryAnalyticsObject } from '@ionic-native/flurry-analytics';
 import { Platform } from 'ionic-angular';
+import { Login } from '../models/login';
+import { PushTokenCreate } from '../models/pushTokenCreate';
+import { Register } from '../models/register';
+import { User } from '../models/user';
 import { AnalyticsService } from './analytics.service';
+import { ApiService } from './api.service';
 import { AppModeService } from './appMode.service';
 import { ProfileService } from './profile.service';
-import { User } from '../models/user';
+import { PushTokenService } from './pushToken.service';
+import { StorageService } from './storage.service';
+import { TokenService } from './token.service';
 
 declare var cookieMaster;
 
@@ -34,8 +33,7 @@ export class AuthService {
         private pushToken: PushTokenService,
         private platform: Platform,
         private appMode: AppModeService,
-        private profile: ProfileService
-    ) {
+        private profile: ProfileService) {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { StatusBar } from '@ionic-native/status-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { AlertController, NavController, NavParams, PopoverController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
@@ -8,6 +11,7 @@ import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
 import { Speciality } from '../../models/speciality';
+import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -18,11 +22,7 @@ import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
-import { TranslateService } from '@ngx-translate/core';
-import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { ComplaintPopover } from './complaint.popover';
-import { AppModeService } from '../../providers/appMode.service';
 
 declare var window;
 

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { OneSignal } from '@ionic-native/onesignal';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -10,6 +9,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { Subscription } from 'rxjs/Rx';
 import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../const/i18n.const';
 import { Share } from '../models/share';
+import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AnalyticsService } from '../providers/analytics.service';
@@ -19,7 +19,6 @@ import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
-import { LoginPage } from '../pages/login/login';
 
 
 @Component({
@@ -47,8 +46,7 @@ export class MyApp {
         private gAnalytics: GoogleAnalytics,
         private analytics: AnalyticsService,
         private share: ShareService,
-        private oneSignal: OneSignal,
-        private flurryAnalytics: FlurryAnalytics) {
+        private oneSignal: OneSignal) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
