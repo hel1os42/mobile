@@ -327,25 +327,29 @@ export class LoginPage {
             this.social.getFbLoginStatus()
                 .then((res) => {
                     // let userId: string;
+                    let accessToken: string;
                     let promise: Promise<any>;
                     if (res.status === 'unknown') {
                         promise = this.social.fbLogin();
                     }
                     else if (res.status === 'connected') {
                         promise = Promise.resolve();
+                        if (res.authResponse) {
+                            accessToken = res.authResponse.accessToken;
+                        }
                         // userId = res.authResponse.userID;
                     }
                     // console.log(res);
                     promise.then(resp => {
-                        // if (resp && resp.authResponse) {
-                        //     userId = resp.authResponse.userID;
-                        // }
+                        if (resp && resp.authResponse) {
+                            accessToken = resp.authResponse.accessToken;
+                        }
                         // console.log(resp);
                         this.social.getFbProfile()
                             .then(profile => {
                                 this.createSocData(profile.name, profile.picture_large.data.url, profile.id, 'facebook', profile.email, )
                                 this.nav.push(SignUpPage, { social: this.socialData });
-                                this.social.fbLogout();
+                                // this.social.fbLogout();
                                 this.isSocial = true;
                                 // console.log(user);
                             })
