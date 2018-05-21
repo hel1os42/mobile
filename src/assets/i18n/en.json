@@ -594,7 +594,14 @@
         "LEVEL" : "Level",
         "REGISTRATION_DATE" : "Registration date",
         "LOADING_REFERRALS" : "Loading...",
-        "YOU_DONT_HAVE": "You don't have any friends yet"
+        "YOU_DONT_HAVE": "You don't have any friends yet",
+        "POINTS" : "points",
+        "POINTS2" : "points",
+        "POINT" : "point",
+        "INVITE" : "invite",
+        "FRIENDS" : "friends",
+        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
+        "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them."
     },
 
     "PAGE_TRANSFER" : {

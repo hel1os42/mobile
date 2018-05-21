@@ -6,39 +6,31 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item class="border-bottom-no top-block-nau">
-    <ion-avatar item-start>
-      <img src="assets/img/user_profile/users.svg">
-    </ion-avatar>
-    <div item-content>
-        <div *ngIf="total && total > 0">
-            <div class="font-18 text-3E4B5D bold">{{ total }}</div>
-            <div class="font-14 text-828282">
-                {{ total >= 10 && total <= 20
-                ?  ('UNIT.FRIENDS' | translate)
-                : total % 10 == 1 
-                ? ('UNIT.FRIEND' | translate) 
-                : (total % 10 >= 2 && total % 10 <= 4) 
-                ? ('UNIT.FRIENDS2' | translate) 
-                : ('UNIT.FRIENDS' | translate) }}
-            </div>
-        </div>
-        <div *ngIf="total == 0" class="font-18 text-3E4B5D bold">
-            {{ 'PAGE_USER-USERS.YOU_DONT_HAVE' | translate }}
-        </div>
-    </div>
-      <a item-end margin-left class="btn_calendar_user" hidden>
-          <a><img src="assets/img/user_offers/icon_right.svg">
-              <ion-datetime
-                doneText="Ok"
-                [(ngModel)]="startDate"
-                [min]="todayDate | date: 'yyyy-MM-dd'"
-                max="2021-12-31">
-              </ion-datetime>
-          </a>
-      </a>
-  </ion-item>
 
+    <ion-item padding-bottom class="border-bottom-no top-block-nau relative overflow-visible">
+        <ion-avatar item-start class="relative">
+            <div class="thumb_image" [style.background-image]="'url(assets/img/user_achi/ava.png)'"></div>
+            <div text-center class="user_level font-20 text-white table"><span class="table-cell">L2</span></div>
+        </ion-avatar>
+        <div class="font-18 text-3E4B5D bold wrap-no width-78">name</div>
+        <img class="margin-top-3vw card" src="assets/img/user_achi/icon_card.svg">
+        <span text-uppercase class="font-14 text-828282">5 {{ 'PAGE_USER-USERS.POINTS' | translate }}</span>
+        <a class="star_right">
+            <div class="flex"><img class="margin-right-10" src="assets/img/user_profile/users.svg"><span class="text-18 text-BDBDBD">
+                {{ total }}
+            </span></div>
+        </a>
+    </ion-item>
+
+    <ion-segment margin-top margin-bottom text-uppercase class="nau-segment">
+        <ion-segment-button value="active">
+            {{ 'PAGE_USER-USERS.INVITE' | translate }}
+        </ion-segment-button>
+        <ion-segment-button value="completed">
+            {{ 'PAGE_USER-USERS.FRIENDS' | translate }}
+        </ion-segment-button>
+    </ion-segment>
+<div hidden>
   <ion-list margin-top no-lines class="item-block-nau">
     <ion-item *ngFor="let referral of referrals">
       <ion-avatar item-start>
@@ -50,11 +42,11 @@
         <span margin-left>
             {{ referral.offers_count >= 10 && referral.offers_count <= 20
             ? ('UNIT.OFFERS' | translate)
-            : referral.offers_count % 10 == 1 
-            ? ('UNIT.OFFER' | translate) 
-            : (referral.offers_count % 10 >= 2 && referral.offers_count % 10 <= 4) 
-            ? ('UNIT.OFFERS2' | translate) 
-            : ('UNIT.OFFERS' | translate) }}: 
+            : referral.offers_count % 10 == 1
+            ? ('UNIT.OFFER' | translate)
+            : (referral.offers_count % 10 >= 2 && referral.offers_count % 10 <= 4)
+            ? ('UNIT.OFFERS2' | translate)
+            : ('UNIT.OFFERS' | translate) }}:
           <b>{{ referral.offers_count }}</b>
         </span>
       </div>
@@ -70,4 +62,12 @@
       loadingText="{{ 'PAGE_USER-USERS.LOADING_REFERRALS' | translate }}">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+</div>
+
+    <div>
+        <div text-center margin-bottom><img class="envelope" src="assets/img/user_users/envelope.svg"></div>
+    </div>
+    <div margin-bottom class="text-3E4B5D font-14">{{ 'PAGE_USER-USERS.NAU_IS_THE_ONLY' | translate }}</div>
+    <div class="text-3E4B5D font-14">{{ 'PAGE_USER-USERS.A_LIFETIME' | translate }}</div>
+
 </ion-content>
