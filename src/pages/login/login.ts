@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { Keyboard } from '@ionic-native/keyboard';
-import { AlertController, Content, Navbar, NavController, Platform, Select } from 'ionic-angular';
+import { AlertController, Content, Navbar, NavController, Platform, Select, LoadingController } from 'ionic-angular';
 import { Observable, Subscription } from 'rxjs';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { Login } from '../../models/login';
@@ -13,6 +13,8 @@ import { SignUpPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 import { SocialData } from '../../models/socialData';
 import { SocialService } from '../../providers/social.service';
+import { SocialIdentity } from '../../models/socialIdentity';
+import { StorageService } from '../../providers/storage.service';
 
 @Component({
     selector: 'page-login',
@@ -41,6 +43,8 @@ export class LoginPage {
     isRetry = false;
     socialData: SocialData;
     isSocial = true;
+    HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
+    isLogin = false;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -55,7 +59,9 @@ export class LoginPage {
         private location: LocationService,
         private keyboard: Keyboard,
         private analytics: GoogleAnalytics,
-        private social: SocialService) {
+        private social: SocialService,
+        private storage: StorageService,
+        private loading: LoadingController) {
 
         if (this.platform.is('android')) {
             let
@@ -116,38 +122,63 @@ export class LoginPage {
     }
 
     getOtp() {
-        this.analytics.trackEvent("Session", 'event_signin');
-        this.auth.getOtp(this.numCode.dial_code + this.authData.phone)
+        let loading = this.loading.create();
+        loading.present();
+        let phone = this.numCode.dial_code + this.authData.phone
+        this.auth.getOtp(phone)
             .subscribe(() => {
-                this.isVisibleLoginButton = true;
-                this.cancelTimer();
-                this.isRetry = false;
-                if (this.getDevMode()) {
-                    this.authData.code = this.authData.phone.slice(-4);
+                this.isLogin = true;
+                this.otpHandler();
+                loading.dismiss();
+                debugger
+            },
+                err => {
+                    let inviteCode = this.storage.get('invCode');
+                    if (err.respStatus == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && !inviteCode) {
+                        this.nav.push(SignUpPage, { phone: this.authData.phone, numCode: this.numCode });
+                        debugger
+                    }
+                    else if (err.respStatus == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && inviteCode) {
+                        this.auth.getReferrerId(inviteCode, phone)
+                            .subscribe(() => {
+                                this.otpHandler();
+                                debugger
+                            })
+                    };
+                    loading.dismiss();
                 }
-                this.backAction = this.platform.registerBackButtonAction(() => {
-                    if (this.isVisibleLoginButton) {
-                        this.isVisibleLoginButton = false;
-                        this.backAction();
-                    }
-                }, 1);
-                this.countDown = Observable.timer(0, this.tick)
-                    .take(this.counter)
-                    .map(() => --this.counter);
-                this.timer = setInterval(() => {
-                    if (this.counter < 1) {
-                        this.cancelTimer();
-                        this.isRetry = true;
-                    }
-                }, 1000);
-            });
+            );
+    }
+
+    otpHandler() {
+        this.isVisibleLoginButton = true;
+        this.cancelTimer();
+        this.isRetry = false;
+        if (this.getDevMode()) {
+            this.authData.code = this.authData.phone.slice(-4);
+        }
+        this.backAction = this.platform.registerBackButtonAction(() => {
+            if (this.isVisibleLoginButton) {
+                this.isVisibleLoginButton = false;
+                this.backAction();
+            }
+        }, 1);
+        this.countDown = Observable.timer(0, this.tick)
+            .take(this.counter)
+            .map(() => --this.counter);
+        this.timer = setInterval(() => {
+            if (this.counter < 1) {
+                this.cancelTimer();
+                this.isRetry = true;
+            }
+        }, 1000);
     }
 
     login() {
         this.auth.login({
             phone: this.numCode.dial_code + this.authData.phone,
             code: this.authData.code
-        }, true)
+        })
             .subscribe(resp => {
                 // this.analytics.trackEvent("Session", 'event_phoneconfirm');
                 // this.profile.get(true, false);//for sending one signal tags
@@ -176,9 +207,9 @@ export class LoginPage {
         }
     }
 
-    signup() {
-        this.nav.push(SignUpPage);
-    }
+    // signup() {
+    //     this.nav.push(SignUpPage);
+    // }
 
     limitStr(str: string, length: number) {
         if (length == 14) this.authData.phone = StringValidator.stringLimitMax(str, length);
@@ -345,6 +376,15 @@ export class LoginPage {
                             accessToken = resp.authResponse.accessToken;
                         }
                         // console.log(resp);
+                        let identity: SocialIdentity = {
+                            identity_access_token: accessToken,
+                            identity_provider: 'facebook'
+                        }
+                        this.auth.loginViaSocial(identity)
+                            .subscribe(() => this.nav.setRoot(TabsPage, { index: 0 }),
+                                err => {
+
+                                });
                         this.social.getFbProfile()
                             .then(profile => {
                                 this.createSocData(profile.name, profile.picture_large.data.url, profile.id, 'facebook', profile.email, )
