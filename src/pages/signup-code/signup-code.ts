@@ -82,22 +82,15 @@ export class SignUpCodePage {
 
     signUp() {
         this.auth.register(this.register)
-            .subscribe(resp => {
-                this.auth
-                    .login({
-                        phone: this.register.phone,
-                        code: this.register.code
-                    })
-                    .subscribe(res => {
-                        // this.analytics.trackEvent("Session", 'event_phoneconfirm');
-                        this.cancelTimer();
-                        this.isRetry = false;
-                        if (this.socialData) {
-                            this.setProfile();
-                        }
-                        this.nav.setRoot(TabsPage, { index: 0 });
-                        // this.nav.setRoot(CreateUserProfilePage);
-                    })
+            .subscribe(() => {
+                // this.analytics.trackEvent("Session", 'event_phoneconfirm');
+                this.cancelTimer();
+                this.isRetry = false;
+                if (this.socialData) {
+                    this.setProfile();
+                }
+                this.nav.setRoot(TabsPage, { index: 0 });
+                // this.nav.setRoot(CreateUserProfilePage);
             })
     }
 
