@@ -14,6 +14,7 @@ import { PushTokenService } from './pushToken.service';
 import { StorageService } from './storage.service';
 import { TokenService } from './token.service';
 import { SocialIdentity } from '../models/socialIdentity';
+import { Observable } from 'rxjs';
 
 declare var cookieMaster;
 
@@ -78,9 +79,9 @@ export class AuthService {
     }
 
     getOtp(phone: string) {
-        return this.api.get(`auth/login/${phone}/code`, { 
+        return this.api.get(`auth/login/${phone}/code`, {
             showLoading: false,
-            ignoreHttpLeftComplaint: this.appMode.getEnvironmentMode() === 'prod'  
+            ignoreHttpNotFound: this.appMode.getEnvironmentMode() === 'prod'
         });
     }
 
@@ -91,7 +92,7 @@ export class AuthService {
                 this.gAnalytics.trackEvent("Session", 'event_signup');
                 this.analytics.faLogEvent('event_signup');
             }
-            this.loginHandler(resp.token);
+            this.loginHandler({ token: resp.token }, false, resp.id);
         });
         return obs;
     }
@@ -102,7 +103,7 @@ export class AuthService {
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
         obs.subscribe(token => {
-            this.loginHandler(token);
+            this.loginHandler(token, false);
             //     this.token.set(token);
             //     this.oneSignal.getIds()
             //         .then(resp => {
@@ -132,24 +133,24 @@ export class AuthService {
         return obs;
     }
 
-    loginHandler(token, isSocial?: boolean) {
+    loginHandler(token, isSocial: boolean, userId?: string) {
         this.token.set(token);
         this.oneSignal.getIds()
             .then(resp => {
-                this.profile.get(false, false)//for sending one signal tags
-                    .subscribe((user: User) => {
-                        let pushToken: PushTokenCreate = {
-                            user_id: user.id,
-                            token: resp.pushToken
-                        };
-                        // this.pushToken.get(resp.userId)
-                        //     .subscribe(res => { },
-                        //         err => {
-                        //             if (err.status == 404) {
-                        this.pushToken.set(pushToken, resp.userId);
-                        //     }
-                        // })
-                    })
+                let obs = userId ? Observable.of({ id: userId }) : this.profile.get(false, false);//for sending one signal tags
+                obs.subscribe((user: User) => {
+                    let pushToken: PushTokenCreate = {
+                        user_id: user.id,
+                        token: resp.pushToken
+                    };
+                    // this.pushToken.get(resp.userId)
+                    //     .subscribe(res => { },
+                    //         err => {
+                    //             if (err.status == 404) {
+                    this.pushToken.set(pushToken, resp.userId);
+                    //     }
+                    // })
+                })
             })
         this.gAnalytics.trackEvent("Session", 'event_signin');
         // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
