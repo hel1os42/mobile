@@ -66,7 +66,7 @@ export class ApiService {
         //             : resp == 'test' ? this.testUrl
         //                 : this.devUrl;
         //     })
-        this.url = 'https://cd4606b9.ngrok.io';
+        this.url = 'https://e04a4d7f.ngrok.io';
     }
 
     private getOptions(options: RequestOptions): RequestOptions {
