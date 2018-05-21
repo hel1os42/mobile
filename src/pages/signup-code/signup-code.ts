@@ -87,7 +87,7 @@ export class SignUpCodePage {
                     .login({
                         phone: this.register.phone,
                         code: this.register.code
-                    }, false)
+                    })
                     .subscribe(res => {
                         // this.analytics.trackEvent("Session", 'event_phoneconfirm');
                         this.cancelTimer();

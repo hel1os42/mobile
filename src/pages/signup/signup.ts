@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Keyboard } from '@ionic-native/keyboard';
-import { OneSignal } from '@ionic-native/onesignal';
 import { Content, NavController, NavParams, Platform, Select } from 'ionic-angular';
 import { Subscription } from 'rxjs';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
@@ -45,7 +44,6 @@ export class SignUpPage {
         private location: LocationService,
         private keyboard: Keyboard,
         private browser: InAppBrowser,
-        private oneSignal: OneSignal,
         private navParams: NavParams) {
 
         this.socialData = this.navParams.get('social');
@@ -119,7 +117,6 @@ export class SignUpPage {
         // else {
         //     inviteCode = this.formData.code;
         // }
-        this.oneSignal.sendTag('refferalInviteCode', inviteCode);
         this.auth.getReferrerId(inviteCode, this.phoneNumber)
             .subscribe(resp => {
                 let register: Register = {
