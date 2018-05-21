@@ -13,6 +13,7 @@ import { ProfileService } from './profile.service';
 import { PushTokenService } from './pushToken.service';
 import { StorageService } from './storage.service';
 import { TokenService } from './token.service';
+import { SocialIdentity } from '../models/socialIdentity';
 
 declare var cookieMaster;
 
@@ -64,54 +65,109 @@ export class AuthService {
         return !!token;
     }
 
-    getReferrerId(inviteCode: string, phone: string) {
-        this.gAnalytics.trackEvent("Session", 'event_signup');
-        return this.api.get(`auth/register/${inviteCode}/${phone}/code`);
+    getReferrerId(inviteCode: string, phone?: string) {
+        this.oneSignal.sendTag('refferalInviteCode', inviteCode);
+        let obs;
+        if (phone) {
+            obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
+        }
+        else {
+            obs = this.api.get(`auth/register/${inviteCode}`);
+        }
+        return obs;
     }
 
     getOtp(phone: string) {
-        return this.api.get(`auth/login/${phone}/code`)
+        return this.api.get(`auth/login/${phone}/code`, { 
+            showLoading: false,
+            ignoreHttpLeftComplaint: this.appMode.getEnvironmentMode() === 'prod'  
+        });
     }
 
     register(register: Register) {
         let obs = this.api.post('users', register);
-        obs.subscribe(() => {
-            this.analytics.faLogEvent('event_signup');
-        })
+        obs.subscribe((resp) => {
+            if (resp.was_recently_created) {
+                this.gAnalytics.trackEvent("Session", 'event_signup');
+                this.analytics.faLogEvent('event_signup');
+            }
+            this.loginHandler(resp.token);
+        });
         return obs;
     }
 
-    login(login: Login, isAnalitics: boolean) {
+    login(login: Login) {
         this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
         this.analytics.faLogEvent('event_phoneconfirm');
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
         obs.subscribe(token => {
-            this.token.set(token);
-            this.oneSignal.getIds()
-                .then(resp => {
-                    this.profile.get(false, false)//for sending one signal tags
-                        .subscribe((user: User) => {
-                            let pushToken: PushTokenCreate = {
-                                user_id: user.id,
-                                token: resp.pushToken
-                            };
-                            // this.pushToken.get(resp.userId)
-                            //     .subscribe(res => { },
-                            //         err => {
-                            //             if (err.status == 404) {
-                            this.pushToken.set(pushToken, resp.userId);
-                            //     }
-                            // })
-                        })
-                })
-            if (isAnalitics) {
-                this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
-            }
-            let envName = this.appMode.getEnvironmentMode();
-            if (this.platform.is('cordova')) {
-                this.oneSignal.sendTag('environment', envName);
-            }
+            this.loginHandler(token);
+            //     this.token.set(token);
+            //     this.oneSignal.getIds()
+            //         .then(resp => {
+            //             this.profile.get(false, false)//for sending one signal tags
+            //                 .subscribe((user: User) => {
+            //                     let pushToken: PushTokenCreate = {
+            //                         user_id: user.id,
+            //                         token: resp.pushToken
+            //                     };
+            //                     // this.pushToken.get(resp.userId)
+            //                     //     .subscribe(res => { },
+            //                     //         err => {
+            //                     //             if (err.status == 404) {
+            //                     this.pushToken.set(pushToken, resp.userId);
+            //                     //     }
+            //                     // })
+            //                 })
+            //         })
+            //     if (isAnalitics) {
+            //         this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
+            //     }
+            //     let envName = this.appMode.getEnvironmentMode();
+            //     if (this.platform.is('cordova')) {
+            //         this.oneSignal.sendTag('environment', envName);
+            //     }
+        });
+        return obs;
+    }
+
+    loginHandler(token, isSocial?: boolean) {
+        this.token.set(token);
+        this.oneSignal.getIds()
+            .then(resp => {
+                this.profile.get(false, false)//for sending one signal tags
+                    .subscribe((user: User) => {
+                        let pushToken: PushTokenCreate = {
+                            user_id: user.id,
+                            token: resp.pushToken
+                        };
+                        // this.pushToken.get(resp.userId)
+                        //     .subscribe(res => { },
+                        //         err => {
+                        //             if (err.status == 404) {
+                        this.pushToken.set(pushToken, resp.userId);
+                        //     }
+                        // })
+                    })
+            })
+        this.gAnalytics.trackEvent("Session", 'event_signin');
+        // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
+        let envName = this.appMode.getEnvironmentMode();
+        if (this.platform.is('cordova')) {
+            this.oneSignal.sendTag('environment', envName);
+        }
+        if (!isSocial) {
+            this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
+            this.analytics.faLogEvent('event_phoneconfirm');
+        }
+    }
+
+    loginViaSocial(identity: SocialIdentity) {
+        this.clearCookies();
+        let obs = this.api.post('auth/login', identity);
+        obs.subscribe(token => {
+            this.loginHandler(token, true);
         });
         return obs;
     }
