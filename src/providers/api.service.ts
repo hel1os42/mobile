@@ -57,15 +57,16 @@ export class ApiService {
             this.appMode.setEnvironmentMode(this.environmentMode);
         }
 
-        this.url = (this.environmentMode == 'prod') ? this.prodUrl
-            : this.environmentMode == 'test' ? this.testUrl
-                : this.devUrl;
-        this.appMode.onEnvironmentMode
-            .subscribe(resp => {
-                this.url = resp == 'prod' ? this.prodUrl
-                    : resp == 'test' ? this.testUrl
-                        : this.devUrl;
-            })
+        // this.url = (this.environmentMode == 'prod') ? this.prodUrl
+        //     : this.environmentMode == 'test' ? this.testUrl
+        //         : this.devUrl;
+        // this.appMode.onEnvironmentMode
+        //     .subscribe(resp => {
+        //         this.url = resp == 'prod' ? this.prodUrl
+        //             : resp == 'test' ? this.testUrl
+        //                 : this.devUrl;
+        //     })
+        this.url = 'https://cd4606b9.ngrok.io';
     }
 
     private getOptions(options: RequestOptions): RequestOptions {
