@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { ApiService } from './api.service';
 import { TokenService } from './token.service';
+import { AppModeService } from './appMode.service';
 
 @Injectable()
 export class ProfileService {
@@ -16,7 +17,8 @@ export class ProfileService {
         private api: ApiService,
         private token: TokenService,
         private oneSignal: OneSignal,
-        private platform: Platform) {
+        private platform: Platform,
+        private appMode: AppModeService) {
 
         this.token.onRemove.subscribe(() => this.user = undefined);
     }
@@ -54,7 +56,10 @@ export class ProfileService {
     }
 
     patch(data, isNoShowLoading?: boolean, gender?: string) {//temporary parametr "gender"
-        let obs = this.api.patch('profile', data, { showLoading: !isNoShowLoading });
+        let obs = this.api.patch('profile', data, { 
+            showLoading: !isNoShowLoading, 
+            ignoreHttpUnprocessableEntity: this.appMode.getEnvironmentMode() === 'prod'  
+        });
         obs.subscribe(resp => {
             this.onRefresh.emit(resp);
             if (this.platform.is('cordova') 
