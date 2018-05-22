@@ -22,7 +22,6 @@ export class SignUpPage {
         phone: '',
         code: ''
     };
-    phoneNumber: string;
     phoneCodes = PHONE_CODES;
     numCode = PHONE_CODES.find(item => item.code === 'US');
     envName: string;
@@ -46,7 +45,11 @@ export class SignUpPage {
         private browser: InAppBrowser,
         private navParams: NavParams) {
 
+        this.envName = this.appMode.getEnvironmentMode();
+        this.formData.code = this.storage.get('invCode') ? this.storage.get('invCode') : '';
         this.socialData = this.navParams.get('social');
+        this.numCode = this.navParams.get('numCode') ? this.navParams.get('numCode') : this.getNumCode(); 
+        this.formData.phone = this.navParams.get('phone') ? this.navParams.get('phone') : '';
 
         if (this.platform.is('android')) {
             //this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
@@ -67,16 +70,10 @@ export class SignUpPage {
 
             this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
                 .subscribe(() => {
-                    //window.alert(appElHeight)
-                    //window.alert(appElHeight2)
-                    // console.log('signup hide')
                     appEl.style.height = (appElHeight2) + 'px';
                 })
         }
 
-        this.envName = this.appMode.getEnvironmentMode();
-        this.formData.code = this.storage.get('invCode') ? this.storage.get('invCode') : '';
-        this.numCode = this.getNumCode();
     }
 
     getNumCode() {
@@ -103,21 +100,12 @@ export class SignUpPage {
     }
 
     getCode() {
-        // this.analytics.trackEvent("Session", 'event_signup');
-        this.phoneNumber = this.numCode.dial_code + this.formData.phone;
+        let phoneNumber = this.numCode.dial_code + this.formData.phone;
 
         let defaultInvite = this.envName === 'prod' ? 'NAU'
             : this.envName === 'test' ? '5a4' : '59c';
         let inviteCode = this.formData.code && this.formData.code !== '' ? this.formData.code : defaultInvite;
-        // if (this.envName === 'prod') {
-        //     inviteCode = this.formData.code && this.formData.code !== ''
-        //         ? this.formData.code
-        //         : 'NAU';
-        // }
-        // else {
-        //     inviteCode = this.formData.code;
-        // }
-        this.auth.getReferrerId(inviteCode, this.phoneNumber)
+        this.auth.getReferrerId(inviteCode, phoneNumber)
             .subscribe(resp => {
                 let register: Register = {
                     phone: resp.phone,
@@ -125,7 +113,6 @@ export class SignUpPage {
                     referrer_id: resp.referrer_id,
                 }
                 this.nav.push(SignUpCodePage, { register: register, inviteCode: inviteCode, social: this.socialData });
-                // this.nav.push(SignUpCodePage, { register: resp })
             })
     }
 
