@@ -71,7 +71,7 @@ export class ProfileService {
         return obs;
     }
 
-    refreshAccounts(isLoading?) {
+    refreshAccounts(isLoading?: boolean) {
         this.getWithAccounts(isLoading).subscribe(user => this.onRefreshAccounts.emit(user));
     }
 
