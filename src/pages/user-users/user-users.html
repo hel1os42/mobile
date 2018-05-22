@@ -3,13 +3,10 @@
     <ion-title>{{ 'PAGE_USER-USERS.YOUR_REFERRALS' | translate }}</ion-title>
   </ion-navbar>
     <div class="header-shadow"></div>
-</ion-header>
-
-<ion-content padding>
-
+    <div margin-left margin-right>
     <ion-item padding-bottom class="border-bottom-no top-block-nau relative overflow-visible">
         <ion-avatar item-start class="relative">
-            <div class="thumb_image" [style.background-image]="'url(assets/img/user_achi/ava.png)'"></div>
+            <div class="thumb_image" [style.background-image]="'url(' + user.picture_url + '?size=mobile)'"></div>
             <div text-center class="user_level font-20 text-white table"><span class="table-cell">L2</span></div>
         </ion-avatar>
         <div class="font-18 text-3E4B5D bold wrap-no width-78">name</div>
@@ -30,6 +27,11 @@
             {{ 'PAGE_USER-USERS.FRIENDS' | translate }}
         </ion-segment-button>
     </ion-segment>
+    </div>
+</ion-header>
+
+<ion-content padding>
+
 <div hidden>
   <ion-list margin-top no-lines class="item-block-nau">
     <ion-item *ngFor="let referral of referrals">
@@ -70,4 +72,15 @@
     <div margin-bottom class="text-3E4B5D font-14">{{ 'PAGE_USER-USERS.NAU_IS_THE_ONLY' | translate }}</div>
     <div class="text-3E4B5D font-14">{{ 'PAGE_USER-USERS.A_LIFETIME' | translate }}</div>
 
+    <div margin-top margin-bottom text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_USER-USERS.SHARE_YOUR_INVITE_LINK' | translate }}</div>
+    <ion-item class="bg-gray label-copy">
+        <span class="text-3E4B5D font-16 bold">marsaizen</span>
+        <a item-end>
+            <ion-icon class="text-FF5A00" name="ios-copy"></ion-icon>
+        </a>
+    </ion-item>
+
+    <div margin-top>
+        <button color="primary" ion-button block>{{ 'PAGE_USER-USERS.INVITE_FRIENDS' | translate }}</button>
+    </div>
 </ion-content>

@@ -88,4 +88,24 @@ page-user-users{
         height: 17vw;
         width: auto;
     }
+
+    .label-copy{
+        padding-left: 6.3vw;
+        padding-right: 6.3vw;
+    }
+
+    .label-copy .item-icon {
+        font-size: 9vw;
+        margin: 0;
+        min-height: 0;
+    }
+
+    .label-copy .input-wrapper {
+        padding-right: 5%;
+    }
+
+    .label-copy .label.label-ios{
+        overflow: scroll;
+        text-overflow: initial;
+    }
 }
