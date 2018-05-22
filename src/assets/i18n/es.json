@@ -597,7 +597,13 @@
         "YOU_DONT_HAVE": "Aún no tienes ningún amigo",
         "POINTS" : "puntos",
         "POINTS2" : "puntos",
-        "POINT" : "punto"
+        "POINT" : "punto",
+        "INVITE" : "invite",
+        "FRIENDS" : "friends",
+        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
+        "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them.",
+        "SHARE_YOUR_INVITE_LINK" : "Share your invite link",
+        "INVITE_FRIENDS" : "Invite friends"
     },
 
     "PAGE_TRANSFER" : {
