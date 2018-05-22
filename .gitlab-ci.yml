@@ -37,7 +37,7 @@ build develop:
     - develop
 
 android:
-  image: gitlab.toavalon.com:5000/codename-nau/mobile-hybrid/android-build:latest
+  image: agileek/ionic-framework:3.19.1
   stage: build_image
   before_script:
     - npm install
@@ -53,7 +53,7 @@ android:
       - nau.apk
 
 android2slack:
-  image: gitlab.toavalon.com:5000/codename-nau/mobile-hybrid/android-build:latest
+  image: agileek/ionic-framework:3.19.1
   stage: deploy
   script:
     - export DT=`date +%Y%m%d%H%M%S`
