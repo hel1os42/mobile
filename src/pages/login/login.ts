@@ -15,6 +15,11 @@ import { SocialData } from '../../models/socialData';
 import { SocialService } from '../../providers/social.service';
 import { SocialIdentity } from '../../models/socialIdentity';
 import { StorageService } from '../../providers/storage.service';
+import { Register } from '../../models/register';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { ProfileService } from '../../providers/profile.service';
+import { ApiService } from '../../providers/api.service';
+import { File } from '@ionic-native/file';
 
 @Component({
     selector: 'page-login',
@@ -45,10 +50,16 @@ export class LoginPage {
     isSocial = true;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
     isLogin = false;
+    register: Register;
+    FACEBOOK = 'facebook';
+    TWITTER = 'twitter';
+    INSTAGRAM = 'instagram';
+    VK = 'vk';
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
     @ViewChild('navbar') navBar: Navbar;
+    @ViewChild('inputPhone') inputPhone;
 
     constructor(
         private platform: Platform,
@@ -61,7 +72,11 @@ export class LoginPage {
         private analytics: GoogleAnalytics,
         private social: SocialService,
         private storage: StorageService,
-        private loading: LoadingController) {
+        private loading: LoadingController,
+        private profile: ProfileService,
+        private fileTransfer: FileTransfer,
+        private file: File,
+        private api: ApiService) {
 
         if (this.platform.is('android')) {
             let
@@ -130,19 +145,21 @@ export class LoginPage {
                 this.isLogin = true;
                 this.otpHandler();
                 loading.dismiss();
-                debugger
             },
                 err => {
                     let inviteCode = this.storage.get('invCode');
-                    if (err.respStatus == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && !inviteCode) {
-                        this.nav.push(SignUpPage, { phone: this.authData.phone, numCode: this.numCode });
-                        debugger
+                    if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && !inviteCode) {
+                        this.nav.push(SignUpPage, { phone: this.authData.phone, numCode: this.numCode, social: this.socialData });
                     }
-                    else if (err.respStatus == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && inviteCode) {
+                    else if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && inviteCode) {
                         this.auth.getReferrerId(inviteCode, phone)
-                            .subscribe(() => {
+                            .subscribe((resp) => {
+                                this.register = {
+                                    phone: resp.phone,
+                                    code: '',
+                                    referrer_id: resp.referrer_id,
+                                };
                                 this.otpHandler();
-                                debugger
                             })
                     };
                     loading.dismiss();
@@ -175,23 +192,25 @@ export class LoginPage {
     }
 
     login() {
-        this.auth.login({
-            phone: this.numCode.dial_code + this.authData.phone,
-            code: this.authData.code
-        })
-            .subscribe(resp => {
-                // this.analytics.trackEvent("Session", 'event_phoneconfirm');
-                // this.profile.get(true, false);//for sending one signal tags
-                //     .subscribe(res => {
-                //         this.location.refreshDefaultCoords({ lat: res.latitude, lng: res.longitude }, true);
-                //         if (res.name == '' && !res.email) {
-                //             this.nav.setRoot(CreateUserProfilePage)
-                //         }
-                //         else {
-                this.nav.setRoot(TabsPage, { index: 0 });
-                //     }
-                // })
-            });
+        let phone = this.numCode.dial_code + this.authData.phone;
+        let obs;
+        if (this.isLogin && !this.socialData) {
+            obs = this.auth.login({ phone: phone, code: this.authData.code });
+        }
+        else {
+            if (this.socialData) {
+                this.register.identity_access_token = this.socialData.token;
+                this.register.identity_provider = this.socialData.socialName;
+            }
+            this.register.code = this.authData.code;
+            obs = this.auth.register(this.register)
+        }
+        obs.subscribe(resp => {
+            if (this.socialData) {
+                this.setProfile();
+            }
+            this.nav.setRoot(TabsPage, { index: 0 });
+        });
     }
 
     cancelTimer() {
@@ -214,6 +233,218 @@ export class LoginPage {
     limitStr(str: string, length: number) {
         if (length == 14) this.authData.phone = StringValidator.stringLimitMax(str, length);
         else this.authData.code = StringValidator.stringLimitMax(str, length);
+    }
+
+    toggleMode() {
+        this.clickMode = this.clickMode + 1;
+        if (this.clickMode >= 5) {
+            this.presentPrompt(false);
+        }
+    }
+
+    onSelectClicked(selectButton: Select) {
+        (<any>selectButton._overlay).didEnter.subscribe(
+            () => {
+                setTimeout(() => {
+                    const options = document.getElementsByClassName('alert-tappable alert-radio');
+                    for (let i = 0; i < options.length; i++) {
+                        if (options[i].attributes[3].nodeValue === 'true') {
+                            options[i].scrollIntoView({ block: 'center', behavior: 'instant' })
+                        }
+                    }
+                }, 5);
+            }
+        );
+    }
+
+    getTwitterProfile() {
+        if (this.isSocial) {
+            this.isSocial = false;
+            this.social.twLogin()
+                .then(resp => {
+                    let identity: SocialIdentity = {
+                        identity_access_token: resp.token,
+                        identity_provider: this.TWITTER
+                        //to do - will get resp.secret
+                    }
+                    this.social.getTwProfile(resp)
+                        .then(res => {
+                            //?
+                            // this.createSocData(resp.token, res.name, res.profile_image_url_https, res.id, this.TWITTER);
+                            // this.loginViaSocial(identity);
+                            // this.isSocial = true;
+                        })
+                        .catch(profile => {
+                            this.createSocData(resp.token, profile.name, profile.profile_image_url_https, profile.id, this.TWITTER);
+                            this.loginViaSocial(identity);
+                            // this.social.twLogout();
+                            this.isSocial = true;
+                        })
+                },
+                    error => {
+                        // this.social.twLogout();
+                        this.isSocial = true;
+                    })
+                .catch(err => {
+                    // console.log("catch: " + err);
+                    this.isSocial = true;
+                })
+        }
+    }
+
+    getFbProfile() {
+        if (this.isSocial) {
+            this.isSocial = false;
+            this.social.getFbLoginStatus()
+                .then((res) => {
+                    // let userId: string;
+                    let accessToken: string;
+                    let promise: Promise<any>;
+                    if (res.status === 'unknown') {
+                        promise = this.social.fbLogin();
+                    }
+                    else if (res.status === 'connected') {
+                        promise = Promise.resolve();
+                        if (res.authResponse) {
+                            accessToken = res.authResponse.accessToken;
+                        }
+                        // userId = res.authResponse.userID;
+                    }
+                    // console.log(res);
+                    promise.then(resp => {
+                        if (resp && resp.authResponse) {
+                            accessToken = resp.authResponse.accessToken;
+                        }
+                        // console.log(resp);
+                        let identity: SocialIdentity = {
+                            identity_access_token: accessToken,
+                            identity_provider: this.FACEBOOK
+                        }
+                        this.social.getFbProfile()//for profile update
+                            .then(profile => {
+                                this.createSocData(accessToken, profile.name, profile.picture_large.data.url, profile.id, this.FACEBOOK, profile.email);
+                                // this.social.fbLogout();
+                                this.isSocial = true;
+                                // console.log(user)
+                                this.loginViaSocial(identity);
+                            })
+                            .catch(err => {
+                                this.isSocial = true;
+                                // console.log(err);
+                            })
+                    },
+                        err => {
+                            this.isSocial = true;
+                        })
+                },
+                    error => {
+                        this.isSocial = true;
+                    })
+                .catch(e => {
+                    this.isSocial = true;
+                    // console.log('Error logging into Facebook', e);
+                });
+        }
+    }
+
+    getInstaProfile() {
+        if (this.isSocial) {
+            this.isSocial = false;
+            this.social.instaLogin()
+                .then((resp: any) => {
+                    this.social.getInstaProfile(resp.access_token)
+                        .subscribe(data => {
+                            let profile = data.data;
+                            this.createSocData(resp.access_token, profile.full_name, profile.profile_picture, profile.id, this.INSTAGRAM);
+                            // email: profile.email
+                            this.nav.push(SignUpPage, { social: this.socialData });
+                            this.isSocial = true;
+                        },
+                            error => {
+                                // console.log('Instagram get profile error' + error);
+                                this.isSocial = true;
+                            });
+                },
+                    error => {
+                        this.isSocial = true;
+                    })
+                .catch(error => {
+                    this.isSocial = true;
+                    // console.log(JSON.stringify('Error logging into Instagram'));
+                });
+        }
+    }
+
+    getVkProfile() {
+        if (this.isSocial) {
+            this.isSocial = false;
+            this.social.vkLogin()
+                .then((resp: any) => {
+                    let identity: SocialIdentity = {
+                        identity_access_token: resp.access_token,
+                        identity_provider: this.VK
+                    }
+                    this.social.getVkProfile(resp.access_token, resp.user_id)
+                        .subscribe(data => {
+                            let profile = data.response[0];
+                            this.createSocData(resp.access_token, profile.first_name, profile.photo_200, resp.user_id, this.VK, resp.email);
+                            this.loginViaSocial(identity);
+                            this.isSocial = true;
+                        },
+                            error => {
+                                // console.log('VK get profile error' + error);
+                                this.isSocial = true;
+                            });
+                },
+                    error => {
+                        this.isSocial = true;
+                    })
+                .catch(err => {
+                    this.isSocial = true;
+                    // console.log('VK login error' + err);
+                });
+        }
+    }
+
+    loginViaSocial(identity: SocialIdentity) {
+        this.auth.loginViaSocial(identity)
+            .subscribe((resp) => {
+                this.nav.setRoot(TabsPage, { index: 0 });
+                this.setProfile();
+            },
+                err => {
+                    setTimeout(() => {
+                        this.keyboard.show();
+                        this.inputPhone.setFocus();
+                    }, 500)
+                });
+    }
+
+    setProfile() {
+        let profile = {//add email
+            name: this.socialData.name,
+            email: this.socialData.email
+        }
+        this.profile.patch(profile, false);
+        if (this.socialData.picture && this.socialData.picture !== '') {
+            let transfer = this.fileTransfer.create();
+            let uri = encodeURI(this.socialData.picture);
+            transfer.download(uri, this.file.dataDirectory + 'profileAva.jpg')
+                .then(entry => {
+                    this.api.uploadImage(entry.toURL(), 'profile/picture', false);
+                })
+        }
+    }
+
+    createSocData(token: string, name: string, picture: string, socialId: string, socialName: string, email?: string) {
+        this.socialData = {
+            token: token,
+            name: name,
+            email: email,
+            picture: picture,
+            socialId: socialId,
+            socialName: socialName
+        };
     }
 
     presentPrompt(selected: boolean) {
@@ -280,201 +511,6 @@ export class LoginPage {
         });
         prompt.present();
         this.clickMode = 0;
-    }
-
-    toggleMode() {
-        this.clickMode = this.clickMode + 1;
-        if (this.clickMode >= 5) {
-            this.presentPrompt(false);
-        }
-    }
-
-    onSelectClicked(selectButton: Select) {
-        (<any>selectButton._overlay).didEnter.subscribe(
-            () => {
-                setTimeout(() => {
-                    const options = document.getElementsByClassName('alert-tappable alert-radio');
-                    for (let i = 0; i < options.length; i++) {
-                        if (options[i].attributes[3].nodeValue === 'true') {
-                            options[i].scrollIntoView({ block: 'center', behavior: 'instant' })
-                        }
-                    }
-                }, 5);
-            }
-        );
-    }
-
-    getTwitterProfile() {
-        if (this.isSocial) {
-            this.isSocial = false;
-            this.social.twLogin()
-                .then(resp => {
-                    this.social.getTwProfile(resp)
-                        .then(res => {
-                            //?
-                        })
-                        // err => {debugger;})
-                        .catch(profile => {
-                            this.createSocData(profile.name, profile.profile_image_url_https, profile.id, 'twitter');
-                            // socialId: resp.userId
-                            // email: user.email,
-                            this.social.twLogout();
-                            // .then((resp) => {
-                            this.nav.push(SignUpPage, { social: this.socialData });
-                            this.isSocial = true;
-                            // });
-                        })
-                    // .subscribe(user => {
-                    //     debugger
-                    //     this.socialData = {
-                    //         name: user.name,
-                    //         //name: user.screen_name,
-                    //         // email: user.email,
-                    //         picture: user.profile_image_url_https
-                    //     };
-                    //     console.log(user);
-                    //     this.nav.push(SignUpPage, { social: this.socialData });
-                    //     this.isSocial = true;
-                    // },
-                    //     err => {
-                    //         this.isSocial = true;
-                    //         debugger
-                    //     })
-                },
-                    error => {
-                        this.social.twLogout();
-                        this.isSocial = true;
-                    })
-                .catch(err => {
-                    // console.log("catch: " + err);
-                    this.isSocial = true;
-                })
-        }
-    }
-
-    getFbProfile() {
-        if (this.isSocial) {
-            this.isSocial = false;
-            this.social.getFbLoginStatus()
-                .then((res) => {
-                    // let userId: string;
-                    let accessToken: string;
-                    let promise: Promise<any>;
-                    if (res.status === 'unknown') {
-                        promise = this.social.fbLogin();
-                    }
-                    else if (res.status === 'connected') {
-                        promise = Promise.resolve();
-                        if (res.authResponse) {
-                            accessToken = res.authResponse.accessToken;
-                        }
-                        // userId = res.authResponse.userID;
-                    }
-                    // console.log(res);
-                    promise.then(resp => {
-                        if (resp && resp.authResponse) {
-                            accessToken = resp.authResponse.accessToken;
-                        }
-                        // console.log(resp);
-                        let identity: SocialIdentity = {
-                            identity_access_token: accessToken,
-                            identity_provider: 'facebook'
-                        }
-                        this.auth.loginViaSocial(identity)
-                            .subscribe(() => this.nav.setRoot(TabsPage, { index: 0 }),
-                                err => {
-
-                                });
-                        this.social.getFbProfile()
-                            .then(profile => {
-                                this.createSocData(profile.name, profile.picture_large.data.url, profile.id, 'facebook', profile.email, )
-                                this.nav.push(SignUpPage, { social: this.socialData });
-                                // this.social.fbLogout();
-                                this.isSocial = true;
-                                // console.log(user);
-                            })
-                            .catch(err => {
-                                this.isSocial = true;
-                                // console.log(err);
-                            })
-                    },
-                        err => {
-                            this.isSocial = true;
-                        })
-                },
-                    error => {
-                        this.isSocial = true;
-                    })
-                .catch(e => {
-                    this.isSocial = true;
-                    // console.log('Error logging into Facebook', e);
-                });
-        }
-    }
-
-    getInstaProfile() {
-        if (this.isSocial) {
-            this.isSocial = false;
-            this.social.instaLogin()
-                .then((resp: any) => {
-                    this.social.getInstaProfile(resp.access_token)
-                        .subscribe(data => {
-                            let profile = data.data;
-                            this.createSocData(profile.full_name, profile.profile_picture, profile.id, 'instagram');
-                            // email: profile.email
-                            this.nav.push(SignUpPage, { social: this.socialData });
-                            this.isSocial = true;
-                        },
-                            error => {
-                                // console.log('Instagram get profile error' + error);
-                                this.isSocial = true;
-                            });
-                },
-                    error => {
-                        this.isSocial = true;
-                    })
-                .catch(error => {
-                    this.isSocial = true;
-                    // console.log(JSON.stringify('Error logging into Instagram'));
-                });
-        }
-    }
-
-    getVkProfile() {
-        if (this.isSocial) {
-            this.isSocial = false;
-            this.social.vkLogin()
-                .then((resp: any) => {
-                    this.social.getVkProfile(resp.access_token, resp.user_id)
-                        .subscribe(data => {
-                            let profile = data.response[0];
-                            this.createSocData(profile.first_name, profile.photo_200, resp.user_id, 'vk', resp.email);
-                            this.nav.push(SignUpPage, { social: this.socialData });
-                            this.isSocial = true;
-                        },
-                            error => {
-                                // console.log('VK get profile error' + error);
-                                this.isSocial = true;
-                            });
-                },
-                    error => {
-                        this.isSocial = true;
-                    })
-                .catch(err => {
-                    this.isSocial = true;
-                    // console.log('VK login error' + err);
-                });
-        }
-    }
-
-    createSocData(name: string, picture: string, socialId: string, socialName: string, email?: string) {
-        this.socialData = {
-            name: name,
-            email: email,
-            picture: picture,
-            socialId: socialId,
-            socialName: socialName
-        };
     }
 
     ngOnDestroy() {
