@@ -166,10 +166,15 @@ export class AuthService {
 
     loginViaSocial(identity: SocialIdentity) {
         this.clearCookies();
-        let obs = this.api.post('auth/login', identity);
+        let obs = this.api.post('auth/login', identity, {
+            ignoreHttpNotFound: this.appMode.getEnvironmentMode() === 'prod'
+        });
         obs.subscribe(token => {
             this.loginHandler(token, true);
-        });
+        },
+            err => {
+                return;
+            });
         return obs;
     }
 
