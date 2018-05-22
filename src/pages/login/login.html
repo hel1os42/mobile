@@ -30,6 +30,7 @@
             </ion-option>
         </ion-select>
         <ion-input
+            #inputPhone
             (ionChange)="limitStr(authData.phone, 14)"
             (keyup)="updateList($event)"
             [(ngModel)]="authData.phone"
