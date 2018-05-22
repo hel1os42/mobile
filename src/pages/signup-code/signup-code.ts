@@ -81,6 +81,10 @@ export class SignUpCodePage {
     }
 
     signUp() {
+        if (this.socialData) {
+            this.register.identity_access_token = this.socialData.token;
+            this.register.identity_provider = this.socialData.socialName;
+        }
         this.auth.register(this.register)
             .subscribe(() => {
                 // this.analytics.trackEvent("Session", 'event_phoneconfirm');
