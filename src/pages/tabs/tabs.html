@@ -4,7 +4,7 @@
     <ion-tab [root]="tab2Root"></ion-tab>
     <ion-tab [root]="tab3Root"></ion-tab>
     <ion-tab [root]="tab4Root" (ionSelect)="refresh()"></ion-tab>
-    <!-- <ion-tab [enabled] = false [root]="tab5Root"></ion-tab> -->
+    <ion-tab [root]="tab5Root"></ion-tab>
 </ion-tabs>
 <div *ngIf="envName === 'dev'" class="devmode">Dev mode</div>
 <div *ngIf="envName === 'test'" class="devmode">Test mode</div>

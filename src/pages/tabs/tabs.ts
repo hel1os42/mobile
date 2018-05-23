@@ -8,6 +8,7 @@ import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
 import { AppModeService } from '../../providers/appMode.service';
+import { UserUsersPage } from '../user-users/user-users';
 
 @Component({
     selector: 'page-tabs',
@@ -19,7 +20,8 @@ export class TabsPage {
     tab2Root = BookmarksPage;
     tab3Root = NotificationsPage;
     tab4Root = UserProfilePage;
-    // tab5Root = FeedPage;//temporary - to revert
+    tab5Root = UserUsersPage;
+    
     selectedTabIndex = 0;
     nauParams;//temporary
     shownTransactions: boolean;//temporary
