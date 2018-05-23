@@ -27,7 +27,9 @@
             <ion-grid class="ava_user_adv">
                 <ion-row text-center align-items-center>
                     <ion-col>
-                        <div margin-top class="thumb_image" [ngStyle]="{'background-image': 'url(' + user.picture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+                        <div 
+                            margin-top class="thumb_image" 
+                            [ngStyle]="{'background-image': 'url(' + user.picture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
                         </div>
                         <div class="font-16 text-3E4B5D bold padding-top-3vw">{{ 'PAGE_SETTINGS.CLIENT' | translate }}</div>
                     </ion-col>
@@ -37,7 +39,9 @@
                         </ion-item>
                     </ion-col>
                     <ion-col>
-                        <div margin-top class="thumb_image" [ngStyle]="{'background-image': 'url(' + advPicture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
+                        <div 
+                            margin-top class="thumb_image" 
+                            [ngStyle]="{'background-image': 'url(' + advPicture_url + '?size=mobile&' + time + '), url(assets/img/create_user_profile/people.svg)'}">
                         </div>
                         <div class="font-16 text-BDBDBD bold padding-top-3vw">{{ 'PAGE_SETTINGS.ADVERTISER' | translate }}</div>
                     </ion-col>
