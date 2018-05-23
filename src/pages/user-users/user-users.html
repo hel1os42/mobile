@@ -19,11 +19,11 @@
         </a>
     </ion-item>
 
-    <ion-segment margin-top margin-bottom text-uppercase class="nau-segment">
-        <ion-segment-button value="active">
+    <ion-segment [(ngModel)]="segment" margin-top margin-bottom text-uppercase class="nau-segment">
+        <ion-segment-button value="invite">
             {{ 'PAGE_USER-USERS.INVITE' | translate }}
         </ion-segment-button>
-        <ion-segment-button value="completed">
+        <ion-segment-button value="friends">
             {{ 'PAGE_USER-USERS.FRIENDS' | translate }}
         </ion-segment-button>
     </ion-segment>
@@ -33,7 +33,7 @@
 <ion-content padding>
 
 <div>
-  <ion-list margin-top no-lines class="item-block-nau">
+  <ion-list *ngIf="segment === 'friends'" margin-top no-lines class="item-block-nau">
     <ion-item *ngFor="let referral of referrals">
       <ion-avatar item-start>
         <div class="thumb_image" [style.background-image]="'url(' + referral.picture_url + '?size=mobile&)'"></div>
@@ -58,7 +58,7 @@
       <img hidden class="right-icon-ref" src="assets/img/user_users/icon_right.svg">
     </ion-item>
   </ion-list>
-  <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="doInfinite($event)" >
+  <ion-infinite-scroll *ngIf="page <= lastPage && segment === 'friends'" (ionInfinite)="doInfinite($event)" >
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="{{ 'PAGE_USER-USERS.LOADING_REFERRALS' | translate }}">
@@ -66,7 +66,7 @@
   </ion-infinite-scroll>
 </div>
 
-<div hidden>
+<div *ngIf="segment === 'invite'">
     <div>
         <div text-center margin-bottom><img class="envelope" src="assets/img/user_users/envelope.svg"></div>
     </div>
@@ -75,14 +75,14 @@
 
     <div margin-top margin-bottom text-uppercase class="font-14 text-4F4F4F">{{ 'PAGE_USER-USERS.SHARE_YOUR_INVITE_LINK' | translate }}</div>
     <ion-item class="bg-gray label-copy">
-        <span class="text-3E4B5D font-16 bold">marsaizen</span>
+        <span class="text-3E4B5D font-16 bold">{{ user.invite_code }}</span>
         <a item-end>
-            <ion-icon class="text-FF5A00" name="ios-copy"></ion-icon>
+            <ion-icon (click)="copyInvCode()" class="text-FF5A00" name="ios-copy"></ion-icon>
         </a>
     </ion-item>
 
     <div margin-top>
-        <button color="primary" ion-button block>{{ 'PAGE_USER-USERS.INVITE_FRIENDS' | translate }}</button>
+        <button (click)="shareInvite()" color="primary" ion-button block>{{ 'PAGE_USER-USERS.INVITE_FRIENDS' | translate }}</button>
     </div>
 </div>
 </ion-content>
