@@ -1,42 +1,38 @@
-<ion-content>
-    <ion-header>
-        <ion-navbar>
-            <ion-title>{{ 'PAGE_USER-USERS.YOUR_REFERRALS' | translate }}</ion-title>
-            <a (click)="openUserUsers()" class="star_right">
-                <div class="flex">
-                    <img class="margin-right-10" src="assets/img/user_profile/users.svg">
-                    <span class="text-18 text-BDBDBD">
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{ 'PAGE_INVITE.INVITE_FRIENDS' | translate }}</ion-title>
+        <ion-buttons class="btn_header" margin-right end>
+            <a (click)="openUserUsers()">
+                <img class="margin-right-10" src="assets/img/user_profile/users.svg">
+                <span class="text-18 text-BDBDBD">
                         {{ user.referrals_count }}
                     </span>
-                </div>
             </a>
-        </ion-navbar>
-        <div class="header-shadow"></div>
-    </ion-header>
-    <div>
-        <div>
-            <div text-center margin-bottom>
-                <img class="envelope" src="assets/img/user_users/envelope.svg">
-            </div>
-        </div>
-        <div margin-bottom class="text-3E4B5D font-14">
-            {{ 'PAGE_USER-USERS.NAU_IS_THE_ONLY' | translate }}
-        </div>
-        <div class="text-3E4B5D font-14">{{ 'PAGE_USER-USERS.A_LIFETIME' | translate }}</div>
-
-        <div margin-top margin-bottom text-uppercase class="font-14 text-4F4F4F">
-            {{ 'PAGE_USER-USERS.SHARE_YOUR_INVITE_LINK' | translate }}
-        </div> 
-        <div>
-            <button (click)="shareInvite()" color="primary" ion-button block>
-                {{ 'PAGE_USER-USERS.INVITE_FRIENDS' | translate }}
-            </button>
-        </div>
-        <ion-item margin-top class="bg-gray label-copy">
-            <span class="text-3E4B5D font-16 bold">{{ user.invite_code }}</span>
-            <a item-end>
-                <ion-icon (click)="copyInvCode()" class="text-FF5A00" name="ios-copy"></ion-icon>
-            </a>
-        </ion-item>
+        </ion-buttons>
+    </ion-navbar>
+    <div class="header-shadow"></div>
+</ion-header>
+<ion-content padding>
+    <div text-center margin-bottom>
+        <img class="envelope" src="assets/img/invite/invite.jpg">
     </div>
+    <div margin-bottom class="text-3E4B5D font-14">
+        {{ 'PAGE_INVITE.NAU_IS_THE_ONLY' | translate }}
+    </div>
+    <div class="text-3E4B5D font-14">{{ 'PAGE_INVITE.A_LIFETIME' | translate }}</div>
+
+    <div margin-top margin-bottom text-uppercase class="font-14 text-4F4F4F">
+        {{ 'PAGE_INVITE.SHARE_YOUR_INVITE_LINK' | translate }}
+    </div>
+    <div>
+        <button (click)="shareInvite()" color="primary" ion-button block>
+            {{ 'PAGE_INVITE.INVITE_FRIENDS' | translate }}
+        </button>
+    </div>
+    <ion-item margin-top class="bg-gray label-copy">
+        <span class="text-3E4B5D font-16 bold">{{ user.invite_code }}</span>
+        <a item-end>
+            <ion-icon (click)="copyInvCode()" class="text-FF5A00" name="ios-copy"></ion-icon>
+        </a>
+    </ion-item>
 </ion-content>

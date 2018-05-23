@@ -3,45 +3,9 @@
     <ion-title>{{ 'PAGE_USER-USERS.YOUR_REFERRALS' | translate }}</ion-title>
   </ion-navbar>
     <div class="header-shadow"></div>
-    <!-- <div margin-left margin-right>
-    <ion-item padding-bottom class="border-bottom-no top-block-nau relative overflow-visible">
-        <ion-avatar item-start class="relative">
-            <div class="thumb_image" [style.background-image]="'url(' + user.picture_url + '?size=mobile)'"></div>
-            <div text-center class="user_level font-20 text-white table"><span class="table-cell">L{{ user.level }}</span></div>
-        </ion-avatar>
-        <div class="font-18 text-3E4B5D bold wrap-no width-78">{{ user?.name }}</div>
-        <img class="margin-top-2vw card" src="assets/img/user_achi/icon_card.svg">
-        <span text-uppercase class="font-14 text-828282">
-            {{ user.points }} 
-            {{ user.points >= 10 && user.points <= 20
-            ? ('UNIT.POINTS' | translate)
-            : user.points % 10 == 1
-            ? ('UNIT.POINT' | translate)
-            : (user.points % 10 >= 2 && user.points % 10 <= 4)
-            ? ('UNIT.POINTS2' | translate)
-            : ('UNIT.POINTS' | translate) }}
-        </span>
-        <a class="star_right">
-            <div class="flex"><img class="margin-right-10" src="assets/img/user_profile/users.svg"><span class="text-18 text-BDBDBD">
-                {{ total }}
-            </span></div>
-        </a>
-    </ion-item>
-
-    <ion-segment [(ngModel)]="segment" margin-top margin-bottom text-uppercase class="nau-segment">
-        <ion-segment-button value="invite">
-            {{ 'PAGE_USER-USERS.INVITE' | translate }}
-        </ion-segment-button>
-        <ion-segment-button value="friends">
-            {{ 'PAGE_USER-USERS.FRIENDS' | translate }}
-        </ion-segment-button>
-    </ion-segment>
-    </div> -->
 </ion-header>
 
 <ion-content padding>
-
-<div>
   <ion-list margin-top no-lines class="item-block-nau">
     <ion-item *ngFor="let referral of referrals">
       <ion-avatar item-start>
@@ -64,7 +28,9 @@
       <div class="text-828282 font-14 margin-top-2vw">
         {{ 'PAGE_USER-USERS.REGISTRATION_DATE' | translate }}: {{ referral.created_at.substring(0,10)}}
       </div>
+        <!--
       <img  class="right-icon-ref" src="assets/img/user_users/icon_right.svg">
+      -->
     </ion-item>
   </ion-list>
   <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="doInfinite($event)" >
@@ -73,8 +39,7 @@
       loadingText="{{ 'PAGE_USER-USERS.LOADING_REFERRALS' | translate }}">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-</div>
-<!-- 
+<!--
 <div *ngIf="segment === 'invite'">
     <div>
         <div text-center margin-bottom><img class="envelope" src="assets/img/user_users/envelope.svg"></div>

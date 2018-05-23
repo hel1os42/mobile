@@ -1,87 +1,9 @@
 page-invite {
-    .item-block-nau .item {
-        position: relative;
-        padding: 2vw;
+    .envelope{
+        width: 63%;
+        height: auto;
     }
-    .happy_title {
-        width: 85%;
-    }
-    .right-icon-ref {
-        position: absolute;
-        right: 2vw;
-        top: 2vw;
-        height: 7vw;
-    }
-    .thumb_image {
-        border-radius: 100vw;
-    }
-    .datetime-ios {
-        padding: 0;
-        font-size: 0;
-    }
-    .item-block-nau .item-ios ion-avatar[item-left],
-    .item-ios ion-thumbnail[item-left],
-    .item-ios ion-avatar[item-start],
-    .item-ios ion-thumbnail[item-start] {
-        margin: 0 2vw 0 0;
-    }
-    .item-block-nau .item-ios ion-avatar .thumb_image {
-        border-radius: 2.5vw;
-    }
-    ion-avatar {
-        background-image: url(../assets/img/imagenotfound.svg);
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        background-size: 70%;
-    }
-    .flex span {
-        margin: auto;
-    }
-    .top-block-nau {
-        overflow: visible;
-    }
-    .top-block-nau ion-avatar {
-        height: inherit;
-    }
-    .user_level {
-        position: absolute;
-        right: -4vw;
-        bottom: -4vw;
-        border-radius: 100vw;
-        height: 10vw;
-        width: 10vw;
-        background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
-    }
-    .top-block-nau .star_right {
-        top: 0;
-        right: 0;
-    }
-    .top-block-nau.item-ios ion-avatar .thumb_image {
-        border-radius: 100vw;
-        width: 15vw;
-        height: 15vw;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-    }
-    .top-block-nau.item-ios ion-avatar {
-        margin: 0 5vw 0 0;
-    }
-    .top-block-nau .star_right img {
-        height: 7.7vw;
-        width: auto;
-    }
-    .card {
-        height: 5vw;
-        width: auto;
-    }
-    .item-block-nau.list.list-ios {
-        margin: 0;
-    }
-    .envelope {
-        height: 17vw;
-        width: auto;
-    }
+
     .label-copy {
         padding-left: 6.3vw;
         padding-right: 6.3vw;
@@ -97,5 +19,10 @@ page-invite {
     .label-copy .label.label-ios {
         overflow: scroll;
         text-overflow: initial;
+    }
+
+    ion-buttons a{
+        display: flex;
+        align-items: center;
     }
 }
