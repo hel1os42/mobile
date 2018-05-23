@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Tabs } from 'ionic-angular';
+import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
+import { InvitePage } from '../invite/invite';
 import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
-import { AppModeService } from '../../providers/appMode.service';
-import { UserUsersPage } from '../user-users/user-users';
 
 @Component({
     selector: 'page-tabs',
@@ -20,7 +20,7 @@ export class TabsPage {
     tab2Root = BookmarksPage;
     tab3Root = NotificationsPage;
     tab4Root = UserProfilePage;
-    tab5Root = UserUsersPage;
+    tab5Root = InvitePage;
     
     selectedTabIndex = 0;
     nauParams;//temporary
