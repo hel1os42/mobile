@@ -68,7 +68,10 @@
         "FRIENDS": "Друзей",
         "FRIENDS2": "Друга",
         "FRIEND": "Друг",
-        "SETTINGS": "Настройки"
+        "SETTINGS": "Настройки",
+        "POINTS": "баллов",
+        "POINTS2": "балла",
+        "POINT": "балл"
     },
 
     "MONTHS" : {

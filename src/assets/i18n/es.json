@@ -68,7 +68,10 @@
         "FRIENDS": "Amigos",
         "FRIENDS2": "Amigos",
         "FRIEND": "Amigo",
-        "SETTINGS": "Configuraciones"
+        "SETTINGS": "Configuraciones",
+        "POINTS": "puntos",
+        "POINTS2": "puntos",
+        "POINT": "punto"
     },
 
     "MONTHS" : {

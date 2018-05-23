@@ -11,7 +11,16 @@
         </ion-avatar>
         <div class="font-18 text-3E4B5D bold wrap-no width-78">{{ user?.name }}</div>
         <img class="margin-top-3vw card" src="assets/img/user_achi/icon_card.svg">
-        <span text-uppercase class="font-14 text-828282">{{ user.points }} {{ 'PAGE_USER-USERS.POINTS' | translate }}</span>
+        <span text-uppercase class="font-14 text-828282">
+            {{ user.points }} 
+            {{ user.points >= 10 && user.points <= 20
+            ? ('UNIT.POINTS' | translate)
+            : user.points % 10 == 1
+            ? ('UNIT.POINT' | translate)
+            : (user.points % 10 >= 2 && user.points % 10 <= 4)
+            ? ('UNIT.POINTS2' | translate)
+            : ('UNIT.POINTS' | translate) }}
+        </span>
         <a class="star_right">
             <div class="flex"><img class="margin-right-10" src="assets/img/user_profile/users.svg"><span class="text-18 text-BDBDBD">
                 {{ total }}

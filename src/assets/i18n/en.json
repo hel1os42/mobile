@@ -68,7 +68,10 @@
         "FRIENDS": "Friends",
         "FRIENDS2": "Friends",
         "FRIEND": "Friend",
-        "SETTINGS": "Settings"
+        "SETTINGS": "Settings",
+        "POINTS": "points",
+        "POINTS2": "points",
+        "POINT": "point"
     },
 
     "MONTHS" : {
