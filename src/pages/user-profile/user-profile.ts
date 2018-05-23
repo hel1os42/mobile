@@ -81,7 +81,7 @@ export class UserProfilePage {
     }
 
     openUserUsers() {
-        this.nav.push(UserUsersPage, { user: this.user });
+        this.nav.push(UserUsersPage);
     }
 
     openCreateUserProfilePage() {

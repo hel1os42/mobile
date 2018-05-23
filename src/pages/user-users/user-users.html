@@ -3,7 +3,7 @@
     <ion-title>{{ 'PAGE_USER-USERS.YOUR_REFERRALS' | translate }}</ion-title>
   </ion-navbar>
     <div class="header-shadow"></div>
-    <div margin-left margin-right>
+    <!-- <div margin-left margin-right>
     <ion-item padding-bottom class="border-bottom-no top-block-nau relative overflow-visible">
         <ion-avatar item-start class="relative">
             <div class="thumb_image" [style.background-image]="'url(' + user.picture_url + '?size=mobile)'"></div>
@@ -36,13 +36,13 @@
             {{ 'PAGE_USER-USERS.FRIENDS' | translate }}
         </ion-segment-button>
     </ion-segment>
-    </div>
+    </div> -->
 </ion-header>
 
 <ion-content padding>
 
 <div>
-  <ion-list *ngIf="segment === 'friends'" margin-top no-lines class="item-block-nau">
+  <ion-list margin-top no-lines class="item-block-nau">
     <ion-item *ngFor="let referral of referrals">
       <ion-avatar item-start>
         <div class="thumb_image" [style.background-image]="'url(' + referral.picture_url + '?size=mobile&)'"></div>
@@ -64,17 +64,17 @@
       <div class="text-828282 font-14 margin-top-2vw">
         {{ 'PAGE_USER-USERS.REGISTRATION_DATE' | translate }}: {{ referral.created_at.substring(0,10)}}
       </div>
-      <img hidden class="right-icon-ref" src="assets/img/user_users/icon_right.svg">
+      <img  class="right-icon-ref" src="assets/img/user_users/icon_right.svg">
     </ion-item>
   </ion-list>
-  <ion-infinite-scroll *ngIf="page <= lastPage && segment === 'friends'" (ionInfinite)="doInfinite($event)" >
+  <ion-infinite-scroll *ngIf="page <= lastPage" (ionInfinite)="doInfinite($event)" >
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="{{ 'PAGE_USER-USERS.LOADING_REFERRALS' | translate }}">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </div>
-
+<!-- 
 <div *ngIf="segment === 'invite'">
     <div>
         <div text-center margin-bottom><img class="envelope" src="assets/img/user_users/envelope.svg"></div>
@@ -93,5 +93,5 @@
     <div margin-top>
         <button (click)="shareInvite()" color="primary" ion-button block>{{ 'PAGE_USER-USERS.INVITE_FRIENDS' | translate }}</button>
     </div>
-</div>
+</div> -->
 </ion-content>
