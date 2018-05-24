@@ -41,4 +41,9 @@ page-user-users{
         background-position: 50% 50%;
         background-size: 70%;
     }
+
+    ion-buttons {
+        display: flex;
+        align-items: center;
+    }
 }

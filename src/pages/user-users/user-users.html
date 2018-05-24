@@ -11,8 +11,8 @@
     <div class="header-shadow"></div>
 </ion-header>
 
-<ion-content padding>
-  <ion-list margin-top no-lines class="item-block-nau">
+<ion-content padding-left padding-right>
+  <ion-list no-lines class="item-block-nau">
     <ion-item *ngFor="let referral of referrals">
       <ion-avatar item-start>
         <div class="thumb_image" [style.background-image]="'url(' + referral.picture_url + '?size=mobile&)'"></div>
