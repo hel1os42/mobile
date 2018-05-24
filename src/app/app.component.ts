@@ -301,6 +301,7 @@ export class MyApp {
             else if (envName === 'dev' || envName === 'test') {
                 adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox);
             }
+            adjustConfig.setLogLevel (AdjustConfig.LogLevelInfo);  
             Adjust.create(adjustConfig);
         }
     }
