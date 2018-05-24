@@ -167,4 +167,5 @@
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="4.2.0">
         <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
     </plugin>
+    <plugin name="com.adjust.sdk" spec="4.13.0" />
 </widget>

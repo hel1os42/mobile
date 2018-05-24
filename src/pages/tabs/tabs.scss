@@ -37,12 +37,12 @@ page-tabs{
     background-image: url(../assets/img/tabs/tab2.svg);
   }
 
-  // .tab-button[aria-selected="true"]:nth-child(5){
-  //   background-image: url(../assets/img/tabs/tab5_a.svg);
-  // }
+  .tab-button[aria-selected="true"]:nth-child(5){
+    background-image: url(../assets/img/tabs/tab5_a.svg);
+  }
 
-  // .tab-button[aria-selected="false"]:nth-child(5){
-  //   background-image: url(../assets/img/tabs/tab5.svg);
-  // }
+  .tab-button[aria-selected="false"]:nth-child(5){
+    background-image: url(../assets/img/tabs/tab5.svg);
+  }
 
 }

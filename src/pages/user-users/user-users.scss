@@ -1,6 +1,7 @@
 page-user-users{
     .item-block-nau .item{
         position: relative;
+        padding: 2vw;
     }
 
   .happy_title{
@@ -30,15 +31,19 @@ page-user-users{
         margin: 0 2vw 0 0;
     }
 
-    .item-block-nau .item {
-        padding: 2vw;
+    .item-block-nau .item-ios ion-avatar .thumb_image{
+        border-radius: 2.5vw;
     }
 
-    .item-block-nau ion-avatar {
-        overflow: hidden;
+    ion-avatar {
         background-image: url(../assets/img/imagenotfound.svg);
         background-repeat: no-repeat;
         background-position: 50% 50%;
         background-size: 70%;
+    }
+
+    ion-buttons {
+        display: flex;
+        align-items: center;
     }
 }

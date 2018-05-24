@@ -68,7 +68,10 @@
         "FRIENDS": "Amigos",
         "FRIENDS2": "Amigos",
         "FRIEND": "Amigo",
-        "SETTINGS": "Configuraciones"
+        "SETTINGS": "Configuraciones",
+        "POINTS": "puntos",
+        "POINTS2": "puntos",
+        "POINT": "punto"
     },
 
     "MONTHS" : {
@@ -320,7 +323,11 @@
 
     "PAGE_INVITE" : {
         "INVITATION" : "Invitación",
-        "PLEASE_ASK" : "Por favor, pregunte a su amigo de nuevo o ... Búsquelo en google :)"
+        "PLEASE_ASK" : "Por favor, pregunte a su amigo de nuevo o ... Búsquelo en google :)",
+        "INVITE_FRIENDS" : "Invite friends",
+        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
+        "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them.",
+        "SHARE_YOUR_INVITE_LINK" : "Share your invite link"
     },
 
     "PAGE_LOGIN" : {
@@ -594,7 +601,12 @@
         "LEVEL" : "Nivel",
         "REGISTRATION_DATE" : "Fecha de Registro",
         "LOADING_REFERRALS" : "Cargando...",
-        "YOU_DONT_HAVE": "Aún no tienes ningún amigo"
+        "YOU_DONT_HAVE": "Aún no tienes ningún amigo",
+        "POINTS" : "puntos",
+        "POINTS2" : "puntos",
+        "POINT" : "punto",
+        "INVITE" : "invite",
+        "FRIENDS" : "friends"
     },
 
     "PAGE_TRANSFER" : {

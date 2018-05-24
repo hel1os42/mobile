@@ -49,6 +49,7 @@
     "branch-cordova-sdk": "2.6.22",
     "build": "0.1.4",
     "chart.js": "2.7.1",
+    "com.adjust.sdk": "4.13.0",
     "cordova-android": "6.3.0",
     "cordova-android-support-gradle-release": "1.2.0",
     "cordova-clipboard": "1.1.1",
@@ -141,7 +142,8 @@
       "cordova-plugin-flurryanalytics": {},
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {
         "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
-      }
+      },
+      "com.adjust.sdk": {}
     },
     "platforms": [
       "ios",

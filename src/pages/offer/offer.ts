@@ -1,28 +1,27 @@
 import { Component } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { StatusBar } from '@ionic-native/status-bar';
+import { TranslateService } from '@ngx-translate/core';
 import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { Place } from '../../models/place';
+import { AnalyticsService } from '../../providers/analytics.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
 import { ToastService } from '../../providers/toast.service';
+import { DateTimeUtils } from '../../utils/date-time.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { CongratulationPopover } from './congratulation.popover';
 import { LinkPopover } from './link.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { TranslateService } from '@ngx-translate/core';
-import { DateTimeUtils } from '../../utils/date-time.utils';
 import { TimeframesPopover } from './timeframes.popover';
-import { NoticePopover } from './notice.popover';
-import { AnalyticsService } from '../../providers/analytics.service';
 
 declare var window;
 
@@ -213,14 +212,15 @@ export class OfferPage {
                     if (this.timer)
                         return;
 
-                    let noticePopover = this.popoverCtrl.create(NoticePopover);
+                    // let noticePopover = this.popoverCtrl.create(NoticePopover);
                     let offerRedeemPopover = this.popoverCtrl.create(
                         OfferRedeemPopover,
                         { offerActivationCode: offerActivationCode },
                         { enableBackdropDismiss: false }
                     );
-                    noticePopover.present();
-                    noticePopover.onDidDismiss(() => offerRedeemPopover.present());
+                    offerRedeemPopover.present();
+                    // noticePopover.present();
+                    // noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                     offerRedeemPopover.onDidDismiss(() => {
                         this.stopTimer();
                         this.gAnalytics.trackEvent("Session", 'event_showqr');

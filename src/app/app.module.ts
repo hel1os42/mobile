@@ -39,6 +39,7 @@ import { CreateOfferPage } from '../pages/create-offer/create-offer';
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
 import { FeedPage } from '../pages/feed/feed';
 import { LoginPage } from '../pages/login/login';
+import { InvitePage } from '../pages/invite/invite';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { OfferTermsPage } from '../pages/offer-terms/offer-terms';
 import { CongratulationPopover } from '../pages/offer/congratulation.popover';
@@ -146,6 +147,7 @@ export function createTranslateLoader(http: HttpClient) {
         AdvTabsPage,
         AdvNotificationsPage,
         CreateOffer1Page,
+        InvitePage,
         PlaceFeedbackPage,
         PlacePage,
         SplashInfoPage,
@@ -232,6 +234,7 @@ export function createTranslateLoader(http: HttpClient) {
         AdvTabsPage,
         AdvNotificationsPage,
         CreateOffer1Page,
+        InvitePage,
         PlaceFeedbackPage,
         PlacePage,
         SplashInfoPage,

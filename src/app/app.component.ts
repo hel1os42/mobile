@@ -20,6 +20,7 @@ import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
 
+declare var Adjust, AdjustConfig;
 
 @Component({
     templateUrl: 'app.html'
@@ -28,7 +29,13 @@ export class MyApp {
     rootPage: any;
     onResumeSubscription: Subscription;
     onConnectSubscription: Subscription;
+    onEnvironmentModeSubscription: Subscription;
     isResumeGlobal = false;
+    ADJUST_ANDROID_APP_TOKEN = 'ztmblhuttfcw';
+    ADJUST_IOS_APP_TOKEN = 'ih8sgf2a82dc';
+    GOOGLE_ANALYTICS_ID = 'UA-114471660-1';
+    ONE_SIGNAL_APP_ID = 'b08f4540-f5f5-426a-a7e1-3611e2a11187';
+    ONE_SIGNAL_GOOGLE_PROJECT_NUMBER = '943098821317';
 
     constructor(
         platform: Platform,
@@ -64,7 +71,7 @@ export class MyApp {
             //}
 
             //Google Analytics
-            this.gAnalytics.startTrackerWithId('UA-114471660-1')
+            this.gAnalytics.startTrackerWithId(this.GOOGLE_ANALYTICS_ID)
                 .then(() => {
                     this.gAnalytics.trackView('test');
                     // Tracker is ready
@@ -110,12 +117,15 @@ export class MyApp {
             if (platform.is('cordova')) {
                 this.oneSignalInit();
                 this.analytics.flurryAnalyticsInit();
+                this.adjustInit(platform);
             }
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
             });
+            this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
+                .subscribe(() => this.adjustInit(platform));
 
             //this.rootPage = BookmarksPage;
 
@@ -262,7 +272,7 @@ export class MyApp {
     }
 
     oneSignalInit() {
-        this.oneSignal.startInit('b08f4540-f5f5-426a-a7e1-3611e2a11187', '943098821317');
+        this.oneSignal.startInit(this.ONE_SIGNAL_APP_ID, this.ONE_SIGNAL_GOOGLE_PROJECT_NUMBER);
 
         this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
 
@@ -277,6 +287,28 @@ export class MyApp {
         this.oneSignal.endInit();
         this.oneSignal.enableVibrate(true);
         this.oneSignal.enableSound(true);
+    }
+
+    adjustInit(platform) {
+        if (typeof Adjust !== 'undefined' && typeof AdjustConfig !== 'undefined') {
+            let appToken: string;
+            let envName = this.appMode.getEnvironmentMode();
+            if (platform.is('android')) {
+                appToken = this.ADJUST_ANDROID_APP_TOKEN;
+            }
+            else if (platform.is('ios')) {
+                appToken = this.ADJUST_IOS_APP_TOKEN;
+            }
+            let adjustConfig;
+            if (envName === 'prod') {
+                adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction);
+            }
+            else if (envName === 'dev' || envName === 'test') {
+                adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox);
+            }
+            adjustConfig.setLogLevel (AdjustConfig.LogLevelInfo);  
+            Adjust.create(adjustConfig);
+        }
     }
 
     ngOnDestroy() {
