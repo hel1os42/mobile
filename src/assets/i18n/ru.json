@@ -68,7 +68,10 @@
         "FRIENDS": "Друзей",
         "FRIENDS2": "Друга",
         "FRIEND": "Друг",
-        "SETTINGS": "Настройки"
+        "SETTINGS": "Настройки",
+        "POINTS": "баллов",
+        "POINTS2": "балла",
+        "POINT": "балл"
     },
 
     "MONTHS" : {
@@ -320,7 +323,11 @@
 
     "PAGE_INVITE" : {
         "INVITATION" : "Приглашение",
-        "PLEASE_ASK" : "Пожалуйста, уточните код у вашего друга, или... просто найдите в Google :)"
+        "PLEASE_ASK" : "Пожалуйста, уточните код у вашего друга, или... просто найдите в Google :)",
+        "INVITE_FRIENDS" : "Invite friends",
+        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
+        "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them.",
+        "SHARE_YOUR_INVITE_LINK" : "Share your invite link"
     },
 
     "PAGE_LOGIN" : {
@@ -594,7 +601,12 @@
         "LEVEL" : "Уровень",
         "REGISTRATION_DATE" : "Дата регистрации",
         "LOADING_REFERRALS" : "Загрузка...",
-        "YOU_DONT_HAVE": "У Вас еще нет друзей"
+        "YOU_DONT_HAVE": "У Вас еще нет друзей",
+        "POINTS" : "баллов",
+        "POINTS2" : "балла",
+        "POINT" : "балл",
+        "INVITE" : "Инвайт",
+        "FRIENDS" : "Друзья"
     },
 
     "PAGE_TRANSFER" : {

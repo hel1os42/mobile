@@ -48,7 +48,7 @@ export class BookmarksPage {
 
         this.isForkMode = this.appMode.getForkMode();
 
-        this.segment = "places";
+        this.segment = 'places';
         this.getLocation(true, true);
 
         this.onRefreshCoords = this.location.onRefreshCoords

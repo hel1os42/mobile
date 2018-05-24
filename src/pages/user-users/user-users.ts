@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ProfileService } from '../../providers/profile.service';
+import { NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
+import { ProfileService } from '../../providers/profile.service';
 
 @Component({
     selector: 'page-user-users',
@@ -12,33 +13,35 @@ export class UserUsersPage {
     page = 1;
     lastPage: number;
 
-  constructor(private profile: ProfileService) {
 
-  }
+    constructor(
+        private profile: ProfileService,
+        private navParams: NavParams
+    ) {
 
-  ionViewDidLoad() {
-      this.profile.getReferrals(this.page)
-        .subscribe(resp => {            
-            this.referrals = resp.data;
-            this.total = resp.total;
-            this.lastPage = resp.last_page;
-      })
-  }
+        this.profile.getReferrals(this.page)
+            .subscribe(resp => {
+                this.referrals = resp.data;
+                this.total = resp.total;
+                this.lastPage = resp.last_page;
+            });
 
-  doInfinite(infiniteScroll) {
-    this.page = this.page + 1;
-    if (this.page <= this.lastPage) {
-        setTimeout(() => {
-            this.profile.getReferrals(this.page)
-                .subscribe(resp => {
-                    this.referrals = [...this.referrals, ...resp.data];
-                    infiniteScroll.complete();
-                });
-        });
     }
-    else {
-        infiniteScroll.complete();
+
+    doInfinite(infiniteScroll) {
+        this.page = this.page + 1;
+        if (this.page <= this.lastPage) {
+            setTimeout(() => {
+                this.profile.getReferrals(this.page)
+                    .subscribe(resp => {
+                        this.referrals = [...this.referrals, ...resp.data];
+                        infiniteScroll.complete();
+                    });
+            });
+        }
+        else {
+            infiniteScroll.complete();
+        }
     }
-}
 
 }
