@@ -1,6 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ 'PAGE_USER-USERS.YOUR_REFERRALS' | translate }}</ion-title>
+      <ion-buttons class="btn_header" margin-right end>
+              <img class="grayscale margin-right-10" src="assets/img/user_profile/users.svg">
+              <span class="text-18 text-BDBDBD">
+                        {{ user.referrals_count }}
+              </span>
+      </ion-buttons>
   </ion-navbar>
     <div class="header-shadow"></div>
 </ion-header>
