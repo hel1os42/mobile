@@ -95,7 +95,8 @@ export class SignUpCodePage {
                 }
                 this.nav.setRoot(TabsPage, { index: 0 });
                 // this.nav.setRoot(CreateUserProfilePage);
-            })
+            },
+        err => { });
     }
 
     setProfile() {

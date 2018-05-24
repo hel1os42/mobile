@@ -22,7 +22,7 @@ export class SocialService {
     vkProvider: VK = new VK({
         clientId: '6473105',
         redirectUri: 'http://localhost',
-        appScope: ['basic', 'public_content', 'email'],
+        appScope: ['public_content', 'email', 'offline'],
     })
     // twitterProvider: Twitter = new Twitter({
     //     // clientId: '1t57CCFvafiX2oaEJuREbE0sz',
