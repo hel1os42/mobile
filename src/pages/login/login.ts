@@ -194,14 +194,14 @@ export class LoginPage {
     login() {
         let phone = this.numCode.dial_code + this.authData.phone;
         let obs;
+        if (this.socialData) {
+            this.register.identity_access_token = this.socialData.token;
+            this.register.identity_provider = this.socialData.socialName;
+        }
         if (this.isLogin && !this.socialData) {
             obs = this.auth.login({ phone: phone, code: this.authData.code });
         }
         else {
-            if (this.socialData) {
-                this.register.identity_access_token = this.socialData.token;
-                this.register.identity_provider = this.socialData.socialName;
-            }
             this.register.code = this.authData.code;
             obs = this.auth.register(this.register)
         }
@@ -210,7 +210,8 @@ export class LoginPage {
                 this.setProfile();
             }
             this.nav.setRoot(TabsPage, { index: 0 });
-        });
+        },
+            err => { });
     }
 
     cancelTimer() {
@@ -262,11 +263,11 @@ export class LoginPage {
             this.isSocial = false;
             this.social.twLogin()
                 .then(resp => {
+                    let token = resp.token + ':' + resp.secret;
                     let identity: SocialIdentity = {
-                        identity_access_token: resp.token,
+                        identity_access_token: token,
                         identity_provider: this.TWITTER
-                        //to do - will get resp.secret
-                    }
+                    };
                     this.social.getTwProfile(resp)
                         .then(res => {
                             //?
@@ -275,7 +276,7 @@ export class LoginPage {
                             // this.isSocial = true;
                         })
                         .catch(profile => {
-                            this.createSocData(resp.token, profile.name, profile.profile_image_url_https, profile.id, this.TWITTER);
+                            this.createSocData(token, profile.name, profile.profile_image_url_https, profile.id, this.TWITTER);
                             this.loginViaSocial(identity);
                             // this.social.twLogout();
                             this.isSocial = true;
@@ -319,7 +320,7 @@ export class LoginPage {
                         let identity: SocialIdentity = {
                             identity_access_token: accessToken,
                             identity_provider: this.FACEBOOK
-                        }
+                        };
                         this.social.getFbProfile()//for profile update
                             .then(profile => {
                                 this.createSocData(accessToken, profile.name, profile.picture_large.data.url, profile.id, this.FACEBOOK, profile.email);
@@ -352,12 +353,16 @@ export class LoginPage {
             this.isSocial = false;
             this.social.instaLogin()
                 .then((resp: any) => {
+                    let identity: SocialIdentity = {
+                        identity_access_token: resp.access_token,
+                        identity_provider: this.INSTAGRAM
+                    };
                     this.social.getInstaProfile(resp.access_token)
                         .subscribe(data => {
                             let profile = data.data;
                             this.createSocData(resp.access_token, profile.full_name, profile.profile_picture, profile.id, this.INSTAGRAM);
                             // email: profile.email
-                            this.nav.push(SignUpPage, { social: this.socialData });
+                            this.loginViaSocial(identity);
                             this.isSocial = true;
                         },
                             error => {
@@ -383,7 +388,7 @@ export class LoginPage {
                     let identity: SocialIdentity = {
                         identity_access_token: resp.access_token,
                         identity_provider: this.VK
-                    }
+                    };
                     this.social.getVkProfile(resp.access_token, resp.user_id)
                         .subscribe(data => {
                             let profile = data.response[0];
