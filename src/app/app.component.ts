@@ -20,6 +20,7 @@ import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
 
+declare var Adjust, AdjustConfig;
 
 @Component({
     templateUrl: 'app.html'
@@ -28,6 +29,7 @@ export class MyApp {
     rootPage: any;
     onResumeSubscription: Subscription;
     onConnectSubscription: Subscription;
+    onEnvironmentModeSubscription: Subscription;
     isResumeGlobal = false;
 
     constructor(
@@ -110,12 +112,15 @@ export class MyApp {
             if (platform.is('cordova')) {
                 this.oneSignalInit();
                 this.analytics.flurryAnalyticsInit();
+                this.adjustInit(platform);
             }
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
             });
+            this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
+                .subscribe(() => this.adjustInit(platform));
 
             //this.rootPage = BookmarksPage;
 
@@ -277,6 +282,27 @@ export class MyApp {
         this.oneSignal.endInit();
         this.oneSignal.enableVibrate(true);
         this.oneSignal.enableSound(true);
+    }
+
+    adjustInit(platform) {
+        if (typeof Adjust !== 'undefined' && typeof AdjustConfig !== 'undefined') {
+            let appToken: string;
+            let envName = this.appMode.getEnvironmentMode();
+            if (platform.is('android')) {
+                appToken = 'ztmblhuttfcw';
+            }
+            else if (platform.is('ios')) {
+                appToken = 'ih8sgf2a82dc';
+            }
+            let adjustConfig;
+            if (envName === 'prod') {
+                adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction);
+            }
+            else if (envName === 'dev' || envName === 'test') {
+                adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox);
+            }
+            Adjust.create(adjustConfig);
+        }
     }
 
     ngOnDestroy() {
