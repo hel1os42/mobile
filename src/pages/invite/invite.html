@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title>{{ 'PAGE_INVITE.INVITE_FRIENDS' | translate }}</ion-title>
-        <ion-buttons class="btn_header" margin-right end>
+        <ion-buttons *ngIf="user" class="btn_header" margin-right end>
             <a (click)="openUserUsers()">
                 <img class="margin-right-10" src="assets/img/user_profile/users.svg">
                 <span class="text-18 text-BDBDBD">
