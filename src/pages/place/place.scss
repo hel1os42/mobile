@@ -275,8 +275,8 @@ page-place {
         height: 15vw;
         border-radius: 100vw;
         position: absolute;
-        bottom: 5%;
-        right: 3%;
+        bottom: 20px;
+        right: 10px;
         opacity: 0.7;
     }
 }
@@ -285,7 +285,7 @@ page-place {
     padding-bottom: 25%;
 }
 
-complaint-popover-component {
+complaint-popover-component, testimonial-popover-component {
     .modal_content{
         padding-left: 7vw;
         padding-right: 7vw;
@@ -303,5 +303,17 @@ complaint-popover-component {
 
     textarea.text-input {
         height: 23vw;
+    }
+}
+
+testimonial-popover-component {
+    .block-star {
+        font-size: 10vw;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    textarea.text-input {
+        height: 30vw;
     }
 }
