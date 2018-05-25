@@ -20,6 +20,7 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { ProfileService } from '../../providers/profile.service';
 import { ApiService } from '../../providers/api.service';
 import { File } from '@ionic-native/file';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-login',
@@ -55,6 +56,8 @@ export class LoginPage {
     TWITTER = 'twitter';
     INSTAGRAM = 'instagram';
     VK = 'vk';
+    termsUrl = 'https://nau.io/terms';
+    policyUrl = 'https://nau.io/privacy-policy';
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -76,7 +79,8 @@ export class LoginPage {
         private profile: ProfileService,
         private fileTransfer: FileTransfer,
         private file: File,
-        private api: ApiService) {
+        private api: ApiService,
+        private browser: InAppBrowser) {
 
         if (this.platform.is('android')) {
             let
@@ -450,6 +454,10 @@ export class LoginPage {
             socialId: socialId,
             socialName: socialName
         };
+    }
+
+    loadUrl(url) {
+        this.browser.create(url, '_system');
     }
 
     presentPrompt(selected: boolean) {
