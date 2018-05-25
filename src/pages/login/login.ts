@@ -51,7 +51,7 @@ export class LoginPage {
     isSocial = true;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
     isLogin = false;
-    register: Register;
+    register = new Register();
     FACEBOOK = 'facebook';
     TWITTER = 'twitter';
     INSTAGRAM = 'instagram';
@@ -147,7 +147,14 @@ export class LoginPage {
         this.auth.getOtp(phone)
             .subscribe(() => {
                 this.isLogin = true;
-                this.otpHandler();
+                if (this.socialData) {
+                    let defaultInvite = this.envName === 'prod' ? 'NAU'
+                        : this.envName === 'test' ? '5a4' : '59c';
+                    this.getReferrerId(defaultInvite);
+                }
+                else {
+                    this.otpHandler();
+                }
                 loading.dismiss();
             },
                 err => {
@@ -156,19 +163,26 @@ export class LoginPage {
                         this.nav.push(SignUpPage, { phone: this.authData.phone, numCode: this.numCode, social: this.socialData });
                     }
                     else if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && inviteCode) {
-                        this.auth.getReferrerId(inviteCode, phone)
-                            .subscribe((resp) => {
-                                this.register = {
-                                    phone: resp.phone,
-                                    code: '',
-                                    referrer_id: resp.referrer_id,
-                                };
-                                this.otpHandler();
-                            })
+                        this.getReferrerId(inviteCode, phone);
                     };
                     loading.dismiss();
                 }
             );
+    }
+
+    getReferrerId(inviteCode: string, phone?: string) {
+        this.auth.getReferrerId(inviteCode, phone)
+            .subscribe((resp) => {
+                let registerPhone = phone 
+                ?  resp.phone 
+                : this.numCode.dial_code + this.authData.phone;
+                this.register = {
+                    phone: registerPhone,
+                    code: '',
+                    referrer_id: resp.referrer_id,
+                };
+                this.otpHandler();
+            })
     }
 
     otpHandler() {
@@ -198,15 +212,17 @@ export class LoginPage {
     login() {
         let phone = this.numCode.dial_code + this.authData.phone;
         let obs;
-        if (this.socialData) {
-            this.register.identity_access_token = this.socialData.token;
-            this.register.identity_provider = this.socialData.socialName;
-        }
+
+
         if (this.isLogin && !this.socialData) {
             obs = this.auth.login({ phone: phone, code: this.authData.code });
         }
         else {
             this.register.code = this.authData.code;
+            if (this.socialData) {
+                this.register.identity_access_token = this.socialData.token;
+                this.register.identity_provider = this.socialData.socialName;
+            }
             obs = this.auth.register(this.register)
         }
         obs.subscribe(resp => {
@@ -422,10 +438,12 @@ export class LoginPage {
                 this.setProfile();
             },
                 err => {
-                    setTimeout(() => {
-                        this.keyboard.show();
-                        this.inputPhone.setFocus();
-                    }, 500)
+                    if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND) {
+                        setTimeout(() => {
+                            this.keyboard.show();
+                            this.inputPhone.setFocus();
+                        }, 500)
+                    }
                 });
     }
 

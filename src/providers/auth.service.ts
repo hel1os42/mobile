@@ -73,7 +73,7 @@ export class AuthService {
             obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
         }
         else {
-            obs = this.api.get(`auth/register/${inviteCode}`);
+            obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
         }
         return obs;
     }
