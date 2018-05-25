@@ -10,6 +10,7 @@ export class ShareService {
     constructor(private storage: StorageService) {
         this.share = this.storage.get(this.SHARE_KEY);
         if (this.share) {
+            // this. remove();
             this.storage.remove(this.SHARE_KEY);
         }
      }
@@ -23,6 +24,7 @@ export class ShareService {
     }
 
     remove() {
+        // this.storage.remove(this.SHARE_KEY);
         this.share = undefined;
     }
 }
