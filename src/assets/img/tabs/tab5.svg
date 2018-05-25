@@ -1,51 +1,12 @@
-<svg width="27" height="24" viewBox="0 0 27 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<title>Group</title>
-<desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(-601 -2165)">
-<rect x="601" y="2165" width="27" height="24" fill="#F2F2F2"/>
-<clipPath id="clip-0" clip-rule="evenodd">
-<path d="M 247 1471L 661 1471L 661 2207L 247 2207L 247 1471Z" fill="#FFFFFF"/>
-</clipPath>
-<g id="09-splash" clip-path="url(#clip-0)">
-<path d="M 247 1471L 661 1471L 661 2207L 247 2207L 247 1471Z" fill="#FFFFFF"/>
-<g id="Rectangle 12">
-<use xlink:href="#path0_fill" transform="translate(247 1893)" fill="#F2F2F2"/>
-</g>
-<g id="Group">
-<g id="Rectangle 2" filter="url(#filter0_d)">
-<use xlink:href="#path1_fill" transform="translate(247 2147)" fill="#FFFFFF"/>
-</g>
-<g id="Group">
-<g id="Rectangle 5">
-<use xlink:href="#path2_fill" transform="translate(601 2165)" fill="#C4C4C4"/>
-</g>
-<g id="Line 2">
-<use xlink:href="#path3_stroke" transform="translate(612 2172)" fill="#BDBDBD"/>
-</g>
-<g id="Line 2">
-<use xlink:href="#path4_stroke" transform="matrix(1 -2.44929e-16 2.44929e-16 1 601 2181)" fill="#BDBDBD"/>
-</g>
-<g id="Line 2">
-<use xlink:href="#path4_stroke" transform="matrix(1 -2.44929e-16 2.44929e-16 1 601 2189)" fill="#BDBDBD"/>
-</g>
-</g>
-</g>
-</g>
-</g>
-<defs>
-<filter id="filter0_d" filterUnits="userSpaceOnUse" x="247" y="2123" width="414" height="84" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
-<feOffset dx="0" dy="-6"/>
-<feGaussianBlur stdDeviation="9"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-</filter>
-<path id="path0_fill" d="M 0 0L 414 0L 414 314L 0 314L 0 0Z"/>
-<path id="path1_fill" d="M 0 0L 414 0L 414 60L 0 60L 0 0Z"/>
-<path id="path2_fill" d="M 0 1C 0 0.447715 0.447715 0 1 0L 6 0C 6.55228 0 7 0.447715 7 1L 7 6C 7 6.55228 6.55228 7 6 7L 1 7C 0.447715 7 0 6.55228 0 6L 0 1Z"/>
-<path id="path3_stroke" d="M 0.75 -1.5C 0.335786 -1.5 0 -1.16421 0 -0.75C 0 -0.335786 0.335786 0 0.75 0L 0.75 -1.5ZM 15.25 0C 15.6642 0 16 -0.335786 16 -0.75C 16 -1.16421 15.6642 -1.5 15.25 -1.5L 15.25 0ZM 0.75 0L 15.25 0L 15.25 -1.5L 0.75 -1.5L 0.75 0Z"/>
-<path id="path4_stroke" d="M 0.75 -1.5C 0.335786 -1.5 0 -1.16421 0 -0.75C 0 -0.335786 0.335786 0 0.75 0L 0.75 -1.5ZM 26.25 0C 26.6642 0 27 -0.335786 27 -0.75C 27 -1.16421 26.6642 -1.5 26.25 -1.5L 26.25 0ZM 0.75 0L 26.25 0L 26.25 -1.5L 0.75 -1.5L 0.75 0Z"/>
-</defs>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="480px" viewBox="0 0 512 480" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Untitled 12</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tab5" fill-rule="nonzero" fill="#BDBDBD">
+            <path d="M480,127.686 L378.752,127.686 C386.016,122.726 392.256,117.798 396.608,113.382 C422.4,87.43 422.4,45.19 396.608,19.238 C371.552,-5.978 327.84,-6.01 302.752,19.238 C288.896,33.158 252.064,89.83 257.152,127.686 L254.848,127.686 C259.904,89.83 223.104,33.158 209.248,19.238 C184.16,-6.01 140.448,-5.978 115.392,19.238 C89.6,45.19 89.6,87.43 115.36,113.382 C119.744,117.798 125.984,122.726 133.248,127.686 L32,127.686 C14.368,127.686 0,142.054 0,159.686 L0,239.686 C0,248.518 7.168,255.686 16,255.686 L32,255.686 L32,447.686 C32,465.318 46.368,479.686 64,479.686 L448,479.686 C465.632,479.686 480,465.318 480,447.686 L480,255.686 L496,255.686 C504.832,255.686 512,248.518 512,239.686 L512,159.686 C512,142.054 497.632,127.686 480,127.686 Z M138.08,41.798 C144.576,35.27 153.184,31.686 162.336,31.686 C171.456,31.686 180.064,35.27 186.56,41.798 C208.128,63.494 229.568,118.918 222.112,126.63 C222.112,126.63 220.768,127.686 216.192,127.686 C194.08,127.686 151.872,104.71 138.08,90.822 C124.672,77.318 124.672,55.302 138.08,41.798 Z M240,447.686 L64,447.686 L64,255.686 L240,255.686 L240,447.686 Z M240,223.686 L32,223.686 L32,159.686 L216.192,159.686 L240,159.686 L240,223.686 Z M325.44,41.798 C338.432,28.774 360.96,28.806 373.92,41.798 C387.328,55.302 387.328,77.318 373.92,90.822 C360.128,104.71 317.92,127.686 295.808,127.686 C291.232,127.686 289.888,126.662 289.856,126.63 C282.432,118.918 303.872,63.494 325.44,41.798 Z M448,447.686 L272,447.686 L272,255.686 L448,255.686 L448,447.686 Z M480,223.686 L272,223.686 L272,159.686 L295.808,159.686 L480,159.686 L480,223.686 Z" id="Shape"></path>
+        </g>
+    </g>
 </svg>
