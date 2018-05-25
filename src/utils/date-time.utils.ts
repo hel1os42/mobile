@@ -165,6 +165,9 @@ export class DateTimeUtils {
             let timeInMinutes = date.getUTCHours() * 60 + date.getUTCMinutes();
             let fromInMinutes = parseInt(day.from.split(':')[0]) * 60 + parseInt(day.from.split(':')[1].slice(0, 2));
             let toInMinutes = parseInt(day.to.split(':')[0]) * 60 + parseInt(day.to.split(':')[1].slice(0, 2));
+            // console.log({ date: date, offerDate: offerDate, timeInMinutes: timeInMinutes, fromInMinutes: fromInMinutes, toInMinutes: toInMinutes, timeOffset: timeOffset });
+            // console.log({ timeframesData: timeframesData});
+            // debugger;
             if ((fromInMinutes < toInMinutes && timeInMinutes >= fromInMinutes && timeInMinutes <= toInMinutes)
                 || ((fromInMinutes > toInMinutes) && (timeInMinutes >= fromInMinutes || timeInMinutes <= toInMinutes))
                 || fromInMinutes == toInMinutes) {

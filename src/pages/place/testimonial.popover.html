@@ -5,5 +5,16 @@
             <ion-icon (click)="setStars(i)" class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
         </ng-container>
     </div>
+
+    <ion-grid padding-top padding-bottom>
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="close()" ion-button block color="primary">{{ 'UNIT.CANCEL' | translate }}</button>
+            </ion-col>
+            <ion-col text-center class="margin-left-2proc">
+                <button (click)="setTestimonial()" [disabled]="!text || text.length < 3" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
     
 </div>

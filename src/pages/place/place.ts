@@ -24,6 +24,7 @@ import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { ComplaintPopover } from './complaint.popover';
+import { TestimonialPopover } from './testimonial.popover';
 
 declare var window;
 
@@ -240,7 +241,8 @@ export class PlacePage {
     }
 
     setTestimonial() {
-    
+        let testimonialPopover = this.popoverCtrl.create(TestimonialPopover, { companyId: this.company.id });
+        testimonialPopover.present();
     }
 
     presentConfirm() {

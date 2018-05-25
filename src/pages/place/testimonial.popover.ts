@@ -47,4 +47,8 @@ export class TestimonialPopover {
                 this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
             })
     }
+
+    close() {
+        this.viewCtrl.dismiss();
+    }
 }
