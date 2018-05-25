@@ -11,6 +11,7 @@ import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
 import { Speciality } from '../../models/speciality';
+import { Testimonial } from '../../models/testimonial';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
@@ -23,7 +24,6 @@ import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { ComplaintPopover } from './complaint.popover';
-import { Testimonial } from '../../models/testimonial';
 
 declare var window;
 
@@ -46,9 +46,7 @@ export class PlacePage {
     onRefreshCompany: Subscription;
     onRefreshTestimonials: Subscription;
     envName: string;//temporary
-    testimonialText: string;
     companyTestimonials: Testimonial[];
-    stars = 4;
 
     constructor(
         private nav: NavController,
@@ -241,28 +239,8 @@ export class PlacePage {
         complaintPopover.present();
     }
 
-    getStars() {
-        let showStars: boolean[] = [];
-        for (var i = 0; i < 5; i++) {
-            showStars.push(this.stars > i);
-        }
-        return showStars;
-    }
-
-    setStars(i) {
-        this.stars = i + 1;
-    }
-
     setTestimonial() {
-        let testimonial: Testimonial = {
-            stars: this.stars,
-            text: this.testimonialText
-        }
-        this.testimonials.post(this.company.id, testimonial)
-            .subscribe(resp => {
-                //to do
-                this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
-            })
+    
     }
 
     presentConfirm() {
