@@ -243,6 +243,11 @@ export class PlacePage {
     setTestimonial() {
         let testimonialPopover = this.popoverCtrl.create(TestimonialPopover, { companyId: this.company.id });
         testimonialPopover.present();
+        testimonialPopover.onDidDismiss(data => {
+            if (data && data.isAdded) {
+                this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
+            }
+        })
     }
 
     presentConfirm() {

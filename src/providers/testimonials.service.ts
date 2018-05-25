@@ -17,7 +17,7 @@ export class TestimonialsService {
     }
 
     post(placeId: string, testimonial: Testimonial) {
-        let obs = this.api.post(`places/${placeId}/testimonials`, testimonial);
+        let obs = this.api.post(`places/${placeId}/testimonials`, testimonial, { showLoading: false });
         obs.subscribe(resp => this.onRefresh.emit(resp));
         return obs;
     }

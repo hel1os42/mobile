@@ -39,15 +39,15 @@ export class TestimonialPopover {
     setTestimonial() {
         let testimonial: Testimonial = {
             stars: this.stars,
-            text: this.text
+            text: this.text && this.text.length >= 3 ? this.text : undefined
         }
         this.testimonials.post(this.companyId, testimonial)
             .subscribe(resp => {
                 //to do
+                this.viewCtrl.dismiss({ isAdded: true });
                 this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
             })
     }
-
     close() {
         this.viewCtrl.dismiss();
     }
