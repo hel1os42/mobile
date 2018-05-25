@@ -9,6 +9,7 @@
     </div>
 
     <ion-textarea
+        [(ngModel)]="text"
         maxlength="250"
         autofocus
         class="bg-gray-radius-small">
@@ -20,7 +21,7 @@
                 <button (click)="close()" ion-button block color="primary">{{ 'UNIT.CANCEL' | translate }}</button>
             </ion-col>
             <ion-col text-center class="margin-left-2proc">
-                <button (click)="setTestimonial()" [disabled]="!text || text.length < 3" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+                <button (click)="setTestimonial()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
             </ion-col>
         </ion-row>
     </ion-grid>
