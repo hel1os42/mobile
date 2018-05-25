@@ -23,6 +23,7 @@ import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { ComplaintPopover } from './complaint.popover';
+import { Testimonial } from '../../models/testimonial';
 
 declare var window;
 
@@ -40,9 +41,14 @@ export class PlacePage {
     features: Speciality[];
     branchDomain = 'https://nau.app.link';
     page: string;
+    testimonialsPage = 1;
+    testimonialsLastPage: number;
     onRefreshCompany: Subscription;
     onRefreshTestimonials: Subscription;
     envName: string;//temporary
+    testimonialText: string;
+    companyTestimonials: Testimonial[];
+    stars = 4;
 
     constructor(
         private nav: NavController,
@@ -75,6 +81,7 @@ export class PlacePage {
                     this.offersList = company.offers;
                     // this.features = this.company.specialities;
                     this.features = _.uniqBy(company.specialities, 'slug');
+                    this.getTestimonials();
                 });
         }
         else {
@@ -90,6 +97,7 @@ export class PlacePage {
                     this.features = _.uniqBy(company.specialities, 'slug');
                     if (!offerId) {
                         this.share.remove();
+                        this.getTestimonials();
                     }
                     else if (offerId) {
                         let offer = company.offers.filter(offer => offer.id === offerId);
@@ -129,12 +137,12 @@ export class PlacePage {
         this.statusBar.styleLightContent();
     }
 
-    getStars(star: number) {
-        let showStars: boolean[] = [];
-        for (var i = 0; i < 5; i++) {
-            showStars.push(star > i);
-        }
-        return showStars;
+    getTestimonials() {
+        this.testimonials.get(this.company.id, this.testimonialsPage)
+            .subscribe(testimonials => {
+                this.companyTestimonials = testimonials.data;
+                this.testimonialsLastPage = testimonials.last_page;
+            })
     }
 
     openFeedback(testimonial) {
@@ -215,8 +223,8 @@ export class PlacePage {
 
     navigate() {
         // if (this.company.latitude) {
-            // this.launchNavigator.navigate([this.company.latitude, this.company.longitude]);
-            this.launchNavigator.navigate(this.company.address);
+        // this.launchNavigator.navigate([this.company.latitude, this.company.longitude]);
+        this.launchNavigator.navigate(this.company.address);
         // }
     }
 
@@ -231,6 +239,30 @@ export class PlacePage {
     openComplaint() {
         let complaintPopover = this.popoverCtrl.create(ComplaintPopover, { companyId: this.company.id });
         complaintPopover.present();
+    }
+
+    getStars() {
+        let showStars: boolean[] = [];
+        for (var i = 0; i < 5; i++) {
+            showStars.push(this.stars > i);
+        }
+        return showStars;
+    }
+
+    setStars(i) {
+        this.stars = i + 1;
+    }
+
+    setTestimonial() {
+        let testimonial: Testimonial = {
+            stars: this.stars,
+            text: this.testimonialText
+        }
+        this.testimonials.post(this.company.id, testimonial)
+            .subscribe(resp => {
+                //to do
+                this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
+            })
     }
 
     presentConfirm() {
@@ -255,6 +287,22 @@ export class PlacePage {
                 });
                 alert.present();
             });
+    }
+
+    doInfinite(infiniteScroll) {
+        this.testimonialsPage = this.testimonialsPage + 1;
+        if (this.testimonialsPage <= this.testimonialsLastPage) {
+            setTimeout(() => {
+                this.testimonials.get(this.company.id, this.testimonialsPage)
+                    .subscribe(testimonials => {
+                        this.companyTestimonials = [...this.companyTestimonials, ...testimonials.data];
+                        infiniteScroll.complete();
+                    });
+            });
+        }
+        else {
+            infiniteScroll.complete();
+        }
     }
 
     ngOnDestroy() {

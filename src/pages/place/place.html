@@ -195,4 +195,10 @@
   <div *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>
 
 </div>
+<ion-infinite-scroll 
+    *ngIf="testimonialsPage <= testimonialsLastPage && segment === 'testimonials'" 
+    (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
+    </ion-infinite-scroll-content>
+</ion-infinite-scroll>
 </ion-content>
