@@ -124,28 +124,32 @@
     <!-- END SWIPE -->
 
     <!-- <ion-footer no-shadow no-border padding>-->
-    <!--
+    
         <div class="footer_testimonials" *ngIf="segment == 'testimonials'">
             <ion-list>
                 <ion-item no-lines>
-                    <ion-input disabled class="bg-gray" placeholder="{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}"></ion-input>
-                    <a disabled class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
+                    <ion-input 
+                        [(ngModel)]="testimonialText" 
+                        class="bg-gray" 
+                        placeholder="{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}">
+                    </ion-input>
+                    <a (click)="setTestimonial()" class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
                 </ion-item>
             </ion-list>
         </div>
-    -->
+   
     <!--<div class="sticky">-->
             <ion-segment [(ngModel)]="segment" text-uppercase class="segment-offers">
                 <ion-segment-button value="alloffers">
                     {{ 'PAGE_PLACE.ALL_OFFERS' | translate }}
                 </ion-segment-button>
-                <!--
-                <ion-segment-button value="testimonials">
-                    {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
-                </ion-segment-button>
-                -->
+                
                 <ion-segment-button value="about">
                     {{ 'PAGE_PLACE.ABOUT' | translate }}
+                </ion-segment-button>
+                
+                <ion-segment-button value="testimonials">
+                    {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
                 </ion-segment-button>
             </ion-segment>
 
@@ -174,9 +178,9 @@
   </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
-    <ion-item *ngFor=" let testimonial of company.testimonials" (click)="openFeedback(testimonial)">
+    <ion-item *ngFor=" let testimonial of companyTestimonials" (click)="openFeedback(testimonial)">
       <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + '?size=mobile&)'"></div>
+        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + '?size=mobile)'"></div>
       </ion-avatar>
       <div class="bold font-18 text-3E4B5D">
             {{ testimonial.name }} 
