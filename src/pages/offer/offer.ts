@@ -201,7 +201,7 @@ export class OfferPage {
     }
 
     openRedeemPopover() {
-
+        this.timeframesHandler();
         // if (!this.disable()) {distance validation
         if (this.isTodayIncluded) {
             if (this.timer)
