@@ -333,7 +333,8 @@
         "SMS_RESENDING" : "Segunda vez SMS después de un tiempo",
         "SECONDS" : "segundos",
         "SECONDS2" : "segundos",
-        "SECOND" : "segundo"
+        "SECOND" : "segundo",
+        "BY_PRESSING" : "Presionando «Obtener SMS», yo estoy de acuerdo"
     },
 
     "PAGE_NOTIFICATIONS" : {
