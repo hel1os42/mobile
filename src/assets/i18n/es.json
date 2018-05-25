@@ -19,7 +19,8 @@
         "COPY_NOTIFICATION" : "Copiado",
         "LOCATION_DETECTION": "Determinación de la posicion",
         "INTERNET_CONNECTION": "Error de conexión",
-        "INCORRECT_EMAIL": "La dirección de correo electrónico no es válida"
+        "INCORRECT_EMAIL": "La dirección de correo electrónico no es válida",
+        "ADDED_TO_TESTIMONIALS": "Added"
     },
 
     "COMPLAINT" : {

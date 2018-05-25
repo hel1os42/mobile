@@ -19,7 +19,8 @@
         "COPY_NOTIFICATION" : "Сopied to clipboard",
         "LOCATION_DETECTION": "Location detection",
         "INTERNET_CONNECTION": "Internet connection error",
-        "INCORRECT_EMAIL": "Incorrect email, please, correct it"
+        "INCORRECT_EMAIL": "Incorrect email, please, correct it",
+        "ADDED_TO_TESTIMONIALS": "Added"
     },
 
     "COMPLAINT" : {
