@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
 import { ProfileService } from '../../providers/profile.service';
 
@@ -15,9 +14,7 @@ export class UserUsersPage {
 
 
     constructor(
-        private profile: ProfileService,
-        private navParams: NavParams
-    ) {
+        private profile: ProfileService) {
 
         this.profile.getReferrals(this.page)
             .subscribe(resp => {

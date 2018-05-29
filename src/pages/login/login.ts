@@ -1,26 +1,25 @@
 import { Component, ViewChild } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Keyboard } from '@ionic-native/keyboard';
-import { AlertController, Content, Navbar, NavController, Platform, Select, LoadingController } from 'ionic-angular';
+import { AlertController, Content, LoadingController, Navbar, NavController, Platform, Select } from 'ionic-angular';
 import { Observable, Subscription } from 'rxjs';
 import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { Login } from '../../models/login';
+import { Register } from '../../models/register';
+import { SocialData } from '../../models/socialData';
+import { SocialIdentity } from '../../models/socialIdentity';
+import { ApiService } from '../../providers/api.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { LocationService } from '../../providers/location.service';
+import { ProfileService } from '../../providers/profile.service';
+import { SocialService } from '../../providers/social.service';
+import { StorageService } from '../../providers/storage.service';
 import { StringValidator } from '../../validators/string.validator';
 import { SignUpPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
-import { SocialData } from '../../models/socialData';
-import { SocialService } from '../../providers/social.service';
-import { SocialIdentity } from '../../models/socialIdentity';
-import { StorageService } from '../../providers/storage.service';
-import { Register } from '../../models/register';
-import { FileTransfer } from '@ionic-native/file-transfer';
-import { ProfileService } from '../../providers/profile.service';
-import { ApiService } from '../../providers/api.service';
-import { File } from '@ionic-native/file';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-login',
@@ -72,7 +71,6 @@ export class LoginPage {
         private alert: AlertController,
         private location: LocationService,
         private keyboard: Keyboard,
-        private analytics: GoogleAnalytics,
         private social: SocialService,
         private storage: StorageService,
         private loading: LoadingController,
