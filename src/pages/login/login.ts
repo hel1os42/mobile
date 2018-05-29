@@ -173,9 +173,9 @@ export class LoginPage {
     getReferrerId(inviteCode: string, phone?: string) {
         this.auth.getReferrerId(inviteCode, phone)
             .subscribe((resp) => {
-                let registerPhone = phone 
-                ?  resp.phone 
-                : this.numCode.dial_code + this.authData.phone;
+                let registerPhone = phone
+                    ? resp.phone
+                    : this.numCode.dial_code + this.authData.phone;
                 this.register = {
                     phone: registerPhone,
                     code: '',
@@ -442,7 +442,7 @@ export class LoginPage {
                         setTimeout(() => {
                             this.keyboard.show();
                             this.inputPhone.setFocus();
-                        }, 500)
+                        }, 700)
                     }
                 });
     }
