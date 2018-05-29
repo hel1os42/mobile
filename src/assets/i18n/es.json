@@ -20,7 +20,7 @@
         "LOCATION_DETECTION": "Determinación de la posicion",
         "INTERNET_CONNECTION": "Error de conexión",
         "INCORRECT_EMAIL": "La dirección de correo electrónico no es válida",
-        "ADDED_TO_TESTIMONIALS": "Added"
+        "ADDED_TO_TESTIMONIALS": "Gracias por su respuesta!"
     },
 
     "COMPLAINT" : {
@@ -491,7 +491,7 @@
         "SIGN_UP" : "REGÍSTRESE",
         "PLEASE_CHOOSE_YOUR_CONVENIENT_WAY" : "Elija una manera conveniente, por favor",
         "TO_ENTER_NAU" : "ingresar en NAU",
-        "OR_SIGN_UP_WITH" : "o registrarse",
+        "OR_SIGN_UP_WITH" : "o usar",
         "ALREADY_HAVE_ACCOUNT" : "Ya tiene una cuenta"
     },
 

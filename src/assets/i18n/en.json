@@ -20,7 +20,7 @@
         "LOCATION_DETECTION": "Location detection",
         "INTERNET_CONNECTION": "Internet connection error",
         "INCORRECT_EMAIL": "Incorrect email, please, correct it",
-        "ADDED_TO_TESTIMONIALS": "Added"
+        "ADDED_TO_TESTIMONIALS": "Thanks for your feedback!"
     },
 
     "COMPLAINT" : {
@@ -491,7 +491,7 @@
         "SIGN_UP" : "Sign Up",
         "PLEASE_CHOOSE" : "Please choose your convenient way",
         "TO_ENTER_NAU" : "to enter NAU",
-        "OR_SIGN_UP_WITH" : "or Sign up with",
+        "OR_SIGN_UP_WITH" : "or use",
         "ALREADY_HAVE_ACCOUNT" : "Already have account"
     },
 

@@ -20,7 +20,7 @@
         "LOCATION_DETECTION": "Определение местоположения",
         "INTERNET_CONNECTION": "Ошибка подключения",
         "INCORRECT_EMAIL": "Неправильный адрес электронной почты",
-        "ADDED_TO_TESTIMONIALS": "Added"
+        "ADDED_TO_TESTIMONIALS": "Спасибо за Ваш отзыв!"
     },
 
     "COMPLAINT" : {
@@ -491,7 +491,7 @@
         "SIGN_UP" : "Регистрация",
         "PLEASE_CHOOSE" : "Выберите удобный способ",
         "TO_ENTER_NAU" : "войти в NAU",
-        "OR_SIGN_UP_WITH" : "или зарегистрируйтесь через:",
+        "OR_SIGN_UP_WITH" : "или воспользуйтесь",
         "ALREADY_HAVE_ACCOUNT" : "Уже есть аккаунт"
     },
 
