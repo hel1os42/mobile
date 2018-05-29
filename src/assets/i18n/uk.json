@@ -341,7 +341,8 @@
         "SMS_RESENDING" : "Повторно відправити SMS через",
         "SECONDS" : "секунд",
         "SECONDS2" : "секунди",
-        "SECOND" : "секунду"
+        "SECOND" : "секунду",
+        "BY_PRESSING" : "Натискаючи 'Отримати SMS', я приймаю"
     },
 
     "PAGE_NOTIFICATIONS" : {

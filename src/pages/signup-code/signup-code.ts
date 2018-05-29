@@ -81,24 +81,22 @@ export class SignUpCodePage {
     }
 
     signUp() {
+        if (this.socialData) {
+            this.register.identity_access_token = this.socialData.token;
+            this.register.identity_provider = this.socialData.socialName;
+        }
         this.auth.register(this.register)
-            .subscribe(resp => {
-                this.auth
-                    .login({
-                        phone: this.register.phone,
-                        code: this.register.code
-                    }, false)
-                    .subscribe(res => {
-                        // this.analytics.trackEvent("Session", 'event_phoneconfirm');
-                        this.cancelTimer();
-                        this.isRetry = false;
-                        if (this.socialData) {
-                            this.setProfile();
-                        }
-                        this.nav.setRoot(TabsPage, { index: 0 });
-                        // this.nav.setRoot(CreateUserProfilePage);
-                    })
-            })
+            .subscribe(() => {
+                // this.analytics.trackEvent("Session", 'event_phoneconfirm');
+                this.cancelTimer();
+                this.isRetry = false;
+                if (this.socialData) {
+                    this.setProfile();
+                }
+                this.nav.setRoot(TabsPage, { index: 0 });
+                // this.nav.setRoot(CreateUserProfilePage);
+            },
+        err => { });
     }
 
     setProfile() {

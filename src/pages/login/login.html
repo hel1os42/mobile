@@ -30,6 +30,7 @@
             </ion-option>
         </ion-select>
         <ion-input
+            #inputPhone
             (ionChange)="limitStr(authData.phone, 14)"
             (keyup)="updateList($event)"
             [(ngModel)]="authData.phone"
@@ -164,10 +165,12 @@
     </div>
 
 </ion-content>
-
 <ion-footer no-shadow no-border>
-    <div text-center>
-        <div><a (click)="signup()" class="link-nau">{{ 'UNIT.SIGN_UP' | translate }}</a></div>
+    <div text-center class="font-75 text-828282">
+        {{ 'PAGE_LOGIN.BY_PRESSING' | translate }}
+        <a href="#" (click)="loadUrl(termsUrl)">{{ 'PAGE_SIGNUP.TERMS_AND_CONDITIONS' | translate }}</a>
+        {{ 'PAGE_SIGNUP.AND' | translate }}
+        <a href="#" (click)="loadUrl(policyUrl)">{{ 'PAGE_SIGNUP.PRIVACY_POLICY' | translate }}</a>
     </div>
     <div *ngIf="envName === 'dev'" class="devmode">Dev mode</div>
     <div *ngIf="envName === 'test'" class="devmode">Test mode</div>

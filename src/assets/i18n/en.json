@@ -341,7 +341,8 @@
         "SMS_RESENDING" : "Resend SMS after",
         "SECONDS" : "seconds",
         "SECONDS2" : "seconds",
-        "SECOND" : "second"
+        "SECOND" : "second",
+        "BY_PRESSING" : "By pressing «Get SMS», I accept"
     },
 
     "PAGE_NOTIFICATIONS" : {
