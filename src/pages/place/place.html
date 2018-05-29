@@ -72,9 +72,9 @@
                         <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">
                             {{ 'PAGE_PLACE.FEATURED' | translate }}
                         </span>
-                        <!-- <ng-container *ngFor="let showStar of getStars(company.stars)">
+                        <ng-container *ngFor="let showStar of getStars(company.stars)">
                             <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
-                        </ng-container> -->
+                        </ng-container>
                         <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
                             <span class="font-75 text-828282">
                                 {{ company.redemptions_count !== undefined ? company.redemptions_count : company.testimonials_count }}

@@ -161,6 +161,14 @@ export class PlacePage {
         return undefined;
     }
 
+    getStars(star: number) {
+        let showStars: boolean[] = [];
+        for (var i = 0; i < 5; i++) {
+            showStars.push(star > i);
+        }
+        return showStars;
+    }
+
     sharePlace() {
         const Branch = window['Branch'];
         this.profile.get(false)
