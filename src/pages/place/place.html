@@ -4,54 +4,54 @@
             <div class="cover-brightness"></div>
             <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
             <div class="cover_block_btn">
-                <button 
-                    *ngIf="company.phone" 
-                    (click)="dial()" 
-                    ion-button 
-                    icon-only 
-                    color="white" 
-                    class="icon_call"> 
+                <button
+                    *ngIf="company.phone"
+                    (click)="dial()"
+                    ion-button
+                    icon-only
+                    color="white"
+                    class="icon_call">
                     <!-- call -->
                 </button>
-                <button 
-                    *ngIf="company.site" 
-                    (click)="openSite()" 
-                    ion-button 
-                    icon-only 
-                    color="white" 
-                    class="icon_web"> 
+                <button
+                    *ngIf="company.site"
+                    (click)="openSite()"
+                    ion-button
+                    icon-only
+                    color="white"
+                    class="icon_web">
                     <!-- web -->
                 </button>
-                <button 
-                    *ngIf="company.is_favorite" 
-                    (click)="presentConfirm()" 
-                    class="icon_bookmarks" 
-                    ion-button 
-                    icon-only 
+                <button
+                    *ngIf="company.is_favorite"
+                    (click)="presentConfirm()"
+                    class="icon_bookmarks"
+                    ion-button
+                    icon-only
                     color="white">
                 </button>
-                <button 
-                    *ngIf="!company.is_favorite" 
-                    (click)="addFavorite()" 
-                    ion-button 
-                    icon-only 
-                    class="grayscale icon_bookmarks" 
+                <button
+                    *ngIf="!company.is_favorite"
+                    (click)="addFavorite()"
+                    ion-button
+                    icon-only
+                    class="grayscale icon_bookmarks"
                     color="white">
                 </button>
-                <button 
-                    (click)="sharePlace()" 
-                    ion-button 
-                    icon-only 
-                    color="white" 
+                <button
+                    (click)="sharePlace()"
+                    ion-button
+                    icon-only
+                    color="white"
                     class="icon_sharing">
                 </button>
             </div>
-            <button 
-                (click)="openComplaint()" 
-                ion-button 
-                icon-only 
-                color="white" 
-                class="icon_complaint"> 
+            <button
+                (click)="openComplaint()"
+                ion-button
+                icon-only
+                color="white"
+                class="icon_complaint">
                 <!-- complaint -->
             </button>
         </div>
@@ -72,9 +72,9 @@
                         <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">
                             {{ 'PAGE_PLACE.FEATURED' | translate }}
                         </span>
-                        <ng-container *ngFor="let showStar of getStars(company.stars)">
+                        <!-- <ng-container *ngFor="let showStar of getStars(company.stars)">
                             <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
-                        </ng-container>
+                        </ng-container> -->
                         <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
                             <span class="font-75 text-828282">
                                 {{ company.redemptions_count !== undefined ? company.redemptions_count : company.testimonials_count }}
@@ -123,29 +123,33 @@
     </ion-list>
     <!-- END SWIPE -->
 
-    <!-- <ion-footer no-shadow no-border padding>-->
-    <!--
-        <div class="footer_testimonials" *ngIf="segment == 'testimonials'">
+       <!--
+       <div class="footer_testimonials" *ngIf="segment == 'testimonials'">
             <ion-list>
                 <ion-item no-lines>
-                    <ion-input disabled class="bg-gray" placeholder="{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}"></ion-input>
-                    <a disabled class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
+                    <ion-input
+                        [(ngModel)]="testimonialText"
+                        class="bg-gray"
+                        placeholder="{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}">
+                    </ion-input>
+                    <a (click)="setTestimonial()" class="btn_check" margin-left item-end><img src="assets/img/place/btn_feed.svg"></a>
                 </ion-item>
             </ion-list>
         </div>
-    -->
+        -->
+
     <!--<div class="sticky">-->
             <ion-segment [(ngModel)]="segment" text-uppercase class="segment-offers">
                 <ion-segment-button value="alloffers">
                     {{ 'PAGE_PLACE.ALL_OFFERS' | translate }}
                 </ion-segment-button>
-                <!--
-                <ion-segment-button value="testimonials">
-                    {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
-                </ion-segment-button>
-                -->
+
                 <ion-segment-button value="about">
                     {{ 'PAGE_PLACE.ABOUT' | translate }}
+                </ion-segment-button>
+
+                <ion-segment-button value="testimonials">
+                    {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
                 </ion-segment-button>
             </ion-segment>
 
@@ -174,21 +178,30 @@
   </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
-    <ion-item *ngFor=" let testimonial of company.testimonials" (click)="openFeedback(testimonial)">
+    <ion-item *ngFor=" let testimonial of companyTestimonials" (click)="openFeedback(testimonial)">
       <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + '?size=mobile&)'"></div>
+        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + '?size=mobile)'"></div>
       </ion-avatar>
       <div class="bold font-18 text-3E4B5D">
-            {{ testimonial.name }} 
+            {{ testimonial.name }}
             <span class="font-12 text-828282 no-bold">
                 {{ testimonial.date }}
             </span>
         </div>
       <div class="margin-top-10 font-12 text-828282 wrap italic text-overflow-35">{{ testimonial.text }}</div>
     </ion-item>
+      <a (click)="setTestimonial()" class="btn-review">
+
+      </a>
   </ion-list>
 
   <div *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>
 
 </div>
+<ion-infinite-scroll
+    *ngIf="testimonialsPage <= testimonialsLastPage && segment === 'testimonials'"
+    (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
+    </ion-infinite-scroll-content>
+</ion-infinite-scroll>
 </ion-content>

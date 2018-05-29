@@ -35,7 +35,7 @@
 
     <div margin padding-bottom class="block-star">
         <ng-container *ngFor="let showStar of getStars(); let i = index">
-            <ion-icon (click)=" setStars(i)" class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+            <ion-icon (click)="setStars(i)" class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
         </ng-container>
     </div>
 

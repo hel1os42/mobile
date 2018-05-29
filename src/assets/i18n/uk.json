@@ -19,7 +19,8 @@
         "COPY_NOTIFICATION" : "Збережено",
         "LOCATION_DETECTION": "Визначення місцеположення",
         "INTERNET_CONNECTION": "Помилка підключення",
-        "INCORRECT_EMAIL": "Некоректна адреса електронної пошти"
+        "INCORRECT_EMAIL": "Некоректна адреса електронної пошти",
+        "ADDED_TO_TESTIMONIALS": "Added"
     },
 
     "COMPLAINT" : {
@@ -605,8 +606,8 @@
         "POINTS" : "балів",
         "POINTS2" : "бала",
         "POINT" : "бал",
-        "INVITE" : "invite",
-        "FRIENDS" : "friends"
+        "INVITE" : "інвайт",
+        "FRIENDS" : "Друзів"
     },
 
     "PAGE_TRANSFER" : {

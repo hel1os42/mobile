@@ -19,7 +19,8 @@
         "COPY_NOTIFICATION" : "Скопировано",
         "LOCATION_DETECTION": "Определение местоположения",
         "INTERNET_CONNECTION": "Ошибка подключения",
-        "INCORRECT_EMAIL": "Неправильный адрес электронной почты"
+        "INCORRECT_EMAIL": "Неправильный адрес электронной почты",
+        "ADDED_TO_TESTIMONIALS": "Added"
     },
 
     "COMPLAINT" : {

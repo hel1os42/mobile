@@ -1,0 +1,29 @@
+<div class="modal_content">
+
+    <ion-label padding-bottom text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ 'PAGE_PLACE.ADD_YOUR_FEEDBACK' | translate }}</ion-label>
+
+    <div margin-top margin-bottom class="block-star">
+        <ng-container *ngFor="let showStar of getStars(); let i = index">
+            <ion-icon (click)="setStars(i)" class="text-FEC282" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+        </ng-container>
+    </div>
+
+    <ion-textarea
+        [(ngModel)]="text"
+        maxlength="250"
+        autofocus
+        class="bg-gray-radius-small">
+    </ion-textarea>
+
+    <ion-grid padding-top padding-bottom>
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="close()" ion-button block color="primary">{{ 'UNIT.CANCEL' | translate }}</button>
+            </ion-col>
+            <ion-col text-center class="margin-left-2proc">
+                <button (click)="setTestimonial()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</div>

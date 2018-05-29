@@ -13,11 +13,11 @@ export class TestimonialsService {
     }
 
     get(placeId: string, page: number) {
-        return this.api.get(`places/${placeId}/testimonials?page=${page}`);
+        return this.api.get(`places/${placeId}/testimonials?page=${page}`, { showLoading: false });
     }
 
     post(placeId: string, testimonial: Testimonial) {
-        let obs = this.api.post(`places/${placeId}/testimonials`, testimonial);
+        let obs = this.api.post(`places/${placeId}/testimonials`, testimonial, { showLoading: false });
         obs.subscribe(resp => this.onRefresh.emit(resp));
         return obs;
     }
