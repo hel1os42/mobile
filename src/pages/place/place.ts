@@ -25,6 +25,7 @@ import { OfferPage } from '../offer/offer';
 import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
+import { MockTestimonials } from '../../mocks/mockTestimonials';
 
 declare var window;
 
@@ -137,11 +138,14 @@ export class PlacePage {
     }
 
     getTestimonials() {
-        this.testimonials.get(this.company.id, this.testimonialsPage)
-            .subscribe(testimonials => {
-                this.companyTestimonials = testimonials.data;
-                this.testimonialsLastPage = testimonials.last_page;
-            })
+        // this.testimonials.get(this.company.id, this.testimonialsPage)
+        //     .subscribe(testimonials => {
+        //         this.companyTestimonials = testimonials.data;
+        //         this.testimonialsLastPage = testimonials.last_page;
+        //     })
+        let testimonials = MockTestimonials.testimonials;
+        this.companyTestimonials = testimonials.data;
+        this.testimonialsLastPage = testimonials.last_page;
     }
 
     openFeedback(testimonial) {

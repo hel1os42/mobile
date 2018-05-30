@@ -180,12 +180,15 @@
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
     <ion-item *ngFor=" let testimonial of companyTestimonials" (click)="openFeedback(testimonial)">
       <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + '?size=mobile)'"></div>
+        <div class="thumb_image" [style.background-image]="'url(' + testimonial.user_picture_url + '?size=mobile)'"></div>
       </ion-avatar>
+      <ng-container *ngFor="let showStar of getStars(testimonial.stars)">
+        <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+    </ng-container>
       <div class="bold font-18 text-3E4B5D">
-            {{ testimonial.name }}
+            {{ testimonial.user_name }}
             <span class="font-12 text-828282 no-bold">
-                {{ testimonial.date }}
+                {{ testimonial.created_at }}
             </span>
         </div>
       <div class="margin-top-10 font-12 text-828282 wrap italic text-overflow-35">{{ testimonial.text }}</div>
