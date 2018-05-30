@@ -25,6 +25,7 @@ import { OfferPage } from '../offer/offer';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
 import { MockTestimonials } from '../../mocks/mockTestimonials';
+import { LimitationPopover } from '../offer/limitation.popover';
 
 declare var window;
 
@@ -204,14 +205,24 @@ export class PlacePage {
             })
     }
 
-    openOffer(offer, company?) {
-        this.analytics.trackEvent("Session", 'event_chooseoffer');
-        this.nav.push(OfferPage, {
-            offer: offer,
-            company: this.company,
-            distanceObj: this.getDistance(offer.latitude, offer.longitude),
-            coords: this.coords
-        });
+    openOffer(offer: Offer, company?) {
+        offer.redemption_access_code = 45;
+        if (!offer.redemption_access_code || company) {
+            this.analytics.trackEvent("Session", 'event_chooseoffer');
+            this.nav.push(OfferPage, {
+                offer: offer,
+                company: this.company,
+                distanceObj: this.getDistance(offer.latitude, offer.longitude),
+                coords: this.coords
+            });
+            debugger
+        }
+        else {
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { companyId: this.company.id });
+            limitationPopover.present();
+            debugger
+        }
+
     }
 
     removeFavorite() {
