@@ -22,7 +22,7 @@ export class MockTestimonials {
                 updated_at: '2018-05-30 10:04:18',
                 status: 'inbox',
                 user_name: 'Ivan',
-                user_picture_url: 'https://api-test.nau.io/users/1c5ca002-84b6-4ce8-83b1-c15ec54fc13f/picture.jpg?size=mobile',
+                user_picture_url: 'https://api-test.nau.io/users/1c5ca002-84b6-4ce8-83b1-c15ec54fc13f/picture.jpg?size=mobile&',
             },
             {
                 id: '3',
