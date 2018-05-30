@@ -22,7 +22,6 @@ import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
-import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
 import { MockTestimonials } from '../../mocks/mockTestimonials';
@@ -138,18 +137,14 @@ export class PlacePage {
     }
 
     getTestimonials() {
-        // this.testimonials.get(this.company.id, this.testimonialsPage)
-        //     .subscribe(testimonials => {
-        //         this.companyTestimonials = testimonials.data;
-        //         this.testimonialsLastPage = testimonials.last_page;
-        //     })
-        let testimonials = MockTestimonials.testimonials;
-        this.companyTestimonials = testimonials.data;
-        this.testimonialsLastPage = testimonials.last_page;
-    }
-
-    openFeedback(testimonial) {
-        this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
+        this.testimonials.get(this.company.id, this.testimonialsPage)
+            .subscribe(testimonials => {
+                this.companyTestimonials = testimonials.data;
+                this.testimonialsLastPage = testimonials.last_page;
+            })
+        // let testimonials = MockTestimonials.testimonials;
+        // this.companyTestimonials = testimonials.data;
+        // this.testimonialsLastPage = testimonials.last_page;
     }
 
     getDistance(latitude: number, longitude: number) {

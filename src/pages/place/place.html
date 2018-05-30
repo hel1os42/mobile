@@ -182,7 +182,7 @@
   </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
-    <ion-item *ngFor=" let testimonial of companyTestimonials" (click)="openFeedback(testimonial)">
+    <ion-item *ngFor=" let testimonial of companyTestimonials">
       <ion-avatar item-start>
         <div class="thumb_image" [style.background-image]="'url(' + testimonial.user_picture_url + '?size=mobile)'"></div>
       </ion-avatar>
