@@ -306,6 +306,12 @@ export class MyApp {
             else if (envName === 'dev' || envName === 'test') {
                 adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox);
             }
+            adjustConfig.setDeferredDeeplinkCallbackListener(deeplink => {
+                console.log("Deferred deep link URL content: " + deeplink);
+                let invite;
+                // this.storage.set('invCode', invite);
+                debugger
+            });
             adjustConfig.setLogLevel (AdjustConfig.LogLevelInfo);  
             Adjust.create(adjustConfig);
         }
