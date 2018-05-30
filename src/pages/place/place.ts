@@ -206,7 +206,8 @@ export class PlacePage {
     }
 
     openOffer(offer: Offer, company?) {
-        offer.redemption_access_code = 45;
+        // offer.redemption_access_code = 95; //temporary mock
+        // offer.redemption_access_code = 0; //temporary mock
         if (!offer.redemption_access_code || company) {
             this.analytics.trackEvent("Session", 'event_chooseoffer');
             this.nav.push(OfferPage, {
@@ -215,12 +216,10 @@ export class PlacePage {
                 distanceObj: this.getDistance(offer.latitude, offer.longitude),
                 coords: this.coords
             });
-            debugger
         }
         else {
-            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { companyId: this.company.id });
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer });
             limitationPopover.present();
-            debugger
         }
 
     }
