@@ -111,6 +111,7 @@ import { ComplaintPopover } from '../pages/place/complaint.popover';
 import { AnalyticsService } from '../providers/analytics.service';
 import { ReportService } from '../providers/report.service';
 import { TestimonialPopover } from '../pages/place/testimonial.popover';
+import { LimitationPopover } from '../pages/offer/limitation.popover';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -168,6 +169,7 @@ export function createTranslateLoader(http: HttpClient) {
         NoticePopover,
         TestimonialPopover,
         ComplaintPopover,
+        LimitationPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
@@ -255,6 +257,7 @@ export function createTranslateLoader(http: HttpClient) {
         NoticePopover,
         TestimonialPopover,
         ComplaintPopover,
+        LimitationPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
