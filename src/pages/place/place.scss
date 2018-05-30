@@ -270,15 +270,16 @@ page-place {
         height: 15vw;
         border-radius: 100vw;
         position: fixed;
-        bottom: 68px;
+        bottom: 64px;
         right: 10px;
         opacity: 0.7;
         z-index: 1111111111;
     }
 }
 
-.iphonex page-place .footer_testimonials {
-    padding-bottom: 25%;
+.iphonex page-place .btn-review {
+    bottom: calc(constant(safe-area-inset-bottom) + 64px);
+    bottom: calc(env(safe-area-inset-bottom) + 64px);
 }
 
 complaint-popover-component, testimonial-popover-component {
