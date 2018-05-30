@@ -46,7 +46,6 @@ import { CongratulationPopover } from '../pages/offer/congratulation.popover';
 import { OfferPage } from '../pages/offer/offer';
 import { OfferRedeemPopover } from '../pages/offer/offerRedeem.popover';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
-import { PlaceFeedbackPage } from '../pages/place-feedback/place-feedback';
 import { PlacePage } from '../pages/place/place';
 import { PlacesPage } from '../pages/places/places';
 import { PlacesPopover } from '../pages/places/places.popover';
@@ -149,7 +148,6 @@ export function createTranslateLoader(http: HttpClient) {
         AdvNotificationsPage,
         CreateOffer1Page,
         InvitePage,
-        PlaceFeedbackPage,
         PlacePage,
         SplashInfoPage,
         SplashNewsPage,
@@ -237,7 +235,6 @@ export function createTranslateLoader(http: HttpClient) {
         AdvNotificationsPage,
         CreateOffer1Page,
         InvitePage,
-        PlaceFeedbackPage,
         PlacePage,
         SplashInfoPage,
         SplashNewsPage,

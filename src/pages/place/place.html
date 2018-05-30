@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [ngSwitch]="segment">
     <ion-list class="margin-0">
         <div class="cover" [style.background-image]="'url(' + company.cover_url + '?size=mobile&)'">
             <div class="cover-brightness"></div>
@@ -59,6 +59,10 @@
     <ion-navbar>
         <ion-title>{{ company.name }}</ion-title>
     </ion-navbar>
+
+    <a *ngSwitchCase="'testimonials'" (click)="setTestimonial()" class="btn-review">
+
+    </a>
 </ion-header>
 
 <ion-content [ngSwitch]="segment" no-bounce>
@@ -72,9 +76,9 @@
                         <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">
                             {{ 'PAGE_PLACE.FEATURED' | translate }}
                         </span>
-                        <!-- <ng-container *ngFor="let showStar of getStars(company.stars)">
+                        <ng-container *ngFor="let showStar of getStars(company.stars)">
                             <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
-                        </ng-container> -->
+                        </ng-container>
                         <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
                             <span class="font-75 text-828282">
                                 {{ company.redemptions_count !== undefined ? company.redemptions_count : company.testimonials_count }}
@@ -147,10 +151,10 @@
                 <ion-segment-button value="about">
                     {{ 'PAGE_PLACE.ABOUT' | translate }}
                 </ion-segment-button>
-
+<!-- 
                 <ion-segment-button value="testimonials">
                     {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
-                </ion-segment-button>
+                </ion-segment-button> -->
             </ion-segment>
 
     <div padding>
@@ -178,21 +182,21 @@
   </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
-    <ion-item *ngFor=" let testimonial of companyTestimonials" (click)="openFeedback(testimonial)">
+    <ion-item *ngFor=" let testimonial of companyTestimonials">
       <ion-avatar item-start>
-        <div class="thumb_image" [style.background-image]="'url(' + testimonial.avatar_url + '?size=mobile)'"></div>
+        <div class="thumb_image" [style.background-image]="'url(' + testimonial.user_picture_url + '?size=mobile)'"></div>
       </ion-avatar>
-      <div class="bold font-18 text-3E4B5D">
-            {{ testimonial.name }}
+      <ng-container *ngFor="let showStar of getStars(testimonial.stars)">
+        <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+    </ng-container>
+      <div class="bold font-18 text-3E4B5D margin-top-2vw">
+            {{ testimonial.user_name }}
             <span class="font-12 text-828282 no-bold">
-                {{ testimonial.date }}
+                {{ testimonial.created_at }}
             </span>
         </div>
-      <div class="margin-top-10 font-12 text-828282 wrap italic text-overflow-35">{{ testimonial.text }}</div>
+      <div class="margin-top-2vw font-12 text-828282 wrap italic text-overflow-10">{{ testimonial.text }}</div>
     </ion-item>
-      <a (click)="setTestimonial()" class="btn-review">
-
-      </a>
   </ion-list>
 
   <div *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>

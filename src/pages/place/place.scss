@@ -28,10 +28,6 @@ page-place {
     border-top: 1px solid #F2F2F2;
   }
 
-  .testimonials.list .item-block:last-child {
-    margin-bottom: 90px;
-  }
-
   .footer_testimonials {
     box-shadow: 0px -6px 18px rgba(0, 0, 0, 0.12);
     background: #fff;
@@ -220,7 +216,6 @@ page-place {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: 50% 50%;
-        background-color: white;
     }
 
     .font-36{
@@ -274,15 +269,17 @@ page-place {
         width: 15vw;
         height: 15vw;
         border-radius: 100vw;
-        position: absolute;
-        bottom: 20px;
+        position: fixed;
+        bottom: 64px;
         right: 10px;
         opacity: 0.7;
+        z-index: 1111111111;
     }
 }
 
-.iphonex page-place .footer_testimonials {
-    padding-bottom: 25%;
+.iphonex page-place .btn-review {
+    bottom: calc(constant(safe-area-inset-bottom) + 64px);
+    bottom: calc(env(safe-area-inset-bottom) + 64px);
 }
 
 complaint-popover-component, testimonial-popover-component {

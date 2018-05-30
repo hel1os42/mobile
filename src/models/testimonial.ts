@@ -1,5 +1,11 @@
 export class Testimonial {
-    text?: string;
+    id: string;
+    place_id: string;
+    text: string;
     stars: number;
-    status?: string;
+    created_at: string;
+    updated_at: string;
+    status: string;
+    user_name: string;
+    user_picture_url: string;
 }

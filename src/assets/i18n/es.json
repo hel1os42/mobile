@@ -20,7 +20,7 @@
         "LOCATION_DETECTION": "Determinación de la posicion",
         "INTERNET_CONNECTION": "Error de conexión",
         "INCORRECT_EMAIL": "La dirección de correo electrónico no es válida",
-        "ADDED_TO_TESTIMONIALS": "Added"
+        "ADDED_TO_TESTIMONIALS": "Gracias por su respuesta!"
     },
 
     "COMPLAINT" : {
@@ -341,7 +341,8 @@
         "SMS_RESENDING" : "Segunda vez SMS después de un tiempo",
         "SECONDS" : "segundos",
         "SECONDS2" : "segundos",
-        "SECOND" : "segundo"
+        "SECOND" : "segundo",
+        "BY_PRESSING" : "Presionando «Obtener SMS», yo estoy de acuerdo"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -451,8 +452,8 @@
         "PHONE_NUMBER" : "Llame e Invite",
         "YOUR_PHONE" : "Se requiere tu número de teléfono para registrarte",
         "YOUR_INVITE" : "Tu código de invitación",
-        "NEXT" : "Siguiente",
-        "BY_PRESSING" : "Presionando «Siguiente», yo estoy de acuerdo",
+        "NEXT" : "Obtener SMS",
+        "BY_PRESSING" : "Presionando «Obtener SMS», yo estoy de acuerdo",
         "TERMS_AND_CONDITIONS" : "Términos y Condiciones",
         "AND" : "y",
         "PRIVACY_POLICY" : "política de privacidad",
@@ -490,7 +491,7 @@
         "SIGN_UP" : "REGÍSTRESE",
         "PLEASE_CHOOSE_YOUR_CONVENIENT_WAY" : "Elija una manera conveniente, por favor",
         "TO_ENTER_NAU" : "ingresar en NAU",
-        "OR_SIGN_UP_WITH" : "o registrarse",
+        "OR_SIGN_UP_WITH" : "o usar",
         "ALREADY_HAVE_ACCOUNT" : "Ya tiene una cuenta"
     },
 

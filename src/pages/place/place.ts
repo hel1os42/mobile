@@ -22,9 +22,9 @@ import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { OfferPage } from '../offer/offer';
-import { PlaceFeedbackPage } from '../place-feedback/place-feedback';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
+import { MockTestimonials } from '../../mocks/mockTestimonials';
 
 declare var window;
 
@@ -142,10 +142,9 @@ export class PlacePage {
                 this.companyTestimonials = testimonials.data;
                 this.testimonialsLastPage = testimonials.last_page;
             })
-    }
-
-    openFeedback(testimonial) {
-        this.nav.push(PlaceFeedbackPage, { testimonial: testimonial });
+        // let testimonials = MockTestimonials.testimonials;
+        // this.companyTestimonials = testimonials.data;
+        // this.testimonialsLastPage = testimonials.last_page;
     }
 
     getDistance(latitude: number, longitude: number) {
@@ -159,6 +158,14 @@ export class PlacePage {
             }
         };
         return undefined;
+    }
+
+    getStars(star: number) {
+        let showStars: boolean[] = [];
+        for (var i = 0; i < 5; i++) {
+            showStars.push(star > i);
+        }
+        return showStars;
     }
 
     sharePlace() {

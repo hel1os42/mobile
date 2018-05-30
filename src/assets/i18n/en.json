@@ -20,7 +20,7 @@
         "LOCATION_DETECTION": "Location detection",
         "INTERNET_CONNECTION": "Internet connection error",
         "INCORRECT_EMAIL": "Incorrect email, please, correct it",
-        "ADDED_TO_TESTIMONIALS": "Added"
+        "ADDED_TO_TESTIMONIALS": "Thanks for your feedback!"
     },
 
     "COMPLAINT" : {
@@ -341,7 +341,8 @@
         "SMS_RESENDING" : "Resend SMS after",
         "SECONDS" : "seconds",
         "SECONDS2" : "seconds",
-        "SECOND" : "second"
+        "SECOND" : "second",
+        "BY_PRESSING" : "By pressing «Get SMS», I accept"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -451,8 +452,8 @@
         "PHONE_NUMBER" : "Phone & Invite",
         "YOUR_PHONE" : "Your phone number is required to sign up",
         "YOUR_INVITE" : "Your invite code",
-        "NEXT" : "Next",
-        "BY_PRESSING" : "By pressing «Next», I accept",
+        "NEXT" : "Get sms",
+        "BY_PRESSING" : "By pressing «Get SMS», I accept",
         "TERMS_AND_CONDITIONS" : "Terms and conditions",
         "AND" : "and",
         "PRIVACY_POLICY" : "privacy policy",
@@ -490,7 +491,7 @@
         "SIGN_UP" : "Sign Up",
         "PLEASE_CHOOSE" : "Please choose your convenient way",
         "TO_ENTER_NAU" : "to enter NAU",
-        "OR_SIGN_UP_WITH" : "or Sign up with",
+        "OR_SIGN_UP_WITH" : "or use",
         "ALREADY_HAVE_ACCOUNT" : "Already have account"
     },
 

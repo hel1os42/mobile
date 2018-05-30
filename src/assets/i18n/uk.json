@@ -20,7 +20,7 @@
         "LOCATION_DETECTION": "Визначення місцеположення",
         "INTERNET_CONNECTION": "Помилка підключення",
         "INCORRECT_EMAIL": "Некоректна адреса електронної пошти",
-        "ADDED_TO_TESTIMONIALS": "Added"
+        "ADDED_TO_TESTIMONIALS": "Дякуємо за Ваш відгук!"
     },
 
     "COMPLAINT" : {
@@ -325,10 +325,10 @@
     "PAGE_INVITE" : {
         "INVITATION" : "Запрошення",
         "PLEASE_ASK" : "Будь-ласка, уточніть його або використайте код за замовчуванням",
-        "INVITE_FRIENDS" : "Invite friends",
-        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
-        "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them.",
-        "SHARE_YOUR_INVITE_LINK" : "Share your invite link"
+        "INVITE_FRIENDS" : "Запросити друзів",
+        "NAU_IS_THE_ONLY" : "Допомагайте вашим друзям заощаджувати - це вигідно! Запросіть друзів встановити додаток NAU, і отримуйте 95% винагороди від рекламодавців за кожне використання акції вашими фолловерами. ",
+        "A_LIFETIME" : "Ви отримуєте 95% винагороди. А ваші друзі користуються NAU 100% безкоштовно!",
+        "SHARE_YOUR_INVITE_LINK" : "Поділитись персональним посиланням"
     },
 
     "PAGE_LOGIN" : {
@@ -341,7 +341,8 @@
         "SMS_RESENDING" : "Повторно відправити SMS через",
         "SECONDS" : "секунд",
         "SECONDS2" : "секунди",
-        "SECOND" : "секунду"
+        "SECOND" : "секунду",
+        "BY_PRESSING" : "Натискаючи 'Отримати SMS', я приймаю"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -451,8 +452,8 @@
         "PHONE_NUMBER" : "Телефон та інвайт",
         "YOUR_PHONE" : "Ваш номер телефону необхідний для реєстрації",
         "YOUR_INVITE" : "Ваш інвайт-код",
-        "NEXT" : "Далі",
-        "BY_PRESSING" : "Натискаючи 'Далі', я приймаю",
+        "NEXT" : "Отримати SMS",
+        "BY_PRESSING" : "Натискаючи 'Отримати SMS', я приймаю",
         "TERMS_AND_CONDITIONS" : "Умови та положення",
         "AND" : "і",
         "PRIVACY_POLICY" : "політику конфіденційності",
@@ -490,7 +491,7 @@
         "SIGN_UP" : "Реєстрація",
         "PLEASE_CHOOSE" : "Оберіть зручний спосіб",
         "TO_ENTER_NAU" : "логіну до NAU",
-        "OR_SIGN_UP_WITH" : "або зареєструйтесь за допомогою:",
+        "OR_SIGN_UP_WITH" : "або скористайтесь",
         "ALREADY_HAVE_ACCOUNT" : "Вже є аккаунт"
     },
 

@@ -181,6 +181,7 @@ export class StartPage {
 
     createSocData(name: string, picture: string, socialId: string, socialName: string, email?: string) {
         this.socialData = {
+            token: '',//mock
             name: name,
             email: email,
             picture: picture,

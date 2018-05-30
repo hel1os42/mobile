@@ -14,7 +14,7 @@ export class ReportService {
 
     set(placeId: string, complaint: Complaint) {
         return this.api.post(`places/${placeId}/complaints`, complaint, { 
-            ignoreHttpLeftComplaint: this.appMode.getEnvironmentMode() === 'prod' 
+            ignoreHttpUnprocessableEntity: this.appMode.getEnvironmentMode() === 'prod' 
         });
     }
 }

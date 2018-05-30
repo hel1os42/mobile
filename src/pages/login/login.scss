@@ -30,12 +30,6 @@ page-login {
         height: inherit;
     }
 
-  .footer.footer-ios{
-    min-height: inherit;
-      height: auto;
-      padding: 3vw;
-  }
-
     .tel .text-input-ios {
         padding: 0 6vw 0 3vw;
     }
@@ -49,5 +43,9 @@ page-login {
         height: 10vw;
         padding: 2vw;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    a {
+        color: #000;
     }
 }

@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Coords } from '../models/coords';
 import { ProfileService } from './profile.service';
 import { ToastService } from './toast.service';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Injectable()
 export class LocationService {
@@ -19,7 +20,8 @@ export class LocationService {
     constructor(private geolocation: Geolocation,
         private http: Http,
         private toast: ToastService,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private diagnostic: Diagnostic) {
 
         this.onProfileCoordsRefresh = this.profile.onRefresh
             .subscribe(resp => {
@@ -105,7 +107,11 @@ export class LocationService {
     }
 
     reset() {
-        this.geoposition = undefined;
+        this.diagnostic.isLocationAvailable().then(result => {
+            if (result) {
+                this.get(false);
+            }
+        });
     }
 
 }
