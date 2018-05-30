@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 import { ToastService } from '../../providers/toast.service';
-import { Testimonial } from '../../models/testimonial';
+import { TestimonialCreate } from '../../models/testimonialCreate';
 import { TestimonialsService } from '../../providers/testimonials.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class TestimonialPopover {
     }
 
     setTestimonial() {
-        let testimonial: Testimonial = {
+        let testimonial: TestimonialCreate = {
             stars: this.stars,
             text: this.text && this.text.length >= 3 ? this.text : undefined
         }

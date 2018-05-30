@@ -1,6 +1,6 @@
-import { Injectable, EventEmitter } from "@angular/core";
-import { ApiService } from "./api.service";
-import { Testimonial } from "../models/testimonial";
+import { EventEmitter, Injectable } from '@angular/core';
+import { TestimonialCreate } from '../models/testimonialCreate';
+import { ApiService } from './api.service';
 
 
 @Injectable()
@@ -16,7 +16,7 @@ export class TestimonialsService {
         return this.api.get(`places/${placeId}/testimonials?page=${page}`, { showLoading: false });
     }
 
-    post(placeId: string, testimonial: Testimonial) {
+    post(placeId: string, testimonial: TestimonialCreate) {
         let obs = this.api.post(`places/${placeId}/testimonials`, testimonial, { showLoading: false });
         obs.subscribe(resp => this.onRefresh.emit(resp));
         return obs;

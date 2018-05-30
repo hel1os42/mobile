@@ -4,7 +4,7 @@ import { NavParams, ViewController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ProfileService } from '../../providers/profile.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
-import { Testimonial } from '../../models/testimonial';
+import { TestimonialCreate } from '../../models/testimonialCreate';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -41,7 +41,7 @@ export class CongratulationPopover {
     }
 
     send() {
-        let testimonial: Testimonial = {
+        let testimonial: TestimonialCreate = {
             stars: this.stars
         }
         this.testimonials.post(this.company.id, testimonial)
