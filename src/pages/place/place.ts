@@ -25,7 +25,7 @@ import { OfferPage } from '../offer/offer';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
 import { MockTestimonials } from '../../mocks/mockTestimonials';
-import { LimitationPopover } from '../offer/limitation.popover';
+import { LimitationPopover } from '../place/limitation.popover';
 
 declare var window;
 
