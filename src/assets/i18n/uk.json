@@ -404,7 +404,13 @@
         "TESTIMONIALS" : "Відгуки",
         "ABOUT" : "Детально",
         "REDEEM_NOW" : "Використати",
-        "ADD_YOUR_FEEDBACK" : "Додайте відгук"
+        "ADD_YOUR_FEEDBACK" : "Додайте відгук",
+        "LIMITATION_1": "Limitation message 1",
+        "LIMITATION_2": "Limitation message 2",
+        "LIMITATION_4": "Limitation message 4",
+        "LIMITATION_8": "Limitation message 8",
+        "LIMITATION_16": "Limitation message 16",
+        "LIMITATION_64": "Limitation message 64"
     },
 
     "PAGE_PLACE-FEEDBACK" : {

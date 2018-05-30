@@ -404,7 +404,13 @@
         "TESTIMONIALS" : "Testimonios",
         "ABOUT" : "Acerca de",
         "REDEEM_NOW" : "canjear ahora",
-        "ADD_YOUR_FEEDBACK" : "Agregue sus comentarios"
+        "ADD_YOUR_FEEDBACK" : "Agregue sus comentarios",
+        "LIMITATION_1": "Limitation message 1",
+        "LIMITATION_2": "Limitation message 2",
+        "LIMITATION_4": "Limitation message 4",
+        "LIMITATION_8": "Limitation message 8",
+        "LIMITATION_16": "Limitation message 16",
+        "LIMITATION_64": "Limitation message 64"
     },
 
     "PAGE_PLACE-FEEDBACK" : {
