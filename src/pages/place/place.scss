@@ -282,7 +282,7 @@ page-place {
     bottom: calc(env(safe-area-inset-bottom) + 64px);
 }
 
-complaint-popover-component, testimonial-popover-component {
+complaint-popover-component, testimonial-popover-component, limitation-popover-component {
     .modal_content{
         padding-left: 7vw;
         padding-right: 7vw;

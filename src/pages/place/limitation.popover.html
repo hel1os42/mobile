@@ -1,3 +1,24 @@
-<div>
-    
+<div class="modal_content">
+    <ion-label padding-bottom text-center text-uppercase class="width-100 text-4F4F4F font-16">OFFER NAME</ion-label>
+
+    <div class="block-lines">
+        <div class="font-14">TEXT 1</div>
+    </div>
+
+    <div class="block-lines">
+        <div class="font-14">TEXT 2</div>
+    </div>
+
+    <div class="block-lines">
+        <div class="font-14">TEXT 3</div>
+    </div>
+
+    <ion-grid padding-top padding-bottom>
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
 </div>
