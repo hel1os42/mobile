@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [ngSwitch]="segment">
     <ion-list class="margin-0">
         <div class="cover" [style.background-image]="'url(' + company.cover_url + '?size=mobile&)'">
             <div class="cover-brightness"></div>
@@ -59,6 +59,10 @@
     <ion-navbar>
         <ion-title>{{ company.name }}</ion-title>
     </ion-navbar>
+
+    <a *ngSwitchCase="'testimonials'" (click)="setTestimonial()" class="btn-review">
+
+    </a>
 </ion-header>
 
 <ion-content [ngSwitch]="segment" no-bounce>
@@ -185,17 +189,14 @@
       <ng-container *ngFor="let showStar of getStars(testimonial.stars)">
         <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
     </ng-container>
-      <div class="bold font-18 text-3E4B5D">
+      <div class="bold font-18 text-3E4B5D margin-top-2vw">
             {{ testimonial.user_name }}
             <span class="font-12 text-828282 no-bold">
                 {{ testimonial.created_at }}
             </span>
         </div>
-      <div class="margin-top-10 font-12 text-828282 wrap italic text-overflow-35">{{ testimonial.text }}</div>
+      <div class="margin-top-2vw font-12 text-828282 wrap italic text-overflow-10">{{ testimonial.text }}</div>
     </ion-item>
-      <a (click)="setTestimonial()" class="btn-review">
-
-      </a>
   </ion-list>
 
   <div *ngSwitchCase="'about'" [innerHTML]="company.about" class="item-block-nau block-about"></div>

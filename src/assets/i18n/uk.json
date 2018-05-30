@@ -325,10 +325,10 @@
     "PAGE_INVITE" : {
         "INVITATION" : "Запрошення",
         "PLEASE_ASK" : "Будь-ласка, уточніть його або використайте код за замовчуванням",
-        "INVITE_FRIENDS" : "Invite friends",
-        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
-        "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them.",
-        "SHARE_YOUR_INVITE_LINK" : "Share your invite link"
+        "INVITE_FRIENDS" : "Запросити друзів",
+        "NAU_IS_THE_ONLY" : "Допомагайте вашим друзям заощаджувати - це вигідно! Запросіть друзів встановити додаток NAU, і отримуйте 95% винагороди від рекламодавців за кожне використання акції вашими фолловерами. ",
+        "A_LIFETIME" : "Ви отримуєте 95% винагороди. А ваші друзі користуються NAU 100% безкоштовно!",
+        "SHARE_YOUR_INVITE_LINK" : "Поділитись персональним посиланням"
     },
 
     "PAGE_LOGIN" : {
