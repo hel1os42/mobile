@@ -206,7 +206,7 @@ export class PlacePage {
     }
 
     openOffer(offer: Offer, company?) {
-        // offer.redemption_access_code = 95; //temporary mock
+        // offer.redemption_access_code = 64; //temporary mock
         // offer.redemption_access_code = 0; //temporary mock
         if (!offer.redemption_access_code || company) {
             this.analytics.trackEvent("Session", 'event_chooseoffer');
