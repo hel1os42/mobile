@@ -5,6 +5,7 @@ export class LimitationFlagsUtils {
     public static FLAG_4 = 'LIMITATION_4';
     public static FLAG_8 = 'LIMITATION_8';
     public static FLAG_16 = 'LIMITATION_16';
+    public static FLAG_32 = 'LIMITATION_32';
     public static FLAG_64 = 'LIMITATION_64';
 
     static extractFlags(code: number) {
@@ -13,10 +14,14 @@ export class LimitationFlagsUtils {
         let flag4 = 4;
         let flag8 = 8;
         let flag16 = 16;
+        let flag32 = 32;
         let flag64 = 64;
         let keys = [];
         if (code & flag64) {
             keys.push(this.FLAG_64);
+        }
+        if (code & flag32) {
+            keys.push(this.FLAG_32);
         }
         if (code & flag16) {
             keys.push(this.FLAG_16);
