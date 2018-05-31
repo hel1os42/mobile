@@ -146,7 +146,7 @@ export class LoginPage {
             .subscribe(() => {
                 this.isLogin = true;
                 if (this.socialData) {
-                    let defaultInvite = this.envName === 'prod' ? 'NAU'
+                    let defaultInvite = this.envName === 'prod' ? 'nau'
                         : this.envName === 'test' ? '5a4' : '59c';
                     this.getReferrerId(defaultInvite);
                 }
