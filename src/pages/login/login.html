@@ -172,6 +172,6 @@
         {{ 'PAGE_SIGNUP.AND' | translate }}
         <a href="#" (click)="loadUrl(policyUrl)">{{ 'PAGE_SIGNUP.PRIVACY_POLICY' | translate }}</a>
     </div>
-    <div *ngIf="envName === 'dev'" class="devmode">Dev mode</div>
+    <div *ngIf="envName === 'dev'" class="devmode">{{ testAdjustLabel }}</div>
     <div *ngIf="envName === 'test'" class="devmode">Test mode</div>
 </ion-footer>

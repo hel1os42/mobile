@@ -57,6 +57,7 @@ export class LoginPage {
     VK = 'vk';
     termsUrl = 'https://nau.io/terms';
     policyUrl = 'https://nau.io/privacy-policy';
+    testAdjustLabel: string;//temporary
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -99,6 +100,10 @@ export class LoginPage {
         }
         this.envName = this.appMode.getEnvironmentMode();
         this.numCode = this.getNumCode();
+        //temporary for adjust test
+        if (this.envName === 'dev') {
+            this.testAdjustLabel = this.storage.get('invCode') ? this.storage.get('invCode') : 'adjustError';
+        }
     }
 
     // ionViewDidEnter() {
@@ -532,6 +537,10 @@ export class LoginPage {
                             this.envName = data;
                             this.appMode.setEnvironmentMode(data);
                             this.getNumCode();
+                            //temporary for adjust test
+                            if (this.envName === 'dev') {
+                                this.testAdjustLabel = this.storage.get('invCode') ? this.storage.get('invCode') : 'adjustError';
+                            }
                         }
                         // }
                     }
