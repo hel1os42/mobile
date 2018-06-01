@@ -26,6 +26,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-targetSdkVersion" value="26" />
     <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="AndroidLaunchMode" value="singleTask" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon src="resources/android/icon/icon.png" />
