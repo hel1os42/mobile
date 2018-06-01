@@ -102,7 +102,7 @@ export class SignUpPage {
     getCode() {
         let phoneNumber = this.numCode.dial_code + this.formData.phone;
 
-        let defaultInvite = this.envName === 'prod' ? 'NAU'
+        let defaultInvite = this.envName === 'prod' ? 'nau'
             : this.envName === 'test' ? '5a4' : '59c';
         let inviteCode = this.formData.code && this.formData.code !== '' ? this.formData.code : defaultInvite;
         this.auth.getReferrerId(inviteCode, phoneNumber)

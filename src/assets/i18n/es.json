@@ -325,10 +325,10 @@
     "PAGE_INVITE" : {
         "INVITATION" : "Invitación",
         "PLEASE_ASK" : "Por favor, pregunte a su amigo de nuevo o ... Búsquelo en google :)",
-        "INVITE_FRIENDS" : "Invite friends",
-        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
-        "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them.",
-        "SHARE_YOUR_INVITE_LINK" : "Share your invite link"
+        "INVITE_FRIENDS" : "Invitar a los amigos",
+        "NAU_IS_THE_ONLY" : "Ayuda tus amigos-es resulta beneficioso. Inviten a sus amigos a instalar NAU, y obtenga el 95% de las contribuciones de los anunciantes por cada pago de cupon realizado por tus seguidores. ",
+        "A_LIFETIME" : "95% de la remuneracion se le calculan a usted. Y tus amigos aun usan NAU 100% gratuitamente.",
+        "SHARE_YOUR_INVITE_LINK" : "Comparte tu enlace personal"
     },
 
     "PAGE_LOGIN" : {
