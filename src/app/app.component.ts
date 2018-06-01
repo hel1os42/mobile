@@ -114,6 +114,7 @@ export class MyApp {
 
             this.branchInit(platform, splashScreen);
             this.initTranslate();
+
             if (platform.is('cordova')) {
                 this.oneSignalInit();
                 this.analytics.flurryAnalyticsInit();
@@ -290,6 +291,7 @@ export class MyApp {
     }
 
     adjustInit(platform) {
+        let storage = this.storage;
         if (typeof Adjust !== 'undefined' && typeof AdjustConfig !== 'undefined') {
             let appToken: string;
             let envName = this.appMode.getEnvironmentMode();
@@ -299,15 +301,33 @@ export class MyApp {
             else if (platform.is('ios')) {
                 appToken = this.ADJUST_IOS_APP_TOKEN;
             }
-            let adjustConfig;
-            if (envName === 'prod') {
-                adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction);
-            }
-            else if (envName === 'dev' || envName === 'test') {
-                adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox);
-            }
-            adjustConfig.setLogLevel (AdjustConfig.LogLevelInfo);  
+            //let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction); //for prod
+            let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox); //for test
+
+            // adjustConfig.setAttributionCallbackListener(function (attribution) {
+            //     // Printing all attribution properties.
+            //     console.log(attribution);
+            // });
+
+            adjustConfig.setDeferredDeeplinkCallbackListener(deeplink => {
+                // console.log("Deferred deep link URL content: " + deeplink);
+                let str = deeplink.split('invite_code=')[1];
+                let invite = str.split('?')[0];
+              
+                if (invite) {
+                    storage.set('invCode', invite);  
+                }
+            });
+
+            adjustConfig.setLogLevel(AdjustConfig.LogLevelInfo);
             Adjust.create(adjustConfig);
+
+            // Adjust.getGoogleAdId(function (googleAdId) {
+            //     console.log(googleAdId);
+            // });
+            // Adjust.getIdfa(function(idfa) //for ios
+            //     // console.log(idfa);
+            //     });
         }
     }
 
