@@ -18,5 +18,8 @@ export class Offer extends OfferCreate {
     rich_description?: string;
     timeframes_offset: number;
     points: number;
-    redemption_access_code?: number
+    redemption_access_code?: number;
+    referral_points_price?: number;
+    redemption_points_price?: number;
+    is_featured?: boolean;
 }

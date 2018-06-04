@@ -18,6 +18,8 @@ export class User {
     accounts?: any;
     roles?: any[];
     approved: boolean;
+    referral_points?: number;
+    redemption_points?: number;
 }
 /*missing:  
     facebookName: string;
