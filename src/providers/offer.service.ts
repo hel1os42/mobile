@@ -126,7 +126,7 @@ export class OfferService {
         return this.api.get(`offers/${offer_id}/activation_code`);
     }
 
-    getRedemtionStatus(code: string) {
+    getRedemptionStatus(code: string) {
         let obs = this.api.get(`activation_codes/${code}`, {
             showLoading: false,
             ignoreHttpNotFound: true

@@ -241,7 +241,7 @@ export class OfferPage {
                         });
 
                         this.timer = setInterval(() => {
-                            this.offers.getRedemtionStatus(offerActivationCode.code)
+                            this.offers.getRedemptionStatus(offerActivationCode.code)
                                 .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
                                     if (offerRedemtionStatus.redemption_id) {
                                         this.stopTimer();
