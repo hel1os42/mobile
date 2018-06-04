@@ -53,6 +53,7 @@
     "cordova-android": "6.3.0",
     "cordova-android-support-gradle-release": "1.2.0",
     "cordova-clipboard": "1.1.1",
+    "cordova-custom-config": "^5.0.2",
     "cordova-ios": "4.5.4",
     "cordova-plugin-actionsheet": "2.3.3",
     "cordova-plugin-android-permissions": "1.0.0",
@@ -143,7 +144,8 @@
       "uk.co.workingedge.phonegap.plugin.launchnavigator": {
         "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
       },
-      "com.adjust.sdk": {}
+      "com.adjust.sdk": {},
+      "cordova-custom-config": {}
     },
     "platforms": [
       "ios",

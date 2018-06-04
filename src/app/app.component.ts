@@ -301,8 +301,8 @@ export class MyApp {
             else if (platform.is('ios')) {
                 appToken = this.ADJUST_IOS_APP_TOKEN;
             }
-            let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction); //for prod
-            // let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox); //for test
+            //let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction); //for prod
+            let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox); //for test
 
             // adjustConfig.setAttributionCallbackListener(function (attribution) {
             //     // Printing all attribution properties.
@@ -313,9 +313,9 @@ export class MyApp {
                 // console.log("Deferred deep link URL content: " + deeplink);
                 let str = deeplink.split('invite_code=')[1];
                 let invite = str.split('?')[0];
-              
+
                 if (invite) {
-                    storage.set('invCode', invite);  
+                    storage.set('invCode', invite);
                 }
             });
 
