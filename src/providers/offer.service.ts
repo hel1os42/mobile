@@ -4,6 +4,7 @@ import { RedeemedOffer } from '../models/redeemedOffer';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { AnalyticsService } from './analytics.service';
 import { ProfileService } from './profile.service';
+import { Place } from '../models/place';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
@@ -11,6 +12,7 @@ import { ProfileService } from './profile.service';
 export class OfferService {
 
     onRefreshRedeemedOffers: EventEmitter<RedeemedOffer[]> = new EventEmitter();
+    onRefreshPlace: EventEmitter<Place> = new EventEmitter();
 
     constructor(
         private api: ApiService,
@@ -87,8 +89,8 @@ export class OfferService {
         });
     }
 
-    getPlace(place_id: string) {
-        return this.api.get(`places/${place_id}?with=offers;specialities`);
+    getPlace(place_id: string, noLoading?: boolean) {
+        return this.api.get(`places/${place_id}?with=offers;specialities`, { showLoading: !noLoading });
     }
 
     getPlaceOffers(place_id) {
@@ -167,5 +169,13 @@ export class OfferService {
             .subscribe(resp => {
                 this.onRefreshRedeemedOffers.emit(resp);
             })
+    }
+
+    refreshPlace(placeId) {
+        this.getPlace(placeId, true)
+        .subscribe(resp => {
+            this.onRefreshPlace.emit(resp);
+            debugger;
+        })
     }
 }

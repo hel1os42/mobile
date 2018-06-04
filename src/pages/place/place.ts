@@ -45,10 +45,11 @@ export class PlacePage {
     page: string;
     testimonialsPage = 1;
     testimonialsLastPage: number;
-    onRefreshCompany: Subscription;
+    onRefreshFavorites: Subscription;
     onRefreshTestimonials: Subscription;
     envName: string;//temporary
     companyTestimonials: Testimonial[];
+    onRefreshCompany: Subscription;
 
     constructor(
         private nav: NavController,
@@ -106,7 +107,7 @@ export class PlacePage {
                 })
         }
 
-        this.onRefreshCompany = this.favorites.onRefreshOffers
+        this.onRefreshFavorites = this.favorites.onRefreshOffers
             .subscribe((resp) => {
                 this.offersList.forEach(offer => {
                     if (offer.id === resp.id) {
@@ -126,6 +127,15 @@ export class PlacePage {
                     // }
                     // this.company.testimonials_count = this.company.testimonials_count + 1;
                 }
+            });
+
+        this.onRefreshCompany = this.offers.onRefreshPlace
+            .subscribe(company => {
+                this.company = company;
+                this.offersList = company.offers;
+                // this.features = this.company.specialities;
+                this.features = _.uniqBy(company.specialities, 'slug');
+                this.getTestimonials();
             });
     }
 
@@ -308,8 +318,9 @@ export class PlacePage {
     }
 
     ngOnDestroy() {
-        this.onRefreshCompany.unsubscribe();
+        this.onRefreshFavorites.unsubscribe();
         this.onRefreshTestimonials.unsubscribe();
+        this.onRefreshCompany.unsubscribe();
         //
         let nav: any = this.nav;
         let root = nav.root;
