@@ -411,7 +411,9 @@
         "LIMITATION_8": "Limitation message 8",
         "LIMITATION_16": "Limitation message 16",
         "LIMITATION_32": "Limitation message 32",
-        "LIMITATION_64": "Limitation message 64"
+        "LIMITATION_64": "Limitation message 64",
+        "LIMITATION_128": "Limitation message 128",
+        "LIMITATION_256": "Limitation message 256"
     },
 
     "PAGE_PLACE-FEEDBACK" : {
