@@ -96,7 +96,6 @@ export class OfferPage {
                         this.offer = _.extend(this.offer, offer)
                     }
                 }
-
             });
     }
 
