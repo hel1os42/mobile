@@ -5,25 +5,22 @@
                 <a
                     ion-col
                     *ngFor="let category of categories; let i = index"
-                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) }"
+                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
                     (click)="i == 2 ? getFeatured() : selectCategory(category)">
                     <p>
-                        <img [src]="category.image_url">
+                        <img [src]="isSelectedCategory(category, i) && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
                     </p>
                     <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
-                    <span
-                        class="semibold" 
-                        [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate">
-                    </span>
+                    <span class="semibold" [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate"></span>
                 </a>
             </ion-row>
         </ion-grid>
 
-        <ion-item 
-            *ngIf="!isFeatured"
-            class="block-search relative padding-top-3vw" 
-            no-lines 
-            padding-left 
+        <ion-item
+            *ngIf="!isFeaturedOffers"
+            class="block-search relative padding-top-3vw"
+            no-lines
+            padding-left
             padding-right>
             <ion-searchbar
                 [(ngModel)]="search"
@@ -96,11 +93,11 @@
     </div>
 -->
 
-<!-- places -->
-    <ion-list 
-        padding-left 
-        padding-right 
-        *ngIf="!isMapVisible && !isFeatured" 
+    <!-- places -->
+    <ion-list
+        padding-left
+        padding-right
+        *ngIf="!isMapVisible && !isFeaturedOffers"
         no-lines class="item-block-nau margin-top-10">
 
         <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">
@@ -161,13 +158,19 @@
     </ion-list>
 
     <!-- featured offers -->
-    <ion-list 
-        padding-left 
-        padding-right 
-        *ngIf="!isMapVisible && isFeatured" 
-        no-lines class="item-block-nau margin-top-10">
+    <ion-list
+        padding-left
+        padding-right
+        *ngIf="!isMapVisible && isFeaturedOffers"
+        no-lines class="item-block-nau margin-top-10 block-featured">
         <a ion-item detail-none *ngFor="let offer of featuredOffers" (click)="openPlace()">
-            <div class="font-0">
+            <ion-avatar item-start text-center>
+                <div
+                    class="thumb_image"
+                    [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
+                </div>
+            </ion-avatar>
+            <div class="font-0 right-side" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282">
                     {{ getDistance(offer.latitude, offer.longitude).distance }}
