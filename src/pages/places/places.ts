@@ -1,8 +1,8 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, Platform, PopoverController, Content } from 'ionic-angular';
 import { DomUtil, icon, LatLng, latLng, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarkerOptions } from 'leaflet';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
@@ -31,6 +31,7 @@ import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
 import { AnalyticsService } from '../../providers/analytics.service';
+import { Offer } from '../../models/offer';
 
 
 @Component({
@@ -38,6 +39,8 @@ import { AnalyticsService } from '../../providers/analytics.service';
     templateUrl: 'places.html'
 })
 export class PlacesPage {
+
+    @ViewChild(Content) content: Content;
 
     companies: Place[];
     categories: OfferCategory[] = OfferCategory.StaticList;
@@ -85,6 +88,10 @@ export class PlacesPage {
     userCoords: Coords;
     zoom = 16;
     isDismissNoPlacesPopover = true;
+    isFeaturedOffers = false;
+    featuredOffers: Offer[];
+    featuredPage = 1;
+    lastFeaturedPage: number;
 
     constructor(
         private platform: Platform,
@@ -141,7 +148,8 @@ export class PlacesPage {
         this.offers.getCategories(false)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
-                    category.id = categories.data.find(p => p.name === category.name).id;//temporary - code
+                    let obj = categories.data.find(p => p.name === category.name);//temporary - code
+                    category.id = obj ? obj.id : '';
                 })
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
@@ -553,11 +561,17 @@ export class PlacesPage {
         }
     }
 
-    isSelectedCategory(category: OfferCategory) {
-        return this.selectedCategory && this.selectedCategory.id == category.id;
+    isSelectedCategory(category: OfferCategory, i: number) {
+        return this.isFeaturedOffers
+            ? i == 2
+            : this.selectedCategory && this.selectedCategory.id === category.id;
     }
 
     selectCategory(category: OfferCategory) {
+        if (this.isFeaturedOffers) {
+            this.isFeaturedOffers = false;
+            this.content.resize();
+        }
         this.isChangedCategory = this.selectedCategory.id !== category.id;
         this.search = "";
         this.selectedCategory = category;
@@ -567,6 +581,17 @@ export class PlacesPage {
             this.typeFilter = [];
             this.specialityFilter = [];
         }
+    }
+
+    getFeatured() {
+        this.isFeaturedOffers = true;
+        this.content.resize();
+        let radius = 19849 * 1000; //temporary
+        this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage)
+            .subscribe(resp => {
+                this.featuredOffers = resp.data;
+                this.lastFeaturedPage = resp.last_page;
+            })
     }
 
     loadCompanies(isHandler: boolean, page, isNoBounds?: boolean) {
