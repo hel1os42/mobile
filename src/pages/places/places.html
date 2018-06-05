@@ -5,15 +5,15 @@
                 <a
                     ion-col
                     *ngFor="let category of categories; let i = index"
-                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}" 
+                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
                     (click)="i == 2 ? getFeatured() : selectCategory(category)">
                     <p>
                         <img [src]="isFeatured && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
                     </p>
                     <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
-                    <span 
+                    <span
                         [ngClass]="{ 'active_cat_featured': isFeatured && i == 2 }"
-                        class="semibold" 
+                        class="semibold"
                         [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate">
                     </span>
                 </a>
@@ -174,19 +174,19 @@
                     [ngStyle]="{'background-image': 'url(' + offer?.owner.place.picture_url + '?size=mobile&)'}">
                 </div>
                 <div class="info-block">
-                    <div>
+                    <div text-center>
+                        <ng-container *ngFor="let showStar of getStars(offer?.owner.place.stars)">
+                            <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+                        </ng-container>
+                    </div>
+                    <div class="margin-top-1vw" text-left>
                         <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                         <span class="font-75 text-828282">
                         {{ getDistance(offer.latitude, offer.longitude).distance }}
                         {{ getDistance(offer.latitude, offer.longitude).key | translate }}
                         </span>
                     </div>
-                    <div>
-                        <ng-container *ngFor="let showStar of getStars(offer?.owner.place.stars)">
-                            <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
-                        </ng-container>
-                    </div>
-                    <div>
+                    <div class="margin-top-1vw" text-left>
                         <img src="assets/img/user_home/icon_small_user.svg">
                         <span class="font-75 text-828282">
                         {{ offer?.owner.place.redemptions_count !== undefined ? offer?.owner.place.redemptions_count : offer?.owner.place.testimonials_count }}
@@ -223,8 +223,8 @@
         </div>
     </div>
 
-    <ion-infinite-scroll 
-        *ngIf="!isMapVisible && ((page <= lastPage && !isFeatured) || (featuredPage <= lastFeaturedPage && isFeatured))" 
+    <ion-infinite-scroll
+        *ngIf="!isMapVisible && ((page <= lastPage && !isFeatured) || (featuredPage <= lastFeaturedPage && isFeatured))"
         (ionInfinite)="infiniteScroll($event)"
         threshold="5px">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_PLACES.LOADING_COMPANIES' | translate }}"></ion-infinite-scroll-content>
