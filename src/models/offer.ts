@@ -20,4 +20,5 @@ export class Offer extends OfferCreate {
     rich_description?: string;
     timeframes_offset: number;
     points: number;
+    owner?: any;
 }

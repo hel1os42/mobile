@@ -32,6 +32,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
 import { AnalyticsService } from '../../providers/analytics.service';
 import { Offer } from '../../models/offer';
+import { MockPlace } from '../../mocks/mockPlace';
 
 
 @Component({
@@ -88,7 +89,7 @@ export class PlacesPage {
     userCoords: Coords;
     zoom = 16;
     isDismissNoPlacesPopover = true;
-    isFeaturedOffers = false;
+    isFeatured = false;
     featuredOffers: Offer[];
     featuredPage = 1;
     lastFeaturedPage: number;
@@ -562,14 +563,14 @@ export class PlacesPage {
     }
 
     isSelectedCategory(category: OfferCategory, i: number) {
-        return this.isFeaturedOffers
+        return this.isFeatured
             ? i == 2
             : this.selectedCategory && this.selectedCategory.id === category.id;
     }
 
     selectCategory(category: OfferCategory) {
-        if (this.isFeaturedOffers) {
-            this.isFeaturedOffers = false;
+        if (this.isFeatured) {
+            this.isFeatured = false;
             this.content.resize();
         }
         this.isChangedCategory = this.selectedCategory.id !== category.id;
@@ -584,14 +585,21 @@ export class PlacesPage {
     }
 
     getFeatured() {
-        this.isFeaturedOffers = true;
+        this.isFeatured = true;
         this.content.resize();
         let radius = 19849 * 1000; //temporary
         this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
                 this.lastFeaturedPage = resp.last_page;
-            })
+
+                // temporary mock
+                this.featuredOffers.forEach(offer => {
+                    offer.owner = {};
+                    offer.owner.place = MockPlace.place;
+                // 
+                });
+            });
     }
 
     loadCompanies(isHandler: boolean, page, isNoBounds?: boolean) {

@@ -11,13 +11,17 @@
                         <img [src]="isSelectedCategory(category, i) && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
                     </p>
                     <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
-                    <span class="semibold" [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate"></span>
+                    <span
+                        [ngClass]="{ 'active_cat_featured': isSelectedCategory(category, i) && i == 2}"
+                        class="semibold" 
+                        [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate">
+                    </span>
                 </a>
             </ion-row>
         </ion-grid>
 
         <ion-item 
-            *ngIf="!isFeaturedOffers"
+            *ngIf="!isFeatured"
             class="block-search relative padding-top-3vw" 
             no-lines 
             padding-left 
@@ -97,7 +101,7 @@
     <ion-list 
         padding-left 
         padding-right 
-        *ngIf="!isMapVisible && !isFeaturedOffers" 
+        *ngIf="!isMapVisible && !isFeatured" 
         no-lines class="item-block-nau margin-top-10">
 
         <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">
@@ -161,7 +165,7 @@
     <ion-list 
         padding-left 
         padding-right 
-        *ngIf="!isMapVisible && isFeaturedOffers" 
+        *ngIf="!isMapVisible && isFeatured" 
         no-lines class="item-block-nau margin-top-10">
         <a ion-item detail-none *ngFor="let offer of featuredOffers" (click)="openPlace()">
             <div class="font-0">

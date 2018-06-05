@@ -29,7 +29,7 @@ export class OfferService {
                 latitude: lat,
                 longitude: lng,
                 radius: radius,
-                // with: 'place',
+                // with: 'account.owner.place',
                 page: page
             }
         });
