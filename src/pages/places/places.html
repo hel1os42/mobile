@@ -5,14 +5,13 @@
                 <a
                     ion-col
                     *ngFor="let category of categories; let i = index"
-                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
+                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) }"
                     (click)="i == 2 ? getFeatured() : selectCategory(category)">
                     <p>
-                        <img [src]="isSelectedCategory(category, i) && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
+                        <img [src]="category.image_url">
                     </p>
                     <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
                     <span
-                        [ngClass]="{ 'active_cat_featured': isSelectedCategory(category, i) && i == 2}"
                         class="semibold" 
                         [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate">
                     </span>

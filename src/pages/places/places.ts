@@ -563,9 +563,7 @@ export class PlacesPage {
     }
 
     isSelectedCategory(category: OfferCategory, i: number) {
-        return this.isFeatured
-            ? i == 2
-            : this.selectedCategory && this.selectedCategory.id === category.id;
+        return this.selectedCategory && this.selectedCategory.id === category.id && !this.isFeatured;
     }
 
     selectCategory(category: OfferCategory) {
