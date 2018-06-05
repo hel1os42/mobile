@@ -4,10 +4,10 @@ export class OfferCategory {
     name_html?: string;
     parent_id?: string;
     children_count?: number;
-    retail_types_count?: number; 
-    parent?; 
+    retail_types_count?: number;
+    parent?;
     children?;
-    retail_types?; 
+    retail_types?;
     image_url?: string;
     imageAdvCreate_url?: string;
 
@@ -27,6 +27,13 @@ export class OfferCategory {
             imageAdvCreate_url: 'assets/img/category/beauty.svg'
         },
         {
+            id: '69d4ccac-0a2b-423b-97c9-7f560c5c8bdb',
+            name: 'Featured',
+            name_html: '<div class="font-65 text-white">Other &<br>Online</div>',
+            image_url: 'assets/img/splash_screen/tab-icon5.svg',
+            imageAdvCreate_url: 'assets/img/category/other.svg'
+        },
+        {
             id: '2ffaf6e1-bfa1-4af6-8755-6ccf2266cb6b',
             name: 'Retail & Services',
             name_html: '<div class="font-65 text-white">Retail &<br>Services</div>',
@@ -39,13 +46,6 @@ export class OfferCategory {
             name_html: '<div class="font-65 text-white">Accommodation<br>& Leisure</div>',
             image_url: 'assets/img/splash_screen/tab-icon4.svg',
             imageAdvCreate_url: 'assets/img/category/attractions.svg'
-        },
-        {
-            id: '69d4ccac-0a2b-423b-97c9-7f560c5c8bdb',
-            name: 'Other & Online',
-            name_html: '<div class="font-65 text-white">Other &<br>Online</div>',
-            image_url: 'assets/img/splash_screen/tab-icon5.svg',
-            imageAdvCreate_url: 'assets/img/category/other.svg'
         }
     ];
 }
