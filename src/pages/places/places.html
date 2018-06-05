@@ -168,24 +168,41 @@
         *ngIf="!isMapVisible && isFeatured"
         no-lines class="item-block-nau margin-top-10 block-featured">
         <a ion-item detail-none *ngFor="let offer of featuredOffers" (click)="openPlace()">
-            <ion-avatar item-start text-center>
+            <ion-avatar item-start text-center class="relative">
                 <div
                     class="thumb_image"
                     [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
                 </div>
-            </ion-avatar>
-            <div class="font-0 right-side" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
-                <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
-                <span class="font-75 text-828282">
-                    {{ getDistance(offer.latitude, offer.longitude).distance }}
-                    {{ getDistance(offer.latitude, offer.longitude).key | translate }}
-                </span>
-                <div class="smooth_transition">
-                    <div class="scroll_content margin-top-2vw">
-                        <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
+                <div class="info-block">
+                    <div>
+                        <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+                        <span class="font-75 text-828282">
+                        {{ getDistance(offer.latitude, offer.longitude).distance }}
+                        {{ getDistance(offer.latitude, offer.longitude).key | translate }}
+                        </span>
+                    </div>
+                    <div>
+                        <ng-container *ngFor="let showStar of getStars(company.stars)">
+                            <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+                        </ng-container>
+                    </div>
+                    <div>
+                        <img src="assets/img/user_home/icon_small_user.svg">
+                        <span class="font-75 text-828282">
+                        {{ company.redemptions_count !== undefined ? company.redemptions_count : company.testimonials_count }}
+                        </span>
                     </div>
                 </div>
-                <div class="text-828282 font-12 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
+            </ion-avatar>
+            <div class="font-0 right-side relative" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
+                <div class="right-side-content">
+                    <div class="smooth_transition">
+                        <div class="scroll_content margin-top-2vw">
+                            <div class="bold font-18 text-white">{{ offer.label }}</div>
+                        </div>
+                    </div>
+                    <div class="text-white font-12 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
+                </div>
             </div>
             <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
 
