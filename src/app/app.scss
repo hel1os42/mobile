@@ -626,6 +626,7 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .grid-tabs-splash .col img {
     max-width: 100%;
     height: 100%;
+    max-height: 31px;
 }
 .platform-tablet .grid-tabs-splash .col img {
     height: 7vw;
@@ -1728,7 +1729,11 @@ ion-app.disable-scroll {
     padding-top: 5vw;
 }
 
-.active_cat{
+.grid-tabs-splash.grid a.col:nth-child(3).active_cat{
+    opacity: 1;
+}
+
+.active_cat, .active_cat_featured span{
     opacity: 0.5;
 }
 
