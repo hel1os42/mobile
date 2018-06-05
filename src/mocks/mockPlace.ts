@@ -23,7 +23,7 @@ export class MockPlace {
         "testimonials_count": 0,
         "offers_count": 1,
         "active_offers_count": 1,
-        "picture_url": "https://nau.test/places/813efb6b-1b27-4971-a70d-1031ddcdae94/picture.jpg",
+        "picture_url": "https://api.nau.io/places/8ba91eb7-5976-4e52-ab90-2182e0885574/picture.jpg",
         "cover_url": "https://nau.test/places/813efb6b-1b27-4971-a70d-1031ddcdae94/cover.jpg",
         "timezone_offset": "10800",
         "redemptions_count": 14,
