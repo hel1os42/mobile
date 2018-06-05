@@ -16,6 +16,25 @@ export class OfferService {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
     }
 
+    getList( // for featured offers
+        // category_ids: string,
+        lat: number,
+        lng: number,
+        radius: number,
+        page: number,
+    ) {
+        // return this.api.get(`offers`, {
+        return this.api.get(`offers?category_ids[]=aea58d61-5ad5-4f79-9a2c-819245f56696`, {// temporary to remove category
+            params: {
+                latitude: lat,
+                longitude: lng,
+                radius: radius,
+                // with: 'place',
+                page: page
+            }
+        });
+    }
+
     getPlacesOfRoot(
         category_ids: string,
         lat: number,
