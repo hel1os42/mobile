@@ -29,8 +29,8 @@ export class OfferCategory {
         {
             id: '69d4ccac-0a2b-423b-97c9-7f560c5c8bdb',
             name: 'Featured',
-            name_html: '<div class="font-65 text-white">Other &<br>Online</div>',
-            image_url: 'assets/img/splash_screen/tab-icon5.svg',
+            name_html: '<div class="font-65 text-white">Featured</div>',
+            image_url: 'assets/img/splash_screen/tab-icon6.svg',
             imageAdvCreate_url: 'assets/img/category/other.svg'
         },
         {
