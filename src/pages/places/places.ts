@@ -595,7 +595,7 @@ export class PlacesPage {
                 this.featuredOffers.forEach(offer => {
                     offer.owner = {};
                     offer.owner.place = MockPlace.place;
-                // 
+                    // 
                 });
             });
     }
@@ -913,22 +913,49 @@ export class PlacesPage {
     }
 
     infiniteScroll(infiniteScroll) {
-        this.page = this.page + 1;
-        if (this.page <= this.lastPage) {
+        let page: number;
+        let lastPage: number;
+        if (this.isFeatured) {
+            page = ++ this.featuredPage;
+            lastPage = this.lastFeaturedPage;
+        }
+        else {
+            page = ++ this.page;
+            lastPage = this.lastPage;
+        }
+        if (page <= lastPage) {
             setTimeout(() => {
-                this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
-                    this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
-                    this.radius, this.search, this.page, this.page == 1)
-                    .subscribe(companies => {
-                        this.companies = [...this.companies, ...companies.data];
-                        this.lastPage = companies.last_page;
-                        this.markers = [];
-                        this.companies.forEach((company) => {
-                            this.markers.push(this.createMarker(company.latitude, company.longitude, company));
-                        })
-                        this.generateBounds(this.markers);
-                        infiniteScroll.complete();
-                    });
+                if (this.isFeatured) {
+                    let radius = 19849 * 1000; //temporary
+                    this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage)
+                        .subscribe(resp => {
+                            this.featuredOffers = [...this.featuredOffers, ...resp.data];
+                            this.lastFeaturedPage = resp.last_page;
+
+                            // temporary mock
+                            this.featuredOffers.forEach(offer => {
+                                offer.owner = {};
+                                offer.owner.place = MockPlace.place;
+                                // 
+                            });
+                            infiniteScroll.complete();
+                        });
+                }
+                else {
+                    this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
+                        this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
+                        this.radius, this.search, this.page, this.page == 1)
+                        .subscribe(companies => {
+                            this.companies = [...this.companies, ...companies.data];
+                            this.lastPage = companies.last_page;
+                            this.markers = [];
+                            this.companies.forEach((company) => {
+                                this.markers.push(this.createMarker(company.latitude, company.longitude, company));
+                            })
+                            this.generateBounds(this.markers);
+                            infiniteScroll.complete();
+                        });
+                }
             });
         }
         else {
