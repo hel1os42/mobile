@@ -1733,7 +1733,11 @@ ion-app.disable-scroll {
     opacity: 1;
 }
 
-.active_cat, .active_cat_featured span{
+.active_cat {
+    opacity: 0.5;
+}
+
+.active_cat_featured div {
     opacity: 0.5;
 }
 

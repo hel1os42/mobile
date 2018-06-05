@@ -5,19 +5,23 @@
                 <a
                     ion-col
                     *ngFor="let category of categories; let i = index"
-                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
+                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}" 
                     (click)="i == 2 ? getFeatured() : selectCategory(category)">
                     <p>
-                        <img [src]="isSelectedCategory(category, i) && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
+                        <img [src]="isFeatured && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
                     </p>
                     <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
-                    <span class="semibold" [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate"></span>
+                    <span 
+                        [ngClass]="{ 'active_cat_featured': isFeatured && i == 2 }"
+                        class="semibold" 
+                        [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate">
+                    </span>
                 </a>
             </ion-row>
         </ion-grid>
 
         <ion-item
-            *ngIf="!isFeaturedOffers"
+            *ngIf="!isFeatured"
             class="block-search relative padding-top-3vw"
             no-lines
             padding-left
@@ -97,7 +101,7 @@
     <ion-list
         padding-left
         padding-right
-        *ngIf="!isMapVisible && !isFeaturedOffers"
+        *ngIf="!isMapVisible && !isFeatured"
         no-lines class="item-block-nau margin-top-10">
 
         <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">
@@ -161,7 +165,7 @@
     <ion-list
         padding-left
         padding-right
-        *ngIf="!isMapVisible && isFeaturedOffers"
+        *ngIf="!isMapVisible && isFeatured"
         no-lines class="item-block-nau margin-top-10 block-featured">
         <a ion-item detail-none *ngFor="let offer of featuredOffers" (click)="openPlace()">
             <ion-avatar item-start text-center>
