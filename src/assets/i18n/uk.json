@@ -4,7 +4,7 @@
         "Beauty": "<div class='font-65 text-white'>Здоров'я і<br>Краса</div>",
         "Retail": "<div class='font-65 text-white'>Товари і<br>Послуги</div>",
         "Accommodation": "<div class='font-65 text-white'>Проживання <br>і Відпочинок</div>",
-        "Other": "<div class='font-65 text-white'>Онлайн та<br>Інше</div>"
+        "Featured": "<div class='font-65 text-white'>Рекомондовані <br> </div>"
     },
 
     "COUNTRIES" : {
