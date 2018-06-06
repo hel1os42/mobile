@@ -26,6 +26,7 @@ import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
 import { MockTestimonials } from '../../mocks/mockTestimonials';
 import { LimitationPopover } from '../place/limitation.popover';
+import { NoticePopover } from '../offer/notice.popover';
 
 declare var window;
 
@@ -216,9 +217,12 @@ export class PlacePage {
     }
 
     openOffer(offer: Offer, company?) {
-        // offer.redemption_access_code = 64; //temporary mock
-        // offer.redemption_access_code = 0; //temporary mock
         if (!offer.redemption_access_code || company) {
+          
+            if (offer.is_featured && (offer.redemption_points_price || offer.referral_points_price)) {
+            let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer });
+            noticePopover.present();
+            }
             this.analytics.trackEvent("Session", 'event_chooseoffer');
             this.nav.push(OfferPage, {
                 offer: offer,
