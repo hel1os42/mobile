@@ -22,5 +22,7 @@ export class Offer extends OfferCreate {
     referral_points_price: number;
     redemption_points_price: number;
     is_featured?: boolean;
-    owner?: any;
+    place?: any; // to remove
+    // place?: Place;
+    
 }

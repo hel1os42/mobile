@@ -635,8 +635,7 @@ export class PlacesPage {
                 }
                 // temporary mock
                 this.featuredOffers.forEach(offer => {
-                    offer.owner = {};
-                    offer.owner.place = MockPlace.place;
+                    offer.place = MockPlace.place;
                     // 
                 });
             },
@@ -989,8 +988,7 @@ export class PlacesPage {
 
                             // temporary mock
                             this.featuredOffers.forEach(offer => {
-                                offer.owner = {};
-                                offer.owner.place = MockPlace.place;
+                                offer.place = MockPlace.place;
                                 // 
                             });
                             infiniteScroll.complete();
