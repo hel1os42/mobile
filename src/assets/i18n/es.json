@@ -386,10 +386,10 @@
     },
 
     "PAGE_ONBOARDING" : {
-        "FOR_BUSINESS" : "Para los negocios",
         "WELCOME" : "¡Bienvenido!",
         "MAKE_PROFIT" : "¡Lucre!",
         "NAU_COINS" : "Monedas NAU!",
+        "FOR_BUSINESS" : "Para los negocios",
         "ENJOY" : "¡Disfrute!",
         "ENJOY_THE_MOST" : "Disfrute de las ofertas, obsequios y descuentos más atractivos de varios comercios en su ubicación, ya sea que esté en su ciudad de residencia o de vacaciones.",
         "INVITE_YOUR_FRIENDS" : "Invite a sus amigos y seguidores a unirse a NAU con su código de invitación y obtenga recompensas cada vez que usen ofertas especiales de los comercios de todo el mundo.",
