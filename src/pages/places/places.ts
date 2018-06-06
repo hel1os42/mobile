@@ -789,6 +789,9 @@ export class PlacesPage {
                 coords: this.userCoords,
             }
         }
+        if (this.user && this.user.id) {
+            params.user = this.user;
+        }
         if (offer && offer.redemption_access_code) {
             let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer });
             limitationPopover.present();

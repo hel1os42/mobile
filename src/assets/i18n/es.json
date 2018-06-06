@@ -4,7 +4,7 @@
         "Beauty": "<div class='font-65 text-white'>Salud y<br>Belleza</div>",
         "Retail": "<div class='font-65 text-white'>Productos y<br>Servicios</div>",
         "Accommodation": "<div class='font-65 text-white'>Alojamiento<br>y Descanso</div>",
-        "Featured": "<div class='font-65 text-white'>Mejores<br>Ofertas</div>"
+        "Featured": "<div class='font-65 text-white'>Ofertas<br>Top</div>"
     },
 
     "COUNTRIES" : {
@@ -48,7 +48,10 @@
         "PLEASE_INFORM": "Le pedimos amablemente que informe al representante de la tienda por adelantado sobre su intencion de usar el cupon NAU. Seguimos siendo novatos para muchos, por lo que algunos personal pueden no estar listos. En este caso le recomendamos que se contacte con el administrador de la establecimiento.",
         "IF_THE_PROBLEM": "Siempre que el problema persiste contactenos en la direccion",
         "SO_THAT": "﻿para la correcion de la situacion mas rapida.",
-        "GOT_IT": "﻿Continuar"
+        "GOT_IT": "﻿Continuar",
+        "FRIENDS_POINTS": "Para redimir esta oferta, usarás referral_points_price puntos de amigos aparte de los referral_points que tienes actualmente. Cada nuevo amigo te traerá más puntos de amigos, entoncen no vaciles en invitarlos ahora mismo!",
+        "REDEMPTIONS_POINTS": "Para redimir esta oferta, usarás redemption_points_price puntos de redención aparte de los redemption_points que tienes actualmente. Puedes obtener mas puntos de redención ahora mismo si redimes cualquier oferta en la app!",
+        "FRIENDS_AND_REDEMPTIONS_POINTS": "Para redimir esta oferta, usarás referral_points_price puntos de amigos aparte de los referral_points y redemption_points_price puntos de redención aparte de los redemption_points que tienes actualmente. Obten más puntos invitando amigos y redimiendo ofertas en la app!"
     },
 
     "UNIT" : {
@@ -405,15 +408,15 @@
         "ABOUT" : "Acerca de",
         "REDEEM_NOW" : "canjear ahora",
         "ADD_YOUR_FEEDBACK" : "Agregue sus comentarios",
-        "LIMITATION_1": "Sorry, this offer has reached its maximum redemptions limit.",
-        "LIMITATION_2": "Sorry, this offer has reached its maximum daily redemptions limit.",
-        "LIMITATION_4": "Sorry, you have reached this offer redemptions limit.",
-        "LIMITATION_8": "Sorry, you have reached this offer daily redemptions limit.",
-        "LIMITATION_16": "Sorry, you have reached this offer weekly redemptions limit.",
-        "LIMITATION_32": "Sorry, you have reached this offer monthly redemptions limit.",
-        "LIMITATION_64": "Sorry, your user level is lower than this offer requires.",
-        "LIMITATION_128": "Sorry, you don't have enough Friends Points to redeem this offer.",
-        "LIMITATION_256": "Sorry, you don't have enough Redemptions Points to redeem this offer."
+        "LIMITATION_1": "Lo sentimos, esta oferta ha alcanzado su limite maximo de redenciones.",
+        "LIMITATION_2": "Lo sentimos, esta oferta ha alcanzado su límite máximo diario de redenciones.",
+        "LIMITATION_4": "Lo sentimos, has alcanzado el limite de redenciones para esta oferta.",
+        "LIMITATION_8": "Lo sentimos, has alcanzado el limite diaro de redenciones para esta oferta.",
+        "LIMITATION_16": "Lo sentimos, has alcanzado el limite semanal de redenciones para esta oferta.",
+        "LIMITATION_32": "Lo sentimos, has alcanzado el limite mensual de redenciones para esta oferta.",
+        "LIMITATION_64": "Lo sentimos, su nivel de ususario esta por debajo del requerido por esta oferta.",
+        "LIMITATION_128": "Lo sentimos, no tienes suficientes puntos de amigos para redimir esta oferta.",
+        "LIMITATION_256": "Lo sentimos, no tienes suficientes puntos de redención para redimir esta oferta."
     },
 
     "PAGE_PLACE-FEEDBACK" : {

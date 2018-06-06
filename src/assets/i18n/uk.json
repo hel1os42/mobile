@@ -48,7 +48,10 @@
         "PLEASE_INFORM": "Please inform the retailer you want to redeem a coupon in advance. While NAU is still a new thing for the retailers, some of the staff may be unaware of it. In this case please call the manager.",
         "IF_THE_PROBLEM": "If the problem persists, contact us at",
         "SO_THAT": "so that we can fix the issue as soon as possible.",
-        "GOT_IT": "Got it!"
+        "GOT_IT": "Got it!",
+        "FRIENDS_POINTS": "Для активації купона ви витратите Балів Дружби: referral_points_price з поточного балансу referral_points. Кожен новий друг приносить вам нові Бали Дружби, тому поспішайте запрошувати друзів прямо зараз!",
+        "REDEMPTIONS_POINTS": "Для активації купона ви витратите Балів Акцій: redemption_points_price з поточного балансу redemption_points. Отримуйте нові Бали Акцій, користуючись будь-якими акціями у додатку NAU!",
+        "FRIENDS_AND_REDEMPTIONS_POINTS": "Для активації купона ви витратите Балів Дружби: referral_points_price з поточного балансу referral_points і Балів Акцій: redemption_points_price з поточного балансу redemption_points. Отримуйте нові Бали, запрошуючи друзів та користуючись будь-якими акціями у додатку NAU!"
     },
 
     "UNIT" : {
