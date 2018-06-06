@@ -34,7 +34,6 @@ import { AnalyticsService } from '../../providers/analytics.service';
 import { Offer } from '../../models/offer';
 import { MockPlace } from '../../mocks/mockPlace';
 
-
 @Component({
     selector: 'page-places',
     templateUrl: 'places.html'
@@ -505,7 +504,7 @@ export class PlacesPage {
         let popupContent = DomUtil.create('div');
         popupContent.innerText = company.name;
         popupContent.addEventListener('click', (event) => {
-            this.openPlace(company);
+            this.openPlace(company, false);
         });
         let popupLayer = popup().setContent(popupContent);
 
@@ -751,7 +750,7 @@ export class PlacesPage {
         setTimeout(renderMap, 1);
     }
 
-    openPlace(data, isShare?: boolean) {
+    openPlace(data, isShare: boolean, offer?: Offer) {
         this.gAnalytics.trackEvent("Session", 'event_chooseplace');
         this.analytics.faLogEvent('event_chooseplace');
         let params;
@@ -767,6 +766,9 @@ export class PlacesPage {
                 distanceObj: this.getDistance(data.latitude, data.longitude),
                 coords: this.userCoords,
             }
+        }
+        if (offer && this.isFeatured) {
+            //to do
         }
         this.nav.push(PlacePage, params);
         // .then(() => {

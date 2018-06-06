@@ -1,7 +1,7 @@
 export class MockPlace {
 
     public static place = {
-        "id": "813efb6b-1b27-4971-a70d-1031ddcdae94",
+        "id": "2fb6a853-ec21-4bc1-b557-7f27151c11ce",
         "user_id": "b7b6fffb-9042-4f71-bb55-d6c079edd2d4",
         "name": "placeadver",
         "description": "weqwad",
