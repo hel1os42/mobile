@@ -207,7 +207,7 @@
                     </div>
                     <div class="text-white font-12 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
                 </div>
-                <div class="right-top-angle"></div>
+                <div [ngClass]="offer.type" class="right-top-angle"></div>
             </div>
             <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
         </a>
