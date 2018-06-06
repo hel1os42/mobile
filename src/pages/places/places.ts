@@ -954,7 +954,7 @@ export class PlacesPage {
             setTimeout(() => {
                 if (this.isFeatured) {
                     let radius = 19849 * 1000; //temporary
-                    this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage, this.page == 1)
+                    this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage, this.featuredPage == 1)
                         .subscribe(resp => {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
