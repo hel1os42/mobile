@@ -132,7 +132,8 @@ export class LoginPage {
         else {
             this.location.getByIp()
                 .subscribe(resp => {
-                    this.numCode = this.phoneCodes.find(item => item.code === resp.country_code);
+                    // this.numCode = this.phoneCodes.find(item => item.code === resp.country_code);
+                    this.numCode = this.phoneCodes.find(item => item.code === resp.countryCode);
                     return this.numCode;
                 },
                     err => {

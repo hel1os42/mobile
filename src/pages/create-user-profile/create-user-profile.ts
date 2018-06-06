@@ -230,8 +230,10 @@ export class CreateUserProfilePage {
             this.location.getByIp()
                 .subscribe(resp => {
                     this.coords = {
-                        lat: resp.latitude,
-                        lng: resp.longitude
+                        // lat: resp.latitude,
+                        // lng: resp.longitude
+                        lat: resp.lat,
+                        lng: resp.lon
                     };
                     this.addMap();
                     this.changeDetectorRef.detectChanges();
