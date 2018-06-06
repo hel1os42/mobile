@@ -167,10 +167,10 @@
         padding-right
         *ngIf="!isMapVisible && isFeatured"
         no-lines class="item-block-nau margin-top-10 block-featured">
-        <a 
-            *ngFor="let offer of featuredOffers" 
+        <a
+            *ngFor="let offer of featuredOffers"
             (click)="openPlace(offer?.owner.place, false, offer)"
-            ion-item 
+            ion-item
             detail-none>
             <ion-avatar item-start text-center class="relative">
                 <div
@@ -228,8 +228,8 @@
         </div>
     </div>
 
-    <ion-infinite-scroll 
-        *ngIf="isInfiniteScroll()" 
+    <ion-infinite-scroll
+        *ngIf="isInfiniteScroll()"
         (ionInfinite)="infiniteScroll($event)"
         threshold="5px">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_PLACES.LOADING_COMPANIES' | translate }}"></ion-infinite-scroll-content>
