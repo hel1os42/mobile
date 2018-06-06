@@ -24,6 +24,7 @@ export class UserProfilePage {
     balance: number;
     onRefreshAccounts: Subscription;
     NAU: Account;
+    branchDomain = 'https://nau.app.link';
 
     @ViewChild(Slides) slides: Slides;
 
@@ -120,6 +121,34 @@ export class UserProfilePage {
 
     slidePrev() {
         this.slides.slidePrev();
+    }
+
+    shareInvite() {
+        const Branch = window['Branch'];
+        let properties = {
+            canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
+            canonicalUrl: `${this.branchDomain}/?invite_code=${this.user.invite_code}`,
+            title: this.user.name,
+            contentImageUrl: this.user.picture_url + '?size=mobile',
+            // contentDescription: '',
+            // price: 12.12,
+            // currency: 'GBD',
+            contentIndexingMode: 'private',
+            contentMetadata: {
+                invite_code: this.user.invite_code,
+            }
+        };
+        var branchUniversalObj = null;
+        Branch.createBranchUniversalObject(properties)
+            .then(res => {
+                branchUniversalObj = res;
+                let analytics = {};
+                let message = 'NAU';
+                branchUniversalObj.showShareSheet(analytics, properties, message)
+                    .then(resp => console.log(resp))
+            }).catch(function (err) {
+                // console.log('Branch create obj error: ' + JSON.stringify(err))
+            })
     }
 
     ngOnDestroy() {

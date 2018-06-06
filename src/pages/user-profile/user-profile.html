@@ -157,6 +157,9 @@
     </ion-grid>
 
     <p margin>
+        <button margin-bottom (click)="shareInvite()" color="primary" ion-button block>
+            {{ 'PAGE_INVITE.INVITE_FRIENDS' | translate }}
+        </button>
         <button (click)="logout()" color="primary" ion-button block text-uppercase>
             {{ 'PAGE_USER-PROFILE.LOGOUT' | translate }}
         </button>
