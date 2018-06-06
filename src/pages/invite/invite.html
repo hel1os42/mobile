@@ -13,10 +13,12 @@
     <div class="header-shadow"></div>
 </ion-header>
 <ion-content padding>
-    <div text-center margin-bottom>
-        <img class="envelope" src="assets/img/invite/invite.jpg">
+    <div class="position-center">
+    <div text-center margin-bottom class="relative">
+        <div class="background-invite"></div>
+        <img class="envelope" src="assets/img/invite/invite2.png">
     </div>
-    <div margin-bottom class="text-3E4B5D font-14">
+    <div margin-bottom text-justify class="text-3E4B5D font-14">
         {{ 'PAGE_INVITE.NAU_IS_THE_ONLY' | translate }}
     </div>
     <div class="text-3E4B5D font-14">{{ 'PAGE_INVITE.A_LIFETIME' | translate }}</div>
@@ -35,4 +37,5 @@
             <ion-icon (click)="copyInvCode()" class="text-FF5A00" name="ios-copy"></ion-icon>
         </a>
     </ion-item>
+    </div>
 </ion-content>
