@@ -21,4 +21,6 @@ export class Offer extends OfferCreate {
     timeframes_offset: number;
     points: number;
     owner?: any;
+    redemption_points_price: number;
+    referral_points_price: number;
 }
