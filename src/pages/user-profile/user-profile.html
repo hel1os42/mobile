@@ -17,6 +17,23 @@
 
 <ion-content class="padding-no">
     <ion-item class="border-bottom-no top-block-nau padding-top-5vw padding-left-5vw padding-right-5vw">
+        <div item-start>
+            <span class="bold font-16">{{ user?.name }}</span>
+        </div>
+        <div item-start>
+                <span class="label label-ios points font-75">
+                    {{ 'PAGE_CREATE-USER-PROFILE.YOU_HAVE' | translate }}
+                    {{ user.points }}
+                    {{ user.points >= 10 && point() <= 20
+                    ? ('UNIT.POINTS' | translate)
+                    : user.points % 10 == 1
+                    ? ('UNIT.POINT' | translate)
+                    : (user.points % 10 >= 2 && user.points % 10 <= 4)
+                    ? ('UNIT.POINTS2' | translate)
+                    : ('UNIT.POINTS' | translate) }}
+                </span>
+        </div>
+        <!--
         <ion-avatar item-start>
             <div text-center class="user_level font-22 text-white table">
                 <span class="table-cell">L{{ user.level }}</span>
@@ -33,7 +50,8 @@
     </a>
     -->
     </ion-item>
-
+<div class="main-position-center">
+    <div class="position-center width-100">
     <div class="block-user-level">
         <div class="block-circle user-level-1">
             <ion-item no-lines class="user-ava-name overflow-visible">
@@ -58,20 +76,21 @@
             </div>
 
             <div class="box box1">
-                <div class="label-point circle-label-top">10 000</div>
+                <div class="label-point circle-label-top">100</div>
                 <div class="next-level">
-                    <span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ user.level }}
-                    </span>
+                    <ion-icon name="checkmark"></ion-icon>
+                    <!--<span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ user.level }}
+                    </span>-->
                 </div>
             </div>
 
             <div class="box box3">
-                <div class="label-point circle-label-left">7 500</div>
+                <div class="label-point circle-label-left">75</div>
             </div>
 
             <div class="box box2">
-                <div class="label-point circle-label-right">2 500</div>
-                <div class="label-point circle-label-bottom">5 000</div>
+                <div class="label-point circle-label-right">25</div>
+                <div class="label-point circle-label-bottom">50</div>
             </div>
         </div>
     </div>
@@ -113,7 +132,7 @@
         </ion-row>
     </ion-grid> -->
 
-    <ion-grid text-center padding-bottom class="block-icon-bottom">
+    <ion-grid text-center class="block-icon-bottom">
     <!-- <ion-grid text-center padding-top padding-bottom class="block-icon-bottom"> -->
         <ion-row>
             <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
@@ -164,5 +183,6 @@
             {{ 'PAGE_USER-PROFILE.LOGOUT' | translate }}
         </button>
     </p>
-
+    </div>
+</div>
 </ion-content>
