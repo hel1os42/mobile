@@ -169,17 +169,17 @@
         no-lines class="item-block-nau margin-top-10 block-featured">
         <a
             *ngFor="let offer of featuredOffers"
-            (click)="openPlace(offer?.owner.place, false, offer)"
+            (click)="openPlace(offer?.place, false, offer)"
             ion-item
             detail-none>
             <ion-avatar item-start text-center class="relative">
                 <div
                     class="thumb_image"
-                    [ngStyle]="{'background-image': 'url(' + offer?.owner.place.picture_url + '?size=mobile&)'}">
+                    [ngStyle]="{'background-image': 'url(' + offer?.place.picture_url + '?size=mobile&)'}">
                 </div>
                 <div class="info-block" text-left>
                     <div>
-                        <ng-container *ngFor="let showStar of getStars(offer?.owner.place.stars)">
+                        <ng-container *ngFor="let showStar of getStars(offer?.place.stars)">
                             <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
                         </ng-container>
                     </div>
@@ -193,7 +193,7 @@
                     <div class="margin-top-1vw">
                         <img src="assets/img/user_home/icon_small_user.svg">
                         <span class="font-75 text-828282">
-                        {{ offer?.owner.place.redemptions_count !== undefined ? offer?.owner.place.redemptions_count : offer?.owner.place.testimonials_count }}
+                        {{ offer?.place.redemptions_count !== undefined ? offer?.place.redemptions_count : offer?.place.testimonials_count }}
                         </span>
                     </div>
                 </div>
