@@ -71,12 +71,12 @@ page-onboarding {
     }
 
     .onboarding-desc{
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: 5%;
+        padding-right: 5%;
     }
 
     .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets {
-        bottom: 23vw;
+        bottom: 5vh;
     }
 
     .pic{
@@ -98,6 +98,30 @@ page-onboarding {
 
     .swiper-slide{
         display: block;
+    }
+
+    .skip{
+        position: absolute;
+        bottom: 5.4vh;
+        right: 5%;
+        height: auto;
+        display: inline;
+    }
+
+    .title-big-sign {
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.7;
+        font-size: 5.5vw;
+        color: #fff;
+        font-family: 'OpenSansNauLight';
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .swiper-pagination-bullet {
+        width: 1.5vh;
+        height: 1.5vh;
     }
 }
 

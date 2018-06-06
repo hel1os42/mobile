@@ -386,9 +386,9 @@
     },
 
     "PAGE_ONBOARDING" : {
-        "WELCOME" : "SAVE RIGHT HERE. RIGHT NAU",
-        "MAKE_PROFIT" : "MAKE PROFIT BY HELPING OTHERS SAVE",
-        "NAU_COINS" : "GET INSTANT REWARDS AND FREE STUFF",
+        "WELCOME" : "SAVE RIGHT HERE.<br> RIGHT NAU.",
+        "MAKE_PROFIT" : "MAKE PROFIT BY HELPING <br> OTHERS SAVE",
+        "NAU_COINS" : "GET INSTANT REWARDS <br> AND FREE STUFF",
         "FOR_BUSINESS" : "For business",
         "ENJOY" : "Enjoy!",
         "ENJOY_THE_MOST" : "Soon as you login, you can start saving. Instantly with no need to purchase any coupons or try to locate something that's not miles away. Only the best special offers, including discounts, BOGO and even free stuff if you are willing to bring a couple of friends!",
