@@ -342,19 +342,25 @@ page-places {
     }
 
     .block-featured .right-top-angle.discount{
-        background-image: url(../assets/img/splash_screen/tab-icon1.svg);
+        background-image: url(../assets/img/place/featured/discount.svg);
     }
 
     .block-featured .right-top-angle.second_free{
-        background-image: url(../assets/img/splash_screen/tab-icon2.svg);
+        background-image: url(../assets/img/place/featured/discount.svg);
     }
 
     .block-featured .right-top-angle.bonus{
-        background-image: url(../assets/img/splash_screen/tab-icon3.svg);
+        background-image: url(../assets/img/place/featured/discount.svg);
     }
 
     .block-featured .right-top-angle.gift{
-        background-image: url(../assets/img/splash_screen/tab-icon4.svg);
+        background-image: url(../assets/img/place/featured/gift.svg);
+    }
+
+    .block-featured .star_right {
+        right: 2vw;
+        top: inherit;
+        bottom: 3vw;
     }
 }
 
