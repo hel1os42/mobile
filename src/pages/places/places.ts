@@ -424,7 +424,7 @@ export class PlacesPage {
         if (this.shareData) {
             this.openPlace(this.shareData, true)
         }
-        this.getCompaniesList();
+        this.getList();
     }
 
     getCoords(isRefresh?: boolean) {
@@ -444,18 +444,23 @@ export class PlacesPage {
         return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
 
-    getCompaniesList() {
-        this.addMap();
-        this.loadCompanies(true, this.page);
-        this.userPin = [marker([this.userCoords.lat, this.userCoords.lng], {
-            icon: icon({
-                iconSize: [40, 50],
-                iconAnchor: [20, 50],
-                // iconUrl: 'assets/img/icon_user_map.svg',
-                iconUrl: 'assets/img/user_home/pin_user.svg',
-                //shadowUrl:
-            })
-        })]
+    getList() {
+        if (this.isFeatured) {
+            this.loadFeaturedOffers();
+        }
+        else {
+            this.addMap();
+            this.loadCompanies(true, this.page);
+            this.userPin = [marker([this.userCoords.lat, this.userCoords.lng], {
+                icon: icon({
+                    iconSize: [40, 50],
+                    iconAnchor: [20, 50],
+                    // iconUrl: 'assets/img/icon_user_map.svg',
+                    iconUrl: 'assets/img/user_home/pin_user.svg',
+                    //shadowUrl:
+                })
+            })]
+        }
     }
 
     addMap() {
@@ -591,19 +596,35 @@ export class PlacesPage {
         // this.content.scrollToTop();
         this.isFeatured = true;
         this.content.resize();
+        this.loadFeaturedOffers();
+    }
+
+    loadFeaturedOffers() {
         let radius = 19849 * 1000; //temporary
-        this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage)
+        this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage, !this.isRefreshLoading)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
                 this.lastFeaturedPage = resp.last_page;
 
+                this.isRefreshLoading = false;
+                if (this.refresher) {
+                    this.refresher.complete();
+                    this.refresher = undefined;
+                }
                 // temporary mock
                 this.featuredOffers.forEach(offer => {
                     offer.owner = {};
                     offer.owner.place = MockPlace.place;
                     // 
                 });
-            });
+            },
+                err => {
+                    this.isRefreshLoading = false;
+                    if (this.refresher) {
+                        this.refresher.complete();
+                        this.refresher = undefined;
+                    }
+                });
     }
 
     loadCompanies(isHandler: boolean, page, isNoBounds?: boolean) {
@@ -922,18 +943,18 @@ export class PlacesPage {
         let page: number;
         let lastPage: number;
         if (this.isFeatured) {
-            page = ++ this.featuredPage;
+            page = ++this.featuredPage;
             lastPage = this.lastFeaturedPage;
         }
         else {
-            page = ++ this.page;
+            page = ++this.page;
             lastPage = this.lastPage;
         }
         if (page <= lastPage) {
             setTimeout(() => {
                 if (this.isFeatured) {
                     let radius = 19849 * 1000; //temporary
-                    this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage)
+                    this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage, this.page == 1)
                         .subscribe(resp => {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
@@ -970,7 +991,12 @@ export class PlacesPage {
     }
 
     doRefresh(refresher) {
-        this.page = 1;
+        if (this.isFeatured) {
+            this.featuredPage = 1;
+        }
+        else {
+            this.page = 1;
+        }
         // this.isRevertCoords = true;
         this.isRefreshLoading = true;
         this.getLocation(false, true);
