@@ -405,15 +405,15 @@
         "ABOUT" : "About",
         "REDEEM_NOW" : "redeem now",
         "ADD_YOUR_FEEDBACK" : "Add your feedback",
-        "LIMITATION_1": "Limitation message 1",
-        "LIMITATION_2": "Limitation message 2",
-        "LIMITATION_4": "Limitation message 4",
-        "LIMITATION_8": "Limitation message 8",
-        "LIMITATION_16": "Limitation message 16",
-        "LIMITATION_32": "Limitation message 32",
-        "LIMITATION_64": "Limitation message 64",
-        "LIMITATION_128": "Limitation message 128",
-        "LIMITATION_256": "Limitation message 256"
+        "LIMITATION_1": "Sorry, this offer has reached its maximum redemptions limit.",
+        "LIMITATION_2": "Sorry, this offer has reached its maximum daily redemptions limit.",
+        "LIMITATION_4": "Sorry, you have reached this offer redemptions limit.",
+        "LIMITATION_8": "Sorry, you have reached this offer daily redemptions limit.",
+        "LIMITATION_16": "Sorry, you have reached this offer weekly redemptions limit.",
+        "LIMITATION_32": "Sorry, you have reached this offer monthly redemptions limit.",
+        "LIMITATION_64": "Sorry, your user level is lower than this offer requires.",
+        "LIMITATION_128": "Sorry, you don't have enough Friends Points to redeem this offer.",
+        "LIMITATION_256": "Sorry, you don't have enough Redemptions Points to redeem this offer."
     },
 
     "PAGE_PLACE-FEEDBACK" : {
