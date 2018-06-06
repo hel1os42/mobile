@@ -566,7 +566,12 @@ export class PlacesPage {
         return this.selectedCategory && this.selectedCategory.id === category.id && !this.isFeatured;
     }
 
+    isInfiniteScroll() {
+        return !this.isMapVisible && (this.isFeatured ? this.featuredPage <= this.lastFeaturedPage : this.page <= this.lastPage);
+    }
+
     selectCategory(category: OfferCategory) {
+        // this.content.scrollToTop();
         if (this.isFeatured) {
             this.isFeatured = false;
             this.content.resize();
@@ -583,6 +588,7 @@ export class PlacesPage {
     }
 
     getFeatured() {
+        // this.content.scrollToTop();
         this.isFeatured = true;
         this.content.resize();
         let radius = 19849 * 1000; //temporary

@@ -26,6 +26,7 @@ export class OfferService {
         // return this.api.get(`offers`, {
         // return this.api.get(`offers?category_ids[]=aea58d61-5ad5-4f79-9a2c-819245f56696`, {// temporary to remove category
         return this.api.get(`offers?category_ids[]=382b8e95-9083-4095-a928-ee9178ee6275`, {// prod mock
+            showLoading: page == 1,
             params: {
                 latitude: lat,
                 longitude: lng,

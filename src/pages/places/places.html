@@ -224,7 +224,7 @@
     </div>
 
     <ion-infinite-scroll 
-        *ngIf="!isMapVisible && ((page <= lastPage && !isFeatured) || (featuredPage <= lastFeaturedPage && isFeatured))" 
+        *ngIf="isInfiniteScroll()" 
         (ionInfinite)="infiniteScroll($event)"
         threshold="5px">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_PLACES.LOADING_COMPANIES' | translate }}"></ion-infinite-scroll-content>
