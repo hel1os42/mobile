@@ -17,10 +17,10 @@ import { UserProfilePage } from '../user-profile/user-profile';
 export class TabsPage {
 
     tab1Root = PlacesPage;
-    tab2Root = BookmarksPage;
-    tab3Root = NotificationsPage;
+    tab2Root = InvitePage;
+    // tab3Root = NotificationsPage;
+    tab3Root = BookmarksPage;
     tab4Root = UserProfilePage;
-    tab5Root = InvitePage;
     
     selectedTabIndex = 0;
     nauParams;//temporary
