@@ -151,7 +151,7 @@
                 <ion-segment-button value="about">
                     {{ 'PAGE_PLACE.ABOUT' | translate }}
                 </ion-segment-button>
-<!-- 
+<!--
                 <ion-segment-button value="testimonials">
                     {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
                 </ion-segment-button> -->
@@ -159,12 +159,12 @@
 
     <div padding>
     <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-        <a 
-            (tap)="openOffer(offer)" 
-            *ngFor=" let offer of offersList" 
+        <a
+            (tap)="openOffer(offer)"
+            *ngFor=" let offer of offersList"
             [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-            ion-item 
-            detail-none 
+            ion-item
+            detail-none
             class="relative">
             <ion-avatar item-start>
                 <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
@@ -177,6 +177,7 @@
             </div>
       <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
       <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
+      <img class="featured_right" src="assets/img/splash_screen/tab-icon6_active.svg">
       <div class="margin-top-2vw flex">
         <!--
         <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
