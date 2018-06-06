@@ -27,6 +27,7 @@ import { TestimonialPopover } from './testimonial.popover';
 import { MockTestimonials } from '../../mocks/mockTestimonials';
 import { LimitationPopover } from '../place/limitation.popover';
 import { NoticePopover } from '../offer/notice.popover';
+import { User } from '../../models/user';
 
 declare var window;
 
@@ -51,6 +52,8 @@ export class PlacePage {
     envName: string;//temporary
     companyTestimonials: Testimonial[];
     onRefreshCompany: Subscription;
+    onRefreshUser: Subscription;
+    user: User;
 
     constructor(
         private nav: NavController,
@@ -73,6 +76,11 @@ export class PlacePage {
         this.envName = this.appMode.getEnvironmentMode();//temporary
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
+        this.user = this.navParams.get('user');
+        if (!this.user) {
+            this.profile.get(true, false)
+                .subscribe(user => this.user = user)
+        }
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
             this.offersList = this.company.offers;
@@ -138,6 +146,9 @@ export class PlacePage {
                 this.features = _.uniqBy(company.specialities, 'slug');
                 this.getTestimonials();
             });
+
+        this.onRefreshUser = this.profile.onRefresh
+            .subscribe(user => this.user = user)
     }
 
     // ionSelected() {
@@ -182,46 +193,48 @@ export class PlacePage {
 
     sharePlace() {
         const Branch = window['Branch'];
-        this.profile.get(false)
-            .subscribe(profile => {
-                let properties = {
-                    canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}`,
-                    canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}`,
-                    title: this.company.name,
-                    contentDescription: this.company.description,
-                    contentImageUrl: this.company.cover_url + '?size=mobile',
-                    // price: 12.12,
-                    // currency: 'GBD',
-                    contentIndexingMode: 'private',
-                    contentMetadata: {
-                        page: 'place',
-                        invite_code: profile.invite_code,
-                        placeId: this.company.id,
-                    }
-                };
-                var branchUniversalObj = null;
-                Branch.createBranchUniversalObject(properties)
-                    .then(res => {
-                        branchUniversalObj = res;
-                        let analytics = {};
-                        // let message = this.company.name + this.company.description
-                        let message = 'NAU';
-                        branchUniversalObj.showShareSheet(analytics, properties, message)
-                            .then(resp => console.log(resp))
-                    })
-                    .catch(function (err) {
-                        console.log('Branch create obj error: ' + JSON.stringify(err))
-                    })
-
+        let properties = {
+            canonicalIdentifier: `?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
+            canonicalUrl: `${this.branchDomain}/?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
+            title: this.company.name,
+            contentDescription: this.company.description,
+            contentImageUrl: this.company.cover_url + '?size=mobile',
+            // price: 12.12,
+            // currency: 'GBD',
+            contentIndexingMode: 'private',
+            contentMetadata: {
+                page: 'place',
+                invite_code: this.user.invite_code,
+                placeId: this.company.id,
+            }
+        };
+        var branchUniversalObj = null;
+        Branch.createBranchUniversalObject(properties)
+            .then(res => {
+                branchUniversalObj = res;
+                let analytics = {};
+                // let message = this.company.name + this.company.description
+                let message = 'NAU';
+                branchUniversalObj.showShareSheet(analytics, properties, message)
+                    .then(resp => console.log(resp))
+            })
+            .catch(function (err) {
+                console.log('Branch create obj error: ' + JSON.stringify(err))
             })
     }
 
     openOffer(offer: Offer, company?) {
         if (!offer.redemption_access_code || company) {
-          
+            //temporary
+            // this.user.redemption_points = 10;
+            // this.user.referral_points = 11;
+            // offer.is_featured = true;
+            // offer.redemption_points_price = 5;
+            // offer.referral_points_price = 6
+            //
             if (offer.is_featured && (offer.redemption_points_price || offer.referral_points_price)) {
-            let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer });
-            noticePopover.present();
+                let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer, user: this.user });
+                noticePopover.present();
             }
             this.analytics.trackEvent("Session", 'event_chooseoffer');
             this.nav.push(OfferPage, {
@@ -325,6 +338,7 @@ export class PlacePage {
         this.onRefreshFavorites.unsubscribe();
         this.onRefreshTestimonials.unsubscribe();
         this.onRefreshCompany.unsubscribe();
+        this.onRefreshUser.unsubscribe();
         //
         let nav: any = this.nav;
         let root = nav.root;
