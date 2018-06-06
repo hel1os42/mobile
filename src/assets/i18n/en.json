@@ -48,7 +48,10 @@
         "PLEASE_INFORM": "Please inform the retailer you want to redeem a coupon in advance. While NAU is still a new thing for the retailers, some of the staff may be unaware of it. In this case please call the manager.",
         "IF_THE_PROBLEM": "If the problem persists, contact us at",
         "SO_THAT": "so that we can fix the issue as soon as possible.",
-        "GOT_IT": "Got it!"
+        "GOT_IT": "Got it!",
+        "FRIENDS_POINTS": "To redeem this offer, you will use referral_points_price Friends Points out of referral_points you currently have. Each new friend will bring you more Friends Points, so don't hesitate to invite them right now!",
+        "REDEMPTIONS_POINTS": "To redeem this offer, you will use redemption_points_price Redemptions Points out of redemption_points you currently have. You can get more Redemptions Points right now if you redeem any offers across the app!",
+        "FRIENDS_AND_REDEMPTIONS_POINTS": "To redeem this offer, you will use referral_points_price Friends Points out of referral_points and redemption_points_price Redemptions Points out of redemption_points you currently have. Get more points by inviting friends and redeeming offers across the app!"
     },
 
     "UNIT" : {

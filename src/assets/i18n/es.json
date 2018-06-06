@@ -48,7 +48,10 @@
         "PLEASE_INFORM": "Le pedimos amablemente que informe al representante de la tienda por adelantado sobre su intencion de usar el cupon NAU. Seguimos siendo novatos para muchos, por lo que algunos personal pueden no estar listos. En este caso le recomendamos que se contacte con el administrador de la establecimiento.",
         "IF_THE_PROBLEM": "Siempre que el problema persiste contactenos en la direccion",
         "SO_THAT": "﻿para la correcion de la situacion mas rapida.",
-        "GOT_IT": "﻿Continuar"
+        "GOT_IT": "﻿Continuar",
+        "FRIENDS_POINTS": "Para redimir esta oferta, usarás referral_points_price puntos de amigos aparte de los referral_points que tienes actualmente. Cada nuevo amigo te traerá más puntos de amigos, entoncen no vaciles en invitarlos ahora mismo!",
+        "REDEMPTIONS_POINTS": "Para redimir esta oferta, usarás redemption_points_price puntos de redención aparte de los redemption_points que tienes actualmente. Puedes obtener mas puntos de redención ahora mismo si redimes cualquier oferta en la app!",
+        "FRIENDS_AND_REDEMPTIONS_POINTS": "Para redimir esta oferta, usarás referral_points_price puntos de amigos aparte de los referral_points y redemption_points_price puntos de redención aparte de los redemption_points que tienes actualmente. Obten más puntos invitando amigos y redimiendo ofertas en la app!"
     },
 
     "UNIT" : {
