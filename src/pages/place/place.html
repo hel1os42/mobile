@@ -158,17 +158,23 @@
             </ion-segment>
 
     <div padding>
-      <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-        <a ion-item detail-none (tap)="openOffer(offer)" *ngFor=" let offer of offersList" class="relative">
-          <ion-avatar item-start>
-            <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
-          <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
-      </ion-avatar>
-        <div class="smooth_transition width-88">
-            <div class="scroll_content">
-                <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
+    <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
+        <a 
+            (tap)="openOffer(offer)" 
+            *ngFor=" let offer of offersList" 
+            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+            ion-item 
+            detail-none 
+            class="relative">
+            <ion-avatar item-start>
+                <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
+                <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
+            </ion-avatar>
+            <div class="smooth_transition width-88">
+                <div class="scroll_content">
+                    <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
+                </div>
             </div>
-        </div>
       <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
       <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
       <div class="margin-top-2vw flex">

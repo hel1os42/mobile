@@ -25,6 +25,7 @@ import { OfferPage } from '../offer/offer';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
 import { MockTestimonials } from '../../mocks/mockTestimonials';
+import { LimitationPopover } from '../place/limitation.popover';
 
 declare var window;
 
@@ -44,10 +45,11 @@ export class PlacePage {
     page: string;
     testimonialsPage = 1;
     testimonialsLastPage: number;
-    onRefreshCompany: Subscription;
+    onRefreshFavorites: Subscription;
     onRefreshTestimonials: Subscription;
     envName: string;//temporary
     companyTestimonials: Testimonial[];
+    onRefreshCompany: Subscription;
 
     constructor(
         private nav: NavController,
@@ -105,7 +107,7 @@ export class PlacePage {
                 })
         }
 
-        this.onRefreshCompany = this.favorites.onRefreshOffers
+        this.onRefreshFavorites = this.favorites.onRefreshOffers
             .subscribe((resp) => {
                 this.offersList.forEach(offer => {
                     if (offer.id === resp.id) {
@@ -125,6 +127,15 @@ export class PlacePage {
                     // }
                     // this.company.testimonials_count = this.company.testimonials_count + 1;
                 }
+            });
+
+        this.onRefreshCompany = this.offers.onRefreshPlace
+            .subscribe(company => {
+                this.company = company;
+                this.offersList = company.offers;
+                // this.features = this.company.specialities;
+                this.features = _.uniqBy(company.specialities, 'slug');
+                this.getTestimonials();
             });
     }
 
@@ -204,14 +215,23 @@ export class PlacePage {
             })
     }
 
-    openOffer(offer, company?) {
-        this.analytics.trackEvent("Session", 'event_chooseoffer');
-        this.nav.push(OfferPage, {
-            offer: offer,
-            company: this.company,
-            distanceObj: this.getDistance(offer.latitude, offer.longitude),
-            coords: this.coords
-        });
+    openOffer(offer: Offer, company?) {
+        // offer.redemption_access_code = 64; //temporary mock
+        // offer.redemption_access_code = 0; //temporary mock
+        if (!offer.redemption_access_code || company) {
+            this.analytics.trackEvent("Session", 'event_chooseoffer');
+            this.nav.push(OfferPage, {
+                offer: offer,
+                company: this.company,
+                distanceObj: this.getDistance(offer.latitude, offer.longitude),
+                coords: this.coords
+            });
+        }
+        else {
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer });
+            limitationPopover.present();
+        }
+
     }
 
     removeFavorite() {
@@ -298,8 +318,9 @@ export class PlacePage {
     }
 
     ngOnDestroy() {
-        this.onRefreshCompany.unsubscribe();
+        this.onRefreshFavorites.unsubscribe();
         this.onRefreshTestimonials.unsubscribe();
+        this.onRefreshCompany.unsubscribe();
         //
         let nav: any = this.nav;
         let root = nav.root;

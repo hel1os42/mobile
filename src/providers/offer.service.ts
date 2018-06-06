@@ -1,6 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ApiService } from './api.service';
 import { RedeemedOffer } from '../models/redeemedOffer';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { AnalyticsService } from './analytics.service';
+import { ProfileService } from './profile.service';
+import { Place } from '../models/place';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
@@ -8,9 +12,13 @@ import { RedeemedOffer } from '../models/redeemedOffer';
 export class OfferService {
 
     onRefreshRedeemedOffers: EventEmitter<RedeemedOffer[]> = new EventEmitter();
+    onRefreshPlace: EventEmitter<Place> = new EventEmitter();
 
     constructor(
-        private api: ApiService) { }
+        private api: ApiService,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
+        private profile: ProfileService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
@@ -103,8 +111,8 @@ export class OfferService {
         });
     }
 
-    getPlace(place_id: string) {
-        return this.api.get(`places/${place_id}?with=offers;specialities`);
+    getPlace(place_id: string, noLoading?: boolean) {
+        return this.api.get(`places/${place_id}?with=offers;specialities`, { showLoading: !noLoading });
     }
 
     getPlaceOffers(place_id) {
@@ -140,8 +148,20 @@ export class OfferService {
         return this.api.get(`offers/${offer_id}/activation_code`);
     }
 
-    getRedemtionStatus(code: string) {
-        return this.api.get(`activation_codes/${code}`, { showLoading: false, ignoreHttpNotFound: true });
+    getRedemptionStatus(code: string) {
+        let obs = this.api.get(`activation_codes/${code}`, {
+            showLoading: false,
+            ignoreHttpNotFound: true
+        });
+        obs.subscribe((offerRedemtionStatus) => {
+            if (offerRedemtionStatus.redemption_id) {
+                this.profile.refreshAccounts();
+                this.refreshRedeemedOffers();
+                this.gAnalytics.trackEvent("Session", 'event_redeemoffer');
+                this.analytics.faLogEvent('event_redeemoffer');
+            }
+        });
+        return obs;
     }
 
     getLink(endpoint: string) {
@@ -171,5 +191,12 @@ export class OfferService {
             .subscribe(resp => {
                 this.onRefreshRedeemedOffers.emit(resp);
             })
+    }
+
+    refreshPlace(placeId) {
+        this.getPlace(placeId, true)
+        .subscribe(resp => {
+            this.onRefreshPlace.emit(resp);
+        })
     }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, NavController, Platform } from 'ionic-angular';
+import { LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -12,6 +12,8 @@ import { TestimonialsService } from '../../providers/testimonials.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlacePage } from '../place/place';
+import { OfferService } from '../../providers/offer.service';
+import { LimitationPopover } from '../place/limitation.popover';
 
 @Component({
     selector: 'page-bookmarks',
@@ -35,6 +37,7 @@ export class BookmarksPage {
     isForkMode: boolean;
     onRefreshTestimonials: Subscription;
     onRefreshCoords: Subscription;
+    onRefreshCompany: Subscription;
     loadingLocation;
 
     constructor(
@@ -44,7 +47,9 @@ export class BookmarksPage {
         private appMode: AppModeService,
         private testimonials: TestimonialsService,
         private platform: Platform,
-        private loading: LoadingController) {
+        private loading: LoadingController,
+        private offerService: OfferService,
+        private popoverCtrl: PopoverController) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -87,6 +92,19 @@ export class BookmarksPage {
                 }
             });
 
+        this.onRefreshCompany = this.offerService.onRefreshPlace
+            .subscribe(data => {
+                if (data.offers && data.offers.length > 0) {
+                    this.offers.forEach(offer => {
+                        data.offers.forEach(refreshedOffer => {
+                            if (offer.id === refreshedOffer.id) {
+                                offer = _.extend(offer, refreshedOffer);
+                            }
+                        })
+                    });
+                }
+
+            });
     }
 
     getPlacesList() {
@@ -231,7 +249,7 @@ export class BookmarksPage {
                 key: undefined
             }
         }
-        
+
     }
 
     openPlace(data) {
@@ -247,14 +265,20 @@ export class BookmarksPage {
     }
 
     openOffer(offer) {
-        let offerData = _.clone(offer);
-        offerData.is_favorite = true;
-        this.nav.push(OfferPage, {
-            offer: offerData,
-            distanceObj: this.getDistance(offer.latitude, offer.longitude),
-            coords: this.coords,
-            company: offer.account.owner.place
-        });
+        if (!offer.redemption_access_code) {
+            let offerData = _.clone(offer);
+            offerData.is_favorite = true;
+            this.nav.push(OfferPage, {
+                offer: offerData,
+                distanceObj: this.getDistance(offer.latitude, offer.longitude),
+                coords: this.coords,
+                company: offer.account.owner.place
+            });
+        }
+        else {
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer });
+            limitationPopover.present();
+        }
     }
 
     getTotal() {
@@ -294,6 +318,7 @@ export class BookmarksPage {
         this.onRefreshCompanies.unsubscribe();
         this.onRefreshOffers.unsubscribe();
         this.onRefreshTestimonials.unsubscribe();
+        this.onRefreshCompany.unsubscribe();
     }
 
 

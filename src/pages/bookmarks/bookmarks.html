@@ -58,7 +58,7 @@
                     <span class="font-75 text-828282">
                         {{ company.redemptions_count !== undefined ? company.redemptions_count : company.testimonials_count }}
                     </span>
-                    <ng-container 
+                    <ng-container
                         *ngIf="getDistance(company.latitude, company.longitude) && getDistance(company.latitude, company.longitude).distance">
                         <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                         <span  class="font-75 text-828282">
@@ -111,11 +111,14 @@
     <!-- OFFERS -->
     <ion-list padding-left padding-right *ngIf="segment === 'offers'" margin-top no-lines class="item-block-nau">
         <ion-item-sliding *ngFor=" let offer of offers" class="relative">
-        <ion-item (click)="openOffer(offer)" class="margin-no">
+        <ion-item
+            (click)="openOffer(offer)"
+            class="margin-no"
+            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }">
             <ion-avatar item-start>
                 <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
-                <div 
-                    class="thumb_image" 
+                <div
+                    class="thumb_image"
                     [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
                 </div>
             </ion-avatar>

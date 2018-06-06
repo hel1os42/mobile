@@ -404,7 +404,16 @@
         "TESTIMONIALS" : "Отзывы",
         "ABOUT" : "Подробнее",
         "REDEEM_NOW" : "Использовать",
-        "ADD_YOUR_FEEDBACK" : "Добавьте отзыв"
+        "ADD_YOUR_FEEDBACK" : "Добавьте отзыв",
+        "LIMITATION_1": "Limitation message 1",
+        "LIMITATION_2": "Limitation message 2",
+        "LIMITATION_4": "Limitation message 4",
+        "LIMITATION_8": "Limitation message 8",
+        "LIMITATION_16": "Limitation message 16",
+        "LIMITATION_32": "Limitation message 32",
+        "LIMITATION_64": "Limitation message 64",
+        "LIMITATION_128": "Limitation message 128",
+        "LIMITATION_256": "Limitation message 256"
     },
 
     "PAGE_PLACE-FEEDBACK" : {
