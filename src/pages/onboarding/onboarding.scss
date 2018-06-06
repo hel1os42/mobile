@@ -17,7 +17,7 @@ page-onboarding {
 
     .title-big-sign{
         color: #fff;
-        margin-bottom: 9vw;
+        margin-bottom: 1vw;
     }
 
     .skip{
@@ -43,7 +43,8 @@ page-onboarding {
 
     .slide-title-img{
         height: 11vw;
-        margin-bottom: 23vw;
+        margin-bottom: 2vh;
+        margin-top: 7vh;
         background: url(../assets/img/logo_intro.svg) no-repeat 50% 50%/contain;
     }
 
@@ -70,12 +71,33 @@ page-onboarding {
     }
 
     .onboarding-desc{
-        padding-left: 15%;
-        padding-right: 15%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
 
     .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets {
         bottom: 23vw;
+    }
+
+    .pic{
+        height: 48vh;
+        width: 100%;
+    }
+
+    .slide1 .pic{
+        background: url("../assets/img/onboarding/pic1.png") no-repeat 100% 50%/95% auto;
+    }
+
+    .slide2 .pic{
+        background: url("../assets/img/onboarding/pic2.png") no-repeat 50% 50%/90% auto;
+    }
+
+    .slide3 .pic{
+        background: url("../assets/img/onboarding/pic3.png") no-repeat 50% 50%/100% auto;
+    }
+
+    .swiper-slide{
+        display: block;
     }
 }
 
