@@ -326,9 +326,9 @@
         "INVITATION" : "Invitation",
         "PLEASE_ASK" : "Please ask your friend again",
         "INVITE_FRIENDS" : "Invite friends",
-        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
+        "NAU_IS_THE_ONLY" : "Help your friends save - that's profitable! Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
         "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them.",
-        "SHARE_YOUR_INVITE_LINK" : "Share your invite link"
+        "SHARE_YOUR_INVITE_LINK" : "Share your invite link:"
     },
 
     "PAGE_LOGIN" : {
@@ -342,7 +342,7 @@
         "SECONDS" : "seconds",
         "SECONDS2" : "seconds",
         "SECOND" : "second",
-        "BY_PRESSING" : "By pressing «Get SMS», I accept"
+        "BY_PRESSING" : "By pressing \"SIGN IN\", I accept"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -462,7 +462,7 @@
         "YOUR_PHONE" : "Your phone number is required to sign up",
         "YOUR_INVITE" : "Your invite code",
         "NEXT" : "Get sms",
-        "BY_PRESSING" : "By pressing «Get SMS», I accept",
+        "BY_PRESSING" : "By pressing \"SIGN IN\", I accept",
         "TERMS_AND_CONDITIONS" : "Terms and conditions",
         "AND" : "and",
         "PRIVACY_POLICY" : "privacy policy",

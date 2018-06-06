@@ -328,7 +328,7 @@
         "INVITE_FRIENDS" : "Invitar a los amigos",
         "NAU_IS_THE_ONLY" : "Ayuda tus amigos-es resulta beneficioso. Inviten a sus amigos a instalar NAU, y obtenga el 95% de las contribuciones de los anunciantes por cada pago de cupon realizado por tus seguidores. ",
         "A_LIFETIME" : "95% de la remuneracion se le calculan a usted. Y tus amigos aun usan NAU 100% gratuitamente.",
-        "SHARE_YOUR_INVITE_LINK" : "Comparte tu enlace personal"
+        "SHARE_YOUR_INVITE_LINK" : "Comparte tu enlace personal:"
     },
 
     "PAGE_LOGIN" : {
@@ -342,7 +342,7 @@
         "SECONDS" : "segundos",
         "SECONDS2" : "segundos",
         "SECOND" : "segundo",
-        "BY_PRESSING" : "Presionando «Obtener SMS», yo estoy de acuerdo"
+        "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -462,7 +462,7 @@
         "YOUR_PHONE" : "Se requiere tu número de teléfono para registrarte",
         "YOUR_INVITE" : "Tu código de invitación",
         "NEXT" : "Obtener SMS",
-        "BY_PRESSING" : "Presionando «Obtener SMS», yo estoy de acuerdo",
+        "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo",
         "TERMS_AND_CONDITIONS" : "Términos y Condiciones",
         "AND" : "y",
         "PRIVACY_POLICY" : "política de privacidad",
