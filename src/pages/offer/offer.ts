@@ -250,6 +250,12 @@ export class OfferPage {
                                         offerCongratulationPopover.present();
                                         offerCongratulationPopover.onDidDismiss(() => {
                                             this.offers.refreshPlace(this.company.id);
+                                            if (this.offer.is_featured) {
+                                                this.offers.refreshFeaturedOffers(this.coords.lat, this.coords.lng);
+                                                if (this.offer.redemption_points_price || this.offer.referral_points_price) {
+                                                    this.profile.get(true, false); // for refresh user profile
+                                                }
+                                            }
                                         });
                                     }
                                 });

@@ -13,6 +13,9 @@ export class OfferService {
 
     onRefreshRedeemedOffers: EventEmitter<RedeemedOffer[]> = new EventEmitter();
     onRefreshPlace: EventEmitter<Place> = new EventEmitter();
+    onRefreshFeaturedOffers: EventEmitter<any> = new EventEmitter();
+
+    MAX_RADIUS = 19849 * 1000;// temporary
 
     constructor(
         private api: ApiService,
@@ -28,7 +31,7 @@ export class OfferService {
         // category_ids: string,
         lat: number,
         lng: number,
-        radius: number,
+        // radius: number,
         page: number,
         showLoading: boolean
     ) {
@@ -39,7 +42,7 @@ export class OfferService {
             params: {
                 latitude: lat,
                 longitude: lng,
-                radius: radius,
+                radius: this.MAX_RADIUS,
                 // with: 'account.owner.place',
                 page: page
             }
@@ -190,6 +193,13 @@ export class OfferService {
         this.getRedeemedOffers()
             .subscribe(resp => {
                 this.onRefreshRedeemedOffers.emit(resp);
+            })
+    }
+
+    refreshFeaturedOffers(lat, lng) {
+        this.getList(lat, lng, 1, false)
+            .subscribe(resp => {
+                this.onRefreshFeaturedOffers.emit(resp.data);
             })
     }
 

@@ -33,6 +33,8 @@ import { MapUtils } from '../../utils/map.utils';
 import { AnalyticsService } from '../../providers/analytics.service';
 import { Offer } from '../../models/offer';
 import { MockPlace } from '../../mocks/mockPlace';
+import { LimitationPopover } from '../place/limitation.popover';
+import { User } from '../../models/user';
 
 @Component({
     selector: 'page-places',
@@ -77,6 +79,8 @@ export class PlacesPage {
     onRefreshListSubscription: Subscription;
     onRefreshTestimonials: Subscription;
     onRefreshDefoultCoords: Subscription;
+    onRefreshFeaturedOffers: Subscription;
+    onRefreshUser: Subscription;
     isConfirm = false;
     shareData: Share;
     isRefreshLoading = false;
@@ -92,6 +96,7 @@ export class PlacesPage {
     featuredOffers: Offer[];
     featuredPage = 1;
     lastFeaturedPage: number;
+    user: User;
 
     constructor(
         private platform: Platform,
@@ -179,6 +184,16 @@ export class PlacesPage {
                     });
                 }
             });
+
+        this.onRefreshFeaturedOffers = this.offers.onRefreshFeaturedOffers
+            .subscribe(resp => {
+                this.featuredOffers = resp.data;
+                this.featuredPage = 1;
+                this.lastFeaturedPage = resp.last_page;
+            })
+
+        this.onRefreshUser = this.profile.onRefresh
+            .subscribe(user => this.user = user)
 
         this.onRefreshDefoultCoords = this.location.onProfileCoordsChanged
             .subscribe(coords => {
@@ -592,15 +607,23 @@ export class PlacesPage {
     }
 
     getFeatured() {
-        // this.content.scrollToTop();
         this.isFeatured = true;
         this.content.resize();
-        this.loadFeaturedOffers();
+        if (!this.user) {
+            this.profile.get(true, false)
+                .subscribe(user => {
+                    this.user = user;
+                    this.loadFeaturedOffers();
+                })
+        }
+        else {
+            this.loadFeaturedOffers();
+        }
     }
 
     loadFeaturedOffers() {
-        let radius = 19849 * 1000; //temporary
-        this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage, !this.isRefreshLoading)
+        //let radius = 19849 * 1000; 
+        this.offers.getList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
                 this.lastFeaturedPage = resp.last_page;
@@ -767,10 +790,13 @@ export class PlacesPage {
                 coords: this.userCoords,
             }
         }
-        if (offer && this.isFeatured) {
-            //to do
+        if (offer && offer.redemption_access_code) {
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer });
+            limitationPopover.present();
         }
-        this.nav.push(PlacePage, params);
+        else {
+            this.nav.push(PlacePage, params);
+        }
         // .then(() => {
         //     this.onRefreshList = this.favorites.onRefreshPlaces
         //         .subscribe((resp) => {
@@ -955,8 +981,8 @@ export class PlacesPage {
         if (page <= lastPage) {
             setTimeout(() => {
                 if (this.isFeatured) {
-                    let radius = 19849 * 1000; //temporary
-                    this.offers.getList(this.coords.lat, this.coords.lng, radius, this.featuredPage, this.featuredPage == 1)
+                    // let radius = 19849 * 1000; 
+                    this.offers.getList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1)
                         .subscribe(resp => {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
@@ -1076,6 +1102,9 @@ export class PlacesPage {
             this.onRefreshListSubscription.unsubscribe();
         }
         this.onRefreshTestimonials.unsubscribe();
+        this.onRefreshUser.unsubscribe();
+        this.onRefreshDefoultCoords.unsubscribe();
+        this.onRefreshFeaturedOffers.unsubscribe();
     }
 
 }
