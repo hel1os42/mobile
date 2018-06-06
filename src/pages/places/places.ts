@@ -258,7 +258,7 @@ export class PlacesPage {
     }
 
     getLocationStatus() {
-        if (this.platform.is('android') && this.platform.is('cordova')) {
+        if (this.platform.is('cordova') && this.platform.is('android')) {
             this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
                 .then(result => {
                     if (result.hasPermission === false) {
@@ -276,7 +276,7 @@ export class PlacesPage {
                 )
             // .catch(err => console.log(err));
         }
-        else if (this.platform.is('ios') && this.platform.is('cordova')) {
+        else if (this.platform.is('cordova') && this.platform.is('ios')) {
             this.diagnostic.getLocationAuthorizationStatus()
                 .then(resp => {
                     if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
