@@ -272,6 +272,7 @@ page-places {
         height: 43vw;
         display: flex;
         align-items: flex-start;
+        overflow: hidden;
     }
 
     .block-featured .right-side{
@@ -289,6 +290,10 @@ page-places {
         height: 100%;
         background-color: rgba(0,0,0,0.5);
         padding: 2vw;
+    }
+
+    .block-featured .smooth_transition {
+        width: 83%;
     }
 
     .block-featured .smooth_transition:before {
@@ -320,6 +325,17 @@ page-places {
 
     .block-featured .icon-star{
         margin-right: 0;
+    }
+
+    .block-featured .right-top-angle{
+        position: absolute;
+        top: -10vw;
+        right: -10vw;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        width: 20vw;
+        height: 20vw;
+        background: #FF5A00;
     }
 }
 

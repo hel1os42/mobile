@@ -325,9 +325,9 @@ export class MyApp {
             // Adjust.getGoogleAdId(function (googleAdId) {
             //     console.log(googleAdId);
             // });
-            // Adjust.getIdfa(function(idfa) //for ios
-            //     // console.log(idfa);
-            //     });
+             //Adjust.getIdfa(function(idfa){ //for ios
+             //    console.log(idfa);
+             //    });
         }
     }
 

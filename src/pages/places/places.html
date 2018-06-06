@@ -173,20 +173,20 @@
                     class="thumb_image"
                     [ngStyle]="{'background-image': 'url(' + offer?.owner.place.picture_url + '?size=mobile&)'}">
                 </div>
-                <div class="info-block">
-                    <div text-center>
+                <div class="info-block" text-left>
+                    <div>
                         <ng-container *ngFor="let showStar of getStars(offer?.owner.place.stars)">
                             <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
                         </ng-container>
                     </div>
-                    <div class="margin-top-1vw" text-left>
+                    <div class="margin-top-1vw">
                         <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                         <span class="font-75 text-828282">
                         {{ getDistance(offer.latitude, offer.longitude).distance }}
                         {{ getDistance(offer.latitude, offer.longitude).key | translate }}
                         </span>
                     </div>
-                    <div class="margin-top-1vw" text-left>
+                    <div class="margin-top-1vw">
                         <img src="assets/img/user_home/icon_small_user.svg">
                         <span class="font-75 text-828282">
                         {{ offer?.owner.place.redemptions_count !== undefined ? offer?.owner.place.redemptions_count : offer?.owner.place.testimonials_count }}
@@ -203,6 +203,7 @@
                     </div>
                     <div class="text-white font-12 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
                 </div>
+                <div class="right-top-angle"></div>
             </div>
             <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
 
