@@ -415,8 +415,8 @@
         "LIMITATION_16": "Sorry, you have reached this offer weekly redemptions limit.",
         "LIMITATION_32": "Sorry, you have reached this offer monthly redemptions limit.",
         "LIMITATION_64": "Sorry, your user level is lower than this offer requires.",
-        "LIMITATION_128": "Sorry, you don't have enough Friends Points to redeem this offer.",
-        "LIMITATION_256": "Sorry, you don't have enough Redemptions Points to redeem this offer."
+        "LIMITATION_128": "Sorry, you don't have enough Friends Points to redeem this offer. Your FP balance is referral_points, while this offer requires referral_points_price. Each new friend will bring you more Friends Points, so don't hesitate to invite them right now!",
+        "LIMITATION_256": "Sorry, you don't have enough Redemptions Points to redeem this offer. Your RP balance is redemption_points, while this offer requires redemption_points_price. You can get more Redemptions Points right now if you redeem any offers across the app!"
     },
 
     "PAGE_PLACE-FEEDBACK" : {
