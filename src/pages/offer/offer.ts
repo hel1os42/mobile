@@ -24,6 +24,7 @@ import { OfferRedeemPopover } from './offerRedeem.popover';
 import { TimeframesPopover } from './timeframes.popover';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
+import { User } from '../../models/user';
 
 declare var window;
 
@@ -48,6 +49,8 @@ export class OfferPage {
     timeframes;
     isTodayIncluded = false;
     onRefreshCompany: Subscription;
+    onRefreshUser: Subscription;
+    user: User;
 
     constructor(
         private nav: NavController,
@@ -74,6 +77,11 @@ export class OfferPage {
         this.offer = this.navParams.get('offer');
         this.distanceObj = this.navParams.get('distanceObj');
         this.coords = this.navParams.get('coords');
+        this.user = this.navParams.get('user');
+        if (!this.user) {
+            this.profile.get(true, false)
+                .subscribe(user => this.user = user);
+        }
         this.offers.get(this.offer.id, true)
             .subscribe(offer => {
                 if (offer.timeframes) {
@@ -97,6 +105,9 @@ export class OfferPage {
                     }
                 }
             });
+
+            this.onRefreshUser = this.profile.onRefresh
+            .subscribe(user => this.user = user)
     }
 
     ionViewDidLoad() {
@@ -375,6 +386,7 @@ export class OfferPage {
 
     ngOnDestroy() {
         this.onRefreshCompany.unsubscribe();
+        this.onRefreshUser.unsubscribe();
     }
 
 }

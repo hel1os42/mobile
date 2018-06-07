@@ -14,6 +14,8 @@ import { OfferPage } from '../offer/offer';
 import { PlacePage } from '../place/place';
 import { OfferService } from '../../providers/offer.service';
 import { LimitationPopover } from '../place/limitation.popover';
+import { ProfileService } from '../../providers/profile.service';
+import { User } from '../../models/user';
 
 @Component({
     selector: 'page-bookmarks',
@@ -38,7 +40,9 @@ export class BookmarksPage {
     onRefreshTestimonials: Subscription;
     onRefreshCoords: Subscription;
     onRefreshCompany: Subscription;
+    onRefreshUser: Subscription;
     loadingLocation;
+    user: User;
 
     constructor(
         private favorites: FavoritesService,
@@ -49,13 +53,16 @@ export class BookmarksPage {
         private platform: Platform,
         private loading: LoadingController,
         private offerService: OfferService,
-        private popoverCtrl: PopoverController) {
+        private popoverCtrl: PopoverController,
+        private profile: ProfileService) {
 
         this.isForkMode = this.appMode.getForkMode();
 
         this.segment = 'places';
         this.getLocation(true, true);
 
+        this.profile.get(true, false)
+            .subscribe(user => this.user = user)
         this.onRefreshCoords = this.location.onRefreshCoords
             .subscribe(coords => {
                 this.coords = coords;
@@ -105,6 +112,9 @@ export class BookmarksPage {
                 }
 
             });
+
+        this.onRefreshUser = this.profile.onRefresh
+            .subscribe(user => this.user = user)
     }
 
     getPlacesList() {
@@ -319,6 +329,8 @@ export class BookmarksPage {
         this.onRefreshOffers.unsubscribe();
         this.onRefreshTestimonials.unsubscribe();
         this.onRefreshCompany.unsubscribe();
+        this.onRefreshUser.unsubscribe();
+        this.onRefreshCoords.unsubscribe();
     }
 
 

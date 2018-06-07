@@ -241,7 +241,8 @@ export class PlacePage {
                 offer: offer,
                 company: this.company,
                 distanceObj: this.getDistance(offer.latitude, offer.longitude),
-                coords: this.coords
+                coords: this.coords,
+                user: this.user
             });
         }
         else {
