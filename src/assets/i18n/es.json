@@ -418,8 +418,8 @@
         "LIMITATION_16": "Lo sentimos, has alcanzado el limite semanal de redenciones para esta oferta.",
         "LIMITATION_32": "Lo sentimos, has alcanzado el limite mensual de redenciones para esta oferta.",
         "LIMITATION_64": "Lo sentimos, su nivel de ususario esta por debajo del requerido por esta oferta.",
-        "LIMITATION_128": "Lo sentimos, no tienes suficientes puntos de amigos para redimir esta oferta.",
-        "LIMITATION_256": "Lo sentimos, no tienes suficientes puntos de redención para redimir esta oferta."
+        "LIMITATION_128": "Lo sentimos, no tienes suficientes Puntos de Amigos para redimir esta oferta (tienes referral_points de referral_points_price). Cada nuevo amigo te traerá más Puntos de Amigos, entoncen no vaciles en invitarlos ahora mismo!",
+        "LIMITATION_256": "Lo sentimos, no tienes suficientes Puntos de Redención para redimir esta oferta (tienes redemption_points de redemption_points_price). Puedes obtener mas Puntos de Redención ahora mismo si redimes cualquier oferta en la app!"
     },
 
     "PAGE_PLACE-FEEDBACK" : {
