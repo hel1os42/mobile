@@ -173,7 +173,9 @@
             (click)="openPlace(offer?.place, false, offer)"
             ion-item
             detail-none>
-            <ion-avatar item-start text-center class="relative">
+            <ion-avatar
+                [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                item-start text-center class="relative">
                 <div
                     class="thumb_image"
                     [ngStyle]="{'background-image': 'url(' + offer?.place.picture_url + '?size=mobile&)'}">
@@ -199,7 +201,9 @@
                     </div>
                 </div>
             </ion-avatar>
-            <div class="font-0 right-side relative" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
+            <div class="font-0 right-side relative"
+                 [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"
+                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }">
                 <div class="right-side-content">
                     <div class="smooth_transition">
                         <div class="scroll_content margin-top-2vw">
@@ -210,7 +214,16 @@
                 </div>
                 <div [ngClass]="offer.type" class="right-top-angle"></div>
             </div>
-            <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
+            <img *ngIf="offer.is_favorite"
+                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                 class="star_right" src="assets/img/place/icon_star.svg">
+            <div class="block-fr">
+                <div class="coupon font-12">{{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: 3/10</div>
+                <div class="block-right" text-right>
+                    <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>3
+                    <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>5
+                </div>
+            </div>
         </a>
     </ion-list>
 

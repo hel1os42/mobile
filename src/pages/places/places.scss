@@ -364,6 +364,43 @@ page-places {
         top: inherit;
         bottom: 3vw;
     }
+
+    .block-fr{
+        position: absolute;
+        bottom: 2vw;
+        right: 2vw;
+        width: 65.5%;
+        color: #fff;
+        display: table;
+        vertical-align: middle;
+    }
+
+    .block-fr div{
+        display: table-cell;
+    }
+
+    .block-fr .circle{
+        color: #000;
+        margin-left: 1%;
+        margin-right: 2%;
+        width: 6vw;
+        height: 6vw;
+        display: inline-block;
+        border-radius: 100vw;
+        text-align: center;
+        line-height: 6vw;
+        font-size: 3.5vw;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .block-fr span.f{
+        background: #75e3ea;
+    }
+
+    .block-fr span.r{
+        background: #c7e240;
+    }
 }
 
     /*

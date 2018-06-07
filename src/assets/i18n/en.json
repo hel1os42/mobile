@@ -133,7 +133,9 @@
         "WE_ARE": "We are actively seeking for regional agents - start a profitable business in your city with NAU:",
         "ARE_YOU": "Are you a retailer? Join NAU among the first in your region prior to the official launch!",
         "OOPS": "Ooops...",
-        "RADIUS": "Radius"
+        "FRIENDS": "f",
+        "OFFER": "o",
+        "COUPONS_LEFT": "Coupons left"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
