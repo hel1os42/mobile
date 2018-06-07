@@ -36,6 +36,7 @@ export class NoticePopover {
         ? this.FRIENDS_POINTS
         : !this.offer.referral_points_price && this.offer.redemption_points_price
         ? this.REDEMPTIONS_POINTS : '';
+        
         if (key && key !== '') {
             this.translate.get(key)
                 .subscribe((resp: string) => {

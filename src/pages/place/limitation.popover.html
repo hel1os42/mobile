@@ -1,8 +1,8 @@
 <div class="modal_content">
     <ion-label padding-bottom text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ offer.label }}</ion-label>
 
-    <div *ngFor="let key of keys" class="block-lines">
-        <div class="font-14">{{ 'PAGE_PLACE.' + key | translate }}</div>
+    <div *ngFor="let message of messages" class="block-lines">
+        <div class="font-14">{{ message }}</div>
     </div>
 
     <ion-grid padding-top padding-bottom>
