@@ -790,7 +790,7 @@ export class PlacesPage {
             params.user = this.user;
         }
         if (offer && offer.redemption_access_code) {
-            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer });
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
             limitationPopover.present();
         }
         else {

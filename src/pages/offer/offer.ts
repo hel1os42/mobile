@@ -287,7 +287,7 @@ export class OfferPage {
             }
         }
         else {
-            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: this.offer });
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: this.offer, user: this.user });
             limitationPopover.present();
         }
     }

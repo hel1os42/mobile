@@ -246,7 +246,7 @@ export class PlacePage {
             });
         }
         else {
-            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer });
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
             limitationPopover.present();
         }
 
