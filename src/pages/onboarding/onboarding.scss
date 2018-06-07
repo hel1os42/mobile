@@ -131,3 +131,9 @@ page-onboarding {
         bottom: calc(env(safe-area-inset-bottom) + 23vw);
     }
 }
+
+.platform-tablet page-onboarding .pic{
+    height: 40vh;
+    background-size: 60% auto;
+    margin-bottom: 1%;
+}

@@ -389,14 +389,14 @@
     },
 
     "PAGE_ONBOARDING" : {
-        "WELCOME" : "¡Bienvenido!",
-        "MAKE_PROFIT" : "¡Lucre!",
-        "NAU_COINS" : "Monedas NAU!",
+        "WELCOME" : "AHORRA DINERO CON NAU",
+        "MAKE_PROFIT" : "GANAS AYUDANDO <br> A OTROS A AHORRAR",
+        "NAU_COINS" : "OBTÉN RECOMPENSAS <br> Y COSAS GRATIS",
         "FOR_BUSINESS" : "Para los negocios",
         "ENJOY" : "¡Disfrute!",
-        "ENJOY_THE_MOST" : "Disfrute de las ofertas, obsequios y descuentos más atractivos de varios comercios en su ubicación, ya sea que esté en su ciudad de residencia o de vacaciones.",
-        "INVITE_YOUR_FRIENDS" : "Invite a sus amigos y seguidores a unirse a NAU con su código de invitación y obtenga recompensas cada vez que usen ofertas especiales de los comercios de todo el mundo.",
-        "NAU_COINS_IS" : "Las monedas de NAU son una criptomoneda que pronto podra cambiar por el valor diario: ¡ otras criptomonedas incluso monedas tradicionales!",
+        "ENJOY_THE_MOST" : "Tan pronto como inicies sesión, vas a poder empezar a ahorrar. Instantáneamente sin necesidad de comprar ningún cupon o tratar de localizar algo que no este a millas de distancia. Solo las mejores ofertas especiales, incluyendo descuentos,(what means bogo) e inclusive cosas gratis si tu estas dispuesto traer a un par de amigos",
+        "INVITE_YOUR_FRIENDS" : "Alguna vez te sentiste mal recompensado por recomendar un comercio a tus amigos?  NAU esta aqui para solucionar eso. Obten recompensas directamente de los comercios cada vez que tus amigos rediman una oferta especial usando NAU!  Esta no es una bonificación unica, cuanto mas ahorran, mas ganas.",
+        "NAU_COINS_IS" : "NAU es todo acerca de diversión y ahorro. Nosotros habilitamos comercios para interactuar directamente contigo y algunas veces ellos estan dispuestos a regalar cosas gratis como café, sushi, horas de bolos etc. Revisa las mejores categorías de ofertas para encontrar las mejores ofertas alrededor y tal vez algunos regalos a la vuelta de la esquina.",
         "MAKE_MONEY" : "Gane dinero",
         "SKIP" : "Omitir"
     },

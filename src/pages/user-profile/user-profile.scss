@@ -386,8 +386,20 @@ page-user-profile{
     }
 
     .main-position-center{
-        height: calc(100% - 49px);
+        height: calc(95% - 43vw);
         display: flex;
     }
 }
 
+.platform-tablet page-user-profile .label-point{
+    font-size: 2vh;
+}
+
+.platform-tablet page-user-profile .font-22, button.font-22{
+    font-size: 2.7vh;
+}
+
+.platform-tablet .main-position-center{
+    height: calc(100% - 43vw);
+    margin-bottom: 5%;
+}
