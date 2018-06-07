@@ -9,7 +9,6 @@ import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { Place } from '../../models/place';
-import { AnalyticsService } from '../../providers/analytics.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -60,7 +59,6 @@ export class OfferPage {
         private alert: AlertController,
         private statusBar: StatusBar,
         private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
         private browser: InAppBrowser,
         private translate: TranslateService) {
 
@@ -236,8 +234,6 @@ export class OfferPage {
                                     this.offers.refreshRedeemedOffers();
                                     let offerCongratulationPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
                                     offerCongratulationPopover.present();
-                                    this.gAnalytics.trackEvent("Session", 'event_redeemoffer');
-                                    this.analytics.faLogEvent('event_redeemoffer');
                                     offerCongratulationPopover.onDidDismiss(() => {
                                         // this.nav.popToRoot();
                                         // if (data.status === 'approved') {

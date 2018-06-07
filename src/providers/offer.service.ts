@@ -1,6 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { ApiService } from './api.service';
 import { RedeemedOffer } from '../models/redeemedOffer';
+import { AnalyticsService } from './analytics.service';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { AdjustService } from './adjust.service';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
@@ -10,7 +13,10 @@ export class OfferService {
     onRefreshRedeemedOffers: EventEmitter<RedeemedOffer[]> = new EventEmitter();
 
     constructor(
-        private api: ApiService) { }
+        private api: ApiService,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
+        private adjust: AdjustService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
@@ -119,7 +125,15 @@ export class OfferService {
     }
 
     getRedemtionStatus(code: string) {
-        return this.api.get(`activation_codes/${code}`, { showLoading: false, ignoreHttpNotFound: true });
+        let obs = this.api.get(`activation_codes/${code}`, { showLoading: false, ignoreHttpNotFound: true });
+        obs.subscribe(status => {
+            if (status.redemption_id) {
+                this.gAnalytics.trackEvent("Session", 'event_redeemoffer');
+                this.analytics.faLogEvent('event_redeemoffer');
+                this.adjust.setEvent('  ACTION_REDEMPTION');
+            }
+        })
+        return obs;
     }
 
     getLink(endpoint: string) {

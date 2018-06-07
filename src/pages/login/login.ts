@@ -20,6 +20,7 @@ import { StorageService } from '../../providers/storage.service';
 import { StringValidator } from '../../validators/string.validator';
 import { SignUpPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-login',
@@ -79,7 +80,8 @@ export class LoginPage {
         private fileTransfer: FileTransfer,
         private file: File,
         private api: ApiService,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private adjust: AdjustService) {
 
         if (this.platform.is('android')) {
             let
@@ -318,6 +320,7 @@ export class LoginPage {
 
     getFbProfile() {
         if (this.isSocial) {
+            this.adjust.setEvent('FACEBOOK_LINK');
             this.isSocial = false;
             this.social.getFbLoginStatus()
                 .then((res) => {
