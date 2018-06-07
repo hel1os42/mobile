@@ -19,8 +19,9 @@ import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
+import { AdjustService } from '../providers/adjust.service';
 
-declare var Adjust, AdjustConfig;
+
 
 @Component({
     templateUrl: 'app.html'
@@ -29,10 +30,9 @@ export class MyApp {
     rootPage: any;
     onResumeSubscription: Subscription;
     onConnectSubscription: Subscription;
-    onEnvironmentModeSubscription: Subscription;
+    // onEnvironmentModeSubscription: Subscription;
     isResumeGlobal = false;
-    ADJUST_ANDROID_APP_TOKEN = 'ztmblhuttfcw';
-    ADJUST_IOS_APP_TOKEN = 'ih8sgf2a82dc';
+  
     GOOGLE_ANALYTICS_ID = 'UA-114471660-1';
     ONE_SIGNAL_APP_ID = 'b08f4540-f5f5-426a-a7e1-3611e2a11187';
     ONE_SIGNAL_GOOGLE_PROJECT_NUMBER = '943098821317';
@@ -53,7 +53,8 @@ export class MyApp {
         private gAnalytics: GoogleAnalytics,
         private analytics: AnalyticsService,
         private share: ShareService,
-        private oneSignal: OneSignal) {
+        private oneSignal: OneSignal,
+        private adjust: AdjustService) {
 
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
@@ -118,15 +119,15 @@ export class MyApp {
             if (platform.is('cordova')) {
                 this.oneSignalInit();
                 this.analytics.flurryAnalyticsInit();
-                this.adjustInit(platform);
+                this.adjustInit();
             }
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
             });
-            this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
-                .subscribe(() => this.adjustInit(platform));
+            // this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
+            //     .subscribe(() => this.adjustInit());
 
             //this.rootPage = BookmarksPage;
 
@@ -290,45 +291,8 @@ export class MyApp {
         this.oneSignal.enableSound(true);
     }
 
-    adjustInit(platform) {
-        let storage = this.storage;
-        if (typeof Adjust !== 'undefined' && typeof AdjustConfig !== 'undefined') {
-            let appToken: string;
-            let envName = this.appMode.getEnvironmentMode();
-            if (platform.is('android')) {
-                appToken = this.ADJUST_ANDROID_APP_TOKEN;
-            }
-            else if (platform.is('ios')) {
-                appToken = this.ADJUST_IOS_APP_TOKEN;
-            }
-            // let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction); //for prod
-            let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox); //for test
-
-            // adjustConfig.setAttributionCallbackListener(function (attribution) {
-            //     // Printing all attribution properties.
-            //     console.log(attribution);
-            // });
-
-            adjustConfig.setDeferredDeeplinkCallbackListener(deeplink => {
-                // console.log("Deferred deep link URL content: " + deeplink);
-                let str = deeplink.split('invite_code=')[1];
-                let invite = str.split('?')[0];
-              
-                if (invite) {
-                    storage.set('invCode', invite);  
-                }
-            });
-
-            adjustConfig.setLogLevel(AdjustConfig.LogLevelInfo);
-            Adjust.create(adjustConfig);
-
-            // Adjust.getGoogleAdId(function (googleAdId) {
-            //     console.log(googleAdId);
-            // });
-            // Adjust.getIdfa(function(idfa) //for ios
-            //     // console.log(idfa);
-            //     });
-        }
+    adjustInit() {
+        this.adjust.init();
     }
 
     ngOnDestroy() {
