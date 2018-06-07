@@ -222,9 +222,18 @@
                     class="coupon font-12">
                     {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}/{{ offer.max_count }}
                 </div>
-                <div class="block-right font-14" text-right>
-                    <span><span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>3</span>
-                    <span><span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>5</span>
+                <div 
+                    *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))" 
+                    class="block-right font-14" 
+                    text-right>
+                    <span *ngIf="offer.referral_points_price > user.referral_points">
+                        <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
+                        {{ offer.referral_points_price - user.referral_points }}
+                    </span>
+                    <span *ngIf="offer.redemption_points_price > user.redemption_points">
+                        <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
+                        {{ offer.redemption_points_price - user.redemption_points }}
+                    </span>
                 </div>
             </div>
         </a>
