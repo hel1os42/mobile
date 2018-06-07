@@ -626,21 +626,15 @@ export class PlacesPage {
 
     loadFeaturedOffers() {
         //let radius = 19849 * 1000; 
-        this.offers.getList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading)
+        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
                 this.lastFeaturedPage = resp.last_page;
-
                 this.isRefreshLoading = false;
                 if (this.refresher) {
                     this.refresher.complete();
                     this.refresher = undefined;
                 }
-                // temporary mock
-                this.featuredOffers.forEach(offer => {
-                    offer.place = MockPlace.place;
-                    // 
-                });
             },
                 err => {
                     this.isRefreshLoading = false;
@@ -987,16 +981,11 @@ export class PlacesPage {
             setTimeout(() => {
                 if (this.isFeatured) {
                     // let radius = 19849 * 1000; 
-                    this.offers.getList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1)
+                    this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1)
                         .subscribe(resp => {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
 
-                            // temporary mock
-                            this.featuredOffers.forEach(offer => {
-                                offer.place = MockPlace.place;
-                                // 
-                            });
                             infiniteScroll.complete();
                         });
                 }

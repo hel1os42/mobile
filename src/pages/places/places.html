@@ -169,7 +169,6 @@
         no-lines class="item-block-nau margin-top-10 block-featured">
         <a
             *ngFor="let offer of featuredOffers"
-            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
             (click)="openPlace(offer?.place, false, offer)"
             ion-item
             detail-none>

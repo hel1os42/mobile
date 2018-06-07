@@ -27,8 +27,7 @@ export class OfferService {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
     }
 
-    getList( // for featured offers
-        // category_ids: string,
+    getFeaturedList( // for featured offers
         lat: number,
         lng: number,
         // radius: number,
@@ -36,14 +35,15 @@ export class OfferService {
         showLoading: boolean
     ) {
         // return this.api.get(`offers`, {
-        return this.api.get(`offers?category_ids[]=aea58d61-5ad5-4f79-9a2c-819245f56696`, {// temporary to remove category
+        return this.api.get('offers', {
         // return this.api.get(`offers?category_ids[]=382b8e95-9083-4095-a928-ee9178ee6275`, {// prod mock
             showLoading: showLoading,
             params: {
+                featured: true,
                 latitude: lat,
                 longitude: lng,
                 radius: this.MAX_RADIUS,
-                // with: 'account.owner.place',
+                with: 'account.owner.place',
                 page: page
             }
         });
@@ -197,9 +197,9 @@ export class OfferService {
     }
 
     refreshFeaturedOffers(lat, lng) {
-        this.getList(lat, lng, 1, false)
+        this.getFeaturedList(lat, lng, 1, false)
             .subscribe(resp => {
-                this.onRefreshFeaturedOffers.emit(resp.data);
+                this.onRefreshFeaturedOffers.emit(resp);
             })
     }
 
