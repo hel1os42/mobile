@@ -133,7 +133,10 @@
         "WE_ARE": "Estamos buscando activamente las federales regionales - puedes construir un buen negocio en su ciudad junto con NAU:",
         "ARE_YOU": "¿Posee usted en propiedad de los puntos o sitios o la representante? ",
         "OOPS": "Ooops...",
-        "RADIUS": "Radio"
+        "RADIUS": "Radio",
+        "FRIENDS": "a",
+        "OFFER": "o",
+        "COUPONS_LEFT": "Cupones restantes"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
