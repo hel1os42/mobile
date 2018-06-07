@@ -217,7 +217,11 @@
                  [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
                  class="star_right" src="assets/img/place/icon_star.svg">
             <div class="block-fr bold">
-                <div class="coupon font-12">{{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: 3/10</div>
+                <div 
+                    *ngIf="offer.max_count" 
+                    class="coupon font-12">
+                    {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}/{{ offer.max_count }}
+                </div>
                 <div class="block-right font-14" text-right>
                     <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>3
                     <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>5
