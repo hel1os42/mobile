@@ -1,10 +1,10 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { ApiService } from './api.service';
-import { RedeemedOffer } from '../models/redeemedOffer';
+import { EventEmitter, Injectable } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
-import { AnalyticsService } from './analytics.service';
-import { ProfileService } from './profile.service';
 import { Place } from '../models/place';
+import { RedeemedOffer } from '../models/redeemedOffer';
+import { AdjustService } from './adjust.service';
+import { AnalyticsService } from './analytics.service';
+import { ApiService } from './api.service';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
@@ -21,7 +21,7 @@ export class OfferService {
         private api: ApiService,
         private gAnalytics: GoogleAnalytics,
         private analytics: AnalyticsService,
-        private profile: ProfileService) { }
+        private adjust: AdjustService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
@@ -152,18 +152,18 @@ export class OfferService {
     }
 
     getRedemptionStatus(code: string) {
-        let obs = this.api.get(`activation_codes/${code}`, {
-            showLoading: false,
-            ignoreHttpNotFound: true
+        let obs = this.api.get(`activation_codes/${code}`, { 
+            showLoading: false, 
+            ignoreHttpNotFound: true 
         });
-        obs.subscribe((offerRedemtionStatus) => {
-            if (offerRedemtionStatus.redemption_id) {
-                this.profile.refreshAccounts();
+        obs.subscribe(status => {
+            if (status.redemption_id) {
                 this.refreshRedeemedOffers();
                 this.gAnalytics.trackEvent("Session", 'event_redeemoffer');
                 this.analytics.faLogEvent('event_redeemoffer');
+                this.adjust.setEvent('ACTION_REDEMPTION');
             }
-        });
+        })
         return obs;
     }
 

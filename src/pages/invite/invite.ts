@@ -6,6 +6,7 @@ import { Clipboard } from '@ionic-native/clipboard';
 import { ToastService } from '../../providers/toast.service';
 import { NavController } from 'ionic-angular';
 import { UserUsersPage } from '../user-users/user-users';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-invite',
@@ -20,7 +21,8 @@ export class InvitePage {
         private profile: ProfileService,
         private clipboard: Clipboard,
         private toast: ToastService,
-        private nav: NavController) {
+        private nav: NavController,
+        private adjust: AdjustService) {
 
         this.profile.get(false, false)
             .subscribe(user => this.user = user);
@@ -34,7 +36,7 @@ export class InvitePage {
         this.toast.showNotification('TOAST.COPY_NOTIFICATION');
     }
 
-    shareInvite() {
+    inviteFriend() {
         const Branch = window['Branch'];
         let properties = {
             canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
@@ -55,9 +57,11 @@ export class InvitePage {
                 branchUniversalObj = res;
                 let analytics = {};
                 let message = '';
-                branchUniversalObj.showShareSheet(analytics, properties, message)
-                    .then(resp => console.log(resp))
-            }).catch(function (err) {
+                branchUniversalObj.showShareSheet(analytics, properties, message);
+
+                branchUniversalObj.onLinkShareResponse(res => {
+                  this.adjust.setEvent('IN_FR_BUTTON_CLICK_INVITE_PAGE');
+                });
                 // console.log('Branch create obj error: ' + JSON.stringify(err))
             })
     }

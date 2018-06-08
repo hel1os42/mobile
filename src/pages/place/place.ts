@@ -28,6 +28,7 @@ import { MockTestimonials } from '../../mocks/mockTestimonials';
 import { LimitationPopover } from '../place/limitation.popover';
 import { NoticePopover } from '../offer/notice.popover';
 import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
 
 declare var window;
 
@@ -71,7 +72,10 @@ export class PlacePage {
         private launchNavigator: LaunchNavigator,
         private browser: InAppBrowser,
         private popoverCtrl: PopoverController,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private adjust: AdjustService) {
+
+        this.adjust.setEvent('PLACE_VIEW');
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
         this.segment = "alloffers";
@@ -215,11 +219,10 @@ export class PlacePage {
                 let analytics = {};
                 // let message = this.company.name + this.company.description
                 let message = '';
-                branchUniversalObj.showShareSheet(analytics, properties, message)
-                    .then(resp => console.log(resp))
-            })
-            .catch(function (err) {
-                console.log('Branch create obj error: ' + JSON.stringify(err))
+                branchUniversalObj.showShareSheet(analytics, properties, message);
+                branchUniversalObj.onLinkShareResponse(res => {
+                    this.adjust.setEvent('SHARE_PLACE_BUTTON_CLICK');
+                });
             })
     }
 
@@ -273,14 +276,17 @@ export class PlacePage {
     }
 
     dial() {
+        this.adjust.setEvent('PHONE_ICON_CLICK');
         window.location = 'tel:' + this.company.phone;
     }
 
     openSite() {
+        this.adjust.setEvent('WEBSITE_ICON_CLICK');
         this.browser.create(this.company.site, '_system');
     }
 
     openComplaint() {
+        this.adjust.setEvent('REPORT_BUTTON_CLICK');
         let complaintPopover = this.popoverCtrl.create(ComplaintPopover, { companyId: this.company.id });
         complaintPopover.present();
     }

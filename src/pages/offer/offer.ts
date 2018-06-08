@@ -4,11 +4,16 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
+import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
+
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
 import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { Place } from '../../models/place';
+import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -22,9 +27,6 @@ import { CongratulationPopover } from './congratulation.popover';
 import { LinkPopover } from './link.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { TimeframesPopover } from './timeframes.popover';
-import { Subscription } from 'rxjs';
-import * as _ from 'lodash';
-import { User } from '../../models/user';
 
 declare var window;
 
@@ -67,8 +69,10 @@ export class OfferPage {
         private statusBar: StatusBar,
         private gAnalytics: GoogleAnalytics,
         private browser: InAppBrowser,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private adjust: AdjustService) {
 
+        this.adjust.setEvent('OFFER_VIEW');
         // this.today = new Date();
         if (this.share.get()) {
             this.share.remove();
@@ -225,6 +229,7 @@ export class OfferPage {
     }
 
     openRedeemPopover() {
+        this.adjust.setEvent('REDEEM_BUTTON_CLICK');
         this.timeframesHandler();
         // if (!this.disable()) {distance validation
         if (!this.offer.redemption_access_code) {
@@ -319,10 +324,11 @@ export class OfferPage {
                         let analytics = {};
                         // let message = this.company.name + this.company.description
                         let message = '';
-                        branchUniversalObj.showShareSheet(analytics, properties, message)
-                            .then(resp => console.log(resp))
-                    }).catch(function (err) {
-                        console.log('Branch create obj error: ' + JSON.stringify(err))
+                        branchUniversalObj.showShareSheet(analytics, properties, message);
+                           
+                        branchUniversalObj.onLinkShareResponse(res => {
+                            this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
+                          });
                     })
 
             })
@@ -342,10 +348,12 @@ export class OfferPage {
     }
 
     dial() {
+        this.adjust.setEvent('PHONE_ICON_CLICK');
         window.location = 'tel:' + this.company.phone;
     }
 
     openSite() {
+        this.adjust.setEvent('WEBSITE_ICON_CLICK');
         this.browser.create(this.company.site, '_system');
     }
 

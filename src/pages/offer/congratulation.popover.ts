@@ -5,6 +5,7 @@ import { Offer } from '../../models/offer';
 import { ProfileService } from '../../providers/profile.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
 import { TestimonialCreate } from '../../models/testimonialCreate';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -22,7 +23,8 @@ export class CongratulationPopover {
         private viewCtrl: ViewController,
         private navParams: NavParams,
         private profile: ProfileService,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private adjust: AdjustService) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
@@ -79,9 +81,10 @@ export class CongratulationPopover {
                         // let message = this.company.name + this.company.description
                         let message = '';
                         branchUniversalObj.showShareSheet(analytics, properties, message)
-                            .then(resp => console.log(resp))
-                    }).catch(function (err) {
-                        console.log('Branch create obj error: ' + JSON.stringify(err))
+
+                        branchUniversalObj.onLinkShareResponse(res => {
+                            this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
+                        });
                     })
 
             })

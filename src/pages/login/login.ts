@@ -104,6 +104,7 @@ export class LoginPage {
         if (this.envName === 'dev') {
             this.testAdjustLabel = this.storage.get('invCode') ? this.storage.get('invCode') : 'adjustError';
         }
+        //
     }
 
     // ionViewDidEnter() {
@@ -319,6 +320,7 @@ export class LoginPage {
 
     getFbProfile() {
         if (this.isSocial) {
+           
             this.isSocial = false;
             this.social.getFbLoginStatus()
                 .then((res) => {

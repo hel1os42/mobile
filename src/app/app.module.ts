@@ -112,6 +112,7 @@ import { AnalyticsService } from '../providers/analytics.service';
 import { ReportService } from '../providers/report.service';
 import { TestimonialPopover } from '../pages/place/testimonial.popover';
 import { LimitationPopover } from '../pages/place/limitation.popover';
+import { AdjustService } from '../providers/adjust.service';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -312,6 +313,7 @@ export function createTranslateLoader(http: HttpClient) {
         File,
         Facebook,
         FlurryAnalytics,
+        AdjustService,
         LaunchNavigator
     ]
 })
