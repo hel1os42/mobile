@@ -80,12 +80,52 @@ export class AdjustService {
                 }
             });
 
+            // adjustConfig.setEventTrackingSucceededCallbackListener(function(eventSuccess) {
+            //     // Printing all event success properties.
+            //     console.log("Event tracking succeeded!");
+            //     console.log(eventSuccess.message);
+            //     console.log(eventSuccess.timestamp);
+            //     console.log(eventSuccess.eventToken);
+            //     console.log(eventSuccess.adid);
+            //     console.log(eventSuccess.jsonResponse);
+            // });
+
+            // adjustConfig.setEventTrackingFailedCallbackListener(function(eventFailure) {
+            //     // Printing all event failure properties.
+            //     console.log("Event tracking failed!");
+            //     console.log(eventFailure.message);
+            //     console.log(eventFailure.timestamp);
+            //     console.log(eventFailure.eventToken);
+            //     console.log(eventFailure.adid);
+            //     console.log(eventFailure.willRetry);
+            //     console.log(eventFailure.jsonResponse);
+            // });
+
+            // adjustConfig.setSessionTrackingSucceededCallbackListener(function(sessionSuccess) {
+            //     // Printing all session success properties.
+            //     console.log("Session tracking succeeded!");
+            //     console.log(sessionSuccess.message);
+            //     console.log(sessionSuccess.timestamp);
+            //     console.log(sessionSuccess.adid);
+            //     console.log(sessionSuccess.jsonResponse);
+            // });
+
+            // adjustConfig.setSessionTrackingFailedCallbackListener(function(sessionFailure) {
+            //     // Printing all session failure properties.
+            //     console.log("Session tracking failed!");
+            //     console.log(sessionFailure.message);
+            //     console.log(sessionFailure.timestamp);
+            //     console.log(sessionFailure.adid);
+            //     console.log(sessionFailure.willRetry);
+            //     console.log(sessionFailure.jsonResponse);
+            // });
+
             adjustConfig.setLogLevel(AdjustConfig.LogLevelInfo);
             Adjust.create(adjustConfig);
 
-            Adjust.getGoogleAdId(function (googleAdId) {
-                console.log(googleAdId);
-            });
+            // Adjust.getGoogleAdId(function (googleAdId) {
+            //     console.log(googleAdId);
+            // });
             // Adjust.getIdfa(function(idfa) //for ios
             //     // console.log(idfa);
             //     });
@@ -95,6 +135,7 @@ export class AdjustService {
     setEvent(key) {
         if (typeof Adjust !== 'undefined' && typeof AdjustConfig !== 'undefined' && AdjustEvent !== 'undefined') {
             let adjustEvent = new AdjustEvent(this.TOKENS[key]);
+            debugger;
             Adjust.trackEvent(adjustEvent);
         }
     }
