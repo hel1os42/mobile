@@ -13,7 +13,7 @@ export class AdjustService {
     TOKENS = {
 
         ACTION_REDEMPTION: 'ubabaz',
-        CLICK_ON_BRANCH_LINK: 'c0xgvd',
+        EXTERNAL_CLICK_ON_BRANCH_LINK: 'c0xgvd',
         FACEBOOK_LINK: 'pbctv3',
         FACEBOOK_SIGN_IN: '1e1wi5',
         FIRST_TIME_SIGN_IN: 'pan15t',
@@ -32,7 +32,7 @@ export class AdjustService {
         REPORT_SENT: '8efs8b',
         SHARE_OFFER_BUTTON_CLICK: 'sldn02',
         SHARE_PLACE_BUTTON_CLICK: 'i12iu4',
-        SUGN_IN: '6ld52c',
+        SIGN_IN: '6ld52c',
         SMS_INITIALIZE: 'g6g1ra',
         TOP_OFFER_FEED_CLICK: '8jzfe2',
         TOP_OFFERS_FEED_VISIT: 'ra1xd6',
