@@ -103,8 +103,8 @@ export class UserNauPage {
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
-                if (this.envName === 'dev' || this.envName === 'test')
-                    this.nav.popToRoot();
+            //     if (this.envName === 'dev' || this.envName === 'test')
+            //         this.nav.popToRoot();
             });
     }
     //temporary

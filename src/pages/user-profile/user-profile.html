@@ -24,7 +24,7 @@
                 <span class="label label-ios points font-75">
                     {{ 'PAGE_CREATE-USER-PROFILE.YOU_HAVE' | translate }}
                     {{ user.points }}
-                    {{ user.points >= 10 && point() <= 20
+                    {{ user.points >= 10 && user.points <= 20
                     ? ('UNIT.POINTS' | translate)
                     : user.points % 10 == 1
                     ? ('UNIT.POINT' | translate)
