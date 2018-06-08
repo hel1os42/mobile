@@ -1,12 +1,15 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { ApiService } from "./api.service";
 import { TransactionCreate } from "../models/transactionCreate";
+import { AdjustService } from "./adjust.service";
 
 @Injectable()
 export class TransactionService {
     onRefreshTransactions: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(private api: ApiService) {
+    constructor(
+        private api: ApiService,
+        private adjust: AdjustService) {
     }
 
     getList(page) {
@@ -22,7 +25,10 @@ export class TransactionService {
     }
 
     set(transaction: TransactionCreate, showLoading?: boolean) {
-        return this.api.post('transactions', transaction, { showLoading: showLoading });
+        let obs = this.api.post('transactions', transaction, { showLoading: showLoading });
+        obs.subscribe(() => this.adjust.setEvent('NAU_TX_SEND'),
+            err => { return; });
+        return obs;
     }
 
     refresh() {

@@ -13,6 +13,7 @@ import { ToastService } from '../../providers/toast.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TransferPopover } from './transfer.popover';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-user-nau',
@@ -54,7 +55,10 @@ export class UserNauPage {
         private barcode: BarcodeScanner,
         private alert: AlertController,
         private transaction: TransactionService,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private adjust: AdjustService) {
+
+        this.adjust.setEvent('NAU_WALLET_CLICK');
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         this.envName = this.appMode.getEnvironmentMode();

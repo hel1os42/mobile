@@ -64,6 +64,7 @@ export class OfferPage {
         private translate: TranslateService,
         private adjust: AdjustService) {
 
+        this.adjust.setEvent('OFFER_VIEW');
         // this.today = new Date();
         if (this.share.get()) {
             this.share.remove();

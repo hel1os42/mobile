@@ -69,6 +69,8 @@ export class PlacePage {
         private appMode: AppModeService,
         private adjust: AdjustService) {
 
+        this.adjust.setEvent('PLACE_VIEW');
+
         this.envName = this.appMode.getEnvironmentMode();//temporary
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
