@@ -160,7 +160,7 @@
     <div padding>
     <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
         <a
-            (tap)="openOffer(offer)"
+            (click)="openOffer(offer)"
             *ngFor=" let offer of offersList"
             [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
             ion-item
