@@ -1,3 +1,5 @@
+import { Place } from "./place";
+
 export class User {
     id: string;
     name: string;
@@ -20,6 +22,7 @@ export class User {
     approved: boolean;
     referral_points?: number;
     redemption_points?: number;
+    place?: Place;
 }
 /*missing:  
     facebookName: string;
