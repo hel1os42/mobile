@@ -588,10 +588,6 @@ export class PlacesPage {
         return this.selectedCategory && this.selectedCategory.id === category.id && !this.isFeatured;
     }
 
-    isInfiniteScroll() {
-        return !this.isMapVisible && (this.isFeatured ? this.featuredPage <= this.lastFeaturedPage : this.page <= this.lastPage);
-    }
-
     selectCategory(category: OfferCategory) {
         // this.content.scrollToTop();
         if (this.isFeatured) {
@@ -610,13 +606,17 @@ export class PlacesPage {
     }
 
     getFeatured() {
+        this.featuredPage = 1;
+        let loading;
         this.isFeatured = true;
         this.content.resize();
         if (!this.user) {
+            loading = this.loading.create();
+            loading.present();
             this.profile.get(true, false)
                 .subscribe(user => {
                     this.user = user;
-                    this.loadFeaturedOffers();
+                    this.loadFeaturedOffers(loading);
                 })
         }
         else {
@@ -624,9 +624,9 @@ export class PlacesPage {
         }
     }
 
-    loadFeaturedOffers() {
+    loadFeaturedOffers(loading?: any) {
         //let radius = 19849 * 1000; 
-        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading)
+        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
                 this.lastFeaturedPage = resp.last_page;
@@ -635,6 +635,7 @@ export class PlacesPage {
                     this.refresher.complete();
                     this.refresher = undefined;
                 }
+                if (loading) loading.dismiss();
             },
                 err => {
                     this.isRefreshLoading = false;
@@ -642,18 +643,19 @@ export class PlacesPage {
                         this.refresher.complete();
                         this.refresher = undefined;
                     }
+                    if (loading) loading.dismiss();
                 });
     }
 
     loadCompanies(isHandler: boolean, page, isNoBounds?: boolean) {
         if (this.isDismissNoPlacesPopover) {
             this.isDismissNoPlacesPopover = false;
-            let isRefreshLoading = !this.isRefreshLoading && !this.isMapVisible;
+            let loading = !this.isRefreshLoading && !this.isMapVisible;
             let obs = ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== '')
                 ? this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
                     this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
-                    this.radius, this.search, page, isRefreshLoading)
-                : this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page, isRefreshLoading);
+                    this.radius, this.search, page, loading)
+                : this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page, loading);
 
             obs.subscribe(companies => {
                 this.isRefreshLoading = false;
@@ -966,6 +968,10 @@ export class PlacesPage {
         this.loadCompanies(true, this.page = 1);
     }
 
+    isInfiniteScroll() {
+        return !this.isMapVisible && (this.isFeatured ? this.featuredPage <= this.lastFeaturedPage : this.page <= this.lastPage);
+    }
+
     infiniteScroll(infiniteScroll) {
         let page: number;
         let lastPage: number;
@@ -985,7 +991,6 @@ export class PlacesPage {
                         .subscribe(resp => {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
-
                             infiniteScroll.complete();
                         });
                 }
