@@ -34,7 +34,7 @@ export class InvitePage {
         this.toast.showNotification('TOAST.COPY_NOTIFICATION');
     }
 
-    shareInvite() {
+    inviteFriend() {
         const Branch = window['Branch'];
         let properties = {
             canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
@@ -55,9 +55,16 @@ export class InvitePage {
                 branchUniversalObj = res;
                 let analytics = {};
                 let message = 'NAU';
-                branchUniversalObj.showShareSheet(analytics, properties, message)
-                    .then(resp => console.log(resp))
-            }).catch(function (err) {
+                branchUniversalObj.showShareSheet(analytics, properties, message);
+
+                branchUniversalObj.onShareSheetLaunched(res => {
+                    console.log('onShareSheetLaunched');
+                    debugger;
+                })
+                branchUniversalObj.onLinkShareResponse(res => {
+                    console.log('onLinkShareResponse');
+                    debugger;
+                });
                 // console.log('Branch create obj error: ' + JSON.stringify(err))
             })
     }
