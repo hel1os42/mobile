@@ -143,7 +143,7 @@ export class UserProfilePage {
             .then(res => {
                 branchUniversalObj = res;
                 let analytics = {};
-                let message = 'NAU';
+                let message = '';
                 branchUniversalObj.showShareSheet(analytics, properties, message)
                     .then(resp => console.log(resp))
             }).catch(function (err) {

@@ -214,7 +214,7 @@ export class PlacePage {
                 branchUniversalObj = res;
                 let analytics = {};
                 // let message = this.company.name + this.company.description
-                let message = 'NAU';
+                let message = '';
                 branchUniversalObj.showShareSheet(analytics, properties, message)
                     .then(resp => console.log(resp))
             })
