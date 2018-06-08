@@ -290,10 +290,11 @@ export class OfferPage {
                         let analytics = {};
                         // let message = this.company.name + this.company.description
                         let message = 'NAU';
-                        branchUniversalObj.showShareSheet(analytics, properties, message)
-                            .then(resp => console.log(resp))
-                    }).catch(function (err) {
-                        console.log('Branch create obj error: ' + JSON.stringify(err))
+                        branchUniversalObj.showShareSheet(analytics, properties, message);
+                           
+                        branchUniversalObj.onLinkShareResponse(res => {
+                            this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
+                          });
                     })
 
             })

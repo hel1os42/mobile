@@ -6,6 +6,7 @@ import { Clipboard } from '@ionic-native/clipboard';
 import { ToastService } from '../../providers/toast.service';
 import { NavController } from 'ionic-angular';
 import { UserUsersPage } from '../user-users/user-users';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-invite',
@@ -20,7 +21,8 @@ export class InvitePage {
         private profile: ProfileService,
         private clipboard: Clipboard,
         private toast: ToastService,
-        private nav: NavController) {
+        private nav: NavController,
+        private adjust: AdjustService) {
 
         this.profile.get(false, false)
             .subscribe(user => this.user = user);
@@ -57,13 +59,8 @@ export class InvitePage {
                 let message = 'NAU';
                 branchUniversalObj.showShareSheet(analytics, properties, message);
 
-                branchUniversalObj.onShareSheetLaunched(res => {
-                    console.log('onShareSheetLaunched');
-                    debugger;
-                })
                 branchUniversalObj.onLinkShareResponse(res => {
-                    console.log('onLinkShareResponse');
-                    debugger;
+                  this.adjust.setEvent('IN_FR_BUTTON_CLICK_INVITE_PAGE');
                 });
                 // console.log('Branch create obj error: ' + JSON.stringify(err))
             })
