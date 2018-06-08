@@ -220,6 +220,7 @@ export class PlacePage {
                 // let message = this.company.name + this.company.description
                 let message = '';
                 branchUniversalObj.showShareSheet(analytics, properties, message);
+                
                 branchUniversalObj.onLinkShareResponse(res => {
                     this.adjust.setEvent('SHARE_PLACE_BUTTON_CLICK');
                 });

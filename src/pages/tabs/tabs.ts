@@ -9,6 +9,7 @@ import { InvitePage } from '../invite/invite';
 import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-tabs',
@@ -33,7 +34,8 @@ export class TabsPage {
         private profile: ProfileService,
         private transaction: TransactionService,
         private statusBar: StatusBar,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private adjust: AdjustService) {
 
         this.envName = this.appMode.getEnvironmentMode();
         // this.profile.getWithAccounts(false)
@@ -42,6 +44,10 @@ export class TabsPage {
         //     });
         // this.tab1Root = PlacesPage;
         this.selectedTabIndex = 0;
+    }
+
+    setAdjustEvent() {
+        this.adjust.setEvent('INVITE_FRIENDS_PAGE_VISIT');
     }
 
     refreshStatusBar(event) {

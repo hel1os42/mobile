@@ -1,6 +1,6 @@
 <ion-tabs [selectedIndex]="selectedTabIndex" (ionChange)="refreshStatusBar($event)" #tabs>
     <ion-tab [root]="tab1Root"></ion-tab> 
-    <ion-tab [root]="tab2Root"></ion-tab>
+    <ion-tab [root]="tab2Root" (ionSelect)="setAdjustEvent()"></ion-tab>
     <ion-tab [root]="tab3Root"></ion-tab>
     <ion-tab [root]="tab4Root" (ionSelect)="refresh()"></ion-tab>
    

@@ -35,6 +35,7 @@ import { Offer } from '../../models/offer';
 import { MockPlace } from '../../mocks/mockPlace';
 import { LimitationPopover } from '../place/limitation.popover';
 import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-places',
@@ -118,7 +119,8 @@ export class PlacesPage {
         private geocoder: GeocodeService,
         private gAnalytics: GoogleAnalytics,
         private analytics: AnalyticsService,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private adjust: AdjustService) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.mapRadius = this.listRadius = this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -606,6 +608,7 @@ export class PlacesPage {
     }
 
     getFeatured() {
+        this.adjust.setEvent('TOP_OFFERS_FEED_VISIT');
         this.featuredPage = 1;
         let loading;
         this.isFeatured = true;
@@ -772,6 +775,9 @@ export class PlacesPage {
     }
 
     openPlace(data, isShare: boolean, offer?: Offer) {
+        if (this.isFeatured) {
+            this.adjust.setEvent('TOP_OFFER_FEED_CLICK');
+        }
         this.gAnalytics.trackEvent("Session", 'event_chooseplace');
         this.analytics.faLogEvent('event_chooseplace');
         let params;

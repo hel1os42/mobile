@@ -60,7 +60,7 @@ export class InvitePage {
                 branchUniversalObj.showShareSheet(analytics, properties, message);
 
                 branchUniversalObj.onLinkShareResponse(res => {
-                  this.adjust.setEvent('IN_FR_BUTTON_CLICK_INVITE_PAGE');
+                    this.adjust.setEvent('IN_FR_BUTTON_CLICK_INVITE_PAGE');
                 });
                 // console.log('Branch create obj error: ' + JSON.stringify(err))
             })

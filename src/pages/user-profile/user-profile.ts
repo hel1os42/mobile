@@ -14,6 +14,7 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-user-profile',
@@ -34,7 +35,8 @@ export class UserProfilePage {
         private auth: AuthService,
         public alert: AlertController,
         private transaction: TransactionService,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private adjust: AdjustService) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -144,9 +146,11 @@ export class UserProfilePage {
                 branchUniversalObj = res;
                 let analytics = {};
                 let message = '';
-                branchUniversalObj.showShareSheet(analytics, properties, message)
-                    .then(resp => console.log(resp))
-            }).catch(function (err) {
+                branchUniversalObj.showShareSheet(analytics, properties, message);
+
+                branchUniversalObj.onLinkShareResponse(res => {
+                    this.adjust.setEvent('IN_FR_BUTTON_CLICK_PROFILE_PAGE');
+                  });
                 // console.log('Branch create obj error: ' + JSON.stringify(err))
             })
     }
