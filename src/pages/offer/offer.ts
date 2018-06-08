@@ -21,6 +21,7 @@ import { CongratulationPopover } from './congratulation.popover';
 import { LinkPopover } from './link.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { TimeframesPopover } from './timeframes.popover';
+import { AdjustService } from '../../providers/adjust.service';
 
 declare var window;
 
@@ -60,7 +61,8 @@ export class OfferPage {
         private statusBar: StatusBar,
         private gAnalytics: GoogleAnalytics,
         private browser: InAppBrowser,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private adjust: AdjustService) {
 
         // this.today = new Date();
         if (this.share.get()) {
@@ -199,6 +201,7 @@ export class OfferPage {
     }
 
     openRedeemPopover() {
+        this.adjust.setEvent('REDEEM_BUTTON_CLICK');
         this.timeframesHandler();
         // if (!this.disable()) {distance validation
         if (this.isTodayIncluded) {
@@ -309,10 +312,12 @@ export class OfferPage {
     }
 
     dial() {
+        this.adjust.setEvent('PHONE_ICON_CLICK');
         window.location = 'tel:' + this.company.phone;
     }
 
     openSite() {
+        this.adjust.setEvent('WEBSITE_ICON_CLICK');
         this.browser.create(this.company.site, '_system');
     }
 

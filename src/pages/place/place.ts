@@ -25,6 +25,7 @@ import { OfferPage } from '../offer/offer';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
 import { MockTestimonials } from '../../mocks/mockTestimonials';
+import { AdjustService } from '../../providers/adjust.service';
 
 declare var window;
 
@@ -65,7 +66,8 @@ export class PlacePage {
         private launchNavigator: LaunchNavigator,
         private browser: InAppBrowser,
         private popoverCtrl: PopoverController,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private adjust: AdjustService) {
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
         this.segment = "alloffers";
@@ -235,14 +237,17 @@ export class PlacePage {
     }
 
     dial() {
+        this.adjust.setEvent('PHONE_ICON_CLICK');
         window.location = 'tel:' + this.company.phone;
     }
 
     openSite() {
+        this.adjust.setEvent('WEBSITE_ICON_CLICK');
         this.browser.create(this.company.site, '_system');
     }
 
     openComplaint() {
+        this.adjust.setEvent('REPORT_BUTTON_CLICK');
         let complaintPopover = this.popoverCtrl.create(ComplaintPopover, { companyId: this.company.id });
         complaintPopover.present();
     }

@@ -249,6 +249,7 @@ export class MyApp {
             // Branch.setCookieBasedMatching('nau.test-app.link')
             Branch.initSession(data => {
                 if (data['+clicked_branch_link']) {
+                    this.adjust.setEvent('EXTERNAL_CLICK_ON_BRANCH_LINK');
                     // read deep link data on click
                     if (data.invite_code) {
                         this.storage.set('invCode', data.invite_code);
