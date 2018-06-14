@@ -1,15 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Tabs } from 'ionic-angular';
+import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { InvitePage } from '../invite/invite';
-import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
-import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-tabs',

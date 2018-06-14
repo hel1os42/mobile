@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
 import { StorageService } from './storage.service';
 
 declare var Adjust, AdjustConfig, AdjustEvent;
@@ -44,9 +43,7 @@ export class AdjustService {
 
     }
 
-    constructor(
-        private platform: Platform,
-        private storage: StorageService) {
+    constructor(private storage: StorageService) {
 
         // this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
         //     .subscribe(() => this.init());

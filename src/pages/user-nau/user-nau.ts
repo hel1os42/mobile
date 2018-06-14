@@ -1,19 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Content, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { Content, NavParams, PopoverController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
 import { TransactionCreate } from '../../models/transactionCreate';
+import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TransferPopover } from './transfer.popover';
-import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-user-nau',
@@ -49,7 +49,6 @@ export class UserNauPage {
         private profile: ProfileService,
         private appMode: AppModeService,
         private navParams: NavParams,
-        private nav: NavController,
         private toast: ToastService,
         private popoverCtrl: PopoverController,
         private barcode: BarcodeScanner,

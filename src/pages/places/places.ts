@@ -32,7 +32,6 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
 import { AnalyticsService } from '../../providers/analytics.service';
 import { Offer } from '../../models/offer';
-import { MockPlace } from '../../mocks/mockPlace';
 import { LimitationPopover } from '../place/limitation.popover';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';

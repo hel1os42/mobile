@@ -12,6 +12,8 @@ import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
 import { Speciality } from '../../models/speciality';
 import { Testimonial } from '../../models/testimonial';
+import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
@@ -21,14 +23,11 @@ import { TestimonialsService } from '../../providers/testimonials.service';
 import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
+import { NoticePopover } from '../offer/notice.popover';
 import { OfferPage } from '../offer/offer';
+import { LimitationPopover } from '../place/limitation.popover';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
-import { MockTestimonials } from '../../mocks/mockTestimonials';
-import { LimitationPopover } from '../place/limitation.popover';
-import { NoticePopover } from '../offer/notice.popover';
-import { User } from '../../models/user';
-import { AdjustService } from '../../providers/adjust.service';
 
 declare var window;
 
@@ -92,7 +91,6 @@ export class PlacePage {
             this.offers.getPlace(this.company.id)
                 .subscribe(company => {
                     this.company = company;
-                    debugger
                     this.offersList = company.offers;
                     // this.features = this.company.specialities;
                     this.features = _.uniqBy(company.specialities, 'slug');
