@@ -20,6 +20,7 @@ export class LimitationPopover {
     keys = [];
     user: User;
     messages = [];
+    message: string;
     PAGE_KEY = 'PAGE_PLACE.';
     LIMITATION_128 = 'LIMITATION_128';
     LIMITATION_256 = 'LIMITATION_256';
@@ -44,8 +45,11 @@ export class LimitationPopover {
                         str = this.addPointsValues(str);
                     }
                     this.messages.push(str);
-                })
-        })
+                });
+        });
+        if (this.messages.length > 0) {
+            this.message = this.messages[0];// only one limitation message
+        }
     }
 
     addPointsValues(str: string) {
