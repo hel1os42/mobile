@@ -92,6 +92,7 @@ export class PlacePage {
             this.offers.getPlace(this.company.id)
                 .subscribe(company => {
                     this.company = company;
+                    debugger
                     this.offersList = company.offers;
                     // this.features = this.company.specialities;
                     this.features = _.uniqBy(company.specialities, 'slug');

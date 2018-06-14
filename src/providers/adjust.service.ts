@@ -95,7 +95,6 @@ export class AdjustService {
     setEvent(key) {
         if (typeof Adjust !== 'undefined' && typeof AdjustConfig !== 'undefined' && AdjustEvent !== 'undefined') {
             let adjustEvent = new AdjustEvent(this.TOKENS[key]);
-            debugger;
             Adjust.trackEvent(adjustEvent);
         }
     }

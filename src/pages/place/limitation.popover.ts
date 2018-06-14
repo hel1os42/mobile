@@ -40,12 +40,10 @@ export class LimitationPopover {
             this.translate.get(this.PAGE_KEY + key)
                 .subscribe(resp => {
                     let str = resp;
-                    debugger
                     if (key === this.LIMITATION_128 || key === this.LIMITATION_256) {
                         str = this.addPointsValues(str);
                     }
                     this.messages.push(str);
-                    debugger;
                 })
         })
     }
