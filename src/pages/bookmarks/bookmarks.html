@@ -113,12 +113,12 @@
         <ion-item-sliding *ngFor=" let offer of offers" class="relative">
         <ion-item
             (click)="openOffer(offer)"
+            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }" 
             class="margin-no">
             <ion-avatar item-start>
                 <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
                 <div
                     [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"
-                    [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }" 
                     class="thumb_image">
                 </div>
             </ion-avatar>
