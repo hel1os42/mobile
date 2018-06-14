@@ -79,7 +79,7 @@
                     </div>
                     <div class="text-828282 font-12 wrap text-overflow-3 margin-top-2vw">{{ company. description }}</div>
                 </div>
-                <img *ngIf="company.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
+                <!-- <img *ngIf="company.is_favorite" class="star_right" src="assets/img/place/icon_star.svg"> -->
 
                 <div item-end>
                     <div class="num_right">
@@ -113,13 +113,13 @@
         <ion-item-sliding *ngFor=" let offer of offers" class="relative">
         <ion-item
             (click)="openOffer(offer)"
-            class="margin-no"
-            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }">
+            class="margin-no">
             <ion-avatar item-start>
                 <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
                 <div
-                    class="thumb_image"
-                    [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
+                    [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"
+                    [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }" 
+                    class="thumb_image">
                 </div>
             </ion-avatar>
             <div class="smooth_transition">
@@ -130,7 +130,7 @@
             <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">
                 {{ offer.description }}
             </div>
-            <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
+            <!-- <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg"> -->
             <!--
             <div class="margin-top-2vw flex">
                 <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">
