@@ -439,8 +439,11 @@ export class PlacesPage {
             this._map.panTo(this.coords);
             this.isRevertCoords = false;
         }
+        if (!this.shareData) {
+            this.shareData = this.share.get();
+        }
         if (this.shareData) {
-            this.openPlace(this.shareData, true)
+            this.openPlace(this.shareData, true);
         }
         this.getList();
     }
