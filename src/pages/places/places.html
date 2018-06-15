@@ -174,10 +174,12 @@
             detail-none>
             <ion-avatar
                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-                item-start text-center class="relative">
-                <div
-                    class="thumb_image margin-top-2vw"
-                    [ngStyle]="{'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)'}">
+                item-start 
+                text-center 
+                class="relative">
+                <div 
+                    [ngStyle]="{'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)'}"
+                    class="thumb_image margin-top-2vw">
                 </div>
                 <div class="info-block" text-left>
                     <div>
@@ -200,9 +202,10 @@
                     </div>
                 </div>
             </ion-avatar>
-            <div class="font-0 right-side relative"
-                 [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"
-                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }">
+            <div 
+                [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}" 
+                [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                class="font-0 right-side relative">
                 <div class="right-side-content">
                     <div class="smooth_transition">
                         <div class="scroll_content margin-top-2vw">
@@ -213,7 +216,8 @@
                 </div>
                 <div [ngClass]="offer.type" class="right-top-angle"></div>
             </div>
-            <img *ngIf="offer.is_favorite"
+            <img 
+                *ngIf="offer.is_favorite"
                  [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
                  class="star_right" src="assets/img/place/icon_star.svg">
             <div class="block-fr bold">
