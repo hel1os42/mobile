@@ -373,7 +373,7 @@
         "POINT" : "point",
         "OFFER" : "Offer",
         "REDEEM" : "Redeem",
-        "OFFER_REDEEMING" : "Offer redeeming",
+        "OFFER_REDEEMING" : "Show to the retailer",
         "OR_USE_QR_CODE" : "or use QR-code",
         "AGREE_WITH_TERMS" : "Agree with Terms & Conditions",
         "SEND_REVIEW" : "Send review",

@@ -374,7 +374,7 @@
         "POINT" : "punto",
         "OFFER" : "Oferta",
         "REDEEM" : "Canjear",
-        "OFFER_REDEEMING" : "Ofrecer canje",
+        "OFFER_REDEEMING" : "Mostrar al comercio",
         "OR_USE_QR_CODE" : "o use el código QR",
         "AGREE_WITH_TERMS" : "Acepto los Términos y Condiciones",
         "SEND_REVIEW" : "Enviar comentario",
