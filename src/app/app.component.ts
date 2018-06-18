@@ -12,6 +12,7 @@ import { Share } from '../models/share';
 import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
+import { AdjustService } from '../providers/adjust.service';
 import { AnalyticsService } from '../providers/analytics.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
@@ -19,7 +20,6 @@ import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
-import { AdjustService } from '../providers/adjust.service';
 
 
 

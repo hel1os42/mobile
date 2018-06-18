@@ -27,8 +27,6 @@ export class TabsPage {
     shownTransactions: boolean;//temporary
     envName: string;
 
-    @ViewChild('tabs') tabs: Tabs;
-
     constructor(
         private profile: ProfileService,
         private transaction: TransactionService,
@@ -60,6 +58,7 @@ export class TabsPage {
             this.statusBar.styleDefault();
         }
     }
+    
     refresh() {
         if (this.shownTransactions) {
             this.profile.refreshAccounts(false);
