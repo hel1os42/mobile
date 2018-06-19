@@ -28,6 +28,7 @@ import { OfferPage } from '../offer/offer';
 import { LimitationPopover } from '../place/limitation.popover';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
+import { LinkPopover } from '../offer/link.popover';
 
 declare var window;
 
@@ -54,6 +55,7 @@ export class PlacePage {
     onRefreshCompany: Subscription;
     onRefreshUser: Subscription;
     user: User;
+    isDismissLinkPopover = true;
 
     constructor(
         private nav: NavController,
@@ -219,40 +221,60 @@ export class PlacePage {
                 // let message = this.company.name + this.company.description
                 let message = '';
                 branchUniversalObj.showShareSheet(analytics, properties, message);
-                
+
                 branchUniversalObj.onLinkShareResponse(res => {
                     this.adjust.setEvent('SHARE_PLACE_BUTTON_CLICK');
                 });
             })
     }
 
-    openOffer(offer: Offer, company?) {
+    openOffer(event, offer: Offer, company?) {
         if (!offer.redemption_access_code || company) {
-            //temporary
-            // this.user.redemption_points = 10;
-            // this.user.referral_points = 11;
-            // offer.is_featured = true;
-            // offer.redemption_points_price = 5;
-            // offer.referral_points_price = 6
-            //
-            if (offer.is_featured && (offer.redemption_points_price || offer.referral_points_price)) {
-                let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer, user: this.user });
-                noticePopover.present();
+            if (event.target.localName === 'a') {
+                this.openLinkPopover(event);
             }
-            this.analytics.trackEvent("Session", 'event_chooseoffer');
-            this.nav.push(OfferPage, {
-                offer: offer,
-                company: this.company,
-                distanceObj: this.getDistance(offer.latitude, offer.longitude),
-                coords: this.coords,
-                user: this.user
-            });
+            else {
+                if (offer.is_featured && (offer.redemption_points_price || offer.referral_points_price)) {
+                    let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer, user: this.user });
+                    noticePopover.present();
+                }
+                this.analytics.trackEvent("Session", 'event_chooseoffer');
+                this.nav.push(OfferPage, {
+                    offer: offer,
+                    company: this.company,
+                    distanceObj: this.getDistance(offer.latitude, offer.longitude),
+                    coords: this.coords,
+                    user: this.user
+                });
+            }
         }
         else {
             let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
             limitationPopover.present();
         }
+    }
 
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offers.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
     }
 
     removeFavorite() {

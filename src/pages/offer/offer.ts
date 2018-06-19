@@ -110,7 +110,7 @@ export class OfferPage {
                 }
             });
 
-            this.onRefreshUser = this.profile.onRefresh
+        this.onRefreshUser = this.profile.onRefresh
             .subscribe(user => this.user = user)
     }
 
@@ -190,9 +190,6 @@ export class OfferPage {
             }
         }
         else return;
-
-
-
     }
 
     getStars(star: number) {
@@ -325,10 +322,10 @@ export class OfferPage {
                         // let message = this.company.name + this.company.description
                         let message = '';
                         branchUniversalObj.showShareSheet(analytics, properties, message);
-                           
+
                         branchUniversalObj.onLinkShareResponse(res => {
                             this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
-                          });
+                        });
                     })
 
             })
