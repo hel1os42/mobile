@@ -35,6 +35,8 @@ import { Offer } from '../../models/offer';
 import { LimitationPopover } from '../place/limitation.popover';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
+import { LinkPopover } from '../offer/link.popover';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-places',
@@ -97,6 +99,7 @@ export class PlacesPage {
     featuredPage = 1;
     lastFeaturedPage: number;
     user: User;
+    isDismissLinkPopover = true;
 
     constructor(
         private platform: Platform,
@@ -119,7 +122,8 @@ export class PlacesPage {
         private gAnalytics: GoogleAnalytics,
         private analytics: AnalyticsService,
         private changeDetectorRef: ChangeDetectorRef,
-        private adjust: AdjustService) {
+        private adjust: AdjustService,
+        private browser: InAppBrowser) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.mapRadius = this.listRadius = this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -443,7 +447,7 @@ export class PlacesPage {
             this.shareData = this.share.get();
         }
         if (this.shareData) {
-            this.openPlace(this.shareData, true);
+            this.openPlace(undefined, this.shareData, true);
         }
         this.getList();
     }
@@ -526,7 +530,7 @@ export class PlacesPage {
         let popupContent = DomUtil.create('div');
         popupContent.innerText = company.name;
         popupContent.addEventListener('click', (event) => {
-            this.openPlace(company, false);
+            this.openPlace(undefined, company, false);
         });
         let popupLayer = popup().setContent(popupContent);
 
@@ -776,12 +780,14 @@ export class PlacesPage {
         setTimeout(renderMap, 1);
     }
 
-    openPlace(data, isShare: boolean, offer?: Offer) {
+    openPlace(event, data, isShare: boolean, offer?: Offer) {
         if (this.isFeatured) {
             this.adjust.setEvent('TOP_OFFER_FEED_CLICK');
         }
-        this.gAnalytics.trackEvent("Session", 'event_chooseplace');
-        this.analytics.faLogEvent('event_chooseplace');
+        else {
+            this.gAnalytics.trackEvent("Session", 'event_chooseplace');
+            this.analytics.faLogEvent('event_chooseplace');
+        }
         let params;
         if (isShare) {
             params = {
@@ -804,18 +810,37 @@ export class PlacesPage {
             limitationPopover.present();
         }
         else {
-            this.nav.push(PlacePage, params);
+            if (offer && event && event.target.localName === 'a') {
+                this.openLinkPopover(event);
+            }
+            else {
+                this.nav.push(PlacePage, params);
+            }
+
         }
-        // .then(() => {
-        //     this.onRefreshList = this.favorites.onRefreshPlaces
-        //         .subscribe((resp) => {
-        //             this.companies.forEach(company => {
-        //                 if (company.id === resp.id) {
-        //                     company.is_favorite = resp.isFavorite;
-        //                 }
-        //             })
-        //         })
-        // });
+    }
+
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offers.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
     }
 
     getStars(star: number) {

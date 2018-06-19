@@ -104,7 +104,7 @@
         *ngIf="!isMapVisible && !isFeatured"
         no-lines class="item-block-nau margin-top-10">
 
-        <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company, false)">
+        <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace($event, company, false)">
             <ion-avatar item-start text-center>
                 <div
                     class="thumb_image"
@@ -167,9 +167,9 @@
         padding-right
         *ngIf="!isMapVisible && isFeatured"
         no-lines class="item-block-nau margin-top-10 block-featured">
-        <a
+        <div
             *ngFor="let offer of featuredOffers"
-            (click)="openPlace(offer?.account.owner.place, false, offer)"
+            (click)="openPlace($event, offer?.account.owner.place, false, offer)"
             ion-item
             detail-none>
             <ion-avatar
@@ -212,7 +212,11 @@
                             <div class="bold font-18 text-white">{{ offer.label }}</div>
                         </div>
                     </div>
-                    <div class="text-white font-12 wrap text-overflow-5 margin-top-2vw">{{ offer.description }}</div>
+                    <div 
+                        [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }" 
+                        [innerHTML]="offer.rich_description"
+                        class="text-white font-12 wrap text-overflow-5 margin-top-2vw">
+                    </div>
                 </div>
                 <div [ngClass]="offer.type" class="right-top-angle"></div>
             </div>
@@ -240,7 +244,7 @@
                     </span>
                 </div>
             </div>
-        </a>
+        </div>
     </ion-list>
 
     <div *ngIf="isMapVisible">
