@@ -224,7 +224,7 @@
         </div>
 
     <p margin>
-        <button color="primary" (click)="createAccount()" [disabled]="baseData.name?.length < 3 || !baseData.email" ion-button block>
+        <button color="primary" (click)="createAccount()" [disabled]="baseData.name?.length < 3" ion-button block>
             <!-- {{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate) }} -->
             {{ ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) }}
         </button>
