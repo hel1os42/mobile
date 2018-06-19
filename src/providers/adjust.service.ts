@@ -59,8 +59,8 @@ export class AdjustService {
             // else if (this.platform.is('ios')) {
             //     appToken = this.ADJUST_IOS_APP_TOKEN;
             // }
-            // let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction); //for prod
-            let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox); //for test
+            let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction); //for prod
+            // let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox); //for test
 
             // adjustConfig.setAttributionCallbackListener(function (attribution) {
             //     // Printing all attribution properties.
