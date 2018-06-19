@@ -16,6 +16,8 @@ import { OfferService } from '../../providers/offer.service';
 import { LimitationPopover } from '../place/limitation.popover';
 import { ProfileService } from '../../providers/profile.service';
 import { User } from '../../models/user';
+import { LinkPopover } from '../offer/link.popover';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-bookmarks',
@@ -43,6 +45,7 @@ export class BookmarksPage {
     onRefreshUser: Subscription;
     loadingLocation;
     user: User;
+    isDismissLinkPopover = true;
 
     constructor(
         private favorites: FavoritesService,
@@ -54,7 +57,8 @@ export class BookmarksPage {
         private loading: LoadingController,
         private offerService: OfferService,
         private popoverCtrl: PopoverController,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private browser: InAppBrowser) {
 
         this.isForkMode = this.appMode.getForkMode();
 
@@ -274,21 +278,49 @@ export class BookmarksPage {
         this.nav.push(PlacePage, params);
     }
 
-    openOffer(offer) {
+    openOffer(event, offer) {
         if (!offer.redemption_access_code) {
-            let offerData = _.clone(offer);
-            offerData.is_favorite = true;
-            this.nav.push(OfferPage, {
-                offer: offerData,
-                distanceObj: this.getDistance(offer.latitude, offer.longitude),
-                coords: this.coords,
-                company: offer.account.owner.place
-            });
+            if (event.target.localName === 'a') {
+                this.openLinkPopover(event);
+            }
+            else {
+                let offerData = _.clone(offer);
+                offerData.is_favorite = true;
+                this.nav.push(OfferPage, {
+                    offer: offerData,
+                    distanceObj: this.getDistance(offer.latitude, offer.longitude),
+                    coords: this.coords,
+                    company: offer.account.owner.place
+                });
+            }
         }
         else {
             let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
             limitationPopover.present();
         }
+    }
+
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offerService.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
     }
 
     getTotal() {

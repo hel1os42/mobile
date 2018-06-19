@@ -112,7 +112,7 @@
     <ion-list padding-left padding-right *ngIf="segment === 'offers'" margin-top no-lines class="item-block-nau">
         <ion-item-sliding *ngFor=" let offer of offers" class="relative">
         <ion-item
-            (click)="openOffer(offer)"
+            (click)="openOffer($event, offer)"
             [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }" 
             class="margin-no">
             <ion-avatar item-start>
@@ -127,8 +127,10 @@
                     <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
                 </div>
             </div>
-            <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">
-                {{ offer.description }}
+            <div
+                [innerHTML]="offer.rich_description" 
+                text-regular 
+                class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">
             </div>
             <!-- <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg"> -->
             <!--
