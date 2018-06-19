@@ -167,6 +167,7 @@
             (click)="openOffer($event, offer)" 
             *ngFor="let offer of offersList" 
             [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+            tappable
             ion-item 
             detail-none 
             class="relative">

@@ -170,6 +170,7 @@
         <div
             *ngFor="let offer of featuredOffers"
             (click)="openPlace($event, offer?.account.owner.place, false, offer)"
+            tappable
             ion-item
             detail-none>
             <ion-avatar
