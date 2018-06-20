@@ -116,7 +116,7 @@ export class PlacePage {
                     }
                     else if (offerId) {
                         let offer = company.offers.filter(offer => offer.id === offerId);
-                        this.openOffer(offer[0], company);
+                        this.openOffer(undefined, offer[0], company);
                     }
                 })
         }
@@ -230,7 +230,7 @@ export class PlacePage {
 
     openOffer(event, offer: Offer, company?) {
         if (!offer.redemption_access_code || company) {
-            if (event.target.localName === 'a') {
+            if (event && event.target.localName === 'a') {
                 this.openLinkPopover(event);
             }
             else {
