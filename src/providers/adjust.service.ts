@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
+import { Subscription } from 'rxjs';
+import { AppModeService } from './appMode.service';
 
 declare var Adjust, AdjustConfig, AdjustEvent;
 
@@ -8,9 +10,9 @@ export class AdjustService {
 
     ADJUST_ANDROID_APP_TOKEN = 'ztmblhuttfcw';
     // ADJUST_IOS_APP_TOKEN = 'ih8sgf2a82dc';
-    // onEnvironmentModeSubscription: Subscription;
-    TOKENS = {
+    onEnvironmentModeSubscription: Subscription;
 
+    TOKENS = {
         ACTION_REDEMPTION: 'ubabaz',
         EXTERNAL_CLICK_ON_BRANCH_LINK: 'c0xgvd',
         FACEBOOK_LINK: 'pbctv3',
@@ -40,14 +42,20 @@ export class AdjustService {
         VK_LINK: 'a9wn67',
         VK_SIGN_IN: 'y8tpmo',
         WEBSITE_ICON_CLICK: 'lhnd54'
+    };
+    envName: string;
 
-    }
+    constructor(
+        private storage: StorageService,
+        private appMode: AppModeService) {
 
-    constructor(private storage: StorageService) {
+        this.envName = this.appMode.getEnvironmentMode();
 
-        // this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
-        //     .subscribe(() => this.init());
-
+        this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
+            .subscribe(name => {
+                this.envName = name;
+                this.init();
+            });
     }
 
     init() {
@@ -59,8 +67,9 @@ export class AdjustService {
             // else if (this.platform.is('ios')) {
             //     appToken = this.ADJUST_IOS_APP_TOKEN;
             // }
-            let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction); //for prod
-            // let adjustConfig = new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox); //for test
+            let adjustConfig = this.envName === 'prod' 
+            ? new AdjustConfig(appToken, AdjustConfig.EnvironmentProduction) //for prod
+            : new AdjustConfig(appToken, AdjustConfig.EnvironmentSandbox); //for test
 
             // adjustConfig.setAttributionCallbackListener(function (attribution) {
             //     // Printing all attribution properties.
