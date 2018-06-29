@@ -31,8 +31,9 @@ export class InvitePage {
             .subscribe(user => this.user = user);
     }
 
-    copyInvCode() {
-        this.clipboard.copy(this.user.invite_code);
+    copyReferralLink() {
+        let link = `${this.branchDomain}?invite_code=${this.user.invite_code}`;
+        this.clipboard.copy(link);
         this.toast.showNotification('TOAST.COPY_NOTIFICATION');
     }
 
@@ -40,7 +41,7 @@ export class InvitePage {
         const Branch = window['Branch'];
         let properties = {
             canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
-            canonicalUrl: `${this.branchDomain}/?invite_code=${this.user.invite_code}`,
+            canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
             title: this.user.name,
             contentImageUrl: this.user.picture_url + '?size=mobile',
             // contentDescription: '',
