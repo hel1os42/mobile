@@ -129,7 +129,7 @@ export class UserProfilePage {
         const Branch = window['Branch'];
         let properties = {
             canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
-            canonicalUrl: `${this.branchDomain}/?invite_code=${this.user.invite_code}`,
+            canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
             title: this.user.name,
             contentImageUrl: this.user.picture_url + '?size=mobile',
             // contentDescription: '',

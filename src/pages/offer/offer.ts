@@ -300,7 +300,7 @@ export class OfferPage {
             .subscribe(profile => {
                 let properties = {
                     canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                    canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                    canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
                     title: this.offer.label,
                     contentDescription: this.offer.description,
                     contentImageUrl: this.offer.picture_url + '?size=mobile',

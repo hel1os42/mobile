@@ -200,7 +200,7 @@ export class PlacePage {
         const Branch = window['Branch'];
         let properties = {
             canonicalIdentifier: `?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
-            canonicalUrl: `${this.branchDomain}/?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
+            canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
             title: this.company.name,
             contentDescription: this.company.description,
             contentImageUrl: this.company.cover_url + '?size=mobile',
