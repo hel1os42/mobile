@@ -781,13 +781,18 @@ export class PlacesPage {
     }
 
     openPlace(event, data, isShare: boolean, offer?: Offer) {
+        let isOfferLeftSideClicked: boolean;
+       
         if (this.isFeatured) {
             this.adjust.setEvent('TOP_OFFER_FEED_CLICK');
+            isOfferLeftSideClicked = event && event.path.find(item => item.localName === 'ion-avatar') ? true : false;
         }
         else {
             this.gAnalytics.trackEvent("Session", 'event_chooseplace');
             this.analytics.faLogEvent('event_chooseplace');
+            isOfferLeftSideClicked = false;
         }
+      
         let params;
         if (isShare) {
             params = {
@@ -806,8 +811,13 @@ export class PlacesPage {
             params.user = this.user;
         }
         if (offer && offer.redemption_access_code) {
-            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
-            limitationPopover.present();
+            if (isOfferLeftSideClicked) {
+                this.nav.push(PlacePage, params);
+            }
+            else {
+                let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
+                limitationPopover.present();
+            }
         }
         else {
             if (offer && event && event.target.localName === 'a') {
