@@ -273,7 +273,10 @@ export class OfferPage {
                                             { cssClass: 'position-top' }
                                         );
                                         congratulationPopover.present();
-                                        congratulationPopover.onDidDismiss(() => {
+                                        congratulationPopover.onDidDismiss(data => {
+                                            if (data && data.isAdded) {
+                                                this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
+                                            }
                                             this.offers.refreshPlace(this.company.id);
                                             if (this.offer.is_featured) {
                                                 this.offers.refreshFeaturedOffers(this.coords.lat, this.coords.lng);

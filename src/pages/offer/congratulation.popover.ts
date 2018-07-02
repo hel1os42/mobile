@@ -51,7 +51,7 @@ export class CongratulationPopover {
         this.testimonials.post(this.company.id, testimonial)
             .subscribe(resp => {
                 // let status = resp ? resp.status : '';
-                this.viewCtrl.dismiss();
+                this.viewCtrl.dismiss({ isAdded: true });
             })
     }
 
