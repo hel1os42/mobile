@@ -634,7 +634,7 @@ export class PlacesPage {
     }
 
     loadFeaturedOffers(loading?: any) {
-        //let radius = 19849 * 1000; 
+        //let radius = 19849 * 1000;
         this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
@@ -782,7 +782,7 @@ export class PlacesPage {
 
     openPlace(event, data, isShare: boolean, offer?: Offer) {
         let isOfferLeftSideClicked: boolean;
-       
+
         if (this.isFeatured) {
             this.adjust.setEvent('TOP_OFFER_FEED_CLICK');
             isOfferLeftSideClicked = event && event.path.find(item => item.localName === 'ion-avatar') ? true : false;
@@ -792,7 +792,7 @@ export class PlacesPage {
             this.analytics.faLogEvent('event_chooseplace');
             isOfferLeftSideClicked = false;
         }
-      
+
         let params;
         if (isShare) {
             params = {
@@ -1029,7 +1029,7 @@ export class PlacesPage {
         if (page <= lastPage) {
             setTimeout(() => {
                 if (this.isFeatured) {
-                    // let radius = 19849 * 1000; 
+                    // let radius = 19849 * 1000;
                     this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1)
                         .subscribe(resp => {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
