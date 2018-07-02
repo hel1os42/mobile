@@ -18,7 +18,6 @@ import { ProfileService } from '../../providers/profile.service';
 import { SocialService } from '../../providers/social.service';
 import { StorageService } from '../../providers/storage.service';
 import { StringValidator } from '../../validators/string.validator';
-import { SignUpPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 
 @Component({
@@ -29,7 +28,8 @@ import { TabsPage } from '../tabs/tabs';
 export class LoginPage {
     authData: Login = {
         phone: '',
-        code: ''
+        code: '',
+        inviteCode: ''
     };
     //numCodes = ['+7', '+49', '+63', '+57', '+380', '+86'];
     page;
@@ -58,6 +58,9 @@ export class LoginPage {
     termsUrl = 'https://nau.io/terms';
     policyUrl = 'https://nau.io/privacy-policy';
     testAdjustLabel: string;//temporary
+    isRegisterMode: boolean;
+    isInviteVisible = false;
+    defaultInvite: string;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -81,6 +84,11 @@ export class LoginPage {
         private api: ApiService,
         private browser: InAppBrowser) {
 
+        this.isRegisterMode = !this.appMode.getRegisteredMode();
+        this.envName = this.appMode.getEnvironmentMode();
+
+        this.getInvite();
+
         if (this.platform.is('android')) {
             let
                 appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
@@ -98,7 +106,7 @@ export class LoginPage {
                     appEl.style.height = (appElHeight) + 'px';
                 })
         }
-        this.envName = this.appMode.getEnvironmentMode();
+
         this.numCode = this.getNumCode();
         //temporary for adjust test
         if (this.envName === 'dev') {
@@ -116,6 +124,19 @@ export class LoginPage {
     //         else this.nav.pop();
     //     }
     // }
+    getInvite() {
+        this.defaultInvite = this.envName === 'prod' ? 'nau'
+            : this.envName === 'test' ? '5a4' : '59c';
+
+        this.authData.inviteCode = this.storage.get('invCode')
+            ? this.storage.get('invCode')
+            : this.defaultInvite;
+    }
+
+    showInvite() {
+        this.isInviteVisible = true;
+        this.isRegisterMode = false;
+    }
 
     updateList(ev) {
         StringValidator.updateList(ev);
@@ -153,9 +174,7 @@ export class LoginPage {
             .subscribe(() => {
                 this.isLogin = true;
                 if (this.socialData) {
-                    let defaultInvite = this.envName === 'prod' ? 'nau'
-                        : this.envName === 'test' ? '5a4' : '59c';
-                    this.getReferrerId(defaultInvite);
+                    this.getReferrerId(this.defaultInvite);
                 }
                 else {
                     this.otpHandler();
@@ -163,13 +182,21 @@ export class LoginPage {
                 loading.dismiss();
             },
                 err => {
-                    let inviteCode = this.storage.get('invCode');
-                    if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && !inviteCode) {
-                        this.nav.push(SignUpPage, { phone: this.authData.phone, numCode: this.numCode, social: this.socialData });
-                    }
-                    else if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && inviteCode) {
+                    let formInvite = this.authData.inviteCode;
+                    let inviteCode = formInvite && formInvite !== ''
+                        ? formInvite
+                        : this.defaultInvite;
+
+                    // if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && !inviteCode) {
+                    //     this.nav.push(SignUpPage, { phone: this.authData.phone, numCode: this.numCode, social: this.socialData });
+                    // }
+                    // else if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && inviteCode) {
+                    //     this.getReferrerId(inviteCode, phone);
+                    // };
+                    if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND) {
                         this.getReferrerId(inviteCode, phone);
                     };
+                    debugger
                     loading.dismiss();
                 }
             );
@@ -192,6 +219,7 @@ export class LoginPage {
 
     otpHandler() {
         this.isVisibleLoginButton = true;
+        this.isInviteVisible = false;
         this.cancelTimer();
         this.isRetry = false;
         if (this.getDevMode()) {
@@ -200,6 +228,7 @@ export class LoginPage {
         this.backAction = this.platform.registerBackButtonAction(() => {
             if (this.isVisibleLoginButton) {
                 this.isVisibleLoginButton = false;
+                this.isRegisterMode = !this.appMode.getRegisteredMode();
                 this.backAction();
             }
         }, 1);
@@ -320,7 +349,7 @@ export class LoginPage {
 
     getFbProfile() {
         if (this.isSocial) {
-           
+
             this.isSocial = false;
             this.social.getFbLoginStatus()
                 .then((res) => {
@@ -540,6 +569,7 @@ export class LoginPage {
                             this.envName = data;
                             this.appMode.setEnvironmentMode(data);
                             this.getNumCode();
+                            this.getInvite();
                             //temporary for adjust test
                             if (this.envName === 'dev') {
                                 this.testAdjustLabel = this.storage.get('invCode') ? this.storage.get('invCode') : 'adjustError';
