@@ -9,6 +9,7 @@ export class AppModeService {
     ONBOARDING_KEY = 'shownOnboarding';
     ENVIRONMENT_KEY = 'envName';
     FORK_MODE_KEY = 'isForkMode';
+    REGISTER_MODE_KEY = 'isRegistered';
 
     onEnvironmentMode = new EventEmitter<string>();
 
@@ -49,5 +50,13 @@ export class AppModeService {
 
     setForkMode() {
         this.storage.set(this.FORK_MODE_KEY, true);
+    }
+
+    getRegisteredMode() {
+        return !!this.storage.get(this.REGISTER_MODE_KEY);
+    }
+
+    setRegisteredMode() {
+        this.storage.set(this.REGISTER_MODE_KEY, true);
     }
 }

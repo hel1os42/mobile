@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { StorageService } from "./storage.service";
 import { Token } from "../models/token";
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { AppModeService } from './appMode.service';
 
 @Injectable()
 export class TokenService {
@@ -12,7 +13,8 @@ export class TokenService {
     
     constructor(
         private storage: StorageService,
-        private analytics: GoogleAnalytics) {
+        private analytics: GoogleAnalytics,
+        private appMode: AppModeService) {
         
     }
 
@@ -28,6 +30,7 @@ export class TokenService {
         this.storage.set(this.TOKEN_KEY, token);
         let date = new Date();
         this.storage.set(this.TOKEN_START_TIME, date.valueOf());
+        this.appMode.setRegisteredMode();
     }
 
     remove(event?: string) {
