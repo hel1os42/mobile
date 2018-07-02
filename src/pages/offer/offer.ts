@@ -6,7 +6,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
-
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { OfferActivationCode } from '../../models/offerActivationCode';
@@ -111,7 +110,16 @@ export class OfferPage {
             });
 
         this.onRefreshUser = this.profile.onRefresh
-            .subscribe(user => this.user = user)
+            .subscribe(user => this.user = user);
+
+        //temporary
+        let congratulationPopover = this.popoverCtrl.create(
+            CongratulationPopover,
+            { company: this.company, offer: this.offer },
+            { cssClass: 'position-top' }
+        );
+        congratulationPopover.present();
+        //
     }
 
     ionViewDidLoad() {
@@ -259,9 +267,13 @@ export class OfferPage {
                                     if (offerRedemtionStatus.redemption_id) {
                                         this.stopTimer();
                                         offerRedeemPopover.dismiss();
-                                        let offerCongratulationPopover = this.popoverCtrl.create(CongratulationPopover, { company: this.company, offer: this.offer });
-                                        offerCongratulationPopover.present();
-                                        offerCongratulationPopover.onDidDismiss(() => {
+                                        let congratulationPopover = this.popoverCtrl.create(
+                                            CongratulationPopover,
+                                            { company: this.company, offer: this.offer },
+                                            { cssClass: 'position-top' }
+                                        );
+                                        congratulationPopover.present();
+                                        congratulationPopover.onDidDismiss(() => {
                                             this.offers.refreshPlace(this.company.id);
                                             if (this.offer.is_featured) {
                                                 this.offers.refreshFeaturedOffers(this.coords.lat, this.coords.lng);
