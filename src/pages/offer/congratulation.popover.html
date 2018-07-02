@@ -1,7 +1,7 @@
 <div margin text-center>
 <div margin-top text-uppercase class="text-4F4F4F font-16 bold">{{ 'PAGE_OFFER.CONGRATULATION' | translate }}</div>
 
-    <div class="hide_on_keyboard">
+    <div *ngIf="isContentVisible">
         <div class="text-3E4B5D font-20 padding-top-25">{{ 'PAGE_OFFER.OFFER_REDEMPTION_COMPLETED_AT' | translate }}
             <br>
             <span class="bold">{{ company?.name }}</span>

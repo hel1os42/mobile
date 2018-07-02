@@ -6,6 +6,8 @@ import { TestimonialCreate } from '../../models/testimonialCreate';
 import { AdjustService } from '../../providers/adjust.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
+import { Subscription } from 'rxjs';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -19,16 +21,26 @@ export class CongratulationPopover {
     branchDomain = 'https://nau.app.link';
     stars = 4;
     text: string;
+    onKeyboardShowSubscription: Subscription;
+    onKeyboardHideSubscription: Subscription;
+    isContentVisible = true;
 
     constructor(
         private viewCtrl: ViewController,
         private navParams: NavParams,
         private profile: ProfileService,
         private testimonials: TestimonialsService,
-        private adjust: AdjustService) {
+        private adjust: AdjustService,
+        private keyboard: Keyboard) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
+
+        this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
+            .subscribe(() => this.isContentVisible = false);
+
+        this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
+            .subscribe(() => this.isContentVisible = true);
     }
 
     getStars() {
@@ -90,5 +102,10 @@ export class CongratulationPopover {
                     })
 
             })
+    }
+
+    ngOnDestroy() {
+        this.onKeyboardShowSubscription.unsubscribe();
+        this.onKeyboardHideSubscription.unsubscribe();
     }
 }
