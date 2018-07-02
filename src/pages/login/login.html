@@ -66,6 +66,22 @@
     </div>
 </form>
 
+    <div class="bg-gray margin-top-1vw relative">
+        <ion-item class="border-bottom-no">
+            <ion-input
+                [(ngModel)]="formData.code"
+                ngControl="code"
+                [maxlength]="42"
+                pattern="^[a-zA-Z0-9]+$"
+                name="code"
+                text-center
+                placeholder="{{ 'PAGE_SIGNUP.INVITE_OPTIONAL' | translate }}"
+                type="text">
+            </ion-input>
+        </ion-item>
+        <div text-uppercase class="lbl-edit bold"><span>{{ 'PAGE_SIGNUP.EDIT' | translate }}</span></div>
+    </div>
+
 <button
     *ngIf="isVisibleLoginButton"
     (click)="login()"
@@ -163,6 +179,8 @@
         </button>
 
     </div>
+
+    <a href="#">Change invite</a>
 
 </ion-content>
 <ion-footer no-shadow no-border>
