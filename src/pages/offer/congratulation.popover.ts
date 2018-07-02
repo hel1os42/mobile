@@ -1,11 +1,11 @@
-import { Place } from '../../models/place';
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
-import { ProfileService } from '../../providers/profile.service';
-import { TestimonialsService } from '../../providers/testimonials.service';
+import { Place } from '../../models/place';
 import { TestimonialCreate } from '../../models/testimonialCreate';
 import { AdjustService } from '../../providers/adjust.service';
+import { ProfileService } from '../../providers/profile.service';
+import { TestimonialsService } from '../../providers/testimonials.service';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -18,6 +18,7 @@ export class CongratulationPopover {
     offer: Offer;
     branchDomain = 'https://nau.app.link';
     stars = 4;
+    text: string;
 
     constructor(
         private viewCtrl: ViewController,
@@ -44,7 +45,8 @@ export class CongratulationPopover {
 
     send() {
         let testimonial: TestimonialCreate = {
-            stars: this.stars
+            stars: this.stars,
+            text: this.text
         }
         this.testimonials.post(this.company.id, testimonial)
             .subscribe(resp => {

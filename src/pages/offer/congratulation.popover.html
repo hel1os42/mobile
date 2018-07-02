@@ -21,17 +21,17 @@
     </div>
 </ng-container>
     <div text-center margin-bottom class="btn_social_icon">
-    <!-- <button ion-button icon-only color="transparent" margin-right>
-      <img src="assets/img/user_offers/soc_icon1.svg">
-    </button>
-    <button ion-button icon-only color="transparent" margin-right>
-      <img src="assets/img/user_offers/soc_icon2.svg">
-    </button> -->
-    <button (click)="shareOffer()" ion-button icon-only color="transparent">
-      <!--<img src="assets/img/user_offers/soc_icon3.svg">-->
-        <img src="assets/img/place/btn_share.svg">
-    </button>
-  </div>
+        <!-- <button ion-button icon-only color="transparent" margin-right>
+        <img src="assets/img/user_offers/soc_icon1.svg">
+        </button>
+        <button ion-button icon-only color="transparent" margin-right>
+        <img src="assets/img/user_offers/soc_icon2.svg">
+        </button> -->
+        <button (click)="shareOffer()" ion-button icon-only color="transparent">
+        <!--<img src="assets/img/user_offers/soc_icon3.svg">-->
+            <img src="assets/img/place/btn_share.svg">
+        </button>
+    </div>
 
     <div margin padding-bottom class="block-star">
         <ng-container *ngFor="let showStar of getStars(); let i = index">
@@ -39,9 +39,16 @@
         </ng-container>
     </div>
 
-  <div margin>
+    <ion-textarea 
+        [(ngModel)]="text" 
+        maxlength="120" 
+        autofocus 
+        class="bg-gray-radius-small">
+    </ion-textarea>
+    
+<div margin>
     <div class="block-btn">
-      <button (click)="send()" ion-button block color="primary">{{ 'PAGE_OFFER.SEND_REVIEW' | translate }}</button>
+        <button (click)="send()" ion-button block color="primary">{{ 'PAGE_OFFER.SEND_REVIEW' | translate }}</button>
     </div>
-  </div>
+</div>
 </div>
