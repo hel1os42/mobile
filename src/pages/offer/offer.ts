@@ -111,15 +111,6 @@ export class OfferPage {
 
         this.onRefreshUser = this.profile.onRefresh
             .subscribe(user => this.user = user);
-
-        //temporary
-        let congratulationPopover = this.popoverCtrl.create(
-            CongratulationPopover,
-            { company: this.company, offer: this.offer },
-            { cssClass: 'position-top' }
-        );
-        congratulationPopover.present();
-        //
     }
 
     ionViewDidLoad() {
