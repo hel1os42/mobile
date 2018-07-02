@@ -174,10 +174,10 @@
             ion-item
             detail-none>
             <ion-avatar
-                item-start 
-                text-center 
+                item-start
+                text-center
                 class="relative">
-                <div 
+                <div
                     [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }"
                     class="thumb_image margin-top-2vw">
                 </div>
@@ -202,8 +202,9 @@
                     </div>
                 </div>
             </ion-avatar>
-            <div 
-                [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }" 
+            <div class="right-block">
+            <div
+                [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
                 class="font-0 right-side relative">
                 <div class="right-side-content">
@@ -212,15 +213,15 @@
                             <div class="bold font-18 text-white">{{ offer.label }}</div>
                         </div>
                     </div>
-                    <div 
-                        [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }" 
+                    <div
+                        [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }"
                         [innerHTML]="offer.rich_description"
                         class="text-white font-12 wrap text-overflow-5 margin-top-2vw">
                     </div>
                 </div>
                 <div [ngClass]="offer.type" class="right-top-angle"></div>
             </div>
-            <img 
+            <img
                 *ngIf="offer.is_favorite"
                  [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
                  class="star_right" src="assets/img/place/icon_star.svg">
@@ -243,6 +244,7 @@
                         {{ offer.redemption_points_price - user.redemption_points }}
                     </span>
                 </div>
+            </div>
             </div>
         </div>
     </ion-list>
