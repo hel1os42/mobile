@@ -169,11 +169,11 @@
         no-lines class="item-block-nau margin-top-10 block-featured">
         <div
             *ngFor="let offer of featuredOffers"
-            (click)="openPlace($event, offer?.account.owner.place, false, offer)"
             tappable
             ion-item
             detail-none>
             <ion-avatar
+                (click)="openPlace($event, offer?.account.owner.place, false)"
                 item-start
                 text-center
                 class="relative">
@@ -202,7 +202,7 @@
                     </div>
                 </div>
             </ion-avatar>
-            <div class="right-block">
+            <div (click)="openPlace($event, offer?.account.owner.place, false, offer)" class="right-block">
             <div
                 [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
