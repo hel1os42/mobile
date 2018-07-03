@@ -385,9 +385,38 @@ page-user-profile{
         border-radius: 0.7vw;
     }
 
+    .points_friens, .points_redemptions{
+        color: #000;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        border-radius: 0.7vw;
+        display: inline-block;
+    }
+
+    .points_friens{
+        background: #75e3ea;
+    }
+
+    .points_redemptions{
+        background: #c7e240;
+    }
+
     .main-position-center{
         height: calc(95% - 43vw);
         display: flex;
+    }
+
+    .right-labels{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin: 0;
+    }
+
+    .item-ios [item-left], .item-ios [item-start] {
+        margin: 0;
     }
 }
 
@@ -402,4 +431,25 @@ page-user-profile{
 .platform-tablet .main-position-center{
     height: calc(100% - 43vw);
     margin-bottom: 5%;
+}
+
+.btn_icon{
+    margin: auto;
+    border-radius: 100vw;
+    box-shadow: 0 0 3px rgba(0,0,0,0.5);
+    width: 15vw;
+    height: 15vw;
+
+}
+
+.btn_icon_offers{
+    background: url(../assets/img/user_profile/offers.svg) no-repeat 50% 50%/ 50% 50%;
+}
+
+.btn_icon_nau{
+    background: url(../assets/img/user_profile/nau.svg) no-repeat 50% 50%/ 50% 50%;
+}
+
+.btn_icon_users{
+    background: url(../assets/img/user_profile/users.svg) no-repeat 50% 50%/ 50% 50%;
 }

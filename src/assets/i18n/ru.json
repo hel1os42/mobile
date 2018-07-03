@@ -311,7 +311,9 @@
         "CONFIRM_YOUR_LOCATION" : "Подтвердите местоположение:",
         "YOU_CAN_SET": "Вы можете вручную указать свое местоположение",
         "AGE" : "Возраст",
-        "INCOME" : "Доход"
+        "INCOME" : "Доход",
+        "POINTS_FRIENDS" : "Баллы<br>Дружбы:",
+        "POINTS_REDEMPTIONS" : "Баллы<br>Погашений:"
     },
 
     "PAGE_FEED" : {

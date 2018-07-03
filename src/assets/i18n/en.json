@@ -310,7 +310,9 @@
         "CONFIRM_YOUR_LOCATION" : "Confirm your location:",
         "YOU_CAN_SET": "You can set the coordinates in manual mode",
         "AGE" : "Age",
-        "INCOME" : "Income"
+        "INCOME" : "Income",
+        "POINTS_FRIENDS" : "Friendship<br>Points:",
+        "POINTS_REDEMPTIONS" : "Redemption<br>Points:"
     },
 
     "PAGE_FEED" : {

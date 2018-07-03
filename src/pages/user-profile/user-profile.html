@@ -20,7 +20,8 @@
         <div item-start>
             <span class="bold font-16">{{ user?.name }}</span>
         </div>
-        <div item-start>
+        <div item-start class="right-labels">
+            <!--
                 <span class="label label-ios points font-75">
                     {{ 'PAGE_CREATE-USER-PROFILE.YOU_HAVE' | translate }}
                     {{ user.points }}
@@ -32,6 +33,16 @@
                     ? ('UNIT.POINTS2' | translate)
                     : ('UNIT.POINTS' | translate) }}
                 </span>
+-->
+            <span class="label label-ios points_friens font-75" margin-right>
+                <span margin-right [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_FRIENDS' | translate"></span>
+                <span>0</span>
+            </span>
+
+            <span class="label label-ios points_redemptions font-75">
+                <span [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_REDEMPTIONS' | translate"></span>
+                <span>0</span>
+            </span>
         </div>
         <!--
         <ion-avatar item-start>
@@ -135,8 +146,9 @@
     <!-- <ion-grid text-center padding-top padding-bottom class="block-icon-bottom"> -->
         <ion-row>
             <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
-                <div>
-                    <img src="assets/img/user_profile/offers.svg">
+                <div class="relative">
+                    <div class="btn_icon btn_icon_offers" margin-bottom></div>
+                    <div class="btn_icon_offers"></div>
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.offers_count }}</div>
                     <div text-uppercase class="text-3E4B5D font-12">
                         {{ user.offers_count >= 10 && user.offers_count <= 20
@@ -150,15 +162,15 @@
                 </div>
             </a>
             <a ion-col class="text-gray" (click)="openUserNau()" align-self-end>
-                <div>
-                    <img src="assets/img/user_profile/nau.svg">
+                <div class="relative">
+                    <div class="btn_icon btn_icon_nau" margin-bottom></div>
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ balance }}</div>
                     <div text-uppercase class="text-3E4B5D font-12">{{ 'PAGE_USER-PROFILE.NAU' | translate }}</div>
                 </div>
             </a>
             <a ion-col class="text-gray" (click)="openUserUsers()" align-self-start>
-                <div>
-                    <img src="assets/img/user_profile/users.svg">
+                <div class="relative">
+                    <div class="btn_icon btn_icon_users" margin-bottom></div>
                     <div class="bold font-22 text-3E4B5D margin-bottom-1vw">{{ user.referrals_count }}</div>
                     <div text-uppercase class="text-3E4B5D font-12">
                         {{ user.referrals_count >= 10 && user.referrals_count <= 20
