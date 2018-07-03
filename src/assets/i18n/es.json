@@ -4,7 +4,7 @@
         "Beauty": "<div class='font-65 text-white'>Salud y<br>Belleza</div>",
         "Retail": "<div class='font-65 text-white'>Productos y<br>Servicios</div>",
         "Accommodation": "<div class='font-65 text-white'>Alojamiento<br>y Descanso</div>",
-        "Other": "<div class='font-65 text-white'>Online y<br>Otros</div>"
+        "Featured": "<div class='font-65 text-white'>Ofertas<br>Top</div>"
     },
 
     "COUNTRIES" : {
@@ -48,7 +48,10 @@
         "PLEASE_INFORM": "Le pedimos amablemente que informe al representante de la tienda por adelantado sobre su intencion de usar el cupon NAU. Seguimos siendo novatos para muchos, por lo que algunos personal pueden no estar listos. En este caso le recomendamos que se contacte con el administrador de la establecimiento.",
         "IF_THE_PROBLEM": "Siempre que el problema persiste contactenos en la direccion",
         "SO_THAT": "﻿para la correcion de la situacion mas rapida.",
-        "GOT_IT": "﻿Continuar"
+        "GOT_IT": "﻿Continuar",
+        "FRIENDS_POINTS": "Para redimir esta oferta, usarás referral_points_price puntos de amigos aparte de los referral_points que tienes actualmente. Cada nuevo amigo te traerá más puntos de amigos, entoncen no vaciles en invitarlos ahora mismo!",
+        "REDEMPTIONS_POINTS": "Para redimir esta oferta, usarás redemption_points_price puntos de redención aparte de los redemption_points que tienes actualmente. Puedes obtener mas puntos de redención ahora mismo si redimes cualquier oferta en la app!",
+        "FRIENDS_AND_REDEMPTIONS_POINTS": "Para redimir esta oferta, usarás referral_points_price puntos de amigos aparte de los referral_points y redemption_points_price puntos de redención aparte de los redemption_points que tienes actualmente. Obten más puntos invitando amigos y redimiendo ofertas en la app!"
     },
 
     "UNIT" : {
@@ -106,7 +109,7 @@
         "NEW" : "Nuevo",
         "MONTHLY" : "Mensual",
         "FEATURED" : "Destacado",
-        "LOADING_COMPANIES" : "Cargando comercios...",
+        "LOADING_COMPANIES" : "Cargando...",
         "SELECT_CUISINE" : "Seleccionar cocina",
         "CLEAR" : "Claro",
         "MAP" : "Mapa",
@@ -130,7 +133,10 @@
         "WE_ARE": "Estamos buscando activamente las federales regionales - puedes construir un buen negocio en su ciudad junto con NAU:",
         "ARE_YOU": "¿Posee usted en propiedad de los puntos o sitios o la representante? ",
         "OOPS": "Ooops...",
-        "RADIUS": "Radio"
+        "RADIUS": "Radio",
+        "FRIENDS": "a",
+        "OFFER": "o",
+        "COUPONS_LEFT": "Cupones restantes"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -328,7 +334,7 @@
         "INVITE_FRIENDS" : "Invitar a los amigos",
         "NAU_IS_THE_ONLY" : "Ayuda tus amigos-es resulta beneficioso. Inviten a sus amigos a instalar NAU, y obtenga el 95% de las contribuciones de los anunciantes por cada pago de cupon realizado por tus seguidores. ",
         "A_LIFETIME" : "95% de la remuneracion se le calculan a usted. Y tus amigos aun usan NAU 100% gratuitamente.",
-        "SHARE_YOUR_INVITE_LINK" : "Comparte tu enlace personal"
+        "SHARE_YOUR_INVITE_LINK" : "Comparte tu enlace personal:"
     },
 
     "PAGE_LOGIN" : {
@@ -342,7 +348,7 @@
         "SECONDS" : "segundos",
         "SECONDS2" : "segundos",
         "SECOND" : "segundo",
-        "BY_PRESSING" : "Presionando «Obtener SMS», yo estoy de acuerdo"
+        "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -368,7 +374,7 @@
         "POINT" : "punto",
         "OFFER" : "Oferta",
         "REDEEM" : "Canjear",
-        "OFFER_REDEEMING" : "Ofrecer canje",
+        "OFFER_REDEEMING" : "Mostrar al comercio",
         "OR_USE_QR_CODE" : "o use el código QR",
         "AGREE_WITH_TERMS" : "Acepto los Términos y Condiciones",
         "SEND_REVIEW" : "Enviar comentario",
@@ -386,14 +392,14 @@
     },
 
     "PAGE_ONBOARDING" : {
+        "WELCOME" : "AHORRA DINERO CON NAU",
+        "MAKE_PROFIT" : "GANAS AYUDANDO <br> A OTROS A AHORRAR",
+        "NAU_COINS" : "OBTÉN RECOMPENSAS <br> Y COSAS GRATIS",
         "FOR_BUSINESS" : "Para los negocios",
-        "WELCOME" : "¡Bienvenido!",
-        "MAKE_PROFIT" : "¡Lucre!",
-        "NAU_COINS" : "Monedas NAU!",
         "ENJOY" : "¡Disfrute!",
-        "ENJOY_THE_MOST" : "Disfrute de las ofertas, obsequios y descuentos más atractivos de varios comercios en su ubicación, ya sea que esté en su ciudad de residencia o de vacaciones.",
-        "INVITE_YOUR_FRIENDS" : "Invite a sus amigos y seguidores a unirse a NAU con su código de invitación y obtenga recompensas cada vez que usen ofertas especiales de los comercios de todo el mundo.",
-        "NAU_COINS_IS" : "Las monedas de NAU son una criptomoneda que pronto podra cambiar por el valor diario: ¡ otras criptomonedas incluso monedas tradicionales!",
+        "ENJOY_THE_MOST" : "Podrás ahorrar desde que inicies sesión. Instantáneamente sin necesidad de comprar cupon o tratar de localizar algo que no este a millas de distancia. Solo las mejores ofertas especialies, incluyendo descuntos, dos al precios de uno, y otras inclusivas cosas gratis si traes un par de amigos más.",
+        "INVITE_YOUR_FRIENDS" : "Alguna vez te sentiste mal recompensado por recomendar un comercio a tus amigos?  NAU esta aqui para solucionar eso. Obten recompensas directamente de los comercios cada vez que tus amigos rediman una oferta especial usando NAU!  Esta no es una bonificación unica, cuanto mas ahorran, mas ganas.",
+        "NAU_COINS_IS" : "NAU es todo acerca de diversión y ahorro. Nosotros habilitamos comercios para interactuar directamente contigo y algunas veces ellos estan dispuestos a regalar cosas gratis como café, sushi, horas de bolos etc. Revisa las mejores categorías de ofertas para encontrar las mejores ofertas alrededor y tal vez algunos regalos a la vuelta de la esquina.",
         "MAKE_MONEY" : "Gane dinero",
         "SKIP" : "Omitir"
     },
@@ -404,7 +410,16 @@
         "TESTIMONIALS" : "Testimonios",
         "ABOUT" : "Acerca de",
         "REDEEM_NOW" : "canjear ahora",
-        "ADD_YOUR_FEEDBACK" : "Agregue sus comentarios"
+        "ADD_YOUR_FEEDBACK" : "Agregue sus comentarios",
+        "LIMITATION_1": "Lo sentimos, esta oferta ha alcanzado su limite maximo de redenciones.",
+        "LIMITATION_2": "Lo sentimos, esta oferta ha alcanzado su límite máximo diario de redenciones.",
+        "LIMITATION_4": "Lo sentimos, has alcanzado el limite de redenciones para esta oferta.",
+        "LIMITATION_8": "Lo sentimos, has alcanzado el limite diaro de redenciones para esta oferta.",
+        "LIMITATION_16": "Lo sentimos, has alcanzado el limite semanal de redenciones para esta oferta.",
+        "LIMITATION_32": "Lo sentimos, has alcanzado el limite mensual de redenciones para esta oferta.",
+        "LIMITATION_64": "Lo sentimos, su nivel de ususario esta por debajo del requerido por esta oferta.",
+        "LIMITATION_128": "Lo sentimos, no tienes suficientes Puntos de Amigos para redimir esta oferta (tienes referral_points de referral_points_price). Cada nuevo amigo te traerá más Puntos de Amigos, entoncen no vaciles en invitarlos ahora mismo!",
+        "LIMITATION_256": "Lo sentimos, no tienes suficientes Puntos de Redención para redimir esta oferta (tienes redemption_points de redemption_points_price). Puedes obtener mas Puntos de Redención ahora mismo si redimes cualquier oferta en la app!"
     },
 
     "PAGE_PLACE-FEEDBACK" : {
@@ -453,7 +468,7 @@
         "YOUR_PHONE" : "Se requiere tu número de teléfono para registrarte",
         "YOUR_INVITE" : "Tu código de invitación",
         "NEXT" : "Obtener SMS",
-        "BY_PRESSING" : "Presionando «Obtener SMS», yo estoy de acuerdo",
+        "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo",
         "TERMS_AND_CONDITIONS" : "Términos y Condiciones",
         "AND" : "y",
         "PRIVACY_POLICY" : "política de privacidad",

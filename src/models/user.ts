@@ -1,3 +1,5 @@
+import { Place } from "./place";
+
 export class User {
     id: string;
     name: string;
@@ -18,6 +20,9 @@ export class User {
     accounts?: any;
     roles?: any[];
     approved: boolean;
+    referral_points?: number;
+    redemption_points?: number;
+    place?: Place;
 }
 /*missing:  
     facebookName: string;

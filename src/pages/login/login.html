@@ -64,6 +64,22 @@
             </ion-input>
         </ion-item>
     </div>
+
+    <div *ngIf="!isVisibleLoginButton && isInviteVisible" class="bg-gray margin-top-1vw relative">
+        <ion-item class="border-bottom-no">
+            <ion-input
+                [(ngModel)]="authData.inviteCode"
+                ngControl="inviteCode"
+                [maxlength]="42"
+                pattern="^[a-zA-Z0-9]+$"
+                name="inviteCode"
+                text-center
+                placeholder="{{ 'PAGE_SIGNUP.INVITE_OPTIONAL' | translate }}"
+                type="text">
+            </ion-input>
+        </ion-item>
+        <div text-uppercase class="lbl-edit bold"><span>{{ 'PAGE_SIGNUP.EDIT' | translate }}</span></div>
+    </div>
 </form>
 
 <button
@@ -162,6 +178,10 @@
             <img src="assets/img/start/icon4.svg">
         </button>
 
+    </div>
+
+    <div text-center class="margin-top-5vw">
+        <a *ngIf="isRegisterMode" (click)="showInvite()" href="#">Change invite</a>
     </div>
 
 </ion-content>

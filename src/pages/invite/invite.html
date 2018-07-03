@@ -13,26 +13,29 @@
     <div class="header-shadow"></div>
 </ion-header>
 <ion-content padding>
-    <div text-center margin-bottom>
-        <img class="envelope" src="assets/img/invite/invite.jpg">
+    <div class="position-center">
+    <div text-center margin-bottom class="relative">
+        <div class="background-invite"></div>
+        <img class="envelope" src="assets/img/invite/invite2.png">
     </div>
-    <div margin-bottom class="text-3E4B5D font-14">
+    <div margin-bottom text-justify class="text-3E4B5D font-14">
         {{ 'PAGE_INVITE.NAU_IS_THE_ONLY' | translate }}
     </div>
     <div class="text-3E4B5D font-14">{{ 'PAGE_INVITE.A_LIFETIME' | translate }}</div>
 
-    <div margin-top margin-bottom text-uppercase class="font-14 text-4F4F4F">
+    <div margin-top margin-bottom class="font-14 text-4F4F4F">
         {{ 'PAGE_INVITE.SHARE_YOUR_INVITE_LINK' | translate }}
     </div>
     <div>
-        <button (click)="shareInvite()" color="primary" ion-button block>
+        <button (click)="inviteFriend()" color="primary" ion-button block>
             {{ 'PAGE_INVITE.INVITE_FRIENDS' | translate }}
         </button>
     </div>
     <ion-item margin-top class="bg-gray label-copy">
         <span class="text-3E4B5D font-16 bold">{{ user.invite_code }}</span>
         <a item-end>
-            <ion-icon (click)="copyInvCode()" class="text-FF5A00" name="ios-copy"></ion-icon>
+            <ion-icon (click)="copyReferralLink()" class="text-FF5A00" name="ios-copy"></ion-icon>
         </a>
     </ion-item>
+    </div>
 </ion-content>

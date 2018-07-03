@@ -7,10 +7,8 @@ export class Offer extends OfferCreate {
     picture_url: string;
     company?: Place;
     status: string;
-    // category?: OfferCategory
     deleted_at: string;
     account_id: string;
-    // categories?: OfferCategory[];
     created_at: string;
     updated_at: string;
     timeframes: TimeFrames[];
@@ -20,4 +18,11 @@ export class Offer extends OfferCreate {
     rich_description?: string;
     timeframes_offset: number;
     points: number;
+    redemption_access_code: number;
+    referral_points_price: number;
+    redemption_points_price: number;
+    is_featured?: boolean;
+    place?: any; // to remove
+    // place?: Place;
+    
 }

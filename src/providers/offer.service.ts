@@ -1,6 +1,10 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { ApiService } from './api.service';
+import { EventEmitter, Injectable } from '@angular/core';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { Place } from '../models/place';
 import { RedeemedOffer } from '../models/redeemedOffer';
+import { AdjustService } from './adjust.service';
+import { AnalyticsService } from './analytics.service';
+import { ApiService } from './api.service';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
@@ -8,12 +12,41 @@ import { RedeemedOffer } from '../models/redeemedOffer';
 export class OfferService {
 
     onRefreshRedeemedOffers: EventEmitter<RedeemedOffer[]> = new EventEmitter();
+    onRefreshPlace: EventEmitter<Place> = new EventEmitter();
+    onRefreshFeaturedOffers: EventEmitter<any> = new EventEmitter();
+
+    MAX_RADIUS = 19849 * 1000;// temporary
 
     constructor(
-        private api: ApiService) { }
+        private api: ApiService,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
+        private adjust: AdjustService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
+    }
+
+    getFeaturedList( // for featured offers
+        lat: number,
+        lng: number,
+        // radius: number,
+        page: number,
+        showLoading: boolean
+    ) {
+        // return this.api.get(`offers`, {
+        return this.api.get('offers', {
+        // return this.api.get(`offers?category_ids[]=382b8e95-9083-4095-a928-ee9178ee6275`, {// prod mock
+            showLoading: showLoading,
+            params: {
+                featured: true,
+                latitude: lat,
+                longitude: lng,
+                radius: this.MAX_RADIUS,
+                with: 'account.owner.place',
+                page: page
+            }
+        });
     }
 
     getPlacesOfRoot(
@@ -81,8 +114,8 @@ export class OfferService {
         });
     }
 
-    getPlace(place_id: string) {
-        return this.api.get(`places/${place_id}?with=offers;specialities`);
+    getPlace(place_id: string, noLoading?: boolean) {
+        return this.api.get(`places/${place_id}?with=offers;specialities`, { showLoading: !noLoading });
     }
 
     getPlaceOffers(place_id) {
@@ -118,8 +151,20 @@ export class OfferService {
         return this.api.get(`offers/${offer_id}/activation_code`);
     }
 
-    getRedemtionStatus(code: string) {
-        return this.api.get(`activation_codes/${code}`, { showLoading: false, ignoreHttpNotFound: true });
+    getRedemptionStatus(code: string) {
+        let obs = this.api.get(`activation_codes/${code}`, { 
+            showLoading: false, 
+            ignoreHttpNotFound: true 
+        });
+        obs.subscribe(status => {
+            if (status.redemption_id) {
+                this.refreshRedeemedOffers();
+                this.gAnalytics.trackEvent("Session", 'event_redeemoffer');
+                this.analytics.faLogEvent('event_redeemoffer');
+                this.adjust.setEvent('ACTION_REDEMPTION');
+            }
+        })
+        return obs;
     }
 
     getLink(endpoint: string) {
@@ -149,5 +194,19 @@ export class OfferService {
             .subscribe(resp => {
                 this.onRefreshRedeemedOffers.emit(resp);
             })
+    }
+
+    refreshFeaturedOffers(lat, lng) {
+        this.getFeaturedList(lat, lng, 1, false)
+            .subscribe(resp => {
+                this.onRefreshFeaturedOffers.emit(resp);
+            })
+    }
+
+    refreshPlace(placeId) {
+        this.getPlace(placeId, true)
+        .subscribe(resp => {
+            this.onRefreshPlace.emit(resp);
+        })
     }
 }

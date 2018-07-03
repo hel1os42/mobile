@@ -14,19 +14,19 @@ page-tabs{
   }
 
   .tab-button[aria-selected="true"]:nth-child(2){
-    background-image: url(../assets/img/tabs/tab3_a.svg);
+    background-image: url(../assets/img/tabs/tab5_a.png);
   }
 
   .tab-button[aria-selected="false"]:nth-child(2){
-    background-image: url(../assets/img/tabs/tab3.svg);
+    background-image: url(../assets/img/tabs/tab5.png);
   }
 
   .tab-button[aria-selected="true"]:nth-child(3){
-    background-image: url(../assets/img/tabs/tab4_a.svg);
+    background-image: url(../assets/img/tabs/tab3_a.svg);
   }
 
   .tab-button[aria-selected="false"]:nth-child(3){
-    background-image: url(../assets/img/tabs/tab4.svg);
+    background-image: url(../assets/img/tabs/tab3.svg);
   }
 
   .tab-button[aria-selected="true"]:nth-child(4){
@@ -37,12 +37,6 @@ page-tabs{
     background-image: url(../assets/img/tabs/tab2.svg);
   }
 
-  .tab-button[aria-selected="true"]:nth-child(5){
-    background-image: url(../assets/img/tabs/tab5_a.svg);
-  }
-
-  .tab-button[aria-selected="false"]:nth-child(5){
-    background-image: url(../assets/img/tabs/tab5.svg);
-  }
+  
 
 }

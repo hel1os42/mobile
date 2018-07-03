@@ -1,7 +1,7 @@
 page-invite {
     .envelope{
-        width: 54%;
-        height: auto;
+        width: auto;
+        height: 27vh;
     }
 
     .label-copy {
@@ -24,5 +24,26 @@ page-invite {
     ion-buttons a{
         display: flex;
         align-items: center;
+    }
+
+    .font-14, button.font-14 {
+        font-size: 2vh;
+    }
+
+    .scroll-content{
+        display: flex;
+    }
+
+    .background-invite{
+        background: url(../assets/img/user_profile/nau.svg);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 131%;
+        opacity: 0.1;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
     }
 }

@@ -103,7 +103,7 @@ export class SettingsPage {
     }
 
     createBranchLink(invCode) {
-        this.referralLink = `${this.branchDomain}/?invite_code=${invCode}`;
+        this.referralLink = `${this.branchDomain}?invite_code=${invCode}`;
     }
 
     copyInvCode() {

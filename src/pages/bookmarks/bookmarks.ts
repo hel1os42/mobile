@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, NavController, Platform } from 'ionic-angular';
+import { LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -12,6 +12,12 @@ import { TestimonialsService } from '../../providers/testimonials.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { OfferPage } from '../offer/offer';
 import { PlacePage } from '../place/place';
+import { OfferService } from '../../providers/offer.service';
+import { LimitationPopover } from '../place/limitation.popover';
+import { ProfileService } from '../../providers/profile.service';
+import { User } from '../../models/user';
+import { LinkPopover } from '../offer/link.popover';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-bookmarks',
@@ -35,7 +41,11 @@ export class BookmarksPage {
     isForkMode: boolean;
     onRefreshTestimonials: Subscription;
     onRefreshCoords: Subscription;
+    onRefreshCompany: Subscription;
+    onRefreshUser: Subscription;
     loadingLocation;
+    user: User;
+    isDismissLinkPopover = true;
 
     constructor(
         private favorites: FavoritesService,
@@ -44,13 +54,19 @@ export class BookmarksPage {
         private appMode: AppModeService,
         private testimonials: TestimonialsService,
         private platform: Platform,
-        private loading: LoadingController) {
+        private loading: LoadingController,
+        private offerService: OfferService,
+        private popoverCtrl: PopoverController,
+        private profile: ProfileService,
+        private browser: InAppBrowser) {
 
         this.isForkMode = this.appMode.getForkMode();
 
         this.segment = 'places';
         this.getLocation(true, true);
 
+        this.profile.get(true, false)
+            .subscribe(user => this.user = user)
         this.onRefreshCoords = this.location.onRefreshCoords
             .subscribe(coords => {
                 this.coords = coords;
@@ -87,6 +103,22 @@ export class BookmarksPage {
                 }
             });
 
+        this.onRefreshCompany = this.offerService.onRefreshPlace
+            .subscribe(data => {
+                if (data.offers && data.offers.length > 0) {
+                    this.offers.forEach(offer => {
+                        data.offers.forEach(refreshedOffer => {
+                            if (offer.id === refreshedOffer.id) {
+                                offer = _.extend(offer, refreshedOffer);
+                            }
+                        })
+                    });
+                }
+
+            });
+
+        this.onRefreshUser = this.profile.onRefresh
+            .subscribe(user => this.user = user)
     }
 
     getPlacesList() {
@@ -231,7 +263,7 @@ export class BookmarksPage {
                 key: undefined
             }
         }
-        
+
     }
 
     openPlace(data) {
@@ -246,15 +278,49 @@ export class BookmarksPage {
         this.nav.push(PlacePage, params);
     }
 
-    openOffer(offer) {
-        let offerData = _.clone(offer);
-        offerData.is_favorite = true;
-        this.nav.push(OfferPage, {
-            offer: offerData,
-            distanceObj: this.getDistance(offer.latitude, offer.longitude),
-            coords: this.coords,
-            company: offer.account.owner.place
-        });
+    openOffer(event, offer) {
+        if (!offer.redemption_access_code) {
+            if (event.target.localName === 'a') {
+                this.openLinkPopover(event);
+            }
+            else {
+                let offerData = _.clone(offer);
+                offerData.is_favorite = true;
+                this.nav.push(OfferPage, {
+                    offer: offerData,
+                    distanceObj: this.getDistance(offer.latitude, offer.longitude),
+                    coords: this.coords,
+                    company: offer.account.owner.place
+                });
+            }
+        }
+        else {
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
+            limitationPopover.present();
+        }
+    }
+
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offerService.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
     }
 
     getTotal() {
@@ -294,6 +360,9 @@ export class BookmarksPage {
         this.onRefreshCompanies.unsubscribe();
         this.onRefreshOffers.unsubscribe();
         this.onRefreshTestimonials.unsubscribe();
+        this.onRefreshCompany.unsubscribe();
+        this.onRefreshUser.unsubscribe();
+        this.onRefreshCoords.unsubscribe();
     }
 
 

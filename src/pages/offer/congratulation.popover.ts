@@ -1,10 +1,13 @@
-import { Place } from '../../models/place';
 import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 import { Offer } from '../../models/offer';
+import { Place } from '../../models/place';
+import { TestimonialCreate } from '../../models/testimonialCreate';
+import { AdjustService } from '../../providers/adjust.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
-import { TestimonialCreate } from '../../models/testimonialCreate';
+import { Subscription } from 'rxjs';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -17,15 +20,27 @@ export class CongratulationPopover {
     offer: Offer;
     branchDomain = 'https://nau.app.link';
     stars = 4;
+    text: string;
+    onKeyboardShowSubscription: Subscription;
+    onKeyboardHideSubscription: Subscription;
+    isContentVisible = true;
 
     constructor(
         private viewCtrl: ViewController,
         private navParams: NavParams,
         private profile: ProfileService,
-        private testimonials: TestimonialsService) {
+        private testimonials: TestimonialsService,
+        private adjust: AdjustService,
+        private keyboard: Keyboard) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
+
+        this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
+            .subscribe(() => this.isContentVisible = false);
+
+        this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
+            .subscribe(() => this.isContentVisible = true);
     }
 
     getStars() {
@@ -42,12 +57,13 @@ export class CongratulationPopover {
 
     send() {
         let testimonial: TestimonialCreate = {
-            stars: this.stars
+            stars: this.stars,
+            text: this.text
         }
         this.testimonials.post(this.company.id, testimonial)
             .subscribe(resp => {
                 // let status = resp ? resp.status : '';
-                this.viewCtrl.dismiss();
+                this.viewCtrl.dismiss({ isAdded: true });
             })
     }
 
@@ -57,7 +73,7 @@ export class CongratulationPopover {
             .subscribe(profile => {
                 let properties = {
                     canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                    canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                    canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
                     title: this.offer.label,
                     contentDescription: this.offer.description,
                     contentImageUrl: this.offer.picture_url + '?size=mobile',
@@ -77,13 +93,19 @@ export class CongratulationPopover {
                         branchUniversalObj = res;
                         let analytics = {};
                         // let message = this.company.name + this.company.description
-                        let message = 'NAU';
+                        let message = '';
                         branchUniversalObj.showShareSheet(analytics, properties, message)
-                            .then(resp => console.log(resp))
-                    }).catch(function (err) {
-                        console.log('Branch create obj error: ' + JSON.stringify(err))
+
+                        branchUniversalObj.onLinkShareResponse(res => {
+                            this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
+                        });
                     })
 
             })
+    }
+
+    ngOnDestroy() {
+        this.onKeyboardShowSubscription.unsubscribe();
+        this.onKeyboardHideSubscription.unsubscribe();
     }
 }

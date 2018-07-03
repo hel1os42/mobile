@@ -17,7 +17,7 @@ page-onboarding {
 
     .title-big-sign{
         color: #fff;
-        margin-bottom: 9vw;
+        margin-bottom: 1vw;
     }
 
     .skip{
@@ -43,7 +43,8 @@ page-onboarding {
 
     .slide-title-img{
         height: 11vw;
-        margin-bottom: 23vw;
+        margin-bottom: 2vh;
+        margin-top: 7vh;
         background: url(../assets/img/logo_intro.svg) no-repeat 50% 50%/contain;
     }
 
@@ -70,12 +71,57 @@ page-onboarding {
     }
 
     .onboarding-desc{
-        padding-left: 15%;
-        padding-right: 15%;
+        padding-left: 5%;
+        padding-right: 5%;
     }
 
     .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets {
-        bottom: 23vw;
+        bottom: 5vh;
+    }
+
+    .pic{
+        height: 48vh;
+        width: 100%;
+    }
+
+    .slide1 .pic{
+        background: url("../assets/img/onboarding/pic1.png") no-repeat 100% 50%/95% auto;
+    }
+
+    .slide2 .pic{
+        background: url("../assets/img/onboarding/pic2.png") no-repeat 50% 50%/90% auto;
+    }
+
+    .slide3 .pic{
+        background: url("../assets/img/onboarding/pic3.png") no-repeat 50% 50%/100% auto;
+    }
+
+    .swiper-slide{
+        display: block;
+    }
+
+    .skip{
+        position: absolute;
+        bottom: 5.4vh;
+        right: 5%;
+        height: auto;
+        display: inline;
+    }
+
+    .title-big-sign {
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.7;
+        font-size: 2.8vh;
+        color: #fff;
+        font-family: 'OpenSansNauLight';
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .swiper-pagination-bullet {
+        width: 1.5vh;
+        height: 1.5vh;
     }
 }
 
@@ -84,4 +130,10 @@ page-onboarding {
         bottom: calc(constant(safe-area-inset-bottom) + 23vw);
         bottom: calc(env(safe-area-inset-bottom) + 23vw);
     }
+}
+
+.platform-tablet page-onboarding .pic{
+    height: 40vh;
+    background-size: 60% auto;
+    margin-bottom: 1%;
 }

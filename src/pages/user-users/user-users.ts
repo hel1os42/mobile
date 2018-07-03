@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../../models/user';
 import { ProfileService } from '../../providers/profile.service';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-user-users',
@@ -14,7 +15,10 @@ export class UserUsersPage {
 
 
     constructor(
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private adjust: AdjustService) {
+
+        this.adjust.setEvent('NAU_FRIENDS_CLICK');
 
         this.profile.getReferrals(this.page)
             .subscribe(resp => {

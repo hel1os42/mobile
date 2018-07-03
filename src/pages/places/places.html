@@ -4,20 +4,35 @@
             <ion-row align-items-end>
                 <a
                     ion-col
-                    *ngFor="let category of categories"
-                    [ngClass]="{ 'active_cat': isSelectedCategory(category) }"
-                    (click)="selectCategory(category)">
+                    *ngFor="let category of categories; let i = index"
+                    [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
+                    (click)="i == 2 ? getFeatured() : selectCategory(category)">
                     <p>
-                        <img [src]="category.image_url">
+                        <img [src]="isFeatured && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
                     </p>
                     <!-- <span class="semibold" [innerHTML]="category.name_html"></span> -->
-                    <span class="semibold" [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate"></span>
+                    <span
+                        [ngClass]="{ 'active_cat_featured': isFeatured && i == 2 }"
+                        class="semibold"
+                        [innerHTML]="'CATEGORIES.' + category.name.split(' ')[0] | translate">
+                    </span>
                 </a>
             </ion-row>
         </ion-grid>
 
-        <ion-item class="block-search relative padding-top-3vw" no-lines padding-left padding-right>
-            <ion-searchbar [(ngModel)]="search" (ionInput)="searchCompanies($event)" debounce=2000 round placeholder=""></ion-searchbar>
+        <ion-item
+            *ngIf="!isFeatured"
+            class="block-search relative padding-top-3vw"
+            no-lines
+            padding-left
+            padding-right>
+            <ion-searchbar
+                [(ngModel)]="search"
+                (ionInput)="searchCompanies($event)"
+                debounce=2000
+                round
+                placeholder="">
+            </ion-searchbar>
             <a (click)="createPopover()" class="btn_search_settings">
                 <img
                     *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
@@ -81,21 +96,33 @@
     </ion-item>
     </div>
 -->
-    <ion-list padding-left padding-right *ngIf="!isMapVisible" no-lines class="item-block-nau margin-top-10">
 
-        <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace(company)">
+    <!-- places -->
+    <ion-list
+        padding-left
+        padding-right
+        *ngIf="!isMapVisible && !isFeatured"
+        no-lines class="item-block-nau margin-top-10">
+
+        <a ion-item detail-none *ngFor="let company of companies" (click)="openPlace($event, company, false)">
             <ion-avatar item-start text-center>
-                <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + company.picture_url + '?size=mobile&)'}"></div>
-                <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">
+                <div
+                    class="thumb_image"
+                    [ngStyle]="{ 'background-image': 'url(' + company.picture_url + '?size=mobile&)' }">
+                </div>
+                <!-- <span *ngIf="company.is_featured" text-uppercase class="bold font-12 text-FF5A00 letter-spacing-1">
                     {{ 'PAGE_PLACES.FEATURED' | translate }}
-                </span>
+                </span> -->
             </ion-avatar>
             <div class="font-0">
                 <ng-container *ngFor="let showStar of getStars(company.stars)">
                     <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
                 </ng-container>
                 <img class="icon_people" src="assets/img/user_home/icon_small_user.svg">
-                <span class="font-75 text-828282">{{ company.redemptions_count !== undefined ? company.redemptions_count : company.testimonials_count }}</span>
+                <span
+                    class="font-75 text-828282">
+                    {{ company.redemptions_count !== undefined ? company.redemptions_count : company.testimonials_count }}
+                </span>
                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                 <span class="font-75 text-828282">
                     {{ getDistance(company.latitude, company.longitude).distance }}
@@ -134,6 +161,94 @@
         </a>
     </ion-list>
 
+    <!-- featured offers -->
+    <ion-list
+        padding-left
+        padding-right
+        *ngIf="!isMapVisible && isFeatured"
+        no-lines class="item-block-nau margin-top-10 block-featured">
+        <div
+            *ngFor="let offer of featuredOffers"
+            tappable
+            ion-item
+            detail-none>
+            <ion-avatar
+                (click)="openPlace($event, offer?.account.owner.place, false)"
+                item-start
+                text-center
+                class="relative">
+                <div
+                    [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }"
+                    class="thumb_image margin-top-2vw">
+                </div>
+                <div class="info-block" text-left>
+                    <div>
+                        <ng-container *ngFor="let showStar of getStars(offer?.account.owner.place.stars)">
+                            <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+                        </ng-container>
+                    </div>
+                    <div class="margin-top-1vw">
+                        <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+                        <span class="font-75 text-828282">
+                        {{ getDistance(offer.latitude, offer.longitude).distance }}
+                        {{ getDistance(offer.latitude, offer.longitude).key | translate }}
+                        </span>
+                    </div>
+                    <div class="margin-top-1vw">
+                        <img src="assets/img/user_home/icon_small_user.svg">
+                        <span class="font-75 text-828282">
+                        {{ offer?.account.owner.place.redemptions_count !== undefined ? offer?.account.owner.place.redemptions_count : offer?.account.owner.place.testimonials_count }}
+                        </span>
+                    </div>
+                </div>
+            </ion-avatar>
+            <div (click)="openPlace($event, offer?.account.owner.place, false, offer)" class="right-block">
+            <div
+                [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
+                [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                class="font-0 right-side relative">
+                <div class="right-side-content">
+                    <div class="smooth_transition">
+                        <div class="scroll_content margin-top-2vw">
+                            <div class="bold font-18 text-white">{{ offer.label }}</div>
+                        </div>
+                    </div>
+                    <div
+                        [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }"
+                        [innerHTML]="offer.rich_description"
+                        class="text-white font-12 wrap text-overflow-5 margin-top-2vw">
+                    </div>
+                </div>
+                <div [ngClass]="offer.type" class="right-top-angle"></div>
+            </div>
+            <img
+                *ngIf="offer.is_favorite"
+                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                 class="star_right" src="assets/img/place/icon_star.svg">
+            <div class="block-fr bold">
+                <div
+                    *ngIf="offer.max_count"
+                    class="coupon font-10 flex">
+                    {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}/{{ offer.max_count }}
+                </div>
+                <div
+                    *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
+                    class="block-right font-14 flex"
+                    text-right>
+                    <span class="flex" *ngIf="offer.referral_points_price > user.referral_points">
+                        <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
+                        {{ offer.referral_points_price - user.referral_points }}
+                    </span>
+                    <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
+                        <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
+                        {{ offer.redemption_points_price - user.redemption_points }}
+                    </span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </ion-list>
+
     <div *ngIf="isMapVisible">
         <div
             id="map_leaf"
@@ -148,7 +263,10 @@
         </div>
     </div>
 
-    <ion-infinite-scroll threshold="5px" *ngIf="page <= lastPage && !isMapVisible" (ionInfinite)="infiniteScroll($event)">
+    <ion-infinite-scroll
+        *ngIf="isInfiniteScroll()"
+        (ionInfinite)="infiniteScroll($event)"
+        threshold="5px">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_PLACES.LOADING_COMPANIES' | translate }}"></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

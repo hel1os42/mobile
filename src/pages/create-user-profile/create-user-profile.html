@@ -67,11 +67,11 @@
                         placeholder="{{ 'PAGE_CREATE-USER-PROFILE.YOUR_EMAIL' | translate }}"
                         name="email">
                     </ion-input>
-                    <span *ngIf="baseData.email" class="text-gray icon_info">
+                    <!-- <span *ngIf="baseData.email" class="text-gray icon_info">
                         <a (click)="toggleVisibleInfo()">
                             <img src="assets/img/create_user_profile/info.svg">
                         </a>
-                    </span>
+                    </span> -->
                 </div>
                 </form>
             </div>
@@ -224,7 +224,7 @@
         </div>
 
     <p margin>
-        <button color="primary" (click)="createAccount()" [disabled]="baseData.name?.length < 3 || !baseData.email" ion-button block>
+        <button color="primary" (click)="createAccount()" [disabled]="baseData.name?.length < 3" ion-button block>
             <!-- {{ isEdit ? ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) : ('PAGE_CREATE-USER-PROFILE.CREATE_ACCOUNT' | translate) }} -->
             {{ ('PAGE_CREATE-USER-PROFILE.EDIT_ACCOUNT' | translate) }}
         </button>

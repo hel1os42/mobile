@@ -12,6 +12,8 @@ import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
 import { Speciality } from '../../models/speciality';
 import { Testimonial } from '../../models/testimonial';
+import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
@@ -21,10 +23,12 @@ import { TestimonialsService } from '../../providers/testimonials.service';
 import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
+import { NoticePopover } from '../offer/notice.popover';
 import { OfferPage } from '../offer/offer';
+import { LimitationPopover } from '../place/limitation.popover';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
-import { MockTestimonials } from '../../mocks/mockTestimonials';
+import { LinkPopover } from '../offer/link.popover';
 
 declare var window;
 
@@ -44,10 +48,14 @@ export class PlacePage {
     page: string;
     testimonialsPage = 1;
     testimonialsLastPage: number;
-    onRefreshCompany: Subscription;
+    onRefreshFavorites: Subscription;
     onRefreshTestimonials: Subscription;
     envName: string;//temporary
     companyTestimonials: Testimonial[];
+    onRefreshCompany: Subscription;
+    onRefreshUser: Subscription;
+    user: User;
+    isDismissLinkPopover = true;
 
     constructor(
         private nav: NavController,
@@ -65,11 +73,19 @@ export class PlacePage {
         private launchNavigator: LaunchNavigator,
         private browser: InAppBrowser,
         private popoverCtrl: PopoverController,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private adjust: AdjustService) {
+
+        this.adjust.setEvent('PLACE_VIEW');
 
         this.envName = this.appMode.getEnvironmentMode();//temporary
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
+        this.user = this.navParams.get('user');
+        if (!this.user) {
+            this.profile.get(true, false)
+                .subscribe(user => this.user = user)
+        }
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
             this.offersList = this.company.offers;
@@ -100,12 +116,12 @@ export class PlacePage {
                     }
                     else if (offerId) {
                         let offer = company.offers.filter(offer => offer.id === offerId);
-                        this.openOffer(offer[0], company);
+                        this.openOffer(undefined, offer[0], company);
                     }
                 })
         }
 
-        this.onRefreshCompany = this.favorites.onRefreshOffers
+        this.onRefreshFavorites = this.favorites.onRefreshOffers
             .subscribe((resp) => {
                 this.offersList.forEach(offer => {
                     if (offer.id === resp.id) {
@@ -126,6 +142,18 @@ export class PlacePage {
                     // this.company.testimonials_count = this.company.testimonials_count + 1;
                 }
             });
+
+        this.onRefreshCompany = this.offers.onRefreshPlace
+            .subscribe(company => {
+                this.company = company;
+                this.offersList = company.offers;
+                // this.features = this.company.specialities;
+                this.features = _.uniqBy(company.specialities, 'slug');
+                this.getTestimonials();
+            });
+
+        this.onRefreshUser = this.profile.onRefresh
+            .subscribe(user => this.user = user)
     }
 
     // ionSelected() {
@@ -170,48 +198,83 @@ export class PlacePage {
 
     sharePlace() {
         const Branch = window['Branch'];
-        this.profile.get(false)
-            .subscribe(profile => {
-                let properties = {
-                    canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}`,
-                    canonicalUrl: `${this.branchDomain}/?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}`,
-                    title: this.company.name,
-                    contentDescription: this.company.description,
-                    contentImageUrl: this.company.cover_url + '?size=mobile',
-                    // price: 12.12,
-                    // currency: 'GBD',
-                    contentIndexingMode: 'private',
-                    contentMetadata: {
-                        page: 'place',
-                        invite_code: profile.invite_code,
-                        placeId: this.company.id,
-                    }
-                };
-                var branchUniversalObj = null;
-                Branch.createBranchUniversalObject(properties)
-                    .then(res => {
-                        branchUniversalObj = res;
-                        let analytics = {};
-                        // let message = this.company.name + this.company.description
-                        let message = 'NAU';
-                        branchUniversalObj.showShareSheet(analytics, properties, message)
-                            .then(resp => console.log(resp))
-                    })
-                    .catch(function (err) {
-                        console.log('Branch create obj error: ' + JSON.stringify(err))
-                    })
+        let properties = {
+            canonicalIdentifier: `?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
+            canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
+            title: this.company.name,
+            contentDescription: this.company.description,
+            contentImageUrl: this.company.cover_url + '?size=mobile',
+            // price: 12.12,
+            // currency: 'GBD',
+            contentIndexingMode: 'private',
+            contentMetadata: {
+                page: 'place',
+                invite_code: this.user.invite_code,
+                placeId: this.company.id,
+            }
+        };
+        var branchUniversalObj = null;
+        Branch.createBranchUniversalObject(properties)
+            .then(res => {
+                branchUniversalObj = res;
+                let analytics = {};
+                // let message = this.company.name + this.company.description
+                let message = '';
+                branchUniversalObj.showShareSheet(analytics, properties, message);
 
+                branchUniversalObj.onLinkShareResponse(res => {
+                    this.adjust.setEvent('SHARE_PLACE_BUTTON_CLICK');
+                });
             })
     }
 
-    openOffer(offer, company?) {
-        this.analytics.trackEvent("Session", 'event_chooseoffer');
-        this.nav.push(OfferPage, {
-            offer: offer,
-            company: this.company,
-            distanceObj: this.getDistance(offer.latitude, offer.longitude),
-            coords: this.coords
-        });
+    openOffer(event, offer: Offer, company?) {
+        if (!offer.redemption_access_code || company) {
+            if (event && event.target.localName === 'a') {
+                this.openLinkPopover(event);
+            }
+            else {
+                if (offer.is_featured && (offer.redemption_points_price || offer.referral_points_price)) {
+                    let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer, user: this.user });
+                    noticePopover.present();
+                }
+                this.analytics.trackEvent("Session", 'event_chooseoffer');
+                this.nav.push(OfferPage, {
+                    offer: offer,
+                    company: this.company,
+                    distanceObj: this.getDistance(offer.latitude, offer.longitude),
+                    coords: this.coords,
+                    user: this.user
+                });
+            }
+        }
+        else {
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
+            limitationPopover.present();
+        }
+    }
+
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offers.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
     }
 
     removeFavorite() {
@@ -235,14 +298,17 @@ export class PlacePage {
     }
 
     dial() {
+        this.adjust.setEvent('PHONE_ICON_CLICK');
         window.location = 'tel:' + this.company.phone;
     }
 
     openSite() {
+        this.adjust.setEvent('WEBSITE_ICON_CLICK');
         this.browser.create(this.company.site, '_system');
     }
 
     openComplaint() {
+        this.adjust.setEvent('REPORT_BUTTON_CLICK');
         let complaintPopover = this.popoverCtrl.create(ComplaintPopover, { companyId: this.company.id });
         complaintPopover.present();
     }
@@ -298,8 +364,10 @@ export class PlacePage {
     }
 
     ngOnDestroy() {
-        this.onRefreshCompany.unsubscribe();
+        this.onRefreshFavorites.unsubscribe();
         this.onRefreshTestimonials.unsubscribe();
+        this.onRefreshCompany.unsubscribe();
+        this.onRefreshUser.unsubscribe();
         //
         let nav: any = this.nav;
         let root = nav.root;

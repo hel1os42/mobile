@@ -1,12 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Tabs } from 'ionic-angular';
+import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { InvitePage } from '../invite/invite';
-import { NotificationsPage } from '../notifications/notifications';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
 
@@ -17,23 +17,22 @@ import { UserProfilePage } from '../user-profile/user-profile';
 export class TabsPage {
 
     tab1Root = PlacesPage;
-    tab2Root = BookmarksPage;
-    tab3Root = NotificationsPage;
+    tab2Root = InvitePage;
+    // tab3Root = NotificationsPage;
+    tab3Root = BookmarksPage;
     tab4Root = UserProfilePage;
-    tab5Root = InvitePage;
     
     selectedTabIndex = 0;
     nauParams;//temporary
     shownTransactions: boolean;//temporary
     envName: string;
 
-    @ViewChild('tabs') tabs: Tabs;
-
     constructor(
         private profile: ProfileService,
         private transaction: TransactionService,
         private statusBar: StatusBar,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private adjust: AdjustService) {
 
         this.envName = this.appMode.getEnvironmentMode();
         // this.profile.getWithAccounts(false)
@@ -42,6 +41,10 @@ export class TabsPage {
         //     });
         // this.tab1Root = PlacesPage;
         this.selectedTabIndex = 0;
+    }
+
+    setAdjustEvent() {
+        this.adjust.setEvent('INVITE_FRIENDS_PAGE_VISIT');
     }
 
     refreshStatusBar(event) {
@@ -55,6 +58,7 @@ export class TabsPage {
             this.statusBar.styleDefault();
         }
     }
+    
     refresh() {
         if (this.shownTransactions) {
             this.profile.refreshAccounts(false);

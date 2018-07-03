@@ -1,8 +1,8 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, Platform, PopoverController, Content } from 'ionic-angular';
 import { DomUtil, icon, LatLng, latLng, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarkerOptions } from 'leaflet';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
@@ -31,13 +31,20 @@ import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
 import { AnalyticsService } from '../../providers/analytics.service';
-
+import { Offer } from '../../models/offer';
+import { LimitationPopover } from '../place/limitation.popover';
+import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
+import { LinkPopover } from '../offer/link.popover';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
     selector: 'page-places',
     templateUrl: 'places.html'
 })
 export class PlacesPage {
+
+    @ViewChild(Content) content: Content;
 
     companies: Place[];
     categories: OfferCategory[] = OfferCategory.StaticList;
@@ -74,6 +81,8 @@ export class PlacesPage {
     onRefreshListSubscription: Subscription;
     onRefreshTestimonials: Subscription;
     onRefreshDefoultCoords: Subscription;
+    onRefreshFeaturedOffers: Subscription;
+    onRefreshUser: Subscription;
     isConfirm = false;
     shareData: Share;
     isRefreshLoading = false;
@@ -85,6 +94,12 @@ export class PlacesPage {
     userCoords: Coords;
     zoom = 16;
     isDismissNoPlacesPopover = true;
+    isFeatured = false;
+    featuredOffers: Offer[];
+    featuredPage = 1;
+    lastFeaturedPage: number;
+    user: User;
+    isDismissLinkPopover = true;
 
     constructor(
         private platform: Platform,
@@ -106,7 +121,9 @@ export class PlacesPage {
         private geocoder: GeocodeService,
         private gAnalytics: GoogleAnalytics,
         private analytics: AnalyticsService,
-        private changeDetectorRef: ChangeDetectorRef) {
+        private changeDetectorRef: ChangeDetectorRef,
+        private adjust: AdjustService,
+        private browser: InAppBrowser) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.mapRadius = this.listRadius = this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -141,7 +158,8 @@ export class PlacesPage {
         this.offers.getCategories(false)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
-                    category.id = categories.data.find(p => p.name === category.name).id;//temporary - code
+                    let obj = categories.data.find(p => p.name === category.name);//temporary - code
+                    category.id = obj ? obj.id : '';
                 })
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
@@ -171,6 +189,16 @@ export class PlacesPage {
                     });
                 }
             });
+
+        this.onRefreshFeaturedOffers = this.offers.onRefreshFeaturedOffers
+            .subscribe(resp => {
+                this.featuredOffers = resp.data;
+                this.featuredPage = 1;
+                this.lastFeaturedPage = resp.last_page;
+            })
+
+        this.onRefreshUser = this.profile.onRefresh
+            .subscribe(user => this.user = user)
 
         this.onRefreshDefoultCoords = this.location.onProfileCoordsChanged
             .subscribe(coords => {
@@ -235,7 +263,7 @@ export class PlacesPage {
     }
 
     getLocationStatus() {
-        if (this.platform.is('android') && this.platform.is('cordova')) {
+        if (this.platform.is('cordova') && this.platform.is('android')) {
             this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
                 .then(result => {
                     if (result.hasPermission === false) {
@@ -253,7 +281,7 @@ export class PlacesPage {
                 )
             // .catch(err => console.log(err));
         }
-        else if (this.platform.is('ios') && this.platform.is('cordova')) {
+        else if (this.platform.is('cordova') && this.platform.is('ios')) {
             this.diagnostic.getLocationAuthorizationStatus()
                 .then(resp => {
                     if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
@@ -351,9 +379,12 @@ export class PlacesPage {
                     else {
                         this.location.getByIp()
                             .subscribe(resp => {
-                                this.getDefaultCoords(resp.latitude, resp.longitude);
-                                user.latitude = resp.latitude;
-                                user.longitude = resp.longitude;
+                                // this.getDefaultCoords(resp.latitude, resp.longitude);
+                                // user.latitude = resp.latitude;
+                                // user.longitude = resp.longitude;
+                                this.getDefaultCoords(resp.lat, resp.lon);
+                                user.latitude = resp.lat;
+                                user.longitude = resp.lon;
                                 this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
                             },
                                 err => {
@@ -412,10 +443,13 @@ export class PlacesPage {
             this._map.panTo(this.coords);
             this.isRevertCoords = false;
         }
-        if (this.shareData) {
-            this.openPlace(this.shareData, true)
+        if (!this.shareData) {
+            this.shareData = this.share.get();
         }
-        this.getCompaniesList();
+        if (this.shareData) {
+            this.openPlace(undefined, this.shareData, true);
+        }
+        this.getList();
     }
 
     getCoords(isRefresh?: boolean) {
@@ -435,18 +469,23 @@ export class PlacesPage {
         return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
 
-    getCompaniesList() {
-        this.addMap();
-        this.loadCompanies(true, this.page);
-        this.userPin = [marker([this.userCoords.lat, this.userCoords.lng], {
-            icon: icon({
-                iconSize: [40, 50],
-                iconAnchor: [20, 50],
-                // iconUrl: 'assets/img/icon_user_map.svg',
-                iconUrl: 'assets/img/user_home/pin_user.svg',
-                //shadowUrl:
-            })
-        })]
+    getList() {
+        if (this.isFeatured) {
+            this.loadFeaturedOffers();
+        }
+        else {
+            this.addMap();
+            this.loadCompanies(true, this.page);
+            this.userPin = [marker([this.userCoords.lat, this.userCoords.lng], {
+                icon: icon({
+                    iconSize: [40, 50],
+                    iconAnchor: [20, 50],
+                    // iconUrl: 'assets/img/icon_user_map.svg',
+                    iconUrl: 'assets/img/user_home/pin_user.svg',
+                    //shadowUrl:
+                })
+            })]
+        }
     }
 
     addMap() {
@@ -491,7 +530,7 @@ export class PlacesPage {
         let popupContent = DomUtil.create('div');
         popupContent.innerText = company.name;
         popupContent.addEventListener('click', (event) => {
-            this.openPlace(company);
+            this.openPlace(undefined, company, false);
         });
         let popupLayer = popup().setContent(popupContent);
 
@@ -553,11 +592,16 @@ export class PlacesPage {
         }
     }
 
-    isSelectedCategory(category: OfferCategory) {
-        return this.selectedCategory && this.selectedCategory.id == category.id;
+    isSelectedCategory(category: OfferCategory, i: number) {
+        return this.selectedCategory && this.selectedCategory.id === category.id && !this.isFeatured;
     }
 
     selectCategory(category: OfferCategory) {
+        // this.content.scrollToTop();
+        if (this.isFeatured) {
+            this.isFeatured = false;
+            this.content.resize();
+        }
         this.isChangedCategory = this.selectedCategory.id !== category.id;
         this.search = "";
         this.selectedCategory = category;
@@ -569,15 +613,58 @@ export class PlacesPage {
         }
     }
 
+    getFeatured() {
+        this.adjust.setEvent('TOP_OFFERS_FEED_VISIT');
+        this.featuredPage = 1;
+        let loading;
+        this.isFeatured = true;
+        this.content.resize();
+        if (!this.user) {
+            loading = this.loading.create();
+            loading.present();
+            this.profile.get(true, false)
+                .subscribe(user => {
+                    this.user = user;
+                    this.loadFeaturedOffers(loading);
+                })
+        }
+        else {
+            this.loadFeaturedOffers();
+        }
+    }
+
+    loadFeaturedOffers(loading?: any) {
+        //let radius = 19849 * 1000;
+        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading)
+            .subscribe(resp => {
+                this.featuredOffers = resp.data;
+                this.lastFeaturedPage = resp.last_page;
+                this.isRefreshLoading = false;
+                if (this.refresher) {
+                    this.refresher.complete();
+                    this.refresher = undefined;
+                }
+                if (loading) loading.dismiss();
+            },
+                err => {
+                    this.isRefreshLoading = false;
+                    if (this.refresher) {
+                        this.refresher.complete();
+                        this.refresher = undefined;
+                    }
+                    if (loading) loading.dismiss();
+                });
+    }
+
     loadCompanies(isHandler: boolean, page, isNoBounds?: boolean) {
         if (this.isDismissNoPlacesPopover) {
             this.isDismissNoPlacesPopover = false;
-            let isRefreshLoading = !this.isRefreshLoading && !this.isMapVisible;
+            let loading = !this.isRefreshLoading && !this.isMapVisible;
             let obs = ((this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== '')
                 ? this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
                     this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
-                    this.radius, this.search, page, isRefreshLoading)
-                : this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page, isRefreshLoading);
+                    this.radius, this.search, page, loading)
+                : this.offers.getPlacesOfRoot(this.selectedCategory.id, this.coords.lat, this.coords.lng, this.radius, page, loading);
 
             obs.subscribe(companies => {
                 this.isRefreshLoading = false;
@@ -693,9 +780,15 @@ export class PlacesPage {
         setTimeout(renderMap, 1);
     }
 
-    openPlace(data, isShare?: boolean) {
-        this.gAnalytics.trackEvent("Session", 'event_chooseplace');
-        this.analytics.faLogEvent('event_chooseplace');
+    openPlace(event, data, isShare: boolean, offer?: Offer) {
+        if (this.isFeatured) {
+            this.adjust.setEvent('TOP_OFFER_FEED_CLICK');
+        }
+        else {
+            this.gAnalytics.trackEvent("Session", 'event_chooseplace');
+            this.analytics.faLogEvent('event_chooseplace');
+        }
+
         let params;
         if (isShare) {
             params = {
@@ -710,17 +803,46 @@ export class PlacesPage {
                 coords: this.userCoords,
             }
         }
-        this.nav.push(PlacePage, params);
-        // .then(() => {
-        //     this.onRefreshList = this.favorites.onRefreshPlaces
-        //         .subscribe((resp) => {
-        //             this.companies.forEach(company => {
-        //                 if (company.id === resp.id) {
-        //                     company.is_favorite = resp.isFavorite;
-        //                 }
-        //             })
-        //         })
-        // });
+        if (this.user && this.user.id) {
+            params.user = this.user;
+        }
+        if (offer && offer.redemption_access_code) {
+
+            let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
+            limitationPopover.present();
+        }
+        else {
+            if (offer && event && event.target.localName === 'a') {
+                this.openLinkPopover(event);
+            }
+            else {
+                this.nav.push(PlacePage, params);
+            }
+
+        }
+    }
+
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offers.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
     }
 
     getStars(star: number) {
@@ -881,23 +1003,47 @@ export class PlacesPage {
         this.loadCompanies(true, this.page = 1);
     }
 
+    isInfiniteScroll() {
+        return !this.isMapVisible && (this.isFeatured ? this.featuredPage <= this.lastFeaturedPage : this.page <= this.lastPage);
+    }
+
     infiniteScroll(infiniteScroll) {
-        this.page = this.page + 1;
-        if (this.page <= this.lastPage) {
+        let page: number;
+        let lastPage: number;
+        if (this.isFeatured) {
+            page = ++this.featuredPage;
+            lastPage = this.lastFeaturedPage;
+        }
+        else {
+            page = ++this.page;
+            lastPage = this.lastPage;
+        }
+        if (page <= lastPage) {
             setTimeout(() => {
-                this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
-                    this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
-                    this.radius, this.search, this.page, this.page == 1)
-                    .subscribe(companies => {
-                        this.companies = [...this.companies, ...companies.data];
-                        this.lastPage = companies.last_page;
-                        this.markers = [];
-                        this.companies.forEach((company) => {
-                            this.markers.push(this.createMarker(company.latitude, company.longitude, company));
-                        })
-                        this.generateBounds(this.markers);
-                        infiniteScroll.complete();
-                    });
+                if (this.isFeatured) {
+                    // let radius = 19849 * 1000;
+                    this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1)
+                        .subscribe(resp => {
+                            this.featuredOffers = [...this.featuredOffers, ...resp.data];
+                            this.lastFeaturedPage = resp.last_page;
+                            infiniteScroll.complete();
+                        });
+                }
+                else {
+                    this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
+                        this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
+                        this.radius, this.search, this.page, this.page == 1)
+                        .subscribe(companies => {
+                            this.companies = [...this.companies, ...companies.data];
+                            this.lastPage = companies.last_page;
+                            this.markers = [];
+                            this.companies.forEach((company) => {
+                                this.markers.push(this.createMarker(company.latitude, company.longitude, company));
+                            })
+                            this.generateBounds(this.markers);
+                            infiniteScroll.complete();
+                        });
+                }
             });
         }
         else {
@@ -906,7 +1052,12 @@ export class PlacesPage {
     }
 
     doRefresh(refresher) {
-        this.page = 1;
+        if (this.isFeatured) {
+            this.featuredPage = 1;
+        }
+        else {
+            this.page = 1;
+        }
         // this.isRevertCoords = true;
         this.isRefreshLoading = true;
         this.getLocation(false, true);
@@ -984,6 +1135,9 @@ export class PlacesPage {
             this.onRefreshListSubscription.unsubscribe();
         }
         this.onRefreshTestimonials.unsubscribe();
+        this.onRefreshUser.unsubscribe();
+        this.onRefreshDefoultCoords.unsubscribe();
+        this.onRefreshFeaturedOffers.unsubscribe();
     }
 
 }

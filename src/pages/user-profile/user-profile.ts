@@ -14,6 +14,7 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
+import { AdjustService } from '../../providers/adjust.service';
 
 @Component({
     selector: 'page-user-profile',
@@ -24,6 +25,7 @@ export class UserProfilePage {
     balance: number;
     onRefreshAccounts: Subscription;
     NAU: Account;
+    branchDomain = 'https://nau.app.link';
 
     @ViewChild(Slides) slides: Slides;
 
@@ -33,7 +35,8 @@ export class UserProfilePage {
         private auth: AuthService,
         public alert: AlertController,
         private transaction: TransactionService,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private adjust: AdjustService) {
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -120,6 +123,36 @@ export class UserProfilePage {
 
     slidePrev() {
         this.slides.slidePrev();
+    }
+
+    shareInvite() {
+        const Branch = window['Branch'];
+        let properties = {
+            canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
+            canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
+            title: this.user.name,
+            contentImageUrl: this.user.picture_url + '?size=mobile',
+            // contentDescription: '',
+            // price: 12.12,
+            // currency: 'GBD',
+            contentIndexingMode: 'private',
+            contentMetadata: {
+                invite_code: this.user.invite_code,
+            }
+        };
+        var branchUniversalObj = null;
+        Branch.createBranchUniversalObject(properties)
+            .then(res => {
+                branchUniversalObj = res;
+                let analytics = {};
+                let message = '';
+                branchUniversalObj.showShareSheet(analytics, properties, message);
+
+                branchUniversalObj.onLinkShareResponse(res => {
+                    this.adjust.setEvent('IN_FR_BUTTON_CLICK_PROFILE_PAGE');
+                  });
+                // console.log('Branch create obj error: ' + JSON.stringify(err))
+            })
     }
 
     ngOnDestroy() {

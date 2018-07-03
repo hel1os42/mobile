@@ -1,0 +1,20 @@
+<div class="modal_content">
+    <ion-label padding-bottom text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ offer.label }}</ion-label>
+<!-- 
+    <div *ngFor="let message of messages" class="block-lines">
+        <div class="font-14" text-justify>{{ message }}</div>
+    </div> -->
+
+    <div class="block-lines">
+        <div class="font-14" text-justify>{{ message }}</div>
+    </div>
+
+    <ion-grid padding-top padding-bottom>
+        <ion-row>
+            <ion-col text-center>
+                <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</div>

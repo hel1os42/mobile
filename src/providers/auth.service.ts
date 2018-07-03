@@ -15,6 +15,7 @@ import { StorageService } from './storage.service';
 import { TokenService } from './token.service';
 import { SocialIdentity } from '../models/socialIdentity';
 import { Observable } from 'rxjs';
+import { AdjustService } from './adjust.service';
 
 declare var cookieMaster;
 
@@ -24,6 +25,16 @@ export class AuthService {
     inviteCode: string = '';
     registerData: Register = new Register();
     onLogout = new EventEmitter();
+    FACEBOOK = 'facebook';
+    TWITTER = 'twitter';
+    INSTAGRAM = 'instagram';
+    VK = 'vk';
+    PROVIDERS_NAMES = [
+        this.FACEBOOK,
+        this.TWITTER,
+        this.INSTAGRAM,
+        this.VK
+    ];
 
     constructor(
         private api: ApiService,
@@ -35,7 +46,8 @@ export class AuthService {
         private pushToken: PushTokenService,
         private platform: Platform,
         private appMode: AppModeService,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private adjust: AdjustService) {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
@@ -68,9 +80,11 @@ export class AuthService {
 
     getReferrerId(inviteCode: string, phone?: string) {
         this.oneSignal.sendTag('refferalInviteCode', inviteCode);
-        let obs;
+        let obs: Observable<any>;
         if (phone) {
             obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
+            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
+                err => { return; });
         }
         else {
             obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
@@ -79,10 +93,13 @@ export class AuthService {
     }
 
     getOtp(phone: string) {
-        return this.api.get(`auth/login/${phone}/code`, {
+        let obs = this.api.get(`auth/login/${phone}/code`, {
             showLoading: false,
             ignoreHttpNotFound: this.appMode.getEnvironmentMode() === 'prod'
         });
+        obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
+            err => { return; });
+        return obs;
     }
 
     register(register: Register) {
@@ -91,6 +108,18 @@ export class AuthService {
             if (resp.was_recently_created) {
                 this.gAnalytics.trackEvent("Session", 'event_signup');
                 this.analytics.faLogEvent('event_signup');
+                this.adjust.setEvent('FIRST_TIME_SIGN_IN');
+            }
+            if (!resp.was_recently_created) {
+                this.adjust.setEvent('SIGN_IN');
+            }
+            if (register.identity_provider) {
+                this.PROVIDERS_NAMES.forEach(name => {
+                    if (name === register.identity_provider) {// to add INSTAGRAM
+                        let event = name.toUpperCase() + '_LINK';
+                        this.adjust.setEvent(event);
+                    }
+                })
             }
             this.loginHandler({ token: resp.token }, false, resp.id);
         });
@@ -104,31 +133,7 @@ export class AuthService {
         let obs = this.api.post('auth/login', login);
         obs.subscribe(token => {
             this.loginHandler(token, false);
-            //     this.token.set(token);
-            //     this.oneSignal.getIds()
-            //         .then(resp => {
-            //             this.profile.get(false, false)//for sending one signal tags
-            //                 .subscribe((user: User) => {
-            //                     let pushToken: PushTokenCreate = {
-            //                         user_id: user.id,
-            //                         token: resp.pushToken
-            //                     };
-            //                     // this.pushToken.get(resp.userId)
-            //                     //     .subscribe(res => { },
-            //                     //         err => {
-            //                     //             if (err.status == 404) {
-            //                     this.pushToken.set(pushToken, resp.userId);
-            //                     //     }
-            //                     // })
-            //                 })
-            //         })
-            //     if (isAnalitics) {
-            //         this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
-            //     }
-            //     let envName = this.appMode.getEnvironmentMode();
-            //     if (this.platform.is('cordova')) {
-            //         this.oneSignal.sendTag('environment', envName);
-            //     }
+            this.adjust.setEvent('SIGN_IN');
         });
         return obs;
     }
@@ -171,6 +176,13 @@ export class AuthService {
         });
         obs.subscribe(token => {
             this.loginHandler(token, true);
+            this.adjust.setEvent('SIGN_IN');
+            this.PROVIDERS_NAMES.forEach(name => {
+                if (name === identity.identity_provider) {// to add INSTAGRAM
+                    let event = name.toUpperCase() + '_SIGN_IN';
+                    this.adjust.setEvent(event);
+                }
+            })
         },
             err => {
                 return;
@@ -181,6 +193,7 @@ export class AuthService {
     logout() {
         this.clearCookies();
         this.token.remove('LOGOUT');
+        this.adjust.setEvent('LOGOUT_BUTTON_CLICK');
     }
 
     clearCookies() {

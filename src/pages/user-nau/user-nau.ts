@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Content, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { Content, NavParams, PopoverController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
 import { TransactionCreate } from '../../models/transactionCreate';
+import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ToastService } from '../../providers/toast.service';
@@ -48,13 +49,15 @@ export class UserNauPage {
         private profile: ProfileService,
         private appMode: AppModeService,
         private navParams: NavParams,
-        private nav: NavController,
         private toast: ToastService,
         private popoverCtrl: PopoverController,
         private barcode: BarcodeScanner,
         private alert: AlertController,
         private transaction: TransactionService,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private adjust: AdjustService) {
+
+        this.adjust.setEvent('NAU_WALLET_CLICK');
 
         this.date = this.todayDate.toISOString().slice(0, 10);
         this.envName = this.appMode.getEnvironmentMode();
@@ -103,8 +106,8 @@ export class UserNauPage {
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
-                if (this.envName === 'dev' || this.envName === 'test')
-                    this.nav.popToRoot();
+            //     if (this.envName === 'dev' || this.envName === 'test')
+            //         this.nav.popToRoot();
             });
     }
     //temporary

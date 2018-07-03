@@ -151,35 +151,63 @@
                 <ion-segment-button value="about">
                     {{ 'PAGE_PLACE.ABOUT' | translate }}
                 </ion-segment-button>
-<!-- 
+<!--
                 <ion-segment-button value="testimonials">
                     {{ 'PAGE_PLACE.TESTIMONIALS' | translate }}
                 </ion-segment-button> -->
             </ion-segment>
 
     <div padding>
-      <ion-list *ngSwitchCase="'alloffers'" margin-top no-lines class="item-block-nau">
-        <a ion-item detail-none (tap)="openOffer(offer)" *ngFor=" let offer of offersList" class="relative">
-          <ion-avatar item-start>
-            <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
-          <div class="thumb_image" [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"></div>
-      </ion-avatar>
-        <div class="smooth_transition width-88">
-            <div class="scroll_content">
-                <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
+    <ion-list 
+        *ngSwitchCase="'alloffers'" 
+        margin-top 
+        no-lines 
+        class="item-block-nau">
+        <div 
+            (click)="openOffer($event, offer)" 
+            *ngFor="let offer of offersList" 
+            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+            tappable
+            ion-item 
+            detail-none 
+            class="relative">
+            <ion-avatar item-start>
+                <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
+                <div 
+                    [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}" 
+                    [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                    class="thumb_image">
+                </div>
+            </ion-avatar>
+            <div class="smooth_transition width-88">
+                <div class="scroll_content">
+                    <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
+                </div>
+            </div>
+            <div
+                [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }" 
+                [innerHTML]="offer.rich_description"
+                text-regular 
+                class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">
+            </div>
+            <img 
+                *ngIf="offer.is_favorite" 
+                class="star_right" 
+                src="assets/img/place/icon_star.svg">
+            <img 
+                *ngIf="offer.is_featured" 
+                [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                class="featured_right" 
+                src="assets/img/splash_screen/tab-icon6_active.svg">
+            <div class="margin-top-2vw flex">
+                <!--
+            <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
+            <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
+            <span class="gift extrabold">1</span>
+            -->
             </div>
         </div>
-      <div text-regular class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">{{ offer.description }}</div>
-      <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg">
-      <div class="margin-top-2vw flex">
-        <!--
-        <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
-        <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-        <span class="gift extrabold">1</span>
-        -->
-      </div>
-    </a>
-  </ion-list>
+    </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
     <ion-item *ngFor=" let testimonial of companyTestimonials">

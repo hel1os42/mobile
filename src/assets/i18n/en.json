@@ -4,7 +4,7 @@
         "Beauty": "<div class='font-65 text-white'>Health &<br>Beauty</div>",
         "Retail": "<div class='font-65 text-white'>Retail &<br>Services</div>",
         "Accommodation": "<div class='font-65 text-white'>Accommodation<br>& Leisure</div>",
-        "Other": "<div class='font-65 text-white'>Online &<br>Other</div>"
+        "Featured": "<div class='font-65 text-white'>Top<br>Offers</div>"
     },
 
     "COUNTRIES" : {
@@ -48,7 +48,10 @@
         "PLEASE_INFORM": "Please inform the retailer you want to redeem a coupon in advance. While NAU is still a new thing for the retailers, some of the staff may be unaware of it. In this case please call the manager.",
         "IF_THE_PROBLEM": "If the problem persists, contact us at",
         "SO_THAT": "so that we can fix the issue as soon as possible.",
-        "GOT_IT": "Got it!"
+        "GOT_IT": "Got it!",
+        "FRIENDS_POINTS": "To redeem this offer, you will use referral_points_price Friends Points out of referral_points you currently have. Each new friend will bring you more Friends Points, so don't hesitate to invite them right now!",
+        "REDEMPTIONS_POINTS": "To redeem this offer, you will use redemption_points_price Redemptions Points out of redemption_points you currently have. You can get more Redemptions Points right now if you redeem any offers across the app!",
+        "FRIENDS_AND_REDEMPTIONS_POINTS": "To redeem this offer, you will use referral_points_price Friends Points out of referral_points and redemption_points_price Redemptions Points out of redemption_points you currently have. Get more points by inviting friends and redeeming offers across the app!"
     },
 
     "UNIT" : {
@@ -106,7 +109,7 @@
         "NEW" : "New",
         "MONTHLY" : "Monthly",
         "FEATURED" : "Featured",
-        "LOADING_COMPANIES" : "Loading places...",
+        "LOADING_COMPANIES" : "Loading...",
         "SELECT_CUISINE" : "Select Cuisine",
         "CLEAR" : "Clear",
         "MAP" : "Map",
@@ -130,7 +133,9 @@
         "WE_ARE": "We are actively seeking for regional agents - start a profitable business in your city with NAU:",
         "ARE_YOU": "Are you a retailer? Join NAU among the first in your region prior to the official launch!",
         "OOPS": "Ooops...",
-        "RADIUS": "Radius"
+        "FRIENDS": "f",
+        "OFFER": "o",
+        "COUPONS_LEFT": "Coupons left"
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -326,9 +331,9 @@
         "INVITATION" : "Invitation",
         "PLEASE_ASK" : "Please ask your friend again",
         "INVITE_FRIENDS" : "Invite friends",
-        "NAU_IS_THE_ONLY" : "NAU is the only way to profit from your friends while making them happy. Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
+        "NAU_IS_THE_ONLY" : "Help your friends save - that's profitable! Invite friends to join NAU and receive 95% of retailer's payment for each coupon redemption your friends make. ",
         "A_LIFETIME" : "A lifetime 95% reward. While NAU is still 100% free for them.",
-        "SHARE_YOUR_INVITE_LINK" : "Share your invite link"
+        "SHARE_YOUR_INVITE_LINK" : "Share your invite link:"
     },
 
     "PAGE_LOGIN" : {
@@ -342,7 +347,7 @@
         "SECONDS" : "seconds",
         "SECONDS2" : "seconds",
         "SECOND" : "second",
-        "BY_PRESSING" : "By pressing «Get SMS», I accept"
+        "BY_PRESSING" : "By pressing \"SIGN IN\", I accept"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -368,7 +373,7 @@
         "POINT" : "point",
         "OFFER" : "Offer",
         "REDEEM" : "Redeem",
-        "OFFER_REDEEMING" : "Offer redeeming",
+        "OFFER_REDEEMING" : "Show to the retailer",
         "OR_USE_QR_CODE" : "or use QR-code",
         "AGREE_WITH_TERMS" : "Agree with Terms & Conditions",
         "SEND_REVIEW" : "Send review",
@@ -386,14 +391,14 @@
     },
 
     "PAGE_ONBOARDING" : {
+        "WELCOME" : "SAVE RIGHT HERE.<br> RIGHT NAU.",
+        "MAKE_PROFIT" : "MAKE PROFIT BY HELPING <br> OTHERS SAVE",
+        "NAU_COINS" : "GET INSTANT REWARDS <br> AND FREE STUFF",
         "FOR_BUSINESS" : "For business",
-        "WELCOME" : "Welcome!",
-        "MAKE_PROFIT" : "Make Profit!",
-        "NAU_COINS" : "NAU Coins!",
         "ENJOY" : "Enjoy!",
-        "ENJOY_THE_MOST" : "Enjoy the most attractive offers, gifts and discounts from various retailers in your location whether you are in your home town or on a vacation.",
-        "INVITE_YOUR_FRIENDS" : "Invite your friends and followers to join NAU using your invite code and get rewarded each time they use special offers from the retailers worldwide.",
-        "NAU_COINS_IS" : "NAU coins is a cryptocurrency which you will soon be able to exchange for the everyday value: other cryptocurrencies and even traditional currencies!",
+        "ENJOY_THE_MOST" : "Soon as you login, you can start saving. Instantly with no need to purchase any coupons or try to locate something that's not miles away. Only the best special offers, including discounts, BOGO and even free stuff if you are willing to bring a couple of friends!",
+        "INVITE_YOUR_FRIENDS" : "Ever felt like being unfairly rewarded for recommending a retailer to your friends? NAU is here to fix that. Get rewarded directly by retailers each time your friends redeem special offers using NAU! That's not a one time bonus - the more they save, the more you earn.",
+        "NAU_COINS_IS" : "NAU is all about fun and saving. We enable retailers to interact with you directly and sometimes they are willing to give away free stuff like coffee, sushi, bowling hours etc. Check the Top Offers category to find out the best deals around and maybe some freebies round the corner!",
         "MAKE_MONEY" : "Make Money",
         "SKIP" : "Skip"
     },
@@ -404,7 +409,16 @@
         "TESTIMONIALS" : "Testimonials",
         "ABOUT" : "About",
         "REDEEM_NOW" : "redeem now",
-        "ADD_YOUR_FEEDBACK" : "Add your feedback"
+        "ADD_YOUR_FEEDBACK" : "Add your feedback",
+        "LIMITATION_1": "Sorry, this offer has reached its maximum redemptions limit.",
+        "LIMITATION_2": "Sorry, this offer has reached its maximum daily redemptions limit.",
+        "LIMITATION_4": "Sorry, you have reached this offer redemptions limit.",
+        "LIMITATION_8": "Sorry, you have reached this offer daily redemptions limit.",
+        "LIMITATION_16": "Sorry, you have reached this offer weekly redemptions limit.",
+        "LIMITATION_32": "Sorry, you have reached this offer monthly redemptions limit.",
+        "LIMITATION_64": "Sorry, your user level is lower than this offer requires.",
+        "LIMITATION_128": "Sorry, you don't have enough Friends Points to redeem this offer. Your FP balance is referral_points, while this offer requires referral_points_price. Each new friend will bring you more Friends Points, so don't hesitate to invite them right now!",
+        "LIMITATION_256": "Sorry, you don't have enough Redemptions Points to redeem this offer. Your RP balance is redemption_points, while this offer requires redemption_points_price. You can get more Redemptions Points right now if you redeem any offers across the app!"
     },
 
     "PAGE_PLACE-FEEDBACK" : {
@@ -453,7 +467,7 @@
         "YOUR_PHONE" : "Your phone number is required to sign up",
         "YOUR_INVITE" : "Your invite code",
         "NEXT" : "Get sms",
-        "BY_PRESSING" : "By pressing «Get SMS», I accept",
+        "BY_PRESSING" : "By pressing \"SIGN IN\", I accept",
         "TERMS_AND_CONDITIONS" : "Terms and conditions",
         "AND" : "and",
         "PRIVACY_POLICY" : "privacy policy",

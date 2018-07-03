@@ -74,18 +74,20 @@ page-user-profile{
   /* CIRCLE */
 
     .block-user-level{
-        width: 100vw;
-        height: 100vw;
+        width: 35vh;
+        height: 35vh;
         background: url(../assets/img/user_profile/star.svg);
         display: flex;
         background-repeat: no-repeat;
         background-position: 50% 50%;
         background-size: cover;
+        margin: auto;
+        padding: 3vh;
     }
 
     .block-circle{
-        width: 50%;
-        height: 50%;
+        width: 90%;
+        height: 90%;
         display: block;
         font-size: 0;
         position: relative;
@@ -100,24 +102,24 @@ page-user-profile{
 
     .circle-label-left{
         top: -2.5vw;
-        left: -12vw;
+        left: -3vh;
     }
 
     .circle-label-right{
         top: -2.5vw;
-        right: -12vw;
+        right: -3vh;
     }
 
     .circle-label-bottom{
-        bottom: -7vw;
+        bottom: -3.5vh;
         left: -50%;
         text-align: center;
         width: 100%;
     }
 
     .circle-label-top{
-        top: -11vw;
-        left: -50%;
+        top: -6vh;
+        left: -53%;
         width: 100%;
         text-align: center;
     }
@@ -132,7 +134,7 @@ page-user-profile{
         background-image: url(../assets/img/user_profile/star.svg);
         background-position: 50% 50%;
         background-repeat: no-repeat;
-        background-size: 100vw 100vw;
+        background-size: 40vh 50vh;
         border-radius: 100vw;
         z-index: 1;
         display: flex;
@@ -211,13 +213,18 @@ page-user-profile{
         height: 12vw;
         z-index: 111;
         color: #fff;
-        font-size: 2.2vw;
+        font-size: 10vw;
         display: flex;
     }
 
     .next-level span{
         margin: auto;
         text-align: center;
+    }
+
+    .next-level ion-icon{
+        margin: auto;
+        line-height: 0;
     }
 
     .user-ava-name{
@@ -367,5 +374,32 @@ page-user-profile{
     .user-ava-name .lbl2{
         font-size: 3vw;
     }
+
+    .points{
+        background: #FF8B10;
+        color: #fff;
+        padding-left: 2vw;
+        padding-right: 2vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        border-radius: 0.7vw;
+    }
+
+    .main-position-center{
+        height: calc(95% - 43vw);
+        display: flex;
+    }
 }
 
+.platform-tablet page-user-profile .label-point{
+    font-size: 2vh;
+}
+
+.platform-tablet page-user-profile .font-22, button.font-22{
+    font-size: 2.7vh;
+}
+
+.platform-tablet .main-position-center{
+    height: calc(100% - 43vw);
+    margin-bottom: 5%;
+}

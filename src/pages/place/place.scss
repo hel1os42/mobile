@@ -1,5 +1,9 @@
 page-place {
 
+    a{
+        color: #FF5A00;
+    }
+
     .gift{
         height: 8.4vw;
         width: 8.4vw;
@@ -187,6 +191,14 @@ page-place {
         top: 2vw;
     }
 
+    .featured_right{
+        position: absolute;
+        left: 1vw;
+        top: 1vw;
+        height: 7vw;
+        width: auto;
+    }
+
     .block-about{
         color: #828282;
         font-family: 'OpenSansNauLight';
@@ -282,7 +294,7 @@ page-place {
     bottom: calc(env(safe-area-inset-bottom) + 64px);
 }
 
-complaint-popover-component, testimonial-popover-component {
+complaint-popover-component, testimonial-popover-component, limitation-popover-component {
     .modal_content{
         padding-left: 7vw;
         padding-right: 7vw;

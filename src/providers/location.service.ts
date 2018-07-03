@@ -10,7 +10,9 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 @Injectable()
 export class LocationService {
     geoposition: Geoposition;
-    url = 'https://freegeoip.net/json/';
+    url = 'http://ip-api.com/json?fields=countryCode,lat,lon,message';//signup.ip-api.com/
+    // url = 'http://ip-api.com/json?fields=country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,mobile,query,status,message';// all fields
+    // url = 'https://freegeoip.net/json/';
     //url = 'http://api.ipstack.com/186.116.207.169?access_key=YOUR_ACCESS_KEY&output=json&legacy=1';//to do before july
     onProfileCoordsChanged = new EventEmitter<Coords>();
     profileCoords = new Coords;

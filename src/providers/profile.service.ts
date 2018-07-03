@@ -72,7 +72,10 @@ export class ProfileService {
     }
 
     refreshAccounts(isLoading?: boolean) {
-        this.getWithAccounts(isLoading).subscribe(user => this.onRefreshAccounts.emit(user));
+        this.getWithAccounts(isLoading).subscribe(user => {
+            this.onRefreshAccounts.emit(user);
+            this.user = user;
+        });
     }
 
     sendTags(user: User, gender?: string) {//temporary parametr "gender"
