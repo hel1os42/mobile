@@ -196,7 +196,6 @@ export class LoginPage {
                     if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND) {
                         this.getReferrerId(inviteCode, phone);
                     };
-                    debugger
                     loading.dismiss();
                 }
             );
