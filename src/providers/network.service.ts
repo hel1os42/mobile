@@ -2,6 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
 import { Subscription } from 'rxjs';
 import { ToastService } from './toast.service';
+import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class NetworkService {
@@ -14,11 +15,12 @@ export class NetworkService {
 
     constructor(
         private network: Network,
-        private toast: ToastService) {
+        private toast: ToastService,
+        private platform: Platform) {
     }
 
     getStatus() {
-        if (this.network.type === 'none' || this.network.type === 'unknown') {
+        if (this.platform.is('cordova') && (this.network.type === 'none' || this.network.type === 'unknown')) {
             this.isConnected = false;
             this.toast.showDisconnected();
         }

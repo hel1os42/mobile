@@ -16,7 +16,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angular2-qrcode';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, Platform } from 'ionic-angular';
 import { BarChartComponent } from '../components/bar-chart';
 import { LineChartComponent } from '../components/line-chart';
 import { AdvNotificationsPage } from '../pages/adv-notifications/adv-notifications';
@@ -123,26 +123,32 @@ export class AppErrorHandler implements ErrorHandler {
 
     constructor(
         injector: Injector,
-        private appVersion: AppVersion) {
-        this.appVersion.getVersionNumber()
-            .then(version => {
-                Pro.init('590f0eb2', {
-                    appVersion: version
+        private appVersion: AppVersion,
+        private platform: Platform) {
+
+        if (this.platform.is('cordova')) {
+            this.appVersion.getVersionNumber()
+                .then(version => {
+                    Pro.init('590f0eb2', {
+                        appVersion: version
+                    })
+                    try {
+                        this.ionicErrorHandler = injector.get(IonicErrorHandler);
+                    } catch (e) {
+                        // Unable to get the IonicErrorHandler provider, ensure
+                        // IonicErrorHandler has been added to the providers list below
+                    }
                 })
-                try {
-                    this.ionicErrorHandler = injector.get(IonicErrorHandler);
-                } catch (e) {
-                    // Unable to get the IonicErrorHandler provider, ensure
-                    // IonicErrorHandler has been added to the providers list below
-                }
-            })
+        }
     }
 
-    handleError(err: any): void {
-        Pro.monitoring.handleNewError(err);
-        // Remove this if you want to disable Ionic's auto exception handling
-        // in development mode.
-        this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+    handleError(err: any) {
+        if (this.platform.is('cordova')) {
+            Pro.monitoring.handleNewError(err);
+            // Remove this if you want to disable Ionic's auto exception handling
+            // in development mode.
+            this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+        }
     }
 }
 
