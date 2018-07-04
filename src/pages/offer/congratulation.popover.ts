@@ -78,40 +78,42 @@ export class CongratulationPopover {
     }
 
     shareOffer() {
-        const Branch = window['Branch'];
-        this.profile.get(false)
-            .subscribe(profile => {
-                let properties = {
-                    canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                    canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                    title: this.offer.label,
-                    contentDescription: this.offer.description,
-                    contentImageUrl: this.offer.picture_url + '?size=mobile',
-                    // price: 12.12,
-                    // currency: 'GBD',
-                    contentIndexingMode: 'private',
-                    contentMetadata: {
-                        page: 'offer',
-                        invite_code: profile.invite_code,
-                        placeId: this.company.id,
-                        offerId: this.offer.id
-                    }
-                };
-                var branchUniversalObj = null;
-                Branch.createBranchUniversalObject(properties)
-                    .then(res => {
-                        branchUniversalObj = res;
-                        let analytics = {};
-                        // let message = this.company.name + this.company.description
-                        let message = '';
-                        branchUniversalObj.showShareSheet(analytics, properties, message)
+        if (this.company && this.offer) {
+            const Branch = window['Branch'];
+            this.profile.get(false)
+                .subscribe(profile => {
+                    let properties = {
+                        canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                        canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                        title: this.offer.label,
+                        contentDescription: this.offer.description,
+                        contentImageUrl: this.offer.picture_url,
+                        // price: 12.12,
+                        // currency: 'GBD',
+                        contentIndexingMode: 'private',
+                        contentMetadata: {
+                            page: 'offer',
+                            invite_code: profile.invite_code,
+                            placeId: this.company.id,
+                            offerId: this.offer.id
+                        }
+                    };
+                    var branchUniversalObj = null;
+                    Branch.createBranchUniversalObject(properties)
+                        .then(res => {
+                            branchUniversalObj = res;
+                            let analytics = {};
+                            // let message = this.company.name + this.company.description
+                            let message = '';
+                            branchUniversalObj.showShareSheet(analytics, properties, message)
 
-                        branchUniversalObj.onLinkShareResponse(res => {
-                            this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
-                        });
-                    })
-
-            })
+                            branchUniversalObj.onLinkShareResponse(res => {
+                                this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
+                            });
+                        })
+                })
+        }
+        else return;
     }
 
     ngOnDestroy() {
