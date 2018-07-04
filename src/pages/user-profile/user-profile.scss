@@ -74,8 +74,8 @@ page-user-profile{
   /* CIRCLE */
 
     .block-user-level{
-        width: 35vh;
-        height: 35vh;
+        width: 31vh;
+        height: 31vh;
         background: url(../assets/img/user_profile/star.svg);
         display: flex;
         background-repeat: no-repeat;
@@ -118,7 +118,7 @@ page-user-profile{
     }
 
     .circle-label-top{
-        top: -6vh;
+        top: -5.5vh;
         left: -53%;
         width: 100%;
         text-align: center;
@@ -409,7 +409,7 @@ page-user-profile{
     }
 
     .main-position-center{
-        height: calc(95% - 41vw);
+        height: calc(95% - 43vw);
         display: flex;
     }
 
