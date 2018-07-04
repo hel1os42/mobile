@@ -36,12 +36,12 @@
 -->
             <span class="label label-ios points_friens font-75" margin-right>
                 <span margin-right [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_FRIENDS' | translate"></span>
-                <span>0</span>
+                <span>{{ user.referral_points }}</span>
             </span>
 
             <span class="label label-ios points_redemptions font-75">
                 <span [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_REDEMPTIONS' | translate"></span>
-                <span>0</span>
+                <span>{{ user.redemption_points }}</span>
             </span>
         </div>
         <!--
