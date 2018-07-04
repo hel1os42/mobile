@@ -401,31 +401,40 @@ export class PlacesPage {
     getNativeCoords(isHighAccuracy: boolean, isRefresh?: boolean) {
         this.translate.get('TOAST.LOCATION_DETECTION')
             .subscribe(resp => {
-                let loadingLocation = this.loading.create(
-                    !isRefresh ?
-                        {
-                            content: resp,
-                            spinner: 'bubbles'
-                        }
-                        : undefined);
+                let loadingLocation;
                 if (!this.isRefreshLoading) {
+                    loadingLocation = this.loading.create(
+                        !isRefresh ?
+                            {
+                                content: resp,
+                                spinner: 'bubbles'
+                            }
+                            : undefined);
                     loadingLocation.present();
                 }
-                this.location.get(isHighAccuracy)
-                    .then((resp) => {
-                        this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
-                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                    })
-                    .catch((error) => {
-                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                        if (this.platform.is('cordova')) {
+                if (this.platform.is('cordova')) {
+                    this.location.get(isHighAccuracy)
+                        .then((resp) => {
+                            this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
+                            if (loadingLocation) {
+                                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                            }
+                        })
+                        .catch((error) => {
+                            if (loadingLocation) {
+                                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                            }
                             this.presentConfirm();
-                        }
-                        else {
-                            this.getLocation(true);
-                        }
-                        // error => console.log(error + 'err')
-                    })
+                        })
+                }
+                //for for browser
+                else {
+                    if (loadingLocation) {
+                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                    }
+                    this.getLocation(true);
+                }
+                //
             })
     }
 
