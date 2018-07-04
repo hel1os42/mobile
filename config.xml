@@ -169,4 +169,5 @@
         <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
     </plugin>
     <plugin name="com.adjust.sdk" spec="4.13.0" />
+    <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
 </widget>

@@ -10,6 +10,7 @@ import { Clipboard } from '@ionic-native/clipboard';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { AppAvailability } from '@ionic-native/app-availability';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -314,7 +315,8 @@ export function createTranslateLoader(http: HttpClient) {
         Facebook,
         FlurryAnalytics,
         AdjustService,
-        LaunchNavigator
+        LaunchNavigator,
+        AppAvailability
     ]
 })
 export class AppModule { }
