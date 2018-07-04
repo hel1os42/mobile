@@ -27,8 +27,8 @@ export class ProfileService {
         if (forceReload || !this.user) {
             let obs = this.api.get('profile', { showLoading: showLoading });
             obs.subscribe(user => {
-                if (this.platform.is('cordova') 
-                && (!this.user || this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email)) {
+                if (this.platform.is('cordova')
+                    && (!this.user || this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email)) {
                     this.sendTags(user);
                 }
                 this.user = user;
@@ -56,14 +56,14 @@ export class ProfileService {
     }
 
     patch(data, isNoShowLoading?: boolean, gender?: string) {//temporary parametr "gender"
-        let obs = this.api.patch('profile', data, { 
-            showLoading: !isNoShowLoading, 
-            ignoreHttpUnprocessableEntity: this.appMode.getEnvironmentMode() === 'prod'  
+        let obs = this.api.patch('profile', data, {
+            showLoading: !isNoShowLoading,
+            ignoreHttpUnprocessableEntity: this.appMode.getEnvironmentMode() === 'prod'
         });
         obs.subscribe(resp => {
             this.onRefresh.emit(resp);
-            if (this.platform.is('cordova') 
-            && (!this.user || this.user.name !== resp.name || this.user.phone !== resp.phone || this.user.email !== resp.email)) {
+            if (this.platform.is('cordova')
+                && (!this.user || this.user.name !== resp.name || this.user.phone !== resp.phone || this.user.email !== resp.email)) {
                 this.sendTags(resp, gender);
             }
             this.user = resp;
@@ -87,9 +87,9 @@ export class ProfileService {
         if (gender && gender !== '') {
             tagObj.gender = gender;
         }
-        this.oneSignal.sendTags(tagObj);
         // this.oneSignal.syncHashedEmail(user.email);
         if (this.platform.is('cordova')) {
+            this.oneSignal.sendTags(tagObj);
             window['plugins'].OneSignal.setEmail(user.email);
         }
     }
