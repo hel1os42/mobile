@@ -170,7 +170,6 @@
     </plugin>
     <plugin name="com.adjust.sdk" spec="4.13.0" />
     <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
-    <plugin name="cordova-plugin-app-version" spec="0.1.9" />
     <plugin name="cordova-plugin-ionic" spec="4.1.7">
         <variable name="APP_ID" value="590f0eb2" />
         <variable name="CHANNEL_NAME" value="Master" />
