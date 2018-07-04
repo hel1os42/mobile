@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavParams, ViewController } from 'ionic-angular';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { NavParams, ViewController, Platform } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { Place } from '../../models/place';
 import { TestimonialCreate } from '../../models/testimonialCreate';
@@ -31,16 +31,26 @@ export class CongratulationPopover {
         private profile: ProfileService,
         private testimonials: TestimonialsService,
         private adjust: AdjustService,
-        private keyboard: Keyboard) {
+        private keyboard: Keyboard,
+        private changeDetectorRef: ChangeDetectorRef,
+        private platform: Platform) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
 
-        this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
-            .subscribe(() => this.isContentVisible = false);
+        if (this.platform.is('android')) {
+            this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
+                .subscribe(() => {
+                    this.isContentVisible = false;
+                    this.changeDetectorRef.detectChanges()
+                });
 
-        this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
-            .subscribe(() => this.isContentVisible = true);
+            this.onKeyboardHideSubscription = this.keyboard.onKeyboardHide()
+                .subscribe(() => {
+                    this.isContentVisible = true;
+                    this.changeDetectorRef.detectChanges()
+                });
+        }
     }
 
     getStars() {
