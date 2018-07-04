@@ -387,12 +387,17 @@ page-user-profile{
 
     .points_friens, .points_redemptions{
         color: #000;
-        padding-left: 2vw;
-        padding-right: 2vw;
+        padding-left: 1.5vw;
+        padding-right: 1vw;
         padding-top: 1vw;
         padding-bottom: 1vw;
         border-radius: 0.7vw;
         display: inline-block;
+        width: 30vw;
+    }
+
+    span.label.label-ios.points_friens{
+        margin-right: 1vw;
     }
 
     .points_friens{
@@ -404,7 +409,7 @@ page-user-profile{
     }
 
     .main-position-center{
-        height: calc(95% - 43vw);
+        height: calc(95% - 41vw);
         display: flex;
     }
 
