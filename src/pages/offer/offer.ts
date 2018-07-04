@@ -115,6 +115,18 @@ export class OfferPage {
         this.onRefreshUser = this.profile.onRefresh
             .subscribe(user => this.user = user);
 
+        let congratulationPopover = this.popoverCtrl.create(
+            CongratulationPopover,
+            { company: this.company, offer: this.offer },
+            { cssClass: 'position-top' }
+        );
+        congratulationPopover.present();
+        congratulationPopover.onDidDismiss(data => {
+            if (data && data.isAdded) {
+                this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
+            }
+        })
+
     }
 
     ionViewDidLoad() {
