@@ -150,6 +150,7 @@
         </button>
 
         <button
+            *ngIf="isTwitterAvailability"
             (click)="getTwitterProfile()"
             [disabled]="!isSocial"
             ion-button
