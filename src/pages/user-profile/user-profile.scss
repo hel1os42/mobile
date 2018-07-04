@@ -423,6 +423,10 @@ page-user-profile{
     .item-ios [item-left], .item-ios [item-start] {
         margin: 0;
     }
+
+    .left-name{
+        max-width: 32%;
+    }
 }
 
 .platform-tablet page-user-profile .label-point{
