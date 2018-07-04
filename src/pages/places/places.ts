@@ -427,7 +427,7 @@ export class PlacesPage {
                             this.presentConfirm();
                         })
                 }
-                //for for browser
+                //for browser
                 else {
                     if (loadingLocation) {
                         loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
@@ -731,7 +731,17 @@ export class PlacesPage {
                 else {
                     isCountryEnabled = false;
                 }
-                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, countryCode: countryCode });
+                let isFiltered = (this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== ''
+                ? true : false;
+                
+                let popover = this.popoverCtrl.create(
+                    NoPlacesPopover, 
+                    { 
+                        isCountryEnabled: isCountryEnabled, 
+                        city: city, 
+                        countryCode: countryCode,
+                        isFiltered: isFiltered 
+                    });
                 popover.present();
                 popover.onDidDismiss(data => {
                     if (data && data.radius) {
