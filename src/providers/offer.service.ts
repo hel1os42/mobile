@@ -159,11 +159,11 @@ export class OfferService {
         obs.subscribe(status => {
             if (status.redemption_id) {
                 this.refreshRedeemedOffers();
-                this.gAnalytics.trackEvent('Session', 'event_redeemoffer');
+                this.gAnalytics.trackEvent('Session', 'event_redeemoffer', status.redemption_id);
                 this.analytics.faLogEvent('event_redeemoffer');
                 this.adjust.setEvent('ACTION_REDEMPTION');
             }
-        })
+        }, err => {})
         return obs;
     }
 
