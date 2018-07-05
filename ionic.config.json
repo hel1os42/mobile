@@ -1,6 +1,6 @@
 {
   "name": "nau",
-  "app_id": "",
+  "app_id": "590f0eb2",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

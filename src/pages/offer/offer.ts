@@ -3,7 +3,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, App, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { AlertController, App, NavController, NavParams, PopoverController, Platform } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -26,6 +26,7 @@ import { CongratulationPopover } from './congratulation.popover';
 import { LinkPopover } from './link.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { TimeframesPopover } from './timeframes.popover';
+import { AppModeService } from '../../providers/appMode.service';
 
 declare var window;
 
@@ -69,7 +70,9 @@ export class OfferPage {
         private gAnalytics: GoogleAnalytics,
         private browser: InAppBrowser,
         private translate: TranslateService,
-        private adjust: AdjustService) {
+        private adjust: AdjustService,
+        private platform: Platform,
+        private appMode: AppModeService) {
 
         this.adjust.setEvent('OFFER_VIEW');
         // this.today = new Date();
@@ -111,7 +114,6 @@ export class OfferPage {
 
         this.onRefreshUser = this.profile.onRefresh
             .subscribe(user => this.user = user);
-
     }
 
     ionViewDidLoad() {
@@ -227,6 +229,18 @@ export class OfferPage {
 
     openRedeemPopover() {
         this.adjust.setEvent('REDEEM_BUTTON_CLICK');
+        if (this.platform.is('cordova') && this.appMode.getEnvironmentMode() === 'prod') {
+            let label = `user_phone: ${this.user.phone},
+            user_coords: (${this.user.latitude},${this.user.longitude}), 
+            user_id: ${this.user.id}, 
+            place_name: ${this.company.name},
+            place_coords: (${this.company.latitude},${this.company.longitude}),
+            place_id: ${this.company.id}, 
+            offer_label: ${this.offer.label},
+            offer_id: ${this.offer.id}`;
+            this.gAnalytics.trackEvent('Session', 'redeem_button_click', label);
+        }
+
         this.timeframesHandler();
         // if (!this.disable()) {distance validation
         if (!this.offer.redemption_access_code) {
@@ -302,40 +316,42 @@ export class OfferPage {
     }
 
     shareOffer() {
-        const Branch = window['Branch'];
-        this.profile.get(false)
-            .subscribe(profile => {
-                let properties = {
-                    canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                    canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                    title: this.offer.label,
-                    contentDescription: this.offer.description,
-                    contentImageUrl: this.offer.picture_url + '?size=mobile',
-                    // price: 12.12,
-                    // currency: 'GBD',
-                    contentIndexingMode: 'private',
-                    contentMetadata: {
-                        page: 'offer',
-                        invite_code: profile.invite_code,
-                        placeId: this.company.id,
-                        offerId: this.offer.id
-                    }
-                };
-                var branchUniversalObj = null;
-                Branch.createBranchUniversalObject(properties)
-                    .then(res => {
-                        branchUniversalObj = res;
-                        let analytics = {};
-                        // let message = this.company.name + this.company.description
-                        let message = '';
-                        branchUniversalObj.showShareSheet(analytics, properties, message);
+        if (this.user && this.user.invite_code && this.company.id && this.offer) {
+            const Branch = window['Branch'];
+            this.profile.get(false)
+                .subscribe(profile => {
+                    let properties = {
+                        canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                        canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                        title: this.offer.label,
+                        contentDescription: this.offer.description,
+                        contentImageUrl: this.offer.picture_url,
+                        // price: 12.12,
+                        // currency: 'GBD',
+                        contentIndexingMode: 'private',
+                        contentMetadata: {
+                            page: 'offer',
+                            invite_code: profile.invite_code,
+                            placeId: this.company.id,
+                            offerId: this.offer.id
+                        }
+                    };
+                    var branchUniversalObj = null;
+                    Branch.createBranchUniversalObject(properties)
+                        .then(res => {
+                            branchUniversalObj = res;
+                            let analytics = {};
+                            // let message = this.company.name + this.company.description
+                            let message = '';
+                            branchUniversalObj.showShareSheet(analytics, properties, message);
 
-                        branchUniversalObj.onLinkShareResponse(res => {
-                            this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
-                        });
-                    })
-
-            })
+                            branchUniversalObj.onLinkShareResponse(res => {
+                                this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
+                            });
+                        })
+                })
+        }
+        else return;
     }
 
     removeFavorite() {

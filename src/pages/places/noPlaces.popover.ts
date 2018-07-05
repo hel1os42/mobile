@@ -19,6 +19,7 @@ export class NoPlacesPopover {
     businessUrl = 'https://nau.io';
     retailerUrl = 'https://nau.io';
     url = 'nau.io';
+    isFiltered: boolean;
 
     constructor(
         private navParams: NavParams,
@@ -28,6 +29,7 @@ export class NoPlacesPopover {
         this.isCountryEnabled = this.navParams.get('isCountryEnabled');
         this.city = this.navParams.get('city');
         this.countryCode = this.navParams.get('countryCode');
+        this.isFiltered = this.navParams.get('isFiltered');
         // this.state = this.navParams.get('state');
     }
 
@@ -49,6 +51,6 @@ export class NoPlacesPopover {
     }
 
     close(radius) {
-        this.viewCtrl.dismiss({ radius: radius});
+        this.viewCtrl.dismiss({ radius: radius });
     }
 }

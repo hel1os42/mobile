@@ -135,7 +135,9 @@
         "OOPS": "Ooops...",
         "FRIENDS": "f",
         "OFFER": "o",
-        "COUPONS_LEFT": "Coupons left"
+        "COUPONS_LEFT": "Coupons left",
+        "NO_RESULTS": "No results",
+        "NOTHING_FOUND": "Nothing found on your search request or filter settings. Please change the request."
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -310,7 +312,9 @@
         "CONFIRM_YOUR_LOCATION" : "Confirm your location:",
         "YOU_CAN_SET": "You can set the coordinates in manual mode",
         "AGE" : "Age",
-        "INCOME" : "Income"
+        "INCOME" : "Income",
+        "POINTS_FRIENDS" : "Friendship<br>Points:",
+        "POINTS_REDEMPTIONS" : "Redemption<br>Points:"
     },
 
     "PAGE_FEED" : {

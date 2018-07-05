@@ -136,7 +136,9 @@
         "RADIUS": "Radio",
         "FRIENDS": "a",
         "OFFER": "o",
-        "COUPONS_LEFT": "Cupones restantes"
+        "COUPONS_LEFT": "Cupones restantes",
+        "NO_RESULTS": "No resultados",
+        "NOTHING_FOUND": "No se encuentra nada en búsqueda o en la configuración de los filtros. Por favor, cambie la búsqueda."
     },
 
     "PAGE_ADV-NOTIFICATIONS" : {
@@ -311,7 +313,9 @@
         "CONFIRM_YOUR_LOCATION" : "Confirma su ubicación:",
         "YOU_CAN_SET": "Puede configurar su ubicación manualmente",
         "AGE" : "Edad",
-        "INCOME" : "Ingresos"
+        "INCOME" : "Ingresos",
+        "POINTS_FRIENDS" : "Puntos<br>Amigos:",
+        "POINTS_REDEMPTIONS" : "Puntos<br>Redención:"
     },
 
     "PAGE_FEED" : {

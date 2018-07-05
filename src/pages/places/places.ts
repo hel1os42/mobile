@@ -401,31 +401,40 @@ export class PlacesPage {
     getNativeCoords(isHighAccuracy: boolean, isRefresh?: boolean) {
         this.translate.get('TOAST.LOCATION_DETECTION')
             .subscribe(resp => {
-                let loadingLocation = this.loading.create(
-                    !isRefresh ?
-                        {
-                            content: resp,
-                            spinner: 'bubbles'
-                        }
-                        : undefined);
+                let loadingLocation;
                 if (!this.isRefreshLoading) {
+                    loadingLocation = this.loading.create(
+                        !isRefresh ?
+                            {
+                                content: resp,
+                                spinner: 'bubbles'
+                            }
+                            : undefined);
                     loadingLocation.present();
                 }
-                this.location.get(isHighAccuracy)
-                    .then((resp) => {
-                        this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
-                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                    })
-                    .catch((error) => {
-                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                        if (this.platform.is('cordova')) {
+                if (this.platform.is('cordova')) {
+                    this.location.get(isHighAccuracy)
+                        .then((resp) => {
+                            this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
+                            if (loadingLocation) {
+                                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                            }
+                        })
+                        .catch((error) => {
+                            if (loadingLocation) {
+                                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                            }
                             this.presentConfirm();
-                        }
-                        else {
-                            this.getLocation(true);
-                        }
-                        // error => console.log(error + 'err')
-                    })
+                        })
+                }
+                //for browser
+                else {
+                    if (loadingLocation) {
+                        loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                    }
+                    this.getLocation(true);
+                }
+                //
             })
     }
 
@@ -722,7 +731,17 @@ export class PlacesPage {
                 else {
                     isCountryEnabled = false;
                 }
-                let popover = this.popoverCtrl.create(NoPlacesPopover, { isCountryEnabled: isCountryEnabled, city: city, countryCode: countryCode });
+                let isFiltered = (this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== ''
+                    ? true : false;
+
+                let popover = this.popoverCtrl.create(
+                    NoPlacesPopover,
+                    {
+                        isCountryEnabled: isCountryEnabled,
+                        city: city,
+                        countryCode: countryCode,
+                        isFiltered: isFiltered
+                    });
                 popover.present();
                 popover.onDidDismiss(data => {
                     if (data && data.radius) {
@@ -1080,12 +1099,7 @@ export class PlacesPage {
                     buttons: [{
                         text: unit['OK'],
                         handler: () => {
-                            // console.log('Application exit prevented!');
-                            alert.dismiss().then(() => {
-                                this.getLocation(true);
-                            })
-                                .catch(err => console.log(err));
-
+                            this.getLocation(true);
                         }
                     }]
                 });

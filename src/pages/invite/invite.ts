@@ -24,7 +24,7 @@ export class InvitePage {
         private nav: NavController,
         private adjust: AdjustService) {
 
-        this.profile.get(false, false)
+        this.profile.get(true, true)
             .subscribe(user => this.user = user);
 
         this.onRefresh = this.profile.onRefresh
@@ -38,33 +38,36 @@ export class InvitePage {
     }
 
     inviteFriend() {
-        const Branch = window['Branch'];
-        let properties = {
-            canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
-            canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
-            title: this.user.name,
-            contentImageUrl: this.user.picture_url + '?size=mobile',
-            // contentDescription: '',
-            // price: 12.12,
-            // currency: 'GBD',
-            contentIndexingMode: 'private',
-            contentMetadata: {
-                invite_code: this.user.invite_code,
-            }
-        };
-        var branchUniversalObj = null;
-        Branch.createBranchUniversalObject(properties)
-            .then(res => {
-                branchUniversalObj = res;
-                let analytics = {};
-                let message = '';
-                branchUniversalObj.showShareSheet(analytics, properties, message);
+        if (this.user && this.user.invite_code) {
+            const Branch = window['Branch'];
+            let properties = {
+                canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
+                canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
+                title: this.user.name,
+                contentImageUrl: this.user.picture_url,
+                // contentDescription: '',
+                // price: 12.12,
+                // currency: 'GBD',
+                contentIndexingMode: 'private',
+                contentMetadata: {
+                    invite_code: this.user.invite_code,
+                }
+            };
+            var branchUniversalObj = null;
+            Branch.createBranchUniversalObject(properties)
+                .then(res => {
+                    branchUniversalObj = res;
+                    let analytics = {};
+                    let message = '';
+                    branchUniversalObj.showShareSheet(analytics, properties, message);
 
-                branchUniversalObj.onLinkShareResponse(res => {
-                    this.adjust.setEvent('IN_FR_BUTTON_CLICK_INVITE_PAGE');
-                });
-                // console.log('Branch create obj error: ' + JSON.stringify(err))
-            })
+                    branchUniversalObj.onLinkShareResponse(res => {
+                        this.adjust.setEvent('IN_FR_BUTTON_CLICK_INVITE_PAGE');
+                    });
+                    // console.log('Branch create obj error: ' + JSON.stringify(err))
+                })
+        }
+        else return;
     }
 
     openUserUsers() {

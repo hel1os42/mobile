@@ -1,6 +1,6 @@
 <div class="modal_content">
-    <ion-label text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ 'PAGE_PLACES.COMING_SOON' | translate }}</ion-label>
-    <div *ngIf="!isCountryEnabled">
+    <ion-label text-center text-uppercase class="width-100 text-4F4F4F font-16">{{ (isFiltered ? 'PAGE_PLACES.NO_RESULTS' : 'PAGE_PLACES.COMING_SOON') | translate }}</ion-label>
+    <div *ngIf="!isCountryEnabled && !isFiltered">
         <div *ngIf="countryCode" text-center margin>
             <img class="flag-big" [src]="getFlag(countryCode)">
         </div>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <div *ngIf="isCountryEnabled">
+    <div *ngIf="isCountryEnabled && !isFiltered">
         <!-- <div *ngIf="city">
         <div *ngIf="state" text-center margin-top class="bold font-16 text-3E4B5D">
             {{ state }}
@@ -64,6 +64,14 @@
             {{ 'PAGE_PLACES.ARE_YOU' | translate }}
             <a href="#" (click)="loadUrl(retailerUrl)">{{ url }}</a>
         </div>
+    </div>
+
+    <div 
+        *ngIf="isFiltered"
+        margin 
+        text-center 
+        class="bold font-16 text-3E4B5D">
+        {{ 'PAGE_PLACES.NOTHING_FOUND' | translate }}
     </div>
 
     <div padding>

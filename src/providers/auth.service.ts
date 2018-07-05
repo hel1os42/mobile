@@ -79,7 +79,9 @@ export class AuthService {
     }
 
     getReferrerId(inviteCode: string, phone?: string) {
-        this.oneSignal.sendTag('refferalInviteCode', inviteCode);
+        if (this.platform.is('cordova')) {
+            this.oneSignal.sendTag('refferalInviteCode', inviteCode);
+        }
         let obs: Observable<any>;
         if (phone) {
             obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
@@ -106,7 +108,7 @@ export class AuthService {
         let obs = this.api.post('users', register);
         obs.subscribe((resp) => {
             if (resp.was_recently_created) {
-                this.gAnalytics.trackEvent("Session", 'event_signup');
+                this.gAnalytics.trackEvent('Session', 'event_signup');
                 this.analytics.faLogEvent('event_signup');
                 this.adjust.setEvent('FIRST_TIME_SIGN_IN');
             }
@@ -127,7 +129,7 @@ export class AuthService {
     }
 
     login(login: Login) {
-        this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
+        this.gAnalytics.trackEvent('Session', 'event_phoneconfirm');
         this.analytics.faLogEvent('event_phoneconfirm');
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
@@ -140,32 +142,32 @@ export class AuthService {
 
     loginHandler(token, isSocial: boolean, userId?: string) {
         this.token.set(token);
-        this.oneSignal.getIds()
-            .then(resp => {
-                let obs = userId ? Observable.of({ id: userId }) : this.profile.get(false, false);//for sending one signal tags
-                obs.subscribe((user: User) => {
-                    let pushToken: PushTokenCreate = {
-                        user_id: user.id,
-                        token: resp.pushToken
-                    };
-                    // this.pushToken.get(resp.userId)
-                    //     .subscribe(res => { },
-                    //         err => {
-                    //             if (err.status == 404) {
-                    this.pushToken.set(pushToken, resp.userId);
-                    //     }
-                    // })
-                })
-            })
-        this.gAnalytics.trackEvent("Session", 'event_signin');
-        // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
-        let envName = this.appMode.getEnvironmentMode();
         if (this.platform.is('cordova')) {
+            this.oneSignal.getIds()
+                .then(resp => {
+                    let obs = userId ? Observable.of({ id: userId }) : this.profile.get(false, false);//for sending one signal tags
+                    obs.subscribe((user: User) => {
+                        let pushToken: PushTokenCreate = {
+                            user_id: user.id,
+                            token: resp.pushToken
+                        };
+                        // this.pushToken.get(resp.userId)
+                        //     .subscribe(res => { },
+                        //         err => {
+                        //             if (err.status == 404) {
+                        this.pushToken.set(pushToken, resp.userId);
+                        //     }
+                        // })
+                    })
+                })
+            this.gAnalytics.trackEvent('Session', 'event_signin');
+            // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
+            let envName = this.appMode.getEnvironmentMode();
             this.oneSignal.sendTag('environment', envName);
-        }
-        if (!isSocial) {
-            this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
-            this.analytics.faLogEvent('event_phoneconfirm');
+            if (!isSocial) {
+                this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
+                this.analytics.faLogEvent('event_phoneconfirm');
+            }
         }
     }
 

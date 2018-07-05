@@ -10,12 +10,13 @@ import { Clipboard } from '@ionic-native/clipboard';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { AppAvailability } from '@ionic-native/app-availability';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angular2-qrcode';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, Platform } from 'ionic-angular';
 import { BarChartComponent } from '../components/bar-chart';
 import { LineChartComponent } from '../components/line-chart';
 import { AdvNotificationsPage } from '../pages/adv-notifications/adv-notifications';
@@ -86,7 +87,7 @@ import { TransactionService } from '../providers/transaction.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { ImageCropperComponent, ImageCropperModule } from 'ng2-img-cropper';
+import { ImageCropperModule } from 'ng2-img-cropper';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { NetworkService } from '../providers/network.service';
@@ -113,6 +114,36 @@ import { ReportService } from '../providers/report.service';
 import { TestimonialPopover } from '../pages/place/testimonial.popover';
 import { LimitationPopover } from '../pages/place/limitation.popover';
 import { AdjustService } from '../providers/adjust.service';
+import { Pro } from '@ionic/pro';
+import { Injectable, Injector } from '@angular/core';
+
+const IONIC_APP_ID = '590f0eb2';
+const VERSION = '1.5.8';
+
+Pro.init(IONIC_APP_ID, {
+    appVersion: VERSION
+})
+
+@Injectable()
+export class AppErrorHandler implements ErrorHandler {
+    ionicErrorHandler: IonicErrorHandler;
+
+    constructor(injector: Injector) {
+        try {
+            this.ionicErrorHandler = injector.get(IonicErrorHandler);
+        } catch (e) {
+            // Unable to get the IonicErrorHandler provider, ensure
+            // IonicErrorHandler has been added to the providers list below
+        }
+    }
+
+    handleError(err: any) {
+        Pro.monitoring.handleNewError(err);
+        // Remove this if you want to disable Ionic's auto exception handling
+        // in development mode.
+        this.ionicErrorHandler && this.ionicErrorHandler.handleError(err);
+    }
+}
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -202,9 +233,10 @@ export function createTranslateLoader(http: HttpClient) {
         LeafletModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
-            provide: TranslateLoader,
-            useFactory: (createTranslateLoader),
-            deps: [HttpClient] },
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            },
         }),
         ImageCropperModule,
     ],
@@ -279,6 +311,8 @@ export function createTranslateLoader(http: HttpClient) {
         ImagePicker,
         FileTransfer,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
+        IonicErrorHandler,
+        [{ provide: ErrorHandler, useClass: AppErrorHandler }],
         BarcodeScanner,
         ApiService,
         AuthService,
@@ -314,7 +348,8 @@ export function createTranslateLoader(http: HttpClient) {
         Facebook,
         FlurryAnalytics,
         AdjustService,
-        LaunchNavigator
+        LaunchNavigator,
+        AppAvailability
     ]
 })
 export class AppModule { }

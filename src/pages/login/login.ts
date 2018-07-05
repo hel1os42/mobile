@@ -19,6 +19,7 @@ import { SocialService } from '../../providers/social.service';
 import { StorageService } from '../../providers/storage.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TabsPage } from '../tabs/tabs';
+import { AppAvailability } from '@ionic-native/app-availability';
 
 @Component({
     selector: 'page-login',
@@ -61,6 +62,7 @@ export class LoginPage {
     isRegisterMode: boolean;
     isInviteVisible = false;
     defaultInvite: string;
+    isTwitterAvailability: boolean;
 
     @ViewChild('codeSelect') codeSelect: Select;
     @ViewChild(Content) content: Content;
@@ -82,12 +84,33 @@ export class LoginPage {
         private fileTransfer: FileTransfer,
         private file: File,
         private api: ApiService,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private appAvailability: AppAvailability) {
 
         this.isRegisterMode = !this.appMode.getRegisteredMode();
         this.envName = this.appMode.getEnvironmentMode();
 
         this.getInvite();
+
+        if (this.platform.is('cordova')) {
+            let app;
+
+            if (this.platform.is('ios')) {
+                app = 'twitter://';
+            } else if (this.platform.is('android')) {
+                app = 'com.twitter.android';
+            }
+
+            this.appAvailability.check(app)
+                .then(
+                    (yes) => {
+                        this.isTwitterAvailability = true;
+                    },
+                    (no) => {
+                        this.isTwitterAvailability = false;
+                    }
+                );
+        }
 
         if (this.platform.is('android')) {
             let

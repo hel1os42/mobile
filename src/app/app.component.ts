@@ -32,7 +32,7 @@ export class MyApp {
     onConnectSubscription: Subscription;
     // onEnvironmentModeSubscription: Subscription;
     isResumeGlobal = false;
-  
+
     GOOGLE_ANALYTICS_ID = 'UA-114471660-1';
     ONE_SIGNAL_APP_ID = 'b08f4540-f5f5-426a-a7e1-3611e2a11187';
     ONE_SIGNAL_GOOGLE_PROJECT_NUMBER = '943098821317';
@@ -59,28 +59,27 @@ export class MyApp {
         platform.ready().then((resp) => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-            splashScreen.hide();
 
             //statusBar.styleLightContent();
-            statusBar.styleDefault();
-            statusBar.overlaysWebView(true);
-            //if (platform.is('ios')) {
-            //    statusBar.overlaysWebView(true);
-            //}
-            //else{
-            //    statusBar.overlaysWebView(true);
-            //}
+            if (platform.is('cordova')) {
+                splashScreen.hide();
+                statusBar.styleDefault();
+                statusBar.overlaysWebView(true);
+                this.oneSignalInit();
+                this.analytics.flurryAnalyticsInit();
+                this.adjustInit();
 
-            //Google Analytics
-            this.gAnalytics.startTrackerWithId(this.GOOGLE_ANALYTICS_ID)
-                .then(() => {
-                    this.gAnalytics.trackView('test');
-                    // Tracker is ready
-                    this.gAnalytics.debugMode();
-                    this.gAnalytics.setAllowIDFACollection(true);
-                    this.gAnalytics.enableUncaughtExceptionReporting(true);
-                })
-                .catch(err => console.log('Error starting GoogleAnalytics', err));
+                //Google Analytics
+                this.gAnalytics.startTrackerWithId(this.GOOGLE_ANALYTICS_ID)
+                    .then(() => {
+                        this.gAnalytics.trackView('test');
+                        // Tracker is ready
+                        this.gAnalytics.debugMode();
+                        this.gAnalytics.setAllowIDFACollection(true);
+                        this.gAnalytics.enableUncaughtExceptionReporting(true);
+                    })
+                    .catch(err => console.log('Error starting GoogleAnalytics', err));
+            }
 
             // Network status
             this.network.onConnect();
@@ -97,7 +96,7 @@ export class MyApp {
             else {
                 this.rootPage = OnBoardingPage;
                 this.onConnectSubscription = this.network.onConnectEmit
-                    .subscribe(resp => {
+                    .subscribe(() => {
                         window.location.reload(true);
                     })
             }
@@ -115,12 +114,6 @@ export class MyApp {
 
             this.branchInit(platform, splashScreen);
             this.initTranslate();
-
-            if (platform.is('cordova')) {
-                this.oneSignalInit();
-                this.analytics.flurryAnalyticsInit();
-                this.adjustInit();
-            }
 
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();

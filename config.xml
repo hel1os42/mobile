@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="057" id="com.nau.io" ios-CFBundleVersion="1.5.7" version="1.5.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="058" id="com.nau.io" ios-CFBundleVersion="1.5.8" version="1.5.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>NAU</name>
     <description>NAU</description>
     <content src="index.html" />
@@ -169,4 +169,14 @@
         <variable name="LOCATION_USAGE_DESCRIPTION" value="This app requires access to your location for navigation purposes" />
     </plugin>
     <plugin name="com.adjust.sdk" spec="4.13.0" />
+    <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
+    <plugin name="cordova-plugin-ionic" spec="4.1.7">
+        <variable name="APP_ID" value="590f0eb2" />
+        <variable name="CHANNEL_NAME" value="Master" />
+        <variable name="UPDATE_METHOD" value="none" />
+        <variable name="WARN_DEBUG" value="true" />
+        <variable name="UPDATE_API" value="https://api.ionicjs.com" />
+        <variable name="MAX_STORE" value="2" />
+    </plugin>
 </widget>
+

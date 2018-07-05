@@ -237,11 +237,11 @@
                     text-right>
                     <span class="flex" *ngIf="offer.referral_points_price > user.referral_points">
                         <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
-                        {{ offer.referral_points_price - user.referral_points }}
+                        {{ offer.referral_points_price }}
                     </span>
                     <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
                         <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
-                        {{ offer.redemption_points_price - user.redemption_points }}
+                        {{ offer.redemption_points_price }}
                     </span>
                 </div>
             </div>
