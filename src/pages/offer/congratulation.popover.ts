@@ -86,7 +86,7 @@ export class CongratulationPopover {
                         canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
                         canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
                         title: this.offer.label,
-                        contentDescription: this.offer.description,
+                        contentDescription: this.getDescription(this.offer.rich_description),
                         contentImageUrl: this.offer.picture_url,
                         // price: 12.12,
                         // currency: 'GBD',
@@ -114,6 +114,11 @@ export class CongratulationPopover {
                 })
         }
         else return;
+    }
+
+    getDescription(str) {
+        // let count = (str.match(/<a href/g) || []).length;
+        return str.replace(/<[^>]+>/g, '');
     }
 
     ngOnDestroy() {
