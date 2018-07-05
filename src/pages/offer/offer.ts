@@ -238,7 +238,7 @@ export class OfferPage {
             place_id: ${this.company.id}, 
             offer_label: ${this.offer.label},
             offer_id: ${this.offer.id}`;
-            this.gAnalytics.trackEvent('Session', 'redeem_button_click', label);
+            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'redeem_button_click', label);
         }
 
         this.timeframesHandler();
@@ -264,7 +264,7 @@ export class OfferPage {
                         // noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                         offerRedeemPopover.onDidDismiss(() => {
                             this.stopTimer();
-                            this.gAnalytics.trackEvent("Session", 'event_showqr');
+                            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_showqr');
                         });
 
                         this.timer = setInterval(() => {

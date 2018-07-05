@@ -68,7 +68,7 @@ export class PlacePage {
         private alert: AlertController,
         private testimonials: TestimonialsService,
         private statusBar: StatusBar,
-        private analytics: GoogleAnalytics,
+        private gAnalytics: GoogleAnalytics,
         private translate: TranslateService,
         private launchNavigator: LaunchNavigator,
         private browser: InAppBrowser,
@@ -241,7 +241,7 @@ export class PlacePage {
                     let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer, user: this.user });
                     noticePopover.present();
                 }
-                this.analytics.trackEvent("Session", 'event_chooseoffer');
+                this.gAnalytics.trackEvent(this.envName, 'event_chooseoffer');
                 this.nav.push(OfferPage, {
                     offer: offer,
                     company: this.company,

@@ -118,7 +118,7 @@ import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
 
 const IONIC_APP_ID = '590f0eb2';
-const VERSION = '1.5.8';
+const VERSION = '1.5.8';//1.5.7
 
 Pro.init(IONIC_APP_ID, {
     appVersion: VERSION
