@@ -86,13 +86,15 @@ export class SettingsPage {
                 });
         }
 
-        this.place.get(true)
-            .subscribe(
-                resp => {
-                    this.nextPage = AdvTabsPage;
-                    this.advPicture_url = resp.picture_url;
-                },
-                errResp => this.nextPage = undefined);
+        if (this.envName !== 'prod') {
+            this.place.get(true)
+                .subscribe(
+                    resp => {
+                        this.nextPage = AdvTabsPage;
+                        this.advPicture_url = resp.picture_url;
+                    },
+                    errResp => this.nextPage = undefined);
+        }
 
         this.onRefreshProfile = this.profile.onRefreshAccounts
             .subscribe((resp) => {
