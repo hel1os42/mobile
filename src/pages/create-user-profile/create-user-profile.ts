@@ -277,7 +277,7 @@ export class CreateUserProfilePage {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
                 };
-                loadingLocation.dismissAll();
+                loadingLocation.dismiss();
                 this.addMap();
                 setTimeout(() => {
                     this.changeDetectorRef.detectChanges();
