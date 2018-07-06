@@ -178,5 +178,5 @@
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
         <variable name="MAX_STORE" value="2" />
     </plugin>
+    <plugin name="cordova-plugin-app-version" spec="0.1.9" />
 </widget>
-
