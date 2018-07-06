@@ -15,6 +15,8 @@ import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
 import { AdjustService } from '../../providers/adjust.service';
+import { MockOffers } from '../../mocks/mockOffers';
+import { Offer } from '../../models/offer';
 
 @Component({
     selector: 'page-user-profile',
@@ -26,6 +28,7 @@ export class UserProfilePage {
     onRefreshAccounts: Subscription;
     NAU: Account;
     branchDomain = 'https://nau.app.link';
+    offers = [];
 
     @ViewChild(Slides) slides: Slides;
 
@@ -38,6 +41,8 @@ export class UserProfilePage {
         private translate: TranslateService,
         private adjust: AdjustService) {
 
+        this.offers = MockOffers.items;
+        
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
                 this.user = resp;
@@ -53,7 +58,6 @@ export class UserProfilePage {
                     this.balance = this.NAU ? this.NAU.balance : 0;
                 });
         }
-
     }
 
     ionSelected() {
@@ -123,6 +127,21 @@ export class UserProfilePage {
 
     slidePrev() {
         this.slides.slidePrev();
+    }
+
+    openPlace(event, place, isShare?: boolean, offer?: Offer) {
+
+    }
+    getStars(star: number) {
+        let showStars: boolean[] = [];
+        for (var i = 0; i < 5; i++) {
+            showStars.push(star > i);
+        }
+        return showStars;
+    }
+
+    getDistance() {
+        return 2000;
     }
 
     shareInvite() {

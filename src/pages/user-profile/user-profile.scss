@@ -20,7 +20,7 @@ page-user-profile{
   }
 
   .block-slider{
-    background: #3E4B5D;
+    // background: #3E4B5D;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     height: 31.4vw;
   }
@@ -29,13 +29,13 @@ page-user-profile{
     height: 100%;
   }
 
-  .block-slider .item-ios ion-avatar img{
-    height: 14.5vw;
-    width: auto;
-    padding-right: 10vw;
-    padding-left: 7vw;
-    border-radius: 0;
-  }
+//   .block-slider .item-ios ion-avatar img{
+//     height: 14.5vw;
+//     width: auto;
+//     padding-right: 10vw;
+//     padding-left: 7vw;
+//     border-radius: 0;
+//   }
 
   .block-slider ion-list {
     padding: 2vw;
