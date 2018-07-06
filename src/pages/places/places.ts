@@ -412,6 +412,20 @@ export class PlacesPage {
                             : undefined);
                     loadingLocation.present();
                 }
+                // this.location.get(isHighAccuracy)
+                // .then((resp) => {
+                //     this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
+                //     loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                // })
+                // .catch((error) => {
+                //     loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                //     if (this.platform.is('cordova')) {
+                //     }
+                //     else {
+                //         this.getLocation(true);
+                //     }
+                //     // error => console.log(error + 'err')
+                // })
                 if (this.platform.is('cordova')) {
                     this.location.get(isHighAccuracy)
                         .then((resp) => {
