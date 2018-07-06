@@ -227,16 +227,45 @@ export class CreateUserProfilePage {
             }
         }
         else {
-            this.location.getByIp()
-                .subscribe(resp => {
-                    this.coords = {
-                        // lat: resp.latitude,
-                        // lng: resp.longitude
-                        lat: resp.lat,
-                        lng: resp.lon
-                    };
-                    this.addMap();
-                    this.changeDetectorRef.detectChanges();
+            this.profile.get(true, false)
+                .subscribe(user => {
+                    if (user.latitude) {
+                        this.coords = {
+                            // lat: resp.latitude,
+                            // lng: resp.longitude
+                            lat: user.latitude,
+                            lng: user.longitude
+                        };
+                        this.addMap();
+                        this.changeDetectorRef.detectChanges();
+                    }
+                    else {
+                        this.location.getByIp()
+                            .subscribe(resp => {
+                                this.coords = {
+                                    // lat: resp.latitude,
+                                    // lng: resp.longitude
+                                    lat: resp.lat,
+                                    lng: resp.lon
+                                };
+                                this.addMap();
+                                this.changeDetectorRef.detectChanges();
+                                this.profile.patch({ latitude: this.user.latitude, longitude: this.user.longitude }, true);
+                            },
+                                err => {
+                                    this.user.latitude = 0;
+                                    this.user.longitude = 0;
+                                    this.coords = {
+                                        // lat: resp.latitude,
+                                        // lng: resp.longitude
+                                        lat: this.user.latitude,
+                                        lng: this.user.longitude
+                                    };
+                                    this.addMap();
+                                    this.changeDetectorRef.detectChanges();
+                                    this.profile.patch({ latitude: this.user.latitude, longitude: this.user.longitude }, true);
+                                })
+                    }
                 })
         }
     }

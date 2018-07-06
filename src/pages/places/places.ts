@@ -383,15 +383,15 @@ export class PlacesPage {
                                 // user.latitude = resp.latitude;
                                 // user.longitude = resp.longitude;
                                 this.getDefaultCoords(resp.lat, resp.lon);
-                                user.latitude = resp.lat;
-                                user.longitude = resp.lon;
-                                this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
+                                this.user.latitude = resp.lat;
+                                this.user.longitude = resp.lon;
+                                this.profile.patch({ latitude: this.user.latitude, longitude: this.user.longitude }, true);
                             },
                                 err => {
                                     this.getDefaultCoords(0, 0);
-                                    user.latitude = 0;
-                                    user.longitude = 0;
-                                    this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
+                                    this.user.latitude = 0;
+                                    this.user.longitude = 0;
+                                    this.profile.patch({ latitude: this.user.latitude, longitude: this.user.longitude }, true);
                                 });
                     }
                 })
