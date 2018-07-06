@@ -349,7 +349,6 @@ page-places {
     .block-fr .circle {
         color: #000;
         margin-left: 2vw;
-        margin-right: 0.5vw;
         width: 5vw;
         height: 5vw;
         border-radius: 100vw;
@@ -360,11 +359,16 @@ page-places {
         font-weight: bold;
         text-transform: uppercase;
     }
+    .block-fr .circle_num{
+        margin-left: 0.5vw;
+    }
     .block-fr span.f {
         background: #75e3ea;
+        font-weight: 100;
     }
     .block-fr span.r {
         background: #c7e240;
+        font-weight: 100;
     }
     .coupon,
     .block-right {
