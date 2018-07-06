@@ -134,8 +134,8 @@
         "ARE_YOU": "Are you a retailer? Join NAU among the first in your region prior to the official launch!",
         "OOPS": "Ooops...",
         "FRIENDS": "f",
-        "OFFER": "o",
-        "COUPONS_LEFT": "Coupons left",
+        "OFFER": "r",
+        "COUPONS_LEFT": "Coupons",
         "NO_RESULTS": "No results",
         "NOTHING_FOUND": "Nothing found on your search request or filter settings. Please change the request."
     },
@@ -421,7 +421,7 @@
         "LIMITATION_16": "Sorry, you have reached this offer weekly redemptions limit.",
         "LIMITATION_32": "Sorry, you have reached this offer monthly redemptions limit.",
         "LIMITATION_64": "Sorry, your user level is lower than this offer requires.",
-        "LIMITATION_128": "Sorry, you don't have enough Friends Points to redeem this offer. Your FP balance is referral_points, while this offer requires referral_points_price. Each new friend will bring you more Friends Points, so don't hesitate to invite them right now!",
+        "LIMITATION_128": "Sorry, you don't have enough Friendship Points to redeem this offer. Your FP balance is referral_points, while this offer requires referral_points_price. Each new friend will bring you more Friendship Points, so don't hesitate to invite them right now!",
         "LIMITATION_256": "Sorry, you don't have enough Redemptions Points to redeem this offer. Your RP balance is redemption_points, while this offer requires redemption_points_price. You can get more Redemptions Points right now if you redeem any offers across the app!"
     },
 
