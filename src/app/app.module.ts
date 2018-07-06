@@ -11,6 +11,7 @@ import { FileTransfer } from '@ionic-native/file-transfer';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { AppAvailability } from '@ionic-native/app-availability';
+import { AppVersion } from '@ionic-native/app-version';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -118,23 +119,31 @@ import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
 
 const IONIC_APP_ID = '590f0eb2';
-const VERSION = '1.5.8';//1.5.7
-
-Pro.init(IONIC_APP_ID, {
-    appVersion: VERSION
-})
 
 @Injectable()
 export class AppErrorHandler implements ErrorHandler {
     ionicErrorHandler: IonicErrorHandler;
 
-    constructor(injector: Injector) {
-        try {
-            this.ionicErrorHandler = injector.get(IonicErrorHandler);
-        } catch (e) {
-            // Unable to get the IonicErrorHandler provider, ensure
-            // IonicErrorHandler has been added to the providers list below
+    constructor(
+        injector: Injector,
+        private platform: Platform,
+        private appVersion: AppVersion) {
+
+        if (this.platform.is('cordova')) {
+            this.appVersion.getVersionNumber()
+                .then(version => {
+                    Pro.init(IONIC_APP_ID, {
+                        appVersion: version
+                    })
+                    try {
+                        this.ionicErrorHandler = injector.get(IonicErrorHandler);
+                    } catch (e) {
+                        // Unable to get the IonicErrorHandler provider, ensure
+                        // IonicErrorHandler has been added to the providers list below
+                    }
+                })
         }
+
     }
 
     handleError(err: any) {
@@ -349,7 +358,8 @@ export function createTranslateLoader(http: HttpClient) {
         FlurryAnalytics,
         AdjustService,
         LaunchNavigator,
-        AppAvailability
+        AppAvailability,
+        AppVersion
     ]
 })
 export class AppModule { }
