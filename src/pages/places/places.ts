@@ -804,7 +804,7 @@ export class PlacesPage {
             this.adjust.setEvent('TOP_OFFER_FEED_CLICK');
         }
         else {
-            this.gAnalytics.trackEvent("Session", 'event_chooseplace');
+            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
             this.analytics.faLogEvent('event_chooseplace');
         }
 

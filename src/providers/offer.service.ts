@@ -5,6 +5,7 @@ import { RedeemedOffer } from '../models/redeemedOffer';
 import { AdjustService } from './adjust.service';
 import { AnalyticsService } from './analytics.service';
 import { ApiService } from './api.service';
+import { AppModeService } from './appMode.service';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
@@ -21,7 +22,8 @@ export class OfferService {
         private api: ApiService,
         private gAnalytics: GoogleAnalytics,
         private analytics: AnalyticsService,
-        private adjust: AdjustService) { }
+        private adjust: AdjustService,
+        private appMode: AppModeService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
@@ -159,11 +161,11 @@ export class OfferService {
         obs.subscribe(status => {
             if (status.redemption_id) {
                 this.refreshRedeemedOffers();
-                this.gAnalytics.trackEvent('Session', 'event_redeemoffer');
+                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', status.redemption_id);
                 this.analytics.faLogEvent('event_redeemoffer');
                 this.adjust.setEvent('ACTION_REDEMPTION');
             }
-        })
+        }, err => {})
         return obs;
     }
 
