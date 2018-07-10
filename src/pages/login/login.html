@@ -181,8 +181,8 @@
 
     </div>
 
-    <div text-center class="margin-top-5vw" hidden>
-        <a *ngIf="isRegisterMode" (click)="showInvite()" href="#">Change invite</a>
+    <div text-center class="margin-top-5vw">
+        <a *ngIf="isRegisterMode" (click)="showInvite()" href="#">{{ 'PAGE_LOGIN.CHANGE_INVITE' | translate }}</a>
     </div>
 
 </ion-content>

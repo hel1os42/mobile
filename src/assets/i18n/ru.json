@@ -477,7 +477,8 @@
         "AND" : "и",
         "PRIVACY_POLICY" : "Политику конфиденциальности",
         "INVITE_OPTIONAL" : "Не обязательно",
-        "EDIT" : "Изменить"
+        "EDIT" : "Изменить",
+        "CHANGE_INVITE" : "Код друга"
     },
 
     "PAGE_SIGNUP-CODE" : {

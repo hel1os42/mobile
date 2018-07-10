@@ -477,7 +477,8 @@
         "AND" : "y",
         "PRIVACY_POLICY" : "política de privacidad",
         "INVITE_OPTIONAL" : "Opcional",
-        "EDIT" : "Editar"
+        "EDIT" : "Editar",
+        "CHANGE_INVITE" : "Código amigo"
     },
 
     "PAGE_SIGNUP-CODE" : {

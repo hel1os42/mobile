@@ -477,7 +477,8 @@
         "AND" : "і",
         "PRIVACY_POLICY" : "політику конфіденційності",
         "INVITE_OPTIONAL" : "Не обов'язково",
-        "EDIT" : "Змінити"
+        "EDIT" : "Змінити",
+        "CHANGE_INVITE" : "Код друга"
     },
 
     "PAGE_SIGNUP-CODE" : {
