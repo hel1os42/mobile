@@ -220,7 +220,7 @@ export class PlacePage {
                     branchUniversalObj = res;
                     let analytics = {};
                     // let message = this.company.name + this.company.description
-                    let message = '';
+                    let message = 'NAU';
                     branchUniversalObj.showShareSheet(analytics, properties, message);
 
                     branchUniversalObj.onLinkShareResponse(res => {
