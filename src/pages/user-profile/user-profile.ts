@@ -129,6 +129,10 @@ export class UserProfilePage {
         this.slides.slidePrev();
     }
 
+    slideChanged(event) {
+        
+    }
+
     openPlace(event, place, isShare?: boolean, offer?: Offer) {
 
     }
@@ -165,7 +169,7 @@ export class UserProfilePage {
                 .then(res => {
                     branchUniversalObj = res;
                     let analytics = {};
-                    let message = '';
+                    let message = 'NAU';
                     branchUniversalObj.showShareSheet(analytics, properties, message);
 
                     branchUniversalObj.onLinkShareResponse(res => {

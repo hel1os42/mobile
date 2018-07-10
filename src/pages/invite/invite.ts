@@ -58,7 +58,7 @@ export class InvitePage {
                 .then(res => {
                     branchUniversalObj = res;
                     let analytics = {};
-                    let message = '';
+                    let message = 'NAU';
                     branchUniversalObj.showShareSheet(analytics, properties, message);
 
                     branchUniversalObj.onLinkShareResponse(res => {
