@@ -60,8 +60,9 @@
     </a>
     -->
     </ion-item>
-<div class="main-position-center padding-top-5vw">
+<div class="main-position-center">
     <div class="position-center width-100">
+        <!--
     <div class="block-user-level">
         <div class="block-circle user-level-1">
             <ion-item no-lines class="user-ava-name overflow-visible">
@@ -70,7 +71,7 @@
                 <div class="text-3E4B5D lbl2">{{ user.points }}</div>
             </ion-item>
             <div class="circle-center">
-                <!-- <div class="block-get">
+                 <div class="block-get">
                     <img src="assets/img/user_profile/cards.svg">
                     <div text-uppercase class="bold">
                         {{ 'PAGE_USER-PROFILE.GET' | translate }}
@@ -79,7 +80,7 @@
                         {{ 'PAGE_USER-PROFILE.ADDITIONAL' | translate }}
                         <br>{{ 'PAGE_USER-PROFILE.POINTS' | translate }}
                     </span>
-                </div> -->
+                </div>
             </div>
 
             <div class="box box4 color-no-fill">
@@ -89,8 +90,8 @@
                 <div class="label-point circle-label-top">100</div>
                 <div class="next-level">
                     <ion-icon name="checkmark"></ion-icon>
-                    <!--<span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ user.level }}
-                    </span>-->
+                    <span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ user.level }}
+                    </span>
                 </div>
             </div>
 
@@ -104,7 +105,7 @@
             </div>
         </div>
     </div>
-
+-->
     <!-- <div class="font-14 text-4F4F4F" margin-bottom text-uppercase text-center>
         {{ 'PAGE_USER-PROFILE.YOUR_TASKS_JOBS_FOR_TODAY' | translate }}
     </div> -->
@@ -155,15 +156,18 @@
                     <ion-slide *ngFor="let offer of offers">
                         <!-- <ion-list no-lines>
                             <ion-item class="text-white"> -->
-    
+                        <ion-list
+                            padding-left
+                            padding-right
+                            no-lines class="item-block-nau margin-top-10 block-featured">
                                 <div tappable ion-item detail-none>
-                                    <ion-avatar 
-                                        (click)="openPlace($event, offer?.account.owner.place, false)" 
-                                        item-start 
-                                        text-center 
+                                    <ion-avatar
+                                        (click)="openPlace($event, offer?.account.owner.place, false)"
+                                        item-start
+                                        text-center
                                         class="relative">
-                                        <div 
-                                            [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }" 
+                                        <div
+                                            [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }"
                                             class="thumb_image margin-top-2vw">
                                         </div>
                                         <div class="info-block" text-left>
@@ -175,25 +179,25 @@
                                             <div class="margin-top-1vw">
                                                 <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                                                 <span class="font-75 text-828282">
-                                                    {{ getDistance(offer.latitude, offer.longitude).distance }} 
+                                                    {{ getDistance(offer.latitude, offer.longitude).distance }}
                                                     {{ getDistance(offer.latitude, offer.longitude).key | translate}}
                                                 </span>
                                             </div>
                                             <div class="margin-top-1vw">
                                                 <img src="assets/img/user_home/icon_small_user.svg">
                                                 <span class="font-75 text-828282">
-                                                    {{ offer?.account.owner.place.redemptions_count !== undefined 
-                                                        ? offer?.account.owner.place.redemptions_count 
+                                                    {{ offer?.account.owner.place.redemptions_count !== undefined
+                                                        ? offer?.account.owner.place.redemptions_count
                                                         : offer?.account.owner.place.testimonials_count}}
                                                 </span>
                                             </div>
                                         </div>
                                     </ion-avatar>
-                                    <div 
-                                        (click)="openPlace($event, offer?.account.owner.place, false, offer)" 
+                                    <div
+                                        (click)="openPlace($event, offer?.account.owner.place, false, offer)"
                                         class="right-block">
-                                        <div 
-                                            [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }" 
+                                        <div
+                                            [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
                                             [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
                                             class="font-0 right-side relative">
                                             <div class="right-side-content">
@@ -202,27 +206,27 @@
                                                         <div class="bold font-18 text-white">{{ offer.label }}</div>
                                                     </div>
                                                 </div>
-                                                <div 
-                                                    [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }" 
+                                                <div
+                                                    [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }"
                                                     [innerHTML]="offer.rich_description"
                                                     class="text-white font-12 wrap text-overflow-5 margin-top-2vw">
                                                 </div>
                                             </div>
                                             <div [ngClass]="offer.type" class="right-top-angle"></div>
                                         </div>
-                                        <img 
-                                            *ngIf="offer.is_favorite" 
+                                        <img
+                                            *ngIf="offer.is_favorite"
                                             [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-                                            class="star_right" 
+                                            class="star_right"
                                             src="assets/img/place/icon_star.svg">
                                         <div class="block-fr bold">
                                             <div *ngIf="offer.max_count" class="coupon font-10 flex">
                                                 {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}
                                                 /{{ offer.max_count }}
                                             </div>
-                                            <div 
+                                            <div
                                                 *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
-                                                class="block-right font-14 flex" 
+                                                class="block-right font-14 flex"
                                                 text-right>
                                                 <span class="flex" *ngIf="offer.referral_points_price > user.referral_points">
                                                     <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
@@ -236,6 +240,11 @@
                                         </div>
                                     </div>
                                 </div>
+                            </ion-list>
+
+
+
+
                             <!-- </ion-item>
                         </ion-list> -->
                     </ion-slide>
