@@ -151,7 +151,7 @@
                 </a>
             </ion-col>
             <ion-col class="grid" col-10 align-self-center>
-                <ion-slides spaceBetween="10">
+                <ion-slides (ionSlideDidChange)="slideChanged($event)" spaceBetween="10">
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
                     <ion-slide *ngFor="let offer of offers">
                         <!-- <ion-list no-lines>
