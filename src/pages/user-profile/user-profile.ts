@@ -42,7 +42,7 @@ export class UserProfilePage {
         private adjust: AdjustService) {
 
         this.offers = MockOffers.items;
-        
+
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
                 this.user = resp;
@@ -130,7 +130,7 @@ export class UserProfilePage {
     }
 
     slideChanged(event) {
-        
+
     }
 
     openPlace(event, place, isShare?: boolean, offer?: Offer) {
@@ -144,8 +144,14 @@ export class UserProfilePage {
         return showStars;
     }
 
-    getDistance() {
-        return 2000;
+    getDistance() {//temporary to do
+        let long = 2000;
+        let distance = long >= 1000 ? long / 1000 : long;
+        let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+        return {
+            distance: distance,
+            key: key
+        }
     }
 
     shareInvite() {
