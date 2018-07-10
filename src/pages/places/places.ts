@@ -155,7 +155,7 @@ export class PlacesPage {
             });
         }
 
-        this.offers.getCategories(false)
+        this.offers.getCategories(true)
             .subscribe(categories => {
                 this.categories.forEach((category) => {
                     let obj = categories.data.find(p => p.name === category.name);//temporary - code
