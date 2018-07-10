@@ -626,14 +626,15 @@ export class PlacesPage {
             this.content.resize();
         }
         this.isChangedCategory = this.selectedCategory.id !== category.id;
-        this.search = "";
-        this.selectedCategory = category;
-        this.loadCompanies(true, this.page = 1);
         if (this.isChangedCategory) {
             this.tagFilter = [];
             this.typeFilter = [];
             this.specialityFilter = [];
         }
+        this.search = "";
+        this.selectedCategory = category;
+        this.loadCompanies(true, this.page = 1);
+
     }
 
     getFeatured() {
@@ -909,38 +910,41 @@ export class PlacesPage {
     }
 
     createPopover() {
-        if (this.isChangedCategory) {
-            this.offers.getTypes(this.selectedCategory.id)
-                .subscribe(resp => {
-                    this.selectedTypes = resp.retail_types.map(type => {
-                        let selectedSpecialities = type.specialities;
-                        return {
-                            ...type,
-                            specialities: selectedSpecialities
-                                .map(item => {
-                                    return {
-                                        ...item,
-                                        isSelected: false
-                                    }
-                                }),
-                            isSelected: false
-                        }
-                    });
-                    this.selectedTags = resp.tags.length > 0
-                        ? resp.tags.map(item => {
+        if (this.selectedCategory.id) {
+            if (this.isChangedCategory) {
+                this.offers.getTypes(this.selectedCategory.id)
+                    .subscribe(resp => {
+                        this.selectedTypes = resp.retail_types.map(type => {
+                            let selectedSpecialities = type.specialities;
                             return {
-                                ...item,
+                                ...type,
+                                specialities: selectedSpecialities
+                                    .map(item => {
+                                        return {
+                                            ...item,
+                                            isSelected: false
+                                        }
+                                    }),
                                 isSelected: false
                             }
-                        })
-                        : undefined;
-                    this.presentPopover();
-                });
+                        });
+                        this.selectedTags = resp.tags.length > 0
+                            ? resp.tags.map(item => {
+                                return {
+                                    ...item,
+                                    isSelected: false
+                                }
+                            })
+                            : undefined;
+                        this.presentPopover();
+                    });
+            }
+            else {
+                this.presentPopover();
+            }
+            this.isChangedCategory = false;
         }
-        else {
-            this.presentPopover();
-        }
-        this.isChangedCategory = false;
+        else return;
     }
 
     presentPopover() {
@@ -973,6 +977,7 @@ export class PlacesPage {
                 else if (types.length == 0 && this.typeFilter.length > 0) {
                     this.selectedTypes.forEach(type => {
                         type.isSelected = false;
+                        type.specialities.forEach(speciality => speciality.isSelected = false);
                     });
                     this.typeFilter = [];
                     this.isChangedFilters = true;
@@ -983,8 +988,8 @@ export class PlacesPage {
                     this.isChangedFilters = true;
                 }
                 else if (tags.length == 0 && this.tagFilter && this.tagFilter.length > 0) {
-                    this.selectedTags.forEach(type => {
-                        type.isSelected = false;
+                    this.selectedTags.forEach(tag => {
+                        tag.isSelected = false;
                     });
                     this.tagFilter = [];
                     this.isChangedFilters = true;
