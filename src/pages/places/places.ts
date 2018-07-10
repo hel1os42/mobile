@@ -226,7 +226,7 @@ export class PlacesPage {
         // console.log(map);
         // let width = this.platform.width();
         let heigth = document.getElementById("map_leaf").offsetHeight;
-        if (!this._map && this.coords.lat) {
+        if (!this._map && this.coords && this.coords.lat) {
             this._map = map;
             this.generateBounds(this.markers);
         }
@@ -234,7 +234,7 @@ export class PlacesPage {
         this._map.on({
             moveend: (event: LeafletEvent) => {
                 this.zoom = this._map.getZoom();
-                if (this.coords.lat != this._map.getCenter().lat) {
+                if (this.coords && this.coords.lat != this._map.getCenter().lat) {
                     this.coords = this._map.getCenter();
                     // this.changeDetectorRef.detectChanges();
                     if (this.coords.lng > 180 || this.coords.lng < -180) {
