@@ -357,7 +357,8 @@
         "SECONDS" : "seconds",
         "SECONDS2" : "seconds",
         "SECOND" : "second",
-        "BY_PRESSING" : "By pressing \"SIGN IN\", I accept"
+        "BY_PRESSING" : "By pressing \"SIGN IN\", I accept",
+        "CHANGE_INVITE" : "Invite code"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -482,8 +483,7 @@
         "AND" : "and",
         "PRIVACY_POLICY" : "privacy policy",
         "INVITE_OPTIONAL" : "Optional",
-        "EDIT" : "Edit",
-        "CHANGE_INVITE" : "Invite code"
+        "EDIT" : "Edit"
     },
 
     "PAGE_SIGNUP-CODE" : {
