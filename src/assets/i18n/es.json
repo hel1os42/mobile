@@ -358,7 +358,8 @@
         "SECONDS" : "segundos",
         "SECONDS2" : "segundos",
         "SECOND" : "segundo",
-        "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo"
+        "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo",
+        "CHANGE_INVITE" : "Código amigo"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -483,8 +484,7 @@
         "AND" : "y",
         "PRIVACY_POLICY" : "política de privacidad",
         "INVITE_OPTIONAL" : "Opcional",
-        "EDIT" : "Editar",
-        "CHANGE_INVITE" : "Código amigo"
+        "EDIT" : "Editar"
     },
 
     "PAGE_SIGNUP-CODE" : {

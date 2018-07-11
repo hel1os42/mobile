@@ -358,7 +358,8 @@
         "SECONDS" : "секунд",
         "SECONDS2" : "секунди",
         "SECOND" : "секунду",
-        "BY_PRESSING" : "Натискаючи \"Вхід\", я приймаю"
+        "BY_PRESSING" : "Натискаючи \"Вхід\", я приймаю",
+        "CHANGE_INVITE" : "Код друга"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -483,8 +484,7 @@
         "AND" : "і",
         "PRIVACY_POLICY" : "політику конфіденційності",
         "INVITE_OPTIONAL" : "Не обов'язково",
-        "EDIT" : "Змінити",
-        "CHANGE_INVITE" : "Код друга"
+        "EDIT" : "Змінити"
     },
 
     "PAGE_SIGNUP-CODE" : {
