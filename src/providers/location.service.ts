@@ -39,8 +39,9 @@ export class LocationService {
         //     return Promise.resolve(this.geoposition);
         // else
         let promise = this.geolocation.getCurrentPosition({
-            enableHighAccuracy: isHighAccuracy,
-            timeout: 5000,
+            // enableHighAccuracy: isHighAccuracy,// slowly
+            enableHighAccuracy: false,// faster
+            timeout: 40000,
             maximumAge: 12000
         })
         promise.then(geo => {
