@@ -103,6 +103,12 @@
         "SUN" : "DOM"
     },
 
+    "SHARING" : {
+        "INVITE" : "NAU is a new app that helps you save money and get free stuff from coffee to iPhone!",
+        "PLACE" : "Check this fabulous place in NAU app and grab their special offer right away!",
+        "OFFER" : "Check this incredible special offer in NAU app and grab it right away! I recommend it!"
+    },
+
     "PAGE_PLACES" : {
         "ALL_OFFERS" : "Todas las ofertas",
         "DELIVERY" : "Entrega",
