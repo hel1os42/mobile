@@ -40,7 +40,7 @@ export class LocationService {
         // else
         let promise = this.geolocation.getCurrentPosition({
             enableHighAccuracy: isHighAccuracy,
-            timeout: 40000,
+            timeout: 5000,
             maximumAge: 12000
         })
         promise.then(geo => {
@@ -53,7 +53,8 @@ export class LocationService {
                 this.onRefreshCoords.emit(coords);
             }
 
-        });
+        })
+        .catch(err => console.log('service' + err));
         return promise;
     }
 

@@ -272,7 +272,7 @@ export class CreateUserProfilePage {
 
     getNativeCoords(isHighAccuracy: boolean, loadingLocation) {
         this.location.get(isHighAccuracy)
-            .then((resp) => {
+            .then(resp => {
                 this.coords = {
                     lat: resp.coords.latitude,
                     lng: resp.coords.longitude
@@ -285,9 +285,10 @@ export class CreateUserProfilePage {
                 }, 600);
                 // this._map.setView(this.coords, 15);
             })
-            .catch((error) => {
+            .catch(error => {
                 loadingLocation.dismissAll();
                 this.presentConfirm();
+                console.log('createUserProfile ' + error);
             })
     }
 

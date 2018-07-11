@@ -428,17 +428,18 @@ export class PlacesPage {
                 // })
                 if (this.platform.is('cordova')) {
                     this.location.get(isHighAccuracy)
-                        .then((resp) => {
+                        .then(resp => {
                             this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
                             if (loadingLocation) {
                                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                             }
                         })
-                        .catch((error) => {
+                        .catch(error => {
                             if (loadingLocation) {
                                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                             }
                             this.presentConfirm();
+                            console.log('places ' + error);
                         })
                 }
                 //for browser
