@@ -8,6 +8,7 @@ import { ProfileService } from '../../providers/profile.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
 import { Subscription } from 'rxjs';
 import { Keyboard } from '@ionic-native/keyboard';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -33,7 +34,8 @@ export class CongratulationPopover {
         private adjust: AdjustService,
         private keyboard: Keyboard,
         private changeDetectorRef: ChangeDetectorRef,
-        private platform: Platform) {
+        private platform: Platform,
+        private translate: TranslateService) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
@@ -79,37 +81,40 @@ export class CongratulationPopover {
 
     shareOffer() {
         if (this.company && this.offer) {
-            const Branch = window['Branch'];
-            this.profile.get(false)
-                .subscribe(profile => {
-                    let properties = {
-                        canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                        canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                        title: this.offer.label,
-                        contentDescription: this.getDescription(this.offer.rich_description),
-                        contentImageUrl: this.offer.picture_url,
-                        // price: 12.12,
-                        // currency: 'GBD',
-                        contentIndexingMode: 'private',
-                        contentMetadata: {
-                            page: 'offer',
-                            invite_code: profile.invite_code,
-                            placeId: this.company.id,
-                            offerId: this.offer.id
-                        }
-                    };
-                    var branchUniversalObj = null;
-                    Branch.createBranchUniversalObject(properties)
-                        .then(res => {
-                            branchUniversalObj = res;
-                            let analytics = {};
-                            // let message = this.company.name + this.company.description
-                            let message = 'NAU';
-                            branchUniversalObj.showShareSheet(analytics, properties, message)
+            this.translate.get('SHARING.OFFER')
+                .subscribe(translation => {
+                    const Branch = window['Branch'];
+                    this.profile.get(false)
+                        .subscribe(profile => {
+                            let properties = {
+                                canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                                canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                                title: this.offer.label,
+                                contentDescription: this.getDescription(this.offer.rich_description),
+                                contentImageUrl: this.offer.picture_url,
+                                // price: 12.12,
+                                // currency: 'GBD',
+                                contentIndexingMode: 'private',
+                                contentMetadata: {
+                                    page: 'offer',
+                                    invite_code: profile.invite_code,
+                                    placeId: this.company.id,
+                                    offerId: this.offer.id
+                                }
+                            };
+                            var branchUniversalObj = null;
+                            Branch.createBranchUniversalObject(properties)
+                                .then(res => {
+                                    branchUniversalObj = res;
+                                    let analytics = {};
+                                    // let message = this.company.name + this.company.description
+                                    let message = translation;
+                                    branchUniversalObj.showShareSheet(analytics, properties, message)
 
-                            branchUniversalObj.onLinkShareResponse(res => {
-                                this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
-                            });
+                                    branchUniversalObj.onLinkShareResponse(res => {
+                                        this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
+                                    });
+                                })
                         })
                 })
         }
@@ -118,7 +123,7 @@ export class CongratulationPopover {
 
     getDescription(str) {
         // let count = (str.match(/<a href/g) || []).length;
-        return str.replace(/<[^>]+>/g, '');
+        return str.replace(/<[^>]+>/g, '').replace(/\r?\n|\r/g, '');
     }
 
     ngOnDestroy() {

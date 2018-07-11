@@ -198,34 +198,37 @@ export class PlacePage {
 
     sharePlace() {
         if (this.user && this.user.invite_code && this.company.id) {
-            const Branch = window['Branch'];
-            let properties = {
-                canonicalIdentifier: `?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
-                canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
-                title: this.company.name,
-                contentDescription: this.company.description,
-                contentImageUrl: this.company.cover_url,
-                // price: 12.12,
-                // currency: 'GBD',
-                contentIndexingMode: 'private',
-                contentMetadata: {
-                    page: 'place',
-                    invite_code: this.user.invite_code,
-                    placeId: this.company.id,
-                }
-            };
-            var branchUniversalObj = null;
-            Branch.createBranchUniversalObject(properties)
-                .then(res => {
-                    branchUniversalObj = res;
-                    let analytics = {};
-                    // let message = this.company.name + this.company.description
-                    let message = 'NAU';
-                    branchUniversalObj.showShareSheet(analytics, properties, message);
+            this.translate.get('SHARING.PLACE')
+                .subscribe(translation => {
+                    const Branch = window['Branch'];
+                    let properties = {
+                        canonicalIdentifier: `?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
+                        canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
+                        title: this.company.name,
+                        contentDescription: this.company.description,
+                        contentImageUrl: this.company.cover_url,
+                        // price: 12.12,
+                        // currency: 'GBD',
+                        contentIndexingMode: 'private',
+                        contentMetadata: {
+                            page: 'place',
+                            invite_code: this.user.invite_code,
+                            placeId: this.company.id,
+                        }
+                    };
+                    var branchUniversalObj = null;
+                    Branch.createBranchUniversalObject(properties)
+                        .then(res => {
+                            branchUniversalObj = res;
+                            let analytics = {};
+                            // let message = this.company.name + this.company.description
+                            let message = translation;
+                            branchUniversalObj.showShareSheet(analytics, properties, message);
 
-                    branchUniversalObj.onLinkShareResponse(res => {
-                        this.adjust.setEvent('SHARE_PLACE_BUTTON_CLICK');
-                    });
+                            branchUniversalObj.onLinkShareResponse(res => {
+                                this.adjust.setEvent('SHARE_PLACE_BUTTON_CLICK');
+                            });
+                        })
                 })
         }
         else return;

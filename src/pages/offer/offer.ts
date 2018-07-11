@@ -317,37 +317,40 @@ export class OfferPage {
 
     shareOffer() {
         if (this.user && this.user.invite_code && this.company.id && this.offer) {
-            const Branch = window['Branch'];
-            this.profile.get(false)
-                .subscribe(profile => {
-                    let properties = {
-                        canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                        canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
-                        title: this.offer.label,
-                        contentDescription: this.getDescription(this.offer.rich_description),
-                        contentImageUrl: this.offer.picture_url,
-                        // price: 12.12,
-                        // currency: 'GBD',
-                        contentIndexingMode: 'private',
-                        contentMetadata: {
-                            page: 'offer',
-                            invite_code: profile.invite_code,
-                            placeId: this.company.id,
-                            offerId: this.offer.id
-                        }
-                    };
-                    var branchUniversalObj = null;
-                    Branch.createBranchUniversalObject(properties)
-                        .then(res => {
-                            branchUniversalObj = res;
-                            let analytics = {};
-                            // let message = this.company.name + this.company.description
-                            let message = 'NAU';
-                            branchUniversalObj.showShareSheet(analytics, properties, message);
+            this.translate.get('SHARING.OFFER')
+                .subscribe(translation => {
+                    const Branch = window['Branch'];
+                    this.profile.get(false)
+                        .subscribe(profile => {
+                            let properties = {
+                                canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                                canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
+                                title: this.offer.label,
+                                contentDescription: this.getDescription(this.offer.rich_description),
+                                contentImageUrl: this.offer.picture_url,
+                                // price: 12.12,
+                                // currency: 'GBD',
+                                contentIndexingMode: 'private',
+                                contentMetadata: {
+                                    page: 'offer',
+                                    invite_code: profile.invite_code,
+                                    placeId: this.company.id,
+                                    offerId: this.offer.id
+                                }
+                            };
+                            var branchUniversalObj = null;
+                            Branch.createBranchUniversalObject(properties)
+                                .then(res => {
+                                    branchUniversalObj = res;
+                                    let analytics = {};
+                                    // let message = this.company.name + this.company.description
+                                    let message = translation;
+                                    branchUniversalObj.showShareSheet(analytics, properties, message);
 
-                            branchUniversalObj.onLinkShareResponse(res => {
-                                this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
-                            });
+                                    branchUniversalObj.onLinkShareResponse(res => {
+                                        this.adjust.setEvent('SHARE_OFFER_BUTTON_CLICK');
+                                    });
+                                })
                         })
                 })
         }
@@ -356,7 +359,8 @@ export class OfferPage {
 
     getDescription(str) {
         // let count = (str.match(/<a href/g) || []).length;
-        return str.replace(/<[^>]+>/g, '');
+        // console.log(str.replace(/<[^>]+>/g, '').replace(/\r?\n|\r/g, ''));
+        return str.replace(/<[^>]+>/g, '').replace(/\r?\n|\r/g, '');
     }
 
     removeFavorite() {

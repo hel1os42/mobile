@@ -7,6 +7,7 @@ import { ToastService } from '../../providers/toast.service';
 import { NavController } from 'ionic-angular';
 import { UserUsersPage } from '../user-users/user-users';
 import { AdjustService } from '../../providers/adjust.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-invite',
@@ -22,7 +23,8 @@ export class InvitePage {
         private clipboard: Clipboard,
         private toast: ToastService,
         private nav: NavController,
-        private adjust: AdjustService) {
+        private adjust: AdjustService,
+        private translate: TranslateService) {
 
         this.profile.get(true, true)
             .subscribe(user => this.user = user);
@@ -39,32 +41,35 @@ export class InvitePage {
 
     inviteFriend() {
         if (this.user && this.user.invite_code) {
-            const Branch = window['Branch'];
-            let properties = {
-                canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
-                canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
-                title: this.user.name,
-                contentImageUrl: this.user.picture_url,
-                // contentDescription: '',
-                // price: 12.12,
-                // currency: 'GBD',
-                contentIndexingMode: 'private',
-                contentMetadata: {
-                    invite_code: this.user.invite_code,
-                }
-            };
-            var branchUniversalObj = null;
-            Branch.createBranchUniversalObject(properties)
-                .then(res => {
-                    branchUniversalObj = res;
-                    let analytics = {};
-                    let message = 'NAU';
-                    branchUniversalObj.showShareSheet(analytics, properties, message);
+            this.translate.get('SHARING.INVITE')
+                .subscribe(translation => {
+                    const Branch = window['Branch'];
+                    let properties = {
+                        canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
+                        canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
+                        title: this.user.name,
+                        contentImageUrl: this.user.picture_url,
+                        // contentDescription: '',
+                        // price: 12.12,
+                        // currency: 'GBD',
+                        contentIndexingMode: 'private',
+                        contentMetadata: {
+                            invite_code: this.user.invite_code,
+                        }
+                    };
+                    var branchUniversalObj = null;
+                    Branch.createBranchUniversalObject(properties)
+                        .then(res => {
+                            branchUniversalObj = res;
+                            let analytics = {};
+                            let message = translation;
+                            branchUniversalObj.showShareSheet(analytics, properties, message);
 
-                    branchUniversalObj.onLinkShareResponse(res => {
-                        this.adjust.setEvent('IN_FR_BUTTON_CLICK_INVITE_PAGE');
-                    });
-                    // console.log('Branch create obj error: ' + JSON.stringify(err))
+                            branchUniversalObj.onLinkShareResponse(res => {
+                                this.adjust.setEvent('IN_FR_BUTTON_CLICK_INVITE_PAGE');
+                            });
+                            // console.log('Branch create obj error: ' + JSON.stringify(err))
+                        })
                 })
         }
         else return;
@@ -72,6 +77,10 @@ export class InvitePage {
 
     openUserUsers() {
         this.nav.push(UserUsersPage);
+    }
+
+    ngOnDestroy() {
+        this.onRefresh.unsubscribe();
     }
 
 }
