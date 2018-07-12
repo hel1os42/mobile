@@ -475,6 +475,9 @@ page-user-profile{
     }
     .block-featured div.item.item-block.item-ios {
         padding: 0 0 0 2vw;
+        z-index: 0;
+        border: 1px solid rgba(0,0,0,0.12);
+        box-shadow: none;
     }
     .block-featured ion-avatar .info-block img {
         width: 1.9vw;
