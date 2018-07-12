@@ -583,8 +583,12 @@ page-user-profile{
     .block-slider .item-block-nau.list.list-ios {
         margin: 0;
     }
-
-
+    .block-slider .item-block-nau .item{
+        margin-bottom: 0;
+    }
+    .nau-segment{
+        padding: 2vw;
+    }
 }
 
 .platform-tablet page-user-profile .label-point{
