@@ -4,8 +4,9 @@ import { Platform } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { User } from '../models/user';
 import { ApiService } from './api.service';
-import { TokenService } from './token.service';
 import { AppModeService } from './appMode.service';
+import { OfferService } from './offer.service';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class ProfileService {
@@ -18,9 +19,15 @@ export class ProfileService {
         private token: TokenService,
         private oneSignal: OneSignal,
         private platform: Platform,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private offer: OfferService) {
 
         this.token.onRemove.subscribe(() => this.user = undefined);
+        this.offer.onRefreshRedeemedOffers.subscribe(user => {
+            this.user = user;
+            this.onRefresh.emit(user);
+        })
+
     }
 
     get(forceReload: boolean, showLoading?: boolean) {
