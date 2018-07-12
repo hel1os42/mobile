@@ -117,13 +117,18 @@ import { AdjustService } from '../providers/adjust.service';
 import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
 
+// The translate loader needs to know where to load i18n files
+// in Ionic's static asset pipeline.
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 const IONIC_APP_ID = '590f0eb2';
 const VERSION = '1.5.8';//1.5.7
 
 Pro.init(IONIC_APP_ID, {
     appVersion: VERSION
 })
-
 
 @Injectable()
 export class AppErrorHandler implements ErrorHandler {
@@ -147,11 +152,6 @@ export class AppErrorHandler implements ErrorHandler {
     }
 }
 
-// The translate loader needs to know where to load i18n files
-// in Ionic's static asset pipeline.
-export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
 
 @NgModule({
     declarations: [
