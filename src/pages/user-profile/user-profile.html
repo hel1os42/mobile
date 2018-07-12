@@ -142,7 +142,6 @@
             </ion-col>
         </ion-row>
     </ion-grid> -->
-
     <ion-grid text-center class="block-slider">
         <ion-row>
             <ion-col col-1 align-self-center>
@@ -151,7 +150,15 @@
                 </a>
             </ion-col>
             <ion-col class="grid" col-10 align-self-center>
-                <ion-slides (ionSlideDidChange)="slideChanged($event)" spaceBetween="10">
+                <ion-segment [(ngModel)]="segment" text-uppercase class="nau-segment">
+                    <ion-segment-button value="allow">
+                        Доступные премиум-акции
+                    </ion-segment-button>
+                    <ion-segment-button value="all">
+                        Все премиум-акции
+                    </ion-segment-button>
+                </ion-segment>
+                <ion-slides (ionSlideDidChange)="slideChanged($event)" spaceBetween="10" *ngIf="segment === 'allow'">
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
                     <ion-slide *ngFor="let offer of offers">
                         <!-- <ion-list no-lines>
@@ -239,12 +246,101 @@
                                     </div>
                                 </div>
                             </ion-list>
-
-
-
-
                             <!-- </ion-item>
                         </ion-list> -->
+                    </ion-slide>
+                </ion-slides>
+
+                <ion-slides (ionSlideDidChange)="slideChanged($event)" spaceBetween="10" *ngIf="segment === 'all'">
+                    <!-- <ion-slide (click)="openRewards()"> temporary-->
+                    <ion-slide *ngFor="let offer of offers">
+                        <!-- <ion-list no-lines>
+                            <ion-item class="text-white"> -->
+                        <ion-list
+                            no-lines class="item-block-nau margin-top-10 block-featured">
+                            <div tappable ion-item detail-none>
+                                <ion-avatar
+                                    (click)="openPlace($event, offer?.account.owner.place, false)"
+                                    item-start
+                                    text-center
+                                    class="relative">
+                                    <div
+                                        [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }"
+                                        class="thumb_image margin-top-2vw">
+                                    </div>
+                                    <div class="info-block" text-left>
+                                        <div>
+                                            <ng-container *ngFor="let showStar of getStars(offer?.account.owner.place.stars)">
+                                                <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+                                            </ng-container>
+                                        </div>
+                                        <div class="margin-top-1vw">
+                                            <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+                                            <span class="font-75 text-828282">
+                                                    {{ getDistance(offer.latitude, offer.longitude).distance }}
+                                                    {{ getDistance(offer.latitude, offer.longitude).key | translate}}
+                                                </span>
+                                        </div>
+                                        <div class="margin-top-1vw">
+                                            <img src="assets/img/user_home/icon_small_user.svg">
+                                            <span class="font-75 text-828282">
+                                                    {{ offer?.account.owner.place.redemptions_count !== undefined
+                                                        ? offer?.account.owner.place.redemptions_count
+                                                        : offer?.account.owner.place.testimonials_count}}
+                                                </span>
+                                        </div>
+                                    </div>
+                                </ion-avatar>
+                                <div
+                                    (click)="openPlace($event, offer?.account.owner.place, false, offer)"
+                                    class="right-block">
+                                    <div
+                                        [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
+                                        [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                                        class="font-0 right-side relative">
+                                        <div class="right-side-content">
+                                            <div class="smooth_transition">
+                                                <div class="scroll_content margin-top-2vw">
+                                                    <div class="bold font-18 text-white">{{ offer.label }}</div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }"
+                                                [innerHTML]="offer.rich_description"
+                                                class="text-white font-12 wrap text-overflow-5 margin-top-2vw">
+                                            </div>
+                                        </div>
+                                        <div [ngClass]="offer.type" class="right-top-angle"></div>
+                                    </div>
+                                    <img
+                                        *ngIf="offer.is_favorite"
+                                        [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                                        class="star_right"
+                                        src="assets/img/place/icon_star.svg">
+                                    <div class="block-fr bold">
+                                        <div *ngIf="offer.max_count" class="coupon font-10 flex">
+                                            {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}
+                                            /{{ offer.max_count }}
+                                        </div>
+                                        <div
+                                            *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
+                                            class="block-right font-14 flex"
+                                            text-right>
+                                                <span class="flex" *ngIf="offer.referral_points_price > user.referral_points">
+                                                    <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
+                                                    {{ offer.referral_points_price }}
+                                                </span>
+                                            <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
+                                                    <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
+                                                    {{ offer.redemption_points_price }}
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ion-list>
+                        <!-- </ion-item>
+                    </ion-list> -->
                     </ion-slide>
                 </ion-slides>
             </ion-col>
