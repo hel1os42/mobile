@@ -403,7 +403,7 @@ page-user-profile{
     }
 
     .main-position-center{
-        height: calc(95% - 43vw);
+        min-height: calc(95% - 44vw);
         display: flex;
     }
 
@@ -587,7 +587,10 @@ page-user-profile{
         margin-bottom: 0;
     }
     .nau-segment{
-        padding: 2vw;
+        padding: 0vw 2vw 0vw 2vw;
+    }
+    .col{
+        padding: 0;
     }
 }
 
