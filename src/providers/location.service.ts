@@ -54,7 +54,7 @@ export class LocationService {
             }
 
         })
-        .catch(err => console.log('service' + err));
+        // .catch(err => console.log('service' + err));
         return promise;
     }
 
