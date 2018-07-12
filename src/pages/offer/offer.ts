@@ -27,6 +27,7 @@ import { LinkPopover } from './link.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { TimeframesPopover } from './timeframes.popover';
 import { AppModeService } from '../../providers/appMode.service';
+import { AnalyticsService } from '../../providers/analytics.service';
 
 declare var window;
 
@@ -53,6 +54,7 @@ export class OfferPage {
     onRefreshCompany: Subscription;
     onRefreshUser: Subscription;
     user: User;
+    isGettingRedeemedStatus;
 
     constructor(
         private nav: NavController,
@@ -72,7 +74,8 @@ export class OfferPage {
         private translate: TranslateService,
         private adjust: AdjustService,
         private platform: Platform,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private analytics: AnalyticsService) {
 
         this.adjust.setEvent('OFFER_VIEW');
         // this.today = new Date();
@@ -209,7 +212,6 @@ export class OfferPage {
         }
     }
 
-
     disable() {
         if (this.offer.radius < this.distance) {//to do add delivery etc.
             return true;
@@ -246,12 +248,16 @@ export class OfferPage {
         if (!this.offer.redemption_access_code) {
 
             if (this.isTodayIncluded) {
-                if (this.timer)
+                // if (this.timer)
+                //     return;
+                if (this.isGettingRedeemedStatus)
                     return;
 
                 this.offers.getActivationCode(this.offer.id)
                     .subscribe((offerActivationCode: OfferActivationCode) => {
-                        if (this.timer)
+                        // if (this.timer)
+                        //     return;
+                        if (this.isGettingRedeemedStatus)
                             return;
                         // let noticePopover = this.popoverCtrl.create(NoticePopover);
                         let offerRedeemPopover = this.popoverCtrl.create(
@@ -263,37 +269,14 @@ export class OfferPage {
                         // noticePopover.present();
                         // noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                         offerRedeemPopover.onDidDismiss(() => {
-                            this.stopTimer();
+                            // this.stopTimer();
+                            this.isGettingRedeemedStatus = false;
                             this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_showqr');
                         });
 
-                        this.timer = setInterval(() => {
-                            this.offers.getRedemptionStatus(offerActivationCode.code)
-                                .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
-                                    if (offerRedemtionStatus.redemption_id) {
-                                        this.stopTimer();
-                                        offerRedeemPopover.dismiss();
-                                        let congratulationPopover = this.popoverCtrl.create(
-                                            CongratulationPopover,
-                                            { company: this.company, offer: this.offer },
-                                            { cssClass: 'position-top' }
-                                        );
-                                        congratulationPopover.present();
-                                        congratulationPopover.onDidDismiss(data => {
-                                            if (data && data.isAdded) {
-                                                this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
-                                            }
-                                            this.offers.refreshPlace(this.company.id);
-                                            if (this.offer.is_featured) {
-                                                this.offers.refreshFeaturedOffers(this.coords.lat, this.coords.lng);
-                                                if (this.offer.redemption_points_price || this.offer.referral_points_price) {
-                                                    this.profile.get(true, false); // for refresh user profile
-                                                }
-                                            }
-                                        });
-                                    }
-                                });
-                        }, 2500)
+                        // this.timer = setInterval(() => {}, 2500)
+                        this.isGettingRedeemedStatus = true;
+                        this.getRedemptionStatus(offerActivationCode.code, offerRedeemPopover);
                     })
                 // }
                 // else {
@@ -312,6 +295,52 @@ export class OfferPage {
         else {
             let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: this.offer, user: this.user });
             limitationPopover.present();
+        }
+    }
+
+    getRedemptionStatus(code, popover) {
+        if (this.isGettingRedeemedStatus) {
+            this.offers.getRedemptionStatus(code)
+                .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
+                    if (offerRedemtionStatus.redemption_id) {
+                        if (this.isGettingRedeemedStatus) {
+                            // this.stopTimer();
+                            this.isGettingRedeemedStatus = false;
+                            popover.dismiss();
+
+                            this.offers.refreshRedeemedOffers();
+                            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', offerRedemtionStatus.redemption_id);
+                            this.analytics.faLogEvent('event_redeemoffer');
+                            this.adjust.setEvent('ACTION_REDEMPTION');
+
+                            let congratulationPopover = this.popoverCtrl.create(
+                                CongratulationPopover,
+                                { company: this.company, offer: this.offer },
+                                { cssClass: 'position-top' }
+                            );
+                            congratulationPopover.present();
+                            congratulationPopover.onDidDismiss(data => {
+                                if (data && data.isAdded) {
+                                    this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
+                                }
+                                this.offers.refreshPlace(this.company.id);
+                                if (this.offer.is_featured) {
+                                    this.offers.refreshFeaturedOffers(this.coords.lat, this.coords.lng);
+                                }
+                            });
+                        }
+                    }
+                    else {
+                        setTimeout(() => {
+                            this.getRedemptionStatus(code, popover);
+                        }, 1000);
+                    }
+                },
+                    err => {
+                        setTimeout(() => {
+                            this.getRedemptionStatus(code, popover);
+                        }, 1000);
+                    });
         }
     }
 
@@ -411,7 +440,8 @@ export class OfferPage {
     }
 
     ionViewDidLeave() {
-        this.stopTimer();
+        // this.stopTimer();
+        this.isGettingRedeemedStatus = false;
         this.app.navPop();
         //
         let nav: any = this.nav;

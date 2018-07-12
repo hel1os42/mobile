@@ -158,14 +158,14 @@ export class OfferService {
             showLoading: false, 
             ignoreHttpNotFound: true 
         });
-        obs.subscribe(status => {
-            if (status.redemption_id) {
-                this.refreshRedeemedOffers();
-                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', status.redemption_id);
-                this.analytics.faLogEvent('event_redeemoffer');
-                this.adjust.setEvent('ACTION_REDEMPTION');
-            }
-        }, err => {})
+        // obs.subscribe(status => {
+        //     if (status.redemption_id) {
+        //         this.refreshRedeemedOffers();
+        //         this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', status.redemption_id);
+        //         this.analytics.faLogEvent('event_redeemoffer');
+        //         this.adjust.setEvent('ACTION_REDEMPTION');
+        //     }
+        // }, err => {})
         return obs;
     }
 
