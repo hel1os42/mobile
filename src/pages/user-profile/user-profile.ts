@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, Slides } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, PopoverController, Slides } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
@@ -8,6 +10,8 @@ import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
+import { AnalyticsService } from '../../providers/analytics.service';
+import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
@@ -15,6 +19,9 @@ import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
+import { LinkPopover } from '../offer/link.popover';
+import { LimitationPopover } from '../place/limitation.popover';
+import { PlacePage } from '../place/place';
 import { SettingsPage } from '../settings/settings';
 import { UserAchievePage } from '../user-achieve/user-achieve';
 import { UserNauPage } from '../user-nau/user-nau';
@@ -47,8 +54,10 @@ export class UserProfilePage {
     offersLastPage: number;
     isLeftArrowVisible: boolean;
     isRightArrowVisible: boolean;
-    isSegmented: boolean
-
+    isSegmented: boolean;
+    isDismissLinkPopover = true;
+    timer;
+    isClick = false;
 
     @ViewChild('allowOffersSlides') allowOffersSlides: Slides;
     @ViewChild('offersSlides') offersSlides: Slides;
@@ -63,7 +72,12 @@ export class UserProfilePage {
         private adjust: AdjustService,
         private location: LocationService,
         private offer: OfferService,
-        private loading: LoadingController) {
+        private loading: LoadingController,
+        private appMode: AppModeService,
+        private gAnalytics: GoogleAnalytics,
+        private analytics: AnalyticsService,
+        private popoverCtrl: PopoverController,
+        private browser: InAppBrowser) {
 
         this.segment = 'allow';
 
@@ -87,7 +101,7 @@ export class UserProfilePage {
             });
 
         if (!this.balance) {
-            this.loadingLocation = this.loading.create({ content: '' }); 
+            this.loadingLocation = this.loading.create({ content: '' });
             this.loadingLocation.present();
             this.profile.getWithAccounts(false)
                 .subscribe(resp => {
@@ -298,8 +312,68 @@ export class UserProfilePage {
         event.slideTo(0);
     }
 
-    openPlace(event, place, isShare?: boolean, offer?: Offer) {
+    openPlace(event, data, offer?: Offer) {
+        if (this.isClick) {
+            let slides = this.allowOffersSlides || this.offersSlides;
+            if (slides) {
+                this.slideToFirst(slides);
+            }
+            this.stopTimer();
+            this.isClick = false;
+        }
+        else {
+            this.isClick = true;
+            this.timer = setTimeout(() => {
+                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
+                this.analytics.faLogEvent('event_chooseplace');
 
+                let params = {
+                    company: data,
+                    distanceObj: this.getDistance(data.latitude, data.longitude),
+                    coords: this.coords,
+                    user: this.user
+
+                }
+                if (offer && offer.redemption_access_code) {
+                    let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
+                    limitationPopover.present();
+                }
+                else {
+                    if (offer && event && event.target.localName === 'a') {
+                        this.openLinkPopover(event);
+                    }
+                    else {
+                        this.nav.push(PlacePage, params);
+                    }
+
+                }
+                this.isClick = false;
+            }, 300);
+        }
+    }
+
+
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offer.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
     }
 
     openSettings() {
@@ -401,7 +475,20 @@ export class UserProfilePage {
             })
     }
 
+    stopTimer() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = undefined;
+        }
+    }
+
+    ionViewDidLeave() {
+        this.stopTimer();
+        this.isClick = false;
+    }
+
     ngOnDestroy() {
+        this.stopTimer();
         this.onRefreshAccounts.unsubscribe();
         this.onRefreshCoords.unsubscribe();
         this.onRefreshUser.unsubscribe();

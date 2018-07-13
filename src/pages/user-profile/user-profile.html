@@ -185,7 +185,6 @@
                     #allowOffersSlides
                     id="allowOffersSlides"
                     (ionSlideDidChange)="slideChangeHandler($event)"
-                    (ionSlideDoubleTap)="slideToFirst($event)"
                     spaceBetween="10"
                     margin-bottom>
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
@@ -196,7 +195,7 @@
                             no-lines class="item-block-nau margin-top-10 block-featured">
                                 <div tappable ion-item detail-none>
                                     <ion-avatar
-                                        (click)="openPlace($event, offer?.account.owner.place, false)"
+                                        (click)="openPlace($event, offer?.account.owner.place)"
                                         item-start
                                         text-center
                                         class="relative">
@@ -228,7 +227,7 @@
                                         </div>
                                     </ion-avatar>
                                     <div
-                                        (click)="openPlace($event, offer?.account.owner.place, false, offer)"
+                                        (click)="openPlace($event, offer?.account.owner.place, offer)"
                                         class="right-block">
                                         <div
                                             [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
@@ -285,7 +284,6 @@
                     #offersSlides
                     id="offersSlides"
                     (ionSlideDidChange)="slideChangeHandler($event)"
-                    (ionSlideDoubleTap)="slideToFirst($event)"
                     spaceBetween="10"
                     margin-bottom>
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
@@ -296,7 +294,7 @@
                             no-lines class="item-block-nau margin-top-10 block-featured">
                             <div tappable ion-item detail-none>
                                 <ion-avatar
-                                    (click)="openPlace($event, offer?.account.owner.place, false)"
+                                    (click)="openPlace($event, offer?.account.owner.place)"
                                     item-start
                                     text-center
                                     class="relative">
@@ -328,7 +326,7 @@
                                     </div>
                                 </ion-avatar>
                                 <div
-                                    (click)="openPlace($event, offer?.account.owner.place, false, offer)"
+                                    (click)="openPlace($event, offer?.account.owner.place, offer)"
                                     class="right-block">
                                     <div
                                         [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
