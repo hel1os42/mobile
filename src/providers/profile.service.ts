@@ -26,8 +26,7 @@ export class ProfileService {
         this.offer.onRefreshRedeemedOffers.subscribe(user => {
             this.user = user;
             this.onRefresh.emit(user);
-        })
-
+        });
     }
 
     get(forceReload: boolean, showLoading?: boolean) {

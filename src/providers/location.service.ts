@@ -86,7 +86,7 @@ export class LocationService {
         //     : this.get(false);
         // return promise;
         let coords;
-        if (this.geoposition && this.geoposition.coords.latitude) {
+        if (this.geoposition && this.geoposition.coords && this.geoposition.coords.latitude) {
             coords = {
                 latitude: this.geoposition.coords.latitude,
                 longitude: this.geoposition.coords.longitude
