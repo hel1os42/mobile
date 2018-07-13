@@ -252,7 +252,7 @@ export class UserProfilePage {
         }
         if (event.isEnd()) {
             this.isRightArrowVisible = false;
-            event.lockSwipeToNext(true);
+            // event.lockSwipeToNext(true);
             let element = event.getNativeElement();
 
             if (element && element.id) {
@@ -275,9 +275,7 @@ export class UserProfilePage {
         let lastPage = elementId === 'allowOffersSlides'
             ? this.allowOffersLastPage
             : this.offersLastPage;
-
         if (page < lastPage) {
-
             let loading = this.loading.create({ content: '' });//temporary
             loading.present();//temporary
             if (elementId === 'allowOffersSlides') {
@@ -302,9 +300,14 @@ export class UserProfilePage {
             }
         }
         else {
-            event.loop = true;
-            event.lockSwipeToNext(false);
-            this.isRightArrowVisible = true;
+            if (event.length() > 1) {
+                event.loop = true;
+                event.lockSwipeToNext(false);
+                this.isRightArrowVisible = true;
+            }
+            else {
+                this.isRightArrowVisible = false;
+            }
         }
     }
 

@@ -142,7 +142,10 @@
             </ion-col>
         </ion-row>
     </ion-grid> -->
-        <ion-grid text-center class="block-slider">
+        <ion-grid 
+            *ngIf="(allowPremiumOffers && allowPremiumOffers.length > 0) || (premiumOffers && premiumOffers.length > 0)"
+            text-center 
+            class="block-slider">
             <ion-row>
                 <ion-col col-1>
                 </ion-col>
