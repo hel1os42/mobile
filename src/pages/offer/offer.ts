@@ -3,7 +3,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, App, NavController, NavParams, PopoverController, Platform } from 'ionic-angular';
+import { AlertController, App, NavController, NavParams, PopoverController, Platform, ViewController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -28,6 +28,8 @@ import { OfferRedeemPopover } from './offerRedeem.popover';
 import { TimeframesPopover } from './timeframes.popover';
 import { AppModeService } from '../../providers/appMode.service';
 import { AnalyticsService } from '../../providers/analytics.service';
+import { UserProfilePage } from '../user-profile/user-profile';
+import { PlacePage } from '../place/place';
 
 declare var window;
 
@@ -446,7 +448,9 @@ export class OfferPage {
         //
         let nav: any = this.nav;
         let root = nav.root;
-        if (root === BookmarksPage) {
+        let views: ViewController[] = nav.getViews();
+        let component = views.find(view => view.component === PlacePage);
+        if ((root === BookmarksPage && !component) || (root === UserProfilePage && !component)) {
             this.statusBar.styleDefault();
         }
     }

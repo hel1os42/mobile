@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Tabs } from 'ionic-angular';
 import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -9,6 +8,8 @@ import { BookmarksPage } from '../bookmarks/bookmarks';
 import { InvitePage } from '../invite/invite';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
+import { Tab, ViewController } from 'ionic-angular/umd';
+import { OfferPage } from '../offer/offer';
 
 @Component({
     selector: 'page-tabs',
@@ -21,7 +22,7 @@ export class TabsPage {
     // tab3Root = NotificationsPage;
     tab3Root = BookmarksPage;
     tab4Root = UserProfilePage;
-    
+
     selectedTabIndex = 0;
     nauParams;//temporary
     shownTransactions: boolean;//temporary
@@ -47,18 +48,22 @@ export class TabsPage {
         this.adjust.setEvent('INVITE_FRIENDS_PAGE_VISIT');
     }
 
-    refreshStatusBar(event) {
+    refreshStatusBar(event: Tab) {
+
         let root = event.root;
-        let views = event.getViews();
+        let views: ViewController[] = event.getViews();
         let length = views.length;
-        if (root === PlacesPage || (root === BookmarksPage && length > 1)) {
+        let page = views[length - 1].component;
+        if (root === PlacesPage
+            || (root === BookmarksPage && length > 1)
+            || (root === UserProfilePage && (page === PlacesPage || page === OfferPage))) {
             this.statusBar.styleLightContent();
         }
         else {
             this.statusBar.styleDefault();
         }
     }
-    
+
     refresh() {
         if (this.shownTransactions) {
             this.profile.refreshAccounts(false);

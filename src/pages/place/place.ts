@@ -29,6 +29,7 @@ import { LimitationPopover } from '../place/limitation.popover';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
 import { LinkPopover } from '../offer/link.popover';
+import { UserProfilePage } from '../user-profile/user-profile';
 
 declare var window;
 
@@ -377,7 +378,7 @@ export class PlacePage {
         //
         let nav: any = this.nav;
         let root = nav.root;
-        if (root === BookmarksPage) {
+        if (root === BookmarksPage || root === UserProfilePage) {
             this.statusBar.styleDefault();
         }
     }
