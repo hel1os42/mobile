@@ -6,6 +6,8 @@ import { AdjustService } from './adjust.service';
 import { AnalyticsService } from './analytics.service';
 import { ApiService } from './api.service';
 import { AppModeService } from './appMode.service';
+import { Observable } from 'rxjs';
+import { MockOffers } from '../mocks/mockOffers';
 
 // import { MockCompanies } from '../mocks/mockCompanies';
 
@@ -38,7 +40,7 @@ export class OfferService {
     ) {
         // return this.api.get(`offers`, {
         return this.api.get('offers', {
-        // return this.api.get(`offers?category_ids[]=382b8e95-9083-4095-a928-ee9178ee6275`, {// prod mock
+            // return this.api.get(`offers?category_ids[]=382b8e95-9083-4095-a928-ee9178ee6275`, {// prod mock
             showLoading: showLoading,
             params: {
                 featured: true,
@@ -49,6 +51,17 @@ export class OfferService {
                 page: page
             }
         });
+    }
+
+    getPremiumList(
+        lat: number,
+        lng: number,
+        // radius: number,
+        page: number,
+        showLoading: boolean
+    ) {
+        return Observable.of(MockOffers.items).delay(1000); //temporary
+
     }
 
     getPlacesOfRoot(
@@ -154,9 +167,9 @@ export class OfferService {
     }
 
     getRedemptionStatus(code: string) {
-        let obs = this.api.get(`activation_codes/${code}`, { 
-            showLoading: false, 
-            ignoreHttpNotFound: true 
+        let obs = this.api.get(`activation_codes/${code}`, {
+            showLoading: false,
+            ignoreHttpNotFound: true
         });
         // obs.subscribe(status => {
         //     if (status.redemption_id) {
@@ -207,8 +220,8 @@ export class OfferService {
 
     refreshPlace(placeId) {
         this.getPlace(placeId, true)
-        .subscribe(resp => {
-            this.onRefreshPlace.emit(resp);
-        })
+            .subscribe(resp => {
+                this.onRefreshPlace.emit(resp);
+            })
     }
 }
