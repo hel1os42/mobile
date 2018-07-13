@@ -142,9 +142,9 @@
             </ion-col>
         </ion-row>
     </ion-grid> -->
-        <ion-grid 
+        <ion-grid
             *ngIf="(allowPremiumOffers && allowPremiumOffers.length > 0) || (premiumOffers && premiumOffers.length > 0)"
-            text-center 
+            text-center
             class="block-slider">
             <ion-row>
                 <ion-col col-1>
@@ -380,9 +380,9 @@
                     </ion-list> -->
                     </ion-slide>
                 </ion-slides>
-                <div   
-                    *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0)) || (segment === 'all' && (!premiumOffers || premiumOffers.length == 0)))" 
-                    class="slider-block">
+                <div margin-bottom
+                    *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0)) || (segment === 'all' && (!premiumOffers || premiumOffers.length == 0)))"
+                    class="slider-empty">
                 </div>
             </ion-col>
             <ion-col col-1 align-self-center>
