@@ -73,11 +73,8 @@ export class UserProfilePage {
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
                 this.user.picture_url = this.user.picture_url + '?' + new Date().valueOf();
-                this.allowPremiumOffers = [];
-                this.premiumOffers = [];
                 this.allowOffersPage = 1;
                 this.offersPage = 1;
-                this.segment = null;
                 this.getLists();
             });
 
@@ -133,6 +130,10 @@ export class UserProfilePage {
             .subscribe(resp => {
                 this.allowPremiumOffers = resp.data;
                 this.allowOffersLastPage = resp.last_page;
+                if (this.allowOffersSlides) {
+                    this.allowOffersSlides.update();
+                    this.allowOffersSlides.slideTo(0, 0, false);
+                }
                 this.getSegment();
                 this.dismissLoading();
             },
@@ -145,6 +146,10 @@ export class UserProfilePage {
             .subscribe(resp => {
                 this.premiumOffers = resp.data;
                 this.offersLastPage = resp.last_page;
+                if (this.offersSlides) {
+                    this.offersSlides.update();
+                    this.offersSlides.slideTo(0, 0, false);
+                }
                 this.getSegment();
                 this.dismissLoading();
             },
@@ -225,7 +230,6 @@ export class UserProfilePage {
 
     slideChangeHandler(event: Slides) {
         //   let length = event.length();
-
         if (event.isBeginning()) {
             this.isLeftArrowVisible = false;
         }
