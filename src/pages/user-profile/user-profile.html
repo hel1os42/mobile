@@ -142,6 +142,25 @@
             </ion-col>
         </ion-row>
     </ion-grid> -->
+        <ion-grid text-center class="block-slider">
+            <ion-row>
+                <ion-col col-1>
+                </ion-col>
+                <ion-col col-10 align-self-center>
+                    <ion-segment [(ngModel)]="segment" margin-top text-uppercase class="nau-segment margin-bottom-2vw">
+                        <ion-segment-button value="allow">
+                            Доступные акции
+                        </ion-segment-button>
+                        <ion-segment-button value="all">
+                            Все акции
+                        </ion-segment-button>
+                    </ion-segment>
+                </ion-col>
+                <ion-col col-1>
+                </ion-col>
+                </ion-row>
+            </ion-grid>
+
     <ion-grid text-center class="block-slider">
         <ion-row>
             <ion-col col-1 align-self-center>
@@ -150,14 +169,6 @@
                 </a>
             </ion-col>
             <ion-col class="grid" col-10 align-self-center>
-                <ion-segment [(ngModel)]="segment" margin-top text-uppercase class="nau-segment margin-bottom-2vw">
-                    <ion-segment-button value="allow">
-                        Доступные акции
-                    </ion-segment-button>
-                    <ion-segment-button value="all">
-                        Все акции
-                    </ion-segment-button>
-                </ion-segment>
                 <ion-slides class="margin-bottom-2vw" (ionSlideDidChange)="slideChanged($event)" spaceBetween="10" *ngIf="segment === 'allow'">
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
                     <ion-slide *ngFor="let offer of offers">
