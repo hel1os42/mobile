@@ -73,8 +73,11 @@ export class UserProfilePage {
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
                 this.user.picture_url = this.user.picture_url + '?' + new Date().valueOf();
+                this.allowPremiumOffers = [];
+                this.premiumOffers = [];
                 this.allowOffersPage = 1;
                 this.offersPage = 1;
+                this.segment = null;
                 this.getLists();
             });
 
@@ -158,7 +161,6 @@ export class UserProfilePage {
                 : 'allow';
         if (isSegmented) {
             this.showArrow();
-
         }
         this.isSegmented = true;
     }
