@@ -589,6 +589,13 @@ page-user-profile{
     .col{
         padding: 0;
     }
+    .slider-block{
+        background: url(../assets/img/invite/invite2.png);
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: contain;
+        height: 43vw;
+    }
 }
 
 .platform-tablet page-user-profile .label-point{
