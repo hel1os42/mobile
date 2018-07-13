@@ -114,7 +114,7 @@
         <ion-item
             (click)="openOffer($event, offer)"
             tappable
-            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }" 
+            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
             class="margin-no">
             <ion-avatar item-start>
                 <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
@@ -129,9 +129,9 @@
                 </div>
             </div>
             <div
-                [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }" 
-                [innerHTML]="offer.rich_description" 
-                text-regular 
+                [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }"
+                [innerHTML]="offer.rich_description"
+                text-regular
                 class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">
             </div>
             <!-- <img *ngIf="offer.is_favorite" class="star_right" src="assets/img/place/icon_star.svg"> -->
