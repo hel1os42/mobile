@@ -43,6 +43,7 @@ export class BookmarksPage {
     onRefreshCoords: Subscription;
     onRefreshCompany: Subscription;
     onRefreshUser: Subscription;
+    onRefreshProfileCoords: Subscription;
     loadingLocation;
     user: User;
     isDismissLinkPopover = true;
@@ -66,11 +67,13 @@ export class BookmarksPage {
         this.getLocation(true, true);
 
         this.profile.get(true, false)
-            .subscribe(user => this.user = user)
+            .subscribe(user => this.user = user);
+
         this.onRefreshCoords = this.location.onRefreshCoords
-            .subscribe(coords => {
-                this.coords = coords;
-            });
+            .subscribe(coords => this.coords = coords);
+
+        this.onRefreshProfileCoords = this.location.onProfileCoordsChanged
+            .subscribe(coords => this.coords = coords);
 
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
             .subscribe(resp => {
@@ -127,11 +130,6 @@ export class BookmarksPage {
                 this.companies = resp.data;
                 this.companiesLastPage = resp.last_page;
                 this.totalCompanies = resp.total;
-                // this.segment = this.companies && this.companies.length > 0 && this.segment === 'places'
-                //     ? 'places'
-                //     : this.offers && this.offers.length > 0
-                //         ? 'offers'
-                //         : 'places';
                 this.getSegment();
                 this.dismissLoading();
             },
@@ -363,6 +361,7 @@ export class BookmarksPage {
         this.onRefreshCompany.unsubscribe();
         this.onRefreshUser.unsubscribe();
         this.onRefreshCoords.unsubscribe();
+        this.onRefreshProfileCoords.unsubscribe();
     }
 
 
