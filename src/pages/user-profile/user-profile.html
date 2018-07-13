@@ -181,7 +181,7 @@
             </ion-col>
             <ion-col class="grid" col-10 align-self-center>
                 <ion-slides
-                    *ngIf="segment === 'allow'"
+                    *ngIf="segment === 'allow' && allowPremiumOffers && allowPremiumOffers.length > 0"
                     #allowOffersSlides
                     id="allowOffersSlides"
                     (ionSlideDidChange)="slideChangeHandler($event)"
@@ -280,7 +280,7 @@
                 </ion-slides>
 
                 <ion-slides
-                    *ngIf="segment === 'all'"
+                    *ngIf="segment === 'all' && premiumOffers && premiumOffers.length > 0"
                     #offersSlides
                     id="offersSlides"
                     (ionSlideDidChange)="slideChangeHandler($event)"
@@ -377,7 +377,10 @@
                     </ion-list> -->
                     </ion-slide>
                 </ion-slides>
-                <div class="slider-block"></div>
+                <div   
+                    *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0)) || (segment === 'all' && (!premiumOffers || premiumOffers.length == 0)))" 
+                    class="slider-block">
+                </div>
             </ion-col>
             <ion-col col-1 align-self-center>
                 <a>
