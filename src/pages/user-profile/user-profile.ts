@@ -1,12 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, NavController, Slides } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, Slides } from 'ionic-angular';
+import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
+import { Coords } from '../../models/coords';
+import { Offer } from '../../models/offer';
 import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
 import { AuthService } from '../../providers/auth.service';
+import { LocationService } from '../../providers/location.service';
+import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
+import { DistanceUtils } from '../../utils/distanse.utils';
 import { CreateUserProfilePage } from '../create-user-profile/create-user-profile';
 import { SettingsPage } from '../settings/settings';
 import { UserAchievePage } from '../user-achieve/user-achieve';
@@ -14,34 +21,51 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
-import { AdjustService } from '../../providers/adjust.service';
-import { MockOffers } from '../../mocks/mockOffers';
-import { Offer } from '../../models/offer';
 
 @Component({
     selector: 'page-user-profile',
     templateUrl: 'user-profile.html'
 })
 export class UserProfilePage {
+
     user: User = new User();
     balance: number;
     onRefreshAccounts: Subscription;
+    onRefreshCoords: Subscription;
+    onRefreshProfileCoords: Subscription;
+    onRefreshUser: Subscription;
     NAU: Account;
     branchDomain = 'https://nau.app.link';
-    offers = [];
+    allowPremiumOffers = [];//allowPremiumOffers: Offers[];
+    premiumOffers = [];//premiumOffers: Offers[];
+    coords: Coords;
+    segment;
+    loadingLocation;
+    allowOffersPage = 1;
+    offersPage = 1;
+    allowOffersLastPage: number;
+    offersLastPage: number;
+    isLeftArrowVisible: boolean;
+    isRightArrowVisible: boolean;
+    isSegmented: boolean
 
-    @ViewChild(Slides) slides: Slides;
+
+    @ViewChild('allowOffersSlides') allowOffersSlides: Slides;
+    @ViewChild('offersSlides') offersSlides: Slides;
 
     constructor(
         private profile: ProfileService,
         private nav: NavController,
         private auth: AuthService,
-        public alert: AlertController,
+        private alert: AlertController,
         private transaction: TransactionService,
         private translate: TranslateService,
-        private adjust: AdjustService) {
+        private adjust: AdjustService,
+        private location: LocationService,
+        private offer: OfferService,
+        private loading: LoadingController) {
 
-        this.offers = MockOffers.items;
+        this.segment = 'allow';
 
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
@@ -49,20 +73,227 @@ export class UserProfilePage {
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
                 this.user.picture_url = this.user.picture_url + '?' + new Date().valueOf();
-            })
+                this.allowOffersPage = 1;
+                this.offersPage = 1;
+                this.getLists();
+            });
+
+        this.onRefreshUser = this.profile.onRefresh
+            .subscribe(user => {
+                this.user = _.extend(this.user, user);
+                this.allowOffersPage = 1;
+                this.offersPage = 1;
+                this.getLists();
+            });
+
         if (!this.balance) {
-            this.profile.getWithAccounts()
+            this.loadingLocation = this.loading.create({ content: '' }); 
+            this.loadingLocation.present();
+            this.profile.getWithAccounts(false)
                 .subscribe(resp => {
                     this.user = resp;
                     this.NAU = resp.accounts.NAU;
                     this.balance = this.NAU ? this.NAU.balance : 0;
-                });
+                    this.getLists();
+                },
+                    err => this.dismissLoading());
         }
+
+        this.onRefreshCoords = this.location.onRefreshCoords
+            .subscribe(coords => this.coords = coords);
+
+        this.onRefreshProfileCoords = this.location.onProfileCoordsChanged
+            .subscribe(coords => this.coords = coords);
     }
 
     ionSelected() {
         this.profile.refreshAccounts(false);
         this.transaction.refresh();
+    }
+
+    getLists() {
+        // this.loadingLocation = this.loading.create({ content: '' });
+        // this.loadingLocation.present();
+        this.location.getCache()
+            .then(resp => {
+                this.coords = {
+                    lat: resp.coords.latitude,
+                    lng: resp.coords.longitude
+                };
+                this.getAllowOffersList();
+                this.getOffersList();
+            });
+    }
+
+    getAllowOffersList() {// to do
+        this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.allowOffersPage, false)
+            .subscribe(resp => {
+                this.allowPremiumOffers = resp.data;
+                this.allowOffersLastPage = resp.last_page;
+                this.getSegment();
+                this.dismissLoading();
+            },
+                err => this.dismissLoading()
+            );
+    }
+
+    getOffersList() {// to do
+        this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.offersPage, false)
+            .subscribe(resp => {
+                this.premiumOffers = resp.data;
+                this.offersLastPage = resp.last_page;
+                this.getSegment();
+                this.dismissLoading();
+            },
+                err => this.dismissLoading()
+            );
+    }
+
+    getSegment() {
+        let isSegmented = this.isSegmented;
+        this.segment = this.allowPremiumOffers && this.allowPremiumOffers.length > 0
+            ? 'allow'
+            : this.premiumOffers && this.premiumOffers.length > 0
+                ? 'all'
+                : 'allow';
+        if (isSegmented) {
+            this.showArrow();
+
+        }
+        this.isSegmented = true;
+    }
+
+    getStars(star: number) {
+        let showStars: boolean[] = [];
+        for (var i = 0; i < 5; i++) {
+            showStars.push(star > i);
+        }
+        return showStars;
+    }
+
+    getDistance(latitude: number, longitude: number) {//temporary to do
+        if (this.coords) {
+            let long = DistanceUtils.getDistanceFromLatLon(this.coords.lat, this.coords.lng, latitude, longitude);
+            let distance = long >= 1000 ? long / 1000 : long;
+            let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
+            return {
+                distance: distance,
+                key: key
+            }
+        };
+        return undefined;
+    }
+
+    showArrow() {
+        if (this.segment === 'allow') {
+            this.isLeftArrowVisible = false;
+            if (this.allowPremiumOffers.length > 1) {
+                this.isRightArrowVisible = true;
+            }
+            else {
+                this.isRightArrowVisible = false;
+            }
+        }
+        else if (this.segment === 'all') {
+            this.isLeftArrowVisible = false;
+            if (this.premiumOffers.length > 1) {
+                this.isRightArrowVisible = true;
+            }
+            else {
+                this.isRightArrowVisible = false;
+            }
+        }
+    }
+
+    slideNext() {
+        let slides = this.segment === 'allow'
+            ? this.allowOffersSlides
+            : this.offersSlides;
+
+        slides.slideNext();
+    }
+
+    slidePrev() {
+        let slides = this.segment === 'allow'
+            ? this.allowOffersSlides
+            : this.offersSlides;
+
+        slides.slidePrev();
+    }
+
+    slideChangeHandler(event: Slides) {
+        //   let length = event.length();
+
+        if (event.isBeginning()) {
+            this.isLeftArrowVisible = false;
+        }
+        else {
+            this.isLeftArrowVisible = true;
+        }
+        if (event.isEnd()) {
+            this.isRightArrowVisible = false;
+            event.lockSwipeToNext(true);
+            let element = event.getNativeElement();
+
+            if (element && element.id) {
+
+                this.addOffers(element.id, event);
+            }
+        }
+        else {
+            this.isRightArrowVisible = true;
+            event.lockSwipeToNext(false);
+        }
+    }
+
+
+    addOffers(elementId: string, event: Slides) {
+        let page = elementId === 'allowOffersSlides'
+            ? this.allowOffersPage
+            : this.offersPage;
+
+        let lastPage = elementId === 'allowOffersSlides'
+            ? this.allowOffersLastPage
+            : this.offersLastPage;
+
+        if (page < lastPage) {
+
+            let loading = this.loading.create({ content: '' });//temporary
+            loading.present();//temporary
+            if (elementId === 'allowOffersSlides') {
+                this.offer.getPremiumList(this.coords.lat, this.coords.lng, ++this.allowOffersPage, true)//to do
+                    .subscribe(resp => {
+                        this.allowPremiumOffers = [...this.allowPremiumOffers, ...resp.data];
+                        this.allowOffersLastPage = resp.last_page;
+                        event.lockSwipeToNext(false);
+                        this.isRightArrowVisible = true;
+                        loading.dismiss();//temporary
+                    });
+            }
+            else if (elementId === 'offersSlides') {
+                this.offer.getPremiumList(this.coords.lat, this.coords.lng, ++this.offersPage, true)//to do
+                    .subscribe(resp => {
+                        this.premiumOffers = [...this.premiumOffers, ...resp.data];
+                        this.offersLastPage = resp.last_page;
+                        event.lockSwipeToNext(false);
+                        this.isRightArrowVisible = true;
+                        loading.dismiss();//temporary
+                    });
+            }
+        }
+        else {
+            event.loop = true;
+            event.lockSwipeToNext(false);
+            this.isRightArrowVisible = true;
+        }
+    }
+
+    slideToFirst(event: Slides) {
+        event.slideTo(0);
+    }
+
+    openPlace(event, place, isShare?: boolean, offer?: Offer) {
+
     }
 
     openSettings() {
@@ -95,62 +326,10 @@ export class UserProfilePage {
         this.nav.push(CreateUserProfilePage, { user: this.user });
     }
 
-    logout() {
-        this.translate.get(['CONFIRM', 'UNIT'])
-            .subscribe(resp => {
-                let content = resp['CONFIRM'];
-                let unit = resp['UNIT'];
-                let confirm = this.alert.create({
-                    title: content['LOGOUT'],
-                    message: content['ARE_YOU_SHURE'],
-                    buttons: [
-                        {
-                            text: unit['CANCEL'],
-                            handler: () => {
-                            }
-                        },
-                        {
-                            text: unit['OK'],
-                            handler: () => {
-                                this.auth.logout();
-                            }
-                        }
-                    ]
-                });
-                confirm.present();
-            })
-    }
-
-    slideNext() {
-        this.slides.slideNext();
-    }
-
-    slidePrev() {
-        this.slides.slidePrev();
-    }
-
-    slideChanged(event) {
-
-    }
-
-    openPlace(event, place, isShare?: boolean, offer?: Offer) {
-
-    }
-    getStars(star: number) {
-        let showStars: boolean[] = [];
-        for (var i = 0; i < 5; i++) {
-            showStars.push(star > i);
-        }
-        return showStars;
-    }
-
-    getDistance() {//temporary to do
-        let long = 2000;
-        let distance = long >= 1000 ? long / 1000 : long;
-        let key = long >= 1000 ? 'UNIT.KM' : 'UNIT.M';
-        return {
-            distance: distance,
-            key: key
+    dismissLoading() {
+        if (this.loadingLocation) {
+            this.loadingLocation.dismiss();
+            this.loadingLocation = undefined;
         }
     }
 
@@ -190,8 +369,37 @@ export class UserProfilePage {
         else return;
     }
 
+    logout() {
+        this.translate.get(['CONFIRM', 'UNIT'])
+            .subscribe(resp => {
+                let content = resp['CONFIRM'];
+                let unit = resp['UNIT'];
+                let confirm = this.alert.create({
+                    title: content['LOGOUT'],
+                    message: content['ARE_YOU_SHURE'],
+                    buttons: [
+                        {
+                            text: unit['CANCEL'],
+                            handler: () => {
+                            }
+                        },
+                        {
+                            text: unit['OK'],
+                            handler: () => {
+                                this.auth.logout();
+                            }
+                        }
+                    ]
+                });
+                confirm.present();
+            })
+    }
+
     ngOnDestroy() {
         this.onRefreshAccounts.unsubscribe();
+        this.onRefreshCoords.unsubscribe();
+        this.onRefreshUser.unsubscribe();
+        this.onRefreshProfileCoords.unsubscribe();
     }
 
 }

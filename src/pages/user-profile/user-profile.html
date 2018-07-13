@@ -146,11 +146,20 @@
         <ion-row>
             <ion-col col-1 align-self-center>
                 <a>
-                    <ion-icon (click)="slidePrev()" name="ios-arrow-back" class="font-200 text-828282"></ion-icon>
+                    <ion-icon 
+                        *ngIf="isLeftArrowVisible"
+                        (click)="slidePrev()" 
+                        name="ios-arrow-back" 
+                        class="font-200 text-828282">
+                    </ion-icon>
                 </a>
             </ion-col>
             <ion-col class="grid" col-10 align-self-center>
-                <ion-segment [(ngModel)]="segment" text-uppercase class="nau-segment">
+                <ion-segment 
+                    (ionChange)="showArrow()"
+                    [(ngModel)]="segment" 
+                    text-uppercase 
+                    class="nau-segment">
                     <ion-segment-button value="allow">
                         Доступные премиум-акции
                     </ion-segment-button>
@@ -158,9 +167,15 @@
                         Все премиум-акции
                     </ion-segment-button>
                 </ion-segment>
-                <ion-slides (ionSlideDidChange)="slideChanged($event)" spaceBetween="10" *ngIf="segment === 'allow'">
+                <ion-slides 
+                    *ngIf="segment === 'allow'" 
+                    #allowOffersSlides 
+                    id="allowOffersSlides"
+                    (ionSlideDidChange)="slideChangeHandler($event)"
+                    (ionSlideDoubleTap)="slideToFirst($event)" 
+                    spaceBetween="10">
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
-                    <ion-slide *ngFor="let offer of offers">
+                    <ion-slide *ngFor="let offer of allowPremiumOffers">
                         <!-- <ion-list no-lines>
                             <ion-item class="text-white"> -->
                         <ion-list
@@ -251,9 +266,15 @@
                     </ion-slide>
                 </ion-slides>
 
-                <ion-slides (ionSlideDidChange)="slideChanged($event)" spaceBetween="10" *ngIf="segment === 'all'">
+                <ion-slides 
+                    *ngIf="segment === 'all'" 
+                    #offersSlides
+                    id="offersSlides"
+                    (ionSlideDidChange)="slideChangeHandler($event)"
+                    (ionSlideDoubleTap)="slideToFirst($event)" 
+                    spaceBetween="10">
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
-                    <ion-slide *ngFor="let offer of offers">
+                    <ion-slide *ngFor="let offer of premiumOffers">
                         <!-- <ion-list no-lines>
                             <ion-item class="text-white"> -->
                         <ion-list
@@ -346,7 +367,12 @@
             </ion-col>
             <ion-col col-1 align-self-center>
                 <a>
-                    <ion-icon (click)="slideNext()" name="ios-arrow-forward" class="font-200 text-828282"></ion-icon>
+                    <ion-icon 
+                        *ngIf="isRightArrowVisible"
+                        (click)="slideNext()" 
+                        name="ios-arrow-forward" 
+                        class="font-200 text-828282">
+                    </ion-icon>
                 </a>
             </ion-col>
         </ion-row>
