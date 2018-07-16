@@ -37,6 +37,7 @@ import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
 import { LinkPopover } from '../offer/link.popover';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'page-places',
@@ -727,10 +728,19 @@ export class PlacesPage {
     }
 
     noPlacesHandler() {
-        this.geocoder.getAddress(this.coords.lat, this.coords.lng, true, true)
-            .subscribe(data => {
+        let isFiltered = (this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== '';
+
+        let obs = isFiltered
+            ? Observable.of({})
+            : this.geocoder.getAddress(this.coords.lat, this.coords.lng, true, true);
+            
+        obs.subscribe(data => {
+            let city;    
+            let isCountryEnabled;
+            let countryCode;
+            if (!isFiltered) {
                 let address = !data.error ? data.address : undefined;
-                let city = address
+                city = address
                     // ? (address.city || address.town || address.county || address.state)
                     // ? (address.city || address.town)
                     ? address.city
@@ -738,8 +748,7 @@ export class PlacesPage {
                 // let state = address
                 //     ? (address.state || address.county)
                 //     : undefined;
-                let countryCode = address ? address.country_code : undefined;
-                let isCountryEnabled;
+                countryCode = address ? address.country_code : undefined;
                 if (countryCode) {
                     let country = PHONE_CODES.find(country => country.code === countryCode.toUpperCase()).name;
                     isCountryEnabled = COUNTRIES.find(item => item.name === country) ? true : false;
@@ -747,41 +756,39 @@ export class PlacesPage {
                 else {
                     isCountryEnabled = false;
                 }
-                let isFiltered = (this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== ''
-                    ? true : false;
-
-                let popover = this.popoverCtrl.create(
-                    NoPlacesPopover,
-                    {
-                        isCountryEnabled: isCountryEnabled,
-                        city: city,
-                        countryCode: countryCode,
-                        isFiltered: isFiltered
-                    });
-                popover.present();
-                popover.onDidDismiss(data => {
-                    if (data && data.radius) {
-                        this.page = 1;
-                        // this.radius = data.radius;
-                        if (this.isMapVisible) {
-                            this.radius = this.mapRadius = data.radius;
-                        }
-                        else {
-                            this.radius = this.listRadius = data.radius;
-                        }
-                        //to test
-                        this.tagFilter = [];
-                        this.typeFilter = [];
-                        this.specialityFilter = [];
-                        this.search = '';
-                        //
-                        this.isDismissNoPlacesPopover = true;
-                        this.loadCompanies(true, this.page);
+            }
+            let popover = this.popoverCtrl.create(
+                NoPlacesPopover,
+                {
+                    isCountryEnabled: isCountryEnabled,
+                    city: city,
+                    countryCode: countryCode,
+                    isFiltered: isFiltered
+                });
+            popover.present();
+            popover.onDidDismiss(data => {
+                if (data && data.radius) {
+                    this.page = 1;
+                    // this.radius = data.radius;
+                    if (this.isMapVisible) {
+                        this.radius = this.mapRadius = data.radius;
                     }
+                    else {
+                        this.radius = this.listRadius = data.radius;
+                    }
+                    //to test
+                    this.tagFilter = [];
+                    this.typeFilter = [];
+                    this.specialityFilter = [];
+                    this.search = '';
+                    //
                     this.isDismissNoPlacesPopover = true;
-                })
-                // this.changeDetectorRef.detectChanges();
+                    this.loadCompanies(true, this.page);
+                }
+                this.isDismissNoPlacesPopover = true;
             })
+            // this.changeDetectorRef.detectChanges();
+        })
     }
 
     toggleMap() {
