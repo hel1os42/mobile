@@ -289,6 +289,21 @@ page-place {
     }
 }
 
+.platform-android4 page-place .item-block-nau ion-avatar {
+    height: 23vw;
+    width: 23vw;
+}
+
+.platform-android4 page-place .cover_block_btn {
+    position: absolute;
+    right: 0;
+    padding-right: 3vw;
+    bottom: 3vw;
+    width: 100%;
+    text-align: right;
+}
+
+
 .iphonex page-place .btn-review {
     bottom: calc(constant(safe-area-inset-bottom) + 64px);
     bottom: calc(env(safe-area-inset-bottom) + 64px);
