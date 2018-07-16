@@ -301,43 +301,25 @@ export class PlacesPage {
         }
     }
 
-    requestPerm() {
-        this.androidPermissions.requestPermissions([
+    async requestPerm() {
+        const permissions = await this.androidPermissions.requestPermissions([
             this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
             this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
             this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
-        ])
-            .then(
-                result => {
-                    if (result.hasPermission === false) {
-                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                            result => {
-                                if (result.hasPermission === false) {
-                                    this.presentAndroidConfirm();
-                                }
-                                else {
-                                    this.getLocation(false);
-                                }
-                            })
-                        // .catch(err => {
-                        //     debugger;
-                        //     console.log(err + 'err');
-                        // });
-                    }
-                    else {
-                        this.getLocation(false);
-                    }
-                    console.log(result)
-                }
-                // err => {
-                //     this.requestPerm();
-                //     debugger
-                // }
-            )
-        // .catch(err => {
-        //     debugger;
-        //     console.log(err + 'err');
-        // });
+        ]);
+        if (permissions.hasPermission === false) {
+            const checkPermissions = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION);
+            if (checkPermissions.hasPermission === false) {
+                this.presentAndroidConfirm();
+            }
+            else {
+                this.getLocation(false);
+            }
+        }
+        else {
+            this.getLocation(false);
+        }
+        console.log(permissions)
     }
 
     getLocation(isDenied: boolean, isRefresh?: boolean) {
@@ -395,7 +377,8 @@ export class PlacesPage {
                                     this.profile.patch({ latitude: this.user.latitude, longitude: this.user.longitude }, true);
                                 });
                     }
-                })
+                },
+                    err => this.getDefaultCoords(0, 0))
         }
     }
 
@@ -733,9 +716,9 @@ export class PlacesPage {
         let obs = isFiltered
             ? Observable.of({})
             : this.geocoder.getAddress(this.coords.lat, this.coords.lng, true, true);
-            
+
         obs.subscribe(data => {
-            let city;    
+            let city;
             let isCountryEnabled;
             let countryCode;
             if (!isFiltered) {
