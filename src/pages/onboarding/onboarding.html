@@ -1,6 +1,7 @@
 <ion-content scroll="false" class="padding-no">
 <div *ngIf="isConnected"
     (click)="skip()" 
+    tappable
     text-uppercase 
     class="skip font-12 bold">
     {{ 'PAGE_ONBOARDING.SKIP' | translate }}
