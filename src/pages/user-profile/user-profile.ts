@@ -58,6 +58,7 @@ export class UserProfilePage {
     isDismissLinkPopover = true;
     timer;
     isClick = false;
+    MAX_POINTS = 100 * 1000;// for all premium offers list
 
     @ViewChild('allowOffersSlides') allowOffersSlides: Slides;
     @ViewChild('offersSlides') offersSlides: Slides;
@@ -140,7 +141,7 @@ export class UserProfilePage {
     }
 
     getAllowOffersList() {// to do
-        this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.allowOffersPage, false)
+        this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, this.allowOffersPage, false,)
             .subscribe(resp => {
                 this.allowPremiumOffers = resp.data;
                 this.allowOffersLastPage = resp.last_page;
@@ -156,7 +157,7 @@ export class UserProfilePage {
     }
 
     getOffersList() {// to do
-        this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.offersPage, false)
+        this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.MAX_POINTS, this.MAX_POINTS, this.offersPage, false)
             .subscribe(resp => {
                 this.premiumOffers = resp.data;
                 this.offersLastPage = resp.last_page;
@@ -232,6 +233,7 @@ export class UserProfilePage {
             : this.offersSlides;
 
         slides.slideNext();
+        this.slideChangeHandler(slides);
     }
 
     slidePrev() {
@@ -240,6 +242,7 @@ export class UserProfilePage {
             : this.offersSlides;
 
         slides.slidePrev();
+        this.slideChangeHandler(slides);
     }
 
     slideChangeHandler(event: Slides) {
@@ -266,6 +269,11 @@ export class UserProfilePage {
         }
     }
 
+    slidePrevHandler(event: Slides) {
+        if (event.isBeginning()) {
+            this.isLeftArrowVisible = false;
+        }
+    }
 
     addOffers(elementId: string, event: Slides) {
         let page = elementId === 'allowOffersSlides'
@@ -276,32 +284,30 @@ export class UserProfilePage {
             ? this.allowOffersLastPage
             : this.offersLastPage;
         if (page < lastPage) {
-            let loading = this.loading.create({ content: '' });//temporary
-            loading.present();//temporary
             if (elementId === 'allowOffersSlides') {
-                this.offer.getPremiumList(this.coords.lat, this.coords.lng, ++this.allowOffersPage, true)//to do
+                this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, ++this.allowOffersPage, true,)//to do
                     .subscribe(resp => {
                         this.allowPremiumOffers = [...this.allowPremiumOffers, ...resp.data];
                         this.allowOffersLastPage = resp.last_page;
                         event.lockSwipeToNext(false);
                         this.isRightArrowVisible = true;
-                        loading.dismiss();//temporary
                     });
             }
             else if (elementId === 'offersSlides') {
-                this.offer.getPremiumList(this.coords.lat, this.coords.lng, ++this.offersPage, true)//to do
+                this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.MAX_POINTS, this.MAX_POINTS, ++this.offersPage, true)//to do
                     .subscribe(resp => {
                         this.premiumOffers = [...this.premiumOffers, ...resp.data];
                         this.offersLastPage = resp.last_page;
                         event.lockSwipeToNext(false);
                         this.isRightArrowVisible = true;
-                        loading.dismiss();//temporary
                     });
             }
         }
         else {
             if (event.length() > 1) {
-                event.loop = true;
+                if (event.loop === false) {
+                      event.loop = true;
+                }
                 event.lockSwipeToNext(false);
                 this.isRightArrowVisible = true;
             }

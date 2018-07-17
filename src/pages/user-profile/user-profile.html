@@ -188,6 +188,7 @@
                     #allowOffersSlides
                     id="allowOffersSlides"
                     (ionSlideDidChange)="slideChangeHandler($event)"
+                    (ionSlideDrag)="slidePrevHandler($event)"
                     spaceBetween="10"
                     margin-bottom>
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
@@ -287,6 +288,7 @@
                     #offersSlides
                     id="offersSlides"
                     (ionSlideDidChange)="slideChangeHandler($event)"
+                    (ionSlideDrag)="slidePrevHandler($event)"
                     spaceBetween="10"
                     margin-bottom>
                     <!-- <ion-slide (click)="openRewards()"> temporary-->
