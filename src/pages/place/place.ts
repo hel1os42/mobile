@@ -124,11 +124,12 @@ export class PlacePage {
 
         this.onRefreshFavorites = this.favorites.onRefreshOffers
             .subscribe((resp) => {
-                this.offersList.forEach(offer => {
+                for (let offer of this.offersList) {
                     if (offer.id === resp.id) {
                         offer.is_favorite = resp.isFavorite;
+                        break;
                     }
-                });
+                };
             });
 
         this.onRefreshTestimonials = this.testimonials.onRefresh
