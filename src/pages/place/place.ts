@@ -241,7 +241,11 @@ export class PlacePage {
                 this.openLinkPopover(event);
             }
             else {
-                if (offer.is_featured && (offer.redemption_points_price || offer.referral_points_price)) {
+                if ((event && !company && (offer.redemption_points_price || offer.referral_points_price))
+                    || (!event && company
+                        && ((offer.redemption_points_price && this.user.redemption_points >= offer.redemption_points_price)
+                            || (offer.referral_points_price && this.user.referral_points >= offer.referral_points_price)))) {
+
                     let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer, user: this.user });
                     noticePopover.present();
                 }
