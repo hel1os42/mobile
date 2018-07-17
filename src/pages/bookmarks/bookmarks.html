@@ -154,4 +154,12 @@
             </ion-item-sliding>
     </ion-list>
 
+    <ion-infinite-scroll 
+    *ngIf="isInfiniteScroll()" 
+    (ionInfinite)="infiniteScroll($event)" 
+    threshold="5px">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_PLACES.LOADING_COMPANIES' | translate }}">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
 </ion-content>

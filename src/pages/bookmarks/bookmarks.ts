@@ -78,6 +78,7 @@ export class BookmarksPage {
         this.onRefreshCompanies = this.favorites.onRefreshPlaces
             .subscribe(resp => {
                 if (!resp.notRefresh) {
+                    this.companiesPage = 1;
                     this.getPlacesList();
                 };
             });
@@ -85,6 +86,7 @@ export class BookmarksPage {
         this.onRefreshOffers = this.favorites.onRefreshOffers
             .subscribe(resp => {
                 if (!resp.notRefresh) {
+                    this.offersPage = 1;
                     this.getOffersList(false);
                 };
             });
@@ -329,29 +331,69 @@ export class BookmarksPage {
     }
 
     removePlace(company) {
-        this.favorites.removePlace(company.id, true)
-            .subscribe(() => {
-                this.companies.forEach(item => {
-                    if (item.id === company.id) {
-                        let i = _.indexOf(this.companies, item);
-                        this.companies.splice(i, 1);
-                        this.totalCompanies = this.companies.length;
-                    }
-                })
-            });
+        this.favorites.removePlace(company.id, false);
+            // .subscribe(() => {
+            //     this.companies.forEach(item => {
+            //         if (item.id === company.id) {
+            //             let i = _.indexOf(this.companies, item);
+            //             this.companies.splice(i, 1);
+            //             this.totalCompanies = this.companies.length;
+            //         }
+            //     })
+            // });
     }
 
     removeOffer(offer) {
-        this.favorites.removeOffer(offer.id, true)
-            .subscribe(() => {
-                this.offers.forEach(item => {
-                    if (item.id === offer.id) {
-                        let i = _.indexOf(this.offers, item);
-                        this.offers.splice(i, 1);
-                        this.totalOffers = this.offers.length;
-                    }
-                })
+        this.favorites.removeOffer(offer.id, false);
+            // .subscribe(() => {
+            //     this.offers.forEach(item => {
+            //         if (item.id === offer.id) {
+            //             let i = _.indexOf(this.offers, item);
+            //             this.offers.splice(i, 1);
+            //             this.totalOffers = this.offers.length;
+            //         }
+            //     })
+            // });
+    }
+
+    isInfiniteScroll() {
+        return this.segment === 'places' ? this.companiesPage <= this.companiesLastPage : this.offersPage <= this.offersLastPage;
+    }
+
+    infiniteScroll(infiniteScroll) {
+        let page: number;
+        let lastPage: number;
+        if (this.segment === 'places') {
+            page = ++this.companiesPage;
+            lastPage = this.companiesLastPage;
+        }
+        else if (this.segment === 'offers') {
+            page = ++this.offersPage;
+            lastPage = this.offersLastPage;
+        }
+        if (page <= lastPage) {
+            setTimeout(() => {
+                if (this.segment === 'places') {
+                    this.favorites.getPlaces(this.companiesPage)
+                        .subscribe(resp => {
+                            this.companies = [...this.companies, ...resp.data];
+                            this.companiesLastPage = resp.last_page;
+                            infiniteScroll.complete();
+                        });
+                }
+                else if (this.segment === 'offers') {
+                    this.favorites.getOffers(this.offersPage)
+                        .subscribe(res => {
+                            this.offers = [...this.offers, ...res.data];
+                            this.offersLastPage = res.last_page;
+                            infiniteScroll.complete();
+                        });
+                }
             });
+        }
+        else {
+            infiniteScroll.complete();
+        }
     }
 
     ngOnDestroy() {
