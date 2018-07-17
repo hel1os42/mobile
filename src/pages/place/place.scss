@@ -186,16 +186,8 @@ page-place {
         padding: 2vw;
     }
 
-    .star_right{
-        right: 2vw;
-        top: 2vw;
-    }
-
     .featured_right{
-        position: absolute;
-        left: 1vw;
-        top: 1vw;
-        height: 7vw;
+        height: 9vw;
         width: auto;
     }
 
@@ -313,6 +305,7 @@ page-place {
 
     .block-place-offers .smooth_transition {
         width: 83%;
+        line-height: 1;
     }
 
     .block-place-offers .smooth_transition:before {
@@ -382,7 +375,11 @@ page-place {
         bottom: 0;
     }
     .coupon {
-        left: 2vw;
+        left: 2vw;;
+        align-items: flex-end;
+    }
+    .coupon img:nth-child(2){
+        margin-left: 2vw;
     }
     .block-right {
         right: 2vw;
