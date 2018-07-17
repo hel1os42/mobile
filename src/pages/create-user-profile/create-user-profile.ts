@@ -179,36 +179,26 @@ export class CreateUserProfilePage {
         }
     }
 
-    requestPerm() {
-        this.androidPermissions.requestPermissions([
+    async requestPerm() {
+        const permissions = await this.androidPermissions.requestPermissions([
             this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
             this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
             this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
-        ])
-            .then(
-                result => {
-                    if (result.hasPermission === false) {
-                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                            result => {
-                                if (result.hasPermission === false) {
-                                    this.presentAndroidConfirm();
-                                }
-                                else {
-                                    this.getLocation(false);
-                                }
-                            });
-                    }
-                    else {
-                        this.getLocation(false);
-                    }
-                    console.log(result)
-                },
-                err => {
-                    this.requestPerm();
-                }
-            )
+        ]);
+        if (permissions.hasPermission === false) {
+            const checkPermissions = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION);
+            if (checkPermissions.hasPermission === false) {
+                this.presentAndroidConfirm();
+            }
+            else {
+                this.getLocation(false);
+            }
+        }
+        else {
+            this.getLocation(false);
+        }
+        console.log(permissions)
     }
-
 
     getLocation(isDenied: boolean) {
         if (!isDenied) {
@@ -266,7 +256,11 @@ export class CreateUserProfilePage {
                                     this.profile.patch({ latitude: this.user.latitude, longitude: this.user.longitude }, true);
                                 })
                     }
-                })
+                },
+                    err => this.coords = {
+                        lat: 0,
+                        lng: 0
+                    });
         }
     }
 
