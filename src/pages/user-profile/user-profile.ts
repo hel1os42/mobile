@@ -28,6 +28,7 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
+import { FavoritesService } from '../../providers/favorites.service';
 
 @Component({
     selector: 'page-user-profile',
@@ -41,6 +42,8 @@ export class UserProfilePage {
     onRefreshCoords: Subscription;
     onRefreshProfileCoords: Subscription;
     onRefreshUser: Subscription;
+    onRefreshFavoritesOffers: Subscription;
+    onRefreshFavoritesPlaces: Subscription;
     NAU: Account;
     branchDomain = 'https://nau.app.link';
     allowPremiumOffers = [];//allowPremiumOffers: Offers[];
@@ -78,7 +81,8 @@ export class UserProfilePage {
         private gAnalytics: GoogleAnalytics,
         private analytics: AnalyticsService,
         private popoverCtrl: PopoverController,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private favorites: FavoritesService) {
 
         this.segment = 'allow';
 
@@ -119,6 +123,46 @@ export class UserProfilePage {
 
         this.onRefreshProfileCoords = this.location.onProfileCoordsChanged
             .subscribe(coords => this.coords = coords);
+
+        this.onRefreshFavoritesOffers = this.favorites.onRefreshOffers
+            .subscribe(offerData => {
+                if (this.allowPremiumOffers && this.allowPremiumOffers.length > 0) {
+                    for (let offer of this.allowPremiumOffers) {
+                        if (offer.id === offerData.id) {
+                            offer.is_favorite = offerData.isFavorite;
+                            break;
+                        }
+                    }
+                }
+                if (this.premiumOffers && this.premiumOffers.length > 0) {
+                    for (let offer of this.premiumOffers) {
+                        if (offer.id === offerData.id) {
+                            offer.is_favorite = offerData.isFavorite;
+                            break;
+                        }
+                    }
+                }
+            });
+
+        this.onRefreshFavoritesPlaces = this.favorites.onRefreshPlaces
+            .subscribe(placeData => {
+                if (this.allowPremiumOffers && this.allowPremiumOffers.length > 0) {
+                    for (let offer of this.allowPremiumOffers) {
+                        if (offer.account.owner.place.id === placeData.id) {
+                            offer.account.owner.place.is_favorite = placeData.isFavorite;
+                            break;
+                        }
+                    }
+                }
+                if (this.premiumOffers && this.premiumOffers.length > 0) {
+                    for (let offer of this.premiumOffers) {
+                        if (offer.account.owner.place.id === placeData.id) {
+                            offer.account.owner.place.is_favorite = placeData.isFavorite;
+                            break;
+                        }
+                    }
+                }
+            });
     }
 
     ionSelected() {
@@ -141,7 +185,7 @@ export class UserProfilePage {
     }
 
     getAllowOffersList() {// to do
-        this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, this.allowOffersPage, false,)
+        this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, this.allowOffersPage, false)
             .subscribe(resp => {
                 this.allowPremiumOffers = resp.data;
                 this.allowOffersLastPage = resp.last_page;
@@ -285,7 +329,7 @@ export class UserProfilePage {
             : this.offersLastPage;
         if (page < lastPage) {
             if (elementId === 'allowOffersSlides') {
-                this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, ++this.allowOffersPage, true,)//to do
+                this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, ++this.allowOffersPage, true)
                     .subscribe(resp => {
                         this.allowPremiumOffers = [...this.allowPremiumOffers, ...resp.data];
                         this.allowOffersLastPage = resp.last_page;
@@ -306,7 +350,7 @@ export class UserProfilePage {
         else {
             if (event.length() > 1) {
                 if (event.loop === false) {
-                      event.loop = true;
+                    event.loop = true;
                 }
                 event.lockSwipeToNext(false);
                 this.isRightArrowVisible = true;
@@ -502,6 +546,8 @@ export class UserProfilePage {
         this.onRefreshCoords.unsubscribe();
         this.onRefreshUser.unsubscribe();
         this.onRefreshProfileCoords.unsubscribe();
+        this.onRefreshFavoritesOffers.unsubscribe();
+        this.onRefreshFavoritesPlaces.unsubscribe();
     }
 
 }

@@ -79,7 +79,8 @@ export class PlacesPage {
     isChangedFilters = false;
     isForkMode: boolean;
     onResumeSubscription: Subscription;
-    onRefreshListSubscription: Subscription;
+    onRefreshFavoritesPlaces: Subscription;
+    onRefreshFavoritesOffers: Subscription;
     onRefreshTestimonials: Subscription;
     onRefreshDefoultCoords: Subscription;
     onRefreshFeaturedOffers: Subscription;
@@ -164,8 +165,9 @@ export class PlacesPage {
                 })
                 this.selectedCategory = this.categories[0];
                 this.getLocationStatus();
-            })
-        this.onRefreshListSubscription = this.favorites.onRefreshPlaces
+            });
+
+        this.onRefreshFavoritesPlaces = this.favorites.onRefreshPlaces
             .subscribe((resp) => {
                 for (let company of this.companies) {
                     if (company.id === resp.id) {
@@ -173,6 +175,26 @@ export class PlacesPage {
                         break;
                     }
                 };
+                if (this.featuredOffers && this.featuredOffers.length > 0) {
+                    for (let offer of this.featuredOffers) {
+                        if (offer.account.owner.place.id === resp.id) {
+                            offer.account.owner.place.is_favorite = resp.isFavorite;
+                            break;
+                        }
+                    }
+                }
+            });
+
+        this.onRefreshFavoritesOffers = this.favorites.onRefreshOffers
+            .subscribe(resp => {
+                if (this.featuredOffers && this.featuredOffers.length > 0) {
+                    for (let offer of this.featuredOffers) {
+                        if (offer.id === resp.id) {
+                            offer.is_favorite = resp.isFavorite;
+                            break;
+                        }
+                    }
+                }
             });
 
         this.onRefreshTestimonials = this.testimonials.onRefresh
@@ -1156,13 +1178,14 @@ export class PlacesPage {
         if (this.platform.is('cordova')) {
             this.onResumeSubscription.unsubscribe();
         }
-        if (this.onRefreshListSubscription) {
-            this.onRefreshListSubscription.unsubscribe();
+        if (this.onRefreshFavoritesPlaces) {
+            this.onRefreshFavoritesPlaces.unsubscribe();
         }
         this.onRefreshTestimonials.unsubscribe();
         this.onRefreshUser.unsubscribe();
         this.onRefreshDefoultCoords.unsubscribe();
         this.onRefreshFeaturedOffers.unsubscribe();
+        this.onRefreshFavoritesOffers.unsubscribe();
     }
 
 }
