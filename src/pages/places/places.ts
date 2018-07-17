@@ -167,11 +167,12 @@ export class PlacesPage {
             })
         this.onRefreshListSubscription = this.favorites.onRefreshPlaces
             .subscribe((resp) => {
-                this.companies.forEach(company => {
+                for (let company of this.companies) {
                     if (company.id === resp.id) {
                         company.is_favorite = resp.isFavorite;
+                        break;
                     }
-                });
+                };
             });
 
         this.onRefreshTestimonials = this.testimonials.onRefresh
