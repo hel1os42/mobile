@@ -767,10 +767,10 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 }
 
 .nau-segment.segment-ios .segment-button:first-of-type {
-    border-top-left-radius: 100px;
+    border-top-left-radius: 100vw;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom-left-radius: 100px;
+    border-bottom-left-radius: 100vw;
     border-left: 1px solid #FF8B10;
     border-top: 1px solid #FF8B10;
     border-bottom: 1px solid #FF8B10;
@@ -778,8 +778,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 
 .nau-segment.segment-ios .segment-button:last-of-type {
     border-top-left-radius: 0;
-    border-top-right-radius: 100px;
-    border-bottom-right-radius: 100px;
+    border-top-right-radius: 100vw;
+    border-bottom-right-radius: 100vw;
     border-bottom-left-radius: 0;
     border-right: 1px solid #FF8B10;
     border-top: 1px solid #FF8B10;
