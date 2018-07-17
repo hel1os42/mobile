@@ -31,16 +31,14 @@ export class OfferService {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
     }
 
-    getFeaturedList( // for featured offers
+    getFeaturedList( //featured offers
         lat: number,
         lng: number,
         // radius: number,
         page: number,
         showLoading: boolean
     ) {
-        // return this.api.get(`offers`, {
         return this.api.get('offers', {
-            // return this.api.get(`offers?category_ids[]=382b8e95-9083-4095-a928-ee9178ee6275`, {// prod mock
             showLoading: showLoading,
             params: {
                 featured: true,
@@ -53,14 +51,46 @@ export class OfferService {
         });
     }
 
-    getPremiumList(
+    getPremiumList( //premium offers
         lat: number,
         lng: number,
-        // radius: number,
+        // radius: number, 
+        userReferralPoints: number,
+        userRedemptionPoints: number,
         page: number,
         showLoading: boolean
     ) {
-        return Observable.of(MockOffers.items).delay(1000); //temporary
+        let obs;
+        if (!userReferralPoints && ! userRedemptionPoints) {
+            obs = Observable.of({
+                data: [],
+                last_page: 1
+            })
+        }
+        else {
+            let searchStr: string;
+            if (userRedemptionPoints) {
+                searchStr = `offerData.redemption_points_price:1,${userRedemptionPoints}`;
+            }
+            if (userReferralPoints) {
+                searchStr = searchStr 
+                ? searchStr + `;offerData.refferal_points_price:1,${userReferralPoints}` 
+                : `offerData.refferal_points_price:1,${userReferralPoints}`
+            }
+            obs = this.api.get('offers', {
+                showLoading: showLoading,
+                params: {
+                    latitude: lat,
+                    longitude: lng,
+                    radius: this.MAX_RADIUS,
+                    with: 'account.owner.place',
+                    search: searchStr,
+                    searchJoin: 'and',
+                    page: page
+                }
+            });
+        }
+        return obs;
 
     }
 
@@ -111,8 +141,8 @@ export class OfferService {
             searchStr += this.getSearch(speciality, specialities);
         }
         if (search && search !== '') {
-            // searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
-            searchStr += 'name:' + `${search}`;
+            searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+            // searchStr += 'name:' + `${search}`;
         }
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
@@ -122,7 +152,7 @@ export class OfferService {
                 longitude: lng,
                 radius: radius,
                 search: searchStr,
-                searchJoin: 'and',
+                searchJoin: 'or',
                 with: 'category;retailTypes;tags;specialities',
                 page: page
             }
