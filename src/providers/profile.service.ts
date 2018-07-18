@@ -54,7 +54,10 @@ export class ProfileService {
     }
 
     getWithAccounts(showLoading?: boolean) {
-        return this.api.get('profile?with=accounts', { showLoading: showLoading });
+        let obs = this.api.get('profile?with=accounts', { showLoading: showLoading });
+        obs.subscribe(user => this.user = user),
+        err => { return };
+        return obs;
     }
 
     put(data) {
