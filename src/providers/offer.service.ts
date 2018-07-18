@@ -61,7 +61,7 @@ export class OfferService {
         showLoading: boolean
     ) {
         let obs;
-        if (!userReferralPoints && ! userRedemptionPoints) {
+        if (!userReferralPoints && !userRedemptionPoints) {
             obs = Observable.of({
                 data: [],
                 last_page: 1
@@ -73,9 +73,9 @@ export class OfferService {
                 searchStr = `offerData.redemption_points_price:1,${userRedemptionPoints}`;
             }
             if (userReferralPoints) {
-                searchStr = searchStr 
-                ? searchStr + `;offerData.refferal_points_price:1,${userReferralPoints}` 
-                : `offerData.refferal_points_price:1,${userReferralPoints}`
+                searchStr = searchStr
+                    ? searchStr + `;offerData.refferal_points_price:1,${userReferralPoints}`
+                    : `offerData.refferal_points_price:1,${userReferralPoints}`
             }
             obs = this.api.get('offers', {
                 showLoading: showLoading,
@@ -141,8 +141,8 @@ export class OfferService {
             searchStr += this.getSearch(speciality, specialities);
         }
         if (search && search !== '') {
-            searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
-            // searchStr += 'name:' + `${search}`;
+            // searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+            searchStr += 'name:' + `${search}`;
         }
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
@@ -152,7 +152,7 @@ export class OfferService {
                 longitude: lng,
                 radius: radius,
                 search: searchStr,
-                searchJoin: 'or',
+                searchJoin: 'and',
                 with: 'category;retailTypes;tags;specialities',
                 page: page
             }
