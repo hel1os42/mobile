@@ -26,7 +26,7 @@ export class InvitePage {
         private adjust: AdjustService,
         private translate: TranslateService) {
 
-        this.profile.get(true, true)
+        this.profile.get(false, true)
             .subscribe(user => this.user = user);
 
         this.onRefresh = this.profile.onRefresh
