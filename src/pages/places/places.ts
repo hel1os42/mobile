@@ -1104,6 +1104,10 @@ export class PlacesPage {
     }
 
     doRefresh(refresher) {
+        if (this.shareData) {
+            this.shareData = undefined;
+            this.share.remove();
+        }
         if (this.isFeatured) {
             this.featuredPage = 1;
         }
