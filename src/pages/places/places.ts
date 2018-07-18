@@ -38,6 +38,7 @@ import { AdjustService } from '../../providers/adjust.service';
 import { LinkPopover } from '../offer/link.popover';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Observable } from 'rxjs';
+import { Speciality } from '../../models/speciality';
 
 @Component({
     selector: 'page-places',
@@ -651,6 +652,10 @@ export class PlacesPage {
         let loading;
         this.isFeatured = true;
         this.content.resize();
+        this.isChangedCategory = true;
+        this.tagFilter = [];
+        this.typeFilter = [];
+        this.specialityFilter = [];
         if (!this.user) {
             loading = this.loading.create();
             loading.present();
@@ -983,7 +988,7 @@ export class PlacesPage {
             else {
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
-                if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {
+                if (types.length > 0 && (this.getFilter(this.selectedTypes, data.types) || this.specialitiesHandler(this.selectedTypes, data.types))) {
                     this.selectedTypes = data.types;
                     this.typeFilter = data.types.filter(p => p.isSelected).map(p => p.id);
                     this.isChangedFilters = true;
@@ -1049,6 +1054,20 @@ export class PlacesPage {
             }
             return counter != arr.length * newArr.length;
         }
+    }
+
+    specialitiesHandler(arr, newArr) {
+        let specialities: Speciality[] = _.flatten(arr.map(item => item.specialities));
+        let newSpecialities: Speciality[] = _.flatten(newArr.map(item => item.specialities));
+        let counter = 0;
+        for (let item of specialities) {
+            for (let newItem of newSpecialities) {
+                if (item.retail_type_id === newItem.retail_type_id && item.slug === newItem.slug && item.isSelected === newItem.isSelected) {
+                    counter++;
+                }
+            }
+        }
+        return counter != specialities.length || counter != newSpecialities.length;
     }
 
     searchCompanies($event) {

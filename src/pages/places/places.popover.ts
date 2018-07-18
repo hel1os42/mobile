@@ -99,7 +99,12 @@ export class PlacesPopover {
     //     }
     // }
 
-    getSpecialities() {
+    getSpecialities(type?) {
+        if (type && !type.isSelected) {
+            type.specialities.forEach(item => {
+                item.isSelected = false;
+            })
+        }
         // this.specialities = [];
         let types = this.types.filter(type => type.isSelected);
         types.forEach(type => {
@@ -119,14 +124,23 @@ export class PlacesPopover {
 
     }
 
+    checkSpeciality(speciality) {
+        this.types.forEach(type => {
+            if (type.isSelected) {
+                type.specialities.forEach(spec => {
+                    if (spec.slug === speciality.slug) {
+                        spec.isSelected = speciality.isSelected;
+                    }
+                })
+            }
+        })
+    }
+
     clear() {
-        this.types = [];
-        this.tags = [];
-        this.specialities = [];
         this.viewCtrl.dismiss({
-            types: this.types,
-            tags: this.tags,
-            specialities: this.specialities,
+            types: this.types = [],
+            tags: this.tags = [],
+            specialities: this.specialities = [],
             radius: this.radius
         });
     }
