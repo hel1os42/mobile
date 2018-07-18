@@ -127,7 +127,9 @@ export class CongratulationPopover {
     }
 
     ngOnDestroy() {
-        this.onKeyboardShowSubscription.unsubscribe();
+        if (this.platform.is('android')) {
+            this.onKeyboardShowSubscription.unsubscribe();
+        }
         this.onKeyboardHideSubscription.unsubscribe();
     }
 }
