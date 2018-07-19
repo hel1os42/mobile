@@ -72,7 +72,7 @@ export class UserNauPage {
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU.balance;
+                this.balance = this.NAU ? this.NAU.balance : 0;
             })
 
         this.onRefreshTransactions = this.transaction.onRefreshTransactions
@@ -105,7 +105,7 @@ export class UserNauPage {
         this.profile.getWithAccounts()
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU.balance;
+                this.balance = this.NAU ? this.NAU.balance : 0;
             //     if (this.envName === 'dev' || this.envName === 'test')
             //         this.nav.popToRoot();
             });
