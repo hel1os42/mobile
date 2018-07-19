@@ -235,7 +235,7 @@
                     *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
                     class="block-right font-14 flex"
                     text-right>
-                    <span class="flex" *ngIf="offer.referral_points_price > user.referral_points">
+                    <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
                         <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
                         <span class="circle_num">{{ offer.referral_points_price }}</span>
                     </span>

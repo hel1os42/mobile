@@ -36,7 +36,7 @@
 -->
             <span class="label label-ios points_friens font-75">
                 <span [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_FRIENDS' | translate"></span>
-                <span>{{ user.referral_points }}</span>
+                <span>{{ user?.referral_points }}</span>
             </span>
 
             <span class="label label-ios points_redemptions font-75">
@@ -265,7 +265,7 @@
                                                 *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
                                                 class="block-right font-14 flex"
                                                 text-right>
-                                                <span class="flex" *ngIf="offer.referral_points_price > user.referral_points">
+                                                <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
                                                     <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
                                                     {{ offer.referral_points_price }}
                                                 </span>
@@ -365,7 +365,7 @@
                                             *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
                                             class="block-right font-14 flex"
                                             text-right>
-                                                <span class="flex" *ngIf="offer.referral_points_price > user.referral_points">
+                                                <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
                                                     <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
                                                     {{ offer.referral_points_price }}
                                                 </span>
