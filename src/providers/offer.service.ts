@@ -131,18 +131,19 @@ export class OfferService {
         let type = 'retailTypes.id:';
         let speciality = 'specialities.slug:';
         let searchStr = '';
+        let filterStr ='';
         if (tags.length > 0) {
-            searchStr += this.getSearch(tag, tags);
+            filterStr += this.getSearch(tag, tags);
         }
         if (types.length > 0) {
-            searchStr += this.getSearch(type, types);
+            filterStr += this.getSearch(type, types);
         }
         if (specialities.length > 0) {
-            searchStr += this.getSearch(speciality, specialities);
+            filterStr += this.getSearch(speciality, specialities);
         }
-        if (search && search !== '') {
-            // searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
-            searchStr += 'name:' + `${search}`;
+        if (search) {
+            searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+            // searchStr += 'name:' + `${search}`;
         }
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
@@ -152,7 +153,8 @@ export class OfferService {
                 longitude: lng,
                 radius: radius,
                 search: searchStr,
-                searchJoin: 'and',
+                whereFilters: filterStr, 
+                searchJoin: 'or',
                 with: 'category;retailTypes;tags;specialities',
                 page: page
             }
