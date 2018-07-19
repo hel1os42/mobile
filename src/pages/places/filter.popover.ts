@@ -3,11 +3,11 @@ import { NavParams, ViewController } from 'ionic-angular';
 import * as _ from 'lodash';
 
 @Component({
-    selector: 'places-popover-component',
-    templateUrl: 'places.popover.html'
+    selector: 'filter-popover-component',
+    templateUrl: 'filter.popover.html'
 })
 
-export class PlacesPopover {
+export class FilterPopover {
 
     types = [];
     tags;

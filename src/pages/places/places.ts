@@ -23,7 +23,7 @@ import { StorageService } from '../../providers/storage.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { PlacePage } from '../place/place';
-import { PlacesPopover } from './places.popover';
+import { FilterPopover } from './filter.popover';
 import { GeocodeService } from '../../providers/geocode.service';
 import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { COUNTRIES } from '../../const/countries';
@@ -967,7 +967,7 @@ export class PlacesPage {
     }
 
     presentPopover() {
-        let popover = this.popoverCtrl.create(PlacesPopover, {
+        let popover = this.popoverCtrl.create(FilterPopover, {
             types: _.cloneDeep(this.selectedTypes),
             tags: _.cloneDeep(this.selectedTags),
             radius: this.radius

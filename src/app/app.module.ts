@@ -49,7 +49,7 @@ import { OfferRedeemPopover } from '../pages/offer/offerRedeem.popover';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { PlacePage } from '../pages/place/place';
 import { PlacesPage } from '../pages/places/places';
-import { PlacesPopover } from '../pages/places/places.popover';
+import { FilterPopover } from '../pages/places/filter.popover';
 import { SettingsChangePhonePage } from '../pages/settings-change-phone/settings-change-phone';
 import { SettingsPage } from '../pages/settings/settings';
 import { SettingsPopover } from '../pages/settings/settings.popover';
@@ -219,7 +219,7 @@ export class AppErrorHandler implements ErrorHandler {
         TemporaryPage,
         SettingsPopover,
         OfferRedeemPopover,
-        PlacesPopover,
+        FilterPopover,
         TransferPopover,
         CongratulationPopover,
         CreateAdvUserProfileCategoryPopover,
@@ -308,7 +308,7 @@ export class AppErrorHandler implements ErrorHandler {
         TemporaryPage,
         SettingsPopover,
         OfferRedeemPopover,
-        PlacesPopover,
+        FilterPopover,
         TransferPopover,
         CongratulationPopover,
         CreateAdvUserProfileCategoryPopover,
