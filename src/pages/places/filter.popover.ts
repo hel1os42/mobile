@@ -132,6 +132,17 @@ export class FilterPopover {
         })
     }
 
+    getIsSelected(arr) {
+        let isSelected = false;
+        for (let item of arr) {
+            if (item.isSelected) {
+                isSelected = true;
+                break;
+            }
+        }
+        return isSelected;
+    }
+
     close() {
         this.viewCtrl.dismiss({
             types: this.types,
