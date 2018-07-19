@@ -36,11 +36,7 @@ export class TabsPage {
         private adjust: AdjustService) {
 
         this.envName = this.appMode.getEnvironmentMode();
-        // this.profile.getWithAccounts(false)
-        //     .subscribe(resp => {
-        //         this.nauParams = resp.accounts.NAU;
-        //     });
-        // this.tab1Root = PlacesPage;
+     
         this.selectedTabIndex = 0;
     }
 

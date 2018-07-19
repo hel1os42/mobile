@@ -437,14 +437,6 @@ export class CreateUserProfilePage {
         // if (this.isEdit) {
         this.nav.pop();
         this.profile.refreshAccounts();
-        // }
-        // else {
-        // this.nav.setRoot(TabsPage);
-        // this.profile.getWithAccounts()
-        //     .subscribe(resp => {
-        //         this.nav.setRoot(TabsPage, { NAU: resp.accounts.NAU });
-        //     });
-        // }
     }
 
     createAccount() {
