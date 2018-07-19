@@ -929,7 +929,7 @@ export class PlacesPage {
     }
 
     createPopover() {
-        if (this.selectedCategory.id) {
+        if (this.selectedCategory && this.selectedCategory.id) {
             if (this.isChangedCategory) {
                 this.offers.getTypes(this.selectedCategory.id)
                     .subscribe(resp => {

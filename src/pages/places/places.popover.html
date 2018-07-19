@@ -23,15 +23,19 @@
     <div *ngIf="isOpenTypesSelect" class="block-checks">
         <ion-item *ngFor="let type of types" no-lines>
             <ion-label item-end class="text-828282 font-16">{{ type.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="type.isSelected" (ionChange)="getSpecialities(type)" item-end></ion-checkbox>
+            <ion-checkbox 
+                [(ngModel)]="type.isSelected" 
+                (ionChange)="getSpecialities(type)" 
+                item-end>
+            </ion-checkbox>
         </ion-item>
     </div>
 
     <a *ngIf="specialities.length > 0" (click)="openSpecialitiesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
         <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_FEATURES' | translate }}</ion-label>
         <div item-end>
-            <img *ngIf=" isOpenSpecialitiesSelect" src="assets/img/user_home/arrow_up.svg">
-            <img *ngIf="! isOpenSpecialitiesSelect" src="assets/img/user_home/arrow_down.svg">
+            <img *ngIf="isOpenSpecialitiesSelect" src="assets/img/user_home/arrow_up.svg">
+            <img *ngIf="!isOpenSpecialitiesSelect" src="assets/img/user_home/arrow_down.svg">
         </div>
     </a>
 

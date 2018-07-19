@@ -42,7 +42,7 @@ export class PlacesPopover {
                 this.slider = i;
             }
         }
-        this.getSpecialities();
+            this.getSpecialities();
     }
 
     getRadius() {
@@ -84,31 +84,28 @@ export class PlacesPopover {
         }
     }
 
-    close() {
-        this.viewCtrl.dismiss({
-            types: this.types,
-            tags: this.tags,
-            specialities: this.specialities.filter(spec => spec.isSelected),
-            radius: this.radius
-        });
-    }
-
-    // clear(arr) {
-    //     for (let i = 0; i < arr.length; i++) {
-    //         arr[i].isSelected = false;
-    //     }
-    // }
-
     getSpecialities(type?) {
+        this.specialities;
         if (type && !type.isSelected) {
             type.specialities.forEach(item => {
                 item.isSelected = false;
-            })
+            });
+            this.types;
+            this.specialities;
+        }
+        else if (type && type.isSelected && this.specialities.length > 0) {
+            type.specialities.forEach(item => {
+                this.specialities.forEach(spec => {
+                    if (item.slug === spec.slug) {
+                        item.isSelected = spec.isSelected;
+                    }
+                });
+            });
         }
         // this.specialities = [];
         let types = this.types.filter(type => type.isSelected);
-        types.forEach(type => {
-            type.specialities.forEach(spec => {
+        types.forEach(item => {
+            item.specialities.forEach(spec => {
                 this.specialities.forEach(item => {
                     if (spec.slug === item.slug) {
                         spec.isSelected = item.isSelected;
@@ -118,10 +115,9 @@ export class PlacesPopover {
         });
         this.specialities = [];
         types.forEach(type => {
-            this.specialities = [...this.specialities, ...type.specialities];
+            this.specialities = [...this.specialities, ..._.cloneDeep(type.specialities)];
         });
         this.specialities = _.uniqBy(this.specialities, 'slug');
-
     }
 
     checkSpeciality(speciality) {
@@ -134,6 +130,15 @@ export class PlacesPopover {
                 })
             }
         })
+    }
+
+    close() {
+        this.viewCtrl.dismiss({
+            types: this.types,
+            tags: this.tags,
+            specialities: this.specialities.filter(spec => spec.isSelected),
+            radius: this.radius
+        });
     }
 
     clear() {
