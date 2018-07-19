@@ -498,8 +498,10 @@ export class LoginPage {
                     if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND) {
                         setTimeout(() => {
                             this.keyboard.show();
-                            this.inputPhone.setFocus();
-                        }, 700)
+                            if (this.inputPhone) {
+                                this.inputPhone.setFocus();
+                            }
+                        }, 800)
                     }
                 });
     }
