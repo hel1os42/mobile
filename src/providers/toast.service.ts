@@ -14,7 +14,7 @@ export class ToastService {
 
     show(message: string, isDisconnected?: boolean) {
         let position = isDisconnected ? 'middle' : 'bottom';
-        let duration = isDisconnected ? 3000 : 5000;
+        let duration = isDisconnected ? 2000 : 5000;
         let toast = this.toast.create({
             message: message,
             duration: duration,
