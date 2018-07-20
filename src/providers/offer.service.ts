@@ -1,15 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { Observable } from 'rxjs';
 import { Place } from '../models/place';
 import { RedeemedOffer } from '../models/redeemedOffer';
-import { AdjustService } from './adjust.service';
-import { AnalyticsService } from './analytics.service';
 import { ApiService } from './api.service';
-import { AppModeService } from './appMode.service';
-import { Observable } from 'rxjs';
-import { MockOffers } from '../mocks/mockOffers';
-
-// import { MockCompanies } from '../mocks/mockCompanies';
 
 @Injectable()
 export class OfferService {
@@ -21,11 +14,7 @@ export class OfferService {
     MAX_RADIUS = 19849 * 1000;// temporary
 
     constructor(
-        private api: ApiService,
-        private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
-        private adjust: AdjustService,
-        private appMode: AppModeService) { }
+        private api: ApiService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });

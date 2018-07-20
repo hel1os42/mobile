@@ -1,15 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Tab, ViewController } from 'ionic-angular/umd';
 import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { InvitePage } from '../invite/invite';
+import { OfferPage } from '../offer/offer';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
-import { Tab, ViewController } from 'ionic-angular/umd';
-import { OfferPage } from '../offer/offer';
 
 @Component({
     selector: 'page-tabs',
