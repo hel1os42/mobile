@@ -75,7 +75,8 @@
         "SETTINGS": "Configuraciones",
         "POINTS": "puntos",
         "POINTS2": "puntos",
-        "POINT": "punto"
+        "POINT": "punto",
+        "ERROR": "Error"
     },
 
     "MONTHS" : {

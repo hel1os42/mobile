@@ -75,7 +75,8 @@
         "SETTINGS": "Настройки",
         "POINTS": "баллов",
         "POINTS2": "балла",
-        "POINT": "балл"
+        "POINT": "балл",
+        "ERROR": "Ошибка"
     },
 
     "MONTHS" : {

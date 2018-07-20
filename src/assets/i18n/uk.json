@@ -75,7 +75,8 @@
         "SETTINGS": "Налаштування",
         "POINTS": "балів",
         "POINTS2": "бала",
-        "POINT": "бал"
+        "POINT": "бал",
+        "ERROR": "Помилка"
     },
 
     "MONTHS" : {
