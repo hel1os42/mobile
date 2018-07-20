@@ -20,6 +20,7 @@ import { StorageService } from '../../providers/storage.service';
 import { StringValidator } from '../../validators/string.validator';
 import { TabsPage } from '../tabs/tabs';
 import { AppAvailability } from '@ionic-native/app-availability';
+import { StatusBar } from '@ionic-native/status-bar';
 
 @Component({
     selector: 'page-login',
@@ -85,7 +86,8 @@ export class LoginPage {
         private file: File,
         private api: ApiService,
         private browser: InAppBrowser,
-        private appAvailability: AppAvailability) {
+        private appAvailability: AppAvailability,
+        private statusBar: StatusBar) {
 
         this.isRegisterMode = !this.appMode.getRegisteredMode();
         this.envName = this.appMode.getEnvironmentMode();
@@ -147,6 +149,10 @@ export class LoginPage {
     //         else this.nav.pop();
     //     }
     // }
+    ionViewDidLoad() {
+        this.statusBar.styleDefault();
+    }
+
     getInvite() {
         this.defaultInvite = this.envName === 'prod' ? 'nau'
             : this.envName === 'test' ? '5a4' : '59c';
