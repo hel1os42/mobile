@@ -3,7 +3,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, App, NavController, NavParams, PopoverController, Platform, ViewController } from 'ionic-angular';
+import { AlertController, App, NavController, NavParams, Platform, PopoverController, ViewController } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { Coords } from '../../models/coords';
@@ -13,6 +13,8 @@ import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { Place } from '../../models/place';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
+import { AnalyticsService } from '../../providers/analytics.service';
+import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -22,14 +24,12 @@ import { DateTimeUtils } from '../../utils/date-time.utils';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { LimitationPopover } from '../place/limitation.popover';
+import { PlacePage } from '../place/place';
+import { UserProfilePage } from '../user-profile/user-profile';
 import { CongratulationPopover } from './congratulation.popover';
 import { LinkPopover } from './link.popover';
 import { OfferRedeemPopover } from './offerRedeem.popover';
 import { TimeframesPopover } from './timeframes.popover';
-import { AppModeService } from '../../providers/appMode.service';
-import { AnalyticsService } from '../../providers/analytics.service';
-import { UserProfilePage } from '../user-profile/user-profile';
-import { PlacePage } from '../place/place';
 
 declare var window;
 
@@ -56,7 +56,7 @@ export class OfferPage {
     onRefreshCompany: Subscription;
     onRefreshUser: Subscription;
     user: User;
-    isGettingRedeemedStatus;
+    isGettingRedemptionStatus;
 
     constructor(
         private nav: NavController,
@@ -65,7 +65,6 @@ export class OfferPage {
         private offers: OfferService,
         private app: App,
         private profile: ProfileService,
-        private alertCtrl: AlertController,
         private share: ShareService,
         private favorites: FavoritesService,
         private toast: ToastService,
@@ -223,13 +222,13 @@ export class OfferPage {
         }
     }
 
-    presentAlert() {
-        let alert = this.alertCtrl.create({
-            title: 'You are located too far',
-            buttons: ['Ok']
-        });
-        alert.present();
-    }
+    // presentAlert() {
+    //     let alert = this.alertCtrl.create({
+    //         title: 'You are located too far',
+    //         buttons: ['Ok']
+    //     });
+    //     alert.present();
+    // }
 
     openRedeemPopover() {
         this.adjust.setEvent('REDEEM_BUTTON_CLICK');
@@ -252,14 +251,14 @@ export class OfferPage {
             if (this.isTodayIncluded) {
                 // if (this.timer)
                 //     return;
-                if (this.isGettingRedeemedStatus)
+                if (this.isGettingRedemptionStatus)
                     return;
 
                 this.offers.getActivationCode(this.offer.id)
                     .subscribe((offerActivationCode: OfferActivationCode) => {
                         // if (this.timer)
                         //     return;
-                        if (this.isGettingRedeemedStatus)
+                        if (this.isGettingRedemptionStatus)
                             return;
                         // let noticePopover = this.popoverCtrl.create(NoticePopover);
                         let offerRedeemPopover = this.popoverCtrl.create(
@@ -272,12 +271,12 @@ export class OfferPage {
                         // noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                         offerRedeemPopover.onDidDismiss(() => {
                             // this.stopTimer();
-                            this.isGettingRedeemedStatus = false;
+                            this.isGettingRedemptionStatus = false;
                             this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_showqr');
                         });
 
                         // this.timer = setInterval(() => {}, 2500)
-                        this.isGettingRedeemedStatus = true;
+                        this.isGettingRedemptionStatus = true;
                         this.getRedemptionStatus(offerActivationCode.code, offerRedeemPopover);
                     })
                 // }
@@ -300,14 +299,18 @@ export class OfferPage {
         }
     }
 
-    getRedemptionStatus(code, popover) {
-        if (this.isGettingRedeemedStatus) {
+    getRedemptionStatus(code, popover, counterErr?: number) {
+        if (this.isGettingRedemptionStatus) {
+            const HTTP_STATUS_CODE_UNATHORIZED = 401;
+            let counter = counterErr;
+
             this.offers.getRedemptionStatus(code)
                 .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
                     if (offerRedemtionStatus.redemption_id) {
-                        if (this.isGettingRedeemedStatus) {
+
+                        if (this.isGettingRedemptionStatus) {
                             // this.stopTimer();
-                            this.isGettingRedeemedStatus = false;
+                            this.isGettingRedemptionStatus = false;
                             popover.dismiss();
 
                             this.offers.refreshRedeemedOffers();
@@ -339,11 +342,30 @@ export class OfferPage {
                     }
                 },
                     err => {
+                        if (!counter) counter = 0;
+                        counter++;
+                        if (err.status == HTTP_STATUS_CODE_UNATHORIZED || counter == 5) {
+                            popover.dismiss();
+                            this.isGettingRedemptionStatus = false;
+                            this.presentAlert(err.status);
+                            return;
+                        }
                         setTimeout(() => {
-                            this.getRedemptionStatus(code, popover);
+                            this.getRedemptionStatus(code, popover, counter);
                         }, 1000);
                     });
         }
+    }
+
+    presentAlert(errStatus: string) {
+        this.translate.get('UNIT')
+            .subscribe(unit => {
+                let alert = this.alert.create({
+                    title: unit['ERROR'] + ': ' + errStatus,
+                    buttons: [unit['OK']]
+                });
+                alert.present();
+            })
     }
 
     shareOffer() {
@@ -443,7 +465,7 @@ export class OfferPage {
 
     ionViewDidLeave() {
         // this.stopTimer();
-        this.isGettingRedeemedStatus = false;
+        this.isGettingRedemptionStatus = false;
         this.app.navPop();
         //
         let nav: any = this.nav;
