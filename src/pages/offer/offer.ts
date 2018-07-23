@@ -57,6 +57,7 @@ export class OfferPage {
     onRefreshUser: Subscription;
     user: User;
     isGettingRedemptionStatus;
+    HTTP_STATUS_CODE_UNATHORIZED = 401;
 
     constructor(
         private nav: NavController,
@@ -88,6 +89,7 @@ export class OfferPage {
         this.distanceObj = this.navParams.get('distanceObj');
         this.coords = this.navParams.get('coords');
         this.user = this.navParams.get('user');
+
         if (!this.user) {
             this.profile.get(true, false)
                 .subscribe(user => this.user = user);
@@ -151,8 +153,7 @@ export class OfferPage {
             this.isTodayIncluded = timeframe.isIncluded;
             this.todayTimeframe = timeframe.day;
             this.timeframes = timeframe.timeFrames;
-        }
-        else {
+        } else {
             this.isTodayIncluded = true;
         }
     }
@@ -164,15 +165,16 @@ export class OfferPage {
             let split = event.target.href.slice(event.target.href.length - 1);
             let host: string;
             let href: string;
+
             if (split && split === '#') {
                 let link = this.links.find(link => link.title === title);
                 href = link.href;
                 host = link.host;
-            }
-            else {
+            } else {
                 href = event.target.href;
                 host = event.target.host;
             }
+
             if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
                 if (this.links.filter(link => link.title === title).length == 0) {
                     this.links.push({
@@ -190,12 +192,10 @@ export class OfferPage {
                         linkPopover.present();
                         linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
                     })
-            }
-            else {
+            } else {
                 this.browser.create(href, '_system');
             }
-        }
-        else return;
+        } else return;
     }
 
     getStars(star: number) {
@@ -213,14 +213,12 @@ export class OfferPage {
         }
     }
 
-    disable() {
-        if (this.offer.radius < this.distance) {//to do add delivery etc.
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+    // disable() {
+    //     if (this.offer.radius < this.distance) {//to do add delivery etc.
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     // presentAlert() {
     //     let alert = this.alertCtrl.create({
@@ -232,6 +230,7 @@ export class OfferPage {
 
     openRedeemPopover() {
         this.adjust.setEvent('REDEEM_BUTTON_CLICK');
+
         if (this.platform.is('cordova') && this.appMode.getEnvironmentMode() === 'prod') {
             let label = `user_phone: ${this.user.phone},
             user_coords: (${this.user.latitude},${this.user.longitude}), 
@@ -283,8 +282,7 @@ export class OfferPage {
                 // else {
                 //     this.presentAlert()
                 // }
-            }
-            else {
+            } else {
                 let popover = this.popoverCtrl.create(TimeframesPopover, {
                     timeFrames: this.timeframes,
                     label: this.offer.label,
@@ -292,17 +290,17 @@ export class OfferPage {
                 });
                 popover.present();
             }
-        }
-        else {
+        } else {
             let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: this.offer, user: this.user });
             limitationPopover.present();
         }
     }
 
-    getRedemptionStatus(code, popover, counterErr?: number) {
+    // getRedemptionStatus(code, popover, counterErr?: number) {
+    getRedemptionStatus(code, popover) {
         if (this.isGettingRedemptionStatus) {
-            const HTTP_STATUS_CODE_UNATHORIZED = 401;
-            let counter = counterErr;
+
+            // let counter = counterErr;
 
             this.offers.getRedemptionStatus(code)
                 .subscribe((offerRedemtionStatus: OfferRedemtionStatus) => {
@@ -334,39 +332,40 @@ export class OfferPage {
                                 }
                             });
                         }
-                    }
-                    else {
+                    } else {
                         setTimeout(() => {
                             this.getRedemptionStatus(code, popover);
                         }, 1000);
                     }
                 },
                     err => {
-                        if (!counter) counter = 0;
-                        counter++;
-                        if (err.status == HTTP_STATUS_CODE_UNATHORIZED || counter == 5) {
+                        // if (!counter) counter = 0;
+                        // counter++;
+                        // if (err.status == HTTP_STATUS_CODE_UNATHORIZED || counter == 5) {
+                        if (err.status == this.HTTP_STATUS_CODE_UNATHORIZED) {
                             popover.dismiss();
                             this.isGettingRedemptionStatus = false;
-                            this.presentAlert(err.status);
+                            // this.presentAlert(err.status);
                             return;
                         }
                         setTimeout(() => {
-                            this.getRedemptionStatus(code, popover, counter);
+                            // this.getRedemptionStatus(code, popover, counter);
+                            this.getRedemptionStatus(code, popover);
                         }, 1000);
                     });
         }
     }
 
-    presentAlert(errStatus: string) {
-        this.translate.get('UNIT')
-            .subscribe(unit => {
-                let alert = this.alert.create({
-                    title: unit['ERROR'] + ': ' + errStatus,
-                    buttons: [unit['OK']]
-                });
-                alert.present();
-            })
-    }
+    // presentAlert(errStatus: string) {
+    //     this.translate.get('UNIT')
+    //         .subscribe(unit => {
+    //             let alert = this.alert.create({
+    //                 title: unit['ERROR'] + ': ' + errStatus,
+    //                 buttons: [unit['OK']]
+    //             });
+    //             alert.present();
+    //         })
+    // }
 
     shareOffer() {
         if (this.user && this.user.invite_code && this.company.id && this.offer) {
@@ -406,8 +405,7 @@ export class OfferPage {
                                 })
                         })
                 })
-        }
-        else return;
+        } else return;
     }
 
     getDescription(str) {
