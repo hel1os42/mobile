@@ -32,10 +32,12 @@ export class FilterPopover {
         let step = this.radius / 1000 > 1
             ? Math.round(this.radius / 1000)
             : Math.round(this.radius / 1000 * 100) / 100;
+
         if (!this.STEPS.find(item => item == step)) {
             this.STEPS.push(step);
             this.STEPS = _.sortBy(this.STEPS);
         }
+        
         this.lengthSteps = this.STEPS.length - 1;
         for (let i = 0; i < this.STEPS.length; i++) {
             if (Math.round(radius / 1000) == this.STEPS[i] || Math.round(this.radius / 1000 * 100) / 100 == this.STEPS[i]) {
@@ -92,8 +94,7 @@ export class FilterPopover {
             });
             this.types;
             this.specialities;
-        }
-        else if (type && type.isSelected && this.specialities.length > 0) {
+        } else if (type && type.isSelected && this.specialities.length > 0) {
             type.specialities.forEach(item => {
                 this.specialities.forEach(spec => {
                     if (item.slug === spec.slug) {
