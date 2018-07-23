@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Share } from '../models/share';
 import { StorageService } from './storage.service';
 
