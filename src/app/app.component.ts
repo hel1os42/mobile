@@ -118,6 +118,7 @@ export class MyApp {
             this.onResumeSubscription = platform.resume.subscribe(() => {
                 this.location.reset();
                 this.branchInit(platform, splashScreen, true);
+                this.network.getStatus();
             });
             // this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
             //     .subscribe(() => this.adjustInit());
