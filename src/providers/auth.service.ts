@@ -22,7 +22,7 @@ declare var cookieMaster;
 @Injectable()
 export class AuthService {
 
-    inviteCode: string = '';
+    // inviteCode: string = '';
     registerData: Register = new Register();
     onLogout = new EventEmitter();
     FACEBOOK = 'facebook';
@@ -52,7 +52,7 @@ export class AuthService {
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
         setInterval(() => {
-            this.clearCookies();
+            // this.clearCookies();
             let date = new Date();
             let time = date.valueOf();
             let tokenStart = this.storage.get('tokenStart');
@@ -60,18 +60,17 @@ export class AuthService {
             if (differ > 129600 && this.isLoggedIn()) {//36 hours
                 this.refreshToken();
             }
-        }, 120 * 1000);
-
+        }, 10 * 1000);
     }
 
-    getInviteCode() {
-        //this.inviteCode = to do
-        return this.inviteCode;
-    }
+    // getInviteCode() {
+    //     //this.inviteCode = to do
+    //     return this.inviteCode;
+    // }
 
-    setInviteCode(invite) {
-        this.inviteCode = invite;//to do
-    }
+    // setInviteCode(invite) {
+    //     this.inviteCode = invite;//to do
+    // }
 
     isLoggedIn() {
         let token = this.token.get();
@@ -204,11 +203,12 @@ export class AuthService {
     }
 
     refreshToken() {
+        this.clearCookies();
         this.api.get('auth/token', { showLoading: false })
             .subscribe(
                 token => this.token.set(token),
                 errResp => {
-                    this.token.remove('ERR_RESP_TOKEN_REFRESH');
+                    // this.token.remove('ERR_RESP_TOKEN_REFRESH');
                 });
     }
 
