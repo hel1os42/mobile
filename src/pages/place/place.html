@@ -215,7 +215,7 @@
                         <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
                         <span class="circle_num">{{ offer.referral_points_price }}</span>
                     </span>
-                    <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
+                    <span class="flex" *ngIf="offer.redemption_points_price > user?.redemption_points">
                         <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
                         <span class="circle_num">{{ offer.redemption_points_price }}</span>
                     </span>
