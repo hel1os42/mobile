@@ -167,12 +167,12 @@ export class AppErrorHandler implements ErrorHandler {
             err.message = this.userPhone 
             ? err.message + '\nuserPhone: ' + this.userPhone 
             : err.message;
-        }
-        else {
+        } else {
             err.userId = this.userId;
             err.userPhone = this.userPhone;
         }
         if (!err.url) {
+            err.message = err.message || '';
             err.message = err.message + '\nenvName: ' + this.appMode.getEnvironmentMode();
         }
         Pro.monitoring.handleNewError(err);

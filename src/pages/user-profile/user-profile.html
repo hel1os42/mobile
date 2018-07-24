@@ -41,7 +41,7 @@
 
             <span class="label label-ios points_redemptions font-75">
                 <span [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_REDEMPTIONS' | translate"></span>
-                <span>{{ user.redemption_points }}</span>
+                <span>{{ user?.redemption_points }}</span>
             </span>
         </div>
         <!--
@@ -269,7 +269,7 @@
                                                     <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
                                                     {{ offer.referral_points_price }}
                                                 </span>
-                                                <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
+                                                <span class="flex" *ngIf="offer.redemption_points_price > user?.redemption_points">
                                                     <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
                                                     {{ offer.redemption_points_price }}
                                                 </span>
