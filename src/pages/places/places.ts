@@ -1036,7 +1036,7 @@ export class PlacesPage {
         return counter != specialities.length || counter != newSpecialities.length;
     }
 
-    searchCompanies($event) {
+    searchCompanies(event) {
         this.loadCompanies(true, this.page = 1);
     }
 

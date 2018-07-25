@@ -12,20 +12,20 @@ export class SettingsPopover {
     latitude: number;
     longitude: number;
 
-    constructor(private viewCtrl: ViewController,
-                private app: App,
-                private navParams: NavParams) { 
-        
+    constructor(
+        private viewCtrl: ViewController,
+        private app: App,
+        private navParams: NavParams) {
+
         this.page = this.navParams.get('page');
         this.latitude = this.navParams.get('latitude');
         this.longitude = this.navParams.get('longitude');
 
-        }
+    }
 
     openOnboarding() {
-        this.viewCtrl.dismiss();
-            // this.app.getRootNav().setRoot(OnBoardingPage, {page: this.page, isAdvMode: true, isAdvOnBoarding: true, latitude: this.latitude, longitude: this.longitude});
-            this.app.getRootNav().setRoot(this.page, { latitude: this.latitude, longitude: this.longitude });
+        // this.viewCtrl.dismiss();
+        // this.app.getRootNav().setRoot(this.page, { latitude: this.latitude, longitude: this.longitude });
     }
 
     close() {
