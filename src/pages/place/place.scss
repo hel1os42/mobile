@@ -280,12 +280,6 @@ page-place {
         z-index: 1111111111;
     }
 
-    .item-block-nau .item.item-block.item-ios{
-        background-position: 50% 50%;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
     .block-place-offers .right-side {
         position: absolute;
         left: 0;
@@ -294,6 +288,9 @@ page-place {
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
         padding: 2vw;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
     .block-place-offers .item{

@@ -538,9 +538,6 @@ page-user-profile{
     .block-featured .item-ios [item-start] {
         margin: 0 2vw 0 0;
     }
-    .block-featured .thumb_image{
-        margin-top: 2vw;
-    }
     .block-fr {
         position: absolute;
         bottom: 2vw;
@@ -595,6 +592,21 @@ page-user-profile{
     }
     .block-slider .item-block-nau .item{
         margin-bottom: 0;
+    }
+    .block-slider .right-side {
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100%;
+    }
+    .block-slider .right-side-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 2vw;
     }
     .col{
         padding: 0;

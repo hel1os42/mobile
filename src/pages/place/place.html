@@ -166,13 +166,14 @@
         <div
             (click)="openOffer($event, offer)"
             *ngFor="let offer of offersList"
-            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-            [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}"
             tappable
             ion-item
             detail-none
             class="relative">
-            <div class="font-0 right-side relative">
+            <div
+                class="font-0 right-side relative"
+                [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
                 <div class="right-side-content">
                     <div class="smooth_transition width-88">
                         <div class="scroll_content">
@@ -193,8 +194,8 @@
                     -->
                     </div>
                 </div>
+                <div [ngClass]="offer.type" class="right-top-angle"></div>
             </div>
-            <div [ngClass]="offer.type" class="right-top-angle"></div>
             <div class="block-fr bold">
                 <div class="coupon font-10 flex">
                     <img
