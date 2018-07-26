@@ -51,7 +51,7 @@ export class PlacesPage {
     companies: Place[];
     categories: OfferCategory[] = OfferCategory.StaticList;
     childCategories: ChildCategory[];
-    selectedCategory = new OfferCategory;
+    selectedCategory = new OfferCategory();
     isMapVisible: boolean = false;
     coords: Coords;
     mapBounds;
@@ -130,12 +130,6 @@ export class PlacesPage {
 
         this.isForkMode = this.appMode.getForkMode();
         this.mapRadius = this.listRadius = this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
-
-        // this.onShareSubscription = this.share.onShare
-        //     .subscribe(resp => {
-        //         this.shareData = resp;
-        //         debugger
-        //     })
         this.shareData = this.share.get();
         this.segment = "alloffers";
 
@@ -253,10 +247,10 @@ export class PlacesPage {
                 this.categories.forEach((category) => {
                     let obj = categories.data.find(p => p.name === category.name);//temporary - code
                     category.id = obj ? obj.id : '';
-                    category.children_count = obj ? obj.children_count : undefined;
                 })
                 let i = index || 0;
                 this.selectedCategory = this.categories[i];
+                debugger;
                 this.getLocationStatus();
             },
                 err => {
@@ -418,6 +412,18 @@ export class PlacesPage {
         }
     }
 
+    getCoords(isRefresh?: boolean) {
+
+        if (this.platform.is('android')) {
+            this.diagnostic.getLocationMode()
+                .then(res => {
+                    this.getNativeCoords(res === 'high_accuracy', isRefresh);
+                });
+        } else {
+            this.getNativeCoords(false, isRefresh);
+        }
+    }
+
     getNativeCoords(isHighAccuracy: boolean, isRefresh?: boolean) {
         this.translate.get('TOAST.LOCATION_DETECTION')
             .subscribe(resp => {
@@ -492,18 +498,6 @@ export class PlacesPage {
             this.openPlace(undefined, this.shareData, true);
         }
         this.getList();
-    }
-
-    getCoords(isRefresh?: boolean) {
-
-        if (this.platform.is('android')) {
-            this.diagnostic.getLocationMode()
-                .then(res => {
-                    this.getNativeCoords(res === 'high_accuracy', isRefresh);
-                });
-        } else {
-            this.getNativeCoords(false, isRefresh);
-        }
     }
 
     getDevMode() {
@@ -642,8 +636,8 @@ export class PlacesPage {
             this.content.resize();
         }
 
-        if (typeof this.categories[0].children_count === 'undefined' || !this.coords) {
-            this.getRootCategories(false, index);
+        if (!this.selectedCategory.id) {
+            this.getRootCategories(true, index);
         } else {
 
             if (this.isFeatured) {
@@ -657,9 +651,15 @@ export class PlacesPage {
                 this.typeFilter = [];
                 this.specialityFilter = [];
             }
+
             this.search = "";
             this.selectedCategory = category;
-            this.loadCompanies(true, this.page = 1);
+
+            if (!this.coords) {
+                this.getLocationStatus();
+            } else {
+                this.loadCompanies(true, this.page = 1);
+            }
         }
     }
 
@@ -750,6 +750,7 @@ export class PlacesPage {
                         this.refresher.complete();
                         this.refresher = undefined;
                     }
+                    this.isDismissNoPlacesPopover = true;
                 });
         }
     }
@@ -1114,8 +1115,11 @@ export class PlacesPage {
     }
 
     doRefresh(refresher) {
-        if (!this.isFeatured && (typeof this.categories[0].children_count === 'undefined' || !this.coords)) {
+        if (!this.isFeatured && !this.selectedCategory.id) {
             this.getRootCategories(false);
+        } else if (!this.isFeatured && !this.coords) {
+            this.page = 1;
+            this.getLocationStatus();
         } else {
             if (this.shareData) {
                 this.shareData = undefined;
