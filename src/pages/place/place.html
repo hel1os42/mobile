@@ -163,11 +163,10 @@
         margin-top
         no-lines
         class="item-block-nau margin-top-10 block-place-offers">
-        <div
+        <ion-item
             (click)="openOffer($event, offer)"
             *ngFor="let offer of offersList"
             tappable
-            ion-item
             detail-none
             class="relative">
             <div
@@ -222,7 +221,7 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </ion-item>
     </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
