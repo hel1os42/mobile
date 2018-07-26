@@ -6,7 +6,7 @@
                     ion-col
                     *ngFor="let category of categories; let i = index"
                     [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
-                    (click)="i == 2 ? getFeatured() : selectCategory(category)">
+                    (click)="i == 2 ? getFeatured() : selectCategory(category, i)">
                     <p>
                         <img [src]="isFeatured && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
                     </p>
@@ -41,7 +41,7 @@
                     *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0"
                     src="assets/img/user_home/icon_settings_active.svg">
             </a>
-            <a (click)="toggleMap()" text-center class="searchbar-right-block">
+            <a *ngIf="coords" (click)="toggleMap()" text-center class="searchbar-right-block">
                 <div class="btn_map1" *ngIf="!isMapVisible">
                     <img src="assets/img/user_home/icon_pin_new.svg">
                     <div class="text-828282 font-10">{{ 'PAGE_PLACES.MAP' | translate }}</div>

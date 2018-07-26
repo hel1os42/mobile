@@ -157,15 +157,16 @@ export class PlacesPage {
             });
         }
 
-        this.offers.getCategories(true)
-            .subscribe(categories => {
-                this.categories.forEach((category) => {
-                    let obj = categories.data.find(p => p.name === category.name);//temporary - code
-                    category.id = obj ? obj.id : '';
-                })
-                this.selectedCategory = this.categories[0];
-                this.getLocationStatus();
-            });
+        // this.offers.getCategories(true)
+        //     .subscribe(categories => {
+        //         this.categories.forEach((category) => {
+        //             let obj = categories.data.find(p => p.name === category.name);//temporary - code
+        //             category.id = obj ? obj.id : '';
+        //         })
+        //         this.selectedCategory = this.categories[0];
+        //         this.getLocationStatus();
+        //     });
+        this.getRootCategories(true);
 
         this.onRefreshFavoritesPlaces = this.favorites.onRefreshPlaces
             .subscribe((resp) => {
@@ -244,6 +245,27 @@ export class PlacesPage {
                 this.changeDetectorRef.detectChanges();
             })
 
+    }
+
+    getRootCategories(isLoading: boolean, index?: number) {
+        this.offers.getCategories(isLoading)
+            .subscribe(categories => {
+                this.categories.forEach((category) => {
+                    let obj = categories.data.find(p => p.name === category.name);//temporary - code
+                    category.id = obj ? obj.id : '';
+                    category.children_count = obj ? obj.children_count : undefined;
+                })
+                let i = index || 0;
+                this.selectedCategory = this.categories[i];
+                this.getLocationStatus();
+            },
+                err => {
+                    this.isRefreshLoading = false;
+                    if (this.refresher) {
+                        this.refresher.complete();
+                        this.refresher = undefined;
+                    }
+                });
     }
 
     onMapReady(map: Map) {
@@ -614,25 +636,31 @@ export class PlacesPage {
         return this.selectedCategory && this.selectedCategory.id === category.id && !this.isFeatured;
     }
 
-    selectCategory(category: OfferCategory) {
-        // this.content.scrollToTop();
+    selectCategory(category: OfferCategory, index: number) {
         if (this.isFeatured) {
-            this.isChangedCategory = true;
             this.isFeatured = false;
             this.content.resize();
+        }
+
+        if (typeof this.categories[0].children_count === 'undefined' || !this.coords) {
+            this.getRootCategories(false, index);
         } else {
-            this.isChangedCategory = this.selectedCategory.id !== category.id;
-        }
 
-        if (this.isChangedCategory) {
-            this.tagFilter = [];
-            this.typeFilter = [];
-            this.specialityFilter = [];
-        }
-        this.search = "";
-        this.selectedCategory = category;
-        this.loadCompanies(true, this.page = 1);
+            if (this.isFeatured) {
+                this.isChangedCategory = true;
+            } else {
+                this.isChangedCategory = this.selectedCategory.id !== category.id;
+            }
 
+            if (this.isChangedCategory) {
+                this.tagFilter = [];
+                this.typeFilter = [];
+                this.specialityFilter = [];
+            }
+            this.search = "";
+            this.selectedCategory = category;
+            this.loadCompanies(true, this.page = 1);
+        }
     }
 
     getFeatured() {
@@ -1086,23 +1114,23 @@ export class PlacesPage {
     }
 
     doRefresh(refresher) {
-        if (this.shareData) {
-            this.shareData = undefined;
-            this.share.remove();
-        }
-        if (this.isFeatured) {
-            this.featuredPage = 1;
+        if (!this.isFeatured && (typeof this.categories[0].children_count === 'undefined' || !this.coords)) {
+            this.getRootCategories(false);
         } else {
-            this.page = 1;
-        }
-        // this.isRevertCoords = true;
-        this.isRefreshLoading = true;
-        this.getLocation(false, true);
-        this.refresher = refresher;
-        // setInterval(() => {
-        //     refresher.complete();
+            if (this.shareData) {
+                this.shareData = undefined;
+                this.share.remove();
+            }
 
-        // }, 300);
+            if (this.isFeatured) {
+                this.featuredPage = 1;
+            } else {
+                this.page = 1;
+            }
+            this.getLocation(false, true);
+        }
+        this.isRefreshLoading = true;
+        this.refresher = refresher;
     }
 
     presentAndroidConfirm() {
