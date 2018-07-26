@@ -39,12 +39,11 @@ export class ProfileService {
                 }
                 this.user = user;
                 this.onRefresh.emit(user);
-            });
+            },
+                err => { });
             return obs;
         }
-        else {
-            return Observable.of(this.user);
-        }
+        return Observable.of(this.user);
     }
 
     getReferrals(page) {
@@ -56,7 +55,7 @@ export class ProfileService {
     getWithAccounts(showLoading?: boolean) {
         let obs = this.api.get('profile?with=accounts', { showLoading: showLoading });
         obs.subscribe(user => this.user = user),
-        err => { return };
+            err => { };
         return obs;
     }
 
