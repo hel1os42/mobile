@@ -200,8 +200,8 @@ export class BookmarksPage {
             // }
             promise.then(resp => {
                 this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
+                    lat: resp.coords.lat,
+                    lng: resp.coords.lng
                 };
                 this.getLists(isPlaces, isOffers);
             })
@@ -231,8 +231,8 @@ export class BookmarksPage {
             this.location.getCache()
                 .then(resp => {
                     this.coords = {
-                        lat: resp.coords.latitude,
-                        lng: resp.coords.longitude
+                        lat: resp.coords.lat,
+                        lng: resp.coords.lng
                     };
                     this.getLists(isPlaces, isOffers);
                 })

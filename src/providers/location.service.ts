@@ -88,14 +88,13 @@ export class LocationService {
         let coords;
         if (this.geoposition && this.geoposition.coords && this.geoposition.coords.latitude) {
             coords = {
-                latitude: this.geoposition.coords.latitude,
-                longitude: this.geoposition.coords.longitude
+                lat: this.geoposition.coords.latitude,
+                lng: this.geoposition.coords.longitude
             };
-        }
-        else {
+        } else {
             coords = {
-                latitude: this.profileCoords.lat,
-                longitude: this.profileCoords.lng
+                lat: this.profileCoords.lat,
+                lng: this.profileCoords.lng
             }
 
         }

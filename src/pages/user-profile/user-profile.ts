@@ -176,8 +176,8 @@ export class UserProfilePage {
         this.location.getCache()
             .then(resp => {
                 this.coords = {
-                    lat: resp.coords.latitude,
-                    lng: resp.coords.longitude
+                    lat: resp.coords.lat,
+                    lng: resp.coords.lng
                 };
                 this.getAllowOffersList();
                 this.getOffersList();
