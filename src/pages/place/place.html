@@ -170,7 +170,7 @@
             detail-none
             class="relative">
             <div
-                class="font-0 right-side relative"
+                class="font-0 right-side"
                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
                 [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
                 <div class="right-side-content">
@@ -206,7 +206,7 @@
                         [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
                         class="featured_right"
                         src="assets/img/splash_screen/tab-icon6_active.svg">
-                    <span class="margin-left-2vw">{{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: 1/10</span>
+                    <span>{{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: 1/10</span>
                 </div>
                 <div
                     class="block-right font-14 flex"

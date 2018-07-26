@@ -531,7 +531,8 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
     border-radius: 0;
     height: 23vw;
     width: 23vw;
-    background-size: cover, 70%;
+    /* background-size: cover, 70%; */
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
