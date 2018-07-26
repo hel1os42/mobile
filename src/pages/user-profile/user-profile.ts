@@ -218,11 +218,12 @@ export class UserProfilePage {
 
     getSegment() {
         let isSegmented = this.isSegmented;
-        this.segment = this.allowPremiumOffers && this.allowPremiumOffers.length > 0
-            ? 'allow'
-            : this.premiumOffers && this.premiumOffers.length > 0
-                ? 'all'
-                : 'allow';
+        // this.segment = this.premiumOffers && this.premiumOffers.length > 0
+        //     ? 'all'
+        //     : this.allowPremiumOffers && this.allowPremiumOffers.length > 0
+        //         ? 'allow'
+        //         : 'all';
+        this.segment = 'all';
         if (isSegmented) {
             this.showArrow();
         }
