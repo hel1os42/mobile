@@ -608,7 +608,9 @@
         "GET_NEW_OFFERS_NEARBY" : "Get new offers nearby for you place and improve your level",
         "NAU" : "nau",
         "USERS" : "users",
-        "LOGOUT" : "logout"
+        "LOGOUT" : "logout",
+        "ALL_OFFERS" : "All offers",
+        "AVAILABLE" : "Available"
     },
 
     "PAGE_USER-TASKS" : {

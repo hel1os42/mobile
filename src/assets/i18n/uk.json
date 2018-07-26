@@ -609,7 +609,9 @@
         "GET_NEW_OFFERS_NEARBY" : "Підвищуйте рівень, користуючись акціями",
         "NAU" : "NAU",
         "USERS" : "друзів",
-        "LOGOUT" : "Вихід"
+        "LOGOUT" : "Вихід",
+        "ALL_OFFERS" : "Всі акції",
+        "AVAILABLE" : "Доступні"
     },
 
     "PAGE_USER-TASKS" : {

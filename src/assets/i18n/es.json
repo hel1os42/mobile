@@ -609,7 +609,9 @@
         "GET_NEW_OFFERS_NEARBY" : "Experimente nuevas ofertas cercanas y mejore su nivel",
         "NAU" : "nau",
         "USERS" : "usuarios",
-        "LOGOUT" : "cerrar sesión"
+        "LOGOUT" : "cerrar sesión",
+        "ALL_OFFERS" : "Todas las ofertas",
+        "AVAILABLE" : "Disponible"
     },
 
     "PAGE_USER-TASKS" : {

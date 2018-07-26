@@ -609,7 +609,9 @@
         "GET_NEW_OFFERS_NEARBY" : "Улучшайте уровень, пользуясь акциями рядом с вами",
         "NAU" : "NAU",
         "USERS" : "друзей",
-        "LOGOUT" : "Выйти"
+        "LOGOUT" : "Выйти",
+        "ALL_OFFERS" : "Все акции",
+        "AVAILABLE" : "Доступные"
     },
 
     "PAGE_USER-TASKS" : {
