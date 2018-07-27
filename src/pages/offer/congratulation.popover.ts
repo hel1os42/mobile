@@ -9,6 +9,7 @@ import { TestimonialsService } from '../../providers/testimonials.service';
 import { Subscription } from 'rxjs';
 import { Keyboard } from '@ionic-native/keyboard';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastService } from '../../providers/toast.service';
 
 @Component({
     selector: 'congratulation-popover-component',
@@ -35,7 +36,8 @@ export class CongratulationPopover {
         private keyboard: Keyboard,
         private changeDetectorRef: ChangeDetectorRef,
         private platform: Platform,
-        private translate: TranslateService) {
+        private translate: TranslateService,
+        private toast: ToastService) {
 
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
@@ -75,8 +77,10 @@ export class CongratulationPopover {
         this.testimonials.post(this.company.id, testimonial)
             .subscribe(resp => {
                 // let status = resp ? resp.status : '';
-                this.viewCtrl.dismiss({ isAdded: true });
+                // this.viewCtrl.dismiss({ isAdded: true });  
+                this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
             })
+        this.viewCtrl.dismiss();
     }
 
     shareOffer() {

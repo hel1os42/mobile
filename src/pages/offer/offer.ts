@@ -84,6 +84,7 @@ export class OfferPage {
         if (this.share.get()) {
             this.share.remove();
         }
+
         this.company = this.navParams.get('company');
         this.offer = this.navParams.get('offer');
         this.distanceObj = this.navParams.get('distanceObj');
@@ -94,6 +95,7 @@ export class OfferPage {
             this.profile.get(true, false)
                 .subscribe(user => this.user = user);
         }
+
         this.offers.get(this.offer.id, true)
             .subscribe(offer => {
                 if (offer.timeframes) {
@@ -323,9 +325,9 @@ export class OfferPage {
                             );
                             congratulationPopover.present();
                             congratulationPopover.onDidDismiss(data => {
-                                if (data && data.isAdded) {
-                                    this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
-                                }
+                                // if (data && data.isAdded) {
+                                //     this.toast.showNotification('TOAST.ADDED_TO_TESTIMONIALS');
+                                // }
                                 this.offers.refreshPlace(this.company.id);
                                 if (this.offer.is_featured) {
                                     this.offers.refreshFeaturedOffers(this.coords.lat, this.coords.lng);
@@ -374,6 +376,7 @@ export class OfferPage {
                     const Branch = window['Branch'];
                     this.profile.get(false)
                         .subscribe(profile => {
+
                             let properties = {
                                 canonicalIdentifier: `?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
                                 canonicalUrl: `${this.branchDomain}?invite_code=${profile.invite_code}&page=place&placeId=${this.company.id}&offerId=${this.offer.id}`,
@@ -390,6 +393,7 @@ export class OfferPage {
                                     offerId: this.offer.id
                                 }
                             };
+
                             var branchUniversalObj = null;
                             Branch.createBranchUniversalObject(properties)
                                 .then(res => {
@@ -405,7 +409,7 @@ export class OfferPage {
                                 })
                         })
                 })
-        } else return;
+        }
     }
 
     getDescription(str) {
