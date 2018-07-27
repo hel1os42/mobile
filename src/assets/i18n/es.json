@@ -611,7 +611,8 @@
         "USERS" : "usuarios",
         "LOGOUT" : "cerrar sesión",
         "ALL_OFFERS" : "Todas las ofertas",
-        "AVAILABLE" : "Disponible"
+        "AVAILABLE" : "Disponible",
+        "SLIDER_TITLE" : "Usen puntos para recibir cupones de regalos"
     },
 
     "PAGE_USER-TASKS" : {

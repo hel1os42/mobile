@@ -610,7 +610,8 @@
         "USERS" : "users",
         "LOGOUT" : "logout",
         "ALL_OFFERS" : "All offers",
-        "AVAILABLE" : "Available"
+        "AVAILABLE" : "Available",
+        "SLIDER_TITLE" : "Используйте баллы для получения подарочных купонов"
     },
 
     "PAGE_USER-TASKS" : {
