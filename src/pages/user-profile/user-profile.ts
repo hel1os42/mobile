@@ -29,6 +29,7 @@ import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
 import { FavoritesService } from '../../providers/favorites.service';
+import { PointsPopover } from './points.popover';
 
 @Component({
     selector: 'page-user-profile',
@@ -406,30 +407,6 @@ export class UserProfilePage {
         }
     }
 
-
-    openLinkPopover(event) {
-        if (this.isDismissLinkPopover) {
-            this.isDismissLinkPopover = false;
-            let host: string = event.target.host;
-            let href: string = event.target.href;
-            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
-                event.target.href = '#';
-                let endpoint = href.split('places')[1];
-                this.offer.getLink(endpoint)
-                    .subscribe(link => {
-                        event.target.href = href;
-                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
-                        linkPopover.present();
-                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
-                    })
-            }
-            else {
-                this.browser.create(href, '_system');
-            }
-        }
-        else return;
-    }
-
     openSettings() {
         this.nav.push(SettingsPage, { isAdvMode: false, user: this.user });
     }
@@ -458,6 +435,34 @@ export class UserProfilePage {
 
     openCreateUserProfilePage() {
         this.nav.push(CreateUserProfilePage, { user: this.user });
+    }
+
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offer.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            }
+            else {
+                this.browser.create(href, '_system');
+            }
+        }
+        else return;
+    }
+
+    openPointsPopover(points: number, mode: string) {
+        let pointsPopover = this.popoverCtrl.create(PointsPopover);
+        pointsPopover.present();
     }
 
     dismissLoading() {
