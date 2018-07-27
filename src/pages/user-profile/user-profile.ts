@@ -257,17 +257,14 @@ export class UserProfilePage {
             this.isLeftArrowVisible = false;
             if (this.allowPremiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
-            }
-            else {
+            } else {
                 this.isRightArrowVisible = false;
             }
-        }
-        else if (this.segment === 'all') {
+        } else if (this.segment === 'all') {
             this.isLeftArrowVisible = false;
             if (this.premiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
-            }
-            else {
+            } else {
                 this.isRightArrowVisible = false;
             }
         }
@@ -295,8 +292,7 @@ export class UserProfilePage {
         //   let length = event.length();
         if (event.isBeginning()) {
             this.isLeftArrowVisible = false;
-        }
-        else {
+        } else {
             this.isLeftArrowVisible = true;
         }
         if (event.isEnd()) {
@@ -308,8 +304,7 @@ export class UserProfilePage {
 
                 this.addOffers(element.id, event);
             }
-        }
-        else {
+        } else {
             this.isRightArrowVisible = true;
             event.lockSwipeToNext(false);
         }
@@ -338,8 +333,7 @@ export class UserProfilePage {
                         event.lockSwipeToNext(false);
                         this.isRightArrowVisible = true;
                     });
-            }
-            else if (elementId === 'offersSlides') {
+            } else if (elementId === 'offersSlides') {
                 this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.MAX_POINTS, this.MAX_POINTS, ++this.offersPage, true)//to do
                     .subscribe(resp => {
                         this.premiumOffers = [...this.premiumOffers, ...resp.data];
@@ -348,16 +342,14 @@ export class UserProfilePage {
                         this.isRightArrowVisible = true;
                     });
             }
-        }
-        else {
+        } else {
             if (event.length() > 1) {
                 if (event.loop === false) {
                     event.loop = true;
                 }
                 event.lockSwipeToNext(false);
                 this.isRightArrowVisible = true;
-            }
-            else {
+            } else {
                 this.isRightArrowVisible = false;
             }
         }
@@ -375,8 +367,7 @@ export class UserProfilePage {
             }
             this.stopTimer();
             this.isClick = false;
-        }
-        else {
+        } else {
             this.isClick = true;
             this.timer = setTimeout(() => {
                 this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
@@ -392,12 +383,10 @@ export class UserProfilePage {
                 if (offer && offer.redemption_access_code) {
                     let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
                     limitationPopover.present();
-                }
-                else {
+                } else {
                     if (offer && event && event.target.localName === 'a') {
                         this.openLinkPopover(event);
-                    }
-                    else {
+                    } else {
                         this.nav.push(PlacePage, params);
                     }
 
@@ -452,12 +441,10 @@ export class UserProfilePage {
                         linkPopover.present();
                         linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
                     })
-            }
-            else {
+            } else {
                 this.browser.create(href, '_system');
             }
         }
-        else return;
     }
 
     openPointsPopover(points: number, mode: string) {
@@ -505,7 +492,6 @@ export class UserProfilePage {
                         })
                 })
         }
-        else return;
     }
 
     logout() {
