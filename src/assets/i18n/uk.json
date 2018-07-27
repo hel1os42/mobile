@@ -611,7 +611,8 @@
         "USERS" : "друзів",
         "LOGOUT" : "Вихід",
         "ALL_OFFERS" : "Всі акції",
-        "AVAILABLE" : "Доступні"
+        "AVAILABLE" : "Доступні",
+        "SLIDER_TITLE" : "Используйте баллы для получения подарочных купонов"
     },
 
     "PAGE_USER-TASKS" : {

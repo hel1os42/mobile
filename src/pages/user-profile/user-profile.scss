@@ -635,3 +635,17 @@ page-user-profile{
     height: calc(100% - 43vw);
     margin-bottom: 5%;
 }
+
+points-popover-component {
+    .modal_content {
+        padding-bottom: 7vw;
+        padding-left: 7vw;
+        padding-right: 7vw;
+        padding-top: 7vw;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    a {
+        color: #FF5A00;
+    }
+}
