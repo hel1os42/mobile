@@ -36,15 +36,15 @@
 -->
             <span
                 (click)="openPointsPopover(user.referral_points, 'referral')"
-                tappable 
+                tappable
                 class="label label-ios points_friens font-75">
                 <span [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_FRIENDS' | translate"></span>
                 <span>{{ user?.referral_points }}</span>
             </span>
 
-            <span 
+            <span
                 (click)="openPointsPopover(user.redemption_points, 'redemption')"
-                tappable 
+                tappable
                 class="label label-ios points_redemptions font-75">
                 <span [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_REDEMPTIONS' | translate"></span>
                 <span>{{ user?.redemption_points }}</span>
@@ -149,11 +149,17 @@
         </ion-row>
     </ion-grid> -->
         <ion-grid
-            *ngIf="(allowPremiumOffers && allowPremiumOffers.length > 0) 
+            *ngIf="(allowPremiumOffers && allowPremiumOffers.length > 0)
                     || (premiumOffers && premiumOffers.length > 0)"
             text-center
             class="block-slider">
-            <div class="font-14 text-3E4B5D" padding-left padding-right padding-top>Используйте баллы для получения подарочных купонов:</div>
+            <div
+                class="font-14 text-3E4B5D"
+                padding-left
+                padding-right
+                padding-top>
+                Используйте баллы для получения подарочных купонов:
+            </div>
             <ion-row>
                 <ion-col col-1>
                 </ion-col>
@@ -273,7 +279,7 @@
                                                 /{{ offer.max_count }}
                                             </div>
                                             <div
-                                                *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) 
+                                                *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0)
                                                         && (offer.referral_points_price || offer.redemption_points_price))"
                                                 class="block-right font-14 flex"
                                                 text-right>
@@ -374,7 +380,7 @@
                                             /{{ offer.max_count }}
                                         </div>
                                         <div
-                                            *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) 
+                                            *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0)
                                                     && (offer.referral_points_price || offer.redemption_points_price))"
                                             class="block-right font-14 flex"
                                             text-right>
@@ -396,7 +402,7 @@
                     </ion-slide>
                 </ion-slides>
                 <div margin-bottom
-                    *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0)) 
+                    *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0))
                             || (segment === 'all' && (!premiumOffers || premiumOffers.length == 0)))"
                     class="slider-empty">
                 </div>
