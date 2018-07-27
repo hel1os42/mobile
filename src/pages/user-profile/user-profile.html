@@ -150,7 +150,8 @@
     </ion-grid> -->
         <div class="font-14 text-3E4B5D" padding-left padding-right padding-top>Используйте баллы для получения подарочных купонов:</div>
         <ion-grid
-            *ngIf="(allowPremiumOffers && allowPremiumOffers.length > 0) || (premiumOffers && premiumOffers.length > 0)"
+            *ngIf="(allowPremiumOffers && allowPremiumOffers.length > 0) 
+                    || (premiumOffers && premiumOffers.length > 0)"
             text-center
             class="block-slider">
             <ion-row>
@@ -271,7 +272,8 @@
                                                 /{{ offer.max_count }}
                                             </div>
                                             <div
-                                                *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
+                                                *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) 
+                                                        && (offer.referral_points_price || offer.redemption_points_price))"
                                                 class="block-right font-14 flex"
                                                 text-right>
                                                 <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
@@ -325,17 +327,17 @@
                                         <div class="margin-top-1vw">
                                             <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
                                             <span class="font-75 text-828282">
-                                                    {{ getDistance(offer.latitude, offer.longitude).distance }}
-                                                    {{ getDistance(offer.latitude, offer.longitude).key | translate}}
-                                                </span>
+                                                {{ getDistance(offer.latitude, offer.longitude).distance }}
+                                                {{ getDistance(offer.latitude, offer.longitude).key | translate}}
+                                            </span>
                                         </div>
                                         <div class="margin-top-1vw">
                                             <img src="assets/img/user_home/icon_small_user.svg">
                                             <span class="font-75 text-828282">
-                                                    {{ offer?.account.owner.place.redemptions_count !== undefined
-                                                        ? offer?.account.owner.place.redemptions_count
-                                                        : offer?.account.owner.place.testimonials_count}}
-                                                </span>
+                                                {{ offer?.account.owner.place.redemptions_count !== undefined
+                                                    ? offer?.account.owner.place.redemptions_count
+                                                    : offer?.account.owner.place.testimonials_count}}
+                                            </span>
                                         </div>
                                     </div>
                                 </ion-avatar>
@@ -371,14 +373,15 @@
                                             /{{ offer.max_count }}
                                         </div>
                                         <div
-                                            *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
+                                            *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) 
+                                                    && (offer.referral_points_price || offer.redemption_points_price))"
                                             class="block-right font-14 flex"
                                             text-right>
                                                 <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
                                                     <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
                                                     {{ offer.referral_points_price }}
                                                 </span>
-                                            <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
+                                                <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
                                                     <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
                                                     {{ offer.redemption_points_price }}
                                                 </span>
@@ -392,7 +395,8 @@
                     </ion-slide>
                 </ion-slides>
                 <div margin-bottom
-                    *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0)) || (segment === 'all' && (!premiumOffers || premiumOffers.length == 0)))"
+                    *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0)) 
+                            || (segment === 'all' && (!premiumOffers || premiumOffers.length == 0)))"
                     class="slider-empty">
                 </div>
             </ion-col>
