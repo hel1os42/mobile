@@ -29,6 +29,7 @@ import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
 import { FavoritesService } from '../../providers/favorites.service';
+import { PointsPopover } from './points.popover';
 
 @Component({
     selector: 'page-user-profile',
@@ -256,17 +257,14 @@ export class UserProfilePage {
             this.isLeftArrowVisible = false;
             if (this.allowPremiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
-            }
-            else {
+            } else {
                 this.isRightArrowVisible = false;
             }
-        }
-        else if (this.segment === 'all') {
+        } else if (this.segment === 'all') {
             this.isLeftArrowVisible = false;
             if (this.premiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
-            }
-            else {
+            } else {
                 this.isRightArrowVisible = false;
             }
         }
@@ -294,8 +292,7 @@ export class UserProfilePage {
         //   let length = event.length();
         if (event.isBeginning()) {
             this.isLeftArrowVisible = false;
-        }
-        else {
+        } else {
             this.isLeftArrowVisible = true;
         }
         if (event.isEnd()) {
@@ -307,8 +304,7 @@ export class UserProfilePage {
 
                 this.addOffers(element.id, event);
             }
-        }
-        else {
+        } else {
             this.isRightArrowVisible = true;
             event.lockSwipeToNext(false);
         }
@@ -337,8 +333,7 @@ export class UserProfilePage {
                         event.lockSwipeToNext(false);
                         this.isRightArrowVisible = true;
                     });
-            }
-            else if (elementId === 'offersSlides') {
+            } else if (elementId === 'offersSlides') {
                 this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.MAX_POINTS, this.MAX_POINTS, ++this.offersPage, true)//to do
                     .subscribe(resp => {
                         this.premiumOffers = [...this.premiumOffers, ...resp.data];
@@ -347,16 +342,14 @@ export class UserProfilePage {
                         this.isRightArrowVisible = true;
                     });
             }
-        }
-        else {
+        } else {
             if (event.length() > 1) {
                 if (event.loop === false) {
                     event.loop = true;
                 }
                 event.lockSwipeToNext(false);
                 this.isRightArrowVisible = true;
-            }
-            else {
+            } else {
                 this.isRightArrowVisible = false;
             }
         }
@@ -374,8 +367,7 @@ export class UserProfilePage {
             }
             this.stopTimer();
             this.isClick = false;
-        }
-        else {
+        } else {
             this.isClick = true;
             this.timer = setTimeout(() => {
                 this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
@@ -391,12 +383,10 @@ export class UserProfilePage {
                 if (offer && offer.redemption_access_code) {
                     let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
                     limitationPopover.present();
-                }
-                else {
+                } else {
                     if (offer && event && event.target.localName === 'a') {
                         this.openLinkPopover(event);
-                    }
-                    else {
+                    } else {
                         this.nav.push(PlacePage, params);
                     }
 
@@ -404,30 +394,6 @@ export class UserProfilePage {
                 this.isClick = false;
             }, 300);
         }
-    }
-
-
-    openLinkPopover(event) {
-        if (this.isDismissLinkPopover) {
-            this.isDismissLinkPopover = false;
-            let host: string = event.target.host;
-            let href: string = event.target.href;
-            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
-                event.target.href = '#';
-                let endpoint = href.split('places')[1];
-                this.offer.getLink(endpoint)
-                    .subscribe(link => {
-                        event.target.href = href;
-                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
-                        linkPopover.present();
-                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
-                    })
-            }
-            else {
-                this.browser.create(href, '_system');
-            }
-        }
-        else return;
     }
 
     openSettings() {
@@ -458,6 +424,32 @@ export class UserProfilePage {
 
     openCreateUserProfilePage() {
         this.nav.push(CreateUserProfilePage, { user: this.user });
+    }
+
+    openLinkPopover(event) {
+        if (this.isDismissLinkPopover) {
+            this.isDismissLinkPopover = false;
+            let host: string = event.target.host;
+            let href: string = event.target.href;
+            if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
+                event.target.href = '#';
+                let endpoint = href.split('places')[1];
+                this.offer.getLink(endpoint)
+                    .subscribe(link => {
+                        event.target.href = href;
+                        let linkPopover = this.popoverCtrl.create(LinkPopover, { link: link });
+                        linkPopover.present();
+                        linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
+                    })
+            } else {
+                this.browser.create(href, '_system');
+            }
+        }
+    }
+
+    openPointsPopover(points: number, mode: string) {
+        let pointsPopover = this.popoverCtrl.create(PointsPopover);
+        pointsPopover.present();
     }
 
     dismissLoading() {
@@ -500,7 +492,6 @@ export class UserProfilePage {
                         })
                 })
         }
-        else return;
     }
 
     logout() {

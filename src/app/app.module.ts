@@ -53,6 +53,7 @@ import { FilterPopover } from '../pages/places/filter.popover';
 import { SettingsChangePhonePage } from '../pages/settings-change-phone/settings-change-phone';
 import { SettingsPage } from '../pages/settings/settings';
 import { SettingsPopover } from '../pages/settings/settings.popover';
+import { PointsPopover } from '../pages/user-profile/points.popover';
 import { SignUpCodePage } from '../pages/signup-code/signup-code';
 import { SignUpPage } from '../pages/signup/signup';
 import { SplashInfoPage } from '../pages/splash-info/splash-info';
@@ -234,6 +235,7 @@ export class AppErrorHandler implements ErrorHandler {
         TestimonialPopover,
         ComplaintPopover,
         LimitationPopover,
+        PointsPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
@@ -323,6 +325,7 @@ export class AppErrorHandler implements ErrorHandler {
         TestimonialPopover,
         ComplaintPopover,
         LimitationPopover,
+        PointsPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
