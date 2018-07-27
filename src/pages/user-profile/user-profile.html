@@ -142,15 +142,16 @@
             </ion-col>
         </ion-row>
     </ion-grid> -->
-        <div class="font-14 text-3E4B5D" padding-left padding-right padding-top>Используйте баллы для получения подарочных купонов:</div>
         <ion-grid
             *ngIf="(allowPremiumOffers && allowPremiumOffers.length > 0) || (premiumOffers && premiumOffers.length > 0)"
             text-center
             class="block-slider">
+            <div class="font-14 text-3E4B5D" padding-left padding-right padding-top>Используйте баллы для получения подарочных купонов:</div>
             <ion-row>
                 <ion-col col-1>
                 </ion-col>
                 <ion-col col-10 align-self-center>
+
                     <ion-segment
                         (ionChange)="showArrow()"
                         [(ngModel)]="segment"
@@ -158,14 +159,14 @@
                         margin-top
                         margin-bottom
                         class="nau-segment">
-                         
+
                         <ion-segment-button value="all">
                             {{ 'PAGE_USER-PROFILE.ALL_OFFERS' | translate }}
                         </ion-segment-button>
                         <ion-segment-button value="allow">
                             {{ 'PAGE_USER-PROFILE.AVAILABLE' | translate }}
                         </ion-segment-button>
-                       
+
                     </ion-segment>
                 </ion-col>
                 <ion-col col-1>
