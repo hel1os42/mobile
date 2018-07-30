@@ -131,7 +131,7 @@ export class PlacesPage {
         this.isForkMode = this.appMode.getForkMode();
         this.mapRadius = this.listRadius = this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
         this.shareData = this.share.get();
-        this.segment = "alloffers";
+        this.segment = 'alloffers';
 
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
@@ -264,7 +264,7 @@ export class PlacesPage {
     onMapReady(map: Map) {
         // console.log(map);
         // let width = this.platform.width();
-        let heigth = document.getElementById("map_leaf").offsetHeight;
+        let heigth = document.getElementById('map_leaf').offsetHeight;
         if (!this._map && this.coords && this.coords.lat) {
             this._map = map;
             this.generateBounds(this.markers);
@@ -654,7 +654,7 @@ export class PlacesPage {
                 this.specialityFilter = [];
             }
 
-            this.search = "";
+            this.search = '';
             this.selectedCategory = category;
 
             if (!this.coords) {
@@ -845,7 +845,7 @@ export class PlacesPage {
             if (document.getElementById("map_leaf")) {
                 document.getElementById("map_leaf").style.height = window.innerHeight -
                     document.getElementsByClassName('block-places-header')[0].clientHeight -
-                    document.getElementsByClassName('tabbar')[0].clientHeight + "px";
+                    document.getElementsByClassName('tabbar')[0].clientHeight + 'px';
             }
         }
         setTimeout(renderMap, 1);
@@ -980,7 +980,8 @@ export class PlacesPage {
             tags: _.cloneDeep(this.selectedTags),
             radius: this.radius
         });
-        this.search = "";
+        this.search = '';
+
         if (this.platform.is('ios')) {
             setTimeout(() => {
                 popover.present();
@@ -988,6 +989,7 @@ export class PlacesPage {
         } else {
             popover.present();
         }
+        
         popover.onDidDismiss((data) => {
             if (!data) {
                 return;
