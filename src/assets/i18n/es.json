@@ -614,7 +614,7 @@
         "AVAILABLE" : "Disponible",
         "SLIDER_TITLE" : "Usen puntos para cupones de regalo",
         "MODAL_REFERRAL_POINTS" : "Puntos que recibes por invitar cada amigo a la aplicación.",
-        "MODAL_REDEPMTION_POINTS" : "Puntos que recibes por cada oferta redimida (excepto las ofertas de regalo)."
+        "MODAL_REDEMPTION_POINTS" : "Puntos que recibes por cada oferta redimida (excepto las ofertas de regalo)."
     },
 
     "PAGE_USER-TASKS" : {
