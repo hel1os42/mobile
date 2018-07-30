@@ -250,7 +250,6 @@ export class PlacesPage {
                 })
                 let i = index || 0;
                 this.selectedCategory = this.categories[i];
-                debugger;
                 this.getLocationStatus();
             },
                 err => {
