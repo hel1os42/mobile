@@ -15,11 +15,10 @@ import { User } from '../../models/user';
 import { ApiService } from '../../providers/api.service';
 import { LocationService } from '../../providers/location.service';
 import { ProfileService } from '../../providers/profile.service';
+import { StorageService } from '../../providers/storage.service';
 import { ToastService } from '../../providers/toast.service';
 import { DataUtils } from '../../utils/data.utils';
 import { MapUtils } from '../../utils/map.utils';
-import { StorageService } from '../../providers/storage.service';
-
 
 @Component({
     selector: 'page-create-user-profile',
@@ -87,40 +86,26 @@ export class CreateUserProfilePage {
                         if (!result) {
                             this.isConfirm = false;
                             this.presentConfirm();
-                        }
-                        else {
+                        } else {
                             this.isConfirm = false;
                             this.getCoords();
                         }
                     });
                 }
-                else return;
             });
         }
 
-        // if (this.navParams.get('user')) {
-        // this.isEdit = true;
         this.user = this.navParams.get('user');
         this.baseData = _.clone(this.user);
         this.picture_url = this.user.picture_url;
         this.coords.lat = this.baseData.latitude;
         this.coords.lng = this.baseData.longitude;
+
         if (this.coords.lat) {
             this.addMap();
-        }
-        else {
+        } else {
             this.getLocationStatus();
         }
-        // }
-        // else {
-        //     this.profile.get(true)
-        //         .subscribe(resp => {
-        //             this.user = resp;
-        //             this.baseData = _.clone(this.user);
-        //             this.picture_url = this.user.picture_url;
-        //         });
-        //     this.getLocationStatus();
-        // }
 
         this.cropperSettings = new CropperSettings();
         this.cropperSettings.noFileInput = true;
@@ -148,8 +133,7 @@ export class CreateUserProfilePage {
                 result => {
                     if (result.hasPermission === false) {
                         this.requestPerm();
-                    }
-                    else {
+                    } else {
                         this.getLocation(false);
                     }
                     console.log(result)
@@ -159,8 +143,7 @@ export class CreateUserProfilePage {
                     console.log(err)
                 }
             )
-        }
-        else if (this.platform.is('ios') && this.platform.is('cordova')) {
+        } else if (this.platform.is('ios') && this.platform.is('cordova')) {
             this.diagnostic.getLocationAuthorizationStatus()
                 .then(resp => {
                     if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
@@ -168,13 +151,11 @@ export class CreateUserProfilePage {
                             .then(res => {
                                 this.getLocation(false);
                             })
-                    }
-                    else {
+                    } else {
                         this.getLocation(false);
                     }
                 })
-        }
-        else {
+        } else {
             this.getLocation(false);
         }
     }
@@ -187,14 +168,14 @@ export class CreateUserProfilePage {
         ]);
         if (permissions.hasPermission === false) {
             const checkPermissions = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION);
+
             if (checkPermissions.hasPermission === false) {
                 this.presentAndroidConfirm();
-            }
-            else {
+            } else {
                 this.getLocation(false);
             }
-        }
-        else {
+
+        } else {
             this.getLocation(false);
         }
         console.log(permissions)
@@ -204,19 +185,16 @@ export class CreateUserProfilePage {
         if (!isDenied) {
             if (!this.platform.is('cordova')) {
                 this.getCoords();
-            }
-            else {
+            } else {
                 this.diagnostic.isLocationAvailable().then(result => {
                     if (!result) {
                         this.presentConfirm();
-                    }
-                    else {
+                    } else {
                         this.getCoords();
                     }
                 });
             }
-        }
-        else {
+        } else {
             this.profile.get(true, false)
                 .subscribe(user => {
                     if (user.latitude) {
@@ -228,8 +206,7 @@ export class CreateUserProfilePage {
                         };
                         this.addMap();
                         this.changeDetectorRef.detectChanges();
-                    }
-                    else {
+                    } else {
                         this.location.getByIp()
                             .subscribe(resp => {
                                 this.coords = {
@@ -294,15 +271,16 @@ export class CreateUserProfilePage {
                     spinner: 'bubbles'
                 });
                 loadingLocation.present();
+
                 if (this.platform.is('android')) {
                     this.diagnostic.getLocationMode()
                         .then(res => {
                             this.getNativeCoords(res === 'high_accuracy', loadingLocation);
                         });
-                }
-                else {
+                } else {
                     this.getNativeCoords(false, loadingLocation);
                 }
+
             })
     }
 
@@ -312,10 +290,12 @@ export class CreateUserProfilePage {
             moveend: (event: LeafletEvent) => {
                 this.coords = this._map.getCenter();
                 this.isCoordsChenged = true;
+
                 if (this.coords.lng > 180 || this.coords.lng < -180) {
                     this.coords.lng = MapUtils.correctLng(this.coords.lng);
                     this._map.setView(this.coords, this._map.getZoom());
-                };
+                }
+
                 this.changeDetectorRef.detectChanges();
             }
         })
@@ -412,9 +392,7 @@ export class CreateUserProfilePage {
             this.toast.show('User name must be atleast 3 charactrs long');
             return false;
         }
-        else {
-            return true;
-        }
+        return true;
 
     }
 
@@ -428,9 +406,7 @@ export class CreateUserProfilePage {
                 })
             return false;
         }
-        else {
-            return true;
-        }
+        return true;
     }
 
     navTo() {
@@ -449,13 +425,13 @@ export class CreateUserProfilePage {
                         refreshed = true;
                     }
                 });
-            }
-            else {
+            } else {
                 this.location.refreshDefaultCoords(this.coords);
                 refreshed = true;
             }
             this.isCoordsChenged = false;
         }
+
         if (this.validateName(this.baseData.name) && this.validateEmail(this.baseData.email)) {
             this.baseData.latitude = this.coords.lat;
             this.baseData.longitude = this.coords.lng;
@@ -465,6 +441,7 @@ export class CreateUserProfilePage {
             let promise = this.picture_url && this.changedPicture
                 ? this.api.uploadImage(this.picture_url, 'profile/picture', true)
                 : Promise.resolve();
+
             if (!isEmpty) {
                 //temporary
                 if (this.gender && this.gender !== this.baseGender) {
@@ -481,8 +458,7 @@ export class CreateUserProfilePage {
                             this.navTo();
                         });
                     })
-            }
-            else {
+            } else {
                 //temporary
                 if (!this.gender || this.gender !== this.baseGender) {
                     if (this.gender) {
@@ -496,7 +472,9 @@ export class CreateUserProfilePage {
                     this.navTo();
                 })
             }
+
         }
+
     }
 
     presentAndroidConfirm() {
@@ -542,8 +520,7 @@ export class CreateUserProfilePage {
                                 this.isConfirm = true;
                                 if (this.platform.is('ios')) {
                                     this.diagnostic.switchToSettings();
-                                }
-                                else {
+                                } else {
                                     this.diagnostic.switchToLocationSettings();
                                 }
                             }

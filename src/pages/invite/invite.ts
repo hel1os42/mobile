@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { ProfileService } from '../../providers/profile.service';
-import { User } from '../../models/user';
-import { Subscription } from 'rxjs';
 import { Clipboard } from '@ionic-native/clipboard';
-import { ToastService } from '../../providers/toast.service';
-import { NavController } from 'ionic-angular';
-import { UserUsersPage } from '../user-users/user-users';
-import { AdjustService } from '../../providers/adjust.service';
 import { TranslateService } from '@ngx-translate/core';
+import { NavController } from 'ionic-angular';
+import { Subscription } from 'rxjs';
+import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
+import { ProfileService } from '../../providers/profile.service';
+import { ToastService } from '../../providers/toast.service';
+import { UserUsersPage } from '../user-users/user-users';
 
 @Component({
     selector: 'page-invite',
@@ -44,6 +44,7 @@ export class InvitePage {
             this.translate.get('SHARING.INVITE')
                 .subscribe(translation => {
                     const Branch = window['Branch'];
+                    
                     let properties = {
                         canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
                         canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
@@ -57,6 +58,7 @@ export class InvitePage {
                             invite_code: this.user.invite_code,
                         }
                     };
+
                     var branchUniversalObj = null;
                     Branch.createBranchUniversalObject(properties)
                         .then(res => {
@@ -72,7 +74,6 @@ export class InvitePage {
                         })
                 })
         }
-        else return;
     }
 
     openUserUsers() {
