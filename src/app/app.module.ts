@@ -174,7 +174,8 @@ export class AppErrorHandler implements ErrorHandler {
         }
         if (!err.url) {
             err.message = err.message || '';
-            err.message = err.message + 'envName: ' + this.appMode.getEnvironmentMode();
+            let envKey =  err.message ? '\nenvName: ' : 'envName: ';
+            err.message = err.message + envKey + this.appMode.getEnvironmentMode();
         }
         Pro.monitoring.handleNewError(err);
         // Remove this if you want to disable Ionic's auto exception handling
