@@ -630,16 +630,19 @@ export class PlacesPage {
     }
 
     selectCategory(category: OfferCategory, index: number) {
-        if (this.isFeatured) {
-            this.isFeatured = false;
-            this.content.resize();
-        }
-
         if (!this.selectedCategory.id) {
+
+            if (this.isFeatured) {
+                this.isFeatured = false;
+                this.content.resize();
+            }
+
             this.getRootCategories(true, index);
         } else {
 
             if (this.isFeatured) {
+                this.isFeatured = false;
+                this.content.resize();
                 this.isChangedCategory = true;
             } else {
                 this.isChangedCategory = this.selectedCategory.id !== category.id;
@@ -659,6 +662,7 @@ export class PlacesPage {
             } else {
                 this.loadCompanies(true, this.page = 1);
             }
+
         }
     }
 
