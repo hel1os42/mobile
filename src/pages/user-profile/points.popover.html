@@ -1,16 +1,15 @@
  <div class="modal_content">
-     <ion-label padding-bottom text-center text-uppercase class="width-100 text-4F4F4F font-16">label</ion-label>
      <!-- <div text-center text-uppercase class="text-4F4F4F font-16 bold">{{ 'CONFIRM.IMPORTANT_NOTICE' | translate }}</div>
      <div margin-top text-center class="text-828282 font-14">{{ 'CONFIRM.PLEASE_INFORM' | translate }}</div>
      <div margin-top text-center class="text-828282 font-14">{{ 'CONFIRM.IF_THE_PROBLEM' | translate }} <a href="mailto:help@nau.io">help@nau.io</a> {{ 'CONFIRM.SO_THAT' | translate }}</div>
      <div margin-left margin-right margin-top> -->
      <div
-         margin-top
          margin-bottom
          padding-bottom
          text-justify
          class="text-828282 font-14">
-         message
+         {{ 'PAGE_USER-PROFILE.MODAL_REFERRAL_POINTS' | translate }}
+         {{ 'PAGE_USER-PROFILE.MODAL_REDEPMTION_POINTS' | translate }}
      </div>
      <div class="block-btn">
          <button (click)="close()" ion-button block color="primary">{{ 'UNIT.OK' | translate }}</button>

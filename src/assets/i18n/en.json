@@ -611,7 +611,9 @@
         "LOGOUT" : "logout",
         "ALL_OFFERS" : "All offers",
         "AVAILABLE" : "Available",
-        "SLIDER_TITLE" : "Используйте баллы для получения подарочных купонов"
+        "SLIDER_TITLE" : "Use points to redeem freebie coupons",
+        "MODAL_REFERRAL_POINTS" : "Points that you receive for each friend invited to the app.",
+        "MODAL_REDEPMTION_POINTS" : "Points you receive for each redeemed offer (except the freebie ones)."
     },
 
     "PAGE_USER-TASKS" : {

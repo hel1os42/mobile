@@ -612,7 +612,9 @@
         "LOGOUT" : "cerrar sesión",
         "ALL_OFFERS" : "Todas las ofertas",
         "AVAILABLE" : "Disponible",
-        "SLIDER_TITLE" : "Usen puntos para recibir cupones de regalos"
+        "SLIDER_TITLE" : "Usen puntos para recibir cupones de regalos",
+        "MODAL_REFERRAL_POINTS" : "Puntos que recibes por invitar cada amigo a la aplicación.",
+        "MODAL_REDEPMTION_POINTS" : "Puntos que recibes por cada oferta redimida (excepto las ofertas de regalo)."
     },
 
     "PAGE_USER-TASKS" : {
