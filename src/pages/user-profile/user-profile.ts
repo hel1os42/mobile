@@ -448,8 +448,12 @@ export class UserProfilePage {
     }
 
     openPointsPopover(points: number, mode: string) {
-        let pointsPopover = this.popoverCtrl.create(PointsPopover);
-        pointsPopover.present();
+        const key = 'PAGE_USER-PROFILE.MODAL_' + mode.toUpperCase() + '_POINTS';
+        this.translate.get(key)
+            .subscribe(res => {
+                let pointsPopover = this.popoverCtrl.create(PointsPopover, { content: res });
+                pointsPopover.present();
+            })
     }
 
     dismissLoading() {

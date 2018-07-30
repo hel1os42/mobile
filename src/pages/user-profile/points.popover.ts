@@ -8,10 +8,13 @@ import { NavParams, ViewController } from 'ionic-angular';
 
 export class PointsPopover {
 
+    content = '';
+
     constructor(
         private viewCtrl: ViewController,
         private navParams: NavParams) {
-
+        
+        this.content = this.navParams.get('content');
     }
 
     close() {
