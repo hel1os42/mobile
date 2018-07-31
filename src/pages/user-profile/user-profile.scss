@@ -591,10 +591,9 @@ page-user-profile{
         padding: 0;
     }
     .slider-empty{
-        // background: url(../assets/img/invite/invite2.png);
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        background-size: contain;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         height: 43vw;
     }
 }
