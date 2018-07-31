@@ -63,7 +63,8 @@ export class UserProfilePage {
     timer;
     isClick = false;
     MAX_POINTS = 100 * 1000;// for all premium offers list
-    isSliderSpinner = false;
+    isSliderSpinner = true;
+    isListsGot = false;
 
     @ViewChild('allowOffersSlides') allowOffersSlides: Slides;
     @ViewChild('offersSlides') offersSlides: Slides;
@@ -110,7 +111,7 @@ export class UserProfilePage {
         if (!this.balance) {
             // this.loadingSpinner = this.loading.create({ content: '' });
             // this.loadingSpinner.present();
-            this.isSliderSpinner = true;
+            this.hideSliderSpinner();
             this.profile.getWithAccounts(false)
                 .subscribe(resp => {
                     this.user = resp;
@@ -120,7 +121,7 @@ export class UserProfilePage {
                 },
                     err => {
                         // this.dismissLoading();
-                        this.isSliderSpinner = false;
+                        this.hideSliderSpinner();
                     });
         }
 
@@ -201,11 +202,11 @@ export class UserProfilePage {
                 }
                 this.getSegment();
                 // this.dismissLoading();
-                this.isSliderSpinner = false;
+                this.hideSliderSpinner();
             },
                 err => {
                     // this.dismissLoading();
-                    this.isSliderSpinner = false;
+                    this.hideSliderSpinner();
                 }
             );
     }
@@ -221,11 +222,11 @@ export class UserProfilePage {
                 }
                 this.getSegment();
                 // this.dismissLoading();
-                this.isSliderSpinner = false;
+                this.hideSliderSpinner();
             },
                 err => {
                     // this.dismissLoading();
-                    this.isSliderSpinner = false;
+                    this.hideSliderSpinner();
                 }
             );
     }
@@ -242,6 +243,16 @@ export class UserProfilePage {
             this.showArrow();
         }
         this.isSegmented = true;
+    }
+
+    hideSliderSpinner() {
+        let isListsGot = this.isListsGot;
+
+        if (isListsGot) {
+            this.isSliderSpinner = false;
+        }
+
+        this.isListsGot = true;
     }
 
     getStars(star: number) {

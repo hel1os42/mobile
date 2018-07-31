@@ -1,20 +1,44 @@
-import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, Platform, PopoverController, Content } from 'ionic-angular';
-import { DomUtil, icon, LatLng, latLng, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarkerOptions } from 'leaflet';
+import { AlertController, Content, LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
+import {
+    Circle,
+    CircleMarkerOptions,
+    DomUtil,
+    icon,
+    LatLng,
+    latLng,
+    LeafletEvent,
+    Map,
+    Marker,
+    marker,
+    popup,
+    tileLayer,
+} from 'leaflet';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs/Subscription';
+import { COUNTRIES } from '../../const/countries';
+import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { ChildCategory } from '../../models/childCategory';
 import { Coords } from '../../models/coords';
+import { Offer } from '../../models/offer';
 import { OfferCategory } from '../../models/offerCategory';
 import { Place } from '../../models/place';
 import { RetailType } from '../../models/retailType';
 import { Share } from '../../models/share';
+import { Speciality } from '../../models/speciality';
 import { Tag } from '../../models/tag';
+import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
+import { AnalyticsService } from '../../providers/analytics.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
+import { GeocodeService } from '../../providers/geocode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -22,23 +46,12 @@ import { ShareService } from '../../providers/share.service';
 import { StorageService } from '../../providers/storage.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
-import { PlacePage } from '../place/place';
-import { FilterPopover } from './filter.popover';
-import { GeocodeService } from '../../providers/geocode.service';
-import { NoPlacesPopover } from '../places/noPlaces.popover';
-import { COUNTRIES } from '../../const/countries';
-import { PHONE_CODES } from '../../const/phoneCodes.const';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
-import { AnalyticsService } from '../../providers/analytics.service';
-import { Offer } from '../../models/offer';
-import { LimitationPopover } from '../place/limitation.popover';
-import { User } from '../../models/user';
-import { AdjustService } from '../../providers/adjust.service';
 import { LinkPopover } from '../offer/link.popover';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Observable } from 'rxjs';
-import { Speciality } from '../../models/speciality';
+import { LimitationPopover } from '../place/limitation.popover';
+import { PlacePage } from '../place/place';
+import { NoPlacesPopover } from '../places/noPlaces.popover';
+import { FilterPopover } from './filter.popover';
 
 @Component({
     selector: 'page-places',
@@ -1073,6 +1086,10 @@ export class PlacesPage {
     searchCompanies(event) {
         this.loadCompanies(true, this.page = 1);
     }
+
+    // getLang() {
+    //     return  SYS_OPTIONS.LANG_CODE;
+    // }
 
     isInfiniteScroll() {
         return !this.isMapVisible && (this.isFeatured ? this.featuredPage <= this.lastFeaturedPage : this.page <= this.lastPage);

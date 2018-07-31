@@ -144,6 +144,10 @@ export class FilterPopover {
         return isSelected;
     }
 
+    // getLang() {
+    //     return  SYS_OPTIONS.LANG_CODE;
+    // }
+
     close() {
         this.viewCtrl.dismiss({
             types: this.types,

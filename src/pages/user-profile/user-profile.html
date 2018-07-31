@@ -149,8 +149,8 @@
         </ion-row>
     </ion-grid> -->
         <ion-grid
-            *ngIf="(allowPremiumOffers && allowPremiumOffers.length > 0)
-                    || (premiumOffers && premiumOffers.length > 0)"
+            *ngIf="((allowPremiumOffers && allowPremiumOffers.length > 0)
+                    || (premiumOffers && premiumOffers.length > 0) && !isSliderSpinner)"
             text-center
             class="block-slider">
             <div
