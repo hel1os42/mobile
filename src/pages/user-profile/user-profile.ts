@@ -51,7 +51,7 @@ export class UserProfilePage {
     premiumOffers = [];//premiumOffers: Offers[];
     coords: Coords;
     segment;
-    loadingLocation;
+    // loadingSpinner;
     allowOffersPage = 1;
     offersPage = 1;
     allowOffersLastPage: number;
@@ -63,6 +63,7 @@ export class UserProfilePage {
     timer;
     isClick = false;
     MAX_POINTS = 100 * 1000;// for all premium offers list
+    isSliderSpinner = false;
 
     @ViewChild('allowOffersSlides') allowOffersSlides: Slides;
     @ViewChild('offersSlides') offersSlides: Slides;
@@ -107,8 +108,9 @@ export class UserProfilePage {
             });
 
         if (!this.balance) {
-            this.loadingLocation = this.loading.create({ content: '' });
-            this.loadingLocation.present();
+            // this.loadingSpinner = this.loading.create({ content: '' });
+            // this.loadingSpinner.present();
+            this.isSliderSpinner = true;
             this.profile.getWithAccounts(false)
                 .subscribe(resp => {
                     this.user = resp;
@@ -116,7 +118,10 @@ export class UserProfilePage {
                     this.balance = this.NAU ? this.NAU.balance : 0;
                     this.getLists();
                 },
-                    err => this.dismissLoading());
+                    err => {
+                        // this.dismissLoading();
+                        this.isSliderSpinner = false;
+                    });
         }
 
         this.onRefreshCoords = this.location.onRefreshCoords
@@ -195,9 +200,13 @@ export class UserProfilePage {
                     this.allowOffersSlides.slideTo(0, 0, false);
                 }
                 this.getSegment();
-                this.dismissLoading();
+                // this.dismissLoading();
+                this.isSliderSpinner = false;
             },
-                err => this.dismissLoading()
+                err => {
+                    // this.dismissLoading();
+                    this.isSliderSpinner = false;
+                }
             );
     }
 
@@ -211,9 +220,13 @@ export class UserProfilePage {
                     this.offersSlides.slideTo(0, 0, false);
                 }
                 this.getSegment();
-                this.dismissLoading();
+                // this.dismissLoading();
+                this.isSliderSpinner = false;
             },
-                err => this.dismissLoading()
+                err => {
+                    // this.dismissLoading();
+                    this.isSliderSpinner = false;
+                }
             );
     }
 
@@ -456,12 +469,12 @@ export class UserProfilePage {
             })
     }
 
-    dismissLoading() {
-        if (this.loadingLocation) {
-            this.loadingLocation.dismiss();
-            this.loadingLocation = undefined;
-        }
-    }
+    // dismissLoading() {
+    //     if (this.loadingSpinner) {
+    //         this.loadingSpinner.dismiss();
+    //         this.loadingSpinner = undefined;
+    //     }
+    // }
 
     inviteFriend() {
         if (this.user && this.user.invite_code) {

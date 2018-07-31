@@ -405,6 +405,7 @@
                     *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0))
                             || (segment === 'all' && (!premiumOffers || premiumOffers.length == 0)))"
                     class="slider-empty">
+                    <ion-spinner *ngIf="isSliderSpinner" name="bubbles"></ion-spinner>
                 </div>
             </ion-col>
             <ion-col col-1 align-self-center>
