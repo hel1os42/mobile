@@ -38,13 +38,14 @@ $balanced: #000066 !default;
 $toolbar-background: transparent;
 $popover-ios-width: 90%;
 $padding-left: 5%;
-$spinner-ios-bubbles-color: #FF5A00;
+$spinner-ios-bubbles-color: #666;
+$loading-ios-spinner-color: #666;
+$infinite-scroll-loading-color: #666;
 
 $alert-ios-button-text-color: #FF5A00;
 $action-sheet-ios-button-text-color: #FF5A00;
 
 $loading-ios-background: rgba(255,255,255,0.5);
-$loading-ios-spinner-color: #000;
 
 @font-face {
   font-family: 'OpenSansNau';
