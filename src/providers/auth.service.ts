@@ -14,7 +14,7 @@ import { PushTokenService } from './pushToken.service';
 import { StorageService } from './storage.service';
 import { TokenService } from './token.service';
 import { SocialIdentity } from '../models/socialIdentity';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AdjustService } from './adjust.service';
 
 declare var cookieMaster;
@@ -35,6 +35,7 @@ export class AuthService {
         this.INSTAGRAM,
         this.VK
     ];
+    onResumeSubscription: Subscription;
 
     constructor(
         private api: ApiService,
@@ -51,6 +52,16 @@ export class AuthService {
 
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
+        this.platform.ready()
+            .then(() => {
+                if (this.isLoggedIn()) this.refreshToken();
+            });
+
+        this.onResumeSubscription = this.platform.resume
+            .subscribe(() => {
+                if (this.isLoggedIn()) this.refreshToken();
+            });
+
         setInterval(() => {
             // this.clearCookies();
             let date = new Date();
@@ -60,7 +71,7 @@ export class AuthService {
             if (differ > 129600 && this.isLoggedIn()) {//36 hours
                 this.refreshToken();
             }
-        }, 10 * 1000);
+        }, 10 * 1000 * 120);
     }
 
     // getInviteCode() {
@@ -81,13 +92,14 @@ export class AuthService {
         if (this.platform.is('cordova')) {
             this.oneSignal.sendTag('refferalInviteCode', inviteCode);
         }
+
         let obs: Observable<any>;
+        
         if (phone) {
             obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
             obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
                 err => { return });
-        }
-        else {
+        } else {
             obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
         }
         return obs;
@@ -111,9 +123,11 @@ export class AuthService {
                 this.analytics.faLogEvent('event_signup');
                 this.adjust.setEvent('FIRST_TIME_SIGN_IN');
             }
+
             if (!resp.was_recently_created) {
                 this.adjust.setEvent('SIGN_IN');
             }
+
             if (register.identity_provider) {
                 this.PROVIDERS_NAMES.forEach(name => {
                     if (name === register.identity_provider) {// to add INSTAGRAM
@@ -122,6 +136,7 @@ export class AuthService {
                     }
                 })
             }
+
             this.loginHandler({ token: resp.token }, false, resp.id);
         },
             err => { return });
@@ -165,10 +180,12 @@ export class AuthService {
             // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
             let envName = this.appMode.getEnvironmentMode();
             this.oneSignal.sendTag('environment', envName);
+
             if (!isSocial) {
                 this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
                 this.analytics.faLogEvent('event_phoneconfirm');
             }
+
         }
     }
 
@@ -181,17 +198,20 @@ export class AuthService {
             this.loginHandler(token, true);
             this.adjust.setEvent('SIGN_IN');
             this.PROVIDERS_NAMES.forEach(name => {
+
                 if (name === identity.identity_provider) {// to add INSTAGRAM
                     let event = name.toUpperCase() + '_SIGN_IN';
                     this.adjust.setEvent(event);
                 }
+
             })
         },
             err => { return });
         return obs;
     }
 
-    logout() {
+    logout() { 
+        this.api.get('auth/logout');
         this.clearCookies();
         this.token.remove('LOGOUT');
         this.adjust.setEvent('LOGOUT_BUTTON_CLICK');
