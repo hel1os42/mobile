@@ -63,8 +63,8 @@ export class OfferService {
             }
             if (userReferralPoints) {
                 searchStr = searchStr
-                    ? searchStr + `;offerData.refferal_points_price:1,${userReferralPoints}`
-                    : `offerData.refferal_points_price:1,${userReferralPoints}`
+                    ? searchStr + `;offerData.referral_points_price:1,${userReferralPoints}`
+                    : `offerData.referral_points_price:1,${userReferralPoints}`
             }
             obs = this.api.get('offers', {
                 showLoading: showLoading,
@@ -74,7 +74,7 @@ export class OfferService {
                     radius: this.MAX_RADIUS,
                     with: 'account.owner.place',
                     search: searchStr,
-                    searchJoin: 'and',
+                    searchJoin: 'or',
                     page: page
                 }
             });
