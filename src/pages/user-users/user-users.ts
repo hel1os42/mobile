@@ -37,10 +37,10 @@ export class UserUsersPage {
                     .subscribe(resp => {
                         this.referrals = [...this.referrals, ...resp.data];
                         infiniteScroll.complete();
-                    });
+                    },
+                        err => infiniteScroll.complete());
             });
-        }
-        else {
+        } else {
             infiniteScroll.complete();
         }
     }

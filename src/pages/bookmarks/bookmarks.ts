@@ -354,14 +354,16 @@ export class BookmarksPage {
                             this.companies = [...this.companies, ...resp.data];
                             this.companiesLastPage = resp.last_page;
                             infiniteScroll.complete();
-                        });
+                        },
+                        err => infiniteScroll.complete());
                 } else if (this.segment === 'offers') {
                     this.favorites.getOffers(this.offersPage)
                         .subscribe(res => {
                             this.offers = [...this.offers, ...res.data];
                             this.offersLastPage = res.last_page;
                             infiniteScroll.complete();
-                        });
+                        },
+                        err => infiniteScroll.complete());
                 }
             });
         } else {

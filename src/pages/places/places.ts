@@ -1002,7 +1002,7 @@ export class PlacesPage {
         } else {
             popover.present();
         }
-        
+
         popover.onDidDismiss((data) => {
             if (!data) {
                 return;
@@ -1114,7 +1114,8 @@ export class PlacesPage {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
                             infiniteScroll.complete();
-                        });
+                        },
+                            err => infiniteScroll.complete());
                 } else {
                     this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
                         this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
@@ -1128,7 +1129,8 @@ export class PlacesPage {
                             })
                             this.generateBounds(this.markers);
                             infiniteScroll.complete();
-                        });
+                        },
+                            err => infiniteScroll.complete());
                 }
             });
         } else {
