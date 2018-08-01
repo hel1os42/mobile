@@ -245,6 +245,10 @@
                                                         : offer?.account.owner.place.testimonials_count}}
                                                 </span>
                                             </div>
+                                            <img
+                                                *ngIf="offer.is_featured"
+                                                class="featured_right"
+                                                src="assets/img/splash_screen/tab-icon6_active.svg">
                                         </div>
                                     </ion-avatar>
                                     <div
@@ -347,6 +351,7 @@
                                             </span>
                                         </div>
                                         <img
+                                            *ngIf="offer.is_featured"
                                             class="featured_right"
                                             src="assets/img/splash_screen/tab-icon6_active.svg">
                                     </div>
