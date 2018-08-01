@@ -206,7 +206,7 @@
                         [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
                         class="featured_right"
                         src="assets/img/splash_screen/tab-icon6_active.svg">
-                    <span>{{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}/{{ offer.max_count }}</span>
+                    <span *ngIf="offer.max_count">{{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}/{{ offer.max_count }}</span>
                 </div>
                 <div
                     class="block-right font-14 flex"
