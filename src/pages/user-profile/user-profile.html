@@ -325,7 +325,7 @@
                                         [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }"
                                         class="thumb_image">
                                     </div>
-                                    <div class="info-block" text-left>
+                                    <div class="info-block relative" text-left>
                                         <div>
                                             <ng-container *ngFor="let showStar of getStars(offer?.account.owner.place.stars)">
                                                 <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
@@ -346,6 +346,9 @@
                                                     : offer?.account.owner.place.testimonials_count}}
                                             </span>
                                         </div>
+                                        <img
+                                            class="featured_right"
+                                            src="assets/img/splash_screen/tab-icon6_active.svg">
                                     </div>
                                 </ion-avatar>
                                 <div
