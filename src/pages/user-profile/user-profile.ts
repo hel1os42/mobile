@@ -367,15 +367,15 @@ export class UserProfilePage {
                     });
             }
         } else {
-            if (event.length() > 1) {
-                if (event.loop === false) {
-                    event.loop = true;
-                }
-                event.lockSwipeToNext(false);
-                this.isRightArrowVisible = true;
-            } else {
+            // if (event.length() > 1) {
+            //     if (event.loop === false) {
+            //         event.loop = true;
+            //     }
+            //     event.lockSwipeToNext(false);
+            //     this.isRightArrowVisible = true;
+            // } else {
                 this.isRightArrowVisible = false;
-            }
+            // }
         }
     }
 
