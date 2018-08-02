@@ -43,7 +43,6 @@ export class OfferService {
     getPremiumList( //premium offers
         lat: number,
         lng: number,
-        // radius: number, 
         userReferralPoints: number,
         userRedemptionPoints: number,
         page: number,
@@ -55,17 +54,10 @@ export class OfferService {
                 data: [],
                 last_page: 1
             })
-        }
-        else {
-            let searchStr: string;
-            if (userRedemptionPoints) {
-                searchStr = `offerData.redemption_points_price:1,${userRedemptionPoints}`;
-            }
-            if (userReferralPoints) {
-                searchStr = searchStr
-                    ? searchStr + `;offerData.referral_points_price:1,${userReferralPoints}`
-                    : `offerData.referral_points_price:1,${userReferralPoints}`
-            }
+        } else {
+            let searchStr = this.getPremiumSearch(userRedemptionPoints, userReferralPoints, 1);
+            let filterStr = this.getPremiumSearch(userRedemptionPoints, userReferralPoints, 0);
+
             obs = this.api.get('offers', {
                 showLoading: showLoading,
                 params: {
@@ -74,6 +66,7 @@ export class OfferService {
                     radius: this.MAX_RADIUS,
                     with: 'account.owner.place',
                     search: searchStr,
+                    whereFilters: filterStr,
                     searchJoin: 'or',
                     page: page
                 }
@@ -120,7 +113,7 @@ export class OfferService {
         let type = 'retailTypes.id:';
         let speciality = 'specialities.slug:';
         let searchStr = '';
-        let filterStr ='';
+        let filterStr = '';
         if (tags.length > 0) {
             filterStr += this.getSearch(tag, tags);
         }
@@ -142,7 +135,7 @@ export class OfferService {
                 longitude: lng,
                 radius: radius,
                 search: searchStr,
-                whereFilters: filterStr, 
+                whereFilters: filterStr,
                 searchJoin: 'or',
                 with: 'category;retailTypes;tags;specialities',
                 page: page
@@ -210,17 +203,28 @@ export class OfferService {
     getSearch(str: string, arr: string[]) {
         if (arr.length == 0) {
             str += ';';
-        }
-        else {
+        } else {
             for (let i = 0; i < arr.length; i++) {
                 str += arr[i];
                 if (i != arr.length - 1) {
                     str += '|';
-                }
-                else {
+                } else {
                     str += ';';
                 }
             }
+        }
+        return str;
+    }
+
+    getPremiumSearch(redemptionPoints: number, referralPoints: number, startPoints: number) {
+        let str: string
+        if (redemptionPoints) {
+            str = `offerData.redemption_points_price:${startPoints},${redemptionPoints}`;
+        }
+        if (referralPoints) {
+            str = str
+                ? str + `;offerData.referral_points_price:${startPoints},${referralPoints}`
+                : `offerData.referral_points_price:${startPoints},${referralPoints}`
         }
         return str;
     }
