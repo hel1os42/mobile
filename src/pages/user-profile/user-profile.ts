@@ -50,15 +50,13 @@ export class UserProfilePage {
     allowPremiumOffers = [];//allowPremiumOffers: Offers[];
     premiumOffers = [];//premiumOffers: Offers[];
     coords: Coords;
-    segment;
-    // loadingSpinner;
+    segment: string;
     allowOffersPage = 1;
     offersPage = 1;
     allowOffersLastPage: number;
     offersLastPage: number;
     isLeftArrowVisible: boolean;
     isRightArrowVisible: boolean;
-    isSegmented: boolean;
     isDismissLinkPopover = true;
     timer;
     isClick = false;
@@ -97,7 +95,7 @@ export class UserProfilePage {
                 this.user.picture_url = this.user.picture_url + '?' + new Date().valueOf();
                 this.allowOffersPage = 1;
                 this.offersPage = 1;
-                this.getLists();
+                this.getLists(true);
             });
 
         this.onRefreshUser = this.profile.onRefresh
@@ -105,12 +103,10 @@ export class UserProfilePage {
                 this.user = _.extend(this.user, user);
                 this.allowOffersPage = 1;
                 this.offersPage = 1;
-                this.getLists();
+                this.getLists(true);
             });
 
         if (!this.balance) {
-            // this.loadingSpinner = this.loading.create({ content: '' });
-            // this.loadingSpinner.present();
             this.hideSliderSpinner();
             this.profile.getWithAccounts(false)
                 .subscribe(resp => {
@@ -120,8 +116,7 @@ export class UserProfilePage {
                     this.getLists();
                 },
                     err => {
-                        // this.dismissLoading();
-                        this.hideSliderSpinner();
+                        this.isSliderSpinner = false;
                     });
         }
 
@@ -177,21 +172,19 @@ export class UserProfilePage {
         this.transaction.refresh();
     }
 
-    getLists() {
-        // this.loadingLocation = this.loading.create({ content: '' });
-        // this.loadingLocation.present();
+    getLists(disableSegment?: boolean) {
         this.location.getCache()
             .then(resp => {
                 this.coords = {
                     lat: resp.coords.lat,
                     lng: resp.coords.lng
                 };
-                this.getAllowOffersList();
-                this.getOffersList();
+                this.getAllowOffersList(disableSegment);
+                this.getOffersList(disableSegment);
             });
     }
 
-    getAllowOffersList() {// to do
+    getAllowOffersList(disableSegment?: boolean) {// to do
         this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, this.allowOffersPage, false)
             .subscribe(resp => {
                 this.allowPremiumOffers = resp.data;
@@ -200,18 +193,15 @@ export class UserProfilePage {
                     this.allowOffersSlides.update();
                     this.allowOffersSlides.slideTo(0, 0, false);
                 }
-                this.getSegment();
-                // this.dismissLoading();
-                this.hideSliderSpinner();
+                this.hideSliderSpinner(disableSegment);
             },
                 err => {
-                    // this.dismissLoading();
-                    this.hideSliderSpinner();
+                    this.isSliderSpinner = false;
                 }
             );
     }
 
-    getOffersList() {// to do
+    getOffersList(disableSegment?: boolean) {// to do
         this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.MAX_POINTS, this.MAX_POINTS, this.offersPage, false)
             .subscribe(resp => {
                 this.premiumOffers = resp.data;
@@ -220,39 +210,33 @@ export class UserProfilePage {
                     this.offersSlides.update();
                     this.offersSlides.slideTo(0, 0, false);
                 }
-                this.getSegment();
-                // this.dismissLoading();
-                this.hideSliderSpinner();
+                this.hideSliderSpinner(disableSegment);
             },
                 err => {
-                    // this.dismissLoading();
-                    this.hideSliderSpinner();
+                    this.isSliderSpinner = false;
                 }
             );
     }
+   
 
-    getSegment() {
-        let isSegmented = this.isSegmented;
-        // this.segment = this.premiumOffers && this.premiumOffers.length > 0
-        //     ? 'all'
-        //     : this.allowPremiumOffers && this.allowPremiumOffers.length > 0
-        //         ? 'allow'
-        //         : 'all';
-        this.segment = 'all';
-        if (isSegmented) {
-            this.showArrow();
-        }
-        this.isSegmented = true;
-    }
-
-    hideSliderSpinner() {
+    hideSliderSpinner(disableSegment?: boolean) {
         let isListsGot = this.isListsGot;
 
         if (isListsGot) {
             this.isSliderSpinner = false;
+            if (!disableSegment || (this.segment === 'allow' && this.allowPremiumOffers.length === 0)) {
+                this.getSegment();
+            }
         }
 
         this.isListsGot = true;
+    }
+
+    getSegment() {
+        this.segment = this.allowPremiumOffers && this.allowPremiumOffers.length > 0
+            ? 'allow'
+            : 'all';
+        this.showArrow();
     }
 
     getStars(star: number) {
@@ -279,14 +263,14 @@ export class UserProfilePage {
     showArrow() {
         if (this.segment === 'allow') {
             this.isLeftArrowVisible = false;
-            if (this.allowPremiumOffers.length > 1) {
+            if (this.allowPremiumOffers && this.allowPremiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
             } else {
                 this.isRightArrowVisible = false;
             }
         } else if (this.segment === 'all') {
             this.isLeftArrowVisible = false;
-            if (this.premiumOffers.length > 1) {
+            if (this.premiumOffers && this.premiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
             } else {
                 this.isRightArrowVisible = false;
@@ -374,7 +358,7 @@ export class UserProfilePage {
             //     event.lockSwipeToNext(false);
             //     this.isRightArrowVisible = true;
             // } else {
-                this.isRightArrowVisible = false;
+            this.isRightArrowVisible = false;
             // }
         }
     }
