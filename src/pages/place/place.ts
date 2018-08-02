@@ -375,7 +375,8 @@ export class PlacePage {
                     .subscribe(testimonials => {
                         this.companyTestimonials = [...this.companyTestimonials, ...testimonials.data];
                         infiniteScroll.complete();
-                    });
+                    },
+                        err => infiniteScroll.complete());
             });
         }
         else {
