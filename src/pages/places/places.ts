@@ -1216,7 +1216,12 @@ export class PlacesPage {
                     confirm.dismiss();
                     backAction();
                 }, 1);
-                confirm.onDidDismiss(() => { backAction = undefined });
+                confirm.onDidDismiss(() => {
+                    if (backAction) {
+                        backAction();
+                    }
+                    backAction = undefined
+                });
             })
     }
 
