@@ -87,10 +87,16 @@ export class ProfileService {
     }
 
     sendTags(user: User, gender?: string) {//temporary parametr "gender"
+        let osName = this.platform.is('ios')
+            ? 'ios'
+            : this.platform.is('android')
+                ? 'android' : '';
+
         let tagObj: any = {
             userName: user.name,
             userPhone: user.phone.split('+')[1],
-            userEmail: user.email
+            userEmail: user.email,
+            os: osName + ' ' + this.platform.version().str
         };
         if (gender && gender !== '') {
             tagObj.gender = gender;

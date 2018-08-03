@@ -244,7 +244,7 @@ export class PlacePage {
         else return;
     }
 
-    openOffer(event, offer: Offer, company?) {
+    openOffer(event, offer: Offer, company?: Place) {
         if (!offer.redemption_access_code || company) {
             if (event && event.target.localName === 'a') {
                 this.openLinkPopover(event);
