@@ -27,7 +27,7 @@ export class TransactionService {
     set(transaction: TransactionCreate, showLoading?: boolean) {
         let obs = this.api.post('transactions', transaction, { showLoading: showLoading });
         obs.subscribe(() => this.adjust.setEvent('NAU_TX_SEND'),
-            err => { return; });
+            err => { });
         return obs;
     }
 

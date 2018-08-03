@@ -292,8 +292,9 @@ export class LoginPage {
                 this.setProfile();
             }
             this.nav.setRoot(TabsPage, { index: 0 });
-        },
-            err => { });
+        });
+        // },
+        //     err => { });
     }
 
     cancelTimer() {

@@ -84,10 +84,9 @@ export class AuthService {
         let obs: Observable<any>;
         if (phone) {
             obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
-            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
-                err => { return });
-        }
-        else {
+            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'));
+            // err => { });
+        } else {
             obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
         }
         return obs;
@@ -99,7 +98,7 @@ export class AuthService {
             ignoreHttpNotFound: this.appMode.getEnvironmentMode() === 'prod'
         });
         obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
-            err => { return });
+            err => { });
         return obs;
     }
 
@@ -123,8 +122,9 @@ export class AuthService {
                 })
             }
             this.loginHandler({ token: resp.token }, false, resp.id);
-        },
-            err => { return });
+        });
+        // },
+        //     err => { });
         return obs;
     }
 
@@ -136,8 +136,9 @@ export class AuthService {
         obs.subscribe(token => {
             this.loginHandler(token, false);
             this.adjust.setEvent('SIGN_IN');
-        },
-            err => { return });
+        });
+        // },
+        //     err => {});
         return obs;
     }
 
@@ -187,7 +188,7 @@ export class AuthService {
                 }
             })
         },
-            err => { return });
+            err => { });
         return obs;
     }
 

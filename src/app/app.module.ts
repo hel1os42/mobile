@@ -141,7 +141,8 @@ export class AppErrorHandler implements ErrorHandler {
     constructor(
         injector: Injector,
         private appMode: AppModeService,
-        private profile: ProfileService) {
+        private profile: ProfileService,
+        private auth: AuthService) {
 
         try {
             this.ionicErrorHandler = injector.get(IonicErrorHandler);
@@ -153,7 +154,7 @@ export class AppErrorHandler implements ErrorHandler {
 
     handleError(err: any) {
         // err.envName = this.appMode.getEnvironmentMode();
-        if (!this.userId) {
+        if (!this.userId && this.auth.isLoggedIn()) {
             this.profile.get(false, false)
                 .subscribe(user => {
                     this.userId = user.id;
@@ -163,6 +164,7 @@ export class AppErrorHandler implements ErrorHandler {
                 },
                     error => err.userId = '');
         };
+
         if (err.message) {
             err.message = err.message + '\nuserId: ' + this.userId;
             err.message = this.userPhone 
@@ -172,11 +174,13 @@ export class AppErrorHandler implements ErrorHandler {
             err.userId = this.userId;
             err.userPhone = this.userPhone;
         }
+
         if (!err.url) {
             err.message = err.message || '';
             let envKey =  err.message ? '\nenvName: ' : 'envName: ';
             err.message = err.message + envKey + this.appMode.getEnvironmentMode();
         }
+        
         Pro.monitoring.handleNewError(err);
         // Remove this if you want to disable Ionic's auto exception handling
         // in development mode.
