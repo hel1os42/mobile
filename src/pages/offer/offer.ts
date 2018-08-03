@@ -128,25 +128,25 @@ export class OfferPage {
         this.statusBar.styleLightContent();
     }
 
-    ngAfterViewInit() {
-        let tabs = document.querySelectorAll('.show-tabbar');
-        if (tabs !== null) {
-            Object.keys(tabs).map((key) => {
-                tabs[key].style.opacity = '0';
-                tabs[key].style.pointerEvents = 'none';
-            });
-        }
-    }
+    // ngAfterViewInit() {
+    //     let tabs = document.querySelectorAll('.show-tabbar');
+    //     if (tabs !== null) {
+    //         Object.keys(tabs).map((key) => {
+    //             tabs[key].style.opacity = '0';
+    //             tabs[key].style.pointerEvents = 'none';
+    //         });
+    //     }
+    // }
 
-    ionViewWillUnload() {
-        let tabs = document.querySelectorAll('.show-tabbar');
-        if (tabs !== null) {
-            Object.keys(tabs).map((key) => {
-                tabs[key].style.opacity = '1';
-                tabs[key].style.pointerEvents = 'all';
-            });
-        }
-    }
+    // ionViewWillUnload() {
+    //     let tabs = document.querySelectorAll('.show-tabbar');
+    //     if (tabs !== null) {
+    //         Object.keys(tabs).map((key) => {
+    //             tabs[key].style.opacity = '1';
+    //             tabs[key].style.pointerEvents = 'all';
+    //         });
+    //     }
+    // }
 
     timeframesHandler() {
         // this.offer.timezone_offset = -10800;//temporary - will removed

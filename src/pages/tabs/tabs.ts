@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Tab, ViewController } from 'ionic-angular/umd';
+import { Tab, ViewController, Tabs } from 'ionic-angular';
 import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -16,6 +16,8 @@ import { UserProfilePage } from '../user-profile/user-profile';
     templateUrl: 'tabs.html'
 })
 export class TabsPage {
+
+    @ViewChild('tabs') tabs: Tabs;
 
     tab1Root = PlacesPage;
     tab2Root = InvitePage;
@@ -36,7 +38,7 @@ export class TabsPage {
         private adjust: AdjustService) {
 
         this.envName = this.appMode.getEnvironmentMode();
-     
+
         this.selectedTabIndex = 0;
     }
 
@@ -45,7 +47,6 @@ export class TabsPage {
     }
 
     refreshStatusBar(event: Tab) {
-
         let root = event.root;
         let views: ViewController[] = event.getViews();
         let length = views.length;
@@ -54,10 +55,24 @@ export class TabsPage {
             || (root === BookmarksPage && length > 1)
             || (root === UserProfilePage && (page === PlacesPage || page === OfferPage))) {
             this.statusBar.styleLightContent();
-        }
-        else {
+        } else {
             this.statusBar.styleDefault();
         }
+        this.hideTabs();
+    }
+
+    hideTabs() {
+        let isHide = false;
+        let tab = this.tabs.getSelected();
+        if (tab) {
+            let views: ViewController[] = tab.getViews();
+            let length = views.length;
+            let page = views[length - 1].component;
+            if (page === OfferPage) {
+                isHide = true;
+            } else isHide = false;
+        }
+        return isHide;
     }
 
     refresh() {
