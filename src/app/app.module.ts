@@ -126,7 +126,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 const IONIC_APP_ID = '590f0eb2';
-const VERSION = '1.6.1';
+const VERSION = '1.6.2';
 
 Pro.init(IONIC_APP_ID, {
     appVersion: VERSION
@@ -181,7 +181,7 @@ export class AppErrorHandler implements ErrorHandler {
             let envKey =  err.message ? '\nenvName: ' : 'envName: ';
             err.message = err.message + envKey + this.appMode.getEnvironmentMode();
         }
-        
+
         Pro.monitoring.handleNewError(err);
         // Remove this if you want to disable Ionic's auto exception handling
         // in development mode.
