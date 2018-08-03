@@ -342,11 +342,14 @@ page-places {
     .block-featured .thumb_image{
         margin-top: 2vw;
     }
+    .block-featured .right-block{
+        position: relative;
+    }
     .block-fr {
         position: absolute;
         bottom: 2vw;
         right: 0;
-        width: calc(100% - 27vw);
+        width: 100%;
         color: #fff;
     }
     .coupon,

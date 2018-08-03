@@ -215,6 +215,11 @@
                         <ion-list
                             no-lines class="item-block-nau margin-top-10 block-featured">
                                 <div tappable ion-item detail-none>
+                                    <img
+                                        *ngIf="offer.is_favorite"
+                                        [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                                        class="star_right"
+                                        src="assets/img/place/icon_star.svg">
                                     <ion-avatar
                                         (click)="openPlace($event, offer?.account.owner.place)"
                                         item-start
@@ -272,11 +277,6 @@
                                             </div>
                                             <div [ngClass]="offer.type" class="right-top-angle"></div>
                                         </div>
-                                        <img
-                                            *ngIf="offer.is_favorite"
-                                            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-                                            class="star_right"
-                                            src="assets/img/place/icon_star.svg">
                                         <div class="block-fr bold">
                                             <div *ngIf="offer.max_count" class="coupon font-10 flex">
                                                 {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}
@@ -320,6 +320,11 @@
                         <ion-list
                             no-lines class="item-block-nau margin-top-10 block-featured">
                             <div tappable ion-item detail-none>
+                                <img
+                                    *ngIf="offer.is_favorite"
+                                    [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                                    class="star_right"
+                                    src="assets/img/place/icon_star.svg">
                                 <ion-avatar
                                     (click)="openPlace($event, offer?.account.owner.place)"
                                     item-start
@@ -377,11 +382,6 @@
                                         </div>
                                         <div [ngClass]="offer.type" class="right-top-angle"></div>
                                     </div>
-                                    <img
-                                        *ngIf="offer.is_favorite"
-                                        [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-                                        class="star_right"
-                                        src="assets/img/place/icon_star.svg">
                                     <div class="block-fr bold">
                                         <div *ngIf="offer.max_count" class="coupon font-10 flex">
                                             {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}
