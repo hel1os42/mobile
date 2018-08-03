@@ -17,9 +17,11 @@ export class TabBarHiddenDirective {
         if (tabBarElement) {
 
             if (this.tabHidden) {
-                tabBarElement.style.display = 'none';
+                tabBarElement.style.opacity = '0';
+                tabBarElement.style.pointerEvents = 'none';
             } else {
-                tabBarElement.style.display = 'flex';
+                tabBarElement.style.opacity = '1';
+                tabBarElement.style.pointerEvents = 'all';
             }
         }
     }
