@@ -1,6 +1,7 @@
 import { Directive, Input } from '@angular/core';
 
 @Directive({ selector: '[tab-bar-hidden]' })
+
 export class TabBarHiddenDirective {
 
     @Input('tab-bar-hidden')

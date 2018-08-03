@@ -58,7 +58,6 @@ export class TabsPage {
         } else {
             this.statusBar.styleDefault();
         }
-        this.hideTabs();
     }
 
     hideTabs() {
