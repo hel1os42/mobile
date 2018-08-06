@@ -217,7 +217,7 @@ export class UserProfilePage {
                 }
             );
     }
-   
+
 
     hideSliderSpinner(disableSegment?: boolean) {
         let isListsGot = this.isListsGot;
@@ -282,18 +282,20 @@ export class UserProfilePage {
         let slides = this.segment === 'allow'
             ? this.allowOffersSlides
             : this.offersSlides;
-
-        slides.slideNext();
-        this.slideChangeHandler(slides);
+        if (slides) {
+            slides.slideNext();
+            this.slideChangeHandler(slides);
+        }
     }
 
     slidePrev() {
         let slides = this.segment === 'allow'
             ? this.allowOffersSlides
             : this.offersSlides;
-
-        slides.slidePrev();
-        this.slideChangeHandler(slides);
+        if (slides) {
+            slides.slidePrev();
+            this.slideChangeHandler(slides);
+        }
     }
 
     slideChangeHandler(event: Slides) {
