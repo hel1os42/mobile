@@ -3,11 +3,11 @@ import { NavParams, ViewController } from 'ionic-angular';
 import * as _ from 'lodash';
 
 @Component({
-    selector: 'places-popover-component',
-    templateUrl: 'places.popover.html'
+    selector: 'filter-popover-component',
+    templateUrl: 'filter.popover.html'
 })
 
-export class PlacesPopover {
+export class FilterPopover {
 
     types = [];
     tags;
@@ -32,17 +32,19 @@ export class PlacesPopover {
         let step = this.radius / 1000 > 1
             ? Math.round(this.radius / 1000)
             : Math.round(this.radius / 1000 * 100) / 100;
+
         if (!this.STEPS.find(item => item == step)) {
             this.STEPS.push(step);
             this.STEPS = _.sortBy(this.STEPS);
         }
+        
         this.lengthSteps = this.STEPS.length - 1;
         for (let i = 0; i < this.STEPS.length; i++) {
             if (Math.round(radius / 1000) == this.STEPS[i] || Math.round(this.radius / 1000 * 100) / 100 == this.STEPS[i]) {
                 this.slider = i;
             }
         }
-        this.getSpecialities();
+            this.getSpecialities();
     }
 
     getRadius() {
@@ -84,26 +86,27 @@ export class PlacesPopover {
         }
     }
 
-    close() {
-        this.viewCtrl.dismiss({
-            types: this.types,
-            tags: this.tags,
-            specialities: this.specialities.filter(spec => spec.isSelected),
-            radius: this.radius
-        });
-    }
-
-    // clear(arr) {
-    //     for (let i = 0; i < arr.length; i++) {
-    //         arr[i].isSelected = false;
-    //     }
-    // }
-
-    getSpecialities() {
+    getSpecialities(type?) {
+        this.specialities;
+        if (type && !type.isSelected) {
+            type.specialities.forEach(item => {
+                item.isSelected = false;
+            });
+            this.types;
+            this.specialities;
+        } else if (type && type.isSelected && this.specialities.length > 0) {
+            type.specialities.forEach(item => {
+                this.specialities.forEach(spec => {
+                    if (item.slug === spec.slug) {
+                        item.isSelected = spec.isSelected;
+                    }
+                });
+            });
+        }
         // this.specialities = [];
         let types = this.types.filter(type => type.isSelected);
-        types.forEach(type => {
-            type.specialities.forEach(spec => {
+        types.forEach(item => {
+            item.specialities.forEach(spec => {
                 this.specialities.forEach(item => {
                     if (spec.slug === item.slug) {
                         spec.isSelected = item.isSelected;
@@ -113,20 +116,52 @@ export class PlacesPopover {
         });
         this.specialities = [];
         types.forEach(type => {
-            this.specialities = [...this.specialities, ...type.specialities];
+            this.specialities = [...this.specialities, ..._.cloneDeep(type.specialities)];
         });
         this.specialities = _.uniqBy(this.specialities, 'slug');
-
     }
 
-    clear() {
-        this.types = [];
-        this.tags = [];
-        this.specialities = [];
+    checkSpeciality(speciality) {
+        this.types.forEach(type => {
+            if (type.isSelected) {
+                type.specialities.forEach(spec => {
+                    if (spec.slug === speciality.slug) {
+                        spec.isSelected = speciality.isSelected;
+                    }
+                })
+            }
+        })
+    }
+
+    getIsSelected(arr) {
+        let isSelected = false;
+        for (let item of arr) {
+            if (item.isSelected) {
+                isSelected = true;
+                break;
+            }
+        }
+        return isSelected;
+    }
+
+    // getLang() {
+    //     return  SYS_OPTIONS.LANG_CODE;
+    // }
+
+    close() {
         this.viewCtrl.dismiss({
             types: this.types,
             tags: this.tags,
-            specialities: this.specialities,
+            specialities: this.specialities.filter(spec => spec.isSelected),
+            radius: this.radius
+        });
+    }
+
+    clear() {
+        this.viewCtrl.dismiss({
+            types: this.types = [],
+            tags: this.tags = [],
+            specialities: this.specialities = [],
             radius: this.radius
         });
     }

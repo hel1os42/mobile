@@ -22,7 +22,7 @@ declare var cookieMaster;
 @Injectable()
 export class AuthService {
 
-    inviteCode: string = '';
+    // inviteCode: string = '';
     registerData: Register = new Register();
     onLogout = new EventEmitter();
     FACEBOOK = 'facebook';
@@ -52,7 +52,7 @@ export class AuthService {
         this.token.onRemove.subscribe(() => this.onLogout.emit());
 
         setInterval(() => {
-            this.clearCookies();
+            // this.clearCookies();
             let date = new Date();
             let time = date.valueOf();
             let tokenStart = this.storage.get('tokenStart');
@@ -60,18 +60,17 @@ export class AuthService {
             if (differ > 129600 && this.isLoggedIn()) {//36 hours
                 this.refreshToken();
             }
-        }, 120 * 1000);
-
+        }, 10 * 1000);
     }
 
-    getInviteCode() {
-        //this.inviteCode = to do
-        return this.inviteCode;
-    }
+    // getInviteCode() {
+    //     //this.inviteCode = to do
+    //     return this.inviteCode;
+    // }
 
-    setInviteCode(invite) {
-        this.inviteCode = invite;//to do
-    }
+    // setInviteCode(invite) {
+    //     this.inviteCode = invite;//to do
+    // }
 
     isLoggedIn() {
         let token = this.token.get();
@@ -85,10 +84,9 @@ export class AuthService {
         let obs: Observable<any>;
         if (phone) {
             obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
-            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
-                err => { return; });
-        }
-        else {
+            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'));
+            // err => { });
+        } else {
             obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
         }
         return obs;
@@ -100,7 +98,7 @@ export class AuthService {
             ignoreHttpNotFound: this.appMode.getEnvironmentMode() === 'prod'
         });
         obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
-            err => { return; });
+            err => { });
         return obs;
     }
 
@@ -108,7 +106,7 @@ export class AuthService {
         let obs = this.api.post('users', register);
         obs.subscribe((resp) => {
             if (resp.was_recently_created) {
-                this.gAnalytics.trackEvent('Session', 'event_signup');
+                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signup');
                 this.analytics.faLogEvent('event_signup');
                 this.adjust.setEvent('FIRST_TIME_SIGN_IN');
             }
@@ -125,11 +123,13 @@ export class AuthService {
             }
             this.loginHandler({ token: resp.token }, false, resp.id);
         });
+        // },
+        //     err => { });
         return obs;
     }
 
     login(login: Login) {
-        this.gAnalytics.trackEvent('Session', 'event_phoneconfirm');
+        this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
         this.analytics.faLogEvent('event_phoneconfirm');
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
@@ -137,6 +137,8 @@ export class AuthService {
             this.loginHandler(token, false);
             this.adjust.setEvent('SIGN_IN');
         });
+        // },
+        //     err => {});
         return obs;
     }
 
@@ -160,12 +162,12 @@ export class AuthService {
                         // })
                     })
                 })
-            this.gAnalytics.trackEvent('Session', 'event_signin');
+            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signin');
             // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
             let envName = this.appMode.getEnvironmentMode();
             this.oneSignal.sendTag('environment', envName);
             if (!isSocial) {
-                this.gAnalytics.trackEvent("Session", 'event_phoneconfirm');
+                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
                 this.analytics.faLogEvent('event_phoneconfirm');
             }
         }
@@ -186,9 +188,7 @@ export class AuthService {
                 }
             })
         },
-            err => {
-                return;
-            });
+            err => { });
         return obs;
     }
 
@@ -204,11 +204,12 @@ export class AuthService {
     }
 
     refreshToken() {
+        this.clearCookies();
         this.api.get('auth/token', { showLoading: false })
             .subscribe(
                 token => this.token.set(token),
                 errResp => {
-                    this.token.remove('ERR_RESP_TOKEN_REFRESH');
+                    // this.token.remove('ERR_RESP_TOKEN_REFRESH');
                 });
     }
 

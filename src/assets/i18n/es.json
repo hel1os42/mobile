@@ -75,7 +75,8 @@
         "SETTINGS": "Configuraciones",
         "POINTS": "puntos",
         "POINTS2": "puntos",
-        "POINT": "punto"
+        "POINT": "punto",
+        "ERROR": "Error"
     },
 
     "MONTHS" : {
@@ -101,6 +102,12 @@
         "FRI" : "VIE",
         "SAT" : "SAB",
         "SUN" : "DOM"
+    },
+
+    "SHARING" : {
+        "INVITE" : "¡NAU es la nueva aplicación que te ayuda ahorrar el dinero y recibir nuevos regalos desde café hasta iPhone!",
+        "PLACE" : "¡Revisa este maravilloso lugar en NAU App y recoge su oferta especial ya ahora!",
+        "OFFER" : "¡Revisa esta estupenda oferta en NAU App y recíbela ya! ¡Te la recomiendo!"
     },
 
     "PAGE_PLACES" : {
@@ -136,7 +143,7 @@
         "RADIUS": "Radio",
         "FRIENDS": "a",
         "OFFER": "o",
-        "COUPONS_LEFT": "Cupones restantes",
+        "COUPONS_LEFT": "Cupones",
         "NO_RESULTS": "No resultados",
         "NOTHING_FOUND": "No se encuentra nada en búsqueda o en la configuración de los filtros. Por favor, cambie la búsqueda."
     },
@@ -314,8 +321,8 @@
         "YOU_CAN_SET": "Puede configurar su ubicación manualmente",
         "AGE" : "Edad",
         "INCOME" : "Ingresos",
-        "POINTS_FRIENDS" : "Puntos<br>Amigos:",
-        "POINTS_REDEMPTIONS" : "Puntos<br>Redención:"
+        "POINTS_FRIENDS" : "Puntos de<br>Amigos:",
+        "POINTS_REDEMPTIONS" : "Puntos de<br>Redención:"
     },
 
     "PAGE_FEED" : {
@@ -352,7 +359,8 @@
         "SECONDS" : "segundos",
         "SECONDS2" : "segundos",
         "SECOND" : "segundo",
-        "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo"
+        "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo",
+        "CHANGE_INVITE" : "Código amigo"
     },
 
     "PAGE_NOTIFICATIONS" : {
@@ -601,7 +609,12 @@
         "GET_NEW_OFFERS_NEARBY" : "Experimente nuevas ofertas cercanas y mejore su nivel",
         "NAU" : "nau",
         "USERS" : "usuarios",
-        "LOGOUT" : "cerrar sesión"
+        "LOGOUT" : "cerrar sesión",
+        "ALL_OFFERS" : "Todas las ofertas",
+        "AVAILABLE" : "Disponible",
+        "SLIDER_TITLE" : "Usen puntos para cupones de regalo",
+        "MODAL_REFERRAL_POINTS" : "Puntos que recibes por invitar cada amigo a la aplicación.",
+        "MODAL_REDEMPTION_POINTS" : "Puntos que recibes por cada oferta redimida (excepto las ofertas de regalo)."
     },
 
     "PAGE_USER-TASKS" : {

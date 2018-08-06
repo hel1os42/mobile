@@ -6,7 +6,7 @@
                     ion-col
                     *ngFor="let category of categories; let i = index"
                     [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
-                    (click)="i == 2 ? getFeatured() : selectCategory(category)">
+                    (click)="i == 2 ? getFeatured() : selectCategory(category, i)">
                     <p>
                         <img [src]="isFeatured && i == 2 ? 'assets/img/splash_screen/tab-icon6_active.svg' : category.image_url">
                     </p>
@@ -41,7 +41,7 @@
                     *ngIf="typeFilter.length > 0 || specialityFilter.length > 0 || tagFilter.length > 0"
                     src="assets/img/user_home/icon_settings_active.svg">
             </a>
-            <a (click)="toggleMap()" text-center class="searchbar-right-block">
+            <a *ngIf="coords" (click)="toggleMap()" text-center class="searchbar-right-block">
                 <div class="btn_map1" *ngIf="!isMapVisible">
                     <img src="assets/img/user_home/icon_pin_new.svg">
                     <div class="text-828282 font-10">{{ 'PAGE_PLACES.MAP' | translate }}</div>
@@ -172,6 +172,10 @@
             tappable
             ion-item
             detail-none>
+            <img
+                *ngIf="offer.is_favorite"
+                [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                class="star_right" src="assets/img/place/icon_star.svg">
             <ion-avatar
                 (click)="openPlace($event, offer?.account.owner.place, false)"
                 item-start
@@ -179,7 +183,7 @@
                 class="relative">
                 <div
                     [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }"
-                    class="thumb_image margin-top-2vw">
+                    class="thumb_image">
                 </div>
                 <div class="info-block" text-left>
                     <div>
@@ -221,10 +225,6 @@
                 </div>
                 <div [ngClass]="offer.type" class="right-top-angle"></div>
             </div>
-            <img
-                *ngIf="offer.is_favorite"
-                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-                 class="star_right" src="assets/img/place/icon_star.svg">
             <div class="block-fr bold">
                 <div
                     *ngIf="offer.max_count"
@@ -235,13 +235,13 @@
                     *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0) && (offer.referral_points_price || offer.redemption_points_price))"
                     class="block-right font-14 flex"
                     text-right>
-                    <span class="flex" *ngIf="offer.referral_points_price > user.referral_points">
+                    <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
                         <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
-                        {{ offer.referral_points_price }}
+                        <span class="circle_num">{{ offer.referral_points_price }}</span>
                     </span>
-                    <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
+                    <span class="flex" *ngIf="offer.redemption_points_price > user?.redemption_points">
                         <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
-                        {{ offer.redemption_points_price }}
+                        <span class="circle_num">{{ offer.redemption_points_price }}</span>
                     </span>
                 </div>
             </div>

@@ -14,7 +14,7 @@ export class ToastService {
 
     show(message: string, isDisconnected?: boolean) {
         let position = isDisconnected ? 'middle' : 'bottom';
-        let duration = isDisconnected ? 3000 : 5000;
+        let duration = isDisconnected ? 2000 : 5000;
         let toast = this.toast.create({
             message: message,
             duration: duration,
@@ -28,9 +28,12 @@ export class ToastService {
         if (!this.isShowed) {
             this.translate.get('TOAST.INTERNET_CONNECTION')
                 .subscribe(resp => {
+                   let message = resp === 'TOAST.INTERNET_CONNECTION' 
+                   ? 'Internet connection error'
+                   : resp;  
                     this.isShowed = true;
                     this.disconnectedToast = this.toast.create({
-                        message: resp,
+                        message: message,
                         // position: 'bottom',
                         // showCloseButton: true,
                         // closeButtonText: 'Close',

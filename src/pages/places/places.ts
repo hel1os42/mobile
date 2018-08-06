@@ -1,20 +1,44 @@
-import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, Platform, PopoverController, Content } from 'ionic-angular';
-import { DomUtil, icon, LatLng, latLng, LeafletEvent, Map, Marker, marker, popup, tileLayer, Circle, CircleMarkerOptions } from 'leaflet';
+import { AlertController, Content, LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
+import {
+    Circle,
+    CircleMarkerOptions,
+    DomUtil,
+    icon,
+    LatLng,
+    latLng,
+    LeafletEvent,
+    Map,
+    Marker,
+    marker,
+    popup,
+    tileLayer,
+} from 'leaflet';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 import { Subscription } from 'rxjs/Subscription';
+import { COUNTRIES } from '../../const/countries';
+import { PHONE_CODES } from '../../const/phoneCodes.const';
 import { ChildCategory } from '../../models/childCategory';
 import { Coords } from '../../models/coords';
+import { Offer } from '../../models/offer';
 import { OfferCategory } from '../../models/offerCategory';
 import { Place } from '../../models/place';
 import { RetailType } from '../../models/retailType';
 import { Share } from '../../models/share';
+import { Speciality } from '../../models/speciality';
 import { Tag } from '../../models/tag';
+import { User } from '../../models/user';
+import { AdjustService } from '../../providers/adjust.service';
+import { AnalyticsService } from '../../providers/analytics.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
+import { GeocodeService } from '../../providers/geocode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -22,21 +46,12 @@ import { ShareService } from '../../providers/share.service';
 import { StorageService } from '../../providers/storage.service';
 import { TestimonialsService } from '../../providers/testimonials.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
-import { PlacePage } from '../place/place';
-import { PlacesPopover } from './places.popover';
-import { GeocodeService } from '../../providers/geocode.service';
-import { NoPlacesPopover } from '../places/noPlaces.popover';
-import { COUNTRIES } from '../../const/countries';
-import { PHONE_CODES } from '../../const/phoneCodes.const';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { MapUtils } from '../../utils/map.utils';
-import { AnalyticsService } from '../../providers/analytics.service';
-import { Offer } from '../../models/offer';
-import { LimitationPopover } from '../place/limitation.popover';
-import { User } from '../../models/user';
-import { AdjustService } from '../../providers/adjust.service';
 import { LinkPopover } from '../offer/link.popover';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LimitationPopover } from '../place/limitation.popover';
+import { PlacePage } from '../place/place';
+import { NoPlacesPopover } from '../places/noPlaces.popover';
+import { FilterPopover } from './filter.popover';
 
 @Component({
     selector: 'page-places',
@@ -49,7 +64,7 @@ export class PlacesPage {
     companies: Place[];
     categories: OfferCategory[] = OfferCategory.StaticList;
     childCategories: ChildCategory[];
-    selectedCategory = new OfferCategory;
+    selectedCategory = new OfferCategory();
     isMapVisible: boolean = false;
     coords: Coords;
     mapBounds;
@@ -78,7 +93,8 @@ export class PlacesPage {
     isChangedFilters = false;
     isForkMode: boolean;
     onResumeSubscription: Subscription;
-    onRefreshListSubscription: Subscription;
+    onRefreshFavoritesPlaces: Subscription;
+    onRefreshFavoritesOffers: Subscription;
     onRefreshTestimonials: Subscription;
     onRefreshDefoultCoords: Subscription;
     onRefreshFeaturedOffers: Subscription;
@@ -127,15 +143,9 @@ export class PlacesPage {
 
         this.isForkMode = this.appMode.getForkMode();
         this.mapRadius = this.listRadius = this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
-
-        // this.onShareSubscription = this.share.onShare
-        //     .subscribe(resp => {
-        //         this.shareData = resp;
-        //         debugger
-        //     })
         this.shareData = this.share.get();
+        this.segment = 'alloffers';
 
-        this.segment = "alloffers";
         if (this.platform.is('cordova')) {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
                 if (this.isConfirm) {
@@ -150,27 +160,49 @@ export class PlacesPage {
                         }
                     })
                     // .catch(err => console.log(err + 'err'));
-                }
-                else return;
+                } else return;
             });
         }
 
-        this.offers.getCategories(false)
-            .subscribe(categories => {
-                this.categories.forEach((category) => {
-                    let obj = categories.data.find(p => p.name === category.name);//temporary - code
-                    category.id = obj ? obj.id : '';
-                })
-                this.selectedCategory = this.categories[0];
-                this.getLocationStatus();
-            })
-        this.onRefreshListSubscription = this.favorites.onRefreshPlaces
+        // this.offers.getCategories(true)
+        //     .subscribe(categories => {
+        //         this.categories.forEach((category) => {
+        //             let obj = categories.data.find(p => p.name === category.name);//temporary - code
+        //             category.id = obj ? obj.id : '';
+        //         })
+        //         this.selectedCategory = this.categories[0];
+        //         this.getLocationStatus();
+        //     });
+        this.getRootCategories(true);
+
+        this.onRefreshFavoritesPlaces = this.favorites.onRefreshPlaces
             .subscribe((resp) => {
-                this.companies.forEach(company => {
+                for (let company of this.companies) {
                     if (company.id === resp.id) {
                         company.is_favorite = resp.isFavorite;
+                        break;
                     }
-                });
+                };
+                if (this.featuredOffers && this.featuredOffers.length > 0) {
+                    for (let offer of this.featuredOffers) {
+                        if (offer.account.owner.place.id === resp.id) {
+                            offer.account.owner.place.is_favorite = resp.isFavorite;
+                            break;
+                        }
+                    }
+                }
+            });
+
+        this.onRefreshFavoritesOffers = this.favorites.onRefreshOffers
+            .subscribe(resp => {
+                if (this.featuredOffers && this.featuredOffers.length > 0) {
+                    for (let offer of this.featuredOffers) {
+                        if (offer.id === resp.id) {
+                            offer.is_favorite = resp.isFavorite;
+                            break;
+                        }
+                    }
+                }
             });
 
         this.onRefreshTestimonials = this.testimonials.onRefresh
@@ -222,11 +254,31 @@ export class PlacesPage {
 
     }
 
+    getRootCategories(isLoading: boolean, index?: number) {
+        this.offers.getCategories(isLoading)
+            .subscribe(categories => {
+                this.categories.forEach((category) => {
+                    let obj = categories.data.find(p => p.name === category.name);//temporary - code
+                    category.id = obj ? obj.id : '';
+                })
+                let i = index || 0;
+                this.selectedCategory = this.categories[i];
+                this.getLocationStatus();
+            },
+                err => {
+                    this.isRefreshLoading = false;
+                    if (this.refresher) {
+                        this.refresher.complete();
+                        this.refresher = undefined;
+                    }
+                });
+    }
+
     onMapReady(map: Map) {
         // console.log(map);
         // let width = this.platform.width();
-        let heigth = document.getElementById("map_leaf").offsetHeight;
-        if (!this._map && this.coords.lat) {
+        let heigth = document.getElementById('map_leaf').offsetHeight;
+        if (!this._map && this.coords && this.coords.lat) {
             this._map = map;
             this.generateBounds(this.markers);
         }
@@ -234,7 +286,7 @@ export class PlacesPage {
         this._map.on({
             moveend: (event: LeafletEvent) => {
                 this.zoom = this._map.getZoom();
-                if (this.coords.lat != this._map.getCenter().lat) {
+                if (this.coords && this.coords.lat != this._map.getCenter().lat) {
                     this.coords = this._map.getCenter();
                     // this.changeDetectorRef.detectChanges();
                     if (this.coords.lng > 180 || this.coords.lng < -180) {
@@ -268,8 +320,7 @@ export class PlacesPage {
                 .then(result => {
                     if (result.hasPermission === false) {
                         this.requestPerm();
-                    }
-                    else {
+                    } else {
                         this.getLocation(false);
                     }
                     // console.log(result)
@@ -280,8 +331,7 @@ export class PlacesPage {
                     // }
                 )
             // .catch(err => console.log(err));
-        }
-        else if (this.platform.is('cordova') && this.platform.is('ios')) {
+        } else if (this.platform.is('cordova') && this.platform.is('ios')) {
             this.diagnostic.getLocationAuthorizationStatus()
                 .then(resp => {
                     if (resp === 'NOT_REQUESTED' || resp === 'NOT_DETERMINED' || resp === 'not_requested' || resp === 'not_determined') {
@@ -289,62 +339,40 @@ export class PlacesPage {
                             .then(res => {
                                 this.getLocation(false);
                             })
-                    }
-                    else {
+                    } else {
                         this.getLocation(false);
                     }
                 })
-        }
-        else {
+        } else {
             this.getLocation(false);
         }
     }
 
-    requestPerm() {
-        this.androidPermissions.requestPermissions([
+    async requestPerm() {
+        const permissions = await this.androidPermissions.requestPermissions([
             this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
             this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
             this.androidPermissions.PERMISSION.ACCESS_LOCATION_EXTRA_COMMANDS
-        ])
-            .then(
-                result => {
-                    if (result.hasPermission === false) {
-                        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
-                            result => {
-                                if (result.hasPermission === false) {
-                                    this.presentAndroidConfirm();
-                                }
-                                else {
-                                    this.getLocation(false);
-                                }
-                            })
-                        // .catch(err => {
-                        //     debugger;
-                        //     console.log(err + 'err');
-                        // });
-                    }
-                    else {
-                        this.getLocation(false);
-                    }
-                    console.log(result)
-                }
-                // err => {
-                //     this.requestPerm();
-                //     debugger
-                // }
-            )
-        // .catch(err => {
-        //     debugger;
-        //     console.log(err + 'err');
-        // });
+        ]);
+        if (permissions.hasPermission === false) {
+            const checkPermissions = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION);
+            if (checkPermissions.hasPermission === false) {
+                this.presentAndroidConfirm();
+            } else {
+                this.getLocation(false);
+            }
+        } else {
+            this.getLocation(false);
+        }
+        console.log(permissions)
     }
 
     getLocation(isDenied: boolean, isRefresh?: boolean) {
         if (!isDenied) {
+
             if (!this.platform.is('cordova')) {
                 this.getCoords(isRefresh);
-            }
-            else {
+            } else {
                 this.diagnostic.isLocationAvailable().then(result => {
                     if (!result) {
                         if (this.platform.is('android')) {
@@ -352,8 +380,7 @@ export class PlacesPage {
                                 .then(result => {
                                     if (result.hasPermission === false) {
                                         this.requestPerm();
-                                    }
-                                    else {
+                                    } else {
                                         this.presentConfirm();
                                     }
                                     // console
@@ -362,39 +389,50 @@ export class PlacesPage {
                         if (this.platform.is('ios')) {
                             this.presentConfirm();
                         }
-                    }
-                    else {
+                    } else {
                         this.getCoords(isRefresh);
                     }
                 })
                 // .catch(err => console.log(err + 'err'))
             }
-        }
-        else {
+
+        } else {
             this.profile.get(true, false)
                 .subscribe(user => {
                     if (user.latitude) {
                         this.getDefaultCoords(user.latitude, user.longitude);
-                    }
-                    else {
+                    } else {
                         this.location.getByIp()
                             .subscribe(resp => {
                                 // this.getDefaultCoords(resp.latitude, resp.longitude);
                                 // user.latitude = resp.latitude;
                                 // user.longitude = resp.longitude;
                                 this.getDefaultCoords(resp.lat, resp.lon);
-                                user.latitude = resp.lat;
-                                user.longitude = resp.lon;
-                                this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
+                                this.user.latitude = resp.lat;
+                                this.user.longitude = resp.lon;
+                                this.profile.patch({ latitude: this.user.latitude, longitude: this.user.longitude }, true);
                             },
                                 err => {
                                     this.getDefaultCoords(0, 0);
-                                    user.latitude = 0;
-                                    user.longitude = 0;
-                                    this.profile.patch({ latitude: user.latitude, longitude: user.longitude }, true);
+                                    this.user.latitude = 0;
+                                    this.user.longitude = 0;
+                                    this.profile.patch({ latitude: this.user.latitude, longitude: this.user.longitude }, true);
                                 });
                     }
-                })
+                },
+                    err => this.getDefaultCoords(0, 0))
+        }
+    }
+
+    getCoords(isRefresh?: boolean) {
+
+        if (this.platform.is('android')) {
+            this.diagnostic.getLocationMode()
+                .then(res => {
+                    this.getNativeCoords(res === 'high_accuracy', isRefresh);
+                });
+        } else {
+            this.getNativeCoords(false, isRefresh);
         }
     }
 
@@ -412,6 +450,20 @@ export class PlacesPage {
                             : undefined);
                     loadingLocation.present();
                 }
+                // this.location.get(isHighAccuracy)
+                // .then((resp) => {
+                //     this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
+                //     loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                // })
+                // .catch((error) => {
+                //     loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                //     if (this.platform.is('cordova')) {
+                //     }
+                //     else {
+                //         this.getLocation(true);
+                //     }
+                //     // error => console.log(error + 'err')
+                // })
                 if (this.platform.is('cordova')) {
                     this.location.get(isHighAccuracy)
                         .then((resp) => {
@@ -425,10 +477,9 @@ export class PlacesPage {
                                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                             }
                             this.presentConfirm();
+                            console.log('places ' + error);
                         })
-                }
-                //for browser
-                else {
+                } else {//for browser
                     if (loadingLocation) {
                         loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                     }
@@ -461,19 +512,6 @@ export class PlacesPage {
         this.getList();
     }
 
-    getCoords(isRefresh?: boolean) {
-
-        if (this.platform.is('android')) {
-            this.diagnostic.getLocationMode()
-                .then(res => {
-                    this.getNativeCoords(res === 'high_accuracy', isRefresh);
-                });
-        }
-        else {
-            this.getNativeCoords(false, isRefresh);
-        }
-    }
-
     getDevMode() {
         return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }
@@ -481,8 +519,7 @@ export class PlacesPage {
     getList() {
         if (this.isFeatured) {
             this.loadFeaturedOffers();
-        }
-        else {
+        } else {
             this.addMap();
             this.loadCompanies(true, this.page);
             this.userPin = [marker([this.userCoords.lat, this.userCoords.lng], {
@@ -573,6 +610,7 @@ export class PlacesPage {
         //     return undefined;
         if (this._map && this.isMapVisible) {
             let distance: number;
+
             if (markers && markers.length > 0) {
                 let latLngPairs = markers.map(p => p.getLatLng());
                 let distanceArr = [];
@@ -593,8 +631,7 @@ export class PlacesPage {
                 this.fitBounds = this.circle.getBounds();
                 // let zoom = this._map.getBoundsZoom(this.fitBounds);
                 this.changeDetectorRef.detectChanges();
-            }
-            else {
+            } else {
                 distance = this.circleRadius;
             }
 
@@ -605,20 +642,40 @@ export class PlacesPage {
         return this.selectedCategory && this.selectedCategory.id === category.id && !this.isFeatured;
     }
 
-    selectCategory(category: OfferCategory) {
-        // this.content.scrollToTop();
-        if (this.isFeatured) {
-            this.isFeatured = false;
-            this.content.resize();
-        }
-        this.isChangedCategory = this.selectedCategory.id !== category.id;
-        this.search = "";
-        this.selectedCategory = category;
-        this.loadCompanies(true, this.page = 1);
-        if (this.isChangedCategory) {
-            this.tagFilter = [];
-            this.typeFilter = [];
-            this.specialityFilter = [];
+    selectCategory(category: OfferCategory, index: number) {
+        if (!this.selectedCategory.id) {
+
+            if (this.isFeatured) {
+                this.isFeatured = false;
+                this.content.resize();
+            }
+
+            this.getRootCategories(true, index);
+        } else {
+
+            if (this.isFeatured) {
+                this.isFeatured = false;
+                this.content.resize();
+                this.isChangedCategory = true;
+            } else {
+                this.isChangedCategory = this.selectedCategory.id !== category.id;
+            }
+
+            if (this.isChangedCategory) {
+                this.tagFilter = [];
+                this.typeFilter = [];
+                this.specialityFilter = [];
+            }
+
+            this.search = '';
+            this.selectedCategory = category;
+
+            if (!this.coords) {
+                this.getLocationStatus();
+            } else {
+                this.loadCompanies(true, this.page = 1);
+            }
+
         }
     }
 
@@ -628,6 +685,10 @@ export class PlacesPage {
         let loading;
         this.isFeatured = true;
         this.content.resize();
+        this.isChangedCategory = true;
+        this.tagFilter = [];
+        this.typeFilter = [];
+        this.specialityFilter = [];
         if (!this.user) {
             loading = this.loading.create();
             loading.present();
@@ -636,8 +697,7 @@ export class PlacesPage {
                     this.user = user;
                     this.loadFeaturedOffers(loading);
                 })
-        }
-        else {
+        } else {
             this.loadFeaturedOffers();
         }
     }
@@ -706,15 +766,26 @@ export class PlacesPage {
                         this.refresher.complete();
                         this.refresher = undefined;
                     }
+                    this.isDismissNoPlacesPopover = true;
                 });
         }
     }
 
     noPlacesHandler() {
-        this.geocoder.getAddress(this.coords.lat, this.coords.lng, true, true)
-            .subscribe(data => {
+        let isFiltered = (this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== '';
+
+        let obs = isFiltered
+            ? Observable.of({})
+            : this.geocoder.getAddress(this.coords.lat, this.coords.lng, true, true);
+
+        obs.subscribe(data => {
+            let city;
+            let isCountryEnabled;
+            let countryCode;
+
+            if (!isFiltered) {
                 let address = !data.error ? data.address : undefined;
-                let city = address
+                city = address
                     // ? (address.city || address.town || address.county || address.state)
                     // ? (address.city || address.town)
                     ? address.city
@@ -722,50 +793,46 @@ export class PlacesPage {
                 // let state = address
                 //     ? (address.state || address.county)
                 //     : undefined;
-                let countryCode = address ? address.country_code : undefined;
-                let isCountryEnabled;
+                countryCode = address ? address.country_code : undefined;
                 if (countryCode) {
                     let country = PHONE_CODES.find(country => country.code === countryCode.toUpperCase()).name;
                     isCountryEnabled = COUNTRIES.find(item => item.name === country) ? true : false;
-                }
-                else {
+                } else {
                     isCountryEnabled = false;
                 }
-                let isFiltered = (this.tagFilter && this.tagFilter.length > 0) || this.typeFilter.length > 0 || this.specialityFilter.length > 0 || this.search !== ''
-                    ? true : false;
+            }
 
-                let popover = this.popoverCtrl.create(
-                    NoPlacesPopover,
-                    {
-                        isCountryEnabled: isCountryEnabled,
-                        city: city,
-                        countryCode: countryCode,
-                        isFiltered: isFiltered
-                    });
-                popover.present();
-                popover.onDidDismiss(data => {
-                    if (data && data.radius) {
-                        this.page = 1;
-                        // this.radius = data.radius;
-                        if (this.isMapVisible) {
-                            this.radius = this.mapRadius = data.radius;
-                        }
-                        else {
-                            this.radius = this.listRadius = data.radius;
-                        }
-                        //to test
-                        this.tagFilter = [];
-                        this.typeFilter = [];
-                        this.specialityFilter = [];
-                        this.search = '';
-                        //
-                        this.isDismissNoPlacesPopover = true;
-                        this.loadCompanies(true, this.page);
+            let popover = this.popoverCtrl.create(
+                NoPlacesPopover,
+                {
+                    isCountryEnabled: isCountryEnabled,
+                    city: city,
+                    countryCode: countryCode,
+                    isFiltered: isFiltered
+                });
+            popover.present();
+            popover.onDidDismiss(data => {
+                if (data && data.radius) {
+                    this.page = 1;
+                    // this.radius = data.radius;
+                    if (this.isMapVisible) {
+                        this.radius = this.mapRadius = data.radius;
+                    } else {
+                        this.radius = this.listRadius = data.radius;
                     }
+                    //to test
+                    this.tagFilter = [];
+                    this.typeFilter = [];
+                    this.specialityFilter = [];
+                    this.search = '';
+                    //
                     this.isDismissNoPlacesPopover = true;
-                })
-                // this.changeDetectorRef.detectChanges();
+                    this.loadCompanies(true, this.page);
+                }
+                this.isDismissNoPlacesPopover = true;
             })
+            // this.changeDetectorRef.detectChanges();
+        })
     }
 
     toggleMap() {
@@ -774,16 +841,14 @@ export class PlacesPage {
         if (this.isMapVisible) {
             if (!this.mapCenter) {
                 this.generateBounds(this.markers);
-            }
-            else {
+            } else {
                 this.radius = this.mapRadius;
                 this.coords = this.mapCenter;
                 this.loadCompanies(false, 1, true);
                 this._map.setView(this.mapCenter, this.zoom);
                 // this.changeDetectorRef.detectChanges();
             }
-        }
-        else {
+        } else {
             this.companies = [];
             this.coords = this.userCoords;
             this.radius = this.listRadius;
@@ -793,7 +858,7 @@ export class PlacesPage {
             if (document.getElementById("map_leaf")) {
                 document.getElementById("map_leaf").style.height = window.innerHeight -
                     document.getElementsByClassName('block-places-header')[0].clientHeight -
-                    document.getElementsByClassName('tabbar')[0].clientHeight + "px";
+                    document.getElementsByClassName('tabbar')[0].clientHeight + 'px';
             }
         }
         setTimeout(renderMap, 1);
@@ -802,9 +867,8 @@ export class PlacesPage {
     openPlace(event, data, isShare: boolean, offer?: Offer) {
         if (this.isFeatured) {
             this.adjust.setEvent('TOP_OFFER_FEED_CLICK');
-        }
-        else {
-            this.gAnalytics.trackEvent("Session", 'event_chooseplace');
+        } else {
+            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
             this.analytics.faLogEvent('event_chooseplace');
         }
 
@@ -814,8 +878,7 @@ export class PlacesPage {
                 ...data,
                 coords: this.userCoords,
             }
-        }
-        else {
+        } else {
             params = {
                 company: data,
                 distanceObj: this.getDistance(data.latitude, data.longitude),
@@ -829,12 +892,10 @@ export class PlacesPage {
 
             let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
             limitationPopover.present();
-        }
-        else {
+        } else {
             if (offer && event && event.target.localName === 'a') {
                 this.openLinkPopover(event);
-            }
-            else {
+            } else {
                 this.nav.push(PlacePage, params);
             }
 
@@ -856,12 +917,10 @@ export class PlacesPage {
                         linkPopover.present();
                         linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
                     })
-            }
-            else {
+            } else {
                 this.browser.create(href, '_system');
             }
-        }
-        else return;
+        } else return;
     }
 
     getStars(star: number) {
@@ -922,43 +981,42 @@ export class PlacesPage {
                         : undefined;
                     this.presentPopover();
                 });
-        }
-        else {
+        } else {
             this.presentPopover();
         }
         this.isChangedCategory = false;
     }
 
     presentPopover() {
-        let popover = this.popoverCtrl.create(PlacesPopover, {
+        let popover = this.popoverCtrl.create(FilterPopover, {
             types: _.cloneDeep(this.selectedTypes),
             tags: _.cloneDeep(this.selectedTags),
             radius: this.radius
         });
-        this.search = "";
+        this.search = '';
+
         if (this.platform.is('ios')) {
             setTimeout(() => {
                 popover.present();
             }, 300)
-        }
-        else {
+        } else {
             popover.present();
         }
+
         popover.onDidDismiss((data) => {
             if (!data) {
                 return;
-            }
-            else {
+            } else {
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
-                if (types.length > 0 && this.getFilter(this.selectedTypes, data.types)) {
+                if (types.length > 0 && (this.getFilter(this.selectedTypes, data.types) || this.specialitiesHandler(this.selectedTypes, data.types))) {
                     this.selectedTypes = data.types;
                     this.typeFilter = data.types.filter(p => p.isSelected).map(p => p.id);
                     this.isChangedFilters = true;
-                }
-                else if (types.length == 0 && this.typeFilter.length > 0) {
+                } else if (types.length == 0 && this.typeFilter.length > 0) {
                     this.selectedTypes.forEach(type => {
                         type.isSelected = false;
+                        type.specialities.forEach(speciality => speciality.isSelected = false);
                     });
                     this.typeFilter = [];
                     this.isChangedFilters = true;
@@ -967,10 +1025,9 @@ export class PlacesPage {
                     this.selectedTags = data.tags;
                     this.tagFilter = data.tags.filter(p => p.isSelected).map(p => p.slug);
                     this.isChangedFilters = true;
-                }
-                else if (tags.length == 0 && this.tagFilter && this.tagFilter.length > 0) {
-                    this.selectedTags.forEach(type => {
-                        type.isSelected = false;
+                } else if (tags.length == 0 && this.tagFilter && this.tagFilter.length > 0) {
+                    this.selectedTags.forEach(tag => {
+                        tag.isSelected = false;
                     });
                     this.tagFilter = [];
                     this.isChangedFilters = true;
@@ -978,8 +1035,7 @@ export class PlacesPage {
                 if (data.specialities.length > 0 && this.getFilter(this.specialityFilter, data.specialities, true)) {
                     this.specialityFilter = data.specialities.map(p => p.slug);
                     this.isChangedFilters = true;
-                }
-                else if (data.specialities.length == 0 && this.specialityFilter.length > 0) {
+                } else if (data.specialities.length == 0 && this.specialityFilter.length > 0) {
                     this.specialityFilter = [];
                     this.isChangedFilters = true;
                 }
@@ -996,8 +1052,7 @@ export class PlacesPage {
     getFilter(arr, newArr, isSpecialities?: boolean) {
         if (arr.length != newArr.length) {
             return true;
-        }
-        else {
+        } else {
             let counter = 0;
             for (let i = 0; i < arr.length; i++) {
                 for (let k = 0; k < newArr.length; k++) {
@@ -1005,22 +1060,36 @@ export class PlacesPage {
                         if (arr[i] === newArr[i].slug) {
                             counter++;
                         }
+                    } else if (arr[i].id === newArr[i].id && arr[i].isSelected === newArr[i].isSelected) {
+                        counter++;
                     }
-                    else {
-                        if (arr[i].id === newArr[i].id && arr[i].isSelected === newArr[i].isSelected) {
-                            counter++;
-                        }
-                    }
-
                 }
             }
             return counter != arr.length * newArr.length;
         }
     }
 
-    searchCompanies($event) {
+    specialitiesHandler(arr, newArr) {
+        let specialities: Speciality[] = _.flatten(arr.map(item => item.specialities));
+        let newSpecialities: Speciality[] = _.flatten(newArr.map(item => item.specialities));
+        let counter = 0;
+        for (let item of specialities) {
+            for (let newItem of newSpecialities) {
+                if (item.retail_type_id === newItem.retail_type_id && item.slug === newItem.slug && item.isSelected === newItem.isSelected) {
+                    counter++;
+                }
+            }
+        }
+        return counter != specialities.length || counter != newSpecialities.length;
+    }
+
+    searchCompanies(event) {
         this.loadCompanies(true, this.page = 1);
     }
+
+    // getLang() {
+    //     return  SYS_OPTIONS.LANG_CODE;
+    // }
 
     isInfiniteScroll() {
         return !this.isMapVisible && (this.isFeatured ? this.featuredPage <= this.lastFeaturedPage : this.page <= this.lastPage);
@@ -1032,8 +1101,7 @@ export class PlacesPage {
         if (this.isFeatured) {
             page = ++this.featuredPage;
             lastPage = this.lastFeaturedPage;
-        }
-        else {
+        } else {
             page = ++this.page;
             lastPage = this.lastPage;
         }
@@ -1046,9 +1114,9 @@ export class PlacesPage {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
                             infiniteScroll.complete();
-                        });
-                }
-                else {
+                        },
+                            err => infiniteScroll.complete());
+                } else {
                     this.offers.getPlaces(this.selectedCategory.id, this.tagFilter,
                         this.typeFilter, this.specialityFilter, this.coords.lat, this.coords.lng,
                         this.radius, this.search, this.page, this.page == 1)
@@ -1061,30 +1129,36 @@ export class PlacesPage {
                             })
                             this.generateBounds(this.markers);
                             infiniteScroll.complete();
-                        });
+                        },
+                            err => infiniteScroll.complete());
                 }
             });
-        }
-        else {
+        } else {
             infiniteScroll.complete();
         }
     }
 
     doRefresh(refresher) {
-        if (this.isFeatured) {
-            this.featuredPage = 1;
-        }
-        else {
+        if (!this.isFeatured && !this.selectedCategory.id) {
+            this.getRootCategories(false);
+        } else if (!this.isFeatured && !this.coords) {
             this.page = 1;
-        }
-        // this.isRevertCoords = true;
-        this.isRefreshLoading = true;
-        this.getLocation(false, true);
-        this.refresher = refresher;
-        // setInterval(() => {
-        //     refresher.complete();
+            this.getLocationStatus();
+        } else {
+            if (this.shareData) {
+                this.shareData = undefined;
+                this.share.remove();
+            }
 
-        // }, 300);
+            if (this.isFeatured) {
+                this.featuredPage = 1;
+            } else {
+                this.page = 1;
+            }
+            this.getLocation(false, true);
+        }
+        this.isRefreshLoading = true;
+        this.refresher = refresher;
     }
 
     presentAndroidConfirm() {
@@ -1128,8 +1202,7 @@ export class PlacesPage {
                                 this.isConfirm = true;
                                 if (this.platform.is('ios')) {
                                     this.diagnostic.switchToSettings();
-                                }
-                                else {
+                                } else {
                                     this.diagnostic.switchToLocationSettings();
                                 }
                             }
@@ -1138,6 +1211,17 @@ export class PlacesPage {
                     enableBackdropDismiss: false
                 });
                 confirm.present();
+                let backAction = this.platform.registerBackButtonAction(() => {
+                    this.getLocation(true);
+                    confirm.dismiss();
+                    backAction();
+                }, 1);
+                confirm.onDidDismiss(() => {
+                    if (backAction) {
+                        backAction();
+                    }
+                    backAction = undefined
+                });
             })
     }
 
@@ -1145,13 +1229,14 @@ export class PlacesPage {
         if (this.platform.is('cordova')) {
             this.onResumeSubscription.unsubscribe();
         }
-        if (this.onRefreshListSubscription) {
-            this.onRefreshListSubscription.unsubscribe();
+        if (this.onRefreshFavoritesPlaces) {
+            this.onRefreshFavoritesPlaces.unsubscribe();
         }
         this.onRefreshTestimonials.unsubscribe();
         this.onRefreshUser.unsubscribe();
         this.onRefreshDefoultCoords.unsubscribe();
         this.onRefreshFeaturedOffers.unsubscribe();
+        this.onRefreshFavoritesOffers.unsubscribe();
     }
 
 }

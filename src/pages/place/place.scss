@@ -182,20 +182,8 @@ page-place {
         margin: 0 2vw 0 0;
     }
 
-    .item-block-nau .item {
-        padding: 2vw;
-    }
-
-    .star_right{
-        right: 2vw;
-        top: 2vw;
-    }
-
     .featured_right{
-        position: absolute;
-        left: 1vw;
-        top: 1vw;
-        height: 7vw;
+        height: 9vw;
         width: auto;
     }
 
@@ -287,7 +275,111 @@ page-place {
         opacity: 0.7;
         z-index: 1111111111;
     }
+
+    .block-place-offers .right-side {
+        width: 100%;
+        height: 100%;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .block-place-offers .right-side-content {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 43vw;
+        width: 100%;
+        padding: 2vw;
+    }
+
+    .block-place-offers ion-item{
+        height: 43vw;
+        display: flex;
+        align-items: flex-start;
+        overflow: hidden;
+    }
+
+    .item-block-nau .item{
+        padding: 0;
+        z-index: 1111;
+    }
+
+    .block-place-offers .smooth_transition {
+        width: 83%;
+        line-height: 1;
+    }
+
+    .block-place-offers .smooth_transition:before {
+        display: none;
+    }
+    .block-place-offers .right-top-angle {
+        position: absolute;
+        top: -10vw;
+        right: -10vw;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        width: 20vw;
+        height: 20vw;
+        background-color: #FF5A00;
+        background-repeat: no-repeat;
+        background-position: 50% 90%;
+        background-size: 25%;
+    }
+    .block-place-offers .right-top-angle.discount {
+        background-image: url(../assets/img/place/featured/discount.svg);
+        background-position: 50% 100%;
+        background-size: 40%;
+    }
+    .block-place-offers .right-top-angle.second_free {
+        background-image: url(../assets/img/place/featured/second_free.svg);
+    }
+    .block-place-offers .right-top-angle.bonus {
+        background-image: url(../assets/img/place/featured/bonus.svg);
+    }
+    .block-place-offers .right-top-angle.gift {
+        background-image: url(../assets/img/place/featured/gift.svg);
+    }
+    .block-fr {
+        position: absolute;
+        bottom: 2vw;
+        left: 0;
+        width: 100%;
+        color: #fff;
+    }
+    .coupon,
+    .block-right {
+        position: absolute;
+        bottom: 0;
+    }
+    .coupon {
+        left: 2vw;;
+        align-items: flex-end;
+    }
+    .coupon img:nth-child(2){
+        margin-left: 2vw;
+    }
+    .block-right {
+        right: 2vw;
+    }
+    .right-block{
+        width: 100%;
+        height: 100%;
+    }
 }
+
+.platform-android4 page-place .item-block-nau ion-avatar {
+    height: 23vw;
+    width: 23vw;
+}
+
+.platform-android4 page-place .cover_block_btn {
+    position: absolute;
+    right: 0;
+    padding-right: 3vw;
+    bottom: 3vw;
+    width: 100%;
+    text-align: right;
+}
+
 
 .iphonex page-place .btn-review {
     bottom: calc(constant(safe-area-inset-bottom) + 64px);

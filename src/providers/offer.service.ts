@@ -1,12 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { Observable } from 'rxjs';
 import { Place } from '../models/place';
 import { RedeemedOffer } from '../models/redeemedOffer';
-import { AdjustService } from './adjust.service';
-import { AnalyticsService } from './analytics.service';
 import { ApiService } from './api.service';
-
-// import { MockCompanies } from '../mocks/mockCompanies';
 
 @Injectable()
 export class OfferService {
@@ -18,25 +14,20 @@ export class OfferService {
     MAX_RADIUS = 19849 * 1000;// temporary
 
     constructor(
-        private api: ApiService,
-        private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
-        private adjust: AdjustService) { }
+        private api: ApiService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
     }
 
-    getFeaturedList( // for featured offers
+    getFeaturedList( //featured offers
         lat: number,
         lng: number,
         // radius: number,
         page: number,
         showLoading: boolean
     ) {
-        // return this.api.get(`offers`, {
         return this.api.get('offers', {
-        // return this.api.get(`offers?category_ids[]=382b8e95-9083-4095-a928-ee9178ee6275`, {// prod mock
             showLoading: showLoading,
             params: {
                 featured: true,
@@ -47,6 +38,42 @@ export class OfferService {
                 page: page
             }
         });
+    }
+
+    getPremiumList( //premium offers
+        lat: number,
+        lng: number,
+        userReferralPoints: number,
+        userRedemptionPoints: number,
+        page: number,
+        showLoading: boolean
+    ) {
+        let obs;
+        if (!userReferralPoints && !userRedemptionPoints) {
+            obs = Observable.of({
+                data: [],
+                last_page: 1
+            })
+        } else {
+            let searchStr = this.getPremiumSearch(userRedemptionPoints, userReferralPoints, 1);
+            let filterStr = this.getPremiumSearch(userRedemptionPoints, userReferralPoints, 0);
+
+            obs = this.api.get('offers', {
+                showLoading: showLoading,
+                params: {
+                    latitude: lat,
+                    longitude: lng,
+                    radius: this.MAX_RADIUS,
+                    with: 'account.owner.place',
+                    search: searchStr,
+                    whereFilters: filterStr,
+                    searchJoin: 'or',
+                    page: page
+                }
+            });
+        }
+        return obs;
+
     }
 
     getPlacesOfRoot(
@@ -86,18 +113,19 @@ export class OfferService {
         let type = 'retailTypes.id:';
         let speciality = 'specialities.slug:';
         let searchStr = '';
+        let filterStr = '';
         if (tags.length > 0) {
-            searchStr += this.getSearch(tag, tags);
+            filterStr += this.getSearch(tag, tags);
         }
         if (types.length > 0) {
-            searchStr += this.getSearch(type, types);
+            filterStr += this.getSearch(type, types);
         }
         if (specialities.length > 0) {
-            searchStr += this.getSearch(speciality, specialities);
+            filterStr += this.getSearch(speciality, specialities);
         }
-        if (search && search !== '') {
-            // searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
-            searchStr += 'name:' + `${search}`;
+        if (search) {
+            searchStr += 'description:' + `${search};` + 'name:' + `${search};`;
+            // searchStr += 'name:' + `${search}`;
         }
         let str = `${'category_ids[]'}=${category_ids}&`;
         return this.api.get(`places?${str}`, {
@@ -107,7 +135,8 @@ export class OfferService {
                 longitude: lng,
                 radius: radius,
                 search: searchStr,
-                searchJoin: 'and',
+                whereFilters: filterStr,
+                searchJoin: 'or',
                 with: 'category;retailTypes;tags;specialities',
                 page: page
             }
@@ -152,18 +181,18 @@ export class OfferService {
     }
 
     getRedemptionStatus(code: string) {
-        let obs = this.api.get(`activation_codes/${code}`, { 
-            showLoading: false, 
-            ignoreHttpNotFound: true 
+        let obs = this.api.get(`activation_codes/${code}`, {
+            showLoading: false,
+            ignoreHttpNotFound: true
         });
-        obs.subscribe(status => {
-            if (status.redemption_id) {
-                this.refreshRedeemedOffers();
-                this.gAnalytics.trackEvent('Session', 'event_redeemoffer');
-                this.analytics.faLogEvent('event_redeemoffer');
-                this.adjust.setEvent('ACTION_REDEMPTION');
-            }
-        })
+        // obs.subscribe(status => {
+        //     if (status.redemption_id) {
+        //         this.refreshRedeemedOffers();
+        //         this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', status.redemption_id);
+        //         this.analytics.faLogEvent('event_redeemoffer');
+        //         this.adjust.setEvent('ACTION_REDEMPTION');
+        //     }
+        // }, err => {})
         return obs;
     }
 
@@ -174,17 +203,28 @@ export class OfferService {
     getSearch(str: string, arr: string[]) {
         if (arr.length == 0) {
             str += ';';
-        }
-        else {
+        } else {
             for (let i = 0; i < arr.length; i++) {
                 str += arr[i];
                 if (i != arr.length - 1) {
                     str += '|';
-                }
-                else {
+                } else {
                     str += ';';
                 }
             }
+        }
+        return str;
+    }
+
+    getPremiumSearch(redemptionPoints: number, referralPoints: number, startPoints: number) {
+        let str: string
+        if (redemptionPoints) {
+            str = `offerData.redemption_points_price:${startPoints},${redemptionPoints}`;
+        }
+        if (referralPoints) {
+            str = str
+                ? str + `;offerData.referral_points_price:${startPoints},${referralPoints}`
+                : `offerData.referral_points_price:${startPoints},${referralPoints}`
         }
         return str;
     }
@@ -205,8 +245,8 @@ export class OfferService {
 
     refreshPlace(placeId) {
         this.getPlace(placeId, true)
-        .subscribe(resp => {
-            this.onRefreshPlace.emit(resp);
-        })
+            .subscribe(resp => {
+                this.onRefreshPlace.emit(resp);
+            })
     }
 }

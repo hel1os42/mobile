@@ -15,38 +15,52 @@
     <a  (click)="openTypesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_TYPE' | translate }}</ion-label>
       <div item-end>
-        <img *ngIf="isOpenTypesSelect" src="assets/img/user_home/arrow_up.svg">
-        <img *ngIf="!isOpenTypesSelect" src="assets/img/user_home/arrow_down.svg">
+        <img *ngIf="isOpenTypesSelect && !getIsSelected(types)" src="assets/img/user_home/arrow_up.svg">
+        <img *ngIf="!isOpenTypesSelect && !getIsSelected(types)" src="assets/img/user_home/arrow_down.svg">
+        <img *ngIf="isOpenTypesSelect && getIsSelected(types)" src="assets/img/user_home/arrow_up_active.svg">
+        <img *ngIf="!isOpenTypesSelect && getIsSelected(types)" src="assets/img/user_home/arrow_down_active.svg">
       </div>
     </a>
 
     <div *ngIf="isOpenTypesSelect" class="block-checks">
         <ion-item *ngFor="let type of types" no-lines>
             <ion-label item-end class="text-828282 font-16">{{ type.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="type.isSelected" (ionChange)="getSpecialities()" item-end></ion-checkbox>
+            <ion-checkbox 
+                [(ngModel)]="type.isSelected" 
+                (ionChange)="getSpecialities(type)" 
+                item-end>
+            </ion-checkbox>
         </ion-item>
     </div>
 
     <a *ngIf="specialities.length > 0" (click)="openSpecialitiesSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
         <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_FEATURES' | translate }}</ion-label>
         <div item-end>
-            <img *ngIf=" isOpenSpecialitiesSelect" src="assets/img/user_home/arrow_up.svg">
-            <img *ngIf="! isOpenSpecialitiesSelect" src="assets/img/user_home/arrow_down.svg">
+            <img *ngIf="isOpenSpecialitiesSelect && !getIsSelected(specialities)" src="assets/img/user_home/arrow_up.svg">
+            <img *ngIf="!isOpenSpecialitiesSelect && !getIsSelected(specialities)" src="assets/img/user_home/arrow_down.svg">
+            <img *ngIf="isOpenSpecialitiesSelect && getIsSelected(specialities)" src="assets/img/user_home/arrow_up_active.svg">
+            <img *ngIf="!isOpenSpecialitiesSelect && getIsSelected(specialities)" src="assets/img/user_home/arrow_down_active.svg">
         </div>
     </a>
 
     <div *ngIf="isOpenSpecialitiesSelect" class="block-checks">
         <ion-item *ngFor="let speciality of specialities" no-lines>
             <ion-label item-end class="text-828282 font-16">{{ speciality.name }}</ion-label>
-            <ion-checkbox [(ngModel)]="speciality.isSelected" item-end></ion-checkbox>
+            <ion-checkbox 
+                [(ngModel)]="speciality.isSelected"
+                (ionChange)="checkSpeciality(speciality)" 
+                item-end>
+            </ion-checkbox>
         </ion-item>
     </div>
 
     <a *ngIf="tags.length > 0" (click)="openCuisineSelect()" ion-item detail-none class="bg-gray margin-bottom-small" padding-left pedding-right>
       <ion-label text-uppercase class="text-4F4F4F font-16">{{ 'PAGE_PLACES.SELECT_CUISINE' | translate }}</ion-label>
       <div item-end>
-        <img *ngIf="isOpenCuisineSelect" src="assets/img/user_home/arrow_up.svg">
-        <img *ngIf="!isOpenCuisineSelect" src="assets/img/user_home/arrow_down.svg">
+        <img *ngIf="isOpenCuisineSelect && !getIsSelected(tags)" src="assets/img/user_home/arrow_up.svg">
+        <img *ngIf="!isOpenCuisineSelect && !getIsSelected(tags)" src="assets/img/user_home/arrow_down.svg">
+        <img *ngIf="isOpenCuisineSelect && getIsSelected(tags)" src="assets/img/user_home/arrow_up_active.svg">
+        <img *ngIf="!isOpenCuisineSelect && getIsSelected(tags)" src="assets/img/user_home/arrow_down_active.svg">
       </div>
     </a>
 

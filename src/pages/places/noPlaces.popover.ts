@@ -25,11 +25,12 @@ export class NoPlacesPopover {
         private navParams: NavParams,
         private viewCtrl: ViewController,
         private browser: InAppBrowser) {
-
+            
+        this.isFiltered = this.navParams.get('isFiltered');
         this.isCountryEnabled = this.navParams.get('isCountryEnabled');
         this.city = this.navParams.get('city');
         this.countryCode = this.navParams.get('countryCode');
-        this.isFiltered = this.navParams.get('isFiltered');
+        
         // this.state = this.navParams.get('state');
     }
 

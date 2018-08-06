@@ -34,14 +34,20 @@
                     : ('UNIT.POINTS' | translate) }}
                 </span>
 -->
-            <span class="label label-ios points_friens font-75">
+            <span
+                (click)="openPointsPopover(user.referral_points, 'referral')"
+                tappable
+                class="label label-ios points_friens font-75">
                 <span [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_FRIENDS' | translate"></span>
-                <span>{{ user.referral_points }}</span>
+                <span>{{ user?.referral_points }}</span>
             </span>
 
-            <span class="label label-ios points_redemptions font-75">
+            <span
+                (click)="openPointsPopover(user.redemption_points, 'redemption')"
+                tappable
+                class="label label-ios points_redemptions font-75">
                 <span [innerHTML]="'PAGE_CREATE-USER-PROFILE.POINTS_REDEMPTIONS' | translate"></span>
-                <span>{{ user.redemption_points }}</span>
+                <span>{{ user?.redemption_points }}</span>
             </span>
         </div>
         <!--
@@ -60,8 +66,9 @@
     </a>
     -->
     </ion-item>
-<div class="main-position-center padding-top-5vw">
+<div class="main-position-center margin-bottom-4vw">
     <div class="position-center width-100">
+        <!--
     <div class="block-user-level">
         <div class="block-circle user-level-1">
             <ion-item no-lines class="user-ava-name overflow-visible">
@@ -70,7 +77,7 @@
                 <div class="text-3E4B5D lbl2">{{ user.points }}</div>
             </ion-item>
             <div class="circle-center">
-                <!-- <div class="block-get">
+                 <div class="block-get">
                     <img src="assets/img/user_profile/cards.svg">
                     <div text-uppercase class="bold">
                         {{ 'PAGE_USER-PROFILE.GET' | translate }}
@@ -79,7 +86,7 @@
                         {{ 'PAGE_USER-PROFILE.ADDITIONAL' | translate }}
                         <br>{{ 'PAGE_USER-PROFILE.POINTS' | translate }}
                     </span>
-                </div> -->
+                </div>
             </div>
 
             <div class="box box4 color-no-fill">
@@ -89,8 +96,8 @@
                 <div class="label-point circle-label-top">100</div>
                 <div class="next-level">
                     <ion-icon name="checkmark"></ion-icon>
-                    <!--<span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ user.level }}
-                    </span>-->
+                    <span text-uppercase>{{ 'PAGE_USER-PROFILE.NEXT' | translate }}<br>{{ 'PAGE_USER-PROFILE.LVL' | translate }} {{ user.level }}
+                    </span>
                 </div>
             </div>
 
@@ -104,7 +111,7 @@
             </div>
         </div>
     </div>
-
+-->
     <!-- <div class="font-14 text-4F4F4F" margin-bottom text-uppercase text-center>
         {{ 'PAGE_USER-PROFILE.YOUR_TASKS_JOBS_FOR_TODAY' | translate }}
     </div> -->
@@ -141,9 +148,290 @@
             </ion-col>
         </ion-row>
     </ion-grid> -->
+        <ion-grid
+            *ngIf="((allowPremiumOffers && allowPremiumOffers.length > 0)
+                    || (premiumOffers && premiumOffers.length > 0) && !isSliderSpinner)"
+            text-center
+            class="block-slider">
+            <div
+                class="font-14 text-3E4B5D"
+                padding-left
+                padding-right
+                padding-top>
+                {{ 'PAGE_USER-PROFILE.SLIDER_TITLE' | translate }}:
+            </div>
+            <ion-row>
+                <ion-col col-1>
+                </ion-col>
+                <ion-col col-10 align-self-center>
 
-    <ion-grid text-center class="block-icon-bottom">
-    <!-- <ion-grid text-center padding-top padding-bottom class="block-icon-bottom"> -->
+                    <ion-segment
+                        (ionChange)="showArrow()"
+                        [(ngModel)]="segment"
+                        text-uppercase
+                        margin-top
+                        margin-bottom
+                        class="nau-segment">
+
+                        <ion-segment-button value="all">
+                            {{ 'PAGE_USER-PROFILE.ALL_OFFERS' | translate }}
+                        </ion-segment-button>
+                        <ion-segment-button value="allow" [disabled]="!allowPremiumOffers || allowPremiumOffers.length == 0">
+                            {{ 'PAGE_USER-PROFILE.AVAILABLE' | translate }}
+                        </ion-segment-button>
+
+                    </ion-segment>
+                </ion-col>
+                <ion-col col-1>
+                </ion-col>
+                </ion-row>
+            </ion-grid>
+
+    <ion-grid text-center class="block-slider">
+        <ion-row>
+            <ion-col col-1 align-self-center>
+                <a>
+                    <ion-icon
+                        *ngIf="isLeftArrowVisible"
+                        (click)="slidePrev()"
+                        name="ios-arrow-back"
+                        class="font-200 text-828282">
+                    </ion-icon>
+                </a>
+            </ion-col>
+            <ion-col class="grid" col-10 align-self-center>
+                <ion-slides
+                    *ngIf="segment === 'allow' && allowPremiumOffers && allowPremiumOffers.length > 0"
+                    #allowOffersSlides
+                    id="allowOffersSlides"
+                    (ionSlideDidChange)="slideChangeHandler($event)"
+                    (ionSlideDrag)="slidePrevHandler($event)"
+                    spaceBetween="10"
+                    margin-bottom>
+                    <!-- <ion-slide (click)="openRewards()"> temporary-->
+                    <ion-slide *ngFor="let offer of allowPremiumOffers">
+                        <!-- <ion-list no-lines>
+                            <ion-item class="text-white"> -->
+                        <ion-list
+                            no-lines class="item-block-nau margin-top-10 block-featured">
+                                <div tappable ion-item detail-none>
+                                    <img
+                                        *ngIf="offer.is_favorite"
+                                        [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                                        class="star_right"
+                                        src="assets/img/place/icon_star.svg">
+                                    <ion-avatar
+                                        (click)="openPlace($event, offer?.account.owner.place)"
+                                        item-start
+                                        text-center
+                                        class="relative">
+                                        <div
+                                            [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }"
+                                            class="thumb_image">
+                                        </div>
+                                        <div class="info-block" text-left>
+                                            <div>
+                                                <ng-container *ngFor="let showStar of getStars(offer?.account.owner.place.stars)">
+                                                    <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+                                                </ng-container>
+                                            </div>
+                                            <div class="margin-top-1vw">
+                                                <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+                                                <span class="font-75 text-828282">
+                                                    {{ getDistance(offer.latitude, offer.longitude).distance }}
+                                                    {{ getDistance(offer.latitude, offer.longitude).key | translate}}
+                                                </span>
+                                            </div>
+                                            <div class="margin-top-1vw">
+                                                <img src="assets/img/user_home/icon_small_user.svg">
+                                                <span class="font-75 text-828282">
+                                                    {{ offer?.account.owner.place.redemptions_count !== undefined
+                                                        ? offer?.account.owner.place.redemptions_count
+                                                        : offer?.account.owner.place.testimonials_count}}
+                                                </span>
+                                            </div>
+                                            <img
+                                                *ngIf="offer.is_featured"
+                                                class="featured_right"
+                                                src="assets/img/splash_screen/tab-icon6_active.svg">
+                                        </div>
+                                    </ion-avatar>
+                                    <div
+                                        (click)="openPlace($event, offer?.account.owner.place, offer)"
+                                        class="right-block">
+                                        <div
+                                            [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
+                                            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                                            class="font-0 right-side relative">
+                                            <div class="right-side-content">
+                                                <div class="smooth_transition">
+                                                    <div class="scroll_content margin-top-2vw">
+                                                        <div class="bold font-18 text-white">{{ offer.label }}</div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }"
+                                                    [innerHTML]="offer.rich_description"
+                                                    class="text-white font-12 wrap text-overflow-5 margin-top-2vw">
+                                                </div>
+                                            </div>
+                                            <div [ngClass]="offer.type" class="right-top-angle"></div>
+                                        </div>
+                                        <div class="block-fr bold">
+                                            <div *ngIf="offer.max_count" class="coupon font-10 flex">
+                                                {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}
+                                                /{{ offer.max_count }}
+                                            </div>
+                                            <div
+                                                *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0)
+                                                        && (offer.referral_points_price || offer.redemption_points_price))"
+                                                class="block-right font-14 flex"
+                                                text-right>
+                                                <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
+                                                    <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
+                                                    {{ offer.referral_points_price }}
+                                                </span>
+                                                <span class="flex" *ngIf="offer.redemption_points_price > user?.redemption_points">
+                                                    <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
+                                                    {{ offer.redemption_points_price }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ion-list>
+                            <!-- </ion-item>
+                        </ion-list> -->
+                    </ion-slide>
+                </ion-slides>
+
+                <ion-slides
+                    *ngIf="segment === 'all' && premiumOffers && premiumOffers.length > 0"
+                    #offersSlides
+                    id="offersSlides"
+                    (ionSlideDidChange)="slideChangeHandler($event)"
+                    (ionSlideDrag)="slidePrevHandler($event)"
+                    spaceBetween="10"
+                    margin-bottom>
+                    <!-- <ion-slide (click)="openRewards()"> temporary-->
+                    <ion-slide *ngFor="let offer of premiumOffers">
+                        <!-- <ion-list no-lines>
+                            <ion-item class="text-white"> -->
+                        <ion-list
+                            no-lines class="item-block-nau margin-top-10 block-featured">
+                            <div tappable ion-item detail-none>
+                                <img
+                                    *ngIf="offer.is_favorite"
+                                    [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                                    class="star_right"
+                                    src="assets/img/place/icon_star.svg">
+                                <ion-avatar
+                                    (click)="openPlace($event, offer?.account.owner.place)"
+                                    item-start
+                                    text-center
+                                    class="relative">
+                                    <div
+                                        [ngStyle]="{ 'background-image': 'url(' + offer?.account.owner.place.picture_url + '?size=mobile&)' }"
+                                        class="thumb_image">
+                                    </div>
+                                    <div class="info-block relative" text-left>
+                                        <div>
+                                            <ng-container *ngFor="let showStar of getStars(offer?.account.owner.place.stars)">
+                                                <ion-icon class="text-FEC282 icon-star" name="{{ showStar ? 'star' : 'star-outline' }}"></ion-icon>
+                                            </ng-container>
+                                        </div>
+                                        <div class="margin-top-1vw">
+                                            <img class="icon_arrow" src="assets/img/user_home/icon_small_arrow.svg">
+                                            <span class="font-75 text-828282">
+                                                {{ getDistance(offer.latitude, offer.longitude).distance }}
+                                                {{ getDistance(offer.latitude, offer.longitude).key | translate}}
+                                            </span>
+                                        </div>
+                                        <div class="margin-top-1vw">
+                                            <img src="assets/img/user_home/icon_small_user.svg">
+                                            <span class="font-75 text-828282">
+                                                {{ offer?.account.owner.place.redemptions_count !== undefined
+                                                    ? offer?.account.owner.place.redemptions_count
+                                                    : offer?.account.owner.place.testimonials_count}}
+                                            </span>
+                                        </div>
+                                        <img
+                                            *ngIf="offer.is_featured"
+                                            class="featured_right"
+                                            src="assets/img/splash_screen/tab-icon6_active.svg">
+                                    </div>
+                                </ion-avatar>
+                                <div
+                                    (click)="openPlace($event, offer?.account.owner.place, offer)"
+                                    class="right-block">
+                                    <div
+                                        [ngStyle]="{ 'background-image': 'url(' + offer.picture_url + '?size=mobile&)' }"
+                                        [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                                        class="font-0 right-side relative">
+                                        <div class="right-side-content">
+                                            <div class="smooth_transition">
+                                                <div class="scroll_content margin-top-2vw">
+                                                    <div class="bold font-18 text-white">{{ offer.label }}</div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }"
+                                                [innerHTML]="offer.rich_description"
+                                                class="text-white font-12 wrap text-overflow-5 margin-top-2vw">
+                                            </div>
+                                        </div>
+                                        <div [ngClass]="offer.type" class="right-top-angle"></div>
+                                    </div>
+                                    <div class="block-fr bold">
+                                        <div *ngIf="offer.max_count" class="coupon font-10 flex">
+                                            {{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}
+                                            /{{ offer.max_count }}
+                                        </div>
+                                        <div
+                                            *ngIf="((offer.redemption_access_code && offer.redemption_access_code > 0)
+                                                    && (offer.referral_points_price || offer.redemption_points_price))"
+                                            class="block-right font-14 flex"
+                                            text-right>
+                                                <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
+                                                    <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
+                                                    {{ offer.referral_points_price }}
+                                                </span>
+                                                <span class="flex" *ngIf="offer.redemption_points_price > user.redemption_points">
+                                                    <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
+                                                    {{ offer.redemption_points_price }}
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ion-list>
+                        <!-- </ion-item>
+                    </ion-list> -->
+                    </ion-slide>
+                </ion-slides>
+                <div margin-bottom
+                    *ngIf="((segment === 'allow' && (!allowPremiumOffers || allowPremiumOffers.length == 0))
+                            || (segment === 'all' && (!premiumOffers || premiumOffers.length == 0)))"
+                    class="slider-empty">
+                    <ion-spinner *ngIf="isSliderSpinner" name="bubbles"></ion-spinner>
+                </div>
+            </ion-col>
+            <ion-col col-1 align-self-center>
+                <a>
+                    <ion-icon
+                        *ngIf="isRightArrowVisible"
+                        (click)="slideNext()"
+                        name="ios-arrow-forward"
+                        class="font-200 text-828282">
+                    </ion-icon>
+                </a>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    </div>
+</div>
+    <ion-grid text-center margin-bottom class="block-icon-bottom">
+        <!-- <ion-grid text-center padding-top padding-bottom class="block-icon-bottom"> -->
         <ion-row>
             <a ion-col class="text-gray" (click)="openUserOffers()" align-self-start>
                 <div class="relative">
@@ -185,10 +473,8 @@
             </a>
         </ion-row>
     </ion-grid>
-    </div>
-</div>
     <div margin-left margin-right margin-bottom>
-        <button margin-bottom (click)="shareInvite()" color="primary" ion-button block>
+        <button margin-bottom (click)="inviteFriend()" color="primary" ion-button block>
             {{ 'PAGE_INVITE.INVITE_FRIENDS' | translate }}
         </button>
         <button (click)="logout()" color="primary" ion-button block text-uppercase>

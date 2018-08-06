@@ -72,7 +72,7 @@ export class UserNauPage {
         this.onRefreshAccounts = this.profile.onRefreshAccounts
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU.balance;
+                this.balance = this.NAU ? this.NAU.balance : 0;
             })
 
         this.onRefreshTransactions = this.transaction.onRefreshTransactions
@@ -105,9 +105,9 @@ export class UserNauPage {
         this.profile.getWithAccounts()
             .subscribe((resp) => {
                 this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU.balance;
-            //     if (this.envName === 'dev' || this.envName === 'test')
-            //         this.nav.popToRoot();
+                this.balance = this.NAU ? this.NAU.balance : 0;
+                //     if (this.envName === 'dev' || this.envName === 'test')
+                //         this.nav.popToRoot();
             });
     }
     //temporary
@@ -138,8 +138,7 @@ export class UserNauPage {
                 this.isFormVisible = !this.isFormVisible;
                 this.content.scrollToTop();
             }
-        }
-        else {
+        } else {
             if (!form[0]) {
                 this.content.scrollToTop();
                 this.isFormVisible = !this.isFormVisible;
@@ -147,21 +146,7 @@ export class UserNauPage {
         }
     }
 
-    doInfinite(infiniteScroll) {
-        this.page = this.page + 1;
-        if (this.page <= this.lastPage) {
-            setTimeout(() => {
-                this.transaction.getList(this.page)
-                    .subscribe(resp => {
-                        this.transactions = [...this.transactions, ...resp.data];
-                        infiniteScroll.complete();
-                    });
-            });
-        }
-        else {
-            infiniteScroll.complete();
-        }
-    }
+
 
     updateAmount(event) {
         StringValidator.stringAmountLimit(event);
@@ -174,9 +159,7 @@ export class UserNauPage {
             this.toast.show('The amount must be at least 1');
             return false;
         }
-        else {
-            return true;
-        }
+        return true;
     }
 
     openPopover() {
@@ -218,18 +201,20 @@ export class UserNauPage {
                             .subscribe(resp => {
                                 let NAU = resp.accounts.NAU;
                                 let balance = NAU.balance;
+
                                 if (this.balance != balance) {
                                     this.isTransferLoading = false;
                                     this.profile.refreshAccounts();
                                     this.transaction.refresh();
                                     this.stopTimer();
                                 }
+                                
                             });
                     }, 2000);
                 },
-                (err) => {
-                    this.presentAlert();
-                })
+                    (err) => {
+                        this.presentAlert();
+                    })
         }
     }
 
@@ -237,6 +222,22 @@ export class UserNauPage {
         if (this.timer) {
             clearInterval(this.timer);
             this.timer = undefined;
+        }
+    }
+
+    doInfinite(infiniteScroll) {
+        this.page = this.page + 1;
+        if (this.page <= this.lastPage) {
+            setTimeout(() => {
+                this.transaction.getList(this.page)
+                    .subscribe(resp => {
+                        this.transactions = [...this.transactions, ...resp.data];
+                        infiniteScroll.complete();
+                    },
+                        err => infiniteScroll.complete());
+            });
+        } else {
+            infiniteScroll.complete();
         }
     }
 

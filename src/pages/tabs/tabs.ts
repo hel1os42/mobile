@@ -1,12 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Tabs } from 'ionic-angular';
+import { Tab, ViewController, Tabs } from 'ionic-angular';
 import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
 import { TransactionService } from '../../providers/transaction.service';
 import { BookmarksPage } from '../bookmarks/bookmarks';
 import { InvitePage } from '../invite/invite';
+import { OfferPage } from '../offer/offer';
 import { PlacesPage } from '../places/places';
 import { UserProfilePage } from '../user-profile/user-profile';
 
@@ -16,12 +17,14 @@ import { UserProfilePage } from '../user-profile/user-profile';
 })
 export class TabsPage {
 
+    @ViewChild('tabs') tabs: Tabs;
+
     tab1Root = PlacesPage;
     tab2Root = InvitePage;
     // tab3Root = NotificationsPage;
     tab3Root = BookmarksPage;
     tab4Root = UserProfilePage;
-    
+
     selectedTabIndex = 0;
     nauParams;//temporary
     shownTransactions: boolean;//temporary
@@ -35,11 +38,7 @@ export class TabsPage {
         private adjust: AdjustService) {
 
         this.envName = this.appMode.getEnvironmentMode();
-        // this.profile.getWithAccounts(false)
-        //     .subscribe(resp => {
-        //         this.nauParams = resp.accounts.NAU;
-        //     });
-        // this.tab1Root = PlacesPage;
+
         this.selectedTabIndex = 0;
     }
 
@@ -47,18 +46,34 @@ export class TabsPage {
         this.adjust.setEvent('INVITE_FRIENDS_PAGE_VISIT');
     }
 
-    refreshStatusBar(event) {
+    refreshStatusBar(event: Tab) {
         let root = event.root;
-        let views = event.getViews();
+        let views: ViewController[] = event.getViews();
         let length = views.length;
-        if (root === PlacesPage || (root === BookmarksPage && length > 1)) {
+        let page = views[length - 1].component;
+        if (root === PlacesPage
+            || (root === BookmarksPage && length > 1)
+            || (root === UserProfilePage && (page === PlacesPage || page === OfferPage))) {
             this.statusBar.styleLightContent();
-        }
-        else {
+        } else {
             this.statusBar.styleDefault();
         }
     }
-    
+
+    hideTabs() {
+        let isHide = false;
+        let tab = this.tabs.getSelected();
+        if (tab) {
+            let views: ViewController[] = tab.getViews();
+            let length = views.length;
+            let page = views[length - 1].component;
+            if (page === OfferPage) {
+                isHide = true;
+            } else isHide = false;
+        }
+        return isHide;
+    }
+
     refresh() {
         if (this.shownTransactions) {
             this.profile.refreshAccounts(false);

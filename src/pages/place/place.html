@@ -158,55 +158,70 @@
             </ion-segment>
 
     <div padding>
-    <ion-list 
-        *ngSwitchCase="'alloffers'" 
-        margin-top 
-        no-lines 
-        class="item-block-nau">
-        <div 
-            (click)="openOffer($event, offer)" 
-            *ngFor="let offer of offersList" 
-            [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+    <ion-list
+        *ngSwitchCase="'alloffers'"
+        margin-top
+        no-lines
+        class="item-block-nau margin-top-10 block-place-offers">
+        <ion-item
+            (click)="openOffer($event, offer)"
+            *ngFor="let offer of offersList"
             tappable
-            ion-item 
-            detail-none 
+            detail-none
             class="relative">
-            <ion-avatar item-start>
-                <!-- <div class="thumb_image" [style.background-image]="offer.picture_url"></div> -->
-                <div 
-                    [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}" 
-                    [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-                    class="thumb_image">
-                </div>
-            </ion-avatar>
-            <div class="smooth_transition width-88">
-                <div class="scroll_content">
-                    <div class="bold font-18 text-3E4B5D">{{ offer.label }}</div>
-                </div>
-            </div>
             <div
-                [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }" 
-                [innerHTML]="offer.rich_description"
-                text-regular 
-                class="font-12 text-828282 wrap text-overflow-3 margin-top-2vw">
-            </div>
-            <img 
-                *ngIf="offer.is_favorite" 
-                class="star_right" 
-                src="assets/img/place/icon_star.svg">
-            <img 
-                *ngIf="offer.is_featured" 
+                class="font-0 right-side"
                 [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
-                class="featured_right" 
-                src="assets/img/splash_screen/tab-icon6_active.svg">
-            <div class="margin-top-2vw flex">
-                <!--
-            <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
-            <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
-            <span class="gift extrabold">1</span>
-            -->
+                [ngStyle]="{'background-image': 'url(' + offer.picture_url + '?size=mobile&)'}">
+                <div class="right-side-content">
+                    <div class="smooth_transition width-88">
+                        <div class="scroll_content">
+                            <div class="bold font-18 text-white">{{ offer.label }}</div>
+                        </div>
+                    </div>
+                    <div
+                        [ngStyle]="{ 'pointer-events': offer.redemption_access_code ? 'none' : 'auto' }"
+                        [innerHTML]="offer.rich_description"
+                        text-regular
+                        class="font-12 text-white wrap text-overflow-5 margin-top-2vw">
+                    </div>
+                    <div class="margin-top-2vw flex">
+                        <!--
+                    <button (click)="openOffer(offer)" ion-button class="btn_transfer font-14 text-white">{{ 'PAGE_PLACE.REDEEM_NOW' | translate }}</button>
+                    <span class="text-BDBDBD font-18 bold margin-left margin-right plus">+</span>
+                    <span class="gift extrabold">1</span>
+                    -->
+                    </div>
+                </div>
+                <div [ngClass]="offer.type" class="right-top-angle"></div>
             </div>
-        </div>
+            <div class="block-fr bold">
+                <div class="coupon font-10 flex">
+                    <img
+                        *ngIf="offer.is_favorite"
+                        class="featured_right"
+                        src="assets/img/place/icon_star.svg">
+                    <img
+                        *ngIf="offer.is_featured"
+                        [ngClass]="{ 'grayscale' : (offer.redemption_access_code && offer.redemption_access_code > 0) }"
+                        class="featured_right"
+                        src="assets/img/splash_screen/tab-icon6_active.svg">
+                    <span *ngIf="offer.max_count">{{ 'PAGE_PLACES.COUPONS_LEFT' | translate }}: {{ offer.max_count - offer.redemptions_count }}/{{ offer.max_count }}</span>
+                </div>
+                <div
+                    class="block-right font-14 flex"
+                    text-right>
+                    <span class="flex" *ngIf="offer.referral_points_price > user?.referral_points">
+                        <span class="circle f">{{ 'PAGE_PLACES.FRIENDS' | translate }}</span>
+                        <span class="circle_num">{{ offer.referral_points_price }}</span>
+                    </span>
+                    <span class="flex" *ngIf="offer.redemption_points_price > user?.redemption_points">
+                        <span class="circle r">{{ 'PAGE_PLACES.OFFER' | translate }}</span>
+                        <span class="circle_num">{{ offer.redemption_points_price }}</span>
+                    </span>
+                </div>
+            </div>
+        </ion-item>
     </ion-list>
 
   <ion-list  *ngSwitchCase="'testimonials'" margin-top no-lines class="item-block-nau testimonials">
@@ -236,4 +251,5 @@
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="">
     </ion-infinite-scroll-content>
 </ion-infinite-scroll>
+
 </ion-content>

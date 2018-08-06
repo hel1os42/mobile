@@ -18,8 +18,7 @@ export class ReportService {
         let obs = this.api.post(`places/${placeId}/complaints`, complaint, {
             ignoreHttpUnprocessableEntity: this.appMode.getEnvironmentMode() === 'prod'
         });
-        obs.subscribe(() => this.adjust.setEvent('REPORT_SENT'),
-            err => { return; });
+        obs.subscribe(() => this.adjust.setEvent('REPORT_SENT'));
         return obs;
     }
 

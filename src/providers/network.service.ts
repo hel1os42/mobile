@@ -26,6 +26,7 @@ export class NetworkService {
         }
         else {
             this.isConnected = true;
+            this.toast.dismiss();
         }
         return this.isConnected;
     }

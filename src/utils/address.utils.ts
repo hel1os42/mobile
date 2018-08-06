@@ -34,8 +34,6 @@ export class AddressUtils {
             display = empty ? undefined : display;
             return display;
         }
-        else {
-            return undefined;
-        }
+        return undefined;
     }
 }

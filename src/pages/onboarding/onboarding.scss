@@ -102,10 +102,13 @@ page-onboarding {
 
     .skip{
         position: absolute;
-        bottom: 5.4vh;
+        bottom: 0;
         right: 5%;
         height: auto;
         display: inline;
+        padding-top: 5.4vh;
+        padding-left: 5.4vh;
+        padding-bottom: 5.4vh;
     }
 
     .title-big-sign {

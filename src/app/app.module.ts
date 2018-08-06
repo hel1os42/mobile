@@ -16,7 +16,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { QRCodeModule } from 'angular2-qrcode';
-import { IonicApp, IonicErrorHandler, IonicModule, Platform } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { BarChartComponent } from '../components/bar-chart';
 import { LineChartComponent } from '../components/line-chart';
 import { AdvNotificationsPage } from '../pages/adv-notifications/adv-notifications';
@@ -49,10 +49,11 @@ import { OfferRedeemPopover } from '../pages/offer/offerRedeem.popover';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { PlacePage } from '../pages/place/place';
 import { PlacesPage } from '../pages/places/places';
-import { PlacesPopover } from '../pages/places/places.popover';
+import { FilterPopover } from '../pages/places/filter.popover';
 import { SettingsChangePhonePage } from '../pages/settings-change-phone/settings-change-phone';
 import { SettingsPage } from '../pages/settings/settings';
 import { SettingsPopover } from '../pages/settings/settings.popover';
+import { PointsPopover } from '../pages/user-profile/points.popover';
 import { SignUpCodePage } from '../pages/signup-code/signup-code';
 import { SignUpPage } from '../pages/signup/signup';
 import { SplashInfoPage } from '../pages/splash-info/splash-info';
@@ -116,9 +117,16 @@ import { LimitationPopover } from '../pages/place/limitation.popover';
 import { AdjustService } from '../providers/adjust.service';
 import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
+import { TabBarHiddenDirective } from '../directives/tab-bar-hidden.directive';
+
+// The translate loader needs to know where to load i18n files
+// in Ionic's static asset pipeline.
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 const IONIC_APP_ID = '590f0eb2';
-const VERSION = '1.5.8';
+const VERSION = '1.6.2';
 
 Pro.init(IONIC_APP_ID, {
     appVersion: VERSION
@@ -126,9 +134,17 @@ Pro.init(IONIC_APP_ID, {
 
 @Injectable()
 export class AppErrorHandler implements ErrorHandler {
-    ionicErrorHandler: IonicErrorHandler;
 
-    constructor(injector: Injector) {
+    ionicErrorHandler: IonicErrorHandler;
+    userId = '';
+    userPhone = '';
+
+    constructor(
+        injector: Injector,
+        private appMode: AppModeService,
+        private profile: ProfileService,
+        private auth: AuthService) {
+
         try {
             this.ionicErrorHandler = injector.get(IonicErrorHandler);
         } catch (e) {
@@ -138,6 +154,34 @@ export class AppErrorHandler implements ErrorHandler {
     }
 
     handleError(err: any) {
+        // err.envName = this.appMode.getEnvironmentMode();
+        if (!this.userId && this.auth.isLoggedIn()) {
+            this.profile.get(false, false)
+                .subscribe(user => {
+                    this.userId = user.id;
+                    this.userPhone = user.phone || '';
+                    err.userId = this.userId;
+                    err.userPhone = this.userPhone;
+                },
+                    error => err.userId = '');
+        };
+
+        if (err.message) {
+            err.message = err.message + '\nuserId: ' + this.userId;
+            err.message = this.userPhone
+            ? err.message + '\nuserPhone: ' + this.userPhone
+            : err.message;
+        } else {
+            err.userId = this.userId;
+            err.userPhone = this.userPhone;
+        }
+
+        if (!err.url) {
+            err.message = err.message || '';
+            let envKey =  err.message ? '\nenvName: ' : 'envName: ';
+            err.message = err.message + envKey + this.appMode.getEnvironmentMode();
+        }
+
         Pro.monitoring.handleNewError(err);
         // Remove this if you want to disable Ionic's auto exception handling
         // in development mode.
@@ -145,11 +189,6 @@ export class AppErrorHandler implements ErrorHandler {
     }
 }
 
-// The translate loader needs to know where to load i18n files
-// in Ionic's static asset pipeline.
-export function createTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
 
 @NgModule({
     declarations: [
@@ -187,7 +226,7 @@ export function createTranslateLoader(http: HttpClient) {
         TemporaryPage,
         SettingsPopover,
         OfferRedeemPopover,
-        PlacesPopover,
+        FilterPopover,
         TransferPopover,
         CongratulationPopover,
         CreateAdvUserProfileCategoryPopover,
@@ -202,6 +241,7 @@ export function createTranslateLoader(http: HttpClient) {
         TestimonialPopover,
         ComplaintPopover,
         LimitationPopover,
+        PointsPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
@@ -214,7 +254,8 @@ export function createTranslateLoader(http: HttpClient) {
         Statistic1Page,
         LineChartComponent,
         BarChartComponent,
-        FormatTimePipe
+        FormatTimePipe,
+        TabBarHiddenDirective
     ],
     imports: [
         BrowserModule,
@@ -276,7 +317,7 @@ export function createTranslateLoader(http: HttpClient) {
         TemporaryPage,
         SettingsPopover,
         OfferRedeemPopover,
-        PlacesPopover,
+        FilterPopover,
         TransferPopover,
         CongratulationPopover,
         CreateAdvUserProfileCategoryPopover,
@@ -291,6 +332,7 @@ export function createTranslateLoader(http: HttpClient) {
         TestimonialPopover,
         ComplaintPopover,
         LimitationPopover,
+        PointsPopover,
         OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
@@ -349,7 +391,7 @@ export function createTranslateLoader(http: HttpClient) {
         FlurryAnalytics,
         AdjustService,
         LaunchNavigator,
-        AppAvailability
+        AppAvailability,
     ]
 })
 export class AppModule { }

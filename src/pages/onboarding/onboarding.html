@@ -1,34 +1,76 @@
 <ion-content scroll="false" class="padding-no">
-  <div (click)="skip()" text-uppercase class="skip font-12 bold">{{ 'PAGE_ONBOARDING.SKIP' | translate }}</div>
-  <ion-slides pager="true">
+<div *ngIf="isConnected"
+    (click)="skip()" 
+    tappable
+    text-uppercase 
+    class="skip font-12 bold">
+    {{ 'PAGE_ONBOARDING.SKIP' | translate }}
+</div>
+<ion-slides pager="true">
     <ion-slide class="slide1">
-      <div class="slide-title-img">
-        <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">{{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}</div>
-      </div>
-      <div class="pic"></div>
-      <div *ngIf="!isAdvMode" text-center class="title-big-sign" [innerHTML]="'PAGE_ONBOARDING.WELCOME' | translate"></div>
-      <div *ngIf="isAdvMode" text-center class="title-big-sign" [innerHTML]="'PAGE_ONBOARDING.ENJOY' | translate"></div>
-      <p text-justify class="font-75 text-white onboarding-desc" [innerHTML]="'PAGE_ONBOARDING.ENJOY_THE_MOST' | translate"></p>
+        <div class="slide-title-img">
+            <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">
+                {{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}
+            </div>
+        </div>
+        <div class="pic"></div>
+        <div 
+            *ngIf="!isAdvMode" 
+            text-center 
+            class="title-big-sign" 
+            [innerHTML]="'PAGE_ONBOARDING.WELCOME' | translate">
+        </div>
+        <div 
+            *ngIf="isAdvMode" 
+            text-center 
+            class="title-big-sign" 
+            [innerHTML]="'PAGE_ONBOARDING.ENJOY' | translate">
+        </div>
+        <p 
+            text-justify 
+            class="font-75 text-white onboarding-desc" 
+            [innerHTML]="'PAGE_ONBOARDING.ENJOY_THE_MOST' | translate">
+        </p>
     </ion-slide>
-  <ion-slide  class="slide2">
-      <div class="slide-title-img">
-          <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">{{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}</div>
-      </div>
-      <div class="pic"></div>
-      <div text-center class="title-big-sign" [innerHTML]="'PAGE_ONBOARDING.MAKE_PROFIT' | translate"></div>
-      <p text-justify class="font-75 text-white onboarding-desc">{{ 'PAGE_ONBOARDING.INVITE_YOUR_FRIENDS' | translate }}</p>
-  </ion-slide>
+    <ion-slide class="slide2">
+        <div class="slide-title-img">
+            <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">
+                {{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}
+            </div>
+        </div>
+        <div class="pic"></div>
+        <div 
+            text-center 
+            class="title-big-sign" 
+            [innerHTML]="'PAGE_ONBOARDING.MAKE_PROFIT' | translate">
+        </div>
+        <p text-justify class="font-75 text-white onboarding-desc">
+            {{ 'PAGE_ONBOARDING.INVITE_YOUR_FRIENDS' | translate }}
+        </p>
+    </ion-slide>
     <ion-slide (swipeleft)="skip()" class="slide3">
-      <div class="slide-title-img">
-        <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">{{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}</div>
-      </div>
-      <div class="pic"></div>
-      <div *ngIf="!isAdvMode" text-center class="title-big-sign" [innerHTML]="'PAGE_ONBOARDING.NAU_COINS' | translate"></div>
-      <div *ngIf="isAdvMode" text-center class="title-big-sign" [innerHTML]="'PAGE_ONBOARDING.ENJOY' | translate"></div>
-      <p text-justify class="font-75 text-white onboarding-desc">{{ 'PAGE_ONBOARDING.NAU_COINS_IS' | translate }}</p>
+        <div class="slide-title-img">
+            <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">
+                {{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}
+            </div>
+        </div>
+        <div class="pic"></div>
+        <div 
+            *ngIf="!isAdvMode" 
+            text-center 
+            class="title-big-sign" 
+            [innerHTML]="'PAGE_ONBOARDING.NAU_COINS' | translate">
+        </div>
+        <div 
+            *ngIf="isAdvMode" 
+            text-center 
+            class="title-big-sign" 
+            [innerHTML]="'PAGE_ONBOARDING.ENJOY' | translate">
+        </div>
+        <p text-justify class="font-75 text-white onboarding-desc">{{ 'PAGE_ONBOARDING.NAU_COINS_IS' | translate }}</p>
     </ion-slide>
-  </ion-slides>
-    <!--
+</ion-slides>
+<!--
   <ion-footer no-shadow no-border class="no-border padding-sign">
       <button color="white" ion-button block outline (click)="skip()">{{ 'PAGE_ONBOARDING.SKIP' | translate }}</button>
   </ion-footer>
