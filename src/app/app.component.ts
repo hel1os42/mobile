@@ -56,7 +56,7 @@ export class MyApp {
         private oneSignal: OneSignal,
         private adjust: AdjustService) {
 
-        platform.ready().then((resp) => {
+        platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
 
@@ -85,15 +85,15 @@ export class MyApp {
             this.network.onConnect();
             this.network.onDisconnect();
             if (this.network.getStatus()) {
+
                 if (!this.auth.isLoggedIn()) {
                     this.rootPage = OnBoardingPage;
-                }
-                else {
+                } else {
                     // this.getRootPage();
                     this.rootPage = TabsPage;
                 }
-            }
-            else {
+
+            } else {
                 this.rootPage = OnBoardingPage;
                 this.onConnectSubscription = this.network.onConnectEmit
                     .subscribe(() => {
@@ -142,8 +142,7 @@ export class MyApp {
                 //}
                 else if (nav.canGoBack()) { //Can we go back?
                     nav.pop();
-                }
-                else {
+                } else {
                     this.presentConfirm(platform);
                 }
             });
@@ -244,10 +243,12 @@ export class MyApp {
             Branch.initSession(data => {
                 if (data['+clicked_branch_link']) {
                     this.adjust.setEvent('EXTERNAL_CLICK_ON_BRANCH_LINK');
+
                     // read deep link data on click
                     if (data.invite_code) {
                         this.storage.set('invCode', data.invite_code);
                     }
+
                     if (data.placeId && data.placeId !== '') {
                         let share: Share = {
                             page: data.page,
@@ -265,7 +266,6 @@ export class MyApp {
                 }
             });
         }
-        else return;
     }
 
     oneSignalInit() {
