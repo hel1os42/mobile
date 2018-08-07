@@ -162,6 +162,10 @@ export class LoginPage {
             : this.defaultInvite;
     }
 
+    isInviteStorage() {
+        return !!this.storage.get('invCode');
+    }
+
     showInvite() {
         this.isInviteVisible = true;
         this.isRegisterMode = false;
