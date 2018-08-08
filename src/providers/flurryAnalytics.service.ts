@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FlurryAnalyticsOptions, FlurryAnalyticsObject, FlurryAnalytics } from '@ionic-native/flurry-analytics';
-import { Platform } from 'ionic-angular/umd';
+import { Platform } from 'ionic-angular';
 
 @Injectable()
 export class FlurryAnalyticsService {
