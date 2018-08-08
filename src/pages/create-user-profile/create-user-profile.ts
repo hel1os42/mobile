@@ -26,6 +26,7 @@ import { MapUtils } from '../../utils/map.utils';
 })
 
 export class CreateUserProfilePage {
+    
     data: Register = new Register();
     coords: Coords = new Coords();
     user: User = new User();
