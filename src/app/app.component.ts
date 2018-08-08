@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { OneSignal } from '@ionic-native/onesignal';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,6 +19,7 @@ import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
+import { GoogleAnalyticsService } from '../providers/googleAnalytics.service';
 
 
 
@@ -50,7 +50,7 @@ export class MyApp {
         private ionicApp: IonicApp,
         private appMode: AppModeService,
         private network: NetworkService,
-        private gAnalytics: GoogleAnalytics,
+        private gAnalytics: GoogleAnalyticsService,
         private analytics: FlurryAnalyticsService,
         private share: ShareService,
         private oneSignal: OneSignal,
@@ -70,15 +70,7 @@ export class MyApp {
                 this.adjustInit();
 
                 //Google Analytics
-                this.gAnalytics.startTrackerWithId(this.GOOGLE_ANALYTICS_ID)
-                    .then(() => {
-                        this.gAnalytics.trackView('test');
-                        // Tracker is ready
-                        this.gAnalytics.debugMode();
-                        this.gAnalytics.setAllowIDFACollection(true);
-                        this.gAnalytics.enableUncaughtExceptionReporting(true);
-                    })
-                    .catch(err => console.log('Error starting GoogleAnalytics', err));
+                this.gAnalytics.init();
             }
 
             // Network status

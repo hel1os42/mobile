@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { Subscription } from 'rxjs';
 import { AppModeService } from './appMode.service';
+import { GoogleAnalyticsService } from './googleAnalytics.service';
 
 declare var Adjust, AdjustConfig, AdjustEvent;
 
@@ -47,7 +48,8 @@ export class AdjustService {
 
     constructor(
         private storage: StorageService,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private gAnalytics: GoogleAnalyticsService) {
 
         this.envName = this.appMode.getEnvironmentMode();
 
@@ -99,6 +101,8 @@ export class AdjustService {
     }
 
     setEvent(key) {
+        this.gAnalytics.trackEvent(key);//add ga event
+
         if (typeof Adjust !== 'undefined' && typeof AdjustConfig !== 'undefined' && AdjustEvent !== 'undefined') {
             let adjustEvent = new AdjustEvent(this.TOKENS[key]);
             Adjust.trackEvent(adjustEvent);
