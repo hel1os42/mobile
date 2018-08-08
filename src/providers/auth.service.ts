@@ -118,24 +118,21 @@ export class AuthService {
     register(register: Register) {
         let obs = this.api.post('users', register);
         obs.subscribe((resp) => {
-            let subKey = '';
 
             if (resp.was_recently_created) {
                 this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signup');
                 this.analytics.faLogEvent('event_signup');
                 this.adjust.setEvent('FIRST_TIME_SIGN_IN');
-                subKey = '_SIGN_IN';
             }
 
             if (!resp.was_recently_created) {
                 this.adjust.setEvent('SIGN_IN');
-                subKey = '_LINK'
             }
 
             if (register.identity_provider) {
                 this.PROVIDERS_NAMES.forEach(name => {
                     if (name === register.identity_provider) {// to add INSTAGRAM
-                        let event = name.toUpperCase() + subKey;
+                        let event = name.toUpperCase() + '_LINK';
                         this.adjust.setEvent(event);
                     }
                 })
