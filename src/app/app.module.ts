@@ -110,7 +110,7 @@ import { FlurryAnalytics } from '@ionic-native/flurry-analytics';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { PushTokenService } from '../providers/pushToken.service';
 import { ComplaintPopover } from '../pages/place/complaint.popover';
-import { AnalyticsService } from '../providers/analytics.service';
+import { FlurryAnalyticsService } from '../providers/flurryAnalytics.service';
 import { ReportService } from '../providers/report.service';
 import { TestimonialPopover } from '../pages/place/testimonial.popover';
 import { LimitationPopover } from '../pages/place/limitation.popover';
@@ -377,7 +377,7 @@ export class AppErrorHandler implements ErrorHandler {
         SocialService,
         PushTokenService,
         ReportService,
-        AnalyticsService,
+        FlurryAnalyticsService,
         Clipboard,
         InAppBrowser,
         AndroidPermissions,

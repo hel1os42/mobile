@@ -35,7 +35,7 @@ import { Speciality } from '../../models/speciality';
 import { Tag } from '../../models/tag';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
-import { AnalyticsService } from '../../providers/analytics.service';
+import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { GeocodeService } from '../../providers/geocode.service';
@@ -136,7 +136,7 @@ export class PlacesPage {
         private testimonials: TestimonialsService,
         private geocoder: GeocodeService,
         private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
+        private analytics: FlurryAnalyticsService,
         private changeDetectorRef: ChangeDetectorRef,
         private adjust: AdjustService,
         private browser: InAppBrowser) {

@@ -13,7 +13,7 @@ import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { Place } from '../../models/place';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
-import { AnalyticsService } from '../../providers/analytics.service';
+import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
 import { OfferService } from '../../providers/offer.service';
@@ -77,7 +77,7 @@ export class OfferPage {
         private adjust: AdjustService,
         private platform: Platform,
         private appMode: AppModeService,
-        private analytics: AnalyticsService) {
+        private analytics: FlurryAnalyticsService) {
 
         this.adjust.setEvent('OFFER_VIEW');
         // this.today = new Date();

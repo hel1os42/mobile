@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FlurryAnalyticsOptions, FlurryAnalyticsObject, FlurryAnalytics } from '@ionic-native/flurry-analytics';
-import { Platform } from 'ionic-angular';
+import { Platform } from 'ionic-angular/umd';
 
 @Injectable()
-export class AnalyticsService {
+export class FlurryAnalyticsService {
 
     fa: FlurryAnalyticsObject;
     FLURRY_ANDROID_APP_KEY = 'WGQND43HCBMFK3Y4Y7X4';

@@ -10,7 +10,7 @@ import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
-import { AnalyticsService } from '../../providers/analytics.service';
+import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
 import { LocationService } from '../../providers/location.service';
@@ -80,7 +80,7 @@ export class UserProfilePage {
         private loading: LoadingController,
         private appMode: AppModeService,
         private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
+        private analytics: FlurryAnalyticsService,
         private popoverCtrl: PopoverController,
         private browser: InAppBrowser,
         private favorites: FavoritesService) {

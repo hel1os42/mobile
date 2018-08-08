@@ -6,7 +6,7 @@ import { Login } from '../models/login';
 import { PushTokenCreate } from '../models/pushTokenCreate';
 import { Register } from '../models/register';
 import { User } from '../models/user';
-import { AnalyticsService } from './analytics.service';
+import { FlurryAnalyticsService } from './flurryAnalytics.service';
 import { ApiService } from './api.service';
 import { AppModeService } from './appMode.service';
 import { ProfileService } from './profile.service';
@@ -41,7 +41,7 @@ export class AuthService {
         private api: ApiService,
         private token: TokenService,
         private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
+        private analytics: FlurryAnalyticsService,
         private storage: StorageService,
         private oneSignal: OneSignal,
         private pushToken: PushTokenService,

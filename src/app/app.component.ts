@@ -13,7 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AdjustService } from '../providers/adjust.service';
-import { AnalyticsService } from '../providers/analytics.service';
+import { FlurryAnalyticsService } from '../providers/flurryAnalytics.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
 import { LocationService } from '../providers/location.service';
@@ -51,7 +51,7 @@ export class MyApp {
         private appMode: AppModeService,
         private network: NetworkService,
         private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
+        private analytics: FlurryAnalyticsService,
         private share: ShareService,
         private oneSignal: OneSignal,
         private adjust: AdjustService) {
