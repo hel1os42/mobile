@@ -92,7 +92,6 @@ import { ImageCropperModule } from 'ng2-img-cropper';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Network } from '@ionic-native/network';
 import { NetworkService } from '../providers/network.service';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { ShareService } from '../providers/share.service';
 import { FavoritesService } from '../providers/favorites.service';
 import { FormatTimePipe } from '../pipes/format-time.pipe';
@@ -119,6 +118,7 @@ import { AdjustService } from '../providers/adjust.service';
 import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
 import { TabBarHiddenDirective } from '../directives/tab-bar-hidden.directive';
+import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -385,9 +385,9 @@ export class AppErrorHandler implements ErrorHandler {
         AndroidPermissions,
         Diagnostic,
         Network,
-        GoogleAnalytics,
         OneSignal,
         TwitterConnect,
+        GoogleAnalytics,
         File,
         Facebook,
         FlurryAnalytics,
