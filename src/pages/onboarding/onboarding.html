@@ -6,7 +6,11 @@
     class="skip font-12 bold">
     {{ 'PAGE_ONBOARDING.SKIP' | translate }}
 </div>
-<ion-slides pager="true">
+<ion-slides 
+    (ionSlideDidChange)="slideChangeHandler($event)"
+    (ionSlideNextStart)="lastChangeHandler($event)"
+    pager="true">
+
     <ion-slide class="slide1">
         <div class="slide-title-img">
             <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">
@@ -48,7 +52,7 @@
             {{ 'PAGE_ONBOARDING.INVITE_YOUR_FRIENDS' | translate }}
         </p>
     </ion-slide>
-    <ion-slide (swipeleft)="skip()" class="slide3">
+    <ion-slide class="slide3">
         <div class="slide-title-img">
             <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">
                 {{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}
@@ -69,6 +73,7 @@
         </div>
         <p text-justify class="font-75 text-white onboarding-desc">{{ 'PAGE_ONBOARDING.NAU_COINS_IS' | translate }}</p>
     </ion-slide>
+
 </ion-slides>
 <!--
   <ion-footer no-shadow no-border class="no-border padding-sign">

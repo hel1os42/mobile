@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { AppModeService } from './appMode.service';
 import { Subscription } from 'rxjs';
+import { App, Platform } from 'ionic-angular';
 
 @Injectable()
 
@@ -42,22 +43,49 @@ export class GoogleAnalyticsService {
         VK_SIGN_IN: 'Vk Sign In',
         WEBSITE_ICON_CLICK: 'Website Icon Click'
     };
+
+    TITLES = {
+        OnBoardingPage: 'Intro 1',
+        OnBoardingPage_1: 'Intro 2',
+        OnBoardingPage_2: 'Intro 3',
+        LoginPage: 'Sign up',
+        PlacesPage_food: 'F&D Feed (Home)',
+        PlacesPage_beauty: 'H&B Feed (B&F)',
+        PlacesPage_featured: 'Top Offers',
+        PlacesPage_retail: 'R&S Feed',
+        PlacesPage_accommodation: '',
+        PlacePage: 'Place View',
+        OfferPage: 'Offer View',
+        InvitePage: 'Inv. Fr. Page',
+        UserProfilePage: 'Profile Page',
+        UserUsersPage: 'Your Friends',
+        UserOffersPage: 'Your Offers',
+        UserNauPage: 'NAU Transact.',
+        CreateUserProfilePage: 'Edit Account',
+        SettingsPage: 'Settings',
+        BookmarksPage: 'Bookmarks'
+    };
+
     envName: string;
     onEnvironmentModeSubscription: Subscription;
 
     constructor(
         private gAnalytics: GoogleAnalytics,
-        private appMode: AppModeService) {
+        private appMode: AppModeService,
+        private app: App,
+        private platform: Platform) {
 
         this.envName = this.appMode.getEnvironmentMode();
 
         this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
             .subscribe(name => {
                 this.envName = name;
-                this.init();
             });
-    }
 
+        this.app.viewDidEnter.subscribe((evt) => {
+            this.handleView(evt);
+        });
+    }
 
     init() {
         this.gAnalytics.startTrackerWithId(this.GOOGLE_ANALYTICS_ID)
@@ -78,6 +106,36 @@ export class GoogleAnalyticsService {
     trackEvent(key: string) {
         let event = this.EVENTS[key];
         this.gAnalytics.trackEvent(this.envName, event);
+    }
+
+    trackView(key) {
+        let title = this.TITLES[key];
+        this.gAnalytics.trackView(title);
+    }
+
+    handleView(view) {
+        const STR = 'Page';
+        let pageName = view.instance.constructor.name;
+        let instance = view.instance;
+
+        if (pageName.includes(STR)) {
+            if (pageName === 'PlacesPage') {
+
+                if (instance && instance.isFeatured) {
+                    pageName = pageName + '_featured';
+                } else if (instance && !instance.selectedCategory.name) {
+                    pageName = pageName + '_food';
+                } else if (instance) {
+                    let categoryName = instance.selectedCategory.name.split(' ')[0].toLowerCase();
+                    pageName = pageName + '_' + categoryName;
+                }
+
+            }
+        }
+
+        if (this.TITLES.hasOwnProperty(pageName)) {
+            this.trackView(pageName);
+        }
     }
 
 }
