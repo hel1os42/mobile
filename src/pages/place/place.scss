@@ -258,6 +258,7 @@ page-place {
         margin-top: calc(constant(safe-area-inset-top) + 4px);
         margin-top: calc(env(safe-area-inset-top) + 4px);
         z-index: 111;
+        border-radius: 100vw;
     }
 
     .btn-review{
