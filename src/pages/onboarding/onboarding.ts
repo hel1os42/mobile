@@ -53,17 +53,11 @@ export class OnBoardingPage {
             let str = event.realIndex !== 0 
             ? '_' + event.realIndex 
             : '';
-            
+
             let key = pageName + str;
             this.gAnalytics.trackView(key);
         }
         this.slideIndex = event.realIndex;
-    }
-
-    lastChangeHandler(event) {
-        if (event.realIndex == 2 && this.slideIndex == 2) {
-            this.skip();
-        }
     }
 
     ionViewDidLoad() {

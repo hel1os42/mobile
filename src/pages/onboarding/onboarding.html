@@ -8,7 +8,6 @@
 </div>
 <ion-slides 
     (ionSlideDidChange)="slideChangeHandler($event)"
-    (ionSlideNextStart)="lastChangeHandler($event)"
     pager="true">
 
     <ion-slide class="slide1">
@@ -52,7 +51,7 @@
             {{ 'PAGE_ONBOARDING.INVITE_YOUR_FRIENDS' | translate }}
         </p>
     </ion-slide>
-    <ion-slide class="slide3">
+    <ion-slide (swipeleft)="skip()" class="slide3">
         <div class="slide-title-img">
             <div *ngIf="isAdvMode" text-uppercase class="text-white font-16 business regular">
                 {{ 'PAGE_ONBOARDING.FOR_BUSINESS' | translate }}
