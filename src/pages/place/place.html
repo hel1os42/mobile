@@ -5,13 +5,6 @@
             <div class="cover_logo" [style.background-image]="'url(' + company.picture_url + '?size=mobile&)'"></div>
             <div class="btn_social">
                 <button
-                    ion-button
-                    icon-only
-                    color="white"
-                    class="icon_address">
-                    <!-- call -->
-                </button>
-                <button
                     *ngIf="company.phone"
                     (click)="dial()"
                     ion-button
@@ -19,6 +12,14 @@
                     color="white"
                     class="icon_call">
                     <!-- call -->
+                </button>
+                <button
+                    (click)="navigate()"
+                    ion-button
+                    icon-only
+                    color="white"
+                    class="icon_address">
+                    <!-- address -->
                 </button>
                 <button
                     *ngIf="company.site"
