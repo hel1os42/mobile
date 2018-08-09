@@ -1,8 +1,7 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { StorageService } from "./storage.service";
-import { Token } from "../models/token";
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Token } from '../models/token';
 import { AppModeService } from './appMode.service';
+import { StorageService } from './storage.service';
 
 @Injectable()
 export class TokenService {
@@ -13,7 +12,6 @@ export class TokenService {
     
     constructor(
         private storage: StorageService,
-        private gAnalytics: GoogleAnalytics,
         private appMode: AppModeService) {
         
     }
@@ -36,7 +34,7 @@ export class TokenService {
     remove(event?: string) {
         this.storage.remove(this.TOKEN_KEY);
         this.token = undefined;
-        this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'Logout', event + ' ' + new Date().toISOString());
+        // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'Logout', event + ' ' + new Date().toISOString());
         this.onRemove.emit();
     }
 }

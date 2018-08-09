@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController, Content, LoadingController, NavController, Platform, PopoverController } from 'ionic-angular';
@@ -35,9 +34,9 @@ import { Speciality } from '../../models/speciality';
 import { Tag } from '../../models/tag';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
-import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
+import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { GeocodeService } from '../../providers/geocode.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
@@ -135,7 +134,6 @@ export class PlacesPage {
         private storage: StorageService,
         private testimonials: TestimonialsService,
         private geocoder: GeocodeService,
-        private gAnalytics: GoogleAnalytics,
         private analytics: FlurryAnalyticsService,
         private changeDetectorRef: ChangeDetectorRef,
         private adjust: AdjustService,
@@ -868,7 +866,7 @@ export class PlacesPage {
         if (this.isFeatured) {
             this.adjust.setEvent('TOP_OFFER_FEED_CLICK');
         } else {
-            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
+            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
             this.analytics.faLogEvent('event_chooseplace');
         }
 

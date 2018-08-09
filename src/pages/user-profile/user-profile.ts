@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, PopoverController, Slides } from 'ionic-angular';
+import { AlertController, NavController, PopoverController, Slides } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
@@ -10,9 +9,9 @@ import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
-import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
-import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
+import { FavoritesService } from '../../providers/favorites.service';
+import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -28,7 +27,6 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
-import { FavoritesService } from '../../providers/favorites.service';
 import { PointsPopover } from './points.popover';
 
 @Component({
@@ -77,9 +75,6 @@ export class UserProfilePage {
         private adjust: AdjustService,
         private location: LocationService,
         private offer: OfferService,
-        private loading: LoadingController,
-        private appMode: AppModeService,
-        private gAnalytics: GoogleAnalytics,
         private analytics: FlurryAnalyticsService,
         private popoverCtrl: PopoverController,
         private browser: InAppBrowser,
@@ -380,7 +375,7 @@ export class UserProfilePage {
         } else {
             this.isClick = true;
             this.timer = setTimeout(() => {
-                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
+                // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
                 this.analytics.faLogEvent('event_chooseplace');
 
                 let params = {

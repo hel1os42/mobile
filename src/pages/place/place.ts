@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -23,13 +22,13 @@ import { TestimonialsService } from '../../providers/testimonials.service';
 import { ToastService } from '../../providers/toast.service';
 import { DistanceUtils } from '../../utils/distanse.utils';
 import { BookmarksPage } from '../bookmarks/bookmarks';
+import { LinkPopover } from '../offer/link.popover';
 import { NoticePopover } from '../offer/notice.popover';
 import { OfferPage } from '../offer/offer';
 import { LimitationPopover } from '../place/limitation.popover';
+import { UserProfilePage } from '../user-profile/user-profile';
 import { ComplaintPopover } from './complaint.popover';
 import { TestimonialPopover } from './testimonial.popover';
-import { LinkPopover } from '../offer/link.popover';
-import { UserProfilePage } from '../user-profile/user-profile';
 
 declare var window;
 
@@ -70,7 +69,6 @@ export class PlacePage {
         private alert: AlertController,
         private testimonials: TestimonialsService,
         private statusBar: StatusBar,
-        private gAnalytics: GoogleAnalytics,
         private translate: TranslateService,
         private launchNavigator: LaunchNavigator,
         private browser: InAppBrowser,
@@ -258,7 +256,7 @@ export class PlacePage {
                     let noticePopover = this.popoverCtrl.create(NoticePopover, { offer: offer, user: this.user });
                     noticePopover.present();
                 }
-                this.gAnalytics.trackEvent(this.envName, 'event_chooseoffer');
+                // this.gAnalytics.trackEvent(this.envName, 'event_chooseoffer');
                 this.nav.push(OfferPage, {
                     offer: offer,
                     company: this.company,

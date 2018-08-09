@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,9 +12,9 @@ import { OfferRedemtionStatus } from '../../models/offerRedemtionStatus';
 import { Place } from '../../models/place';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
-import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { FavoritesService } from '../../providers/favorites.service';
+import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
 import { ShareService } from '../../providers/share.service';
@@ -71,7 +70,6 @@ export class OfferPage {
         private toast: ToastService,
         private alert: AlertController,
         private statusBar: StatusBar,
-        private gAnalytics: GoogleAnalytics,
         private browser: InAppBrowser,
         private translate: TranslateService,
         private adjust: AdjustService,
@@ -242,7 +240,7 @@ export class OfferPage {
             place_id: ${this.company.id}, 
             offer_label: ${this.offer.label},
             offer_id: ${this.offer.id}`;
-            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'redeem_button_click', label);
+            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'redeem_button_click', label);
         }
 
         this.timeframesHandler();
@@ -273,7 +271,7 @@ export class OfferPage {
                         offerRedeemPopover.onDidDismiss(() => {
                             // this.stopTimer();
                             this.isGettingRedemptionStatus = false;
-                            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_showqr');
+                            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_showqr');
                         });
 
                         // this.timer = setInterval(() => {}, 2500)
@@ -314,7 +312,7 @@ export class OfferPage {
                             popover.dismiss();
 
                             this.offers.refreshRedeemedOffers();
-                            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', offerRedemtionStatus.redemption_id);
+                            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', offerRedemtionStatus.redemption_id);
                             this.analytics.faLogEvent('event_redeemoffer');
                             this.adjust.setEvent('ACTION_REDEMPTION');
 
