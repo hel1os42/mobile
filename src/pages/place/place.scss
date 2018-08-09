@@ -257,8 +257,15 @@ page-place {
         margin-top: calc(20px + 4px);
         margin-top: calc(constant(safe-area-inset-top) + 4px);
         margin-top: calc(env(safe-area-inset-top) + 4px);
+        margin-right: 0;
         z-index: 111;
         border-radius: 100vw;
+    }
+
+    .btn_social{
+        position: absolute;
+        right: 5vw;
+        bottom: 3vw;
     }
 
     .btn-review{
