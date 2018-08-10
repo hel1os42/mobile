@@ -51,6 +51,7 @@ import { LimitationPopover } from '../place/limitation.popover';
 import { PlacePage } from '../place/place';
 import { NoPlacesPopover } from '../places/noPlaces.popover';
 import { FilterPopover } from './filter.popover';
+import { GoogleAnalyticsService } from '../../providers/googleAnalytics.service';
 
 @Component({
     selector: 'page-places',
@@ -137,7 +138,8 @@ export class PlacesPage {
         private analytics: FlurryAnalyticsService,
         private changeDetectorRef: ChangeDetectorRef,
         private adjust: AdjustService,
-        private browser: InAppBrowser) {
+        private browser: InAppBrowser,
+        private gAnalytics: GoogleAnalyticsService) {
 
         this.isForkMode = this.appMode.getForkMode();
         this.mapRadius = this.listRadius = this.radius = this.storage.get('radius') ? this.storage.get('radius') : 500000;
@@ -162,15 +164,6 @@ export class PlacesPage {
             });
         }
 
-        // this.offers.getCategories(true)
-        //     .subscribe(categories => {
-        //         this.categories.forEach((category) => {
-        //             let obj = categories.data.find(p => p.name === category.name);//temporary - code
-        //             category.id = obj ? obj.id : '';
-        //         })
-        //         this.selectedCategory = this.categories[0];
-        //         this.getLocationStatus();
-        //     });
         this.getRootCategories(true);
 
         this.onRefreshFavoritesPlaces = this.favorites.onRefreshPlaces
@@ -663,6 +656,11 @@ export class PlacesPage {
                 this.tagFilter = [];
                 this.typeFilter = [];
                 this.specialityFilter = [];
+                //ga track view
+                let categoryKey = category.name.split(' ')[0].toLowerCase();
+                let key = 'PlacesPage_' + categoryKey;
+                this.gAnalytics.trackView(key);
+                //
             }
 
             this.search = '';
@@ -678,15 +676,21 @@ export class PlacesPage {
     }
 
     getFeatured() {
-        this.adjust.setEvent('TOP_OFFERS_FEED_VISIT');
         this.featuredPage = 1;
         let loading;
+         //ga track view
+        if (!this.isFeatured) {
+            this.gAnalytics.trackView('PlacesPage_featured');
+            this.adjust.setEvent('TOP_OFFERS_FEED_VISIT');
+        }
+        //
         this.isFeatured = true;
         this.content.resize();
         this.isChangedCategory = true;
         this.tagFilter = [];
         this.typeFilter = [];
         this.specialityFilter = [];
+
         if (!this.user) {
             loading = this.loading.create();
             loading.present();
@@ -698,6 +702,7 @@ export class PlacesPage {
         } else {
             this.loadFeaturedOffers();
         }
+        
     }
 
     loadFeaturedOffers(loading?: any) {

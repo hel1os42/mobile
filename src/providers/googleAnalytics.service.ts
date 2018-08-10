@@ -53,7 +53,7 @@ export class GoogleAnalyticsService {
         PlacesPage_beauty: 'H&B Feed (B&F)',
         PlacesPage_featured: 'Top Offers',
         PlacesPage_retail: 'R&S Feed',
-        PlacesPage_accommodation: '',
+        PlacesPage_accommodation: 'A&L Feed',
         PlacePage: 'Place View',
         OfferPage: 'Offer View',
         InvitePage: 'Inv. Fr. Page',
