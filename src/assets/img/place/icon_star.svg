@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="22px" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="46px" height="44px" viewBox="0 0 46 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-    <title>Untitled 4</title>
+    <title>Untitled</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Star" fill-rule="nonzero" fill="#FF8B10">
-            <g id="path1_fill-link">
-                <polygon id="path1_fill" points="12 0 15.174 7.63131 23.4127 8.2918 17.1357 13.6687 19.0534 21.7082 12 17.4 4.94658 21.7082 6.8643 13.6687 0.587322 8.2918 8.82596 7.63131"></polygon>
-            </g>
+        <g id="icon_star" transform="translate(-1.000000, 0.000000)" fill-rule="nonzero" fill="#FF8B10">
+            <polygon id="path1_fill" points="24 0 30.348 15.26262 46.8254 16.5836 34.2714 27.3374 38.1068 43.4164 24 34.8 9.89316 43.4164 13.7286 27.3374 1.174644 16.5836 17.65192 15.26262"></polygon>
         </g>
     </g>
 </svg>
