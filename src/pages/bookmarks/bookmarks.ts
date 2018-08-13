@@ -125,7 +125,8 @@ export class BookmarksPage {
             });
 
         this.onRefreshUser = this.profile.onRefresh
-            .subscribe(user => this.user = user)
+            .subscribe(user => this.user = user);
+
     }
 
     getPlacesList() {
