@@ -82,15 +82,17 @@ export class GoogleAnalyticsService {
                 this.envName = name;
             });
 
-        this.app.viewDidEnter.subscribe((evt) => {
-            this.handleView(evt);
-        });
+        if (this.isProd()) {
+            this.app.viewDidEnter.subscribe((evt) => {
+                this.handleView(evt);
+            });
+        }
     }
 
     init() {
         this.gAnalytics.startTrackerWithId(this.GOOGLE_ANALYTICS_ID)
             .then(() => {
-                this.gAnalytics.trackView('init');
+                // this.gAnalytics.trackView('init');
                 // Tracker is ready
                 this.gAnalytics.debugMode();
                 this.gAnalytics.setAllowIDFACollection(true);
@@ -104,13 +106,17 @@ export class GoogleAnalyticsService {
     }
 
     trackEvent(key: string) {
-        let event = this.EVENTS[key];
-        this.gAnalytics.trackEvent(this.envName, event);
+        if (this.isProd()) {
+            let event = this.EVENTS[key];
+            this.gAnalytics.trackEvent(this.envName, event);
+        }
     }
 
     trackView(key) {
-        let title = this.TITLES[key];
-        this.gAnalytics.trackView(title);
+        if (this.isProd()) {
+            let title = this.TITLES[key];
+            this.gAnalytics.trackView(title);
+        }
     }
 
     handleView(view) {
@@ -136,6 +142,10 @@ export class GoogleAnalyticsService {
         if (this.TITLES.hasOwnProperty(pageName)) {
             this.trackView(pageName);
         }
+    }
+
+    isProd() {
+        return this.envName === 'prod';
     }
 
 }
