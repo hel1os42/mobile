@@ -117,7 +117,7 @@ import { LimitationPopover } from '../pages/place/limitation.popover';
 import { AdjustService } from '../providers/adjust.service';
 import { Pro } from '@ionic/pro';
 import { Injectable, Injector } from '@angular/core';
-import { TabBarHiddenDirective } from '../directives/tab-bar-hidden.directive';
+import { TabBarHiddenDirective } from '../directives/tab-bar-hidden';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 
 // The translate loader needs to know where to load i18n files
@@ -256,7 +256,7 @@ export class AppErrorHandler implements ErrorHandler {
         LineChartComponent,
         BarChartComponent,
         FormatTimePipe,
-        TabBarHiddenDirective
+        TabBarHiddenDirective,
     ],
     imports: [
         BrowserModule,
