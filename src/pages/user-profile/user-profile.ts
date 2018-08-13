@@ -185,8 +185,8 @@ export class UserProfilePage {
                 this.allowPremiumOffers = resp.data;
                 this.allowOffersLastPage = resp.last_page;
                 if (this.allowOffersSlides) {
-                    this.allowOffersSlides.update();
-                    this.allowOffersSlides.slideTo(0, 0, false);
+                    // this.allowOffersSlides.update();
+                    // this.allowOffersSlides.slideTo(0, 0, false);
                 }
                 this.hideSliderSpinner(disableSegment);
             },
@@ -202,8 +202,8 @@ export class UserProfilePage {
                 this.premiumOffers = resp.data;
                 this.offersLastPage = resp.last_page;
                 if (this.offersSlides) {
-                    this.offersSlides.update();
-                    this.offersSlides.slideTo(0, 0, false);
+                    // this.offersSlides.update();
+                    // this.offersSlides.slideTo(0, 0, false);
                 }
                 this.hideSliderSpinner(disableSegment);
             },
@@ -219,7 +219,7 @@ export class UserProfilePage {
 
         if (isListsGot) {
             this.isSliderSpinner = false;
-            if (!disableSegment || (this.segment === 'allow' && this.allowPremiumOffers.length === 0)) {
+            if (!disableSegment || (this.segment === 'allow' && this.allowPremiumOffers && this.allowPremiumOffers.length === 0)) {
                 this.getSegment();
             }
         }
@@ -288,7 +288,12 @@ export class UserProfilePage {
             ? this.allowOffersSlides
             : this.offersSlides;
         if (slides) {
-            slides.slidePrev();
+            // slides.slidePrev();
+            if (slides.isEnd()) {
+                slides.slideTo(slides.realIndex - 1);
+            } else {
+                slides.slidePrev();
+            }
             this.slideChangeHandler(slides);
         }
     }
@@ -311,7 +316,7 @@ export class UserProfilePage {
             }
         } else {
             this.isRightArrowVisible = true;
-            event.lockSwipeToNext(false);
+            // event.lockSwipeToNext(false);
         }
     }
 
@@ -335,7 +340,7 @@ export class UserProfilePage {
                     .subscribe(resp => {
                         this.allowPremiumOffers = [...this.allowPremiumOffers, ...resp.data];
                         this.allowOffersLastPage = resp.last_page;
-                        event.lockSwipeToNext(false);
+                        // event.lockSwipeToNext(false);
                         this.isRightArrowVisible = true;
                     });
             } else if (elementId === 'offersSlides') {
@@ -343,7 +348,7 @@ export class UserProfilePage {
                     .subscribe(resp => {
                         this.premiumOffers = [...this.premiumOffers, ...resp.data];
                         this.offersLastPage = resp.last_page;
-                        event.lockSwipeToNext(false);
+                        // event.lockSwipeToNext(false);
                         this.isRightArrowVisible = true;
                     });
             }
