@@ -116,6 +116,7 @@ export class PlacesPage {
     lastFeaturedPage: number;
     user: User;
     isDismissLinkPopover = true;
+    backAction;
 
     constructor(
         private platform: Platform,
@@ -441,34 +442,41 @@ export class PlacesPage {
                             : undefined);
                     loadingLocation.present();
                 }
-                // this.location.get(isHighAccuracy)
-                // .then((resp) => {
-                //     this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
-                //     loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                // })
-                // .catch((error) => {
-                //     loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
-                //     if (this.platform.is('cordova')) {
-                //     }
-                //     else {
-                //         this.getLocation(true);
-                //     }
-                //     // error => console.log(error + 'err')
-                // })
                 if (this.platform.is('cordova')) {
-                    this.location.get(isHighAccuracy)
-                        .then((resp) => {
+                    let isStopped = false;
+                    let promise = this.location.get(isHighAccuracy);
+
+                    if (!this.coords) {
+                        this.backAction = this.platform.registerBackButtonAction(() => {
+                            if (loadingLocation) {
+                                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                            }
+                            isStopped = true;
+                            this.presentConfirm();
+                            this.backAction();
+                        }, 1);
+                    }
+
+                    promise.then((resp) => {
+                        if (!isStopped) {
                             this.getDefaultCoords(resp.coords.latitude, resp.coords.longitude);
                             if (loadingLocation) {
                                 loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
                             }
-                        })
+                            this.backAction();
+
+                        }
+                    })
+
                         .catch((error) => {
-                            if (loadingLocation) {
-                                loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                            if (!isStopped) {
+                                if (loadingLocation) {
+                                    loadingLocation.dismiss().catch((err) => { console.log(err + 'err') });
+                                }
+                                this.presentConfirm();
+                                console.log('places ' + error);
                             }
-                            this.presentConfirm();
-                            console.log('places ' + error);
+                            this.backAction();
                         })
                 } else {//for browser
                     if (loadingLocation) {
@@ -678,7 +686,7 @@ export class PlacesPage {
     getFeatured() {
         this.featuredPage = 1;
         let loading;
-         //ga track view
+        //ga track view
         if (!this.isFeatured) {
             this.gAnalytics.trackView('PlacesPage_featured');
             this.adjust.setEvent('TOP_OFFERS_FEED_VISIT');
@@ -702,7 +710,7 @@ export class PlacesPage {
         } else {
             this.loadFeaturedOffers();
         }
-        
+
     }
 
     loadFeaturedOffers(loading?: any) {
@@ -1226,6 +1234,10 @@ export class PlacesPage {
                     backAction = undefined
                 });
             })
+    }
+
+    ionViewDidLeave() {
+        this.backAction();
     }
 
     ngOnDestroy() {
