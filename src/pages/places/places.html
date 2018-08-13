@@ -1,9 +1,11 @@
 <ion-header>
     <div class="block-places-header">
         <ion-grid text-center class="grid-tabs-splash">
-            <ion-row align-items-end>
+            <ion-row 
+            [ngClass]="{ 'category_disabled': isRefresher() }"
+            align-items-end>
                 <a
-                    ion-col
+                    ion-col 
                     *ngFor="let category of categories; let i = index"
                     [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
                     (click)="i == 2 ? getFeatured() : selectCategory(category, i)">

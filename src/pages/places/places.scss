@@ -1,5 +1,5 @@
 page-places {
-     a {
+    a {
         color: #FF5A00;
     }
     .grid img {
@@ -22,6 +22,15 @@ page-places {
         width: 60px;
         height: 60px;
         margin-bottom: 10px;
+    }
+    .category_disabled {
+        pointer-events: none;
+    }
+    .category_disabled .col.active_cat {
+        opacity: 0.5;
+    }
+    .category_disabled .col {
+        opacity: 0.25;
     }
     agm-map {
         height: calc(100vh - 248px);
@@ -339,10 +348,10 @@ page-places {
         width: 100%;
         height: 100%;
     }
-    .block-featured .thumb_image{
+    .block-featured .thumb_image {
         margin-top: 2vw;
     }
-    .block-featured .right-block{
+    .block-featured .right-block {
         position: relative;
     }
     .block-fr {
@@ -364,7 +373,7 @@ page-places {
     .block-right {
         right: 2vw;
     }
-    .right-block{
+    .right-block {
         width: 100%;
         height: 100%;
     }

@@ -1172,6 +1172,10 @@ export class PlacesPage {
         this.refresher = refresher;
     }
 
+    isRefresher() {
+        return !!this.refresher;
+    }
+
     presentAndroidConfirm() {
         this.translate.get(
             ['PAGE_PLACES', 'UNIT'])
