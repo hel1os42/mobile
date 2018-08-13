@@ -127,7 +127,9 @@ export class MyApp {
                 let nav = app.getActiveNavs()[0];
 
                 if (activePortal) {
-                    activePortal.dismiss();
+                    activePortal.dismiss()
+                        .then(() => {})
+                        .catch((err) => { console.log(err) }); 
                 }
                 //else if (this.menuCtrl.isOpen()) {
                 //this.menuCtrl.close();
