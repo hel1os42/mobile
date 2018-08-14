@@ -902,7 +902,7 @@ export class PlacesPage {
                 this.coords = this.mapCenter;
                 if (this.isFeatured) {
                     this.featuredPage = 1;
-                    this.loadFeaturedOffers(true);
+                    this.loadFeaturedOffers(null, true);
                 } else {
                     this.loadCompanies(false, 1, true, true);
                 }
@@ -916,7 +916,7 @@ export class PlacesPage {
             this.coords = this.userCoords;
             this.radius = this.listRadius;
             if (this.isFeatured) {
-                this.loadFeaturedOffers(true);
+                this.loadFeaturedOffers(null, true);
             } else {
                 this.loadCompanies(true, 1, true, true);
             }
@@ -1156,7 +1156,7 @@ export class PlacesPage {
     searchCompanies(event) {
         if (this.isFeatured) {
             this.featuredPage = 1
-            this.loadFeaturedOffers(true, false)
+            this.loadFeaturedOffers(null, false)
         } else {
             this.loadCompanies(true, this.page = 1);
         }
