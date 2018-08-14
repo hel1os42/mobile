@@ -360,7 +360,11 @@
         "SECONDS2" : "секунди",
         "SECOND" : "секунду",
         "BY_PRESSING" : "Натискаючи \"Вхід\", я приймаю",
-        "CHANGE_INVITE" : "Код друга"
+        "CHANGE_INVITE" : "Код друга",
+        "ERROR_TITLE" : "Инвайт-код",
+        "ERROR_BODY" : "Не существующий инвайт-код. Повторить ввод?",
+        "ERROR_BTN_RETRY" : "Да",
+        "ERROR_BTN_DEFAULT_INVITE" : "Без инвайт-кода"
     },
 
     "PAGE_NOTIFICATIONS" : {
