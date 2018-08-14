@@ -203,7 +203,7 @@ export class AuthService {
     }
 
     logout() { 
-        this.api.get('auth/logout');
+        this.api.get('auth/logout', { showLoading: false });
         this.clearCookies();
         this.token.remove('LOGOUT');
         this.adjust.setEvent('LOGOUT_BUTTON_CLICK');
