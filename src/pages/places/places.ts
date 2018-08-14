@@ -850,6 +850,7 @@ export class PlacesPage {
         this.isMapVisible = !this.isMapVisible;
         this.changeDetectorRef.detectChanges();
         if (this.isMapVisible) {
+
             if (!this.mapCenter) {
                 this.generateBounds(this.markers);
             } else {
@@ -859,6 +860,7 @@ export class PlacesPage {
                 this._map.setView(this.mapCenter, this.zoom);
                 // this.changeDetectorRef.detectChanges();
             }
+            
         } else {
             this.companies = [];
             this.coords = this.userCoords;

@@ -168,7 +168,7 @@
     <ion-list
         padding-left
         padding-right
-        *ngIf="!isMapVisible && isFeatured"
+        *ngIf="isFeatured"
         no-lines class="item-block-nau margin-top-10 block-featured">
         <div
             *ngFor="let offer of featuredOffers"
@@ -252,7 +252,7 @@
         </div>
     </ion-list>
 
-    <div *ngIf="isMapVisible">
+    <div *ngIf="isMapVisible && !isFeatured">
         <div
             id="map_leaf"
             class="leaflet-map"
