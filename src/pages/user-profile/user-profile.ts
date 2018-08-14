@@ -258,18 +258,22 @@ export class UserProfilePage {
     showArrow() {
         if (this.segment === 'allow') {
             this.isLeftArrowVisible = false;
+
             if (this.allowPremiumOffers && this.allowPremiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
             } else {
                 this.isRightArrowVisible = false;
             }
+
         } else if (this.segment === 'all') {
             this.isLeftArrowVisible = false;
+
             if (this.premiumOffers && this.premiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
             } else {
                 this.isRightArrowVisible = false;
             }
+            
         }
     }
 
@@ -305,6 +309,7 @@ export class UserProfilePage {
         } else {
             this.isLeftArrowVisible = true;
         }
+
         if (event.isEnd()) {
             this.isRightArrowVisible = false;
             // event.lockSwipeToNext(true);
@@ -335,6 +340,7 @@ export class UserProfilePage {
             ? this.allowOffersLastPage
             : this.offersLastPage;
         if (page < lastPage) {
+
             if (elementId === 'allowOffersSlides') {
                 this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, ++this.allowOffersPage, true)
                     .subscribe(resp => {
@@ -352,6 +358,7 @@ export class UserProfilePage {
                         this.isRightArrowVisible = true;
                     });
             }
+
         } else {
             // if (event.length() > 1) {
             //     if (event.loop === false) {
@@ -372,9 +379,11 @@ export class UserProfilePage {
     openPlace(event, data, offer?: Offer) {
         if (this.isClick) {
             let slides = this.allowOffersSlides || this.offersSlides;
+
             if (slides) {
                 this.slideToFirst(slides);
             }
+
             this.stopTimer();
             this.isClick = false;
         } else {
@@ -441,6 +450,7 @@ export class UserProfilePage {
             this.isDismissLinkPopover = false;
             let host: string = event.target.host;
             let href: string = event.target.href;
+
             if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
                 event.target.href = '#';
                 let endpoint = href.split('places')[1];
@@ -454,6 +464,7 @@ export class UserProfilePage {
             } else {
                 this.browser.create(href, '_system');
             }
+
         }
     }
 
@@ -478,6 +489,7 @@ export class UserProfilePage {
             this.translate.get('SHARING.INVITE')
                 .subscribe(translation => {
                     const Branch = window['Branch'];
+
                     let properties = {
                         canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
                         canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
@@ -491,6 +503,7 @@ export class UserProfilePage {
                             invite_code: this.user.invite_code,
                         }
                     };
+
                     var branchUniversalObj = null;
                     Branch.createBranchUniversalObject(properties)
                         .then(res => {
