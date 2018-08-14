@@ -1707,6 +1707,10 @@ body {
     filter: grayscale(100%) brightness(70%);
 }
 
+.disabled-pointer-events{
+    pointer-events: none;
+}
+
 .disabled-elements .smooth_transition .scroll_content{
     pointer-events: none;
 }
