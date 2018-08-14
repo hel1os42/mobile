@@ -116,6 +116,7 @@ export class AuthService {
     }
 
     register(register: Register) {
+        this.clearCookies();
         let obs = this.api.post('users', register);
         obs.subscribe((resp) => {
             if (resp.was_recently_created) {
@@ -212,9 +213,9 @@ export class AuthService {
         return obs;
     }
 
-    logout() { 
-        this.api.get('auth/logout');
+    logout() {   
         this.clearCookies();
+        this.api.get('auth/logout');
         this.token.remove('LOGOUT');
         this.adjust.setEvent('LOGOUT_BUTTON_CLICK');
     }
