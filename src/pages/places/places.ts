@@ -382,6 +382,7 @@ export class PlacesPage {
             } else {
                 this.diagnostic.isLocationAvailable().then(result => {
                     if (!result) {
+
                         if (this.platform.is('android')) {
                             this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
                                 .then(result => {
@@ -390,12 +391,13 @@ export class PlacesPage {
                                     } else {
                                         this.presentConfirm();
                                     }
-                                    // console
                                 })
                         }
+
                         if (this.platform.is('ios')) {
                             this.presentConfirm();
                         }
+
                     } else {
                         this.getCoords(isRefresh);
                     }
@@ -597,9 +599,9 @@ export class PlacesPage {
         markerLayer.bindPopup(popupLayer);
 
         markerLayer.on('click', (event: LeafletEvent) => {
-            console.log(company);
+            // console.log(company);
         });
-
+        this.changeDetectorRef.detectChanges();
         return markerLayer;
     }
 
@@ -649,7 +651,7 @@ export class PlacesPage {
                 distance = this.circleRadius;
             }
             setTimeout(() => {
-                   this.isBounds = false;
+                this.isBounds = false;
             }, 500)
         }
     }
