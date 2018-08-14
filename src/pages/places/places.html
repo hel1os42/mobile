@@ -1,11 +1,11 @@
 <ion-header>
     <div class="block-places-header">
         <ion-grid text-center class="grid-tabs-splash">
-            <ion-row 
+            <ion-row
             [ngClass]="{ 'category_disabled': isRefresher() }"
             align-items-end>
                 <a
-                    ion-col 
+                    ion-col
                     *ngFor="let category of categories; let i = index"
                     [ngClass]="{ 'active_cat': isSelectedCategory(category, i) && i != 2}"
                     (click)="i == 2 ? getFeatured() : selectCategory(category, i)">
@@ -252,18 +252,16 @@
         </div>
     </ion-list>
 
-    <div *ngIf="isMapVisible && !isFeatured">
-        <div
-            id="map_leaf"
-            class="leaflet-map"
-            leaflet
-            [leafletOptions]="options"
-            [leafletLayers]="getLayers()"
-            [leafletFitBounds]="fitBounds"
-            (leafletMapReady)="onMapReady($event)">
-            <span (click)="revertedLocation()" class="user-location"></span>
-            <span class="radius">{{ 'PAGE_PLACES.RADIUS' | translate }}: {{ getRadius().distance }} {{ getRadius().key | translate }}</span>
-        </div>
+    <div *ngIf="isMapVisible && !isFeatured"
+        id="map_leaf"
+        class="leaflet-map"
+        leaflet
+        [leafletOptions]="options"
+        [leafletLayers]="getLayers()"
+        [leafletFitBounds]="fitBounds"
+        (leafletMapReady)="onMapReady($event)">
+        <span (click)="revertedLocation()" class="user-location"></span>
+        <span class="radius">{{ 'PAGE_PLACES.RADIUS' | translate }}: {{ getRadius().distance }} {{ getRadius().key | translate }}</span>
     </div>
 
     <ion-infinite-scroll
