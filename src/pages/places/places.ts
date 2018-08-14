@@ -642,6 +642,7 @@ export class PlacesPage {
     }
 
     selectCategory(category: OfferCategory, index: number) {
+        let isRender = this.isFeatured;
         if (!this.selectedCategory.id) {
 
             if (this.isFeatured) {
@@ -678,6 +679,9 @@ export class PlacesPage {
                 this.getLocationStatus();
             } else {
                 this.loadCompanies(true, this.page = 1);
+            }
+            if (isRender && this.isMapVisible) {
+                this.renderMap();
             }
 
         }
@@ -858,23 +862,26 @@ export class PlacesPage {
                 this.coords = this.mapCenter;
                 this.loadCompanies(false, 1, true);
                 this._map.setView(this.mapCenter, this.zoom);
-                // this.changeDetectorRef.detectChanges();
+                // this.changeDetectorRef.detectChanges(); 
             }
-            
+
         } else {
             this.companies = [];
             this.coords = this.userCoords;
             this.radius = this.listRadius;
             this.loadCompanies(true, 1, true);
         }
-        function renderMap() {
+        this.renderMap();
+    }
+
+    renderMap() {
+        setTimeout(() => {
             if (document.getElementById("map_leaf")) {
                 document.getElementById("map_leaf").style.height = window.innerHeight -
                     document.getElementsByClassName('block-places-header')[0].clientHeight -
                     document.getElementsByClassName('tabbar')[0].clientHeight + 'px';
             }
-        }
-        setTimeout(renderMap, 1);
+        }, 1)
     }
 
     openPlace(event, data, isShare: boolean, offer?: Offer) {
