@@ -25,6 +25,7 @@
         <ion-item
             *ngIf="!isFeatured"
             class="block-search relative padding-top-3vw"
+            [ngClass]="{ 'disabled-pointer-events': isRefresher() }"
             no-lines
             padding-left
             padding-right>
