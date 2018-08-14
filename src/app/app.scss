@@ -1709,6 +1709,7 @@ body {
 
 .disabled-pointer-events{
     pointer-events: none;
+    opacity: 0.5;
 }
 
 .disabled-elements .smooth_transition .scroll_content{
