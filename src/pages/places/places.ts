@@ -306,9 +306,14 @@ export class PlacesPage {
                     this.mapRadius = this.radius = Math.round(radius);
                     this.changeDetectorRef.detectChanges();
                     if (!this.isBounds) {
-                        this.loadCompanies(false, 1, true);
-                        debugger
+                        if (this.isFeatured) {
+                            this.featuredPage = 1;
+                            this.loadFeaturedOffers(null, false)
+                        } else {
+                            this.loadCompanies(false, 1, true);
+                        }
                     }
+                    // this.isBounds = false;
                 }
             },
 
@@ -650,10 +655,10 @@ export class PlacesPage {
             } else {
                 distance = this.circleRadius;
             }
-            setTimeout(() => {
-                this.isBounds = false;
-            }, 500)
         }
+        setTimeout(() => {
+            this.isBounds = false;
+        }, 500)
     }
 
     isSelectedCategory(category: OfferCategory, i: number) {
@@ -662,7 +667,6 @@ export class PlacesPage {
 
     selectCategory(category: OfferCategory, index: number) {
         this.isBounds = true;
-        let isRender = this.isFeatured;
         if (!this.selectedCategory.id) {
 
             if (this.isFeatured) {
@@ -701,7 +705,7 @@ export class PlacesPage {
                 this.loadCompanies(true, this.page = 1, false, true);
             };
 
-            if (isRender && this.isMapVisible) {
+            if (this.isMapVisible) {
                 this.renderMap();
             }
 
@@ -709,6 +713,7 @@ export class PlacesPage {
     }
 
     getFeatured() {
+        this.isBounds = true;
         this.featuredPage = 1;
         let loading;
         //ga track view
@@ -723,6 +728,7 @@ export class PlacesPage {
         this.tagFilter = [];
         this.typeFilter = [];
         this.specialityFilter = [];
+        this.search = '';
 
         if (!this.user) {
             loading = this.loading.create();
@@ -730,21 +736,29 @@ export class PlacesPage {
             this.profile.get(true, false)
                 .subscribe(user => {
                     this.user = user;
-                    this.loadFeaturedOffers(loading);
+                    this.loadFeaturedOffers(loading, true);
                 })
         } else {
-            this.loadFeaturedOffers();
+            this.loadFeaturedOffers(null, true);
+        }
+        if (this.isMapVisible) {
+            this.renderMap();
         }
 
     }
 
-    loadFeaturedOffers(loading?: any) {
+    loadFeaturedOffers(loading?: any, isBounds?: boolean) {
         //let radius = 19849 * 1000;
-        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading)
+        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading, this.search)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
                 this.lastFeaturedPage = resp.last_page;
                 this.isRefreshLoading = false;
+                this.markers = [];
+                let companies = this.featuredOffers.map(offer => offer.account.owner.place);
+                companies.forEach((company) => {
+                    this.markers.push(this.createMarker(company.latitude, company.longitude, company));
+                });
                 if (this.refresher) {
                     this.refresher.complete();
                     this.refresher = undefined;
@@ -758,6 +772,9 @@ export class PlacesPage {
                         this.refresher = undefined;
                     }
                     if (loading) loading.dismiss();
+                    if (isBounds) {
+                        this.generateBounds(this.markers)
+                    }
                 });
     }
 
@@ -883,16 +900,26 @@ export class PlacesPage {
             } else {
                 this.radius = this.mapRadius;
                 this.coords = this.mapCenter;
-                this.loadCompanies(false, 1, true, true);
+                if (this.isFeatured) {
+                    this.featuredPage = 1;
+                    this.loadFeaturedOffers(true);
+                } else {
+                    this.loadCompanies(false, 1, true, true);
+                }
                 this._map.setView(this.mapCenter, this.zoom);
                 // this.changeDetectorRef.detectChanges();
             }
 
         } else {
+            this.isDismissNoPlacesPopover = true;
             this.companies = [];
             this.coords = this.userCoords;
             this.radius = this.listRadius;
-            this.loadCompanies(true, 1, true, true);
+            if (this.isFeatured) {
+                this.loadFeaturedOffers(true);
+            } else {
+                this.loadCompanies(true, 1, true, true);
+            }
         }
         this.renderMap();
     }
@@ -1127,7 +1154,12 @@ export class PlacesPage {
     }
 
     searchCompanies(event) {
-        this.loadCompanies(true, this.page = 1);
+        if (this.isFeatured) {
+            this.featuredPage = 1
+            this.loadFeaturedOffers(true, false)
+        } else {
+            this.loadCompanies(true, this.page = 1);
+        }
     }
 
     // getLang() {
@@ -1152,10 +1184,15 @@ export class PlacesPage {
             setTimeout(() => {
                 if (this.isFeatured) {
                     // let radius = 19849 * 1000;
-                    this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1)
+                    this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1, this.search)
                         .subscribe(resp => {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
+                            let companies = this.featuredOffers.map(offer => offer.account.owner.place);
+                            this.markers = [];
+                            companies.forEach((company) => {
+                                this.markers.push(this.createMarker(company.latitude, company.longitude, company));
+                            })
                             infiniteScroll.complete();
                         },
                             err => infiniteScroll.complete());

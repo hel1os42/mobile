@@ -23,7 +23,6 @@
         </ion-grid>
 
         <ion-item
-            *ngIf="!isFeatured"
             class="block-search relative padding-top-3vw"
             [ngClass]="{ 'disabled-pointer-events': isRefresher() }"
             no-lines
@@ -36,7 +35,10 @@
                 round
                 placeholder="">
             </ion-searchbar>
-            <a (click)="createPopover()" class="btn_search_settings">
+            <a 
+                *ngIf="!isFeatured"
+                (click)="createPopover()" 
+                class="btn_search_settings">
                 <img
                     *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
                     src="assets/img/user_home/icon_settings.svg">
@@ -168,7 +170,7 @@
     <ion-list
         padding-left
         padding-right
-        *ngIf="isFeatured"
+        *ngIf="isFeatured && !isMapVisible"
         no-lines class="item-block-nau margin-top-10 block-featured">
         <div
             *ngFor="let offer of featuredOffers"
@@ -252,7 +254,7 @@
         </div>
     </ion-list>
 
-    <div *ngIf="isMapVisible && !isFeatured"
+    <div *ngIf="isMapVisible"
         id="map_leaf"
         class="leaflet-map"
         leaflet

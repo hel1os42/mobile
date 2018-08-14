@@ -25,8 +25,13 @@ export class OfferService {
         lng: number,
         // radius: number,
         page: number,
-        showLoading: boolean
+        showLoading: boolean,
+        search: string,
     ) {
+        // let searchStr = '';
+        // if (search) {
+        //     searchStr += 'description:' + `${search};` + 'label:' + `${search};`;
+        // }
         return this.api.get('offers', {
             showLoading: showLoading,
             params: {
@@ -35,6 +40,8 @@ export class OfferService {
                 longitude: lng,
                 radius: this.MAX_RADIUS,
                 with: 'account.owner.place',
+                // searchJoin: 'or;',
+                // search: searchStr,
                 page: page
             }
         });
@@ -237,7 +244,7 @@ export class OfferService {
     }
 
     refreshFeaturedOffers(lat, lng) {
-        this.getFeaturedList(lat, lng, 1, false)
+        this.getFeaturedList(lat, lng, 1, false, '')
             .subscribe(resp => {
                 this.onRefreshFeaturedOffers.emit(resp);
             })
