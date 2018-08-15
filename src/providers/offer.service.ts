@@ -30,7 +30,7 @@ export class OfferService {
     ) {
         // let searchStr = '';
         // if (search) {
-        //     searchStr += 'description:' + `${search};` + 'label:' + `${search};`;
+        //     searchStr += 'offerData.description:' + `${search};` + 'offerData.label:' + `${search};`;
         // }
         return this.api.get('offers', {
             showLoading: showLoading,

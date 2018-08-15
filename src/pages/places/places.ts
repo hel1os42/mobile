@@ -308,7 +308,7 @@ export class PlacesPage {
                     if (!this.isBounds) {
                         if (this.isFeatured) {
                             this.featuredPage = 1;
-                            this.loadFeaturedOffers(null, false)
+                            this.loadFeaturedOffers(null, false);
                         } else {
                             this.loadCompanies(false, 1, true);
                         }
@@ -539,7 +539,7 @@ export class PlacesPage {
 
     getList() {
         if (this.isFeatured) {
-            this.loadFeaturedOffers();
+            this.loadFeaturedOffers(null, true);
         } else {
             this.addMap();
             this.loadCompanies(true, this.page);
