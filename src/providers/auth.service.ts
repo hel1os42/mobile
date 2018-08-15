@@ -97,8 +97,8 @@ export class AuthService {
         
         if (phone) {
             obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
-            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'));
-            // err => { });
+            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
+            err => { });
         } else {
             obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
         }
