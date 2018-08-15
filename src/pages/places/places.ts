@@ -756,6 +756,7 @@ export class PlacesPage {
                 this.isRefreshLoading = false;
                 this.markers = [];
                 let companies = this.featuredOffers.map(offer => offer.account.owner.place);
+               companies = _.uniqBy(companies, 'id');
                 companies.forEach((company) => {
                     this.markers.push(this.createMarker(company.latitude, company.longitude, company));
                 });
@@ -1189,6 +1190,7 @@ export class PlacesPage {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;
                             let companies = this.featuredOffers.map(offer => offer.account.owner.place);
+                            companies = _.uniqBy(companies, 'id');
                             this.markers = [];
                             companies.forEach((company) => {
                                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
