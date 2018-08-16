@@ -29,6 +29,7 @@
             padding-left
             padding-right>
             <ion-searchbar
+                [ngClass]="{ 'disabled-pointer-events': isFeatured }"
                 [(ngModel)]="search"
                 (ionInput)="searchCompanies($event)"
                 debounce=2000
