@@ -152,14 +152,15 @@ export class PlacesPage {
             this.onResumeSubscription = this.platform.resume.subscribe(() => {
                 if (this.isConfirm) {
                     this.diagnostic.isLocationAvailable().then(result => {
+
                         if (!result) {
                             this.isConfirm = false;
                             this.presentConfirm();
-                        }
-                        else {
+                        } else {
                             this.isConfirm = false;
                             this.getCoords();
                         }
+
                     })
                     // .catch(err => console.log(err + 'err'));
                 } else return;
@@ -175,7 +176,7 @@ export class PlacesPage {
                         company.is_favorite = resp.isFavorite;
                         break;
                     }
-                };
+                }
                 if (this.featuredOffers && this.featuredOffers.length > 0) {
                     for (let offer of this.featuredOffers) {
                         if (offer.account.owner.place.id === resp.id) {
@@ -305,6 +306,7 @@ export class PlacesPage {
                     let radius = MapUtils.getRadius(heigth / 2, this._map);
                     this.mapRadius = this.radius = Math.round(radius);
                     this.changeDetectorRef.detectChanges();
+
                     if (!this.isBounds) {
                         if (this.isFeatured) {
                             this.featuredPage = 1;
@@ -312,6 +314,7 @@ export class PlacesPage {
                         } else {
                             this.loadCompanies(false, 1, true);
                         }
+                        
                     }
                     // this.isBounds = false;
                 }
@@ -755,11 +758,13 @@ export class PlacesPage {
                 this.lastFeaturedPage = resp.last_page;
                 this.isRefreshLoading = false;
                 this.markers = [];
+
                 let companies = this.featuredOffers.map(offer => offer.account.owner.place);
-               companies = _.uniqBy(companies, 'id');
+                companies = _.uniqBy(companies, 'id');
                 companies.forEach((company) => {
                     this.markers.push(this.createMarker(company.latitude, company.longitude, company));
                 });
+
                 if (this.refresher) {
                     this.refresher.complete();
                     this.refresher = undefined;
@@ -768,10 +773,12 @@ export class PlacesPage {
             },
                 err => {
                     this.isRefreshLoading = false;
+
                     if (this.refresher) {
                         this.refresher.complete();
                         this.refresher = undefined;
                     }
+
                     if (loading) loading.dismiss();
                     if (isBounds) {
                         this.generateBounds(this.markers)
@@ -916,11 +923,13 @@ export class PlacesPage {
             this.companies = [];
             this.coords = this.userCoords;
             this.radius = this.listRadius;
+
             if (this.isFeatured) {
                 this.loadFeaturedOffers(null, true);
             } else {
                 this.loadCompanies(true, 1, true, true);
             }
+
         }
         this.renderMap();
     }
@@ -1080,6 +1089,7 @@ export class PlacesPage {
             } else {
                 let types = data.types.filter(t => t.isSelected);
                 let tags = data.tags.filter(p => p.isSelected);
+
                 if (types.length > 0 && (this.getFilter(this.selectedTypes, data.types) || this.specialitiesHandler(this.selectedTypes, data.types))) {
                     this.selectedTypes = data.types;
                     this.typeFilter = data.types.filter(p => p.isSelected).map(p => p.id);
@@ -1092,6 +1102,7 @@ export class PlacesPage {
                     this.typeFilter = [];
                     this.isChangedFilters = true;
                 }
+
                 if (tags.length > 0 && this.getFilter(this.selectedTags, data.tags)) {
                     this.selectedTags = data.tags;
                     this.tagFilter = data.tags.filter(p => p.isSelected).map(p => p.slug);
@@ -1103,6 +1114,7 @@ export class PlacesPage {
                     this.tagFilter = [];
                     this.isChangedFilters = true;
                 }
+
                 if (data.specialities.length > 0 && this.getFilter(this.specialityFilter, data.specialities, true)) {
                     this.specialityFilter = data.specialities.map(p => p.slug);
                     this.isChangedFilters = true;
@@ -1110,12 +1122,14 @@ export class PlacesPage {
                     this.specialityFilter = [];
                     this.isChangedFilters = true;
                 }
+
                 if (this.isChangedFilters || this.radius != data.radius) {
                     this.radius = data.radius;
                     this.storage.set('radius', this.radius);
                     this.isChangedFilters = false;
                     this.loadCompanies(true, this.page = 1);
                 }
+
             }
         })
     }
@@ -1319,9 +1333,11 @@ export class PlacesPage {
         if (this.platform.is('cordova')) {
             this.onResumeSubscription.unsubscribe();
         }
+
         if (this.onRefreshFavoritesPlaces) {
             this.onRefreshFavoritesPlaces.unsubscribe();
         }
+
         this.onRefreshTestimonials.unsubscribe();
         this.onRefreshUser.unsubscribe();
         this.onRefreshDefoultCoords.unsubscribe();

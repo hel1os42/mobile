@@ -82,10 +82,12 @@ export class PlacePage {
         this.segment = "alloffers";
         this.coords = this.navParams.get('coords');
         this.user = this.navParams.get('user');
+
         if (!this.user) {
             this.profile.get(true, false)
                 .subscribe(user => this.user = user)
         }
+
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
             this.offersList = this.company.offers;
@@ -94,12 +96,10 @@ export class PlacePage {
                 .subscribe(company => {
                     this.company = company;
                     this.offersList = company.offers;
-                    // this.features = this.company.specialities;
                     this.features = _.uniqBy(company.specialities, 'slug');
                     this.getTestimonials();
                 });
-        }
-        else {
+        } else {
             let companyId = this.navParams.get('placeId');
             this.page = this.navParams.get('page');
             let offerId = this.navParams.get('offerId');
@@ -108,16 +108,16 @@ export class PlacePage {
                     this.company = company;
                     this.offersList = company.offers;
                     this.distanceObj = this.getDistance(this.company.latitude, this.company.longitude);
-                    // this.features = this.company.specialities;
                     this.features = _.uniqBy(company.specialities, 'slug');
+
                     if (!offerId) {
                         this.share.remove();
                         this.getTestimonials();
-                    }
-                    else if (offerId) {
+                    } else if (offerId) {
                         let offer = company.offers.filter(offer => offer.id === offerId);
                         this.openOffer(undefined, offer[0], company);
                     }
+
                 })
         }
 
@@ -209,6 +209,7 @@ export class PlacePage {
             this.translate.get('SHARING.PLACE')
                 .subscribe(translation => {
                     const Branch = window['Branch'];
+
                     let properties = {
                         canonicalIdentifier: `?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
                         canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}&page=place&placeId=${this.company.id}`,
@@ -224,6 +225,7 @@ export class PlacePage {
                             placeId: this.company.id,
                         }
                     };
+
                     var branchUniversalObj = null;
                     Branch.createBranchUniversalObject(properties)
                         .then(res => {
@@ -239,15 +241,14 @@ export class PlacePage {
                         })
                 })
         }
-        else return;
     }
 
     openOffer(event, offer: Offer, company?: Place) {
         if (!offer.redemption_access_code || company) {
+
             if (event && event.target.localName === 'a') {
                 this.openLinkPopover(event);
-            }
-            else {
+            } else {
                 if ((event && !company && (offer.redemption_points_price || offer.referral_points_price))
                     || (!event && company
                         && ((offer.redemption_points_price && this.user.redemption_points >= offer.redemption_points_price)
@@ -265,8 +266,7 @@ export class PlacePage {
                     user: this.user
                 });
             }
-        }
-        else {
+        } else {
             let limitationPopover = this.popoverCtrl.create(LimitationPopover, { offer: offer, user: this.user });
             limitationPopover.present();
         }
@@ -277,6 +277,7 @@ export class PlacePage {
             this.isDismissLinkPopover = false;
             let host: string = event.target.host;
             let href: string = event.target.href;
+
             if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
                 event.target.href = '#';
                 let endpoint = href.split('places')[1];
@@ -287,12 +288,11 @@ export class PlacePage {
                         linkPopover.present();
                         linkPopover.onDidDismiss(() => this.isDismissLinkPopover = true);
                     })
-            }
-            else {
+            } else {
                 this.browser.create(href, '_system');
             }
+
         }
-        else return;
     }
 
     removeFavorite() {
@@ -376,8 +376,7 @@ export class PlacePage {
                     },
                         err => infiniteScroll.complete());
             });
-        }
-        else {
+        } else {
             infiniteScroll.complete();
         }
     }
