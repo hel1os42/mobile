@@ -36,8 +36,7 @@ export class ComplaintPopover {
         if (i == 3) {
             this.complaint = undefined;
             this.isInputVisible = true;
-        }
-        else {
+        } else {
             let complaintsEn;
             let rootKey = key.split('.')[0];
             let childKey = key.split('.')[1];
