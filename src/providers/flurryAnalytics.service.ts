@@ -38,6 +38,5 @@ export class FlurryAnalyticsService {
         if (this.platform.is('cordova')) {
             return this.fa.logEvent(event);
         }
-        else return;
     }
 }
