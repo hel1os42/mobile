@@ -183,8 +183,7 @@ export class LoginPage {
         if (this.getDevMode()) {
             this.numCode = this.phoneCodes.find(item => item.dial_code === '+380');
             return this.numCode;
-        }
-        else {
+        } else {
             this.location.getByIp()
                 .subscribe(resp => {
                     // this.numCode = this.phoneCodes.find(item => item.code === resp.country_code);
@@ -208,8 +207,7 @@ export class LoginPage {
                 this.isLogin = true;
                 if (this.socialData) {
                     this.getReferrerId(this.defaultInvite);
-                }
-                else {
+                } else {
                     this.otpHandler();
                 }
                 loading.dismiss();
@@ -279,11 +277,9 @@ export class LoginPage {
         let phone = this.numCode.dial_code + this.authData.phone;
         let obs;
 
-
         if (this.isLogin && !this.socialData) {
             obs = this.auth.login({ phone: phone, code: this.authData.code });
-        }
-        else {
+        } else {
             this.register.code = this.authData.code;
             if (this.socialData) {
                 this.register.identity_access_token = this.socialData.token;
@@ -389,16 +385,17 @@ export class LoginPage {
                     // let userId: string;
                     let accessToken: string;
                     let promise: Promise<any>;
+
                     if (res.status === 'unknown') {
                         promise = this.social.fbLogin();
-                    }
-                    else if (res.status === 'connected') {
+                    } else if (res.status === 'connected') {
                         promise = Promise.resolve();
                         if (res.authResponse) {
                             accessToken = res.authResponse.accessToken;
                         }
                         // userId = res.authResponse.userID;
                     }
+
                     // console.log(res);
                     promise.then(resp => {
                         if (resp && resp.authResponse) {
@@ -592,15 +589,7 @@ export class LoginPage {
                     handler: (data) => {
                         if (!data || this.envName == data) {
                             return;
-                        }
-                        // else {
-                        //     if (data === 'fork') {
-                        //         this.envName = 'prod';
-                        //         this.appMode.setForkMode();// only for fork mode;
-                        //         this.appMode.setEnvironmentMode('prod');
-                        //         debugger
-                        //     }
-                        else {
+                        } else {
                             this.envName = data;
                             this.appMode.setEnvironmentMode(data);
                             this.getNumCode();

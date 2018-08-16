@@ -27,7 +27,7 @@
         {{ 'PAGE_INVITE.SHARE_YOUR_INVITE_LINK' | translate }}
     </div>
     <div>
-        <button (click)="inviteFriend()" color="primary" ion-button block>
+        <button [disabled]="!user.invite_code" (click)="inviteFriend()" color="primary" ion-button block>
             {{ 'PAGE_INVITE.INVITE_FRIENDS' | translate }}
         </button>
     </div>

@@ -474,7 +474,7 @@
         </ion-row>
     </ion-grid>
     <div margin-left margin-right margin-bottom>
-        <button margin-bottom (click)="inviteFriend()" color="primary" ion-button block>
+        <button [disabled]="!user.invite_code" margin-bottom (click)="inviteFriend()" color="primary" ion-button block>
             {{ 'PAGE_INVITE.INVITE_FRIENDS' | translate }}
         </button>
         <button (click)="logout()" color="primary" ion-button block text-uppercase>

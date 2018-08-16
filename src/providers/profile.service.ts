@@ -7,6 +7,7 @@ import { ApiService } from './api.service';
 import { AppModeService } from './appMode.service';
 import { OfferService } from './offer.service';
 import { TokenService } from './token.service';
+import { GoogleAnalyticsService } from './googleAnalytics.service';
 
 @Injectable()
 export class ProfileService {
@@ -20,7 +21,8 @@ export class ProfileService {
         private oneSignal: OneSignal,
         private platform: Platform,
         private appMode: AppModeService,
-        private offer: OfferService) {
+        private offer: OfferService,
+        private gAnalytics: GoogleAnalyticsService) {
 
         this.token.onRemove.subscribe(() => this.user = undefined);
         this.offer.onRefreshRedeemedOffers.subscribe(user => {
@@ -36,6 +38,7 @@ export class ProfileService {
                 if (this.platform.is('cordova')
                     && (!this.user || this.user.name !== user.name || this.user.phone !== user.phone || this.user.email !== user.email)) {
                     this.sendTags(user);
+                    this.gAnalytics.setUserId(user.invite_code);
                 }
                 this.user = user;
                 this.onRefresh.emit(user);

@@ -1164,11 +1164,12 @@ ion-app.ios [padding], ion-app.ios [padding] .padding-no .scroll-content{
 .cover_block_btn .button{
     width: 8vw;
     height: 8vw;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    background-size: 60% auto;
+    background-size: 5vw;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     margin-left: 2.2vw;
+    margin-right: 0;
+    vertical-align: top;
 }
 
 .relative{
@@ -1706,6 +1707,11 @@ body {
     filter: grayscale(100%) brightness(70%);
 }
 
+.disabled-pointer-events{
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 .disabled-elements .smooth_transition .scroll_content{
     pointer-events: none;
 }
@@ -1942,6 +1948,11 @@ ion-title.title.title-ios{
     height: 6vw;
 }
 
+.button.icon_address{
+    background-image: url(../assets/img/place/icon_address.svg);
+    background-size: 55% auto;
+}
+
 .button.icon_call{
     background-image: url(../assets/img/user_offers/icon_call.svg);
 }
@@ -1952,6 +1963,7 @@ ion-title.title.title-ios{
 
 .button.icon_bookmarks{
     background-image: url(../assets/img/place/icon_star.svg);
+    background-size: 70% auto;
 }
 
 .button.icon_sharing{

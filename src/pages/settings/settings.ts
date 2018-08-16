@@ -24,6 +24,7 @@ import { Subscription } from 'rxjs';
     templateUrl: 'settings.html'
 })
 export class SettingsPage {
+    
     user: User = new User;
     message: string;
     coords: Coords = new Coords();

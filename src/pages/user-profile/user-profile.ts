@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, LoadingController, NavController, PopoverController, Slides } from 'ionic-angular';
+import { AlertController, NavController, PopoverController, Slides } from 'ionic-angular';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Rx';
 import { Account } from '../../models/account';
@@ -10,9 +9,9 @@ import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { User } from '../../models/user';
 import { AdjustService } from '../../providers/adjust.service';
-import { AnalyticsService } from '../../providers/analytics.service';
-import { AppModeService } from '../../providers/appMode.service';
 import { AuthService } from '../../providers/auth.service';
+import { FavoritesService } from '../../providers/favorites.service';
+import { FlurryAnalyticsService } from '../../providers/flurryAnalytics.service';
 import { LocationService } from '../../providers/location.service';
 import { OfferService } from '../../providers/offer.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -28,7 +27,6 @@ import { UserNauPage } from '../user-nau/user-nau';
 import { UserOffersPage } from '../user-offers/user-offers';
 import { UserTasksPage } from '../user-tasks/user-tasks';
 import { UserUsersPage } from '../user-users/user-users';
-import { FavoritesService } from '../../providers/favorites.service';
 import { PointsPopover } from './points.popover';
 
 @Component({
@@ -77,10 +75,7 @@ export class UserProfilePage {
         private adjust: AdjustService,
         private location: LocationService,
         private offer: OfferService,
-        private loading: LoadingController,
-        private appMode: AppModeService,
-        private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
+        private analytics: FlurryAnalyticsService,
         private popoverCtrl: PopoverController,
         private browser: InAppBrowser,
         private favorites: FavoritesService) {
@@ -190,8 +185,8 @@ export class UserProfilePage {
                 this.allowPremiumOffers = resp.data;
                 this.allowOffersLastPage = resp.last_page;
                 if (this.allowOffersSlides) {
-                    this.allowOffersSlides.update();
-                    this.allowOffersSlides.slideTo(0, 0, false);
+                    // this.allowOffersSlides.update();
+                    // this.allowOffersSlides.slideTo(0, 0, false);
                 }
                 this.hideSliderSpinner(disableSegment);
             },
@@ -207,8 +202,8 @@ export class UserProfilePage {
                 this.premiumOffers = resp.data;
                 this.offersLastPage = resp.last_page;
                 if (this.offersSlides) {
-                    this.offersSlides.update();
-                    this.offersSlides.slideTo(0, 0, false);
+                    // this.offersSlides.update();
+                    // this.offersSlides.slideTo(0, 0, false);
                 }
                 this.hideSliderSpinner(disableSegment);
             },
@@ -224,7 +219,7 @@ export class UserProfilePage {
 
         if (isListsGot) {
             this.isSliderSpinner = false;
-            if (!disableSegment || (this.segment === 'allow' && this.allowPremiumOffers.length === 0)) {
+            if (!disableSegment || (this.segment === 'allow' && this.allowPremiumOffers && this.allowPremiumOffers.length === 0)) {
                 this.getSegment();
             }
         }
@@ -263,18 +258,22 @@ export class UserProfilePage {
     showArrow() {
         if (this.segment === 'allow') {
             this.isLeftArrowVisible = false;
+
             if (this.allowPremiumOffers && this.allowPremiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
             } else {
                 this.isRightArrowVisible = false;
             }
+
         } else if (this.segment === 'all') {
             this.isLeftArrowVisible = false;
+
             if (this.premiumOffers && this.premiumOffers.length > 1) {
                 this.isRightArrowVisible = true;
             } else {
                 this.isRightArrowVisible = false;
             }
+            
         }
     }
 
@@ -293,7 +292,12 @@ export class UserProfilePage {
             ? this.allowOffersSlides
             : this.offersSlides;
         if (slides) {
-            slides.slidePrev();
+            // slides.slidePrev();
+            if (slides.isEnd()) {
+                slides.slideTo(slides.realIndex - 1);
+            } else {
+                slides.slidePrev();
+            }
             this.slideChangeHandler(slides);
         }
     }
@@ -305,6 +309,7 @@ export class UserProfilePage {
         } else {
             this.isLeftArrowVisible = true;
         }
+
         if (event.isEnd()) {
             this.isRightArrowVisible = false;
             // event.lockSwipeToNext(true);
@@ -316,7 +321,7 @@ export class UserProfilePage {
             }
         } else {
             this.isRightArrowVisible = true;
-            event.lockSwipeToNext(false);
+            // event.lockSwipeToNext(false);
         }
     }
 
@@ -335,12 +340,13 @@ export class UserProfilePage {
             ? this.allowOffersLastPage
             : this.offersLastPage;
         if (page < lastPage) {
+
             if (elementId === 'allowOffersSlides') {
                 this.offer.getPremiumList(this.coords.lat, this.coords.lng, this.user.referral_points, this.user.redemption_points, ++this.allowOffersPage, true)
                     .subscribe(resp => {
                         this.allowPremiumOffers = [...this.allowPremiumOffers, ...resp.data];
                         this.allowOffersLastPage = resp.last_page;
-                        event.lockSwipeToNext(false);
+                        // event.lockSwipeToNext(false);
                         this.isRightArrowVisible = true;
                     });
             } else if (elementId === 'offersSlides') {
@@ -348,10 +354,11 @@ export class UserProfilePage {
                     .subscribe(resp => {
                         this.premiumOffers = [...this.premiumOffers, ...resp.data];
                         this.offersLastPage = resp.last_page;
-                        event.lockSwipeToNext(false);
+                        // event.lockSwipeToNext(false);
                         this.isRightArrowVisible = true;
                     });
             }
+
         } else {
             // if (event.length() > 1) {
             //     if (event.loop === false) {
@@ -372,15 +379,17 @@ export class UserProfilePage {
     openPlace(event, data, offer?: Offer) {
         if (this.isClick) {
             let slides = this.allowOffersSlides || this.offersSlides;
+
             if (slides) {
                 this.slideToFirst(slides);
             }
+
             this.stopTimer();
             this.isClick = false;
         } else {
             this.isClick = true;
             this.timer = setTimeout(() => {
-                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
+                // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_chooseplace');
                 this.analytics.faLogEvent('event_chooseplace');
 
                 let params = {
@@ -441,6 +450,7 @@ export class UserProfilePage {
             this.isDismissLinkPopover = false;
             let host: string = event.target.host;
             let href: string = event.target.href;
+
             if (host === 'api.nau.io' || host === 'api-test.nau.io' || host === 'nau.toavalon.com') {
                 event.target.href = '#';
                 let endpoint = href.split('places')[1];
@@ -454,6 +464,7 @@ export class UserProfilePage {
             } else {
                 this.browser.create(href, '_system');
             }
+
         }
     }
 
@@ -478,6 +489,7 @@ export class UserProfilePage {
             this.translate.get('SHARING.INVITE')
                 .subscribe(translation => {
                     const Branch = window['Branch'];
+
                     let properties = {
                         canonicalIdentifier: `?invite_code=${this.user.invite_code}`,
                         canonicalUrl: `${this.branchDomain}?invite_code=${this.user.invite_code}`,
@@ -491,6 +503,7 @@ export class UserProfilePage {
                             invite_code: this.user.invite_code,
                         }
                     };
+
                     var branchUniversalObj = null;
                     Branch.createBranchUniversalObject(properties)
                         .then(res => {

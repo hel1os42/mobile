@@ -1,7 +1,9 @@
 <ion-header>
     <div class="block-places-header">
         <ion-grid text-center class="grid-tabs-splash">
-            <ion-row align-items-end>
+            <ion-row
+            [ngClass]="{ 'category_disabled': isRefresher() }"
+            align-items-end>
                 <a
                     ion-col
                     *ngFor="let category of categories; let i = index"
@@ -21,19 +23,23 @@
         </ion-grid>
 
         <ion-item
-            *ngIf="!isFeatured"
             class="block-search relative padding-top-3vw"
+            [ngClass]="{ 'disabled-pointer-events': isRefresher() }"
             no-lines
             padding-left
             padding-right>
             <ion-searchbar
+                [ngClass]="{ 'disabled-pointer-events': isFeatured }"
                 [(ngModel)]="search"
                 (ionInput)="searchCompanies($event)"
                 debounce=2000
                 round
                 placeholder="">
             </ion-searchbar>
-            <a (click)="createPopover()" class="btn_search_settings">
+            <a 
+                *ngIf="!isFeatured"
+                (click)="createPopover()" 
+                class="btn_search_settings">
                 <img
                     *ngIf="typeFilter.length == 0 && specialityFilter.length == 0 && tagFilter.length == 0"
                     src="assets/img/user_home/icon_settings.svg">
@@ -165,7 +171,7 @@
     <ion-list
         padding-left
         padding-right
-        *ngIf="!isMapVisible && isFeatured"
+        *ngIf="isFeatured && !isMapVisible"
         no-lines class="item-block-nau margin-top-10 block-featured">
         <div
             *ngFor="let offer of featuredOffers"
@@ -249,18 +255,16 @@
         </div>
     </ion-list>
 
-    <div *ngIf="isMapVisible">
-        <div
-            id="map_leaf"
-            class="leaflet-map"
-            leaflet
-            [leafletOptions]="options"
-            [leafletLayers]="getLayers()"
-            [leafletFitBounds]="fitBounds"
-            (leafletMapReady)="onMapReady($event)">
-            <span (click)="revertedLocation()" class="user-location"></span>
-            <span class="radius">{{ 'PAGE_PLACES.RADIUS' | translate }}: {{ getRadius().distance }} {{ getRadius().key | translate }}</span>
-        </div>
+    <div *ngIf="isMapVisible"
+        id="map_leaf"
+        class="leaflet-map"
+        leaflet
+        [leafletOptions]="options"
+        [leafletLayers]="getLayers()"
+        [leafletFitBounds]="fitBounds"
+        (leafletMapReady)="onMapReady($event)">
+        <span (click)="revertedLocation()" class="user-location"></span>
+        <span class="radius">{{ 'PAGE_PLACES.RADIUS' | translate }}: {{ getRadius().distance }} {{ getRadius().key | translate }}</span>
     </div>
 
     <ion-infinite-scroll

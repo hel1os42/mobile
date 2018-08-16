@@ -1,21 +1,20 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { OneSignal } from '@ionic-native/onesignal';
 import { Platform } from 'ionic-angular';
+import { Observable, Subscription } from 'rxjs';
 import { Login } from '../models/login';
 import { PushTokenCreate } from '../models/pushTokenCreate';
 import { Register } from '../models/register';
+import { SocialIdentity } from '../models/socialIdentity';
 import { User } from '../models/user';
-import { AnalyticsService } from './analytics.service';
+import { AdjustService } from './adjust.service';
 import { ApiService } from './api.service';
 import { AppModeService } from './appMode.service';
+import { FlurryAnalyticsService } from './flurryAnalytics.service';
 import { ProfileService } from './profile.service';
 import { PushTokenService } from './pushToken.service';
 import { StorageService } from './storage.service';
 import { TokenService } from './token.service';
-import { SocialIdentity } from '../models/socialIdentity';
-import { Observable, Subscription } from 'rxjs';
-import { AdjustService } from './adjust.service';
 
 declare var cookieMaster;
 
@@ -40,8 +39,7 @@ export class AuthService {
     constructor(
         private api: ApiService,
         private token: TokenService,
-        private gAnalytics: GoogleAnalytics,
-        private analytics: AnalyticsService,
+        private analytics: FlurryAnalyticsService,
         private storage: StorageService,
         private oneSignal: OneSignal,
         private pushToken: PushTokenService,
@@ -73,15 +71,6 @@ export class AuthService {
             }
         }, 10 * 1000 * 120);
     }
-
-    // getInviteCode() {
-    //     //this.inviteCode = to do
-    //     return this.inviteCode;
-    // }
-
-    // setInviteCode(invite) {
-    //     this.inviteCode = invite;//to do
-    // }
 
     isLoggedIn() {
         let token = this.token.get();
@@ -118,8 +107,9 @@ export class AuthService {
     register(register: Register) {
         let obs = this.api.post('users', register);
         obs.subscribe((resp) => {
+
             if (resp.was_recently_created) {
-                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signup');
+                // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signup');
                 this.analytics.faLogEvent('event_signup');
                 this.adjust.setEvent('FIRST_TIME_SIGN_IN');
             }
@@ -145,7 +135,7 @@ export class AuthService {
     }
 
     login(login: Login) {
-        this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
+        // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
         this.analytics.faLogEvent('event_phoneconfirm');
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
@@ -178,13 +168,13 @@ export class AuthService {
                         // })
                     })
                 })
-            this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signin');
+            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signin');
             // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
             let envName = this.appMode.getEnvironmentMode();
             this.oneSignal.sendTag('environment', envName);
 
             if (!isSocial) {
-                this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
+                // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
                 this.analytics.faLogEvent('event_phoneconfirm');
             }
 
@@ -213,7 +203,7 @@ export class AuthService {
     }
 
     logout() { 
-        this.api.get('auth/logout');
+        this.api.get('auth/logout', { showLoading: false });
         this.clearCookies();
         this.token.remove('LOGOUT');
         this.adjust.setEvent('LOGOUT_BUTTON_CLICK');
