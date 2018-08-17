@@ -41,7 +41,6 @@ import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-
 import { LoginPage } from '../pages/login/login';
 import { InvitePage } from '../pages/invite/invite';
 import { NotificationsPage } from '../pages/notifications/notifications';
-import { OfferTermsPage } from '../pages/offer-terms/offer-terms';
 import { CongratulationPopover } from '../pages/offer/congratulation.popover';
 import { OfferPage } from '../pages/offer/offer';
 import { OfferRedeemPopover } from '../pages/offer/offerRedeem.popover';
@@ -240,7 +239,6 @@ export class AppErrorHandler implements ErrorHandler {
         ComplaintPopover,
         LimitationPopover,
         PointsPopover,
-        OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
         CreateOffer2Page,
@@ -329,7 +327,6 @@ export class AppErrorHandler implements ErrorHandler {
         ComplaintPopover,
         LimitationPopover,
         PointsPopover,
-        OfferTermsPage,
         SettingsChangePhonePage,
         AdvRedeemOfferPage,
         CreateOffer2Page,
