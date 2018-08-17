@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
     selector: 'page-user-offers',
     templateUrl: 'user-offers.html'
 })
+
 export class UserOffersPage {
     offers: RedeemedOffer[];
     total;
@@ -25,8 +26,7 @@ export class UserOffersPage {
                         .subscribe(resp => {
                             this.total = resp;
                         });
-                }
-                else {
+                } else {
                     this.total = resp.offers_count;
                 }
             });
