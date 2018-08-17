@@ -10,6 +10,8 @@ import { SignUpPage } from '../signup/signup';
     templateUrl: 'start.html'
 })
 
+// this page is not used
+
 export class StartPage {
 
     socialData: SocialData;
@@ -49,22 +51,6 @@ export class StartPage {
                             this.isSocial = true;
                             // });
                         })
-                    // .subscribe(user => {
-                    //     debugger
-                    //     this.socialData = {
-                    //         name: user.name,
-                    //         //name: user.screen_name,
-                    //         // email: user.email,
-                    //         picture: user.profile_image_url_https
-                    //     };
-                    //     console.log(user);
-                    //     this.nav.push(SignUpPage, { social: this.socialData });
-                    //     this.isSocial = true;
-                    // },
-                    //     err => {
-                    //         this.isSocial = true;
-                    //         debugger
-                    //     })
                 },
                     error => {
                         this.social.twLogout();
@@ -86,8 +72,7 @@ export class StartPage {
                     let promise: Promise<any>;
                     if (res.status === 'unknown') {
                         promise = this.social.fbLogin();
-                    }
-                    else if (res.status === 'connected') {
+                    } else if (res.status === 'connected') {
                         promise = Promise.resolve();
                         // userId = res.authResponse.userID;
                     }
