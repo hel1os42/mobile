@@ -54,9 +54,6 @@ import { SettingsPopover } from '../pages/settings/settings.popover';
 import { PointsPopover } from '../pages/user-profile/points.popover';
 import { SignUpCodePage } from '../pages/signup-code/signup-code';
 import { SignUpPage } from '../pages/signup/signup';
-import { SplashInfoPage } from '../pages/splash-info/splash-info';
-import { SplashNewsPage } from '../pages/splash-news/splash-news';
-import { SplashScreenPage } from '../pages/splash-screen/splash-screen';
 import { StartPage } from '../pages/start/start';
 import { StatisticPage } from '../pages/statistic/statistic';
 import { Statistic1Page } from '../pages/statistic1/statistic1';
@@ -208,7 +205,6 @@ export class AppErrorHandler implements ErrorHandler {
         AdvUserProfilePage,
         UserOffersPage,
         OfferPage,
-        SplashScreenPage,
         UserTasksPage,
         UserAchievePage,
         UserUsersPage,
@@ -219,8 +215,6 @@ export class AppErrorHandler implements ErrorHandler {
         CreateOffer1Page,
         InvitePage,
         PlacePage,
-        SplashInfoPage,
-        SplashNewsPage,
         SettingsPopover,
         OfferRedeemPopover,
         FilterPopover,
@@ -296,7 +290,6 @@ export class AppErrorHandler implements ErrorHandler {
         AdvUserProfilePage,
         UserOffersPage,
         OfferPage,
-        SplashScreenPage,
         UserTasksPage,
         UserAchievePage,
         UserUsersPage,
@@ -307,8 +300,6 @@ export class AppErrorHandler implements ErrorHandler {
         CreateOffer1Page,
         InvitePage,
         PlacePage,
-        SplashInfoPage,
-        SplashNewsPage,
         SettingsPopover,
         OfferRedeemPopover,
         FilterPopover,
