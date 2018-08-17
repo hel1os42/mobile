@@ -8,6 +8,9 @@ import { StringValidator } from '../../validators/string.validator';
     selector: 'page-settings-change-phone',
     templateUrl: 'settings-change-phone.html'
 })
+
+// this page is not used
+
 export class SettingsChangePhonePage {
 
     user: User;
@@ -15,7 +18,8 @@ export class SettingsChangePhonePage {
     otp: string;
     phone: string
 
-    constructor(private nav: NavController,
+    constructor(
+        private nav: NavController,
         private navParams: NavParams,
         private profile: ProfileService) {
 
@@ -41,9 +45,9 @@ export class SettingsChangePhonePage {
         //     this.nav.pop();
         // }
         // else {
-            this.user.phone = this.phone;
-            this.profile.patch({ phone: this.user.phone })
-                .subscribe(
+        this.user.phone = this.phone;
+        this.profile.patch({ phone: this.user.phone })
+            .subscribe(
                 resp => this.nav.pop(),
                 errResp => this.visibleChangePhone = true);
         // }

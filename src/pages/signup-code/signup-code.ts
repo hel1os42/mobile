@@ -16,6 +16,9 @@ import { TabsPage } from '../tabs/tabs';
     selector: 'page-signup-code',
     templateUrl: 'signup-code.html'
 })
+
+// this page is not used
+
 export class SignUpCodePage {
     register: Register;
     envName: string;
@@ -41,6 +44,7 @@ export class SignUpCodePage {
         this.register = this.navParams.get('register');
         this.inviteCode = this.navParams.get('inviteCode');
         this.envName = this.appMode.getEnvironmentMode();
+
         if (this.envName === 'dev' || this.envName === 'test') {
             this.register.code = this.register.phone.slice(-4);
         }

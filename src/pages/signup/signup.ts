@@ -17,6 +17,9 @@ import { SignUpCodePage } from '../signup-code/signup-code';
     selector: 'page-signup',
     templateUrl: 'signup.html'
 })
+
+// this page is not used
+
 export class SignUpPage {
     formData = {
         phone: '',
