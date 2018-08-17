@@ -38,7 +38,6 @@ import { CreateOffer4Page } from '../pages/create-offer-4/create-offer-4';
 import { CreateOffer5Page } from '../pages/create-offer-5/create-offer-5';
 import { CreateOfferPage } from '../pages/create-offer/create-offer';
 import { CreateUserProfilePage } from '../pages/create-user-profile/create-user-profile';
-import { FeedPage } from '../pages/feed/feed';
 import { LoginPage } from '../pages/login/login';
 import { InvitePage } from '../pages/invite/invite';
 import { NotificationsPage } from '../pages/notifications/notifications';
@@ -248,7 +247,6 @@ export class AppErrorHandler implements ErrorHandler {
         CreateOffer3Page,
         CreateOffer4Page,
         CreateOffer5Page,
-        FeedPage,
         StatisticPage,
         Statistic1Page,
         LineChartComponent,
@@ -338,7 +336,6 @@ export class AppErrorHandler implements ErrorHandler {
         CreateOffer3Page,
         CreateOffer4Page,
         CreateOffer5Page,
-        FeedPage,
         StatisticPage,
         Statistic1Page,
         LineChartComponent,
