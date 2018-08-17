@@ -361,10 +361,10 @@
         "SECOND" : "секунду",
         "BY_PRESSING" : "Натискаючи \"Вхід\", я приймаю",
         "CHANGE_INVITE" : "Код друга",
-        "ERROR_TITLE" : "Инвайт-код",
-        "ERROR_BODY" : "Не существующий инвайт-код. Повторить ввод?",
-        "ERROR_BTN_RETRY" : "Да",
-        "ERROR_BTN_DEFAULT_INVITE" : "Без инвайт-кода"
+        "ERROR_TITLE" : "Невірний інвайт-код",
+        "ERROR_BODY" : "Інвайт-код не знайдено. Повторити введення?",
+        "ERROR_BTN_RETRY" : "Повторити",
+        "ERROR_BTN_DEFAULT_INVITE" : "Пропустити"
     },
 
     "PAGE_NOTIFICATIONS" : {

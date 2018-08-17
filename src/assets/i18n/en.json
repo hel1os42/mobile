@@ -361,10 +361,10 @@
         "SECOND" : "second",
         "BY_PRESSING" : "By pressing \"SIGN IN\", I accept",
         "CHANGE_INVITE" : "Invite code",
-        "ERROR_TITLE" : "Инвайт-код",
-        "ERROR_BODY" : "Не существующий инвайт-код. Повторить ввод?",
-        "ERROR_BTN_RETRY" : "Да",
-        "ERROR_BTN_DEFAULT_INVITE" : "Без инвайт-кода"
+        "ERROR_TITLE" : "Wrong invite code",
+        "ERROR_BODY" : "Invite code not found. Try again?",
+        "ERROR_BTN_RETRY" : "Yes, try again",
+        "ERROR_BTN_DEFAULT_INVITE" : "Skip"
     },
 
     "PAGE_NOTIFICATIONS" : {
