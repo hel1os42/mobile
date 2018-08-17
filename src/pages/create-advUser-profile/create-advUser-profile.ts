@@ -35,7 +35,10 @@ import { CreateAdvUserProfileTypesPopover } from './create-advUser-profile.types
     templateUrl: 'create-advUser-profile.html'
 })
 
+// this page is not used
+
 export class CreateAdvUserProfilePage {
+
     coords: Coords = new Coords();
     message: string;
     categories: OfferCategory[] = OfferCategory.StaticList;
@@ -87,6 +90,7 @@ export class CreateAdvUserProfilePage {
                     category.id = placeCategories.id;//temporary - code
                 })
             });
+
         if (this.navParams.get('company')) {
             this.company = this.navParams.get('company');
             this.zoom = MapUtils.round(MapUtils.getZoom(this.company.latitude, this.company.radius, 95), 0.5);
@@ -116,14 +120,12 @@ export class CreateAdvUserProfilePage {
                             }
                         })
                 });
-        }
-        else {
+        } else {
             this.coords.lat = this.navParams.get('latitude');
             this.coords.lng = this.navParams.get('longitude');
             if (this.coords.lat) {
                 this.mapPresent(true);
-            }
-            else {
+            } else {
                 this.profile.get(true)
                     .subscribe(user => {
                         this.coords = {
@@ -132,29 +134,6 @@ export class CreateAdvUserProfilePage {
                         };
                         this.mapPresent(true)
                     });
-                // this.location.get()
-                //     .then((resp) => {
-                //         this.coords = {
-                //             lat: resp.coords.latitude,
-                //             lng: resp.coords.longitude
-                //         };
-                //         this.mapPresent(true)
-                //     })
-                //     .catch((error) => {
-                //         this.message = error.message;
-                //     });
-                // setTimeout(() => {
-                //     if (!this.coords.lat) {
-                //         this.location.getByIp()
-                //             .subscribe(resp => {
-                //                 this.coords = {
-                //                     lat: resp.latitude,
-                //                     lng: resp.longitude
-                //                 };
-                //                 this.mapPresent(true);
-                //             })
-                //     }
-                // }, 20000);
             }
         };
 
@@ -327,8 +306,7 @@ export class CreateAdvUserProfilePage {
             if (selectedTags.length > 0) {
                 this.selectedTags = selectedTags;
                 this.tagsNames = this.selectedTags.map(p => ' ' + p.name);
-            }
-            else {
+            } else {
                 this.selectedTags = undefined;
             }
         })
@@ -356,8 +334,7 @@ export class CreateAdvUserProfilePage {
                 this.selectedTypes = selectedTypes;
                 this.typeNames = this.selectedTypes.map(p => ' ' + p.name);
                 this.getFeaturesNames();
-            }
-            else {
+            } else {
                 this.selectedTypes = undefined;
             }
         });
@@ -380,8 +357,7 @@ export class CreateAdvUserProfilePage {
         popover.onDidDismiss(data => {
             if (!data) {
                 return;
-            }
-            else {
+            } else {
                 this.selectedTypes = data.types;
                 this.lastOpened = data.name;
                 this.selectedTypes.forEach(t => {
@@ -397,8 +373,7 @@ export class CreateAdvUserProfilePage {
         if (this.selectedTypes) {
             let names = _.flatten(this.selectedTypes.map(t => t.specialities)).filter(p => p.isSelected);
             this.featuresNames = names.map(n => ' ' + n.name);
-        }
-        else {
+        } else {
             this.featuresNames = undefined;
         }
     }
@@ -449,7 +424,7 @@ export class CreateAdvUserProfilePage {
             this.toast.show('Please select category, type and features');
             return false;
         }
-        else return true;
+        return true;
     }
 
     createAccount() {
@@ -479,8 +454,7 @@ export class CreateAdvUserProfilePage {
                             coverUpload.then(() => this.nav.setRoot(AdvTabsPage, { company: company }));
                         });
                     })
-            }
-            else {
+            } else {
                 // let different = DataUtils.difference(this.company, this.baseData);
                 // let isEmpty = _.isEmpty(different);
                 // if (!isEmpty || this.isChangedLogo || this.isChangedCover) {

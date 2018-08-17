@@ -6,12 +6,15 @@ import { ViewController, NavParams } from 'ionic-angular';
     templateUrl: 'create-advUser-profile.types.popover.html'
 })
 
+// this component is not used
+
 export class CreateAdvUserProfileTypesPopover {
 
     types;
 
-    constructor(private viewCtrl: ViewController,
-                private navParams: NavParams) {
+    constructor(
+        private viewCtrl: ViewController,
+        private navParams: NavParams) {
 
         this.types = this.navParams.get('types');
     }

@@ -7,6 +7,8 @@ import * as _ from 'lodash';
     templateUrl: 'create-advUser-profile.features.popover.html'
 })
 
+// this component is not used
+
 export class CreateAdvUserProfileFeaturesPopover {
 
     types;
@@ -53,7 +55,5 @@ export class CreateAdvUserProfileFeaturesPopover {
                 t.specialities = _.flatten(t.specialities);
             })
         }
-
-        
     }
 }
