@@ -1,51 +1,51 @@
 page-adv-tabs{
-  .tab-button{
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: auto 40%;
-  }
+    .tab-button{
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: auto 40%;
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(1){
-    background-image: url(../assets/img/tabs/tab1_a.svg);
-  }
+    .tab-button[aria-selected="true"]:nth-child(1){
+        background-image: url(../assets/img/tabs/tab1_a.svg);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(1){
-    color: blue;
-    background-image: url(../assets/img/tabs/tab1.svg);
-  }
+    .tab-button[aria-selected="false"]:nth-child(1){
+        color: blue;
+        background-image: url(../assets/img/tabs/tab1.svg);
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(2){
-    background-image: url(../assets/img/tabs/tab2_a.svg);
-  }
+    .tab-button[aria-selected="true"]:nth-child(2){
+        background-image: url(../assets/img/tabs/tab2_a.svg);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(2){
-    background-image: url(../assets/img/tabs/tab2.svg);
-  }
+    .tab-button[aria-selected="false"]:nth-child(2){
+        background-image: url(../assets/img/tabs/tab2.svg);
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(3){
-    background-size: auto 65%;
-    background-image: url(../assets/img/tabs/adv/tab3_a.svg);
-  }
+    .tab-button[aria-selected="true"]:nth-child(3){
+        background-size: auto 65%;
+        background-image: url(../assets/img/tabs/adv/tab3_a.svg);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(3){
-    background-size: auto 65%;
-    background-image: url(../assets/img/tabs/adv/tab3.svg);
-  }
+    .tab-button[aria-selected="false"]:nth-child(3){
+        background-size: auto 65%;
+        background-image: url(../assets/img/tabs/adv/tab3.svg);
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(4){
-    background-image: url(../assets/img/tabs/tab4_a.svg);
-  }
+    .tab-button[aria-selected="true"]:nth-child(4){
+        background-image: url(../assets/img/tabs/tab4_a.svg);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(4){
-    background-image: url(../assets/img/tabs/tab4.svg);
-  }
+    .tab-button[aria-selected="false"]:nth-child(4){
+        background-image: url(../assets/img/tabs/tab4.svg);
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(5){
-    background-image: url(../assets/img/tabs/adv/tab5_a.svg);
-  }
+    .tab-button[aria-selected="true"]:nth-child(5){
+        background-image: url(../assets/img/tabs/adv/tab5_a.svg);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(5){
-    color: blue;
-    background-image: url(../assets/img/tabs/adv/tab5.svg);
-  }
+    .tab-button[aria-selected="false"]:nth-child(5){
+        color: blue;
+        background-image: url(../assets/img/tabs/adv/tab5.svg);
+    }
 }
