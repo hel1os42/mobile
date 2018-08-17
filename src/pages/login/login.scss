@@ -1,15 +1,13 @@
 page-login {
-  .header{
-    box-shadow: none;
-  }
+    .header{
+        box-shadow: none;
+    }
 
     .temporary {
         border: 1px solid red;
-        p {
-            color: red;
-            font-size: 10px;
-            text-align: center;
-        }
+        color: red;
+        font-size: 10px;
+        text-align: center;
     }
 
     .select-ios .select-icon .select-icon-inner{
