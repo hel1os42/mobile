@@ -1,19 +1,22 @@
+import { Component } from '@angular/core';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import { NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Rx';
+import { Account } from '../../models/account';
+import { Place } from '../../models/place';
+import { PlaceService } from '../../providers/place.service';
+import { ProfileService } from '../../providers/profile.service';
+import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
 import { StatisticPage } from '../statistic/statistic';
 import { UserNauPage } from '../user-nau/user-nau';
-import { AdvUserOffersPage } from '../adv-user-offers/adv-user-offers';
-import { Place } from '../../models/place';
-import { ProfileService } from '../../providers/profile.service';
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { PlaceService } from '../../providers/place.service';
-import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { Account } from '../../models/account';
 
 @Component({
     selector: 'page-adv-redeem-offer',
     templateUrl: 'adv-redeem-offer.html'
 })
+
+// this page is not used
+
 export class AdvRedeemOfferPage {
 
     code: string;

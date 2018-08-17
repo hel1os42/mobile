@@ -10,6 +10,9 @@ import { AppModeService } from '../../providers/appMode.service';
     selector: 'page-adv-tabs',
     templateUrl: 'adv-tabs.html'
 })
+
+// this page is not used
+
 export class AdvTabsPage {
 
     isDevMode = false;

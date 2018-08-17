@@ -19,6 +19,9 @@ import { Account } from '../../models/account';
     selector: 'page-adv-user-profile',
     templateUrl: 'adv-user-profile.html'
 })
+
+// this page is not used
+
 export class AdvUserProfilePage {
 
     @ViewChild(Content) content: Content;
@@ -65,21 +68,21 @@ export class AdvUserProfilePage {
                 this.user = resp;
                 this.NAU = resp.accounts.NAU;
                 this.balance = this.NAU.balance;
-                
+
                 this.time = new Date().valueOf();
             })
 
-            if (!this.balance) {
-        this.profile.getWithAccounts()
-            .subscribe(resp => {
-                this.user = resp;
-                this.NAU = resp.accounts.NAU;
-                this.balance = this.NAU ? this.NAU.balance : 0;
-                
-                this.time = new Date().valueOf();
-            })
+        if (!this.balance) {
+            this.profile.getWithAccounts()
+                .subscribe(resp => {
+                    this.user = resp;
+                    this.NAU = resp.accounts.NAU;
+                    this.balance = this.NAU ? this.NAU.balance : 0;
+
+                    this.time = new Date().valueOf();
+                })
+        }
     }
-}
 
     ionViewWillEnter() {
         this.isModalVisible = this.storage.get(this.MODAL_VISIBLE_KEY);
