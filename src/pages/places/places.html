@@ -22,14 +22,15 @@
             </ion-row>
         </ion-grid>
 
-        <ion-item
+        <ion-item    
+            *ngIf="!isFeatured"
             class="block-search relative padding-top-3vw"
             [ngClass]="{ 'disabled-pointer-events': isRefresher() }"
             no-lines
             padding-left
             padding-right>
             <ion-searchbar
-                [ngClass]="{ 'disabled-pointer-events': isFeatured }"
+            
                 [(ngModel)]="search"
                 (ionInput)="searchCompanies($event)"
                 debounce=2000
@@ -37,7 +38,6 @@
                 placeholder="">
             </ion-searchbar>
             <a 
-                *ngIf="!isFeatured"
                 (click)="createPopover()" 
                 class="btn_search_settings">
                 <img
