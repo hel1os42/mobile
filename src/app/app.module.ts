@@ -63,7 +63,6 @@ import { StartPage } from '../pages/start/start';
 import { StatisticPage } from '../pages/statistic/statistic';
 import { Statistic1Page } from '../pages/statistic1/statistic1';
 import { TabsPage } from '../pages/tabs/tabs';
-import { TemporaryPage } from '../pages/temporary/temporary';
 import { TransferPopover } from '../pages/user-nau/transfer.popover';
 import { UserAchievePage } from '../pages/user-achieve/user-achieve';
 import { UserNauPage } from '../pages/user-nau/user-nau';
@@ -224,7 +223,6 @@ export class AppErrorHandler implements ErrorHandler {
         PlacePage,
         SplashInfoPage,
         SplashNewsPage,
-        TemporaryPage,
         SettingsPopover,
         OfferRedeemPopover,
         FilterPopover,
@@ -315,7 +313,6 @@ export class AppErrorHandler implements ErrorHandler {
         PlacePage,
         SplashInfoPage,
         SplashNewsPage,
-        TemporaryPage,
         SettingsPopover,
         OfferRedeemPopover,
         FilterPopover,

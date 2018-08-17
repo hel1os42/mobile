@@ -19,9 +19,7 @@ export class StartPage {
 
     constructor(
         private nav: NavController,
-        private social: SocialService) {
-
-    }
+        private social: SocialService) { }
 
     login() {
         this.nav.push(LoginPage);
