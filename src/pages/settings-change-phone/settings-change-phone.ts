@@ -30,8 +30,7 @@ export class SettingsChangePhonePage {
     toggleChangePhone() {
         if (this.user.phone == this.phone) {
             this.nav.pop();
-        }
-        else {
+        } else {
             this.visibleChangePhone = false;
             this.otp = this.phone.slice(-6);//to do 
         }
