@@ -94,13 +94,18 @@ export class AuthService {
         }
 
         let obs: Observable<any>;
-        
+
         if (phone) {
-            obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
+            obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`, {
+                ignoreHttpBadReferralLink: this.appMode.getEnvironmentMode() === 'prod'
+            });
             obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
-            err => { });
+                err => { });
         } else {
-            obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
+            obs = this.api.get(`auth/register/${inviteCode}`, {
+                showLoading: false,
+                ignoreHttpBadReferralLink: this.appMode.getEnvironmentMode() === 'prod'
+            });
         }
         return obs;
     }
@@ -213,7 +218,7 @@ export class AuthService {
         return obs;
     }
 
-    logout() {   
+    logout() {
         this.clearCookies();
         this.api.get('auth/logout');
         this.token.remove('LOGOUT');

@@ -16,6 +16,7 @@ interface ApiRequestOptions {
     options?: RequestOptions;
     ignoreHttpNotFound?: boolean;
     ignoreHttpUnprocessableEntity?: boolean;
+    ignoreHttpBadReferralLink?: boolean;
 }
 
 class UriQueryEncoder extends QueryEncoder {
@@ -34,6 +35,7 @@ export class ApiService {
     HTTP_STATUS_CODE_TOO_MANY_REQ = 423;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
     HTTP_STATUS_CODE_UNPROCESSABLE_ENTITY = 422;
+    HTTTP_STATUS_CODE_BAD_REFERRAL_LINK = 400;
     prodUrl = 'https://api.nau.io';
     // prodUrl = 'http://88.99.124.83';
     devUrl = 'https://nau.toavalon.com';
@@ -124,7 +126,8 @@ export class ApiService {
                         messages.push(err.phone);
                     }
                     else if ((errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound)
-                            || (errResp.status == this.HTTP_STATUS_CODE_UNPROCESSABLE_ENTITY && requestOptions.ignoreHttpUnprocessableEntity)) {
+                            || (errResp.status == this.HTTP_STATUS_CODE_UNPROCESSABLE_ENTITY && requestOptions.ignoreHttpUnprocessableEntity)
+                            || (errResp.status == this.HTTTP_STATUS_CODE_BAD_REFERRAL_LINK && requestOptions.ignoreHttpBadReferralLink)) {
                             // || (errResp.status == this.HTTP_STATUS_CODE_LEFT_COMPLAINT && requestOptions.ignoreHttpLeftComplaint && !errResp.json().text)) {
                         return;
                     }
