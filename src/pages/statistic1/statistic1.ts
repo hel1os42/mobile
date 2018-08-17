@@ -6,13 +6,14 @@ import { Component } from '@angular/core';
   templateUrl: 'statistic1.html'
 })
 
+// this page is not used
+
 export class Statistic1Page {
 
     labels = [['PERIOD 1', '01/07/2017'], ['PERIOD 2', '01/07/2017']];
     data = [435, 335];
     segment = "realdata";
 
-    constructor() {
-    }
+    constructor() { }
 
 }
