@@ -1,25 +1,23 @@
 page-create-offer-1 {
+    .icon {
+        line-height: 1.1;
+    }
 
+    .item-ios.item-block .item-inner{
+        padding-right: 0;
+    }
 
-  .icon {
-    line-height: 1.1;
-  }
+    .progress-block .progress-line-fill{
+        width: 20%;
+    }
 
-  .item-ios.item-block .item-inner{
-    padding-right: 0;
-  }
+    .item-ios[detail-push]{
+        padding-right: 4vw;
+    }
 
-  .progress-block .progress-line-fill{
-    width: 20%;
-  }
-
-  .item-ios[detail-push]{
-    padding-right: 4vw;
-  }
-
-  .select-ios .select-icon {
-    display: none;
-  }
+    .select-ios .select-icon {
+        display: none;
+    }
 
     .select.select-ios {
         padding: 0;
