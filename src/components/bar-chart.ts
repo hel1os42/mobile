@@ -6,6 +6,8 @@ import { Chart } from 'chart.js';
     template: `<canvas #barCanvas height="300"></canvas>`,
 })
 
+// this component is not used
+
 export class BarChartComponent {
 
     @ViewChild('barCanvas') barCanvas: ElementRef;
@@ -34,7 +36,7 @@ export class BarChartComponent {
                     yAxes: [{ // titles axes
                         ticks: {
                             stepSize: 100,
-                            beginAtZero:true,
+                            beginAtZero: true,
                             padding: 20,
                         },
                         gridLines: {
@@ -52,8 +54,8 @@ export class BarChartComponent {
                         }
                     }],
                 },
-                legend:{
-                    display:false,
+                legend: {
+                    display: false,
                 },
                 responsive: true,
                 animation: {
@@ -68,7 +70,7 @@ export class BarChartComponent {
                             ctx.font = "8vw OpenSansNauSemibold";
                             ctx.fillStyle = "White";
                             chart.getDatasetMeta(i).data.forEach(function (p: any, j: any) {
-                                ctx.fillText(datasets[i].data[j], p._model.x, p._model.y );
+                                ctx.fillText(datasets[i].data[j], p._model.x, p._model.y);
                             });
                         });
                     }
