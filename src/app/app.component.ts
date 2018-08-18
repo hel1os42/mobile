@@ -12,16 +12,14 @@ import { LoginPage } from '../pages/login/login';
 import { OnBoardingPage } from '../pages/onboarding/onboarding';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AdjustService } from '../providers/adjust.service';
-import { FlurryAnalyticsService } from '../providers/flurryAnalytics.service';
 import { AppModeService } from '../providers/appMode.service';
 import { AuthService } from '../providers/auth.service';
+import { FlurryAnalyticsService } from '../providers/flurryAnalytics.service';
+import { GoogleAnalyticsService } from '../providers/googleAnalytics.service';
 import { LocationService } from '../providers/location.service';
 import { NetworkService } from '../providers/network.service';
 import { ShareService } from '../providers/share.service';
 import { StorageService } from '../providers/storage.service';
-import { GoogleAnalyticsService } from '../providers/googleAnalytics.service';
-
-
 
 @Component({
     templateUrl: 'app.html'
@@ -94,7 +92,7 @@ export class MyApp {
             }
 
             // FORK
-            this.appMode.setForkMode();// only for fork mode;
+            this.appMode.setForkMode();
 
             // IPhone X
             if (platform.is('ios') && platform.width() == 375 && platform.height() == 812) {
@@ -112,8 +110,6 @@ export class MyApp {
                 this.branchInit(platform, splashScreen, true);
                 this.network.getStatus();
             });
-            // this.onEnvironmentModeSubscription = this.appMode.onEnvironmentMode
-            //     .subscribe(() => this.adjustInit());
 
             //this.rootPage = BookmarksPage;
 
@@ -140,29 +136,6 @@ export class MyApp {
                     this.presentConfirm(platform);
                 }
             });
-
-            // FIX KEYBOARD SCROLL
-
-            // if (platform.is('android')) {
-            //     let
-            //         appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
-            //         appElHeight = appEl.clientHeight;
-
-            //     window.addEventListener('native.keyboardshow', (e) => {
-            //         console.log("native.keyboardshow");
-            //         //console.log("appElHeight " + appElHeight);
-            //         //console.log("native.keyboardHeight " + (<any>e).keyboardHeight);
-            //         setTimeout(function() {
-            //             appEl.style.height = (appElHeight - (<any>e).keyboardHeight) + 'px';
-            //         }, 50)
-            //         //console.log("position scroll: " + window.pageYOffset || document.documentElement.scrollTop);
-            //     });
-
-            //     window.addEventListener('native.keyboardhide', () => {
-            //         console.log("native.keyboardhide");
-            //         appEl.style.height = '100%';
-            //     });
-            // }
         });
 
         this.auth.onLogout.subscribe(() => {
@@ -170,16 +143,6 @@ export class MyApp {
         });
 
     }
-
-    // getRootPage() {
-    //     this.profile.get(true, false)
-    //         .subscribe(resp => {
-    //             this.rootPage = (!resp.name && !resp.email)
-    //                 ? CreateUserProfilePage
-    //                 : TabsPage;
-    //             // this.rootPage = SettingsPage;
-    //         });
-    // }
 
     initTranslate() {
         // this language will be used as a fallback when a translation isn't found in the current language
