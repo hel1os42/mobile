@@ -13,15 +13,13 @@ export class AppModeService {
 
     onEnvironmentMode = new EventEmitter<string>();
 
-    constructor(private storage: StorageService) {
-    }
+    constructor(private storage: StorageService) { }
 
     getAdvMode() {
         return !!this.storage.get(this.ADV_MODE_KEY);
     }
 
     setAdvMode(advMode: boolean) {
-        
         this.storage.set(this.ADV_MODE_KEY, advMode);
     }
 
@@ -37,7 +35,6 @@ export class AppModeService {
 
     getOnboardingVisible() {
         return !!this.storage.get(this.ONBOARDING_KEY);
-
     }
 
     setOnboardingVisible() {

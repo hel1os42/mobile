@@ -10,9 +10,7 @@ export class ReportService {
     constructor(
         private api: ApiService,
         private appMode: AppModeService,
-        private adjust: AdjustService) {
-
-    }
+        private adjust: AdjustService) { }
 
     set(placeId: string, complaint: Complaint) {
         let obs = this.api.post(`places/${placeId}/complaints`, complaint, {

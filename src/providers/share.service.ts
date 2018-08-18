@@ -9,12 +9,13 @@ export class ShareService {
     // onSetShareData: EventEmitter<Share> = new EventEmitter<Share>();
 
     constructor(private storage: StorageService) {
+
         this.share = this.storage.get(this.SHARE_KEY);
         if (this.share) {
             // this. remove();
             this.storage.remove(this.SHARE_KEY);
         }
-     }
+    }
 
     get() {
         return this.share;

@@ -13,8 +13,7 @@ export class OfferService {
 
     MAX_RADIUS = 19849 * 1000;// temporary
 
-    constructor(
-        private api: ApiService) { }
+    constructor(private api: ApiService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
@@ -73,7 +72,6 @@ export class OfferService {
             });
         }
         return obs;
-
     }
 
     getPlacesOfRoot(
@@ -169,7 +167,6 @@ export class OfferService {
                 with: 'retailTypes;retailTypes.specialities;tags'
             }
         });
-        // return Observable.of(MockCategory.items);
     }
 
     getRedeemedOffers() {
@@ -185,14 +182,6 @@ export class OfferService {
             showLoading: false,
             ignoreHttpNotFound: true
         });
-        // obs.subscribe(status => {
-        //     if (status.redemption_id) {
-        //         this.refreshRedeemedOffers();
-        //         this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', status.redemption_id);
-        //         this.analytics.faLogEvent('event_redeemoffer');
-        //         this.adjust.setEvent('ACTION_REDEMPTION');
-        //     }
-        // }, err => {})
         return obs;
     }
 

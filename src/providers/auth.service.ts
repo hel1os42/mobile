@@ -109,7 +109,6 @@ export class AuthService {
         obs.subscribe((resp) => {
 
             if (resp.was_recently_created) {
-                // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signup');
                 this.analytics.faLogEvent('event_signup');
                 this.adjust.setEvent('FIRST_TIME_SIGN_IN');
             }
@@ -135,7 +134,6 @@ export class AuthService {
     }
 
     login(login: Login) {
-        // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
         this.analytics.faLogEvent('event_phoneconfirm');
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
@@ -168,13 +166,10 @@ export class AuthService {
                         // })
                     })
                 })
-            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signin');
-            // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
             let envName = this.appMode.getEnvironmentMode();
             this.oneSignal.sendTag('environment', envName);
 
             if (!isSocial) {
-                // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
                 this.analytics.faLogEvent('event_phoneconfirm');
             }
 

@@ -7,8 +7,7 @@ export class FavoritesService {
     onRefreshPlaces: EventEmitter<any> = new EventEmitter();
     onRefreshOffers: EventEmitter<any> = new EventEmitter();
 
-    constructor(private api: ApiService) {
-    }
+    constructor(private api: ApiService) { }
 
     getPlaces(page: number) {
         return this.api.get(`profile/favorite/places?page=${page}`, { showLoading: false });

@@ -51,8 +51,7 @@ export class ApiService {
 
         if (this.appMode.getEnvironmentMode()) {
             this.environmentMode = this.appMode.getEnvironmentMode();
-        }
-        else {
+        } else {
             this.environmentMode = 'prod';
             this.appMode.setEnvironmentMode(this.environmentMode);
         }
@@ -122,24 +121,20 @@ export class ApiService {
                     if (errResp.status == this.HTTP_STATUS_CODE_TOO_MANY_REQ) {
                         let err = errResp.json();
                         messages.push(err.phone);
-                    }
-                    else if ((errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound)
-                            || (errResp.status == this.HTTP_STATUS_CODE_UNPROCESSABLE_ENTITY && requestOptions.ignoreHttpUnprocessableEntity)) {
-                            // || (errResp.status == this.HTTP_STATUS_CODE_LEFT_COMPLAINT && requestOptions.ignoreHttpLeftComplaint && !errResp.json().text)) {
+                    } else if ((errResp.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND && requestOptions.ignoreHttpNotFound)
+                        || (errResp.status == this.HTTP_STATUS_CODE_UNPROCESSABLE_ENTITY && requestOptions.ignoreHttpUnprocessableEntity)) {
+                        // || (errResp.status == this.HTTP_STATUS_CODE_LEFT_COMPLAINT && requestOptions.ignoreHttpLeftComplaint && !errResp.json().text)) {
                         return;
-                    }
-                    else {
+                    } else {
                         let err = errResp.json();
 
                         if (err.error && err.message) {
                             messages.push(err.message)
-                        }
-                        else {
+                        } else {
                             if (errResp.status == 0) {
                                 messages.push('Internet connection error');
                                 // this.network.setStatus(false);
-                            }
-                            else {
+                            } else {
                                 for (let key in err) {
                                     let el = err[key];
                                     for (let i = 0; i < el.length; i++) {
@@ -154,7 +149,7 @@ export class ApiService {
                     if (messages.length == 0) {
                         messages.push('Unexpected error occured');
                     }
-                        this.toast.show(messages.join('\n'), errResp.status == 0);
+                    this.toast.show(messages.join('\n'), errResp.status == 0);
                 });
 
         // return sharableObs.map(resp => resp.json());

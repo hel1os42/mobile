@@ -11,18 +11,14 @@ export class FlurryAnalyticsService {
 
     constructor(
         private fAnalytics: FlurryAnalytics,
-        private platform: Platform) {
-
-        // this.flurryAnalyticsInit();
-    }
+        private platform: Platform) { }
 
     flurryAnalyticsInit() {
         if (this.platform.is('cordova')) {
             let appKey: string;
             if (this.platform.is('android')) {
                 appKey = this.FLURRY_ANDROID_APP_KEY;
-            }
-            else if (this.platform.is('ios')) {
+            } else if (this.platform.is('ios')) {
                 appKey = this.FLURRY_IOS_APP_KEY;
             }
             const options: FlurryAnalyticsOptions = {
