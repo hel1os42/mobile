@@ -1,5 +1,4 @@
 page-place {
-
     a{
         color: #FF5A00;
     }
@@ -28,53 +27,53 @@ page-place {
         background: linear-gradient(180deg, #FF8A0E 0%, #FF5A00 100%);
     }
 
-  .segment{
-    border-top: 1px solid #F2F2F2;
-  }
+    .segment{
+        border-top: 1px solid #F2F2F2;
+    }
 
-  .footer_testimonials {
-    box-shadow: 0px -6px 18px rgba(0, 0, 0, 0.12);
-    background: #fff;
-    padding-top: 3%;
-    padding-bottom: 17%;
-    height: 17vw;
-    width: 100%;
-    margin-bottom: 13%;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    z-index: 999999;
-  }
+    .footer_testimonials {
+        box-shadow: 0px -6px 18px rgba(0, 0, 0, 0.12);
+        background: #fff;
+        padding-top: 3%;
+        padding-bottom: 17%;
+        height: 17vw;
+        width: 100%;
+        margin-bottom: 13%;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 999999;
+    }
 
     .footer_testimonials .text-input-ios {
         padding: 3vw;
     }
 
-  .item-ios.item-block .item-inner{
-    padding-right: 0;
-  }
+    .item-ios.item-block .item-inner{
+        padding-right: 0;
+    }
 
-  .footer_testimonials .bg-gray{
-    border-radius: 8px;
-  }
+    .footer_testimonials .bg-gray{
+        border-radius: 8px;
+    }
 
-  .btn_check{
-    background: linear-gradient(0deg, #FF5A00 0%, #FF8A23 100%);
-    border-radius: 100vw;
-    padding: 2.7vw;
-    height: 10.4vw;
-    width: 10.4vw;
-  }
+    .btn_check{
+        background: linear-gradient(0deg, #FF5A00 0%, #FF8A23 100%);
+        border-radius: 100vw;
+        padding: 2.7vw;
+        height: 10.4vw;
+        width: 10.4vw;
+    }
 
-  .tabbar_testimonials{
-    border-bottom: 1px solid gray;
-  }
+    .tabbar_testimonials{
+        border-bottom: 1px solid gray;
+    }
 
-  .offers_count{
-    line-height: 34px;
-  }
+    .offers_count{
+        line-height: 34px;
+    }
 
     .num_right {
         position: absolute;
@@ -87,27 +86,6 @@ page-place {
         line-height: 12vw;
     }
 
-    /*
-    .segment-ios{
-        width: 100%;
-        display: block;
-    }
-
-    .segment-ios .segment-button {
-        margin-left: 12%;
-        display: inline;
-        font-size: 4vw;
-        line-height: 12vw;
-    }
-
-    .segment-ios .segment-button:first-of-type{
-        margin-left: 5%;
-    }
-
-    .segment-ios .segment-button:last-of-type {
-        margin-left: 13%;
-    }
-*/
     .label-ios{
         margin: 0;
     }
@@ -259,7 +237,6 @@ page-place {
         margin-top: calc(env(safe-area-inset-top) + 4px);
         margin-right: 0;
         z-index: 111;
-        border-radius: 100vw;
     }
 
     .btn_social{
@@ -319,6 +296,7 @@ page-place {
     .block-place-offers .smooth_transition:before {
         display: none;
     }
+
     .block-place-offers .right-top-angle {
         position: absolute;
         top: -10vw;
@@ -332,20 +310,25 @@ page-place {
         background-position: 50% 90%;
         background-size: 25%;
     }
+
     .block-place-offers .right-top-angle.discount {
         background-image: url(../assets/img/place/featured/discount.svg);
         background-position: 50% 100%;
         background-size: 40%;
     }
+
     .block-place-offers .right-top-angle.second_free {
         background-image: url(../assets/img/place/featured/second_free.svg);
     }
+
     .block-place-offers .right-top-angle.bonus {
         background-image: url(../assets/img/place/featured/bonus.svg);
     }
+
     .block-place-offers .right-top-angle.gift {
         background-image: url(../assets/img/place/featured/gift.svg);
     }
+
     .block-fr {
         position: absolute;
         bottom: 2vw;
@@ -354,21 +337,26 @@ page-place {
         color: #fff;
         transform: translate3d(0, 0, 0);
     }
+
     .coupon,
     .block-right {
         position: absolute;
         bottom: 0;
     }
+
     .coupon {
         left: 2vw;;
         align-items: flex-end;
     }
+
     .coupon img:nth-child(2){
         margin-left: 2vw;
     }
+
     .block-right {
         right: 2vw;
     }
+
     .right-block{
         width: 100%;
         height: 100%;
@@ -388,7 +376,6 @@ page-place {
     width: 100%;
     text-align: right;
 }
-
 
 .iphonex page-place .btn-review {
     bottom: calc(constant(safe-area-inset-bottom) + 64px);

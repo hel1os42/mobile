@@ -1,24 +1,24 @@
 page-signup {
-  .header{
-    box-shadow: none;
-  }
+    .header{
+        box-shadow: none;
+    }
 
-  .list-md .item-block .item-inner, .border-bottom-no.item-md.item-block .item-inner {
-    border-bottom: none;
-    padding-right: 0;
-  }
+    .list-md .item-block .item-inner, .border-bottom-no.item-md.item-block .item-inner {
+        border-bottom: none;
+        padding-right: 0;
+    }
 
-  .select-ios .select-icon .select-icon-inner{
-      background: url(../assets/img/sign_up/arrow_down.svg) no-repeat center center;
-      color: transparent;
-      width: 4vw;
-      height: 2vw;
-      background-size: 100%;
-      margin: 0;
-      border: none;
-      left: 1vw;
-      top: 1.5vw;
-  }
+    .select-ios .select-icon .select-icon-inner{
+        background: url(../assets/img/sign_up/arrow_down.svg) no-repeat center center;
+        color: transparent;
+        width: 4vw;
+        height: 2vw;
+        background-size: 100%;
+        margin: 0;
+        border: none;
+        left: 1vw;
+        top: 1.5vw;
+    }
 
     .select-ios .select-icon {
         position: relative;
