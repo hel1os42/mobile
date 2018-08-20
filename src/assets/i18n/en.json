@@ -360,7 +360,11 @@
         "SECONDS2" : "seconds",
         "SECOND" : "second",
         "BY_PRESSING" : "By pressing \"SIGN IN\", I accept",
-        "CHANGE_INVITE" : "Invite code"
+        "CHANGE_INVITE" : "Invite code",
+        "ERROR_TITLE" : "Wrong invite code",
+        "ERROR_BODY" : "Invite code not found. Try again?",
+        "ERROR_BTN_RETRY" : "Yes, try again",
+        "ERROR_BTN_DEFAULT_INVITE" : "Skip"
     },
 
     "PAGE_NOTIFICATIONS" : {

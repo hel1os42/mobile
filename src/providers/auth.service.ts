@@ -83,13 +83,18 @@ export class AuthService {
         }
 
         let obs: Observable<any>;
-        
+
         if (phone) {
-            obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
-            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'));
-            // err => { });
+            obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`, {
+                ignoreHttpBadReferralLink: this.appMode.getEnvironmentMode() === 'prod'
+            });
+            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
+                err => { });
         } else {
-            obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
+            obs = this.api.get(`auth/register/${inviteCode}`, {
+                showLoading: false,
+                ignoreHttpBadReferralLink: this.appMode.getEnvironmentMode() === 'prod'
+            });
         }
         return obs;
     }
@@ -105,6 +110,7 @@ export class AuthService {
     }
 
     register(register: Register) {
+        this.clearCookies();
         let obs = this.api.post('users', register);
         obs.subscribe((resp) => {
 
@@ -197,9 +203,9 @@ export class AuthService {
         return obs;
     }
 
-    logout() { 
-        this.api.get('auth/logout', { showLoading: false });
+    logout() {
         this.clearCookies();
+        this.api.get('auth/logout');
         this.token.remove('LOGOUT');
         this.adjust.setEvent('LOGOUT_BUTTON_CLICK');
     }

@@ -21,6 +21,7 @@ import { StringValidator } from '../../validators/string.validator';
 import { TabsPage } from '../tabs/tabs';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { StatusBar } from '@ionic-native/status-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'page-login',
@@ -51,6 +52,7 @@ export class LoginPage {
     socialData: SocialData;
     isSocial = true;
     HTTP_STATUS_CODE_PAGE_NOT_FOUND = 404;
+    BAD_USER_REFERRER_LINK = 400;
     isLogin = false;
     register = new Register();
     FACEBOOK = 'facebook';
@@ -87,7 +89,8 @@ export class LoginPage {
         private api: ApiService,
         private browser: InAppBrowser,
         private appAvailability: AppAvailability,
-        private statusBar: StatusBar) {
+        private statusBar: StatusBar,
+        private translate: TranslateService) {
 
         this.isRegisterMode = !this.appMode.getRegisteredMode();
         this.envName = this.appMode.getEnvironmentMode();
@@ -205,11 +208,13 @@ export class LoginPage {
         this.auth.getOtp(phone)
             .subscribe(() => {
                 this.isLogin = true;
+
                 if (this.socialData) {
                     this.getReferrerId(this.defaultInvite);
                 } else {
                     this.otpHandler();
                 }
+                
                 loading.dismiss();
             },
                 err => {
@@ -226,6 +231,7 @@ export class LoginPage {
                     // };
                     if (err.status == this.HTTP_STATUS_CODE_PAGE_NOT_FOUND) {
                         this.getReferrerId(inviteCode, phone);
+                        this.isLogin = false;
                     };
                     loading.dismiss();
                 }
@@ -244,7 +250,18 @@ export class LoginPage {
                     referrer_id: resp.referrer_id,
                 };
                 this.otpHandler();
-            })
+            },
+                err => {
+                    if (err.status === this.BAD_USER_REFERRER_LINK && !this.isLogin) {
+
+                        if (this.isInviteStorage()) {
+                            this.getReferrerId(this.defaultInvite, phone);//retry get referrer id with default invite code
+                        } else {
+                            this.presentConfirm(phone);
+                        }
+
+                    }
+                })
     }
 
     otpHandler() {
@@ -285,7 +302,7 @@ export class LoginPage {
                 this.register.identity_access_token = this.socialData.token;
                 this.register.identity_provider = this.socialData.socialName;
             }
-            obs = this.auth.register(this.register)
+            obs = this.auth.register(this.register);
         }
         obs.subscribe(resp => {
             if (this.socialData) {
@@ -293,7 +310,7 @@ export class LoginPage {
             }
             this.nav.setRoot(TabsPage, { index: 0 });
         });
-        // },
+                // },
         //     err => { });
     }
 
@@ -545,6 +562,28 @@ export class LoginPage {
         this.browser.create(url, '_system');
     }
 
+
+    presentConfirm(phone) {
+        this.translate.get('PAGE_LOGIN')
+            .subscribe(translate => {
+                const alert = this.alert.create({
+                    title: translate['ERROR_TITLE'],
+                    message: translate['ERROR_BODY'],
+                    buttons: [{
+                        text: translate['ERROR_BTN_RETRY'],
+                        role: 'cancel',
+                        handler: () => { }
+                    }, {
+                        text: translate['ERROR_BTN_DEFAULT_INVITE'],
+                        handler: () => {
+                            this.getReferrerId(this.defaultInvite, phone); //retry get referrer id with default invite code
+                        }
+                    }]
+                });
+                alert.present();
+            });
+    }
+
     presentPrompt(selected: boolean) {
         let prompt = this.alert.create({
             title: 'Choose environment',
@@ -594,7 +633,7 @@ export class LoginPage {
                             this.appMode.setEnvironmentMode(data);
                             this.getNumCode();
                             this.getInvite();
-                            //temporary for adjust test
+                            //temporary for test adjust deeplink
                             if (this.envName === 'dev') {
                                 this.testAdjustLabel = this.storage.get('invCode') ? this.storage.get('invCode') : 'adjustError';
                             }
