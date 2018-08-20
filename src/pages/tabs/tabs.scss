@@ -1,42 +1,39 @@
 page-tabs{
-  .tab-button{
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: auto 41%;
-  }
+    .tab-button{
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: auto 41%;
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(1) {
-    background-image: url(../assets/img/tabs/tab1_a.svg);
-  }
+    .tab-button[aria-selected="true"]:nth-child(1) {
+        background-image: url(../assets/img/tabs/tab1_a.svg);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(1){
-    background-image: url(../assets/img/tabs/tab1.svg);
-  }
+    .tab-button[aria-selected="false"]:nth-child(1){
+        background-image: url(../assets/img/tabs/tab1.svg);
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(2){
-    background-image: url(../assets/img/tabs/tab5_a.png);
-  }
+    .tab-button[aria-selected="true"]:nth-child(2){
+        background-image: url(../assets/img/tabs/tab5_a.png);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(2){
-    background-image: url(../assets/img/tabs/tab5.png);
-  }
+    .tab-button[aria-selected="false"]:nth-child(2){
+        background-image: url(../assets/img/tabs/tab5.png);
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(3){
-    background-image: url(../assets/img/tabs/tab3_a.svg);
-  }
+    .tab-button[aria-selected="true"]:nth-child(3){
+        background-image: url(../assets/img/tabs/tab3_a.svg);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(3){
-    background-image: url(../assets/img/tabs/tab3.svg);
-  }
+    .tab-button[aria-selected="false"]:nth-child(3){
+        background-image: url(../assets/img/tabs/tab3.svg);
+    }
 
-  .tab-button[aria-selected="true"]:nth-child(4){
-    background-image: url(../assets/img/tabs/tab2_a.svg);
-  }
+    .tab-button[aria-selected="true"]:nth-child(4){
+        background-image: url(../assets/img/tabs/tab2_a.svg);
+    }
 
-  .tab-button[aria-selected="false"]:nth-child(4){
-    background-image: url(../assets/img/tabs/tab2.svg);
-  }
-
-  
-
+    .tab-button[aria-selected="false"]:nth-child(4){
+        background-image: url(../assets/img/tabs/tab2.svg);
+    }
 }
