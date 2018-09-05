@@ -2,8 +2,8 @@
     <div class="block-places-header">
         <ion-grid text-center class="grid-tabs-splash">
             <ion-row
-            [ngClass]="{ 'category_disabled': isRefresher() }"
-            align-items-end>
+                [ngClass]="{ 'category_disabled': isRefresher() }"
+                align-items-end>
                 <a
                     ion-col
                     *ngFor="let category of categories; let i = index"
@@ -30,7 +30,6 @@
             padding-left
             padding-right>
             <ion-searchbar
-            
                 [(ngModel)]="search"
                 (ionInput)="searchCompanies($event)"
                 debounce=2000
@@ -264,13 +263,18 @@
         [leafletFitBounds]="fitBounds"
         (leafletMapReady)="onMapReady($event)">
         <span (click)="revertedLocation()" class="user-location"></span>
-        <span class="radius">{{ 'PAGE_PLACES.RADIUS' | translate }}: {{ getRadius().distance }} {{ getRadius().key | translate }}</span>
+        <span class="radius">
+            {{ 'PAGE_PLACES.RADIUS' | translate }}: {{ getRadius().distance }} {{ getRadius().key | translate }}
+        </span>
     </div>
 
     <ion-infinite-scroll
         *ngIf="isInfiniteScroll()"
         (ionInfinite)="infiniteScroll($event)"
         threshold="5px">
-        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{ 'PAGE_PLACES.LOADING_COMPANIES' | translate }}"></ion-infinite-scroll-content>
+        <ion-infinite-scroll-content 
+            loadingSpinner="bubbles" 
+            loadingText="{{ 'PAGE_PLACES.LOADING_COMPANIES' | translate }}">
+        </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
