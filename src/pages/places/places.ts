@@ -723,7 +723,7 @@ export class PlacesPage {
 
     loadFeaturedOffers(loading?: any, isBounds?: boolean) {
         //let radius = 19849 * 1000;
-        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading)
+        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading && !this.isMapVisible)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
                 this.lastFeaturedPage = resp.last_page;
