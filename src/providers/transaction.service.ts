@@ -9,8 +9,7 @@ export class TransactionService {
 
     constructor(
         private api: ApiService,
-        private adjust: AdjustService) {
-    }
+        private adjust: AdjustService) { }
 
     getList(page) {
         return this.api.get('transactions', {

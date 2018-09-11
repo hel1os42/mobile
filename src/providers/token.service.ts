@@ -12,9 +12,7 @@ export class TokenService {
     
     constructor(
         private storage: StorageService,
-        private appMode: AppModeService) {
-        
-    }
+        private appMode: AppModeService) { }
 
     get() {
         if (this.token)
@@ -34,7 +32,6 @@ export class TokenService {
     remove(event?: string) {
         this.storage.remove(this.TOKEN_KEY);
         this.token = undefined;
-        // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'Logout', event + ' ' + new Date().toISOString());
         this.onRemove.emit();
     }
 }

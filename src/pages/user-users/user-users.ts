@@ -7,6 +7,7 @@ import { AdjustService } from '../../providers/adjust.service';
     selector: 'page-user-users',
     templateUrl: 'user-users.html'
 })
+
 export class UserUsersPage {
     referrals: User[];
     total: number;

@@ -1,126 +1,126 @@
 page-settings{
-  .map{
-    width: 100%;
-    height: auto;
-    border-radius: 100px;
-  }
+    .map{
+        width: 100%;
+        height: auto;
+        border-radius: 100px;
+    }
 
-  .label-md,.label-ios{
-    margin: 0;
-  }
+    .label-md,.label-ios{
+        margin: 0;
+    }
 
-  ion-navbar a {
-    float: right;
-  }
+    ion-navbar a {
+        float: right;
+    }
 
-  .select {
-      display: block;
-      width: 100%;
-  }
+    .select {
+        display: block;
+        width: 100%;
+    }
 
     .select .icon{
         float: right;
         display: inline;
     }
 
-  agm-map {
-    height: 250px;
+    agm-map {
+        height: 250px;
     }
 
 
-  .leaflet-map {
-    height: 250px;
-    z-index: 111;
-  }
+    .leaflet-map {
+        height: 250px;
+        z-index: 111;
+    }
 
-  .modal_create img{
-    width: 50%;
-    margin: 0 auto;
-  }
+    .modal_create img{
+        width: 50%;
+        margin: 0 auto;
+    }
 
-  .modal_create .why{
-    font-size: 80%;
-    font-weight: 400;
-    line-height: 170%;
-  }
+    .modal_create .why{
+        font-size: 80%;
+        font-weight: 400;
+        line-height: 170%;
+    }
 
-  /* NEW STYLES */
-  .toggle-ios .toggle-icon{
-    background-color: #fff;
-    border-radius: 100vw;
-  }
+    /* NEW STYLES */
+    .toggle-ios .toggle-icon{
+        background-color: #fff;
+        border-radius: 100vw;
+    }
 
-  .toggle-ios .toggle-inner{
-    background: linear-gradient(90.57deg, #FF5A00 0.54%, #FF8B10 99.56%);
-    box-shadow: none;
-    left: 1vw;
-    top: 1vw;
-    width: 6.5vw;
-    height: 6.5vw;
-    border-radius: 100vw;
-  }
+    .toggle-ios .toggle-inner{
+        background: linear-gradient(90.57deg, #FF5A00 0.54%, #FF8B10 99.56%);
+        box-shadow: none;
+        left: 1vw;
+        top: 1vw;
+        width: 6.5vw;
+        height: 6.5vw;
+        border-radius: 100vw;
+    }
 
-  .toggle-ios {
-    width: 18.8vw;
-    height: 8.4vw;
-    border: 1px solid #E0E0E0;
-    border-radius: 100vw;
-  }
+    .toggle-ios {
+        width: 18.8vw;
+        height: 8.4vw;
+        border: 1px solid #E0E0E0;
+        border-radius: 100vw;
+    }
 
-  .item-ios .toggle-ios {
-    margin: 0;
-    padding: 0;
-  }
+    .item-ios .toggle-ios {
+        margin: 0;
+        padding: 0;
+    }
 
-  .toggle-ios.toggle-checked .toggle-icon{
-    background-color: #FFF;
-  }
+    .toggle-ios.toggle-checked .toggle-icon{
+        background-color: #FFF;
+    }
 
-  .toggle-ios.toggle-checked .toggle-inner {
-    -webkit-transform: translate3d(10.5vw, 0, 0);
-    transform: translate3d(10.5vw, 0, 0);
-  }
+    .toggle-ios.toggle-checked .toggle-inner {
+        -webkit-transform: translate3d(10.5vw, 0, 0);
+        transform: translate3d(10.5vw, 0, 0);
+    }
 
-   .thumb_image{
-       width: 15.5vw;
-       height: 15.5vw;
-       border-radius: 100vw;
-       margin: auto;
-   }
+    .thumb_image{
+        width: 15.5vw;
+        height: 15.5vw;
+        border-radius: 100vw;
+        margin: auto;
+    }
 
-  .ava_user_adv .input-wrapper{
-    display: none;
-  }
+    .ava_user_adv .input-wrapper{
+        display: none;
+    }
 
-  .ava_user_adv .item-ios .toggle-ios{
-    margin: 0 auto;
-  }
+    .ava_user_adv .item-ios .toggle-ios{
+        margin: 0 auto;
+    }
 
-  .block-map{
-    position: relative;
-  }
+    .block-map{
+        position: relative;
+    }
 
-  #marker {
-    position: absolute;
-    z-index: 111;
-    background-color: rgba(255, 139, 16, 0.2);
-    background-image: url(../assets/img/create_user_profile/pin.svg);
-    background-position: 50% 60px;
-    background-size: auto 35px;
-    background-repeat: no-repeat;
-    width: 190px;
-    height: 190px;
-    left: calc(50% - 95px);
-    top: 30px;
-    border-radius: 100vw;
-    pointer-events: none;
-  }
+    #marker {
+        position: absolute;
+        z-index: 111;
+        background-color: rgba(255, 139, 16, 0.2);
+        background-image: url(../assets/img/create_user_profile/pin.svg);
+        background-position: 50% 60px;
+        background-size: auto 35px;
+        background-repeat: no-repeat;
+        width: 190px;
+        height: 190px;
+        left: calc(50% - 95px);
+        top: 30px;
+        border-radius: 100vw;
+        pointer-events: none;
+    }
 
-  .block-lines .item-ios .item-button {
-      height: 6.3vw;
-      width: 17.1vw;
-      border-radius: 100vw;
-  }
+    .block-lines .item-ios .item-button {
+        height: 6.3vw;
+        width: 17.1vw;
+        border-radius: 100vw;
+    }
 
     .select-ios .select-icon {
         position: inherit;

@@ -269,8 +269,6 @@ export class PlacesPage {
     }
 
     onMapReady(map: Map) {
-        // console.log(map);
-        // let width = this.platform.width();
         let heigth = document.getElementById('map_leaf').offsetHeight;
         if (!this._map && this.coords && this.coords.lat) {
             this._map = map;
@@ -278,14 +276,6 @@ export class PlacesPage {
         }
         this._map = map;
         this._map.on({
-            // zoom: (event: LeafletEvent) => {
-            //     this.isDragged = true;
-            //     debugger;
-            // },
-            // dragend: (event: LeafletEvent) => {
-            //     this.isDragged = true;
-            //     debugger;
-            // },
             moveend: (event: LeafletEvent) => {
                 this.zoom = this._map.getZoom();
                 if (this.coords && this.coords.lat != this._map.getCenter().lat) {
@@ -314,9 +304,8 @@ export class PlacesPage {
                         } else {
                             this.loadCompanies(false, 1, true);
                         }
-                        
                     }
-                    // this.isBounds = false;
+                    this.isBounds = false;
                 }
             },
 
@@ -614,24 +603,6 @@ export class PlacesPage {
     }
 
     generateBounds(markers: Marker[]): any {
-        //     if (markers && markers.length > 0) {
-        //         let latLngPairs = markers.map(p => p.getLatLng());
-        //         let bounds = new LatLngBounds(this.coords, this.coords);
-        //         latLngPairs.forEach((latLng: LatLng) => {
-        //             bounds.extend(latLng);
-        //         });
-        //         if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
-        //             return bounds;
-        //         }
-        //         let northEast = bounds.getNorthEast();
-        //         northEast.lat = northEast.lat + 0.3;
-        //         bounds.extend(northEast);
-        //         return bounds;
-        //     }
-        //     if (this._map) {
-        //         this._map.setView(this.coords, this._map.getZoom());
-        //     }
-        //     return undefined;
         if (this._map && this.isMapVisible) {
             let distance: number;
 
@@ -669,7 +640,6 @@ export class PlacesPage {
     }
 
     selectCategory(category: OfferCategory, index: number) {
-        this.isBounds = true;
         if (!this.selectedCategory.id) {
 
             if (this.isFeatured) {
@@ -705,6 +675,7 @@ export class PlacesPage {
             if (!this.coords) {
                 this.getLocationStatus();
             } else {
+                this.isBounds = true;
                 this.loadCompanies(true, this.page = 1, false, true);
             };
 
@@ -752,7 +723,7 @@ export class PlacesPage {
 
     loadFeaturedOffers(loading?: any, isBounds?: boolean) {
         //let radius = 19849 * 1000;
-        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading, this.search)
+        this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, !this.isRefreshLoading && !loading && !this.isMapVisible)
             .subscribe(resp => {
                 this.featuredOffers = resp.data;
                 this.lastFeaturedPage = resp.last_page;
@@ -908,12 +879,14 @@ export class PlacesPage {
             } else {
                 this.radius = this.mapRadius;
                 this.coords = this.mapCenter;
+
                 if (this.isFeatured) {
                     this.featuredPage = 1;
                     this.loadFeaturedOffers(null, true);
                 } else {
                     this.loadCompanies(false, 1, true, true);
                 }
+
                 this._map.setView(this.mapCenter, this.zoom);
                 // this.changeDetectorRef.detectChanges();
             }
@@ -1199,7 +1172,7 @@ export class PlacesPage {
             setTimeout(() => {
                 if (this.isFeatured) {
                     // let radius = 19849 * 1000;
-                    this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1, this.search)
+                    this.offers.getFeaturedList(this.coords.lat, this.coords.lng, this.featuredPage, this.featuredPage == 1)
                         .subscribe(resp => {
                             this.featuredOffers = [...this.featuredOffers, ...resp.data];
                             this.lastFeaturedPage = resp.last_page;

@@ -7,6 +7,8 @@ import { SelectedCategory } from '../../models/selectedCategory';
     templateUrl: 'create-advUser-profile.category.popover.html'
 })
 
+// this component is not used
+
 export class CreateAdvUserProfileCategoryPopover {
 
     categories: SelectedCategory[];

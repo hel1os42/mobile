@@ -16,15 +16,13 @@ export class NetworkService {
     constructor(
         private network: Network,
         private toast: ToastService,
-        private platform: Platform) {
-    }
+        private platform: Platform) { }
 
     getStatus() {
         if (this.platform.is('cordova') && (this.network.type === 'none' || this.network.type === 'unknown')) {
             this.isConnected = false;
             this.toast.showDisconnected();
-        }
-        else {
+        } else {
             this.isConnected = true;
             this.toast.dismiss();
         }

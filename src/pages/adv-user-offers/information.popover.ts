@@ -6,6 +6,8 @@ import { NavParams, ViewController } from 'ionic-angular';
     templateUrl: 'information.popover.html'
 })
 
+// this component is not used
+
 export class CreateOfferInformationPopover {
 
     balance: number;

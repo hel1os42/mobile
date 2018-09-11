@@ -17,6 +17,9 @@ import { SignUpCodePage } from '../signup-code/signup-code';
     selector: 'page-signup',
     templateUrl: 'signup.html'
 })
+
+// this page is not used
+
 export class SignUpPage {
     formData = {
         phone: '',
@@ -52,15 +55,12 @@ export class SignUpPage {
         this.formData.phone = this.navParams.get('phone') ? this.navParams.get('phone') : '';
 
         if (this.platform.is('android')) {
-            //this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
-            //    .subscribe((resp) => {
-            //        this.content.scrollTo(1, resp.keyboardHeight - 30);
-            //    })
             let
                 appEl = <HTMLElement>(document.getElementsByTagName('ION-APP')[0]),
                 appEl2 = <HTMLElement>(document.getElementsByTagName('BODY')[0]),
                 // appElHeight = appEl.clientHeight,
                 appElHeight2 = appEl2.clientHeight;
+
             this.onKeyboardShowSubscription = this.keyboard.onKeyboardShow()
                 .subscribe(() => {
                     console.log('signup open')
@@ -80,8 +80,7 @@ export class SignUpPage {
         if (this.getDevMode()) {
             this.numCode = this.phoneCodes.find(item => item.dial_code === '+380');
             return this.numCode;
-        }
-        else {
+        } else {
             this.location.getByIp()
                 .subscribe(resp => {
                     // this.numCode = this.phoneCodes.find(item => item.code === resp.country_code);

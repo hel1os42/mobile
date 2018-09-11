@@ -35,9 +35,6 @@ export class LocationService {
     }
 
     get(isHighAccuracy: boolean, isBookmarks?: boolean) {
-        // if (this.geoposition)
-        //     return Promise.resolve(this.geoposition);
-        // else
         let promise = this.geolocation.getCurrentPosition({
             enableHighAccuracy: isHighAccuracy,
             timeout: 40000,
@@ -54,7 +51,7 @@ export class LocationService {
             }
 
         })
-        .catch(err => console.log('Location service' + err)); // to comment for adding to error monitoring
+            .catch(err => console.log('Location service' + err)); // to comment for adding to error monitoring
         return promise;
     }
 

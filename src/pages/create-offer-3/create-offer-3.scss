@@ -31,11 +31,11 @@ page-create-offer-3 {
     .leaflet-map {
         height: 250px;
         z-index: 111;
-      }
+    }
 
     .block-map{
         position: relative;
-      }
+    }
 
     #marker {
         position: absolute;
@@ -59,6 +59,7 @@ page-create-offer-3 {
     .gmnoprint a, .gmnoprint span, .gm-style-cc {
         display:none;
     }
+
     .gm-svpc {
         display: none;
     }

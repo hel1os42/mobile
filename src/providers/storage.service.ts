@@ -6,10 +6,11 @@ export class StorageService {
     constructor() { }
 
     set(key: string, value: any) {
-        if (typeof value === 'undefined')
+        if (typeof value === 'undefined') {
             localStorage.setItem(key, '');
-        else
+        } else {
             localStorage.setItem(key, JSON.stringify(value));
+        }
     }
 
     get(key: string): any {

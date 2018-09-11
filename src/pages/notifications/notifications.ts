@@ -5,21 +5,23 @@ import { AppModeService } from '../../providers/appMode.service';
     selector: 'page-notifications',
     templateUrl: 'notifications.html'
 })
+
+// this page is not used
+
 export class NotificationsPage {
 
     isVisibleSearch: boolean = false;
     isForkMode: boolean;
 
-    constructor(
-        private appMode: AppModeService) {
+    constructor(private appMode: AppModeService) {
 
-            this.isForkMode = this.appMode.getForkMode();
+        this.isForkMode = this.appMode.getForkMode();
     }
 
     toggleSearch() {
         this.isVisibleSearch = !this.isVisibleSearch;
     }
-    
+
     getDevMode() {
         return (this.appMode.getEnvironmentMode() === 'dev' || this.appMode.getEnvironmentMode() === 'test');
     }

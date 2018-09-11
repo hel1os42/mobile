@@ -7,6 +7,8 @@ import { Chart } from 'chart.js';
     template: '<canvas #barCanvas height="300"></canvas>',
 })
 
+// this component is not used
+
 export class LineChartComponent {
 
     @ViewChild('barCanvas') barCanvas: ElementRef;

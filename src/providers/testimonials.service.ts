@@ -8,9 +8,7 @@ export class TestimonialsService {
 
     onRefresh = new EventEmitter<any>();
 
-    constructor(private api: ApiService) {
-
-    }
+    constructor(private api: ApiService) { }
 
     get(placeId: string, page: number) {
         return this.api.get(`places/${placeId}/testimonials?page=${page}`, { showLoading: false });

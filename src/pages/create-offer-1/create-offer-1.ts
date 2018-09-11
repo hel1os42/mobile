@@ -11,6 +11,9 @@ import { CreateOffer2Page } from '../create-offer-2/create-offer-2';
     selector: 'page-create-offer-1',
     templateUrl: 'create-offer-1.html'
 })
+
+// this page is not used
+
 export class CreateOffer1Page {
 
     offer: Offer;
@@ -30,15 +33,15 @@ export class CreateOffer1Page {
         private place: PlaceService,
         private toast: ToastService,
         private builder: FormBuilder) {
-     
+
         this.offer = this.navParams.get('offer');
         if (this.offer.type) {
             this.type = this.offer.type;
             if (this.offer.type === 'discount' && this.offer.discount_percent) {
-                this.isDiscountHidden = false; 
+                this.isDiscountHidden = false;
             }
             if ((this.offer.type === 'gift' || this.offer.type === 'bonus') && this.offer.discount_percent) {
-                this.isGiftBonusHidden = false; 
+                this.isGiftBonusHidden = false;
             }
         }
         this.picture_url = this.navParams.get('picture');
@@ -68,8 +71,7 @@ export class CreateOffer1Page {
         this.isDiscountHidden = isDiscountSelectDisable;
         if (event === 'bonus' || event === 'gift') {
             this.isGiftBonusHidden = false;
-        }
-        else {
+        } else {
             this.isGiftBonusHidden = true;
         }
         this.type = event;
@@ -80,8 +82,7 @@ export class CreateOffer1Page {
             if (this.formDiscount.controls.percent.invalid) {
                 this.toast.show('Please, set valid percent value!');
                 return false;
-            }
-            else {
+            } else {
                 if (this.formDiscount.controls.srartPrice.invalid) {
                     this.toast.show('Please, set  valid price value!');
                     return false;
@@ -93,15 +94,16 @@ export class CreateOffer1Page {
                 else return true;
             }
 
-        }
-        else {
+        } else {
             if (this.type === 'bonus' || this.type === 'gift') {
+
                 if (!this.giftBonusDescr || this.giftBonusDescr === '') {
                     let type = this.type === 'bonus' ? 'bonus' : 'gift';
                     this.toast.show(`Please, set ${type} description!`);
                     return false;
                 }
                 else return true;
+
             }
             else return true;
         }

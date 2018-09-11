@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { ToastService } from './toast.service';
 import { SYS_OPTIONS } from '../const/i18n.const';
-
+import { ToastService } from './toast.service';
 
 @Injectable()
 export class GeocodeService {
@@ -11,9 +10,7 @@ export class GeocodeService {
     url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2';
 
     constructor(private http: Http,
-        private toast: ToastService) {
-
-    }
+        private toast: ToastService) { }
 
     getAddress(lat: number, lng: number, isLang?: boolean, isZoom?: boolean) {
         let lang = SYS_OPTIONS.LANG_CODE;
@@ -23,7 +20,6 @@ export class GeocodeService {
         if (isZoom) {
             this.url = this.url + `&zoom=15`;
         }
-        // return this.wrapObservable(this.http.get(this.url + `&lat=${lat}&lon=${lng}`));
         return this.wrapObservable(this.http.get(this.url + `&lat=${lat}&lon=${lng}`, this.getOptions()));
     }
 

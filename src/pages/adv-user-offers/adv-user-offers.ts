@@ -13,10 +13,10 @@ import { CreateOfferInformationPopover } from './information.popover';
     selector: 'page-adv-user-offers',
     templateUrl: 'adv-user-offers.html'
 })
+
+// this page is not used
+
 export class AdvUserOffersPage {
-    itemCompleted(item) {
-        return item.completed;
-      }
 
     segment: string;
     offers: Offer[];
@@ -57,140 +57,135 @@ export class AdvUserOffersPage {
 
         if (this.navParams.get('balance')) {
             this.balance = this.navParams.get('balance');
-        }
-        else {
+        } else {
             if (!this.balance) {
-                    this.profile.getWithAccounts()
-                        .subscribe(resp => {
-                            this.balance = resp.accounts.length > 0 ? resp.accounts.NAU.balance : 0;
-                        })
-                }
-            }
-            this.processOffers(this.place.getOffers(this.page));
-            this.segment = 'all';
-        }
-
-        processOffers(obs: Observable<any>) {
-            obs.subscribe(resp => {
-                this.offers = resp.data;
-                this.total = resp.total;
-                this.lastPage = resp.last_page;
-            })
-        }
-
-    filterOffers() {
-                this.page = 1;
-                this.isFilterByDate = false;
-
-                if(this.segment == 'featured') {
-                    this.offers = [];//to do
-                    this.total = 0;//to do
-                }
-        else {
-                    let obs = this.segment == 'all'
-                        ? this.place.getOffers(this.page)
-                        : this.segment == 'active'
-                            ? this.place.getActiveOffers(this.page)
-                            : this.place.getDeActiveOffers(this.page);
-                    this.processOffers(obs);
-                }
-            }
-
-    filterOffersByDate() {
-                this.segment = 'active';
-                this.page = 1;
-                this.isFilterByDate = true;
-                this.dates = DateTimeUtils.getFilterDates(this.date);
-                this.processOffers(this.place.getFilteredOffersByDate(this.dates.startDate, this.dates.finishDate, this.page));
-            }
-
-    openCreateOffer() {
-                this.nav.push(CreateOfferPage);
-            }
-
-    openEditOffer(offer) {
-                this.place.getOfferWithTimeframes(offer.id)
+                this.profile.getWithAccounts()
                     .subscribe(resp => {
-                        this.nav.push(CreateOfferPage, { offer: resp });
+                        this.balance = resp.accounts.length > 0 ? resp.accounts.NAU.balance : 0;
                     })
             }
+        }
+        this.processOffers(this.place.getOffers(this.page));
+        this.segment = 'all';
+    }
+
+    processOffers(obs: Observable<any>) {
+        obs.subscribe(resp => {
+            this.offers = resp.data;
+            this.total = resp.total;
+            this.lastPage = resp.last_page;
+        })
+    }
+
+    filterOffers() {
+        this.page = 1;
+        this.isFilterByDate = false;
+
+        if (this.segment == 'featured') {
+            this.offers = [];//to do
+            this.total = 0;//to do
+        } else {
+            let obs = this.segment == 'all'
+                ? this.place.getOffers(this.page)
+                : this.segment == 'active'
+                    ? this.place.getActiveOffers(this.page)
+                    : this.place.getDeActiveOffers(this.page);
+            this.processOffers(obs);
+        }
+
+    }
+
+    filterOffersByDate() {
+        this.segment = 'active';
+        this.page = 1;
+        this.isFilterByDate = true;
+        this.dates = DateTimeUtils.getFilterDates(this.date);
+        this.processOffers(this.place.getFilteredOffersByDate(this.dates.startDate, this.dates.finishDate, this.page));
+    }
+
+    openCreateOffer() {
+        this.nav.push(CreateOfferPage);
+    }
+
+    openEditOffer(offer) {
+        this.place.getOfferWithTimeframes(offer.id)
+            .subscribe(resp => {
+                this.nav.push(CreateOfferPage, { offer: resp });
+            })
+    }
 
     enableActivation(offer) {
         if (offer.status == 'deactive' && offer.reserved > this.balance) {
-           this.modalInfromation(offer);
+            this.modalInfromation(offer);
             return false;
         }
-        else {
-            return true;
-        }
-     }
+        return true;
+    }
 
-     modalInfromation(offer){
-         let popover = this.popoverCtrl.create(CreateOfferInformationPopover, { balance: this.balance, reserved: offer.reserved });
-         popover.present();
-     }
+    modalInfromation(offer) {
+        let popover = this.popoverCtrl.create(CreateOfferInformationPopover, { balance: this.balance, reserved: offer.reserved });
+        popover.present();
+    }
 
     editStatus(offer) {
         if (this.enableActivation(offer)) {
-                let statusInfo = {
-                    status: (offer.status == 'active')
-                        ? 'deactive'
-                        : 'active'
-                };
-                this.place.changeOfferStatus(statusInfo, offer.id)
-                    .subscribe(resp => {
-                        offer.status = statusInfo.status;
-                        this.profile.refreshAccounts();
-                    })
-            }
+            let statusInfo = {
+                status: (offer.status == 'active')
+                    ? 'deactive'
+                    : 'active'
+            };
+            this.place.changeOfferStatus(statusInfo, offer.id)
+                .subscribe(resp => {
+                    offer.status = statusInfo.status;
+                    this.profile.refreshAccounts();
+                })
         }
+    }
 
-        delete(offer: Offer) {
-            this.place.deleteOffer(offer.id)
-                .subscribe(() => {
-                    this.offers = _.reject(this.offers, (o) => {
-                        return o.id == offer.id;
-                    });
-                    this.total = this.total - 1;
+    delete(offer: Offer) {
+        this.place.deleteOffer(offer.id)
+            .subscribe(() => {
+                this.offers = _.reject(this.offers, (o) => {
+                    return o.id == offer.id;
                 });
-        }
+                this.total = this.total - 1;
+            });
+    }
 
     doInfinite(infiniteScroll) {
-                this.page = this.page + 1;
-                if(this.page <= this.lastPage) {
-                    setTimeout(() => {
-                        let obs;
-                        if (this.isFilterByDate) {
-                            obs = this.place.getFilteredOffersByDate(
-                                this.dates.startDate, this.dates.finishDate, this.page);
-                        }
-                        else {
-                            switch (this.segment) {
-                                case 'all':
-                                    obs = this.place.getOffers(this.page);
-                                    break;
-                                case 'active':
-                                    obs = this.place.getActiveOffers(this.page);
-                                    break;
-                                case 'deactive':
-                                    obs = this.place.getDeActiveOffers(this.page);
-                                    break;
-                            }
-                        }
-                        obs.subscribe(resp => {
-                            this.offers = [...this.offers, ...resp.data];
-                            infiniteScroll.complete();
-                        });
-                    });
+        this.page = this.page + 1;
+        if (this.page <= this.lastPage) {
+            setTimeout(() => {
+                let obs;
+                if (this.isFilterByDate) {
+                    obs = this.place.getFilteredOffersByDate(
+                        this.dates.startDate, this.dates.finishDate, this.page);
+                } else {
+                    switch (this.segment) {
+                        case 'all':
+                            obs = this.place.getOffers(this.page);
+                            break;
+                        case 'active':
+                            obs = this.place.getActiveOffers(this.page);
+                            break;
+                        case 'deactive':
+                            obs = this.place.getDeActiveOffers(this.page);
+                            break;
+                    }
                 }
-        else {
+                obs.subscribe(resp => {
+                    this.offers = [...this.offers, ...resp.data];
                     infiniteScroll.complete();
-                }
-            }
+                });
+            });
+        } else {
+            infiniteScroll.complete();
+        }
+    }
 
     ionViewWillUnload() {
-                this.onRefreshBalance.unsubscribe();
-                this.onRefreshOffers.unsubscribe();
-                this.onRefreshOffersList.unsubscribe();
-            }
+        this.onRefreshBalance.unsubscribe();
+        this.onRefreshOffers.unsubscribe();
+        this.onRefreshOffersList.unsubscribe();
+    }
 }

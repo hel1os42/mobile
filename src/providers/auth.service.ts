@@ -83,13 +83,18 @@ export class AuthService {
         }
 
         let obs: Observable<any>;
-        
+
         if (phone) {
-            obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`);
-            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'));
-            // err => { });
+            obs = this.api.get(`auth/register/${inviteCode}/${phone}/code`, {
+                ignoreHttpBadReferralLink: this.appMode.getEnvironmentMode() === 'prod'
+            });
+            obs.subscribe(() => this.adjust.setEvent('SMS_INITIALIZE'),
+                err => { });
         } else {
-            obs = this.api.get(`auth/register/${inviteCode}`, { showLoading: false });
+            obs = this.api.get(`auth/register/${inviteCode}`, {
+                showLoading: false,
+                ignoreHttpBadReferralLink: this.appMode.getEnvironmentMode() === 'prod'
+            });
         }
         return obs;
     }
@@ -105,11 +110,11 @@ export class AuthService {
     }
 
     register(register: Register) {
+        this.clearCookies();
         let obs = this.api.post('users', register);
         obs.subscribe((resp) => {
 
             if (resp.was_recently_created) {
-                // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signup');
                 this.analytics.faLogEvent('event_signup');
                 this.adjust.setEvent('FIRST_TIME_SIGN_IN');
             }
@@ -135,7 +140,6 @@ export class AuthService {
     }
 
     login(login: Login) {
-        // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
         this.analytics.faLogEvent('event_phoneconfirm');
         this.clearCookies();
         let obs = this.api.post('auth/login', login);
@@ -168,13 +172,10 @@ export class AuthService {
                         // })
                     })
                 })
-            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_signin');
-            // this.gAnalytics.trackEvent("Session", "Login", new Date().toISOString());
             let envName = this.appMode.getEnvironmentMode();
             this.oneSignal.sendTag('environment', envName);
 
             if (!isSocial) {
-                // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_phoneconfirm');
                 this.analytics.faLogEvent('event_phoneconfirm');
             }
 
@@ -202,9 +203,9 @@ export class AuthService {
         return obs;
     }
 
-    logout() { 
-        this.api.get('auth/logout', { showLoading: false });
+    logout() {
         this.clearCookies();
+        this.api.get('auth/logout');
         this.token.remove('LOGOUT');
         this.adjust.setEvent('LOGOUT_BUTTON_CLICK');
     }

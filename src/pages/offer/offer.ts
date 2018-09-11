@@ -231,57 +231,45 @@ export class OfferPage {
     openRedeemPopover() {
         this.adjust.setEvent('REDEEM_BUTTON_CLICK');
 
-        if (this.platform.is('cordova') && this.appMode.getEnvironmentMode() === 'prod') {
-            let label = `user_phone: ${this.user.phone},
-            user_coords: (${this.user.latitude},${this.user.longitude}), 
-            user_id: ${this.user.id}, 
-            place_name: ${this.company.name},
-            place_coords: (${this.company.latitude},${this.company.longitude}),
-            place_id: ${this.company.id}, 
-            offer_label: ${this.offer.label},
-            offer_id: ${this.offer.id}`;
-            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'redeem_button_click', label);
-        }
+        // if (this.platform.is('cordova') && this.appMode.getEnvironmentMode() === 'prod') {
+        //     let label = `user_phone: ${this.user.phone},
+        //     user_coords: (${this.user.latitude},${this.user.longitude}), 
+        //     user_id: ${this.user.id}, 
+        //     place_name: ${this.company.name},
+        //     place_coords: (${this.company.latitude},${this.company.longitude}),
+        //     place_id: ${this.company.id}, 
+        //     offer_label: ${this.offer.label},
+        //     offer_id: ${this.offer.id}`;
+        //     this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'redeem_button_click', label);
+        // }
 
         this.timeframesHandler();
-        // if (!this.disable()) {distance validation
+        // if (!this.disable()) { //distance validation
         if (!this.offer.redemption_access_code) {
 
             if (this.isTodayIncluded) {
-                // if (this.timer)
-                //     return;
+
                 if (this.isGettingRedemptionStatus)
                     return;
 
                 this.offers.getActivationCode(this.offer.id)
                     .subscribe((offerActivationCode: OfferActivationCode) => {
-                        // if (this.timer)
-                        //     return;
+
                         if (this.isGettingRedemptionStatus)
                             return;
-                        // let noticePopover = this.popoverCtrl.create(NoticePopover);
+
                         let offerRedeemPopover = this.popoverCtrl.create(
                             OfferRedeemPopover,
                             { offerActivationCode: offerActivationCode },
                             { enableBackdropDismiss: false }
                         );
                         offerRedeemPopover.present();
-                        // noticePopover.present();
-                        // noticePopover.onDidDismiss(() => offerRedeemPopover.present());
                         offerRedeemPopover.onDidDismiss(() => {
-                            // this.stopTimer();
                             this.isGettingRedemptionStatus = false;
-                            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_showqr');
                         });
-
-                        // this.timer = setInterval(() => {}, 2500)
                         this.isGettingRedemptionStatus = true;
                         this.getRedemptionStatus(offerActivationCode.code, offerRedeemPopover);
                     })
-                // }
-                // else {
-                //     this.presentAlert()
-                // }
             } else {
                 let popover = this.popoverCtrl.create(TimeframesPopover, {
                     timeFrames: this.timeframes,
@@ -307,12 +295,10 @@ export class OfferPage {
                     if (offerRedemtionStatus.redemption_id) {
 
                         if (this.isGettingRedemptionStatus) {
-                            // this.stopTimer();
                             this.isGettingRedemptionStatus = false;
                             popover.dismiss();
 
                             this.offers.refreshRedeemedOffers();
-                            // this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', offerRedemtionStatus.redemption_id);
                             this.analytics.faLogEvent('event_redeemoffer');
                             this.adjust.setEvent('ACTION_REDEMPTION');
 

@@ -13,8 +13,7 @@ export class OfferService {
 
     MAX_RADIUS = 19849 * 1000;// temporary
 
-    constructor(
-        private api: ApiService) { }
+    constructor(private api: ApiService) { }
 
     get(offerId, showLoading?: boolean) {
         return this.api.get(`offers/${offerId}?with=timeframes`, { showLoading: showLoading });
@@ -26,12 +25,7 @@ export class OfferService {
         // radius: number,
         page: number,
         showLoading: boolean,
-        search: string,
     ) {
-        // let searchStr = '';
-        // if (search) {
-        //     searchStr += 'offerData.description:' + `${search};` + 'offerData.label:' + `${search};`;
-        // }
         return this.api.get('offers', {
             showLoading: showLoading,
             params: {
@@ -40,8 +34,6 @@ export class OfferService {
                 longitude: lng,
                 radius: this.MAX_RADIUS,
                 with: 'account.owner.place',
-                // searchJoin: 'or;',
-                // search: searchStr,
                 page: page
             }
         });
@@ -80,7 +72,6 @@ export class OfferService {
             });
         }
         return obs;
-
     }
 
     getPlacesOfRoot(
@@ -176,7 +167,6 @@ export class OfferService {
                 with: 'retailTypes;retailTypes.specialities;tags'
             }
         });
-        // return Observable.of(MockCategory.items);
     }
 
     getRedeemedOffers() {
@@ -192,14 +182,6 @@ export class OfferService {
             showLoading: false,
             ignoreHttpNotFound: true
         });
-        // obs.subscribe(status => {
-        //     if (status.redemption_id) {
-        //         this.refreshRedeemedOffers();
-        //         this.gAnalytics.trackEvent(this.appMode.getEnvironmentMode(), 'event_redeemoffer', status.redemption_id);
-        //         this.analytics.faLogEvent('event_redeemoffer');
-        //         this.adjust.setEvent('ACTION_REDEMPTION');
-        //     }
-        // }, err => {})
         return obs;
     }
 
@@ -244,7 +226,7 @@ export class OfferService {
     }
 
     refreshFeaturedOffers(lat, lng) {
-        this.getFeaturedList(lat, lng, 1, false, '')
+        this.getFeaturedList(lat, lng, 1, false)
             .subscribe(resp => {
                 this.onRefreshFeaturedOffers.emit(resp);
             })

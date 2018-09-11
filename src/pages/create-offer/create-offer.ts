@@ -11,6 +11,9 @@ import { CreateOffer1Page } from '../create-offer-1/create-offer-1';
     selector: 'page-create-offer',
     templateUrl: 'create-offer.html'
 })
+
+// this page is not used
+
 export class CreateOfferPage {
     message: string;
     offer = new Offer();
@@ -18,20 +21,19 @@ export class CreateOfferPage {
     formData: FormGroup;
     regStr = '"\\s+", "g"';
 
-    constructor(private nav: NavController,
-                private navParams: NavParams,
-                private toast: ToastService,
-                private imagePicker: ImagePicker,
-                private builder: FormBuilder) {
+    constructor(
+        private nav: NavController,
+        private navParams: NavParams,
+        private toast: ToastService,
+        private imagePicker: ImagePicker,
+        private builder: FormBuilder) {
 
         if (this.navParams.get('offer')) {
             this.offer = this.navParams.get('offer');
-        }
-        else {
+        } else {
             this.offer.label = '';
             this.offer.description = '';
         }
-
 
         this.formData = this.builder.group({
             offerLabel: new FormControl(this.offer.label, Validators.compose([

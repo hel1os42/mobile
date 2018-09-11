@@ -2,6 +2,7 @@ page-create-advUser-profile {
     .cover {
         background-image: linear-gradient(89.86deg, #FF5A00 0.03%, #FF8B10 99.98%);
     }
+
     .cover_logo_adv {
         position: absolute;
         left: 4.8%;
@@ -18,6 +19,7 @@ page-create-advUser-profile {
         background-size: 80% 80%;
         display: table;
     }
+
     .cover_logo_adv span {
         margin: 0 auto;
         display: table-cell;
@@ -25,6 +27,7 @@ page-create-advUser-profile {
         text-align: center;
         line-height: 4.5vw;
     }
+
     .btn_right {
         position: absolute;
         right: 4.3vw;
@@ -34,22 +37,28 @@ page-create-advUser-profile {
         height: 6vw;
         color: #3E4B5D;
     }
+
     .padding-top-9vw {
         padding-top: 9vw;
     }
+
     .label-ios {
         margin: 0;
     }
+
     agm-map {
         height: 250px;
     }
+
     .leaflet-map {
         height: 250px;
         z-index: 111;
     }
+
     .block-map {
         position: relative;
     }
+
     #marker {
         position: absolute;
         z-index: 111;
@@ -65,14 +74,17 @@ page-create-advUser-profile {
         border-radius: 100vw;
         pointer-events: none;
     }
+
     .select-ios .select-icon {
         display: none;
     }
+
     .category img {
         width: 6.5vw;
         margin-left: 2vw;
         height: auto;
     }
+
     .choose-img {
         height: 7vw;
         width: auto;
@@ -84,14 +96,17 @@ create-advUser-profile-category-popover {
         padding-left: 0;
         margin-bottom: 7vw;
     }
+
     .block-checks img {
         height: 7.8vw;
         width: auto;
     }
+
     .block-img-category {
         width: 23vw;
         text-align: center;
     }
+
     .modal_content {
         padding-top: 8vw;
         padding-right: 6vw;
@@ -109,16 +124,20 @@ create-advUser-profile-popover-features {
         padding-left: 7vw;
         padding-bottom: 21vw;
     }
+
     .item-ios.item-block .item-inner {
         padding-right: 0;
     }
+
     .item-block {
         min-height: 3.4rem;
     }
+
     .checkbox-ios .checkbox-icon {
         background-color: #fff;
         background-image: none;
     }
+
     .footer_btn .grid {
         padding-bottom: 0;
     }
@@ -136,34 +155,43 @@ create-advUser-profile-popover-features {
     .modal_content {
         padding-bottom: 21vw;
     }
+
     .bg-gray {
         border: none;
         background: #E0E0E0;
         padding-right: 5%;
     }
+
     .bg-gray img {
         display: flex;
         height: 2.5vw
     }
+
     .item-ios.item-block .item-inner {
         padding-right: 0;
     }
+
     .item-block {
         min-height: 3.4rem;
     }
+
     .checkbox-ios .checkbox-icon {
         background-color: #fff;
         background-image: none;
     }
+
     .margin-left-2proc {
         margin-left: 2%;
     }
+
     .margin-right-2proc {
         margin-right: 2%;
     }
+
     .footer_btn .grid {
         padding-bottom: 0;
     }
+
     .item.item-ios .checkbox-ios[item-right],
     .item.item-ios .checkbox-ios[item-end] {
         margin: 0 2.3vw;

@@ -1,23 +1,19 @@
 import { FormControl } from '@angular/forms';
 
-
 export class StringValidator {
 
     static stringLimitMax(str: string, length: number) {
         if (str && str.length > length) {
             return str = str.slice(0, str.length - 1);
         }
-        else {
-            return str;
-        }
+        return str;
     }
 
     static validString(fc: FormControl) {
         if (fc.value.replace(/\s+/g, '').length >= 3) {
             return (null);
-        } else {
-            return ({ validString: true });
         }
+        return ({ validString: true });
     }
 
     static updateList(ev) {
@@ -42,14 +38,13 @@ export class StringValidator {
         if (ev.target.value.split('.')[0] && ev.target.value.split('.')[0].length > 9) {
             if (ev.target.value.split('.')[1]) {
                 ev.target.value = ev.target.value.split('.')[0].substr(0, 9) + '.' + ev.target.value.split('.')[1]
-            }
-            else {
+            } else {
                 ev.target.value = ev.target.value.split('.')[0].substr(0, 9)
             }
         }
         // check num.1234
         if (ev.target.value.split('.')[1] && ev.target.value.split('.')[1].length > 4) {
-                ev.target.value = ev.target.value.split('.')[0] + '.' + ev.target.value.split('.')[1].substr(0, 4);
+            ev.target.value = ev.target.value.split('.')[0] + '.' + ev.target.value.split('.')[1].substr(0, 4);
         }
     }
 }

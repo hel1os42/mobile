@@ -2,19 +2,24 @@ page-places {
     a {
         color: #FF5A00;
     }
+
     .grid img {
         max-width: 30px;
     }
+
     .list {
         margin: 0 0 16px;
     }
+
     .tb-background {
         background: #aaa2a2;
     }
+
     .tb-background img {
         height: auto;
         width: 50%;
     }
+
     .item-md ion-avatar ion-img,
     .item-md ion-avatar img,
     .item-ios ion-avatar ion-img,
@@ -23,78 +28,96 @@ page-places {
         height: 60px;
         margin-bottom: 10px;
     }
+
     .category_disabled {
         pointer-events: none;
     }
+
     .category_disabled .col.active_cat {
         opacity: 0.5;
     }
+
     .category_disabled .col {
         opacity: 0.25;
     }
+
     agm-map {
         height: calc(100vh - 248px);
         height: -webkit-calc(100vh - 248px);
         height: -moz-calc(100vh - 248px);
     }
+
     .leaflet-map {
         height: calc(100% - 5vw) !important;
         margin-top: 5vw;
         position: relative;
     }
+
     a[href^="http://maps.google.com/maps"] {
         display: none !important
     }
+
     a[href^="https://maps.google.com/maps"] {
         display: none !important
     }
+
     .gmnoprint a,
     .gmnoprint span,
     .gm-style-cc {
         display: none;
     }
+
     .gm-svpc {
         display: none;
     }
+
     .item-block-nau .item-ios [item-right],
     .item-ios [item-end] {
         width: 33px;
     }
+
     .block-search.item-ios.item-block .item-inner {
         padding-right: 0;
     }
+
     .star_right {
         position: absolute;
         right: 2vw;
         top: 2vw;
         width: auto;
     }
+
     .segment-ios {
         width: 93%;
         margin-left: 4%;
         display: -webkit-box;
         justify-content: space-between;
     }
+
     .segment-ios .segment-button {
         width: auto;
         max-width: 20vw;
     }
+
     .sticky {
         box-shadow: 0 1.9vw 5vw rgba(0, 0, 0, 0.12);
         top: -1px;
         background-color: white;
         z-index: 999999999999;
     }
+
     .item-block-nau .item {
         padding: 2vw;
         z-index: 1111;
     }
+
     .item-block-nau .item-ios ion-avatar[item-left],
     .item-ios ion-thumbnail[item-left],
     .item-ios ion-avatar[item-start],
     .item-ios ion-thumbnail[item-start] {
         margin: 0 2vw 0 0;
     }
+
     ion-avatar {
         overflow: hidden;
         background-image: url(../assets/img/imagenotfound.svg);
@@ -102,6 +125,7 @@ page-places {
         background-position: 50% 50%;
         background-size: 70%;
     }
+
     .item-block-nau .item-ios ion-avatar .thumb_image {
         height: 23vw;
         width: 23vw;
@@ -111,61 +135,39 @@ page-places {
         background-color: white;
         border-radius: 2.5vw;
     }
+
     .font-36 {
         padding-bottom: 0;
     }
+
     .font-75 {
         line-height: 3vw;
     }
-    /*
-        ion-refresher {
-            margin-top: -35px;
-            background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
-            height: 170px;
-        }
-    */
+
     ion-refresher {
         margin-top: 40px;
         height: 60px;
         z-index: 1111111;
     }
-    /* STATUS BAR
-        .sticky{
-            top: 20px;
-        }
-        */
-    /*
-        .header-ios{
-            height: 20px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 999;
-            background: linear-gradient(89.83deg, #FF5A00 0.05%, #FF8B10 99.97%);
-        }
-    */
+
     ion-content {
         margin-top: -20px;
         height: calc(100% + 20px)
     }
+
     .has-refresher>.scroll-content {
         border-top: 0;
     }
+
     ion-navbar.toolbar.toolbar-ios {
         pointer-events: none;
     }
-    /*
-    .scroll-content{
-        background-image: url(../assets/img/user_home/bg-content.jpg);
-        background-repeat: no-repeat;
-        background-position: 0 0;
-        background-size: 100% 50%;
-    }
-*/
+
     .item-block-nau.list.list-ios {
         margin: 0 0 5vw;
         padding-top: 12.5vw;
     }
+
     .user-location {
         position: absolute;
         right: 2vw;
@@ -188,13 +190,16 @@ page-places {
         background-position: 44% 55%;
         opacity: 0.7;
     }
+
     .user-location:active {
         opacity: 0.5;
     }
+
     .leaflet-left {
         left: inherit;
         right: 2vw;
     }
+
     .leaflet-top {
         top: -18vw;
         height: 33vw;
@@ -202,14 +207,17 @@ page-places {
         bottom: 0;
         opacity: 0.7;
     }
+
     .leaflet-left .leaflet-control,
     .leaflet-top .leaflet-control {
         margin: 0;
     }
+
     .leaflet-touch .leaflet-control-layers,
     .leaflet-touch .leaflet-bar {
         border: none;
     }
+
     .leaflet-touch .leaflet-bar a {
         color: #fff;
         width: 15vw;
@@ -221,6 +229,7 @@ page-places {
         background-size: 7vw;
         border: 0;
     }
+
     .leaflet-touch .leaflet-bar a:first-child {
         border-top-left-radius: 100vw;
         border-top-right-radius: 100vw;
@@ -229,6 +238,7 @@ page-places {
         margin-bottom: 3vw;
         background-image: url(../assets/img/user_home/plus-symbol.svg);
     }
+
     .leaflet-touch .leaflet-bar a:last-child {
         border-top-left-radius: 100vw;
         border-top-right-radius: 100vw;
@@ -236,9 +246,11 @@ page-places {
         border-bottom-right-radius: 100vw;
         background-image: url(../assets/img/user_home/minus-symbol.svg);
     }
+
     .leaflet-container a {
         -webkit-tap-highlight-color: transparent;
     }
+
     .radius {
         position: absolute;
         left: 0;
@@ -249,25 +261,30 @@ page-places {
         padding: 0 5px;
         color: #FF5A00;
     }
+
     ion-navbar.toolbar.toolbar-ios {
         min-height: 0;
         padding-top: 0;
     }
+
     .header-ios {
         box-shadow: 0 1.9vw 5vw rgba(0, 0, 0, 0.12);
     }
+
     .block-featured .item {
         height: 43vw;
         display: flex;
         align-items: flex-start;
         overflow: hidden;
     }
+
     .block-featured .right-side {
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: cover;
         height: 100%;
     }
+
     .block-featured .right-side-content {
         position: absolute;
         left: 0;
@@ -277,27 +294,34 @@ page-places {
         background-color: rgba(0, 0, 0, 0.5);
         padding: 2vw;
     }
+
     .block-featured .smooth_transition {
         width: 83%;
     }
+
     .block-featured .smooth_transition:before {
         display: none;
     }
+
     .block-featured a.item.item-block.item-ios {
         padding: 0 0 0 2vw;
     }
+
     .block-featured div.item.item-block.item-ios {
         padding: 0 0 0 2vw;
     }
+
     .block-featured ion-avatar .info-block img {
         width: 1.9vw;
         margin: 0;
         display: inline;
     }
+
     .block-featured ion-avatar {
         background-position: 50% 2vw;
         height: 100%;
     }
+
     .block-featured .info-block {
         position: absolute;
         left: 0;
@@ -305,9 +329,11 @@ page-places {
         width: 100%;
         padding-bottom: 2vw;
     }
+
     .block-featured .icon-star {
         margin-right: 0;
     }
+
     .block-featured .right-top-angle {
         position: absolute;
         top: -10vw;
@@ -321,35 +347,44 @@ page-places {
         background-position: 50% 90%;
         background-size: 25%;
     }
+
     .block-featured .right-top-angle.discount {
         background-image: url(../assets/img/place/featured/discount.svg);
         background-position: 50% 100%;
         background-size: 40%;
     }
+
     .block-featured .right-top-angle.second_free {
         background-image: url(../assets/img/place/featured/second_free.svg);
     }
+
     .block-featured .right-top-angle.bonus {
         background-image: url(../assets/img/place/featured/bonus.svg);
     }
+
     .block-featured .right-top-angle.gift {
         background-image: url(../assets/img/place/featured/gift.svg);
     }
+
     .block-featured .star_right {
         left: 2vw;
         top: 2vw;
     }
+
     .block-featured .item-inner,
     .block-featured .input-wrapper {
         width: 100%;
         height: 100%;
     }
+
     .block-featured .thumb_image {
         margin-top: 2vw;
     }
+
     .block-featured .right-block {
         position: relative;
     }
+
     .block-fr {
         position: absolute;
         bottom: 2vw;
@@ -358,17 +393,21 @@ page-places {
         color: #fff;
         transform: translate3d(0, 0, 0);
     }
+
     .coupon,
     .block-right {
         position: absolute;
         bottom: 0;
     }
+
     .coupon {
         left: 2vw;
     }
+
     .block-right {
         right: 2vw;
     }
+
     .right-block {
         width: 100%;
         height: 100%;
@@ -379,31 +418,6 @@ page-places {
     height: 23vw;
     width: 23vw;
 }
-
-/*
-    .platform-ios page-places {
-        .scroll-content{
-            margin-top: 20px;
-        }
-    }
-    */
-
-/* FIX STATUS BAR IPHONE_X
-.iphonex page-places .header-ios{
-    height: 40px;
-}
-
-.iphonex page-places ion-content{
-    margin-top: -40px;
-    height: calc(100% + 40px)
-}
- */
-
-/*
-.iphonex page-places .sticky{
-    top: 40px;
-}
-*/
 
 .iphonex page-places ion-refresher {
     margin-top: 40px;
@@ -419,51 +433,65 @@ filter-popover-component {
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
+
     .block-checks {
         margin-right: 5px;
         margin-left: 8px;
     }
+
     .bg-gray {
         border: none;
         background: #E0E0E0;
         padding-right: 5%;
     }
+
     .bg-gray img {
         display: flex;
         height: 2.5vw
     }
+
     .item-ios.item-block .item-inner {
         padding-right: 0;
     }
+
     .item-block {
         min-height: 3.4rem;
     }
+
     .checkbox-ios .checkbox-icon {
         background-color: #fff;
         background-image: none;
     }
+
     .margin-left-2proc {
         margin-left: 2%;
     }
+
     .margin-right-2proc {
         margin-right: 2%;
     }
+
     .footer_btn .grid {
         padding-bottom: 0;
     }
+
     .item.item-ios .checkbox-ios[item-right],
     .item.item-ios .checkbox-ios[item-end] {
         margin: 0 2.3vw;
     }
+
     ion-item.item.item-block.item-ios.item-checkbox {
         padding-left: 2vw;
     }
+
     .item.item-block.item-ios.item-range {
         padding-left: 0;
     }
+
     .range-ios.range-has-pin {
         padding-top: 2.2vw;
     }
+
     .range-ios {
         padding: 2.2vw 0;
     }
@@ -476,9 +504,11 @@ noPlaces-popover-component {
         padding-top: 7vw;
         overflow: auto;
     }
+
     .flag-big {
         width: 20vw;
     }
+
     .flag-block div {
         display: -webkit-flex;
         display: -ms-flex;
@@ -488,10 +518,12 @@ noPlaces-popover-component {
         -ms-flex-align: center;
         align-items: center;
     }
+
     .flag-block img {
         width: 6vw;
         margin-right: 1vw;
     }
+
     .flag-big,
     .flag-block img {
         border-radius: 100vw;

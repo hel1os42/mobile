@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { Clipboard } from '@ionic-native/clipboard';
+import { TranslateService } from '@ngx-translate/core';
 import { App, NavController, NavParams, Platform, PopoverController } from 'ionic-angular';
 import { latLng, tileLayer } from 'leaflet';
+import { Subscription } from 'rxjs';
+import { AVAILABLE_LANGUAGES, DEFAULT_LANG_CODE, SYS_OPTIONS } from '../../const/i18n.const';
 import { Coords } from '../../models/coords';
 import { User } from '../../models/user';
 import { AppModeService } from '../../providers/appMode.service';
 import { PlaceService } from '../../providers/place.service';
 import { ProfileService } from '../../providers/profile.service';
+import { StorageService } from '../../providers/storage.service';
+import { ToastService } from '../../providers/toast.service';
 import { AdvTabsPage } from '../adv-tabs/adv-tabs';
 import { CreateAdvUserProfilePage } from '../create-advUser-profile/create-advUser-profile';
 import { OnBoardingPage } from '../onboarding/onboarding';
 import { SettingsChangePhonePage } from '../settings-change-phone/settings-change-phone';
 import { TabsPage } from '../tabs/tabs';
 import { SettingsPopover } from './settings.popover';
-import { AVAILABLE_LANGUAGES, SYS_OPTIONS, DEFAULT_LANG_CODE } from '../../const/i18n.const';
-import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from '../../providers/storage.service';
-import { ToastService } from '../../providers/toast.service';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'page-settings',
@@ -176,12 +176,11 @@ export class SettingsPage {
         // .subscribe(resp => {to do
         if (!this.isModeChanged) {
             this.nav.pop();
-        }
-        else {
+        } else {
             if (this.isAdvMode && !this.nextPage) {
                 this.app.getRootNav().setRoot(OnBoardingPage, { isAdvMode: true, page: CreateAdvUserProfilePage, isAdvOnBoarding: true, latitude: this.coords.lat, longitude: this.coords.lng });
-            }
-            else
+            } else
+
                 if (this.isAdvMode) {
                     // if (!isShownOnboard) {
                     //     this.app.getRootNav().setRoot(OnBoardingPage, { isAdvMode: true, page: this.nextPage, isAdvOnBoarding: true });
@@ -189,8 +188,7 @@ export class SettingsPage {
                     // else {
                     this.app.getRootNav().setRoot(AdvTabsPage, { isAdvMode: true, isAdvOnBoarding: true });
                     // }
-                }
-                else {
+                } else {
                     this.app.getRootNav().setRoot(TabsPage);
                 }
 

@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'page-adv-notifications',
-  templateUrl: 'adv-notifications.html'
+    selector: 'page-adv-notifications',
+    templateUrl: 'adv-notifications.html'
 })
+
+// this page is not used
+
 export class AdvNotificationsPage {
 
-  isVisibleSearch: boolean = false;
+    isVisibleSearch: boolean = false;
 
-  constructor() {
+    constructor() { }
 
-  }
-
-  toggleSearch() {
-    this.isVisibleSearch = !this.isVisibleSearch;
-  }
+    toggleSearch() {
+        this.isVisibleSearch = !this.isVisibleSearch;
+    }
 
 }

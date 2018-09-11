@@ -360,7 +360,11 @@
         "SECONDS2" : "segundos",
         "SECOND" : "segundo",
         "BY_PRESSING" : "Presionando \"REGISTRARSE\", yo estoy de acuerdo",
-        "CHANGE_INVITE" : "Código amigo"
+        "CHANGE_INVITE" : "Código amigo",
+        "ERROR_TITLE" : "Código de invitación inválido",
+        "ERROR_BODY" : "El código de invitación no fue encontrado. Repetir la entrada?",
+        "ERROR_BTN_RETRY" : "Reintentar",
+        "ERROR_BTN_DEFAULT_INVITE" : "Skip"
     },
 
     "PAGE_NOTIFICATIONS" : {

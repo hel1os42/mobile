@@ -6,6 +6,9 @@ import { User } from '../../models/user';
     selector: 'page-user-achieve',
     templateUrl: 'user-achieve.html'
 })
+
+// this page is not used
+
 export class UserAchievePage {
 
     user: User = new User();

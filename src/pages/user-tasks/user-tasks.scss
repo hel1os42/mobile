@@ -1,30 +1,30 @@
 page-user-tasks{
-  .flex span{
-    margin: auto;
-  }
+    .flex span{
+        margin: auto;
+    }
 
-  .top-block-nau {
-    overflow: visible;
-  }
+    .top-block-nau {
+        overflow: visible;
+    }
 
-  .top-block-nau ion-avatar{
-    height: inherit;
-  }
+    .top-block-nau ion-avatar{
+        height: inherit;
+    }
 
-  .user_level{
-    position: absolute;
-    right: -4vw;
-    bottom: -4vw;
-    border-radius: 100vw;
-    height: 10vw;
-    width: 10vw;
-    background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
-  }
+    .user_level{
+        position: absolute;
+        right: -4vw;
+        bottom: -4vw;
+        border-radius: 100vw;
+        height: 10vw;
+        width: 10vw;
+        background: linear-gradient(90deg, #FF5A00 0%, #FF8A23 100%);
+    }
 
-  .top-block-nau .star_right {
-    top: 0;
-    right: 0;
-  }
+    .top-block-nau .star_right {
+        top: 0;
+        right: 0;
+    }
 
     .top-block-nau.item-ios ion-avatar .thumb_image{
         border-radius: 100vw;

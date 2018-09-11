@@ -9,6 +9,9 @@ import { CreateOffer3Page } from '../create-offer-3/create-offer-3';
     selector: 'page-create-offer-2',
     templateUrl: 'create-offer-2.html'
 })
+
+// this page is not used
+
 export class CreateOffer2Page {
 
     offer: Offer;
@@ -24,7 +27,8 @@ export class CreateOffer2Page {
     isWeekend = false;
     timezoneStr: string;
 
-    constructor(private nav: NavController,
+    constructor(
+        private nav: NavController,
         private navParams: NavParams,
         private timezoneService: TimezoneService) {
 
@@ -73,8 +77,7 @@ export class CreateOffer2Page {
         this.timeFrames.forEach((timeFrame) => {
             if (this.isWeekend || this.isWorkingDays) {
                 timeFrame.from = timeFrame.isSelected ? this.startTime : '';
-            }
-            else {
+            } else {
                 timeFrame.from = this.startTime;
                 if (timeFrame.to != '') {
                     timeFrame.isSelected = true;
@@ -86,17 +89,14 @@ export class CreateOffer2Page {
         if (this.todayDate.getTime() > new Date(this.startDate).getTime()) {
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     selectFinishTime($event) {
         this.timeFrames.forEach((timeFrame) => {
             if (this.isWeekend || this.isWorkingDays) {
                 timeFrame.to = timeFrame.isSelected ? this.finishTime : '';
-            }
-            else {
+            } else {
                 timeFrame.to = this.finishTime;
                 if (timeFrame.from != '') {
                     timeFrame.isSelected = true;
@@ -155,21 +155,13 @@ export class CreateOffer2Page {
                 this.isWorkingDays = DateTimeUtils.find(daysFrame, [day.MONDAY, day.TUESDAY, day.WEDNESDAY, day.THURSDAY, day.FRIDAY]);
                 this.isWeekend = false;
             }
-        }
-        else {
+        } else {
             this.isWeekend = false;
             this.isWorkingDays = false;
         }
 
         this.startTime = DateTimeUtils.getTime(this.timeFrames).startTime;
         this.finishTime = DateTimeUtils.getTime(this.timeFrames).finishTime;
-
-        // this.timeFrames.forEach((timeFrame) => {
-        //     if (!timeFrame.isSelected) {
-        //         timeFrame.from = '';
-        //         timeFrame.to = '';
-        //     }
-        // });
     }
 
     isDisabled() {
@@ -187,11 +179,13 @@ export class CreateOffer2Page {
         this.offer.finish_date = this.finishDate + finishDateMask + this.timezoneStr;
         let selected = this.timeFrames.filter(p => p.isSelected);
         this.offer.timeframes = selected.map(p => {
+
             return {
                 from: p.from + timeMask + this.timezoneStr,
                 to: p.to + timeMask + this.timezoneStr,
                 days: [p.days.slice(0, 2)]
-            }
+            };
+
         })
         this.nav.push(CreateOffer3Page, { offer: this.offer, picture: this.picture_url });
     }

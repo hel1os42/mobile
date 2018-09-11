@@ -1,16 +1,19 @@
-import { StringValidator } from '../../validators/string.validator';
-import { NamberValidator } from '../../validators/number.validator';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 import { Offer } from '../../models/offer';
 import { ToastService } from '../../providers/toast.service';
+import { NamberValidator } from '../../validators/number.validator';
+import { StringValidator } from '../../validators/string.validator';
 import { CreateOffer5Page } from '../create-offer-5/create-offer-5';
 
 @Component({
     selector: 'page-create-offer-4',
     templateUrl: 'create-offer-4.html'
 })
+
+// this page is not used
+
 export class CreateOffer4Page {
 
     offer: Offer;

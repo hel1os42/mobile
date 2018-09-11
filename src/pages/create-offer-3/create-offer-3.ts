@@ -1,18 +1,19 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { latLng, LeafletEvent, tileLayer } from 'leaflet';
-import { Map } from 'leaflet';
+import { latLng, LeafletEvent, Map, tileLayer } from 'leaflet';
 import { Coords } from '../../models/coords';
 import { Offer } from '../../models/offer';
 import { GeocodeService } from '../../providers/geocode.service';
 import { MapUtils } from '../../utils/map.utils';
 import { CreateOffer4Page } from '../create-offer-4/create-offer-4';
 
-
 @Component({
     selector: 'page-create-offer-3',
     templateUrl: 'create-offer-3.html'
 })
+
+// this page is not used
+
 export class CreateOffer3Page {
 
     offer: Offer;
@@ -36,7 +37,7 @@ export class CreateOffer3Page {
 
         this.offer = this.navParams.get('offer');
         this.picture_url = this.navParams.get('picture');
-        
+
         this.radius = this.offer.radius;
         this.zoom = MapUtils.round(MapUtils.getZoom(this.offer.latitude, this.radius, 95), 0.5);
         this.coords.lat = this.offer.latitude;
@@ -76,17 +77,17 @@ export class CreateOffer3Page {
                 this.coords = this._map.getCenter();
                 if (this.coords.lng > 180 || this.coords.lng < -180) {
                     this.coords.lng = MapUtils.correctLng(this.coords.lng);
-                    this._map.setView(this.coords, this._map.getZoom());    
+                    this._map.setView(this.coords, this._map.getZoom());
                 }
                 this.geocoder.getAddress(this.coords.lat, this.coords.lng)
-                .subscribe(data => {
-                    let address = !data.error ? data.address: undefined;
-                        this.city = address 
-                        ? (address.city || address.town || address.county || address.state)
-                        : undefined;
+                    .subscribe(data => {
+                        let address = !data.error ? data.address : undefined;
+                        this.city = address
+                            ? (address.city || address.town || address.county || address.state)
+                            : undefined;
                         this.country = address ? address.country : undefined;
-                    this.changeDetectorRef.detectChanges();
-                })
+                        this.changeDetectorRef.detectChanges();
+                    })
                 this.radius = MapUtils.getRadius(95, this._map);
                 this.zoom = map.getZoom();
             }

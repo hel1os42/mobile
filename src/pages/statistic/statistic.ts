@@ -7,6 +7,9 @@ import { Statistic1Page } from '../statistic1/statistic1';
     selector: 'page-statistic',
     templateUrl: 'statistic.html'
 })
+
+// this page is not used
+
 export class StatisticPage {
 
     segment = 'today';

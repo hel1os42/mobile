@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar';
-import { Tab, ViewController, Tabs } from 'ionic-angular';
+import { Tab, Tabs, ViewController } from 'ionic-angular';
 import { AdjustService } from '../../providers/adjust.service';
 import { AppModeService } from '../../providers/appMode.service';
 import { ProfileService } from '../../providers/profile.service';
@@ -15,6 +15,7 @@ import { UserProfilePage } from '../user-profile/user-profile';
     selector: 'page-tabs',
     templateUrl: 'tabs.html'
 })
+
 export class TabsPage {
 
     @ViewChild('tabs') tabs: Tabs;
@@ -51,6 +52,7 @@ export class TabsPage {
         let views: ViewController[] = event.getViews();
         let length = views.length;
         let page = views[length - 1].component;
+
         if (root === PlacesPage
             || (root === BookmarksPage && length > 1)
             || (root === UserProfilePage && (page === PlacesPage || page === OfferPage))) {
@@ -58,6 +60,7 @@ export class TabsPage {
         } else {
             this.statusBar.styleDefault();
         }
+
     }
 
     hideTabs() {
@@ -67,9 +70,11 @@ export class TabsPage {
             let views: ViewController[] = tab.getViews();
             let length = views.length;
             let page = views[length - 1].component;
+
             if (page === OfferPage) {
                 isHide = true;
             } else isHide = false;
+
         }
         return isHide;
     }
