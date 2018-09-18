@@ -157,8 +157,12 @@ export class LoginPage {
     }
 
     getInvite() {
-        this.defaultInvite = this.envName === 'prod' ? 'nau'
-            : this.envName === 'test' ? '5a4' : '59c';
+        const prodInvite = 'nau';
+        const testInvite = '5a4';
+        const devInvite = '5a4';
+        
+        this.defaultInvite = this.envName === 'prod' ? prodInvite
+            : this.envName === 'test' ? testInvite : devInvite;
 
         this.authData.inviteCode = this.storage.get('invCode')
             ? this.storage.get('invCode')
