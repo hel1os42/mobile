@@ -120,7 +120,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 const IONIC_APP_ID = '590f0eb2';
-const VERSION = '1.6.3';
+const VERSION = '1.6.4';
 
 Pro.init(IONIC_APP_ID, {
     appVersion: VERSION
