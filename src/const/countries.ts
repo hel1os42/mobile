@@ -15,5 +15,9 @@ export const COUNTRIES =
         {
             name: 'Philippines',
             code: 'ph'
+        },
+        {
+            name: 'Belarus',
+            code: 'by'
         }
     ]
