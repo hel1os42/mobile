@@ -1299,7 +1299,7 @@ export class PlacesPage {
     }
 
     ionViewDidLeave() {
-        this.backAction();
+        if(this.backAction) this.backAction();
     }
 
     ngOnDestroy() {
