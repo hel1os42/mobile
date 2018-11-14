@@ -598,7 +598,6 @@ export class PlacesPage {
         markerLayer.on('click', (event: LeafletEvent) => {
             // console.log(company);
         });
-        this.changeDetectorRef.detectChanges();
         return markerLayer;
     }
 
@@ -735,6 +734,7 @@ export class PlacesPage {
                 companies.forEach((company) => {
                     this.markers.push(this.createMarker(company.latitude, company.longitude, company));
                 });
+                this.changeDetectorRef.detectChanges();
 
                 if (this.refresher) {
                     this.refresher.complete();
@@ -781,6 +781,7 @@ export class PlacesPage {
                 this.companies.forEach((company) => {
                     this.markers.push(this.createMarker(company.latitude, company.longitude, company));
                 })
+                this.changeDetectorRef.detectChanges();
                 // if (this.companies.length == 0 && isHandler && !this.isMapVisible) {
                 if (this.companies.length == 0 && isHandler) {
                     this.noPlacesHandler();
@@ -1181,7 +1182,7 @@ export class PlacesPage {
                             this.markers = [];
                             companies.forEach((company) => {
                                 this.markers.push(this.createMarker(company.latitude, company.longitude, company));
-                            })
+                            });
                             infiniteScroll.complete();
                         },
                             err => infiniteScroll.complete());
